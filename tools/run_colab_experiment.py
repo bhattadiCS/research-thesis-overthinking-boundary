@@ -21,7 +21,8 @@ DEFAULT_FULL_DIR = REPO_ROOT / "research" / "outputs" / "real_traces_colab"
 def run_command(command: list[str], cwd: Path = REPO_ROOT) -> None:
     printable = " ".join(command)
     print(f"\n[run] {printable}", flush=True)
-    subprocess.run(command, cwd=cwd, check=True)
+    env = {**os.environ, "PYTHONUNBUFFERED": "1"}
+    subprocess.run(command, cwd=cwd, check=True, env=env)
 
 
 def ensure_packages(skip_install: bool) -> None:
@@ -93,6 +94,8 @@ def run_real_trace_experiment(
     temperatures: list[float],
     seeds: list[int],
     output_dir: Path,
+    prompt_mode: str,
+    system_prompt_mode: str,
 ) -> None:
     command = [
         PYTHON,
@@ -107,6 +110,10 @@ def run_real_trace_experiment(
         str(max_steps),
         "--max-new-tokens",
         str(max_new_tokens),
+        "--prompt-mode",
+        prompt_mode,
+        "--system-prompt-mode",
+        system_prompt_mode,
         "--output-dir",
         str(output_dir),
         "--temperatures",
@@ -165,14 +172,16 @@ def main() -> None:
     parser.add_argument("--skip-smoke", action="store_true")
     parser.add_argument("--smoke-only", action="store_true")
     parser.add_argument("--skip-simulator", action="store_true")
+    parser.add_argument("--prompt-mode", default="minimal_json", choices=["structured_four_line", "minimal_json", "answer_only"])
+    parser.add_argument("--system-prompt-mode", default="default", choices=["none", "short", "default"])
     parser.add_argument("--full-max-tasks", type=int, default=4)
     parser.add_argument("--full-max-steps", type=int, default=5)
-    parser.add_argument("--full-max-new-tokens", type=int, default=56)
+    parser.add_argument("--full-max-new-tokens", type=int, default=128)
     parser.add_argument("--full-temperatures", nargs="+", type=float, default=[0.2, 0.6])
     parser.add_argument("--full-seeds", nargs="+", type=int, default=[7, 13])
     parser.add_argument("--smoke-max-tasks", type=int, default=2)
     parser.add_argument("--smoke-max-steps", type=int, default=2)
-    parser.add_argument("--smoke-max-new-tokens", type=int, default=12)
+    parser.add_argument("--smoke-max-new-tokens", type=int, default=128)
     parser.add_argument("--smoke-temperatures", nargs="+", type=float, default=[0.2])
     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
@@ -202,6 +211,8 @@ def main() -> None:
             temperatures=args.smoke_temperatures,
             seeds=args.smoke_seeds,
             output_dir=smoke_output_dir,
+            prompt_mode=args.prompt_mode,
+            system_prompt_mode=args.system_prompt_mode,
         )
         run_analysis(smoke_output_dir)
         print_csv(smoke_output_dir / "pilot_summary.csv", "Smoke Pilot Summary")
@@ -222,6 +233,8 @@ def main() -> None:
         temperatures=args.full_temperatures,
         seeds=args.full_seeds,
         output_dir=full_output_dir,
+        prompt_mode=args.prompt_mode,
+        system_prompt_mode=args.system_prompt_mode,
     )
     run_analysis(full_output_dir)
 
