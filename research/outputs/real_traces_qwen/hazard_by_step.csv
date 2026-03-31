@@ -1,0 +1,3 @@
+step,q_t,repair_rate,corruption_rate,hazard_mu,entropy_mean,confidence_mean,answer_changed_rate,hidden_shift_mean,n_transitions
+1,0.0,0.0,,,0.70703125,50.0,0.0,0.0,6
+2,0.0,0.0,,,0.22428385416666666,50.0,0.0,54.403727213541664,6

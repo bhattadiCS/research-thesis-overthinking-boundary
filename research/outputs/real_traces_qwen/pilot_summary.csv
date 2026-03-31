@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,backend,device
+qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,Qwen2.5 instruct,0.5B,6,3,1.0,3.0,3.0,0.16666666666666666,0.3987087673611111,25.51008441713121,0.0,,transformers+torch(cpu),cpu

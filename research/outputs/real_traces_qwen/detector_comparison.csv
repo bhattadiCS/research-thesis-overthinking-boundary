@@ -1,0 +1,6 @@
+detector,mean_stop_step,mean_oracle_gap,false_early_rate,false_late_rate,mean_false_late_severity
+first_answer,1.0,0.0,0.0,0.0,0.0
+entropy_plateau,2.0,0.05000000000000001,0.0,1.0,1.0
+answer_stability,3.0,0.10000000000000002,0.0,1.0,2.0
+hazard_drift,3.0,0.10000000000000002,0.0,1.0,2.0
+verifier_first_correct,3.0,0.10000000000000002,0.0,1.0,2.0
