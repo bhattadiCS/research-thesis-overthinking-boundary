@@ -174,7 +174,7 @@ def lexical_overlap(current_text: str, prior_text: str) -> float:
     return len(current_tokens & prior_tokens) / len(current_tokens | prior_tokens)
 
 
-def conversation_prompt(task: TaskSpec, history: list[dict[str, Any]], step: int, max_steps: int) -> str:
+def conversation_prompt(task: TaskSpec, history: list[dict[str, Any]], step: int, max_steps: int, prompt_mode: str) -> str:
     if history:
         rendered_history = "\n".join(
             (
@@ -186,75 +186,132 @@ def conversation_prompt(task: TaskSpec, history: list[dict[str, Any]], step: int
     else:
         rendered_history = "No previous steps."
 
+    protocol_text = (
+        f"Research protocol: you are at incremental reasoning step {step} of {max_steps}. "
+        "Even if you already know the answer, continue with one short reasoning or verification step. "
+        "Do not repeat the full solution. Update the answer field every time.\n\n"
+        f"Previous steps:\n{rendered_history}\n\n"
+    )
+
+    if prompt_mode == "structured_four_line":
+        format_instr = (
+            "Return exactly four lines:\n"
+            "THOUGHT: <one short sentence>\n"
+            "ANSWER: <current best final answer only>\n"
+            "CONFIDENCE: <integer 0-100>\n"
+            "STOP: <yes or no>"
+        )
+    elif prompt_mode == "minimal_json":
+        format_instr = (
+            "Return a single JSON object with the following keys: 'thought' (string), 'answer' (string), "
+            "'confidence' (integer 0-100), and 'stop' (boolean)."
+        )
+    else:
+        format_instr = "Provide the final answer."
+
     return (
         f"Task id: {task.task_id}\n"
         f"Domain: {task.domain}\n"
         f"Difficulty band: {task.difficulty}\n"
         f"Task: {task.prompt}\n\n"
-        f"Research protocol: you are at incremental reasoning step {step} of {max_steps}. "
-        "Even if you already know the answer, continue with one short reasoning or verification step. "
-        "Do not repeat the full solution. Update the answer field every time.\n\n"
-        f"Previous steps:\n{rendered_history}\n\n"
-        "Return exactly four lines:\n"
-        "THOUGHT: <one short sentence>\n"
-        "ANSWER: <current best final answer only>\n"
-        "CONFIDENCE: <integer 0-100>\n"
-        "STOP: <yes or no>"
+        f"{protocol_text if prompt_mode != 'answer_only' else ''}"
+        f"{format_instr}"
     )
 
 
-def render_prompt(tokenizer: Any, user_prompt: str) -> str:
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_prompt},
-    ]
+def render_prompt(tokenizer: Any, user_prompt: str, system_prompt_mode: str) -> str:
+    if system_prompt_mode == "default":
+        sys_msg = SYSTEM_PROMPT
+    elif system_prompt_mode == "short":
+        sys_msg = "You are a logical reasoning assistant."
+    else:
+        sys_msg = ""
+        
+    messages = []
+    if sys_msg:
+        messages.append({"role": "system", "content": sys_msg})
+    messages.append({"role": "user", "content": user_prompt})
+
     if hasattr(tokenizer, "apply_chat_template"):
         return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    return f"System: {SYSTEM_PROMPT}\nUser: {user_prompt}\nAssistant:"
+    if sys_msg:
+        return f"System: {sys_msg}\nUser: {user_prompt}\nAssistant:"
+    return f"User: {user_prompt}\nAssistant:"
 
 
-def parse_json_like(raw_text: str) -> dict[str, Any]:
+def parse_generation(raw_text: str, answer_type: str, prompt_mode: str) -> dict[str, Any]:
     cleaned = raw_text.strip()
-    cleaned = cleaned.replace("```json", "").replace("```", "").strip()
+    cleaned = re.sub(r"^```\w*\n", "", cleaned, flags=re.MULTILINE)
+    cleaned = re.sub(r"\n```$", "", cleaned, flags=re.MULTILINE)
+    cleaned = cleaned.strip()
 
-    line_thought = re.search(r"^THOUGHT\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
-    line_answer = re.search(r"^ANSWER\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
-    line_confidence = re.search(r"^CONFIDENCE\s*:\s*(-?\d+(?:\.\d+)?)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
-    line_stop = re.search(r"^STOP\s*:\s*(yes|no|true|false)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
-    if line_thought or line_answer or line_confidence or line_stop:
-        return {
-            "thought": line_thought.group(1).strip() if line_thought else cleaned.splitlines()[0].strip(),
-            "answer": line_answer.group(1).strip() if line_answer else cleaned.splitlines()[-1].strip(),
-            "confidence": int(float(line_confidence.group(1))) if line_confidence else 50,
-            "stop": bool(line_stop and line_stop.group(1).lower() in {"yes", "true"}),
-        }
-
-    start = cleaned.find("{")
-    end = cleaned.rfind("}")
-    if start != -1 and end != -1 and end > start:
-        candidate = cleaned[start : end + 1]
-        try:
-            parsed = json.loads(candidate)
-            return {
-                "thought": str(parsed.get("thought", "")).strip(),
-                "answer": str(parsed.get("answer", "")).strip(),
-                "confidence": int(float(parsed.get("confidence", 50))),
-                "stop": bool(parsed.get("stop", False)),
-            }
-        except (json.JSONDecodeError, TypeError, ValueError):
-            pass
-
-    thought_match = re.search(r'thought\s*[:=]\s*["\']?(.*?)(?:["\']?\s*,\s*answer|\n)', cleaned, flags=re.IGNORECASE | re.DOTALL)
-    answer_match = re.search(r'answer\s*[:=]\s*["\']?(.*?)(?:["\']?\s*,\s*confidence|\n)', cleaned, flags=re.IGNORECASE | re.DOTALL)
-    confidence_match = re.search(r'confidence\s*[:=]\s*(-?\d+(?:\.\d+)?)', cleaned, flags=re.IGNORECASE)
-    stop_match = re.search(r'stop\s*[:=]\s*(true|false)', cleaned, flags=re.IGNORECASE)
-    fallback_answer = answer_match.group(1).strip() if answer_match else cleaned.splitlines()[-1].strip()
-    return {
-        "thought": thought_match.group(1).strip() if thought_match else cleaned,
-        "answer": fallback_answer,
-        "confidence": int(float(confidence_match.group(1))) if confidence_match else 50,
-        "stop": bool(stop_match and stop_match.group(1).lower() == "true"),
+    result = {
+        "thought": "",
+        "answer": "",
+        "confidence": 50,
+        "stop": False,
+        "parse_success": 0,
+        "output_format_type": "fallback_freeform",
+        "answer_extraction_source": "fallback",
+        "stop_extraction_source": "default",
+        "confidence_extraction_source": "default",
     }
+    
+    if prompt_mode == "structured_four_line":
+        line_thought = re.search(r"^THOUGHT\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+        line_answer = re.search(r"^ANSWER\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+        line_confidence = re.search(r"^CONFIDENCE\s*:\s*(-?\d+(?:\.\d+)?)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+        line_stop = re.search(r"^STOP\s*:\s*(yes|no|true|false)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+        
+        if line_thought and line_answer and line_confidence and line_stop:
+            result["parse_success"] = 1
+            result["output_format_type"] = "structured_exact"
+        elif line_thought or line_answer or line_confidence or line_stop:
+            result["output_format_type"] = "structured_partial"
+            
+        if line_thought:
+            result["thought"] = line_thought.group(1).strip()
+        if line_answer:
+            result["answer"] = line_answer.group(1).strip()
+            result["answer_extraction_source"] = "ANSWER_line"
+        if line_confidence:
+            result["confidence"] = int(float(line_confidence.group(1)))
+            result["confidence_extraction_source"] = "CONFIDENCE_line"
+        if line_stop:
+            result["stop"] = line_stop.group(1).lower() in {"yes", "true"}
+            result["stop_extraction_source"] = "STOP_line"
+
+    elif prompt_mode == "minimal_json":
+        start = cleaned.find("{")
+        end = cleaned.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            candidate = cleaned[start : end + 1]
+            try:
+                parsed = json.loads(candidate)
+                result["thought"] = str(parsed.get("thought", "")).strip()
+                result["answer"] = str(parsed.get("answer", "")).strip()
+                result["confidence"] = int(float(parsed.get("confidence", 50)))
+                result["stop"] = bool(parsed.get("stop", False))
+                result["parse_success"] = 1
+                result["output_format_type"] = "json_exact"
+                result["answer_extraction_source"] = "json_field"
+                result["confidence_extraction_source"] = "json_field"
+                result["stop_extraction_source"] = "json_field"
+            except (json.JSONDecodeError, TypeError, ValueError):
+                result["output_format_type"] = "json_partial"
+
+    if not result["answer"]:
+        lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
+        if lines:
+            result["answer"] = lines[-1]
+            result["answer_extraction_source"] = "last_line_fallback"
+            
+    if not result["thought"]:
+        lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
+        if lines:
+            result["thought"] = lines[0]
+
+    return result
 
 
 def load_model(model_spec: ModelSpec, device: str) -> tuple[Any, Any, str, str]:
@@ -358,15 +415,27 @@ def run_single_trace(
     max_steps: int,
     max_new_tokens: int,
     hidden_dir: Path,
+    prompt_mode: str,
+    system_prompt_mode: str,
+    is_baseline: bool,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     set_seed(seed)
     history: list[dict[str, Any]] = []
     hidden_vectors: list[np.ndarray] = []
     run_rows: list[dict[str, Any]] = []
 
-    for step in range(1, max_steps + 1):
-        user_prompt = conversation_prompt(task=task, history=history, step=step, max_steps=max_steps)
-        prompt_text = render_prompt(tokenizer, user_prompt)
+    steps_to_run = 1 if is_baseline else max_steps
+
+    for step in range(1, steps_to_run + 1):
+        actual_prompt_mode = "answer_only" if is_baseline else prompt_mode
+        user_prompt = conversation_prompt(
+            task=task,
+            history=history,
+            step=step,
+            max_steps=max_steps,
+            prompt_mode=actual_prompt_mode
+        )
+        prompt_text = render_prompt(tokenizer, user_prompt, system_prompt_mode)
         started_at = time.perf_counter()
         generated = generate_with_diagnostics(
             model=model,
@@ -377,12 +446,18 @@ def run_single_trace(
             max_new_tokens=max_new_tokens,
         )
         elapsed_seconds = time.perf_counter() - started_at
-        parsed = parse_json_like(generated["raw_text"])
+        
+        parsed = parse_generation(generated["raw_text"], task.answer_type, actual_prompt_mode)
         normalized_answer = normalize_answer(parsed["answer"], task.answer_type)
         is_correct = verify_answer(task, parsed["answer"])
         prior_answer = history[-1]["answer_normalized"] if history else ""
         answer_changed = bool(history) and normalized_answer != prior_answer and normalized_answer != ""
         prior_thought = " ".join(item["thought"] for item in history[-2:])
+        
+        raw_text_length_chars = len(generated["raw_text"])
+        hit_max_new_tokens = int(generated["generated_tokens"] == max_new_tokens)
+        truncated_output_suspected = int(hit_max_new_tokens and not parsed["parse_success"])
+        
         hidden_vector = generated["pooled_hidden"]
         if hidden_vectors:
             previous_hidden = hidden_vectors[-1]
@@ -424,6 +499,19 @@ def run_single_trace(
             "seed": seed,
             "temperature": temperature,
             "device": actual_device,
+            "prompt_mode": actual_prompt_mode,
+            "system_prompt_mode": system_prompt_mode,
+            "is_baseline": int(is_baseline),
+            "parse_success": parsed["parse_success"],
+            "output_format_type": parsed["output_format_type"],
+            "answer_extraction_source": parsed["answer_extraction_source"],
+            "stop_extraction_source": parsed["stop_extraction_source"],
+            "confidence_extraction_source": parsed["confidence_extraction_source"],
+            "hit_max_new_tokens": hit_max_new_tokens,
+            "truncated_output_suspected": truncated_output_suspected,
+            "raw_text_length_chars": raw_text_length_chars,
+            "raw_text_length_tokens": generated["generated_tokens"],
+            "raw_text": generated["raw_text"],
         }
         history.append(row)
         run_rows.append(row)
@@ -431,10 +519,11 @@ def run_single_trace(
     hidden_dir.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(hidden_dir / f"{run_rows[0]['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
 
-    first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), max_steps)
-    first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), max_steps)
+    first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
+    first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
     oracle_stop = max(run_rows, key=lambda row: row["utility"])["step"]
     revision_count = int(sum(row["answer_changed"] for row in run_rows))
+    
     run_summary = {
         "run_id": run_rows[0]["run_id"],
         "model_alias": model_spec.alias,
@@ -444,9 +533,14 @@ def run_single_trace(
         "difficulty": task.difficulty,
         "temperature": temperature,
         "seed": seed,
+        "prompt_mode": actual_prompt_mode,
+        "system_prompt_mode": system_prompt_mode,
+        "is_baseline": int(is_baseline),
+        "ever_correct": int(first_correct_step != -1),
+        "correct_at_step_1": int(run_rows[0]["correct"] == 1) if run_rows else 0,
         "oracle_stop": oracle_stop,
-        "first_correct_step": first_correct_step,
-        "first_model_stop_step": first_model_stop_step,
+        "first_correct_step": first_correct_step if first_correct_step != -1 else max_steps,
+        "first_model_stop_step": first_model_stop_step if first_model_stop_step != -1 else max_steps,
         "revision_count": revision_count,
         "best_utility": max(row["utility"] for row in run_rows),
         "final_correct": run_rows[-1]["correct"],
@@ -466,18 +560,21 @@ def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
     for step, group in ordered.groupby("step"):
         wrong_group = group[group["correct"] == 0]
         correct_group = group[group["correct"] == 1]
+        n_repairs = wrong_group["repair"].sum()
+        n_corruptions = correct_group["corruption"].sum()
         repair_rate = float(wrong_group["repair"].mean()) if len(wrong_group) else float("nan")
         corruption_rate = float(correct_group["corruption"].mean()) if len(correct_group) else float("nan")
         q_t = float(group["correct"].mean())
-        hazard_mu = (
-            (1.0 - q_t) * repair_rate - q_t * corruption_rate - STEP_COST
-            if not math.isnan(repair_rate) and not math.isnan(corruption_rate)
-            else float("nan")
-        )
+        if (n_repairs + n_corruptions) >= 3 and not math.isnan(repair_rate) and not math.isnan(corruption_rate):
+            hazard_mu = (1.0 - q_t) * repair_rate - q_t * corruption_rate - STEP_COST
+        else:
+            hazard_mu = float("nan")
         rows.append(
             {
                 "step": int(step),
                 "q_t": q_t,
+                "n_repairs": int(n_repairs),
+                "n_corruptions": int(n_corruptions),
                 "repair_rate": repair_rate,
                 "corruption_rate": corruption_rate,
                 "hazard_mu": hazard_mu,
@@ -498,8 +595,11 @@ def main() -> None:
     parser.add_argument("--temperatures", nargs="+", type=float, default=[0.6])
     parser.add_argument("--seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--max-steps", type=int, default=5)
-    parser.add_argument("--max-new-tokens", type=int, default=56)
+    parser.add_argument("--max-new-tokens", type=int, default=128)
     parser.add_argument("--max-tasks", type=int, default=len(TASKS))
+    parser.add_argument("--prompt-mode", default="structured_four_line", choices=["structured_four_line", "minimal_json", "answer_only"])
+    parser.add_argument("--system-prompt-mode", default="default", choices=["default", "short", "none"])
+    parser.add_argument("--run-baseline", action="store_true", help="Run competence baseline instead of iterative reasoning")
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
     args = parser.parse_args()
 
@@ -525,12 +625,23 @@ def main() -> None:
                     max_steps=args.max_steps,
                     max_new_tokens=args.max_new_tokens,
                     hidden_dir=hidden_dir,
+                    prompt_mode=args.prompt_mode,
+                    system_prompt_mode=args.system_prompt_mode,
+                    is_baseline=args.run_baseline,
                 )
                 all_rows.extend(rows)
                 all_runs.append(run_summary)
 
     step_frame = pd.DataFrame(all_rows)
     run_frame = pd.DataFrame(all_runs)
+    
+    if args.run_baseline:
+        file_prefix = "baseline_"
+        step_frame.to_csv(output_dir / f"{file_prefix}steps.csv", index=False)
+        run_frame.to_csv(output_dir / f"{file_prefix}runs.csv", index=False)
+        print(f"Wrote baseline artifacts to: {output_dir}")
+        return
+
     transition_frame = summarize_transitions(step_frame)
     pilot_summary = pd.DataFrame(
         [
@@ -549,6 +660,7 @@ def main() -> None:
                 "mean_hidden_shift": float(step_frame["hidden_l2_shift"].mean()),
                 "repair_rate_overall": float(transition_frame["repair_rate"].dropna().mean()),
                 "corruption_rate_overall": float(transition_frame["corruption_rate"].dropna().mean()),
+                "runs_ever_correct": int(run_frame["ever_correct"].sum()),
                 "backend": backend,
                 "device": actual_device,
             }
@@ -569,6 +681,8 @@ def main() -> None:
         "max_steps": args.max_steps,
         "max_new_tokens": args.max_new_tokens,
         "step_cost": STEP_COST,
+        "prompt_mode": args.prompt_mode,
+        "system_prompt_mode": args.system_prompt_mode,
         "tasks": [asdict(task) for task in TASKS[: args.max_tasks]],
         "hidden_state_accessible": True,
         "token_logprobs_accessible": True,
@@ -581,6 +695,7 @@ def main() -> None:
     for _, row in pilot_summary.iterrows():
         print(
             f"{row['model_alias']}: runs={int(row['n_runs'])}, "
+            f"ever_correct={int(row['runs_ever_correct'])}, "
             f"oracle={row['mean_oracle_stop']:.2f}, first_correct={row['mean_first_correct_step']:.2f}, "
             f"repair={row['repair_rate_overall']:.3f}, corruption={row['corruption_rate_overall']:.3f}, "
             f"device={row['device']}"
