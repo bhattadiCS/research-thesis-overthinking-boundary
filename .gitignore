@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# Local and Colab caches
+.cache/
+huggingface/
+
+# Generated large artifacts
+research/outputs/real_traces/
+research/outputs/real_traces_deepseek/
+research/outputs/real_traces_colab/
+research/outputs/real_traces_colab_smoke/
+research/outputs/*.zip

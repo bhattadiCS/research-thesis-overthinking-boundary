@@ -1,0 +1,7 @@
+run_id,brier,auc
+qwen2p5_0p5b__calendar_offset_easy__temp0.20__seed7,0.0,
+qwen2p5_0p5b__calendar_offset_easy__temp0.80__seed7,0.0,
+qwen2p5_0p5b__fraction_remaining__temp0.20__seed7,0.0,
+qwen2p5_0p5b__fraction_remaining__temp0.80__seed7,0.0,
+qwen2p5_0p5b__linear_equation__temp0.20__seed7,0.0,
+qwen2p5_0p5b__linear_equation__temp0.80__seed7,0.0,
