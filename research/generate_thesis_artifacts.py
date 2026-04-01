@@ -106,7 +106,7 @@ def build_question_answers(
     hazard_row = detectors.set_index("detector")
     crossing_step = first_zero_crossing(hazard)
     crossings = sign_change_count(hazard)
-    benchmark_scope = "across the currently completed model families" if steps["model_alias"].nunique() > 1 else "within the current DeepSeek 1.5B L4 run"
+    benchmark_scope = "Across the currently completed model families" if steps["model_alias"].nunique() > 1 else "Within the current DeepSeek 1.5B L4 run"
 
     answers: list[tuple[int, str, str]] = [
         (
@@ -129,7 +129,7 @@ def build_question_answers(
         ),
         (
             3,
-            "Can $\alpha_t$ and $\beta_t$ be learned online from cross-task trace features well enough to support a practical stop rule?",
+            r"Can $\alpha_t$ and $\beta_t$ be learned online from cross-task trace features well enough to support a practical stop rule?",
             (
                 f"Partially yes. The hazard-based stop rule reached mean oracle gap {safe_float(hazard_row.loc['hazard_drift', 'mean_oracle_gap'], 4)} with false-late rate {safe_float(hazard_row.loc['hazard_drift', 'false_late_rate'], 3)}, "
                 f"while the empirical-Bernstein detector reached {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}. "
@@ -149,9 +149,9 @@ def build_question_answers(
             5,
             "Which observable is most stable across model families: entropy dynamics, answer revisions, hidden-state drift, or calibrated judge confidence?",
             (
-                f"{benchmark_scope.capitalize()}, the most stable currently supported observable is {feature_name(weights, 'correctness_probe')}, "
+                f"{benchmark_scope}, the most stable currently supported observable is {feature_name(weights, 'correctness_probe')}, "
                 f"while the strongest corruption-side signal is {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
-                "That keeps hidden-state drift, entropy, and verbosity-linked signals in the lead, but true cross-family stability is not settled until a stronger second family is run at comparable scale."
+                "That puts answer revision dynamics in the lead for this run, while hidden-state drift, entropy, and verbosity-linked signals remain secondary candidates. True cross-family stability is still unsettled until a stronger second family is run at comparable scale."
             ),
         ),
         (
@@ -160,7 +160,7 @@ def build_question_answers(
             (
                 f"In the current traces it shows up earliest through {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
                 f"The hazard drift crosses zero at step {crossing_step if crossing_step is not None else 'not yet observed'}, and the never-stop policy still loses {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average. "
-                "That pattern is more consistent with corruption through unstable internal state and verbosity-linked overrun than with harmless extra verification."
+                "That pattern is more consistent with corruption through unstable answer revision dynamics and verbosity-linked overrun than with harmless extra verification."
             ),
         ),
         (
@@ -303,7 +303,7 @@ def build_report_markdown(
             (
                 f"The strongest correctness proxy in the fitted models was {feature_name(weights, 'correctness_probe')}. "
                 f"The strongest corruption-side signal was {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
-                "Those coefficients make hidden-state drift and verbosity-linked features the leading observable candidates for boundary detection in the current run."
+                "Those coefficients make answer revision dynamics the dominant observable family in the current run, with hidden-state drift, entropy, and verbosity-linked features remaining secondary boundary signals."
             ),
             "",
             "## Stopping Comparison",

@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+deepseek_r1_distill_1p5b,deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B,DeepSeek-R1 distill,1.5B,900,300,2.4744444444444444,5.264444444444444,9.856666666666667,6.156666666666666,0.34406656222873266,10.03794508733352,0.18865441355482354,0.46119111001773877,621,transformers+torch(cuda),cuda
