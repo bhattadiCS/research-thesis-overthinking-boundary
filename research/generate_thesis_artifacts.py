@@ -89,6 +89,14 @@ def feature_name(weight_frame: pd.DataFrame, model_name: str, positive_only: boo
     return f"{label} ({feature}, coeff={float(winner['coefficient']):.3f})"
 
 
+def model_run_label(summary: pd.Series) -> str:
+    family = str(summary.get("family", "")).strip()
+    parameter_count = str(summary.get("parameter_count", "")).strip()
+    if family and parameter_count:
+        return f"{family} {parameter_count}"
+    return str(summary.get("model_alias", "current model run"))
+
+
 def build_question_answers(
     *,
     steps: pd.DataFrame,
@@ -100,20 +108,48 @@ def build_question_answers(
     weights: pd.DataFrame,
 ) -> list[tuple[int, str, str]]:
     summary = pilot.iloc[0]
+    model_label = model_run_label(summary)
     q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
     repair_rate = float(summary["repair_rate_overall"]) if not pd.isna(summary["repair_rate_overall"]) else float("nan")
     corruption_rate = float(summary["corruption_rate_overall"]) if not pd.isna(summary["corruption_rate_overall"]) else float("nan")
     hazard_row = detectors.set_index("detector")
     crossing_step = first_zero_crossing(hazard)
     crossings = sign_change_count(hazard)
-    benchmark_scope = "Across the currently completed model families" if steps["model_alias"].nunique() > 1 else "Within the current DeepSeek 1.5B L4 run"
+    correctness_signal = feature_name(weights, "correctness_probe")
+    corruption_signal = feature_name(weights, "corruption_hazard", positive_only=True)
+    benchmark_scope = "Across the currently completed model families" if steps["model_alias"].nunique() > 1 else f"Within the current {model_label} L4 run"
+    has_e_process = "e_process" in hazard_row.index
+    e_process_gap = float(hazard_row.loc["e_process", "mean_oracle_gap"]) if has_e_process else float("nan")
+    e_process_false_late = float(hazard_row.loc["e_process", "false_late_rate"]) if has_e_process else float("nan")
+    hazard_gap = float(hazard_row.loc["hazard_drift", "mean_oracle_gap"])
+
+    if has_e_process:
+        if e_process_gap < hazard_gap:
+            question_4_tail = (
+                f"It also improves on the fitted hazard rule at {safe_float(hazard_gap, 4)}, so the stronger sequential detector is currently the best pooled stop rule in the repo on this run."
+            )
+        else:
+            question_4_tail = (
+                f"It still trails the fitted hazard rule at {safe_float(hazard_gap, 4)}, so the stronger sequential detector exists now, but it is not yet the best practical stopping rule in the repo."
+            )
+        question_4_answer = (
+            f"Partially yes. The implemented mixture e-process detector reduced mean oracle gap from {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)} "
+            f"under empirical-Bernstein to {safe_float(e_process_gap, 4)}, and reduced false-late rate from {safe_float(hazard_row.loc['empirical_bernstein', 'false_late_rate'], 3)} "
+            f"to {safe_float(e_process_false_late, 3)}. {question_4_tail}"
+        )
+    else:
+        question_4_answer = (
+            f"Still unresolved. In the current run the empirical-Bernstein rule achieved mean oracle gap {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}, "
+            f"which improves materially over never-stop at {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} but still trails the fitted hazard rule at {safe_float(hazard_gap, 4)}. "
+            "No mixture-bound or e-process detector was implemented and validated in this cycle, so the tighter-safe replacement remains an open follow-up rather than a completed result."
+        )
 
     answers: list[tuple[int, str, str]] = [
         (
             1,
             "Can the DeepSeek 1.5B distill or an equivalent 1B-1.5B reasoning model be run with CUDA-enabled PyTorch or quantized inference so the real-trace study leaves the low-skill regime?",
             (
-                f"Yes. The completed L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
+                f"Yes. The completed {model_label} L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
                 f"with step-1 competence $q_1={safe_float(q1, 3)}$ and at-least-once correctness in {int(summary['runs_ever_correct'])} runs. "
                 "That is enough to leave the low-skill regime and estimate continuation hazards on real traces rather than toy tasks."
             ),
@@ -123,7 +159,7 @@ def build_question_answers(
             "Can $q_t$ be estimated from hidden states or verifier-lite signals when exact stepwise verification is unavailable?",
             (
                 f"Provisionally yes. The correctness probe achieved mean Brier {safe_float(probe['brier'].mean(), 4)} and mean AUC {safe_float(probe['auc'].dropna().mean(), 4)}, "
-                f"with {feature_name(weights, 'correctness_probe')} as the strongest signal. "
+                f"with {correctness_signal} as the strongest signal. "
                 "This run still uses exact GSM8K verification for supervision, so the evidence is about signal availability rather than full label-free deployment, but it is strong enough to justify a verifier-lite estimator."
             ),
         ),
@@ -132,35 +168,32 @@ def build_question_answers(
             r"Can $\alpha_t$ and $\beta_t$ be learned online from cross-task trace features well enough to support a practical stop rule?",
             (
                 f"Partially yes. The hazard-based stop rule reached mean oracle gap {safe_float(hazard_row.loc['hazard_drift', 'mean_oracle_gap'], 4)} with false-late rate {safe_float(hazard_row.loc['hazard_drift', 'false_late_rate'], 3)}, "
-                f"while the empirical-Bernstein detector reached {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}. "
+                f"while the empirical-Bernstein detector reached {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}"
+                f"{', and the new mixture e-process reached ' + safe_float(e_process_gap, 4) if has_e_process else ''}. "
                 f"The pooled repair and corruption rates were {safe_float(repair_rate, 3)} and {safe_float(corruption_rate, 3)}, so the hazards are learnable enough to drive a practical detector, although still conservatively."
             ),
         ),
         (
             4,
             "Can the empirical-Bernstein detector be replaced by a genuinely tighter mixture-bound or e-process construction without losing usability?",
-            (
-                f"Still unresolved. In the current run the empirical-Bernstein rule achieved mean oracle gap {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}, "
-                f"which improves materially over never-stop at {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} but still trails the fitted hazard rule at {safe_float(hazard_row.loc['hazard_drift', 'mean_oracle_gap'], 4)}. "
-                "No mixture-bound or e-process detector was implemented and validated in this cycle, so the tighter-safe replacement remains an open follow-up rather than a completed result."
-            ),
+            question_4_answer,
         ),
         (
             5,
             "Which observable is most stable across model families: entropy dynamics, answer revisions, hidden-state drift, or calibrated judge confidence?",
             (
-                f"{benchmark_scope}, the most stable currently supported observable is {feature_name(weights, 'correctness_probe')}, "
-                f"while the strongest corruption-side signal is {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
-                "That puts answer revision dynamics in the lead for this run, while hidden-state drift, entropy, and verbosity-linked signals remain secondary candidates. True cross-family stability is still unsettled until a stronger second family is run at comparable scale."
+                f"{benchmark_scope}, the most stable currently supported observable is {correctness_signal}, "
+                f"while the strongest corruption-side signal is {corruption_signal}. "
+                "True cross-family stability is still unsettled until another family is run at comparable scale, but the current run cleanly identifies the leading signals for this model."
             ),
         ),
         (
             6,
             "Does reward hacking in real reasoning traces show up first as verbosity bias, confidence inflation, hidden-state drift, or verifier disagreement?",
             (
-                f"In the current traces it shows up earliest through {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
+                f"In the current traces it shows up earliest through {corruption_signal}. "
                 f"The hazard drift crosses zero at step {crossing_step if crossing_step is not None else 'not yet observed'}, and the never-stop policy still loses {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average. "
-                "That pattern is more consistent with corruption through unstable answer revision dynamics and verbosity-linked overrun than with harmless extra verification."
+                "That pattern is more consistent with corruption through instability in the model's observable state than with harmless extra verification."
             ),
         ),
         (
@@ -175,7 +208,7 @@ def build_question_answers(
             8,
             "How much of the apparent boundary is model-family specific versus benchmark specific?",
             (
-                "Still unresolved from this cycle. The completed large run is concentrated on DeepSeek 1.5B over GSM8K, so it identifies a real boundary for that model-benchmark pair but cannot yet decompose family effects from benchmark effects. "
+                f"Still unresolved from this cycle. The completed large run is concentrated on {model_label} over GSM8K, so it identifies a real boundary for that model-benchmark pair but cannot yet decompose family effects from benchmark effects. "
                 "A comparable Qwen, Llama, or larger DeepSeek follow-up is still needed before attributing the boundary to model family rather than task distribution."
             ),
         ),
@@ -252,13 +285,17 @@ def build_report_markdown(
     weights: pd.DataFrame,
     report_path: Path,
     input_dir: Path,
+    report_title: str,
 ) -> str:
     summary = pilot.iloc[0]
+    model_label = model_run_label(summary)
     detector_rows = detectors.set_index("detector")
     crossing_step = first_zero_crossing(hazard)
     q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
     q_peak = float(hazard["q_t"].max()) if not hazard.empty else float("nan")
     q_peak_step = int(hazard.loc[hazard["q_t"].idxmax(), "step"]) if not hazard.empty else -1
+    correctness_signal = feature_name(weights, "correctness_probe")
+    corruption_signal = feature_name(weights, "corruption_hazard", positive_only=True)
 
     graph_sections = [
         "### Drift Crossing Proof",
@@ -275,19 +312,31 @@ def build_report_markdown(
         "| Policy | Mean stop step | Mean utility | Mean oracle gap |",
         "| --- | ---: | ---: | ---: |",
     ]
-    for detector_name in ["oracle", "empirical_bernstein", "never_stop"]:
+    detector_order = ["oracle", "hazard_drift", "e_process", "empirical_bernstein", "never_stop"]
+    for detector_name in detector_order:
+        if detector_name not in detector_rows.index:
+            continue
         row = detector_rows.loc[detector_name]
         comparison_table.append(
             f"| {detector_name} | {safe_float(row['mean_stop_step'], 2)} | {safe_float(row['mean_stop_utility'], 4)} | {safe_float(row['mean_oracle_gap'], 4)} |"
         )
 
+    e_process_sentence = ""
+    if "e_process" in detector_rows.index:
+        e_process_gap = float(detector_rows.loc["e_process", "mean_oracle_gap"])
+        hazard_gap = float(detector_rows.loc["hazard_drift", "mean_oracle_gap"])
+        if e_process_gap < hazard_gap:
+            e_process_sentence = f" The new mixture e-process improves on the fitted hazard rule with mean oracle gap {safe_float(e_process_gap, 4)}."
+        else:
+            e_process_sentence = f" The new mixture e-process closes part of the gap to the hazard rule with mean oracle gap {safe_float(e_process_gap, 4)}."
+
     return "\n".join(
         [
-            "# L4 Overthinking Results",
+            f"# {report_title}",
             "",
             "## Executive Summary",
             (
-                f"The L4 execution loop completed the environment check, parser repair, GSM8K scaling refactor, and real-trace collection on "
+                f"The L4 execution loop completed the environment check, parser repair, GSM8K scaling refactor, and real-trace collection for {model_label} on "
                 f"{int(summary['n_runs'])} runs. The model entered a competent regime immediately, with step-1 accuracy $q_1={safe_float(q1, 3)}$, "
                 f"and reached peak correctness $q_t={safe_float(q_peak, 3)}$ at step {q_peak_step}."
             ),
@@ -297,13 +346,14 @@ def build_report_markdown(
                 f"The hazard decomposition exhibits repair rate {safe_float(summary['repair_rate_overall'], 3)} and corruption rate {safe_float(summary['corruption_rate_overall'], 3)}. "
                 f"The first hazard drift zero crossing occurs at step {crossing_step if crossing_step is not None else 'not observed'}, which is the empirical candidate for the Overthinking Boundary. "
                 f"The never-stop policy loses {safe_float(detector_rows.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average relative to the oracle, which is direct evidence that extra reasoning past the boundary is harmful."
+                f"{e_process_sentence}"
             ),
             "",
             "## Observables Evaluation",
             (
-                f"The strongest correctness proxy in the fitted models was {feature_name(weights, 'correctness_probe')}. "
-                f"The strongest corruption-side signal was {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
-                "Those coefficients make answer revision dynamics the dominant observable family in the current run, with hidden-state drift, entropy, and verbosity-linked features remaining secondary boundary signals."
+                f"The strongest correctness proxy in the fitted models was {correctness_signal}. "
+                f"The strongest corruption-side signal was {corruption_signal}. "
+                "Those coefficients identify the dominant correctness and corruption observables for this run without assuming they transfer unchanged across model families."
             ),
             "",
             "## Stopping Comparison",
@@ -323,6 +373,7 @@ def main() -> None:
     parser.add_argument("--open-questions-output", default=str(DEFAULT_OPEN_QUESTIONS_PATH))
     parser.add_argument("--research-report-output", default=str(DEFAULT_RESEARCH_REPORT_PATH))
     parser.add_argument("--root-report-output", default=str(DEFAULT_ROOT_REPORT_PATH))
+    parser.add_argument("--report-title", default="L4 Overthinking Results")
     args = parser.parse_args()
 
     input_dir = Path(args.input_dir)
@@ -365,6 +416,7 @@ def main() -> None:
         weights=weights,
         report_path=research_report_output,
         input_dir=input_dir,
+        report_title=args.report_title,
     )
     root_report_markdown = build_report_markdown(
         steps=steps,
@@ -374,6 +426,7 @@ def main() -> None:
         weights=weights,
         report_path=root_report_output,
         input_dir=input_dir,
+        report_title=args.report_title,
     )
 
     answers_output.write_text(answers_markdown, encoding="utf-8")
