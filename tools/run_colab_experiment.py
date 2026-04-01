@@ -33,6 +33,9 @@ def ensure_packages(skip_install: bool) -> None:
     required_modules = {
         "transformers": "transformers",
         "accelerate": "accelerate",
+        "datasets": "datasets",
+        "evaluate": "evaluate",
+        "bitsandbytes": "bitsandbytes",
         "sentencepiece": "sentencepiece",
         "safetensors": "safetensors",
         "pandas": "pandas",
@@ -40,6 +43,7 @@ def ensure_packages(skip_install: bool) -> None:
         "scipy": "scipy",
         "matplotlib": "matplotlib",
         "numpy": "numpy",
+        "tqdm": "tqdm",
     }
     missing_packages = [package for module, package in required_modules.items() if importlib.util.find_spec(module) is None]
     if not missing_packages:
@@ -65,8 +69,8 @@ def print_environment() -> str:
     return "cpu"
 
 
-def prepare_output_dir(path: Path) -> None:
-    if path.exists():
+def prepare_output_dir(path: Path, clear: bool = False) -> None:
+    if clear and path.exists():
         for child in path.iterdir():
             if child.is_file():
                 child.unlink()
@@ -94,8 +98,15 @@ def run_real_trace_experiment(
     temperatures: list[float],
     seeds: list[int],
     output_dir: Path,
+    task_source: str,
+    dataset_split: str,
+    dataset_shuffle_seed: int,
+    batch_size: int,
     prompt_mode: str,
     system_prompt_mode: str,
+    quantization: str,
+    device_map: str | None,
+    resume: bool,
 ) -> None:
     command = [
         PYTHON,
@@ -110,17 +121,31 @@ def run_real_trace_experiment(
         str(max_steps),
         "--max-new-tokens",
         str(max_new_tokens),
+        "--task-source",
+        task_source,
+        "--dataset-split",
+        dataset_split,
+        "--dataset-shuffle-seed",
+        str(dataset_shuffle_seed),
+        "--batch-size",
+        str(batch_size),
         "--prompt-mode",
         prompt_mode,
         "--system-prompt-mode",
         system_prompt_mode,
+        "--quantization",
+        quantization,
         "--output-dir",
         str(output_dir),
         "--temperatures",
     ]
+    if device_map:
+        command.extend(["--device-map", device_map])
     command.extend(str(value) for value in temperatures)
     command.append("--seeds")
     command.extend(str(value) for value in seeds)
+    if not resume:
+        command.append("--no-resume")
     run_command(command)
 
 
@@ -166,31 +191,51 @@ def zip_results(output_dir: Path) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run the overthinking-boundary experiment safely on Google Colab.")
-    parser.add_argument("--model", default="deepseek_r1_distill_1p5b", choices=["deepseek_r1_distill_1p5b", "qwen2p5_0p5b"])
-    parser.add_argument("--smoke-model", default="qwen2p5_0p5b", choices=["deepseek_r1_distill_1p5b", "qwen2p5_0p5b"])
+    parser.add_argument(
+        "--model",
+        default="deepseek_r1_distill_1p5b",
+        choices=["deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_7b"],
+    )
+    parser.add_argument(
+        "--smoke-model",
+        default=None,
+        choices=["deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_7b"],
+    )
     parser.add_argument("--skip-install", action="store_true")
     parser.add_argument("--skip-smoke", action="store_true")
     parser.add_argument("--smoke-only", action="store_true")
     parser.add_argument("--skip-simulator", action="store_true")
     parser.add_argument("--prompt-mode", default="minimal_json", choices=["structured_four_line", "minimal_json", "answer_only"])
     parser.add_argument("--system-prompt-mode", default="default", choices=["none", "short", "default"])
-    parser.add_argument("--full-max-tasks", type=int, default=4)
-    parser.add_argument("--full-max-steps", type=int, default=5)
-    parser.add_argument("--full-max-new-tokens", type=int, default=128)
-    parser.add_argument("--full-temperatures", nargs="+", type=float, default=[0.2, 0.6])
+    parser.add_argument("--task-source", default="gsm8k", choices=["builtin", "gsm8k"])
+    parser.add_argument("--smoke-task-source", default="builtin", choices=["builtin", "gsm8k"])
+    parser.add_argument("--dataset-split", default="train")
+    parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
+    parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
+    parser.add_argument("--device-map", default=None)
+    parser.add_argument("--full-max-tasks", type=int, default=300)
+    parser.add_argument("--full-max-steps", type=int, default=10)
+    parser.add_argument("--full-max-new-tokens", type=int, default=256)
+    parser.add_argument("--full-batch-size", type=int, default=8)
+    parser.add_argument("--full-temperatures", nargs="+", type=float, default=[0.1, 0.6, 1.0])
     parser.add_argument("--full-seeds", nargs="+", type=int, default=[7, 13])
     parser.add_argument("--smoke-max-tasks", type=int, default=2)
     parser.add_argument("--smoke-max-steps", type=int, default=2)
     parser.add_argument("--smoke-max-new-tokens", type=int, default=128)
+    parser.add_argument("--smoke-batch-size", type=int, default=2)
     parser.add_argument("--smoke-temperatures", nargs="+", type=float, default=[0.2])
     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
     parser.add_argument("--smoke-output-dir", default=str(DEFAULT_SMOKE_DIR))
+    parser.add_argument("--fresh-output", action="store_true")
+    parser.add_argument("--no-resume", dest="resume", action="store_false")
+    parser.set_defaults(resume=True)
     args = parser.parse_args()
 
     started_at = time.time()
     ensure_packages(skip_install=args.skip_install)
     device = print_environment()
+    smoke_model = args.smoke_model or args.model
 
     full_output_dir = Path(args.output_dir)
     smoke_output_dir = Path(args.smoke_output_dir)
@@ -200,10 +245,10 @@ def main() -> None:
         print_csv(REPO_ROOT / "research" / "outputs" / "summary.csv", "Synthetic Detector Summary")
 
     if not args.skip_smoke:
-        prepare_output_dir(smoke_output_dir)
+        prepare_output_dir(smoke_output_dir, clear=True)
         print("\n[phase] Running smoke test before the full experiment.", flush=True)
         run_real_trace_experiment(
-            model=args.smoke_model,
+            model=smoke_model,
             device=device,
             max_tasks=args.smoke_max_tasks,
             max_steps=args.smoke_max_steps,
@@ -211,8 +256,15 @@ def main() -> None:
             temperatures=args.smoke_temperatures,
             seeds=args.smoke_seeds,
             output_dir=smoke_output_dir,
+            task_source=args.smoke_task_source,
+            dataset_split=args.dataset_split,
+            dataset_shuffle_seed=args.dataset_shuffle_seed,
+            batch_size=args.smoke_batch_size,
             prompt_mode=args.prompt_mode,
             system_prompt_mode=args.system_prompt_mode,
+            quantization="none",
+            device_map=None,
+            resume=False,
         )
         run_analysis(smoke_output_dir)
         print_csv(smoke_output_dir / "pilot_summary.csv", "Smoke Pilot Summary")
@@ -222,7 +274,7 @@ def main() -> None:
             print(f"\n[done] Smoke test archive: {archive}", flush=True)
             return
 
-    prepare_output_dir(full_output_dir)
+    prepare_output_dir(full_output_dir, clear=args.fresh_output)
     print("\n[phase] Running the full real-trace experiment.", flush=True)
     run_real_trace_experiment(
         model=args.model,
@@ -233,8 +285,15 @@ def main() -> None:
         temperatures=args.full_temperatures,
         seeds=args.full_seeds,
         output_dir=full_output_dir,
+        task_source=args.task_source,
+        dataset_split=args.dataset_split,
+        dataset_shuffle_seed=args.dataset_shuffle_seed,
+        batch_size=args.full_batch_size,
         prompt_mode=args.prompt_mode,
         system_prompt_mode=args.system_prompt_mode,
+        quantization=args.quantization,
+        device_map=args.device_map,
+        resume=args.resume,
     )
     run_analysis(full_output_dir)
 

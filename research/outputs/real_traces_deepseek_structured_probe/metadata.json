@@ -1,0 +1,45 @@
+{
+  "model": {
+    "alias": "deepseek_r1_distill_1p5b",
+    "hf_name": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    "family": "DeepSeek-R1 distill",
+    "parameter_count": "1.5B"
+  },
+  "backend": "transformers+torch(cuda)",
+  "device": "cuda",
+  "temperatures": [
+    0.2
+  ],
+  "seeds": [
+    7
+  ],
+  "max_steps": 2,
+  "max_new_tokens": 256,
+  "step_cost": 0.05,
+  "prompt_mode": "structured_four_line",
+  "system_prompt_mode": "default",
+  "tasks": [
+    {
+      "task_id": "calendar_offset_easy",
+      "domain": "calendar",
+      "difficulty": "easy",
+      "prompt": "If today is Tuesday, what day of the week will it be 14 days later? Answer with only the weekday.",
+      "answer_type": "day",
+      "expected_answer": "tuesday",
+      "notes": "Very easy task where extra verification can become redundant."
+    },
+    {
+      "task_id": "fraction_remaining",
+      "domain": "arithmetic",
+      "difficulty": "medium",
+      "prompt": "A tank is half full. Then one quarter of the whole tank is drained. What fraction of the tank is full now?",
+      "answer_type": "fraction",
+      "expected_answer": "1/4",
+      "notes": "Easy fraction task with exact verification."
+    }
+  ],
+  "hidden_state_accessible": true,
+  "token_logprobs_accessible": true,
+  "reasoning_traces_accessible": true,
+  "runtime_limit_notes": "Pilot sized for local Windows workstation; fixed-step protocol is used to observe post-answer revisions."
+}
