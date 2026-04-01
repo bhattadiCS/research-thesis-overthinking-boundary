@@ -19,6 +19,8 @@ STEP_COST = 0.05
 EB_DELTA = 0.05
 DELTA_LOWER_BOUND = -(1.0 + STEP_COST)
 DELTA_UPPER_BOUND = 1.0 - STEP_COST
+E_PROCESS_SCALE = max(abs(DELTA_LOWER_BOUND), abs(DELTA_UPPER_BOUND))
+E_PROCESS_LAMBDAS = np.linspace(0.05, 0.95, 19)
 FEATURE_COLUMNS = [
     "step",
     "entropy_mean",
@@ -157,6 +159,25 @@ def hazard_stop_for_group(group: pd.DataFrame, q_model: Any, repair_model: Any, 
     return int(scoring.iloc[-1]["step"])
 
 
+def mixture_e_process_value(observations: pd.Series | np.ndarray) -> float:
+    values = np.asarray(observations, dtype=float)
+    values = values[np.isfinite(values)]
+    if len(values) == 0:
+        return 1.0
+
+    scaled = np.clip(values / E_PROCESS_SCALE, -1.0, 1.0)
+    log_e_values: list[float] = []
+    for lam in E_PROCESS_LAMBDAS:
+        factors = 1.0 - lam * scaled
+        if np.any(factors <= 0.0):
+            return float("inf")
+        log_e_values.append(float(np.log(factors).sum()))
+
+    log_e_array = np.asarray(log_e_values, dtype=float)
+    max_log_e = float(log_e_array.max())
+    return float(np.exp(max_log_e) * np.mean(np.exp(log_e_array - max_log_e)))
+
+
 def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, Any, Any, Any]:
     transition_rows = step_frame[step_frame["has_next"] == 1].copy()
     transition_rows["repair"] = ((transition_rows["correct"] == 0) & (transition_rows["next_correct"] == 1)).astype(int)
@@ -192,6 +213,13 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
         n_examples=("run_id", "count"),
     )
     by_step = by_step.reset_index()
+    e_process_frame = (
+        transition_rows.groupby("step")["delta_utility"]
+        .apply(mixture_e_process_value)
+        .rename("e_process_value")
+        .reset_index()
+    )
+    by_step = by_step.merge(e_process_frame, on="step", how="left")
     by_step["empirical_variance"] = by_step["empirical_variance"].fillna(0.0)
     by_step["hazard_mu"] = (1.0 - by_step["q_t"]) * by_step["repair_rate"] - by_step["q_t"] * by_step["corruption_rate"] - STEP_COST
     by_step["delta_t"] = 6.0 * EB_DELTA / (np.pi**2 * np.square(by_step["step"] + 1))
@@ -201,6 +229,8 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
         + 3.0 * (DELTA_UPPER_BOUND - DELTA_LOWER_BOUND) * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"]
     )
     by_step["eb_stop_signal"] = (by_step["eb_upper_bound"] <= 0.0).astype(int)
+    by_step["e_process_threshold"] = 1.0 / by_step["delta_t"]
+    by_step["e_process_stop_signal"] = (by_step["e_process_value"] >= by_step["e_process_threshold"]).astype(int)
     return by_step, pd.DataFrame(weights), correctness_probe, repair_model, corruption_model
 
 
@@ -226,6 +256,7 @@ def build_detector_frame(
     corruption_model: Any,
     entropy_threshold: float,
     eb_stop_step: int,
+    e_process_stop_step: int,
 ) -> pd.DataFrame:
     detector_rows: list[dict[str, Any]] = []
     for _, group in step_frame.groupby("run_id"):
@@ -283,6 +314,13 @@ def build_detector_frame(
                 ordered,
                 detector_name="empirical_bernstein",
                 step=min(eb_stop_step, int(ordered.iloc[-1]["step"])),
+            )
+        )
+        detector_rows.append(
+            evaluate_detector_on_group(
+                ordered,
+                detector_name="e_process",
+                step=min(e_process_stop_step, int(ordered.iloc[-1]["step"])),
             )
         )
         detector_rows.append(
@@ -395,6 +433,10 @@ def main() -> None:
     hazard_frame, weight_frame, correctness_probe, repair_model, corruption_model = fit_global_models(step_frame)
     entropy_threshold = select_entropy_threshold(step_frame)
     eb_stop_step = first_step_matching(hazard_frame, (hazard_frame["step"] >= 2) & (hazard_frame["eb_upper_bound"] <= 0.0))
+    e_process_stop_step = first_step_matching(
+        hazard_frame,
+        (hazard_frame["step"] >= 2) & (hazard_frame["e_process_stop_signal"] == 1),
+    )
 
     detector_frame = build_detector_frame(
         step_frame=step_frame,
@@ -403,10 +445,14 @@ def main() -> None:
         corruption_model=corruption_model,
         entropy_threshold=entropy_threshold,
         eb_stop_step=eb_stop_step,
+        e_process_stop_step=e_process_stop_step,
     )
     detector_summary = summarize_detector_frame(detector_frame)
     correctness_probe_frame = evaluate_correctness_probe(step_frame, correctness_probe)
     eb_summary = detector_summary[detector_summary["detector"].isin(["oracle", "empirical_bernstein", "never_stop"])]
+    sequential_summary = detector_summary[
+        detector_summary["detector"].isin(["oracle", "hazard_drift", "e_process", "empirical_bernstein", "never_stop"])
+    ]
 
     detector_frame.to_csv(input_dir / "detector_comparison_by_run.csv", index=False)
     detector_summary.to_csv(input_dir / "detector_comparison.csv", index=False)
@@ -414,6 +460,7 @@ def main() -> None:
     hazard_frame.to_csv(input_dir / "hazard_drift_summary.csv", index=False)
     weight_frame.to_csv(input_dir / "feature_weights.csv", index=False)
     eb_summary.to_csv(input_dir / "empirical_bernstein_summary.csv", index=False)
+    sequential_summary.to_csv(input_dir / "sequential_detector_summary.csv", index=False)
 
     plot_detector_comparison(detector_summary, input_dir)
     plot_drift_crossing_proof(hazard_frame, input_dir)
@@ -432,6 +479,7 @@ def main() -> None:
             f"false_early={row['false_early_rate']:.3f}, "
             f"false_late={row['false_late_rate']:.3f}"
         )
+    print(f"E-process stop step: {e_process_stop_step}")
     print(f"Empirical-Bernstein stop step: {eb_stop_step}")
     print(f"Wrote analysis artifacts to: {input_dir}")
 
