@@ -1,12 +1,33 @@
 # Overthinking Boundary in Reasoning LLMs
 
-This repository studies a simple question with surprisingly sharp consequences:
+This repository explores a simple yet profound question: **When does extra "thinking" stop helping an AI and start making it worse?**
 
-> When does extra reasoning stop helping and start hurting?
+> [!TIP]
+> **New to the project?** Start with the [Simplified Research Summary](#simplified-research-summary) below for a non-technical primer on our methods and findings.
 
-Reasoning models often improve for the first few steps of chain-of-thought because they can repair an initially wrong answer. But continued reasoning can also corrupt a correct answer, trigger unstable revisions, or waste tokens on steps that no longer add value. This project tries to detect that turning point early enough to stop on time.
+## Simplified Research Summary
 
-The name we use for that turning point is the overthinking boundary.
+### 1. What is "Overthinking"?
+Large Language Models often perform better when allowed to "think" before answering (Chain-of-Thought). However, thinking too much can lead to:
+- **Corruption**: Correct answers getting broken by unnecessary revisions.
+- **Hallucination**: The model drifting into nonsense.
+- **Token Waste**: Spending money and time on answers that were already correct.
+
+### 2. The Core Formula
+We use a mathematical rule to decide exactly when to stop. We weigh:
+- **Repair Potential (α)**: "If I'm wrong, can the next step fix it?"
+- **Corruption Risk (β)**: "If I'm right, will the next step break it?"
+- **Step Cost (λ)**: The cost of the extra token.
+
+**The Decision:** We calculate the **Drift (μ)**. If the chance of fixing the answer is higher than the risk of breaking it (minus the cost), we keep going. If it drops below zero, we've hit the **Overthinking Boundary** and should stop.
+
+### 3. Key Findings (DeepSeek vs. Qwen)
+Our experiments on an NVIDIA L4 GPU on math tasks (GSM8K) proved:
+- **DeepSeek-R1 (Capable model)**: Overthinking is real. The model reached peak correctness at **Step 7**, and accuracy dropped if we forced it to keep thinking.
+- **Qwen-0.5B (Weak model)**: This served as a control. Because it wasn't smart enough to repair its own mistakes, its "Overthinking Boundary" was reached almost immediately at Step 1.
+- **The Verdict**: A smart stopping rule outperforms a "never-stop" policy in both accuracy and efficiency.
+
+---
 
 ## Primer: What This Means in LLM Terms
 
