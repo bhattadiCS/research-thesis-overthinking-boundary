@@ -1,29 +1,40 @@
 from __future__ import annotations
 
 import argparse
-import concurrent.futures
+import hashlib
 import json
+import logging
 import math
 import re
 import time
 from dataclasses import asdict, dataclass
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 import numpy as np
 import pandas as pd
 import torch
+from tqdm.auto import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
+
+try:
+    from datasets import load_dataset
+except ImportError:
+    load_dataset = None
+
+try:
+    from transformers import BitsAndBytesConfig
+except ImportError:
+    BitsAndBytesConfig = None
 
 
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
 STEP_COST = 0.05
 SYSTEM_PROMPT = (
     "You are participating in a research protocol about incremental reasoning. "
-    "Reply with exactly four lines in this format: THOUGHT: ..., ANSWER: ..., CONFIDENCE: ..., STOP: .... "
-    "THOUGHT must be one short sentence. ANSWER must be only the current best final answer. "
-    "CONFIDENCE must be an integer from 0 to 100. STOP must be yes or no."
+    "Each step should be brief and update the current best answer rather than re-deriving the full solution. "
+    "If you already know the answer, do one short verification step and still return the requested format."
 )
 DAY_NAMES = [
     "monday",
@@ -34,6 +45,70 @@ DAY_NAMES = [
     "saturday",
     "sunday",
 ]
+NUMBER_WORDS = {
+    "a": 1,
+    "an": 1,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+}
+FRACTION_DENOMINATORS = {
+    "half": 2,
+    "halves": 2,
+    "third": 3,
+    "thirds": 3,
+    "quarter": 4,
+    "quarters": 4,
+    "fourth": 4,
+    "fourths": 4,
+    "fifth": 5,
+    "fifths": 5,
+    "sixth": 6,
+    "sixths": 6,
+    "seventh": 7,
+    "sevenths": 7,
+    "eighth": 8,
+    "eighths": 8,
+    "ninth": 9,
+    "ninths": 9,
+    "tenth": 10,
+    "tenths": 10,
+}
+PLURAL_FRACTION_WORDS = {
+    "halves",
+    "thirds",
+    "quarters",
+    "fourths",
+    "fifths",
+    "sixths",
+    "sevenths",
+    "eighths",
+    "ninths",
+    "tenths",
+}
+ANSWER_CUE_PHRASES = (
+    "answer",
+    "final",
+    "therefore",
+    "thus",
+    "hence",
+    "so",
+    "equals",
+    "equal to",
+    "gives",
+    "will be",
+    "would be",
+    "should be",
+    "left with",
+    "remaining",
+)
 
 
 @dataclass(frozen=True)
@@ -45,6 +120,8 @@ class TaskSpec:
     answer_type: str
     expected_answer: str
     notes: str
+    source: str = "builtin"
+    source_index: int = -1
 
 
 @dataclass(frozen=True)
@@ -55,7 +132,7 @@ class ModelSpec:
     parameter_count: str
 
 
-TASKS = [
+BUILTIN_TASKS = [
     TaskSpec(
         task_id="calendar_offset_easy",
         domain="calendar",
@@ -115,18 +192,91 @@ MODEL_CATALOG = {
         family="DeepSeek-R1 distill",
         parameter_count="1.5B",
     ),
+    "deepseek_r1_distill_7b": ModelSpec(
+        alias="deepseek_r1_distill_7b",
+        hf_name="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        family="DeepSeek-R1 distill",
+        parameter_count="7B",
+    ),
     "qwen2p5_0p5b": ModelSpec(
         alias="qwen2p5_0p5b",
         hf_name="Qwen/Qwen2.5-0.5B-Instruct",
         family="Qwen2.5 instruct",
         parameter_count="0.5B",
     ),
+    "qwen2p5_7b": ModelSpec(
+        alias="qwen2p5_7b",
+        hf_name="Qwen/Qwen2.5-7B-Instruct",
+        family="Qwen2.5 instruct",
+        parameter_count="7B",
+    ),
 }
+
+
+def sanitize_split_name(dataset_split: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", dataset_split.lower()).strip("_") or "split"
+
+
+def extract_word_fraction_values(text: str) -> list[str]:
+    values: list[str] = []
+    pattern = re.compile(
+        r"\b(?:(?P<numerator>a|an|one|two|three|four|five|six|seven|eight|nine|ten)\s+)?"
+        r"(?P<denominator>half|halves|third|thirds|quarter|quarters|fourth|fourths|fifth|fifths|sixth|sixths|seventh|sevenths|eighth|eighths|ninth|ninths|tenth|tenths)\b",
+        flags=re.IGNORECASE,
+    )
+    for match in pattern.finditer(text):
+        numerator_token = (match.group("numerator") or "one").lower()
+        denominator_token = match.group("denominator").lower()
+        if match.group("numerator") is None and denominator_token in PLURAL_FRACTION_WORDS:
+            continue
+        numerator = NUMBER_WORDS.get(numerator_token)
+        denominator = FRACTION_DENOMINATORS.get(denominator_token)
+        if numerator is None or denominator is None:
+            continue
+        values.append(str(Fraction(numerator, denominator)))
+    return values
+
+
+def extract_numeric_candidate(text: str) -> str:
+    stripped = text.strip().lower().replace(",", "")
+    if not stripped:
+        return ""
+
+    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", stripped)
+    if boxed_matches:
+        stripped = boxed_matches[-1].strip().lower().replace(",", "")
+
+    fraction_matches = re.findall(r"-?\d+\s*/\s*-?\d+", stripped)
+    if fraction_matches:
+        value = fraction_matches[-1].replace(" ", "")
+        try:
+            normalized = Fraction(value)
+            return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
+        except ZeroDivisionError:
+            return value
+
+    word_fraction_matches = extract_word_fraction_values(stripped)
+    if word_fraction_matches:
+        return word_fraction_matches[-1]
+
+    decimal_matches = re.findall(r"-?\d+(?:\.\d+)?", stripped)
+    if decimal_matches:
+        value = decimal_matches[-1]
+        try:
+            normalized = Fraction(value).limit_denominator()
+            return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
+        except ValueError:
+            return value
+
+    return ""
 
 
 def normalize_answer(raw_answer: str, answer_type: str) -> str:
     text = raw_answer.strip().lower()
     text = re.sub(r"\s+", " ", text)
+    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", text)
+    if boxed_matches:
+        text = boxed_matches[-1].strip().lower()
     if not text:
         return ""
 
@@ -140,21 +290,9 @@ def normalize_answer(raw_answer: str, answer_type: str) -> str:
         match = re.findall(r"-?\d+", text)
         return match[-1] if match else text
 
-    if answer_type == "fraction":
-        fraction_match = re.findall(r"-?\d+\s*/\s*-?\d+", text)
-        if fraction_match:
-            value = fraction_match[-1].replace(" ", "")
-            try:
-                return str(Fraction(value))
-            except ZeroDivisionError:
-                return value
-        decimal_match = re.findall(r"-?\d+(?:\.\d+)?", text)
-        if decimal_match:
-            try:
-                return str(Fraction(decimal_match[-1]).limit_denominator())
-            except ValueError:
-                return decimal_match[-1]
-        return text
+    if answer_type in {"fraction", "number"}:
+        numeric_candidate = extract_numeric_candidate(text)
+        return numeric_candidate or text
 
     return text
 
@@ -208,7 +346,10 @@ def conversation_prompt(task: TaskSpec, history: list[dict[str, Any]], step: int
             "'confidence' (integer 0-100), and 'stop' (boolean)."
         )
     else:
-        format_instr = "Provide the final answer."
+        if task.answer_type in {"int", "fraction", "number"}:
+            format_instr = "Provide only the final numeric answer."
+        else:
+            format_instr = "Provide only the final answer."
 
     return (
         f"Task id: {task.task_id}\n"
@@ -227,7 +368,7 @@ def render_prompt(tokenizer: Any, user_prompt: str, system_prompt_mode: str) -> 
         sys_msg = "You are a logical reasoning assistant."
     else:
         sys_msg = ""
-        
+
     messages = []
     if sys_msg:
         messages.append({"role": "system", "content": sys_msg})
@@ -238,6 +379,74 @@ def render_prompt(tokenizer: Any, user_prompt: str, system_prompt_mode: str) -> 
     if sys_msg:
         return f"System: {sys_msg}\nUser: {user_prompt}\nAssistant:"
     return f"User: {user_prompt}\nAssistant:"
+
+
+def extract_typed_answer(text: str, answer_type: str) -> str:
+    stripped = text.strip()
+    if not stripped:
+        return ""
+
+    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", stripped)
+    if boxed_matches:
+        stripped = boxed_matches[-1].strip()
+
+    lowered = stripped.lower()
+    if answer_type == "day":
+        day_matches = re.findall(r"\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", lowered)
+        return day_matches[-1] if day_matches else ""
+
+    if answer_type == "int":
+        int_matches = re.findall(r"-?\d+", stripped)
+        return int_matches[-1] if int_matches else ""
+
+    if answer_type in {"fraction", "number"}:
+        return extract_numeric_candidate(stripped)
+
+    return stripped
+
+
+def split_answer_segments(text: str) -> list[str]:
+    return [
+        segment.strip(" \t\r\n-:;,")
+        for segment in re.split(r"(?:\n+|(?<=[.!?])\s+)", text)
+        if segment.strip()
+    ]
+
+
+def segment_has_answer_cue(text: str) -> bool:
+    lowered = text.lower()
+    return any(phrase in lowered for phrase in ANSWER_CUE_PHRASES)
+
+
+def extract_answer(raw_text: str, answer_type: str) -> tuple[str, str]:
+    cleaned = raw_text.strip()
+    if not cleaned:
+        return "", "fallback"
+
+    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", cleaned)
+    if boxed_matches:
+        candidate = extract_typed_answer(boxed_matches[-1], answer_type)
+        if candidate:
+            return candidate, "boxed"
+
+    regions: list[tuple[str, str]] = []
+    think_parts = re.split(r"</think>", cleaned, flags=re.IGNORECASE)
+    if len(think_parts) > 1 and think_parts[-1].strip():
+        regions.append(("after_think", think_parts[-1].strip()))
+    regions.append(("full_text", cleaned))
+
+    for region_name, region_text in regions:
+        for segment in reversed(split_answer_segments(region_text)):
+            candidate = extract_typed_answer(segment, answer_type)
+            if candidate and segment_has_answer_cue(segment):
+                return candidate, f"{region_name}_cue_segment"
+
+    for region_name, region_text in regions:
+        candidate = extract_typed_answer(region_text, answer_type)
+        if candidate:
+            return candidate, region_name
+
+    return "", "fallback"
 
 
 def parse_generation(raw_text: str, answer_type: str, prompt_mode: str) -> dict[str, Any]:
@@ -257,19 +466,19 @@ def parse_generation(raw_text: str, answer_type: str, prompt_mode: str) -> dict[
         "stop_extraction_source": "default",
         "confidence_extraction_source": "default",
     }
-    
+
     if prompt_mode == "structured_four_line":
         line_thought = re.search(r"^THOUGHT\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
         line_answer = re.search(r"^ANSWER\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
         line_confidence = re.search(r"^CONFIDENCE\s*:\s*(-?\d+(?:\.\d+)?)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
         line_stop = re.search(r"^STOP\s*:\s*(yes|no|true|false)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
-        
+
         if line_thought and line_answer and line_confidence and line_stop:
             result["parse_success"] = 1
             result["output_format_type"] = "structured_exact"
         elif line_thought or line_answer or line_confidence or line_stop:
             result["output_format_type"] = "structured_partial"
-            
+
         if line_thought:
             result["thought"] = line_thought.group(1).strip()
         if line_answer:
@@ -302,42 +511,166 @@ def parse_generation(raw_text: str, answer_type: str, prompt_mode: str) -> dict[
                 result["output_format_type"] = "json_partial"
 
     if not result["answer"]:
-        lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
-        if lines:
-            result["answer"] = lines[-1]
-            result["answer_extraction_source"] = "last_line_fallback"
-            
+        extracted_answer, extraction_source = extract_answer(cleaned, answer_type)
+        if extracted_answer:
+            result["answer"] = extracted_answer
+            result["answer_extraction_source"] = extraction_source
+
     if not result["thought"]:
-        lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
-        if lines:
-            result["thought"] = lines[0]
+        think_match = re.search(r"<think>(.*?)</think>", cleaned, flags=re.IGNORECASE | re.DOTALL)
+        if think_match:
+            result["thought"] = think_match.group(1).strip()
+        else:
+            lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
+            if lines:
+                result["thought"] = lines[0]
 
     return result
 
 
-def load_model(model_spec: ModelSpec, device: str) -> tuple[Any, Any, str, str]:
+def extract_gsm8k_reference_answer(answer_text: str) -> str:
+    match = re.search(r"####\s*([^\n]+)", answer_text)
+    if match:
+        return normalize_answer(match.group(1), "number")
+    return normalize_answer(answer_text, "number")
+
+
+def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+    if load_dataset is None:
+        raise ImportError("datasets is required for --task-source gsm8k. Install it with pip install datasets evaluate bitsandbytes tqdm.")
+
+    dataset = load_dataset("gsm8k", "main", split=dataset_split)
+    if shuffle_seed is not None:
+        dataset = dataset.shuffle(seed=shuffle_seed)
+    if max_tasks > 0 and len(dataset) > max_tasks:
+        dataset = dataset.select(range(max_tasks))
+
+    split_name = sanitize_split_name(dataset_split)
+    tasks: list[TaskSpec] = []
+    for index, example in enumerate(dataset):
+        question = str(example["question"]).strip()
+        expected_answer = extract_gsm8k_reference_answer(str(example["answer"]))
+        short_hash = hashlib.md5(question.encode("utf-8")).hexdigest()[:8]
+        tasks.append(
+            TaskSpec(
+                task_id=f"gsm8k_{split_name}_{index:05d}_{short_hash}",
+                domain="gsm8k",
+                difficulty="grade_school_math",
+                prompt=question,
+                answer_type="number",
+                expected_answer=expected_answer,
+                notes=f"gsm8k main split={dataset_split}",
+                source="gsm8k",
+                source_index=index,
+            )
+        )
+    return tasks
+
+
+def load_tasks(task_source: str, max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+    if task_source == "builtin":
+        return BUILTIN_TASKS[:max_tasks]
+    if task_source == "gsm8k":
+        return load_gsm8k_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+    raise ValueError(f"Unsupported task source: {task_source}")
+
+
+def run_id_for(model_alias: str, task: TaskSpec, temperature: float, seed: int) -> str:
+    return f"{model_alias}__{task.task_id}__temp{temperature:.2f}__seed{seed}"
+
+
+def chunked(items: list[TaskSpec], size: int) -> Iterable[list[TaskSpec]]:
+    for start in range(0, len(items), size):
+        yield items[start : start + size]
+
+
+def output_paths(output_dir: Path, is_baseline: bool) -> dict[str, Path]:
+    steps_name = "baseline_steps.csv" if is_baseline else "trace_steps.csv"
+    runs_name = "baseline_runs.csv" if is_baseline else "trace_runs.csv"
+    return {
+        "steps": output_dir / steps_name,
+        "runs": output_dir / runs_name,
+        "hazard": output_dir / "hazard_by_step.csv",
+        "pilot": output_dir / "pilot_summary.csv",
+        "metadata": output_dir / "metadata.json",
+    }
+
+
+def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
+    if not rows:
+        return
+    frame = pd.DataFrame(rows)
+    if path.exists():
+        existing_columns = pd.read_csv(path, nrows=0).columns.tolist()
+        for column in existing_columns:
+            if column not in frame.columns:
+                frame[column] = np.nan
+        extra_columns = [column for column in frame.columns if column not in existing_columns]
+        frame = frame[existing_columns + extra_columns]
+        frame.to_csv(path, mode="a", header=False, index=False)
+        return
+    frame.to_csv(path, index=False)
+
+
+def load_existing_outputs(output_dir: Path, is_baseline: bool) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
+    paths = output_paths(output_dir, is_baseline)
+    if paths["steps"].exists():
+        existing_steps = pd.read_csv(paths["steps"]).to_dict("records")
+    else:
+        existing_steps = []
+    if paths["runs"].exists():
+        existing_runs = pd.read_csv(paths["runs"]).to_dict("records")
+    else:
+        existing_runs = []
+    completed_run_ids = {str(row["run_id"]) for row in existing_runs}
+    return existing_steps, existing_runs, completed_run_ids
+
+
+def load_model(
+    model_spec: ModelSpec,
+    device: str,
+    quantization: str,
+    device_map: str | None,
+) -> tuple[Any, Any, str, str]:
     tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = "left"
 
     if device == "auto":
         actual_device = "cuda" if torch.cuda.is_available() else "cpu"
     else:
         actual_device = device
+
     backend = "transformers+torch(cpu)"
     load_kwargs: dict[str, Any] = {"trust_remote_code": True}
+    if actual_device == "cuda":
+        load_kwargs["dtype"] = torch.float16
 
     try:
-        if actual_device == "cuda":
-            load_kwargs["torch_dtype"] = torch.float16
+        if actual_device == "cuda" and quantization in {"8bit", "4bit"}:
+            if BitsAndBytesConfig is None:
+                raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
+            load_kwargs.pop("dtype", None)
+            if quantization == "8bit":
+                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
+            else:
+                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
+            load_kwargs["device_map"] = device_map or "auto"
             model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
-            model.to("cuda")
-            backend = "transformers+torch(cuda)"
+            backend = f"transformers+torch(cuda-{quantization})"
+        elif actual_device == "cuda" and device_map:
+            load_kwargs["device_map"] = device_map
+            model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+            backend = f"transformers+torch(cuda-device-map={device_map})"
         else:
             model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
-            model.to("cpu")
-    except Exception:
-        model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+            model.to(actual_device)
+            backend = f"transformers+torch({actual_device})"
+    except Exception as exc:
+        logging.warning("Primary model load failed for %s: %s", model_spec.hf_name, exc)
+        fallback_kwargs = {"trust_remote_code": True}
+        model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **fallback_kwargs)
         model.to("cpu")
         actual_device = "cpu"
         backend = "transformers+torch(cpu-fallback)"
@@ -346,17 +679,27 @@ def load_model(model_spec: ModelSpec, device: str) -> tuple[Any, Any, str, str]:
     return model, tokenizer, actual_device, backend
 
 
-def generate_with_diagnostics(
+def trim_completion_ids(completion_ids: torch.Tensor, pad_token_id: int | None, eos_token_id: int | None) -> torch.Tensor:
+    trimmed = completion_ids
+    trim_token_ids = {token_id for token_id in (pad_token_id, eos_token_id) if token_id is not None}
+    while len(trimmed) > 0 and int(trimmed[-1].item()) in trim_token_ids:
+        trimmed = trimmed[:-1]
+    return trimmed
+
+
+def generate_batch_with_diagnostics(
     model: Any,
     tokenizer: Any,
-    prompt_text: str,
+    prompt_texts: list[str],
     actual_device: str,
     temperature: float,
     max_new_tokens: int,
-) -> dict[str, Any]:
-    encoded = tokenizer(prompt_text, return_tensors="pt")
+) -> tuple[list[dict[str, Any]], float]:
+    started_at = time.perf_counter()
+    encoded = tokenizer(prompt_texts, padding=True, return_tensors="pt")
     input_ids = encoded["input_ids"].to(actual_device)
     attention_mask = encoded["attention_mask"].to(actual_device)
+    prompt_width = input_ids.shape[1]
 
     generation_kwargs = {
         "input_ids": input_ids,
@@ -373,40 +716,108 @@ def generate_with_diagnostics(
 
     with torch.no_grad():
         generated_ids = model.generate(**generation_kwargs)
-        prompt_length = input_ids.shape[1]
-        completion_ids = generated_ids[0, prompt_length:]
-        raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True)
+        completion_width = generated_ids.shape[1] - prompt_width
+        generated_attention_mask = torch.cat(
+            [
+                attention_mask,
+                torch.ones((attention_mask.shape[0], completion_width), dtype=attention_mask.dtype, device=attention_mask.device),
+            ],
+            dim=1,
+        )
+        forward_outputs = model(generated_ids, attention_mask=generated_attention_mask, output_hidden_states=True)
 
-        forward_outputs = model(generated_ids, attention_mask=torch.ones_like(generated_ids), output_hidden_states=True)
-        full_logits = forward_outputs.logits[0]
-        generated_length = completion_ids.shape[0]
+    full_logits = forward_outputs.logits
+    hidden_states = forward_outputs.hidden_states[-1]
+    elapsed_seconds = time.perf_counter() - started_at
+
+    results: list[dict[str, Any]] = []
+    for index in range(generated_ids.shape[0]):
+        raw_completion_ids = generated_ids[index, prompt_width:].detach()
+        completion_ids = trim_completion_ids(raw_completion_ids, tokenizer.pad_token_id, tokenizer.eos_token_id)
+        generated_length = int(completion_ids.shape[0])
+        raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
+
         if generated_length > 0:
-            scoring_logits = full_logits[prompt_length - 1 : generated_ids.shape[1] - 1]
+            scoring_logits = full_logits[index, prompt_width - 1 : prompt_width - 1 + generated_length]
             log_probs = torch.log_softmax(scoring_logits, dim=-1)
             probs = torch.softmax(scoring_logits, dim=-1)
             token_logprobs = log_probs.gather(1, completion_ids.unsqueeze(1)).squeeze(1)
             token_entropies = -(probs * log_probs).sum(dim=-1)
-            pooled_hidden = forward_outputs.hidden_states[-1][0, prompt_length:, :].mean(dim=0).float().cpu().numpy()
+            pooled_hidden = hidden_states[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
         else:
             token_logprobs = torch.empty(0)
             token_entropies = torch.empty(0)
             pooled_hidden = np.zeros((model.config.hidden_size,), dtype=np.float32)
 
-    return {
-        "raw_text": raw_text,
-        "generated_tokens": int(generated_length),
-        "mean_token_logprob": float(token_logprobs.mean().item()) if len(token_logprobs) else float("nan"),
-        "mean_entropy": float(token_entropies.mean().item()) if len(token_entropies) else float("nan"),
-        "entropy_std": float(token_entropies.std().item()) if len(token_entropies) > 1 else 0.0,
-        "pooled_hidden": pooled_hidden,
-    }
+        results.append(
+            {
+                "raw_text": raw_text,
+                "generated_tokens": generated_length,
+                "mean_token_logprob": float(token_logprobs.mean().item()) if len(token_logprobs) else float("nan"),
+                "mean_entropy": float(token_entropies.mean().item()) if len(token_entropies) else float("nan"),
+                "entropy_std": float(token_entropies.std().item()) if len(token_entropies) > 1 else 0.0,
+                "pooled_hidden": pooled_hidden,
+            }
+        )
+
+    if actual_device == "cuda":
+        torch.cuda.empty_cache()
+    return results, elapsed_seconds
 
 
-def run_single_trace(
+def safe_generate_batch_with_diagnostics(
+    model: Any,
+    tokenizer: Any,
+    prompt_texts: list[str],
+    actual_device: str,
+    temperature: float,
+    max_new_tokens: int,
+) -> tuple[list[dict[str, Any]], float]:
+    try:
+        return generate_batch_with_diagnostics(
+            model=model,
+            tokenizer=tokenizer,
+            prompt_texts=prompt_texts,
+            actual_device=actual_device,
+            temperature=temperature,
+            max_new_tokens=max_new_tokens,
+        )
+    except RuntimeError as exc:
+        if actual_device != "cuda" or "out of memory" not in str(exc).lower() or len(prompt_texts) == 1:
+            raise
+        logging.warning("CUDA OOM for microbatch size %d. Retrying with smaller splits.", len(prompt_texts))
+        torch.cuda.empty_cache()
+        midpoint = max(1, len(prompt_texts) // 2)
+        first_results, first_elapsed = safe_generate_batch_with_diagnostics(
+            model=model,
+            tokenizer=tokenizer,
+            prompt_texts=prompt_texts[:midpoint],
+            actual_device=actual_device,
+            temperature=temperature,
+            max_new_tokens=max_new_tokens,
+        )
+        second_results, second_elapsed = safe_generate_batch_with_diagnostics(
+            model=model,
+            tokenizer=tokenizer,
+            prompt_texts=prompt_texts[midpoint:],
+            actual_device=actual_device,
+            temperature=temperature,
+            max_new_tokens=max_new_tokens,
+        )
+        return first_results + second_results, first_elapsed + second_elapsed
+
+
+def gpu_memory_allocated_gb(actual_device: str) -> float:
+    if actual_device != "cuda" or not torch.cuda.is_available():
+        return float("nan")
+    return torch.cuda.memory_allocated() / (1024**3)
+
+
+def run_batch_traces(
     model: Any,
     tokenizer: Any,
     model_spec: ModelSpec,
-    task: TaskSpec,
+    tasks: list[TaskSpec],
     actual_device: str,
     temperature: float,
     seed: int,
@@ -416,135 +827,187 @@ def run_single_trace(
     prompt_mode: str,
     system_prompt_mode: str,
     is_baseline: bool,
-) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    set_seed(seed)
-    history: list[dict[str, Any]] = []
-    hidden_vectors: list[np.ndarray] = []
-    run_rows: list[dict[str, Any]] = []
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    if not tasks:
+        return [], []
 
+    actual_prompt_mode = "answer_only" if is_baseline else prompt_mode
     steps_to_run = 1 if is_baseline else max_steps
+    contexts = [
+        {
+            "task": task,
+            "run_id": run_id_for(model_spec.alias, task, temperature, seed),
+            "history": [],
+            "hidden_vectors": [],
+            "rows": [],
+        }
+        for task in tasks
+    ]
 
     for step in range(1, steps_to_run + 1):
-        actual_prompt_mode = "answer_only" if is_baseline else prompt_mode
-        user_prompt = conversation_prompt(
-            task=task,
-            history=history,
-            step=step,
-            max_steps=max_steps,
-            prompt_mode=actual_prompt_mode
-        )
-        prompt_text = render_prompt(tokenizer, user_prompt, system_prompt_mode)
-        started_at = time.perf_counter()
-        generated = generate_with_diagnostics(
+        prompts = [
+            render_prompt(
+                tokenizer,
+                conversation_prompt(
+                    task=context["task"],
+                    history=context["history"],
+                    step=step,
+                    max_steps=max_steps,
+                    prompt_mode=actual_prompt_mode,
+                ),
+                system_prompt_mode,
+            )
+            for context in contexts
+        ]
+
+        generated_batch, batch_elapsed_seconds = safe_generate_batch_with_diagnostics(
             model=model,
             tokenizer=tokenizer,
-            prompt_text=prompt_text,
+            prompt_texts=prompts,
             actual_device=actual_device,
             temperature=temperature,
             max_new_tokens=max_new_tokens,
         )
-        elapsed_seconds = time.perf_counter() - started_at
-        
-        parsed = parse_generation(generated["raw_text"], task.answer_type, actual_prompt_mode)
-        normalized_answer = normalize_answer(parsed["answer"], task.answer_type)
-        is_correct = verify_answer(task, parsed["answer"])
-        prior_answer = history[-1]["answer_normalized"] if history else ""
-        answer_changed = bool(history) and normalized_answer != prior_answer and normalized_answer != ""
-        prior_thought = " ".join(item["thought"] for item in history[-2:])
-        
-        raw_text_length_chars = len(generated["raw_text"])
-        hit_max_new_tokens = int(generated["generated_tokens"] == max_new_tokens)
-        truncated_output_suspected = int(hit_max_new_tokens and not parsed["parse_success"])
-        
-        hidden_vector = generated["pooled_hidden"]
-        if hidden_vectors:
-            previous_hidden = hidden_vectors[-1]
-            denominator = float(np.linalg.norm(hidden_vector) * np.linalg.norm(previous_hidden))
-            hidden_cosine_shift = 1.0 - float(np.dot(hidden_vector, previous_hidden) / denominator) if denominator else 0.0
-            hidden_l2_shift = float(np.linalg.norm(hidden_vector - previous_hidden))
-        else:
-            hidden_cosine_shift = 0.0
-            hidden_l2_shift = 0.0
-        hidden_vectors.append(hidden_vector)
+        batch_tokens = sum(item["generated_tokens"] for item in generated_batch)
+        logging.info(
+            "temp=%.2f seed=%d step=%d/%d | batch=%d | generated_tokens=%d | tok_s=%.2f | gpu_mem_gb=%.2f",
+            temperature,
+            seed,
+            step,
+            steps_to_run,
+            len(contexts),
+            batch_tokens,
+            batch_tokens / max(batch_elapsed_seconds, 1e-6),
+            gpu_memory_allocated_gb(actual_device),
+        )
 
-        row = {
-            "run_id": f"{model_spec.alias}__{task.task_id}__temp{temperature:.2f}__seed{seed}",
+        for context, generated in zip(contexts, generated_batch, strict=True):
+            history = context["history"]
+            parsed = parse_generation(generated["raw_text"], context["task"].answer_type, actual_prompt_mode)
+            normalized_answer = normalize_answer(parsed["answer"], context["task"].answer_type)
+            is_correct = verify_answer(context["task"], parsed["answer"])
+            prior_answer = history[-1]["answer_normalized"] if history else ""
+            answer_changed = bool(history) and normalized_answer != prior_answer and normalized_answer != ""
+            prior_thought = " ".join(item["thought"] for item in history[-2:])
+
+            hidden_vector = generated["pooled_hidden"]
+            if context["hidden_vectors"]:
+                previous_hidden = context["hidden_vectors"][-1]
+                denominator = float(np.linalg.norm(hidden_vector) * np.linalg.norm(previous_hidden))
+                hidden_cosine_shift = 1.0 - float(np.dot(hidden_vector, previous_hidden) / denominator) if denominator else 0.0
+                hidden_l2_shift = float(np.linalg.norm(hidden_vector - previous_hidden))
+            else:
+                hidden_cosine_shift = 0.0
+                hidden_l2_shift = 0.0
+            context["hidden_vectors"].append(hidden_vector)
+
+            hit_max_new_tokens = int(generated["generated_tokens"] == max_new_tokens)
+            truncated_output_suspected = int(hit_max_new_tokens and not parsed["parse_success"])
+            tokens_per_second = generated["generated_tokens"] / max(batch_elapsed_seconds, 1e-6)
+
+            row = {
+                "run_id": context["run_id"],
+                "model_alias": model_spec.alias,
+                "model_name": model_spec.hf_name,
+                "task_id": context["task"].task_id,
+                "domain": context["task"].domain,
+                "difficulty": context["task"].difficulty,
+                "task_source": context["task"].source,
+                "task_source_index": context["task"].source_index,
+                "expected_answer": context["task"].expected_answer,
+                "step": step,
+                "thought": parsed["thought"],
+                "answer": parsed["answer"],
+                "answer_normalized": normalized_answer,
+                "correct": int(is_correct),
+                "confidence": int(max(0, min(100, parsed["confidence"]))),
+                "model_stop_flag": int(bool(parsed["stop"])),
+                "answer_changed": int(answer_changed),
+                "thought_token_count": int(len(re.findall(r"\w+", parsed["thought"]))),
+                "raw_generation_tokens": generated["generated_tokens"],
+                "mean_token_logprob": generated["mean_token_logprob"],
+                "entropy_mean": generated["mean_entropy"],
+                "entropy_std": generated["entropy_std"],
+                "hidden_norm": float(np.linalg.norm(hidden_vector)),
+                "hidden_l2_shift": hidden_l2_shift,
+                "hidden_cosine_shift": hidden_cosine_shift,
+                "lexical_echo": lexical_overlap(parsed["thought"], prior_thought),
+                "verbose_confidence_proxy": float(parsed["confidence"]) / 100.0 + 0.01 * generated["generated_tokens"],
+                "utility": utility(correct=is_correct, step=step),
+                "elapsed_seconds": batch_elapsed_seconds,
+                "tokens_per_second": tokens_per_second,
+                "gpu_memory_allocated_gb": gpu_memory_allocated_gb(actual_device),
+                "seed": seed,
+                "temperature": temperature,
+                "device": actual_device,
+                "prompt_mode": actual_prompt_mode,
+                "system_prompt_mode": system_prompt_mode,
+                "is_baseline": int(is_baseline),
+                "parse_success": parsed["parse_success"],
+                "output_format_type": parsed["output_format_type"],
+                "answer_extraction_source": parsed["answer_extraction_source"],
+                "stop_extraction_source": parsed["stop_extraction_source"],
+                "confidence_extraction_source": parsed["confidence_extraction_source"],
+                "hit_max_new_tokens": hit_max_new_tokens,
+                "truncated_output_suspected": truncated_output_suspected,
+                "raw_text_length_chars": len(generated["raw_text"]),
+                "raw_text_length_tokens": generated["generated_tokens"],
+                "raw_text": generated["raw_text"],
+            }
+            history.append(row)
+            context["rows"].append(row)
+
+    hidden_dir.mkdir(parents=True, exist_ok=True)
+    all_rows: list[dict[str, Any]] = []
+    all_runs: list[dict[str, Any]] = []
+    for context in contexts:
+        run_rows = context["rows"]
+        hidden_vectors = context["hidden_vectors"]
+        if not run_rows:
+            continue
+
+        np.savez_compressed(hidden_dir / f"{context['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
+        first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
+        first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
+        oracle_stop = max(run_rows, key=lambda row: row["utility"])["step"]
+        revision_count = int(sum(row["answer_changed"] for row in run_rows))
+
+        run_summary = {
+            "run_id": context["run_id"],
             "model_alias": model_spec.alias,
             "model_name": model_spec.hf_name,
-            "task_id": task.task_id,
-            "domain": task.domain,
-            "difficulty": task.difficulty,
-            "step": step,
-            "thought": parsed["thought"],
-            "answer": parsed["answer"],
-            "answer_normalized": normalized_answer,
-            "correct": int(is_correct),
-            "confidence": int(max(0, min(100, parsed["confidence"]))),
-            "model_stop_flag": int(bool(parsed["stop"])),
-            "answer_changed": int(answer_changed),
-            "thought_token_count": int(len(re.findall(r"\w+", parsed["thought"]))),
-            "raw_generation_tokens": generated["generated_tokens"],
-            "mean_token_logprob": generated["mean_token_logprob"],
-            "entropy_mean": generated["mean_entropy"],
-            "entropy_std": generated["entropy_std"],
-            "hidden_norm": float(np.linalg.norm(hidden_vector)),
-            "hidden_l2_shift": hidden_l2_shift,
-            "hidden_cosine_shift": hidden_cosine_shift,
-            "lexical_echo": lexical_overlap(parsed["thought"], prior_thought),
-            "verbose_confidence_proxy": float(parsed["confidence"]) / 100.0 + 0.01 * generated["generated_tokens"],
-            "utility": utility(correct=is_correct, step=step),
-            "elapsed_seconds": elapsed_seconds,
-            "seed": seed,
+            "task_id": context["task"].task_id,
+            "domain": context["task"].domain,
+            "difficulty": context["task"].difficulty,
+            "task_source": context["task"].source,
+            "task_source_index": context["task"].source_index,
             "temperature": temperature,
-            "device": actual_device,
+            "seed": seed,
             "prompt_mode": actual_prompt_mode,
             "system_prompt_mode": system_prompt_mode,
             "is_baseline": int(is_baseline),
-            "parse_success": parsed["parse_success"],
-            "output_format_type": parsed["output_format_type"],
-            "answer_extraction_source": parsed["answer_extraction_source"],
-            "stop_extraction_source": parsed["stop_extraction_source"],
-            "confidence_extraction_source": parsed["confidence_extraction_source"],
-            "hit_max_new_tokens": hit_max_new_tokens,
-            "truncated_output_suspected": truncated_output_suspected,
-            "raw_text_length_chars": raw_text_length_chars,
-            "raw_text_length_tokens": generated["generated_tokens"],
-            "raw_text": generated["raw_text"],
+            "ever_correct": int(first_correct_step != -1),
+            "correct_at_step_1": int(run_rows[0]["correct"] == 1),
+            "oracle_stop": oracle_stop,
+            "first_correct_step": first_correct_step if first_correct_step != -1 else max_steps,
+            "first_model_stop_step": first_model_stop_step if first_model_stop_step != -1 else max_steps,
+            "revision_count": revision_count,
+            "best_utility": max(row["utility"] for row in run_rows),
+            "final_correct": run_rows[-1]["correct"],
+            "device": actual_device,
         }
-        history.append(row)
-        run_rows.append(row)
+        all_rows.extend(run_rows)
+        all_runs.append(run_summary)
+        logging.info(
+            "completed %s | ever_correct=%d | first_correct=%s | final_correct=%d | revisions=%d",
+            context["run_id"],
+            run_summary["ever_correct"],
+            run_summary["first_correct_step"],
+            run_summary["final_correct"],
+            revision_count,
+        )
 
-    hidden_dir.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(hidden_dir / f"{run_rows[0]['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
-
-    first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
-    first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
-    oracle_stop = max(run_rows, key=lambda row: row["utility"])["step"]
-    revision_count = int(sum(row["answer_changed"] for row in run_rows))
-    
-    run_summary = {
-        "run_id": run_rows[0]["run_id"],
-        "model_alias": model_spec.alias,
-        "model_name": model_spec.hf_name,
-        "task_id": task.task_id,
-        "domain": task.domain,
-        "difficulty": task.difficulty,
-        "temperature": temperature,
-        "seed": seed,
-        "prompt_mode": actual_prompt_mode,
-        "system_prompt_mode": system_prompt_mode,
-        "is_baseline": int(is_baseline),
-        "ever_correct": int(first_correct_step != -1),
-        "correct_at_step_1": int(run_rows[0]["correct"] == 1) if run_rows else 0,
-        "oracle_stop": oracle_stop,
-        "first_correct_step": first_correct_step if first_correct_step != -1 else max_steps,
-        "first_model_stop_step": first_model_stop_step if first_model_stop_step != -1 else max_steps,
-        "revision_count": revision_count,
-        "best_utility": max(row["utility"] for row in run_rows),
-        "final_correct": run_rows[-1]["correct"],
-        "device": actual_device,
-    }
-    return run_rows, run_summary
+    return all_rows, all_runs
 
 
 def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
@@ -586,77 +1049,15 @@ def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Run a small real-trace pilot on an open-weight reasoning model.")
-    parser.add_argument("--model", default="deepseek_r1_distill_1p5b", choices=sorted(MODEL_CATALOG.keys()))
-    parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
-    parser.add_argument("--temperatures", nargs="+", type=float, default=[0.6])
-    parser.add_argument("--seeds", nargs="+", type=int, default=[7])
-    parser.add_argument("--max-steps", type=int, default=5)
-    parser.add_argument("--max-new-tokens", type=int, default=128)
-    parser.add_argument("--max-tasks", type=int, default=len(TASKS))
-    parser.add_argument("--prompt-mode", default="structured_four_line", choices=["structured_four_line", "minimal_json", "answer_only"])
-    parser.add_argument("--system-prompt-mode", default="default", choices=["default", "short", "none"])
-    parser.add_argument("--run-baseline", action="store_true", help="Run competence baseline instead of iterative reasoning")
-    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
-    parser.add_argument("--concurrency", type=int, default=8, help="Number of concurrent generation threads")
-    args = parser.parse_args()
-
-    output_dir = Path(args.output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    hidden_dir = output_dir / "hidden_states"
-    model_spec = MODEL_CATALOG[args.model]
-    model, tokenizer, actual_device, backend = load_model(model_spec=model_spec, device=args.device)
-
-    all_rows: list[dict[str, Any]] = []
-    all_runs: list[dict[str, Any]] = []
-
-    tasks_to_run = []
-    for task in TASKS[: args.max_tasks]:
-        for temperature in args.temperatures:
-            for seed in args.seeds:
-                tasks_to_run.append((task, temperature, seed))
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.concurrency) as executor:
-        futures = []
-        for task, temperature, seed in tasks_to_run:
-            kwargs = dict(
-                model=model,
-                tokenizer=tokenizer,
-                model_spec=model_spec,
-                task=task,
-                actual_device=actual_device,
-                temperature=temperature,
-                seed=seed,
-                max_steps=args.max_steps,
-                max_new_tokens=args.max_new_tokens,
-                hidden_dir=hidden_dir,
-                prompt_mode=args.prompt_mode,
-                system_prompt_mode=args.system_prompt_mode,
-                is_baseline=args.run_baseline,
-            )
-            futures.append(executor.submit(run_single_trace, **kwargs))
-
-        for future in concurrent.futures.as_completed(futures):
-            try:
-                rows, run_summary = future.result()
-                all_rows.extend(rows)
-                all_runs.append(run_summary)
-            except Exception as exc:
-                print(f"A trace generated an exception: {exc}", flush=True)
-
-    step_frame = pd.DataFrame(all_rows)
-    run_frame = pd.DataFrame(all_runs)
-    
-    if args.run_baseline:
-        file_prefix = "baseline_"
-        step_frame.to_csv(output_dir / f"{file_prefix}steps.csv", index=False)
-        run_frame.to_csv(output_dir / f"{file_prefix}runs.csv", index=False)
-        print(f"Wrote baseline artifacts to: {output_dir}")
-        return
-
-    transition_frame = summarize_transitions(step_frame)
-    pilot_summary = pd.DataFrame(
+def build_pilot_summary(
+    step_frame: pd.DataFrame,
+    run_frame: pd.DataFrame,
+    transition_frame: pd.DataFrame,
+    model_spec: ModelSpec,
+    backend: str,
+    actual_device: str,
+) -> pd.DataFrame:
+    return pd.DataFrame(
         [
             {
                 "model_alias": model_spec.alias,
@@ -671,8 +1072,8 @@ def main() -> None:
                 "mean_revision_count": float(run_frame["revision_count"].mean()),
                 "mean_entropy": float(step_frame["entropy_mean"].mean()),
                 "mean_hidden_shift": float(step_frame["hidden_l2_shift"].mean()),
-                "repair_rate_overall": float(transition_frame["repair_rate"].dropna().mean()),
-                "corruption_rate_overall": float(transition_frame["corruption_rate"].dropna().mean()),
+                "repair_rate_overall": float(transition_frame["repair_rate"].dropna().mean()) if not transition_frame.empty else float("nan"),
+                "corruption_rate_overall": float(transition_frame["corruption_rate"].dropna().mean()) if not transition_frame.empty else float("nan"),
                 "runs_ever_correct": int(run_frame["ever_correct"].sum()),
                 "backend": backend,
                 "device": actual_device,
@@ -680,29 +1081,166 @@ def main() -> None:
         ]
     )
 
-    step_frame.to_csv(output_dir / "trace_steps.csv", index=False)
-    run_frame.to_csv(output_dir / "trace_runs.csv", index=False)
-    transition_frame.to_csv(output_dir / "hazard_by_step.csv", index=False)
-    pilot_summary.to_csv(output_dir / "pilot_summary.csv", index=False)
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Run real-trace reasoning experiments on builtin tasks or GSM8K.")
+    parser.add_argument("--model", default="deepseek_r1_distill_1p5b", choices=sorted(MODEL_CATALOG.keys()))
+    parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
+    parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
+    parser.add_argument("--device-map", default=None)
+    parser.add_argument("--temperatures", nargs="+", type=float, default=[0.6])
+    parser.add_argument("--seeds", nargs="+", type=int, default=[7])
+    parser.add_argument("--max-steps", type=int, default=5)
+    parser.add_argument("--max-new-tokens", type=int, default=256)
+    parser.add_argument("--max-tasks", type=int, default=len(BUILTIN_TASKS))
+    parser.add_argument("--task-source", default="builtin", choices=["builtin", "gsm8k"])
+    parser.add_argument("--dataset-split", default="train")
+    parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
+    parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--prompt-mode", default="structured_four_line", choices=["structured_four_line", "minimal_json", "answer_only"])
+    parser.add_argument("--system-prompt-mode", default="default", choices=["default", "short", "none"])
+    parser.add_argument("--run-baseline", action="store_true", help="Run competence baseline instead of iterative reasoning")
+    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
+    parser.add_argument("--no-resume", dest="resume", action="store_false")
+    parser.set_defaults(resume=True)
+    args = parser.parse_args()
+
+    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
+    if torch.cuda.is_available():
+        torch.backends.cuda.matmul.allow_tf32 = True
+
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    hidden_dir = output_dir / ("hidden_states_baseline" if args.run_baseline else "hidden_states")
+    paths = output_paths(output_dir, args.run_baseline)
+    model_spec = MODEL_CATALOG[args.model]
+
+    tasks = load_tasks(
+        task_source=args.task_source,
+        max_tasks=args.max_tasks,
+        dataset_split=args.dataset_split,
+        shuffle_seed=args.dataset_shuffle_seed,
+    )
+    logging.info("Loaded %d tasks from %s.", len(tasks), args.task_source)
+
+    existing_steps, existing_runs, completed_run_ids = load_existing_outputs(output_dir, args.run_baseline)
+    if args.resume and completed_run_ids:
+        logging.info("Resuming with %d completed runs already on disk.", len(completed_run_ids))
+
+    total_requested_runs = len(tasks) * len(args.temperatures) * len(args.seeds)
+    pending_requested_runs = 0
+    for temperature in args.temperatures:
+        for seed in args.seeds:
+            for task in tasks:
+                run_id = run_id_for(model_spec.alias, task, temperature, seed)
+                if not args.resume or run_id not in completed_run_ids:
+                    pending_requested_runs += 1
+    logging.info("Requested runs=%d | pending runs=%d", total_requested_runs, pending_requested_runs)
+
+    if pending_requested_runs == 0 and existing_runs:
+        logging.info("No pending runs detected. Rebuilding summaries from existing artifacts.")
+    elif pending_requested_runs == 0:
+        logging.info("No runs to execute.")
+
+    model = None
+    tokenizer = None
+    actual_device = args.device
+    backend = "transformers+torch(uninitialized)"
+    if pending_requested_runs > 0:
+        model, tokenizer, actual_device, backend = load_model(
+            model_spec=model_spec,
+            device=args.device,
+            quantization=args.quantization,
+            device_map=args.device_map,
+        )
+        logging.info("Model loaded: %s | backend=%s | device=%s", model_spec.hf_name, backend, actual_device)
+
+    all_rows: list[dict[str, Any]] = list(existing_steps)
+    all_runs: list[dict[str, Any]] = list(existing_runs)
+
+    if model is not None and tokenizer is not None:
+        for temperature in args.temperatures:
+            for seed in args.seeds:
+                pending_tasks = [
+                    task
+                    for task in tasks
+                    if not args.resume or run_id_for(model_spec.alias, task, temperature, seed) not in completed_run_ids
+                ]
+                if not pending_tasks:
+                    logging.info("Skipping temp=%.2f seed=%d because all runs already exist.", temperature, seed)
+                    continue
+
+                set_seed(seed)
+                batches = list(chunked(pending_tasks, max(1, args.batch_size)))
+                progress = tqdm(batches, desc=f"temp={temperature:.2f} seed={seed}", unit="batch")
+                for task_batch in progress:
+                    batch_rows, batch_runs = run_batch_traces(
+                        model=model,
+                        tokenizer=tokenizer,
+                        model_spec=model_spec,
+                        tasks=task_batch,
+                        actual_device=actual_device,
+                        temperature=temperature,
+                        seed=seed,
+                        max_steps=args.max_steps,
+                        max_new_tokens=args.max_new_tokens,
+                        hidden_dir=hidden_dir,
+                        prompt_mode=args.prompt_mode,
+                        system_prompt_mode=args.system_prompt_mode,
+                        is_baseline=args.run_baseline,
+                    )
+                    append_records(paths["steps"], batch_rows)
+                    append_records(paths["runs"], batch_runs)
+                    all_rows.extend(batch_rows)
+                    all_runs.extend(batch_runs)
+                    completed_run_ids.update(run["run_id"] for run in batch_runs)
+                    progress.set_postfix(
+                        runs=len(batch_runs),
+                        correct=sum(int(run["ever_correct"]) for run in batch_runs),
+                    )
+
+    if not all_rows or not all_runs:
+        raise RuntimeError("No trace data is available to summarize. The experiment produced no rows.")
+
+    if args.run_baseline:
+        logging.info("Wrote baseline artifacts to: %s", output_dir)
+        return
+
+    step_frame = pd.DataFrame(all_rows)
+    run_frame = pd.DataFrame(all_runs)
+    transition_frame = summarize_transitions(step_frame)
+    pilot_summary = build_pilot_summary(step_frame, run_frame, transition_frame, model_spec, backend, actual_device)
+
+    transition_frame.to_csv(paths["hazard"], index=False)
+    pilot_summary.to_csv(paths["pilot"], index=False)
 
     metadata = {
         "model": asdict(model_spec),
         "backend": backend,
         "device": actual_device,
+        "quantization": args.quantization,
+        "device_map": args.device_map,
         "temperatures": args.temperatures,
         "seeds": args.seeds,
         "max_steps": args.max_steps,
         "max_new_tokens": args.max_new_tokens,
+        "max_tasks": args.max_tasks,
+        "task_source": args.task_source,
+        "dataset_split": args.dataset_split,
+        "dataset_shuffle_seed": args.dataset_shuffle_seed,
+        "batch_size": args.batch_size,
         "step_cost": STEP_COST,
         "prompt_mode": args.prompt_mode,
         "system_prompt_mode": args.system_prompt_mode,
-        "tasks": [asdict(task) for task in TASKS[: args.max_tasks]],
+        "resume_enabled": args.resume,
+        "completed_run_count": len(completed_run_ids),
+        "tasks": [asdict(task) for task in tasks],
         "hidden_state_accessible": True,
         "token_logprobs_accessible": True,
         "reasoning_traces_accessible": True,
-        "runtime_limit_notes": "Pilot sized for local Windows workstation; fixed-step protocol is used to observe post-answer revisions.",
+        "runtime_limit_notes": "Batch-first GSM8K runner with append-only CSV outputs and automatic microbatch splitting on CUDA OOM.",
     }
-    with (output_dir / "metadata.json").open("w", encoding="utf-8") as handle:
+    with paths["metadata"].open("w", encoding="utf-8") as handle:
         json.dump(metadata, handle, indent=2)
 
     for _, row in pilot_summary.iterrows():
