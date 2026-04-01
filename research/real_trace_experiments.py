@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import math
 import re
@@ -391,9 +392,6 @@ def generate_with_diagnostics(
             token_entropies = torch.empty(0)
             pooled_hidden = np.zeros((model.config.hidden_size,), dtype=np.float32)
 
-    if actual_device == "cuda":
-        torch.cuda.empty_cache()
-
     return {
         "raw_text": raw_text,
         "generated_tokens": int(generated_length),
@@ -601,6 +599,7 @@ def main() -> None:
     parser.add_argument("--system-prompt-mode", default="default", choices=["default", "short", "none"])
     parser.add_argument("--run-baseline", action="store_true", help="Run competence baseline instead of iterative reasoning")
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
+    parser.add_argument("--concurrency", type=int, default=8, help="Number of concurrent generation threads")
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -611,26 +610,40 @@ def main() -> None:
 
     all_rows: list[dict[str, Any]] = []
     all_runs: list[dict[str, Any]] = []
+
+    tasks_to_run = []
     for task in TASKS[: args.max_tasks]:
         for temperature in args.temperatures:
             for seed in args.seeds:
-                rows, run_summary = run_single_trace(
-                    model=model,
-                    tokenizer=tokenizer,
-                    model_spec=model_spec,
-                    task=task,
-                    actual_device=actual_device,
-                    temperature=temperature,
-                    seed=seed,
-                    max_steps=args.max_steps,
-                    max_new_tokens=args.max_new_tokens,
-                    hidden_dir=hidden_dir,
-                    prompt_mode=args.prompt_mode,
-                    system_prompt_mode=args.system_prompt_mode,
-                    is_baseline=args.run_baseline,
-                )
+                tasks_to_run.append((task, temperature, seed))
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.concurrency) as executor:
+        futures = []
+        for task, temperature, seed in tasks_to_run:
+            kwargs = dict(
+                model=model,
+                tokenizer=tokenizer,
+                model_spec=model_spec,
+                task=task,
+                actual_device=actual_device,
+                temperature=temperature,
+                seed=seed,
+                max_steps=args.max_steps,
+                max_new_tokens=args.max_new_tokens,
+                hidden_dir=hidden_dir,
+                prompt_mode=args.prompt_mode,
+                system_prompt_mode=args.system_prompt_mode,
+                is_baseline=args.run_baseline,
+            )
+            futures.append(executor.submit(run_single_trace, **kwargs))
+
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                rows, run_summary = future.result()
                 all_rows.extend(rows)
                 all_runs.append(run_summary)
+            except Exception as exc:
+                print(f"A trace generated an exception: {exc}", flush=True)
 
     step_frame = pd.DataFrame(all_rows)
     run_frame = pd.DataFrame(all_runs)
