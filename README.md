@@ -8,6 +8,20 @@ Reasoning models often improve for the first few steps of chain-of-thought becau
 
 The name we use for that turning point is the overthinking boundary.
 
+## Primer: What This Means in LLM Terms
+
+### What is an LLM and what is a token?
+
+At a basic level, a large language model is an autoregressive statistical engine. It predicts the next token from the tokens that came before it. In this view, each generated token is one discrete time step in a sequential process.
+
+### What is reasoning or chain-of-thought?
+
+Older systems often tried to jump directly to a final answer. Modern reasoning models do better when they are allowed to produce intermediate reasoning steps before committing to an answer. In current AI work, those intermediate steps are often described as test-time compute or reasoning tokens.
+
+### What is overthinking?
+
+The naive scaling story says that allowing more reasoning should keep helping. The central claim of this repo is that this breaks down. Beyond some point, additional reasoning can make the model second-guess a correct solution, compound small errors, or drift into a worse answer. That turning point is the overthinking boundary.
+
 ## Why This Matters
 
 A lot of test-time scaling work assumes that more thinking is better. In practice, that is only true for part of a trajectory.
@@ -38,6 +52,29 @@ In plain English:
 If `mu_t > 0`, continuing is still worth it.
 
 If `mu_t <= 0`, the model has crossed the overthinking boundary and should stop.
+
+## The Mathematical Bridge
+
+The main mathematical move in this project is to translate a language-model trace into a stochastic process.
+
+Instead of treating the generated text as a purely linguistic artifact, we treat the reasoning sequence as a discrete-time process with changing continuation value. Early in a good trace, the process can have positive drift because the model is moving toward the correct answer. Later in the same trace, corruption risk can dominate repair and flip the expected drift negative.
+
+```mermaid
+graph TD
+	A[Start: problem prompt] -->|Positive drift| B(Generate reasoning steps)
+	B -->|Convergence| C{Stopping boundary}
+	C -->|Stop here| D((Correct answer))
+	C -->|Keep forcing more reasoning| E[Corruption hazard activates]
+	E -->|Negative drift| F[Hallucination or error compounding]
+	F -->|Eventual output| G((Incorrect answer))
+```
+
+This is the working interpretation behind the empirical analysis:
+
+- State space: at each step, the model is in a latent regime that is either moving toward or away from the correct answer.
+- Positive drift: early reasoning can improve the answer.
+- Hazard: as traces lengthen, the chance of corrupting a correct path can rise.
+- Flip: once a harmful token or revision is sampled, future tokens condition on that mistake and the trajectory can deteriorate.
 
 ## The Main Concepts, Explained Clearly
 
@@ -108,6 +145,22 @@ The repo also studies simpler or complementary signals such as:
 
 These are useful as observables, but they are not the primary theory.
 
+## The Applied Math Tools
+
+The repo is explicitly trying to connect LLM behavior to established mathematical tools rather than treating overthinking as a vague empirical curiosity.
+
+### Optimal Stopping Theory
+
+This is the language of deciding exactly when to act in order to maximize expected value. Here, the action is stopping generation at the step where another reasoning token has nonpositive marginal value.
+
+### Convergence Theory and Concentration
+
+These tools help bound uncertainty in estimated quantities. In this project, they motivate the empirical-Bernstein and e-process style detectors that try to decide when the continuation value has become negative while accounting for sampling noise.
+
+### Phase Transitions
+
+One working hypothesis is that productive reasoning and destructive overthinking are not just two points on a smooth slope. The transition may be relatively sharp, more like a tipping point than a gentle decay.
+
 ## What Signals We Measure From Traces
 
 The current experiments extract features from each reasoning step, including:
@@ -122,6 +175,52 @@ The current experiments extract features from each reasoning step, including:
 - confidence when the model exposes it.
 
 These signals are then used to estimate when continuing reasoning is still useful.
+
+## Proof of Work: The Empirical Harness
+
+This repository is not just a theory note. It includes a working experimental harness for collecting real step-by-step traces from open-weight models.
+
+### Infrastructure
+
+The current workflow is designed around larger cloud runs:
+
+- Google Colab with an NVIDIA L4 GPU.
+- Remote orchestration from the local VS Code environment, including SSH-based remote control of the cloud runtime.
+- A reusable wrapper in [tools/run_colab_experiment.py](tools/run_colab_experiment.py) for smoke tests, full runs, and artifact regeneration.
+
+### Current DeepSeek Experiment Design
+
+The main large run in the repo forces DeepSeek-R1-Distill 1.5B to reason step by step on GSM8K problems for up to 10 steps and across temperatures `0.1`, `0.6`, and `1.0`. Rather than only checking the final answer, the harness records what happens at each reasoning step so that repair and corruption can be studied directly.
+
+### What gets logged
+
+At each step, the harness can record:
+
+- the current answer,
+- whether the answer is correct,
+- entropy and related uncertainty signals,
+- hidden-state movement,
+- revision behavior,
+- the final utility of stopping at that step.
+
+```mermaid
+sequenceDiagram
+	participant Harness as Python harness
+	participant Model as Reasoning model
+	participant Evaluator as Step evaluator
+	participant Log as CSV outputs
+
+	Harness->>Model: Prompt plus forced multi-step reasoning
+	loop For each step t
+		Model-->>Harness: Intermediate reasoning state
+		Harness->>Evaluator: Parse and score current answer
+		Evaluator-->>Harness: Correct or incorrect
+		Harness->>Log: Record step, correctness, entropy, hidden drift, temperature
+	end
+	Harness->>Log: Save full temporal trace for analysis
+```
+
+This is what makes the hazard model identifiable: the repo does not only ask whether the model was right at the end. It asks when it first became right, whether it later became wrong, and which observables signaled that change.
 
 ## High-Level Pipeline
 
@@ -148,6 +247,14 @@ The current literature sweep pushed this repo in four important directions:
 - Time-uniform risk control matters if a detector scans for a stop at every step.
 
 That is why the repo now centers a continuation-value model, hazard decomposition, and anytime-valid detector layer instead of relying on a single entropy threshold or a generic prompting heuristic.
+
+## Why This Matters Beyond PRMs
+
+One common way to supervise reasoning is to train a second model, often called a process reward model, to score the steps of the first model. That approach can help, but it is expensive and brittle.
+
+The alternative explored here is mathematical rather than supervisory: if test-time compute can be modeled as a stochastic process with a stopping boundary, then a model may not need a second full evaluator at inference time. In the strongest version of that idea, the system would monitor its own observable drift and halt when the expected value of continuing turns negative.
+
+That is the long-term motivation of this repo: replacing brute-force extra supervision with a principled stopping rule.
 
 ## The Main Research Questions
 
