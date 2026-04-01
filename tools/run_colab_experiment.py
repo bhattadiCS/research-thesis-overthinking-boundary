@@ -96,6 +96,7 @@ def run_real_trace_experiment(
     output_dir: Path,
     prompt_mode: str,
     system_prompt_mode: str,
+    concurrency: int,
 ) -> None:
     command = [
         PYTHON,
@@ -116,6 +117,8 @@ def run_real_trace_experiment(
         system_prompt_mode,
         "--output-dir",
         str(output_dir),
+        "--concurrency",
+        str(concurrency),
         "--temperatures",
     ]
     command.extend(str(value) for value in temperatures)
@@ -186,6 +189,7 @@ def main() -> None:
     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
     parser.add_argument("--smoke-output-dir", default=str(DEFAULT_SMOKE_DIR))
+    parser.add_argument("--concurrency", type=int, default=8)
     args = parser.parse_args()
 
     started_at = time.time()
@@ -213,6 +217,7 @@ def main() -> None:
             output_dir=smoke_output_dir,
             prompt_mode=args.prompt_mode,
             system_prompt_mode=args.system_prompt_mode,
+            concurrency=args.concurrency,
         )
         run_analysis(smoke_output_dir)
         print_csv(smoke_output_dir / "pilot_summary.csv", "Smoke Pilot Summary")
@@ -235,6 +240,7 @@ def main() -> None:
         output_dir=full_output_dir,
         prompt_mode=args.prompt_mode,
         system_prompt_mode=args.system_prompt_mode,
+        concurrency=args.concurrency,
     )
     run_analysis(full_output_dir)
 
@@ -249,6 +255,11 @@ def main() -> None:
     print(f"\n[done] Full results directory: {full_output_dir}", flush=True)
     print(f"[done] Zipped archive: {archive}", flush=True)
     print(f"[done] Total runtime: {elapsed_minutes:.2f} minutes", flush=True)
+
+    # Trigger Colab automated shutdown to save GPU credits
+    if os.path.exists("/content"):
+        print("[done] Triggering Colab autonomous shutdown...", flush=True)
+        os.system("touch /content/SHUTDOWN_COLAB.txt")
 
 
 if __name__ == "__main__":
