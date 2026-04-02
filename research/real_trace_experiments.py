@@ -1331,6 +1331,37 @@ def build_pilot_summary(
     )
 
 
+def infer_existing_runtime_context(paths: dict[str, Path], requested_device: str) -> tuple[str, str]:
+    backend = "transformers+torch(uninitialized)"
+    if requested_device == "auto":
+        actual_device = "cuda" if torch.cuda.is_available() else "cpu"
+    else:
+        actual_device = requested_device
+
+    metadata_path = paths["metadata"]
+    if metadata_path.exists():
+        try:
+            with metadata_path.open("r", encoding="utf-8") as handle:
+                metadata = json.load(handle)
+            backend = str(metadata.get("backend", backend))
+            actual_device = str(metadata.get("device", actual_device))
+            return backend, actual_device
+        except (json.JSONDecodeError, OSError, TypeError, ValueError):
+            logging.warning("Failed to read existing metadata from %s for runtime context recovery.", metadata_path)
+
+    pilot_path = paths["pilot"]
+    if pilot_path.exists():
+        try:
+            pilot_summary = pd.read_csv(pilot_path)
+            if not pilot_summary.empty:
+                backend = str(pilot_summary.iloc[0].get("backend", backend))
+                actual_device = str(pilot_summary.iloc[0].get("device", actual_device))
+        except (OSError, ValueError, pd.errors.EmptyDataError):
+            logging.warning("Failed to read existing pilot summary from %s for runtime context recovery.", pilot_path)
+
+    return backend, actual_device
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run real-trace reasoning experiments on builtin tasks or GSM8K.")
     parser.add_argument("--model", default="deepseek_r1_distill_1p5b", choices=sorted(MODEL_CATALOG.keys()))
@@ -1416,8 +1447,7 @@ def main() -> None:
 
     model = None
     tokenizer = None
-    actual_device = args.device
-    backend = "transformers+torch(uninitialized)"
+    backend, actual_device = infer_existing_runtime_context(paths, args.device)
     if pending_requested_runs > 0:
         model, tokenizer, actual_device, backend = load_model(
             model_spec=model_spec,
