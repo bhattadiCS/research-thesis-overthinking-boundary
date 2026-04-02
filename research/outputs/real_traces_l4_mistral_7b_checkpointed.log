@@ -1,0 +1,14 @@
+[2026-04-02 23:40:34 UTC] Using configured git author: Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+[2026-04-02 23:40:34 UTC] Starting checkpointed run for model=mistral_7b_instruct_v0p3, quantization=none, attn=sdpa, batch_size=4, max_tasks=300.
+[2026-04-02 23:41:55 UTC] Using configured git author: Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+[2026-04-02 23:41:55 UTC] Starting checkpointed run for model=mistral_7b_instruct_v0p3, quantization=none, attn=sdpa, batch_size=4, max_tasks=300.
+[2026-04-02 23:41:59 UTC] Existing completed runs=0 pending_runs=900 output_dir=research/outputs/real_traces_l4_mistral_7b
+[2026-04-02 23:42:11 UTC] Model loaded on device=cuda backend=transformers+torch(cuda)
+[2026-04-02 23:42:11 UTC] Running temp=0.10 seed=7 with 300 pending tasks and 0 completed tasks already on disk.
+[2026-04-02 23:43:41 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=4 completed_runs_total=4 elapsed=90.4s
+[2026-04-02 23:45:39 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=8 completed_runs_total=8 elapsed=117.9s
+[2026-04-02 23:48:01 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=12 completed_runs_total=12 elapsed=142.6s
+[2026-04-02 23:50:28 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=16 completed_runs_total=16 elapsed=146.7s
+[2026-04-02 23:52:29 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=20 completed_runs_total=20 elapsed=120.8s
+[2026-04-02 23:54:57 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=24 completed_runs_total=24 elapsed=148.2s
+[2026-04-02 23:57:25 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=28 completed_runs_total=28 elapsed=148.0s
