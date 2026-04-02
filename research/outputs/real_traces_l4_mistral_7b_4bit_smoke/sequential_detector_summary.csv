@@ -1,0 +1,6 @@
+detector,mean_stop_step,mean_stop_utility,mean_oracle_utility,mean_oracle_gap,false_early_rate,false_late_rate,mean_false_late_severity
+e_process,1.0,1.0,1.0,0.0,0.0,0.0,0.0
+empirical_bernstein,1.0,1.0,1.0,0.0,0.0,0.0,0.0
+oracle,1.0,1.0,1.0,0.0,0.0,0.0,0.0
+hazard_drift,2.0,-0.05,1.0,1.05,0.0,1.0,1.0
+never_stop,2.0,-0.05,1.0,1.05,0.0,1.0,1.0

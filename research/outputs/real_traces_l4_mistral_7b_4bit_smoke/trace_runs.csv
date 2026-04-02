@@ -1,0 +1,3 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,temperature,seed,prompt_mode,system_prompt_mode,is_baseline,ever_correct,correct_at_step_1,oracle_stop,first_correct_step,first_model_stop_step,revision_count,best_utility,final_correct,device
+mistral_7b_instruct_v0p3__calendar_offset_easy__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,calendar_offset_easy,calendar,easy,builtin,-1,0.1,7,minimal_json,default,0,1,1,1,1,1,1,1.0,0,cuda
+mistral_7b_instruct_v0p3__fraction_remaining__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,fraction_remaining,arithmetic,medium,builtin,-1,0.1,7,minimal_json,default,0,1,1,1,1,1,1,1.0,0,cuda

@@ -1,0 +1,80 @@
+{
+  "model": {
+    "alias": "mistral_7b_instruct_v0p3",
+    "hf_name": "mistralai/Mistral-7B-Instruct-v0.3",
+    "family": "Mistral instruct",
+    "parameter_count": "7B"
+  },
+  "backend": "transformers+torch(cuda-4bit)",
+  "device": "cuda",
+  "quantization": "4bit",
+  "device_map": "auto",
+  "attn_implementation": "sdpa",
+  "temperatures": [
+    0.1
+  ],
+  "seeds": [
+    7
+  ],
+  "max_steps": 2,
+  "max_new_tokens": 128,
+  "max_tasks": 2,
+  "task_source": "builtin",
+  "dataset_split": "train",
+  "dataset_shuffle_seed": 17,
+  "batch_size": 1,
+  "step_cost": 0.05,
+  "prompt_mode": "minimal_json",
+  "system_prompt_mode": "default",
+  "resume_enabled": false,
+  "completed_run_count": 2,
+  "pending_run_count": 0,
+  "next_pending_run": {
+    "run_id": "mistral_7b_instruct_v0p3__calendar_offset_easy__temp0.10__seed7",
+    "task_id": "calendar_offset_easy",
+    "task_source_index": -1,
+    "temperature": 0.1,
+    "seed": 7
+  },
+  "checkpoint_reconciliation": {
+    "expected_steps_per_run": 2,
+    "completed_run_count": 0,
+    "hidden_state_file_count": 0,
+    "duplicate_step_rows_removed": 0,
+    "duplicate_run_rows_removed": 0,
+    "reconstructed_run_summaries": 0,
+    "incomplete_step_run_ids": [],
+    "runs_without_complete_steps": [],
+    "hidden_without_complete_steps": [],
+    "anomalies_detected": false
+  },
+  "tasks": [
+    {
+      "task_id": "calendar_offset_easy",
+      "domain": "calendar",
+      "difficulty": "easy",
+      "prompt": "If today is Tuesday, what day of the week will it be 14 days later? Answer with only the weekday.",
+      "answer_type": "day",
+      "expected_answer": "tuesday",
+      "notes": "Very easy task where extra verification can become redundant.",
+      "source": "builtin",
+      "source_index": -1
+    },
+    {
+      "task_id": "fraction_remaining",
+      "domain": "arithmetic",
+      "difficulty": "medium",
+      "prompt": "A tank is half full. Then one quarter of the whole tank is drained. What fraction of the tank is full now?",
+      "answer_type": "fraction",
+      "expected_answer": "1/4",
+      "notes": "Easy fraction task with exact verification.",
+      "source": "builtin",
+      "source_index": -1
+    }
+  ],
+  "hidden_state_accessible": true,
+  "token_logprobs_accessible": true,
+  "reasoning_traces_accessible": true,
+  "batch_metrics_accessible": true,
+  "runtime_limit_notes": "Batch-first GSM8K runner with checkpoint reconciliation, append-only CSV outputs, incremental metadata snapshots, and automatic microbatch splitting on CUDA OOM."
+}
