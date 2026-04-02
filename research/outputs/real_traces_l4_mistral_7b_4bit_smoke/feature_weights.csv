@@ -1,0 +1,13 @@
+model,feature,coefficient
+correctness_probe,step,-0.44400039180255546
+correctness_probe,entropy_mean,-0.24905546018510996
+correctness_probe,entropy_std,-0.18570771064738997
+correctness_probe,confidence,0.20144838370664492
+correctness_probe,answer_changed,-0.44400039180255546
+correctness_probe,thought_token_count,0.09894301044647183
+correctness_probe,hidden_l2_shift,-0.38371693153102104
+correctness_probe,hidden_cosine_shift,-0.33609313450574113
+correctness_probe,lexical_echo,-0.3112391077483639
+correctness_probe,verbose_confidence_proxy,-0.027196006807611424
+repair_hazard,constant_probability,0.0
+corruption_hazard,constant_probability,1.0

@@ -147,10 +147,10 @@ def run_real_trace_experiment(
         quantization,
         "--output-dir",
         str(output_dir),
-        "--temperatures",
     ]
     if device_map:
         command.extend(["--device-map", device_map])
+    command.append("--temperatures")
     command.extend(str(value) for value in temperatures)
     command.append("--seeds")
     command.extend(str(value) for value in seeds)
