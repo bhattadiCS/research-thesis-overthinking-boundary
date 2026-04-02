@@ -25,5 +25,7 @@ thesis_data_backup_from_*.zip
 recovered_*_data/
 
 # Thesis documentation
-ThesisDocs/
+ThesisDocs/*
+!ThesisDocs/
+!ThesisDocs/*.md
 

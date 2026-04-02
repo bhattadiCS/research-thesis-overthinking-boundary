@@ -119,7 +119,83 @@ is the optimal stopping time for maximizing $\mathbb{E}[V_\tau]$ over bounded st
 
 That part of the earlier argument survives unchanged.
 
-### 2.3 Reward-Hacking Region
+### 2.3 Thesis-Ready Stopping Algorithm
+
+The theorem object, the empirical estimate, and the deployment rule should be kept separate.
+
+The latent boundary is
+
+$$
+T_c = \inf\{t \ge 0 : \mu_t \le 0\}, \qquad \mu_t = (1-q_t)\alpha_t - q_t\beta_t - \lambda.
+$$
+
+This is the clean optimal-stopping target, but it is not directly observable because $q_t$, $\alpha_t$, and $\beta_t$ are latent conditional objects.
+
+Given observable trace features $Z_{1:t}$, define the plug-in estimates
+
+$$
+\widehat{q}_t \approx \mathbb{P}(C_t = 1 \mid \mathcal{F}_t), \qquad
+\widehat{\alpha}_t \approx \mathbb{P}(C_{t+1} = 1 \mid C_t = 0, \mathcal{F}_t), \qquad
+\widehat{\beta}_t \approx \mathbb{P}(C_{t+1} = 0 \mid C_t = 1, \mathcal{F}_t),
+$$
+
+and the empirical continuation value
+
+$$
+\widehat{\mu}_t = (1-\widehat{q}_t)\widehat{\alpha}_t - \widehat{q}_t\widehat{\beta}_t - \lambda.
+$$
+
+The corresponding plug-in empirical boundary is
+
+$$
+\widehat{T}_c = \inf\{t \ge 1 : \widehat{\mu}_t \le 0\}.
+$$
+
+For scientific interpretation, $\widehat{T}_c$ is the right estimator-facing analogue of $T_c$. For deployment, however, a raw plug-in crossing can be too optimistic because it ignores sequential uncertainty. The deployment-safe version is therefore an anytime upper-confidence rule
+
+$$
+  au_{\mathrm{safe}} = \inf\{t \ge 2 : U_t \le 0\},
+$$
+
+where $U_t$ is an anytime-valid upper bound on the one-step continuation gain, for example the empirical-Bernstein upper bound implemented in this repo or a valid e-process-derived stopping signal.
+
+Algorithm 1 states the thesis-facing version of the stopping rule.
+
+```text
+Algorithm 1. Continuation-value stopping from hazards and observable traces
+Input: trace prefixes Z_1:Z_T, per-step compute cost lambda,
+     fitted estimators for q_t, alpha_t, beta_t, and an anytime upper bound U_t
+Output: plug-in boundary T_hat_c and sequentially safe stop time tau_safe
+
+Initialize T_hat_c as undefined
+for t = 1, 2, ..., T:
+  update the observable filtration F_t from the current trace prefix
+  estimate q_hat_t = P(C_t = 1 | F_t)
+  estimate alpha_hat_t = P(C_{t+1} = 1 | C_t = 0, F_t)
+  estimate beta_hat_t = P(C_{t+1} = 0 | C_t = 1, F_t)
+  compute mu_hat_t = (1 - q_hat_t) * alpha_hat_t - q_hat_t * beta_hat_t - lambda
+
+  if T_hat_c is undefined and mu_hat_t <= 0:
+    set T_hat_c = t
+
+  construct an anytime-valid upper confidence bound U_t for the continuation gain
+  if t >= 2 and U_t <= 0:
+    return T_hat_c, tau_safe = t
+
+if T_hat_c is undefined:
+  set T_hat_c = T
+return T_hat_c, tau_safe = T
+```
+
+The interpretation is straightforward:
+
+- $T_c$ is the latent theorem-facing optimal boundary.
+- $\widehat{T}_c$ is the plug-in empirical estimate used for model comparison and hazard-audit reporting.
+- $\tau_{\mathrm{safe}}$ is the deployable stopping time because it accounts for sequential uncertainty rather than treating the first negative point estimate as certain.
+
+In the current pipeline, $\widehat{q}_t$, $\widehat{\alpha}_t$, and $\widehat{\beta}_t$ come from fitted observable probes in `trace_analysis.py`, while $U_t$ is instantiated either by the anytime empirical-Bernstein bound on realized continuation gains or by the mixture e-process summary.
+
+### 2.4 Reward-Hacking Region
 
 Let a proxy score $P_t$ have predictable drift
 
