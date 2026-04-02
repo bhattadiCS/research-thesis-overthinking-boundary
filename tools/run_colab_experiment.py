@@ -106,6 +106,7 @@ def run_real_trace_experiment(
     system_prompt_mode: str,
     quantization: str,
     device_map: str | None,
+    attn_implementation: str,
     resume: bool,
 ) -> None:
     command = [
@@ -133,6 +134,8 @@ def run_real_trace_experiment(
         prompt_mode,
         "--system-prompt-mode",
         system_prompt_mode,
+        "--attn-implementation",
+        attn_implementation,
         "--quantization",
         quantization,
         "--output-dir",
@@ -213,17 +216,18 @@ def main() -> None:
     parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
     parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
     parser.add_argument("--device-map", default=None)
+    parser.add_argument("--attn-implementation", default="sdpa", choices=["auto", "sdpa", "flash_attention_2", "eager"])
     parser.add_argument("--full-max-tasks", type=int, default=300)
     parser.add_argument("--full-max-steps", type=int, default=10)
     parser.add_argument("--full-max-new-tokens", type=int, default=256)
-    parser.add_argument("--full-batch-size", type=int, default=8)
+    parser.add_argument("--full-batch-size", type=int, default=4)
     parser.add_argument("--full-temperatures", nargs="+", type=float, default=[0.1, 0.6, 1.0])
-    parser.add_argument("--full-seeds", nargs="+", type=int, default=[7, 13])
+    parser.add_argument("--full-seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--smoke-max-tasks", type=int, default=2)
     parser.add_argument("--smoke-max-steps", type=int, default=2)
     parser.add_argument("--smoke-max-new-tokens", type=int, default=128)
-    parser.add_argument("--smoke-batch-size", type=int, default=2)
-    parser.add_argument("--smoke-temperatures", nargs="+", type=float, default=[0.2])
+    parser.add_argument("--smoke-batch-size", type=int, default=1)
+    parser.add_argument("--smoke-temperatures", nargs="+", type=float, default=[0.1])
     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
     parser.add_argument("--smoke-output-dir", default=str(DEFAULT_SMOKE_DIR))
@@ -247,6 +251,8 @@ def main() -> None:
     if not args.skip_smoke:
         prepare_output_dir(smoke_output_dir, clear=True)
         print("\n[phase] Running smoke test before the full experiment.", flush=True)
+        smoke_quantization = args.quantization if smoke_model == args.model else "none"
+        smoke_device_map = args.device_map if smoke_model == args.model else None
         run_real_trace_experiment(
             model=smoke_model,
             device=device,
@@ -262,8 +268,9 @@ def main() -> None:
             batch_size=args.smoke_batch_size,
             prompt_mode=args.prompt_mode,
             system_prompt_mode=args.system_prompt_mode,
-            quantization="none",
-            device_map=None,
+            quantization=smoke_quantization,
+            device_map=smoke_device_map,
+            attn_implementation=args.attn_implementation,
             resume=False,
         )
         run_analysis(smoke_output_dir)
@@ -293,6 +300,7 @@ def main() -> None:
         system_prompt_mode=args.system_prompt_mode,
         quantization=args.quantization,
         device_map=args.device_map,
+        attn_implementation=args.attn_implementation,
         resume=args.resume,
     )
     run_analysis(full_output_dir)
