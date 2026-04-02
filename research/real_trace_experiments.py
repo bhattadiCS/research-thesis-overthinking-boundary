@@ -8,6 +8,7 @@ import logging
 import math
 import re
 import shutil
+import sys
 import time
 from dataclasses import asdict, dataclass
 from fractions import Fraction
@@ -18,6 +19,11 @@ import numpy as np
 import pandas as pd
 import torch
 from tqdm.auto import tqdm
+
+TORCHVISION_STUB_ROOT = Path(__file__).resolve().parent / "_vendor" / "torchvision_stub"
+if TORCHVISION_STUB_ROOT.exists() and str(TORCHVISION_STUB_ROOT) not in sys.path:
+    sys.path.insert(0, str(TORCHVISION_STUB_ROOT))
+
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 
 try:
@@ -815,7 +821,7 @@ def load_model(
     load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
     compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
     if actual_device == "cuda":
-        load_kwargs["dtype"] = compute_dtype
+        load_kwargs["torch_dtype"] = compute_dtype
         if attn_implementation != "eager":
             load_kwargs["attn_implementation"] = "sdpa" if attn_implementation == "auto" else attn_implementation
 

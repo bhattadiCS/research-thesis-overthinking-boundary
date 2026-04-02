@@ -1,0 +1,94 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,expected_answer,step,thought,answer,answer_normalized,correct,confidence,model_stop_flag,answer_changed,thought_token_count,raw_generation_tokens,mean_token_logprob,entropy_mean,entropy_std,hidden_norm,hidden_l2_shift,hidden_cosine_shift,lexical_echo,verbose_confidence_proxy,utility,elapsed_seconds,tokens_per_second,gpu_memory_allocated_gb,seed,temperature,device,prompt_mode,system_prompt_mode,is_baseline,parse_success,output_format_type,answer_extraction_source,stop_extraction_source,confidence_extraction_source,hit_max_new_tokens,truncated_output_suspected,raw_text_length_chars,raw_text_length_tokens,raw_text
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,1,"Last year, 200 people signed up and 40 didn't show up. So, the actual number of runners was 200 - 40 = 160. This year, there will be twice as many runners as last year, so we multiply the actual number of runners by 2.",320,320,1,100,0,0,44,109,-0.09375,0.203125,0.353515625,153.4749755859375,0.0,0.0,0.0,2.09,1.0,13.138876051999887,8.295991191987001,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,294,109,"{
+  ""thought"": ""Last year, 200 people signed up and 40 didn't show up. So, the actual number of runners was 200 - 40 = 160. This year, there will be twice as many runners as last year, so we multiply the actual number of runners by 2."",
+  ""answer"": ""320"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,2,"We have already calculated that there were 160 actual runners last year. This year, there will be twice as many, so we multiply the actual number by 2.",320,320,1,100,1,0,28,77,-0.12255859375,0.283203125,0.47265625,155.96527099609375,62.163536071777344,0.08058935403823853,0.5428571428571428,1.77,0.95,7.739080104000095,9.94950290800079,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,227,77,"{
+  ""thought"": ""We have already calculated that there were 160 actual runners last year. This year, there will be twice as many, so we multiply the actual number by 2."",
+  ""answer"": ""320"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,1,"Let T be the total number of classrooms with 30 desks and R be the remaining classrooms with 25 desks. We know there are 15 classrooms in total. So, T + R = 15.",T = 15 - R,15,0,100,0,0,32,92,-0.0966796875,0.1953125,0.431640625,155.3936004638672,0.0,0.0,0.0,1.92,0.0,13.138876051999887,7.002121006080771,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,243,92,"{
+  ""thought"": ""Let T be the total number of classrooms with 30 desks and R be the remaining classrooms with 25 desks. We know there are 15 classrooms in total. So, T + R = 15."",
+  ""answer"": ""T = 15 - R"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,2,"'thought': ""Now we need to find the number of classrooms with 30 desks (T). We know there are 15 classrooms in total and some have 25 desks. Let's find the number of classrooms with 25 desks (R).""",15,15,0,50,0,0,38,93,-0.162109375,0.33203125,0.5234375,158.27011108398438,72.06283569335938,0.10540652275085449,0.6333333333333333,1.4300000000000002,-0.05,7.739080104000095,12.016932083689266,13.50843095779419,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text_cue_segment,default,default,0,0,251,93,"'thought': ""Now we need to find the number of classrooms with 30 desks (T). We know there are 15 classrooms in total and some have 25 desks. Let's find the number of classrooms with 25 desks (R).""
+'answer': ""R = 15 - T""
+'confidence': ""100""
+'stop': ""0"""
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,1,"John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, he will be 3 times as old, so we can represent that as 3*(A+9). To find his current age, we subtract 9 from this future age.","A = current age - 11, future age = 3*(A+9). Solving for A gives A = current age - 11 - 9 + 9/3. Simplifying, A = (current age - 20)/3.",3,0,100,0,0,52,164,-0.1728515625,0.373046875,0.55078125,156.77749633789062,0.0,0.0,0.0,2.64,0.0,13.138876051999887,12.482041793448332,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,439,164,"{
+  ""thought"": ""John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, he will be 3 times as old, so we can represent that as 3*(A+9). To find his current age, we subtract 9 from this future age."",
+  ""answer"": ""A = current age - 11, future age = 3*(A+9). Solving for A gives A = current age - 11 - 9 + 9/3. Simplifying, A = (current age - 20)/3."",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,2,"We have the current age in terms of A as (current age - 20)/3. To find the current age, we multiply by 3 and add 20.",current age = 3*A + 20,20,0,100,1,1,26,84,-0.146484375,0.271484375,0.58203125,153.4442901611328,77.7586898803711,0.12543952465057373,0.23809523809523808,1.8399999999999999,-0.05,7.739080104000095,10.854003172364498,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,207,84,"{
+  ""thought"": ""We have the current age in terms of A as (current age - 20)/3. To find the current age, we multiply by 3 and add 20."",
+  ""answer"": ""current age = 3*A + 20"",
+  ""confidence"": 100,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,1,"John worked for 8 hours each day for 6 days (from the 3rd to the 8th, not including the 8th). So, the total hours worked is 8 hours/day * 6 days = 48 hours.",48 hours,48,0,100,0,0,33,90,-0.10888671875,0.2431640625,0.44140625,157.5562286376953,0.0,0.0,0.0,1.9,0.0,13.138876051999887,6.84990098420945,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,237,90,"{
+  ""thought"": ""John worked for 8 hours each day for 6 days (from the 3rd to the 8th, not including the 8th). So, the total hours worked is 8 hours/day * 6 days = 48 hours."",
+  ""answer"": ""48 hours"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,2,"The question asks for the total hours John worked, and we've already calculated that as 48 hours. No further calculation is needed.",48 hours,48,0,100,1,0,23,68,-0.1533203125,0.341796875,0.55859375,157.41380310058594,77.9100570678711,0.12237048149108887,0.24242424242424243,1.6800000000000002,-0.05,7.739080104000095,8.786573996676022,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,212,68,"{
+  ""thought"": ""The question asks for the total hours John worked, and we've already calculated that as 48 hours. No further calculation is needed."",
+  ""answer"": ""48 hours"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00004_3ee48c01__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00004_3ee48c01,gsm8k,grade_school_math,gsm8k,4,4,1,"First, let's find the total rainfall in the first 2 hours. The first 30 minutes had 5 inches, the next 30 minutes had half of that (5/2 = 2.5 inches), and the next hour had 1/2 inch. So, the total rainfall in 2 hours is 5 + 2.5 + 1 = 8.5 inches.",8.5 inches,17/2,0,100,0,0,55,126,-0.11328125,0.251953125,0.423828125,159.16476440429688,0.0,0.0,0.0,2.26,0.0,14.024264079999739,8.984428650319764,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,328,126,"{
+  ""thought"": ""First, let's find the total rainfall in the first 2 hours. The first 30 minutes had 5 inches, the next 30 minutes had half of that (5/2 = 2.5 inches), and the next hour had 1/2 inch. So, the total rainfall in 2 hours is 5 + 2.5 + 1 = 8.5 inches."",
+  ""answer"": ""8.5 inches"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00004_3ee48c01__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00004_3ee48c01,gsm8k,grade_school_math,gsm8k,4,4,2,"Now, to find the average rainfall over the entire storm duration (which is 3 hours), we divide the total rainfall (8.5 inches) by the number of hours (3).",2.83 inches,283/100,0,100,1,1,29,81,-0.1220703125,0.2431640625,0.40234375,154.1078643798828,76.18331146240234,0.11778777837753296,0.2564102564102564,1.81,-0.05,9.915999077999913,8.168617137098195,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,234,81,"{
+  ""thought"": ""Now, to find the average rainfall over the entire storm duration (which is 3 hours), we divide the total rainfall (8.5 inches) by the number of hours (3)."",
+  ""answer"": ""2.83 inches"",
+  ""confidence"": 100,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00005_d0817615__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00005_d0817615,gsm8k,grade_school_math,gsm8k,5,160,1,"First, let's find out how many math books June bought. She bought 4 math books at $20 each, so that's 4 * 20 = $80. Then she bought 6 more science books than math books, so if we call the number of science books 'x', then x = math books + 6. She also bought twice as many art books as math books, so art books = 2 * math books. Now we have three equations: 80 = 4 * cost_math, x = cost_math + 6, and 2 * cost_math = art_books.",The number of science books is x = 80/20 + 6.,4,0,90,0,0,82,184,-0.1513671875,0.314453125,0.515625,162.58184814453125,0.0,0.0,0.0,2.74,0.0,14.024264079999739,13.120118029038386,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,543,184,"{
+  ""thought"": ""First, let's find out how many math books June bought. She bought 4 math books at $20 each, so that's 4 * 20 = $80. Then she bought 6 more science books than math books, so if we call the number of science books 'x', then x = math books + 6. She also bought twice as many art books as math books, so art books = 2 * math books. Now we have three equations: 80 = 4 * cost_math, x = cost_math + 6, and 2 * cost_math = art_books."",
+  ""answer"": ""The number of science books is x = 80/20 + 6."",
+  ""confidence"": 90,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00005_d0817615__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00005_d0817615,gsm8k,grade_school_math,gsm8k,5,160,2,"Now we know the number of science books. Let's find the number of art books. We know that art books = 2 * math books. Since we already found that math books = 80/20, we can calculate art books as art_books = 2 * (80/20).",The number of art books is art_books = 160/20.,8,0,90,1,1,43,118,-0.1494140625,0.328125,0.53515625,158.19940185546875,58.96754837036133,0.06722229719161987,0.3541666666666667,2.08,-0.05,9.915999077999913,11.899960767624531,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,334,118,"{
+  ""thought"": ""Now we know the number of science books. Let's find the number of art books. We know that art books = 2 * math books. Since we already found that math books = 80/20, we can calculate art books as art_books = 2 * (80/20)."",
+  ""answer"": ""The number of art books is art_books = 160/20."",
+  ""confidence"": 90,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00006_4cf43e2d__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00006_4cf43e2d,gsm8k,grade_school_math,gsm8k,6,10,1,"Tammy wants to run 3500 meters per week, which is equivalent to 500 meters per day (since there are 7 days in a week). To run 500 meters on her track, she needs to complete 10 loops (50 meters * 10 = 500 meters) because her track is 50 meters around.",10 loops,10,1,100,0,0,49,118,-0.1416015625,0.2890625,0.466796875,156.3908233642578,0.0,0.0,0.0,2.1799999999999997,1.0,14.024264079999739,8.413988736013748,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,331,118,"{
+  ""thought"": ""Tammy wants to run 3500 meters per week, which is equivalent to 500 meters per day (since there are 7 days in a week). To run 500 meters on her track, she needs to complete 10 loops (50 meters * 10 = 500 meters) because her track is 50 meters around."",
+  ""answer"": ""10 loops"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00006_4cf43e2d__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00006_4cf43e2d,gsm8k,grade_school_math,gsm8k,6,10,2,"Tammy wants to run the same amount each day, so the number of loops she needs to make per day remains the same as what we calculated earlier: 10 loops.",10 loops,10,1,100,0,0,30,74,-0.1298828125,0.28515625,0.46875,157.56716918945312,81.52470397949219,0.13482815027236938,0.2222222222222222,1.74,0.95,9.915999077999913,7.462687261052673,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,232,74,"{
+  ""thought"": ""Tammy wants to run the same amount each day, so the number of loops she needs to make per day remains the same as what we calculated earlier: 10 loops."",
+  ""answer"": ""10 loops"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00007_40d1aba4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00007_40d1aba4,gsm8k,grade_school_math,gsm8k,7,360,1,"Given that the shadow stretches 5 feet every hour past noon, we need to find out how long it will be 6 hours past noon. Since there are 12 inches in a foot, we multiply the number of hours by the rate of increase and convert the result to inches.",300 inches,300,0,100,0,0,50,99,-0.2060546875,0.40234375,0.5859375,159.3135223388672,0.0,0.0,0.0,1.99,0.0,14.024264079999739,7.059193939536957,13.50843095779419,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,329,99,"{
+  ""thought"": ""Given that the shadow stretches 5 feet every hour past noon, we need to find out how long it will be 6 hours past noon. Since there are 12 inches in a foot, we multiply the number of hours by the rate of increase and convert the result to inches."",
+  ""answer"": ""300 inches"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00007_40d1aba4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00007_40d1aba4,gsm8k,grade_school_math,gsm8k,7,360,2,{,300,300,0,50,0,0,0,62,-0.11474609375,0.26171875,0.486328125,156.50009155273438,86.09539794921875,0.14849042892456055,0.0,1.12,-0.05,9.915999077999913,6.252521759260347,13.50843095779419,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text_cue_segment,default,default,0,0,194,62,"{
+""thought"": ""We have already calculated the length of the shadow 6 hours past noon to be 300 inches. No further calculation is needed."",
+""answer"": ""300 inches"",
+""confidence"": ""100"",
+""stop"": ""1"""

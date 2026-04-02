@@ -73,6 +73,30 @@ Successful configurations were compute-bound.
 
 This configuration is the best stable throughput path observed on the L4 for the matched harness. It does not consume the entire 22.5 GB card, but that is the correct outcome here: moving from batch size `4` to `6` increased memory usage while reducing per-example throughput, so additional VRAM consumption did not improve the objective that matters for the 300-task run.
 
+## 2026-04-02 Runtime Revalidation
+
+After the interrupted Mistral cycle, the live runtime was revalidated instead of rerunning the full ladder. The hardware still matched the original benchmark class: single NVIDIA L4, about `22.5 GB` usable VRAM, and no `flash_attn` package installed.
+
+The repo-local environment needed two compatibility repairs before the validation slice could run cleanly:
+
+- `requirements-colab.txt` was tightened to the `transformers 4.49.x` line used by the harness rather than later releases.
+- `research/real_trace_experiments.py` now inserts a local torchvision shim for the text-only harness and uses `torch_dtype` instead of `dtype` when calling `AutoModelForCausalLM.from_pretrained()`.
+
+Validation artifact path:
+
+- `research/outputs/benchmark_mistral7b_l4_validation_20260402`
+
+Short validation slice (`8` GSM8K tasks, `2` steps, temperature `0.1`, seed `7`):
+
+| Config | Mean examples/s | Mean tokens/s | Peak reserved VRAM | Result |
+| --- | ---: | ---: | ---: | --- |
+| full precision `sdpa`, batch `4` | `0.3775` | `36.90` | `15.12 GB` | best stable validation point |
+| full precision `sdpa`, batch `6` | `0.2397` | `29.30` | `16.14 GB` | stable but slower |
+| 4-bit `sdpa`, batch `4` | `0.1731` | `18.78` | `5.49 GB` | stable but much slower |
+| 4-bit `sdpa`, batch `6` | `0.1323` | `16.57` | `6.43 GB` | stable but slower |
+
+Conclusion: the live revalidation preserved the main selection. The long-run path should remain `quantization=none`, `attn_implementation=sdpa`, `batch_size=4`. The small validation slice did not reproduce the earlier 4-bit `bs6 > bs4` ordering, so the quantized fallback ranking should still be taken from the larger committed ladder rather than from this short rerun.
+
 ## Reproducible Full-Run Command
 
 ```bash

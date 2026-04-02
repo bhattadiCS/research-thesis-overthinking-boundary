@@ -1,0 +1,140 @@
+{
+  "model": {
+    "alias": "mistral_7b_instruct_v0p3",
+    "hf_name": "mistralai/Mistral-7B-Instruct-v0.3",
+    "family": "Mistral instruct",
+    "parameter_count": "7B"
+  },
+  "backend": "transformers+torch(cuda)",
+  "device": "cuda",
+  "quantization": "none",
+  "device_map": null,
+  "attn_implementation": "sdpa",
+  "temperatures": [
+    0.1
+  ],
+  "seeds": [
+    7
+  ],
+  "max_steps": 2,
+  "max_new_tokens": 256,
+  "max_tasks": 8,
+  "task_source": "gsm8k",
+  "dataset_split": "train",
+  "dataset_shuffle_seed": 17,
+  "batch_size": 6,
+  "step_cost": 0.05,
+  "prompt_mode": "minimal_json",
+  "system_prompt_mode": "default",
+  "resume_enabled": true,
+  "completed_run_count": 8,
+  "pending_run_count": 0,
+  "next_pending_run": null,
+  "checkpoint_reconciliation": {
+    "expected_steps_per_run": 2,
+    "completed_run_count": 0,
+    "hidden_state_file_count": 0,
+    "duplicate_step_rows_removed": 0,
+    "duplicate_run_rows_removed": 0,
+    "reconstructed_run_summaries": 0,
+    "incomplete_step_run_ids": [],
+    "runs_without_complete_steps": [],
+    "hidden_without_complete_steps": [],
+    "anomalies_detected": false
+  },
+  "tasks": [
+    {
+      "task_id": "gsm8k_train_00000_b5828bc4",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "Last year, Peter organized a Fun Run for his community project and 200 people signed up. Forty people did not show up to run. This year, there will be twice as many runners as last year. How many people will run this year?",
+      "answer_type": "number",
+      "expected_answer": "320",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 0
+    },
+    {
+      "task_id": "gsm8k_train_00001_3691caf7",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "A school has 15 classrooms. One-third of these classrooms have 30 desks in each classroom and the rest have 25 desks in each classroom. Only one student can sit at one desk. How many students can this school accommodate so that everyone has their own desk?",
+      "answer_type": "number",
+      "expected_answer": "400",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 1
+    },
+    {
+      "task_id": "gsm8k_train_00002_ae407466",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "9 years from now, John will be 3 times as old as he was 11 years ago. How old is he now?",
+      "answer_type": "number",
+      "expected_answer": "21",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 2
+    },
+    {
+      "task_id": "gsm8k_train_00003_135cf83f",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "John worked 8 hours a day every day from the 3rd to the 8th, including the 3rd and not including the 8th.  How many hours did he work?",
+      "answer_type": "number",
+      "expected_answer": "40",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 3
+    },
+    {
+      "task_id": "gsm8k_train_00004_3ee48c01",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "A storm dropped 5 inches of rain in the first thirty minutes.  In the next 30 minutes, the hurricane dropped half that amount of rain.  It then dropped 1/2 inch of rain for the next hour.  What was the average rainfall total for the duration of the storm?",
+      "answer_type": "number",
+      "expected_answer": "4",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 4
+    },
+    {
+      "task_id": "gsm8k_train_00005_d0817615",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "June has $500 for buying school supplies for the new school year. She buys four maths books at $20 each, six more science books than maths books at $10 each, and twice as many art books as maths books at $20 each. If she also bought music books, how much money did she spend on music books?",
+      "answer_type": "number",
+      "expected_answer": "160",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 5
+    },
+    {
+      "task_id": "gsm8k_train_00006_4cf43e2d",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "Tammy wants to run 3500 meters per week. She knows her track at school is 50 meters around. If she wants to run the same amount each day, how many loops should she make per day?",
+      "answer_type": "number",
+      "expected_answer": "10",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 6
+    },
+    {
+      "task_id": "gsm8k_train_00007_40d1aba4",
+      "domain": "gsm8k",
+      "difficulty": "grade_school_math",
+      "prompt": "Every hour past noon shadows from a building stretch an extra 5 feet, starting at zero at noon.  How long are the shadows from the building 6 hours past noon in inches?",
+      "answer_type": "number",
+      "expected_answer": "360",
+      "notes": "gsm8k main split=train",
+      "source": "gsm8k",
+      "source_index": 7
+    }
+  ],
+  "hidden_state_accessible": true,
+  "token_logprobs_accessible": true,
+  "reasoning_traces_accessible": true,
+  "batch_metrics_accessible": true,
+  "runtime_limit_notes": "Batch-first GSM8K runner with checkpoint reconciliation, append-only CSV outputs, incremental metadata snapshots, and automatic microbatch splitting on CUDA OOM."
+}

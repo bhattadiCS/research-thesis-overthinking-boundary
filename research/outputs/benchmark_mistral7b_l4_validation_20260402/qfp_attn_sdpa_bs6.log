@@ -1,0 +1,31 @@
+[INFO] Loaded 8 tasks from gsm8k.
+[INFO] Requested runs=8 | pending runs=8
+[INFO] Next pending run: task_index=0 | temperature=0.10 | seed=7 | run_id=mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7
+2026-04-02 23:32:17.723533: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-04-02 23:32:17.740526: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1775172737.759597   13897 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1775172737.766721   13897 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1775172737.783436   13897 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1775172737.783472   13897 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1775172737.783476   13897 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1775172737.783479   13897 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2026-04-02 23:32:17.788290: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:00<00:00,  3.76it/s]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:00<00:00,  3.72it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00,  3.72it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00,  3.73it/s]
+[INFO] Model loaded: mistralai/Mistral-7B-Instruct-v0.3 | backend=transformers+torch(cuda) | device=cuda
+temp=0.10 seed=7:   0%|          | 0/2 [00:00<?, ?batch/s][INFO] temp=0.10 seed=7 step=1/2 | batch=6 | generated_tokens=841 | ex_s=0.28 | tok_s=39.05 | gpu_peak_alloc_gb=15.03 | gpu_peak_reserved_gb=15.54 | splits=1 | oom_retries=0
+[INFO] temp=0.10 seed=7 step=2/2 | batch=6 | generated_tokens=711 | ex_s=0.28 | tok_s=33.47 | gpu_peak_alloc_gb=15.26 | gpu_peak_reserved_gb=16.08 | splits=1 | oom_retries=0
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7 | ever_correct=0 | first_correct=2 | final_correct=0 | revisions=0
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7 | ever_correct=0 | first_correct=2 | final_correct=0 | revisions=1
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7 | ever_correct=0 | first_correct=2 | final_correct=0 | revisions=0
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00004_3ee48c01__temp0.10__seed7 | ever_correct=0 | first_correct=2 | final_correct=0 | revisions=1
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00005_d0817615__temp0.10__seed7 | ever_correct=0 | first_correct=2 | final_correct=0 | revisions=1
+temp=0.10 seed=7:   0%|          | 0/2 [00:42<?, ?batch/s, correct=1, runs=6]temp=0.10 seed=7:  50%|█████     | 1/2 [00:42<00:42, 42.85s/batch, correct=1, runs=6][INFO] temp=0.10 seed=7 step=1/2 | batch=2 | generated_tokens=215 | ex_s=0.23 | tok_s=24.87 | gpu_peak_alloc_gb=13.87 | gpu_peak_reserved_gb=16.14 | splits=1 | oom_retries=0
+[INFO] temp=0.10 seed=7 step=2/2 | batch=2 | generated_tokens=238 | ex_s=0.17 | tok_s=19.80 | gpu_peak_alloc_gb=13.98 | gpu_peak_reserved_gb=16.14 | splits=1 | oom_retries=0
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00006_4cf43e2d__temp0.10__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] completed mistral_7b_instruct_v0p3__gsm8k_train_00007_40d1aba4__temp0.10__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+temp=0.10 seed=7:  50%|█████     | 1/2 [01:03<00:42, 42.85s/batch, correct=2, runs=2]temp=0.10 seed=7: 100%|██████████| 2/2 [01:03<00:00, 29.82s/batch, correct=2, runs=2]temp=0.10 seed=7: 100%|██████████| 2/2 [01:03<00:00, 31.77s/batch, correct=2, runs=2]
+mistral_7b_instruct_v0p3: runs=8, ever_correct=3, oracle=1.25, first_correct=1.88, repair=0.286, corruption=0.000, device=cuda
+Wrote real-trace artifacts to: research/outputs/benchmark_mistral7b_l4_validation_20260402/qfp_attn_sdpa_bs6

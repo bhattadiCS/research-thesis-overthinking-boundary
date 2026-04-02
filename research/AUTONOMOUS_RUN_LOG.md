@@ -13,10 +13,12 @@
 
 - Current target model: `mistral_7b_instruct_v0p3` (`mistralai/Mistral-7B-Instruct-v0.3`)
 - Current benchmark configuration: selected `quantization=none`, `attn_implementation=sdpa`, `batch_size=4`
+- Current benchmark validation: short rerun under `research/outputs/benchmark_mistral7b_l4_validation_20260402` reconfirmed `none + sdpa + batch_size=4` as the fastest stable path in the live runtime; `flash_attn` remains unavailable
 - Current full-run output directory: `research/outputs/real_traces_l4_mistral_7b`
 - Current last completed task index: successful Mistral smoke run and L4 benchmark ladder complete; no recoverable full matched-protocol output directory or experiment checkpoint commit exists yet
 - Current runtime validation: live NVIDIA L4 re-verified on 2026-04-02; repo-local `.venv` now reuses the system CUDA stack and imports the required experiment packages successfully
 - Current git checkpoint state: repo-local git author is configured as `Aditya Bhatt <bhattadiCS@users.noreply.github.com>` and the next run should use the tracked checkpoint driver in `tools/run_checkpointed_real_trace.py`
+- Current harness compatibility state: the text-only Mistral path now uses a local torchvision shim and a `torch_dtype` load fix so the current runtime no longer fails during model resolution
 - Current resume instructions: restart from repo root with the selected `none + sdpa + batch_size=4` configuration, keep the recovered Qwen2.5 7B artifacts untouched, and land the first durable Mistral experiment checkpoint no later than the first completed 25-task / temperature block
 
 ## Checkpoints
@@ -59,6 +61,5 @@
 
 ## Pending Milestones
 
-1. Validate the selected `none + sdpa + batch_size=4` path on the current runtime without repeating the full ladder.
-2. Run the full matched-protocol non-Qwen experiment with aggressive checkpoint commits.
-3. Regenerate per-run and cross-family reports and update the claim.
+1. Run the full matched-protocol non-Qwen experiment with aggressive checkpoint commits.
+2. Regenerate per-run and cross-family reports and update the claim.
