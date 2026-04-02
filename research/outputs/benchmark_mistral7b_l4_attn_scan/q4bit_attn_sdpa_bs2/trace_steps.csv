@@ -1,0 +1,45 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,expected_answer,step,thought,answer,answer_normalized,correct,confidence,model_stop_flag,answer_changed,thought_token_count,raw_generation_tokens,mean_token_logprob,entropy_mean,entropy_std,hidden_norm,hidden_l2_shift,hidden_cosine_shift,lexical_echo,verbose_confidence_proxy,utility,elapsed_seconds,tokens_per_second,gpu_memory_allocated_gb,seed,temperature,device,prompt_mode,system_prompt_mode,is_baseline,parse_success,output_format_type,answer_extraction_source,stop_extraction_source,confidence_extraction_source,hit_max_new_tokens,truncated_output_suspected,raw_text_length_chars,raw_text_length_tokens,raw_text
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,1,"Last year, 200 - 40 = 160 people showed up. This year, there will be twice as many runners, so 160 * 2 = 320 people.",320,320,1,100,1,0,22,84,-0.0712890625,0.1748046875,0.3203125,152.55418395996094,0.0,0.0,0.0,1.8399999999999999,1.0,35.872319051999966,2.341638405875987,3.862009048461914,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,191,84,"{
+  ""thought"": ""Last year, 200 - 40 = 160 people showed up. This year, there will be twice as many runners, so 160 * 2 = 320 people."",
+  ""answer"": ""320"",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,2,We have already calculated that there will be 320 runners this year.,320,320,1,100,1,0,12,56,-0.123046875,0.26953125,0.5546875,159.64700317382812,74.6638412475586,0.11341458559036255,0.2916666666666667,1.56,0.95,30.721131825000157,1.822849506945199,3.862009048461914,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,144,56,"{
+  ""thought"": ""We have already calculated that there will be 320 runners this year."",
+  ""answer"": ""320"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,1,{,40,40,0,50,0,0,0,256,-0.1337890625,0.27734375,0.453125,164.90159606933594,0.0,0.0,0.0,3.06,0.0,35.872319051999966,7.13642180838396,3.862009048461914,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text_cue_segment,default,default,1,1,792,256,"{
+  ""thought"": ""Let's calculate the number of classrooms with 30 desks first. Since one-third of the classrooms have 30 desks, that would be (15 * 1/3) = 5 classrooms. The total number of desks in these classrooms is 5 * 30 = 150 desks. Now let's find out how many students can be accommodated in these classrooms: 150 desks / 1 student per desk = 150 students. Now, let's calculate the number of classrooms with 25 desks. The remaining classrooms have 25 desks each, so there are 15 - 5 = 10 classrooms with 25 desks. The total number of students that can be accommodated in these classrooms is 10 * 25 = 250 students. Finally, let's add the students from the classrooms with 30 desks to find the total number of students that can be accommodated: 150 + 250 = 400 students."",
+  ""answer"": ""40"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,2,{,400,400,1,50,0,1,0,220,-0.091796875,0.2158203125,0.435546875,159.0908203125,45.901187896728516,0.03951221704483032,0.0,2.7,0.95,30.721131825000157,7.161194491570425,3.862009048461914,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text_cue_segment,default,default,0,0,555,220,"{
+  ""thought"": ""There are 15 classrooms. Let's find out how many classrooms have 30 desks and how many have 25 desks. One-third of the classrooms have 30 desks, so that's 15 * (1/3) = 5 classrooms with 30 desks each, which is 5 * 30 = 150 desks. The rest of the classrooms have 25 desks each, so that's 15 - 5 = 10 classrooms with 25 desks each, which is 10 * 25 = 250 desks. In total, there are 150 + 250 = 400 desks. Since one student can sit at one desk, the school can accommodate 400 students."",
+  ""answer"": ""400"",
+  ""confidence"": 100,
+  ""stop"": true"
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,1,"John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, his age will be A + 9. At that time, he will be 3 times as old as he was 11 years ago, so we can write the equation: A + 9 = 3*(A - 11). Solving for A will give us his current age.",A = (9 + 11 * 3) / 2,2,0,90,0,0,66,146,-0.138671875,0.3046875,0.53515625,156.698974609375,0.0,0.0,0.0,2.36,0.0,20.38876497299998,7.160806463429341,3.862009048461914,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,380,146,"{
+  ""thought"": ""John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, his age will be A + 9. At that time, he will be 3 times as old as he was 11 years ago, so we can write the equation: A + 9 = 3*(A - 11). Solving for A will give us his current age."",
+  ""answer"": ""A = (9 + 11 * 3) / 2"",
+  ""confidence"": 90,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,2,Solving the equation A + 9 = 3*(A - 11) for A gives us A = (9 + 11 * 3) / 2.,(9 + 11 * 3) / 2,2,0,100,1,0,17,84,-0.08544921875,0.193359375,0.42578125,160.77549743652344,92.57301330566406,0.169749915599823,0.225,1.8399999999999999,-0.05,12.173210616999768,6.9003981482662295,3.862009048461914,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,164,84,"{
+  ""thought"": ""Solving the equation A + 9 = 3*(A - 11) for A gives us A = (9 + 11 * 3) / 2."",
+  ""answer"": ""(9 + 11 * 3) / 2"",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,1,"John worked for 8 hours a day for 6 days (3rd to 8th). So, the total hours worked would be 8 hours/day * 6 days = 48 hours.",48 hours,48,0,100,0,0,27,80,-0.138671875,0.310546875,0.5546875,156.68077087402344,0.0,0.0,0.0,1.8,0.0,20.38876497299998,3.9237295690023783,3.862009048461914,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,204,80,"{
+  ""thought"": ""John worked for 8 hours a day for 6 days (3rd to 8th). So, the total hours worked would be 8 hours/day * 6 days = 48 hours."",
+  ""answer"": ""48 hours"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,2,We have already calculated the total hours John worked. Let's verify the answer.,48 hours,48,0,100,1,0,14,56,-0.1796875,0.390625,0.72265625,162.33152770996094,84.59835815429688,0.14006614685058594,0.19230769230769232,1.56,-0.05,12.173210616999768,4.600265432177486,3.862009048461914,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,161,56,"{
+  ""thought"": ""We have already calculated the total hours John worked. Let's verify the answer."",
+  ""answer"": ""48 hours"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"

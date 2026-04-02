@@ -1,0 +1,127 @@
+config_name,status,stable_memory,return_code,output_dir,command,elapsed_seconds,n_batches,n_runs,n_step_rows,total_generated_tokens,mean_examples_per_second,mean_tokens_per_second,mean_wall_clock_per_batch,max_wall_clock_per_batch,peak_gpu_allocated_gb,peak_gpu_reserved_gb,mean_gpu_utilization,max_gpu_utilization,mean_gpu_memory_utilization,mean_gpu_memory_used_gb,max_gpu_memory_used_gb,generation_seconds,forward_seconds,cpu_preprocessing_seconds,hidden_state_write_seconds,dominant_bottleneck,oom_retry_count,split_events,log_path,failure_tail
+q4bit_attn_sdpa_bs2,ok,1,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_sdpa_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization 4bit --attn-implementation sdpa --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_sdpa_bs2 --temperatures 0.1 --seeds 7 --device-map auto,123.24790699999994,4,4,8,982,0.09581087417864585,10.261825956412752,24.788856616749968,35.872319051999966,4.451980113983154,13.48046875,78.03333333333333,100.0,78.94166666666666,11.4968017578125,13.716796875,97.57088183299993,1.559148066000034,0.02539656799990575,0.020225152999955698,model_compute,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_sdpa_bs2.log,
+q4bit_attn_auto_bs2,ok,1,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_auto_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization 4bit --attn-implementation auto --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_auto_bs2 --temperatures 0.1 --seeds 7 --device-map auto,123.59586766600023,4,4,8,982,0.09531877129822738,10.209448933892869,24.914716595499954,36.07883559099992,4.450484752655029,13.4765625,78.50833333333334,100.0,78.88333333333334,11.511140950520833,13.712890625,98.02020757000037,1.6131644070005677,0.025494404998880782,0.0222792660001686,model_compute,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_auto_bs2.log,
+q4bit_attn_flash_attention_2_bs2,failed,0,1,research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_flash_attention_2_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization 4bit --attn-implementation flash_attention_2 --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_flash_attention_2_bs2 --temperatures 0.1 --seeds 7 --device-map auto,18.301657521999914,0,0,0,0,,,,,,,1.7222222222222223,31.0,0.3888888888888889,0.0016276041666666667,0.0029296875,0.0,0.0,0.0,0.0,unknown,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q4bit_attn_flash_attention_2_bs2.log,"[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/tokenizer_config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/tokenizer_config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/tokenizer_config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/tokenizer_config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: GET https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false ""HTTP/1.1 404 Not Found""
+[INFO] HTTP Request: GET https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.3/tree/main?recursive=true&expand=false ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[WARNING] Primary model load failed for mistralai/Mistral-7B-Instruct-v0.3: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2.
+Traceback (most recent call last):
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 1824, in <module>
+    main()
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 1649, in main
+    model, tokenizer, actual_device, backend = load_model(
+                                               ^^^^^^^^^^^
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 839, in load_model
+    model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/models/auto/auto_factory.py"", line 372, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 4072, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/models/mistral/modeling_mistral.py"", line 421, in __init__
+    super().__init__(config)
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1295, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1873, in _check_and_adjust_attn_implementation
+    applicable_attn_implementation = self.get_correct_attn_implementation(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1914, in get_correct_attn_implementation
+    self._flash_attn_2_can_dispatch(is_init_check)
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1594, in _flash_attn_2_can_dispatch
+    raise ImportError(f""{preface} the package flash_attn seems to be not installed. {install_message}"")
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2."
+q8bit_attn_sdpa_bs2,ok,1,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_sdpa_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization 8bit --attn-implementation sdpa --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_sdpa_bs2 --temperatures 0.1 --seeds 7 --device-map auto,163.29451260399992,4,4,8,952,0.06950927426986417,7.856032154486858,30.821694015999924,44.84735347700007,8.022976875305176,13.2421875,28.2125,96.0,21.9875,11.842413330078125,13.486328125,120.75657748899948,2.5097134590005226,0.020485115999690606,0.0199545270006638,model_compute,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_sdpa_bs2.log,
+q8bit_attn_auto_bs2,ok,1,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_auto_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization 8bit --attn-implementation auto --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_auto_bs2 --temperatures 0.1 --seeds 7 --device-map auto,166.59724375800033,4,4,8,952,0.0670478485713918,7.589918129944662,31.812363361500047,45.573406471,8.020729064941406,13.1953125,28.791411042944784,92.0,22.766871165644172,11.832840059432515,13.439453125,124.70332605699969,2.5245258839995586,0.0216015050009446,0.0200912820000666,model_compute,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_auto_bs2.log,
+q8bit_attn_flash_attention_2_bs2,failed,0,1,research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_flash_attention_2_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization 8bit --attn-implementation flash_attention_2 --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_flash_attention_2_bs2 --temperatures 0.1 --seeds 7 --device-map auto,18.31811233799999,0,0,0,0,,,,,,,0.05555555555555555,1.0,0.0,0.0016276041666666667,0.0029296875,0.0,0.0,0.0,0.0,unknown,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/q8bit_attn_flash_attention_2_bs2.log,"[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/tokenizer_config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/tokenizer_config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/tokenizer_config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: GET https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false ""HTTP/1.1 404 Not Found""
+[INFO] HTTP Request: GET https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.3/tree/main?recursive=true&expand=false ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/config.json ""HTTP/1.1 307 Temporary Redirect""
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[WARNING] Primary model load failed for mistralai/Mistral-7B-Instruct-v0.3: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2.
+Traceback (most recent call last):
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 1824, in <module>
+    main()
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 1649, in main
+    model, tokenizer, actual_device, backend = load_model(
+                                               ^^^^^^^^^^^
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 839, in load_model
+    model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/models/auto/auto_factory.py"", line 372, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 4072, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/models/mistral/modeling_mistral.py"", line 421, in __init__
+    super().__init__(config)
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1295, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1873, in _check_and_adjust_attn_implementation
+    applicable_attn_implementation = self.get_correct_attn_implementation(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1914, in get_correct_attn_implementation
+    self._flash_attn_2_can_dispatch(is_init_check)
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1594, in _flash_attn_2_can_dispatch
+    raise ImportError(f""{preface} the package flash_attn seems to be not installed. {install_message}"")
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2."
+qfp_attn_sdpa_bs2,ok,1,0,research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_sdpa_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization none --attn-implementation sdpa --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_sdpa_bs2 --temperatures 0.1 --seeds 7,62.88123750099976,4,4,8,896,0.2029466503675033,21.690286462591516,10.542285462749987,14.20703685699982,14.028663158416748,14.30078125,65.50819672131148,98.0,64.77049180327869,10.268362576844263,14.537109375,40.952901329999804,1.1925204840003971,0.023720036999748118,0.0204475390005426,model_compute,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_sdpa_bs2.log,
+qfp_attn_auto_bs2,ok,1,0,research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_auto_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization none --attn-implementation auto --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_auto_bs2 --temperatures 0.1 --seeds 7,62.963095178,4,4,8,896,0.20279020610132625,21.669935030709375,10.554590814499988,14.228123033999964,14.028663158416748,14.30078125,65.06557377049181,98.0,64.60655737704919,10.262118980532787,14.537109375,40.97723549099965,1.2195842259998244,0.021543541000482946,0.0204512350001095,model_compute,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_auto_bs2.log,
+qfp_attn_flash_attention_2_bs2,failed,0,1,research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_flash_attention_2_bs2,/usr/bin/python3 /content/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model mistral_7b_instruct_v0p3 --device cuda --quantization none --attn-implementation flash_attention_2 --max-tasks 4 --max-steps 2 --max-new-tokens 256 --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --batch-size 2 --prompt-mode minimal_json --system-prompt-mode default --output-dir research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_flash_attention_2_bs2 --temperatures 0.1 --seeds 7,15.639616113000102,0,0,0,0,,,,,,,0.0,0.0,0.0,0.00146484375,0.0029296875,0.0,0.0,0.0,0.0,unknown,0,0,research/outputs/benchmark_mistral7b_l4_attn_scan/qfp_attn_flash_attention_2_bs2.log,"[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/tokenizer_config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/tokenizer_config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/tokenizer_config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/tokenizer_config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: GET https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false ""HTTP/1.1 404 Not Found""
+[INFO] HTTP Request: GET https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.3/tree/main?recursive=true&expand=false ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[INFO] HTTP Request: HEAD https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/resolve/main/config.json ""HTTP/1.1 307 Temporary Redirect""
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mistral-7B-Instruct-v0.3/c170c708c41dac9275d15a8fff4eca08d52bab71/config.json ""HTTP/1.1 200 OK""
+[WARNING] Primary model load failed for mistralai/Mistral-7B-Instruct-v0.3: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2.
+Traceback (most recent call last):
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 1824, in <module>
+    main()
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 1649, in main
+    model, tokenizer, actual_device, backend = load_model(
+                                               ^^^^^^^^^^^
+  File ""/content/research-thesis-overthinking-boundary/research/real_trace_experiments.py"", line 846, in load_model
+    model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/models/auto/auto_factory.py"", line 372, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 4072, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/models/mistral/modeling_mistral.py"", line 421, in __init__
+    super().__init__(config)
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1295, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1873, in _check_and_adjust_attn_implementation
+    applicable_attn_implementation = self.get_correct_attn_implementation(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1914, in get_correct_attn_implementation
+    self._flash_attn_2_can_dispatch(is_init_check)
+  File ""/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py"", line 1594, in _flash_attn_2_can_dispatch
+    raise ImportError(f""{preface} the package flash_attn seems to be not installed. {install_message}"")
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2."

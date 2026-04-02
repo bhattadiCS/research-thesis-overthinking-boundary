@@ -848,6 +848,8 @@ def load_model(
             backend = f"transformers+torch({actual_device})"
     except Exception as exc:
         logging.warning("Primary model load failed for %s: %s", model_spec.hf_name, exc)
+        if actual_device == "cuda":
+            raise
         fallback_kwargs = {"trust_remote_code": True}
         model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **fallback_kwargs)
         model.to("cpu")

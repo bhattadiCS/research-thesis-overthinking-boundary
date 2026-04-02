@@ -1,0 +1,147 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,expected_answer,step,thought,answer,answer_normalized,correct,confidence,model_stop_flag,answer_changed,thought_token_count,raw_generation_tokens,mean_token_logprob,entropy_mean,entropy_std,hidden_norm,hidden_l2_shift,hidden_cosine_shift,lexical_echo,verbose_confidence_proxy,utility,elapsed_seconds,tokens_per_second,gpu_memory_allocated_gb,seed,temperature,device,prompt_mode,system_prompt_mode,is_baseline,parse_success,output_format_type,answer_extraction_source,stop_extraction_source,confidence_extraction_source,hit_max_new_tokens,truncated_output_suspected,raw_text_length_chars,raw_text_length_tokens,raw_text
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,1,"Last year, 200 people signed up and 40 didn't show up. So, the actual number of runners was 200 - 40 = 160. This year, there will be twice as many runners as last year, so we multiply the actual number of runners by 2.",320,320,1,100,0,0,44,109,-0.09130859375,0.19921875,0.349609375,153.6526641845703,0.0,0.0,0.0,2.09,1.0,7.750588607999816,14.063448018321473,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,294,109,"{
+  ""thought"": ""Last year, 200 people signed up and 40 didn't show up. So, the actual number of runners was 200 - 40 = 160. This year, there will be twice as many runners as last year, so we multiply the actual number of runners by 2."",
+  ""answer"": ""320"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,2,"We have already calculated that there were 160 actual runners last year. This year, there will be twice as many, so we multiply the actual number by 2.",320,320,1,100,1,0,28,77,-0.123046875,0.283203125,0.474609375,155.93104553222656,62.06108474731445,0.08026933670043945,0.5428571428571428,1.77,0.95,5.190017478999835,14.836173541141644,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,227,77,"{
+  ""thought"": ""We have already calculated that there were 160 actual runners last year. This year, there will be twice as many, so we multiply the actual number by 2."",
+  ""answer"": ""320"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,1,"Let T be the number of classrooms with 30 desks and R be the number of classrooms with 25 desks. Since one-third of the classrooms have 30 desks, T = (1/3) * 15 = 5. This means R = 15 - T = 15 - 5 = 10. The total number of desks in the classrooms with 30 desks is 30T = 30 * 5 = 150. Similarly, the total number of desks in the classrooms with 25 desks is 25R = 25 * 10 = 250. The total number of desks in all classrooms is 150 + 250 = 400. Since one student can sit at one desk, the total number of students that can be accommodated is the total number of desks, which is 400.",400 students,400,1,100,1,0,113,249,-0.07470703125,0.1533203125,0.34375,160.22079467773438,0.0,0.0,0.0,3.49,1.0,16.04426999899988,15.519559320275802,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,661,249,"{
+  ""thought"": ""Let T be the number of classrooms with 30 desks and R be the number of classrooms with 25 desks. Since one-third of the classrooms have 30 desks, T = (1/3) * 15 = 5. This means R = 15 - T = 15 - 5 = 10. The total number of desks in the classrooms with 30 desks is 30T = 30 * 5 = 150. Similarly, the total number of desks in the classrooms with 25 desks is 25R = 25 * 10 = 250. The total number of desks in all classrooms is 150 + 250 = 400. Since one student can sit at one desk, the total number of students that can be accommodated is the total number of desks, which is 400."",
+  ""answer"": ""400 students"",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,2,"We have already calculated the total number of desks, which is 400. Since one student can sit at one desk, the number of students that can be accommodated is the total number of desks, which remains 400.",400 students,400,1,100,1,0,37,91,-0.08154296875,0.2021484375,0.390625,158.0309600830078,91.91870880126953,0.16675162315368652,0.425531914893617,1.9100000000000001,0.95,6.209883993999938,14.654057964355736,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,288,91,"{
+  ""thought"": ""We have already calculated the total number of desks, which is 400. Since one student can sit at one desk, the number of students that can be accommodated is the total number of desks, which remains 400."",
+  ""answer"": ""400 students"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,1,"John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, he will be 3 times as old, so that age is 3*A + 9. Solving this equation for A will give us his current age.",Age now = (9 - 9 * (age 11 years ago)),11,0,90,0,0,49,121,-0.1728515625,0.3671875,0.55078125,157.3007354736328,0.0,0.0,0.0,2.11,0.0,7.851487642999928,15.411092203383745,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,326,121,"{
+  ""thought"": ""John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, he will be 3 times as old, so that age is 3*A + 9. Solving this equation for A will give us his current age."",
+  ""answer"": ""Age now = (9 - 9 * (age 11 years ago))"",
+  ""confidence"": 90,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,2,"We have the equation Age now = (9 - 9 * (age 11 years ago)). We know that age 11 years ago is A. So, we can substitute A into the equation to find Age now.",Age now = (9 - 9 * Age 11 years ago),11,0,100,1,0,33,98,-0.173828125,0.3515625,0.609375,158.28456115722656,70.40319061279297,0.09951764345169067,0.2558139534883721,1.98,-0.05,6.531927185999848,15.003229094477275,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,260,98,"{
+  ""thought"": ""We have the equation Age now = (9 - 9 * (age 11 years ago)). We know that age 11 years ago is A. So, we can substitute A into the equation to find Age now."",
+  ""answer"": ""Age now = (9 - 9 * Age 11 years ago)"",
+  ""confidence"": 100,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,1,"John worked for 8 hours each day for 6 days (from the 3rd to the 8th). So, the total hours worked is 8 hours/day * 6 days = 48 hours.",48 hours,48,0,100,0,0,29,83,-0.099609375,0.236328125,0.447265625,157.4426727294922,0.0,0.0,0.0,1.83,0.0,5.335994502999711,15.554738662744176,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,214,83,"{
+  ""thought"": ""John worked for 8 hours each day for 6 days (from the 3rd to the 8th). So, the total hours worked is 8 hours/day * 6 days = 48 hours."",
+  ""answer"": ""48 hours"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,2,We have already calculated the total hours John worked. No need for further calculation.,48 hours,48,0,100,1,0,14,55,-0.166015625,0.359375,0.63671875,161.70631408691406,86.91661834716797,0.14800596237182617,0.23076923076923078,1.55,-0.05,3.66958271600015,14.988080186934734,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,169,55,"{
+  ""thought"": ""We have already calculated the total hours John worked. No need for further calculation."",
+  ""answer"": ""48 hours"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00004_3ee48c01__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00004_3ee48c01,gsm8k,grade_school_math,gsm8k,4,4,1,"First, let's calculate the total rainfall in the first 2 hours (30 minutes * 2 = 60 minutes). The first 30 minutes had 5 inches, and the next 30 minutes had half of that, which is 2.5 inches. So, the total rainfall in the first 2 hours is 5 + 2.5 = 7.5 inches. The last hour had an additional 1/2 inch of rain. Adding this to the total gives us 7.5 + 0.5 = 8 inches. To find the average rainfall, we divide the total rainfall by the duration of the storm in hours (2 hours).",The average rainfall total for the duration of the storm is 8 inches / 2 hours = 4 inches per hour.,4,1,100,0,0,98,208,-0.150390625,0.310546875,0.470703125,165.8256378173828,0.0,0.0,0.0,3.08,1.0,13.448421705000328,15.466498936649378,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,646,208,"{
+  ""thought"": ""First, let's calculate the total rainfall in the first 2 hours (30 minutes * 2 = 60 minutes). The first 30 minutes had 5 inches, and the next 30 minutes had half of that, which is 2.5 inches. So, the total rainfall in the first 2 hours is 5 + 2.5 = 7.5 inches. The last hour had an additional 1/2 inch of rain. Adding this to the total gives us 7.5 + 0.5 = 8 inches. To find the average rainfall, we divide the total rainfall by the duration of the storm in hours (2 hours)."",
+  ""answer"": ""The average rainfall total for the duration of the storm is 8 inches / 2 hours = 4 inches per hour."",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00004_3ee48c01__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00004_3ee48c01,gsm8k,grade_school_math,gsm8k,4,4,2,"We have calculated the total rainfall for the 2 hours and the total duration of the storm. Now, we just need to convert the average rainfall per hour to the average rainfall per minute.",The average rainfall total for the duration of the storm is 4 inches per hour * 60 minutes per hour = 240 inches per minute.,240,0,100,1,1,34,108,-0.17578125,0.361328125,0.58203125,162.47132873535156,66.92324829101562,0.08290928602218628,0.23636363636363636,2.08,-0.05,7.2922779050004465,14.8101870782986,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,378,108,"{
+  ""thought"": ""We have calculated the total rainfall for the 2 hours and the total duration of the storm. Now, we just need to convert the average rainfall per hour to the average rainfall per minute."",
+  ""answer"": ""The average rainfall total for the duration of the storm is 4 inches per hour * 60 minutes per hour = 240 inches per minute."",
+  ""confidence"": 100,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00005_d0817615__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00005_d0817615,gsm8k,grade_school_math,gsm8k,5,160,1,"First, let's find out how many math books June bought. She bought 4 math books at $20 each, so that's 4 * 20 = 80 dollars. Then she bought 6 more science books than math books, so if we call the number of science books 'x', then x = 4 + 6 = 10. Science books cost 10 dollars each, so 10 * x = 10 * 10 = 100 dollars. Art books cost twice as much as math books, so they cost 2 * 80 = 160 dollars. Since June had 500 dollars in total, we can find the amount spent on music books by subtracting the costs of math, science, art, and the initial 80 dollars from her total budget: 500 - 80 - 100 - 160 = 160 dollars.",June spent 160 dollars on music books.,160,1,100,0,0,119,250,-0.1259765625,0.275390625,0.466796875,161.90713500976562,0.0,0.0,0.0,3.5,1.0,16.17065261800053,15.460105779633771,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,720,250,"{
+  ""thought"": ""First, let's find out how many math books June bought. She bought 4 math books at $20 each, so that's 4 * 20 = 80 dollars. Then she bought 6 more science books than math books, so if we call the number of science books 'x', then x = 4 + 6 = 10. Science books cost 10 dollars each, so 10 * x = 10 * 10 = 100 dollars. Art books cost twice as much as math books, so they cost 2 * 80 = 160 dollars. Since June had 500 dollars in total, we can find the amount spent on music books by subtracting the costs of math, science, art, and the initial 80 dollars from her total budget: 500 - 80 - 100 - 160 = 160 dollars."",
+  ""answer"": ""June spent 160 dollars on music books."",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00005_d0817615__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00005_d0817615,gsm8k,grade_school_math,gsm8k,5,160,2,"We have already calculated the costs for math, science, and art books. The remaining amount is the total budget minus the costs of those items and the initial 80 dollars for math books. Let's check if our previous calculation for music books is correct.",June spent 160 dollars on music books.,160,1,100,1,0,45,99,-0.2275390625,0.466796875,0.65625,158.2725830078125,83.90827941894531,0.13711732625961304,0.25675675675675674,1.99,0.95,6.766712548000214,14.6304426703123,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,363,99,"{
+  ""thought"": ""We have already calculated the costs for math, science, and art books. The remaining amount is the total budget minus the costs of those items and the initial 80 dollars for math books. Let's check if our previous calculation for music books is correct."",
+  ""answer"": ""June spent 160 dollars on music books."",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00006_4cf43e2d__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00006_4cf43e2d,gsm8k,grade_school_math,gsm8k,6,10,1,"Tammy wants to run 3500 meters per week, which is equivalent to running 500 meters per day (3500 / 7 days). Since her track is 50 meters around, she needs to run 10 loops (500 / 50) to cover 500 meters.",10 loops,10,1,100,0,0,39,109,-0.1337890625,0.29296875,0.46875,157.9129638671875,0.0,0.0,0.0,2.09,1.0,7.125438084000052,15.297305051987763,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,283,109,"{
+  ""thought"": ""Tammy wants to run 3500 meters per week, which is equivalent to running 500 meters per day (3500 / 7 days). Since her track is 50 meters around, she needs to run 10 loops (500 / 50) to cover 500 meters."",
+  ""answer"": ""10 loops"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00006_4cf43e2d__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00006_4cf43e2d,gsm8k,grade_school_math,gsm8k,6,10,2,"To find out how many loops she needs to make per day, we divide the daily distance by the length of one loop.","She needs to make 20 loops per day (10 loops * 2, since she runs twice around the track each day).",2,0,100,1,1,23,88,-0.1533203125,0.33203125,0.51171875,158.07798767089844,72.1440658569336,0.10425084829330444,0.14634146341463414,1.88,-0.05,5.748007661999509,15.309652522172911,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,276,88,"{
+  ""thought"": ""To find out how many loops she needs to make per day, we divide the daily distance by the length of one loop."",
+  ""answer"": ""She needs to make 20 loops per day (10 loops * 2, since she runs twice around the track each day)."",
+  ""confidence"": 100,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00007_40d1aba4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00007_40d1aba4,gsm8k,grade_school_math,gsm8k,7,360,1,"We know that the shadow stretches 5 feet every hour past noon. Since it's 6 hours past noon, we multiply the hourly increase by 6.",6 * 5 = 30 feet,30,0,100,0,0,26,116,-0.177734375,0.38671875,0.5859375,157.60337829589844,0.0,0.0,0.0,2.16,0.0,7.543202695000218,15.378083380536369,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,320,116,"{
+  ""thought"": ""We know that the shadow stretches 5 feet every hour past noon. Since it's 6 hours past noon, we multiply the hourly increase by 6."",
+  ""answer"": ""6 * 5 = 30 feet"",
+  ""confidence"": 100,
+  ""stop"": false
+}
+
+(Note: The answer is in feet. To convert feet to inches, multiply by 12. So, 30 feet is 360 inches.)"
+mistral_7b_instruct_v0p3__gsm8k_train_00007_40d1aba4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00007_40d1aba4,gsm8k,grade_school_math,gsm8k,7,360,2,"We convert feet to inches because there are 12 inches in a foot. So, the length in inches is 30 feet * 12 inches/foot.",360 inches,360,1,100,1,1,24,74,-0.1025390625,0.2216796875,0.451171875,158.05540466308594,67.29532623291016,0.09089607000350952,0.08571428571428572,1.74,0.95,4.854929669999365,15.242239338146723,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,197,74,"{
+  ""thought"": ""We convert feet to inches because there are 12 inches in a foot. So, the length in inches is 30 feet * 12 inches/foot."",
+  ""answer"": ""360 inches"",
+  ""confidence"": 100,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00008_cd4fe6cf__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00008_cd4fe6cf,gsm8k,grade_school_math,gsm8k,8,110,1,"If 198 passengers fit into 9 buses, then each bus can hold approximately 22 passengers (198 / 9). Since 5 buses are now considered, we need to find 5 times the capacity of one bus. So, the number of passengers that can fit into 5 buses is 22 * 5.",110,110,1,100,0,0,48,112,-0.1708984375,0.34765625,0.53515625,158.93927001953125,0.0,0.0,0.0,2.12,1.0,7.298053294000056,15.346558251647531,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,322,112,"{
+  ""thought"": ""If 198 passengers fit into 9 buses, then each bus can hold approximately 22 passengers (198 / 9). Since 5 buses are now considered, we need to find 5 times the capacity of one bus. So, the number of passengers that can fit into 5 buses is 22 * 5."",
+  ""answer"": ""110"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00008_cd4fe6cf__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00008_cd4fe6cf,gsm8k,grade_school_math,gsm8k,8,110,2,"We are given that each bus can hold 22 passengers. To find out how many passengers can fit into 5 buses, we simply multiply the number of buses by the capacity of one bus.",110,110,1,100,1,0,34,82,-0.11376953125,0.263671875,0.51171875,154.6060333251953,60.143310546875,0.07321947813034058,0.5128205128205128,1.82,0.95,5.364432786999714,15.285865860547386,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,247,82,"{
+  ""thought"": ""We are given that each bus can hold 22 passengers. To find out how many passengers can fit into 5 buses, we simply multiply the number of buses by the capacity of one bus."",
+  ""answer"": ""110"",
+  ""confidence"": ""100"",
+  ""stop"": ""0""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00009_a1cbbbd0__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00009_a1cbbbd0,gsm8k,grade_school_math,gsm8k,9,32,1,"Eric has 6 points. Mark has 50% more points than Eric, so Mark has 6 + (0.5 * 6) = 9 points. Samanta has 8 more points than Mark, so Samanta has 9 + 8 = 17 points. The total points for all three are 6 + 9 + 17 = 32.",32,32,1,100,1,0,45,119,-0.07666015625,0.15234375,0.333984375,155.32041931152344,0.0,0.0,0.0,2.19,1.0,7.757306418999178,15.34037635906008,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,289,119,"{
+  ""thought"": ""Eric has 6 points. Mark has 50% more points than Eric, so Mark has 6 + (0.5 * 6) = 9 points. Samanta has 8 more points than Mark, so Samanta has 9 + 8 = 17 points. The total points for all three are 6 + 9 + 17 = 32."",
+  ""answer"": ""32"",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00009_a1cbbbd0__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00009_a1cbbbd0,gsm8k,grade_school_math,gsm8k,9,32,2,"We have already calculated the points for each player: Eric has 6 points, Mark has 9 points, and Samanta has 17 points. To find the total points, we simply add their scores: 6 + 9 + 17 = 32.",32,32,1,100,1,0,36,95,-0.10498046875,0.2373046875,0.431640625,156.69747924804688,62.7857780456543,0.08094555139541626,0.34285714285714286,1.9500000000000002,0.95,6.3817324960000406,14.88623975692249,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,265,95,"{
+  ""thought"": ""We have already calculated the points for each player: Eric has 6 points, Mark has 9 points, and Samanta has 17 points. To find the total points, we simply add their scores: 6 + 9 + 17 = 32."",
+  ""answer"": ""32"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00010_8c587dfb__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00010_8c587dfb,gsm8k,grade_school_math,gsm8k,10,42,1,"First, let's calculate the total cost of the sundaes without Yvette's. Alicia's sundae costs $7.50, Brant's costs $10.00, and Josh's costs $8.50. That's a total of $7.50 + $10.00 + $8.50 = $26.00. Now, we need to find out how much Yvette's sundae costs. Her sundae costs $9.00. To find her total bill, we add the cost of her sundae to the total cost of the other sundaes.",$35.00,35,0,100,0,0,80,188,-0.1337890625,0.279296875,0.498046875,144.64093017578125,0.0,0.0,0.0,2.88,0.0,12.287998523999704,15.299481004397663,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,450,188,"{
+  ""thought"": ""First, let's calculate the total cost of the sundaes without Yvette's. Alicia's sundae costs $7.50, Brant's costs $10.00, and Josh's costs $8.50. That's a total of $7.50 + $10.00 + $8.50 = $26.00. Now, we need to find out how much Yvette's sundae costs. Her sundae costs $9.00. To find her total bill, we add the cost of her sundae to the total cost of the other sundaes."",
+  ""answer"": ""$35.00"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00010_8c587dfb__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00010_8c587dfb,gsm8k,grade_school_math,gsm8k,10,42,2,"Now, we need to add Yvette's sundae cost of $9.00 to the total cost of the other sundaes ($26.00) to get the final bill. So, the final bill is $26.00 + $9.00 = $35.00.",$35.00,35,0,100,1,0,38,110,-0.10546875,0.23046875,0.42578125,150.30197143554688,63.40814208984375,0.09173351526260376,0.4186046511627907,2.1,-0.05,7.194384459000503,15.28970277121971,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,245,110,"{
+  ""thought"": ""Now, we need to add Yvette's sundae cost of $9.00 to the total cost of the other sundaes ($26.00) to get the final bill. So, the final bill is $26.00 + $9.00 = $35.00."",
+  ""answer"": ""$35.00"",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00011_127045f3__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00011_127045f3,gsm8k,grade_school_math,gsm8k,11,3,1,"Tommy ordered a total of 10 kg of fruits. We know the weights of apples, oranges, and grapes. Let's find out the weight of strawberries by subtracting the known weights from the total weight.",7 kg,7,0,100,1,0,35,86,-0.10986328125,0.228515625,0.3828125,153.22096252441406,0.0,0.0,0.0,1.8599999999999999,0.0,5.72555614599969,15.02037493075431,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,267,86,"{
+  ""thought"": ""Tommy ordered a total of 10 kg of fruits. We know the weights of apples, oranges, and grapes. Let's find out the weight of strawberries by subtracting the known weights from the total weight."",
+  ""answer"": ""7 kg"",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00011_127045f3__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00011_127045f3,gsm8k,grade_school_math,gsm8k,11,3,2,"We have already found that the total weight of the fruits Tommy ordered is 10 kg. The weights of apples, oranges, and grapes are 3 kg, 1 kg, and 3 kg respectively. The weight of strawberries is the remaining weight after subtracting the known weights. So, the weight of strawberries is 10 kg - (3 kg + 1 kg + 3 kg) = 10 kg - 7 kg = 3 kg.",3 kg,3,1,100,1,1,65,138,-0.1318359375,0.30859375,0.5234375,162.16683959960938,62.63202667236328,0.07732689380645752,0.46153846153846156,2.38,0.95,9.101621736000197,15.162133079444537,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,413,138,"{
+  ""thought"": ""We have already found that the total weight of the fruits Tommy ordered is 10 kg. The weights of apples, oranges, and grapes are 3 kg, 1 kg, and 3 kg respectively. The weight of strawberries is the remaining weight after subtracting the known weights. So, the weight of strawberries is 10 kg - (3 kg + 1 kg + 3 kg) = 10 kg - 7 kg = 3 kg."",
+  ""answer"": ""3 kg"",
+  ""confidence"": 100,
+  ""stop"": true
+}"

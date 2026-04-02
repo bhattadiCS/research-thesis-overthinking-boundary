@@ -1,0 +1,49 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,expected_answer,step,thought,answer,answer_normalized,correct,confidence,model_stop_flag,answer_changed,thought_token_count,raw_generation_tokens,mean_token_logprob,entropy_mean,entropy_std,hidden_norm,hidden_l2_shift,hidden_cosine_shift,lexical_echo,verbose_confidence_proxy,utility,elapsed_seconds,tokens_per_second,gpu_memory_allocated_gb,seed,temperature,device,prompt_mode,system_prompt_mode,is_baseline,parse_success,output_format_type,answer_extraction_source,stop_extraction_source,confidence_extraction_source,hit_max_new_tokens,truncated_output_suspected,raw_text_length_chars,raw_text_length_tokens,raw_text
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,1,"Last year, 200 people signed up and 40 didn't show up. So, the actual number of runners was 200 - 40 = 160. This year, there will be twice as many runners as last year, so we multiply the actual number of runners by 2.",320,320,1,100,0,0,44,109,-0.0908203125,0.19921875,0.349609375,153.51829528808594,0.0,0.0,0.0,2.09,1.0,8.548581239000214,12.750653816415966,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,294,109,"{
+  ""thought"": ""Last year, 200 people signed up and 40 didn't show up. So, the actual number of runners was 200 - 40 = 160. This year, there will be twice as many runners as last year, so we multiply the actual number of runners by 2."",
+  ""answer"": ""320"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,2,"We have already calculated that there were 160 actual runners last year. This year, there will be twice as many, so we multiply the actual number by 2.",320,320,1,100,1,0,28,77,-0.123046875,0.283203125,0.474609375,156.0170440673828,62.11632537841797,0.08041650056838989,0.5428571428571428,1.77,0.95,14.20703685699982,5.4198493869650255,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,227,77,"{
+  ""thought"": ""We have already calculated that there were 160 actual runners last year. This year, there will be twice as many, so we multiply the actual number by 2."",
+  ""answer"": ""320"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,1,"Let T be the total number of classrooms with 30 desks and R be the remaining classrooms with 25 desks. We know there are 15 classrooms in total. So, T + R = 15.",T = 15 - R,15,0,100,0,0,32,92,-0.0986328125,0.1953125,0.43359375,155.33883666992188,0.0,0.0,0.0,1.92,0.0,8.548581239000214,10.762019734956596,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,243,92,"{
+  ""thought"": ""Let T be the total number of classrooms with 30 desks and R be the remaining classrooms with 25 desks. We know there are 15 classrooms in total. So, T + R = 15."",
+  ""answer"": ""T = 15 - R"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00001_3691caf7__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,2,"Now we need to find the number of classrooms with 30 desks (T). We know that the total number of desks in these classrooms is 30 * T. The total number of desks in the school is 15 * (30 + 25) = 675. Since each classroom with 30 desks has 30 desks, the total number of desks in these classrooms is 30 * T. So, 30 * T + 25 * R = 675. Solving for T gives us T = (675 - 25 * R) / 30.",T = (675 - 25 * R) / 30,30,0,100,1,1,76,195,-0.1298828125,0.275390625,0.4609375,160.3695831298828,64.28327178955078,0.08243203163146973,0.41025641025641024,2.95,-0.05,14.20703685699982,13.725592603352986,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,471,195,"{
+  ""thought"": ""Now we need to find the number of classrooms with 30 desks (T). We know that the total number of desks in these classrooms is 30 * T. The total number of desks in the school is 15 * (30 + 25) = 675. Since each classroom with 30 desks has 30 desks, the total number of desks in these classrooms is 30 * T. So, 30 * T + 25 * R = 675. Solving for T gives us T = (675 - 25 * R) / 30."",
+  ""answer"": ""T = (675 - 25 * R) / 30"",
+  ""confidence"": 100,
+  ""stop"": 1
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,1,"John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, he will be 3 times as old, so that will be 3*A + 9. Solving this equation will give us his current age.","Let A = John's age - 11. So, A + 11 + 9 = 3*A + 11 + 9 => 2*A = 18 => A = 9. Therefore, John's current age is 9 + 11 = 20.",20,0,100,0,0,47,169,-0.1513671875,0.298828125,0.5234375,161.95518493652344,0.0,0.0,0.0,2.69,0.0,12.026933076000205,14.051795161082271,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,406,169,"{
+  ""thought"": ""John's age 11 years ago can be found by subtracting 11 from his current age. Let's call that A. In 9 years, he will be 3 times as old, so that will be 3*A + 9. Solving this equation will give us his current age."",
+  ""answer"": ""Let A = John's age - 11. So, A + 11 + 9 = 3*A + 11 + 9 => 2*A = 18 => A = 9. Therefore, John's current age is 9 + 11 = 20."",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00002_ae407466__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,2,"We have already found that John's age 11 years ago was A = 9. Now, we can find his current age by adding 11 years to that value.",20,20,0,100,1,0,28,74,-0.1708984375,0.36328125,0.58984375,157.12579345703125,75.84229278564453,0.11256033182144165,0.34146341463414637,1.74,-0.05,7.38659067899971,10.018153599655134,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,202,74,"{
+  ""thought"": ""We have already found that John's age 11 years ago was A = 9. Now, we can find his current age by adding 11 years to that value."",
+  ""answer"": ""20"",
+  ""confidence"": 100,
+  ""stop"": true
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,1,"John works for 8 hours every day for 6 days (from the 3rd to the 8th). So, the total hours worked is 8 hours/day * 6 days = 48 hours.",48 hours,48,0,100,0,0,29,83,-0.12890625,0.259765625,0.4921875,156.97567749023438,0.0,0.0,0.0,1.83,0.0,12.026933076000205,6.901177505146914,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,214,83,"{
+  ""thought"": ""John works for 8 hours every day for 6 days (from the 3rd to the 8th). So, the total hours worked is 8 hours/day * 6 days = 48 hours."",
+  ""answer"": ""48 hours"",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+mistral_7b_instruct_v0p3__gsm8k_train_00003_135cf83f__temp0.10__seed7,mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,2,"We've calculated the total hours John worked, but let's verify that our calculation is correct. We know that John worked 8 hours a day for 6 days, so the total hours should indeed be 8 hours/day * 6 days = 48 hours.",48 hours,48,0,100,1,0,43,97,-0.2314453125,0.4453125,0.703125,160.42298889160156,63.43417739868164,0.07965868711471558,0.37142857142857144,1.97,-0.05,7.38659067899971,13.131904042791188,13.508431434631348,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,296,97,"{
+  ""thought"": ""We've calculated the total hours John worked, but let's verify that our calculation is correct. We know that John worked 8 hours a day for 6 days, so the total hours should indeed be 8 hours/day * 6 days = 48 hours."",
+  ""answer"": ""48 hours"",
+  ""confidence"": ""100"",
+  ""stop"": ""1""
+}"
