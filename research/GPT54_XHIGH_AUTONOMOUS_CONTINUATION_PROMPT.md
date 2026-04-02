@@ -2,6 +2,14 @@
 
 Use this prompt inside the ResearchThesis workspace when you want GPT-5.4 xhigh to resume the interrupted overthinking-boundary program from recovered checkpoint state, finish the pending second-family run efficiently on Colab L4, and drive the next experiment cycle to completion.
 
+Historical note as of 2026-04-02: recovery of the overnight Colab backup established that the raw Qwen2.5 7B 4-bit collection actually completed all 900 runs across 300 GSM8K tasks. Use this prompt only for downstream recovery, analysis regeneration, or optional follow-up experiments unless the tracked Qwen 7B artifacts are missing again.
+
+Recovered completion state:
+
+- `research/outputs/real_traces_l4_qwen_7b_4bit` now contains 900 runs, 9000 step rows, and 900 hidden-state files.
+- The main unfinished work after recovery was downstream analysis and report regeneration, not raw collection.
+- `thesis_data_backup_from_overnight.zip` supersedes the earlier incomplete backup for recovery purposes.
+
 ## Mission
 
 You are GPT-5.4 xhigh operating inside the `ResearchThesis` VS Code workspace. Your job is not to propose ideas and stop. Your job is to inspect the existing code and artifacts, recover the interrupted `qwen2p5_7b` experiment from the saved partial state, repair any analysis bug that would invalidate theorem-facing claims, optimize the runtime path for the available L4 GPU, build a combined cross-family report, finish the materially important experiment, regenerate the research artifacts, and stop only when the repo contains updated code, updated Markdown outputs, durable checkpointed commits, and a clear empirical answer about whether the late overthinking boundary survives in a stronger second family.
