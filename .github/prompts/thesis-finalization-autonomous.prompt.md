@@ -1,6 +1,6 @@
 ---
 name: "Autonomous Thesis Finalization"
-description: "Fully autonomous thesis-finalization run: add a thesis-ready stopping-rule algorithm box tied to mu_t and T_c, run one stronger genuinely non-Qwen family on Colab L4, verify GPU optimization, and checkpoint commits/pushes throughout."
+description: "Continue the interrupted thesis-finalization run from the latest remote Mistral checkpoint state: reuse the completed mu_t / T_c documentation, resume or restart the matched-protocol Mistral run safely, verify the selected L4 runtime, and checkpoint commits/pushes aggressively."
 argument-hint: "Optional: preferred non-Qwen family (llama/gemma/mistral), compute budget, benchmark, or thesis-doc priority"
 agent: "agent"
 ---
@@ -52,6 +52,38 @@ $$
 T_c = \inf\{t \ge 0 : \mu_t \le 0\}.
 $$
 
+## Current Continuation State (Post-Interrupted Mistral Run)
+
+The repo has already advanced beyond the original version of this prompt. Treat the following as completed unless the files are missing or corrupted:
+
+- Thesis-ready stopping-rule documentation was added in commit `b2a2b94`.
+- The harness was extended to support the selected non-Qwen family alias `mistral_7b_instruct_v0p3` in commit `048036e`.
+- A successful Mistral smoke run was committed in `9d74e32`.
+- L4 optimization benchmarking and runtime selection were committed in `e6be9dd`.
+
+The current committed Mistral baseline is:
+
+- Selected model: `mistralai/Mistral-7B-Instruct-v0.3`
+- Selected alias: `mistral_7b_instruct_v0p3`
+- Selected long-run configuration: `quantization=none`, `attn_implementation=sdpa`, `batch_size=4`
+- Best tested quantized fallback: `4bit`, `sdpa`, `batch_size=6`
+- `flash_attention_2` was unavailable in the benchmark environment because `flash_attn` was not installed
+- Gemma and Llama candidates were blocked by gated-model access in the tested Colab runtime
+
+The interrupted run did **not** reach its first committed long-run checkpoint.
+
+That means:
+
+- there are **no** committed `exp: mistral checkpoint ...` commits on `origin/main`,
+- the committed repo contains the smoke run and benchmark artifacts but not the full matched-protocol Mistral run,
+- any partial full-run output may exist only in the current Colab filesystem or remote runtime and must be inspected before deciding whether to resume or restart.
+
+The canonical progress log for the interrupted run is:
+
+- [Autonomous run log](../../research/AUTONOMOUS_RUN_LOG.md)
+- [Non-Qwen model selection](../../research/NON_QWEN_MODEL_SELECTION.md)
+- [L4 optimization notes](../../research/L4_OPTIMIZATION_NOTES.md)
+
 ## Mission
 
 You are not here to brainstorm. You are here to finish the next thesis-grade research cycle autonomously.
@@ -59,8 +91,8 @@ You are not here to brainstorm. You are here to finish the next thesis-grade res
 You must complete **all** of the following, end-to-end, unless you are genuinely blocked by unavailable credentials, unavailable hardware, or an irreducible external dependency:
 
 1. Turn the current stopping rule into a **thesis-ready algorithm box and pseudocode section** directly tied to $\mu_t$ and $T_c$.
-2. Run **one stronger genuinely non-Qwen family** under the matched protocol if the goal is to upgrade the current claim from capability-linked evidence to genuine cross-family robustness.
-3. Verify that the Colab L4 run is **actually optimized** for throughput and stable memory use on the available `22.5 GB` GPU, using measured metrics rather than intuition.
+2. Continue the selected genuinely non-Qwen family path, which is currently the matched-protocol Mistral 7B run, and only reopen model selection if the current runtime changes or Mistral becomes infeasible.
+3. Reuse the committed L4 optimization evidence unless the environment has materially changed, and verify that the resumed full run still matches the selected best stable throughput configuration.
 4. Use materially stronger **commit and push checkpointing** so failures, Colab disconnects, or SSH drops do not strand important code or outputs locally.
 
 Do not stop at partial implementation. Continue through code changes, benchmark calibration, real execution, regeneration of reports, and updated written conclusions.
@@ -77,6 +109,27 @@ Do not stop at partial implementation. Continue through code changes, benchmark 
 8. Configure the Python environment before any Python terminal command.
 9. Use workspace tools, repo memory, and real scripts aggressively. Do not fake execution.
 10. Continue automatically through successive phases unless blocked by a real external constraint.
+11. Start by synchronizing with `origin/main` and reconciling the current worktree before making any edits or launching any run.
+12. Do not redo already committed benchmark sweeps or smoke tests unless the runtime, package set, or hardware has changed enough to invalidate the prior choice.
+
+## Mandatory First Actions
+
+Before any new code edit or experiment command, do all of the following in order:
+
+1. `git fetch --all --prune`
+2. `git pull --ff-only origin main` if the local branch is behind and the worktree is clean
+3. read [Autonomous run log](../../research/AUTONOMOUS_RUN_LOG.md)
+4. read [Non-Qwen model selection](../../research/NON_QWEN_MODEL_SELECTION.md)
+5. read [L4 optimization notes](../../research/L4_OPTIMIZATION_NOTES.md)
+6. inspect whether the current runtime already contains any partial full-run artifacts under:
+   - `research/outputs/real_traces_l4_mistral_7b`
+   - `research/outputs/real_traces_l4_mistral_7b_checkpointed.log`
+7. inspect local git history for any `exp: mistral checkpoint ...` commits
+
+Decision rule:
+
+- If partial Mistral full-run artifacts exist locally, stage and checkpoint them **before** any restart.
+- If they do not exist locally and no checkpoint commits exist remotely, treat the full run as not yet recoverable from git and restart it from the selected configuration rather than wasting time searching for missing tracked state.
 
 ## What Counts As A Real Upgrade To The Thesis Claim
 
@@ -156,18 +209,29 @@ But do not leave it at this rough level. Convert it into a thesis-quality algori
 
 ## Stronger Non-Qwen Family Requirement
 
-The current harness only supports DeepSeek and Qwen aliases. That is not sufficient for this objective.
+This requirement is already partially satisfied in the current repo state.
 
-### You must treat this as a real engineering task
+The harness now supports the selected non-Qwen family alias:
 
-If a genuinely non-Qwen family is not already supported, extend:
+- `mistral_7b_instruct_v0p3` -> `mistralai/Mistral-7B-Instruct-v0.3`
 
-- [research/real_trace_experiments.py](../../research/real_trace_experiments.py)
-- [tools/run_colab_experiment.py](../../tools/run_colab_experiment.py)
+Do **not** reopen this as a generic engineering task unless the relevant code or files are missing.
 
-so that at least one stronger genuinely non-Qwen family can run under the same instrumentation.
+Only revisit model-selection or model-catalog work if one of the following is true:
 
-### Non-Qwen candidate priority order
+- the current runtime now has access to Gemma or Llama and you explicitly want to supersede Mistral,
+- Mistral becomes infeasible under the matched instrumentation,
+- the existing Mistral harness path is broken in the present environment.
+
+### Current selected non-Qwen family
+
+The current selected candidate is Mistral, not because it is theoretically preferred over Gemma or Llama, but because it was the first genuinely non-Qwen family that was both accessible and benchmarkable in the live Colab runtime.
+
+Reuse this selection by default.
+
+Only fall back to the generic priority order below if you are forced to reopen candidate selection.
+
+### Candidate priority order if reselection is required
 
 Pick the strongest candidate that is both **downloadable** and **practical on a 22.5 GB L4** under instrumentation.
 
@@ -194,9 +258,22 @@ Before finalizing the candidate, verify and record:
 
 If the first candidate is blocked by gated access or infeasible memory, fall back automatically to the next candidate and document the reason.
 
+In the currently committed evidence, Gemma and Llama were both blocked by gated access, and Mistral was the first successful fallback.
+
 ## Colab L4 Optimization Requirements
 
 You must explicitly verify that the chosen long-run configuration is actually close to the best stable throughput path on the `22.5 GB` L4.
+
+The current committed benchmark conclusion is:
+
+- best overall tested runtime: `quantization=none`, `attn_implementation=sdpa`, `batch_size=4`
+- best tested quantized runtime: `4bit`, `sdpa`, `batch_size=6`
+- `flash_attention_2` unavailable in the tested environment
+
+Default rule:
+
+- reuse the committed full-precision `sdpa` batch-4 configuration for the matched Mistral full run,
+- only rerun the full benchmark sweep if the environment changed materially or if real full-run telemetry contradicts the benchmark results.
 
 ### Required optimization workflow
 
@@ -215,6 +292,10 @@ You must explicitly verify that the chosen long-run configuration is actually cl
    - `sdpa` vs `flash_attention_2` vs `auto` when available,
    - at least several batch sizes rather than a single guess.
 6. Choose the final configuration based on measured throughput and stability, not just “highest memory use”.
+
+Additional rule:
+
+- If the committed benchmark note already shows a best stable configuration and the runtime is materially the same, do not waste paid Colab time repeating the full benchmark ladder. Validate the chosen path with a quick sanity check and continue.
 
 ### Required decision logic
 
@@ -267,6 +348,7 @@ Commit and push after each of these milestones:
 5. Each major long-run checkpoint.
 6. Final analysis regeneration.
 7. Final narrative and conclusion updates.
+8. The first successful partial full-run state if the output directory or checkpoint log exists but no experiment checkpoint commit exists yet.
 
 ### Long-run checkpoint cadence
 
@@ -274,11 +356,22 @@ During the long run, do not wait until all 300 tasks finish before checkpointing
 
 At minimum, commit and push after whichever comes first:
 
-- every `50` tasks,
-- every `150` completed runs,
+- every `25` tasks,
+- every `75` completed runs,
 - every completed temperature block,
 - any recovery from an OOM or disconnect,
-- any change in the chosen runtime configuration.
+- any change in the chosen runtime configuration,
+- any first bootstrap checkpoint where the long-run output directory exists but no experiment checkpoint commit has yet been created.
+
+Do **not** use a first checkpoint boundary as large as `50` tasks if the run is otherwise unprotected. The initial checkpoint must land earlier than that.
+
+Prefer a tracked checkpoint driver or scripted loop over a one-off terminal one-liner, so the checkpoint logic itself is reproducible.
+
+Before the first commit attempt in a fresh Colab runtime:
+
+- verify repo-local git author configuration,
+- if missing, set it to the same author identity already used on `main`,
+- record that action in the run log.
 
 If push fails, keep the local commit and record the failure in the run log immediately.
 
@@ -294,7 +387,9 @@ Tasks:
 2. Read the authoritative result docs.
 3. Read the current theory note and thesis proposal.
 4. Verify current git status before editing.
-5. Confirm that the current late-boundary witness is still Qwen 7B and that the claim is still capability-linked rather than cross-family robust.
+5. Pull the latest remote commits before doing anything else if the worktree allows it.
+6. Confirm that the current late-boundary witness is still Qwen 7B and that the claim is still capability-linked rather than cross-family robust.
+7. Confirm which Mistral milestones are already committed and which are not.
 
 Acceptance criteria:
 
@@ -321,13 +416,16 @@ Acceptance criteria:
 
 ### Phase C: Extend the harness to one genuinely non-Qwen family
 
+This phase is now primarily a verification-and-repair phase, not a blank-slate extension phase.
+
 Tasks:
 
 1. Inspect the current model catalog and runner choices.
-2. Add one stronger genuinely non-Qwen family alias.
+2. Verify that `mistral_7b_instruct_v0p3` is still present and functional.
 3. Preserve current families and CLI behavior.
 4. Keep quantization, prompt mode, resume behavior, and instrumentation coherent.
 5. If necessary, add guarded compatibility logic for tokenizer or chat template differences.
+6. Only add another family alias if the current Mistral path is blocked or if a stronger non-Qwen candidate is newly accessible.
 
 Acceptance criteria:
 
@@ -335,12 +433,15 @@ Acceptance criteria:
 
 ### Phase D: Calibrate the Colab L4 path for the new family
 
+This phase is now a reuse-or-validate phase by default.
+
 Tasks:
 
-1. Benchmark the candidate across a sensible batch-size ladder.
-2. Test stable quantization and attention settings.
-3. Use measured throughput and memory to choose the final configuration.
-4. Record the results in tracked artifacts.
+1. Read the committed optimization artifacts first.
+2. Validate that the current runtime still supports the chosen configuration.
+3. Only rerun the full ladder if the environment changed or if the selected configuration now behaves materially differently.
+4. If rerunning is unnecessary, record a short validation note and move on.
+5. Record any new results in tracked artifacts.
 
 Acceptance criteria:
 
@@ -362,10 +463,17 @@ Match the existing empirical design unless a documented blocker requires a devia
 
 Tasks:
 
-1. Run a smoke test.
-2. Run the full real-trace experiment.
-3. Checkpoint commits and pushes at the required cadence.
-4. Recover automatically from resumable failures.
+1. Inspect whether a partial full-run output directory or checkpoint log already exists in the current runtime.
+2. If partial full-run artifacts exist, checkpoint them immediately and resume rather than restarting.
+3. If no partial full-run artifacts exist, start the full real-trace experiment from the committed selected configuration.
+4. Use a checkpoint plan that lands the first durable experiment commit no later than the `25`-task mark.
+5. Checkpoint commits and pushes at the required cadence.
+6. Recover automatically from resumable failures.
+
+Implementation preference:
+
+- Do not launch the 300-task run as a single fragile one-liner with the first commit deferred too long.
+- Prefer explicit task-increment checkpoints such as `25, 50, 75, ..., 300` per temperature, or an equivalently aggressive scripted checkpoint schedule.
 
 Acceptance criteria:
 
@@ -424,6 +532,7 @@ Do not finish with a vague success note. End with a concrete final summary that 
 This prompt is complete only when:
 
 - the thesis-ready stopping algorithm is written into the repo,
+- the committed Mistral baseline has been either resumed successfully or restarted cleanly from the selected configuration,
 - a stronger genuinely non-Qwen family has been seriously executed or blocked with evidence,
 - the L4 path has been benchmarked and justified,
 - commits and pushes were used as durable checkpoints,
