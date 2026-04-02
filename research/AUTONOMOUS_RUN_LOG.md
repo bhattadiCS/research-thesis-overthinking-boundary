@@ -14,8 +14,10 @@
 - Current target model: `mistral_7b_instruct_v0p3` (`mistralai/Mistral-7B-Instruct-v0.3`)
 - Current benchmark configuration: selected `quantization=none`, `attn_implementation=sdpa`, `batch_size=4`
 - Current full-run output directory: `research/outputs/real_traces_l4_mistral_7b`
-- Current last completed task index: successful Mistral smoke run and L4 benchmark ladder complete; full matched-protocol run pending
-- Current resume instructions: rerun from repo root and resume from the latest committed output directory metadata; do not rerun the recovered Qwen2.5 7B artifacts
+- Current last completed task index: successful Mistral smoke run and L4 benchmark ladder complete; no recoverable full matched-protocol output directory or experiment checkpoint commit exists yet
+- Current runtime validation: live NVIDIA L4 re-verified on 2026-04-02; repo-local `.venv` now reuses the system CUDA stack and imports the required experiment packages successfully
+- Current git checkpoint state: repo-local git author is configured as `Aditya Bhatt <bhattadiCS@users.noreply.github.com>` and the next run should use the tracked checkpoint driver in `tools/run_checkpointed_real_trace.py`
+- Current resume instructions: restart from repo root with the selected `none + sdpa + batch_size=4` configuration, keep the recovered Qwen2.5 7B artifacts untouched, and land the first durable Mistral experiment checkpoint no later than the first completed 25-task / temperature block
 
 ## Checkpoints
 
@@ -25,6 +27,7 @@
 | 2026-04-02 14:56 UTC | B | Added thesis-ready stopping-rule documentation, a theory-note algorithm section, and the autonomous run log. | `b2a2b94` | pushed |
 | 2026-04-02 15:13 UTC | C | Added the Mistral harness path, L4 benchmark runner, and non-Qwen selection note. | `048036e` | pushed |
 | 2026-04-02 15:18 UTC | D | Fixed the quantized Colab runner argument-order bug and checkpointed the successful Mistral smoke run artifacts. | `9d74e32` | pushed |
+| 2026-04-02 15:31 UTC | D | Committed the benchmark-selection checkpoint and recorded the chosen long-run Mistral L4 runtime. | `e6be9dd` | pushed |
 
 ## Candidate Access Notes
 
@@ -56,6 +59,6 @@
 
 ## Pending Milestones
 
-1. Commit and push the benchmark-selection checkpoint.
-2. Run the full matched-protocol non-Qwen experiment with checkpoint commits.
+1. Validate the selected `none + sdpa + batch_size=4` path on the current runtime without repeating the full ladder.
+2. Run the full matched-protocol non-Qwen experiment with aggressive checkpoint commits.
 3. Regenerate per-run and cross-family reports and update the claim.
