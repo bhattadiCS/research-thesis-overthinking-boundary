@@ -21,11 +21,12 @@ We use a mathematical rule to decide exactly when to stop. We weigh:
 
 **The Decision:** We calculate the **Drift (μ)**. If the chance of fixing the answer is higher than the risk of breaking it (minus the cost), we keep going. If it drops below zero, we've hit the **Overthinking Boundary** and should stop.
 
-### 3. Key Findings (DeepSeek vs. Qwen)
-Our experiments on an NVIDIA L4 GPU on math tasks (GSM8K) proved:
-- **DeepSeek-R1 (Capable model)**: Overthinking is real. The model reached peak correctness at **Step 7**, and accuracy dropped if we forced it to keep thinking.
-- **Qwen-0.5B (Weak model)**: This served as a control. Because it wasn't smart enough to repair its own mistakes, its "Overthinking Boundary" was reached almost immediately at Step 1.
-- **The Verdict**: A smart stopping rule outperforms a "never-stop" policy in both accuracy and efficiency.
+### 3. Key Findings (Current Post-Audit State)
+Our experiments on an NVIDIA L4 GPU on GSM8K now support a narrower but stronger claim:
+- **Qwen2.5 7B 4-bit (Competent regime)**: This is the clearest late-boundary result in the repo. Step-1 accuracy is **0.3644**, peak correctness is **0.7789** at **Step 9**, and the corrected theorem-facing boundary is **Step 6**. Forcing the model to continue through the end loses **0.4317** utility relative to the oracle.
+- **DeepSeek-R1 Distill 1.5B**: The earlier proxy-based story that placed the boundary near Step 7 does **not** survive the conditional hazard audit. The corrected boundary is **Step 1**, so DeepSeek remains evidence that overthinking costs matter, but not the main late-boundary witness.
+- **Qwen2.5 0.5B (Weak control)**: This model remains in a low-skill regime and also crosses at **Step 1**, which is exactly the kind of early-boundary control the theory predicts.
+- **The Verdict**: Overthinking is real, measurable, and utility-relevant in a capable regime, but **cross-family robustness is still unproven** because only the stronger Qwen 7B run shows a late corrected boundary.
 
 ---
 
@@ -209,9 +210,9 @@ The current workflow is designed around larger cloud runs:
 - Remote orchestration from the local VS Code environment, including SSH-based remote control of the cloud runtime.
 - A reusable wrapper in [tools/run_colab_experiment.py](tools/run_colab_experiment.py) for smoke tests, full runs, and artifact regeneration.
 
-### Current DeepSeek Experiment Design
+### Current Real-Trace Design
 
-The main large run in the repo forces DeepSeek-R1-Distill 1.5B to reason step by step on GSM8K problems for up to 10 steps and across temperatures `0.1`, `0.6`, and `1.0`. Rather than only checking the final answer, the harness records what happens at each reasoning step so that repair and corruption can be studied directly.
+The main large runs in the repo force open-weight reasoning models to produce step-by-step traces on GSM8K problems for up to 10 steps across temperatures `0.1`, `0.6`, and `1.0`. The strongest completed tracked runs now cover DeepSeek-R1-Distill 1.5B, Qwen2.5 0.5B, and Qwen2.5 7B 4-bit. Rather than only checking the final answer, the harness records what happens at each reasoning step so that repair and corruption can be studied directly.
 
 ### What gets logged
 
@@ -290,76 +291,113 @@ This repository is trying to answer the following questions in a concrete, testa
 
 ## What the Current Results Say
 
-### DeepSeek-R1 Distill 1.5B
+This README reflects the post-recovery, post-audit state of the repository as of 2026-04-02. The authoritative cross-run summary is [research/CROSS_FAMILY_REPORT.md](research/CROSS_FAMILY_REPORT.md).
 
-The strongest completed run in the repo is the L4 DeepSeek-R1 distill 1.5B experiment on 300 GSM8K tasks across 3 temperatures.
+### Cross-Family Bottom Line
+
+The main conclusion is now more precise than earlier versions of this repo:
+
+- **Late-boundary evidence exists**, but only in one clearly capable family-member run.
+- **Qwen2.5 7B 4-bit** shows the strongest late-boundary replication.
+- **DeepSeek 1.5B** and **Qwen 0.5B** both cross at Step 1 under the corrected conditional hazard audit.
+- Therefore the best defended statement is **capability-linked late-boundary evidence, not yet cross-family robustness**.
+
+### Qwen2.5 7B 4-bit
+
+The recovered L4 Qwen2.5 instruct 7B 4-bit experiment is now the strongest completed run in the repo.
 
 What it shows:
 
-- The model is competent enough to leave the low-skill regime.
-- Step-1 accuracy is 0.237.
-- At least one correct answer appears in 621 of 900 runs.
-- The pooled trajectory reaches peak correctness around step 7.
-- The never-stop policy loses 0.7463 utility on average relative to the oracle.
+- Step-1 accuracy is **0.3644**.
+- Peak correctness is **0.7789** at **Step 9**.
+- The corrected conditional hazard boundary is **Step 6**.
+- The fitted hazard boundary is **Step 7**.
+- The never-stop policy loses **0.4317** utility on average relative to the oracle.
 
 Interpretation:
 
-- Overthinking is real in this setting.
-- Extra reasoning is often useful early and harmful late.
-- A practical stopping rule should stop far earlier than the final step.
+- This is the clearest evidence in the repo that extra reasoning can help early and hurt later.
+- The run clears the current capability gate for a late-boundary witness.
+- The strongest correctness signal in this run is self-reported confidence; the strongest corruption-side signal is the verbosity-confidence proxy.
+
+### DeepSeek-R1 Distill 1.5B
+
+DeepSeek remains important, but the interpretation changed after the hazard audit.
+
+What it shows:
+
+- Step-1 accuracy is **0.2367**.
+- Peak correctness is **0.3200** at **Step 10**.
+- The corrected boundary is **Step 1**.
+- The legacy pooled proxy had suggested a much later crossing near **Step 7**, but that proxy used unconditional transition frequencies and is no longer accepted as the theorem-facing witness.
+- The never-stop policy still loses **0.7463** utility on average relative to the oracle.
+
+Interpretation:
+
+- DeepSeek still shows that uncontrolled continued reasoning can be costly.
+- It no longer supports the strongest late-boundary theorem claim in this repo.
 
 ### Qwen2.5 0.5B
 
-The L4 Qwen2.5 0.5B run is informative for a different reason.
+The smaller Qwen run remains the weak-regime control.
 
 What it shows:
 
-- The model stays in a much weaker regime on GSM8K.
-- The best utility is concentrated almost immediately.
-- The apparent boundary collapses toward the first step.
+- Step-1 accuracy is **0.0711**.
+- Peak correctness is **0.0822** at **Step 3**.
+- The corrected boundary is **Step 1**.
 
 Interpretation:
 
-- This run is useful as a low-skill comparison point.
-- It does not give the same quality of hazard evidence as the DeepSeek run.
+- This is the expected early-boundary behavior for a model that rarely repairs itself successfully.
+- It helps separate genuine competent-regime late-boundary behavior from weak-model noise.
 
 ### Detector Comparison
 
-Current detector results show a clear ranking:
+The detector story is more nuanced than earlier README versions suggested:
 
-- The fitted hazard rule is currently the best practical detector in the DeepSeek L4 run.
-- The mixture e-process is a real improvement over empirical-Bernstein.
-- Empirical-Bernstein is safer than naive pointwise checking, but too conservative in the present traces.
-- Never-stop is consistently poor once a model enters a regime where corruption becomes common.
+- `oracle` remains the unattainable benchmark.
+- `verifier_first_correct` is the best non-oracle detector in the current DeepSeek and Qwen 7B summaries.
+- `first_answer` is the strongest simple baseline in the weak Qwen 0.5B regime.
+- `hazard_drift` remains the central theory-facing witness for the Qwen 7B late-boundary result, but it is **not** uniformly the lowest-gap practical detector across all families.
+- `e_process` improves on some conservative baselines but still leaves a noticeable gap to oracle in the current real traces.
+- `never_stop` is consistently poor once corruption becomes material.
 
 ### What Is Supported Versus What Is Still Open
 
 Supported by the current repo:
 
-- Overthinking can be observed in real traces, not only in simulation.
-- Repair and corruption are both measurable and practically important.
-- Answer revisions, entropy, and hidden-state drift carry real stopping information.
-- Sequentially valid stopping is meaningfully different from pointwise thresholding.
+- A mathematically explicit continuation-value framework centered on
+	`mu_t = (1 - q_t) * alpha_t - q_t * beta_t - lambda`.
+- An operational stopping-boundary interpretation based on the first time the continuation value becomes nonpositive.
+- Real-trace evidence that overthinking can be utility-harmful in capable regimes, not only in simulation.
+- Empirical evidence that pooled proxy drift can be misleading if it ignores the conditional repair-versus-corruption decomposition.
+- A credible capable-regime late-boundary witness in the recovered Qwen 7B run.
 
 Still open:
 
-- a stronger online estimator for `alpha_t` and `beta_t` under distribution shift,
+- a stronger online estimator for `q_t`, `alpha_t`, and `beta_t` under distribution shift,
 - cross-family stability of the same observables,
 - cleaner per-task evidence for one-crossing behavior,
-- better detectors that approach oracle performance without heavy conservatism.
+- better detectors that approach oracle performance without heavy conservatism,
+- another higher-capability non-Qwen family to test whether the late boundary generalizes beyond the present Qwen 7B run.
 
 ## Snapshot Table
 
-| Model | Runs | Runs ever correct | Step-1 accuracy | Peak correctness | Peak step | Hazard gap | E-process gap | Empirical-Bernstein gap | Never-stop gap |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| DeepSeek-R1 distill 1.5B | 900 | 621 | 0.237 | 0.304 | 7 | 0.4121 | 0.4441 | 0.7141 | 0.7463 |
-| Qwen2.5 instruct 0.5B | 900 | 81 | 0.071 | 0.082 | 3 | 0.1531 | 0.0595 | 0.4106 | 0.4595 |
+| Model | Step-1 accuracy | Peak correctness | Peak step | Corrected boundary | Hazard gap | E-process gap | Never-stop gap | Assessment |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| DeepSeek-R1 distill 1.5B | 0.2367 | 0.3200 | 10 | 1 | 0.4121 | 0.4441 | 0.7463 | No late-boundary replication |
+| Qwen2.5 instruct 0.5B | 0.0711 | 0.0822 | 3 | 1 | 0.1531 | 0.0595 | 0.4595 | No late-boundary replication |
+| Qwen2.5 instruct 7B 4-bit | 0.3644 | 0.7789 | 9 | 6 | 0.2193 | 0.3139 | 0.4317 | Late-boundary replication |
 
 ## Representative Artifacts
 
 - Theory note: [research/overthinking_boundary.md](research/overthinking_boundary.md)
+- Cross-family summary: [research/CROSS_FAMILY_REPORT.md](research/CROSS_FAMILY_REPORT.md)
+- Recovery audit: [research/RECOVERY_AUDIT_2026-04-02.md](research/RECOVERY_AUDIT_2026-04-02.md)
 - DeepSeek summary: [research/FINAL_L4_RESULTS.md](research/FINAL_L4_RESULTS.md)
-- Qwen summary: [research/FINAL_QWEN_L4_RESULTS.md](research/FINAL_QWEN_L4_RESULTS.md)
+- Qwen 0.5B summary: [research/FINAL_QWEN_L4_RESULTS.md](research/FINAL_QWEN_L4_RESULTS.md)
+- Qwen 7B summary: [research/FINAL_QWEN_7B_L4_RESULTS.md](research/FINAL_QWEN_7B_L4_RESULTS.md)
 - Open questions and answers: [research/open_questions.md](research/open_questions.md) and [research/ANSWERS_TO_OPEN_QUESTIONS.md](research/ANSWERS_TO_OPEN_QUESTIONS.md)
 - Literature synthesis: [research/literature_synthesis.md](research/literature_synthesis.md)
 - Framework ranking: [research/hypothesis_table.md](research/hypothesis_table.md)
@@ -367,8 +405,10 @@ Still open:
 Representative plots checked into the repo:
 
 - Synthetic trajectories: ![Representative synthetic trajectories](research/outputs/representative_trajectories.png)
+- Cross-family boundary comparison: ![Cross-family boundary comparison](research/outputs/cross_family/cross_family_boundary_comparison.png)
 - DeepSeek drift crossing: ![DeepSeek drift crossing](research/outputs/real_traces_l4_deepseek_1p5b/drift_crossing_proof.png)
 - Qwen drift crossing: ![Qwen drift crossing](research/outputs/real_traces_l4_qwen_0p5b/drift_crossing_proof.png)
+- Qwen 7B drift crossing: ![Qwen 7B drift crossing](research/outputs/real_traces_l4_qwen_7b_4bit/drift_crossing_proof.png)
 
 ## Repository Map
 
