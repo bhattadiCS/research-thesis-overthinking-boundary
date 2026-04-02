@@ -30,7 +30,8 @@ The configured Colab environment attempted direct `AutoConfig.from_pretrained()`
 - Token-level outputs: yes through standard logits, log-softmax scoring, and decoded completions
 - Prompt compatibility: yes through `tokenizer.apply_chat_template`
 - Quantization path: compatible with the current repo loader for `4bit`, `8bit`, and unquantized execution
-- Outstanding verification: choose the final stable L4 configuration by measured throughput, utilization, and peak memory before the full 300-task run
+- Final benchmarked L4 configuration: unquantized (`none`) + `sdpa` + batch size `4`
+- Benchmark evidence: full precision at batch size `4` delivered the best stable example throughput among the tested configurations, while `flash_attention_2` was unavailable and 8-bit underperformed
 
 ## Decision
 
