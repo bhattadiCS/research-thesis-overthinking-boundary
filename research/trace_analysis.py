@@ -127,6 +127,12 @@ def predict_probabilities(model: Any, frame: pd.DataFrame) -> np.ndarray:
     return model.predict_proba(frame[FEATURE_COLUMNS])
 
 
+def conditional_probability(successes: int, denominator: int) -> float:
+    if denominator <= 0:
+        return float("nan")
+    return float(successes / denominator)
+
+
 def select_entropy_threshold(step_frame: pd.DataFrame) -> float:
     candidates = np.quantile(step_frame["entropy_mean"].dropna(), [0.2, 0.35, 0.5, 0.65, 0.8])
     best_threshold = float(candidates[0])
@@ -200,19 +206,71 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
         for feature, coefficient in zip(FEATURE_COLUMNS, coefficients, strict=True):
             weights.append({"model": label, "feature": feature, "coefficient": float(coefficient)})
 
-    by_step = transition_rows.groupby("step").agg(
-        q_t=("correct", "mean"),
-        repair_rate=("repair", "mean"),
-        corruption_rate=("corruption", "mean"),
-        empirical_mu=("delta_utility", "mean"),
-        empirical_variance=("delta_utility", "var"),
-        entropy_mean=("entropy_mean", "mean"),
-        answer_changed_rate=("answer_changed", "mean"),
-        hidden_shift_mean=("hidden_l2_shift", "mean"),
-        confidence_mean=("confidence", "mean"),
-        n_examples=("run_id", "count"),
+    transition_rows["q_hat"] = predict_probabilities(correctness_probe, transition_rows)[:, 1]
+    transition_rows["repair_hazard_hat"] = predict_probabilities(repair_model, transition_rows)[:, 1]
+    transition_rows["corruption_hazard_hat"] = predict_probabilities(corruption_model, transition_rows)[:, 1]
+    transition_rows["fitted_hazard_drift"] = (
+        (1.0 - transition_rows["q_hat"]) * transition_rows["repair_hazard_hat"]
+        - transition_rows["q_hat"] * transition_rows["corruption_hazard_hat"]
+        - STEP_COST
     )
-    by_step = by_step.reset_index()
+
+    rows: list[dict[str, Any]] = []
+    for step, group in transition_rows.groupby("step"):
+        q_t = float(group["correct"].mean())
+        n_transitions = int(len(group))
+        n_correct_states = int(group["correct"].sum())
+        n_incorrect_states = int(n_transitions - n_correct_states)
+        n_repairs = int(group["repair"].sum())
+        n_corruptions = int(group["corruption"].sum())
+
+        pooled_repair_frequency = float(group["repair"].mean())
+        pooled_corruption_frequency = float(group["corruption"].mean())
+        conditional_repair_hazard = conditional_probability(n_repairs, n_incorrect_states)
+        conditional_corruption_hazard = conditional_probability(n_corruptions, n_correct_states)
+        empirical_utility_drift = float(group["delta_utility"].mean())
+        conditional_hazard_drift = (
+            (1.0 - q_t) * conditional_repair_hazard - q_t * conditional_corruption_hazard - STEP_COST
+            if not math.isnan(conditional_repair_hazard) and not math.isnan(conditional_corruption_hazard)
+            else float("nan")
+        )
+        pooled_proxy_drift = (
+            (1.0 - q_t) * pooled_repair_frequency - q_t * pooled_corruption_frequency - STEP_COST
+        )
+
+        rows.append(
+            {
+                "step": int(step),
+                "q_t": q_t,
+                "n_transitions": n_transitions,
+                "n_correct_states": n_correct_states,
+                "n_incorrect_states": n_incorrect_states,
+                "n_repairs": n_repairs,
+                "n_corruptions": n_corruptions,
+                "pooled_repair_frequency": pooled_repair_frequency,
+                "pooled_corruption_frequency": pooled_corruption_frequency,
+                "pooled_proxy_drift": pooled_proxy_drift,
+                "repair_rate": conditional_repair_hazard,
+                "corruption_rate": conditional_corruption_hazard,
+                "empirical_utility_drift": empirical_utility_drift,
+                "conditional_hazard_drift": conditional_hazard_drift,
+                "hazard_mu": conditional_hazard_drift,
+                "empirical_mu": empirical_utility_drift,
+                "empirical_variance": float(group["delta_utility"].var()),
+                "conditional_empirical_gap": conditional_hazard_drift - empirical_utility_drift,
+                "fitted_q_t": float(group["q_hat"].mean()),
+                "fitted_repair_hazard": float(group["repair_hazard_hat"].mean()),
+                "fitted_corruption_hazard": float(group["corruption_hazard_hat"].mean()),
+                "fitted_hazard_drift": float(group["fitted_hazard_drift"].mean()),
+                "entropy_mean": float(group["entropy_mean"].mean()),
+                "answer_changed_rate": float(group["answer_changed"].mean()),
+                "hidden_shift_mean": float(group["hidden_l2_shift"].mean()),
+                "confidence_mean": float(group["confidence"].mean()),
+                "n_examples": n_transitions,
+            }
+        )
+
+    by_step = pd.DataFrame(rows)
     e_process_frame = (
         transition_rows.groupby("step")["delta_utility"]
         .apply(mixture_e_process_value)
@@ -221,10 +279,9 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
     )
     by_step = by_step.merge(e_process_frame, on="step", how="left")
     by_step["empirical_variance"] = by_step["empirical_variance"].fillna(0.0)
-    by_step["hazard_mu"] = (1.0 - by_step["q_t"]) * by_step["repair_rate"] - by_step["q_t"] * by_step["corruption_rate"] - STEP_COST
     by_step["delta_t"] = 6.0 * EB_DELTA / (np.pi**2 * np.square(by_step["step"] + 1))
     by_step["eb_upper_bound"] = (
-        by_step["empirical_mu"]
+        by_step["empirical_utility_drift"]
         + np.sqrt(2.0 * by_step["empirical_variance"] * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"])
         + 3.0 * (DELTA_UPPER_BOUND - DELTA_LOWER_BOUND) * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"]
     )
@@ -232,6 +289,12 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
     by_step["e_process_threshold"] = 1.0 / by_step["delta_t"]
     by_step["e_process_stop_signal"] = (by_step["e_process_value"] >= by_step["e_process_threshold"]).astype(int)
     return by_step, pd.DataFrame(weights), correctness_probe, repair_model, corruption_model
+
+
+def corrected_drift_column(hazard_frame: pd.DataFrame) -> str:
+    if "conditional_hazard_drift" in hazard_frame.columns:
+        return "conditional_hazard_drift"
+    return "hazard_mu"
 
 
 def first_zero_crossing(hazard_frame: pd.DataFrame, column: str) -> int:
@@ -378,7 +441,8 @@ def plot_detector_comparison(detector_summary: pd.DataFrame, output_dir: Path) -
 
 
 def plot_drift_crossing_proof(hazard_frame: pd.DataFrame, output_dir: Path) -> None:
-    crossing_step = first_zero_crossing(hazard_frame, "hazard_mu")
+    corrected_column = corrected_drift_column(hazard_frame)
+    crossing_step = first_zero_crossing(hazard_frame, corrected_column)
     fig, axes = plt.subplots(2, 1, figsize=(10, 7), sharex=True)
 
     axes[0].plot(hazard_frame["step"], hazard_frame["q_t"], color="#1d4ed8", linewidth=2)
@@ -387,11 +451,42 @@ def plot_drift_crossing_proof(hazard_frame: pd.DataFrame, output_dir: Path) -> N
     axes[0].grid(alpha=0.25)
     axes[0].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2)
 
-    axes[1].plot(hazard_frame["step"], hazard_frame["empirical_mu"], label="Empirical μ_t", color="#0f766e", linewidth=2)
-    axes[1].plot(hazard_frame["step"], hazard_frame["hazard_mu"], label="Hazard μ_t", color="#7c3aed", linestyle="--", linewidth=2)
+    axes[1].plot(
+        hazard_frame["step"],
+        hazard_frame["empirical_utility_drift"],
+        label="Empirical utility drift",
+        color="#0f766e",
+        linewidth=2,
+    )
+    axes[1].plot(
+        hazard_frame["step"],
+        hazard_frame[corrected_column],
+        label="Conditional hazard drift",
+        color="#7c3aed",
+        linestyle="--",
+        linewidth=2,
+    )
+    if "pooled_proxy_drift" in hazard_frame.columns:
+        axes[1].plot(
+            hazard_frame["step"],
+            hazard_frame["pooled_proxy_drift"],
+            label="Pooled proxy drift",
+            color="#b45309",
+            linestyle=":",
+            linewidth=2,
+        )
+    if "fitted_hazard_drift" in hazard_frame.columns:
+        axes[1].plot(
+            hazard_frame["step"],
+            hazard_frame["fitted_hazard_drift"],
+            label="Fitted hazard drift",
+            color="#2563eb",
+            linestyle="-.",
+            linewidth=2,
+        )
     axes[1].plot(hazard_frame["step"], hazard_frame["eb_upper_bound"], label="Empirical-Bernstein upper bound", color="#ea580c", linestyle=":", linewidth=2)
     axes[1].axhline(0.0, color="black", linewidth=1)
-    axes[1].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2, label=f"Crossing step {crossing_step}")
+    axes[1].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2, label=f"Corrected boundary step {crossing_step}")
     axes[1].set_xlabel("Step")
     axes[1].set_ylabel("Drift")
     axes[1].grid(alpha=0.25)
@@ -458,6 +553,7 @@ def main() -> None:
     detector_summary.to_csv(input_dir / "detector_comparison.csv", index=False)
     correctness_probe_frame.to_csv(input_dir / "correctness_probe_metrics.csv", index=False)
     hazard_frame.to_csv(input_dir / "hazard_drift_summary.csv", index=False)
+    hazard_frame.to_csv(input_dir / "hazard_decomposition_by_step.csv", index=False)
     weight_frame.to_csv(input_dir / "feature_weights.csv", index=False)
     eb_summary.to_csv(input_dir / "empirical_bernstein_summary.csv", index=False)
     sequential_summary.to_csv(input_dir / "sequential_detector_summary.csv", index=False)

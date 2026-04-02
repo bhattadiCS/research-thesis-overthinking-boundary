@@ -6,6 +6,7 @@ import json
 import logging
 import math
 import re
+import shutil
 import time
 from dataclasses import asdict, dataclass
 from fractions import Fraction
@@ -596,6 +597,10 @@ def output_paths(output_dir: Path, is_baseline: bool) -> dict[str, Path]:
     }
 
 
+def expected_steps_per_run(is_baseline: bool, max_steps: int) -> int:
+    return 1 if is_baseline else max_steps
+
+
 def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
     if not rows:
         return
@@ -610,6 +615,153 @@ def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
         frame.to_csv(path, mode="a", header=False, index=False)
         return
     frame.to_csv(path, index=False)
+
+
+def backup_for_reconciliation(path: Path) -> Path:
+    backup_path = path.with_name(f"{path.stem}.pre_reconcile{path.suffix}")
+    if path.exists() and not backup_path.exists():
+        shutil.copy2(path, backup_path)
+    return backup_path
+
+
+def summarize_run_rows(run_rows: pd.DataFrame) -> dict[str, Any]:
+    ordered = run_rows.sort_values("step").drop_duplicates(subset=["step"], keep="last").reset_index(drop=True)
+    first_row = ordered.iloc[0]
+    final_row = ordered.iloc[-1]
+    first_correct = ordered.loc[ordered["correct"] == 1, "step"]
+    first_model_stop = ordered.loc[ordered["model_stop_flag"] == 1, "step"]
+    oracle_row = ordered.loc[ordered["utility"].idxmax()]
+
+    return {
+        "run_id": str(first_row["run_id"]),
+        "model_alias": str(first_row["model_alias"]),
+        "model_name": str(first_row["model_name"]),
+        "task_id": str(first_row["task_id"]),
+        "domain": str(first_row["domain"]),
+        "difficulty": str(first_row["difficulty"]),
+        "task_source": str(first_row["task_source"]),
+        "task_source_index": int(first_row["task_source_index"]),
+        "temperature": float(first_row["temperature"]),
+        "seed": int(first_row["seed"]),
+        "prompt_mode": str(first_row["prompt_mode"]),
+        "system_prompt_mode": str(first_row["system_prompt_mode"]),
+        "is_baseline": int(first_row["is_baseline"]),
+        "ever_correct": int(ordered["correct"].max()),
+        "correct_at_step_1": int(first_row["correct"]),
+        "oracle_stop": int(oracle_row["step"]),
+        "first_correct_step": int(first_correct.iloc[0]) if not first_correct.empty else -1,
+        "first_model_stop_step": int(first_model_stop.iloc[0]) if not first_model_stop.empty else -1,
+        "revision_count": int(ordered["answer_changed"].sum()),
+        "best_utility": float(ordered["utility"].max()),
+        "final_correct": int(final_row["correct"]),
+        "device": str(first_row["device"]),
+    }
+
+
+def reconcile_existing_outputs(
+    output_dir: Path,
+    hidden_dir: Path,
+    is_baseline: bool,
+    max_steps: int,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str], dict[str, Any]]:
+    paths = output_paths(output_dir, is_baseline)
+    expected_steps = expected_steps_per_run(is_baseline, max_steps)
+    expected_step_sequence = list(range(1, expected_steps + 1))
+
+    steps_frame = pd.read_csv(paths["steps"]) if paths["steps"].exists() else pd.DataFrame()
+    runs_frame = pd.read_csv(paths["runs"]) if paths["runs"].exists() else pd.DataFrame()
+    hidden_run_ids = {path.stem for path in hidden_dir.glob("*.npz")} if hidden_dir.exists() else set()
+
+    duplicate_step_rows = 0
+    duplicate_run_rows = 0
+    if not steps_frame.empty:
+        steps_frame = steps_frame.reset_index(drop=True)
+        steps_frame["_row_order"] = np.arange(len(steps_frame))
+        duplicate_step_rows = int(steps_frame.duplicated(subset=["run_id", "step"], keep=False).sum())
+        steps_frame = steps_frame.sort_values("_row_order").drop_duplicates(subset=["run_id", "step"], keep="last")
+    if not runs_frame.empty:
+        runs_frame = runs_frame.reset_index(drop=True)
+        runs_frame["_row_order"] = np.arange(len(runs_frame))
+        duplicate_run_rows = int(runs_frame.duplicated(subset=["run_id"], keep=False).sum())
+        runs_frame = runs_frame.sort_values("_row_order").drop_duplicates(subset=["run_id"], keep="last")
+
+    completed_from_steps: set[str] = set()
+    incomplete_step_run_ids: list[str] = []
+    reconstructed_runs: list[dict[str, Any]] = []
+    existing_run_ids = set(runs_frame["run_id"].astype(str)) if not runs_frame.empty else set()
+
+    if not steps_frame.empty:
+        for run_id, group in steps_frame.groupby("run_id", sort=False):
+            run_id_str = str(run_id)
+            ordered = group.sort_values("step")
+            observed_steps = [int(value) for value in ordered["step"].tolist()]
+            is_complete = observed_steps == expected_step_sequence and run_id_str in hidden_run_ids
+            if is_complete:
+                completed_from_steps.add(run_id_str)
+                if run_id_str not in existing_run_ids:
+                    reconstructed_runs.append(summarize_run_rows(ordered))
+            else:
+                incomplete_step_run_ids.append(run_id_str)
+
+    runs_without_complete_steps = sorted(existing_run_ids - completed_from_steps)
+    hidden_without_complete_steps = sorted(hidden_run_ids - completed_from_steps)
+    completed_run_ids = set(completed_from_steps)
+
+    if not steps_frame.empty:
+        sanitized_steps = steps_frame[steps_frame["run_id"].astype(str).isin(completed_run_ids)].copy()
+        sanitized_steps = sanitized_steps.sort_values(["run_id", "step", "_row_order"])
+        sanitized_steps = sanitized_steps.drop(columns=["_row_order"], errors="ignore")
+    else:
+        sanitized_steps = steps_frame
+
+    sanitized_runs_frames: list[pd.DataFrame] = []
+    if not runs_frame.empty:
+        sanitized_runs_frames.append(runs_frame[runs_frame["run_id"].astype(str).isin(completed_run_ids)].copy())
+    if reconstructed_runs:
+        sanitized_runs_frames.append(pd.DataFrame(reconstructed_runs))
+    if sanitized_runs_frames:
+        sanitized_runs = pd.concat(sanitized_runs_frames, ignore_index=True, sort=False)
+        sanitized_runs["task_source_index"] = pd.to_numeric(sanitized_runs["task_source_index"], errors="coerce").fillna(-1).astype(int)
+        sanitized_runs["temperature"] = pd.to_numeric(sanitized_runs["temperature"], errors="coerce")
+        sanitized_runs["seed"] = pd.to_numeric(sanitized_runs["seed"], errors="coerce").fillna(-1).astype(int)
+        sanitized_runs = sanitized_runs.sort_values(["temperature", "seed", "task_source_index", "run_id"])
+        sanitized_runs = sanitized_runs.drop(columns=["_row_order"], errors="ignore")
+    else:
+        sanitized_runs = pd.DataFrame(columns=runs_frame.columns.drop("_row_order", errors="ignore"))
+
+    anomalies_detected = any(
+        [
+            duplicate_step_rows,
+            duplicate_run_rows,
+            reconstructed_runs,
+            incomplete_step_run_ids,
+            runs_without_complete_steps,
+            hidden_without_complete_steps,
+        ]
+    )
+    reconciliation_report = {
+        "expected_steps_per_run": expected_steps,
+        "completed_run_count": len(completed_run_ids),
+        "hidden_state_file_count": len(hidden_run_ids),
+        "duplicate_step_rows_removed": duplicate_step_rows,
+        "duplicate_run_rows_removed": duplicate_run_rows,
+        "reconstructed_run_summaries": len(reconstructed_runs),
+        "incomplete_step_run_ids": incomplete_step_run_ids,
+        "runs_without_complete_steps": runs_without_complete_steps,
+        "hidden_without_complete_steps": hidden_without_complete_steps,
+        "anomalies_detected": bool(anomalies_detected),
+    }
+    if anomalies_detected:
+        if paths["steps"].exists():
+            backup_for_reconciliation(paths["steps"])
+        if paths["runs"].exists():
+            backup_for_reconciliation(paths["runs"])
+        sanitized_steps.to_csv(paths["steps"], index=False)
+        sanitized_runs.to_csv(paths["runs"], index=False)
+        with (output_dir / "checkpoint_reconciliation.json").open("w", encoding="utf-8") as handle:
+            json.dump(reconciliation_report, handle, indent=2)
+
+    return sanitized_steps.to_dict("records"), sanitized_runs.to_dict("records"), completed_run_ids, reconciliation_report
 
 
 def load_existing_outputs(output_dir: Path, is_baseline: bool) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
@@ -631,6 +783,7 @@ def load_model(
     device: str,
     quantization: str,
     device_map: str | None,
+    attn_implementation: str,
 ) -> tuple[Any, Any, str, str]:
     tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
     if tokenizer.pad_token is None:
@@ -643,19 +796,29 @@ def load_model(
         actual_device = device
 
     backend = "transformers+torch(cpu)"
-    load_kwargs: dict[str, Any] = {"trust_remote_code": True}
+    load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
+    compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
     if actual_device == "cuda":
-        load_kwargs["dtype"] = torch.float16
+        load_kwargs["dtype"] = compute_dtype
+        if attn_implementation != "eager":
+            load_kwargs["attn_implementation"] = "sdpa" if attn_implementation == "auto" else attn_implementation
 
     try:
         if actual_device == "cuda" and quantization in {"8bit", "4bit"}:
             if BitsAndBytesConfig is None:
                 raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
-            load_kwargs.pop("dtype", None)
             if quantization == "8bit":
-                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
+                load_kwargs["quantization_config"] = BitsAndBytesConfig(
+                    load_in_8bit=True,
+                    llm_int8_enable_fp32_cpu_offload=True,
+                )
             else:
-                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
+                load_kwargs["quantization_config"] = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_compute_dtype=compute_dtype,
+                )
             load_kwargs["device_map"] = device_map or "auto"
             model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
             backend = f"transformers+torch(cuda-{quantization})"
@@ -696,7 +859,12 @@ def generate_batch_with_diagnostics(
     max_new_tokens: int,
 ) -> tuple[list[dict[str, Any]], float]:
     started_at = time.perf_counter()
-    encoded = tokenizer(prompt_texts, padding=True, return_tensors="pt")
+    encoded = tokenizer(
+        prompt_texts,
+        padding=True,
+        pad_to_multiple_of=8 if actual_device == "cuda" else None,
+        return_tensors="pt",
+    )
     input_ids = encoded["input_ids"].to(actual_device)
     attention_mask = encoded["attention_mask"].to(actual_device)
     prompt_width = input_ids.shape[1]
@@ -714,7 +882,7 @@ def generate_batch_with_diagnostics(
     else:
         generation_kwargs.update({"do_sample": False})
 
-    with torch.no_grad():
+    with torch.inference_mode():
         generated_ids = model.generate(**generation_kwargs)
         completion_width = generated_ids.shape[1] - prompt_width
         generated_attention_mask = torch.cat(
@@ -759,9 +927,6 @@ def generate_batch_with_diagnostics(
                 "pooled_hidden": pooled_hidden,
             }
         )
-
-    if actual_device == "cuda":
-        torch.cuda.empty_cache()
     return results, elapsed_seconds
 
 
@@ -811,6 +976,90 @@ def gpu_memory_allocated_gb(actual_device: str) -> float:
     if actual_device != "cuda" or not torch.cuda.is_available():
         return float("nan")
     return torch.cuda.memory_allocated() / (1024**3)
+
+
+def first_pending_run(
+    model_spec: ModelSpec,
+    tasks: list[TaskSpec],
+    temperatures: list[float],
+    seeds: list[int],
+    completed_run_ids: set[str],
+) -> dict[str, Any] | None:
+    for temperature in temperatures:
+        for seed in seeds:
+            for task in tasks:
+                run_id = run_id_for(model_spec.alias, task, temperature, seed)
+                if run_id in completed_run_ids:
+                    continue
+                return {
+                    "run_id": run_id,
+                    "task_id": task.task_id,
+                    "task_source_index": task.source_index,
+                    "temperature": temperature,
+                    "seed": seed,
+                }
+    return None
+
+
+def write_runtime_metadata(
+    *,
+    metadata_path: Path,
+    model_spec: ModelSpec,
+    backend: str,
+    actual_device: str,
+    quantization: str,
+    device_map: str | None,
+    attn_implementation: str,
+    temperatures: list[float],
+    seeds: list[int],
+    max_steps: int,
+    max_new_tokens: int,
+    max_tasks: int,
+    task_source: str,
+    dataset_split: str,
+    dataset_shuffle_seed: int,
+    batch_size: int,
+    prompt_mode: str,
+    system_prompt_mode: str,
+    resume_enabled: bool,
+    completed_run_ids: set[str],
+    pending_run_count: int,
+    next_pending_run: dict[str, Any] | None,
+    reconciliation_report: dict[str, Any],
+    tasks: list[TaskSpec],
+) -> None:
+    metadata = {
+        "model": asdict(model_spec),
+        "backend": backend,
+        "device": actual_device,
+        "quantization": quantization,
+        "device_map": device_map,
+        "attn_implementation": attn_implementation,
+        "temperatures": temperatures,
+        "seeds": seeds,
+        "max_steps": max_steps,
+        "max_new_tokens": max_new_tokens,
+        "max_tasks": max_tasks,
+        "task_source": task_source,
+        "dataset_split": dataset_split,
+        "dataset_shuffle_seed": dataset_shuffle_seed,
+        "batch_size": batch_size,
+        "step_cost": STEP_COST,
+        "prompt_mode": prompt_mode,
+        "system_prompt_mode": system_prompt_mode,
+        "resume_enabled": resume_enabled,
+        "completed_run_count": len(completed_run_ids),
+        "pending_run_count": pending_run_count,
+        "next_pending_run": next_pending_run,
+        "checkpoint_reconciliation": reconciliation_report,
+        "tasks": [asdict(task) for task in tasks],
+        "hidden_state_accessible": True,
+        "token_logprobs_accessible": True,
+        "reasoning_traces_accessible": True,
+        "runtime_limit_notes": "Batch-first GSM8K runner with checkpoint reconciliation, append-only CSV outputs, incremental metadata snapshots, and automatic microbatch splitting on CUDA OOM.",
+    }
+    with metadata_path.open("w", encoding="utf-8") as handle:
+        json.dump(metadata, handle, indent=2)
 
 
 def run_batch_traces(
@@ -1088,6 +1337,7 @@ def main() -> None:
     parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
     parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
     parser.add_argument("--device-map", default=None)
+    parser.add_argument("--attn-implementation", default="auto", choices=["auto", "sdpa", "flash_attention_2", "eager"])
     parser.add_argument("--temperatures", nargs="+", type=float, default=[0.6])
     parser.add_argument("--seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--max-steps", type=int, default=5)
@@ -1123,7 +1373,14 @@ def main() -> None:
     )
     logging.info("Loaded %d tasks from %s.", len(tasks), args.task_source)
 
-    existing_steps, existing_runs, completed_run_ids = load_existing_outputs(output_dir, args.run_baseline)
+    existing_steps, existing_runs, completed_run_ids, reconciliation_report = reconcile_existing_outputs(
+        output_dir=output_dir,
+        hidden_dir=hidden_dir,
+        is_baseline=args.run_baseline,
+        max_steps=args.max_steps,
+    )
+    if reconciliation_report["anomalies_detected"]:
+        logging.warning("Checkpoint reconciliation adjusted on-disk artifacts: %s", reconciliation_report)
     if args.resume and completed_run_ids:
         logging.info("Resuming with %d completed runs already on disk.", len(completed_run_ids))
 
@@ -1136,6 +1393,21 @@ def main() -> None:
                 if not args.resume or run_id not in completed_run_ids:
                     pending_requested_runs += 1
     logging.info("Requested runs=%d | pending runs=%d", total_requested_runs, pending_requested_runs)
+    next_pending_run = first_pending_run(
+        model_spec=model_spec,
+        tasks=tasks,
+        temperatures=args.temperatures,
+        seeds=args.seeds,
+        completed_run_ids=completed_run_ids if args.resume else set(),
+    )
+    if next_pending_run is not None:
+        logging.info(
+            "Next pending run: task_index=%s | temperature=%.2f | seed=%d | run_id=%s",
+            next_pending_run["task_source_index"],
+            next_pending_run["temperature"],
+            next_pending_run["seed"],
+            next_pending_run["run_id"],
+        )
 
     if pending_requested_runs == 0 and existing_runs:
         logging.info("No pending runs detected. Rebuilding summaries from existing artifacts.")
@@ -1152,8 +1424,36 @@ def main() -> None:
             device=args.device,
             quantization=args.quantization,
             device_map=args.device_map,
+            attn_implementation=args.attn_implementation,
         )
         logging.info("Model loaded: %s | backend=%s | device=%s", model_spec.hf_name, backend, actual_device)
+
+    write_runtime_metadata(
+        metadata_path=paths["metadata"],
+        model_spec=model_spec,
+        backend=backend,
+        actual_device=actual_device,
+        quantization=args.quantization,
+        device_map=args.device_map,
+        attn_implementation=args.attn_implementation,
+        temperatures=args.temperatures,
+        seeds=args.seeds,
+        max_steps=args.max_steps,
+        max_new_tokens=args.max_new_tokens,
+        max_tasks=args.max_tasks,
+        task_source=args.task_source,
+        dataset_split=args.dataset_split,
+        dataset_shuffle_seed=args.dataset_shuffle_seed,
+        batch_size=args.batch_size,
+        prompt_mode=args.prompt_mode,
+        system_prompt_mode=args.system_prompt_mode,
+        resume_enabled=args.resume,
+        completed_run_ids=completed_run_ids,
+        pending_run_count=pending_requested_runs,
+        next_pending_run=next_pending_run,
+        reconciliation_report=reconciliation_report,
+        tasks=tasks,
+    )
 
     all_rows: list[dict[str, Any]] = list(existing_steps)
     all_runs: list[dict[str, Any]] = list(existing_runs)
@@ -1194,6 +1494,39 @@ def main() -> None:
                     all_rows.extend(batch_rows)
                     all_runs.extend(batch_runs)
                     completed_run_ids.update(run["run_id"] for run in batch_runs)
+                    next_pending_run = first_pending_run(
+                        model_spec=model_spec,
+                        tasks=tasks,
+                        temperatures=args.temperatures,
+                        seeds=args.seeds,
+                        completed_run_ids=completed_run_ids if args.resume else set(),
+                    )
+                    write_runtime_metadata(
+                        metadata_path=paths["metadata"],
+                        model_spec=model_spec,
+                        backend=backend,
+                        actual_device=actual_device,
+                        quantization=args.quantization,
+                        device_map=args.device_map,
+                        attn_implementation=args.attn_implementation,
+                        temperatures=args.temperatures,
+                        seeds=args.seeds,
+                        max_steps=args.max_steps,
+                        max_new_tokens=args.max_new_tokens,
+                        max_tasks=args.max_tasks,
+                        task_source=args.task_source,
+                        dataset_split=args.dataset_split,
+                        dataset_shuffle_seed=args.dataset_shuffle_seed,
+                        batch_size=args.batch_size,
+                        prompt_mode=args.prompt_mode,
+                        system_prompt_mode=args.system_prompt_mode,
+                        resume_enabled=args.resume,
+                        completed_run_ids=completed_run_ids,
+                        pending_run_count=max(total_requested_runs - len(completed_run_ids), 0),
+                        next_pending_run=next_pending_run,
+                        reconciliation_report=reconciliation_report,
+                        tasks=tasks,
+                    )
                     progress.set_postfix(
                         runs=len(batch_runs),
                         correct=sum(int(run["ever_correct"]) for run in batch_runs),
@@ -1214,34 +1547,39 @@ def main() -> None:
     transition_frame.to_csv(paths["hazard"], index=False)
     pilot_summary.to_csv(paths["pilot"], index=False)
 
-    metadata = {
-        "model": asdict(model_spec),
-        "backend": backend,
-        "device": actual_device,
-        "quantization": args.quantization,
-        "device_map": args.device_map,
-        "temperatures": args.temperatures,
-        "seeds": args.seeds,
-        "max_steps": args.max_steps,
-        "max_new_tokens": args.max_new_tokens,
-        "max_tasks": args.max_tasks,
-        "task_source": args.task_source,
-        "dataset_split": args.dataset_split,
-        "dataset_shuffle_seed": args.dataset_shuffle_seed,
-        "batch_size": args.batch_size,
-        "step_cost": STEP_COST,
-        "prompt_mode": args.prompt_mode,
-        "system_prompt_mode": args.system_prompt_mode,
-        "resume_enabled": args.resume,
-        "completed_run_count": len(completed_run_ids),
-        "tasks": [asdict(task) for task in tasks],
-        "hidden_state_accessible": True,
-        "token_logprobs_accessible": True,
-        "reasoning_traces_accessible": True,
-        "runtime_limit_notes": "Batch-first GSM8K runner with append-only CSV outputs and automatic microbatch splitting on CUDA OOM.",
-    }
-    with paths["metadata"].open("w", encoding="utf-8") as handle:
-        json.dump(metadata, handle, indent=2)
+    next_pending_run = first_pending_run(
+        model_spec=model_spec,
+        tasks=tasks,
+        temperatures=args.temperatures,
+        seeds=args.seeds,
+        completed_run_ids=completed_run_ids if args.resume else set(),
+    )
+    write_runtime_metadata(
+        metadata_path=paths["metadata"],
+        model_spec=model_spec,
+        backend=backend,
+        actual_device=actual_device,
+        quantization=args.quantization,
+        device_map=args.device_map,
+        attn_implementation=args.attn_implementation,
+        temperatures=args.temperatures,
+        seeds=args.seeds,
+        max_steps=args.max_steps,
+        max_new_tokens=args.max_new_tokens,
+        max_tasks=args.max_tasks,
+        task_source=args.task_source,
+        dataset_split=args.dataset_split,
+        dataset_shuffle_seed=args.dataset_shuffle_seed,
+        batch_size=args.batch_size,
+        prompt_mode=args.prompt_mode,
+        system_prompt_mode=args.system_prompt_mode,
+        resume_enabled=args.resume,
+        completed_run_ids=completed_run_ids,
+        pending_run_count=max(total_requested_runs - len(completed_run_ids), 0),
+        next_pending_run=next_pending_run,
+        reconciliation_report=reconciliation_report,
+        tasks=tasks,
+    )
 
     for _, row in pilot_summary.iterrows():
         print(

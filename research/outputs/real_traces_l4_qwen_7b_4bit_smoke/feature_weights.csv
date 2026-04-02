@@ -1,0 +1,4 @@
+model,feature,coefficient
+correctness_probe,constant_probability,1.0
+repair_hazard,constant_probability,0.0
+corruption_hazard,constant_probability,0.0

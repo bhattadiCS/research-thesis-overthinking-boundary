@@ -35,10 +35,50 @@ def read_csv(path: Path) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
+def read_hazard_artifact(input_dir: Path) -> pd.DataFrame:
+    for artifact_name in ["hazard_decomposition_by_step.csv", "hazard_drift_summary.csv", "hazard_by_step.csv"]:
+        artifact_path = input_dir / artifact_name
+        if artifact_path.exists():
+            return pd.read_csv(artifact_path)
+    raise FileNotFoundError(f"Missing required hazard artifact under: {input_dir}")
+
+
 def safe_float(value: float, digits: int = 4) -> str:
     if pd.isna(value):
         return "n/a"
     return f"{float(value):.{digits}f}"
+
+
+def corrected_drift_column(hazard_frame: pd.DataFrame) -> str:
+    if "conditional_hazard_drift" in hazard_frame.columns:
+        return "conditional_hazard_drift"
+    return "hazard_mu"
+
+
+def empirical_drift_column(hazard_frame: pd.DataFrame) -> str:
+    if "empirical_utility_drift" in hazard_frame.columns:
+        return "empirical_utility_drift"
+    return "empirical_mu"
+
+
+def pooled_proxy_column(hazard_frame: pd.DataFrame) -> str | None:
+    if "pooled_proxy_drift" in hazard_frame.columns:
+        return "pooled_proxy_drift"
+    return None
+
+
+def fitted_drift_column(hazard_frame: pd.DataFrame) -> str | None:
+    if "fitted_hazard_drift" in hazard_frame.columns:
+        return "fitted_hazard_drift"
+    return None
+
+
+def capability_gate(step1_accuracy: float, runs_ever_correct: int) -> bool:
+    return step1_accuracy >= 0.15 or runs_ever_correct >= 250
+
+
+def format_boundary(step: int | None) -> str:
+    return str(step) if step is not None else "not observed"
 
 
 def first_zero_crossing(hazard_frame: pd.DataFrame, column: str = "hazard_mu") -> int | None:
@@ -110,11 +150,20 @@ def build_question_answers(
     summary = pilot.iloc[0]
     model_label = model_run_label(summary)
     q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
+    runs_ever_correct = int(summary["runs_ever_correct"])
+    clears_capability_gate = capability_gate(q1, runs_ever_correct)
     repair_rate = float(summary["repair_rate_overall"]) if not pd.isna(summary["repair_rate_overall"]) else float("nan")
     corruption_rate = float(summary["corruption_rate_overall"]) if not pd.isna(summary["corruption_rate_overall"]) else float("nan")
     hazard_row = detectors.set_index("detector")
-    crossing_step = first_zero_crossing(hazard)
-    crossings = sign_change_count(hazard)
+    corrected_column = corrected_drift_column(hazard)
+    empirical_column = empirical_drift_column(hazard)
+    pooled_column = pooled_proxy_column(hazard)
+    fitted_column = fitted_drift_column(hazard)
+    corrected_crossing = first_zero_crossing(hazard, corrected_column)
+    empirical_crossing = first_zero_crossing(hazard, empirical_column)
+    pooled_crossing = first_zero_crossing(hazard, pooled_column) if pooled_column else None
+    fitted_crossing = first_zero_crossing(hazard, fitted_column) if fitted_column else None
+    crossings = sign_change_count(hazard, corrected_column)
     correctness_signal = feature_name(weights, "correctness_probe")
     corruption_signal = feature_name(weights, "corruption_hazard", positive_only=True)
     benchmark_scope = "Across the currently completed model families" if steps["model_alias"].nunique() > 1 else f"Within the current {model_label} L4 run"
@@ -122,6 +171,11 @@ def build_question_answers(
     e_process_gap = float(hazard_row.loc["e_process", "mean_oracle_gap"]) if has_e_process else float("nan")
     e_process_false_late = float(hazard_row.loc["e_process", "false_late_rate"]) if has_e_process else float("nan")
     hazard_gap = float(hazard_row.loc["hazard_drift", "mean_oracle_gap"])
+    legacy_proxy_note = ""
+    if pooled_crossing is not None and corrected_crossing is not None and pooled_crossing != corrected_crossing:
+        legacy_proxy_note = (
+            f" A legacy pooled proxy drift would cross at step {pooled_crossing}, but that quantity uses unconditional transition frequencies and is not the conditional hazard object $((1-q_t)\alpha_t - q_t\beta_t - c)$ used for theorem-facing claims."
+        )
 
     if has_e_process:
         if e_process_gap < hazard_gap:
@@ -149,9 +203,17 @@ def build_question_answers(
             1,
             "Can the DeepSeek 1.5B distill or an equivalent 1B-1.5B reasoning model be run with CUDA-enabled PyTorch or quantized inference so the real-trace study leaves the low-skill regime?",
             (
-                f"Yes. The completed {model_label} L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
-                f"with step-1 competence $q_1={safe_float(q1, 3)}$ and at-least-once correctness in {int(summary['runs_ever_correct'])} runs. "
-                "That is enough to leave the low-skill regime and estimate continuation hazards on real traces rather than toy tasks."
+                (
+                    f"Yes. The completed {model_label} L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
+                    f"with step-1 competence $q_1={safe_float(q1, 3)}$ and at-least-once correctness in {runs_ever_correct} runs. "
+                    "That clears the capability gate used for cross-family boundary claims, so this run leaves the low-skill regime and supports continuation-hazard estimation on real traces rather than toy tasks."
+                )
+                if clears_capability_gate
+                else (
+                    f"Not yet. The completed {model_label} L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
+                    f"but it only reached step-1 competence $q_1={safe_float(q1, 3)}$ and at-least-once correctness in {runs_ever_correct} runs. "
+                    "That stays below the current capability gate for a strong boundary claim, so this run is still best interpreted as a weak-regime control rather than a decisive theorem-facing witness."
+                )
             ),
         ),
         (
@@ -170,7 +232,9 @@ def build_question_answers(
                 f"Partially yes. The hazard-based stop rule reached mean oracle gap {safe_float(hazard_row.loc['hazard_drift', 'mean_oracle_gap'], 4)} with false-late rate {safe_float(hazard_row.loc['hazard_drift', 'false_late_rate'], 3)}, "
                 f"while the empirical-Bernstein detector reached {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}"
                 f"{', and the new mixture e-process reached ' + safe_float(e_process_gap, 4) if has_e_process else ''}. "
-                f"The pooled repair and corruption rates were {safe_float(repair_rate, 3)} and {safe_float(corruption_rate, 3)}, so the hazards are learnable enough to drive a practical detector, although still conservatively."
+                f"The corrected conditional hazard drift crosses at step {format_boundary(corrected_crossing)} and the raw empirical utility drift crosses at step {format_boundary(empirical_crossing)}"
+                f"{', while the fitted hazard drift estimate crosses at step ' + format_boundary(fitted_crossing) if fitted_crossing is not None else ''}. "
+                f"The pooled repair and corruption hazards were {safe_float(repair_rate, 3)} and {safe_float(corruption_rate, 3)}, so the hazards are learnable enough to drive a practical detector, although still conservatively.{legacy_proxy_note}"
             ),
         ),
         (
@@ -192,7 +256,7 @@ def build_question_answers(
             "Does reward hacking in real reasoning traces show up first as verbosity bias, confidence inflation, hidden-state drift, or verifier disagreement?",
             (
                 f"In the current traces it shows up earliest through {corruption_signal}. "
-                f"The hazard drift crosses zero at step {crossing_step if crossing_step is not None else 'not yet observed'}, and the never-stop policy still loses {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average. "
+                f"The corrected conditional hazard drift crosses zero at step {format_boundary(corrected_crossing)}, and the never-stop policy still loses {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average. "
                 "That pattern is more consistent with corruption through instability in the model's observable state than with harmless extra verification."
             ),
         ),
@@ -200,7 +264,7 @@ def build_question_answers(
             7,
             "Are multiple drift crossings common on real traces, or is the one-crossing picture mostly correct once tasks are conditioned on difficulty?",
             (
-                f"The pooled hazard curve is currently much closer to a one-crossing story than a repeated-crossing story: the first zero crossing occurs at step {crossing_step if crossing_step is not None else 'not observed'}, and the aggregate hazard sign changes {crossings} time(s). "
+                f"The corrected conditional hazard curve is currently much closer to a one-crossing story than a repeated-crossing story: the first zero crossing occurs at step {format_boundary(corrected_crossing)}, and the aggregate corrected hazard sign changes {crossings} time(s). "
                 "That supports the one-crossing picture at the population level, but the present artifact stack does not yet fit per-task latent-state crossing models, so repeated crossings cannot be ruled out on difficult outlier tasks."
             ),
         ),
@@ -208,8 +272,8 @@ def build_question_answers(
             8,
             "How much of the apparent boundary is model-family specific versus benchmark specific?",
             (
-                f"Still unresolved from this cycle. The completed large run is concentrated on {model_label} over GSM8K, so it identifies a real boundary for that model-benchmark pair but cannot yet decompose family effects from benchmark effects. "
-                "A comparable Qwen, Llama, or larger DeepSeek follow-up is still needed before attributing the boundary to model family rather than task distribution."
+                f"Still unresolved from this cycle. The completed large run is concentrated on {model_label} over GSM8K, so it identifies a boundary story for that model-benchmark pair but cannot yet cleanly decompose family effects from benchmark effects. "
+                "A comparable higher-capability cross-family follow-up is still needed before attributing the boundary to model family rather than task distribution."
             ),
         ),
     ]
@@ -290,12 +354,37 @@ def build_report_markdown(
     summary = pilot.iloc[0]
     model_label = model_run_label(summary)
     detector_rows = detectors.set_index("detector")
-    crossing_step = first_zero_crossing(hazard)
     q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
-    q_peak = float(hazard["q_t"].max()) if not hazard.empty else float("nan")
-    q_peak_step = int(hazard.loc[hazard["q_t"].idxmax(), "step"]) if not hazard.empty else -1
+    step_accuracy = steps.groupby("step")["correct"].mean().reset_index(name="q_t")
+    q_peak = float(step_accuracy["q_t"].max()) if not step_accuracy.empty else float("nan")
+    q_peak_step = int(step_accuracy.loc[step_accuracy["q_t"].idxmax(), "step"]) if not step_accuracy.empty else -1
+    corrected_column = corrected_drift_column(hazard)
+    empirical_column = empirical_drift_column(hazard)
+    pooled_column = pooled_proxy_column(hazard)
+    fitted_column = fitted_drift_column(hazard)
+    corrected_crossing = first_zero_crossing(hazard, corrected_column)
+    empirical_crossing = first_zero_crossing(hazard, empirical_column)
+    pooled_crossing = first_zero_crossing(hazard, pooled_column) if pooled_column else None
+    fitted_crossing = first_zero_crossing(hazard, fitted_column) if fitted_column else None
+    clears_capability_gate = capability_gate(q1, int(summary["runs_ever_correct"]))
     correctness_signal = feature_name(weights, "correctness_probe")
     corruption_signal = feature_name(weights, "corruption_hazard", positive_only=True)
+    legacy_erratum = ""
+    if pooled_crossing is not None and corrected_crossing is not None and pooled_crossing != corrected_crossing:
+        legacy_erratum = (
+            f" A previous report cited step {pooled_crossing} from a pooled proxy drift built from unconditional transition frequencies; that proxy is retained only as an audit trail and is no longer used as the boundary witness."
+        )
+
+    drift_audit_table = [
+        "| Drift Curve | First zero crossing | Role |",
+        "| --- | ---: | --- |",
+        f"| empirical utility drift | {format_boundary(empirical_crossing)} | raw mean $\\Delta U_t$ from realized utilities |",
+        f"| conditional hazard drift | {format_boundary(corrected_crossing)} | theorem-facing $((1-q_t)\\alpha_t - q_t\\beta_t - c)$ witness |",
+    ]
+    if fitted_crossing is not None:
+        drift_audit_table.append(f"| fitted hazard drift | {format_boundary(fitted_crossing)} | model-based estimate from learned probes |")
+    if pooled_crossing is not None:
+        drift_audit_table.append(f"| pooled proxy drift | {format_boundary(pooled_crossing)} | legacy unconditional proxy kept for auditability only |")
 
     graph_sections = [
         "### Drift Crossing Proof",
@@ -338,16 +427,21 @@ def build_report_markdown(
             (
                 f"The L4 execution loop completed the environment check, parser repair, GSM8K scaling refactor, and real-trace collection for {model_label} on "
                 f"{int(summary['n_runs'])} runs. The model entered a competent regime immediately, with step-1 accuracy $q_1={safe_float(q1, 3)}$, "
-                f"and reached peak correctness $q_t={safe_float(q_peak, 3)}$ at step {q_peak_step}."
+                f"and reached peak correctness $q_t={safe_float(q_peak, 3)}$ at step {q_peak_step}. "
+                f"{('This run clears the current capability gate for a cross-family boundary claim.' if clears_capability_gate else 'This run remains below the current capability gate, so it should be treated as a weak-regime control rather than a decisive family-level witness.')}"
             ),
             "",
             "## Mathematical Validation",
             (
                 f"The hazard decomposition exhibits repair rate {safe_float(summary['repair_rate_overall'], 3)} and corruption rate {safe_float(summary['corruption_rate_overall'], 3)}. "
-                f"The first hazard drift zero crossing occurs at step {crossing_step if crossing_step is not None else 'not observed'}, which is the empirical candidate for the Overthinking Boundary. "
+                f"The corrected conditional hazard drift crosses zero at step {format_boundary(corrected_crossing)}, while the raw empirical utility drift crosses at step {format_boundary(empirical_crossing)}"
+                f"{', and the fitted hazard drift estimate crosses at step ' + format_boundary(fitted_crossing) if fitted_crossing is not None else ''}. "
                 f"The never-stop policy loses {safe_float(detector_rows.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average relative to the oracle, which is direct evidence that extra reasoning past the boundary is harmful."
-                f"{e_process_sentence}"
+                f"{e_process_sentence}{legacy_erratum}"
             ),
+            "",
+            "## Drift Audit",
+            *drift_audit_table,
             "",
             "## Observables Evaluation",
             (
@@ -385,7 +479,7 @@ def main() -> None:
     steps = read_csv(input_dir / "trace_steps.csv")
     runs = read_csv(input_dir / "trace_runs.csv")
     pilot = read_csv(input_dir / "pilot_summary.csv")
-    hazard = read_csv(input_dir / "hazard_drift_summary.csv")
+    hazard = read_hazard_artifact(input_dir)
     detectors = read_csv(input_dir / "detector_comparison.csv")
     probe = read_csv(input_dir / "correctness_probe_metrics.csv")
     weights = read_csv(input_dir / "feature_weights.csv")

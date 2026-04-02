@@ -1,0 +1,58 @@
+{
+  "model": {
+    "alias": "qwen2p5_7b",
+    "hf_name": "Qwen/Qwen2.5-7B-Instruct",
+    "family": "Qwen2.5 instruct",
+    "parameter_count": "7B"
+  },
+  "backend": "transformers+torch(cuda-4bit)",
+  "device": "cuda",
+  "quantization": "4bit",
+  "device_map": null,
+  "temperatures": [
+    0.2
+  ],
+  "seeds": [
+    7
+  ],
+  "max_steps": 2,
+  "max_new_tokens": 128,
+  "max_tasks": 2,
+  "task_source": "builtin",
+  "dataset_split": "train",
+  "dataset_shuffle_seed": 17,
+  "batch_size": 1,
+  "step_cost": 0.05,
+  "prompt_mode": "minimal_json",
+  "system_prompt_mode": "default",
+  "resume_enabled": false,
+  "completed_run_count": 2,
+  "tasks": [
+    {
+      "task_id": "calendar_offset_easy",
+      "domain": "calendar",
+      "difficulty": "easy",
+      "prompt": "If today is Tuesday, what day of the week will it be 14 days later? Answer with only the weekday.",
+      "answer_type": "day",
+      "expected_answer": "tuesday",
+      "notes": "Very easy task where extra verification can become redundant.",
+      "source": "builtin",
+      "source_index": -1
+    },
+    {
+      "task_id": "fraction_remaining",
+      "domain": "arithmetic",
+      "difficulty": "medium",
+      "prompt": "A tank is half full. Then one quarter of the whole tank is drained. What fraction of the tank is full now?",
+      "answer_type": "fraction",
+      "expected_answer": "1/4",
+      "notes": "Easy fraction task with exact verification.",
+      "source": "builtin",
+      "source_index": -1
+    }
+  ],
+  "hidden_state_accessible": true,
+  "token_logprobs_accessible": true,
+  "reasoning_traces_accessible": true,
+  "runtime_limit_notes": "Batch-first GSM8K runner with append-only CSV outputs and automatic microbatch splitting on CUDA OOM."
+}
