@@ -16,6 +16,13 @@ PYTHON = sys.executable
 COLAB_REQUIREMENTS = REPO_ROOT / "requirements-colab.txt"
 DEFAULT_SMOKE_DIR = REPO_ROOT / "research" / "outputs" / "real_traces_colab_smoke"
 DEFAULT_FULL_DIR = REPO_ROOT / "research" / "outputs" / "real_traces_colab"
+MODEL_CHOICES = [
+    "deepseek_r1_distill_1p5b",
+    "deepseek_r1_distill_7b",
+    "qwen2p5_0p5b",
+    "qwen2p5_7b",
+    "mistral_7b_instruct_v0p3",
+]
 
 
 def run_command(command: list[str], cwd: Path = REPO_ROOT) -> None:
@@ -197,12 +204,12 @@ def main() -> None:
     parser.add_argument(
         "--model",
         default="deepseek_r1_distill_1p5b",
-        choices=["deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_7b"],
+        choices=MODEL_CHOICES,
     )
     parser.add_argument(
         "--smoke-model",
         default=None,
-        choices=["deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_7b"],
+        choices=MODEL_CHOICES,
     )
     parser.add_argument("--skip-install", action="store_true")
     parser.add_argument("--skip-smoke", action="store_true")

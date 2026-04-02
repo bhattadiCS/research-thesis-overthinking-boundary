@@ -212,6 +212,12 @@ MODEL_CATALOG = {
         family="Qwen2.5 instruct",
         parameter_count="7B",
     ),
+    "mistral_7b_instruct_v0p3": ModelSpec(
+        alias="mistral_7b_instruct_v0p3",
+        hf_name="mistralai/Mistral-7B-Instruct-v0.3",
+        family="Mistral instruct",
+        parameter_count="7B",
+    ),
 }
 
 
@@ -589,9 +595,11 @@ def chunked(items: list[TaskSpec], size: int) -> Iterable[list[TaskSpec]]:
 def output_paths(output_dir: Path, is_baseline: bool) -> dict[str, Path]:
     steps_name = "baseline_steps.csv" if is_baseline else "trace_steps.csv"
     runs_name = "baseline_runs.csv" if is_baseline else "trace_runs.csv"
+    batch_metrics_name = "baseline_batch_metrics.csv" if is_baseline else "batch_metrics.csv"
     return {
         "steps": output_dir / steps_name,
         "runs": output_dir / runs_name,
+        "batch_metrics": output_dir / batch_metrics_name,
         "hazard": output_dir / "hazard_by_step.csv",
         "pilot": output_dir / "pilot_summary.csv",
         "metadata": output_dir / "metadata.json",
@@ -616,6 +624,13 @@ def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
         frame.to_csv(path, mode="a", header=False, index=False)
         return
     frame.to_csv(path, index=False)
+
+
+def max_nan(values: Iterable[float]) -> float:
+    finite_values = [float(value) for value in values if not math.isnan(float(value))]
+    if not finite_values:
+        return float("nan")
+    return max(finite_values)
 
 
 def backup_for_reconciliation(path: Path) -> Path:
@@ -858,14 +873,24 @@ def generate_batch_with_diagnostics(
     actual_device: str,
     temperature: float,
     max_new_tokens: int,
-) -> tuple[list[dict[str, Any]], float]:
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    if actual_device == "cuda" and torch.cuda.is_available():
+        torch.cuda.synchronize()
+        torch.cuda.reset_peak_memory_stats()
+
     started_at = time.perf_counter()
+    encode_started_at = time.perf_counter()
     encoded = tokenizer(
         prompt_texts,
         padding=True,
         pad_to_multiple_of=8 if actual_device == "cuda" else None,
         return_tensors="pt",
     )
+    if actual_device == "cuda" and torch.cuda.is_available():
+        torch.cuda.synchronize()
+    encode_seconds = time.perf_counter() - encode_started_at
+
+    prompt_tokens = int(encoded["attention_mask"].sum().item())
     input_ids = encoded["input_ids"].to(actual_device)
     attention_mask = encoded["attention_mask"].to(actual_device)
     prompt_width = input_ids.shape[1]
@@ -884,7 +909,13 @@ def generate_batch_with_diagnostics(
         generation_kwargs.update({"do_sample": False})
 
     with torch.inference_mode():
+        generation_started_at = time.perf_counter()
         generated_ids = model.generate(**generation_kwargs)
+        if actual_device == "cuda" and torch.cuda.is_available():
+            torch.cuda.synchronize()
+        generation_seconds = time.perf_counter() - generation_started_at
+
+        forward_started_at = time.perf_counter()
         completion_width = generated_ids.shape[1] - prompt_width
         generated_attention_mask = torch.cat(
             [
@@ -894,12 +925,15 @@ def generate_batch_with_diagnostics(
             dim=1,
         )
         forward_outputs = model(generated_ids, attention_mask=generated_attention_mask, output_hidden_states=True)
+        if actual_device == "cuda" and torch.cuda.is_available():
+            torch.cuda.synchronize()
+        forward_seconds = time.perf_counter() - forward_started_at
 
     full_logits = forward_outputs.logits
     hidden_states = forward_outputs.hidden_states[-1]
-    elapsed_seconds = time.perf_counter() - started_at
 
     results: list[dict[str, Any]] = []
+    postprocess_started_at = time.perf_counter()
     for index in range(generated_ids.shape[0]):
         raw_completion_ids = generated_ids[index, prompt_width:].detach()
         completion_ids = trim_completion_ids(raw_completion_ids, tokenizer.pad_token_id, tokenizer.eos_token_id)
@@ -928,7 +962,28 @@ def generate_batch_with_diagnostics(
                 "pooled_hidden": pooled_hidden,
             }
         )
-    return results, elapsed_seconds
+    if actual_device == "cuda" and torch.cuda.is_available():
+        torch.cuda.synchronize()
+    postprocess_seconds = time.perf_counter() - postprocess_started_at
+    elapsed_seconds = time.perf_counter() - started_at
+    generated_tokens = int(sum(item["generated_tokens"] for item in results))
+    batch_metrics = {
+        "batch_size": len(prompt_texts),
+        "prompt_tokens": prompt_tokens,
+        "generated_tokens": generated_tokens,
+        "total_seconds": elapsed_seconds,
+        "tokenize_seconds": encode_seconds,
+        "generation_seconds": generation_seconds,
+        "forward_seconds": forward_seconds,
+        "postprocess_seconds": postprocess_seconds,
+        "gpu_memory_allocated_gb": gpu_memory_allocated_gb(actual_device),
+        "gpu_memory_reserved_gb": gpu_memory_reserved_gb(actual_device),
+        "gpu_max_memory_allocated_gb": gpu_max_memory_allocated_gb(actual_device),
+        "gpu_max_memory_reserved_gb": gpu_max_memory_reserved_gb(actual_device),
+        "split_count": 1,
+        "oom_retry_count": 0,
+    }
+    return results, batch_metrics
 
 
 def release_cuda_memory() -> None:
@@ -948,7 +1003,7 @@ def safe_generate_batch_with_diagnostics(
     temperature: float,
     max_new_tokens: int,
     allow_single_retry: bool = True,
-) -> tuple[list[dict[str, Any]], float]:
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     try:
         return generate_batch_with_diagnostics(
             model=model,
@@ -966,7 +1021,7 @@ def safe_generate_batch_with_diagnostics(
             if not allow_single_retry:
                 raise
             logging.warning("CUDA OOM for single prompt. Retrying once after cache release.")
-            return safe_generate_batch_with_diagnostics(
+            retry_results, retry_metrics = safe_generate_batch_with_diagnostics(
                 model=model,
                 tokenizer=tokenizer,
                 prompt_texts=prompt_texts,
@@ -975,9 +1030,11 @@ def safe_generate_batch_with_diagnostics(
                 max_new_tokens=max_new_tokens,
                 allow_single_retry=False,
             )
+            retry_metrics["oom_retry_count"] = int(retry_metrics.get("oom_retry_count", 0)) + 1
+            return retry_results, retry_metrics
         logging.warning("CUDA OOM for microbatch size %d. Retrying with smaller splits.", len(prompt_texts))
         midpoint = max(1, len(prompt_texts) // 2)
-        first_results, first_elapsed = safe_generate_batch_with_diagnostics(
+        first_results, first_metrics = safe_generate_batch_with_diagnostics(
             model=model,
             tokenizer=tokenizer,
             prompt_texts=prompt_texts[:midpoint],
@@ -987,7 +1044,7 @@ def safe_generate_batch_with_diagnostics(
             allow_single_retry=allow_single_retry,
         )
         release_cuda_memory()
-        second_results, second_elapsed = safe_generate_batch_with_diagnostics(
+        second_results, second_metrics = safe_generate_batch_with_diagnostics(
             model=model,
             tokenizer=tokenizer,
             prompt_texts=prompt_texts[midpoint:],
@@ -996,13 +1053,59 @@ def safe_generate_batch_with_diagnostics(
             max_new_tokens=max_new_tokens,
             allow_single_retry=allow_single_retry,
         )
-        return first_results + second_results, first_elapsed + second_elapsed
+        merged_metrics = {
+            "batch_size": int(first_metrics["batch_size"]) + int(second_metrics["batch_size"]),
+            "prompt_tokens": int(first_metrics["prompt_tokens"]) + int(second_metrics["prompt_tokens"]),
+            "generated_tokens": int(first_metrics["generated_tokens"]) + int(second_metrics["generated_tokens"]),
+            "total_seconds": float(first_metrics["total_seconds"]) + float(second_metrics["total_seconds"]),
+            "tokenize_seconds": float(first_metrics["tokenize_seconds"]) + float(second_metrics["tokenize_seconds"]),
+            "generation_seconds": float(first_metrics["generation_seconds"]) + float(second_metrics["generation_seconds"]),
+            "forward_seconds": float(first_metrics["forward_seconds"]) + float(second_metrics["forward_seconds"]),
+            "postprocess_seconds": float(first_metrics["postprocess_seconds"]) + float(second_metrics["postprocess_seconds"]),
+            "gpu_memory_allocated_gb": max_nan([
+                float(first_metrics["gpu_memory_allocated_gb"]),
+                float(second_metrics["gpu_memory_allocated_gb"]),
+            ]),
+            "gpu_memory_reserved_gb": max_nan([
+                float(first_metrics["gpu_memory_reserved_gb"]),
+                float(second_metrics["gpu_memory_reserved_gb"]),
+            ]),
+            "gpu_max_memory_allocated_gb": max_nan([
+                float(first_metrics["gpu_max_memory_allocated_gb"]),
+                float(second_metrics["gpu_max_memory_allocated_gb"]),
+            ]),
+            "gpu_max_memory_reserved_gb": max_nan([
+                float(first_metrics["gpu_max_memory_reserved_gb"]),
+                float(second_metrics["gpu_max_memory_reserved_gb"]),
+            ]),
+            "split_count": int(first_metrics.get("split_count", 1)) + int(second_metrics.get("split_count", 1)),
+            "oom_retry_count": int(first_metrics.get("oom_retry_count", 0)) + int(second_metrics.get("oom_retry_count", 0)) + 1,
+        }
+        return first_results + second_results, merged_metrics
 
 
 def gpu_memory_allocated_gb(actual_device: str) -> float:
     if actual_device != "cuda" or not torch.cuda.is_available():
         return float("nan")
     return torch.cuda.memory_allocated() / (1024**3)
+
+
+def gpu_memory_reserved_gb(actual_device: str) -> float:
+    if actual_device != "cuda" or not torch.cuda.is_available():
+        return float("nan")
+    return torch.cuda.memory_reserved() / (1024**3)
+
+
+def gpu_max_memory_allocated_gb(actual_device: str) -> float:
+    if actual_device != "cuda" or not torch.cuda.is_available():
+        return float("nan")
+    return torch.cuda.max_memory_allocated() / (1024**3)
+
+
+def gpu_max_memory_reserved_gb(actual_device: str) -> float:
+    if actual_device != "cuda" or not torch.cuda.is_available():
+        return float("nan")
+    return torch.cuda.max_memory_reserved() / (1024**3)
 
 
 def first_pending_run(
@@ -1083,6 +1186,7 @@ def write_runtime_metadata(
         "hidden_state_accessible": True,
         "token_logprobs_accessible": True,
         "reasoning_traces_accessible": True,
+        "batch_metrics_accessible": True,
         "runtime_limit_notes": "Batch-first GSM8K runner with checkpoint reconciliation, append-only CSV outputs, incremental metadata snapshots, and automatic microbatch splitting on CUDA OOM.",
     }
     with metadata_path.open("w", encoding="utf-8") as handle:
@@ -1103,12 +1207,13 @@ def run_batch_traces(
     prompt_mode: str,
     system_prompt_mode: str,
     is_baseline: bool,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     if not tasks:
-        return [], []
+        return [], [], []
 
     actual_prompt_mode = "answer_only" if is_baseline else prompt_mode
     steps_to_run = 1 if is_baseline else max_steps
+    batch_metric_rows: list[dict[str, Any]] = []
     contexts = [
         {
             "task": task,
@@ -1136,7 +1241,7 @@ def run_batch_traces(
             for context in contexts
         ]
 
-        generated_batch, batch_elapsed_seconds = safe_generate_batch_with_diagnostics(
+        generated_batch, batch_metrics = safe_generate_batch_with_diagnostics(
             model=model,
             tokenizer=tokenizer,
             prompt_texts=prompts,
@@ -1144,17 +1249,50 @@ def run_batch_traces(
             temperature=temperature,
             max_new_tokens=max_new_tokens,
         )
+        batch_elapsed_seconds = float(batch_metrics["total_seconds"])
         batch_tokens = sum(item["generated_tokens"] for item in generated_batch)
+        batch_examples_per_second = len(contexts) / max(batch_elapsed_seconds, 1e-6)
+        batch_tokens_per_second = batch_tokens / max(batch_elapsed_seconds, 1e-6)
+        batch_metric_rows.append(
+            {
+                "phase": "generate",
+                "temperature": temperature,
+                "seed": seed,
+                "step": step,
+                "requested_batch_size": len(contexts),
+                "realized_batch_size": int(batch_metrics["batch_size"]),
+                "prompt_tokens": int(batch_metrics["prompt_tokens"]),
+                "generated_tokens": batch_tokens,
+                "wall_clock_seconds": batch_elapsed_seconds,
+                "examples_per_second": batch_examples_per_second,
+                "tokens_per_second": batch_tokens_per_second,
+                "tokenize_seconds": float(batch_metrics["tokenize_seconds"]),
+                "generation_seconds": float(batch_metrics["generation_seconds"]),
+                "forward_seconds": float(batch_metrics["forward_seconds"]),
+                "postprocess_seconds": float(batch_metrics["postprocess_seconds"]),
+                "hidden_state_write_seconds": 0.0,
+                "gpu_memory_allocated_gb": float(batch_metrics["gpu_memory_allocated_gb"]),
+                "gpu_memory_reserved_gb": float(batch_metrics["gpu_memory_reserved_gb"]),
+                "gpu_max_memory_allocated_gb": float(batch_metrics["gpu_max_memory_allocated_gb"]),
+                "gpu_max_memory_reserved_gb": float(batch_metrics["gpu_max_memory_reserved_gb"]),
+                "split_count": int(batch_metrics.get("split_count", 1)),
+                "oom_retry_count": int(batch_metrics.get("oom_retry_count", 0)),
+            }
+        )
         logging.info(
-            "temp=%.2f seed=%d step=%d/%d | batch=%d | generated_tokens=%d | tok_s=%.2f | gpu_mem_gb=%.2f",
+            "temp=%.2f seed=%d step=%d/%d | batch=%d | generated_tokens=%d | ex_s=%.2f | tok_s=%.2f | gpu_peak_alloc_gb=%.2f | gpu_peak_reserved_gb=%.2f | splits=%d | oom_retries=%d",
             temperature,
             seed,
             step,
             steps_to_run,
             len(contexts),
             batch_tokens,
-            batch_tokens / max(batch_elapsed_seconds, 1e-6),
-            gpu_memory_allocated_gb(actual_device),
+            batch_examples_per_second,
+            batch_tokens_per_second,
+            float(batch_metrics["gpu_max_memory_allocated_gb"]),
+            float(batch_metrics["gpu_max_memory_reserved_gb"]),
+            int(batch_metrics.get("split_count", 1)),
+            int(batch_metrics.get("oom_retry_count", 0)),
         )
 
         for context, generated in zip(contexts, generated_batch, strict=True):
@@ -1236,13 +1374,16 @@ def run_batch_traces(
     hidden_dir.mkdir(parents=True, exist_ok=True)
     all_rows: list[dict[str, Any]] = []
     all_runs: list[dict[str, Any]] = []
+    hidden_state_write_seconds = 0.0
     for context in contexts:
         run_rows = context["rows"]
         hidden_vectors = context["hidden_vectors"]
         if not run_rows:
             continue
 
+        hidden_write_started_at = time.perf_counter()
         np.savez_compressed(hidden_dir / f"{context['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
+        hidden_state_write_seconds += time.perf_counter() - hidden_write_started_at
         first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
         first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
         oracle_stop = max(run_rows, key=lambda row: row["utility"])["step"]
@@ -1283,7 +1424,34 @@ def run_batch_traces(
             revision_count,
         )
 
-    return all_rows, all_runs
+    batch_metric_rows.append(
+        {
+            "phase": "hidden_state_write",
+            "temperature": temperature,
+            "seed": seed,
+            "step": 0,
+            "requested_batch_size": len(contexts),
+            "realized_batch_size": len(contexts),
+            "prompt_tokens": 0,
+            "generated_tokens": 0,
+            "wall_clock_seconds": hidden_state_write_seconds,
+            "examples_per_second": float("nan"),
+            "tokens_per_second": float("nan"),
+            "tokenize_seconds": 0.0,
+            "generation_seconds": 0.0,
+            "forward_seconds": 0.0,
+            "postprocess_seconds": 0.0,
+            "hidden_state_write_seconds": hidden_state_write_seconds,
+            "gpu_memory_allocated_gb": gpu_memory_allocated_gb(actual_device),
+            "gpu_memory_reserved_gb": gpu_memory_reserved_gb(actual_device),
+            "gpu_max_memory_allocated_gb": gpu_max_memory_allocated_gb(actual_device),
+            "gpu_max_memory_reserved_gb": gpu_max_memory_reserved_gb(actual_device),
+            "split_count": 0,
+            "oom_retry_count": 0,
+        }
+    )
+
+    return all_rows, all_runs, batch_metric_rows
 
 
 def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
@@ -1531,7 +1699,7 @@ def main() -> None:
                 batches = list(chunked(pending_tasks, max(1, args.batch_size)))
                 progress = tqdm(batches, desc=f"temp={temperature:.2f} seed={seed}", unit="batch")
                 for task_batch in progress:
-                    batch_rows, batch_runs = run_batch_traces(
+                    batch_rows, batch_runs, batch_metrics = run_batch_traces(
                         model=model,
                         tokenizer=tokenizer,
                         model_spec=model_spec,
@@ -1548,6 +1716,7 @@ def main() -> None:
                     )
                     append_records(paths["steps"], batch_rows)
                     append_records(paths["runs"], batch_runs)
+                    append_records(paths["batch_metrics"], batch_metrics)
                     all_rows.extend(batch_rows)
                     all_runs.extend(batch_runs)
                     completed_run_ids.update(run["run_id"] for run in batch_runs)
