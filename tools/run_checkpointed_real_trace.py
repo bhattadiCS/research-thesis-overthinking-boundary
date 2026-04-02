@@ -87,7 +87,8 @@ def ensure_git_author(log_path: Path) -> dict[str, str]:
 
 
 def relative_repo_path(path: Path) -> str:
-    return str(path.relative_to(REPO_ROOT))
+    resolved = path if path.is_absolute() else (REPO_ROOT / path)
+    return str(resolved.relative_to(REPO_ROOT))
 
 
 def stage_paths(paths: list[Path]) -> None:
