@@ -21,3 +21,9 @@ research/outputs/real_traces_deepseek/
 research/outputs/real_traces_colab/
 research/outputs/real_traces_colab_smoke/
 research/outputs/*.zip
+thesis_data_backup_from_*.zip
+recovered_*_data/
+
+# Thesis documentation
+ThesisDocs/
+
