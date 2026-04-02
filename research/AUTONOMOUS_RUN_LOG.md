@@ -11,10 +11,10 @@
 
 ## Current Working State
 
-- Current target model: pending non-Qwen selection
+- Current target model: `mistral_7b_instruct_v0p3` (`mistralai/Mistral-7B-Instruct-v0.3`)
 - Current benchmark configuration: pending
 - Current full-run output directory: pending
-- Current last completed task index: Phase B documentation patch in progress
+- Current last completed task index: Phase C harness extension and candidate selection complete; smoke benchmark pending
 - Current resume instructions: rerun from repo root and resume from the latest committed output directory metadata; do not rerun the recovered Qwen2.5 7B artifacts
 
 ## Checkpoints
@@ -22,11 +22,18 @@
 | Timestamp | Phase | Summary | Commit | Push |
 | --- | --- | --- | --- | --- |
 | 2026-04-02 14:44 UTC | A | Verified clean audited baseline, git tracking, and live L4 availability. | pending | pending |
+| 2026-04-02 14:56 UTC | B | Added thesis-ready stopping-rule documentation, a theory-note algorithm section, and the autonomous run log. | `b2a2b94` | pushed |
+
+## Candidate Access Notes
+
+- Gemma attempt: `google/gemma-2-9b-it` returned a gated-repo `401` error in this runtime.
+- Llama attempt: `meta-llama/Llama-3.1-8B-Instruct` returned a gated-repo `401` error in this runtime.
+- Selected fallback: `mistralai/Mistral-7B-Instruct-v0.3` loaded config and tokenizer successfully with chat-template support.
+- Reason for selection: Mistral is the strongest practical genuinely non-Qwen family that is open-access from this Colab environment without waiting on Hugging Face approval.
 
 ## Pending Milestones
 
-1. Commit and push thesis algorithm box patch.
-2. Add a stronger genuinely non-Qwen family to the harness and Colab runner.
-3. Record model-selection evidence, smoke-test results, and L4 benchmark ladder.
-4. Run the full matched-protocol non-Qwen experiment with checkpoint commits.
-5. Regenerate per-run and cross-family reports and update the claim.
+1. Commit and push the harness extension and model-selection checkpoint.
+2. Record smoke-test results and the L4 benchmark ladder.
+3. Run the full matched-protocol non-Qwen experiment with checkpoint commits.
+4. Regenerate per-run and cross-family reports and update the claim.
