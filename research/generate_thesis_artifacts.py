@@ -174,7 +174,7 @@ def build_question_answers(
     legacy_proxy_note = ""
     if pooled_crossing is not None and corrected_crossing is not None and pooled_crossing != corrected_crossing:
         legacy_proxy_note = (
-            f" A legacy pooled proxy drift would cross at step {pooled_crossing}, but that quantity uses unconditional transition frequencies and is not the conditional hazard object $((1-q_t)\alpha_t - q_t\beta_t - c)$ used for theorem-facing claims."
+            f" A legacy pooled proxy drift would cross at step {pooled_crossing}, but that quantity uses unconditional transition frequencies and is not the conditional hazard object $((1-q_t)\\alpha_t - q_t\\beta_t - c)$ used for theorem-facing claims."
         )
 
     if has_e_process:

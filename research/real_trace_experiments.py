@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import json
 import logging
@@ -930,6 +931,15 @@ def generate_batch_with_diagnostics(
     return results, elapsed_seconds
 
 
+def release_cuda_memory() -> None:
+    gc.collect()
+    if not torch.cuda.is_available():
+        return
+    torch.cuda.empty_cache()
+    if hasattr(torch.cuda, "ipc_collect"):
+        torch.cuda.ipc_collect()
+
+
 def safe_generate_batch_with_diagnostics(
     model: Any,
     tokenizer: Any,
@@ -937,6 +947,7 @@ def safe_generate_batch_with_diagnostics(
     actual_device: str,
     temperature: float,
     max_new_tokens: int,
+    allow_single_retry: bool = True,
 ) -> tuple[list[dict[str, Any]], float]:
     try:
         return generate_batch_with_diagnostics(
@@ -948,10 +959,23 @@ def safe_generate_batch_with_diagnostics(
             max_new_tokens=max_new_tokens,
         )
     except RuntimeError as exc:
-        if actual_device != "cuda" or "out of memory" not in str(exc).lower() or len(prompt_texts) == 1:
+        if actual_device != "cuda" or "out of memory" not in str(exc).lower():
             raise
+        release_cuda_memory()
+        if len(prompt_texts) == 1:
+            if not allow_single_retry:
+                raise
+            logging.warning("CUDA OOM for single prompt. Retrying once after cache release.")
+            return safe_generate_batch_with_diagnostics(
+                model=model,
+                tokenizer=tokenizer,
+                prompt_texts=prompt_texts,
+                actual_device=actual_device,
+                temperature=temperature,
+                max_new_tokens=max_new_tokens,
+                allow_single_retry=False,
+            )
         logging.warning("CUDA OOM for microbatch size %d. Retrying with smaller splits.", len(prompt_texts))
-        torch.cuda.empty_cache()
         midpoint = max(1, len(prompt_texts) // 2)
         first_results, first_elapsed = safe_generate_batch_with_diagnostics(
             model=model,
@@ -960,7 +984,9 @@ def safe_generate_batch_with_diagnostics(
             actual_device=actual_device,
             temperature=temperature,
             max_new_tokens=max_new_tokens,
+            allow_single_retry=allow_single_retry,
         )
+        release_cuda_memory()
         second_results, second_elapsed = safe_generate_batch_with_diagnostics(
             model=model,
             tokenizer=tokenizer,
@@ -968,6 +994,7 @@ def safe_generate_batch_with_diagnostics(
             actual_device=actual_device,
             temperature=temperature,
             max_new_tokens=max_new_tokens,
+            allow_single_retry=allow_single_retry,
         )
         return first_results + second_results, first_elapsed + second_elapsed
 

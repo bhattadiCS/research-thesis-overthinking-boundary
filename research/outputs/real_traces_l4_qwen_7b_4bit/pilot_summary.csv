@@ -1,2 +1,2 @@
 model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
-qwen2p5_7b,Qwen/Qwen2.5-7B-Instruct,Qwen2.5 instruct,7B,204,204,2.4950980392156863,3.906862745098039,5.284313725490196,2.485294117647059,0.15841047997568167,32.750917221167505,0.17250691172500837,0.15110126172433536,172,transformers+torch(uninitialized),cuda
+qwen2p5_7b,Qwen/Qwen2.5-7B-Instruct,Qwen2.5 instruct,7B,900,300,2.4766666666666666,3.966666666666667,5.2188888888888885,2.647777777777778,0.176786619398329,37.569997418642046,0.1793693677276681,0.16775372752940956,751,transformers+torch(cuda-4bit),cuda
