@@ -24,9 +24,10 @@ We use a mathematical rule to decide exactly when to stop. We weigh:
 ### 3. Key Findings (Current Post-Audit State)
 Our experiments on an NVIDIA L4 GPU on GSM8K now support a narrower but stronger claim:
 - **Qwen2.5 7B 4-bit (Competent regime)**: This is the clearest late-boundary result in the repo. Step-1 accuracy is **0.3644**, peak correctness is **0.7789** at **Step 9**, and the corrected theorem-facing boundary is **Step 6**. Forcing the model to continue through the end loses **0.4317** utility relative to the oracle.
+- **Mistral 7B Instruct (Non-Qwen follow-up)**: This is the completed genuinely non-Qwen matched-protocol witness. Step-1 accuracy is **0.3022**, peak correctness is **0.3189** at **Step 10**, the corrected theorem-facing boundary is **Step 3**, and forcing the model to continue through the end loses **0.5696** utility relative to the oracle. This is real second-family support, but it is earlier and weaker than the Qwen 7B late-boundary case.
 - **DeepSeek-R1 Distill 1.5B**: The earlier proxy-based story that placed the boundary near Step 7 does **not** survive the conditional hazard audit. The corrected boundary is **Step 1**, so DeepSeek remains evidence that overthinking costs matter, but not the main late-boundary witness.
 - **Qwen2.5 0.5B (Weak control)**: This model remains in a low-skill regime and also crosses at **Step 1**, which is exactly the kind of early-boundary control the theory predicts.
-- **The Verdict**: Overthinking is real, measurable, and utility-relevant in a capable regime, but **cross-family robustness is still unproven** because only the stronger Qwen 7B run shows a late corrected boundary.
+- **The Verdict**: Overthinking is real, measurable, and utility-relevant in more than one capable family. However, **full cross-family late-boundary robustness is still unproven** because the strongest clearly late corrected boundary remains Qwen 7B, while the Mistral follow-up crosses earlier at Step 3.
 
 ---
 

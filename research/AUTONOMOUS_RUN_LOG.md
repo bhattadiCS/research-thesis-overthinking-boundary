@@ -15,11 +15,11 @@
 - Current benchmark configuration: selected `quantization=none`, `attn_implementation=sdpa`, `batch_size=4`
 - Current benchmark validation: short rerun under `research/outputs/benchmark_mistral7b_l4_validation_20260402` reconfirmed `none + sdpa + batch_size=4` as the fastest stable path in the live runtime; `flash_attn` remains unavailable
 - Current full-run output directory: `research/outputs/real_traces_l4_mistral_7b`
-- Current last completed task index: successful Mistral smoke run and L4 benchmark ladder complete; no recoverable full matched-protocol output directory or experiment checkpoint commit exists yet
-- Current runtime validation: live NVIDIA L4 re-verified on 2026-04-02; repo-local `.venv` now reuses the system CUDA stack and imports the required experiment packages successfully
-- Current git checkpoint state: repo-local git author is configured as `Aditya Bhatt <bhattadiCS@users.noreply.github.com>` and the next run should use the tracked checkpoint driver in `tools/run_checkpointed_real_trace.py`
-- Current harness compatibility state: the text-only Mistral path now uses a local torchvision shim and a `torch_dtype` load fix so the current runtime no longer fails during model resolution
-- Current resume instructions: restart from repo root with the selected `none + sdpa + batch_size=4` configuration, keep the recovered Qwen2.5 7B artifacts untouched, and land the first durable Mistral experiment checkpoint no later than the first completed 25-task / temperature block
+- Current last completed task index: full matched-protocol run complete at `900/900` runs (`300` tasks across temperatures `0.1`, `0.6`, and `1.0` with seed `7`)
+- Current runtime validation: live NVIDIA L4 was re-verified on 2026-04-02; repo-local `.venv` reused the system CUDA stack successfully for the completed Mistral run
+- Current git checkpoint state: repo-local git author remained `Aditya Bhatt <bhattadiCS@users.noreply.github.com>` throughout the run; aggressive checkpoint commits landed and pushed across every temperature block, followed by a final analysis commit
+- Current harness compatibility state: the text-only Mistral path required the local torchvision shim and `torch_dtype` load fix, both now committed on `main`
+- Current resume instructions: no resume is required for this cycle; the completed raw run, per-run analysis, and updated cross-family artifacts are all on `origin/main`
 
 ## Checkpoints
 
@@ -30,6 +30,12 @@
 | 2026-04-02 15:13 UTC | C | Added the Mistral harness path, L4 benchmark runner, and non-Qwen selection note. | `048036e` | pushed |
 | 2026-04-02 15:18 UTC | D | Fixed the quantized Colab runner argument-order bug and checkpointed the successful Mistral smoke run artifacts. | `9d74e32` | pushed |
 | 2026-04-02 15:31 UTC | D | Committed the benchmark-selection checkpoint and recorded the chosen long-run Mistral L4 runtime. | `e6be9dd` | pushed |
+| 2026-04-02 23:16 UTC | D | Added the checkpointed Mistral long-run driver and pinned the repo-local dependency baseline. | `cd28243` | pushed |
+| 2026-04-02 23:39 UTC | D | Restored the live Mistral L4 runtime, revalidated the selected configuration, and committed the validation artifacts. | `58b3a3f` | pushed |
+| 2026-04-02 23:41 UTC | E | Fixed checkpoint-driver path normalization before restarting the full matched-protocol run. | `e70eedf` | pushed |
+| 2026-04-03 00:09 UTC | F | Added the watcher that waits for run completion and finalizes the analysis stack automatically. | `53b2dc8` | pushed |
+| 2026-04-03 overnight | E | Full matched-protocol Mistral run completed with checkpoint commits from `f7697f4` through `3a651ce`; per-checkpoint hashes and push status are recorded in `research/outputs/real_traces_l4_mistral_7b_checkpoint_history.jsonl`. | multiple | pushed |
+| 2026-04-03 completion | F | Regenerated the Mistral artifacts, reran the cross-family analysis, and committed the completed thesis-cycle outputs. | `968a96b` | pushed |
 
 ## Candidate Access Notes
 
@@ -61,5 +67,21 @@
 
 ## Pending Milestones
 
-1. Run the full matched-protocol non-Qwen experiment with aggressive checkpoint commits.
-2. Regenerate per-run and cross-family reports and update the claim.
+None. This autonomous cycle is complete.
+
+## Completed Full Mistral Result
+
+- Total matched-protocol runs: `900`
+- Temperatures and seed: `0.1`, `0.6`, `1.0` with seed `7`
+- Step-1 accuracy: `0.3022`
+- Peak accuracy: `0.3189` at step `10`
+- Corrected conditional-hazard boundary: `3`
+- Fitted hazard boundary: `5`
+- Never-stop oracle gap: `0.5696`
+- Assessment: `Weakened late-boundary support`
+
+## Final Claim State
+
+- Qwen 7B remains the only clearly late corrected-boundary witness in the repo.
+- Mistral 7B now provides a genuinely non-Qwen matched-protocol replication of early-helpful / later-harmful behavior with a nontrivial step-`3` corrected boundary and a large never-stop penalty.
+- The cross-family evidence is therefore materially stronger than the earlier single-family story, but full late-boundary robustness is still not established.
