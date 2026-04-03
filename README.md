@@ -23,11 +23,29 @@ We use a mathematical rule to decide exactly when to stop. We weigh:
 
 ### 3. Key Findings (Current Post-Audit State)
 Our experiments on an NVIDIA L4 GPU on GSM8K now support a narrower but stronger claim:
-- **Qwen2.5 7B 4-bit (Competent regime)**: This is the clearest late-boundary result in the repo. Step-1 accuracy is **0.3644**, peak correctness is **0.7789** at **Step 9**, and the corrected theorem-facing boundary is **Step 6**. Forcing the model to continue through the end loses **0.4317** utility relative to the oracle.
-- **Mistral 7B Instruct (Non-Qwen follow-up)**: This is the completed genuinely non-Qwen matched-protocol witness. Step-1 accuracy is **0.3022**, peak correctness is **0.3189** at **Step 10**, the corrected theorem-facing boundary is **Step 3**, and forcing the model to continue through the end loses **0.5696** utility relative to the oracle. This is real second-family support, but it is earlier and weaker than the Qwen 7B late-boundary case.
+- **Qwen2.5 7B 4-bit (Competent regime)**: This is still the clearest aggregate late-boundary result in the repo. Step-1 accuracy is **0.3644**, peak correctness is **0.7789** at **Step 9**, and the corrected theorem-facing boundary is **Step 6**. The stratum analysis is even more revealing: on the large `Medium` slice, the drift shows **`T_c^{first} = 1` but `T_c^{late} = 6`**, with a **+60.3pp** gain from Step 1 to peak. Forcing the aggregate run to continue through the end loses **0.4317** utility relative to the oracle.
+- **Mistral 7B Instruct (Non-Qwen follow-up)**: This is the completed genuinely non-Qwen matched-protocol witness. Step-1 accuracy is **0.3022**, peak correctness is **0.3189** at **Step 10**, and the corrected theorem-facing boundary is **Step 3**. On the `Medium` slice, the same dual-boundary pattern appears more weakly: **`T_c^{first} = 1` and `T_c^{late} = 3`**, with a **+14.7pp** gain from Step 1 to peak. This is real second-family support for the mechanism, but it is earlier and weaker than the Qwen 7B late-boundary case.
 - **DeepSeek-R1 Distill 1.5B**: The earlier proxy-based story that placed the boundary near Step 7 does **not** survive the conditional hazard audit. The corrected boundary is **Step 1**, so DeepSeek remains evidence that overthinking costs matter, but not the main late-boundary witness.
 - **Qwen2.5 0.5B (Weak control)**: This model remains in a low-skill regime and also crosses at **Step 1**, which is exactly the kind of early-boundary control the theory predicts.
 - **The Verdict**: Overthinking is real, measurable, and utility-relevant in more than one capable family. However, **full cross-family late-boundary robustness is still unproven** because the strongest clearly late corrected boundary remains Qwen 7B, while the Mistral follow-up crosses earlier at Step 3.
+
+### 4. What The Thesis Now Claims
+The thesis claim is no longer "there exists one universal overthinking step shared by every model." The stronger supported claim is that the boundary is a **capability-gated and stratum-dependent function of the repair-to-corruption balance**.
+
+That requires a dual-boundary reading of empirical drift traces:
+- **`T_c^{first}`** is the first step where the estimated drift becomes nonpositive.
+- **`T_c^{late}`** is the last positive-to-negative crossing and therefore the final usable repair window.
+
+This distinction matters because several real drift paths are nonmonotone rather than clean one-crossing curves. Qwen 7B on the `Medium` stratum is the clearest example: an early negative estimate is followed by a long repair-dominant window, so the scientifically important boundary is the later collapse at Step 6, not the first warning at Step 1. Mistral shows the same mechanism in compressed form, with a shorter late window that ends at Step 3.
+
+### 5. Open These Figures First
+If you only open a few artifacts before a defense or final write-up pass, start with these:
+- `research/outputs/difficulty_stratified_analysis/stratum_drift_grid.png`: the 4x3 drift grid is the clearest visual proof that the boundary is difficulty-stratum dependent.
+- `research/outputs/alpha_beta_predictive_analysis/alpha_beta_scatter.png`: the alpha/beta scatter is the cleanest single slide for the capability-gated claim.
+- `research/outputs/cross_family/cross_family_boundary_comparison.png`: the compact cross-family headline figure for the aggregate story.
+- `research/outputs/trajectory_type_analysis/trajectory_feature_profiles.png`: the backup figure that explains why Qwen repairs and Mistral corrupts at different rates.
+
+The defense-oriented derivation of the first-versus-late boundary logic is summarized in [ThesisDocs/dual_boundary_appendix.md](ThesisDocs/dual_boundary_appendix.md).
 
 ---
 

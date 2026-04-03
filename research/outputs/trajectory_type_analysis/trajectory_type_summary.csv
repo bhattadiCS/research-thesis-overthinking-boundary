@@ -1,0 +1,17 @@
+model,trajectory_type,count,pct
+Qwen 0.5B,repair,17,1.8888888888888888
+Qwen 0.5B,corruption,6,0.6666666666666667
+Qwen 0.5B,persistent_correct,58,6.444444444444445
+Qwen 0.5B,persistent_wrong,819,91.0
+DeepSeek 1.5B,repair,408,45.33333333333333
+DeepSeek 1.5B,corruption,207,23.0
+DeepSeek 1.5B,persistent_correct,6,0.6666666666666667
+DeepSeek 1.5B,persistent_wrong,279,31.0
+Mistral 7B,repair,138,15.333333333333332
+Mistral 7B,corruption,188,20.88888888888889
+Mistral 7B,persistent_correct,84,9.333333333333334
+Mistral 7B,persistent_wrong,490,54.44444444444444
+Qwen 7B,repair,423,47.0
+Qwen 7B,corruption,282,31.333333333333336
+Qwen 7B,persistent_correct,46,5.111111111111112
+Qwen 7B,persistent_wrong,149,16.555555555555557

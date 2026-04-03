@@ -22,6 +22,13 @@ MODEL_CHOICES = [
     "qwen2p5_0p5b",
     "qwen2p5_7b",
     "mistral_7b_instruct_v0p3",
+    "gemma_4_31b_it",
+    "gemma_4_26b_moe_it",
+    "gemma_4_e4b_it",
+    "qwen_3p5_7b_instruct",
+    "qwen_3p5_35b_moe_it",
+    "llama_4_8b_it",
+    "llama_3p1_8b_instruct",
 ]
 
 

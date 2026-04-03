@@ -1,0 +1,5 @@
+family,run_directory,runs,steps,repair_eligible_steps,repair_events,corruption_eligible_steps,corruption_events
+Qwen 0.5B,real_traces_l4_qwen_0p5b,900,9000,7456,22,644,15
+DeepSeek 1.5B,real_traces_l4_deepseek_1p5b,900,9000,5853,1105,2247,1030
+Mistral 7B,real_traces_l4_mistral_7b,900,9000,5761,326,2339,311
+Qwen 7B,real_traces_l4_qwen_7b_4bit,900,9000,3646,782,4454,409
