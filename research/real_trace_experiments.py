@@ -10,6 +10,7 @@ import re
 import shutil
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 from fractions import Fraction
 from pathlib import Path
@@ -39,6 +40,29 @@ except ImportError:
 
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
 STEP_COST = 0.05
+
+class IOManager:
+    def __init__(self, max_threads: int = 4):
+        self.executor = ThreadPoolExecutor(max_workers=max_threads)
+        self.pending_futures = []
+
+    def save_npz_async(self, path: Path, data_dict: dict[str, np.ndarray]) -> None:
+        future = self.executor.submit(np.savez_compressed, path, **data_dict)
+        self.pending_futures.append(future)
+        self._cleanup()
+
+    def _cleanup(self) -> None:
+        self.pending_futures = [f for f in self.pending_futures if not f.done()]
+
+    def wait_all(self) -> None:
+        for f in self.pending_futures:
+            f.result()
+        self.pending_futures = []
+
+    def shutdown(self) -> None:
+        self.wait_all()
+        self.executor.shutdown()
+
 SYSTEM_PROMPT = (
     "You are participating in a research protocol about incremental reasoning. "
     "Each step should be brief and update the current best answer rather than re-deriving the full solution. "
@@ -849,32 +873,50 @@ def load_model(
     device_map: str | None,
     attn_implementation: str,
 ) -> tuple[Any, Any, str, str]:
-    tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+    actual_device = device if device != "auto" else ("cuda" if torch.cuda.is_available() else "cpu")
+    
+    # Precision Auto-Tuning for L4
+    target_precision = quantization
+    if quantization == "auto" and actual_device == "cuda":
+        # Extract numeric parameter count
+        try:
+            num_params = float(re.findall(r"[\d.]+", model_spec.parameter_count)[0])
+            # If < 12B, use bfloat16 for speed on L4 24GB.
+            target_precision = "bf16" if num_params < 12 else "4bit"
+        except:
+            target_precision = "4bit"
+            
+    backend = "transformers+torch(cpu)"
+    load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
+    compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
+    
+    if actual_device == "cuda":
+        load_kwargs["torch_dtype"] = compute_dtype
+        # Flash Attention 2 Enforcement
+        if attn_implementation == "auto" or attn_implementation == "flash_attention_2":
+            load_kwargs["attn_implementation"] = "flash_attention_2"
+        else:
+            load_kwargs["attn_implementation"] = attn_implementation
+
+    is_multimodal = any(f in model_spec.family.lower() for f in ["gemma 4", "llama 4", "qwen3.5"])
+    model_class = AutoModelForMultimodalLM if is_multimodal else AutoModelForCausalLM
+    
+    # Loading handle (Processor for multimodal, Tokenizer for vanilla)
+    if is_multimodal:
+        processor = AutoProcessor.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+        tokenizer = processor
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
 
-    if device == "auto":
-        actual_device = "cuda" if torch.cuda.is_available() else "cpu"
-    else:
-        actual_device = device
-
-    backend = "transformers+torch(cpu)"
-    load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
-    compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
-    if actual_device == "cuda":
-        load_kwargs["torch_dtype"] = compute_dtype
-        if attn_implementation != "eager":
-            load_kwargs["attn_implementation"] = "sdpa" if attn_implementation == "auto" else attn_implementation
-
     try:
-        is_multimodal = any(f in model_spec.family.lower() for f in ["gemma 4", "llama 4", "qwen3.5"])
-        model_class = AutoModelForMultimodalLM if is_multimodal else AutoModelForCausalLM
-        
-        if actual_device == "cuda" and quantization in {"8bit", "4bit"}:
+        if actual_device == "cuda" and target_precision in {"8bit", "4bit"}:
             if BitsAndBytesConfig is None:
                 raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
-            if quantization == "8bit":
+            if target_precision == "8bit":
                 load_kwargs["quantization_config"] = BitsAndBytesConfig(
                     load_in_8bit=True,
                     llm_int8_enable_fp32_cpu_offload=True,
@@ -887,8 +929,16 @@ def load_model(
                     bnb_4bit_compute_dtype=compute_dtype,
                 )
             load_kwargs["device_map"] = device_map or "auto"
-            model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
-            backend = f"transformers+torch(cuda-{quantization})"
+            try:
+                model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
+            except ValueError as ve:
+                if "flash_attention_2" in str(ve):
+                    logging.warning("Flash Attention 2 not supported for this model. Falling back to SDPA.")
+                    load_kwargs["attn_implementation"] = "sdpa"
+                    model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
+                else:
+                    raise
+            backend = f"transformers+torch(cuda-{target_precision})"
         elif actual_device == "cuda" and device_map:
             load_kwargs["device_map"] = device_map
             model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
@@ -1256,10 +1306,10 @@ def run_batch_traces(
     seed: int,
     max_steps: int,
     max_new_tokens: int,
-    hidden_dir: Path,
     prompt_mode: str,
     system_prompt_mode: str,
     is_baseline: bool,
+    io_manager: IOManager | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     if not tasks:
         return [], [], []
@@ -1435,7 +1485,10 @@ def run_batch_traces(
             continue
 
         hidden_write_started_at = time.perf_counter()
-        np.savez_compressed(hidden_dir / f"{context['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
+        if io_manager:
+            io_manager.save_npz_async(hidden_dir / f"{context['run_id']}.npz", {"hidden_states": np.stack(hidden_vectors)})
+        else:
+            np.savez_compressed(hidden_dir / f"{context['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
         hidden_state_write_seconds += time.perf_counter() - hidden_write_started_at
         first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
         first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
@@ -1630,6 +1683,7 @@ def main() -> None:
     parser.add_argument("--system-prompt-mode", default="default", choices=["default", "short", "none"])
     parser.add_argument("--run-baseline", action="store_true", help="Run competence baseline instead of iterative reasoning")
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
+    parser.add_argument("--io-threads", type=int, default=4, help="Number of background threads for IO operations")
     parser.add_argument("--no-resume", dest="resume", action="store_false")
     parser.set_defaults(resume=True)
     args = parser.parse_args()
@@ -1706,122 +1760,127 @@ def main() -> None:
         )
         logging.info("Model loaded: %s | backend=%s | device=%s", model_spec.hf_name, backend, actual_device)
 
-    write_runtime_metadata(
-        metadata_path=paths["metadata"],
-        model_spec=model_spec,
-        backend=backend,
-        actual_device=actual_device,
-        quantization=args.quantization,
-        device_map=args.device_map,
-        attn_implementation=args.attn_implementation,
-        temperatures=args.temperatures,
-        seeds=args.seeds,
-        max_steps=args.max_steps,
-        max_new_tokens=args.max_new_tokens,
-        max_tasks=args.max_tasks,
-        task_source=args.task_source,
-        dataset_split=args.dataset_split,
-        dataset_shuffle_seed=args.dataset_shuffle_seed,
-        batch_size=args.batch_size,
-        prompt_mode=args.prompt_mode,
-        system_prompt_mode=args.system_prompt_mode,
-        resume_enabled=args.resume,
-        completed_run_ids=completed_run_ids,
-        pending_run_count=pending_requested_runs,
-        next_pending_run=next_pending_run,
-        reconciliation_report=reconciliation_report,
-        tasks=tasks,
-    )
+    io_manager = IOManager(max_threads=args.io_threads)
+    try:
+        write_runtime_metadata(
+            metadata_path=paths["metadata"],
+            model_spec=model_spec,
+            backend=backend,
+            actual_device=actual_device,
+            quantization=args.quantization,
+            device_map=args.device_map,
+            attn_implementation=args.attn_implementation,
+            temperatures=args.temperatures,
+            seeds=args.seeds,
+            max_steps=args.max_steps,
+            max_new_tokens=args.max_new_tokens,
+            max_tasks=args.max_tasks,
+            task_source=args.task_source,
+            dataset_split=args.dataset_split,
+            dataset_shuffle_seed=args.dataset_shuffle_seed,
+            batch_size=args.batch_size,
+            prompt_mode=args.prompt_mode,
+            system_prompt_mode=args.system_prompt_mode,
+            resume_enabled=args.resume,
+            completed_run_ids=completed_run_ids,
+            pending_run_count=pending_requested_runs,
+            next_pending_run=next_pending_run,
+            reconciliation_report=reconciliation_report,
+            tasks=tasks,
+        )
 
-    all_rows: list[dict[str, Any]] = list(existing_steps)
-    all_runs: list[dict[str, Any]] = list(existing_runs)
+        all_rows: list[dict[str, Any]] = list(existing_steps)
+        all_runs: list[dict[str, Any]] = list(existing_runs)
 
-    if model is not None and tokenizer is not None:
-        for temperature in args.temperatures:
-            for seed in args.seeds:
-                pending_tasks = [
-                    task
-                    for task in tasks
-                    if not args.resume or run_id_for(model_spec.alias, task, temperature, seed) not in completed_run_ids
-                ]
-                if not pending_tasks:
-                    logging.info("Skipping temp=%.2f seed=%d because all runs already exist.", temperature, seed)
-                    continue
+        if model is not None and tokenizer is not None:
+            for temperature in args.temperatures:
+                for seed in args.seeds:
+                    pending_tasks = [
+                        task
+                        for task in tasks
+                        if not args.resume or run_id_for(model_spec.alias, task, temperature, seed) not in completed_run_ids
+                    ]
+                    if not pending_tasks:
+                        logging.info("Skipping temp=%.2f seed=%d because all runs already exist.", temperature, seed)
+                        continue
 
-                set_seed(seed)
-                batches = list(chunked(pending_tasks, max(1, args.batch_size)))
-                progress = tqdm(batches, desc=f"temp={temperature:.2f} seed={seed}", unit="batch")
-                for task_batch in progress:
-                    batch_rows, batch_runs, batch_metrics = run_batch_traces(
-                        model=model,
-                        tokenizer=tokenizer,
-                        model_spec=model_spec,
-                        tasks=task_batch,
-                        actual_device=actual_device,
-                        temperature=temperature,
-                        seed=seed,
-                        max_steps=args.max_steps,
-                        max_new_tokens=args.max_new_tokens,
-                        hidden_dir=hidden_dir,
-                        prompt_mode=args.prompt_mode,
-                        system_prompt_mode=args.system_prompt_mode,
-                        is_baseline=args.run_baseline,
-                    )
-                    append_records(paths["steps"], batch_rows)
-                    append_records(paths["runs"], batch_runs)
-                    append_records(paths["batch_metrics"], batch_metrics)
-                    all_rows.extend(batch_rows)
-                    all_runs.extend(batch_runs)
-                    completed_run_ids.update(run["run_id"] for run in batch_runs)
-                    next_pending_run = first_pending_run(
-                        model_spec=model_spec,
-                        tasks=tasks,
-                        temperatures=args.temperatures,
-                        seeds=args.seeds,
-                        completed_run_ids=completed_run_ids if args.resume else set(),
-                    )
-                    write_runtime_metadata(
-                        metadata_path=paths["metadata"],
-                        model_spec=model_spec,
-                        backend=backend,
-                        actual_device=actual_device,
-                        quantization=args.quantization,
-                        device_map=args.device_map,
-                        attn_implementation=args.attn_implementation,
-                        temperatures=args.temperatures,
-                        seeds=args.seeds,
-                        max_steps=args.max_steps,
-                        max_new_tokens=args.max_new_tokens,
-                        max_tasks=args.max_tasks,
-                        task_source=args.task_source,
-                        dataset_split=args.dataset_split,
-                        dataset_shuffle_seed=args.dataset_shuffle_seed,
-                        batch_size=args.batch_size,
-                        prompt_mode=args.prompt_mode,
-                        system_prompt_mode=args.system_prompt_mode,
-                        resume_enabled=args.resume,
-                        completed_run_ids=completed_run_ids,
-                        pending_run_count=max(total_requested_runs - len(completed_run_ids), 0),
-                        next_pending_run=next_pending_run,
-                        reconciliation_report=reconciliation_report,
-                        tasks=tasks,
-                    )
-                    progress.set_postfix(
-                        runs=len(batch_runs),
-                        correct=sum(int(run["ever_correct"]) for run in batch_runs),
-                    )
+                    set_seed(seed)
+                    batches = list(chunked(pending_tasks, max(1, args.batch_size)))
+                    progress = tqdm(batches, desc=f"temp={temperature:.2f} seed={seed}", unit="batch")
+                    for task_batch in progress:
+                        batch_rows, batch_runs, batch_metrics = run_batch_traces(
+                            model=model,
+                            tokenizer=tokenizer,
+                            model_spec=model_spec,
+                            tasks=task_batch,
+                            actual_device=actual_device,
+                            temperature=temperature,
+                            seed=seed,
+                            max_steps=args.max_steps,
+                            max_new_tokens=args.max_new_tokens,
+                            prompt_mode=args.prompt_mode,
+                            system_prompt_mode=args.system_prompt_mode,
+                            is_baseline=args.run_baseline,
+                            io_manager=io_manager,
+                        )
+                        append_records(paths["steps"], batch_rows)
+                        append_records(paths["runs"], batch_runs)
+                        append_records(paths["batch_metrics"], batch_metrics)
+                        all_rows.extend(batch_rows)
+                        all_runs.extend(batch_runs)
+                        completed_run_ids.update(run["run_id"] for run in batch_runs)
+                        next_pending_run = first_pending_run(
+                            model_spec=model_spec,
+                            tasks=tasks,
+                            temperatures=args.temperatures,
+                            seeds=args.seeds,
+                            completed_run_ids=completed_run_ids if args.resume else set(),
+                        )
+                        write_runtime_metadata(
+                            metadata_path=paths["metadata"],
+                            model_spec=model_spec,
+                            backend=backend,
+                            actual_device=actual_device,
+                            quantization=args.quantization,
+                            device_map=args.device_map,
+                            attn_implementation=args.attn_implementation,
+                            temperatures=args.temperatures,
+                            seeds=args.seeds,
+                            max_steps=args.max_steps,
+                            max_new_tokens=args.max_new_tokens,
+                            max_tasks=args.max_tasks,
+                            task_source=args.task_source,
+                            dataset_split=args.dataset_split,
+                            dataset_shuffle_seed=args.dataset_shuffle_seed,
+                            batch_size=args.batch_size,
+                            prompt_mode=args.prompt_mode,
+                            system_prompt_mode=args.system_prompt_mode,
+                            resume_enabled=args.resume,
+                            completed_run_ids=completed_run_ids,
+                            pending_run_count=max(total_requested_runs - len(completed_run_ids), 0),
+                            next_pending_run=next_pending_run,
+                            reconciliation_report=reconciliation_report,
+                            tasks=tasks,
+                        )
+                        progress.set_postfix(
+                            runs=len(batch_runs),
+                            correct=sum(int(run["ever_correct"]) for run in batch_runs),
+                        )
 
-    if not all_rows or not all_runs:
-        raise RuntimeError("No trace data is available to summarize. The experiment produced no rows.")
+        if not all_rows or not all_runs:
+            raise RuntimeError("No trace data is available to summarize. The experiment produced no rows.")
 
-    if args.run_baseline:
-        logging.info("Wrote baseline artifacts to: %s", output_dir)
-        return
+        if args.run_baseline:
+            logging.info("Wrote baseline artifacts to: %s", output_dir)
+            return
 
-    step_frame = pd.DataFrame(all_rows)
-    run_frame = pd.DataFrame(all_runs)
-    transition_frame = summarize_transitions(step_frame)
-    pilot_summary = build_pilot_summary(step_frame, run_frame, transition_frame, model_spec, backend, actual_device)
+        step_frame = pd.DataFrame(all_rows)
+        run_frame = pd.DataFrame(all_runs)
+        transition_frame = summarize_transitions(step_frame)
+        pilot_summary = build_pilot_summary(step_frame, run_frame, transition_frame, model_spec, backend, actual_device)
+    finally:
+        if io_manager:
+            io_manager.shutdown()
 
     transition_frame.to_csv(paths["hazard"], index=False)
     pilot_summary.to_csv(paths["pilot"], index=False)

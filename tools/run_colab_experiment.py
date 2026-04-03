@@ -122,6 +122,7 @@ def run_real_trace_experiment(
     device_map: str | None,
     attn_implementation: str,
     resume: bool,
+    io_threads: int = 4,
 ) -> None:
     command = [
         PYTHON,
@@ -154,6 +155,8 @@ def run_real_trace_experiment(
         quantization,
         "--output-dir",
         str(output_dir),
+        "--io-threads",
+        str(io_threads),
     ]
     if device_map:
         command.extend(["--device-map", device_map])
@@ -245,6 +248,7 @@ def main() -> None:
     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
     parser.add_argument("--smoke-output-dir", default=str(DEFAULT_SMOKE_DIR))
+    parser.add_argument("--io-threads", type=int, default=4, help="Number of background threads for IO operations")
     parser.add_argument("--fresh-output", action="store_true")
     parser.add_argument("--no-resume", dest="resume", action="store_false")
     parser.set_defaults(resume=True)
@@ -286,6 +290,7 @@ def main() -> None:
             device_map=smoke_device_map,
             attn_implementation=args.attn_implementation,
             resume=False,
+            io_threads=args.io_threads,
         )
         run_analysis(smoke_output_dir)
         print_csv(smoke_output_dir / "pilot_summary.csv", "Smoke Pilot Summary")
@@ -316,6 +321,7 @@ def main() -> None:
         device_map=args.device_map,
         attn_implementation=args.attn_implementation,
         resume=args.resume,
+        io_threads=args.io_threads,
     )
     run_analysis(full_output_dir)
 
