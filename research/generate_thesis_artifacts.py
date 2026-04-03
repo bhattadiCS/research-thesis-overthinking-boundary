@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -281,11 +282,9 @@ def build_question_answers(
 
 
 def relative_markdown_link(target: Path, from_file: Path) -> str:
-    rel = target.relative_to(REPO_ROOT) if target.is_absolute() else target
-    base = from_file.parent.relative_to(REPO_ROOT) if from_file.is_absolute() else from_file.parent
-    if str(base) == ".":
-        return str(rel).replace("\\", "/")
-    return str(Path("..") / rel).replace("\\", "/")
+    target_abs = target if target.is_absolute() else (Path.cwd() / target).resolve()
+    from_abs = from_file if from_file.is_absolute() else (Path.cwd() / from_file).resolve()
+    return os.path.relpath(target_abs, start=from_abs.parent).replace("\\", "/")
 
 
 def build_answers_markdown(
