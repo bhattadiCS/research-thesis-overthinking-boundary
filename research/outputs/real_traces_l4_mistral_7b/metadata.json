@@ -29,13 +29,13 @@
   "prompt_mode": "minimal_json",
   "system_prompt_mode": "default",
   "resume_enabled": true,
-  "completed_run_count": 276,
-  "pending_run_count": 624,
+  "completed_run_count": 300,
+  "pending_run_count": 600,
   "next_pending_run": {
-    "run_id": "mistral_7b_instruct_v0p3__gsm8k_train_00276_4674940d__temp0.10__seed7",
-    "task_id": "gsm8k_train_00276_4674940d",
-    "task_source_index": 276,
-    "temperature": 0.1,
+    "run_id": "mistral_7b_instruct_v0p3__gsm8k_train_00000_b5828bc4__temp0.60__seed7",
+    "task_id": "gsm8k_train_00000_b5828bc4",
+    "task_source_index": 0,
+    "temperature": 0.6,
     "seed": 7
   },
   "checkpoint_reconciliation": {
