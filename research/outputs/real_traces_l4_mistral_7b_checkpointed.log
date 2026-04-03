@@ -91,3 +91,12 @@
 [2026-04-03 02:34:05 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=292 completed_runs_total=292 elapsed=154.0s
 [2026-04-03 02:36:00 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=296 completed_runs_total=296 elapsed=115.4s
 [2026-04-03 02:38:09 UTC] Completed batch temp=0.10 seed=7 batch_runs=4 completed_tasks_in_block=300 completed_runs_total=300 elapsed=128.8s
+[2026-04-03 02:38:14 UTC] Checkpoint temp0.10_t300 committed as 1ebd6b1fa8c7679d0c8b485c0e08e03e2e21753e and pushed successfully.
+[2026-04-03 02:38:14 UTC] Running temp=0.60 seed=7 with 300 pending tasks and 0 completed tasks already on disk.
+[2026-04-03 02:40:16 UTC] Completed batch temp=0.60 seed=7 batch_runs=4 completed_tasks_in_block=4 completed_runs_total=304 elapsed=122.0s
+[2026-04-03 02:42:36 UTC] Completed batch temp=0.60 seed=7 batch_runs=4 completed_tasks_in_block=8 completed_runs_total=308 elapsed=139.8s
+[2026-04-03 02:44:42 UTC] Completed batch temp=0.60 seed=7 batch_runs=4 completed_tasks_in_block=12 completed_runs_total=312 elapsed=126.1s
+[2026-04-03 02:47:25 UTC] Completed batch temp=0.60 seed=7 batch_runs=4 completed_tasks_in_block=16 completed_runs_total=316 elapsed=162.9s
+[2026-04-03 02:50:05 UTC] Completed batch temp=0.60 seed=7 batch_runs=4 completed_tasks_in_block=20 completed_runs_total=320 elapsed=160.6s
+[2026-04-03 02:52:25 UTC] Completed batch temp=0.60 seed=7 batch_runs=4 completed_tasks_in_block=24 completed_runs_total=324 elapsed=139.5s
+[2026-04-03 02:54:49 UTC] Completed batch temp=0.60 seed=7 batch_runs=4 completed_tasks_in_block=28 completed_runs_total=328 elapsed=143.7s
