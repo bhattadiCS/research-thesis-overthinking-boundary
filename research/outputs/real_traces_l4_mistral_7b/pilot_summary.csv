@@ -1,2 +1,2 @@
 model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
-mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,Mistral instruct,7B,476,300,1.3067226890756303,5.976890756302521,2.527310924369748,2.619747899159664,0.24665063168822216,41.68947060368642,0.05335760585585393,0.12005093789460974,229,transformers+torch(cuda),cuda
+mistral_7b_instruct_v0p3,mistralai/Mistral-7B-Instruct-v0.3,Mistral instruct,7B,500,300,1.298,6.068,2.58,2.644,0.24875986328125,41.906704906368255,0.05257534394140609,0.12012491964356123,235,transformers+torch(cuda),cuda
