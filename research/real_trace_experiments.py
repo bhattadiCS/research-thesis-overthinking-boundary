@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import gc
 import hashlib
+import importlib.util
 import json
 import logging
 import math
@@ -22,7 +23,7 @@ import torch
 from tqdm.auto import tqdm
 
 TORCHVISION_STUB_ROOT = Path(__file__).resolve().parent / "_vendor" / "torchvision_stub"
-if TORCHVISION_STUB_ROOT.exists() and str(TORCHVISION_STUB_ROOT) not in sys.path:
+if TORCHVISION_STUB_ROOT.exists() and importlib.util.find_spec("torchvision") is None:
     sys.path.insert(0, str(TORCHVISION_STUB_ROOT))
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed, AutoModelForMultimodalLM, AutoProcessor
@@ -889,14 +890,18 @@ def load_model(
     backend = "transformers+torch(cpu)"
     load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
     compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
+    dtype_label = "bfloat16" if compute_dtype == torch.bfloat16 else "float16"
+    logging.info("Precision auto-tuning: %s detected for %s model.", dtype_label, model_spec.parameter_count)
     
     if actual_device == "cuda":
         load_kwargs["torch_dtype"] = compute_dtype
         # Flash Attention 2 Enforcement
         if attn_implementation == "auto" or attn_implementation == "flash_attention_2":
             load_kwargs["attn_implementation"] = "flash_attention_2"
+            logging.info("Flash Attention 2 explicitly enabled.")
         else:
             load_kwargs["attn_implementation"] = attn_implementation
+            logging.info("Attention implementation: %s (native FA2 kernels via SDPA).", attn_implementation)
 
     is_multimodal = any(f in model_spec.family.lower() for f in ["gemma 4", "llama 4", "qwen3.5"])
     model_class = AutoModelForMultimodalLM if is_multimodal else AutoModelForCausalLM
@@ -904,7 +909,8 @@ def load_model(
     # Loading handle (Processor for multimodal, Tokenizer for vanilla)
     if is_multimodal:
         processor = AutoProcessor.from_pretrained(model_spec.hf_name, trust_remote_code=True)
-        tokenizer = processor
+        # Use the inner tokenizer for text encoding; it also has apply_chat_template
+        tokenizer = getattr(processor, "tokenizer", processor)
     else:
         tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
 
@@ -1309,6 +1315,7 @@ def run_batch_traces(
     prompt_mode: str,
     system_prompt_mode: str,
     is_baseline: bool,
+    hidden_dir: Path,
     io_manager: IOManager | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     if not tasks:
@@ -1485,11 +1492,14 @@ def run_batch_traces(
             continue
 
         hidden_write_started_at = time.perf_counter()
+        npz_path = hidden_dir / f"{context['run_id']}.npz"
         if io_manager:
-            io_manager.save_npz_async(hidden_dir / f"{context['run_id']}.npz", {"hidden_states": np.stack(hidden_vectors)})
+            io_manager.save_npz_async(npz_path, {"hidden_states": np.stack(hidden_vectors)})
+            logging.info("IOManager: Background saving started for %s", npz_path.name)
         else:
-            np.savez_compressed(hidden_dir / f"{context['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
+            np.savez_compressed(npz_path, hidden_states=np.stack(hidden_vectors))
         hidden_state_write_seconds += time.perf_counter() - hidden_write_started_at
+        logging.info("batch_metrics: hidden_state_write_seconds = %.4f", hidden_state_write_seconds)
         first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
         first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
         oracle_stop = max(run_rows, key=lambda row: row["utility"])["step"]
@@ -1821,6 +1831,7 @@ def main() -> None:
                             prompt_mode=args.prompt_mode,
                             system_prompt_mode=args.system_prompt_mode,
                             is_baseline=args.run_baseline,
+                            hidden_dir=hidden_dir,
                             io_manager=io_manager,
                         )
                         append_records(paths["steps"], batch_rows)
