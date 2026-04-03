@@ -1,5 +1,6 @@
-transformers>=4.49,<4.50
-accelerate>=1.4
+transformers>=4.51,<4.52
+accelerate>=1.5
+flash-attn>=2.7.2
 datasets>=3.4
 evaluate>=0.4
 bitsandbytes>=0.45

@@ -85,3 +85,17 @@ None. This autonomous cycle is complete.
 - Qwen 7B remains the only clearly late corrected-boundary witness in the repo.
 - Mistral 7B now provides a genuinely non-Qwen matched-protocol replication of early-helpful / later-harmful behavior with a nontrivial step-`3` corrected boundary and a large never-stop penalty.
 - The cross-family evidence is therefore materially stronger than the earlier single-family story, but full late-boundary robustness is still not established.
+
+## 2026-04-03 Algorithm X CPU Phase
+
+- Detailed phase log: `research/outputs/universal_feature_analysis/autonomous_zero_shot_log.md`
+- Mode: local CPU-only universal feature analysis and leave-one-family-out hazard regression
+- Candidate scan: `linear_required6`, `linear_top4`, and `quadratic_top4`
+- Selected Algorithm X basis: `quadratic_top4` over `entropy_mean`, `answer_changed`, `thought_token_count`, and `hidden_l2_shift`
+- Mean zero-shot repair AUC: `0.6070`
+- Mean zero-shot corruption AUC: `0.6930`
+- Mistral hidden repair AUC: `0.7089`
+- Qwen 7B hidden corruption AUC: `0.8055`
+- Entropy significance check: `r = 0.1243`, 95% CI `[0.1047, 0.1439]`, `p = 1.17e-34`
+- Outcome: strong zero-shot proof of concept with both hidden-family calibration targets satisfied, but the all-family corruption target remains narrowly missed by `0.0070`
+- Phase-2 intake file: `research/outputs/universal_feature_analysis/universal_hazard_weights.csv`

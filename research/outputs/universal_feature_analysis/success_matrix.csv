@@ -1,0 +1,5 @@
+criterion,value,threshold,status
+Average beta LOFO AUC > 0.70,0.6930154195184136,0.7,fail
+Mistral alpha generalization gap < 0.05,-0.05838959036562197,0.05,pass
+Mistral hidden repair AUC about 0.68,0.7089033248486012,0.68,pass
+Qwen 7B hidden corruption AUC about 0.80,0.8054566445338355,0.8,pass

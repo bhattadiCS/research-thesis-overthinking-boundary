@@ -24,7 +24,7 @@ TORCHVISION_STUB_ROOT = Path(__file__).resolve().parent / "_vendor" / "torchvisi
 if TORCHVISION_STUB_ROOT.exists() and str(TORCHVISION_STUB_ROOT) not in sys.path:
     sys.path.insert(0, str(TORCHVISION_STUB_ROOT))
 
-from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
+from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed, AutoModelForMultimodalLM, AutoProcessor
 
 try:
     from datasets import load_dataset
@@ -223,6 +223,48 @@ MODEL_CATALOG = {
         hf_name="mistralai/Mistral-7B-Instruct-v0.3",
         family="Mistral instruct",
         parameter_count="7B",
+    ),
+    "gemma_4_31b_it": ModelSpec(
+        alias="gemma_4_31b_it",
+        hf_name="google/gemma-4-31B-it",
+        family="Gemma 4",
+        parameter_count="31B",
+    ),
+    "gemma_4_26b_moe_it": ModelSpec(
+        alias="gemma_4_26b_moe_it",
+        hf_name="google/gemma-4-26B-A4B-it",
+        family="Gemma 4 MoE",
+        parameter_count="26B",
+    ),
+    "gemma_4_e4b_it": ModelSpec(
+        alias="gemma_4_e4b_it",
+        hf_name="google/gemma-4-E4B-it",
+        family="Gemma 4 Edge",
+        parameter_count="4B",
+    ),
+    "qwen_3p5_7b_instruct": ModelSpec(
+        alias="qwen_3p5_7b_instruct",
+        hf_name="Qwen/Qwen3.5-7B-Instruct",
+        family="Qwen3.5 instruct",
+        parameter_count="7B",
+    ),
+    "qwen_3p5_35b_moe_it": ModelSpec(
+        alias="qwen_3p5_35b_moe_it",
+        hf_name="Qwen/Qwen3.5-35B-A3B",
+        family="Qwen3.5 MoE",
+        parameter_count="35B",
+    ),
+    "llama_4_8b_it": ModelSpec(
+        alias="llama_4_8b_it",
+        hf_name="meta-llama/Llama-4-8B-Instruct",
+        family="Llama 4",
+        parameter_count="8B",
+    ),
+    "llama_3p1_8b_instruct": ModelSpec(
+        alias="llama_3p1_8b_instruct",
+        hf_name="meta-llama/Llama-3.1-8B-Instruct",
+        family="Llama 3.1",
+        parameter_count="8B",
     ),
 }
 
@@ -826,6 +868,9 @@ def load_model(
             load_kwargs["attn_implementation"] = "sdpa" if attn_implementation == "auto" else attn_implementation
 
     try:
+        is_multimodal = any(f in model_spec.family.lower() for f in ["gemma 4", "llama 4", "qwen3.5"])
+        model_class = AutoModelForMultimodalLM if is_multimodal else AutoModelForCausalLM
+        
         if actual_device == "cuda" and quantization in {"8bit", "4bit"}:
             if BitsAndBytesConfig is None:
                 raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
@@ -842,14 +887,14 @@ def load_model(
                     bnb_4bit_compute_dtype=compute_dtype,
                 )
             load_kwargs["device_map"] = device_map or "auto"
-            model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+            model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
             backend = f"transformers+torch(cuda-{quantization})"
         elif actual_device == "cuda" and device_map:
             load_kwargs["device_map"] = device_map
-            model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+            model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
             backend = f"transformers+torch(cuda-device-map={device_map})"
         else:
-            model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+            model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
             model.to(actual_device)
             backend = f"transformers+torch({actual_device})"
     except Exception as exc:

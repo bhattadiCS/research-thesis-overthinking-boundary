@@ -1,0 +1,4 @@
+model_name,basis,features,feature_count,alpha_mean_train_auc,alpha_mean_test_auc,beta_mean_train_auc,beta_mean_test_auc,q_mean_test_auc,mistral_alpha_test_auc,mistral_alpha_gap,qwen7_beta_test_auc
+quadratic_top4,quadratic,"entropy_mean, answer_changed, thought_token_count, hidden_l2_shift",4,0.6769828850903972,0.6070325705893791,0.775272387046323,0.6930154195184136,0.6435305718090998,0.7089033248486012,-0.05838959036562197,0.8054566445338355
+linear_top4,linear,"entropy_mean, answer_changed, thought_token_count, hidden_l2_shift",4,0.6410109344055488,0.5971659827044176,0.6981822563742816,0.6736285121049519,0.6375643517159529,0.6992070255840074,-0.07195946550859134,0.80821836249286
+linear_required6,linear,"entropy_mean, entropy_std, confidence, hidden_l2_shift, answer_changed, thought_token_count",6,0.6925677827840442,0.5847741566711766,0.7588523210050606,0.6318600286463067,0.6339078841281721,0.70075515997765,-0.01048233364524409,0.8180590605081585
