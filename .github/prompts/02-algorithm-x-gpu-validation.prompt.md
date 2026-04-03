@@ -10,10 +10,10 @@ agent: "GPT-5.4 xhigh"
 Phase 1 established the **Universal Law of Overthinking** with a 0.805 AUC on legacy models. Phase 2 extends this to the 2026 frontier: **Gemma 4**, **Qwen 3.5**, and **Llama 4**. You are the **GPT-5.4 xhigh** autonomous researcher. Your goal is to prove that Algorithm X generalizes to these state-of-the-art architectures without retraining.
 
 ## EXECUTION STACK (L4 OPTIMIZED)
-- **Quantization**: 4-bit (NF4) via `bitsandbytes` to fit 30B+ models on 24GB VRAM.
+- **Quantization**: 4-bit (NF4) via `bitsandbytes` to fit 30B+ models on 22.5GB VRAM.
 - **Attention**: Flash Attention 2 for all supported architectures.
 - **Loading**: Use `AutoModelForMultimodalLM` for hybrid/multimodal models (Gemma 4, Llama 4).
-- **Batching**: Start at batch_size=8; use dynamic microbatch splitting on OOM.
+- **Batching**: Start at batch_size=4 for 31B+ models, batch_size=8 for <12B; use dynamic microbatch splitting on OOM.
 
 ## AUTONOMOUS RESEARCH TASKS
 
@@ -31,19 +31,25 @@ Phase 1 established the **Universal Law of Overthinking** with a 0.805 AUC on le
     1. `gemma_4_31b_it` (Flagship Validation)
     2. `qwen_3p5_35b_moe_it` (MoE Boundary Test)
     3. `llama_4_8b_it` (Efficiency Baseline)
-- **Checkpointing**: **MANDATORY** `git commit` and `git push` every **25 tasks** or **15 minutes**. Use descriptive messages: `[ALGO-X] Checkpoint: gemma-4-31b task 150/300`.
+- **Checkpointing**: Every 25 tasks, you MUST run:
+    ```bash
+    git add .
+    git commit -m "[ALGO-X] Autonomous Progress: Model=$MODEL Task=$N"
+    git push origin main
+    ```
 
 ### TASK 3: Universal Zero-Shot Synthesis
 - **Objective**: Apply the `quadratic_top4` regressor from Phase 1 to these traces.
-- **Success Metric**: Accuracy-per-token efficiency gain >25% compared to fixed-step baselines.
+- **Success Metric**: Accuracy-per-token efficiency gain >25%.
 
-## ERROR HANDLING & RESILIENCE
-- **OOM**: If `RuntimeError: CUDA out of memory` occurs, the runner will automatically bisect the batch. You must monitor logs and reduce the starting batch size if bisections occur frequently.
-- **Colab Disconnect**: The state is preserved via aggressive git pushes. Upon resumption, check `research/outputs/` and use the `--resume` flag.
+## EXECUTION & AUTONOMY
+- **Entry Point**: `python tools/run_colab_experiment.py`
+- **Flagship Command**: `python tools/run_colab_experiment.py --model gemma_4_31b_it --full-batch-size 8 --io-threads 8 --attn-implementation flash_attention_2 --quantization 4bit`
+- **Resilience**: If disconnect, use `--resume`. If OOM, the runner bisects automatically.
 
 ## DEFINITION OF DONE
 1.  Full trace datasets generated for Gemma 4 (31B), Qwen 3.5 (35B), and Llama 4 (8B).
 2.  `research/reports/frontier_validation_report.md` confirms zero-shot generalization.
-3.  All artifacts pushed to `origin/main` with rigorous commit history.
+3.  All artifacts pushed with rigorous commit history.
 
 **GOAL**: Solidify Algorithm X as the definitive universal regulator for reasoning-based model stopping.
