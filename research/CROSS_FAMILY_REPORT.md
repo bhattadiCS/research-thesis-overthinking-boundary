@@ -1,7 +1,7 @@
 # Cross-Family Report
 
 ## Executive Summary
-A late overthinking boundary now appears in at least two capable families under the matched GSM8K protocol, so cross-family support is materially stronger.
+Qwen 7B remains the only clearly late corrected-boundary witness, but Mistral 7B now adds a weaker non-Qwen step-3 boundary with a large never-stop penalty. Cross-family evidence is therefore stronger than a single-family story, but full late-boundary robustness is still unproven.
 
 Task IDs align across all 4 runs under the shared GSM8K train split and shuffle seed 17 protocol.
 

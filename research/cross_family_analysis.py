@@ -367,12 +367,19 @@ def markdown_table(headers: list[str], rows: list[list[str]]) -> list[str]:
 
 def strongest_cross_family_conclusion(summary_df: pd.DataFrame) -> str:
     capable = summary_df[summary_df["capability_gate_met"] == True]
-    late = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"])]
+    strong_late = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication"])]
+    supportive_late = capable[
+        capable["late_boundary_assessment"].isin(
+            ["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"]
+        )
+    ]
     if capable.empty:
         return "No run currently clears the capability gate, so the repo still lacks a theorem-facing cross-family boundary witness."
-    if late["family"].nunique() >= 2:
-        return "A late overthinking boundary now appears in at least two capable families under the matched GSM8K protocol, so cross-family support is materially stronger."
-    if late["family"].nunique() == 1:
+    if strong_late["family"].nunique() >= 2:
+        return "A materially late overthinking boundary now appears in at least two capable families under the matched GSM8K protocol, so cross-family support is materially stronger."
+    if strong_late["family"].nunique() == 1 and supportive_late["family"].nunique() >= 2:
+        return "Qwen 7B remains the only clearly late corrected-boundary witness, but Mistral 7B now adds a weaker non-Qwen step-3 boundary with a large never-stop penalty. Cross-family evidence is therefore stronger than a single-family story, but full late-boundary robustness is still unproven."
+    if supportive_late["family"].nunique() == 1:
         return "Late-boundary evidence is still confined to a single capable family, so cross-family robustness remains unproven."
     return "After the hazard audit, the current matched GSM8K evidence does not support a late conditional-hazard boundary in any available run."
 
@@ -498,7 +505,12 @@ def open_question_rows(summary_df: pd.DataFrame) -> list[dict[str, str]]:
     capable = summary_df[summary_df["capability_gate_met"] == True]
     qwen_family = summary_df[summary_df["family"].str.contains("Qwen", case=False, na=False)]
     qwen_capable = qwen_family[qwen_family["capability_gate_met"] == True]
-    late_runs = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"])]
+    strong_late_runs = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication"])]
+    supportive_late_runs = capable[
+        capable["late_boundary_assessment"].isin(
+            ["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"]
+        )
+    ]
     detector_changes = summary_df["best_detector"].nunique() > 1
     signal_features = summary_df["strongest_corruption_feature"].dropna().unique().tolist()
     has_qwen7 = any(summary_df["model_alias"] == "qwen2p5_7b")
@@ -506,10 +518,13 @@ def open_question_rows(summary_df: pd.DataFrame) -> list[dict[str, str]]:
     if capable.empty:
         boundary_status = "still unresolved"
         boundary_answer = "No run currently clears the capability gate, so boundary existence is not yet robust across families."
-    elif late_runs["family"].nunique() >= 2:
+    elif strong_late_runs["family"].nunique() >= 2:
         boundary_status = "answered"
-        boundary_answer = "A late boundary is present in at least two capable families under the matched GSM8K protocol."
-    elif late_runs["family"].nunique() == 1:
+        boundary_answer = "A materially late boundary is present in at least two capable families under the matched GSM8K protocol."
+    elif strong_late_runs["family"].nunique() == 1 and supportive_late_runs["family"].nunique() >= 2:
+        boundary_status = "partially answered"
+        boundary_answer = "A clearly late boundary is still supported in only one capable family, but Mistral adds weaker second-family support with a corrected step-3 crossing and a large never-stop penalty. Cross-family robustness is stronger than before, but not yet settled."
+    elif supportive_late_runs["family"].nunique() == 1:
         boundary_status = "partially answered"
         boundary_answer = "A late boundary is only supported in one capable family so far, so cross-family robustness is still unproven."
     else:
@@ -543,9 +558,12 @@ def open_question_rows(summary_df: pd.DataFrame) -> list[dict[str, str]]:
     if not has_qwen7:
         family_status = "still unresolved"
         family_answer = "Without a capable second-family follow-up, the current data cannot separate family effects from capability effects."
-    elif late_runs["family"].nunique() >= 2:
+    elif strong_late_runs["family"].nunique() >= 2:
         family_status = "partially answered"
         family_answer = "A late boundary in multiple capable families weakens the case for a DeepSeek-only effect, but one benchmark and one capable run per family still leave family-versus-capability attribution incomplete."
+    elif strong_late_runs["family"].nunique() == 1 and supportive_late_runs["family"].nunique() >= 2:
+        family_status = "partially answered"
+        family_answer = "The completed Mistral run weakens the case for a single-family artifact, but its earlier step-3 boundary still leaves family-versus-capability attribution incomplete and below a strong cross-family late-boundary claim."
     else:
         family_status = "partially answered"
         family_answer = "The matched benchmark now includes multiple families, but the evidence still cannot cleanly isolate family effects from capability effects."
@@ -555,7 +573,7 @@ def open_question_rows(summary_df: pd.DataFrame) -> list[dict[str, str]]:
         blocked_answer = "Without the Qwen 7B second-family run, the repo cannot claim cross-family robustness, capability-linked boundary placement within Qwen, or stable detector/signal behavior in a capable second family."
     else:
         blocked_status = "answered"
-        blocked_answer = "Even with the Qwen 7B run, the repo still cannot claim benchmark-invariant behavior, clean family-versus-capability separation, or universal observable stability without additional families or benchmarks."
+        blocked_answer = "Even with the completed Mistral follow-up, the repo still cannot claim benchmark-invariant behavior, clean family-versus-capability separation, or universal observable stability without additional families or benchmarks."
 
     return [
         {
