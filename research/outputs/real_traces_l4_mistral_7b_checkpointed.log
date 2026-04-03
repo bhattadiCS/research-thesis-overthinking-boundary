@@ -267,3 +267,5 @@
 [2026-04-03 08:33:17 UTC] Completed batch temp=1.00 seed=7 batch_runs=4 completed_tasks_in_block=292 completed_runs_total=892 elapsed=138.9s
 [2026-04-03 08:35:37 UTC] Completed batch temp=1.00 seed=7 batch_runs=4 completed_tasks_in_block=296 completed_runs_total=896 elapsed=140.1s
 [2026-04-03 08:37:40 UTC] Completed batch temp=1.00 seed=7 batch_runs=4 completed_tasks_in_block=300 completed_runs_total=900 elapsed=122.4s
+[2026-04-03 08:37:45 UTC] Checkpoint temp1.00_t300 committed as 3a651ce03931fb3ff54e8a3e138a408e8b724a26 and pushed successfully.
+[2026-04-03 08:37:46 UTC] Checkpointed collection finished with completed_runs=900 pending_runs=0.
