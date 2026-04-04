@@ -273,12 +273,6 @@ MODEL_CATALOG = {
         family="Qwen3.5 instruct",
         parameter_count="9B",
     ),
-    "qwen_3p5_9b": ModelSpec(
-        alias="qwen_3p5_9b",
-        hf_name="Qwen/Qwen3.5-9B",
-        family="Qwen3.5 instruct",
-        parameter_count="9B",
-    ),
     "qwen_3p5_35b_moe_it": ModelSpec(
         alias="qwen_3p5_35b_moe_it",
         hf_name="Qwen/Qwen3.5-35B-A3B",
@@ -296,18 +290,6 @@ MODEL_CATALOG = {
         hf_name="QuantTrio/Qwen3.5-35B-A3B-AWQ",
         family="Qwen3.5 MoE AWQ",
         parameter_count="35B",
-    ),
-    "llama_4_scout_17b_it": ModelSpec(
-        alias="llama_4_scout_17b_it",
-        hf_name="chutesai/Llama-4-Scout-17B-16E-Instruct",
-        family="Llama 4 Scout",
-        parameter_count="17B",
-    ),
-    "llama_4_scout_17b_unsloth_bnb4": ModelSpec(
-        alias="llama_4_scout_17b_unsloth_bnb4",
-        hf_name="unsloth/Llama-4-Scout-17B-16E-Instruct-unsloth-bnb-4bit",
-        family="Llama 4 Scout 4bit",
-        parameter_count="17B",
     ),
     "llama_3p1_8b_instruct": ModelSpec(
         alias="llama_3p1_8b_instruct",

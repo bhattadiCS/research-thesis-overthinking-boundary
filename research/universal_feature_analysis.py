@@ -73,6 +73,12 @@ MODEL_SPECS = (
         basis="quadratic",
         c_value=1.0,
     ),
+    ModelSpec(
+        name="hazard_quadratic_combo_entropymean_entropystd_confidence_thoughttokencount",
+        features=("entropy_mean", "entropy_std", "confidence", "thought_token_count"),
+        basis="quadratic",
+        c_value=1.0,
+    ),
 )
 
 
