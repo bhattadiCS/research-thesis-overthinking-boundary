@@ -26,9 +26,10 @@ DEFAULT_SUMMARY_PATH = REPORTS_DIR / "frontier_validation_summary.csv"
 DEFAULT_INTEGRITY_PATH = REPORTS_DIR / "frontier_validation_integrity.csv"
 DEFAULT_METADATA_PATH = OUTPUT_BASE / "universal_feature_analysis" / "universal_hazard_model_metadata.json"
 DEFAULT_FRONTIER_RUN_DIRS = [
+    OUTPUT_BASE / "real_traces_colab_gemma_4_e4b_it",
+    OUTPUT_BASE / "real_traces_colab_qwen_3p5_9b",
     OUTPUT_BASE / "real_traces_colab_gemma_4_31b_it",
-    OUTPUT_BASE / "real_traces_colab_qwen_3p5_35b_moe_it",
-    OUTPUT_BASE / "real_traces_colab_llama_4_8b_it",
+    OUTPUT_BASE / "real_traces_colab_llama_3p1_8b_instruct",
 ]
 DEFAULT_SELECTED_MODEL = "quadratic_top4"
 DEFAULT_STEP_COST = 0.05
@@ -402,11 +403,13 @@ def build_report(
     missing_run_dirs: list[Path],
     selected_name: str,
     step_cost: float,
+    expected_run_count: int,
+    protocol_name: str,
 ) -> str:
     completed = int(len(results_frame))
     data_quality_pass = bool(results_frame["data_quality_pass"].all()) if completed else False
     efficiency_pass = bool(results_frame["efficiency_pass"].all()) if completed else False
-    complete_frontier_set = completed == len(DEFAULT_FRONTIER_RUN_DIRS) and not missing_run_dirs
+    complete_frontier_set = completed == expected_run_count and not missing_run_dirs
 
     verdict_parts = []
     if complete_frontier_set and data_quality_pass and efficiency_pass:
@@ -421,7 +424,7 @@ def build_report(
     score_table = pd.DataFrame(
         [
             {
-                "criterion": "All 3 frontier model families present",
+                "criterion": f"All requested protocol runs present ({expected_run_count})",
                 "status": "pass" if complete_frontier_set else "fail",
             },
             {
@@ -471,6 +474,7 @@ def build_report(
         "",
         "## Protocol",
         "",
+        f"- Protocol label: `{protocol_name}`.",
         f"- Phase 1 intake: `{selected_name}` fit on capable legacy families only ({', '.join(CAPABLE_FAMILIES)}).",
         f"- Step cost: `{step_cost:.2f}` utility units per extra reasoning step.",
         "- Efficiency metric: stop accuracy divided by mean cumulative generated tokens, reported as accuracy per 1k generated tokens.",
@@ -527,6 +531,7 @@ def main() -> None:
     parser.add_argument("--report-path", default=str(DEFAULT_REPORT_PATH))
     parser.add_argument("--summary-path", default=str(DEFAULT_SUMMARY_PATH))
     parser.add_argument("--integrity-path", default=str(DEFAULT_INTEGRITY_PATH))
+    parser.add_argument("--protocol-name", default="frontier_validation")
     parser.add_argument("--random-state", type=int, default=7)
     args = parser.parse_args()
 
@@ -581,6 +586,8 @@ def main() -> None:
             missing_run_dirs=missing_run_dirs,
             selected_name=selected_spec.name,
             step_cost=step_cost,
+            expected_run_count=len(requested_run_dirs),
+            protocol_name=args.protocol_name,
         ),
         encoding="utf-8",
     )

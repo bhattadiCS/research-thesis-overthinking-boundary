@@ -1,0 +1,5 @@
+family,run_dir,runs,steps,tasks,parse_success_rate
+DeepSeek 1.5B,real_traces_l4_deepseek_1p5b,900,9000,300,0.010888888888888889
+Mistral 7B,real_traces_l4_mistral_7b,900,9000,300,0.6938888888888889
+Qwen 0.5B,real_traces_l4_qwen_0p5b,900,9000,300,0.9871111111111112
+Qwen 7B,real_traces_l4_qwen_7b_4bit,900,9000,300,0.566

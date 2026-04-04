@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+gemma_4_e4b_it,google/gemma-4-E4B-it,Gemma 4 Edge,4B,2,2,1.0,1.0,2.0,0.0,0.203369140625,12.361268520355225,,0.0,2,transformers+torch(cuda),cuda

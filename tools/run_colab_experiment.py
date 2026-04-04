@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import importlib.metadata
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -25,11 +27,62 @@ MODEL_CHOICES = [
     "gemma_4_31b_it",
     "gemma_4_26b_moe_it",
     "gemma_4_e4b_it",
-    "qwen_3p5_7b_instruct",
+    "qwen_3p5_9b",
     "qwen_3p5_35b_moe_it",
-    "llama_4_8b_it",
+    "qwen_3p5_35b_gptq_int4",
+    "qwen_3p5_35b_awq",
+    "llama_4_scout_17b_it",
+    "llama_4_scout_17b_unsloth_bnb4",
     "llama_3p1_8b_instruct",
+    "phi_4_mini_instruct",
+    "internlm3_8b_instruct",
+    "yi_1p5_9b_chat",
+    "mistral_small_3p1_24b_instruct",
 ]
+
+MINIMUM_PACKAGE_VERSIONS = {
+    "transformers": {"module": "transformers", "min_version": "5.5.0"},
+    "accelerate": {"module": "accelerate", "min_version": "1.13.0"},
+    "datasets": {"module": "datasets", "min_version": "3.4.0"},
+    "evaluate": {"module": "evaluate", "min_version": "0.4.0"},
+    "bitsandbytes": {"module": "bitsandbytes", "min_version": "0.49.0"},
+    "sentencepiece": {"module": "sentencepiece", "min_version": "0.2.0"},
+    "safetensors": {"module": "safetensors", "min_version": "0.4.0"},
+    "pandas": {"module": "pandas", "min_version": "2.2.0"},
+    "scikit-learn": {"module": "sklearn", "min_version": "1.6.0"},
+    "scipy": {"module": "scipy", "min_version": "1.15.0"},
+    "matplotlib": {"module": "matplotlib", "min_version": "3.10.0"},
+    "numpy": {"module": "numpy", "min_version": "2.0.0"},
+    "tqdm": {"module": "tqdm", "min_version": "4.67.0"},
+}
+
+
+def version_key(raw_version: str) -> tuple[int, ...]:
+    numbers = [int(value) for value in re.findall(r"\d+", raw_version)]
+    if not numbers:
+        return (0,)
+    return tuple(numbers)
+
+
+def collect_package_issues() -> tuple[list[str], list[str]]:
+    satisfied: list[str] = []
+    issues: list[str] = []
+    for package_name, spec in MINIMUM_PACKAGE_VERSIONS.items():
+        module_name = spec["module"]
+        min_version = spec["min_version"]
+        if importlib.util.find_spec(module_name) is None:
+            issues.append(f"{package_name} missing (requires >= {min_version})")
+            continue
+        try:
+            installed_version = importlib.metadata.version(package_name)
+        except importlib.metadata.PackageNotFoundError:
+            issues.append(f"{package_name} installed but distribution metadata is unavailable")
+            continue
+        if version_key(installed_version) < version_key(min_version):
+            issues.append(f"{package_name}=={installed_version} is too old (requires >= {min_version})")
+            continue
+        satisfied.append(f"{package_name}=={installed_version}")
+    return satisfied, issues
 
 
 def run_command(command: list[str], cwd: Path = REPO_ROOT) -> None:
@@ -40,32 +93,29 @@ def run_command(command: list[str], cwd: Path = REPO_ROOT) -> None:
 
 
 def ensure_packages(skip_install: bool) -> None:
+    satisfied, issues = collect_package_issues()
+    if not issues:
+        print(f"[setup] Required Python packages meet minimum versions: {', '.join(satisfied)}", flush=True)
+        return
+
     if skip_install:
-        print("[setup] Skipping dependency installation by request.", flush=True)
-        return
+        raise RuntimeError(
+            "[setup] --skip-install requested, but the environment does not match the verified baseline: "
+            + "; ".join(issues)
+        )
 
-    required_modules = {
-        "transformers": "transformers",
-        "accelerate": "accelerate",
-        "datasets": "datasets",
-        "evaluate": "evaluate",
-        "bitsandbytes": "bitsandbytes",
-        "sentencepiece": "sentencepiece",
-        "safetensors": "safetensors",
-        "pandas": "pandas",
-        "sklearn": "scikit-learn",
-        "scipy": "scipy",
-        "matplotlib": "matplotlib",
-        "numpy": "numpy",
-        "tqdm": "tqdm",
-    }
-    missing_packages = [package for module, package in required_modules.items() if importlib.util.find_spec(module) is None]
-    if not missing_packages:
-        print("[setup] Required Python packages are already present.", flush=True)
-        return
-
-    print(f"[setup] Installing missing packages: {', '.join(missing_packages)}", flush=True)
+    print("[setup] Installing or upgrading Python packages to the verified baseline.", flush=True)
+    for issue in issues:
+        print(f"[setup]   - {issue}", flush=True)
     run_command([PYTHON, "-m", "pip", "install", "-q", "-r", str(COLAB_REQUIREMENTS)])
+
+    satisfied, issues = collect_package_issues()
+    if issues:
+        raise RuntimeError(
+            "[setup] Dependency installation completed, but the environment is still invalid: "
+            + "; ".join(issues)
+        )
+    print(f"[setup] Verified Python package baseline: {', '.join(satisfied)}", flush=True)
 
 
 def print_environment() -> str:
@@ -136,6 +186,7 @@ def run_real_trace_experiment(
     attn_implementation: str,
     resume: bool,
     io_threads: int = 4,
+    model_path_override: str | None = None,
 ) -> None:
     command = [
         PYTHON,
@@ -173,6 +224,8 @@ def run_real_trace_experiment(
     ]
     if device_map:
         command.extend(["--device-map", device_map])
+    if model_path_override:
+        command.extend(["--model-path-override", model_path_override])
     command.append("--temperatures")
     command.extend(str(value) for value in temperatures)
     command.append("--seeds")
@@ -246,6 +299,7 @@ def main() -> None:
     parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
     parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
     parser.add_argument("--device-map", default=None)
+    parser.add_argument("--model-path-override", default=None)
     parser.add_argument("--attn-implementation", default="sdpa", choices=["auto", "sdpa", "flash_attention_2", "eager"])
     parser.add_argument("--full-max-tasks", type=int, default=300)
     parser.add_argument("--full-max-steps", type=int, default=10)
@@ -304,6 +358,7 @@ def main() -> None:
             attn_implementation=args.attn_implementation,
             resume=False,
             io_threads=args.io_threads,
+            model_path_override=args.model_path_override,
         )
         run_analysis(smoke_output_dir)
         print_csv(smoke_output_dir / "pilot_summary.csv", "Smoke Pilot Summary")
@@ -335,6 +390,7 @@ def main() -> None:
         attn_implementation=args.attn_implementation,
         resume=args.resume,
         io_threads=args.io_threads,
+        model_path_override=args.model_path_override,
     )
     run_analysis(full_output_dir)
 

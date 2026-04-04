@@ -1,9 +1,8 @@
-transformers>=4.51.0
-accelerate>=1.5
-flash-attn>=2.7.2
+transformers>=5.5.0
+accelerate>=1.13.0
 datasets>=3.4
 evaluate>=0.4
-bitsandbytes>=0.45
+bitsandbytes>=0.49.0
 sentencepiece>=0.2
 safetensors>=0.4
 pandas>=2.2

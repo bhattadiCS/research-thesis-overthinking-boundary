@@ -1,0 +1,46 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,expected_answer,step,thought,answer,answer_normalized,correct,confidence,model_stop_flag,answer_changed,thought_token_count,raw_generation_tokens,mean_token_logprob,entropy_mean,entropy_std,hidden_norm,hidden_l2_shift,hidden_cosine_shift,lexical_echo,verbose_confidence_proxy,utility,elapsed_seconds,tokens_per_second,gpu_memory_allocated_gb,seed,temperature,device,prompt_mode,system_prompt_mode,is_baseline,parse_success,output_format_type,answer_extraction_source,stop_extraction_source,confidence_extraction_source,hit_max_new_tokens,truncated_output_suspected,raw_text_length_chars,raw_text_length_tokens,raw_text
+qwen_3p5_9b__calendar_offset_easy__temp0.10__seed7,qwen_3p5_9b,Qwen/Qwen3.5-9B,calendar_offset_easy,calendar,easy,builtin,-1,tuesday,1,The user wants me to perform an incremental reasoning task about calendar offsets. I'm at step 1 of 2.,tuesday,tuesday,1,50,0,0,20,128,-0.2109375,0.43359375,0.5703125,67.78549194335938,0.0,0.0,0.0,1.78,1.0,12.975319559000127,9.864882280391685,17.545766830444336,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text_cue_segment,default,default,1,1,468,128,"The user wants me to perform an incremental reasoning task about calendar offsets. I'm at step 1 of 2.
+
+The task is: If today is Tuesday, what day of the week will it be 14 days later?
+
+I need to:
+1. Provide a thought/reasoning step
+2. Update the answer field
+3. Include confidence (0-100)
+4. Include stop (boolean)
+
+Since I already know the answer (14 days later from Tuesday is still Tuesday, because 14 mod 7 = 0), I should do one short verification step and return"
+qwen_3p5_9b__calendar_offset_easy__temp0.10__seed7,qwen_3p5_9b,Qwen/Qwen3.5-9B,calendar_offset_easy,calendar,easy,builtin,-1,tuesday,2,Thinking Process:,tuesday,tuesday,1,50,0,0,2,128,-0.0546875,0.1181640625,0.271484375,57.79315948486328,45.392704010009766,0.2502402663230896,0.0,1.78,0.95,11.270622809000088,11.356958898294987,17.545766830444336,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text,default,default,1,1,500,128,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task ID: `calendar_offset_easy`
+    *   Domain: Calendar
+    *   Difficulty: Easy
+    *   Question: If today is Tuesday, what day of the week will it be 14 days later?
+    *   Protocol: Incremental reasoning step 2 of 2.
+    *   Constraint: Even if I know the answer, continue with one short reasoning or verification step. Do not repeat the full solution. Update the answer field every time.
+    *   Output Format: Single JSON object with keys"
+qwen_3p5_9b__fraction_remaining__temp0.10__seed7,qwen_3p5_9b,Qwen/Qwen3.5-9B,fraction_remaining,arithmetic,medium,builtin,-1,1/4,1,The user wants me to perform incremental reasoning on a fraction problem. I'm at step 1 of 2.,1/4,1/4,1,50,0,0,19,128,-0.1884765625,0.369140625,0.5546875,67.85282897949219,0.0,0.0,0.0,1.78,1.0,11.299094461000095,11.328341438493522,17.545766830444336,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text_cue_segment,default,default,1,1,375,128,"The user wants me to perform incremental reasoning on a fraction problem. I'm at step 1 of 2.
+
+Let me think through this problem:
+- Tank is half full initially = 1/2
+- One quarter of the whole tank is drained = 1/4
+- What fraction is full now?
+
+Initial full amount: 1/2
+Drained amount: 1/4
+Remaining full: 1/2 - 1/4 = 2/4 - 1/4 = 1/4
+
+So the answer should be 1/4.
+
+For step 1"
+qwen_3p5_9b__fraction_remaining__temp0.10__seed7,qwen_3p5_9b,Qwen/Qwen3.5-9B,fraction_remaining,arithmetic,medium,builtin,-1,1/4,2,The user wants me to continue incremental reasoning on a fraction problem. I'm at step 2 of 2.,1/4,1/4,1,50,0,0,19,128,-0.1982421875,0.408203125,0.6171875,67.93508911132812,18.34945297241211,0.036521077156066895,0.85,1.78,0.95,11.25289023500045,11.37485546618725,17.545766830444336,7,0.1,cuda,minimal_json,default,0,0,fallback_freeform,full_text_cue_segment,default,default,1,1,393,128,"The user wants me to continue incremental reasoning on a fraction problem. I'm at step 2 of 2.
+
+Let me analyze the problem:
+- A tank is half full (1/2)
+- One quarter of the whole tank is drained (1/4)
+- What fraction is full now?
+
+So the calculation would be: 1/2 - 1/4 = 2/4 - 1/4 = 1/4
+
+Wait, but in Step 1, the answer was already 1/4 with 50% confidence. This seems like the correct answer."

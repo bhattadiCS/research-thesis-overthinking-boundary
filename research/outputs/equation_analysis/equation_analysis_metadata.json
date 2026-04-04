@@ -1,0 +1,11 @@
+{
+  "current_baseline_variant": "hazard_quadratic_top4",
+  "best_overall_variant": "direct_drift_ridge_top4",
+  "recommended_hazard_variant": "hazard_quadratic_combo_entropymean_entropystd_confidence_thoughttokencount",
+  "family_count": 4,
+  "run_dir_count": 4,
+  "frontier_run_dir_count": 0,
+  "missing_frontier_run_dirs": [],
+  "geometry_enabled": true,
+  "random_state": 7
+}

@@ -1,0 +1,33 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,expected_answer,step,thought,answer,answer_normalized,correct,confidence,model_stop_flag,answer_changed,thought_token_count,raw_generation_tokens,mean_token_logprob,entropy_mean,entropy_std,hidden_norm,hidden_l2_shift,hidden_cosine_shift,lexical_echo,verbose_confidence_proxy,utility,elapsed_seconds,tokens_per_second,gpu_memory_allocated_gb,seed,temperature,device,prompt_mode,system_prompt_mode,is_baseline,parse_success,output_format_type,answer_extraction_source,stop_extraction_source,confidence_extraction_source,hit_max_new_tokens,truncated_output_suspected,raw_text_length_chars,raw_text_length_tokens,raw_text
+gemma_4_e4b_it__calendar_offset_easy__temp0.10__seed7,gemma_4_e4b_it,google/gemma-4-E4B-it,calendar_offset_easy,calendar,easy,builtin,-1,tuesday,1,"Since the cycle of days repeats every 7 days, 14 days later will be the same day of the week as today because 14 is a multiple of 7 (14 / 7 = 2 with a remainder of 0).",Tuesday,tuesday,1,100,0,0,37,128,-0.12109375,0.29296875,0.54296875,61.85443878173828,0.0,0.0,0.0,2.2800000000000002,1.0,13.544590581999728,9.450267191546372,14.915609359741211,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,1,0,451,128,"```json
+{
+  ""thought"": ""Since the cycle of days repeats every 7 days, 14 days later will be the same day of the week as today because 14 is a multiple of 7 (14 / 7 = 2 with a remainder of 0)."",
+  ""answer"": ""Tuesday"",
+  ""confidence"": 100,
+  ""stop"": false
+}
+```步The user wants me to continue the incremental reasoning process. I have already determined the answer in the previous step. I need to perform one short verification step and return the result"
+gemma_4_e4b_it__calendar_offset_easy__temp0.10__seed7,gemma_4_e4b_it,google/gemma-4-E4B-it,calendar_offset_easy,calendar,easy,builtin,-1,tuesday,2,"Confirming that a 14-day interval results in the same day of the week as the starting day, which was Tuesday.",Tuesday,tuesday,1,100,1,0,21,66,-0.1171875,0.2412109375,0.458984375,70.5421371459961,30.54454231262207,0.09826099872589111,0.23529411764705882,1.6600000000000001,0.95,6.622177595000721,9.966510117431064,14.915609359741211,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,200,66,"```json
+{
+  ""thought"": ""Confirming that a 14-day interval results in the same day of the week as the starting day, which was Tuesday."",
+  ""answer"": ""Tuesday"",
+  ""confidence"": 100,
+  ""stop"": true
+}
+```"
+gemma_4_e4b_it__fraction_remaining__temp0.10__seed7,gemma_4_e4b_it,google/gemma-4-E4B-it,fraction_remaining,arithmetic,medium,builtin,-1,1/4,1,{,1/4,1/4,1,50,0,0,0,81,-0.054931640625,0.1435546875,0.455078125,66.17459869384766,0.0,0.0,0.0,1.31,1.0,8.285662797999976,9.77592281688703,14.915609359741211,7,0.1,cuda,minimal_json,default,0,0,json_partial,full_text_cue_segment,default,default,0,0,201,81,"```json
+{
+  ""thought"": ""The tank starts half full, which is 1/2. Then 1/4 of the whole tank is drained. I need to subtract 1/4 from 1/2."",
+  ""answer"": ""1/4"",
+  ""confidence"": 80,
+  ""stop"": false
+}
+```}'"
+gemma_4_e4b_it__fraction_remaining__temp0.10__seed7,gemma_4_e4b_it,google/gemma-4-E4B-it,fraction_remaining,arithmetic,medium,builtin,-1,1/4,2,"The tank starts at 1/2. 1/4 of the whole tank is drained. So, the remaining fraction is 1/2 - 1/4 = 2/4 - 1/4 = 1/4.",1/4,1/4,1,100,1,0,29,92,-0.06201171875,0.1357421875,0.32421875,63.72589874267578,18.900531768798828,0.04164457321166992,0.0,1.92,0.95,9.047892397000396,10.168113850525048,14.915609359741211,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,203,92,"```json
+{
+  ""thought"": ""The tank starts at 1/2. 1/4 of the whole tank is drained. So, the remaining fraction is 1/2 - 1/4 = 2/4 - 1/4 = 1/4."",
+  ""answer"": ""1/4"",
+  ""confidence"": 100,
+  ""stop"": true
+}
+```"

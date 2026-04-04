@@ -11,6 +11,10 @@ Phase 1 established the **Universal Law of Overthinking** with a 0.805 AUC on le
 
 > **Phase 2b Verification Status**: The L4 optimization stack has been **fully verified** (see `research/reports/gpu_optimization_audit.md`). All commands below incorporate findings from that audit.
 
+> **Live Hub Correction (2026-04-04)**: The public Hub does not expose `Qwen/Qwen3.5-7B-Instruct`, and there is no public `meta-llama/Llama-4-8B-Instruct` repo. The runner keeps the legacy aliases for compatibility, but currently resolves them to `Qwen/Qwen3.5-9B` and the public Scout mirror `chutesai/Llama-4-Scout-17B-16E-Instruct`.
+
+> **Feasibility Warning (2026-04-04)**: Public Llama 4 Scout mirrors are not L4-feasible in this runtime. The tested full-weight mirrors expose roughly 217 GB of weights, and the available public 4-bit mirror is still roughly 60 GB and failed config validation under the verified Transformers stack. Qwen 3.5 35B A3B also exceeded the L4 memory envelope in NF4 during live execution. See `research/reports/frontier_phase2_execution_status_2026-04-04.md` before attempting a full frontier cycle.
+
 ---
 
 ## PREREQUISITES (VERIFIED)
@@ -67,9 +71,9 @@ If this check fails, reports `CUDA available: no`, or cannot import `torch`, sto
 ### TASK 1: Model Catalog Smoke Test
 - **Objective**: Verify loading and inference for all three families.
 - **Models**:
-    - `gemma_4_e4b_it` (Edge 4B) — **Verified working** ✅
-    - `qwen_3p5_7b_instruct` (Base 7B)
-    - `llama_4_8b_it` (Base 8B)
+  - `gemma_4_e4b_it` (Edge 4B) — **Verified working** ✅
+  - `qwen_3p5_9b` (public base Qwen 3.5 target)
+  - `llama_4_scout_17b_it` (public Llama 4 Scout mirror)
 - **Constraint**: Confirm hidden state extraction (2D pooled, shape `(steps, hidden_dim)`) and logprob access.
 - **Smoke Command** (per model):
   ```bash
@@ -98,7 +102,7 @@ If this check fails, reports `CUDA available: no`, or cannot import `torch`, sto
 - **Models (Priority Order)**:
     1. `gemma_4_31b_it` — Flagship (4-bit NF4, ~17.8 GB VRAM, ~3.7 tok/s)
     2. `qwen_3p5_35b_moe_it` — MoE Boundary Test (4-bit, monitor VRAM carefully)
-    3. `llama_4_8b_it` — Efficiency Baseline (BF16, ~5 tok/s expected)
+  3. `llama_4_scout_17b_it` — Public Llama 4 family target (run in 4-bit NF4 on L4 unless a gated official repo is available)
 - **Flagship Command** (verified working):
   ```bash
   python tools/run_colab_experiment.py \
@@ -113,7 +117,7 @@ If this check fails, reports `CUDA available: no`, or cannot import `torch`, sto
 - **Required Output Convention**: Use a distinct `--output-dir` per frontier model, for example:
   - `research/outputs/real_traces_colab_gemma_4_31b_it`
   - `research/outputs/real_traces_colab_qwen_3p5_35b_moe_it`
-  - `research/outputs/real_traces_colab_llama_4_8b_it`
+  - `research/outputs/real_traces_colab_llama_4_scout_17b_it`
 - **Checkpointing**: Every 25 tasks, you MUST run:
     ```bash
     git add .
@@ -135,7 +139,7 @@ If this check fails, reports `CUDA available: no`, or cannot import `torch`, sto
     --run-dirs \
       research/outputs/real_traces_colab_gemma_4_31b_it \
       research/outputs/real_traces_colab_qwen_3p5_35b_moe_it \
-      research/outputs/real_traces_colab_llama_4_8b_it \
+      research/outputs/real_traces_colab_llama_4_scout_17b_it \
     --report-path research/reports/frontier_validation_report.md
   ```
 
@@ -166,7 +170,7 @@ If any indicator is missing, **STOP** and re-run the Phase 2b verifier prompt be
 ---
 
 ## DEFINITION OF DONE
-1. Full trace datasets generated for Gemma 4 (31B), Qwen 3.5 (35B), and Llama 4 (8B).
+1. Full trace datasets generated for Gemma 4 (31B), Qwen 3.5 (35B), and a public Llama 4 family target.
 2. `research/reports/frontier_validation_report.md` confirms zero-shot generalization.
 3. All `.npz` files pass integrity checks (2D pooled, no NaN/Inf, non-zero L2 shifts).
 4. All artifacts pushed with rigorous commit history.
