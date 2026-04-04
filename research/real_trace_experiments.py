@@ -273,6 +273,12 @@ MODEL_CATALOG = {
         family="Qwen3.5 instruct",
         parameter_count="9B",
     ),
+    "qwen_3p5_9b": ModelSpec(
+        alias="qwen_3p5_9b",
+        hf_name="Qwen/Qwen3.5-9B",
+        family="Qwen3.5 instruct",
+        parameter_count="9B",
+    ),
     "qwen_3p5_35b_moe_it": ModelSpec(
         alias="qwen_3p5_35b_moe_it",
         hf_name="Qwen/Qwen3.5-35B-A3B",
