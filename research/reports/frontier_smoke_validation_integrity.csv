@@ -1,0 +1,5 @@
+run_dir,file,valid,has_nan,has_inf,ndim,shape,l2_shift,reason
+real_traces_colab_smoke_gemma_4_e4b_it,gemma_4_e4b_it__calendar_offset_easy__temp0.10__seed7.npz,True,False,False,2,2x2560,30.54454231262207,
+real_traces_colab_smoke_gemma_4_e4b_it,gemma_4_e4b_it__fraction_remaining__temp0.10__seed7.npz,True,False,False,2,2x2560,18.900531768798828,
+real_traces_colab_smoke_qwen_3p5_9b,qwen_3p5_9b__calendar_offset_easy__temp0.10__seed7.npz,True,False,False,2,2x4096,45.392704010009766,
+real_traces_colab_smoke_qwen_3p5_9b,qwen_3p5_9b__fraction_remaining__temp0.10__seed7.npz,True,False,False,2,2x4096,18.34945297241211,

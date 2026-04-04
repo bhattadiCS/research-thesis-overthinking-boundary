@@ -267,11 +267,11 @@ MODEL_CATALOG = {
         family="Gemma 4 Edge",
         parameter_count="4B",
     ),
-    "qwen_3p5_7b_instruct": ModelSpec(
-        alias="qwen_3p5_7b_instruct",
-        hf_name="Qwen/Qwen3.5-7B-Instruct",
+    "qwen_3p5_9b": ModelSpec(
+        alias="qwen_3p5_9b",
+        hf_name="Qwen/Qwen3.5-9B",
         family="Qwen3.5 instruct",
-        parameter_count="7B",
+        parameter_count="9B",
     ),
     "qwen_3p5_35b_moe_it": ModelSpec(
         alias="qwen_3p5_35b_moe_it",
@@ -279,17 +279,59 @@ MODEL_CATALOG = {
         family="Qwen3.5 MoE",
         parameter_count="35B",
     ),
-    "llama_4_8b_it": ModelSpec(
-        alias="llama_4_8b_it",
-        hf_name="meta-llama/Llama-4-8B-Instruct",
-        family="Llama 4",
-        parameter_count="8B",
+    "qwen_3p5_35b_gptq_int4": ModelSpec(
+        alias="qwen_3p5_35b_gptq_int4",
+        hf_name="Qwen/Qwen3.5-35B-A3B-GPTQ-Int4",
+        family="Qwen3.5 MoE GPTQ",
+        parameter_count="35B",
+    ),
+    "qwen_3p5_35b_awq": ModelSpec(
+        alias="qwen_3p5_35b_awq",
+        hf_name="QuantTrio/Qwen3.5-35B-A3B-AWQ",
+        family="Qwen3.5 MoE AWQ",
+        parameter_count="35B",
+    ),
+    "llama_4_scout_17b_it": ModelSpec(
+        alias="llama_4_scout_17b_it",
+        hf_name="chutesai/Llama-4-Scout-17B-16E-Instruct",
+        family="Llama 4 Scout",
+        parameter_count="17B",
+    ),
+    "llama_4_scout_17b_unsloth_bnb4": ModelSpec(
+        alias="llama_4_scout_17b_unsloth_bnb4",
+        hf_name="unsloth/Llama-4-Scout-17B-16E-Instruct-unsloth-bnb-4bit",
+        family="Llama 4 Scout 4bit",
+        parameter_count="17B",
     ),
     "llama_3p1_8b_instruct": ModelSpec(
         alias="llama_3p1_8b_instruct",
         hf_name="meta-llama/Llama-3.1-8B-Instruct",
         family="Llama 3.1",
         parameter_count="8B",
+    ),
+    "phi_4_mini_instruct": ModelSpec(
+        alias="phi_4_mini_instruct",
+        hf_name="microsoft/Phi-4-mini-instruct",
+        family="Phi 4",
+        parameter_count="4B",
+    ),
+    "internlm3_8b_instruct": ModelSpec(
+        alias="internlm3_8b_instruct",
+        hf_name="internlm/InternLM3-8B-Instruct",
+        family="InternLM3",
+        parameter_count="8B",
+    ),
+    "yi_1p5_9b_chat": ModelSpec(
+        alias="yi_1p5_9b_chat",
+        hf_name="01-ai/Yi-1.5-9B-Chat",
+        family="Yi 1.5",
+        parameter_count="9B",
+    ),
+    "mistral_small_3p1_24b_instruct": ModelSpec(
+        alias="mistral_small_3p1_24b_instruct",
+        hf_name="mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+        family="Mistral Small 3.1",
+        parameter_count="24B",
     ),
 }
 
@@ -873,8 +915,11 @@ def load_model(
     quantization: str,
     device_map: str | None,
     attn_implementation: str,
+    model_path_override: str | None = None,
+    offload_folder: str | None = None,
 ) -> tuple[Any, Any, str, str]:
     actual_device = device if device != "auto" else ("cuda" if torch.cuda.is_available() else "cpu")
+    model_source = model_path_override or model_spec.hf_name
     
     # Precision Auto-Tuning for L4
     target_precision = quantization
@@ -908,11 +953,11 @@ def load_model(
     
     # Loading handle (Processor for multimodal, Tokenizer for vanilla)
     if is_multimodal:
-        processor = AutoProcessor.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+        processor = AutoProcessor.from_pretrained(model_source, trust_remote_code=True)
         # Use the inner tokenizer for text encoding; it also has apply_chat_template
         tokenizer = getattr(processor, "tokenizer", processor)
     else:
-        tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+        tokenizer = AutoTokenizer.from_pretrained(model_source, trust_remote_code=True)
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -935,30 +980,36 @@ def load_model(
                     bnb_4bit_compute_dtype=compute_dtype,
                 )
             load_kwargs["device_map"] = device_map or "auto"
+            if offload_folder:
+                load_kwargs["offload_folder"] = offload_folder
+                load_kwargs["offload_state_dict"] = True
             try:
-                model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
+                model = model_class.from_pretrained(model_source, **load_kwargs)
             except ValueError as ve:
                 if "flash_attention_2" in str(ve):
                     logging.warning("Flash Attention 2 not supported for this model. Falling back to SDPA.")
                     load_kwargs["attn_implementation"] = "sdpa"
-                    model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
+                    model = model_class.from_pretrained(model_source, **load_kwargs)
                 else:
                     raise
             backend = f"transformers+torch(cuda-{target_precision})"
         elif actual_device == "cuda" and device_map:
             load_kwargs["device_map"] = device_map
-            model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
+            if offload_folder:
+                load_kwargs["offload_folder"] = offload_folder
+                load_kwargs["offload_state_dict"] = True
+            model = model_class.from_pretrained(model_source, **load_kwargs)
             backend = f"transformers+torch(cuda-device-map={device_map})"
         else:
-            model = model_class.from_pretrained(model_spec.hf_name, **load_kwargs)
+            model = model_class.from_pretrained(model_source, **load_kwargs)
             model.to(actual_device)
             backend = f"transformers+torch({actual_device})"
     except Exception as exc:
-        logging.warning("Primary model load failed for %s: %s", model_spec.hf_name, exc)
+        logging.warning("Primary model load failed for %s: %s", model_source, exc)
         if actual_device == "cuda":
             raise
         fallback_kwargs = {"trust_remote_code": True}
-        model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **fallback_kwargs)
+        model = AutoModelForCausalLM.from_pretrained(model_source, **fallback_kwargs)
         model.to("cpu")
         actual_device = "cpu"
         backend = "transformers+torch(cpu-fallback)"
@@ -1266,10 +1317,12 @@ def write_runtime_metadata(
     next_pending_run: dict[str, Any] | None,
     reconciliation_report: dict[str, Any],
     tasks: list[TaskSpec],
+    model_source: str | None,
 ) -> None:
     metadata = {
         "model": asdict(model_spec),
         "backend": backend,
+        "model_source": model_source or model_spec.hf_name,
         "device": actual_device,
         "quantization": quantization,
         "device_map": device_map,
@@ -1679,6 +1732,7 @@ def main() -> None:
     parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
     parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
     parser.add_argument("--device-map", default=None)
+    parser.add_argument("--model-path-override", default=None)
     parser.add_argument("--attn-implementation", default="auto", choices=["auto", "sdpa", "flash_attention_2", "eager"])
     parser.add_argument("--temperatures", nargs="+", type=float, default=[0.6])
     parser.add_argument("--seeds", nargs="+", type=int, default=[7])
@@ -1761,12 +1815,16 @@ def main() -> None:
     tokenizer = None
     backend, actual_device = infer_existing_runtime_context(paths, args.device)
     if pending_requested_runs > 0:
+        offload_folder = output_dir / "model_offload"
+        offload_folder.mkdir(parents=True, exist_ok=True)
         model, tokenizer, actual_device, backend = load_model(
             model_spec=model_spec,
             device=args.device,
             quantization=args.quantization,
             device_map=args.device_map,
             attn_implementation=args.attn_implementation,
+            model_path_override=args.model_path_override,
+            offload_folder=str(offload_folder),
         )
         logging.info("Model loaded: %s | backend=%s | device=%s", model_spec.hf_name, backend, actual_device)
 
@@ -1797,6 +1855,7 @@ def main() -> None:
             next_pending_run=next_pending_run,
             reconciliation_report=reconciliation_report,
             tasks=tasks,
+            model_source=args.model_path_override,
         )
 
         all_rows: list[dict[str, Any]] = list(existing_steps)
@@ -1872,6 +1931,7 @@ def main() -> None:
                             next_pending_run=next_pending_run,
                             reconciliation_report=reconciliation_report,
                             tasks=tasks,
+                            model_source=args.model_path_override,
                         )
                         progress.set_postfix(
                             runs=len(batch_runs),
@@ -1928,6 +1988,7 @@ def main() -> None:
         next_pending_run=next_pending_run,
         reconciliation_report=reconciliation_report,
         tasks=tasks,
+        model_source=args.model_path_override,
     )
 
     for _, row in pilot_summary.iterrows():
