@@ -401,15 +401,15 @@ def to_markdown_table(frame: pd.DataFrame, float_columns: set[str]) -> str:
 def build_report(
     results_frame: pd.DataFrame,
     missing_run_dirs: list[Path],
+    requested_run_count: int,
     selected_name: str,
     step_cost: float,
-    expected_run_count: int,
     protocol_name: str,
 ) -> str:
     completed = int(len(results_frame))
     data_quality_pass = bool(results_frame["data_quality_pass"].all()) if completed else False
     efficiency_pass = bool(results_frame["efficiency_pass"].all()) if completed else False
-    complete_frontier_set = completed == expected_run_count and not missing_run_dirs
+    complete_frontier_set = completed == requested_run_count and not missing_run_dirs
 
     verdict_parts = []
     if complete_frontier_set and data_quality_pass and efficiency_pass:
@@ -424,7 +424,7 @@ def build_report(
     score_table = pd.DataFrame(
         [
             {
-                "criterion": f"All requested protocol runs present ({expected_run_count})",
+                "criterion": f"All requested protocol runs present ({requested_run_count})",
                 "status": "pass" if complete_frontier_set else "fail",
             },
             {
@@ -565,6 +565,46 @@ def main() -> None:
             integrity_frames.append(integrity_frame)
 
     results_frame = pd.DataFrame(results)
+    if results_frame.empty:
+        results_frame = pd.DataFrame(
+            columns=[
+                "run_dir",
+                "model_label",
+                "model_alias",
+                "n_runs",
+                "n_tasks",
+                "q_auc_zero_shot",
+                "alpha_auc_zero_shot",
+                "beta_auc_zero_shot",
+                "universal_boundary_step",
+                "universal_mean_stop_step",
+                "universal_mean_stop_utility",
+                "universal_mean_oracle_gap",
+                "universal_false_late_rate",
+                "universal_stop_accuracy",
+                "universal_mean_stop_tokens",
+                "universal_accuracy_per_1k_tokens",
+                "never_stop_accuracy_per_1k_tokens",
+                "first_answer_accuracy_per_1k_tokens",
+                "efficiency_gain_vs_never_stop_pct",
+                "utility_gain_vs_never_stop",
+                "hazard_drift_mean_oracle_gap",
+                "parse_success_rate",
+                "hidden_dir",
+                "npz_file_count",
+                "invalid_npz_count",
+                "nan_file_count",
+                "inf_file_count",
+                "ndim_mismatch_count",
+                "zero_shift_count",
+                "all_npz_valid",
+                "mean_l2_shift",
+                "min_l2_shift",
+                "max_l2_shift",
+                "data_quality_pass",
+                "efficiency_pass",
+            ]
+        )
     integrity_output = pd.concat(integrity_frames, ignore_index=True) if integrity_frames else pd.DataFrame(
         columns=["run_dir", "file", "valid", "has_nan", "has_inf", "ndim", "shape", "l2_shift", "reason"]
     )
@@ -584,9 +624,9 @@ def main() -> None:
         build_report(
             results_frame=results_frame,
             missing_run_dirs=missing_run_dirs,
+            requested_run_count=len(requested_run_dirs),
             selected_name=selected_spec.name,
             step_cost=step_cost,
-            expected_run_count=len(requested_run_dirs),
             protocol_name=args.protocol_name,
         ),
         encoding="utf-8",

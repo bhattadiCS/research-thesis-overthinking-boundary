@@ -38,7 +38,15 @@ That requires a dual-boundary reading of empirical drift traces:
 
 This distinction matters because several real drift paths are nonmonotone rather than clean one-crossing curves. Qwen 7B on the `Medium` stratum is the clearest example: an early negative estimate is followed by a long repair-dominant window, so the scientifically important boundary is the later collapse at Step 6, not the first warning at Step 1. Mistral shows the same mechanism in compressed form, with a shorter late window that ends at Step 3.
 
-### 5. Open These Figures First
+### 5. CPU Continuation Update (2026-04-04)
+The latest CPU audit tightened the repository story in four ways:
+
+- **Deployed versus recommended equation**: the deployed local intake is still `quadratic_top4`, because the universal-feature metadata pipeline still selects that baseline. The broader equation sweep now recommends `hazard_quadratic_combo_entropymean_entropystd_confidence_thoughttokencount` as the best hazard-form successor, while `direct_drift_ridge_top4` is the best overall empirical stop rule.
+- **Algorithm status**: the live local Algorithm X implementation did **not** change. The hazard-style q/alpha/beta decomposition remains the thesis-facing default, and the direct-drift rule is documented as a comparator rather than a replacement.
+- **Frontier status**: Gemma 4 Edge 4B and Qwen 3.5 9B smoke traces now confirm valid hidden-state capture, but there are still no completed full `real_traces_colab_<MODEL_KEY>` directories for the corrected frontier set. That means full frontier generalization is still pending in this workspace.
+- **Parse-success interpretation**: `parse_success` is a strict exact-format metric, not a synonym for answer correctness. Qwen 3.5 9B smoke traces recovered correct answers on all observed smoke steps despite `parse_success = 0`, and the DeepSeek legacy failures are mostly format-plus-truncation failures rather than hidden-state corruption.
+
+### 6. Open These Figures First
 If you only open a few artifacts before a defense or final write-up pass, start with these:
 - `research/outputs/difficulty_stratified_analysis/stratum_drift_grid.png`: the 4x3 drift grid is the clearest visual proof that the boundary is difficulty-stratum dependent.
 - `research/outputs/alpha_beta_predictive_analysis/alpha_beta_scatter.png`: the alpha/beta scatter is the cleanest single slide for the capability-gated claim.
@@ -310,7 +318,17 @@ This repository is trying to answer the following questions in a concrete, testa
 
 ## What the Current Results Say
 
-This README reflects the post-recovery, post-audit state of the repository as of 2026-04-02. The authoritative cross-run summary is [research/CROSS_FAMILY_REPORT.md](research/CROSS_FAMILY_REPORT.md).
+This README reflects the post-recovery, post-audit, and CPU-continuation state of the repository as of 2026-04-04. The authoritative cross-family legacy summary remains [research/CROSS_FAMILY_REPORT.md](research/CROSS_FAMILY_REPORT.md). The newer audit and promotion-status artifacts are [research/reports/cpu_truth_audit_2026-04-04.md](research/reports/cpu_truth_audit_2026-04-04.md), [research/reports/equation_promotion_decision.md](research/reports/equation_promotion_decision.md), [research/reports/parse_success_audit.md](research/reports/parse_success_audit.md), and [research/reports/cpu_status_memo_2026-04-04.md](research/reports/cpu_status_memo_2026-04-04.md).
+
+### CPU Continuation Bottom Line
+
+The CPU follow-up answered a different question than the earlier family comparison: not "which legacy family had the clearest late boundary?" but "what exactly is deployed locally, what changed at the analysis layer, and what frontier evidence actually exists in this workspace?"
+
+- **Local deployed baseline still** `quadratic_top4`: rerunning `research/universal_feature_analysis.py --random-state 7` preserved the current metadata choice.
+- **Best hazard-form successor changed**: the strongest theorem-preserving replacement is now `hazard_quadratic_combo_entropymean_entropystd_confidence_thoughttokencount`.
+- **Best overall empirical stop rule changed**: `direct_drift_ridge_top4` currently wins on boundary accuracy, but it is not the thesis default because it drops the original hazard decomposition.
+- **Frontier evidence is still smoke-only**: Gemma 4 Edge 4B and Qwen 3.5 9B smoke traces passed hidden-state integrity checks, but the full corrected frontier run directories are still missing.
+- **Parse-success must be read carefully**: low `parse_success` in DeepSeek and Qwen smoke mostly means exact-format mismatch plus truncation, not unusable traces or corrupted hidden states.
 
 ### Cross-Family Bottom Line
 
@@ -414,6 +432,13 @@ Still open:
 - Theory note: [research/overthinking_boundary.md](research/overthinking_boundary.md)
 - Cross-family summary: [research/CROSS_FAMILY_REPORT.md](research/CROSS_FAMILY_REPORT.md)
 - Recovery audit: [research/RECOVERY_AUDIT_2026-04-02.md](research/RECOVERY_AUDIT_2026-04-02.md)
+- CPU truth audit: [research/reports/cpu_truth_audit_2026-04-04.md](research/reports/cpu_truth_audit_2026-04-04.md)
+- CPU status memo: [research/reports/cpu_status_memo_2026-04-04.md](research/reports/cpu_status_memo_2026-04-04.md)
+- Equation promotion decision: [research/reports/equation_promotion_decision.md](research/reports/equation_promotion_decision.md)
+- Parse-success audit: [research/reports/parse_success_audit.md](research/reports/parse_success_audit.md)
+- Equation sweep report: [research/reports/equation_analysis_report.md](research/reports/equation_analysis_report.md)
+- Frontier pending-status report: [research/reports/frontier_validation_report.md](research/reports/frontier_validation_report.md)
+- Frontier smoke validation report: [research/reports/frontier_smoke_validation_report.md](research/reports/frontier_smoke_validation_report.md)
 - DeepSeek summary: [research/FINAL_L4_RESULTS.md](research/FINAL_L4_RESULTS.md)
 - Qwen 0.5B summary: [research/FINAL_QWEN_L4_RESULTS.md](research/FINAL_QWEN_L4_RESULTS.md)
 - Qwen 7B summary: [research/FINAL_QWEN_7B_L4_RESULTS.md](research/FINAL_QWEN_7B_L4_RESULTS.md)
@@ -444,6 +469,9 @@ Representative plots checked into the repo:
 - `python research/real_trace_experiments.py --model qwen2p5_0p5b --device cpu --max-tasks 3 --max-steps 3 --max-new-tokens 16 --temperatures 0.2 0.8 --seeds 7 --output-dir research/outputs/real_traces_qwen`
 - `python research/trace_analysis.py --input-dir research/outputs/real_traces_qwen`
 - `python research/generate_thesis_artifacts.py --input-dir research/outputs/real_traces_l4_deepseek_1p5b`
+- `python research/universal_feature_analysis.py --random-state 7`
+- `python research/equation_analysis.py --random-state 7`
+- `python research/frontier_validation_report.py`
 
 ## Google Colab Workflow
 
@@ -468,6 +496,7 @@ Useful variants:
 - Smoke test only: `python tools/run_colab_experiment.py --smoke-only`
 - Skip dependency installation: `python tools/run_colab_experiment.py --skip-install`
 - Run the smaller Qwen family end-to-end: `python tools/run_colab_experiment.py --model qwen2p5_0p5b`
+- Run the current public Qwen frontier smoke target: `python tools/run_colab_experiment.py --model qwen_3p5_9b --smoke-only`
 - Resume a partially completed run by reusing an existing `--output-dir`
 
 Dependencies for Colab are listed in [requirements-colab.txt](requirements-colab.txt). The runner intentionally does not reinstall PyTorch so it preserves the GPU-enabled Colab build.

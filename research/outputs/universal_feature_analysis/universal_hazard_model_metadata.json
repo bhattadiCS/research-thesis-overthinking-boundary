@@ -16,10 +16,11 @@
   "candidate_model_count": 3,
   "beta_mean_test_auc": 0.6930154195184136,
   "alpha_mean_test_auc": 0.6070325705893791,
+  "q_mean_test_auc": 0.6435305718090998,
   "mistral_alpha_test_auc": 0.7089033248486012,
   "mistral_alpha_gap": -0.05838959036562197,
   "qwen7_beta_test_auc": 0.8054566445338355,
-  "bootstrap_reps": 80,
+  "bootstrap_reps": 250,
   "significance_method": "pearson_correlation_confidence_interval",
   "random_state": 7
 }
