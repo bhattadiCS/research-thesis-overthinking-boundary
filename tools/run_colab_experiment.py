@@ -98,6 +98,19 @@ def prepare_output_dir(path: Path, clear: bool = False) -> None:
     path.mkdir(parents=True, exist_ok=True)
 
 
+def resolve_model_output_dir(requested: str, default_path: Path, model: str, label: str) -> Path:
+    requested_path = Path(requested)
+    if requested_path != default_path:
+        return requested_path
+
+    resolved_path = default_path.parent / f"{default_path.name}_{model}"
+    print(
+        f"[output] No explicit {label} output directory supplied. Using model-scoped path: {resolved_path}",
+        flush=True,
+    )
+    return resolved_path
+
+
 def run_simulator() -> None:
     run_command([PYTHON, str(REPO_ROOT / "research" / "simulate_overthinking_boundary.py")])
 
@@ -259,8 +272,8 @@ def main() -> None:
     device = print_environment()
     smoke_model = args.smoke_model or args.model
 
-    full_output_dir = Path(args.output_dir)
-    smoke_output_dir = Path(args.smoke_output_dir)
+    full_output_dir = resolve_model_output_dir(args.output_dir, DEFAULT_FULL_DIR, args.model, "full")
+    smoke_output_dir = resolve_model_output_dir(args.smoke_output_dir, DEFAULT_SMOKE_DIR, smoke_model, "smoke")
 
     if not args.skip_simulator:
         run_simulator()
