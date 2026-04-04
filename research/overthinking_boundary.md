@@ -562,7 +562,7 @@ The exported basis is the standardized quadratic lift of
 - `thought_token_count`
 - `hidden_l2_shift`
 
-so the CSV stores both the basis scaling terms and the hazard coefficients needed for downstream reuse.
+so the CSV stores the per-model scaling terms and weights for the universal correctness probe $\hat{q}_t^U$, repair hazard $\hat{\alpha}_t^U$, and corruption hazard $\hat{\beta}_t^U$ needed for downstream reuse.
 
 The largest capable-group corruption weights are attached to answer revision, entropy, and nonlinear hidden-state / revision terms, which is consistent with the qualitative story that risky late-stage overthinking is dominated by answer pivoting plus uncertain latent wandering rather than by verbosity alone.
 

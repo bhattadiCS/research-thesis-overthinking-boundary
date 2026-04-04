@@ -38,6 +38,8 @@ print('Flash SDP:', torch.backends.cuda.flash_sdp_enabled())
 "
 ```
 
+If this check fails, reports `CUDA available: no`, or cannot import `torch`, stop and switch to the verified Colab SSH runtime before proceeding.
+
 ---
 
 ## EXECUTION STACK (L4 OPTIMIZED — VERIFIED BASELINES)
@@ -56,6 +58,7 @@ print('Flash SDP:', torch.backends.cuda.flash_sdp_enabled())
 - `--skip-install` — Avoids redundant pip checks on subsequent runs.
 - `--skip-simulator` — Skips synthetic trace generation; uses real GPU inference only.
 - `--io-threads 4` — Enables async `IOManager` for non-blocking `.npz` saves (~0.0008s write time verified).
+- Prefer model-scoped output directories such as `research/outputs/real_traces_colab_<MODEL_KEY>` and `research/outputs/real_traces_colab_smoke_<MODEL_KEY>` so frontier families never share the same artifact directory.
 
 ---
 
@@ -73,6 +76,7 @@ print('Flash SDP:', torch.backends.cuda.flash_sdp_enabled())
   python tools/run_colab_experiment.py \
     --model <MODEL_KEY> \
     --smoke-only \
+    --smoke-output-dir research/outputs/real_traces_colab_smoke_<MODEL_KEY> \
     --io-threads 4 \
     --attn-implementation sdpa \
     --skip-install --skip-simulator
@@ -101,10 +105,15 @@ print('Flash SDP:', torch.backends.cuda.flash_sdp_enabled())
     --model gemma_4_31b_it \
     --quantization 4bit \
     --full-batch-size 1 \
+    --output-dir research/outputs/real_traces_colab_gemma_4_31b_it \
     --io-threads 4 \
     --attn-implementation sdpa \
     --skip-install --skip-simulator
   ```
+- **Required Output Convention**: Use a distinct `--output-dir` per frontier model, for example:
+  - `research/outputs/real_traces_colab_gemma_4_31b_it`
+  - `research/outputs/real_traces_colab_qwen_3p5_35b_moe_it`
+  - `research/outputs/real_traces_colab_llama_4_8b_it`
 - **Checkpointing**: Every 25 tasks, you MUST run:
     ```bash
     git add .
@@ -115,11 +124,20 @@ print('Flash SDP:', torch.backends.cuda.flash_sdp_enabled())
 
 ### TASK 3: Universal Zero-Shot Synthesis
 - **Objective**: Apply the `quadratic_top4` regressor from Phase 1 to these traces.
-- **Success Metric**: Accuracy-per-token efficiency gain >25%.
+- **Success Metric**: Accuracy-per-token efficiency gain >25%, operationalized as accuracy per 1k cumulative generated tokens relative to the `never_stop` baseline.
 - **Data Quality Gates** (from audit):
     - Hidden Shift Variance must be non-zero (L2 shifts fluctuating — confirmed for Gemma 4)
     - Parsing Success Rate > 95% for GSM8K
     - No NaN/Inf in hidden states
+- **Synthesis Command**:
+  ```bash
+  python research/frontier_validation_report.py \
+    --run-dirs \
+      research/outputs/real_traces_colab_gemma_4_31b_it \
+      research/outputs/real_traces_colab_qwen_3p5_35b_moe_it \
+      research/outputs/real_traces_colab_llama_4_8b_it \
+    --report-path research/reports/frontier_validation_report.md
+  ```
 
 ---
 

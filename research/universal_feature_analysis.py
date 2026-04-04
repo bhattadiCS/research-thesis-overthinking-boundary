@@ -331,9 +331,36 @@ def fit_final_models(
     families: tuple[str, ...],
     random_state: int,
 ) -> tuple[Pipeline | ConstantProbabilityModel, Pipeline | ConstantProbabilityModel]:
+    _, alpha_model, beta_model = fit_phase2_models(
+        frame,
+        spec,
+        families,
+        random_state,
+    )
+    return alpha_model, beta_model
+
+
+def fit_phase2_models(
+    frame: pd.DataFrame,
+    spec: ModelSpec,
+    families: tuple[str, ...],
+    random_state: int,
+) -> tuple[
+    Pipeline | ConstantProbabilityModel,
+    Pipeline | ConstantProbabilityModel,
+    Pipeline | ConstantProbabilityModel,
+]:
     subset = frame[frame["family"].isin(families)].copy()
+    q_frame = subset.copy()
     alpha_frame = subset[subset["valid_repair"]].copy()
     beta_frame = subset[subset["valid_corruption"]].copy()
+    _, _, q_model = fit_binary_model(
+        q_frame,
+        q_frame,
+        spec,
+        target_column="correct",
+        random_state=random_state,
+    )
     _, _, alpha_model = fit_binary_model(
         alpha_frame,
         alpha_frame,
@@ -348,39 +375,52 @@ def fit_final_models(
         target_column="event_corruption",
         random_state=random_state,
     )
-    return alpha_model, beta_model
+    return q_model, alpha_model, beta_model
 
 
 def export_weight_frame(
+    q_model: Pipeline | ConstantProbabilityModel,
     alpha_model: Pipeline | ConstantProbabilityModel,
     beta_model: Pipeline | ConstantProbabilityModel,
     spec: ModelSpec,
 ) -> pd.DataFrame:
-    if not isinstance(alpha_model, Pipeline) or not isinstance(beta_model, Pipeline):
+    if not isinstance(q_model, Pipeline) or not isinstance(alpha_model, Pipeline) or not isinstance(beta_model, Pipeline):
         raise RuntimeError("Final hazard models must be fitted pipelines.")
+    q_basis = q_model.named_steps.get("basis")
     alpha_basis = alpha_model.named_steps.get("basis")
     beta_basis = beta_model.named_steps.get("basis")
+    q_scale = q_model.named_steps["scale"]
     alpha_scale = alpha_model.named_steps["scale"]
     beta_scale = beta_model.named_steps["scale"]
+    q_logit = q_model.named_steps["model"]
     alpha_logit = alpha_model.named_steps["model"]
     beta_logit = beta_model.named_steps["model"]
 
-    if alpha_basis is None:
+    if q_basis is None:
         terms = np.asarray(spec.features, dtype=object)
     else:
-        terms = alpha_basis.get_feature_names_out(spec.features)
+        terms = q_basis.get_feature_names_out(spec.features)
+    if alpha_basis is not None:
+        alpha_terms = alpha_basis.get_feature_names_out(spec.features)
+        if list(terms) != list(alpha_terms):
+            raise RuntimeError("Q and alpha basis terms do not align.")
     if beta_basis is not None:
         beta_terms = beta_basis.get_feature_names_out(spec.features)
         if list(terms) != list(beta_terms):
-            raise RuntimeError("Alpha and beta basis terms do not align.")
+            raise RuntimeError("Q and beta basis terms do not align.")
 
     rows = [
         {
             "term": "intercept",
             "term_type": "intercept",
-            "basis_mean": 0.0,
-            "basis_scale": 1.0,
+            "q_basis_mean": 0.0,
+            "q_basis_scale": 1.0,
+            "q_weight": float(q_logit.intercept_[0]),
+            "alpha_basis_mean": 0.0,
+            "alpha_basis_scale": 1.0,
             "alpha_weight": float(alpha_logit.intercept_[0]),
+            "beta_basis_mean": 0.0,
+            "beta_basis_scale": 1.0,
             "beta_weight": float(beta_logit.intercept_[0]),
         }
     ]
@@ -395,18 +435,26 @@ def export_weight_frame(
             {
                 "term": str(term),
                 "term_type": term_type,
-                "basis_mean": float(alpha_scale.mean_[index]),
-                "basis_scale": float(alpha_scale.scale_[index]),
+                "q_basis_mean": float(q_scale.mean_[index]),
+                "q_basis_scale": float(q_scale.scale_[index]),
+                "q_weight": float(q_logit.coef_[0][index]),
+                "alpha_basis_mean": float(alpha_scale.mean_[index]),
+                "alpha_basis_scale": float(alpha_scale.scale_[index]),
                 "alpha_weight": float(alpha_logit.coef_[0][index]),
+                "beta_basis_mean": float(beta_scale.mean_[index]),
+                "beta_basis_scale": float(beta_scale.scale_[index]),
                 "beta_weight": float(beta_logit.coef_[0][index]),
             }
         )
     weight_frame = pd.DataFrame(rows)
     non_intercepts = weight_frame[weight_frame["term"] != "intercept"].copy()
+    q_ranks = non_intercepts["q_weight"].abs().rank(ascending=False, method="dense")
     alpha_ranks = non_intercepts["alpha_weight"].abs().rank(ascending=False, method="dense")
     beta_ranks = non_intercepts["beta_weight"].abs().rank(ascending=False, method="dense")
+    weight_frame["q_abs_rank"] = pd.Series(dtype=float)
     weight_frame["alpha_abs_rank"] = pd.Series(dtype=float)
     weight_frame["beta_abs_rank"] = pd.Series(dtype=float)
+    weight_frame.loc[non_intercepts.index, "q_abs_rank"] = q_ranks.values
     weight_frame.loc[non_intercepts.index, "alpha_abs_rank"] = alpha_ranks.values
     weight_frame.loc[non_intercepts.index, "beta_abs_rank"] = beta_ranks.values
     weight_frame["fit_scope"] = "capable_group_only"
@@ -723,13 +771,13 @@ def main() -> None:
     significance_frame = entropy_significance(frame)
     significance_frame.to_csv(OUTPUT_DIR / "entropy_mean_significance.csv", index=False)
 
-    alpha_model, beta_model = fit_final_models(
+    q_model, alpha_model, beta_model = fit_phase2_models(
         frame,
         selected_spec,
         families=CAPABLE_FAMILIES,
         random_state=args.random_state,
     )
-    weight_frame = export_weight_frame(alpha_model, beta_model, selected_spec)
+    weight_frame = export_weight_frame(q_model, alpha_model, beta_model, selected_spec)
     weight_frame.to_csv(OUTPUT_DIR / "universal_hazard_weights.csv", index=False)
 
     selected_summary = summary_frame.set_index("model_name").loc[selected_name]
@@ -745,6 +793,7 @@ def main() -> None:
         "candidate_model_count": len(MODEL_SPECS),
         "beta_mean_test_auc": float(selected_summary["beta_mean_test_auc"]),
         "alpha_mean_test_auc": float(selected_summary["alpha_mean_test_auc"]),
+        "q_mean_test_auc": float(selected_summary["q_mean_test_auc"]),
         "mistral_alpha_test_auc": float(selected_summary["mistral_alpha_test_auc"]),
         "mistral_alpha_gap": float(selected_summary["mistral_alpha_gap"]),
         "qwen7_beta_test_auc": float(selected_summary["qwen7_beta_test_auc"]),
