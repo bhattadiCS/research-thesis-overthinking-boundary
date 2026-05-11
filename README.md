@@ -467,7 +467,7 @@ Representative plots checked into the repo:
 
 The authoritative repository is the root `ResearchThesis` checkout on `main`.
 
-The `recovered_overnight_data/` and `recovered_thesis_data/` directories are local backup snapshots kept for forensic recovery only. Their Git metadata is intentionally disabled as `.git.disabled` so VS Code shows a single active repository while still preserving those backup contents on disk.
+Recovery snapshots and backup archives should live outside the repo root. Keep only the active `ResearchThesis` checkout in the workspace so VS Code shows a single repository and cluster pulls target one clean source of truth.
 
 ## Local Entry Points
 

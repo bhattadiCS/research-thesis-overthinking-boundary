@@ -14,14 +14,18 @@ Thumbs.db
 # Local and Colab caches
 .cache/
 huggingface/
+research/.model_cache/
 
 # Generated large artifacts
 research/outputs/real_traces/
 research/outputs/real_traces_deepseek/
 research/outputs/real_traces_colab/
 research/outputs/real_traces_colab_smoke/
+research/outputs/benchmark_*/
+research/outputs/*/hidden_states/
+research/outputs/*/model_offload/
 research/outputs/*.zip
-thesis_data_backup_from_*.zip
+thesis_data_backup*.zip
 recovered_*_data/
 
 # Thesis documentation
