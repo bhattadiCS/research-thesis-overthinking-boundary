@@ -477,6 +477,8 @@ Representative plots checked into the repo:
 
 The guarded Colab runner is [tools/run_colab_experiment.py](tools/run_colab_experiment.py). It is designed to avoid wasting GPU credits.
 
+If you are launching the same workflow from NVIDIA RUN:AI instead of a notebook, convenience wrappers now live in [tools/runai/README.md](tools/runai/README.md), including a one-file session bootstrap at [tools/runai/bootstrap_session.sh](tools/runai/bootstrap_session.sh).
+
 Typical flow:
 
 1. Check the Python environment and GPU.

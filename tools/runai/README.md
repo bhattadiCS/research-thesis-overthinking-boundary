@@ -1,0 +1,60 @@
+# RUN:AI Scripts
+
+This folder stores lightweight launch helpers for running the repo on NVIDIA RUN:AI without modifying the main experiment code.
+
+These wrappers assume the repository is already cloned in your RUN:AI workspace and keep using the repo-native launcher at `tools/run_colab_experiment.py`.
+
+## Files
+
+- `bootstrap_session.sh`: one-file RUN:AI session bootstrap for clone/update, venv setup, dependency install, env check, and smoke/full launch.
+- `check_env.py`: prints repo, git, GPU, Python, and Torch details.
+- `jupyter_repo_gpu_sanity.py`: notebook-safe Python bootstrap for clone/update plus GPU validation in a Jupyter Python 3 kernel.
+- `run_experiment.py`: launches a smoke or full run through the existing Colab-safe runner.
+
+## Quick Start
+
+Bootstrap a fresh RUN:AI session with one file:
+
+```bash
+bash tools/runai/bootstrap_session.sh
+```
+
+Choose a different model or a full run:
+
+```bash
+MODEL=qwen2p5_0p5b MODE=full bash tools/runai/bootstrap_session.sh --quantization 4bit --full-batch-size 1
+```
+
+Run an environment check:
+
+```bash
+python tools/runai/check_env.py
+```
+
+For a fresh Jupyter notebook session, copy the contents of `tools/runai/jupyter_repo_gpu_sanity.py` into a new Python 3 cell.
+
+Run the default smoke test:
+
+```bash
+python tools/runai/run_experiment.py --mode smoke --model deepseek_r1_distill_1p5b
+```
+
+Run a full experiment after the smoke test passes:
+
+```bash
+python tools/runai/run_experiment.py --mode full --model qwen2p5_0p5b --quantization 4bit --full-batch-size 1
+```
+
+Update the repo first when the worktree is clean:
+
+```bash
+python tools/runai/run_experiment.py --pull --mode smoke --model deepseek_r1_distill_1p5b
+```
+
+## Notes
+
+- `bootstrap_session.sh` is the easiest option when you want one copy-pasteable setup file for a new RUN:AI session.
+- `run_experiment.py` uses the same Python interpreter that launched it.
+- Extra flags are forwarded to `tools/run_colab_experiment.py`.
+- By default the wrapper skips the synthetic simulator phase to get to GPU validation faster.
+- `--pull` is intentionally blocked when the worktree has local changes.
