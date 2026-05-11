@@ -463,6 +463,12 @@ Representative plots checked into the repo:
 - [research/generate_thesis_artifacts.py](research/generate_thesis_artifacts.py): markdown artifact generation from outputs
 - [tools/run_colab_experiment.py](tools/run_colab_experiment.py): guarded Colab runner for larger experiments
 
+## Workspace Hygiene
+
+The authoritative repository is the root `ResearchThesis` checkout on `main`.
+
+The `recovered_overnight_data/` and `recovered_thesis_data/` directories are local backup snapshots kept for forensic recovery only. Their Git metadata is intentionally disabled as `.git.disabled` so VS Code shows a single active repository while still preserving those backup contents on disk.
+
 ## Local Entry Points
 
 - `python research/simulate_overthinking_boundary.py`
