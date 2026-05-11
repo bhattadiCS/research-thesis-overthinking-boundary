@@ -1,0 +1,14 @@
+{
+    "version": "1.0-alpha",
+    "equation": "Hazard = Sigmoid(k0 + k1*Entropy + k2*LatentShift + k3*AnswerChange*Entropy)",
+    "parameters": {
+        "k0_bias": -1.459503036416335,
+        "k1_entropy": 0.6081681981104596,
+        "k2_latentshift": -0.2989058926502091,
+        "k3_interaction": -0.5772493240033875
+    },
+    "performance": {
+        "beta_auc": 0.64725601674461,
+        "optimization_residual": 0.45918114097312246
+    }
+}

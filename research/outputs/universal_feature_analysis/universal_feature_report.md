@@ -15,6 +15,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | quadratic_top4 | quadratic | 4 | 0.6070 | 0.6930 | 0.6435 | 0.7089 | -0.0584 | 0.8055 |
 | linear_top4 | linear | 4 | 0.5972 | 0.6736 | 0.6376 | 0.6992 | -0.0720 | 0.8082 |
+| hazard_quadratic_combo_entropymean_entropystd_confidence_thoughttokencount | quadratic | 4 | 0.6091 | 0.6374 | 0.5987 | 0.6634 | 0.0749 | 0.8773 |
 | linear_required6 | linear | 6 | 0.5848 | 0.6319 | 0.6339 | 0.7008 | -0.0105 | 0.8181 |
 
 ## Final LOFO Generalization Table

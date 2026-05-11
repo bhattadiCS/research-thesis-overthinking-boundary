@@ -13,7 +13,7 @@
   ],
   "family_zscore_normalization": true,
   "step_cost": 0.05,
-  "candidate_model_count": 3,
+  "candidate_model_count": 4,
   "beta_mean_test_auc": 0.6930154195184136,
   "alpha_mean_test_auc": 0.6070325705893791,
   "q_mean_test_auc": 0.6435305718090998,

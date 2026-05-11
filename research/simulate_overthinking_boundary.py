@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import argparse
 import csv
 import math
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -9,13 +11,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-OUTPUT_DIR = Path(__file__).resolve().parent / "outputs"
+DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs"
 SEED = 7
 OBS_LOW = -0.15
 OBS_HIGH = 0.15
 ENTROPY_THRESHOLD = 0.58
 CUSUM_THRESHOLD = 0.05
 CUSUM_MARGIN = 0.0015
+DEFAULT_PLOT_SAMPLE_SIZE = 2048
 
 
 @dataclass(frozen=True)
@@ -39,6 +42,39 @@ class ScenarioConfig:
     prm_noise: float
     probe_noise: float
     observable_noise: float
+
+
+@dataclass
+class ScenarioAggregate:
+    cfg: ScenarioConfig
+    count: int
+    sum_optimal_stop: float
+    sum_true_boundary: float
+    sum_safe_stop: float
+    sum_eb_stop: float
+    sum_naive_stop: float
+    sum_cusum_stop: float
+    sum_entropy_stop: float
+    sum_prm_peak_stop: float
+    sum_safe_gap: float
+    sum_eb_gap: float
+    sum_naive_gap: float
+    sum_cusum_gap: float
+    sum_entropy_gap: float
+    sum_prm_peak_gap: float
+    count_safe_false_early: float
+    count_eb_false_early: float
+    count_naive_false_early: float
+    count_cusum_false_early: float
+    count_entropy_false_early: float
+    count_prm_postboundary: float
+    sum_true_mu: np.ndarray
+    sum_proxy_mu: np.ndarray
+    sum_entropy: np.ndarray
+    sum_hidden_shift: np.ndarray
+    representative_score: float
+    representative_run: dict[str, np.ndarray | int | float]
+    gap_samples: np.ndarray
 
 
 def sigmoid(values: np.ndarray | float) -> np.ndarray | float:
@@ -231,64 +267,167 @@ def simulate_single_run(
     }
 
 
-def summarize_runs(name: str, runs: list[dict[str, np.ndarray | int | float]]) -> dict[str, float | str]:
-    optimal_stops = np.array([run["optimal_stop"] for run in runs], dtype=float)
-    true_boundaries = np.array([run["true_boundary"] for run in runs], dtype=float)
-    safe_stops = np.array([run["safe_stop"] for run in runs], dtype=float)
-    eb_stops = np.array([run["eb_stop"] for run in runs], dtype=float)
-    naive_stops = np.array([run["naive_stop"] for run in runs], dtype=float)
-    cusum_stops = np.array([run["cusum_stop"] for run in runs], dtype=float)
-    entropy_stops = np.array([run["entropy_stop"] for run in runs], dtype=float)
-    prm_peak_stops = np.array([run["prm_peak_stop"] for run in runs], dtype=float)
+def aggregate_scenario_runs(
+    cfg: ScenarioConfig,
+    run_count: int,
+    probe_count: int,
+    delta: float,
+    seed: int,
+    plot_sample_size: int,
+) -> ScenarioAggregate:
+    rng = np.random.default_rng(seed)
+    sum_true_mu = np.zeros(cfg.horizon, dtype=float)
+    sum_proxy_mu = np.zeros(cfg.horizon, dtype=float)
+    sum_entropy = np.zeros(cfg.horizon, dtype=float)
+    sum_hidden_shift = np.zeros(cfg.horizon, dtype=float)
+    gap_samples: list[list[float]] = []
+    representative_run: dict[str, np.ndarray | int | float] | None = None
+    representative_score = math.inf
 
-    oracle_values = np.array([run["oracle_value"] for run in runs], dtype=float)
-    safe_values = np.array([run["safe_value"] for run in runs], dtype=float)
-    eb_values = np.array([run["eb_value"] for run in runs], dtype=float)
-    naive_values = np.array([run["naive_value"] for run in runs], dtype=float)
-    cusum_values = np.array([run["cusum_value"] for run in runs], dtype=float)
-    entropy_values = np.array([run["entropy_value"] for run in runs], dtype=float)
-    prm_peak_values = np.array([run["prm_peak_value"] for run in runs], dtype=float)
+    sum_optimal_stop = 0.0
+    sum_true_boundary = 0.0
+    sum_safe_stop = 0.0
+    sum_eb_stop = 0.0
+    sum_naive_stop = 0.0
+    sum_cusum_stop = 0.0
+    sum_entropy_stop = 0.0
+    sum_prm_peak_stop = 0.0
+    sum_safe_gap = 0.0
+    sum_eb_gap = 0.0
+    sum_naive_gap = 0.0
+    sum_cusum_gap = 0.0
+    sum_entropy_gap = 0.0
+    sum_prm_peak_gap = 0.0
+    count_safe_false_early = 0.0
+    count_eb_false_early = 0.0
+    count_naive_false_early = 0.0
+    count_cusum_false_early = 0.0
+    count_entropy_false_early = 0.0
+    count_prm_postboundary = 0.0
 
-    safe_gaps = oracle_values - safe_values
-    eb_gaps = oracle_values - eb_values
-    naive_gaps = oracle_values - naive_values
-    cusum_gaps = oracle_values - cusum_values
-    entropy_gaps = oracle_values - entropy_values
-    prm_peak_gaps = oracle_values - prm_peak_values
+    for run_index in range(run_count):
+        run = simulate_single_run(rng=rng, cfg=cfg, probe_count=probe_count, delta=delta)
 
+        optimal_stop = float(run["optimal_stop"])
+        true_boundary = float(run["true_boundary"])
+        safe_stop = float(run["safe_stop"])
+        eb_stop = float(run["eb_stop"])
+        naive_stop = float(run["naive_stop"])
+        cusum_stop = float(run["cusum_stop"])
+        entropy_stop = float(run["entropy_stop"])
+        prm_peak_stop = float(run["prm_peak_stop"])
+        oracle_value = float(run["oracle_value"])
+        safe_gap = oracle_value - float(run["safe_value"])
+        eb_gap = oracle_value - float(run["eb_value"])
+        naive_gap = oracle_value - float(run["naive_value"])
+        cusum_gap = oracle_value - float(run["cusum_value"])
+        entropy_gap = oracle_value - float(run["entropy_value"])
+        prm_peak_gap = oracle_value - float(run["prm_peak_value"])
+
+        sum_optimal_stop += optimal_stop
+        sum_true_boundary += true_boundary
+        sum_safe_stop += safe_stop
+        sum_eb_stop += eb_stop
+        sum_naive_stop += naive_stop
+        sum_cusum_stop += cusum_stop
+        sum_entropy_stop += entropy_stop
+        sum_prm_peak_stop += prm_peak_stop
+        sum_safe_gap += safe_gap
+        sum_eb_gap += eb_gap
+        sum_naive_gap += naive_gap
+        sum_cusum_gap += cusum_gap
+        sum_entropy_gap += entropy_gap
+        sum_prm_peak_gap += prm_peak_gap
+        count_safe_false_early += float(safe_stop < true_boundary)
+        count_eb_false_early += float(eb_stop < true_boundary)
+        count_naive_false_early += float(naive_stop < true_boundary)
+        count_cusum_false_early += float(cusum_stop < true_boundary)
+        count_entropy_false_early += float(entropy_stop < true_boundary)
+        count_prm_postboundary += float(prm_peak_stop > true_boundary)
+        sum_true_mu += np.asarray(run["true_mu"], dtype=float)
+        sum_proxy_mu += np.asarray(run["proxy_mu"], dtype=float)
+        sum_entropy += np.asarray(run["entropy"], dtype=float)
+        sum_hidden_shift += np.asarray(run["hidden_shift"], dtype=float)
+
+        current_score = abs(optimal_stop - eb_stop)
+        if representative_run is None or current_score < representative_score:
+            representative_score = current_score
+            representative_run = run
+
+        gap_row = [safe_gap, eb_gap, cusum_gap, entropy_gap, prm_peak_gap]
+        if len(gap_samples) < plot_sample_size:
+            gap_samples.append(gap_row)
+        else:
+            replace_index = int(rng.integers(0, run_index + 1))
+            if replace_index < plot_sample_size:
+                gap_samples[replace_index] = gap_row
+
+    if representative_run is None:
+        raise ValueError(f"No runs were simulated for scenario {cfg.name}")
+
+    return ScenarioAggregate(
+        cfg=cfg,
+        count=run_count,
+        sum_optimal_stop=sum_optimal_stop,
+        sum_true_boundary=sum_true_boundary,
+        sum_safe_stop=sum_safe_stop,
+        sum_eb_stop=sum_eb_stop,
+        sum_naive_stop=sum_naive_stop,
+        sum_cusum_stop=sum_cusum_stop,
+        sum_entropy_stop=sum_entropy_stop,
+        sum_prm_peak_stop=sum_prm_peak_stop,
+        sum_safe_gap=sum_safe_gap,
+        sum_eb_gap=sum_eb_gap,
+        sum_naive_gap=sum_naive_gap,
+        sum_cusum_gap=sum_cusum_gap,
+        sum_entropy_gap=sum_entropy_gap,
+        sum_prm_peak_gap=sum_prm_peak_gap,
+        count_safe_false_early=count_safe_false_early,
+        count_eb_false_early=count_eb_false_early,
+        count_naive_false_early=count_naive_false_early,
+        count_cusum_false_early=count_cusum_false_early,
+        count_entropy_false_early=count_entropy_false_early,
+        count_prm_postboundary=count_prm_postboundary,
+        sum_true_mu=sum_true_mu,
+        sum_proxy_mu=sum_proxy_mu,
+        sum_entropy=sum_entropy,
+        sum_hidden_shift=sum_hidden_shift,
+        representative_score=representative_score,
+        representative_run=representative_run,
+        gap_samples=np.asarray(gap_samples, dtype=float),
+    )
+
+
+def summarize_aggregate(aggregate: ScenarioAggregate) -> dict[str, float | str]:
+    count = float(aggregate.count)
     return {
-        "scenario": name,
-        "mean_optimal_stop": float(np.mean(optimal_stops)),
-        "mean_true_boundary": float(np.mean(true_boundaries)),
-        "mean_safe_stop": float(np.mean(safe_stops)),
-        "mean_eb_stop": float(np.mean(eb_stops)),
-        "mean_naive_stop": float(np.mean(naive_stops)),
-        "mean_cusum_stop": float(np.mean(cusum_stops)),
-        "mean_entropy_stop": float(np.mean(entropy_stops)),
-        "mean_prm_peak_stop": float(np.mean(prm_peak_stops)),
-        "mean_safe_optimality_gap": float(np.mean(safe_gaps)),
-        "mean_eb_optimality_gap": float(np.mean(eb_gaps)),
-        "mean_naive_optimality_gap": float(np.mean(naive_gaps)),
-        "mean_cusum_optimality_gap": float(np.mean(cusum_gaps)),
-        "mean_entropy_optimality_gap": float(np.mean(entropy_gaps)),
-        "mean_prm_peak_optimality_gap": float(np.mean(prm_peak_gaps)),
-        "safe_false_early_rate": float(np.mean(safe_stops < true_boundaries)),
-        "eb_false_early_rate": float(np.mean(eb_stops < true_boundaries)),
-        "naive_false_early_rate": float(np.mean(naive_stops < true_boundaries)),
-        "cusum_false_early_rate": float(np.mean(cusum_stops < true_boundaries)),
-        "entropy_false_early_rate": float(np.mean(entropy_stops < true_boundaries)),
-        "prm_postboundary_rate": float(np.mean(prm_peak_stops > true_boundaries)),
+        "scenario": aggregate.cfg.name,
+        "mean_optimal_stop": aggregate.sum_optimal_stop / count,
+        "mean_true_boundary": aggregate.sum_true_boundary / count,
+        "mean_safe_stop": aggregate.sum_safe_stop / count,
+        "mean_eb_stop": aggregate.sum_eb_stop / count,
+        "mean_naive_stop": aggregate.sum_naive_stop / count,
+        "mean_cusum_stop": aggregate.sum_cusum_stop / count,
+        "mean_entropy_stop": aggregate.sum_entropy_stop / count,
+        "mean_prm_peak_stop": aggregate.sum_prm_peak_stop / count,
+        "mean_safe_optimality_gap": aggregate.sum_safe_gap / count,
+        "mean_eb_optimality_gap": aggregate.sum_eb_gap / count,
+        "mean_naive_optimality_gap": aggregate.sum_naive_gap / count,
+        "mean_cusum_optimality_gap": aggregate.sum_cusum_gap / count,
+        "mean_entropy_optimality_gap": aggregate.sum_entropy_gap / count,
+        "mean_prm_peak_optimality_gap": aggregate.sum_prm_peak_gap / count,
+        "safe_false_early_rate": aggregate.count_safe_false_early / count,
+        "eb_false_early_rate": aggregate.count_eb_false_early / count,
+        "naive_false_early_rate": aggregate.count_naive_false_early / count,
+        "cusum_false_early_rate": aggregate.count_cusum_false_early / count,
+        "entropy_false_early_rate": aggregate.count_entropy_false_early / count,
+        "prm_postboundary_rate": aggregate.count_prm_postboundary / count,
     }
 
 
-def representative_run(runs: list[dict[str, np.ndarray | int | float]]) -> dict[str, np.ndarray | int | float]:
-    gaps = np.array([abs(run["optimal_stop"] - run["eb_stop"]) for run in runs], dtype=float)
-    return runs[int(np.argmin(gaps))]
-
-
-def write_summary_csv(rows: list[dict[str, float | str]]) -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    output_path = OUTPUT_DIR / "summary.csv"
+def write_summary_csv(rows: list[dict[str, float | str]], output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / "summary.csv"
     fieldnames = list(rows[0].keys())
     with output_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -296,8 +435,11 @@ def write_summary_csv(rows: list[dict[str, float | str]]) -> None:
         writer.writerows(rows)
 
 
-def plot_representatives(representatives: list[tuple[ScenarioConfig, dict[str, np.ndarray | int | float]]]) -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+def plot_representatives(
+    representatives: list[tuple[ScenarioConfig, dict[str, np.ndarray | int | float]]],
+    output_dir: Path,
+) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
     fig, axes = plt.subplots(len(representatives), 1, figsize=(11.5, 13.5), sharex=True)
     if len(representatives) == 1:
         axes = [axes]
@@ -333,31 +475,26 @@ def plot_representatives(representatives: list[tuple[ScenarioConfig, dict[str, n
 
     axes[-1].set_xlabel("Reasoning step")
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "representative_trajectories.png", dpi=200)
+    fig.savefig(output_dir / "representative_trajectories.png", dpi=200)
     plt.close(fig)
 
 
-def plot_gap_distributions(runs_by_scenario: list[tuple[ScenarioConfig, list[dict[str, np.ndarray | int | float]]]]) -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    fig, axes = plt.subplots(1, len(runs_by_scenario), figsize=(15, 4.5), sharey=True)
-    if len(runs_by_scenario) == 1:
+def plot_gap_distributions(aggregates: list[ScenarioAggregate], output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    fig, axes = plt.subplots(1, len(aggregates), figsize=(15, 4.5), sharey=True)
+    if len(aggregates) == 1:
         axes = [axes]
 
-    for ax, (cfg, runs) in zip(axes, runs_by_scenario):
-        oracle_values = np.array([run["oracle_value"] for run in runs], dtype=float)
-        safe_values = np.array([run["safe_value"] for run in runs], dtype=float)
-        eb_values = np.array([run["eb_value"] for run in runs], dtype=float)
-        cusum_values = np.array([run["cusum_value"] for run in runs], dtype=float)
-        entropy_values = np.array([run["entropy_value"] for run in runs], dtype=float)
-        prm_peak_values = np.array([run["prm_peak_value"] for run in runs], dtype=float)
-
+    for ax, aggregate in zip(axes, aggregates):
+        cfg = aggregate.cfg
+        gap_samples = aggregate.gap_samples
         ax.boxplot(
             [
-                oracle_values - safe_values,
-                oracle_values - eb_values,
-                oracle_values - cusum_values,
-                oracle_values - entropy_values,
-                oracle_values - prm_peak_values,
+                gap_samples[:, 0],
+                gap_samples[:, 1],
+                gap_samples[:, 2],
+                gap_samples[:, 3],
+                gap_samples[:, 4],
             ],
             tick_labels=["Hoeffding", "EmpBern", "CUSUM", "Entropy", "PRM"],
             showfliers=False,
@@ -368,20 +505,21 @@ def plot_gap_distributions(runs_by_scenario: list[tuple[ScenarioConfig, list[dic
         ax.grid(alpha=0.25)
 
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "monte_carlo_gaps.png", dpi=200)
+    fig.savefig(output_dir / "monte_carlo_gaps.png", dpi=200)
     plt.close(fig)
 
 
-def plot_average_drifts(runs_by_scenario: list[tuple[ScenarioConfig, list[dict[str, np.ndarray | int | float]]]]) -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    fig, axes = plt.subplots(1, len(runs_by_scenario), figsize=(15, 4.5), sharey=True)
-    if len(runs_by_scenario) == 1:
+def plot_average_drifts(aggregates: list[ScenarioAggregate], output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    fig, axes = plt.subplots(1, len(aggregates), figsize=(15, 4.5), sharey=True)
+    if len(aggregates) == 1:
         axes = [axes]
 
-    for ax, (cfg, runs) in zip(axes, runs_by_scenario):
-        mean_true_mu = np.mean(np.stack([run["true_mu"] for run in runs]), axis=0)
-        mean_proxy_mu = np.mean(np.stack([run["proxy_mu"] for run in runs]), axis=0)
-        mean_boundary = np.mean([run["true_boundary"] for run in runs])
+    for ax, aggregate in zip(axes, aggregates):
+        cfg = aggregate.cfg
+        mean_true_mu = aggregate.sum_true_mu / aggregate.count
+        mean_proxy_mu = aggregate.sum_proxy_mu / aggregate.count
+        mean_boundary = aggregate.sum_true_boundary / aggregate.count
         ax.plot(mean_true_mu, linewidth=2.0, color="#1d4ed8", label="True drift mu_t")
         ax.plot(mean_proxy_mu, linewidth=2.0, color="#d97706", linestyle="--", label="Proxy drift mu_t + kappa_t")
         ax.axhline(0.0, color="black", linewidth=1.0, alpha=0.8)
@@ -393,19 +531,20 @@ def plot_average_drifts(runs_by_scenario: list[tuple[ScenarioConfig, list[dict[s
         ax.legend(fontsize=8)
 
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "average_drifts.png", dpi=200)
+    fig.savefig(output_dir / "average_drifts.png", dpi=200)
     plt.close(fig)
 
 
-def plot_observable_signals(runs_by_scenario: list[tuple[ScenarioConfig, list[dict[str, np.ndarray | int | float]]]]) -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    fig, axes = plt.subplots(1, len(runs_by_scenario), figsize=(15, 4.5), sharey=True)
-    if len(runs_by_scenario) == 1:
+def plot_observable_signals(aggregates: list[ScenarioAggregate], output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    fig, axes = plt.subplots(1, len(aggregates), figsize=(15, 4.5), sharey=True)
+    if len(aggregates) == 1:
         axes = [axes]
 
-    for ax, (cfg, runs) in zip(axes, runs_by_scenario):
-        mean_entropy = np.mean(np.stack([run["entropy"] for run in runs]), axis=0)
-        mean_hidden_shift = np.mean(np.stack([run["hidden_shift"] for run in runs]), axis=0)
+    for ax, aggregate in zip(axes, aggregates):
+        cfg = aggregate.cfg
+        mean_entropy = aggregate.sum_entropy / aggregate.count
+        mean_hidden_shift = aggregate.sum_hidden_shift / aggregate.count
         ax.plot(mean_entropy, linewidth=2.0, color="#a16207", label="Entropy proxy")
         ax.plot(mean_hidden_shift, linewidth=2.0, color="#0f766e", linestyle="--", label="Hidden-state shift proxy")
         ax.axhline(ENTROPY_THRESHOLD, color="#7c2d12", linestyle=":", linewidth=1.2, label="Entropy threshold")
@@ -416,14 +555,34 @@ def plot_observable_signals(runs_by_scenario: list[tuple[ScenarioConfig, list[di
         ax.legend(fontsize=8)
 
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "observable_signals.png", dpi=200)
+    fig.savefig(output_dir / "observable_signals.png", dpi=200)
     plt.close(fig)
 
 
-def main() -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    rng = np.random.default_rng(SEED)
-    scenarios = [
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Simulate the overthinking boundary under synthetic regimes.")
+    parser.add_argument("--n-trials", type=int, default=400, help="Monte Carlo trials per scenario.")
+    parser.add_argument("--probe-count", type=int, default=2048, help="Probe samples per reasoning step.")
+    parser.add_argument("--delta", type=float, default=0.05, help="Confidence level for time-uniform bounds.")
+    parser.add_argument("--seed", type=int, default=SEED, help="Base RNG seed.")
+    parser.add_argument("--parallel", action="store_true", help="Run scenarios in parallel processes.")
+    parser.add_argument(
+        "--plot-sample-size",
+        type=int,
+        default=DEFAULT_PLOT_SAMPLE_SIZE,
+        help="Maximum sampled gaps retained per scenario for boxplots.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=DEFAULT_OUTPUT_DIR,
+        help="Directory for summary tables and plots.",
+    )
+    return parser.parse_args()
+
+
+def build_scenarios() -> list[ScenarioConfig]:
+    return [
         ScenarioConfig(
             name="helpful_reasoning",
             q0=0.28,
@@ -489,25 +648,53 @@ def main() -> None:
         ),
     ]
 
-    probe_count = 2048
-    delta = 0.05
-    run_count = 400
 
-    runs_by_scenario: list[tuple[ScenarioConfig, list[dict[str, np.ndarray | int | float]]]] = []
-    summary_rows: list[dict[str, float | str]] = []
-    representatives: list[tuple[ScenarioConfig, dict[str, np.ndarray | int | float]]] = []
+def main() -> None:
+    args = parse_args()
+    output_dir = args.output_dir.resolve()
+    output_dir.mkdir(parents=True, exist_ok=True)
+    scenarios = [
+        *build_scenarios(),
+    ]
 
-    for cfg in scenarios:
-        runs = [simulate_single_run(rng=rng, cfg=cfg, probe_count=probe_count, delta=delta) for _ in range(run_count)]
-        runs_by_scenario.append((cfg, runs))
-        summary_rows.append(summarize_runs(cfg.name, runs))
-        representatives.append((cfg, representative_run(runs)))
+    aggregates: list[ScenarioAggregate] = []
+    if args.parallel:
+        with ProcessPoolExecutor(max_workers=min(len(scenarios), len(scenarios))) as executor:
+            futures = [
+                executor.submit(
+                    aggregate_scenario_runs,
+                    cfg,
+                    args.n_trials,
+                    args.probe_count,
+                    args.delta,
+                    args.seed + scenario_index,
+                    args.plot_sample_size,
+                )
+                for scenario_index, cfg in enumerate(scenarios)
+            ]
+            for future in futures:
+                aggregates.append(future.result())
+    else:
+        for scenario_index, cfg in enumerate(scenarios):
+            aggregates.append(
+                aggregate_scenario_runs(
+                    cfg=cfg,
+                    run_count=args.n_trials,
+                    probe_count=args.probe_count,
+                    delta=args.delta,
+                    seed=args.seed + scenario_index,
+                    plot_sample_size=args.plot_sample_size,
+                )
+            )
 
-    write_summary_csv(summary_rows)
-    plot_representatives(representatives)
-    plot_gap_distributions(runs_by_scenario)
-    plot_average_drifts(runs_by_scenario)
-    plot_observable_signals(runs_by_scenario)
+    summary_rows = [summarize_aggregate(aggregate) for aggregate in aggregates]
+    representatives = [(aggregate.cfg, aggregate.representative_run) for aggregate in aggregates]
+
+    write_summary_csv(summary_rows, output_dir=output_dir)
+    plot_representatives(representatives, output_dir=output_dir)
+    plot_gap_distributions(aggregates, output_dir=output_dir)
+    plot_average_drifts(aggregates, output_dir=output_dir)
+    plot_observable_signals(aggregates, output_dir=output_dir)
 
     for row in summary_rows:
         print(
@@ -521,7 +708,7 @@ def main() -> None:
             f"prm={row['mean_prm_peak_stop']:.2f} (gap={row['mean_prm_peak_optimality_gap']:.4f})"
         )
 
-    print(f"Wrote outputs to: {OUTPUT_DIR}")
+    print(f"Wrote outputs to: {output_dir}")
 
 
 if __name__ == "__main__":
