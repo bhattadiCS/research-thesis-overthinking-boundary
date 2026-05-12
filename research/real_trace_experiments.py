@@ -1281,10 +1281,22 @@ def generate_batch_with_diagnostics(
             torch.cuda.synchronize()
         forward_seconds = time.perf_counter() - forward_started_at
 
+    # Postprocess on CPU to avoid expanding completion logits into softmax buffers on a constrained GPU.
+    generated_ids_cpu = generated_ids.detach().cpu()
+    scoring_logits = scoring_logits.float().cpu()
+    final_hidden_states = final_hidden_states.float().cpu()
+    if actual_device == "cuda":
+        del input_ids
+        del attention_mask
+        del generated_ids
+        del generated_attention_mask
+        release_cuda_memory()
+
     results: list[dict[str, Any]] = []
     postprocess_started_at = time.perf_counter()
-    for index in range(generated_ids.shape[0]):
-        raw_completion_ids = generated_ids[index, prompt_width:].detach()
+    batch_size = scoring_logits.shape[0]
+    for index in range(batch_size):
+        raw_completion_ids = generated_ids_cpu[index, prompt_width:]
         completion_ids = trim_completion_ids(raw_completion_ids, tokenizer.pad_token_id, tokenizer.eos_token_id)
         generated_length = int(completion_ids.shape[0])
         raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
