@@ -51,7 +51,14 @@ MINIMUM_PACKAGE_VERSIONS = {
     "scipy": {"module": "scipy", "min_version": "1.15.0"},
     "matplotlib": {"module": "matplotlib", "min_version": "3.10.0"},
     "numpy": {"module": "numpy", "min_version": "2.0.0"},
+    "numexpr": {"module": "numexpr", "min_version": "2.14.1"},
+    "bottleneck": {"module": "bottleneck", "min_version": "1.6.0"},
     "tqdm": {"module": "tqdm", "min_version": "4.67.0"},
+}
+
+IMPORT_VALIDATED_PACKAGES = {
+    "numexpr": "numexpr>=2.14.1",
+    "bottleneck": "bottleneck>=1.6.0",
 }
 
 
@@ -60,6 +67,30 @@ def version_key(raw_version: str) -> tuple[int, ...]:
     if not numbers:
         return (0,)
     return tuple(numbers)
+
+
+def probe_module_import(module_name: str) -> tuple[bool, str]:
+    result = subprocess.run(
+        [
+            PYTHON,
+            "-c",
+            (
+                "import importlib\n"
+                f"module_name = {module_name!r}\n"
+                "importlib.import_module(module_name)\n"
+            ),
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        env={**os.environ, "PYTHONUNBUFFERED": "1"},
+    )
+    if result.returncode == 0:
+        return True, ""
+
+    error = (result.stderr or result.stdout or "module import failed").strip()
+    return False, error.splitlines()[-1] if error else "module import failed"
 
 
 def collect_package_issues() -> tuple[list[str], list[str]]:
@@ -79,8 +110,21 @@ def collect_package_issues() -> tuple[list[str], list[str]]:
         if version_key(installed_version) < version_key(min_version):
             issues.append(f"{package_name}=={installed_version} is too old (requires >= {min_version})")
             continue
+        if package_name in IMPORT_VALIDATED_PACKAGES:
+            import_ok, import_error = probe_module_import(module_name)
+            if not import_ok:
+                issues.append(f"{package_name}=={installed_version} fails to import ({import_error})")
+                continue
         satisfied.append(f"{package_name}=={installed_version}")
     return satisfied, issues
+
+
+def targeted_repair_requirements(issues: list[str]) -> list[str]:
+    return [
+        requirement
+        for package_name, requirement in IMPORT_VALIDATED_PACKAGES.items()
+        if any(issue.startswith(package_name) for issue in issues)
+    ]
 
 
 def run_command(command: list[str], cwd: Path = REPO_ROOT) -> None:
@@ -108,6 +152,24 @@ def ensure_packages(skip_install: bool) -> None:
     run_command([PYTHON, "-m", "pip", "install", "-q", "-r", str(COLAB_REQUIREMENTS)])
 
     satisfied, issues = collect_package_issues()
+    repair_requirements = targeted_repair_requirements(issues)
+    if repair_requirements:
+        print("[setup] Force-reinstalling NumPy optional dependencies for binary compatibility.", flush=True)
+        run_command(
+            [
+                PYTHON,
+                "-m",
+                "pip",
+                "install",
+                "-q",
+                "--upgrade",
+                "--force-reinstall",
+                "--no-cache-dir",
+                *repair_requirements,
+            ]
+        )
+        satisfied, issues = collect_package_issues()
+
     if issues:
         raise RuntimeError(
             "[setup] Dependency installation completed, but the environment is still invalid: "
