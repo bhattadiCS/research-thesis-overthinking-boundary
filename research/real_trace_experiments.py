@@ -1151,6 +1151,56 @@ def trim_completion_ids(completion_ids: torch.Tensor, pad_token_id: int | None, 
     return trimmed
 
 
+def apply_output_head_with_model_postprocessing(model: Any, hidden_states: torch.Tensor) -> torch.Tensor:
+    output_embeddings = model.get_output_embeddings() if hasattr(model, "get_output_embeddings") else None
+    if output_embeddings is None:
+        raise AttributeError("Model does not expose output embeddings for low-memory scoring.")
+
+    logits = output_embeddings(hidden_states)
+    config = getattr(model, "config", None)
+    if config is None:
+        return logits
+
+    text_config_getter = getattr(config, "get_text_config", None)
+    text_config = text_config_getter() if callable(text_config_getter) else config
+    final_logit_softcapping = getattr(text_config, "final_logit_softcapping", None)
+    if final_logit_softcapping is not None:
+        logits = logits / final_logit_softcapping
+        logits = torch.tanh(logits)
+        logits = logits * final_logit_softcapping
+    return logits
+
+
+def low_memory_scoring_pass(
+    model: Any,
+    generated_ids: torch.Tensor,
+    generated_attention_mask: torch.Tensor,
+    prompt_width: int,
+    completion_width: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    base_model = getattr(model, "model", None)
+    if base_model is None:
+        base_model = getattr(model, "base_model", None)
+    if base_model is None:
+        raise AttributeError("Model does not expose a base model for low-memory scoring.")
+
+    base_outputs = base_model(
+        input_ids=generated_ids,
+        attention_mask=generated_attention_mask,
+        use_cache=False,
+        return_dict=True,
+    )
+    last_hidden_state = getattr(base_outputs, "last_hidden_state", None)
+    if last_hidden_state is None:
+        raise AttributeError("Base model did not return last_hidden_state for low-memory scoring.")
+
+    scoring_start = prompt_width - 1
+    scoring_stop = scoring_start + completion_width
+    scoring_hidden_states = last_hidden_state[:, scoring_start:scoring_stop, :]
+    scoring_logits = apply_output_head_with_model_postprocessing(model, scoring_hidden_states)
+    return scoring_logits, last_hidden_state
+
+
 def generate_batch_with_diagnostics(
     model: Any,
     tokenizer: Any,
@@ -1209,13 +1259,27 @@ def generate_batch_with_diagnostics(
             ],
             dim=1,
         )
-        forward_outputs = model(generated_ids, attention_mask=generated_attention_mask, output_hidden_states=True)
+        try:
+            scoring_logits, final_hidden_states = low_memory_scoring_pass(
+                model=model,
+                generated_ids=generated_ids,
+                generated_attention_mask=generated_attention_mask,
+                prompt_width=prompt_width,
+                completion_width=completion_width,
+            )
+        except Exception as exc:
+            logging.warning("Low-memory scoring path failed; falling back to wrapper forward: %s", exc)
+            forward_outputs = model(
+                generated_ids,
+                attention_mask=generated_attention_mask,
+                output_hidden_states=True,
+                use_cache=False,
+            )
+            scoring_logits = forward_outputs.logits[:, prompt_width - 1 : prompt_width - 1 + completion_width, :]
+            final_hidden_states = forward_outputs.hidden_states[-1]
         if actual_device == "cuda" and torch.cuda.is_available():
             torch.cuda.synchronize()
         forward_seconds = time.perf_counter() - forward_started_at
-
-    full_logits = forward_outputs.logits
-    hidden_states = forward_outputs.hidden_states[-1]
 
     results: list[dict[str, Any]] = []
     postprocess_started_at = time.perf_counter()
@@ -1226,12 +1290,12 @@ def generate_batch_with_diagnostics(
         raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
 
         if generated_length > 0:
-            scoring_logits = full_logits[index, prompt_width - 1 : prompt_width - 1 + generated_length]
-            log_probs = torch.log_softmax(scoring_logits, dim=-1)
-            probs = torch.softmax(scoring_logits, dim=-1)
+            completion_scoring_logits = scoring_logits[index, :generated_length]
+            log_probs = torch.log_softmax(completion_scoring_logits, dim=-1)
+            probs = torch.softmax(completion_scoring_logits, dim=-1)
             token_logprobs = log_probs.gather(1, completion_ids.unsqueeze(1)).squeeze(1)
             token_entropies = -(probs * log_probs).sum(dim=-1)
-            pooled_hidden = hidden_states[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+            pooled_hidden = final_hidden_states[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
         else:
             token_logprobs = torch.empty(0)
             token_entropies = torch.empty(0)
