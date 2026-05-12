@@ -963,6 +963,7 @@ def load_model(
             else:
                 load_kwargs["quantization_config"] = BitsAndBytesConfig(
                     load_in_4bit=True,
+                    llm_int8_enable_fp32_cpu_offload=True,
                     bnb_4bit_quant_type="nf4",
                     bnb_4bit_use_double_quant=True,
                     bnb_4bit_compute_dtype=compute_dtype,
@@ -994,6 +995,16 @@ def load_model(
             backend = f"transformers+torch({actual_device})"
     except Exception as exc:
         logging.warning("Primary model load failed for %s: %s", model_source, exc)
+        if (
+            actual_device == "cuda"
+            and target_precision == "4bit"
+            and "Some modules are dispatched on the CPU or the disk" in str(exc)
+        ):
+            logging.warning(
+                "4-bit loading requested CPU offload but %s still does not fit cleanly on this GPU. "
+                "This usually means the card is too small for the model family even with quantization.",
+                model_source,
+            )
         if actual_device == "cuda":
             raise
         fallback_kwargs = {"trust_remote_code": True}
