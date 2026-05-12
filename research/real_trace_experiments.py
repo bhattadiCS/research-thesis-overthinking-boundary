@@ -4,6 +4,7 @@ import argparse
 import gc
 import hashlib
 import importlib.util
+import inspect
 import json
 import logging
 import math
@@ -37,6 +38,35 @@ try:
     from transformers import BitsAndBytesConfig
 except ImportError:
     BitsAndBytesConfig = None
+
+
+def ensure_bitsandbytes_params4bit_compatibility() -> None:
+    try:
+        from bitsandbytes.nn.modules import Params4bit
+    except Exception:
+        return
+
+    current_new = Params4bit.__new__
+    if getattr(current_new, "_hf_compat_patched", False):
+        return
+
+    try:
+        signature = inspect.signature(current_new)
+    except (TypeError, ValueError):
+        return
+
+    if "_is_hf_initialized" in signature.parameters:
+        return
+
+    def compat_new(cls, data=None, *args, **kwargs):
+        kwargs.pop("_is_hf_initialized", None)
+        return current_new(cls, data, *args, **kwargs)
+
+    compat_new._hf_compat_patched = True
+    Params4bit.__new__ = compat_new
+    logging.info(
+        "Applied Params4bit compatibility shim for Accelerate/Transformers quantized dispatch."
+    )
 
 
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
@@ -955,6 +985,8 @@ def load_model(
         if actual_device == "cuda" and target_precision in {"8bit", "4bit"}:
             if BitsAndBytesConfig is None:
                 raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
+            if target_precision == "4bit":
+                ensure_bitsandbytes_params4bit_compatibility()
             if target_precision == "8bit":
                 load_kwargs["quantization_config"] = BitsAndBytesConfig(
                     load_in_8bit=True,
