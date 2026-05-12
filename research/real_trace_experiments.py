@@ -69,6 +69,67 @@ def ensure_bitsandbytes_params4bit_compatibility() -> None:
     )
 
 
+def ensure_accelerate_meta_state_dict_compatibility() -> None:
+    try:
+        import accelerate.hooks as accelerate_hooks
+        import accelerate.big_modeling as accelerate_big_modeling
+    except Exception:
+        return
+
+    current_hook = accelerate_hooks.attach_execution_device_hook
+    if getattr(current_hook, "_hf_compat_patched", False):
+        return
+
+    add_hook_to_module = accelerate_hooks.add_hook_to_module
+    align_devices_hook = accelerate_hooks.AlignDevicesHook
+
+    def compat_attach_execution_device_hook(
+        module: torch.nn.Module,
+        execution_device: int | str | torch.device,
+        skip_keys: str | list[str] | None = None,
+        preload_module_classes: list[str] | None = None,
+        tied_params_map: dict[int, dict[torch.device, torch.Tensor]] | None = None,
+    ) -> None:
+        if not hasattr(module, "_hf_hook"):
+            try:
+                has_state = len(module.state_dict()) > 0
+            except RuntimeError as exc:
+                if "Tensor.item() cannot be called on meta tensors" not in str(exc):
+                    raise
+                has_state = any(value is not None for value in module._parameters.values()) or any(
+                    value is not None for value in module._buffers.values()
+                )
+            if has_state:
+                add_hook_to_module(
+                    module,
+                    align_devices_hook(
+                        execution_device,
+                        skip_keys=skip_keys,
+                        tied_params_map=tied_params_map,
+                    ),
+                )
+
+        if preload_module_classes is not None and module.__class__.__name__ in preload_module_classes:
+            return
+
+        for child in module.children():
+            compat_attach_execution_device_hook(
+                child,
+                execution_device,
+                skip_keys=skip_keys,
+                preload_module_classes=preload_module_classes,
+                tied_params_map=tied_params_map,
+            )
+
+    compat_attach_execution_device_hook._hf_compat_patched = True
+    accelerate_hooks.attach_execution_device_hook = compat_attach_execution_device_hook
+    if hasattr(accelerate_big_modeling, "attach_execution_device_hook"):
+        accelerate_big_modeling.attach_execution_device_hook = compat_attach_execution_device_hook
+    logging.info(
+        "Applied Accelerate meta state_dict compatibility shim for quantized dispatch."
+    )
+
+
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
 STEP_COST = 0.05
 
@@ -987,6 +1048,7 @@ def load_model(
                 raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
             if target_precision == "4bit":
                 ensure_bitsandbytes_params4bit_compatibility()
+                ensure_accelerate_meta_state_dict_compatibility()
             if target_precision == "8bit":
                 load_kwargs["quantization_config"] = BitsAndBytesConfig(
                     load_in_8bit=True,
