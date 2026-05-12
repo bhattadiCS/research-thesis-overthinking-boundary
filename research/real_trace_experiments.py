@@ -130,6 +130,29 @@ def ensure_accelerate_meta_state_dict_compatibility() -> None:
     )
 
 
+def resolve_low_vram_device_map(
+    model_spec: ModelSpec,
+    actual_device: str,
+    target_precision: str,
+    device_map: str | None,
+) -> str | dict[str, int | str] | None:
+    if device_map is not None:
+        return device_map
+    if actual_device != "cuda" or target_precision != "4bit":
+        return None
+    if model_spec.alias != "gemma_4_e4b_it":
+        return None
+
+    return {
+        "model.language_model": 0,
+        "model.vision_tower": "cpu",
+        "model.audio_tower": "cpu",
+        "model.embed_vision": "cpu",
+        "model.embed_audio": "cpu",
+        "lm_head": "cpu",
+    }
+
+
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
 STEP_COST = 0.05
 
@@ -1042,6 +1065,15 @@ def load_model(
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
 
+    resolved_device_map = resolve_low_vram_device_map(
+        model_spec=model_spec,
+        actual_device=actual_device,
+        target_precision=target_precision,
+        device_map=device_map,
+    )
+    if resolved_device_map is not None and resolved_device_map != device_map:
+        logging.info("Using explicit low-VRAM device map for %s: %s", model_spec.alias, resolved_device_map)
+
     try:
         if actual_device == "cuda" and target_precision in {"8bit", "4bit"}:
             if BitsAndBytesConfig is None:
@@ -1062,7 +1094,7 @@ def load_model(
                     bnb_4bit_use_double_quant=True,
                     bnb_4bit_compute_dtype=compute_dtype,
                 )
-            load_kwargs["device_map"] = device_map or "auto"
+            load_kwargs["device_map"] = resolved_device_map or "auto"
             if offload_folder:
                 load_kwargs["offload_folder"] = offload_folder
                 load_kwargs["offload_state_dict"] = True
@@ -1076,13 +1108,13 @@ def load_model(
                 else:
                     raise
             backend = f"transformers+torch(cuda-{target_precision})"
-        elif actual_device == "cuda" and device_map:
-            load_kwargs["device_map"] = device_map
+        elif actual_device == "cuda" and resolved_device_map:
+            load_kwargs["device_map"] = resolved_device_map
             if offload_folder:
                 load_kwargs["offload_folder"] = offload_folder
                 load_kwargs["offload_state_dict"] = True
             model = model_class.from_pretrained(model_source, **load_kwargs)
-            backend = f"transformers+torch(cuda-device-map={device_map})"
+            backend = f"transformers+torch(cuda-device-map={resolved_device_map})"
         else:
             model = model_class.from_pretrained(model_source, **load_kwargs)
             model.to(actual_device)
