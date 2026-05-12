@@ -39,6 +39,27 @@ Run the default smoke test:
 python tools/runai/run_experiment.py --mode smoke --model deepseek_r1_distill_1p5b
 ```
 
+Recommended for Blackwell RUN:AI terminal sessions that need the same torch/GPU repair path as the notebook:
+
+```bash
+git fetch --all --prune
+git pull --ff-only
+
+MODEL=gemma_4_e4b_it \
+EXPERIMENT_MODE=full \
+START_EXPERIMENT=1 \
+RUN_SIMULATOR=0 \
+AUTO_INSTALL_TORCH=1 \
+GPU_FAILURE_MODE=stop \
+python tools/runai/jupyter_repo_gpu_sanity.py
+```
+
+That command writes the full run to:
+
+```bash
+/workspaces/research-thesis-overthinking-boundary/research/outputs/real_traces_colab_gemma_4_e4b_it
+```
+
 Run a full experiment after the smoke test passes:
 
 ```bash

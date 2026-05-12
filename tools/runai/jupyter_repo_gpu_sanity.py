@@ -15,6 +15,10 @@ RECOMMENDED_BLACKWELL_TORCH_INDEX_URL = DEFAULT_TORCH_INDEX_URL
 RECOMMENDED_BLACKWELL_TORCH_PACKAGES = DEFAULT_TORCH_PACKAGES
 LEGACY_BLACKWELL_TORCH_INDEX_URLS = {"https://download.pytorch.org/whl/cu124"}
 VALID_GPU_FAILURE_MODES = {"stop", "skip-experiment", "cpu"}
+RUNTIME_OPTIONAL_NUMPY_DEPENDENCIES = {
+    "numexpr": "numexpr>=2.14.1",
+    "bottleneck": "bottleneck>=1.6.0",
+}
 
 REPO_URL = os.environ.get(
     "REPO_URL",
@@ -24,7 +28,7 @@ REPO_NAME = os.environ.get("REPO_NAME", "research-thesis-overthinking-boundary")
 WORKDIR = Path(
     os.environ.get(
         "WORKDIR",
-        "/workspace" if Path("/workspace").exists() else str(Path.cwd()),
+        "/workspaces" if Path("/workspaces").exists() else str(Path.cwd()),
     )
 ).resolve()
 MODEL = os.environ.get("MODEL", "deepseek_r1_distill_1p5b")
@@ -120,11 +124,25 @@ def git_output(repo_dir: Path, *args: str) -> str:
     return (result.stdout or "").strip()
 
 
+def git_status_lines(repo_dir: Path) -> list[str]:
+    return [line for line in git_output(repo_dir, "status", "--porcelain").splitlines() if line.strip()]
+
+
+def is_ignorable_status_line(line: str) -> bool:
+    if not line.startswith("?? "):
+        return False
+    relative_path = line[3:].strip()
+    return relative_path == "research/outputs" or relative_path.startswith("research/outputs/")
+
+
+def non_ignorable_status_lines(repo_dir: Path) -> list[str]:
+    return [line for line in git_status_lines(repo_dir) if not is_ignorable_status_line(line)]
+
+
 def print_repo_state(repo_dir: Path) -> None:
     remote_url = git_output(repo_dir, "remote", "get-url", "origin")
     branch_name = git_output(repo_dir, "branch", "--show-current")
     head_commit = git_output(repo_dir, "rev-parse", "--short", "HEAD")
-    status_output = git_output(repo_dir, "status", "--porcelain")
 
     log(f"Repository root: {repo_dir}")
     if remote_url:
@@ -134,7 +152,7 @@ def print_repo_state(repo_dir: Path) -> None:
     if head_commit:
         log(f"HEAD: {head_commit}")
 
-    status_lines = [line for line in status_output.splitlines() if line.strip()]
+    status_lines = git_status_lines(repo_dir)
     if status_lines:
         log(f"Worktree is dirty with {len(status_lines)} change(s); showing first {min(20, len(status_lines))}.")
         for line in status_lines[:20]:
@@ -163,10 +181,13 @@ def clone_or_update_repo() -> Path:
     before_head = git_output(repo_dir, "rev-parse", "--short", "HEAD")
     run(["git", "fetch", "--all", "--prune"], cwd=repo_dir)
 
-    status = run(["git", "status", "--porcelain"], cwd=repo_dir, check=False, capture_output=True)
-    if (status.stdout or "").strip():
-        log("Skipping git pull because the worktree has local changes.")
+    dirty_lines = non_ignorable_status_lines(repo_dir)
+    if dirty_lines:
+        log("Skipping git pull because the worktree has non-generated local changes.")
     else:
+        all_status_lines = git_status_lines(repo_dir)
+        if all_status_lines:
+            log("Ignoring generated research/outputs changes while pulling the latest code.")
         run(["git", "pull", "--ff-only"], cwd=repo_dir)
 
     head = run(["git", "rev-parse", "--short", "HEAD"], cwd=repo_dir, check=False, capture_output=True)
@@ -408,6 +429,62 @@ def ensure_torch() -> dict[str, object]:
     return info
 
 
+def probe_module_import(module_name: str) -> dict[str, object]:
+    probe_code = (
+        "import importlib, json\n"
+        f"module_name = {module_name!r}\n"
+        "payload = {'module': module_name, 'import_ok': False}\n"
+        "try:\n"
+        "    importlib.import_module(module_name)\n"
+        "    payload['import_ok'] = True\n"
+        "except Exception as exc:\n"
+        "    payload['error'] = repr(exc)\n"
+        "print(json.dumps(payload))\n"
+    )
+    result = run([sys.executable, "-c", probe_code], check=False, capture_output=True)
+    lines = [line.strip() for line in (result.stdout or "").splitlines() if line.strip()]
+    for line in reversed(lines):
+        try:
+            return json.loads(line)
+        except json.JSONDecodeError:
+            continue
+    return {
+        "module": module_name,
+        "import_ok": False,
+        "error": (result.stderr or result.stdout or "Unable to parse module import probe output").strip(),
+    }
+
+
+def collect_numpy_optional_dependency_issues() -> list[tuple[str, str, str]]:
+    issues: list[tuple[str, str, str]] = []
+    for module_name, requirement in RUNTIME_OPTIONAL_NUMPY_DEPENDENCIES.items():
+        info = probe_module_import(module_name)
+        if not info.get("import_ok"):
+            issues.append((module_name, requirement, str(info.get("error") or "import failed")))
+    return issues
+
+
+def ensure_numpy_optional_dependencies() -> None:
+    issues = collect_numpy_optional_dependency_issues()
+    if not issues:
+        return
+
+    log("Detected NumPy optional dependencies that need reinstall for NumPy 2.x compatibility.")
+    for module_name, _, error in issues:
+        log(f"{module_name} import failed: {error}")
+
+    install_args = ["--upgrade", "--force-reinstall", "--no-cache-dir"]
+    install_args.extend(requirement for _, requirement, _ in issues)
+    pip_install(install_args)
+
+    remaining = collect_numpy_optional_dependency_issues()
+    if remaining:
+        details = "; ".join(f"{module_name}: {error}" for module_name, _, error in remaining)
+        raise RuntimeError(f"NumPy optional dependency repair failed: {details}")
+
+    log("NumPy optional dependencies are importable.")
+
+
 def gpu_sanity_check() -> dict[str, object]:
     log("Starting GPU sanity checks.")
     print("\n=== GPU visibility via nvidia-smi ===")
@@ -568,6 +645,7 @@ def main() -> None:
         log("START_EXPERIMENT=0, stopping after repo update and GPU sanity checks.")
         return
 
+    ensure_numpy_optional_dependencies()
     launch_experiment(repo_dir, launch_device)
 
 
