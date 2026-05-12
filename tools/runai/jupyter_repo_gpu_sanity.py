@@ -132,7 +132,12 @@ def is_ignorable_status_line(line: str) -> bool:
     if not line.startswith("?? "):
         return False
     relative_path = line[3:].strip()
-    return relative_path == "research/outputs" or relative_path.startswith("research/outputs/")
+    return (
+        relative_path == "research/outputs"
+        or relative_path.startswith("research/outputs/")
+        or relative_path == "run_logs"
+        or relative_path.startswith("run_logs/")
+    )
 
 
 def non_ignorable_status_lines(repo_dir: Path) -> list[str]:

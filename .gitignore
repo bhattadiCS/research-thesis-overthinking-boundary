@@ -21,6 +21,7 @@ research/outputs/real_traces/
 research/outputs/real_traces_deepseek/
 research/outputs/real_traces_colab/
 research/outputs/real_traces_colab_smoke/
+run_logs/
 research/outputs/benchmark_*/
 research/outputs/*/hidden_states/
 research/outputs/*/model_offload/

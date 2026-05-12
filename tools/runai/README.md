@@ -45,13 +45,17 @@ Recommended for Blackwell RUN:AI terminal sessions that need the same torch/GPU 
 git fetch --all --prune
 git pull --ff-only
 
+mkdir -p run_logs
+
 MODEL=gemma_4_e4b_it \
 EXPERIMENT_MODE=full \
 START_EXPERIMENT=1 \
 RUN_SIMULATOR=0 \
 AUTO_INSTALL_TORCH=1 \
 GPU_FAILURE_MODE=stop \
-python tools/runai/jupyter_repo_gpu_sanity.py
+EXPERIMENT_ARGS="--quantization 4bit --smoke-batch-size 1 --full-batch-size 1 --io-threads 4 --attn-implementation sdpa" \
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+python -u tools/runai/jupyter_repo_gpu_sanity.py 2>&1 | tee run_logs/gemma_4_e4b_it_full_$(date +%Y%m%d_%H%M%S).log
 ```
 
 That command writes the full run to:
