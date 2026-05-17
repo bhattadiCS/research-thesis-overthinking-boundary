@@ -178,6 +178,31 @@ def ensure_packages(skip_install: bool) -> None:
     print(f"[setup] Verified Python package baseline: {', '.join(satisfied)}", flush=True)
 
 
+def ensure_torchvision_from_cuda_index() -> None:
+    """Install torchvision from the PyTorch CUDA wheel index if missing or CPU-only."""
+    try:
+        import torch
+        import torchvision  # noqa: F401
+        if torch.cuda.is_available() and "+cpu" in getattr(torchvision, "__version__", ""):
+            raise ImportError("CPU-only torchvision detected on a CUDA machine")
+        print(f"[setup] torchvision {torchvision.__version__} is available.", flush=True)
+        return
+    except ImportError:
+        pass
+
+    cuda_index = "https://download.pytorch.org/whl/cu128"
+    try:
+        import torch
+        cuda_ver = (torch.version.cuda or "").replace(".", "")
+        if cuda_ver:
+            cuda_index = f"https://download.pytorch.org/whl/cu{cuda_ver}"
+    except Exception:
+        pass
+
+    print(f"[setup] Installing torchvision from CUDA wheel index: {cuda_index}", flush=True)
+    run_command([PYTHON, "-m", "pip", "install", "-q", "torchvision", "--index-url", cuda_index])
+
+
 def print_environment() -> str:
     import torch
 
@@ -383,6 +408,7 @@ def main() -> None:
 
     started_at = time.time()
     ensure_packages(skip_install=args.skip_install)
+    ensure_torchvision_from_cuda_index()
     device = print_environment()
     smoke_model = args.smoke_model or args.model
 

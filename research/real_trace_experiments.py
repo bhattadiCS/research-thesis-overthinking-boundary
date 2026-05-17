@@ -140,17 +140,7 @@ def resolve_low_vram_device_map(
         return device_map
     if actual_device != "cuda" or target_precision != "4bit":
         return None
-    if model_spec.alias != "gemma_4_e4b_it":
-        return None
-
-    return {
-        "model.language_model": 0,
-        "model.vision_tower": "cpu",
-        "model.audio_tower": "cpu",
-        "model.embed_vision": "cpu",
-        "model.embed_audio": "cpu",
-        "lm_head": "cpu",
-    }
+    return None
 
 
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
@@ -377,8 +367,8 @@ MODEL_CATALOG = {
     ),
     "gemma_4_e4b_it": ModelSpec(
         alias="gemma_4_e4b_it",
-        hf_name="google/gemma-4-E4B-it",
-        family="Gemma 4 Edge",
+        hf_name="principled-intelligence/gemma-4-E4B-it-text-only",
+        family="Gemma 4 Edge (text-only)",
         parameter_count="4B",
     ),
     "qwen_3p5_9b": ModelSpec(
@@ -1050,7 +1040,12 @@ def load_model(
             load_kwargs["attn_implementation"] = attn_implementation
             logging.info("Attention implementation: %s (native FA2 kernels via SDPA).", attn_implementation)
 
-    is_multimodal = any(f in model_spec.family.lower() for f in ["gemma 4", "llama 4", "qwen3.5"])
+    _MULTIMODAL_FAMILIES = ["gemma 4", "llama 4", "qwen3.5"]
+    _TEXT_ONLY_OVERRIDE = "text-only" in model_spec.family.lower()
+    is_multimodal = (
+        not _TEXT_ONLY_OVERRIDE
+        and any(f in model_spec.family.lower() for f in _MULTIMODAL_FAMILIES)
+    )
     if is_multimodal:
         from transformers import AutoModelForMultimodalLM
         model_class = AutoModelForMultimodalLM

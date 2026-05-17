@@ -1,5 +1,4 @@
 transformers>=5.5.0
-torchvision>=0.22.0
 accelerate>=1.13.0
 datasets>=3.4
 evaluate>=0.4
