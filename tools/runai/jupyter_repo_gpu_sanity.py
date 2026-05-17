@@ -31,7 +31,7 @@ WORKDIR = Path(
         "/workspaces" if Path("/workspaces").exists() else str(Path.cwd()),
     )
 ).resolve()
-MODEL = os.environ.get("MODEL", "gemma_4_e4b_it")
+MODEL = os.environ.get("MODEL", "deepseek_r1_distill_7b")
 EXPERIMENT_MODE = os.environ.get("EXPERIMENT_MODE", "full")
 START_EXPERIMENT = os.environ.get("START_EXPERIMENT", "1") == "1"
 RUN_SIMULATOR = os.environ.get("RUN_SIMULATOR", "0") == "1"
@@ -41,8 +41,7 @@ TORCH_INDEX_URL = os.environ.get("TORCH_INDEX_URL", DEFAULT_TORCH_INDEX_URL)
 TORCH_PACKAGES = shlex.split(os.environ.get("TORCH_PACKAGES", DEFAULT_TORCH_PACKAGES))
 GPU_FAILURE_MODE = os.environ.get("GPU_FAILURE_MODE", "stop").strip().lower()
 
-# Default EXPERIMENT_ARGS tuned for Gemma-4-E4B-It on a ~10 GB Blackwell GPU.
-# 4-bit quantization + batch size 1 keeps peak VRAM under 9.78 GB.
+# Default EXPERIMENT_ARGS tuned for DeepSeek 7B at 4-bit on a ~10 GB Blackwell GPU.
 _DEFAULT_EXPERIMENT_ARGS = (
     "--quantization 4bit "
     "--smoke-batch-size 1 "
