@@ -140,6 +140,17 @@ def resolve_low_vram_device_map(
         return device_map
     if actual_device != "cuda" or target_precision != "4bit":
         return None
+    # For small models (≤ 8B params), force single-GPU loading.
+    # device_map="auto" estimates memory using the unquantized model size,
+    # which can cause accelerate to offload 4-bit layers to CPU as meta
+    # tensors -- bitsandbytes then crashes with "Cannot copy out of meta
+    # tensor; no data!" when generate() tries to move them back to CUDA.
+    try:
+        num_params = float(re.findall(r"[\d.]+", model_spec.parameter_count)[0])
+        if num_params <= 8:
+            return {"": 0}
+    except (IndexError, ValueError):
+        pass
     return None
 
 
