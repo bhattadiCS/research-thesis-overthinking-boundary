@@ -27,7 +27,7 @@ TORCHVISION_STUB_ROOT = Path(__file__).resolve().parent / "_vendor" / "torchvisi
 if TORCHVISION_STUB_ROOT.exists() and importlib.util.find_spec("torchvision") is None:
     sys.path.insert(0, str(TORCHVISION_STUB_ROOT))
 
-from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed, AutoModelForMultimodalLM, AutoProcessor
+from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 
 try:
     from datasets import load_dataset
@@ -1051,10 +1051,15 @@ def load_model(
             logging.info("Attention implementation: %s (native FA2 kernels via SDPA).", attn_implementation)
 
     is_multimodal = any(f in model_spec.family.lower() for f in ["gemma 4", "llama 4", "qwen3.5"])
-    model_class = AutoModelForMultimodalLM if is_multimodal else AutoModelForCausalLM
+    if is_multimodal:
+        from transformers import AutoModelForMultimodalLM
+        model_class = AutoModelForMultimodalLM
+    else:
+        model_class = AutoModelForCausalLM
     
     # Loading handle (Processor for multimodal, Tokenizer for vanilla)
     if is_multimodal:
+        from transformers import AutoProcessor
         processor = AutoProcessor.from_pretrained(model_source, trust_remote_code=True)
         # Use the inner tokenizer for text encoding; it also has apply_chat_template
         tokenizer = getattr(processor, "tokenizer", processor)
