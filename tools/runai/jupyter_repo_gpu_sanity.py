@@ -31,16 +31,26 @@ WORKDIR = Path(
         "/workspaces" if Path("/workspaces").exists() else str(Path.cwd()),
     )
 ).resolve()
-MODEL = os.environ.get("MODEL", "deepseek_r1_distill_1p5b")
-EXPERIMENT_MODE = os.environ.get("EXPERIMENT_MODE", "smoke")
+MODEL = os.environ.get("MODEL", "gemma_4_e4b_it")
+EXPERIMENT_MODE = os.environ.get("EXPERIMENT_MODE", "full")
 START_EXPERIMENT = os.environ.get("START_EXPERIMENT", "1") == "1"
 RUN_SIMULATOR = os.environ.get("RUN_SIMULATOR", "0") == "1"
 SKIP_INSTALL = os.environ.get("SKIP_INSTALL", "0") == "1"
 AUTO_INSTALL_TORCH = os.environ.get("AUTO_INSTALL_TORCH", "1") == "1"
 TORCH_INDEX_URL = os.environ.get("TORCH_INDEX_URL", DEFAULT_TORCH_INDEX_URL)
 TORCH_PACKAGES = shlex.split(os.environ.get("TORCH_PACKAGES", DEFAULT_TORCH_PACKAGES))
-GPU_FAILURE_MODE = os.environ.get("GPU_FAILURE_MODE", "skip-experiment").strip().lower()
-EXPERIMENT_ARGS = shlex.split(os.environ.get("EXPERIMENT_ARGS", ""))
+GPU_FAILURE_MODE = os.environ.get("GPU_FAILURE_MODE", "stop").strip().lower()
+
+# Default EXPERIMENT_ARGS tuned for Gemma-4-E4B-It on a ~10 GB Blackwell GPU.
+# 4-bit quantization + batch size 1 keeps peak VRAM under 9.78 GB.
+_DEFAULT_EXPERIMENT_ARGS = (
+    "--quantization 4bit "
+    "--smoke-batch-size 1 "
+    "--full-batch-size 1 "
+    "--io-threads 4 "
+    "--attn-implementation sdpa"
+)
+EXPERIMENT_ARGS = shlex.split(os.environ.get("EXPERIMENT_ARGS", _DEFAULT_EXPERIMENT_ARGS))
 
 
 def log(message: str) -> None:
@@ -622,6 +632,10 @@ def main() -> None:
     if GPU_FAILURE_MODE not in VALID_GPU_FAILURE_MODES:
         valid_modes = ", ".join(sorted(VALID_GPU_FAILURE_MODES))
         raise ValueError(f"GPU_FAILURE_MODE must be one of {valid_modes}; got: {GPU_FAILURE_MODE}")
+
+    # Enable expandable CUDA memory segments for tight-VRAM Blackwell cards.
+    if not os.environ.get("PYTORCH_CUDA_ALLOC_CONF"):
+        os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
     log("Notebook bootstrap starting.")
     log(f"WORKDIR={WORKDIR}")

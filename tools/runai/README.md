@@ -33,10 +33,10 @@ python tools/runai/check_env.py
 
 For a fresh Jupyter notebook session, copy the contents of `tools/runai/jupyter_repo_gpu_sanity.py` into a new Python 3 cell.
 
-Run the default smoke test:
+Run the default smoke test (Gemma-4-E4B-It, 4-bit quantized for ~10 GB GPUs):
 
 ```bash
-python tools/runai/run_experiment.py --mode smoke --model deepseek_r1_distill_1p5b
+python tools/runai/run_experiment.py --mode smoke --model gemma_4_e4b_it --quantization 4bit --smoke-batch-size 1
 ```
 
 Recommended for Blackwell RUN:AI terminal sessions that need the same torch/GPU repair path as the notebook:
