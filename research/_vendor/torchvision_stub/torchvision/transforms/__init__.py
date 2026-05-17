@@ -1,6 +1,9 @@
+"""Minimal torchvision.transforms stub."""
 from __future__ import annotations
 
 from enum import Enum
+
+from . import functional  # noqa: F401
 
 
 class InterpolationMode(str, Enum):
