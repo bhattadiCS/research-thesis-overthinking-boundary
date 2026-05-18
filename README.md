@@ -288,14 +288,23 @@ flowchart LR
 
 ## What the Literature Added
 
-The current literature sweep pushed this repo in four important directions:
+Recent literature (e.g., *Mitigating Overthinking in Large Reasoning Language Models via Reasoning Path Deviation Monitoring*, 2026) has provided external corroboration for our core premise: overthinking is frequently accompanied by high-entropy transition tokens (e.g., "Wait", "But", "Alternatively"). These studies demonstrate that token entropy spikes can effectively detect when a model deviates from the correct reasoning path.
+
+However, the current literature sweep also pushed this repo beyond those initial findings in four important directions:
 
 - Longer reasoning is not reliably monotone-helpful.
-- Hidden states and entropy are among the most useful stopping observables.
+- Output token entropy is useful, but **internal hidden-state drift** provides a much deeper semantic signal of corruption.
 - Proxy-based reward signals can remain useful while still being misaligned.
 - Time-uniform risk control matters if a detector scans for a stop at every step.
 
-That is why the repo now centers a continuation-value model, hazard decomposition, and anytime-valid detector layer instead of relying on a single entropy threshold or a generic prompting heuristic.
+### Algorithm X vs. Unidimensional Heuristics
+
+Recent early-exit papers often rely on unidimensional heuristics—such as dividing a local entropy window by global entropy and stopping if it crosses a hardcoded threshold. 
+
+This repository (Algorithm X) fundamentally differentiates itself from these heuristic approaches in three ways:
+1. **Multidimensional Feature Vector**: Rather than looking exclusively at output logits (token entropy), Algorithm X uses a 4-dimensional universal feature set (`entropy_mean`, `answer_changed`, `thought_token_count`, `hidden_l2_shift`). This combines surface-level uncertainty with deep latent representation shifts from the transformer's hidden states.
+2. **Optimal Stopping Theory over Hard Thresholds**: Instead of arbitrary ratios, Algorithm X formulates overthinking as a stochastic process, utilizing Martingale stopping theory and Empirical-Bernstein bounds to mathematically guarantee optimal stopping without over-truncation.
+3. **Hazard Decomposition**: Algorithm X explicitly models the competing forces of *repair* (fixing a wrong answer) versus *corruption* (breaking a correct answer) using cost-adjusted continuation value (`mu_t`), rather than just tracking generic "path deviation."
 
 ## Why This Matters Beyond PRMs
 
