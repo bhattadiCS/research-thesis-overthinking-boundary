@@ -38,7 +38,7 @@ Only promote a new default after all of the following are done together:
 1. Add the chosen variant to the live metadata/training pipeline.
 2. Regenerate `universal_hazard_model_metadata.json` and any downstream reports from that new default.
 3. Re-run frontier validation on real full frontier traces, not smoke traces.
-4. State explicitly whether the thesis is still presenting Algorithm X as a hazard decomposition or is switching to a direct-drift rule.
+4. State explicitly whether the thesis is still presenting The OBE System as a hazard decomposition or is switching to a direct-drift rule.
 
 ## Immediate Outcome
 

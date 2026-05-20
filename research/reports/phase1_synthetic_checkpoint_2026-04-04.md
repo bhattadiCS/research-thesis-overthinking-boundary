@@ -34,7 +34,7 @@ Advance the UAS-11 latent next command on local CPU by making the synthetic boun
 
 ## Thesis Implication
 
-This checkpoint advances Phase 1 synthetic scaffolding and removes a tooling bottleneck in the UAS-11 prompt loop. It does not change the deployed local Algorithm X baseline, and it does not change the previously documented frontier-validation status. The main value is that the synthetic boundary program is now scalable, reproducible, and isolated enough to support larger CPU sweeps.
+This checkpoint advances Phase 1 synthetic scaffolding and removes a tooling bottleneck in the UAS-11 prompt loop. It does not change the deployed local The OBE System baseline, and it does not change the previously documented frontier-validation status. The main value is that the synthetic boundary program is now scalable, reproducible, and isolated enough to support larger CPU sweeps.
 
 ## Recommended Next Step
 

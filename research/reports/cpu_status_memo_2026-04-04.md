@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-The CPU continuation resolved the truth gap between reports, code, and metadata. The local workspace now tells a coherent story: legacy CPU analysis reruns are stable, the equation recommendation changed only at the analysis layer, the deployed Algorithm X baseline did not change, and full frontier validation is still pending because only smoke frontier traces exist locally.
+The CPU continuation resolved the truth gap between reports, code, and metadata. The local workspace now tells a coherent story: legacy CPU analysis reruns are stable, the equation recommendation changed only at the analysis layer, the deployed The OBE System baseline did not change, and full frontier validation is still pending because only smoke frontier traces exist locally.
 
 ## Did the math equation change?
 
@@ -18,7 +18,7 @@ Short answer: the recommended math changed, but the live local baseline did not.
 
 No.
 
-- The deployed local algorithm remains the original hazard-style Algorithm X using the `quadratic_top4` intake.
+- The deployed local algorithm remains the original hazard-style The OBE System using the `quadratic_top4` intake.
 - `direct_drift_ridge_top4` outperformed on boundary accuracy, but it remains an experimental comparator because it is not the original q/alpha/beta hazard decomposition.
 
 Short answer: the deployed algorithm did not change.
@@ -54,4 +54,4 @@ Short answer: we moved from ambiguous partial completion to coherent partial com
 
 ## Net Conclusion
 
-Algorithm X is in a stronger analytical state than before this CPU continuation, but not in a stronger frontier-validation state. The main result of this session is epistemic cleanup: we now know exactly what changed, what did not, what data exist locally, and why the parse metrics behave the way they do.
+The OBE System is in a stronger analytical state than before this CPU continuation, but not in a stronger frontier-validation state. The main result of this session is epistemic cleanup: we now know exactly what changed, what did not, what data exist locally, and why the parse metrics behave the way they do.

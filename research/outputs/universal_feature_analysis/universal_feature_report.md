@@ -53,7 +53,7 @@
 | Mistral hidden repair AUC about 0.68 | 0.7089 | 0.6800 | pass |
 | Qwen 7B hidden corruption AUC about 0.80 | 0.8055 | 0.8000 | pass |
 
-## Selected Algorithm X Variant
+## Selected The OBE System Variant
 
 Selected model: `quadratic_top4`
 

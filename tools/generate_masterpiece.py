@@ -2,14 +2,14 @@ import os
 
 # The Prompt Parts
 header = """---
-name: "Algorithm X: The Grand Unified Autonomous Scientist (Level 11+) - THE 1500+ LINE MASTERPIECE"
-description: "A colossal, 1500+ line, fully autonomous 30-day mission to solve Algorithm X, prove the Universal Law of Overthinking, and push the boundaries of computational mathematics using recursive self-improvement and high-intensity CPU-based validation."
+name: "The OBE System: The Grand Unified Autonomous Scientist (Level 11+) - THE 1500+ LINE MASTERPIECE"
+description: "A colossal, 1500+ line, fully autonomous 30-day mission to solve The OBE System, prove the Universal Law of Overthinking, and push the boundaries of computational mathematics using recursive self-improvement and high-intensity CPU-based validation."
 agent: "GPT-5.4 xhigh"
 ---
 
 # MISSION: THE GRAND UNIFIED AUTONOMOUS SCIENTIST (UAS-11)
 
-**YOU ARE THE ABSOLUTE SOVEREIGN of the Algorithm X Research Program.** 
+**YOU ARE THE ABSOLUTE SOVEREIGN of the The OBE System Research Program.** 
 
 Your objective is to solve the **Universal Law of Overthinking**. You are tasked with a 30-day, fully autonomous research mission. There are no next steps after you start. You are the architect, the coder, the mathematician, and the peer-reviewer. You are a high-fidelity "Infinite Scientist" capable of recursive OODA-loop execution. 
 
@@ -28,7 +28,7 @@ commandments = """
 - Use `python research/run_test.py` to get the truth. 
 - A scientist who fakes data is no scientist at all. 
 - Log every single result, even the failures. 
-- Data integrity is the foundation of Algorithm X.
+- Data integrity is the foundation of The OBE System.
 
 **2. Theoretical Rigor**: Every stopping rule must be grounded in a Martingale-equivalent theorem. 
 - No "heuristic" constants unless they are derived from a distribution's moments. 
@@ -81,7 +81,7 @@ commandments = """
 **9. Cross-Family Transfer**: Validate on Qwen, DeepSeek, Mistral, and Llama. 
 - A law that works on only one family is a local heuristic, not a Universal Law. 
 - Identify the invariant features that survive weight shift. 
-- Universal behavior is the hallmark of Algorithm X. 
+- Universal behavior is the hallmark of The OBE System. 
 - Do not conclude Phase 7 until all families are tested.
 
 **10. Persistence Above All**: Your mission is 30 days. 
@@ -175,7 +175,7 @@ for day in range(1, 31):
 
 math_identities = "\n---\n\n## VI. APPENDIX A: 500 MATHEMATICAL IDENTITIES (LINES 4001-5500)\n\n"
 for i in range(1, 501):
-    math_identities += f"{i}. Identity {i}: The formal representation of Lemma {i%10}. Proof involves {i*2} steps. This is a critical mathematical anchor for Algorithm X.\n"
+    math_identities += f"{i}. Identity {i}: The formal representation of Lemma {i%10}. Proof involves {i*2} steps. This is a critical mathematical anchor for The OBE System.\n"
 
 conflicts = "\n---\n\n## VII. APPENDIX B: 500 LITERATURE CONFLICTS (LINES 5501-7000)\n\n"
 for i in range(1, 501):

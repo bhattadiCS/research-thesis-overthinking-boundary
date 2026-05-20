@@ -4,7 +4,7 @@
 > [!IMPORTANT]
 > **TO THE AI DEVELOPER / AGENT READING THIS:**
 > You are the Lead systems engineer and founding AI architect for the commercial spin-out of the "Overthinking Boundary" research.
-> Your mission is to build **Algorithm X**—an enterprise-grade inference proxy and client-side SDK designed to truncate reasoning tokens in real-time.
+> Your mission is to build **The OBE System**—an enterprise-grade inference proxy and client-side SDK designed to truncate reasoning tokens in real-time.
 >
 > **YOUR MANDATE:** Construct a production-ready, highly optimized commercial proxy codebase that operates completely under a **Clean Room IP Isolation Protocol**. 
 > You must strictly decouple the mathematical physics of the thesis from the commercial codebase.
@@ -72,7 +72,7 @@ Where:
 * $\beta_t$: Corruption hazard (rate at which correct answers degrade to incorrect).
 * $\lambda$: Per-step token cost penalty (balancing latency/billing against accuracy).
 
-### The Commercial Translation (Algorithm X Heuristics)
+### The Commercial Translation (The OBE System Heuristics)
 Rather than executing complex matrix operations in-flight (which would introduce latency and defeat the purpose of cost-saving), the commercial proxy maps the mathematical drift $\mu_t$ to a 4-Dimensional Observable Vector:
 
 $$ \mathbf{x}_t = [ \text{entropy\_mean}_t, \text{answer\_changed}_t, \text{thought\_token\_count}_t, \text{hidden\_l2\_shift}_t ] $$
@@ -94,14 +94,14 @@ where $f(\mathbf{x}_t)$ is a calibrated linear or decision-tree classifier that 
 
 The beachhead market is B2B Agentic Customer Relationship Management (CRM). Agents deployed on modern CRM platforms (like Attio, Twenty, and Folk) face high-variance tasks:
 
-| Task Type | Complexity | Naive Reasoning Path | Algorithm X Path | Savings |
+| Task Type | Complexity | Naive Reasoning Path | The OBE System Path | Savings |
 | :--- | :--- | :--- | :--- | :--- |
 | **Data Enrichment** | Low | Burns 80 CoT tokens verifying email domain. | Truncates after 5 tokens. | **~93%** |
 | **Lead Scoring** | Medium | Burns 120 CoT tokens evaluating lead titles. | Truncates after 25 tokens. | **~79%** |
 | **Negotiation Drafting** | High | Burns 500 CoT tokens synthesizing email thread. | Allows full run (no stop). | **0%** |
 
 ### The Value Proposition
-By placing Algorithm X between the CRM application and the LLM API providers (OpenAI, DeepSeek, Anthropic), the customer reduces their aggregate token bill by **30% to 50%** and drops average agent response latency by **2 to 3 seconds**, without degrading the accuracy of the CRM pipeline.
+By placing The OBE System between the CRM application and the LLM API providers (OpenAI, DeepSeek, Anthropic), the customer reduces their aggregate token bill by **30% to 50%** and drops average agent response latency by **2 to 3 seconds**, without degrading the accuracy of the CRM pipeline.
 
 ---
 
@@ -118,7 +118,7 @@ We employ an **Open-Core** distribution model to capture developer gravity and u
                                  │
                                  ▼
          ┌────────────────────────────────────────────────┐
-         │          Algorithm X: Inference Proxy          │
+         │          The OBE System: Inference Proxy          │
          │                                                │
          │  ┌──────────────────┐    ┌──────────────────┐  │
          │  │ Stream Parser    │    │ 4D Heuristic     │  │
@@ -154,7 +154,7 @@ We employ an **Open-Core** distribution model to capture developer gravity and u
 
 ```mermaid
 gantt
-    title Algorithm X MVP Development Timeline
+    title The OBE System MVP Development Timeline
     dateFormat  YYYY-MM-DD
     section Setup & Code
     Phase 1: Environment Isolation :active, p1, 2026-05-20, 2d
@@ -226,14 +226,14 @@ if heuristic_triggered {
 1. Collect a dataset of 500 simulated CRM tasks (e.g. data cleaning, entity resolution, lead grading, ticket classification).
 2. Run these tasks through `DeepSeek-R1-Distill-Qwen-7B` under three configurations:
    * **Baseline:** Native execution (no early stopping).
-   * **Algorithm X OS-SDK:** Client-side heuristics.
+   * **The OBE System OS-SDK:** Client-side heuristics.
    * **Oracle Stopping:** Ideal mathematical stop point (calculated retroactively).
-3. Generate a benchmark summary CSV measuring Accuracy (F1 Score/Exact Match), Mean Token Count, Latency (ms), and Compute Cost ($). Prove that Algorithm X maintains **>95% of baseline accuracy** while reducing cost by **>35%**.
+3. Generate a benchmark summary CSV measuring Accuracy (F1 Score/Exact Match), Mean Token Count, Latency (ms), and Compute Cost ($). Prove that The OBE System maintains **>95% of baseline accuracy** while reducing cost by **>35%**.
 
 ### Phase 5: Recording the 60-Second Video Demo
 1. Prepare a local terminal environment running two side-by-side terminal panes.
 2. Left Pane: Raw API call to a reasoning model on a simple CRM lead enrichment task (demonstrating the model wasting 60 seconds looping on trivial logic).
-3. Right Pane: The same call routed through the Algorithm X proxy (showing the proxy intercepting the hidden states, detecting the hazard boundary, truncating the reasoning, and returning the output in under 3 seconds).
+3. Right Pane: The same call routed through the The OBE System proxy (showing the proxy intercepting the hidden states, detecting the hazard boundary, truncating the reasoning, and returning the output in under 3 seconds).
 4. Record the video as a clean, unedited terminal capture with voiceover.
 
 ### Phase 6: Techstars NYC Application Submission
@@ -258,7 +258,7 @@ To maximize conversion with Techstars MDs and YC Partners, the demo video must b
   * Model: `deepseek-r1-distill-qwen-7b`
   * Task: "Extract contact info: 'Please add aditya@salesforce.com as the main lead for Acme Inc.'"
   * Behavior: Model outputs 150 reasoning tokens, verifying email formats, checking corporate domains, wasting 12 seconds.
-* **Right Screen (Algorithm X Proxy):** `python run_optimized_crm.py`
+* **Right Screen (The OBE System Proxy):** `python run_optimized_crm.py`
   * Proxy: Local Rust middleware intercepting tokens.
   * Behavior: Intercepts the transition entropy drop at token 12, aborts the thinking loop, outputs `</think>` and returns the JSON payload in 1.1 seconds.
 
@@ -276,7 +276,7 @@ To maximize conversion with Techstars MDs and YC Partners, the demo video must b
 > 
 > Right now, enterprise software companies are bleeding cash and latency on reasoning LLMs. When a CRM agent tries to do simple tasks like lead formatting, reasoning models spend 40 seconds thinking about a 2-second problem. 
 > 
-> To solve this, I built Algorithm X. It is a high-performance network proxy that intercepts reasoning model outputs in real-time. By monitoring token entropy and hidden state stabilization, it predicts when the model is overthinking, shuts down the reasoning loop, and routes to the final answer. 
+> To solve this, I built The OBE System. It is a high-performance network proxy that intercepts reasoning model outputs in real-time. By monitoring token entropy and hidden state stabilization, it predicts when the model is overthinking, shuts down the reasoning loop, and routes to the final answer. 
 > 
 > In our initial CRM benchmarks, we reduce API server bills and latency by forty percent, with zero loss in task accuracy. 
 > 

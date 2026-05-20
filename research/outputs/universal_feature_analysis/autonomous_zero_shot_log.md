@@ -1,4 +1,4 @@
-# Algorithm X CPU Phase Log
+# The OBE System CPU Phase Log
 
 ## Session Header
 
@@ -39,7 +39,7 @@
 - Failed checks: `1`
 - The hidden-family calibration targets are met for Mistral repair and Qwen 7B corruption.
 - The full 4-family mean corruption AUC remains below the 0.70 thesis-grade target, so the CPU phase supports strong zero-shot transfer but does not close the universal corruption proof completely.
-- The exported capable-group weight vector is therefore suitable as the current best Algorithm X intake for a follow-up GPU phase, but it should be treated as a high-quality partial proof rather than a final theorem-closing estimate.
+- The exported capable-group weight vector is therefore suitable as the current best The OBE System intake for a follow-up GPU phase, but it should be treated as a high-quality partial proof rather than a final theorem-closing estimate.
 
 ## Output Artifacts
 

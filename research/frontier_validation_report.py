@@ -632,7 +632,7 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    print(f"Selected Algorithm X intake: {selected_spec.name}")
+    print(f"Selected The OBE System intake: {selected_spec.name}")
     print(f"Completed frontier run directories: {len(existing_run_dirs)}")
     if missing_run_dirs:
         print("Missing run directories:")

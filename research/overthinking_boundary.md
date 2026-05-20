@@ -465,7 +465,7 @@ What is still missing:
 - `research/outputs/real_traces_qwen/trace_steps.csv`
 - `research/outputs/real_traces_qwen/detector_comparison.csv`
 
-## 11. Algorithm X: The Universal Law of Overthinking
+## 11. The OBE System: The Universal Law of Overthinking
 
 Phase E/F was rerun on 2026-04-03 as a local CPU-only analysis over all four trace families:
 
@@ -574,7 +574,7 @@ $$
 x_t = \big[z(\text{entropy_mean}),\ z(\text{answer_changed}),\ z(\text{thought_token_count}),\ z(\text{hidden_l2_shift})\big],
 $$
 
-and let $Z_t$ denote the standardized quadratic lift used by the selected hazard model. Then Algorithm X uses
+and let $Z_t$ denote the standardized quadratic lift used by the selected hazard model. Then The OBE System uses
 
 $$
 \hat{\alpha}_t^{U} = \text{logistic}(W_\alpha \cdot Z_t),
