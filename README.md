@@ -81,15 +81,7 @@ The connection between the mathematical parameters ($\alpha_t, \beta_t$) and the
 2. **Regression Calibration:** We train a regression model (such as a calibrated XGBoost ensemble or symbolic regression equations) on these historical trace vectors $\mathbf{x}_t$ to output the expected marginal utility drift ($\mu_t$) directly or to estimate the probability $P(\mu_t \le 0)$.
 3. **Inference Execution:** At runtime, the estimator evaluates $\mathbf{x}_t$ at each token step $t$. When the estimated probability of non-positive marginal utility ($P(\mu_t \le 0)$) crosses our dynamic stakes-based threshold ($\theta$), the system halts generation.
 
----
 
-## 🛡️ Intellectual Property Partitioning & Separation
-
-To maintain clear boundary lines between academic research and commercial applications:
-1. **Research & Thesis Repository (`research-thesis-overthinking-boundary`):** This repository contains only the mathematical derivations, theoretical formulations (e.g., Snell Envelopes, martingale drift signs), offline empirical analyses on open benchmarks, and academic verification scripts. It contains no production server code, client SDK wrappers, or cloud infrastructure configurations.
-2. **Commercial Gateway Repository (`algorithm-x-optimizer`):** The commercial enterprise implementation (including the asynchronous Rust proxy, client SDK integrations for python/typescript, eBPF XDP network filters, and cloud infrastructure setups) is housed in a strictly segregated repository to prevent IP contamination.
-
----
 
 ## Primer: What This Means in LLM Terms
 
