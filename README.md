@@ -42,7 +42,7 @@ This distinction matters because several real drift paths are nonmonotone rather
 The latest CPU audit tightened the repository story in four ways:
 
 - **Deployed versus recommended equation**: the deployed local intake is still `quadratic_top4`, because the universal-feature metadata pipeline still selects that baseline. The broader equation sweep now recommends `hazard_quadratic_combo_entropymean_entropystd_confidence_thoughttokencount` as the best hazard-form successor, while `direct_drift_ridge_top4` is the best overall empirical stop rule.
-- **Algorithm status**: the live local Algorithm X implementation did **not** change. The hazard-style q/alpha/beta decomposition remains the thesis-facing default, and the direct-drift rule is documented as a comparator rather than a replacement.
+- **Algorithm status**: the live local estimator implementation did **not** change. The hazard-style q/alpha/beta decomposition remains the thesis-facing default, and the direct-drift rule is documented as a comparator rather than a replacement.
 - **Frontier status**: Gemma 4 Edge 4B and Qwen 3.5 9B smoke traces now confirm valid hidden-state capture, but there are still no completed full `real_traces_colab_<MODEL_KEY>` directories for the corrected frontier set. That means full frontier generalization is still pending in this workspace.
 - **Parse-success interpretation**: `parse_success` is a strict exact-format metric, not a synonym for answer correctness. Qwen 3.5 9B smoke traces recovered correct answers on all observed smoke steps despite `parse_success = 0`, and the DeepSeek legacy failures are mostly format-plus-truncation failures rather than hidden-state corruption.
 
@@ -297,14 +297,14 @@ However, the current literature sweep also pushed this repo beyond those initial
 - Proxy-based reward signals can remain useful while still being misaligned.
 - Time-uniform risk control matters if a detector scans for a stop at every step.
 
-### Algorithm X vs. Unidimensional Heuristics
+### The Overthinking Boundary Estimator vs. Unidimensional Heuristics
 
 Recent early-exit papers often rely on unidimensional heuristics—such as dividing a local entropy window by global entropy and stopping if it crosses a hardcoded threshold. 
 
-This repository (Algorithm X) fundamentally differentiates itself from these heuristic approaches in three ways:
-1. **Multidimensional Feature Vector**: Rather than looking exclusively at output logits (token entropy), Algorithm X uses a 4-dimensional universal feature set (`entropy_mean`, `answer_changed`, `thought_token_count`, `hidden_l2_shift`). This combines surface-level uncertainty with deep latent representation shifts from the transformer's hidden states.
-2. **Optimal Stopping Theory over Hard Thresholds**: Instead of arbitrary ratios, Algorithm X formulates overthinking as a stochastic process, utilizing Martingale stopping theory and Empirical-Bernstein bounds to mathematically guarantee optimal stopping without over-truncation.
-3. **Hazard Decomposition**: Algorithm X explicitly models the competing forces of *repair* (fixing a wrong answer) versus *corruption* (breaking a correct answer) using cost-adjusted continuation value (`mu_t`), rather than just tracking generic "path deviation."
+This repository's estimator fundamentally differentiates itself from these heuristic approaches in three ways:
+1. **Multidimensional Feature Vector**: Rather than looking exclusively at output logits (token entropy), the estimator uses a 4-dimensional universal feature set (`entropy_mean`, `answer_changed`, `thought_token_count`, `hidden_l2_shift`). This combines surface-level uncertainty with deep latent representation shifts from the transformer's hidden states.
+2. **Optimal Stopping Theory over Hard Thresholds**: Instead of arbitrary ratios, the estimator formulates overthinking as a stochastic process, utilizing Martingale stopping theory and Empirical-Bernstein bounds to mathematically guarantee optimal stopping without over-truncation.
+3. **Hazard Decomposition**: The estimator explicitly models the competing forces of *repair* (fixing a wrong answer) versus *corruption* (breaking a correct answer) using cost-adjusted continuation value (`mu_t`), rather than just tracking generic "path deviation."
 
 ## Why This Matters Beyond PRMs
 

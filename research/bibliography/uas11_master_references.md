@@ -1,4 +1,4 @@
-# Algorithm X: Master Bibliography (UAS-11)
+# Overthinking Boundary: Master Bibliography (UAS-11)
 
 This bibliography provides the foundational and frontier research supporting the **Universal Law of Overthinking**.
 
@@ -27,13 +27,13 @@ This bibliography provides the foundational and frontier research supporting the
 15. **Cobbe, K., et al. (2021).** *Training Verifiers to Solve Math Word Problems*. arXiv:2110.14168.
 16. **Zhu, Y., et al. (2025).** *Process Reward Models That Think*. arXiv:2504.16828.
 
-## Overthinking & Calibration (Algorithm X Context)
+## Overthinking & Calibration (Thesis Context)
 
 17. **Singh, A., et al. (2025).** *THOUGHTTERMINATOR: Benchmarking, Calibrating, and Mitigating Overthinking in Reasoning Models*. arXiv:2512.04000.
 18. **Nayab, S., et al. (2025).** *Answer Convergence as a Signal for Early Stopping in LLM Reasoning*. EMNLP 2025.
 19. **Shah, S., et al. (2024).** *Stop Spinning Wheels: Mitigating LLM Overthinking via Mining Patterns for Early Reasoning Exit*. AAAI 2025.
 20. **Li, Z., et al. (2024).** *Hidden States as Calibrators: Detecting Reasoning Drift in Transformers*. ICML 2024.
-21. **Bhatt, A. (2026).** *Algorithm X: The Grand Unified Law of Overthinking*. (This Work).
+21. **Bhatt, A. (2026).** *The Grand Unified Law of Overthinking*. (This Work).
 
 ## Uncertainty & Entropy Management
 
