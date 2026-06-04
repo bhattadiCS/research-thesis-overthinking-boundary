@@ -143,8 +143,7 @@ If everything goes wrong with compute, the absolute floor is:
 | Re-derive the $\mu_t$ drift equation from scratch | 3 hrs | Walk through every step to make sure the math is airtight before building on it. |
 | Audit existing trace data for leakage | 5 hrs | Check that training data never leaks into test evaluations in the current codebase. |
 | Re-run a small Qwen 0.5B sample | 2 hrs | Confirm outputs match previous runs exactly — this verifies nothing is broken. |
-| Set up a clean Git branch for Phase 1 | 1 hr | Separate all new semester work from the preliminary experiments. |
-| **→ Done when:** Math is locked in. Advisor signs off on the core equations. ||
+| **→ Done when:** Math is locked in. ||
 
 ---
 
