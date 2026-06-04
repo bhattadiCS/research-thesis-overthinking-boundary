@@ -137,7 +137,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 1: Math Lockdown & Project Audit
+#### Week 1 (Week of Jun 1): Math Lockdown & Project Audit
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Re-derive the $\mu_t$ drift equation from scratch | 3 hrs | Walk through every step to make sure the math is airtight before building on it. |
@@ -147,7 +147,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 2: Literature Review
+#### Week 2 (Week of Jun 8): Literature Review
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Gather 20-30 recent papers | 4 hrs | Focus on test-time compute scaling, hazard models, sequential stopping rules, and adaptive inference. |
@@ -157,7 +157,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 3: Pipeline Hardening & New Datasets
+#### Week 3 (Week of Jun 15): Pipeline Hardening & New Datasets
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Refactor trace collection for large models | 6 hrs | Add batched inference, gradient checkpointing, and graceful OOM recovery. |
@@ -168,7 +168,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 4: Trace Collection — Standard Mid-Weight Models
+#### Week 4 (Week of Jun 22): Trace Collection — Standard Mid-Weight Models
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Configure DeepSeek-Distill-7B, Llama-3.1-8B, Gemma-2-9B | 3 hrs | Download weights, set quantization, verify tokenizer configs. |
@@ -178,7 +178,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 5: Trace Collection — Math-Specialized Models
+#### Week 5 (Week of Jun 29): Trace Collection — Math-Specialized Models
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Configure Mathstral-7B, NuminaMath-7B, Phi-4 | 2 hrs | These may need special prompt templates for their math-specific training. |
@@ -188,7 +188,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 6: Trace Collection — Frontier Models (Part 1)
+#### Week 6 (Week of Jul 6): Trace Collection — Frontier Models (Part 1)
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Spin up 80GB GPU instances on HPC/cloud | 3 hrs | Environment setup, driver checks, dependency installation. |
@@ -198,7 +198,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 7: Trace Collection — Frontier Models (Part 2)
+#### Week 7 (Week of Jul 13): Trace Collection — Frontier Models (Part 2)
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Run Mistral-Small-24B, InternLM2-20B, GPT-OSS-20B | 10 hrs (automated) | Three independent model families — critical for proving the boundary isn't Qwen-specific. |
@@ -208,7 +208,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 8: Trace Collection — Final Models & Data Consolidation
+#### Week 8 (Week of Jul 20): Trace Collection — Final Models & Data Consolidation
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Run remaining models: Yi-34B, Command-R, Qwen-MoE variants, Gemma-4-31B | 12 hrs (automated) | Complete the full model matrix. |
@@ -219,7 +219,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 9: Feature Extraction
+#### Week 9 (Week of Jul 27): Feature Extraction
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Extract the 4D observable vector from every trace | 8 hrs (computation) | Token count, moving average entropy, logprob variance, entropy drop — for every step of every trace. |
@@ -229,7 +229,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 10: Hazardous Feature Discovery
+#### Week 10 (Week of Aug 3): Hazardous Feature Discovery
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Build a "semantic loop" detector | 5 hrs | Check if the model starts repeating the same logical argument — a sign it's stuck. |
@@ -240,7 +240,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 11: Baseline Predictor Training
+#### Week 11 (Week of Aug 10): Baseline Predictor Training
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Train Ridge Regression to predict $P(\mu_t \le 0)$ | 4 hrs | The simplest possible baseline. If this works, great. If not, we know we need nonlinear models. |
@@ -251,7 +251,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 12: Generalization Testing
+#### Week 12 (Week of Aug 17): Generalization Testing
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Cross-domain test: train on GSM8K, evaluate on MATH | 4 hrs | Does the stopping rule learned on easy math transfer to hard math? |
@@ -262,7 +262,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 13: Visualization & Analysis
+#### Week 13 (Week of Aug 24): Visualization & Analysis
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Generate difficulty-stratified drift grids for all models | 6 hrs | The signature chart type of this thesis — showing how the boundary shifts with question difficulty. |
@@ -273,7 +273,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 14: Semester 1 Report & Submission
+#### Week 14 (Week of Aug 31): Semester 1 Report & Submission
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Compile the literature review into the report | 4 hrs | Pull from Week 2 drafts, polish for formal submission. |
@@ -288,7 +288,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 15 (Sem 2, W1): Advanced Predictor — Symbolic Regression
+#### Week 15 (Sem 2, W1) (Week of Sep 7): Advanced Predictor — Symbolic Regression
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Set up PySR (Symbolic Regression library) | 3 hrs | Install, configure, and test on a toy problem. |
@@ -298,7 +298,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 16: Sequential Analysis — Statistical Rigor
+#### Week 16 (Week of Sep 14): Sequential Analysis — Statistical Rigor
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Implement empirical-Bernstein confidence bounds | 8 hrs | These provide "anytime-valid" guarantees — meaning our stopping rule is statistically valid no matter when we check. |
@@ -308,7 +308,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 17: Building the Live Stopping System
+#### Week 17 (Week of Sep 21): Building the Live Stopping System
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Build a token-by-token generation loop with a predictor hook | 8 hrs | At each step, compute the observable vector and run the predictor. |
@@ -318,7 +318,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 18: The Big Comparison
+#### Week 18 (Week of Sep 28): The Big Comparison
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Run 1,000 prompts: dynamic stopping (our method) | 4 hrs | Record accuracy, stop step, and total tokens generated. |
@@ -329,7 +329,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 19: Error Analysis
+#### Week 19 (Week of Oct 5): Error Analysis
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Isolate the 50 worst predictions | 4 hrs | Where did our system stop too early (killed a correct chain) or too late (let a hallucination run)? |
@@ -339,7 +339,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 20: Final Data Cleanup
+#### Week 20 (Week of Oct 12): Final Data Cleanup
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Identify missing or corrupted traces | 3 hrs | Final sweep of the entire dataset. |
@@ -349,7 +349,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 21: Writing — Methods Chapters
+#### Week 21 (Week of Oct 19): Writing — Methods Chapters
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Write Chapter 2: Mathematical Framework | 8 hrs | The formal derivation of the stopping boundary, hazard processes, and drift equation. |
@@ -358,7 +358,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 22: Writing — Results Chapter
+#### Week 22 (Week of Oct 26): Writing — Results Chapter
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Integrate all charts, drift grids, and comparison tables | 4 hrs | Every figure gets a home in the document. |
@@ -367,7 +367,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 23: Writing — Discussion, Intro, Conclusion
+#### Week 23 (Week of Nov 2): Writing — Discussion, Intro, Conclusion
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Write the Discussion: broader impacts, connection to AI scaling, future work | 6 hrs | Why does this matter beyond our specific experiments? |
@@ -377,7 +377,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 24: Advisor Review Cycle 1
+#### Week 24 (Week of Nov 9): Advisor Review Cycle 1
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Submit draft to Dr. Woods and Dr. Pemy | 1 hr | Send it off. |
@@ -386,7 +386,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 25: Revisions
+#### Week 25 (Week of Nov 16): Revisions
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Address all advisor comments — structural, technical, and editorial | 8 hrs | This could range from "expand this proof" to "this chart is confusing, redo it." |
@@ -395,7 +395,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 26: Defense Slide Deck
+#### Week 26 (Week of Nov 23): Defense Slide Deck
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Outline the 30-minute presentation | 2 hrs | Plan the story arc: problem → math → experiments → results → so what? |
@@ -405,7 +405,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 27: Practice Runs
+#### Week 27 (Week of Nov 30): Practice Runs
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Do 3 full timed rehearsals | 3 hrs | Practice hitting the 30-minute mark. |
@@ -415,7 +415,7 @@ If everything goes wrong with compute, the absolute floor is:
 
 ---
 
-#### Week 28: Defense & Submission
+#### Week 28 (Week of Dec 7): Defense & Submission
 | Task | Est. Time | Details |
 |------|-----------|---------|
 | Defend the thesis before the committee | 2 hrs | Present, answer questions, receive feedback. |
