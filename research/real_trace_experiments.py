@@ -765,7 +765,14 @@ def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | Non
     if load_dataset is None:
         raise ImportError("datasets is required for --task-source gsm8k. Install it with pip install datasets evaluate bitsandbytes tqdm.")
 
-    dataset = load_dataset("gsm8k", "main", split=dataset_split)
+    try:
+        dataset = load_dataset("gsm8k", "main", split=dataset_split)
+    except Exception as exc:
+        raise RuntimeError(
+            f"Failed to download or load the GSM8K dataset from HuggingFace. "
+            f"Please check your internet connection on the VM and verify that you can access HuggingFace. "
+            f"Error details: {exc}"
+        ) from exc
     if shuffle_seed is not None:
         dataset = dataset.shuffle(seed=shuffle_seed)
     if max_tasks > 0 and len(dataset) > max_tasks:
