@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+internlm3_8b_instruct,internlm/InternLM3-8B-Instruct,InternLM3,8B,5,5,1.4,6.8,5.2,1.2,0.3204344168305397,4.109579721689224,0.044444444444444446,0.0,2,transformers+torch(cuda),cuda
