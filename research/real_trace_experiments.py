@@ -766,7 +766,7 @@ def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | Non
         raise ImportError("datasets is required for --task-source gsm8k. Install it with pip install datasets evaluate bitsandbytes tqdm.")
 
     try:
-        dataset = load_dataset("gsm8k", "main", split=dataset_split)
+        dataset = load_dataset("openai/gsm8k", "main", split=dataset_split)
     except Exception as exc:
         raise RuntimeError(
             f"Failed to download or load the GSM8K dataset from HuggingFace. "
