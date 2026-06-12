@@ -39,7 +39,7 @@ MODEL_CHOICES = [
 ]
 
 MINIMUM_PACKAGE_VERSIONS = {
-    "transformers": {"module": "transformers", "min_version": "5.5.0"},
+    "transformers": {"module": "transformers", "min_version": "4.46.0", "max_version": "4.53.99"},
     "accelerate": {"module": "accelerate", "min_version": "1.13.0"},
     "datasets": {"module": "datasets", "min_version": "3.4.0"},
     "evaluate": {"module": "evaluate", "min_version": "0.4.0"},
@@ -109,6 +109,9 @@ def collect_package_issues() -> tuple[list[str], list[str]]:
             continue
         if version_key(installed_version) < version_key(min_version):
             issues.append(f"{package_name}=={installed_version} is too old (requires >= {min_version})")
+            continue
+        if "max_version" in spec and version_key(installed_version) > version_key(spec["max_version"]):
+            issues.append(f"{package_name}=={installed_version} is too new (requires <= {spec['max_version']})")
             continue
         if package_name in IMPORT_VALIDATED_PACKAGES:
             import_ok, import_error = probe_module_import(module_name)
