@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+phi_4_mini_instruct,microsoft/Phi-4-mini-instruct,Phi 4,4B,900,300,1.978888888888889,4.808888888888889,6.426666666666667,4.875555555555556,0.537207876354456,9.041938388556241,0.15335971439649823,0.35527691923065985,617,transformers+torch(cuda),cuda
