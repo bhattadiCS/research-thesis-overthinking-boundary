@@ -1383,6 +1383,7 @@ def safe_generate_batch_with_diagnostics(
     max_new_tokens: int,
     allow_single_retry: bool = True,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    oom_occurred = False
     try:
         return generate_batch_with_diagnostics(
             model=model,
@@ -1395,10 +1396,16 @@ def safe_generate_batch_with_diagnostics(
     except RuntimeError as exc:
         if actual_device != "cuda" or "out of memory" not in str(exc).lower():
             raise
+        oom_occurred = True
+
+    if oom_occurred:
+        import gc
         release_cuda_memory()
+        gc.collect()
+
         if len(prompt_texts) == 1:
             if not allow_single_retry:
-                raise
+                raise RuntimeError("CUDA out of memory for single prompt; retry disabled or already attempted.")
             logging.warning("CUDA OOM for single prompt. Retrying once after cache release.")
             retry_results, retry_metrics = safe_generate_batch_with_diagnostics(
                 model=model,
@@ -1411,6 +1418,7 @@ def safe_generate_batch_with_diagnostics(
             )
             retry_metrics["oom_retry_count"] = int(retry_metrics.get("oom_retry_count", 0)) + 1
             return retry_results, retry_metrics
+
         logging.warning("CUDA OOM for microbatch size %d. Retrying with smaller splits.", len(prompt_texts))
         midpoint = max(1, len(prompt_texts) // 2)
         first_results, first_metrics = safe_generate_batch_with_diagnostics(
@@ -1423,6 +1431,8 @@ def safe_generate_batch_with_diagnostics(
             allow_single_retry=allow_single_retry,
         )
         release_cuda_memory()
+        gc.collect()
+
         second_results, second_metrics = safe_generate_batch_with_diagnostics(
             model=model,
             tokenizer=tokenizer,
@@ -1461,6 +1471,7 @@ def safe_generate_batch_with_diagnostics(
             "oom_retry_count": int(first_metrics.get("oom_retry_count", 0)) + int(second_metrics.get("oom_retry_count", 0)) + 1,
         }
         return first_results + second_results, merged_metrics
+
 
 
 def gpu_memory_allocated_gb(actual_device: str) -> float:
