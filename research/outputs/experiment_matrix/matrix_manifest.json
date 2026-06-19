@@ -250,5 +250,11 @@
       "n_runs": 0
     }
   },
-  "aggregate": {}
+  "aggregate": {
+    "gsm8k": {
+      "status": "ok",
+      "return_code": 0,
+      "n_models": 11
+    }
+  }
 }
