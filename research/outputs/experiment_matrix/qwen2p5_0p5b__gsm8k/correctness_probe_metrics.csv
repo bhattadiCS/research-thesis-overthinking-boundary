@@ -1,0 +1,7 @@
+run_id,brier,auc
+qwen2p5_0p5b__gsm8k_train_00000_b5828bc4__temp0.10__seed7,0.5191446834193362,
+qwen2p5_0p5b__gsm8k_train_00001_3691caf7__temp0.10__seed7,0.1439427851731093,
+qwen2p5_0p5b__gsm8k_train_00002_ae407466__temp0.10__seed7,0.0037322181404332647,
+qwen2p5_0p5b__gsm8k_train_00003_135cf83f__temp0.10__seed7,0.05901819115648294,
+qwen2p5_0p5b__gsm8k_train_00004_3ee48c01__temp0.10__seed7,0.0017910333704088917,
+qwen2p5_0p5b__gsm8k_train_00005_d0817615__temp0.10__seed7,0.0031239918410742103,

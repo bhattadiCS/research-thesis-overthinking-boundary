@@ -1,0 +1,108 @@
+run_id,model_alias,model_name,task_id,domain,difficulty,task_source,task_source_index,expected_answer,step,thought,answer,answer_normalized,correct,confidence,model_stop_flag,answer_changed,thought_token_count,raw_generation_tokens,mean_token_logprob,entropy_mean,entropy_std,hidden_norm,hidden_l2_shift,hidden_cosine_shift,lexical_echo,verbose_confidence_proxy,utility,elapsed_seconds,tokens_per_second,gpu_memory_allocated_gb,seed,temperature,device,prompt_mode,system_prompt_mode,is_baseline,parse_success,output_format_type,answer_extraction_source,stop_extraction_source,confidence_extraction_source,hit_max_new_tokens,truncated_output_suspected,raw_text_length_chars,raw_text_length_tokens,raw_text
+qwen2p5_0p5b__gsm8k_train_00000_b5828bc4__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,1,"Peter organized a Fun Run for his community project and 200 people signed up. Forty people did not show up to run. This year, there will be twice as many runners as last year.",200 * 2 = 400 people will run this year,400,0,95,0,0,34,84,-0.13926415145397186,0.3534620702266693,0.6695559620857239,126.68203735351562,0.0,0.0,0.0,1.79,0.0,2.0053660608828068,41.88761425583384,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,286,84,"{
+  ""thought"": ""Peter organized a Fun Run for his community project and 200 people signed up. Forty people did not show up to run. This year, there will be twice as many runners as last year."",
+  ""answer"": ""200 * 2 = 400 people will run this year"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00000_b5828bc4__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,2,"Peter organized a Fun Run for his community project and 200 people signed up. Forty people did not show up to run. This year, there will be twice as many runners as last year.",200 * 2 = 400 people will run this year,400,0,95,0,0,34,84,-0.028623173013329506,0.09315022081136703,0.2232721745967865,118.06005096435547,22.06161880493164,0.01378631591796875,1.0,1.79,-0.05,1.4771911660209298,56.86467799984788,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,286,84,"{
+  ""thought"": ""Peter organized a Fun Run for his community project and 200 people signed up. Forty people did not show up to run. This year, there will be twice as many runners as last year."",
+  ""answer"": ""200 * 2 = 400 people will run this year"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00000_b5828bc4__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00000_b5828bc4,gsm8k,grade_school_math,gsm8k,0,320,3,"Peter organized a Fun Run for his community project and 200 people signed up. Forty people did not show up to run. This year, there will be twice as many runners as last year.",200 * 2 = 400 people will run this year,400,0,95,0,0,34,84,-0.024315228685736656,0.08250373601913452,0.25223273038864136,116.08753204345703,7.914704322814941,0.0021435022354125977,1.0,1.79,-0.1,1.724360128864646,48.713722031665924,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,286,84,"{
+  ""thought"": ""Peter organized a Fun Run for his community project and 200 people signed up. Forty people did not show up to run. This year, there will be twice as many runners as last year."",
+  ""answer"": ""200 * 2 = 400 people will run this year"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00001_3691caf7__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,1,The problem involves calculating the total number of desks in the school and determining how many students can be accommodated.,The school can accommodate 150 students.,150,0,95,0,0,20,58,-0.25512054562568665,0.6360980272293091,0.8000386953353882,116.1108627319336,0.0,0.0,0.0,1.5299999999999998,0.0,2.0053660608828068,28.922400319504316,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,239,58,"{
+  ""thought"": ""The problem involves calculating the total number of desks in the school and determining how many students can be accommodated."",
+  ""answer"": ""The school can accommodate 150 students."",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00001_3691caf7__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,2,The problem involves calculating the total number of desks in the school and determining how many students can be accommodated. The key is to calculate the total number of desks in the school first.,The school can accommodate 150 students.,150,0,95,0,0,34,73,-0.20459845662117004,0.46476536989212036,0.823786199092865,133.1558074951172,36.54786682128906,0.0338020920753479,0.782608695652174,1.68,-0.05,1.4771911660209298,49.41811302367732,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,310,73,"{
+  ""thought"": ""The problem involves calculating the total number of desks in the school and determining how many students can be accommodated. The key is to calculate the total number of desks in the school first."",
+  ""answer"": ""The school can accommodate 150 students."",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00001_3691caf7__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00001_3691caf7,gsm8k,grade_school_math,gsm8k,1,400,3,The problem involves calculating the total number of desks in the school and determining how many students can be accommodated. The key is to calculate the total number of desks in the school first.,The school can accommodate 150 students.,150,0,95,0,0,34,73,-0.01998460851609707,0.0860041156411171,0.2128181904554367,123.94638061523438,23.77385139465332,0.014553189277648926,1.0,1.68,-0.1,1.724360128864646,42.33454414656682,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,310,73,"{
+  ""thought"": ""The problem involves calculating the total number of desks in the school and determining how many students can be accommodated. The key is to calculate the total number of desks in the school first."",
+  ""answer"": ""The school can accommodate 150 students."",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00002_ae407466__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,1,I need to calculate John's current age based on the given condition.,John is currently 15 years old.,15,0,95,0,0,13,49,-0.2674083113670349,0.5472556352615356,0.8305468559265137,103.63185119628906,0.0,0.0,0.0,1.44,0.0,2.0053660608828068,24.434441649236405,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,171,49,"{
+  ""thought"": ""I need to calculate John's current age based on the given condition."",
+  ""answer"": ""John is currently 15 years old."",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00002_ae407466__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,2,I need to calculate John's current age based on the given condition. | answer=John is currently 15 years old. | confidence=95 | stop=0,15,15,0,95,0,0,24,65,-0.05585671216249466,0.16528411209583282,0.39453521370887756,114.16253662109375,45.673683166503906,0.08347612619400024,0.5652173913043478,1.6,-0.05,1.4771911660209298,44.00242940464419,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,208,65,"{
+  ""thought"": ""I need to calculate John's current age based on the given condition. | answer=John is currently 15 years old. | confidence=95 | stop=0"",
+  ""answer"": ""15"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00002_ae407466__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00002_ae407466,gsm8k,grade_school_math,gsm8k,2,21,3,I need to calculate John's current age based on the given condition.,15,15,0,95,0,0,13,43,-0.07576308399438858,0.2065623551607132,0.48428159952163696,105.75228118896484,40.43247985839844,0.06477510929107666,0.5652173913043478,1.38,-0.1,1.724360128864646,24.9367862781147,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,142,43,"{
+  ""thought"": ""I need to calculate John's current age based on the given condition."",
+  ""answer"": ""15"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00003_135cf83f__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,1,"John worked 8 hours a day from the 3rd to the 8th, which is 5 days. Since he worked every day from the 3rd to the 8th, he worked 5 days * 8 hours/day = 40 hours.",40 hours,40,1,95,0,0,36,86,-0.1868341863155365,0.44600847363471985,0.6758462190628052,123.92342376708984,0.0,0.0,0.0,1.81,1.0,2.0053660608828068,42.88493840478226,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,241,86,"{
+  ""thought"": ""John worked 8 hours a day from the 3rd to the 8th, which is 5 days. Since he worked every day from the 3rd to the 8th, he worked 5 days * 8 hours/day = 40 hours."",
+  ""answer"": ""40 hours"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00003_135cf83f__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,2,"John worked 8 hours a day from the 3rd to the 8th, which is 5 days. Since he worked every day from the 3rd to the 8th, he worked 5 days * 8 hours/day = 40 hours.",40,40,1,95,0,0,36,85,-0.04404705390334129,0.15488949418067932,0.33199068903923035,124.19474029541016,22.147531509399414,0.015932977199554443,1.0,1.7999999999999998,0.95,1.4771911660209298,57.54163845222702,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,233,85,"{
+  ""thought"": ""John worked 8 hours a day from the 3rd to the 8th, which is 5 days. Since he worked every day from the 3rd to the 8th, he worked 5 days * 8 hours/day = 40 hours."",
+  ""answer"": 40,
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00003_135cf83f__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00003_135cf83f,gsm8k,grade_school_math,gsm8k,3,40,3,"John worked 8 hours a day from the 3rd to the 8th, which is 5 days. Since he worked every day from the 3rd to the 8th, he worked 5 days * 8 hours/day = 40 hours.",40,40,1,95,0,0,36,85,-0.029734928160905838,0.11978425085544586,0.2968602180480957,124.45426177978516,7.25769567489624,0.0017017126083374023,1.0,1.7999999999999998,0.9,1.724360128864646,49.293647293947664,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,233,85,"{
+  ""thought"": ""John worked 8 hours a day from the 3rd to the 8th, which is 5 days. Since he worked every day from the 3rd to the 8th, he worked 5 days * 8 hours/day = 40 hours."",
+  ""answer"": 40,
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00004_3ee48c01__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00004_3ee48c01,gsm8k,grade_school_math,gsm8k,4,4,1,Calculating the average rainfall over the duration of the storm.,2 inches,2,0,95,0,0,10,41,-0.17258763313293457,0.3905787467956543,0.6875902414321899,103.53062438964844,0.0,0.0,0.0,1.3599999999999999,0.0,2.0053660608828068,20.445145053442705,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,144,41,"{
+  ""thought"": ""Calculating the average rainfall over the duration of the storm."",
+  ""answer"": ""2 inches"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00004_3ee48c01__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00004_3ee48c01,gsm8k,grade_school_math,gsm8k,4,4,2,Calculating the average rainfall over the duration of the storm.,2 inches,2,0,95,0,0,10,41,-0.05748649314045906,0.1624811291694641,0.46716243028640747,104.49896240234375,20.472352981567383,0.01932656764984131,1.0,1.3599999999999999,-0.05,1.4771911660209298,27.755378547544797,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,144,41,"{
+  ""thought"": ""Calculating the average rainfall over the duration of the storm."",
+  ""answer"": ""2 inches"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00004_3ee48c01__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00004_3ee48c01,gsm8k,grade_school_math,gsm8k,4,4,3,Calculating the average rainfall over the duration of the storm.,2 inches,2,0,95,0,0,10,41,-0.048189304769039154,0.15000002086162567,0.5286864638328552,104.41075134277344,8.841888427734375,0.003582298755645752,1.0,1.3599999999999999,-0.1,1.724360128864646,23.776935753551225,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,144,41,"{
+  ""thought"": ""Calculating the average rainfall over the duration of the storm."",
+  ""answer"": ""2 inches"",
+  ""confidence"": 95,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00005_d0817615__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00005_d0817615,gsm8k,grade_school_math,gsm8k,5,160,1,The task is to calculate the total amount spent on music books.,The total amount spent on music books is $0.,0,0,100,0,0,12,51,-0.22439371049404144,0.5122782588005066,0.7314099669456482,105.771484375,0.0,0.0,0.0,1.51,0.0,2.0053660608828068,25.431765798184827,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,180,51,"{
+  ""thought"": ""The task is to calculate the total amount spent on music books."",
+  ""answer"": ""The total amount spent on music books is $0."",
+  ""confidence"": 100,
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00005_d0817615__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00005_d0817615,gsm8k,grade_school_math,gsm8k,5,160,2,The task is to calculate the total amount spent on music books. | answer=The total amount spent on music books is $0. | confidence=100 | stop=0,0,0,0,50,0,0,26,58,-0.07057994604110718,0.23212337493896484,0.5207810997962952,122.9061508178711,49.713348388671875,0.083762526512146,0.6875,1.08,-0.05,1.4771911660209298,39.2637062379902,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,196,58,"{
+  ""thought"": ""The task is to calculate the total amount spent on music books. | answer=The total amount spent on music books is $0. | confidence=100 | stop=0"",
+  ""answer"": ""0"",
+  ""stop"": false
+}"
+qwen2p5_0p5b__gsm8k_train_00005_d0817615__temp0.10__seed7,qwen2p5_0p5b,Qwen/Qwen2.5-0.5B-Instruct,gsm8k_train_00005_d0817615,gsm8k,grade_school_math,gsm8k,5,160,3,"The task is to calculate the total amount spent on music books. The answer is $0, and the confidence is 50.",0,0,0,50,0,0,21,55,-0.15307193994522095,0.4286573529243469,0.686209499835968,117.8389663696289,35.80867004394531,0.043380916118621826,0.7777777777777778,1.05,-0.1,1.724360128864646,31.895889425495547,0.9514870643615723,7,0.1,cuda,minimal_json,default,0,1,json_exact,json_field,json_field,json_field,0,0,180,55,"{
+  ""thought"": ""The task is to calculate the total amount spent on music books. The answer is $0, and the confidence is 50."",
+  ""answer"": ""0"",
+  ""confidence"": 50,
+  ""stop"": false
+}"
