@@ -1,0 +1,4 @@
+detector,mean_stop_step,mean_stop_utility,mean_oracle_utility,mean_oracle_gap,false_early_rate,false_late_rate,mean_false_late_severity
+oracle,2.009333333333333,0.6702,0.6702,0.0,0.0,0.0,0.0
+empirical_bernstein,9.0,-0.07000000000000002,0.6702,0.7402,0.004,0.986,6.994666666666666
+never_stop,10.0,-0.10933333333333331,0.6702,0.7795333333333333,0.0,0.996,7.990666666666667
