@@ -352,11 +352,29 @@ MODEL_CATALOG = {
         family="Qwen2.5 instruct",
         parameter_count="0.5B",
     ),
+    "qwen2p5_3b": ModelSpec(
+        alias="qwen2p5_3b",
+        hf_name="Qwen/Qwen2.5-3B-Instruct",
+        family="Qwen2.5 instruct",
+        parameter_count="3B",
+    ),
     "qwen2p5_7b": ModelSpec(
         alias="qwen2p5_7b",
         hf_name="Qwen/Qwen2.5-7B-Instruct",
         family="Qwen2.5 instruct",
         parameter_count="7B",
+    ),
+    "qwen2p5_14b": ModelSpec(
+        alias="qwen2p5_14b",
+        hf_name="Qwen/Qwen2.5-14B-Instruct",
+        family="Qwen2.5 instruct",
+        parameter_count="14B",
+    ),
+    "qwen2p5_32b": ModelSpec(
+        alias="qwen2p5_32b",
+        hf_name="Qwen/Qwen2.5-32B-Instruct",
+        family="Qwen2.5 instruct",
+        parameter_count="32B",
     ),
     "mistral_7b_instruct_v0p3": ModelSpec(
         alias="mistral_7b_instruct_v0p3",

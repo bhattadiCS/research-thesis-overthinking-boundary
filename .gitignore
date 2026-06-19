@@ -29,6 +29,13 @@ research/outputs/*.zip
 thesis_data_backup*.zip
 recovered_*_data/
 
+# Experiment matrix: keep CSVs/figures/reports/manifest in git for periodic
+# checkpoints, but exclude the large regenerable hidden-state tensors and logs
+# (the persistent volume holds those). See research/run_experiment_matrix.py.
+research/outputs/experiment_matrix/**/*.npz
+research/outputs/experiment_matrix/**/*.log
+research/outputs/experiment_matrix/_preflight/
+
 # Thesis documentation
 ThesisDocs/*
 !ThesisDocs/
