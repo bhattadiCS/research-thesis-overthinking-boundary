@@ -1,0 +1,5 @@
+# Shell and Python scripts must check out with LF so they run on Linux (RunAI)
+# regardless of a contributor's core.autocrlf setting. A CRLF shell script fails
+# with "bad interpreter: /usr/bin/env bash^M".
+*.sh text eol=lf
+*.py text eol=lf
