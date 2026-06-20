@@ -116,18 +116,14 @@ def relative_gain_pct(current: float, baseline: float) -> float:
     return 100.0 * (current - baseline) / baseline
 
 
-def first_zero_crossing(frame: pd.DataFrame, column: str) -> int | None:
+def first_zero_crossing(frame: pd.DataFrame, column: str, t_min: int = 2) -> int | None:
+    # AUDIT FIX: T* = inf{t >= t_min : col(t) <= 0}; None if never observed. The
+    # previous version had no t_min floor and a step-1 fallback (theory-forbidden).
     valid = frame.dropna(subset=[column]).sort_values("step")
-    if valid.empty:
-        return None
-    previous = None
-    for _, row in valid.iterrows():
-        value = float(row[column])
-        if previous is not None and previous > 0.0 and value <= 0.0:
-            return int(row["step"])
-        previous = value
-    if float(valid.iloc[0][column]) <= 0.0:
-        return int(valid.iloc[0]["step"])
+    eligible = valid[valid["step"] >= t_min]
+    crossed = eligible[eligible[column] <= 0.0]
+    if len(crossed):
+        return int(crossed.iloc[0]["step"])
     return None
 
 

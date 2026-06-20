@@ -82,18 +82,19 @@ def format_boundary(step: int | None) -> str:
     return str(step) if step is not None else "not observed"
 
 
-def first_zero_crossing(hazard_frame: pd.DataFrame, column: str = "hazard_mu") -> int | None:
+def first_zero_crossing(hazard_frame: pd.DataFrame, column: str = "hazard_mu", t_min: int = 2) -> int | None:
+    # AUDIT FIX: implement T* = inf{t >= t_min : col(t) <= 0}, returning None when
+    # the drift never crosses within the observed window ("not observed"). The
+    # previous version required a strict positive->nonpositive transition, had no
+    # t_min floor, and fell back to step 1 when the first value was already <= 0 --
+    # reporting the theory-forbidden step 1 for several models. Returning None
+    # (rather than the last step) keeps an always-positive-drift run from being
+    # misclassified as a late-boundary witness.
     valid = hazard_frame.dropna(subset=[column]).sort_values("step")
-    if valid.empty:
-        return None
-    previous = None
-    for _, row in valid.iterrows():
-        value = float(row[column])
-        if previous is not None and previous > 0.0 and value <= 0.0:
-            return int(row["step"])
-        previous = value
-    if float(valid.iloc[0][column]) <= 0.0:
-        return int(valid.iloc[0]["step"])
+    eligible = valid[valid["step"] >= t_min]
+    crossed = eligible[eligible[column] <= 0.0]
+    if len(crossed):
+        return int(crossed.iloc[0]["step"])
     return None
 
 

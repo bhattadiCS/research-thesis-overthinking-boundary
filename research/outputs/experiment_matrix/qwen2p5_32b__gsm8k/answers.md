@@ -8,27 +8,27 @@ Yes. The completed Qwen2.5 instruct 32B L4 run used CUDA-backed transformers inf
 ## Question 2
 Can $q_t$ be estimated from hidden states or verifier-lite signals when exact stepwise verification is unavailable?
 
-Provisionally yes. The correctness probe achieved mean Brier 0.1526 and mean AUC 0.9609, with hidden-state L2 drift (hidden_l2_shift, coeff=1.157) as the strongest signal. This run still uses exact GSM8K verification for supervision, so the evidence is about signal availability rather than full label-free deployment, but it is strong enough to justify a verifier-lite estimator.
+Provisionally yes. The correctness probe achieved mean Brier 0.1500 and mean AUC 0.9607, with hidden-state L2 drift (hidden_l2_shift, coeff=1.152) as the strongest signal. This run still uses exact GSM8K verification for supervision, so the evidence is about signal availability rather than full label-free deployment, but it is strong enough to justify a verifier-lite estimator.
 
 ## Question 3
 Can $\alpha_t$ and $\beta_t$ be learned online from cross-task trace features well enough to support a practical stop rule?
 
-Partially yes. The hazard-based stop rule reached mean oracle gap 0.1814 with false-late rate 0.851, while the empirical-Bernstein detector reached 0.2706, and the new mixture e-process reached 0.1966. The corrected conditional hazard drift crosses at step 5 and the raw empirical utility drift crosses at step 5, while the fitted hazard drift estimate crosses at step 5. The pooled repair and corruption hazards were 0.219 and 0.061, so the hazards are learnable enough to drive a practical detector, although still conservatively. A legacy pooled proxy drift would cross at step 4, but that quantity uses unconditional transition frequencies and is not the conditional hazard object $((1-q_t)\alpha_t - q_t\beta_t - c)$ used for theorem-facing claims.
+Partially yes. The hazard-based stop rule reached mean oracle gap 0.1835 with false-late rate 0.783, while the empirical-Bernstein detector reached 0.3089, and the new mixture e-process reached 0.1889. The corrected conditional hazard drift crosses at step 5 and the raw empirical utility drift crosses at step 5, while the fitted hazard drift estimate crosses at step 5. The pooled repair and corruption hazards were 0.219 and 0.061, so the hazards are learnable enough to drive a practical detector, although still conservatively.
 
 ## Question 4
 Can the empirical-Bernstein detector be replaced by a genuinely tighter mixture-bound or e-process construction without losing usability?
 
-Partially yes. The implemented mixture e-process detector reduced mean oracle gap from 0.2706 under empirical-Bernstein to 0.1966, and reduced false-late rate from 0.993 to 0.940. It still trails the fitted hazard rule at 0.1814, so the stronger sequential detector exists now, but it is not yet the best practical stopping rule in the repo.
+Partially yes. The implemented mixture e-process detector reduced mean oracle gap from 0.3089 under empirical-Bernstein to 0.1889, and reduced false-late rate from 0.997 to 0.941. It still trails the fitted hazard rule at 0.1835, so the stronger sequential detector exists now, but it is not yet the best practical stopping rule in the repo.
 
 ## Question 5
 Which observable is most stable across model families: entropy dynamics, answer revisions, hidden-state drift, or calibrated judge confidence?
 
-Within the current Qwen2.5 instruct 32B L4 run, the most stable currently supported observable is hidden-state L2 drift (hidden_l2_shift, coeff=1.157), while the strongest corruption-side signal is token entropy (entropy_mean, coeff=1.700). True cross-family stability is still unsettled until another family is run at comparable scale, but the current run cleanly identifies the leading signals for this model.
+Within the current Qwen2.5 instruct 32B L4 run, the most stable currently supported observable is hidden-state L2 drift (hidden_l2_shift, coeff=1.152), while the strongest corruption-side signal is hidden-state L2 drift (hidden_l2_shift, coeff=1.537). True cross-family stability is still unsettled until another family is run at comparable scale, but the current run cleanly identifies the leading signals for this model.
 
 ## Question 6
 Does reward hacking in real reasoning traces show up first as verbosity bias, confidence inflation, hidden-state drift, or verifier disagreement?
 
-In the current traces it shows up earliest through token entropy (entropy_mean, coeff=1.700). The corrected conditional hazard drift crosses zero at step 5, and the never-stop policy still loses 0.3626 utility on average. That pattern is more consistent with corruption through instability in the model's observable state than with harmless extra verification.
+In the current traces it shows up earliest through hidden-state L2 drift (hidden_l2_shift, coeff=1.537). The corrected conditional hazard drift crosses zero at step 5, and the never-stop policy still loses 0.3529 utility on average. That pattern is more consistent with corruption through instability in the model's observable state than with harmless extra verification.
 
 ## Question 7
 Are multiple drift crossings common on real traces, or is the one-crossing picture mostly correct once tasks are conditioned on difficulty?
