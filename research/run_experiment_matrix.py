@@ -166,7 +166,7 @@ def cell_dir(root: Path, model: str, dataset: str) -> Path:
     return root / cell_key(model, dataset)
 
 
-def collection_complete(cdir: Path) -> bool:
+def collection_complete(cdir: Path, scope: dict[str, Any] | None = None, dataset: str | None = None) -> bool:
     meta, steps = cdir / "metadata.json", cdir / "trace_steps.csv"
     if not meta.exists() or not steps.exists():
         return False
@@ -176,8 +176,25 @@ def collection_complete(cdir: Path) -> bool:
         return False
     pending = data.get("pending_run_count")
     if pending is not None:
-        return pending == 0
-    return data.get("next_pending_run") is None
+        if pending != 0:
+            return False
+    elif data.get("next_pending_run") is not None:
+        return False
+    # AUDIT FIX: a cell counts as complete only for the REQUESTED scope. A
+    # leftover smoke run (e.g. 6 tasks, 1 temp) has pending==0 but must not
+    # satisfy a full 500-task / 3-temp request, or its tiny, statistically
+    # meaningless trace set silently flows into per-cell + cross-family results.
+    if scope is not None:
+        ds = DATASETS.get(dataset or "", {})
+        req_tasks = scope.get("max_tasks") if scope.get("max_tasks") is not None else ds.get("max_tasks")
+        on_disk_tasks = data.get("max_tasks")
+        if req_tasks is not None and (on_disk_tasks is None or int(on_disk_tasks) < int(req_tasks)):
+            return False
+        req_temps = {float(t) for t in scope.get("temperatures", [])}
+        on_disk_temps = {float(t) for t in data.get("temperatures", [])}
+        if req_temps and not req_temps.issubset(on_disk_temps):
+            return False
+    return True
 
 
 def analysis_complete(cdir: Path) -> bool:
@@ -343,8 +360,12 @@ def load_manifest(root: Path) -> dict[str, Any]:
 
 
 def save_manifest(root: Path, manifest: dict[str, Any]) -> None:
+    # AUDIT FIX: write atomically so a concurrent reader (or a crash mid-write)
+    # never sees a torn manifest.
     root.mkdir(parents=True, exist_ok=True)
-    (root / MANIFEST_NAME).write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    tmp = root / (MANIFEST_NAME + ".tmp")
+    tmp.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    os.replace(tmp, root / MANIFEST_NAME)
 
 
 def apply_config(config_path: str | None) -> dict[str, Any]:
@@ -454,7 +475,7 @@ def run_matrix(args: argparse.Namespace, catalog: dict[str, Any], models: list[s
 
     # Plan: which cells need collecting now.
     gpu_jobs = [(m, d) for (m, d) in cells
-                if "collect" in args.phases and not (collection_complete(cell_dir(root, m, d)) and not force)]
+                if "collect" in args.phases and not (collection_complete(cell_dir(root, m, d), scope, d) and not force)]
 
     total_vram = query_total_vram_gb()
     budget = args.vram_budget_gb or (total_vram or 96.0) * args.vram_budget_frac
@@ -507,7 +528,7 @@ def run_matrix(args: argparse.Namespace, catalog: dict[str, Any], models: list[s
 
     # Cells already collected (skip collect) but with CPU work outstanding -> start now.
     for (m, d) in cells:
-        if (m, d) not in gpu_jobs and collection_complete(cell_dir(root, m, d)):
+        if (m, d) not in gpu_jobs and collection_complete(cell_dir(root, m, d), scope, d):
             futures.append(cpu_pool.submit(cpu_followup, m, d))
 
     # GPU admission loop.
@@ -556,7 +577,7 @@ def run_matrix(args: argparse.Namespace, catalog: dict[str, Any], models: list[s
     # Aggregate per dataset (CPU, cheap) once all its collects are resolved.
     if "aggregate" in args.phases:
         for d in datasets:
-            dirs = [cell_dir(root, m, d) for m in models if collection_complete(cell_dir(root, m, d))]
+            dirs = [cell_dir(root, m, d) for m in models if collection_complete(cell_dir(root, m, d), scope, d)]
             if len(dirs) < 2:
                 print(f"[aggregate] {d} -> skip (need >=2 completed models, have {len(dirs)})")
                 continue

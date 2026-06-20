@@ -43,6 +43,7 @@ VRAM_BUDGET_FRAC="${VRAM_BUDGET_FRAC:-0.80}"
 GIT_CHECKPOINT="${GIT_CHECKPOINT:-1}"       # commit light artifacts after each cell
 GIT_PUSH="${GIT_PUSH:-1}"                   # also push each checkpoint
 OUTPUT_ROOT="${OUTPUT_ROOT:-$REPO_DIR/research/outputs/experiment_matrix}"
+[[ "$MODE" == "smoke" ]] && OUTPUT_ROOT="$OUTPUT_ROOT/_smoke"   # AUDIT FIX: never pollute the real matrix tree
 LOG_DIR="${LOG_DIR:-$REPO_DIR/run_logs}"
 HF_HOME="${HF_HOME:-$REPO_DIR/.hf_cache}"
 SMOKE_MODEL="${SMOKE_MODEL:-qwen2p5_0p5b}"

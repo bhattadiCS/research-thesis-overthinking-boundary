@@ -106,6 +106,17 @@ def best_detector(detector_frame: pd.DataFrame) -> str:
     return str(eligible.sort_values("mean_oracle_gap").iloc[0]["detector"])
 
 
+def _pooled_probe(probe: pd.DataFrame, col: str) -> float:
+    # Prefer the pooled out-of-fold metric (audit fix); fall back to the mean of
+    # per-run rows for legacy in-sample CSVs.
+    if "scope" in probe.columns:
+        pooled = probe[probe["scope"] == "pooled_oof"]
+        if not pooled.empty and pd.notna(pooled[col].iloc[0]):
+            return float(pooled[col].iloc[0])
+    series = probe[col].dropna()
+    return float(series.mean()) if series.size else float("nan")
+
+
 def classify_late_boundary(summary_row: dict[str, Any]) -> str:
     if not summary_row["capability_gate_met"]:
         return "No late-boundary replication"
@@ -206,8 +217,8 @@ def load_run_record(run_dir: Path) -> dict[str, Any]:
         "hazard_rule_gap": float(detector_rows.loc["hazard_drift", "mean_oracle_gap"]),
         "e_process_gap": float(detector_rows.loc["e_process", "mean_oracle_gap"]) if "e_process" in detector_rows.index else float("nan"),
         "never_stop_gap": float(detector_rows.loc["never_stop", "mean_oracle_gap"]),
-        "probe_brier": float(probe["brier"].mean()),
-        "probe_auc": float(probe["auc"].dropna().mean()) if probe["auc"].dropna().size else float("nan"),
+        "probe_brier": _pooled_probe(probe, "brier"),
+        "probe_auc": _pooled_probe(probe, "auc"),
         "runs_ever_correct": int(summary["runs_ever_correct"]),
         "capability_gate_met": capability_gate(float(q_curve.loc[q_curve["step"] == 1, "q_t"].iloc[0]), int(summary["runs_ever_correct"])),
         "total_repairs": int(hazard["n_repairs"].fillna(0).sum()) if "n_repairs" in hazard.columns else int(steps.get("repair", pd.Series(dtype=int)).sum()),

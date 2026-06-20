@@ -10,12 +10,14 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import brier_score_loss, roc_auc_score
+from sklearn.model_selection import GroupKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 
 OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
 STEP_COST = 0.05
+T_MIN = 2  # earliest admissible stop; step 1 is the forced-commit init, not a decision point
 EB_DELTA = 0.05
 DELTA_LOWER_BOUND = -(1.0 + STEP_COST)
 DELTA_UPPER_BOUND = 1.0 - STEP_COST
@@ -102,9 +104,21 @@ def utility_at_stop(group: pd.DataFrame, step: int) -> float:
     return float(group.loc[group["step"] == step, "utility"].iloc[0])
 
 
+def oracle_stop(group: pd.DataFrame, t_min: int = T_MIN) -> tuple[int, float]:
+    # AUDIT FIX: the oracle must respect the same protocol floor (t >= T_min) as
+    # every detector. Previously the oracle could "stop" at step 1 (where
+    # correct@1 forces utility=1.0 for already-correct traces) while detectors
+    # were floored at step 2, baking a structural >=0.05 oracle_gap into every
+    # comparison and overstating overthinking cost.
+    feasible = group[group["step"] >= t_min]
+    if feasible.empty:
+        feasible = group
+    idx = feasible["utility"].idxmax()
+    return int(feasible.loc[idx, "step"]), float(feasible.loc[idx, "utility"])
+
+
 def evaluate_detector_on_group(group: pd.DataFrame, detector_name: str, step: int) -> dict[str, Any]:
-    oracle_utility = float(group["utility"].max())
-    oracle_step = int(group.loc[group["utility"].idxmax(), "step"])
+    oracle_step, oracle_utility = oracle_stop(group)
     stop_utility = utility_at_stop(group, step)
     return {
         "run_id": group.iloc[0]["run_id"],
@@ -190,8 +204,13 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
     transition_rows["corruption"] = ((transition_rows["correct"] == 1) & (transition_rows["next_correct"] == 0)).astype(int)
 
     correctness_probe = fit_binary_model(step_frame, target_column="correct")
-    repair_model = fit_binary_model(transition_rows[transition_rows["correct"] == 0], target_column="repair")
-    corruption_model = fit_binary_model(transition_rows[transition_rows["correct"] == 1], target_column="corruption")
+    # AUDIT FIX: fit the repair/corruption hazards on genuine state transitions
+    # only (t >= T_MIN). The step 1->2 transition is a forced commit out of the
+    # uncommitted init state, not a real repair/corruption, and contaminated
+    # alpha/beta/mu_1 (4-59% of transitions across models).
+    hazard_train = transition_rows[transition_rows["step"] >= T_MIN]
+    repair_model = fit_binary_model(hazard_train[hazard_train["correct"] == 0], target_column="repair")
+    corruption_model = fit_binary_model(hazard_train[hazard_train["correct"] == 1], target_column="corruption")
 
     weights: list[dict[str, Any]] = []
     for label, model in [
@@ -234,9 +253,11 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
             if not math.isnan(conditional_repair_hazard) and not math.isnan(conditional_corruption_hazard)
             else float("nan")
         )
-        pooled_proxy_drift = (
-            (1.0 - q_t) * pooled_repair_frequency - q_t * pooled_corruption_frequency - STEP_COST
-        )
+        # AUDIT FIX: pooled (marginal) frequencies already equal (1-q)*alpha and
+        # q*beta, so the proxy drift is prf - pcf - lambda. The previous form
+        # multiplied by (1-q)/q a second time -> (1-q)^2 alpha - q^2 beta, which
+        # has no theoretical meaning.
+        pooled_proxy_drift = pooled_repair_frequency - pooled_corruption_frequency - STEP_COST
 
         rows.append(
             {
@@ -256,7 +277,7 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
                 "conditional_hazard_drift": conditional_hazard_drift,
                 "hazard_mu": conditional_hazard_drift,
                 "empirical_mu": empirical_utility_drift,
-                "empirical_variance": float(group["delta_utility"].var()),
+                "empirical_variance": float(group["delta_utility"].var(ddof=0)),
                 "conditional_empirical_gap": conditional_hazard_drift - empirical_utility_drift,
                 "fitted_q_t": float(group["q_hat"].mean()),
                 "fitted_repair_hazard": float(group["repair_hazard_hat"].mean()),
@@ -279,7 +300,7 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
     )
     by_step = by_step.merge(e_process_frame, on="step", how="left")
     by_step["empirical_variance"] = by_step["empirical_variance"].fillna(0.0)
-    by_step["delta_t"] = 6.0 * EB_DELTA / (np.pi**2 * np.square(by_step["step"] + 1))
+    by_step["delta_t"] = 6.0 * EB_DELTA / (np.pi**2 * np.square(by_step["step"]))
     by_step["eb_upper_bound"] = (
         by_step["empirical_utility_drift"]
         + np.sqrt(2.0 * by_step["empirical_variance"] * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"])
@@ -297,18 +318,21 @@ def corrected_drift_column(hazard_frame: pd.DataFrame) -> str:
     return "hazard_mu"
 
 
-def first_zero_crossing(hazard_frame: pd.DataFrame, column: str) -> int:
+def first_zero_crossing(hazard_frame: pd.DataFrame, column: str, t_min: int = T_MIN) -> int:
+    # AUDIT FIX: implement the stated optimal-stop rule T* = inf{t >= T_min : col(t) <= 0},
+    # else the last step. The previous version required a strict positive->nonpositive
+    # transition and had no T_min floor, so it returned the theory-forbidden step 1
+    # for models whose drift starts non-positive (4/6 shipped models). This now
+    # matches hazard_stop_for_group.
     valid = hazard_frame.dropna(subset=[column]).sort_values("step")
     if valid.empty:
-        return 1
-    previous_value = None
-    for _, row in valid.iterrows():
-        value = float(row[column])
-        if previous_value is not None and previous_value > 0.0 and value <= 0.0:
-            return int(row["step"])
-        previous_value = value
-    if float(valid.iloc[0][column]) <= 0.0:
-        return int(valid.iloc[0]["step"])
+        return t_min
+    eligible = valid[valid["step"] >= t_min]
+    if eligible.empty:
+        return int(valid.iloc[-1]["step"])
+    crossed = eligible[eligible[column] <= 0.0]
+    if len(crossed):
+        return int(crossed.iloc[0]["step"])
     return int(valid.iloc[-1]["step"])
 
 
@@ -328,7 +352,7 @@ def build_detector_frame(
             evaluate_detector_on_group(
                 ordered,
                 detector_name="oracle",
-                step=int(ordered.loc[ordered["utility"].idxmax(), "step"]),
+                step=oracle_stop(ordered)[0],
             )
         )
         detector_rows.append(
@@ -411,6 +435,76 @@ def evaluate_correctness_probe(step_frame: pd.DataFrame, correctness_probe: Any)
             auc = roc_auc_score(y_true, predictions)
         rows.append({"run_id": run_id, "brier": brier, "auc": auc})
     return pd.DataFrame(rows)
+
+
+def _fit_fold_models(train_frame: pd.DataFrame) -> tuple[Any, Any, Any]:
+    transitions = train_frame[train_frame["has_next"] == 1].copy()
+    transitions["repair"] = ((transitions["correct"] == 0) & (transitions["next_correct"] == 1)).astype(int)
+    transitions["corruption"] = ((transitions["correct"] == 1) & (transitions["next_correct"] == 0)).astype(int)
+    haz = transitions[transitions["step"] >= T_MIN]
+    probe = fit_binary_model(train_frame, target_column="correct")
+    repair = fit_binary_model(haz[haz["correct"] == 0], target_column="repair")
+    corruption = fit_binary_model(haz[haz["correct"] == 1], target_column="corruption")
+    return probe, repair, corruption
+
+
+def _probe_metrics(scored_frame: pd.DataFrame) -> pd.DataFrame:
+    """Out-of-fold probe AUC/Brier: per-run rows plus a pooled sample-weighted row."""
+    sf = scored_frame.dropna(subset=["oof_score"])
+    rows: list[dict[str, Any]] = []
+    for run_id, group in sf.groupby("run_id"):
+        y = group["correct"].astype(int).to_numpy()
+        p = group["oof_score"].to_numpy()
+        auc = roc_auc_score(y, p) if np.unique(y).size >= 2 else float("nan")
+        rows.append({"run_id": run_id, "brier": brier_score_loss(y, p), "auc": auc,
+                     "n": int(len(y)), "scope": "per_run_oof"})
+    y_all = sf["correct"].astype(int).to_numpy()
+    p_all = sf["oof_score"].to_numpy()
+    pooled_auc = roc_auc_score(y_all, p_all) if np.unique(y_all).size >= 2 else float("nan")
+    rows.append({"run_id": "__pooled__", "brier": brier_score_loss(y_all, p_all), "auc": pooled_auc,
+                 "n": int(len(y_all)), "scope": "pooled_oof"})
+    return pd.DataFrame(rows)
+
+
+def out_of_sample_eval(step_frame: pd.DataFrame, n_splits: int = 5) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """AUDIT FIX: honest out-of-sample evaluation via GroupKFold by run_id, so no
+    trajectory is scored by a probe / hazard model / entropy threshold / EB /
+    e-process step that was fit on it. Returns (out-of-fold detector frame,
+    out-of-fold probe metrics). The previous pipeline fit and scored everything
+    on the same rows, inflating every learned-detector and probe metric."""
+    sf = step_frame.reset_index(drop=True)
+    n_groups = sf["run_id"].nunique()
+
+    def _fold_steps(train_haz: pd.DataFrame) -> tuple[int, int]:
+        eb = first_step_matching(train_haz, (train_haz["step"] >= T_MIN) & (train_haz["eb_upper_bound"] <= 0.0))
+        ep = first_step_matching(train_haz, (train_haz["step"] >= T_MIN) & (train_haz["e_process_stop_signal"] == 1))
+        return eb, ep
+
+    if n_groups < 2:  # too few runs to split (pilot); fall back to in-sample, flagged
+        probe, repair, corruption = _fit_fold_models(sf)
+        train_haz = fit_global_models(sf)[0]
+        eb, ep = _fold_steps(train_haz)
+        det = build_detector_frame(sf, probe, repair, corruption, select_entropy_threshold(sf), eb, ep)
+        det["out_of_sample"] = 0
+        sf["oof_score"] = predict_probabilities(probe, sf)[:, 1]
+        return det, _probe_metrics(sf)
+
+    n_splits = max(2, min(n_splits, n_groups))
+    gkf = GroupKFold(n_splits=n_splits)
+    oof = np.full(len(sf), np.nan)
+    det_parts: list[pd.DataFrame] = []
+    for train_idx, test_idx in gkf.split(sf, groups=sf["run_id"]):
+        train = sf.iloc[train_idx]
+        test = sf.iloc[test_idx]
+        probe, repair, corruption = _fit_fold_models(train)
+        threshold = select_entropy_threshold(train)
+        eb, ep = _fold_steps(fit_global_models(train)[0])
+        oof[test_idx] = predict_probabilities(probe, test)[:, 1]
+        det_parts.append(build_detector_frame(test, probe, repair, corruption, threshold, eb, ep))
+    sf["oof_score"] = oof
+    det = pd.concat(det_parts, ignore_index=True)
+    det["out_of_sample"] = 1
+    return det, _probe_metrics(sf)
 
 
 def summarize_detector_frame(detector_frame: pd.DataFrame) -> pd.DataFrame:
@@ -526,24 +620,17 @@ def main() -> None:
     step_frame["corruption"] = ((step_frame["correct"] == 1) & (step_frame["next_correct"] == 0)).astype(int)
 
     hazard_frame, weight_frame, correctness_probe, repair_model, corruption_model = fit_global_models(step_frame)
-    entropy_threshold = select_entropy_threshold(step_frame)
-    eb_stop_step = first_step_matching(hazard_frame, (hazard_frame["step"] >= 2) & (hazard_frame["eb_upper_bound"] <= 0.0))
-    e_process_stop_step = first_step_matching(
-        hazard_frame,
-        (hazard_frame["step"] >= 2) & (hazard_frame["e_process_stop_signal"] == 1),
-    )
-
-    detector_frame = build_detector_frame(
-        step_frame=step_frame,
-        q_model=correctness_probe,
-        repair_model=repair_model,
-        corruption_model=corruption_model,
-        entropy_threshold=entropy_threshold,
-        eb_stop_step=eb_stop_step,
-        e_process_stop_step=e_process_stop_step,
-    )
+    # AUDIT FIX: honest out-of-sample evaluation (GroupKFold by run_id) for the
+    # detector comparison and the probe. The in-sample models above feed only the
+    # descriptive drift/boundary curve and feature weights, not any benchmark.
+    detector_frame, correctness_probe_frame = out_of_sample_eval(step_frame)
     detector_summary = summarize_detector_frame(detector_frame)
-    correctness_probe_frame = evaluate_correctness_probe(step_frame, correctness_probe)
+
+    # Descriptive (in-sample) anytime stop steps, for the drift report/prints only.
+    eb_stop_step = first_step_matching(hazard_frame, (hazard_frame["step"] >= T_MIN) & (hazard_frame["eb_upper_bound"] <= 0.0))
+    e_process_stop_step = first_step_matching(
+        hazard_frame, (hazard_frame["step"] >= T_MIN) & (hazard_frame["e_process_stop_signal"] == 1),
+    )
     eb_summary = detector_summary[detector_summary["detector"].isin(["oracle", "empirical_bernstein", "never_stop"])]
     sequential_summary = detector_summary[
         detector_summary["detector"].isin(["oracle", "hazard_drift", "e_process", "empirical_bernstein", "never_stop"])
@@ -562,11 +649,14 @@ def main() -> None:
     plot_drift_crossing_proof(hazard_frame, input_dir)
     plot_feature_weights(weight_frame, input_dir)
 
-    print(
-        "correctness probe: "
-        f"brier={correctness_probe_frame['brier'].mean():.4f}, "
-        f"auc={correctness_probe_frame['auc'].dropna().mean():.4f}"
-    )
+    pooled = (correctness_probe_frame[correctness_probe_frame["scope"] == "pooled_oof"]
+              if "scope" in correctness_probe_frame.columns else correctness_probe_frame.iloc[0:0])
+    if not pooled.empty:
+        print(f"correctness probe (out-of-fold, pooled): "
+              f"brier={pooled['brier'].iloc[0]:.4f}, auc={pooled['auc'].iloc[0]:.4f}")
+    else:
+        print(f"correctness probe (out-of-fold): brier={correctness_probe_frame['brier'].mean():.4f}, "
+              f"auc={correctness_probe_frame['auc'].dropna().mean():.4f}")
     for _, row in detector_summary.iterrows():
         print(
             f"{row['detector']}: stop={row['mean_stop_step']:.2f}, "

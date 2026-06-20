@@ -469,10 +469,14 @@ def extract_word_fraction_values(text: str) -> list[str]:
         flags=re.IGNORECASE,
     )
     for match in pattern.finditer(text):
-        numerator_token = (match.group("numerator") or "one").lower()
-        denominator_token = match.group("denominator").lower()
-        if match.group("numerator") is None and denominator_token in PLURAL_FRACTION_WORDS:
+        # AUDIT FIX: require an EXPLICIT numerator. Previously a bare singular
+        # ordinal ("third", "quarter") was read as 1/3, 1/4 via an implicit
+        # "one", turning ordinary words into fraction answers and creating
+        # false negatives on GSM8K.
+        if match.group("numerator") is None:
             continue
+        numerator_token = match.group("numerator").lower()
+        denominator_token = match.group("denominator").lower()
         numerator = NUMBER_WORDS.get(numerator_token)
         denominator = FRACTION_DENOMINATORS.get(denominator_token)
         if numerator is None or denominator is None:
@@ -481,7 +485,20 @@ def extract_word_fraction_values(text: str) -> list[str]:
     return values
 
 
+def _canonical_fraction(value: str) -> str:
+    try:
+        normalized = Fraction(value)
+    except (ValueError, ZeroDivisionError):
+        return value
+    return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
+
+
 def extract_numeric_candidate(text: str) -> str:
+    # AUDIT FIX: the final answer is the numeric token that appears LAST by
+    # position, regardless of whether it is a fraction or an integer/decimal.
+    # The previous implementation scanned fractions first and returned a leading
+    # fraction even when the real answer was the trailing integer, deflating
+    # GSM8K correctness on ratio-flavoured problems.
     stripped = text.strip().lower().replace(",", "")
     if not stripped:
         return ""
@@ -490,40 +507,64 @@ def extract_numeric_candidate(text: str) -> str:
     if boxed_matches:
         stripped = boxed_matches[-1].strip().lower().replace(",", "")
 
-    fraction_matches = re.findall(r"-?\d+\s*/\s*-?\d+", stripped)
-    if fraction_matches:
-        value = fraction_matches[-1].replace(" ", "")
-        try:
-            normalized = Fraction(value)
-            return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
-        except ZeroDivisionError:
-            return value
+    candidates: list[tuple[int, str]] = []
+    fraction_spans: list[tuple[int, int]] = []
+    for match in re.finditer(r"-?\d+\s*/\s*-?\d+", stripped):
+        fraction_spans.append((match.start(), match.end()))
+        candidates.append((match.start(), _canonical_fraction(match.group().replace(" ", ""))))
+    for match in re.finditer(r"-?\d+(?:\.\d+)?", stripped):
+        if any(start <= match.start() < end for start, end in fraction_spans):
+            continue  # already covered by a fraction match
+        candidates.append((match.start(), _canonical_fraction(match.group())))
+
+    if candidates:
+        candidates.sort(key=lambda item: item[0])
+        return candidates[-1][1]
 
     word_fraction_matches = extract_word_fraction_values(stripped)
     if word_fraction_matches:
         return word_fraction_matches[-1]
 
-    decimal_matches = re.findall(r"-?\d+(?:\.\d+)?", stripped)
-    if decimal_matches:
-        value = decimal_matches[-1]
-        try:
-            normalized = Fraction(value).limit_denominator()
-            return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
-        except ValueError:
-            return value
-
     return ""
+
+
+def _last_boxed_content(s: str) -> str | None:
+    """Return the content of the last \\boxed{...} with balanced braces (handles
+    nesting like \\boxed{\\frac{1}{2}}, which a non-greedy regex truncates)."""
+    key = "\\boxed{"
+    idx = s.rfind(key)
+    if idx == -1:
+        return None
+    i = idx + len(key)
+    depth = 1
+    out: list[str] = []
+    while i < len(s) and depth > 0:
+        c = s[i]
+        if c == "{":
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                break
+        out.append(c)
+        i += 1
+    return "".join(out)
 
 
 def _strip_latex_math(text: str) -> str:
     """Reduce a LaTeX/competition-math answer to a compact comparable form."""
     s = str(text).strip()
-    if "=" in s and not any(op in s for op in ("<=", ">=", "==", "!=")):
-        s = s.split("=")[-1].strip()  # keep the RHS of "x = ..."
+    # AUDIT FIX: only peel a leading single-variable assignment ("x = ...").
+    # The previous "split on last =" collapsed equations/systems/lines to a
+    # single token (e.g. "5x-7y+11z+4=0" -> "0"), accepting "0" as correct for
+    # a plane. Keep the full expression for everything else.
+    if (s.count("=") == 1 and re.match(r"^\s*[A-Za-z]\w*\s*=", s)
+            and not any(op in s for op in ("<=", ">=", "==", "!="))):
+        s = s.split("=", 1)[1].strip()
     s = re.sub(r"^\$+|\$+$", "", s).strip()
-    boxed = re.findall(r"\\boxed\{(.+?)\}", s)
-    if boxed:
-        s = boxed[-1]
+    boxed_content = _last_boxed_content(s)
+    if boxed_content is not None:
+        s = boxed_content
     s = re.sub(r"\\(?:text|mathrm|mbox|mathbf|mathit|operatorname)\s*\{([^{}]*)\}", r"\1", s)
     s = s.replace("\\dfrac", "\\frac").replace("\\tfrac", "\\frac")
     s = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"((\1)/(\2))", s)
@@ -899,19 +940,18 @@ def load_math_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None
     if load_dataset is None:
         raise ImportError("datasets is required for --task-source math. Install it with pip install datasets.")
     split = dataset_split if dataset_split and dataset_split not in {"train", "main"} else "test"
-    dataset = None
-    last_exc: Exception | None = None
-    for repo, kwargs in (("HuggingFaceH4/MATH-500", {}), ("lighteval/MATH", {"name": "all"})):
-        try:
-            dataset = load_dataset(repo, split=split, **kwargs)
-            break
-        except Exception as exc:  # noqa: BLE001 -- try the next source
-            last_exc = exc
-    if dataset is None:
+    # AUDIT FIX: load ONLY the pinned corpus and FAIL HARD if unavailable. The
+    # previous silent fallback to lighteval/MATH (~5000 problems) could swap the
+    # whole corpus on a transient error, giving different models different
+    # problems and silently breaking cross-model comparability.
+    repo = "HuggingFaceH4/MATH-500"
+    try:
+        dataset = load_dataset(repo, split=split)
+    except Exception as exc:
         raise RuntimeError(
-            "Failed to load a MATH dataset (tried HuggingFaceH4/MATH-500 and lighteval/MATH). "
-            f"Check HuggingFace access on the VM. Error details: {last_exc}"
-        )
+            f"Failed to load the pinned MATH dataset {repo} (split={split}). Failing hard rather than "
+            f"silently substituting a different corpus. Error details: {exc}"
+        ) from exc
     if shuffle_seed is not None:
         dataset = dataset.shuffle(seed=shuffle_seed)
     if max_tasks > 0 and len(dataset) > max_tasks:
@@ -936,7 +976,7 @@ def load_math_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None
                 prompt=problem,
                 answer_type="math",
                 expected_answer=str(answer).strip(),
-                notes=f"MATH split={split} subject={subject} level={level}",
+                notes=f"MATH repo={repo} split={split} subject={subject} level={level}",
                 source="math",
                 source_index=index,
             )

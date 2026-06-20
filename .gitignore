@@ -35,6 +35,10 @@ recovered_*_data/
 research/outputs/experiment_matrix/**/*.npz
 research/outputs/experiment_matrix/**/*.log
 research/outputs/experiment_matrix/_preflight/
+# Offloaded weight shards can sit two levels deep under the matrix tree; the
+# single-level rule above (research/outputs/*/model_offload/) misses them.
+research/outputs/**/model_offload/
+research/outputs/**/hidden_states/
 
 # Thesis documentation
 ThesisDocs/*
