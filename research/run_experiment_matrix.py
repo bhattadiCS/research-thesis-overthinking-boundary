@@ -86,7 +86,7 @@ CANONICAL = {
 DATASETS: dict[str, dict[str, Any]] = {
     "gsm8k": {"split": "train", "max_tasks": 500, "max_steps": 10},
     "builtin": {"split": "train", "max_tasks": None, "max_steps": 5},
-    # "math":      {"split": "test", "max_tasks": 500, "max_steps": 14},  # needs parser
+    "math": {"split": "test", "max_tasks": 500, "max_steps": 14},
     # "humaneval": {"split": "test", "max_tasks": 164, "max_steps": 12},  # needs parser
 }
 DEFAULT_DATASETS = ["gsm8k"]

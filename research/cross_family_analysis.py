@@ -365,23 +365,52 @@ def markdown_table(headers: list[str], rows: list[list[str]]) -> list[str]:
     return lines
 
 
+def _run_listing(df: pd.DataFrame) -> str:
+    parts = []
+    for _, row in df.iterrows():
+        boundary = row["corrected_boundary_step"]
+        boundary = "n/a" if pd.isna(boundary) else f"step {int(boundary)}"
+        parts.append(f"{row['run_label']} ({boundary})")
+    return "; ".join(parts)
+
+
 def strongest_cross_family_conclusion(summary_df: pd.DataFrame) -> str:
+    # Data-driven: computed from the actual runs so it never goes stale as the
+    # model set grows. Reports counts/families/specific runs rather than naming
+    # fixed models.
     capable = summary_df[summary_df["capability_gate_met"] == True]
-    strong_late = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication"])]
-    supportive_late = capable[
-        capable["late_boundary_assessment"].isin(
-            ["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"]
-        )
-    ]
     if capable.empty:
         return "No run currently clears the capability gate, so the repo still lacks a theorem-facing cross-family boundary witness."
-    if strong_late["family"].nunique() >= 2:
-        return "A materially late overthinking boundary now appears in at least two capable families under the matched GSM8K protocol, so cross-family support is materially stronger."
-    if strong_late["family"].nunique() == 1 and supportive_late["family"].nunique() >= 2:
-        return "Qwen 7B remains the only clearly late corrected-boundary witness, but Mistral 7B now adds a weaker non-Qwen step-3 boundary with a large never-stop penalty. Cross-family evidence is therefore stronger than a single-family story, but full late-boundary robustness is still unproven."
-    if supportive_late["family"].nunique() == 1:
-        return "Late-boundary evidence is still confined to a single capable family, so cross-family robustness remains unproven."
-    return "After the hazard audit, the current matched GSM8K evidence does not support a late conditional-hazard boundary in any available run."
+    strong = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication"])]
+    supportive = capable[capable["late_boundary_assessment"].isin(
+        ["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"])]
+    strong_fams = sorted(strong["family"].unique())
+    sup_fams = sorted(supportive["family"].unique())
+
+    if strong.empty:
+        if supportive.empty:
+            return "No capable run shows a late corrected boundary under the matched protocol."
+        return (f"No run shows a clearly late corrected boundary, but {len(supportive)} capable run(s) across "
+                f"{len(sup_fams)} family/families ({', '.join(sup_fams)}) show weaker late-boundary support: "
+                f"{_run_listing(supportive)}.")
+
+    sentence = (f"A clearly late corrected boundary replicates in {len(strong)} capable run(s) across "
+                f"{len(strong_fams)} family/families: {_run_listing(strong)}.")
+    extra = supportive[~supportive.index.isin(strong.index)]
+    if not extra.empty:
+        extra_fams = sorted(extra["family"].unique())
+        sentence += (f" An additional {len(extra)} run(s) across {len(extra_fams)} family/families "
+                     f"({', '.join(extra_fams)}) add weaker late-boundary support: {_run_listing(extra)}.")
+    if len(strong_fams) >= 2:
+        sentence += " Cross-family support for a late overthinking boundary is now strong."
+    elif len(sup_fams) >= 2:
+        sentence += (f" The clearly-late evidence is concentrated in the {strong_fams[0]} family, with weaker "
+                     f"corroboration from {len(sup_fams) - 1} other family/families; cross-family support is "
+                     f"materially stronger than a single-witness story, though a clearly-late non-{strong_fams[0]} "
+                     f"witness is still pending.")
+    else:
+        sentence += " Late-boundary evidence remains confined to a single capable family, so cross-family robustness is not yet established."
+    return sentence
 
 
 def build_report_markdown(
@@ -523,7 +552,12 @@ def open_question_rows(summary_df: pd.DataFrame) -> list[dict[str, str]]:
         boundary_answer = "A materially late boundary is present in at least two capable families under the matched GSM8K protocol."
     elif strong_late_runs["family"].nunique() == 1 and supportive_late_runs["family"].nunique() >= 2:
         boundary_status = "partially answered"
-        boundary_answer = "A clearly late boundary is still supported in only one capable family, but Mistral adds weaker second-family support with a corrected step-3 crossing and a large never-stop penalty. Cross-family robustness is stronger than before, but not yet settled."
+        lone_family = sorted(strong_late_runs["family"].unique())[0]
+        n_other = supportive_late_runs["family"].nunique() - 1
+        boundary_answer = (f"A clearly late boundary replicates within one capable family ({lone_family}, "
+                           f"{len(strong_late_runs)} run(s)), with weaker support from {n_other} other family/families. "
+                           f"Cross-family robustness is materially stronger than a single-witness story, but not fully "
+                           f"settled until a clearly-late non-{lone_family} witness appears.")
     elif supportive_late_runs["family"].nunique() == 1:
         boundary_status = "partially answered"
         boundary_answer = "A late boundary is only supported in one capable family so far, so cross-family robustness is still unproven."

@@ -2,7 +2,7 @@
 
 | Question | Status | Joint answer |
 | --- | --- | --- |
-| Is the boundary robust across model families? | partially answered | A clearly late boundary is still supported in only one capable family, but Mistral adds weaker second-family support with a corrected step-3 crossing and a large never-stop penalty. Cross-family robustness is stronger than before, but not yet settled. |
+| Is the boundary robust across model families? | partially answered | A clearly late boundary replicates within one capable family (Qwen2.5 instruct, 3 run(s)), with weaker support from 3 other family/families. Cross-family robustness is materially stronger than a single-witness story, but not fully settled until a clearly-late non-Qwen2.5 instruct witness appears. |
 | Does boundary location appear capability-linked? | answered | The weak Qwen control stays early while the higher-capability Qwen run moves later, which supports a capability-linked boundary location. |
 | Does detector ranking change with capability? | answered | Detector ranking changes across runs, so ranking is not invariant across capability regimes. |
 | Is answer revision or entropy more cross-family stable? | partially answered | Signal leadership is not stable yet: DeepSeek emphasizes answer revision, while Qwen-family evidence includes entropy or verbosity proxies. |

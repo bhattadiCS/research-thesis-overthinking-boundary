@@ -515,7 +515,76 @@ def extract_numeric_candidate(text: str) -> str:
     return ""
 
 
+def _strip_latex_math(text: str) -> str:
+    """Reduce a LaTeX/competition-math answer to a compact comparable form."""
+    s = str(text).strip()
+    if "=" in s and not any(op in s for op in ("<=", ">=", "==", "!=")):
+        s = s.split("=")[-1].strip()  # keep the RHS of "x = ..."
+    s = re.sub(r"^\$+|\$+$", "", s).strip()
+    boxed = re.findall(r"\\boxed\{(.+?)\}", s)
+    if boxed:
+        s = boxed[-1]
+    s = re.sub(r"\\(?:text|mathrm|mbox|mathbf|mathit|operatorname)\s*\{([^{}]*)\}", r"\1", s)
+    s = s.replace("\\dfrac", "\\frac").replace("\\tfrac", "\\frac")
+    s = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"((\1)/(\2))", s)
+    s = re.sub(r"\\frac\s*(\d)\s*(\d)", r"((\1)/(\2))", s)
+    s = re.sub(r"\\sqrt\{([^{}]+)\}", r"sqrt(\1)", s)
+    s = re.sub(r"\\sqrt\s*(\w)", r"sqrt(\1)", s)
+    s = s.replace("\\cdot", "*").replace("\\times", "*").replace("\\div", "/").replace("\\pi", "pi")
+    for token in ("\\left", "\\right", "\\!", "\\,", "\\;", "\\:", "\\ ", "\\$",
+                  "\\(", "\\)", "\\[", "\\]", "^{\\circ}", "^\\circ", "\\circ", "\\%", "%", "$"):
+        s = s.replace(token, "")
+    s = s.replace("{", "").replace("}", "").replace("\\", "")
+    s = re.sub(r"(?<=\d),(?=\d{3}\b)", "", s)  # 1,000 -> 1000
+    return s.replace(" ", "").rstrip(".").strip()
+
+
+def normalize_math_answer(raw_answer: str) -> str:
+    if raw_answer is None:
+        return ""
+    s = _strip_latex_math(raw_answer)
+    if s == "":
+        return ""
+    bare = s.replace("(", "").replace(")", "")
+    if re.fullmatch(r"-?\d+(\.\d+)?", bare) or re.fullmatch(r"-?\d+/-?\d+", bare):
+        try:
+            frac = Fraction(bare).limit_denominator(10**6)
+            return str(frac.numerator) if frac.denominator == 1 else f"{frac.numerator}/{frac.denominator}"
+        except (ValueError, ZeroDivisionError):
+            pass
+    return s.lower()
+
+
+def math_answers_equivalent(candidate: str, expected: str) -> bool:
+    norm_candidate = normalize_math_answer(candidate)
+    norm_expected = normalize_math_answer(expected)
+    if not norm_expected:
+        return False
+    if norm_candidate == norm_expected:
+        return True
+    try:
+        if abs(float(norm_candidate) - float(norm_expected)) < 1e-6:
+            return True
+    except (ValueError, TypeError):
+        pass
+    try:  # symbolic fallback; sympy ships as an indirect torch dependency
+        import sympy
+        from sympy.parsing.sympy_parser import (
+            parse_expr, standard_transformations, implicit_multiplication_application,
+        )
+        transforms = standard_transformations + (implicit_multiplication_application,)
+        expr_a = parse_expr(norm_candidate.replace("^", "**"), transformations=transforms)
+        expr_b = parse_expr(norm_expected.replace("^", "**"), transformations=transforms)
+        if sympy.simplify(expr_a - expr_b) == 0:
+            return True
+    except Exception:  # noqa: BLE001 -- unparseable expressions just fall through
+        pass
+    return False
+
+
 def normalize_answer(raw_answer: str, answer_type: str) -> str:
+    if answer_type == "math":
+        return normalize_math_answer(raw_answer)
     text = raw_answer.strip().lower()
     text = re.sub(r"\s+", " ", text)
     boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", text)
@@ -542,6 +611,8 @@ def normalize_answer(raw_answer: str, answer_type: str) -> str:
 
 
 def verify_answer(task: TaskSpec, candidate_answer: str) -> bool:
+    if task.answer_type == "math":
+        return math_answers_equivalent(candidate_answer, task.expected_answer)
     return normalize_answer(candidate_answer, task.answer_type) == normalize_answer(task.expected_answer, task.answer_type)
 
 
@@ -633,6 +704,9 @@ def extract_typed_answer(text: str, answer_type: str) -> str:
     boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", stripped)
     if boxed_matches:
         stripped = boxed_matches[-1].strip()
+
+    if answer_type == "math":
+        return stripped.strip()
 
     lowered = stripped.lower()
     if answer_type == "day":
@@ -818,11 +892,65 @@ def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | Non
     return tasks
 
 
+def load_math_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+    """Competition MATH. Uses HuggingFaceH4/MATH-500 (500 problems, openly
+    available); falls back to lighteval/MATH. Answers are graded with
+    math_answers_equivalent (LaTeX-normalized + numeric + sympy fallback)."""
+    if load_dataset is None:
+        raise ImportError("datasets is required for --task-source math. Install it with pip install datasets.")
+    split = dataset_split if dataset_split and dataset_split not in {"train", "main"} else "test"
+    dataset = None
+    last_exc: Exception | None = None
+    for repo, kwargs in (("HuggingFaceH4/MATH-500", {}), ("lighteval/MATH", {"name": "all"})):
+        try:
+            dataset = load_dataset(repo, split=split, **kwargs)
+            break
+        except Exception as exc:  # noqa: BLE001 -- try the next source
+            last_exc = exc
+    if dataset is None:
+        raise RuntimeError(
+            "Failed to load a MATH dataset (tried HuggingFaceH4/MATH-500 and lighteval/MATH). "
+            f"Check HuggingFace access on the VM. Error details: {last_exc}"
+        )
+    if shuffle_seed is not None:
+        dataset = dataset.shuffle(seed=shuffle_seed)
+    if max_tasks > 0 and len(dataset) > max_tasks:
+        dataset = dataset.select(range(max_tasks))
+
+    split_name = sanitize_split_name(split)
+    tasks: list[TaskSpec] = []
+    for index, example in enumerate(dataset):
+        problem = str(example.get("problem", "")).strip()
+        answer = example.get("answer")
+        if answer is None or str(answer).strip() == "":
+            boxed = re.findall(r"\\boxed\{(.+?)\}", str(example.get("solution", "")))
+            answer = boxed[-1] if boxed else str(example.get("solution", ""))
+        level = str(example.get("level", "")).strip()
+        subject = str(example.get("subject", example.get("type", ""))).strip()
+        short_hash = hashlib.md5(problem.encode("utf-8")).hexdigest()[:8]
+        tasks.append(
+            TaskSpec(
+                task_id=f"math_{split_name}_{index:05d}_{short_hash}",
+                domain="math",
+                difficulty=(f"MATH {level}".strip() or "competition_math"),
+                prompt=problem,
+                answer_type="math",
+                expected_answer=str(answer).strip(),
+                notes=f"MATH split={split} subject={subject} level={level}",
+                source="math",
+                source_index=index,
+            )
+        )
+    return tasks
+
+
 def load_tasks(task_source: str, max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
     if task_source == "builtin":
         return BUILTIN_TASKS[:max_tasks]
     if task_source == "gsm8k":
         return load_gsm8k_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+    if task_source == "math":
+        return load_math_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
     raise ValueError(f"Unsupported task source: {task_source}")
 
 
@@ -1987,7 +2115,7 @@ def main() -> None:
     parser.add_argument("--max-steps", type=int, default=5)
     parser.add_argument("--max-new-tokens", type=int, default=256)
     parser.add_argument("--max-tasks", type=int, default=len(BUILTIN_TASKS))
-    parser.add_argument("--task-source", default="builtin", choices=["builtin", "gsm8k"])
+    parser.add_argument("--task-source", default="builtin", choices=["builtin", "gsm8k", "math"])
     parser.add_argument("--dataset-split", default="train")
     parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
     parser.add_argument("--batch-size", type=int, default=4)
