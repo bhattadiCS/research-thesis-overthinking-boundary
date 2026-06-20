@@ -596,6 +596,18 @@ def normalize_math_answer(raw_answer: str) -> str:
     return s.lower()
 
 
+def _as_number(text: str | None) -> float | None:
+    if not text:
+        return None
+    try:
+        return float(Fraction(text))
+    except (ValueError, ZeroDivisionError):
+        try:
+            return float(text)
+        except (ValueError, TypeError):
+            return None
+
+
 def math_answers_equivalent(candidate: str, expected: str) -> bool:
     norm_candidate = normalize_math_answer(candidate)
     norm_expected = normalize_math_answer(expected)
@@ -608,6 +620,21 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
             return True
     except (ValueError, TypeError):
         pass
+    # VALIDATION FIX: when the gold answer is purely numeric, the model often
+    # gives the right number wrapped in words/units ("Savings: 550 gallons",
+    # "1.25 miles"). Compare the candidate's trailing numeric token by value.
+    # Gated on a numeric gold answer so a verbose wrong answer that merely
+    # mentions a different number cannot become a false positive.
+    exp_num = _as_number(norm_expected)
+    candidate_str = str(candidate)
+    # Only number-grab from PROSE-wrapped numbers, never from symbolic answers
+    # (equations/expressions: '=', '^', '\', or digit-letter adjacency like "5r"),
+    # so "5x-7y+11z+4=0" is never reduced to its trailing "0".
+    looks_symbolic = bool(re.search(r"[=^\\]|\d[a-zA-Z]|[a-zA-Z]\d", candidate_str))
+    if exp_num is not None and not looks_symbolic:
+        cand_num = _as_number(extract_numeric_candidate(candidate_str))
+        if cand_num is not None and abs(cand_num - exp_num) < 1e-6:
+            return True
     try:  # symbolic fallback; sympy ships as an indirect torch dependency
         import sympy
         from sympy.parsing.sympy_parser import (

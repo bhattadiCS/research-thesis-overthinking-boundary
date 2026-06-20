@@ -48,6 +48,13 @@ EQ_CASES = [
     ("x^2+1", "1+x^2", True),
     ("5x-7y+11z+4=0", "0", False, "plane must NOT equal 0"),
     ("3", "4", False),
+    # text/unit-wrapped numeric answers (model right, was a false negative)
+    ("Savings: 550 gallons", "550", True, "number wrapped in words/units"),
+    ("1.25 miles", "1.25", True, "decimal with unit"),
+    ("c=33", "33", True, "single-var assignment"),
+    # guard: verbose wrong answer with a different number stays wrong
+    ("Hybrid: 250 gallons saved", "550", False, "different number -> not a false positive"),
+    (r'"answer": "3"', r"\frac{7}{2}", False, "nested-json wrong answer stays wrong"),
 ]
 
 def main() -> int:
