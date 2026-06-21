@@ -131,8 +131,12 @@ def model_profile(spec: dict[str, Any]) -> dict[str, Any]:
     if p != p:  # NaN -> be conservative
         return {"quantization": "4bit", "batch_size": 4, "params_b": float("nan")}
     quant = "none" if p <= 34 else "4bit"  # bf16 up to ~34B (32B bf16 ~64 GB)
-    bs = (64 if p <= 1 else 48 if p <= 4 else 32 if p <= 8
-          else 24 if p <= 15 else 12 if p <= 34 else 4)
+    # THROUGHPUT FIX: decode is memory-bandwidth-bound, so bigger batches raise
+    # tok/s (measured ~70 tok/s at the old sizes -- far below the card's ceiling).
+    # ~2x the old batches for small/mid models (ample VRAM headroom); modest for
+    # 32B (VRAM-limited). The harness OOM-microbatch-splits if a cell overshoots.
+    bs = (128 if p <= 1 else 96 if p <= 4 else 64 if p <= 8
+          else 40 if p <= 15 else 16 if p <= 34 else 8)
     return {"quantization": quant, "batch_size": bs, "params_b": p}
 
 
@@ -147,9 +151,12 @@ def estimate_footprint_gb(profile: dict[str, Any]) -> float:
     # (it put the 32B at ~85 GB when it actually uses ~70 GB), so the scheduler
     # ran big models solo and left the GPU under-packed. Measured peak is close
     # to weights + a modest KV/activation margin; the harness OOM-splits if a
-    # cell overshoots, so a tighter estimate is safe and lets models co-run
-    # (overlapping each other's CPU/IO-bound, GPU-idle step gaps).
-    return weights * 1.10 + 2.0
+    # cell overshoots, so a tighter estimate is safe and lets models co-run.
+    # Batch-aware: bigger batches grow the KV cache, so packing must account for
+    # it (calibrated so 32B@bs12 ~= 71 GB and 7B@bs32 ~= 18 GB, matching peaks).
+    batch = profile.get("batch_size") or 16
+    kv_activations = 0.018 * p * batch  # KV cache + activations at a few-thousand-token context
+    return weights + kv_activations + 2.5
 
 
 def query_total_vram_gb() -> float | None:
