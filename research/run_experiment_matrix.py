@@ -143,7 +143,13 @@ def estimate_footprint_gb(profile: dict[str, Any]) -> float:
         return 10.0
     bytes_per_param = 2.0 if profile["quantization"] == "none" else 0.6  # bf16 vs 4-bit
     weights = p * bytes_per_param
-    return weights + max(2.0, 0.30 * weights) + 1.5  # + KV/activations + CUDA context
+    # SPEEDUP FIX: the old reserve (0.30*weights) badly overestimated peak VRAM
+    # (it put the 32B at ~85 GB when it actually uses ~70 GB), so the scheduler
+    # ran big models solo and left the GPU under-packed. Measured peak is close
+    # to weights + a modest KV/activation margin; the harness OOM-splits if a
+    # cell overshoots, so a tighter estimate is safe and lets models co-run
+    # (overlapping each other's CPU/IO-bound, GPU-idle step gaps).
+    return weights * 1.10 + 2.0
 
 
 def query_total_vram_gb() -> float | None:
@@ -623,7 +629,7 @@ def main() -> int:
     parser.add_argument("--batch-size", type=int)
     parser.add_argument("--max-parallel", default="auto", help="Concurrent collect jobs: int or 'auto' (default).")
     parser.add_argument("--vram-budget-gb", type=float, help="Hard VRAM budget for concurrent collects.")
-    parser.add_argument("--vram-budget-frac", type=float, default=0.80, help="Budget as fraction of total VRAM.")
+    parser.add_argument("--vram-budget-frac", type=float, default=0.88, help="Budget as fraction of total VRAM.")
     parser.add_argument("--cpu-workers", type=int, help="Parallel analyze/report workers (default min(4,cpus)).")
     parser.add_argument("--git-checkpoint", action="store_true", help="Commit light artifacts after each cell.")
     parser.add_argument("--git-push", action="store_true", help="Also push after each commit (implies checkpoint).")
