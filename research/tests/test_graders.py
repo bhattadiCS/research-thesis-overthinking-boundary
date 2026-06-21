@@ -20,6 +20,7 @@ spec.loader.exec_module(rte)
 
 norm_num = lambda s: rte.normalize_answer(s, "number")
 norm_math = rte.normalize_math_answer
+norm_mcq = lambda s: rte.normalize_answer(s, "mcq")
 math_eq = rte.math_answers_equivalent
 
 # (callable, input, expected, label)
@@ -40,6 +41,14 @@ CASES = [
     (norm_math, "x = 5", "5", "single-var assignment peeled"),
     (norm_math, "n=12", "12", "single-var assignment peeled (no spaces)"),
     (norm_math, r"\boxed{\frac{1}{2}}", "1/2", "boxed fraction"),
+    # --- MCQ (GPQA / ARC): extract the choice letter ---
+    (norm_mcq, "B", "B", "bare letter"),
+    (norm_mcq, "(D)", "D", "parenthesized letter"),
+    (norm_mcq, "Answer: A", "A", "answer-marker letter"),
+    (norm_mcq, "The answer is C.", "C", "answer-is letter"),
+    (norm_mcq, "B. Mitochondria are the powerhouse", "B", "letter then option text"),
+    (norm_mcq, "I think it's option D because ...", "D", "option-marker in prose"),
+    (norm_mcq, "Mitochondria", "", "free-text option (no letter) -> empty"),
 ]
 
 EQ_CASES = [

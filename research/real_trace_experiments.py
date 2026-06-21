@@ -8,6 +8,7 @@ import inspect
 import json
 import logging
 import math
+import random
 import re
 import shutil
 import sys
@@ -448,11 +449,15 @@ MODEL_CATALOG = {
         family="Yi 1.5",
         parameter_count="9B",
     ),
-    "mistral_small_3p1_24b_instruct": ModelSpec(
-        alias="mistral_small_3p1_24b_instruct",
-        hf_name="mistralai/Mistral-Small-3.1-24B-Instruct-2503",
-        family="Mistral Small 3.1",
-        parameter_count="24B",
+    "mistral_small_24b_2409": ModelSpec(
+        # Text-only Mistral-Small (22B, MistralForCausalLM). Replaces the
+        # Mistral-Small-3.1-24B-2503 entry, which is a vision-language model
+        # (Mistral3ForConditionalGeneration) that this text-only harness cannot
+        # load. Gated -- needs HF_TOKEN + accepting the license on the HF page.
+        alias="mistral_small_24b_2409",
+        hf_name="mistralai/Mistral-Small-Instruct-2409",
+        family="Mistral Small",
+        parameter_count="22B",
     ),
 }
 
@@ -650,9 +655,40 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
     return False
 
 
+_MCQ_LETTERS = "ABCDEFGH"
+
+
+def normalize_mcq_answer(raw_answer: str) -> str:
+    """Extract the single multiple-choice letter (A-H) from a model answer.
+    Handles 'B', '(C)', 'Answer: D', 'The answer is A', boxed letters, etc."""
+    if raw_answer is None:
+        return ""
+    s = str(raw_answer).strip()
+    boxed = _last_boxed_content(s)
+    if boxed is not None:
+        s = boxed
+    s = s.upper()
+    for pattern in (r"(?:ANSWER|OPTION|CHOICE)\s*(?:IS|:|=)?\s*\(?([A-H])\)?",
+                    r"\(([A-H])\)",
+                    r"(?<![A-Z])([A-H])(?![A-Z])"):
+        matches = re.findall(pattern, s)
+        if matches:
+            return matches[-1]
+    return s[:1] if s[:1] in _MCQ_LETTERS else ""
+
+
+def _format_mcq_prompt(question: str, labeled_options: list[tuple[str, str]]) -> str:
+    lines = [question.strip(), "", "Options:"]
+    lines += [f"{label}. {text}" for label, text in labeled_options]
+    lines += ["", "Respond with the letter of the single correct option."]
+    return "\n".join(lines)
+
+
 def normalize_answer(raw_answer: str, answer_type: str) -> str:
     if answer_type == "math":
         return normalize_math_answer(raw_answer)
+    if answer_type == "mcq":
+        return normalize_mcq_answer(raw_answer)
     text = raw_answer.strip().lower()
     text = re.sub(r"\s+", " ", text)
     boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", text)
@@ -681,6 +717,9 @@ def normalize_answer(raw_answer: str, answer_type: str) -> str:
 def verify_answer(task: TaskSpec, candidate_answer: str) -> bool:
     if task.answer_type == "math":
         return math_answers_equivalent(candidate_answer, task.expected_answer)
+    if task.answer_type == "mcq":
+        gold = normalize_mcq_answer(task.expected_answer)
+        return gold != "" and normalize_mcq_answer(candidate_answer) == gold
     return normalize_answer(candidate_answer, task.answer_type) == normalize_answer(task.expected_answer, task.answer_type)
 
 
@@ -775,6 +814,9 @@ def extract_typed_answer(text: str, answer_type: str) -> str:
 
     if answer_type == "math":
         return stripped.strip()
+
+    if answer_type == "mcq":
+        return normalize_mcq_answer(stripped)
 
     lowered = stripped.lower()
     if answer_type == "day":
@@ -1011,6 +1053,75 @@ def load_math_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None
     return tasks
 
 
+def load_arc_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+    """ARC-Challenge (allenai/ai2_arc, public). Multiple choice; all options are
+    relabeled A,B,C(,D,E) and the gold answerKey is mapped to the new letter."""
+    if load_dataset is None:
+        raise ImportError("datasets is required for --task-source arc.")
+    split = dataset_split if dataset_split and dataset_split not in {"train", "main"} else "test"
+    try:
+        dataset = load_dataset("allenai/ai2_arc", "ARC-Challenge", split=split)
+    except Exception as exc:
+        raise RuntimeError(f"Failed to load allenai/ai2_arc ARC-Challenge (split={split}). Error: {exc}") from exc
+    if shuffle_seed is not None:
+        dataset = dataset.shuffle(seed=shuffle_seed)
+    if max_tasks > 0 and len(dataset) > max_tasks:
+        dataset = dataset.select(range(max_tasks))
+    split_name = sanitize_split_name(split)
+    tasks: list[TaskSpec] = []
+    for index, example in enumerate(dataset):
+        question = str(example["question"]).strip()
+        texts = list(example["choices"]["text"])
+        labels = [str(label) for label in example["choices"]["label"]]
+        new_labels = [chr(ord("A") + j) for j in range(len(texts))]
+        gold = dict(zip(labels, new_labels)).get(str(example["answerKey"]).strip(), "")
+        if not gold or not texts:
+            continue
+        short_hash = hashlib.md5(question.encode("utf-8")).hexdigest()[:8]
+        tasks.append(TaskSpec(
+            task_id=f"arc_{split_name}_{index:05d}_{short_hash}", domain="arc",
+            difficulty="arc_challenge", prompt=_format_mcq_prompt(question, list(zip(new_labels, texts))),
+            answer_type="mcq", expected_answer=gold, notes=f"ARC-Challenge split={split}",
+            source="arc", source_index=index))
+    return tasks
+
+
+def load_gpqa_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+    """GPQA main (Idavidrein/gpqa, GATED -- needs HF_TOKEN + accepted terms).
+    The correct + 3 incorrect answers are deterministically shuffled per item."""
+    if load_dataset is None:
+        raise ImportError("datasets is required for --task-source gpqa.")
+    try:
+        dataset = load_dataset("Idavidrein/gpqa", "gpqa_main", split="train")
+    except Exception as exc:
+        raise RuntimeError(
+            "Failed to load Idavidrein/gpqa (gpqa_main). It is GATED: accept the terms on the dataset "
+            f"page and set HF_TOKEN. Error: {exc}") from exc
+    if shuffle_seed is not None:
+        dataset = dataset.shuffle(seed=shuffle_seed)
+    if max_tasks > 0 and len(dataset) > max_tasks:
+        dataset = dataset.select(range(max_tasks))
+    new_labels = ["A", "B", "C", "D"]
+    tasks: list[TaskSpec] = []
+    for index, example in enumerate(dataset):
+        question = str(example["Question"]).strip()
+        options = [str(example["Correct Answer"]).strip(),
+                   str(example["Incorrect Answer 1"]).strip(),
+                   str(example["Incorrect Answer 2"]).strip(),
+                   str(example["Incorrect Answer 3"]).strip()]
+        rng = random.Random((shuffle_seed if shuffle_seed is not None else 0) * 100003 + index)
+        order = [0, 1, 2, 3]
+        rng.shuffle(order)
+        gold = new_labels[order.index(0)]  # where the correct option (index 0) landed
+        labeled = list(zip(new_labels, [options[k] for k in order]))
+        short_hash = hashlib.md5(question.encode("utf-8")).hexdigest()[:8]
+        tasks.append(TaskSpec(
+            task_id=f"gpqa_main_{index:05d}_{short_hash}", domain="gpqa", difficulty="gpqa_main",
+            prompt=_format_mcq_prompt(question, labeled), answer_type="mcq", expected_answer=gold,
+            notes="GPQA main", source="gpqa", source_index=index))
+    return tasks
+
+
 def load_tasks(task_source: str, max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
     if task_source == "builtin":
         return BUILTIN_TASKS[:max_tasks]
@@ -1018,6 +1129,10 @@ def load_tasks(task_source: str, max_tasks: int, dataset_split: str, shuffle_see
         return load_gsm8k_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
     if task_source == "math":
         return load_math_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+    if task_source == "arc":
+        return load_arc_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+    if task_source == "gpqa":
+        return load_gpqa_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
     raise ValueError(f"Unsupported task source: {task_source}")
 
 
@@ -2182,7 +2297,7 @@ def main() -> None:
     parser.add_argument("--max-steps", type=int, default=5)
     parser.add_argument("--max-new-tokens", type=int, default=256)
     parser.add_argument("--max-tasks", type=int, default=len(BUILTIN_TASKS))
-    parser.add_argument("--task-source", default="builtin", choices=["builtin", "gsm8k", "math"])
+    parser.add_argument("--task-source", default="builtin", choices=["builtin", "gsm8k", "math", "arc", "gpqa"])
     parser.add_argument("--dataset-split", default="train")
     parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
     parser.add_argument("--batch-size", type=int, default=4)
