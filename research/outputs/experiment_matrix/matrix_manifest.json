@@ -395,6 +395,36 @@
         "elapsed_min": 0.01,
         "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/generate_thesis_artifacts.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_small_24b_2409__gsm8k --answers-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_small_24b_2409__gsm8k/answers.md --open-questions-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_small_24b_2409__gsm8k/open_questions.md --research-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_small_24b_2409__gsm8k/final_results.md --root-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_small_24b_2409__gsm8k/summary.md"
       }
+    },
+    "qwen2p5_32b__math": {
+      "collect": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 130.19,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model qwen2p5_32b --device cuda --quantization none --attn-implementation sdpa --task-source math --dataset-split test --dataset-shuffle-seed 17 --max-steps 14 --max-new-tokens 256 --batch-size 16 --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 --output-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/qwen2p5_32b__math --max-tasks 500"
+      },
+      "n_runs": 1500,
+      "analyze": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 1.34,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/trace_analysis.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/qwen2p5_32b__math"
+      },
+      "report": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 0.01,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/generate_thesis_artifacts.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/qwen2p5_32b__math --answers-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/qwen2p5_32b__math/answers.md --open-questions-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/qwen2p5_32b__math/open_questions.md --research-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/qwen2p5_32b__math/final_results.md --root-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/qwen2p5_32b__math/summary.md"
+      }
+    },
+    "llama_3p1_8b_instruct__math": {
+      "collect": {
+        "status": "failed",
+        "return_code": 1,
+        "elapsed_min": 0.1,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model llama_3p1_8b_instruct --device cuda --quantization none --attn-implementation sdpa --task-source math --dataset-split test --dataset-shuffle-seed 17 --max-steps 14 --max-new-tokens 256 --batch-size 64 --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 --output-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__math --max-tasks 500"
+      },
+      "n_runs": 0
     }
   },
   "aggregate": {
