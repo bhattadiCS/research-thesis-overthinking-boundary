@@ -11,6 +11,9 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
+# Secrets (HF token read by tools/runai/autostart.sh)
+.hf_token
+
 # Local and Colab caches
 .cache/
 huggingface/
