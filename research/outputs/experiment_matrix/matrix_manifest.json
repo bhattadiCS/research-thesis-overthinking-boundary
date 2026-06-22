@@ -455,6 +455,27 @@
         "elapsed_min": 0.01,
         "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/generate_thesis_artifacts.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__math --answers-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__math/answers.md --open-questions-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__math/open_questions.md --research-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__math/final_results.md --root-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__math/summary.md"
       }
+    },
+    "internlm3_8b_instruct__math": {
+      "collect": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 722.33,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model internlm3_8b_instruct --device cuda --quantization none --attn-implementation sdpa --task-source math --dataset-split test --dataset-shuffle-seed 17 --max-steps 14 --max-new-tokens 256 --batch-size 64 --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 --output-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/internlm3_8b_instruct__math --max-tasks 500"
+      },
+      "n_runs": 1500,
+      "analyze": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 1.24,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/trace_analysis.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/internlm3_8b_instruct__math"
+      },
+      "report": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 0.01,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/generate_thesis_artifacts.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/internlm3_8b_instruct__math --answers-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/internlm3_8b_instruct__math/answers.md --open-questions-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/internlm3_8b_instruct__math/open_questions.md --research-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/internlm3_8b_instruct__math/final_results.md --root-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/internlm3_8b_instruct__math/summary.md"
+      }
     }
   },
   "aggregate": {
