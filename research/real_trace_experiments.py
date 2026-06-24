@@ -1227,6 +1227,27 @@ def summarize_run_rows(run_rows: pd.DataFrame) -> dict[str, Any]:
     }
 
 
+def _drop_truncated_rows(frame: pd.DataFrame, key_cols: list[str]) -> tuple[pd.DataFrame, int]:
+    """Drop rows whose key identifier columns are missing/unparseable -- the
+    signature of an append-only CSV line truncated by a hard kill mid-write
+    (e.g. the autostart watchdog SIGKILLing a hung run). Such a half-row would
+    otherwise poison numeric columns (object dtype) or blow up int(step) on
+    resume, crashing the whole cell. The affected run simply lacks a complete
+    row set and gets re-collected, which is exactly what we want."""
+    if frame.empty:
+        return frame, 0
+    before = len(frame)
+    out = frame
+    for col in key_cols:
+        if col not in out.columns:
+            continue
+        out = out[out[col].notna()]
+        if col == "step":  # must be a clean integer; garbled value -> drop the row
+            out = out[pd.to_numeric(out[col], errors="coerce").notna()]
+    out = out.reset_index(drop=True)
+    return out, before - len(out)
+
+
 def reconcile_existing_outputs(
     output_dir: Path,
     hidden_dir: Path,
@@ -1239,6 +1260,15 @@ def reconcile_existing_outputs(
 
     steps_frame = pd.read_csv(paths["steps"]) if paths["steps"].exists() else pd.DataFrame()
     runs_frame = pd.read_csv(paths["runs"]) if paths["runs"].exists() else pd.DataFrame()
+    steps_frame, truncated_step_rows = _drop_truncated_rows(steps_frame, ["run_id", "step"])
+    runs_frame, truncated_run_rows = _drop_truncated_rows(runs_frame, ["run_id"])
+    if truncated_step_rows or truncated_run_rows:
+        print(
+            f"[reconcile] dropped {truncated_step_rows} truncated step row(s) and "
+            f"{truncated_run_rows} truncated run row(s) from a prior hard kill; "
+            "affected runs will be re-collected.",
+            flush=True,
+        )
     hidden_run_ids = {path.stem for path in hidden_dir.glob("*.npz")} if hidden_dir.exists() else set()
 
     duplicate_step_rows = 0
