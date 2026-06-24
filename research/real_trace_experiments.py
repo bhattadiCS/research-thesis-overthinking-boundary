@@ -2181,6 +2181,15 @@ def run_batch_traces(
     return all_rows, all_runs, batch_metric_rows
 
 
+def _safe_mean(series: pd.Series) -> float:
+    """Mean that tolerates a string-contaminated numeric column: coerce
+    non-numeric entries to NaN and average the rest. AUDIT/STABILITY FIX -- a
+    single stray string in a summary column was doing str+float inside pandas
+    .mean() and crashing a cell's end-of-run summary, throwing away hours of
+    completed collection (e.g. yi x math failed after 5 h)."""
+    return float(pd.to_numeric(series, errors="coerce").mean())
+
+
 def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
     ordered = step_frame.sort_values(["run_id", "step"]).copy()
     ordered["next_correct"] = ordered.groupby("run_id")["correct"].shift(-1)
@@ -2194,9 +2203,9 @@ def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
         correct_group = group[group["correct"] == 1]
         n_repairs = wrong_group["repair"].sum()
         n_corruptions = correct_group["corruption"].sum()
-        repair_rate = float(wrong_group["repair"].mean()) if len(wrong_group) else float("nan")
-        corruption_rate = float(correct_group["corruption"].mean()) if len(correct_group) else float("nan")
-        q_t = float(group["correct"].mean())
+        repair_rate = _safe_mean(wrong_group["repair"]) if len(wrong_group) else float("nan")
+        corruption_rate = _safe_mean(correct_group["corruption"]) if len(correct_group) else float("nan")
+        q_t = _safe_mean(group["correct"])
         if (n_repairs + n_corruptions) >= 3 and not math.isnan(repair_rate) and not math.isnan(corruption_rate):
             hazard_mu = (1.0 - q_t) * repair_rate - q_t * corruption_rate - STEP_COST
         else:
@@ -2210,10 +2219,10 @@ def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
                 "repair_rate": repair_rate,
                 "corruption_rate": corruption_rate,
                 "hazard_mu": hazard_mu,
-                "entropy_mean": float(group["entropy_mean"].mean()),
-                "confidence_mean": float(group["confidence"].mean()),
-                "answer_changed_rate": float(group["answer_changed"].mean()),
-                "hidden_shift_mean": float(group["hidden_l2_shift"].mean()),
+                "entropy_mean": _safe_mean(group["entropy_mean"]),
+                "confidence_mean": _safe_mean(group["confidence"]),
+                "answer_changed_rate": _safe_mean(group["answer_changed"]),
+                "hidden_shift_mean": _safe_mean(group["hidden_l2_shift"]),
                 "n_transitions": int(len(group)),
             }
         )
@@ -2237,14 +2246,14 @@ def build_pilot_summary(
                 "parameter_count": model_spec.parameter_count,
                 "n_runs": int(len(run_frame)),
                 "n_tasks": int(step_frame["task_id"].nunique()),
-                "mean_oracle_stop": float(run_frame["oracle_stop"].mean()),
-                "mean_first_correct_step": float(run_frame["first_correct_step"].mean()),
-                "mean_model_stop_step": float(run_frame["first_model_stop_step"].mean()),
-                "mean_revision_count": float(run_frame["revision_count"].mean()),
-                "mean_entropy": float(step_frame["entropy_mean"].mean()),
-                "mean_hidden_shift": float(step_frame["hidden_l2_shift"].mean()),
-                "repair_rate_overall": float(transition_frame["repair_rate"].dropna().mean()) if not transition_frame.empty else float("nan"),
-                "corruption_rate_overall": float(transition_frame["corruption_rate"].dropna().mean()) if not transition_frame.empty else float("nan"),
+                "mean_oracle_stop": _safe_mean(run_frame["oracle_stop"]),
+                "mean_first_correct_step": _safe_mean(run_frame["first_correct_step"]),
+                "mean_model_stop_step": _safe_mean(run_frame["first_model_stop_step"]),
+                "mean_revision_count": _safe_mean(run_frame["revision_count"]),
+                "mean_entropy": _safe_mean(step_frame["entropy_mean"]),
+                "mean_hidden_shift": _safe_mean(step_frame["hidden_l2_shift"]),
+                "repair_rate_overall": _safe_mean(transition_frame["repair_rate"]) if not transition_frame.empty else float("nan"),
+                "corruption_rate_overall": _safe_mean(transition_frame["corruption_rate"]) if not transition_frame.empty else float("nan"),
                 "runs_ever_correct": int(run_frame["ever_correct"].sum()),
                 "backend": backend,
                 "device": actual_device,
