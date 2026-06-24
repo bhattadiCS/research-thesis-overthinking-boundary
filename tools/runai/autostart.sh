@@ -24,6 +24,8 @@
 #   HF_TOKEN   for gated models/datasets   (env, or a .hf_token file in the repo
 #              root -- which is gitignored; create with:
 #                  echo 'hf_xxx' > <repo>/.hf_token )
+#   STALE_MIN  minutes of no run output before a still-alive run is judged hung
+#              and force-restarted (default: 30)
 # ============================================================================
 set -uo pipefail
 
@@ -37,10 +39,32 @@ STAMP="$(date +%Y%m%d_%H%M%S 2>/dev/null || echo now)"
 
 log() { printf '[autostart] %s\n' "$1"; }
 
-# 1. Don't double-launch.
-if pgrep -f run_experiment_matrix.py >/dev/null 2>&1; then
-  log "a matrix run is already alive (pgrep hit); nothing to do."
-  exit 0
+# 1. Don't double-launch -- BUT distinguish a healthy run from a hung one. A
+#    matrix run that's alive AND still writing output is left alone; one that's
+#    alive but silent for STALE_MIN minutes (GPU/CUDA stall, deadlock) is treated
+#    as hung, killed, and relaunched. (pgrep alone can't tell the difference, so
+#    a hang would otherwise block auto-resume forever -- which is exactly what
+#    bit us on the 36h stall.)
+STALE_MIN="${STALE_MIN:-30}"
+running_pid="$(pgrep -f run_experiment_matrix.py | head -1)"
+if [ -n "$running_pid" ]; then
+  # Freshest progress signal: per-cell collect.log or per-run .npz both update
+  # every few minutes during an active collect.
+  newest_epoch="$(find "$REPO_DIR/research/outputs/experiment_matrix" -type f \
+      \( -name 'collect.log' -o -name '*.npz' \) -printf '%T@\n' 2>/dev/null | sort -nr | head -1)"
+  if [ -n "$newest_epoch" ]; then
+    age_min=$(( ( $(date +%s) - ${newest_epoch%.*} ) / 60 ))
+  else
+    age_min=9999
+  fi
+  if [ "$age_min" -lt "$STALE_MIN" ]; then
+    log "matrix run (pid $running_pid) alive and progressing (last output ${age_min}m ago); nothing to do."
+    exit 0
+  fi
+  log "matrix run (pid $running_pid) alive but STALE (no output ${age_min}m >= ${STALE_MIN}m) -- treating as hung; killing."
+  pkill -9 -f run_experiment_matrix.py 2>/dev/null || true
+  pkill -9 -f real_trace_experiments.py 2>/dev/null || true
+  sleep 5
 fi
 
 # 2. Config.
