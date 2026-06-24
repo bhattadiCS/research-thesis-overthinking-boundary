@@ -497,6 +497,27 @@
         "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model yi_1p5_9b_chat --device cuda --quantization none --attn-implementation sdpa --task-source math --dataset-split test --dataset-shuffle-seed 17 --max-steps 14 --max-new-tokens 256 --batch-size 40 --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 --output-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math --max-tasks 500"
       },
       "n_runs": 1500
+    },
+    "deepseek_r1_distill_1p5b__arc": {
+      "collect": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 91.66,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model deepseek_r1_distill_1p5b --device cuda --quantization none --attn-implementation sdpa --task-source arc --dataset-split test --dataset-shuffle-seed 17 --max-steps 8 --max-new-tokens 256 --batch-size 96 --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 --output-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc --max-tasks 500"
+      },
+      "n_runs": 1500,
+      "analyze": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 1.3,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/trace_analysis.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc"
+      },
+      "report": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 0.01,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/generate_thesis_artifacts.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc --answers-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc/answers.md --open-questions-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc/open_questions.md --research-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc/final_results.md --root-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc/summary.md"
+      }
     }
   },
   "aggregate": {
