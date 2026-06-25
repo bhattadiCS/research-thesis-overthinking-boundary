@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+yi_1p5_9b_chat,01-ai/Yi-1.5-9B-Chat,Yi 1.5,9B,1500,500,1.1946666666666668,1.9366666666666668,5.286666666666667,0.5,0.30820443923569596,29.20848224445184,0.1286923297886674,0.0319294300738617,1341,transformers+torch(cuda),cuda
