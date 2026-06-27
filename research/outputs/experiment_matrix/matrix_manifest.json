@@ -1069,6 +1069,11 @@
       "status": "ok",
       "return_code": 0,
       "n_models": 13
+    },
+    "gpqa": {
+      "status": "failed",
+      "return_code": 1,
+      "n_models": 12
     }
   }
 }
