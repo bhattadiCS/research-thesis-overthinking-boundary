@@ -1109,9 +1109,9 @@
       "n_models": 13
     },
     "math": {
-      "status": "ok",
-      "return_code": 0,
-      "n_models": 11
+      "status": "failed",
+      "return_code": 1,
+      "n_models": 13
     },
     "arc": {
       "status": "ok",
