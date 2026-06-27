@@ -608,6 +608,45 @@ def plot_feature_weights(weight_frame: pd.DataFrame, output_dir: Path) -> None:
     plt.close(fig)
 
 
+def _sanitize_step_frame(frame: pd.DataFrame) -> tuple[pd.DataFrame, int]:
+    """Defend against CSV field-shift from a hard kill mid-write. A SIGKILL (the
+    autostart watchdog / -9 on a hung run) can split an append-only row so that
+    string values like 'cuda' / 'minimal_json' / a raw JSON blob bleed into numeric
+    columns (hidden_l2_shift, utility, seed, ...). Such a row is garbage across every
+    column, and the stray strings later blow up arithmetic as 'str' - 'str'. Drop any
+    row holding a non-numeric string in a must-be-numeric column, then re-type columns
+    that are now cleanly numeric so downstream math works. Returns (clean, n_dropped)."""
+    numeric_guard = [c for c in ("step", "correct", "confidence", "hidden_l2_shift",
+                                 "hidden_cosine_shift", "hidden_norm", "entropy_mean",
+                                 "utility", "elapsed_seconds", "seed") if c in frame.columns]
+    # step/correct are the run index and the label: every analyzable row must have
+    # both as clean numbers. A field-shift can leave them empty (NaN) rather than a
+    # string, so guard them on NaN too (correct.astype(int) later can't take NaN).
+    essential = [c for c in ("step", "correct") if c in frame.columns]
+    bad = pd.Series(False, index=frame.index)
+    for c in numeric_guard:
+        coerced = pd.to_numeric(frame[c], errors="coerce")
+        bad |= coerced.isna() & frame[c].notna()  # a real string sitting in a numeric column
+    for c in essential:
+        bad |= pd.to_numeric(frame[c], errors="coerce").isna()  # missing/garbled index or label
+    # Drop the WHOLE run for any run touched by corruption: removing single rows would
+    # leave step-gaps, but the detector logic assumes contiguous per-run step sequences
+    # (utility_at_stop looks up the chosen stop step within the run and would IndexError).
+    if bad.any() and "run_id" in frame.columns:
+        bad = frame["run_id"].isin(frame.loc[bad, "run_id"].unique())
+    n_dropped = int(bad.sum())
+    frame = frame.loc[~bad].reset_index(drop=True)
+    # Stray strings forced these columns to object dtype; now that the garbage rows
+    # are gone, restore numeric dtype for any column whose non-null values all parse.
+    for c in frame.columns:
+        if frame[c].dtype == object:
+            coerced = pd.to_numeric(frame[c], errors="coerce")
+            non_null = frame[c].notna().sum()
+            if non_null > 0 and coerced.notna().sum() == non_null:
+                frame[c] = coerced
+    return frame, n_dropped
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Analyze real-trace pilot or full-run artifacts.")
     parser.add_argument("--input-dir", default=str(OUTPUT_DIR))
@@ -615,6 +654,9 @@ def main() -> None:
 
     input_dir = Path(args.input_dir)
     step_frame = pd.read_csv(input_dir / "trace_steps.csv")
+    step_frame, n_corrupt = _sanitize_step_frame(step_frame)
+    if n_corrupt:
+        print(f"[analyze] dropped {n_corrupt} CSV-corrupt row(s) (hard-kill field-shift) before analysis.")
     step_frame = add_temporal_features(step_frame)
     step_frame["repair"] = ((step_frame["correct"] == 0) & (step_frame["next_correct"] == 1)).astype(int)
     step_frame["corruption"] = ((step_frame["correct"] == 1) & (step_frame["next_correct"] == 0)).astype(int)

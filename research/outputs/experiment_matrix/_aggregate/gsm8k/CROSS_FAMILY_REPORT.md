@@ -1,7 +1,7 @@
 # Cross-Family Report
 
 ## Executive Summary
-A clearly late corrected boundary replicates in 5 capable run(s) across 3 family/families: Qwen 7B (step 5); Qwen 14B (step 5); Qwen 32B (step 5); Llama 3.1 8B (step 5); Mistral Small 22B (step 6). An additional 4 run(s) across 4 family/families (InternLM3, Mistral instruct, Qwen2.5 instruct, Yi 1.5) add weaker late-boundary support: Qwen 3B (step 4); Mistral instruct 7B (step 3); InternLM3 8B (step 4); Yi 1.5 9B (step 3). Cross-family support for a late overthinking boundary is now strong.
+A clearly late corrected boundary replicates in 5 capable run(s) across 3 family/families: Qwen 7B (step 5); Qwen 14B (step 5); Qwen 32B (step 5); Mistral Small 22B (step 6); Llama 3.1 8B (step 5). An additional 4 run(s) across 4 family/families (InternLM3, Mistral instruct, Qwen2.5 instruct, Yi 1.5) add weaker late-boundary support: Qwen 3B (step 4); Mistral instruct 7B (step 3); InternLM3 8B (step 4); Yi 1.5 9B (step 3). Cross-family support for a late overthinking boundary is now strong.
 
 Task IDs align across all 13 runs under the shared GSM8K train split and shuffle seed 17 protocol.
 
@@ -16,11 +16,11 @@ Task IDs align across all 13 runs under the shared GSM8K train split and shuffle
 | Qwen 14B | Qwen2.5 instruct | 14B | transformers+torch(cuda) | none | 0.0300 | 0.4733 | 9 | 5 | 0.1427 | 0.2577 | 0.3535 | 0.3990 | 0.5676 | 0.1026 | 0.9122 | Late-boundary replication |
 | Qwen 32B | Qwen2.5 instruct | 32B | transformers+torch(cuda) | none | 0.0413 | 0.8787 | 10 | 5 | 0.2188 | 0.0611 | 0.1835 | 0.1889 | 0.3529 | 0.1500 | 0.8346 | Late-boundary replication |
 | Mistral instruct 7B | Mistral instruct | 7B | transformers+torch(cuda) | none | 0.3040 | 0.3207 | 10 | 3 | 0.0526 | 0.1339 | 0.1440 | 0.1550 | 0.4470 | 0.2316 | 0.6504 | Weakened late-boundary support |
-| Llama 3.1 8B | Llama 3.1 | 8B | transformers+torch(cuda) | none | 0.0113 | 0.4747 | 10 | 5 | 0.1162 | 0.1817 | 0.2841 | 0.3349 | 0.5043 | 0.2040 | 0.7435 | Late-boundary replication |
 | Phi 4 4B | Phi 4 | 4B | transformers+torch(cuda) | none | 0.3333 | 0.3413 | 10 | 2 | 0.1589 | 0.3427 | 0.2935 | 0.3407 | 0.6594 | 0.2314 | 0.6521 | No late-boundary replication |
 | InternLM3 8B | InternLM3 | 8B | transformers+torch(cuda) | none | 0.2707 | 0.6807 | 9 | 4 | 0.1073 | 0.0243 | 0.1569 | 0.1725 | 0.4092 | 0.2170 | 0.6942 | Weakened late-boundary support |
 | Yi 1.5 9B | Yi 1.5 | 9B | transformers+torch(cuda) | none | 0.0953 | 0.3807 | 10 | 3 | 0.1001 | 0.1550 | 0.2077 | 0.2341 | 0.4968 | 0.2215 | 0.6923 | Weakened late-boundary support |
 | Mistral Small 22B | Mistral Small | 22B | transformers+torch(cuda) | none | 0.0140 | 0.7247 | 10 | 6 | 0.2025 | 0.2266 | 0.3638 | 0.3251 | 0.3338 | 0.1713 | 0.8246 | Late-boundary replication |
+| Llama 3.1 8B | Llama 3.1 | 8B | transformers+torch(cuda) | none | 0.0113 | 0.4747 | 10 | 5 | 0.1162 | 0.1817 | 0.2841 | 0.3349 | 0.5043 | 0.2040 | 0.7435 | Late-boundary replication |
 
 ## Drift Audit
 | Run | Empirical boundary | Corrected boundary | Fitted boundary | Legacy pooled proxy | Mismatch |
@@ -33,11 +33,11 @@ Task IDs align across all 13 runs under the shared GSM8K train split and shuffle
 | Qwen 14B | 5 | 5 | 6 | 5 | no |
 | Qwen 32B | 5 | 5 | 5 | 5 | no |
 | Mistral instruct 7B | 3 | 3 | 4 | 3 | no |
-| Llama 3.1 8B | 5 | 5 | 4 | 5 | no |
 | Phi 4 4B | 2 | 2 | 3 | 2 | no |
 | InternLM3 8B | 4 | 4 | 4 | 4 | no |
 | Yi 1.5 9B | 3 | 3 | 4 | 3 | no |
 | Mistral Small 22B | 6 | 6 | 5 | 6 | no |
+| Llama 3.1 8B | 5 | 5 | 4 | 5 | no |
 
 ## Detector Rankings
 | Run | Detector | Rank | Mean oracle gap | False-late rate |
@@ -66,9 +66,6 @@ Task IDs align across all 13 runs under the shared GSM8K train split and shuffle
 | Mistral instruct 7B | oracle | 1 | 0.0000 | 0.000 |
 | Mistral instruct 7B | first_answer | 2 | 0.0137 | 0.000 |
 | Mistral instruct 7B | verifier_first_correct | 3 | 0.1423 | 0.558 |
-| Llama 3.1 8B | oracle | 1 | 0.0000 | 0.000 |
-| Llama 3.1 8B | verifier_first_correct | 2 | 0.1403 | 0.360 |
-| Llama 3.1 8B | answer_stability | 3 | 0.2811 | 0.862 |
 | Phi 4 4B | oracle | 1 | 0.0000 | 0.000 |
 | Phi 4 4B | verifier_first_correct | 2 | 0.0046 | 0.279 |
 | Phi 4 4B | first_answer | 3 | 0.2174 | 0.000 |
@@ -81,6 +78,9 @@ Task IDs align across all 13 runs under the shared GSM8K train split and shuffle
 | Mistral Small 22B | oracle | 1 | 0.0000 | 0.000 |
 | Mistral Small 22B | verifier_first_correct | 2 | 0.0907 | 0.233 |
 | Mistral Small 22B | e_process | 3 | 0.3251 | 0.945 |
+| Llama 3.1 8B | oracle | 1 | 0.0000 | 0.000 |
+| Llama 3.1 8B | verifier_first_correct | 2 | 0.1403 | 0.360 |
+| Llama 3.1 8B | answer_stability | 3 | 0.2811 | 0.862 |
 
 ## Signal Comparison
 | Run | Strongest correctness signal | Strongest corruption signal |
@@ -93,11 +93,11 @@ Task IDs align across all 13 runs under the shared GSM8K train split and shuffle
 | Qwen 14B | hidden-state L2 drift (hidden_l2_shift, coeff=1.755) | answer revision flag (answer_changed, coeff=0.942) |
 | Qwen 32B | hidden-state L2 drift (hidden_l2_shift, coeff=1.152) | hidden-state L2 drift (hidden_l2_shift, coeff=1.537) |
 | Mistral instruct 7B | answer revision flag (answer_changed, coeff=-0.554) | hidden-state L2 drift (hidden_l2_shift, coeff=0.908) |
-| Llama 3.1 8B | hidden-state L2 drift (hidden_l2_shift, coeff=1.221) | hidden-state L2 drift (hidden_l2_shift, coeff=1.010) |
 | Phi 4 4B | answer revision flag (answer_changed, coeff=-0.565) | answer revision flag (answer_changed, coeff=0.355) |
 | InternLM3 8B | hidden-state L2 drift (hidden_l2_shift, coeff=0.395) | hidden-state L2 drift (hidden_l2_shift, coeff=1.309) |
 | Yi 1.5 9B | self-reported confidence (confidence, coeff=0.994) | token entropy (entropy_mean, coeff=0.718) |
 | Mistral Small 22B | hidden-state L2 drift (hidden_l2_shift, coeff=1.736) | token entropy (entropy_mean, coeff=0.480) |
+| Llama 3.1 8B | hidden-state L2 drift (hidden_l2_shift, coeff=1.221) | hidden-state L2 drift (hidden_l2_shift, coeff=1.010) |
 
 ## Figures
 ![Cross-family boundary comparison](outputs/cross_family/cross_family_boundary_comparison.png)
