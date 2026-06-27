@@ -149,12 +149,24 @@
     },
     "llama_3p1_8b_instruct__gsm8k": {
       "collect": {
-        "status": "failed",
-        "return_code": 1,
-        "elapsed_min": 0.1,
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 114.13,
         "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model llama_3p1_8b_instruct --device cuda --quantization none --attn-implementation sdpa --task-source gsm8k --dataset-split train --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 256 --batch-size 64 --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 --output-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k --max-tasks 500"
       },
-      "n_runs": 0
+      "n_runs": 1500,
+      "analyze": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 1.22,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/trace_analysis.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k"
+      },
+      "report": {
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 0.01,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/generate_thesis_artifacts.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k --answers-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k/answers.md --open-questions-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k/open_questions.md --research-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k/final_results.md --root-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k/summary.md"
+      }
     },
     "phi_4_mini_instruct__gsm8k": {
       "collect": {
