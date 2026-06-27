@@ -515,12 +515,24 @@
     },
     "yi_1p5_9b_chat__math": {
       "collect": {
-        "status": "failed",
-        "return_code": 1,
-        "elapsed_min": 311.92,
+        "status": "ok",
+        "return_code": 0,
+        "elapsed_min": 142.08,
         "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py --model yi_1p5_9b_chat --device cuda --quantization none --attn-implementation sdpa --task-source math --dataset-split test --dataset-shuffle-seed 17 --max-steps 14 --max-new-tokens 256 --batch-size 40 --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 --output-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math --max-tasks 500"
       },
-      "n_runs": 1500
+      "n_runs": 1500,
+      "analyze": {
+        "status": "failed",
+        "return_code": 1,
+        "elapsed_min": 0.03,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/trace_analysis.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math"
+      },
+      "report": {
+        "status": "failed",
+        "return_code": 1,
+        "elapsed_min": 0.01,
+        "command": "/opt/conda/bin/python /workspace-persist/research-thesis-overthinking-boundary/research/generate_thesis_artifacts.py --input-dir /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math --answers-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math/answers.md --open-questions-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math/open_questions.md --research-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math/final_results.md --root-report-output /workspace-persist/research-thesis-overthinking-boundary/research/outputs/experiment_matrix/yi_1p5_9b_chat__math/summary.md"
+      }
     },
     "deepseek_r1_distill_1p5b__arc": {
       "collect": {

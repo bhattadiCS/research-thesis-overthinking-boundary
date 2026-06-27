@@ -1,0 +1,14 @@
+{
+  "expected_steps_per_run": 14,
+  "completed_run_count": 400,
+  "hidden_state_file_count": 400,
+  "duplicate_step_rows_removed": 0,
+  "duplicate_run_rows_removed": 0,
+  "reconstructed_run_summaries": 0,
+  "incomplete_step_run_ids": [
+    "ightarrow 0^+$ to ensure the minimum value found is indeed the global minimum within the given domain."
+  ],
+  "runs_without_complete_steps": [],
+  "hidden_without_complete_steps": [],
+  "anomalies_detected": true
+}
