@@ -10,17 +10,17 @@ Task IDs align across all 13 runs under the shared GSM8K train split and shuffle
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | DeepSeek 1.5B | DeepSeek-R1 distill | 1.5B | transformers+torch(cuda) | none | 0.2068 | 0.2269 | 10 | 2 | 0.1016 | 0.3663 | 0.2029 | 0.2034 | 0.5900 | 0.2489 | 0.5325 | No late-boundary replication |
 | DeepSeek 7B | DeepSeek-R1 distill | 7B | transformers+torch(cuda) | none | 0.2135 | 0.2143 | 5 | 2 | 0.1059 | 0.4183 | 0.2505 | 0.3407 | 0.6399 | 0.2476 | 0.5502 | No late-boundary replication |
-| Qwen 0.5B | Qwen2.5 instruct | 0.5B | transformers+torch(cuda) | none | 0.2039 | 0.2039 | 1 | 2 | 0.0271 | 0.1342 | 0.0666 | 0.0544 | 0.4626 | 0.2485 | 0.5452 | No late-boundary replication |
-| Qwen 3B | Qwen2.5 instruct | 3B | transformers+torch(cuda) | none | 0.1690 | 0.2277 | 10 | 2 | 0.0345 | 0.1053 | 0.1324 | 0.1375 | 0.4860 | 0.2459 | 0.5729 | No late-boundary replication |
+| Qwen 0.5B | Qwen2.5 instruct | 0.5B | transformers+torch(cuda) | none | 0.2034 | 0.2034 | 1 | 2 | 0.0271 | 0.1342 | 0.0666 | 0.0544 | 0.4626 | 0.2485 | 0.5452 | No late-boundary replication |
+| Qwen 3B | Qwen2.5 instruct | 3B | transformers+torch(cuda) | none | 0.1690 | 0.2278 | 10 | 2 | 0.0345 | 0.1053 | 0.1324 | 0.1375 | 0.4860 | 0.2459 | 0.5729 | No late-boundary replication |
 | Qwen 7B | Qwen2.5 instruct | 7B | transformers+torch(cuda) | none | 0.3118 | 0.3296 | 5 | 2 | 0.0245 | 0.0473 | 0.0777 | 0.0631 | 0.4445 | 0.2493 | 0.5316 | No late-boundary replication |
 | Qwen 14B | Qwen2.5 instruct | 14B | transformers+torch(cuda) | none | 0.3326 | 0.3579 | 9 | 2 | 0.0176 | 0.0257 | 0.0791 | 0.0491 | 0.4320 | 0.2493 | 0.5373 | No late-boundary replication |
 | Qwen 32B | Qwen2.5 instruct | 32B | transformers+torch(cuda) | none | 0.2827 | 0.3705 | 9 | 2 | 0.0276 | 0.0289 | 0.0923 | 0.1058 | 0.4358 | 0.2480 | 0.5370 | No late-boundary replication |
 | Mistral instruct 7B | Mistral instruct | 7B | transformers+torch(cuda) | none | 0.2775 | 0.2879 | 4 | 2 | 0.0518 | 0.1309 | 0.1599 | 0.1671 | 0.5355 | 0.2497 | 0.5209 | No late-boundary replication |
 | Phi 4 4B | Phi 4 | 4B | transformers+torch(cuda) | none | 0.2641 | 0.2865 | 7 | 2 | 0.0889 | 0.2255 | 0.2210 | 0.2629 | 0.5881 | 0.2480 | 0.5486 | No late-boundary replication |
 | InternLM3 8B | InternLM3 | 8B | transformers+torch(cuda) | none | 0.3519 | 0.3743 | 3 | 2 | 0.0310 | 0.0491 | 0.0837 | 0.0633 | 0.4573 | 0.2494 | 0.5266 | No late-boundary replication |
-| Yi 1.5 9B | Yi 1.5 | 9B | transformers+torch(cuda) | none | 0.2695 | 0.3021 | 10 | 2 | 0.0452 | 0.1023 | 0.1306 | 0.1125 | 0.4954 | 0.2488 | 0.5167 | No late-boundary replication |
+| Yi 1.5 9B | Yi 1.5 | 9B | transformers+torch(cuda) | none | 0.2695 | 0.3023 | 10 | 2 | 0.0452 | 0.1023 | 0.1306 | 0.1125 | 0.4954 | 0.2488 | 0.5167 | No late-boundary replication |
 | Mistral Small 22B | Mistral Small | 22B | transformers+torch(cuda) | none | 0.1704 | 0.3557 | 10 | 2 | 0.0556 | 0.0793 | 0.2228 | 0.2613 | 0.4828 | 0.2405 | 0.6138 | No late-boundary replication |
-| Llama 3.1 8B | Llama 3.1 | 8B | transformers+torch(cuda) | none | 0.1727 | 24.2293 | 0 | 2 | 0.1005 | 0.2105 | 0.3382 | 0.4358 | 0.6298 | 0.2446 | 0.5715 | No late-boundary replication |
+| Llama 3.1 8B | Llama 3.1 | 8B | transformers+torch(cuda) | none | 0.1721 | 0.3256 | 10 | 2 | 0.1005 | 0.2105 | 0.3382 | 0.4358 | 0.6298 | 0.2446 | 0.5715 | No late-boundary replication |
 
 ## Drift Audit
 | Run | Empirical boundary | Corrected boundary | Fitted boundary | Legacy pooled proxy | Mismatch |

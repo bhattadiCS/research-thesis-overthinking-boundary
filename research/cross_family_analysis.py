@@ -21,7 +21,7 @@ from generate_thesis_artifacts import (
     pooled_proxy_column,
     safe_float,
 )
-from trace_analysis import add_temporal_features, fit_global_models
+from trace_analysis import add_temporal_features, fit_global_models, _sanitize_step_frame
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -167,6 +167,10 @@ def load_run_record(run_dir: Path) -> dict[str, Any]:
     weights = read_csv(run_dir / "feature_weights.csv")
     metadata = read_json(run_dir / "metadata.json")
     steps = read_csv(run_dir / "trace_steps.csv")
+    # Drop hard-kill-corrupted rows (field-shift puts non-0/1 values into `correct`
+    # and step=0 into `step`, which otherwise inflate the q_t accuracy curve -- e.g.
+    # a bogus peak accuracy of 24.23 for llama x gpqa). Same guard as the per-cell analyze.
+    steps, _n_corrupt = _sanitize_step_frame(steps)
     hazard = load_corrected_hazard(run_dir)
 
     summary = pilot.iloc[0]

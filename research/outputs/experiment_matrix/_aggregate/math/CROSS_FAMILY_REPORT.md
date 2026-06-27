@@ -18,7 +18,7 @@ Task IDs align across all 13 runs under the shared GSM8K train split and shuffle
 | Mistral instruct 7B | Mistral instruct | 7B | transformers+torch(cuda) | none | 0.0733 | 0.0733 | 1 | 2 | 0.0087 | 0.1423 | 0.1490 | 0.0523 | 0.6257 | 0.2209 | 0.7097 | No late-boundary replication |
 | Phi 4 4B | Phi 4 | 4B | transformers+torch(cuda) | none | 0.0887 | 0.1373 | 10 | 2 | 0.0594 | 0.4521 | 0.2536 | 0.2105 | 0.7399 | 0.2002 | 0.7356 | No late-boundary replication |
 | InternLM3 8B | InternLM3 | 8B | transformers+torch(cuda) | none | 0.1120 | 0.2540 | 14 | 2 | 0.0272 | 0.0588 | 0.1893 | 0.1284 | 0.6117 | 0.2072 | 0.7463 | No late-boundary replication |
-| Yi 1.5 9B | Yi 1.5 | 9B | transformers+torch(cuda) | none | 0.1167 | 0.1553 | 14 | 2 | 0.0232 | 0.1248 | 0.1953 | 0.0946 | 0.6592 | 0.2242 | 0.7044 | No late-boundary replication |
+| Yi 1.5 9B | Yi 1.5 | 9B | transformers+torch(cuda) | none | 0.1167 | 0.1554 | 14 | 2 | 0.0232 | 0.1248 | 0.1953 | 0.0946 | 0.6592 | 0.2242 | 0.7044 | No late-boundary replication |
 | Mistral Small 22B | Mistral Small | 22B | transformers+torch(cuda) | none | 0.0200 | 0.3113 | 14 | 2 | 0.0395 | 0.1047 | 0.3503 | 0.2286 | 0.5479 | 0.1815 | 0.8146 | No late-boundary replication |
 | Llama 3.1 8B | Llama 3.1 | 8B | transformers+torch(cuda) | none | 0.0287 | 0.2113 | 14 | 2 | 0.0371 | 0.1405 | 0.2811 | 0.2800 | 0.6760 | 0.2109 | 0.7496 | No late-boundary replication |
 
