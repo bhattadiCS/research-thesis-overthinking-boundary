@@ -70,7 +70,7 @@ The datasets cover a wide range of reasoning domains:
 A crucial part of our methodology is that **we do not grade intermediate reasoning or sub-problems**, even for datasets like GSM8K that contain them. Instead, we use a "candidate answer" approach:
 1.  **Forced Answer Extraction**: At the end of every single generation step, the LLM is prompted to output its *current best final answer*.
 2.  **Dataset-Specific Grading**: 
-    *   For **Math Datasets (GSM8K, MATH)**: We extract the raw number or equation and use programmatic math equivalence (including `sympy` for complex algebra) to check if it matches the ground truth mathematically.
+    *   For **Math Datasets (GSM8K, MATH)**: We pull out the final number or equation the model wrote. Because "1/2", "0.5", and "2/4" all mean the exact same thing, we don't just do a simple text comparison. We pass the model's answer into an automated math grader (a Python math library) to check if its underlying value perfectly matches the true answer.
     *   For **Multiple Choice (ARC, GPQA)**: We extract the chosen letter (e.g., A, B, C, D) and compare it against the answer key.
 3.  **The Stopping Criterion**: To determine if stopping at Step $t$ was optimal, we only ask: *"If we cut the model off right now and forced it to submit this candidate answer, would it get the question right?"* If the candidate answer is correct, the step is considered a success, regardless of whether the internal reasoning was flawless or flawed.
 
