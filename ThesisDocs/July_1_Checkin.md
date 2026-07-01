@@ -100,3 +100,22 @@ Here is how our stopping rules performed compared to a perfect "Oracle" and the 
 *   **Grader Fixing**: The model's final answers were being graded incorrectly by regex bugs (e.g., scoring "a third" as a wrong answer even if the math was correct). We rewrote the grading logic, recovering hundreds of correct runs.
 *   **Leakage Elimination**: We implemented **GroupKFold cross-validation**. This ensures that the detectors are trained and tested on separate subsets of math problems, proving they truly generalize out-of-sample.
 *   **Fair Baselines**: We enforced a minimum Step 2 floor on both our detectors and the Oracle, making sure we compare them on equal footing.
+
+---
+
+## 🚀 Part 6: What We Plan to Do Next (Our Roadmap)
+
+To wrap up the thesis and prepare for publication, we have outlined the following next steps:
+
+1.  **Stakes Sweeping (Evaluating Safety-Critical Domains)**:
+    *   *What we will do*: Expose and sweep the correct reward $v$ vs. incorrect penalty $c$ (e.g., $c = 10, v = 1$ representing a safety-critical setting like medical or legal Q&A).
+    *   *Why*: Verify if our stopping equations correctly force aggressive early stopping when incorrect answers carry massive penalties.
+2.  **In-Flight Inference Deployment (Active Stopping)**:
+    *   *What we will do*: Build a real-time stopper that hooks into the generation loop (using vLLM or Hugging Face hooks) to evaluate the observable vector $\mathbf{x}_t$ dynamically.
+    *   *Why*: Transition from offline analysis of logs to actively halting token generation, saving actual GPU runtime and token costs.
+3.  **Prompted vs. Distilled Reasoning Analysis**:
+    *   *What we will do*: Study why distilled reasoning models (like DeepSeek-R1 Distill 7B) exhibit early-boundary profiles (halting at Step 2 on GSM8K) compared to prompted instruct models (like Qwen 2.5 7B, which halts at Step 5).
+    *   *Why*: Determine if distilled models have their stopping rules "pre-baked" during training, or if their internal hazards ($\alpha_t, \beta_t$) behave differently.
+4.  **New Benchmark Domains**:
+    *   *What we will do*: Evaluate stopping behavior on other reasoning domains (such as coding benchmarks or logical puzzles).
+    *   *Why*: Verify if the late-boundary and corruption hazard behaviors generalize outside mathematical word problems.
