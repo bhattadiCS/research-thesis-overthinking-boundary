@@ -159,7 +159,8 @@ Thus, we measure performance using **% Oracle Utility Captured**:
 
 $$\% \text{ Oracle Utility Captured} = \frac{U_{\text{policy}} - U_{\text{baseline}}}{U_{\text{oracle}} - U_{\text{baseline\_worst}}}$$
 
-In plain terms, it measures **what percentage of the avoidable regret we successfully reclaim**:
+In plain terms, it measures **what percentage of the avoidable regret we successfully reclaim**: 
+*(If doing the naive baseline is the worst case, and having a god-like "oracle" is the perfect case, the gap between them is our "regret"—the potential value we would leave on the table if we were lazy. This metric simply shows how much of that gap our detector successfully closes).*
 *   **0% (Baseline - Never Stop)**: You do nothing, running the AI to the maximum limit. You waste tons of tokens and risk corruption. Average utility is **0.1077**.
 *   **100% (The Oracle)**: A theoretical, god-like controller that knows the future and stops the model at the absolute best step for every single problem. Average utility is **0.5563**.
 *   **Our Detector (Hazard Drift)**: Achieves **0.3360** utility, capturing **50.9%** of the potential gains.
