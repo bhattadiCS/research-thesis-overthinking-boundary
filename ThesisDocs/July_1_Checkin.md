@@ -119,13 +119,21 @@ The regression model is the calculator for the probabilities. We don't calculate
 
 Let's walk through exactly what happens during a single test run, step-by-step, in plain English.
 
-#### The Setup
+#### Why We Used Logistic Regression
+We chose Logistic Regression over complex Neural Networks or Random Forests for four strategic reasons:
+1.  **Zero Latency (Compute Free):** A complex neural network would eat up the exact GPU power we are trying to save. Logistic regression is just a few basic multiplications and an addition, running in microseconds on a CPU.
+2.  **Calibrated Probabilities:** To calculate Expected Utility (Hazard Drift), we need exact mathematical probabilities (e.g., 20% chance of being right). Logistic regression naturally outputs a perfectly calibrated probability between 0 and 1, unlike decision trees.
+3.  **No Black Boxes (Explainability):** Because the model is a simple math equation, we can look at the internal weights and mathematically prove exactly *why* the detector chose to stop the LLM. 
+4.  **Prevents Overfitting:** We needed a model that generalizes across 13 different LLMs. Complex models overfit to training quirks; logistic regression is so rigid it can only learn universal laws (like "high entropy = bad"), forcing it to generalize beautifully to unseen models.
 
-Before the test even begins, we have three trained Logistic Regression models sitting on our hard drive. Because they are logistic regression models, they are basically just simple math equations, like:
+#### How We Pre-Trained the Detector (The Setup)
+Before the live test run even begins, we train the Logistic Regression models on a subset of the data. 
+*   **The Training Process:** We feed the regression model thousands of historical steps, allowing it to learn the optimal "weights" (coefficients) for each feature (e.g., it learns to assign a heavy negative weight to high entropy). 
+*   **Preventing Leakage:** To ensure we aren't cheating, we use **GroupKFold Cross-Validation** grouped by the run ID. This guarantees the detector is strictly tested out-of-sample on completely new problems it has never seen before.
 
+Once trained, the three models are essentially locked-in math equations sitting on our hard drive, looking something like this:
 *   `q_t = (0.5 * confidence) - (0.8 * entropy) - (0.4 * answer_changed)`
-
-(Note: those aren't the real numbers, but that's exactly how the math works).
+*(Note: those aren't the real numbers, but that's exactly how the math works).*
 
 #### The Live Test Run
 
