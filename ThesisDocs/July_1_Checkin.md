@@ -128,7 +128,16 @@ In plain terms, it measures **what percentage of the avoidable regret we success
 
 ---
 
-## 🛠️ Part 6: Codebase Remediation (What We Cleaned Up)
+## 📈 Part 6: How Often Was Early Stopping Useful?
+*If your advisor asks, "How often did this actually help?", here are the key statistics:*
+
+*   **98.1% of configurations (51 out of 52 cells)**: Our learned stopping rule successfully outperformed the standard "Never Stop" policy. Early stopping is almost universally useful.
+*   **58.6% Compute Savings on Math**: On hard reasoning math problems, the detector stopped the model at an average of **Step 4.34** instead of the maximum limit of **Step 10.50**. This saves **58.6% of the token cost** while keeping the model at its peak correctness.
+*   **80% Compute Savings on MCQ**: On multiple-choice questions (where reasoning does not help), the detector stopped the model immediately at **Step 2** (the minimum floor), saving **80% of compute** with zero loss in accuracy.
+
+---
+
+## 🛠️ Part 7: Codebase Remediation (What We Cleaned Up)
 
 *   **Grader Fixing**: The model's final answers were being graded incorrectly by regex bugs (e.g., scoring "a third" as a wrong answer even if the math was correct). We rewrote the grading logic, recovering hundreds of correct runs.
 *   **Leakage Elimination**: We implemented **GroupKFold cross-validation**. This ensures that the detectors are trained and tested on separate subsets of math problems, proving they truly generalize out-of-sample.
@@ -136,7 +145,7 @@ In plain terms, it measures **what percentage of the avoidable regret we success
 
 ---
 
-## 🚀 Part 7: What We Plan to Do Next (Our Roadmap)
+## 🚀 Part 8: What We Plan to Do Next (Our Roadmap)
 
 Here is exactly what we will be doing next to finish this thesis:
 
