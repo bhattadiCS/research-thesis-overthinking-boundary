@@ -50,7 +50,7 @@ Imagine a PhD student deciding when to submit their research paper to a journal:
 
     $$T^* = \inf \{ t \ge 0 : \mu_t \le 0 \}$$
 
-    *(where $\mu_t$ is the predictable drift, representing expected change in utility from step $t$ to $t+1$)*
+    (where $\mu_t$ is the predictable drift, representing expected change in utility from step $t$ to $t+1$)
 
 ---
 
