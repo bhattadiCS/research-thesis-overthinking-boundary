@@ -40,6 +40,26 @@ $$T^* = \inf \{ t \ge 0 : \mu_t \le 0 \}$$
 
 ---
 
+## 📊 Data Collection & Methodology
+
+### 1. What Data Did We Collect?
+For each step $t$ in a generated Chain of Thought (CoT), we recorded:
+*   **Candidate Answer ($A_t$)**: Extracted from the thinking trace and evaluated against the ground-truth to obtain correctness $C_t \in \{0, 1\}$.
+*   **Token Entropy Features (`entropy_mean`, `entropy_std`)**: The Shannon entropy of predicted token probabilities, representing the model's internal uncertainty during generation.
+*   **Log-probability Variance**: Measures the statistical variance of the token logprobs.
+*   **Answer Stability (`answer_changed`)**: A binary indicator representing whether the model's candidate answer changed from step $t-1$ to $t$.
+*   **Self-Reported Confidence (`confidence`)**: A numerical confidence score output by the model itself when prompted (rendered in a JSON structure).
+*   **Verbosity proxy (`token_count`)**: The number of reasoning tokens generated up to that step.
+
+Across all 52 cells, we evaluated **900 runs per model-dataset combo**, resulting in **hundreds of thousands of step-level rows** containing these features.
+
+### 2. Why Was It Useful?
+The primary challenge of stopping theory is that the repair hazard ($\alpha_t$) and corruption hazard ($\beta_t$) are **latent variables**—they cannot be directly observed in real-time during generation. 
+
+By collecting this observable vector ($\mathbf{x}_t$) and matching it with retrospectively graded correctness labels, we can train low-overhead classifiers (regression models) on historical runs. At inference time, these classifiers ingest the active observables ($\mathbf{x}_t$) and estimate the expected marginal utility $\mu_t$ on the fly to decide whether to stop.
+
+---
+
 ## 🧪 Empirical Matrix Results (The 52-Cell Sweep)
 
 We ran 13 models on 4 datasets (52 cells total) to verify if our theoretical boundary matches real-world runs:
@@ -51,11 +71,32 @@ We ran 13 models on 4 datasets (52 cells total) to verify if our theoretical bou
     *   **Stronger Models (e.g., Qwen 32B, Mistral 24B)**: Have late boundaries (Step 5–6) on math, because they can systematically correct intermediate errors.
 
 ### Stopping Detector Performance (On the 12 Late-Boundary Cells)
-We compared different deployable stopping detectors against the theoretical **Oracle** (which knows exactly when to stop for maximum utility) and the do-nothing baseline (**Never Stop**):
 
-*   **Hazard Drift (Our Learned Detector)**: **Beats all other deployable detectors**, capturing **50.1%** of the potential oracle utility gain.
-*   **Answer Stability (Heuristic)**: Captures **46.2%** of the gap. It works well but lacks theoretical safety guarantees.
-*   **E-Process & Empirical Bernstein**: These anytime-valid statistical bounds are highly conservative. Empirical Bernstein is too strict (requires $N > 1000$ samples to fire), so it behaves similarly to "Never Stop".
+We compared different stopping detectors against the theoretical **Oracle** (which stops at the step of maximum utility) and the default baseline (**Never Stop**):
+
+| Detector | Mean Oracle Gap | Mean Stop Step | Mean Stop Utility | Utility Gain vs. Never-Stop | % Oracle Utility Captured |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Oracle ($T \ge 2$)** | 0.0000 | 3.05 | 0.5563 | +0.4486 | 100.0% |
+| *Cheater: Verifier (First Correct)* | 0.1271 | 5.82 | 0.4292 | +0.3215 | 71.7% |
+| **Hazard Drift (Learned)** | **0.2203** | **4.34** | **0.3360** | **+0.2283** | **50.1%** |
+| **Answer Stability (Heuristic)** | 0.2415 | 4.65 | 0.3148 | +0.2071 | 46.2% |
+| **Entropy Plateau (Heuristic)** | 0.2603 | 4.34 | 0.2960 | +0.1883 | 41.7% |
+| **E-Process (Anytime-Valid)** | 0.2672 | 6.23 | 0.2891 | +0.1814 | 40.9% |
+| **Empirical Bernstein (Bound)** | 0.4024 | 9.50 | 0.1539 | +0.0462 | 10.3% |
+| **First Answer ($t=2$ fallback)** | 0.4131 | 2.00 | 0.1432 | +0.0355 | 8.0% |
+| **Never Stop (Do Nothing)** | 0.4486 | 10.50 | 0.1077 | 0.0000 | 0.0% |
+
+#### What do these values represent?
+*   **Mean Oracle Gap**: The utility penalty relative to the Oracle. A smaller gap (closer to `0.0000`) is better.
+*   **Mean Stop Step**: The average reasoning step where the detector decides to stop generation.
+*   **Mean Stop Utility**: The expected utility achieved. (Under normalized stakes $v=1, c=0$, utility ranges from `0` to `1` minus token costs).
+*   **Utility Gain vs. Never-Stop**: The net increase in utility compared to simply running the generation to completion.
+*   **% Oracle Utility Captured**: Tells us what percentage of the gap between doing nothing ("Never Stop") and perfect stopping ("Oracle") was successfully recovered by each method.
+
+### How Did We Perform?
+*   **Hazard Drift Wins**: Our learned detector successfully captured **50.1%** of the potential oracle gains, outperforming all other deployable options. 
+*   **Simple Heuristics Fall Short**: While checking if the answer changes (`Answer Stability`) is a strong heuristic, it struggles to adapt to varying cost structures and lacks theoretical safety guarantees.
+*   **Statistical Bounds are Too Conservative**: `Empirical Bernstein` and `E-Process` attempt to guarantee that we never stop too early (avoiding false-early errors). However, they are mathematically so conservative that they rarely stop before the maximum trace length, capturing only **10.3%** of the utility.
 
 ---
 
