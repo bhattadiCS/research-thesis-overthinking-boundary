@@ -22,9 +22,11 @@ While thinking longer generally helps, there is a turning point where continuing
 To evaluate how well our stopping rules work, we calculate a **Utility Score** ($V_t$) for every decision. 
 
 The formula is:
+
 $$V_t = q_t(v + c) - c - \lambda t$$
 
 By expanding the terms, we can see its real-world components:
+
 $$V_t = q_t \cdot v - (1 - q_t) \cdot c - \lambda t$$
 
 1.  **Expected Reward ($q_t \cdot v$)**: The value ($v$) of a correct answer, multiplied by the probability ($q_t$) that our current answer is correct.
@@ -45,7 +47,9 @@ Imagine a PhD student deciding when to submit their research paper to a journal:
 *   *Submitting too early (Underthinking - Low $t$)*: Low confidence of acceptance. The student saves time ($\lambda t$ is small), but faces a massive risk of rejection penalty. Expected utility is negative.
 *   *Submitting too late (Overthinking - High $t$)*: The student spends 5 years perfecting a single paper ($q_t \approx 99\%$). Although acceptance is guaranteed, the opportunity costs and stipends paid ($60\lambda$) exceed the paper's value. Expected utility is negative.
 *   **Optimal Stopping ($T^*$)**: Submitting at the exact sweet spot where the marginal value of another experiment's confidence boost is equal to the burn rate of delaying another month:
+
     $$T^* = \inf \{ t \ge 0 : \mu_t \le 0 \}$$
+
     *(where $\mu_t$ is the predictable drift, representing expected change in utility from step $t$ to $t+1$)*
 
 ---
@@ -86,14 +90,21 @@ For every single step $t$ in the data above, we recorded:
 *   **Token Entropy**: 
     *   *What it means*: The uncertainty of the model's token selections. 
     *   *Why it's useful*: If the model is confused, token entropy is high. When it finds a solid logical path, entropy drops.
-*   **Log-probability Variance**:
-    *   *What it means*: How spread out the model's confidence is over possible next tokens.
-    *   *Why it's useful*: High variance indicates the model is highly confident in specific words.
 *   **Answer Stability (`answer_changed`)**:
     *   *What it means*: A flag showing if the model changed its candidate answer from the previous step.
     *   *Why it's useful*: If the answer stops changing, the model has converged. If it keeps changing, the model is lost.
 *   **Self-Reported Confidence**:
-    *   *What it means*: The model's own numeric estimate of how sure it is (e.g., "Confidence: 0.8").
+    *   *What it means*: The model's own numeric estimate of how sure it is (e.g., an integer between 0 and 100).
+
+### How the Detector Uses These Observables in Real-Time
+The missing link is how we translate these raw measurements into the probabilities ($q_t$, $\alpha$, $\beta$) from Part 2. 
+
+Our "Detector" is a set of pre-trained Logistic Regression models. They act as simple mathematical calculators. During a test run:
+1. **We pause the LLM** after it generates a step.
+2. **We measure** its current "vital signs" (e.g., its Entropy is 0.9, Answer_Changed is True).
+3. **The Regression Models calculate:** We plug those measurements into our pre-trained equations. The equations output the probabilities (e.g., $q_t = 20\%$ chance it's correct right now, $\alpha = 50\%$ chance it fixes a mistake next step, $\beta = 5\%$ chance it breaks a correct answer).
+4. **The Drift Formula:** We plug those output probabilities into the stopping formula: `Expected Drift = (1 - 0.20)*0.50 - (0.20)*0.05 - Cost`.
+5. **The Decision:** If the formula outputs a positive number, we unpause the LLM and let it keep thinking. If it outputs a negative number, the expected value of thinking is negative, and we cut off the GPU generation immediately.
 
 ---
 
@@ -105,15 +116,17 @@ In standard machine learning, you use classification accuracy or F1-score. Howev
 *   **Single-Stop Constraint**: Unlike a classifier that labels every frame of a video, a stopping rule only makes a decision *once*. The moment it says "stop," the process terminates.
 
 Thus, we measure performance using **% Oracle Utility Captured**:
-$$\% \text{ Oracle Utility Captured} = \frac{U_{\text{policy}} - U_{\text{baseline}}}{U_{\text{baseline\_worst}} - U_{\text{oracle}}}$$
+
+$$\% \text{ Oracle Utility Captured} = \frac{U_{\text{policy}} - U_{\text{baseline}}}{U_{\text{oracle}} - U_{\text{baseline\_worst}}}$$
+
 In plain terms, it measures **what percentage of the avoidable regret we successfully reclaim**:
 *   **0% (Baseline - Never Stop)**: You do nothing, running the AI to the maximum limit. You waste tons of tokens and risk corruption. Average utility is **0.1077**.
 *   **100% (The Oracle)**: A theoretical, god-like controller that knows the future and stops the model at the absolute best step for every single problem. Average utility is **0.5563**.
-*   **Our Detector (Hazard Drift)**: Achieves **0.3360** utility, capturing **50.1%** of the potential gains.
+*   **Our Detector (Hazard Drift)**: Achieves **0.3360** utility, capturing **50.9%** of the potential gains.
 
-### 🏆 Why capturing 50.1% of the Oracle Gap is a major success:
+### 🏆 Why capturing 50.9% of the Oracle Gap is a major success:
 *   **The Oracle has Foresight**: The Oracle can see the future. If a model is wrong at Step 3 but corrects itself at Step 8, the Oracle allows it. An online detector must make decisions based only on information available *up to Step 3*.
-*   **The Prophet Inequality Bound**: In decision theory, the mathematical upper bound for any real-time, online policy trying to guess the future is often bounded at $50\%$ or $1/e \approx 36.8\%$. Capturing **50.1%** indicates that our detector is performing near the absolute theoretical limit of what is mathematically possible.
+*   **The Prophet Inequality Bound**: In decision theory, the mathematical upper bound for any real-time, online policy trying to guess the future is often bounded at $50\%$ or $1/e \approx 36.8\%$. Capturing **50.9%** indicates that our detector is performing near the absolute theoretical limit of what is mathematically possible.
 
 ### Detector Performance on Late-Boundary Tasks
 *(Performance evaluated across the **12 late-boundary cells**)*
@@ -121,7 +134,7 @@ In plain terms, it measures **what percentage of the avoidable regret we success
 | Stopping Policy | Mean Stop Step | Mean Stop Utility | Mean Oracle Gap | % Oracle Utility Captured |
 | :--- | :---: | :---: | :---: | :---: |
 | **Oracle** | 3.05 | 0.5563 | 0.0000 | 100.0% |
-| **Hazard Drift (Ours)** | **4.34** | **0.3360** | **0.2203** | **50.1%** |
+| **Hazard Drift (Ours)** | **4.34** | **0.3360** | **0.2203** | **50.9%** |
 | **Answer Stability** | 4.65 | 0.3148 | 0.2415 | 46.2% |
 | **First Answer** | 2.00 | 0.1432 | 0.4131 | 8.0% |
 | **Never Stop** | 10.50 | 0.1077 | 0.4486 | 0.0% |
