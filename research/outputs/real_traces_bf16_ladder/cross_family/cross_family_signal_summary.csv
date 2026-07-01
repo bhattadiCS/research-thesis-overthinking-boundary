@@ -1,0 +1,4 @@
+run_name,run_label,family,parameter_count,correctness_feature,correctness_label,correctness_coefficient,correctness_display,corruption_feature,corruption_label,corruption_coefficient,corruption_display
+qwen2p5_7b,Qwen 7B,Qwen2.5 instruct,7B,confidence,self-reported confidence,0.7396501360120766,"self-reported confidence (confidence, coeff=0.740)",entropy_mean,token entropy,1.430900972763396,"token entropy (entropy_mean, coeff=1.431)"
+qwen2p5_14b,Qwen 14B,Qwen2.5 instruct,14B,hidden_l2_shift,hidden-state L2 drift,1.7551320970214743,"hidden-state L2 drift (hidden_l2_shift, coeff=1.755)",answer_changed,answer revision flag,0.94239032429245,"answer revision flag (answer_changed, coeff=0.942)"
+qwen2p5_32b,Qwen 32B,Qwen2.5 instruct,32B,hidden_l2_shift,hidden-state L2 drift,1.1524187095052925,"hidden-state L2 drift (hidden_l2_shift, coeff=1.152)",hidden_l2_shift,hidden-state L2 drift,1.5365163277757152,"hidden-state L2 drift (hidden_l2_shift, coeff=1.537)"
