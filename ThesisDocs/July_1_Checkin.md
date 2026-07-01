@@ -66,6 +66,14 @@ The datasets cover a wide range of reasoning domains:
 *   **ARC (Challenge)**: Grade-school science questions (tests general scientific knowledge and logical deduction).
 *   **GPQA**: Graduate-level physics, biology, and chemistry questions (tests extreme expert-level reasoning).
 
+### How We Evaluated Correctness (The Grading Methodology)
+A crucial part of our methodology is that **we do not grade intermediate reasoning or sub-problems**, even for datasets like GSM8K that contain them. Instead, we use a "candidate answer" approach:
+1.  **Forced Answer Extraction**: At the end of every single generation step, the LLM is prompted to output its *current best final answer*.
+2.  **Dataset-Specific Grading**: 
+    *   For **Math Datasets (GSM8K, MATH)**: We extract the raw number or equation and use programmatic math equivalence (including `sympy` for complex algebra) to check if it matches the ground truth mathematically.
+    *   For **Multiple Choice (ARC, GPQA)**: We extract the chosen letter (e.g., A, B, C, D) and compare it against the answer key.
+3.  **The Stopping Criterion**: To determine if stopping at Step $t$ was optimal, we only ask: *"If we cut the model off right now and forced it to submit this candidate answer, would it get the question right?"* If the candidate answer is correct, the step is considered a success, regardless of whether the internal reasoning was flawless or flawed.
+
 | Model | Parameter Scale | GSM8K (Runs) | MATH (Runs) | ARC (Runs) | GPQA (Runs) | Total Runs |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **deepseek_r1_distill_1p5b** | 1.5B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
