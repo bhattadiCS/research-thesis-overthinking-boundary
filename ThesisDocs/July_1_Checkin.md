@@ -243,6 +243,8 @@ With a massive sample size of **$N = 74,540$ runs**, we can mathematically dispr
 
 ## 🚀 Part 9: What We Plan to Do Next (Our Roadmap)
 
+*(Note on Model Scaling: With 13 diverse model families and 74,500+ runs achieving a Z-score > 350, we consider the model dimension saturated. We have proven the methodology across Llama, Qwen, Mistral, Gemma, Phi, and DeepSeek architectures. We will not be adding further LLMs to the experiment matrix.)*
+
 Here is exactly what we will be doing next to finish this thesis:
 
 1.  **Stakes Sweeping (Evaluating Safety-Critical Domains)**
