@@ -89,12 +89,15 @@ For every single step $t$ in the data above, we recorded:
 
 *   **Token Entropy**: 
     *   *What it means*: The uncertainty of the model's token selections. 
+    *   *How it is calculated*: Hooked directly into the LLM's raw probability distributions (the `logits`) while generating on the GPU. We calculate the Shannon Entropy `-(probs * log_probs).sum()` for every single token generated during the step, and take the average.
     *   *Why it's useful*: If the model is confused, token entropy is high. When it finds a solid logical path, entropy drops.
 *   **Answer Stability (`answer_changed`)**:
     *   *What it means*: A flag showing if the model changed its candidate answer from the previous step.
+    *   *How it is calculated*: Programmatically evaluated in Python by parsing the model's output at Step $t$ and comparing the string to the parsed output from Step $t-1$.
     *   *Why it's useful*: If the answer stops changing, the model has converged. If it keeps changing, the model is lost.
 *   **Self-Reported Confidence**:
     *   *What it means*: The model's own numeric estimate of how sure it is (e.g., an integer between 0 and 100).
+    *   *How it is calculated*: Extracted directly from the LLM's generated text using a regular expression. The system prompt forces the LLM to output a rigid format ending with "CONFIDENCE: <integer 0-100>" on every step.
 
 ### How the Detector Uses These Observables in Real-Time
 
