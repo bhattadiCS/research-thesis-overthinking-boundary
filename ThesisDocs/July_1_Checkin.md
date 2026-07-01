@@ -58,7 +58,13 @@ Imagine a PhD student deciding when to submit their research paper to a journal:
 
 To prove that the overthinking boundary is a universal physical property of reasoning LLMs rather than a fluke of one specific model, we ran a massive **52-cell experiment matrix**. 
 
-We collected data across **13 unique models** and **4 datasets**, running each configuration at **3 different temperatures** (0.1, 0.6, and 1.0) to capture varying levels of sample variance:
+We collected data across **13 unique models** and **4 datasets**, running each configuration at **3 different temperatures** (0.1, 0.6, and 1.0) to capture varying levels of sample variance. 
+
+The datasets cover a wide range of reasoning domains:
+*   **GSM8K**: Grade-school math word problems (tests basic multi-step arithmetic logic).
+*   **MATH**: Challenging competition-level mathematics (tests advanced theorems and complex algebraic reasoning).
+*   **ARC (Challenge)**: Grade-school science questions (tests general scientific knowledge and logical deduction).
+*   **GPQA**: Graduate-level physics, biology, and chemistry questions (tests extreme expert-level reasoning).
 
 | Model | Parameter Scale | GSM8K (Runs) | MATH (Runs) | ARC (Runs) | GPQA (Runs) | Total Runs |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
