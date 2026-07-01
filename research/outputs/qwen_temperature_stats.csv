@@ -1,0 +1,4 @@
+temperature,total_runs,strict_win_rate,non_strict_win_rate,mean_stopping_step_hazard_drift,mean_utility_hazard_drift,mean_utility_never_stop
+0.1,500,0.928,0.928,3.87,0.4805,0.24199999999999997
+0.6,500,0.896,0.896,3.758,0.49010000000000004,0.28
+1.0,500,0.902,0.902,3.898,0.4571,0.244
