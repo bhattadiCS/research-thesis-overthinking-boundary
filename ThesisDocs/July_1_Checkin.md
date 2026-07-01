@@ -131,9 +131,15 @@ Before the live test run even begins, we train the Logistic Regression models on
 *   **The Training Process:** We feed the regression model thousands of historical steps, allowing it to learn the optimal "weights" (coefficients) for each feature (e.g., it learns to assign a heavy negative weight to high entropy). 
 *   **Preventing Leakage:** To ensure we aren't cheating, we use **GroupKFold Cross-Validation** grouped by the run ID. This guarantees the detector is strictly tested out-of-sample on completely new problems it has never seen before.
 
-Once trained, the three models are essentially locked-in math equations sitting on our hard drive, looking something like this:
-*   `q_t = (0.5 * confidence) - (0.8 * entropy) - (0.4 * answer_changed)`
-*(Note: those aren't the real numbers, but that's exactly how the math works).*
+Once trained, the three models are essentially locked-in math equations sitting on our hard drive, using the standard Logistic Regression sigmoid function ($P = \frac{1}{1 + e^{-(\text{weights} + \text{bias})}}$) to predict three specific events:
+
+1.  **The $q_t$ Equation (Correctness):** Learns to predict the probability that the current answer is correct.
+2.  **The Alpha ($\alpha$) Equation (Repair Rate):** 
+    *   *What it means:* "If the LLM is currently holding a **wrong** answer, what is the probability it will figure out the **correct** answer on the very next step?"
+    *   *How it was trained:* We filtered the training data to only include rows where the LLM was wrong, forcing the equation to learn which vital signs (like dropping entropy or a changing answer) predicted a successful repair.
+3.  **The Beta ($\beta$) Equation (Corruption Rate):**
+    *   *What it means:* "If the LLM is currently holding a **correct** answer, what is the probability it will overthink, hallucinate, and break its answer into a **wrong** one on the very next step?"
+    *   *How it was trained:* We filtered the training data to only include rows where the LLM was right, forcing the equation to learn which vital signs predicted a coming hallucination.
 
 #### The Live Test Run
 
