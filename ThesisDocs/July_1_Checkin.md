@@ -44,8 +44,8 @@ Imagine a PhD student deciding when to submit their research paper to a journal:
 *   **Monthly Burn Rate ($\lambda$)**: Compute costs, stipend, and the risk of getting scooped.
 
 **The Stopping Dilemma**:
-*   *Submitting too early (Underthinking - Low $t$)*: Low confidence of acceptance. The student saves time ($\lambda t$ is small), but faces a massive risk of rejection penalty. Expected utility is negative.
-*   *Submitting too late (Overthinking - High $t$)*: The student spends 5 years perfecting a single paper ($q_t \approx 99\%$). Although acceptance is guaranteed, the opportunity costs and stipends paid ($60\lambda$) exceed the paper's value. Expected utility is negative.
+*   **Submitting too early** (Underthinking - Low $t$): Low confidence of acceptance. The student saves time ($\lambda t$ is small), but faces a massive risk of rejection penalty. Expected utility is negative.
+*   **Submitting too late** (Overthinking - High $t$): The student spends 5 years perfecting a single paper ($q_t \approx 99\%$). Although acceptance is guaranteed, the opportunity costs and stipends paid ($60\lambda$) exceed the paper's value. Expected utility is negative.
 *   **Optimal Stopping ($T^*$)**: Submitting at the exact sweet spot where the marginal value of another experiment's confidence boost is equal to the burn rate of delaying another month:
 
     $$T^* = \inf \{ t \ge 0 : \mu_t \le 0 \}$$
@@ -97,14 +97,51 @@ For every single step $t$ in the data above, we recorded:
     *   *What it means*: The model's own numeric estimate of how sure it is (e.g., an integer between 0 and 100).
 
 ### How the Detector Uses These Observables in Real-Time
-The missing link is how we translate these raw measurements into the probabilities ($q_t$, $\alpha$, $\beta$) from Part 2. 
 
-Our "Detector" is a set of pre-trained Logistic Regression models. They act as simple mathematical calculators. During a test run:
-1. **We pause the LLM** after it generates a step.
-2. **We measure** its current "vital signs" (e.g., its Entropy is 0.9, Answer_Changed is True).
-3. **The Regression Models calculate:** We plug those measurements into our pre-trained equations. The equations output the probabilities (e.g., $q_t = 20\%$ chance it's correct right now, $\alpha = 50\%$ chance it fixes a mistake next step, $\beta = 5\%$ chance it breaks a correct answer).
-4. **The Drift Formula:** We plug those output probabilities into the stopping formula: `Expected Drift = (1 - 0.20)*0.50 - (0.20)*0.05 - Cost`.
-5. **The Decision:** If the formula outputs a positive number, we unpause the LLM and let it keep thinking. If it outputs a negative number, the expected value of thinking is negative, and we cut off the GPU generation immediately.
+The regression model is the calculator for the probabilities. We don't calculate the probabilities and then use them with the model. The probabilities are the output of the model.
+
+Let's walk through exactly what happens during a single test run, step-by-step, in plain English.
+
+#### The Setup
+
+Before the test even begins, we have three trained Logistic Regression models sitting on our hard drive. Because they are logistic regression models, they are basically just simple math equations, like:
+
+*   `q_t = (0.5 * confidence) - (0.8 * entropy) - (0.4 * answer_changed)`
+
+(Note: those aren't the real numbers, but that's exactly how the math works).
+
+#### The Live Test Run
+
+Now we give the LLM a brand new math problem.
+
+**Step 1:**
+
+1.  **The LLM thinks:** The LLM generates a few sentences of reasoning and outputs a guess. We pause the LLM.
+2.  **We measure:** We look at what the LLM just did and measure its "vital signs" as numbers. Let's say its Entropy is 0.9 and its Confidence is 10.
+3.  **The Model calculates:** We plug those exact numbers into our pre-trained Regression equations:
+    *   The $q_t$ equation spits out 0.20 (Meaning: "Based on these vital signs, there is a 20% chance the LLM's current answer is correct").
+    *   The $\alpha$ equation spits out 0.50 (Meaning: "There is a 50% chance the LLM will fix its mistake on the next step").
+    *   The $\beta$ equation spits out 0.05 (Meaning: "There is a 5% chance it will break a correct answer").
+4.  **The Drift Formula:** We take those three outputs and plug them into our stopping formula: `(1 - 0.20) * 0.50 - (0.20) * 0.05 - Cost`.
+5.  **The Decision:** The formula outputs `+0.34`. Because this is a positive number, the detector says, "Keep going! The expected value of thinking more is positive." We unpause the LLM.
+
+**Step 2:**
+
+1.  **The LLM thinks:** The LLM generates a few more sentences and updates its guess. We pause it again.
+2.  **We measure:** The LLM's vital signs have changed! It found a solid logical path. Its Entropy drops to 0.1 and its Confidence jumps to 90.
+3.  **The Model calculates:** We plug these new numbers into the same Regression equations:
+    *   The $q_t$ equation now spits out 0.95 (95% chance it's correct).
+    *   The $\alpha$ equation spits out 0.10.
+    *   The $\beta$ equation spits out 0.20.
+4.  **The Drift Formula:** We plug the new probabilities into the stopping formula: `(1 - 0.95) * 0.10 - (0.95) * 0.20 - Cost`.
+5.  **The Decision:** The formula outputs `-0.23`. Because this is a negative number, the detector says, "STOP! If we let it keep thinking, it's more likely to ruin its correct answer than to improve it."
+
+#### In Short
+
+1.  We measure the LLM's internal state.
+2.  The regression models turn those measurements into probabilities ($q_t$, $\alpha$, $\beta$).
+3.  We plug those probabilities into the stopping formula.
+4.  If the formula is negative, we stop the LLM.
 
 ---
 
