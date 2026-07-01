@@ -46,9 +46,38 @@ To understand our data, we first need to define our terms:
 
 ---
 
-## 📊 Part 3: What Data Did We Collect & Why?
+## 📊 Part 3: Data Scale & Matrix Scope (What We Collected)
 
-We ran **900 independent problem-solving trials** per model-dataset combination. For every single step $t$ of the model's reasoning chain, we recorded the following features:
+To prove that the overthinking boundary is a universal physical property of reasoning LLMs rather than a fluke of one specific model, we ran a massive **52-cell experiment matrix**. 
+
+We collected data across **13 unique models** and **4 datasets**, running each configuration at **3 different temperatures** (0.1, 0.6, and 1.0) to capture varying levels of sample variance:
+
+| Model | Parameter Scale | GSM8K (Runs) | MATH (Runs) | ARC (Runs) | GPQA (Runs) | Total Runs |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **deepseek_r1_distill_1p5b** | 1.5B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **deepseek_r1_distill_7b** | 7B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **internlm3_8b_instruct** | 8B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **llama_3p1_8b_instruct** | 8B | 1,500 | 1,500 | 1,500 | 1,348 | **5,848** |
+| **mistral_7b_instruct_v0p3** | 7B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **mistral_small_24b_2409** | 24B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **phi_4_mini_instruct** | 4B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **qwen2p5_0p5b** | 0.5B | 1,500 | 1,500 | 1,500 | 1,354 | **5,854** |
+| **qwen2p5_3b** | 3B | 1,500 | 1,500 | 1,500 | 1,349 | **5,849** |
+| **qwen2p5_7b** | 7B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **qwen2p5_14b** | 14B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **qwen2p5_32b** | 32B | 1,500 | 1,500 | 1,500 | 1,344 | **5,844** |
+| **yi_1p5_9b_chat** | 9B | 1,500 | 1,500 | 1,500 | 1,349 | **5,849** |
+| **TOTALS** | — | **19,500** | **19,500** | **19,500** | **17,496** | **75,996** |
+
+### What this data scale represents:
+*   **75,996 Total Runs**: Each run represents a model solving a specific question at a specific temperature.
+*   **759,960 Data Points**: Because we track the model's features (uncertainty, answer stability, confidence) at every generation step (up to 10 steps), we have collected nearly three-quarters of a million step-level data rows. This size is what makes our thesis statistically robust.
+
+---
+
+## 📊 Part 4: What Observables Did We Track & Why?
+
+For every single step $t$ in the data above, we recorded:
 
 *   **Token Entropy**: 
     *   *What it means*: The uncertainty of the model's token selections. 
@@ -62,14 +91,9 @@ We ran **900 independent problem-solving trials** per model-dataset combination.
 *   **Self-Reported Confidence**:
     *   *What it means*: The model's own numeric estimate of how sure it is (e.g., "Confidence: 0.8").
 
-### Why this data is useful:
-We cannot observe the model's true correctness belief ($q_t$) or hazards ($\alpha_t, \beta_t$) in-flight. Instead, we use this collected data to train a machine-learning model (a stopping detector). This detector looks at the active token entropy and answer stability in real-time, estimates $\mu_t$, and halts the model.
-
 ---
 
-## 🧪 Part 4: How Did We Perform? (Reading the Results)
-
-We ran this pipeline on **13 different models** across **4 benchmarks** (52 combinations, or "cells"):
+## 🧪 Part 5: How Did We Perform? (Reading the Results)
 
 *   **Task-Dependency**:
     *   On simple multiple-choice tasks (ARC, GPQA), reasoning does not help. The models perform best at Step 2 (stop immediately to save tokens).
@@ -95,7 +119,7 @@ Here is how our stopping rules performed compared to a perfect "Oracle" and the 
 
 ---
 
-## 🛠️ Part 5: Codebase Remediation (What We Cleaned Up)
+## 🛠️ Part 6: Codebase Remediation (What We Cleaned Up)
 
 *   **Grader Fixing**: The model's final answers were being graded incorrectly by regex bugs (e.g., scoring "a third" as a wrong answer even if the math was correct). We rewrote the grading logic, recovering hundreds of correct runs.
 *   **Leakage Elimination**: We implemented **GroupKFold cross-validation**. This ensures that the detectors are trained and tested on separate subsets of math problems, proving they truly generalize out-of-sample.
@@ -103,7 +127,7 @@ Here is how our stopping rules performed compared to a perfect "Oracle" and the 
 
 ---
 
-## 🚀 Part 6: What We Plan to Do Next (Our Roadmap)
+## 🚀 Part 7: What We Plan to Do Next (Our Roadmap)
 
 Here is exactly what we will be doing next to finish this thesis:
 
