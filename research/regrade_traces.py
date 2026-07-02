@@ -49,11 +49,14 @@ def regrade_file(path: Path, dry_run: bool) -> tuple[int, int]:
                             prompt="", answer_type=atype, expected_answer=exp,
                             notes="", source=str(row.get("task_source", "")), source_index=-1)
         correct = int(rte.verify_answer(task, ans))
-        step = int(row.get("step", 1))
+        step_raw = row.get("step", 1)
+        step = 1 if pd.isna(step_raw) else int(step_raw)
         new_correct.append(correct)
         new_norm.append(rte.normalize_answer(ans, atype))
         new_util.append(float(correct) - STEP_COST * (step - 1))
-        if correct != int(row.get("correct", 0)):
+        prev_correct_raw = row.get("correct", 0)
+        prev_correct = 0 if pd.isna(prev_correct_raw) else int(prev_correct_raw)
+        if correct != prev_correct:
             flipped += 1
     if not dry_run:
         df["correct"] = new_correct
