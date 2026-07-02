@@ -14,8 +14,8 @@ Sweep Settings:
 
 | Model | Penalty (c) | Boundary Step (T*) | Oracle Utility | Hazard Utility | Never Stop Utility | Hazard Oracle Gap | Never Stop Oracle Gap |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| qwen2p5_7b | 0.0 | 1 | 0.6498 | 0.2240 | 0.2053 | 0.4258 | 0.4444 |
-| qwen2p5_7b | 0.5 | 1 | 0.5304 | -0.1390 | 0.0580 | 0.6694 | 0.4724 |
+| qwen2p5_7b | 0.0 | 5 | 0.6498 | 0.4153 | 0.2053 | 0.2344 | 0.4444 |
+| qwen2p5_7b | 0.5 | 5 | 0.5304 | 0.2480 | 0.0580 | 0.2824 | 0.4724 |
 | qwen2p5_7b | 1.0 | 5 | 0.4111 | 0.0807 | -0.0893 | 0.3304 | 0.5004 |
 | qwen2p5_7b | 2.0 | 6 | 0.1724 | -0.2300 | -0.3840 | 0.4024 | 0.5564 |
 | qwen2p5_7b | 5.0 | 6 | -0.5436 | -1.1600 | -1.2680 | 0.6164 | 0.7244 |
@@ -43,5 +43,5 @@ Sweep Settings:
 | qwen2p5_32b | 100.0 | 10 | -9.4601 | -11.7547 | -11.7547 | 2.2946 | 2.2946 |
 
 ## Key Insights:
-1. **Boundary Shifts Earlier:** As error penalty ($c$) scales, the boundary step shifts to the left (e.g. from step 5 to step 2 or 3). In high-penalty regimes, the model must halt as soon as possible to avoid corruption risk.
+1. **Boundary Shifts Later:** As error penalty ($c$) scales, the boundary step shifts to the right (later), not earlier. This is expected from the utility formula: scaling $c$ amplifies the reward/penalty term $(v + c)$ relative to the fixed per-step cost $\lambda$, so continued reasoning becomes worth more, not less, as consequences scale -- the model is incentivized to keep reasoning longer to avoid an even costlier wrong answer.
 2. **Utility Conservation:** In high-penalty sweeps (c >= 10), letting the model think indefinitely (`never_stop`) leads to severe negative utility scores due to high error accumulation. The `hazard_drift` early stopping policy prevents this degradation.

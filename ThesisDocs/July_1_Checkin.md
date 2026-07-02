@@ -205,7 +205,7 @@ In plain terms, it measures **what percentage of the avoidable regret we success
 | **Oracle** | 3.05 | 0.5563 | 0.0000 | 100.0% |
 | **Hazard Drift (Ours)** | **4.34** | **0.3360** | **0.2203** | **50.9%** |
 | **Answer Stability** | 4.65 | 0.3148 | 0.2415 | 46.2% |
-| **First Answer** | 2.00 | 0.1432 | 0.4131 | 8.0% |
+| **First Answer** | 1.00 | 0.1432 | 0.4131 | 8.0% |
 | **Never Stop** | 10.50 | 0.1077 | 0.4486 | 0.0% |
 
 ---

@@ -20,6 +20,7 @@ Output:
 """
 
 import os
+import sys
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -29,6 +30,14 @@ import matplotlib.pyplot as plt
 
 # Set paths
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+# AUDIT FIX: delegate boundary detection to trace_analysis's audited
+# T_MIN-floored first_zero_crossing (commit ef45dda) instead of a local
+# reimplementation. The local reimplementation silently reintroduced the
+# unfloored-boundary bug (returning theory-forbidden step 1) that ef45dda
+# fixed in trace_analysis.py.
+from trace_analysis import T_MIN, first_zero_crossing  # noqa: E402
+
 LADDER_OUTPUT_ROOT = HERE / "outputs" / "real_traces_bf16_ladder"
 MODELS = ["qwen2p5_7b", "qwen2p5_14b", "qwen2p5_32b"]
 PENALTIES = [0.0, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0]
@@ -87,23 +96,21 @@ def compute_base_hazards(steps_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def find_boundary(haz_df: pd.DataFrame, penalty: float) -> int:
-    """Find first step where predictable drift mu_t <= 0."""
+    """Find first eligible step (t >= T_MIN) where predictable drift mu_t <= 0.
+
+    Delegates to trace_analysis.first_zero_crossing (the audited, T_MIN-floored
+    implementation) rather than scanning locally, so step 1 -- the forced-commit
+    init state, not a real decision point -- can never be returned as a boundary.
+    """
     if haz_df.empty:
-        return 1
-        
-    for _, row in haz_df.iterrows():
-        step = int(row["step"])
-        q_t = row["q_t"]
-        alpha_t = row["alpha_t"]
-        beta_t = row["beta_t"]
-        
-        # mu_t = [(1 - q_t)*alpha_t - q_t*beta_t] * (v + c) - lambda
-        mu_t = ((1 - q_t) * alpha_t - q_t * beta_t) * (REWARD_VAL + penalty) - STEP_COST
-        
-        if mu_t <= 0:
-            return step
-            
-    return int(haz_df["step"].max())
+        return T_MIN
+
+    scored = haz_df.copy()
+    # mu_t = [(1 - q_t)*alpha_t - q_t*beta_t] * (v + c) - lambda
+    scored["mu_t"] = (
+        (1 - scored["q_t"]) * scored["alpha_t"] - scored["q_t"] * scored["beta_t"]
+    ) * (REWARD_VAL + penalty) - STEP_COST
+    return first_zero_crossing(scored, "mu_t")
 
 
 def calculate_run_utilities(
@@ -217,7 +224,7 @@ def main():
         )
         
     md_content.append("\n## Key Insights:")
-    md_content.append("1. **Boundary Shifts Earlier:** As error penalty ($c$) scales, the boundary step shifts to the left (e.g. from step 5 to step 2 or 3). In high-penalty regimes, the model must halt as soon as possible to avoid corruption risk.")
+    md_content.append("1. **Boundary Shifts Later:** As error penalty ($c$) scales, the boundary step shifts to the right (later), not earlier. This is expected from the utility formula: scaling $c$ amplifies the reward/penalty term $(v + c)$ relative to the fixed per-step cost $\\lambda$, so continued reasoning becomes worth more, not less, as consequences scale -- the model is incentivized to keep reasoning longer to avoid an even costlier wrong answer.")
     md_content.append("2. **Utility Conservation:** In high-penalty sweeps (c >= 10), letting the model think indefinitely (`never_stop`) leads to severe negative utility scores due to high error accumulation. The `hazard_drift` early stopping policy prevents this degradation.")
     
     report_path.write_text("\n".join(md_content), encoding="utf-8")

@@ -11,6 +11,7 @@ Output:
 """
 
 import os
+import sys
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -20,6 +21,12 @@ import matplotlib.pyplot as plt
 
 # Set paths
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+# AUDIT FIX: delegate boundary detection to trace_analysis's audited
+# T_MIN-floored first_zero_crossing (commit ef45dda) instead of a local
+# unfloored "first row where mu_t <= 0" scan, which silently reintroduced
+# the same bug ef45dda fixed in trace_analysis.py.
+from trace_analysis import T_MIN, first_zero_crossing  # noqa: E402
 MATRIX_ROOT = HERE / "outputs" / "experiment_matrix"
 QWEN_DIR = MATRIX_ROOT / "qwen2p5_7b__gsm8k"
 DEEPSEEK_DIR = MATRIX_ROOT / "deepseek_r1_distill_7b__gsm8k"
@@ -138,12 +145,10 @@ def main():
     qwen_max_step = qwen_haz.loc[qwen_haz["q_t"].idxmax()]
     ds_max_step = ds_haz.loc[ds_haz["q_t"].idxmax()]
     
-    # Boundary detections
-    qwen_boundary = qwen_haz[qwen_haz["mu_t"] <= 0]["step"].values
-    qwen_b_val = qwen_boundary[0] if len(qwen_boundary) > 0 else 10
-    
-    ds_boundary = ds_haz[ds_haz["mu_t"] <= 0]["step"].values
-    ds_b_val = ds_boundary[0] if len(ds_boundary) > 0 else 10
+    # Boundary detections (T_MIN-floored: step 1 is the forced-commit init
+    # state, not a real decision point, and can never be returned here).
+    qwen_b_val = first_zero_crossing(qwen_haz, "mu_t")
+    ds_b_val = first_zero_crossing(ds_haz, "mu_t")
     
     md = [
         "# Prompted vs. Distilled Reasoning Comparison Report",
@@ -162,7 +167,7 @@ def main():
         f"*   **The Verdict:** **RL-Distillation pre-bakes the stopping boundary.** DeepSeek-R1 is explicitly trained via RL to generate reasoning until it reaches the answer, then halt. Thus, its correctness probability $q_t$ starts very high at step 2 ({ds_haz.iloc[1]['q_t']:.4f}) and does not improve with further reasoning. Its optimal boundary is extremely early (Step {ds_b_val}).",
         "\n### 2. Hazard Curve Divergence",
         f"*   **Qwen (Prompted):** Qwen starts with a low correctness solve rate at step 1 ({qwen_haz.iloc[0]['q_t']:.4f}) but has a high repair rate (alpha={qwen_haz['alpha_t'].mean():.4f}), indicating it actively fixes mistakes as it reasons. Its corruption rate is very low.",
-        f"*   **DeepSeek-R1 (Distilled):** DeepSeek has an extremely low repair rate (alpha={ds_haz['alpha_t'].mean():.4f}) but an extremely high corruption rate (beta={ds_haz['beta_t'].mean():.4f}). Because it was RL-trained to get it right in its initial CoT output, if it fails to solve it in the first 2 steps, it gets stuck in recursive loops, and continuing to generate tokens is highly likely to corrupt any correct intermediate state.",
+        f"*   **DeepSeek-R1 (Distilled):** DeepSeek actually has a *higher* repair rate (alpha={ds_haz['alpha_t'].mean():.4f}) than Qwen, but an even more dominant corruption rate (beta={ds_haz['beta_t'].mean():.4f}). Repairs do happen, but corruptions happen just as fast, so there is no net benefit to continuing -- the two rates roughly cancel out, leaving no accuracy gain from extra reasoning. Because it was RL-trained to get it right in its initial CoT output, if it fails to solve it in the first 2 steps, it gets stuck in recursive loops where continuing to generate tokens is just as likely to corrupt a correct intermediate state as to repair an incorrect one.",
         "\n### 3. Thesis Recommendation",
         "Your thesis should make a distinction between prompted CoT and RL-distilled models. Standard prompted models require online dynamic stopping (like our `hazard_drift` policy) to find their boundary. Distilled models, having already pre-baked their boundaries into their weights during RL training, are best stopped immediately after their first candidate answer extraction (Step 2)."
     ]
