@@ -1,5 +1,12 @@
 # $\alpha/\beta$ Ratio Predicts Boundary Location
 
+> ⚠️ **SUPERSEDED (2026-07-02).** This file predates the `research/reports/deep_code_audit.md` findings
+> and the `ef45dda` grader/leakage/boundary remediation commit — its boundary and AUC numbers were
+> computed under the pre-audit pipeline (unfixed graders, in-sample leakage, unfloored boundary) and
+> are retained as a historical record only. For the authoritative current numbers, see
+> [`research/reports/deep_code_audit.md`](reports/deep_code_audit.md) and
+> [`ThesisDocs/cross_benchmark_results.md`](../ThesisDocs/cross_benchmark_results.md).
+
 ## Overview
 
 The pivotal finding of this entire autonomous deep-dive is the resolution of the prior "inconclusive" boundary variance observed between the cross-family models. The hypothesis is strongly affirmed: the optimal continuation boundary $T_c$ scales linearly with the base log ratio between reasoning repair and failure corruption.

@@ -1,5 +1,12 @@
 # Overthinking Boundary in Reasoning LLMs
 
+> ⚠️ **SUPERSEDED (2026-07-02).** This file predates the `research/reports/deep_code_audit.md` findings
+> and the `ef45dda` grader/leakage/boundary remediation commit — its boundary and AUC numbers were
+> computed under the pre-audit pipeline (unfixed graders, in-sample leakage, unfloored boundary) and
+> are retained as a historical record only. For the authoritative current numbers, see
+> [`research/reports/deep_code_audit.md`](reports/deep_code_audit.md) and
+> [`ThesisDocs/cross_benchmark_results.md`](../ThesisDocs/cross_benchmark_results.md).
+
 ## Scope
 
 This note is an externalized research log rather than private chain-of-thought. It extends the earlier repo baseline in five concrete ways:

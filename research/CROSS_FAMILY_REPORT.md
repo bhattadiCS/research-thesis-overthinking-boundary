@@ -1,5 +1,12 @@
 # Cross-Family Report
 
+> ⚠️ **SUPERSEDED (2026-07-02).** This file predates the `research/reports/deep_code_audit.md` findings
+> and the `ef45dda` grader/leakage/boundary remediation commit — its boundary and AUC numbers were
+> computed under the pre-audit pipeline (unfixed graders, in-sample leakage, unfloored boundary) and
+> are retained as a historical record only. For the authoritative current numbers, see
+> [`research/reports/deep_code_audit.md`](reports/deep_code_audit.md) and
+> [`ThesisDocs/cross_benchmark_results.md`](../ThesisDocs/cross_benchmark_results.md).
+
 ## Executive Summary
 Qwen 7B remains the only clearly late corrected-boundary witness, but Mistral 7B now adds a weaker non-Qwen step-3 boundary with a large never-stop penalty. Cross-family evidence is therefore stronger than a single-family story, but full late-boundary robustness is still unproven.
 
