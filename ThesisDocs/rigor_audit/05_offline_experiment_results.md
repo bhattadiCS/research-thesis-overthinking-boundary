@@ -34,9 +34,19 @@ Cochran–Armitage trend on loss vs temperature {0.1, 0.6, 1.0}, per dataset: AR
 
 Census of all loss stop/final rows + 1.1% seeded sample of remaining rows. **Label delta rate 0.188% (bar: ≤0.5% — PASSED).** Verdict-relevant deltas: **30 (bar: 0 — FAILED)** — but every flagged row sits in a **DeepSeek** cell, and the mechanism was identified by direct inspection (`deepseek_r1_distill_1p5b__math …00243`, step 14): reasoning-mode outputs carry the answer inside the `<think>` block followed by an *incomplete* JSON block; collection-time extraction credited the think-block answer via its fallback path, which a from-scratch re-parse of `raw_text` alone does not reproduce. Storage truncation was ruled out (stored text ≥ recorded length). **Scoped verdict:** extraction is NOT a live confound for the 11 non-reasoning models (0 verdict-relevant deltas outside DeepSeek); for the 2 DeepSeek models, a follow-up that replicates the collection-time fallback/carry-forward semantics is required before treating any of the 30 rows as label errors. Worst-case bound if all 30 were genuine: ≤0.04 pp of verdicts, mixed direction.
 
-## P9 — λ-sensitivity sweep: RUNNING (background, `p9_lambda_sweep.py`, multi-hour)
+## P9 — λ-sensitivity sweep: **PASSED** ✅
 
-λ ∈ {0.01, 0.02, 0.10, 0.20} re-analyzed per cell with a STEP_COST-parameterized copy of the committed `trace_analysis.py` (λ in both the drift rule and the utility, out-of-place). Success bar: win rate within ±5pp of 89.6% for λ ∈ [0.02, 0.10]. Result to be appended.
+Method note: the original plan (full out-of-place `trace_analysis.py` re-runs per (cell, λ)) was abandoned at 19/208 cells for runtime (~14 min/cell); replaced by the **exact analytic form** — since the fitted models are λ-independent, `mu_λ ≤ 0 ⇔ (1−q̂)α̂ − q̂β̂ ≤ λ`, so recovering each run's validated out-of-fold base series once yields the identical sweep (λ in both the rule and the utility) in minutes. **Validation anchor: λ=0.05 reproduces 68,095/2,135/5,735 with 0 stop mismatches against the recorded stops across all 75,965 runs.**
+
+| λ | win % | loss % |
+|---|---|---|
+| 0.01 | 87.65 | 6.60 |
+| 0.02 | 88.84 | 6.85 |
+| **0.05 (published)** | **89.64** | **7.55** |
+| 0.10 | 90.86 | 7.06 |
+| 0.20 | 98.78 | 0.27 |
+
+**Criterion (win within ±5pp of 89.6% for λ ∈ [0.02, 0.10]): PASSED** — max deviation 1.26pp. The headline is not knife-edged on the λ=0.05 convention. Caveat: λ=0.20 is a degenerate regime (the rule stops almost immediately everywhere while `never_stop` pays a heavy horizon cost — win rate is trivially high there and should not be quoted as policy quality).
 
 ## P3b/P3c/P3d — conditional policy arms (run 2026-07-10, same census harness family: `p3bcd.py`)
 
