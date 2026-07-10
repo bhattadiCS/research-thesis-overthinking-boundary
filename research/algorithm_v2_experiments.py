@@ -188,6 +188,8 @@ def main() -> int:
     ap.add_argument("--matrix-root", default=str(HERE / "outputs" / "experiment_matrix"))
     ap.add_argument("--cache-dir", default=".algov2_cache")
     ap.add_argument("--cells", default=None, help="comma-separated subset (smoke test)")
+    ap.add_argument("--min-cells-for-meta", type=int, default=40,
+                    help="run the N1 LOCO/LOMO aggregation only at/above this many cells")
     args = ap.parse_args()
     root = Path(args.matrix_root)
     cache = Path(args.cache_dir)
@@ -208,7 +210,7 @@ def main() -> int:
               f"delta={r['delta_full']:+.3f} n4(1p/2p)={r['n4']['du_1param']:+.1f}/{r['n4']['du_2param']:+.1f}",
               flush=True)
 
-    smoke = len(results) < 40
+    smoke = len(results) < args.min_cells_for_meta
     total_mism = sum(r["mismatch"] for r in results)
     print(f"\n=== {len(results)} cells, {sum(r['n'] for r in results)} runs, {total_mism} stop mismatches")
 

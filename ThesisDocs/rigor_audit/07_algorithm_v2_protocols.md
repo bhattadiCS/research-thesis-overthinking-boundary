@@ -85,6 +85,16 @@ Expectation-setting (from [03] §3 and [05]): late-cell capture is already at �
 
 ## Runbook — running everything in the Nvidia workspace
 
+**The one command** (from the repo root, python env active — e.g. after `bash tools/runai/bootstrap_session.sh`):
+
+```bash
+git pull && bash tools/run_autonomous_v2.sh
+```
+
+`tools/run_autonomous_v2.sh` runs the whole batch autonomously: N1/N4 on the CPU cores in the background while N5 then N6 generate on the GPU; every stage's outputs land under `research/outputs/experiments_v2/`; a background loop **commits and pushes that directory every 20 minutes** (checkpoint commits), each stage ends with a commit, and the pre-registered success-check verdicts are appended to `research/outputs/experiments_v2/success_checks.log`. Everything is resumable: the collector reconciles and continues interrupted runs by default, the N1/N4 harness caches per-cell JSONs, and re-running the same command just continues. Verified before commit: harness smoke runs with 0 stop mismatches and exact agreement with the P3d harness; the N1 aggregation path exercised end-to-end; both success-checkers dry-run against real cells; model/flag names checked against `MODEL_CATALOG` and the manifest's recorded commands.
+
+The individual stages, for reference or manual runs:
+
 One box-day covers Tier 1 **and** Tier 2: Tier-1 scripts are CPU-only (pandas/sklearn — a GPU does not accelerate them) so launch them first and let them run on the box's cores *while* the GPU jobs generate. All trace CSVs are committed, so `git pull` brings the data.
 
 ```bash
