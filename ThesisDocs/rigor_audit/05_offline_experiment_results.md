@@ -1,0 +1,43 @@
+# Offline Experiment Results — Pre-registered Protocols P1/P2/P3a/P13 (+P6/P9)
+
+**Date:** 2026-07-10 · **Corpus:** post-repair canonical matrix (75,965 runs; 68,095 W / 2,135 T / 5,735 L = 7.5495% loss) · **Harness:** `research/offline_policy_experiments.py` (census, per-cell cached, deterministic)
+**Counterfactual semantics** (as pre-registered in [04_next_experiment_protocols.md](04_next_experiment_protocols.md)): stop steps come from the frozen `hazard_drift` decisions in `detector_comparison_by_run.csv`; a guard veto defers the stop to the first later step where the predicate clears (drift-persistence assumption), else the run's last step; `utility = correct − 0.05·(step−1)`; `never_stop` is never modified. **Validation:** recomputed stop-step utilities matched the pipeline's `stop_utility` for **75,965/75,965 runs (0 mismatches)**.
+
+## P1 — Empty-answer guard: **FAILED (guard not shipped)** ❌
+
+| Pre-registered criterion | Result |
+|---|---|
+| net ΔU > 0 | **−116.55** ❌ |
+| ≥100 B-losses dissolved | 140 ✅ |
+| ≤50 win→loss conversions | **118** ❌ |
+
+Affected runs: 196 losses, **1,056 wins**, 14 ties. The decisive fact the census surfaced: five times more *wins* than losses stop on an empty extracted answer — on hard datasets the model's final answer is wrong anyway, so an early empty-answer stop (utility −0.05·(s−1)) beats paying the horizon cost, and deferring lands on wrong answers later. Per-dataset ΔU: ARC +12.0 (only positive), GSM8K −0.25, MATH −1.45, GPQA −126.85. **Interpretation:** Module 2's AUC 0.991 separated B-losses from other *losses*, not from empty-stopping *wins* at decision time. A blanket guard is net-negative; only an ARC-scoped variant is even neutral. Publishable negative, per the protocol's own clause.
+
+## P2 — T_MIN=2 vs T_MIN=3: **FLOOR DEFENDED** ✅
+
+Moving the floor to 3 costs **net ΔU = −1,912.35**: it dissolves 1,169 losses but converts 880 wins to losses and charges +0.05 delay to the (previously unquantified) **36,527 step-2-stopping runs, 33,574 of which are wins**. The T_MIN=2 structural choice now has a quantified defense: the modal loss (quit at the floor, repair later) is the tail of a bet that is overwhelmingly correct — step-2 stops are 91.9% wins.
+
+## P3a — Blanket token-cap guard: **FAILED (guard not shipped)** ❌
+
+| Pre-registered criterion | Result |
+|---|---|
+| net ΔU > 0 | **−8,033.65** ❌ |
+| ≥200 of the capped losses dissolve | 1,730 ✅ |
+
+Affected: 1,771 losses, **20,410 wins**, 492 ties — capped-step stopping is endemic and usually *right* (2,023 win→loss under the guard). Truncation is heavily involved in losses (Module 2's E/F sub-slices) but "never stop on a capped step" is far too blunt; 27% of the whole corpus stops on capped steps. Any viable truncation lever must be conditional (e.g., capped AND churning AND low q̂) — that is P3b/P3c territory, not a deterministic guard. The *causal* question (would longer budgets fix the underlying instability?) remains P4b (GPU).
+
+## P13 — Temperature→loss monotonicity: **CONFIRMED 4/4** ✅
+
+Cochran–Armitage trend on loss vs temperature {0.1, 0.6, 1.0}, per dataset: ARC Z=+2.77 (4.35/4.38/5.38%), GPQA Z=+4.43 (6.15/7.68/8.30%), GSM8K Z=+2.33 (10.66/11.06/11.95%), MATH Z=+2.08 (6.45/6.80/7.37%). Criterion (Z>1.96 increasing in ≥3/4) met in **4/4** — with the pre-registered honesty clause that the direction was observed before this confirmatory pass, so this is a within-corpus consistency check, not fresh-data confirmation.
+
+## P6 — Raw-text re-extraction audit: **PASS on rate / FAIL on zero-flips, scoped** ⚠️
+
+Census of all loss stop/final rows + 1.1% seeded sample of remaining rows. **Label delta rate 0.188% (bar: ≤0.5% — PASSED).** Verdict-relevant deltas: **30 (bar: 0 — FAILED)** — but every flagged row sits in a **DeepSeek** cell, and the mechanism was identified by direct inspection (`deepseek_r1_distill_1p5b__math …00243`, step 14): reasoning-mode outputs carry the answer inside the `<think>` block followed by an *incomplete* JSON block; collection-time extraction credited the think-block answer via its fallback path, which a from-scratch re-parse of `raw_text` alone does not reproduce. Storage truncation was ruled out (stored text ≥ recorded length). **Scoped verdict:** extraction is NOT a live confound for the 11 non-reasoning models (0 verdict-relevant deltas outside DeepSeek); for the 2 DeepSeek models, a follow-up that replicates the collection-time fallback/carry-forward semantics is required before treating any of the 30 rows as label errors. Worst-case bound if all 30 were genuine: ≤0.04 pp of verdicts, mixed direction.
+
+## P9 — λ-sensitivity sweep: RUNNING (background, `p9_lambda_sweep.py`, multi-hour)
+
+λ ∈ {0.01, 0.02, 0.10, 0.20} re-analyzed per cell with a STEP_COST-parameterized copy of the committed `trace_analysis.py` (λ in both the drift rule and the utility, out-of-place). Success bar: win rate within ±5pp of 89.6% for λ ∈ [0.02, 0.10]. Result to be appended.
+
+## What this changes in the improvement picture
+
+The two deterministic guards ranked #2 and #4 in [03_improvement_levers.md](03_improvement_levers.md) are **empirically dead as blanket policies** — the census showed their trigger conditions are dominated by wins. The floor (52.2% of losses) is **defended with numbers**. What survives as live levers: the *conditional* policy arms P3b–P3d (churn-gated hysteresis, best-so-far selection, per-cell threshold calibration — the last backed by the strongest evidence, slice-identity AUC 0.760), and the token-budget causal experiment P4b. Realistic recovery should be revised **down** from Module 3's ~800–1,400 estimate toward whatever P3b–P3d deliver out-of-fold; the structural-core share of losses is correspondingly larger than the 39% floor estimate.
