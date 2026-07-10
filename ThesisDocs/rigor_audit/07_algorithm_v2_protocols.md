@@ -80,3 +80,69 @@ Parser/executor wiring in `real_trace_experiments.py` (+ sandboxed execution gra
 5. **Full-sweep decision:** only if N7 or N8 passes does a 13-model re-collection sweep get designed (it would be the first re-collection since June; cost ≈ the original 52-cell sweep × arms).
 
 Expectation-setting (from [03] §3 and [05]): late-cell capture is already at ≈ the online bound for the current observables; Tier-1 gains come from context, Tier-3 gains from *changing what the policy can see*. Anything promising loss ≪ 5% on the existing traces without new observables remains a red flag.
+
+---
+
+## Runbook — running everything in the Nvidia workspace
+
+One box-day covers Tier 1 **and** Tier 2: Tier-1 scripts are CPU-only (pandas/sklearn — a GPU does not accelerate them) so launch them first and let them run on the box's cores *while* the GPU jobs generate. All trace CSVs are committed, so `git pull` brings the data.
+
+```bash
+# --- bootstrap (fresh session) ---
+bash tools/runai/bootstrap_session.sh        # or: git pull, if already cloned
+REPO=/workspace-persist/research-thesis-overthinking-boundary   # adjust to your workspace
+
+# --- Tier 1 (CPU; ~30-60 min; per-cell cached => interruptible/restartable) ---
+nohup python $REPO/research/algorithm_v2_experiments.py \
+  --matrix-root $REPO/research/outputs/experiment_matrix \
+  --cache-dir $REPO/.algov2_cache > n1n4.log 2>&1 &
+# N2 (probe suite) and N3 (hierarchical hazards): protocols registered above,
+# harnesses NOT YET IMPLEMENTED — do not improvise them; they need the same
+# validated-recovery pattern as algorithm_v2_experiments.py.
+
+# --- Tier 2, N5 (= P4b): token budget 256->512, worst cell (~6 GPU-h) ---
+# Byte-identical to the recorded cell's command except --max-new-tokens and --output-dir.
+python $REPO/research/real_trace_experiments.py --model mistral_small_24b_2409 --device cuda \
+  --quantization none --attn-implementation sdpa --task-source gsm8k --dataset-split train \
+  --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 512 --batch-size 16 \
+  --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
+  --max-tasks 500 --output-dir $REPO/research/outputs/experiments_v2/p4b_mistral_small_24b_2409__gsm8k_tok512
+python $REPO/research/trace_analysis.py --input-dir $REPO/research/outputs/experiments_v2/p4b_mistral_small_24b_2409__gsm8k_tok512
+
+# --- Tier 2, N6 (= P8): clean bf16 vs 4-bit pair, Qwen2.5-7B (~6-8 GPU-h; same batch size BOTH arms) ---
+for Q in none 4bit; do
+python $REPO/research/real_trace_experiments.py --model qwen2p5_7b --device cuda \
+  --quantization $Q --attn-implementation sdpa --task-source gsm8k --dataset-split train \
+  --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 256 --batch-size 32 \
+  --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
+  --max-tasks 500 --output-dir $REPO/research/outputs/experiments_v2/p8_qwen7b_$Q
+python $REPO/research/trace_analysis.py --input-dir $REPO/research/outputs/experiments_v2/p8_qwen7b_$Q
+done
+```
+
+**Success checks (pre-registered criteria, run after the analyze steps):**
+
+```bash
+# N5: cell loss rate must be <= 25.3% (baseline 30.27%)
+python - <<'EOF'
+import pandas as pd
+d = pd.read_csv('research/outputs/experiments_v2/p4b_mistral_small_24b_2409__gsm8k_tok512/detector_comparison_by_run.csv')
+p = d[d.detector.isin(['hazard_drift','never_stop'])].pivot(index='run_id', columns='detector', values='stop_utility')
+loss = 100*(p.hazard_drift < p.never_stop).mean()
+print(f"loss {loss:.2f}%  PASS: {loss <= 25.3}")
+EOF
+
+# N6: step-2 correctness gap must be >= 0.10 with Z >= 1.96
+python - <<'EOF'
+import pandas as pd, math
+q = {}
+for arm in ('none','4bit'):
+    ts = pd.read_csv(f'research/outputs/experiments_v2/p8_qwen7b_{arm}/trace_steps.csv', usecols=['step','correct'])
+    s2 = ts[ts.step==2].correct.fillna(0); q[arm] = (s2.mean(), len(s2))
+gap = q['none'][0]-q['4bit'][0]
+se = math.sqrt(sum(p*(1-p)/n for p,n in q.values()))
+print(f"q2 bf16={q['none'][0]:.4f} 4bit={q['4bit'][0]:.4f} gap={gap:.4f} Z={gap/se:.2f}  PASS: {gap>=0.10 and gap/se>=1.96}")
+EOF
+```
+
+Notes: everything writes under `research/outputs/experiments_v2/` — the canonical 52-cell tree stays untouched until results are accepted. Commit + push results from the box per repo convention (CSVs/reports are tracked; `.npz`/logs are gitignored). The `algorithm_v2_experiments.py` output ends with the N1/N4 criterion verdicts printed against their pre-registered bars.
