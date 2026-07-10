@@ -646,8 +646,15 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
             parse_expr, standard_transformations, implicit_multiplication_application,
         )
         transforms = standard_transformations + (implicit_multiplication_application,)
-        expr_a = parse_expr(norm_candidate.replace("^", "**"), transformations=transforms)
-        expr_b = parse_expr(norm_expected.replace("^", "**"), transformations=transforms)
+        def _sympy_ready(expr: str) -> str:
+            # Digit-letter adjacency like '0x^2' tokenizes as a broken hex
+            # literal BEFORE sympy's implicit-multiplication transform runs
+            # (TokenError; rigor_audit/01 §4c) -- make the product explicit,
+            # leaving scientific notation (2e3) alone.
+            return re.sub(r"(\d)(?![eE][0-9])([a-zA-Z(])", r"\1*\2", expr.replace("^", "**"))
+
+        expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
+        expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
         if sympy.simplify(expr_a - expr_b) == 0:
             return True
     except Exception:  # noqa: BLE001 -- unparseable expressions just fall through
@@ -670,7 +677,9 @@ def normalize_mcq_answer(raw_answer: str) -> str:
     s = s.upper()
     for pattern in (r"(?:ANSWER|OPTION|CHOICE)\s*(?:IS|:|=)?\s*\(?([A-H])\)?",
                     r"\(([A-H])\)",
-                    r"(?<![A-Z])([A-H])(?![A-Z])"):
+                    # '/' guards: a bare letter adjacent to a slash is part of a
+                    # token like 'N/A', not a choice (rigor_audit/01 §4a).
+                    r"(?<![A-Z/])([A-H])(?![A-Z/])"):
         matches = re.findall(pattern, s)
         if matches:
             return matches[-1]
@@ -1163,10 +1172,24 @@ def expected_steps_per_run(is_baseline: bool, max_steps: int) -> int:
     return 1 if is_baseline else max_steps
 
 
+def _escape_control_chars(frame: pd.DataFrame) -> pd.DataFrame:
+    # Control characters (\r, \f from decoded LaTeX like \rho, \frac) inside
+    # text fields break CSV row framing when writes are interrupted
+    # (rigor_audit/01 Axis 5a root cause). Tabs and newlines survive pandas
+    # quoting; everything else in C0 gets replaced.
+    pattern = re.compile(r"[\x00-\x08\x0b-\x1f]")
+    for column in frame.columns:
+        if frame[column].dtype == object:
+            frame[column] = frame[column].map(
+                lambda value: pattern.sub(" ", value) if isinstance(value, str) else value
+            )
+    return frame
+
+
 def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
     if not rows:
         return
-    frame = pd.DataFrame(rows)
+    frame = _escape_control_chars(pd.DataFrame(rows))
     if path.exists():
         existing_columns = pd.read_csv(path, nrows=0).columns.tolist()
         for column in existing_columns:

@@ -213,7 +213,18 @@ def collection_complete(cdir: Path, scope: dict[str, Any] | None = None, dataset
 
 
 def analysis_complete(cdir: Path) -> bool:
-    return (cdir / "real_trace_feature_weights.png").exists()
+    # Existence alone let a cell whose collection later GREW keep passing as
+    # analyzed (qwen2p5_7b__math sat at 75/1500 detector-stage runs for two
+    # weeks -- rigor_audit/01 §5c). Analysis is complete only if its outputs
+    # are no older than the trace data they were computed from.
+    marker = cdir / "real_trace_feature_weights.png"
+    dcbr = cdir / "detector_comparison_by_run.csv"
+    steps = cdir / "trace_steps.csv"
+    if not (marker.exists() and dcbr.exists()):
+        return False
+    if steps.exists() and dcbr.stat().st_mtime < steps.stat().st_mtime:
+        return False
+    return True
 
 
 def report_complete(cdir: Path) -> bool:
@@ -226,12 +237,17 @@ def trace_counts(cdir: Path) -> tuple[int, int]:
         return 0, 0
     run_ids: set[str] = set()
     rows = 0
+    # Corruption fragments (field-shifted rows from interrupted writes) carry
+    # malformed run_ids and previously inflated collected-run counts by 24
+    # phantom ids (rigor_audit/01 Axis 5a). Count well-formed run_ids only.
+    run_id_ok = re.compile(r"__temp\d+(?:\.\d+)?__seed\d+$")
     try:
         with steps.open(newline="", encoding="utf-8", errors="replace") as fh:
             for row in csv.DictReader(fh):
                 rows += 1
-                if row.get("run_id"):
-                    run_ids.add(row["run_id"])
+                rid = row.get("run_id")
+                if rid and run_id_ok.search(rid):
+                    run_ids.add(rid)
     except OSError:
         return 0, 0
     return len(run_ids), rows

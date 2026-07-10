@@ -141,8 +141,12 @@ def calculate_run_utilities(
         step_utils = []
         for t in range(n_steps):
             q_val = 1.0 if correct_seq[t] else 0.0
-            # Vt = q_val * v - (1 - q_val) * c - lambda * t
-            ut = q_val * REWARD_VAL - (1.0 - q_val) * penalty - STEP_COST * (t + 1)
+            # Vt = q_val * v - (1 - q_val) * c - lambda * (step - 1); step = t+1.
+            # Matches the pipeline convention utility = correct - 0.05*(step-1)
+            # (real_trace_experiments.py) so utility LEVELS are cross-readable
+            # with matrix stop_utility (rigor_audit/01 Axis 6 / lever H5).
+            # Uniform +lambda offset: boundaries/argmax unaffected.
+            ut = q_val * REWARD_VAL - (1.0 - q_val) * penalty - STEP_COST * t
             step_utils.append(ut)
             
         # 1. Oracle utility: max Vt over the sequence

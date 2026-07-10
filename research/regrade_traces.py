@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import re
 import sys
 from pathlib import Path
 
@@ -31,17 +32,40 @@ STEP_COST = 0.05
 
 
 def _answer_type(domain: str, task_source: str) -> str:
+    # Must mirror collection-time answer_type per dataset: ARC/GPQA are
+    # multiple-choice; grading them as "number" rewrites ~12,284 correct
+    # labels (rigor_audit/01 §4b).
     src = (task_source or domain or "").strip().lower()
-    return "math" if src == "math" else "number"
+    if src == "math":
+        return "math"
+    if src in ("arc", "gpqa"):
+        return "mcq"
+    return "number"
+
+
+# Well-formed run_id suffix; SIGKILL-corruption fragments fail this and must
+# not be re-graded as if they were rows (rigor_audit/01 Axis 5a).
+_RUN_ID_OK = re.compile(r"__temp\d+(?:\.\d+)?__seed\d+$")
 
 
 def regrade_file(path: Path, dry_run: bool) -> tuple[int, int]:
-    df = pd.read_csv(path)
+    # keep_default_na=False keeps literal 'N/A'-style answers as strings
+    # (pandas would otherwise coerce them to NaN); na_values=[""] keeps
+    # genuinely empty fields detectable via pd.isna.
+    df = pd.read_csv(path, keep_default_na=False, na_values=[""])
     if not {"answer", "expected_answer", "correct", "step"}.issubset(df.columns):
         return (0, 0)
     new_correct, new_norm, new_util = [], [], []
     flipped = 0
+    skipped_fragments = 0
     for _, row in df.iterrows():
+        rid = row.get("run_id")
+        if not isinstance(rid, str) or not _RUN_ID_OK.search(rid):
+            skipped_fragments += 1
+            new_correct.append(row.get("correct"))
+            new_norm.append(row.get("answer_normalized"))
+            new_util.append(row.get("utility"))
+            continue
         atype = _answer_type(str(row.get("domain", "")), str(row.get("task_source", "")))
         ans = "" if pd.isna(row.get("answer")) else str(row.get("answer"))
         exp = "" if pd.isna(row.get("expected_answer")) else str(row.get("expected_answer"))
@@ -50,12 +74,18 @@ def regrade_file(path: Path, dry_run: bool) -> tuple[int, int]:
                             notes="", source=str(row.get("task_source", "")), source_index=-1)
         correct = int(rte.verify_answer(task, ans))
         step_raw = row.get("step", 1)
-        step = 1 if pd.isna(step_raw) else int(step_raw)
+        try:
+            step = 1 if pd.isna(step_raw) else int(float(step_raw))
+        except (TypeError, ValueError):
+            step = 1
         new_correct.append(correct)
         new_norm.append(rte.normalize_answer(ans, atype))
         new_util.append(float(correct) - STEP_COST * (step - 1))
         prev_correct_raw = row.get("correct", 0)
-        prev_correct = 0 if pd.isna(prev_correct_raw) else int(prev_correct_raw)
+        try:
+            prev_correct = 0 if pd.isna(prev_correct_raw) else int(float(prev_correct_raw))
+        except (TypeError, ValueError):
+            prev_correct = 0
         if correct != prev_correct:
             flipped += 1
     if not dry_run:
