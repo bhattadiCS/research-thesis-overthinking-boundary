@@ -1,7 +1,9 @@
 import os
 import pandas as pd, numpy as np
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+# Relocated out of research/outputs/experiment_matrix/ (audit lever H6):
+# analysis code must not live inside the outputs tree.
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs", "experiment_matrix")
 late=[("qwen2p5_3b","gsm8k"),("qwen2p5_7b","gsm8k"),("qwen2p5_7b","math"),("qwen2p5_14b","gsm8k"),
 ("qwen2p5_32b","gsm8k"),("qwen2p5_32b","math"),("mistral_7b_instruct_v0p3","gsm8k"),
 ("internlm3_8b_instruct","gsm8k"),("yi_1p5_9b_chat","gsm8k"),("mistral_small_24b_2409","gsm8k"),

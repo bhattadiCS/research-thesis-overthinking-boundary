@@ -3,6 +3,17 @@
 
 This guide is a self-explanatory walkthrough of our research. It is structured to help explain the project's core concepts, terminology, data, and performance results to anyone from scratch.
 
+> **⚠️ Post-audit corrections (2026-07-10, from `ThesisDocs/rigor_audit/`; the body below is preserved as written for the July 1 meeting):**
+> 1. **Headline basis changed.** The `qwen2p5_7b__math` cell's detector stage covered only 75/1,500 collected runs; after the approved re-analysis (commit `57cd2f5`), the canonical breakdown is **75,965 runs: 68,095 wins (89.64%) / 2,135 ties (2.81%) / 5,735 losses (7.55%)** — cite these instead of Part 6's 74,540/89.59/2.83/7.57.
+> 2. **Part 6's "stopped too late" loss clause is impossible.** Under `utility = correct − 0.05·(step−1)` with `never_stop` at the horizon, a strict loss can only be a **missed late correction** (stop-step answer wrong, final answer correct — verified for 5,646/5,646 pre-repair losses; `rigor_audit/02` §1). Losses are never "stopped too late."
+> 3. **Part 5's 50.9% oracle-capture needs its caption.** It reproduces only as a mean over a hardcoded 12-late-cell selection (now `research/thesis_audit_latecells.py`) that included the then-defective cell. Honest variants: **50.41%** (12 late cells, repaired), 48.84% (11 cells), **63.66% all-cells run-pooled** (per-dataset 52.4/64.6/70.1/69.2). Always state slice + aggregation.
+> 4. **Loss concentration correction:** losses do **not** concentrate in "GSM8K/MATH vs the rest." Actual per-dataset loss rates: GSM8K 11.23% > GPQA 7.37% > MATH 6.92% > ARC 4.71% (pre-repair; MATH 6.87% post-repair). The old reading came from win-rate complements, which mix ties into MATH's complement. Losses also rise monotonically with temperature (6.95%/7.51%/8.27% at 0.1/0.6/1.0).
+> 5. **Dataset splits are asymmetric and now disclosed:** GSM8K and GPQA runs use the **train** split; MATH and ARC use **test** (per `matrix_manifest.json` command strings).
+> 6. **Part 3 roster corrections:** `mistral_small_24b_2409` is a **22B**-parameter model (mislabeled 24B), substituted after `mistral_small_3p1_24b` failed to load (vision-language checkpoint in a text-only harness); collected-run totals included 24 phantom run_ids from corruption fragments (75,996 → 75,972 well-formed).
+> 7. **Naming:** the "e-process" detector is a per-step **union-bound e-value grid**, not a time-uniform supermartingale — no optional-stopping validity is claimed (`rigor_audit/04` P10).
+> 8. Label integrity is now verified: on-disk `correct` labels agree with the audited grader to within 1 row in ~799K (fixed by `ce0167c`), and **0 of the win/loss/tie verdicts move** under any known label correction.
+> 9. **MATH narrative revision (post-repair):** on the full 1,500-run cell, `qwen2p5_7b__math`'s boundary is **step 4 with "Weakened late-boundary support"** — not the step 5 clear-late reading derived from the defective 75-run subset. The MATH story is now "**Qwen-32B-only clear late boundary (step 6); Qwen-7B weakened (step 4)**" (regenerated `_aggregate/math/CROSS_FAMILY_REPORT.md`).
+
 ---
 
 ## 📌 Part 1: The Core Problem (What is "LLM Overthinking"?)

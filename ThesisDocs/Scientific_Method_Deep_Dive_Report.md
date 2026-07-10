@@ -1,6 +1,8 @@
 # Scientific Method Deep Dive Report: Variable Isolation & Empirical Breakdowns
 *Date: July 1, 2026*
 
+> **⚠️ AUDIT RULING (2026-07-09): CONFIRMED-WITH-NAMED-CORRECTIONS — read alongside `ThesisDocs/rigor_audit/01_scientific_method_adversarial_verification.md` §Supersession.** Named corrections: the Factor 6 table was hand-patched at authoring time against a source that then produced Step 1/Step 1 (values happen to match current data; provenance was misstated); Factor 2's held-constant list omits real deltas; Factor 4 mislabels 13-model matrix aggregates as a Qwen-ladder result and bundles the max-steps horizon change; Factor 5 shows 1 of 3 swept models. Prompted-vs-distilled (Factor 6) is **NOT CONTROLLABLE** as an isolated factor — present it as a suggestive case comparison. Never regenerated after `8ce9b9f`/`074bc70`; boundary values spot-verified numerically current.
+
 This report presents a thorough, detailed deep dive into how our research pipeline strictly follows the scientific method of **factor isolation** (ceteris paribus). It provides exact empirical data breakdowns by independent variables (Model Scale, Precision, Temperature, Dataset Type, Stakes, and Reasoning Paradigm) and a forensic failure analysis of early stopping.
 
 ---

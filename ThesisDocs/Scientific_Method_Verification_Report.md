@@ -1,6 +1,8 @@
 # Scientific Method Verification & Deep Analysis Report
 *Meeting Date: July 1, 2026*
 
+> **⚠️ AUDIT RULING (2026-07-09): CONFIRMED-WITH-NAMED-CORRECTIONS — read alongside `ThesisDocs/rigor_audit/01_scientific_method_adversarial_verification.md` §Supersession.** Named corrections: the ladder-hardware "NVIDIA L4" claim is false (≈61 GB allocation traces); §1.2 overstates bf16-vs-4-bit isolation (the two runs differ in task count, code vintage, hardware, and batch size — the *conclusion* survives three robustness checks, the isolation claim as written does not); the failure-mode taxonomy here generalizes 2 single-cell anecdotes and is superseded by the full-population taxonomy in `rigor_audit/02`. This document was never regenerated after fixes `8ce9b9f`/`074bc70`; its boundary tables were spot-verified numerically current.
+
 This document serves as a comprehensive presentation guide and scientific report outlining how our research methodology adheres strictly to the scientific method, the results of our full-precision capability-ladder experiments, and deep theoretical insights explaining model behaviors under temperature variations, dataset domains, and failure cases.
 
 ---
