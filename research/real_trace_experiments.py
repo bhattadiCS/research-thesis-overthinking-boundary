@@ -1294,7 +1294,7 @@ def reconcile_existing_outputs(
             run_id_str = str(run_id)
             ordered = group.sort_values("step")
             observed_steps = [int(value) for value in ordered["step"].tolist()]
-            is_complete = observed_steps == expected_step_sequence and run_id_str in hidden_run_ids
+            is_complete = observed_steps == expected_step_sequence
             if is_complete:
                 completed_from_steps.add(run_id_str)
                 if run_id_str not in existing_run_ids:
