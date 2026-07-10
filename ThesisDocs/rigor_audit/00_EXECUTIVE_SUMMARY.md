@@ -3,6 +3,8 @@
 **Date:** 2026-07-09 · **Repo state audited:** HEAD `e049cc7` + one uncommitted hunk in `research/real_trace_experiments.py` (characterized in [00_repo_state_and_staleness.md](00_repo_state_and_staleness.md) §C, left untouched for human review)
 **Orchestration:** Module 0 (Sonnet 5) → Modules 1–2 (Fable 5, adversarial verification + full-population taxonomy) → Modules 3–4 (Fable 5, levers + pre-registered protocols) → this synthesis. Every number below traces to a module report that cites the exact file/line/command; nothing here is quoted from the pre-audit reports.
 
+> **Update 2026-07-10 — P5 executed and verified.** With the user's approval, the defective `qwen2p5_7b__math` cell was re-analyzed in place (committed `trace_analysis.py`, same traces) and its reports regenerated. All four pre-registered predictions matched exactly (cell 1,374 W / 35 T / 91 L; global; MATH slice; capture). **The canonical headline is now 75,965 runs: 68,095 W / 2,135 T / 5,735 L = 7.5495% loss** (MATH slice 6.8721%; 12-late-cell capture 50.41%). §3 item 1 is closed; the 74,540/7.5745% figures below describe the pre-repair tree and remain correct for what they measured. Residual: the cell's `metadata.json` nested reconciliation block and the `_aggregate/math` cross-family artifacts still predate the repair (regenerating aggregates was not pre-registered in P5 — flagged, not done).
+
 ---
 
 ## 1. The verdict — direct answers
@@ -46,7 +48,7 @@ Key slice facts ([02] §2): GSM8K is the heaviest loss dataset (11.23%), ARC lig
 
 | # | Action | Cost | Why first |
 |---|---|---|---|
-| 1 | **P5**: approve + run in-place `trace_analysis.py` repair of `qwen2p5_7b__math`; pre-registered prediction 1,374W/35T/91L, global 7.5495% | CPU, 5 min | Only production-tree write; unblocks consistent numbers everywhere |
+| 1 | ~~**P5**: in-place repair of `qwen2p5_7b__math`~~ **DONE 2026-07-10** — prediction matched exactly (1,374W/35T/91L; global 7.5495%) | CPU, 5 min | Executed with user approval; see Update note above |
 | 2 | Patch `regrade_traces.py` (MCQ answer-type, `keep_default_na=False`, fragment skip) + the `'N/A'`→`'A'` regex | hours | Gates all future label work; prevents a 12,284-label corruption |
 | 3 | **P1**: offline census of the empty-answer guard (B) on existing traces | CPU ~1 h | Cheapest real utility gain (~0.2pp), AUC 0.991 |
 | 4 | **P2/P3**: offline policy-variant census — T_MIN 2v3, token-cap guard, best-so-far cache, churn hysteresis, per-cell calibration | CPU 1–2 days | Tests every (iii) lever with zero GPU; pre-registered criteria fixed |
