@@ -47,4 +47,6 @@ research/outputs/**/hidden_states/
 ThesisDocs/*
 !ThesisDocs/
 !ThesisDocs/*.md
+!ThesisDocs/rigor_audit/
+!ThesisDocs/rigor_audit/*.md
 
