@@ -1,14 +1,14 @@
 {
   "model": {
-    "alias": "mistral_small_24b_2409",
-    "hf_name": "mistralai/Mistral-Small-Instruct-2409",
-    "family": "Mistral Small",
-    "parameter_count": "22B"
+    "alias": "qwen2p5_7b",
+    "hf_name": "Qwen/Qwen2.5-7B-Instruct",
+    "family": "Qwen2.5 instruct",
+    "parameter_count": "7B"
   },
-  "backend": "transformers+torch(cuda)",
-  "model_source": "mistralai/Mistral-Small-Instruct-2409",
+  "backend": "transformers+torch(cuda-4bit)",
+  "model_source": "Qwen/Qwen2.5-7B-Instruct",
   "device": "cuda",
-  "quantization": "none",
+  "quantization": "4bit",
   "device_map": null,
   "attn_implementation": "sdpa",
   "temperatures": [
@@ -20,23 +20,23 @@
     7
   ],
   "max_steps": 10,
-  "max_new_tokens": 512,
+  "max_new_tokens": 256,
   "max_tasks": 500,
   "task_source": "gsm8k",
   "dataset_split": "train",
   "dataset_shuffle_seed": 17,
-  "batch_size": 16,
+  "batch_size": 32,
   "step_cost": 0.05,
   "prompt_mode": "minimal_json",
   "system_prompt_mode": "default",
   "resume_enabled": true,
-  "completed_run_count": 548,
-  "pending_run_count": 952,
+  "completed_run_count": 128,
+  "pending_run_count": 1372,
   "next_pending_run": {
-    "run_id": "mistral_small_24b_2409__gsm8k_train_00048_11e2cfda__temp0.60__seed7",
-    "task_id": "gsm8k_train_00048_11e2cfda",
-    "task_source_index": 48,
-    "temperature": 0.6,
+    "run_id": "qwen2p5_7b__gsm8k_train_00128_47ebf5c6__temp0.10__seed7",
+    "task_id": "gsm8k_train_00128_47ebf5c6",
+    "task_source_index": 128,
+    "temperature": 0.1,
     "seed": 7
   },
   "checkpoint_reconciliation": {
