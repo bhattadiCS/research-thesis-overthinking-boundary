@@ -30,12 +30,12 @@
   "prompt_mode": "minimal_json",
   "system_prompt_mode": "default",
   "resume_enabled": true,
-  "completed_run_count": 548,
-  "pending_run_count": 952,
+  "completed_run_count": 628,
+  "pending_run_count": 872,
   "next_pending_run": {
-    "run_id": "mistral_small_24b_2409__gsm8k_train_00048_11e2cfda__temp0.60__seed7",
-    "task_id": "gsm8k_train_00048_11e2cfda",
-    "task_source_index": 48,
+    "run_id": "mistral_small_24b_2409__gsm8k_train_00128_47ebf5c6__temp0.60__seed7",
+    "task_id": "gsm8k_train_00128_47ebf5c6",
+    "task_source_index": 128,
     "temperature": 0.6,
     "seed": 7
   },
