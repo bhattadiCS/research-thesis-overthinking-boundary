@@ -1,0 +1,86 @@
+[1/52] deepseek_r1_distill_1p5b__arc n=1500 mism=0 delta=+0.110 n4(1p/2p)=+9.2/+6.5
+[2/52] deepseek_r1_distill_1p5b__gpqa n=1344 mism=0 delta=+0.020 n4(1p/2p)=-1.9/-1.9
+[3/52] deepseek_r1_distill_1p5b__gsm8k n=1500 mism=0 delta=+0.060 n4(1p/2p)=+57.3/+57.1
+[4/52] deepseek_r1_distill_1p5b__math n=1500 mism=0 delta=+0.075 n4(1p/2p)=+25.4/+25.4
+[5/52] deepseek_r1_distill_7b__arc n=1500 mism=0 delta=+0.080 n4(1p/2p)=-14.6/-19.7
+[6/52] deepseek_r1_distill_7b__gpqa n=1344 mism=0 delta=+0.055 n4(1p/2p)=-5.7/-7.3
+[7/52] deepseek_r1_distill_7b__gsm8k n=1500 mism=0 delta=+0.075 n4(1p/2p)=-7.8/-13.7
+[8/52] deepseek_r1_distill_7b__math n=1500 mism=0 delta=+0.100 n4(1p/2p)=+75.3/+75.1
+[9/52] internlm3_8b_instruct__arc n=1500 mism=0 delta=+0.150 n4(1p/2p)=+31.0/+31.5
+[10/52] internlm3_8b_instruct__gpqa n=1344 mism=0 delta=+0.150 n4(1p/2p)=+14.8/+25.4
+[11/52] internlm3_8b_instruct__gsm8k n=1500 mism=0 delta=+0.050 n4(1p/2p)=+1.5/+4.4
+[12/52] internlm3_8b_instruct__math n=1500 mism=0 delta=+0.150 n4(1p/2p)=+59.8/+70.8
+[13/52] llama_3p1_8b_instruct__arc n=1500 mism=0 delta=+0.020 n4(1p/2p)=-9.7/-6.0
+[14/52] llama_3p1_8b_instruct__gpqa n=1342 mism=0 delta=+0.135 n4(1p/2p)=+26.9/+21.7
+[15/52] llama_3p1_8b_instruct__gsm8k n=1500 mism=0 delta=-0.110 n4(1p/2p)=+1.9/+1.9
+[16/52] llama_3p1_8b_instruct__math n=1500 mism=0 delta=+0.150 n4(1p/2p)=+55.3/+62.3
+[17/52] mistral_7b_instruct_v0p3__arc n=1500 mism=0 delta=+0.130 n4(1p/2p)=+6.5/+7.2
+[18/52] mistral_7b_instruct_v0p3__gpqa n=1344 mism=0 delta=+0.025 n4(1p/2p)=+7.0/+6.9
+[19/52] mistral_7b_instruct_v0p3__gsm8k n=1500 mism=0 delta=+0.150 n4(1p/2p)=+46.6/+53.0
+[20/52] mistral_7b_instruct_v0p3__math n=1500 mism=0 delta=+0.150 n4(1p/2p)=+65.7/+87.5
+[21/52] mistral_small_24b_2409__arc n=1500 mism=0 delta=+0.000 n4(1p/2p)=-0.0/-1.1
+[22/52] mistral_small_24b_2409__gpqa n=1344 mism=0 delta=+0.120 n4(1p/2p)=+31.3/+28.4
+[23/52] mistral_small_24b_2409__gsm8k n=1500 mism=0 delta=-0.145 n4(1p/2p)=+122.6/+115.0
+[24/52] mistral_small_24b_2409__math n=1500 mism=0 delta=+0.150 n4(1p/2p)=+145.0/+159.9
+[25/52] phi_4_mini_instruct__arc n=1500 mism=0 delta=-0.115 n4(1p/2p)=+11.6/+15.9
+[26/52] phi_4_mini_instruct__gpqa n=1344 mism=0 delta=+0.125 n4(1p/2p)=-1.3/-0.1
+[27/52] phi_4_mini_instruct__gsm8k n=1500 mism=0 delta=+0.090 n4(1p/2p)=-7.3/-8.0
+[28/52] phi_4_mini_instruct__math n=1500 mism=0 delta=+0.150 n4(1p/2p)=+64.8/+104.8
+[29/52] qwen2p5_0p5b__arc n=1500 mism=0 delta=+0.100 n4(1p/2p)=+24.9/+24.8
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arrays/arrow/array.py", line 1041, in _evaluate_op_method
+    result = pc_func(self._pa_array, other)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pyarrow/compute.py", line 254, in wrapper
+    return func.call(args, None, memory_pool)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/_compute.pyx", line 405, in pyarrow._compute.Function.call
+  File "pyarrow/error.pxi", line 155, in pyarrow.lib.pyarrow_internal_check_status
+  File "pyarrow/error.pxi", line 92, in pyarrow.lib.check_status
+pyarrow.lib.ArrowNotImplementedError: Function 'subtract_checked' has no kernel matching input types (large_string, large_string)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/algorithm_v2_experiments.py", line 272, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/algorithm_v2_experiments.py", line 205, in main
+    r = cell_pass(cell, root, cache)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/algorithm_v2_experiments.py", line 128, in cell_pass
+    U, uns, uhd, chg2, tasks, rids, mism, feats = recover_cell(root / cell)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/algorithm_v2_experiments.py", line 71, in recover_cell
+    sf = ta.add_temporal_features(sf)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/trace_analysis.py", line 55, in add_temporal_features
+    ordered["delta_utility"] = ordered["next_utility"] - ordered["utility"]
+                               ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/ops/common.py", line 85, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arraylike.py", line 198, in __sub__
+    return self._arith_method(other, operator.sub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/series.py", line 6751, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/base.py", line 1644, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/ops/array_ops.py", line 279, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/ops/common.py", line 85, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arraylike.py", line 198, in __sub__
+    return self._arith_method(other, operator.sub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arrays/arrow/array.py", line 1091, in _arith_method
+    result = self._evaluate_op_method(other, op, ARROW_ARITHMETIC_FUNCS)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arrays/arrow/array.py", line 1043, in _evaluate_op_method
+    raise TypeError(self._op_method_error_message(other_original, op)) from err
+TypeError: operation 'sub' not supported for dtype 'str' with dtype 'str'
