@@ -30,12 +30,12 @@
   "prompt_mode": "minimal_json",
   "system_prompt_mode": "default",
   "resume_enabled": true,
-  "completed_run_count": 596,
-  "pending_run_count": 904,
+  "completed_run_count": 884,
+  "pending_run_count": 616,
   "next_pending_run": {
-    "run_id": "qwen2p5_7b__gsm8k_train_00096_6481a627__temp0.60__seed7",
-    "task_id": "gsm8k_train_00096_6481a627",
-    "task_source_index": 96,
+    "run_id": "qwen2p5_7b__gsm8k_train_00384_30d9094c__temp0.60__seed7",
+    "task_id": "gsm8k_train_00384_30d9094c",
+    "task_source_index": 384,
     "temperature": 0.6,
     "seed": 7
   },
