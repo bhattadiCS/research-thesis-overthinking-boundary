@@ -85,10 +85,25 @@ Expectation-setting (from [03] §3 and [05]): late-cell capture is already at �
 
 ## Runbook — running everything in the Nvidia workspace
 
-**The one command** (from the repo root, python env active — e.g. after `bash tools/runai/bootstrap_session.sh`):
+**First time on a fresh box** (repo already cloned at `/workspace-persist/research-thesis-overthinking-boundary`, conda `base` active — the same env that ran the 52-cell sweep, `/opt/conda/bin/python`):
 
 ```bash
-git pull && bash tools/run_autonomous_v2.sh
+cd /workspace-persist/research-thesis-overthinking-boundary
+git pull
+pip install -r requirements-colab.txt          # only if preflight says deps are missing
+export HF_TOKEN=hf_xxx                         # N5's Mistral-Small-Instruct-2409 is GATED
+export HF_HOME=/workspace-persist/hf_cache     # keep ~60GB of weights on the persistent volume
+V2_PARALLEL_GPU=1 bash tools/run_autonomous_v2.sh
+```
+
+`tools/preflight_v2.py` runs automatically **before** the script detaches, so anything that would sabotage an unattended run fails in your terminal in ~10 s rather than 12 hours later. It hard-checks: **git identity and `git push` authentication** (without which every checkpoint would commit locally and never reach GitHub — the single most dangerous silent failure), torch/CUDA with native `sm_120` Blackwell kernels, `bitsandbytes` (the N6 4-bit arm aborts without it), access to the **gated** Mistral repo, ~80 GB of free disk, and the 52 analyzed cells N1/N4 read. Run it standalone any time with `python tools/preflight_v2.py`.
+
+**GPU utilization — what we deliberately do NOT tune.** Batch size (16 for Mistral, 32 for Qwen), attention implementation (`sdpa`), and dtype are **held-constant variables**, not free parameters: N5's control arm *is* the recorded 256-token cell, and N6 exists specifically to eliminate a batch/code/hardware confound ([01] Axis 2). Retuning them for throughput would reintroduce the very confound these experiments are designed to kill. The legitimate levers, all applied: N1/N4 run niced on the CPU cores *while* the GPU generates; `HF_HOME` on the persistent volume avoids re-downloading 60 GB per container; and `V2_PARALLEL_GPU=1` runs N5 and N6 **concurrently** — peak ≈ 52 GB (Mistral-22B bf16 @ batch 16 + KV) + 19 GB (Qwen-7B bf16 @ batch 32) ≈ **71 GB of your 96 GB**, in separate CUDA contexts, so results are bit-for-bit unaffected and wall-clock drops from ~14 h to ~8 h. Drop to `V2_PARALLEL_GPU=0` if you'd rather be conservative.
+
+**Subsequent runs / resume after a crash** — the same command; it continues where it stopped:
+
+```bash
+git pull && V2_PARALLEL_GPU=1 bash tools/run_autonomous_v2.sh
 ```
 
 **No `nohup` needed — the script self-detaches** (`setsid`/`nohup` + SIGHUP ignored, inherited by children), prints the pid and the log paths, and returns immediately. Closing the terminal or dropping SSH cannot kill the run. `--foreground` stays attached if you want to watch it; a second invocation while a run is active refuses to start a duplicate.

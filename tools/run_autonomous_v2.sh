@@ -36,6 +36,15 @@ if [ "$FOREGROUND" -eq 0 ] && [ "${V2_DETACHED:-0}" != "1" ]; then
         echo "  tail -f $REPO/$LOG"
         exit 0
     fi
+    # Preflight runs HERE (parent, attached) so blocking problems -- above all a
+    # git push that cannot authenticate -- surface in your terminal now, not in
+    # a log you would read 12 hours from now. SKIP_PREFLIGHT=1 to bypass.
+    if [ "${SKIP_PREFLIGHT:-0}" != "1" ]; then
+        "$PY" tools/preflight_v2.py || {
+            echo "Preflight failed — not launching. (SKIP_PREFLIGHT=1 to override.)"
+            exit 1
+        }
+    fi
     if command -v setsid >/dev/null 2>&1; then
         V2_DETACHED=1 setsid nohup bash "$0" --foreground >> "$V2/nohup.out" 2>&1 < /dev/null &
     else
@@ -95,18 +104,61 @@ nohup nice -n 10 "$PY" research/algorithm_v2_experiments.py \
     --cache-dir "$V2/algov2_cache" > "$V2/n1n4_results.log" 2>&1 &
 N1_PID=$!
 
-# ---- Stage 2: N5 (= P4b) token budget 256 -> 512 on the worst cell ----------
+# ---- Stages 2/3: the two GPU experiments -----------------------------------
+# The collection flags below are byte-identical to the recorded cells' commands
+# (matrix_manifest.json) EXCEPT each experiment's single independent variable.
+# Do NOT "optimize" batch size / attention impl / dtype here: those are the
+# held-constant variables. N5's control arm IS the recorded 256-token cell, and
+# N6 exists precisely to remove a batch/code/hardware confound -- retuning them
+# would reintroduce the confound the experiment is meant to kill.
 N5_DIR="$V2/p4b_mistral_small_24b_2409__gsm8k_tok512"
-say "Stage 2: N5/P4b collect -> $N5_DIR"
-"$PY" research/real_trace_experiments.py --model mistral_small_24b_2409 --device cuda \
-    --quantization none --attn-implementation sdpa --task-source gsm8k --dataset-split train \
-    --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 512 --batch-size 16 \
-    --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
-    --max-tasks 500 --output-dir "$N5_DIR" >>"$LOG" 2>&1
-say "N5 collect rc=$?"
-ckpt "wip: N5 collection"
-if [ -f "$N5_DIR/trace_steps.csv" ]; then
-    "$PY" research/trace_analysis.py --input-dir "$N5_DIR" >>"$LOG" 2>&1 || say "N5 analyze FAILED"
+
+run_n5() {   # IV: --max-new-tokens 256 -> 512 (everything else = recorded cell)
+    say "N5/P4b collect -> $N5_DIR"
+    "$PY" research/real_trace_experiments.py --model mistral_small_24b_2409 --device cuda \
+        --quantization none --attn-implementation sdpa --task-source gsm8k --dataset-split train \
+        --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 512 --batch-size 16 \
+        --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
+        --max-tasks 500 --output-dir "$N5_DIR" >>"$LOG" 2>&1
+    say "N5 collect rc=$?"
+    ckpt "wip: N5 collection"
+    if [ -f "$N5_DIR/trace_steps.csv" ]; then
+        "$PY" research/trace_analysis.py --input-dir "$N5_DIR" >>"$LOG" 2>&1 || say "N5 analyze FAILED"
+    fi
+    ckpt "wip: N5 analyzed"
+}
+
+run_n6() {   # IV: --quantization none vs 4bit (same batch size BOTH arms)
+    for Q in none 4bit; do
+        ARM_DIR="$V2/p8_qwen7b_$Q"
+        say "N6/P8 arm quantization=$Q -> $ARM_DIR"
+        "$PY" research/real_trace_experiments.py --model qwen2p5_7b --device cuda \
+            --quantization "$Q" --attn-implementation sdpa --task-source gsm8k --dataset-split train \
+            --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 256 --batch-size 32 \
+            --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
+            --max-tasks 500 --output-dir "$ARM_DIR" >>"$LOG" 2>&1
+        say "N6 arm $Q collect rc=$?"
+        [ -f "$ARM_DIR/trace_steps.csv" ] && { "$PY" research/trace_analysis.py --input-dir "$ARM_DIR" >>"$LOG" 2>&1 || say "N6 arm $Q analyze FAILED"; }
+        ckpt "wip: N6 arm $Q"
+    done
+}
+
+if [ "${V2_PARALLEL_GPU:-0}" = "1" ]; then
+    # Safe on a 96GB card: peak ~52GB (Mistral-22B bf16 @batch16 + KV) + ~19GB
+    # (Qwen-7B bf16 @batch32) = ~71GB. Separate CUDA contexts => results are
+    # unchanged; only wall-clock (~14h -> ~8h) and SM contention differ.
+    say "GPU mode: PARALLEL (N5 || N6); set V2_PARALLEL_GPU=0 for sequential"
+    run_n5 & P_N5=$!
+    run_n6 & P_N6=$!
+    wait "$P_N5"; wait "$P_N6"
+else
+    say "GPU mode: SEQUENTIAL (default; V2_PARALLEL_GPU=1 runs N5 and N6 together)"
+    run_n5
+    run_n6
+fi
+
+# ---- success checks (pre-registered criteria) -------------------------------
+if [ -f "$N5_DIR/detector_comparison_by_run.csv" ]; then
     "$PY" - "$N5_DIR" <<'EOF' 2>&1 | tee -a "$SUMMARY" | tee -a "$LOG"
 import sys, pandas as pd
 d = pd.read_csv(sys.argv[1] + "/detector_comparison_by_run.csv")
@@ -116,21 +168,6 @@ print(f"N5/P4b (max_new_tokens 256->512): loss {loss:.2f}% on {len(p)} runs | "
       f"baseline 30.27% | pre-registered PASS (<=25.3%): {loss <= 25.3}")
 EOF
 fi
-ckpt "wip: N5 analyzed"
-
-# ---- Stage 3: N6 (= P8) clean bf16 vs 4-bit pair ----------------------------
-for Q in none 4bit; do
-    ARM_DIR="$V2/p8_qwen7b_$Q"
-    say "Stage 3: N6/P8 arm quantization=$Q -> $ARM_DIR"
-    "$PY" research/real_trace_experiments.py --model qwen2p5_7b --device cuda \
-        --quantization "$Q" --attn-implementation sdpa --task-source gsm8k --dataset-split train \
-        --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 256 --batch-size 32 \
-        --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
-        --max-tasks 500 --output-dir "$ARM_DIR" >>"$LOG" 2>&1
-    say "N6 arm $Q collect rc=$?"
-    [ -f "$ARM_DIR/trace_steps.csv" ] && { "$PY" research/trace_analysis.py --input-dir "$ARM_DIR" >>"$LOG" 2>&1 || say "N6 arm $Q analyze FAILED"; }
-    ckpt "wip: N6 arm $Q"
-done
 if [ -f "$V2/p8_qwen7b_none/trace_steps.csv" ] && [ -f "$V2/p8_qwen7b_4bit/trace_steps.csv" ]; then
     "$PY" - "$V2" <<'EOF' 2>&1 | tee -a "$SUMMARY" | tee -a "$LOG"
 import sys, math, pandas as pd
