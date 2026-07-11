@@ -42,6 +42,11 @@ research/outputs/experiment_matrix/_preflight/
 # single-level rule above (research/outputs/*/model_offload/) misses them.
 research/outputs/**/model_offload/
 research/outputs/**/hidden_states/
+# Autonomous v2 runner: keep the results (success_checks.log, n1n4_results.log,
+# CSVs, per-cell caches); drop the firehose log and process bookkeeping.
+research/outputs/experiments_v2/autonomous_run.log
+research/outputs/experiments_v2/nohup.out
+research/outputs/experiments_v2/.run.pid
 
 # Thesis documentation
 ThesisDocs/*
