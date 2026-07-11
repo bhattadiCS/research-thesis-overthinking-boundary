@@ -85,7 +85,11 @@ try:
         else:
             ok(f"torch has native sm_{cap[0]}{cap[1]} kernels")
 except ImportError:
-    bad("torch is not installed", "pip install -r requirements-colab.txt")
+    bad("torch is not installed (NOTE: requirements-colab.txt does NOT include torch — "
+        "the old image shipped it preinstalled)",
+        "install the Blackwell/CUDA-13 wheel (matches the sm_120 card + driver on this box):\n"
+        "             pip install torch --index-url https://download.pytorch.org/whl/cu130\n"
+        "             (cu128 wheels also carry sm_120 kernels if cu130 is unavailable)")
 
 try:
     import bitsandbytes  # noqa: F401

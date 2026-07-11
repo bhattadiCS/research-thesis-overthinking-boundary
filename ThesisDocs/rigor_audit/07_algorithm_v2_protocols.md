@@ -90,7 +90,19 @@ Expectation-setting (from [03] §3 and [05]): late-cell capture is already at �
 ```bash
 cd /workspace-persist/research-thesis-overthinking-boundary
 git pull
-pip install -r requirements-colab.txt          # only if preflight says deps are missing
+
+# 1. git identity — checkpoint commits fail without it
+git config user.name  "Aditya Bhatt"
+git config user.email "bhattadiCS@users.noreply.github.com"
+
+# 2. torch for this box (Blackwell sm_120 + CUDA 13). NOT in requirements-colab.txt:
+#    the previous image shipped torch preinstalled; a fresh container does not.
+pip install torch --index-url https://download.pytorch.org/whl/cu130
+
+# 3. everything else (transformers, bitsandbytes for the N6 4-bit arm, datasets, sklearn…)
+pip install -r requirements-colab.txt
+
+# 4. env + launch
 export HF_TOKEN=hf_xxx                         # N5's Mistral-Small-Instruct-2409 is GATED
 export HF_HOME=/workspace-persist/hf_cache     # keep ~60GB of weights on the persistent volume
 V2_PARALLEL_GPU=1 bash tools/run_autonomous_v2.sh
