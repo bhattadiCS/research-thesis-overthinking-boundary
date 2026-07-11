@@ -58,13 +58,23 @@ else:
         'git config user.name "Aditya Bhatt" && git config user.email "you@example.com"')
 
 rc, out = sh("git", "push", "--dry-run", "origin", "HEAD:main")
+low = out.lower()
 if rc == 0:
-    ok("git push authenticates (dry-run) — checkpoints will reach the remote")
-else:
-    bad("git push FAILS — checkpoints would never leave this box",
-        "set up a credential helper or a token remote, e.g.:\n"
+    ok("git push authenticates and fast-forwards (dry-run) — checkpoints will reach the remote")
+elif "fast-forward" in low or "rejected" in low or "behind" in low:
+    # NOT an auth problem: credentials worked, the history is just stale.
+    bad("git push rejected: this branch is BEHIND origin/main (credentials are fine)",
+        "git pull --rebase origin main     # then re-run — no new token needed")
+elif any(s in low for s in ("authentication", "could not read username", "403",
+                            "permission denied", "password authentication")):
+    bad("git push cannot AUTHENTICATE — checkpoints would never leave this box",
+        "use a token remote (classic PAT needs the `repo` scope; fine-grained needs "
+        "Contents: Read and write):\n"
         "             git remote set-url origin https://<GITHUB_PAT>@github.com/bhattadiCS/"
-        "research-thesis-overthinking-boundary.git\n"
+        "research-thesis-overthinking-boundary.git")
+else:
+    bad("git push failed for an unexpected reason — checkpoints may not reach the remote",
+        f"investigate: git push --dry-run origin HEAD:main\n"
         f"             (git said: {out.splitlines()[-1] if out else 'no output'})")
 
 print("\n=== 2. GPU stack ===")
