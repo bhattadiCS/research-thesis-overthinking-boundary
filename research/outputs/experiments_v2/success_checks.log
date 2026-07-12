@@ -17,3 +17,29 @@ n=200: median 0.88  (cells: 50)
 n=400: median 0.93  (cells: 50)
 N5/P4b (max_new_tokens 256->512): loss 30.27% on 1500 runs | baseline 30.27% | pre-registered PASS (<=25.3%): False
 N6/P8 (bf16 vs 4-bit): q2 bf16=0.2787 (n=1500) 4bit=0.1360 (n=1500) gap=0.1427 Z=9.79 | pre-registered PASS (gap>=0.10 and Z>=1.96): True
+--- N1/N4 (pre-registered: N1 LOCO >= +927.5 ; N4 paired gain > +150) ---
+[46/52] qwen2p5_7b__gpqa n=1344 mism=0 delta=+0.150 n4(1p/2p)=+20.4/+24.0
+[47/52] qwen2p5_7b__gsm8k n=1500 mism=0 delta=+0.010 n4(1p/2p)=+1.0/-5.6
+[48/52] qwen2p5_7b__math n=1500 mism=0 delta=+0.145 n4(1p/2p)=+43.3/+47.3
+[49/52] yi_1p5_9b_chat__arc n=1500 mism=0 delta=+0.015 n4(1p/2p)=-0.5/-0.4
+[50/52] yi_1p5_9b_chat__gpqa n=1343 mism=0 delta=+0.125 n4(1p/2p)=+18.1/+16.7
+[51/52] yi_1p5_9b_chat__gsm8k n=1500 mism=0 delta=-0.005 n4(1p/2p)=+3.9/+0.1
+[52/52] yi_1p5_9b_chat__math n=1499 mism=0 delta=+0.150 n4(1p/2p)=+107.8/+116.5
+
+=== 52 cells, 75965 runs, 0 stop mismatches
+
+--- N4 two-parameter rule (paired, identical folds) ---
+1-param OOF dU: +1540.50   2-param OOF dU: +1700.00   paired gain: +159.50
+CRITERION (2-param beats 1-param by > +150): True
+
+--- N1 meta-calibration ---
+P3d full-fit lookup ceiling (in-sample deploy deltas): +1717.10
+LOCO predicted-delta dU: +919.20  (59.5% of the P3d OOF gain)
+LOMO predicted-delta dU: +976.80  (63.2%)
+CRITERION (LOCO >= 60% of +1,545.85 => >= +927.5): False
+
+--- N1 learning curve (median fraction of full-delta gain recovered) ---
+  n= 50: median 0.76  (cells: 51)
+  n=100: median 0.82  (cells: 49)
+  n=200: median 0.88  (cells: 50)
+  n=400: median 0.93  (cells: 50)
