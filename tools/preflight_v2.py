@@ -162,8 +162,8 @@ else:
 
 print()
 if fails:
-    print(f"\033[31m✗ PREFLIGHT FAILED — {len(fails)} blocking issue(s). Fix them, then re-run.\033[0m")
+    print(f"\033[31mX PREFLIGHT FAILED — {len(fails)} blocking issue(s). Fix them, then re-run.\033[0m")
     sys.exit(1)
-print(f"\033[32m✓ PREFLIGHT PASSED\033[0m" + (f" ({len(warns)} warning(s))" if warns else "")
+print(f"\033[32mOK PREFLIGHT PASSED\033[0m" + (f" ({len(warns)} warning(s))" if warns else "")
       + " — safe to launch the autonomous run.\n")
 sys.exit(0)
