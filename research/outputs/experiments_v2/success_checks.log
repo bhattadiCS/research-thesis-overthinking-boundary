@@ -1,2 +1,28 @@
 N5/P4b (max_new_tokens 256->512): loss 30.27% on 1500 runs | baseline 30.27% | pre-registered PASS (<=25.3%): False
 N6/P8 (bf16 vs 4-bit): q2 bf16=0.2787 (n=1500) 4bit=0.1360 (n=1500) gap=0.1427 Z=9.79 | pre-registered PASS (gap>=0.10 and Z>=1.96): True
+--- N1/N4 (pre-registered: N1 LOCO >= +927.5 ; N4 paired gain > +150) ---
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arraylike.py", line 198, in __sub__
+    return self._arith_method(other, operator.sub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/series.py", line 6751, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/base.py", line 1644, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/ops/array_ops.py", line 279, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/ops/common.py", line 85, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arraylike.py", line 198, in __sub__
+    return self._arith_method(other, operator.sub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arrays/arrow/array.py", line 1091, in _arith_method
+    result = self._evaluate_op_method(other, op, ARROW_ARITHMETIC_FUNCS)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/pandas/core/arrays/arrow/array.py", line 1043, in _evaluate_op_method
+    raise TypeError(self._op_method_error_message(other_original, op)) from err
+TypeError: operation 'sub' not supported for dtype 'str' with dtype 'str'
