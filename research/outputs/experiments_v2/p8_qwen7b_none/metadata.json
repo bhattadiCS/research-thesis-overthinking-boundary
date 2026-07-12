@@ -35,8 +35,8 @@
   "next_pending_run": null,
   "checkpoint_reconciliation": {
     "expected_steps_per_run": 10,
-    "completed_run_count": 0,
-    "hidden_state_file_count": 0,
+    "completed_run_count": 1500,
+    "hidden_state_file_count": 1500,
     "duplicate_step_rows_removed": 0,
     "duplicate_run_rows_removed": 0,
     "reconstructed_run_summaries": 0,
