@@ -15,3 +15,5 @@ n= 50: median 0.76  (cells: 51)
 n=100: median 0.82  (cells: 49)
 n=200: median 0.88  (cells: 50)
 n=400: median 0.93  (cells: 50)
+N5/P4b (max_new_tokens 256->512): loss 30.27% on 1500 runs | baseline 30.27% | pre-registered PASS (<=25.3%): False
+N6/P8 (bf16 vs 4-bit): q2 bf16=0.2787 (n=1500) 4bit=0.1360 (n=1500) gap=0.1427 Z=9.79 | pre-registered PASS (gap>=0.10 and Z>=1.96): True
