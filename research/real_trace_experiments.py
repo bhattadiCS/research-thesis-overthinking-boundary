@@ -1576,7 +1576,8 @@ def low_memory_scoring_pass(
     generated_attention_mask: torch.Tensor,
     prompt_width: int,
     completion_width: int,
-) -> tuple[torch.Tensor, torch.Tensor]:
+    output_hidden_states: bool = False,
+) -> tuple[torch.Tensor, torch.Tensor, tuple[torch.Tensor, ...] | None]:
     base_model = getattr(model, "model", None)
     if base_model is None:
         base_model = getattr(model, "base_model", None)
@@ -1588,6 +1589,7 @@ def low_memory_scoring_pass(
         attention_mask=generated_attention_mask,
         use_cache=False,
         return_dict=True,
+        output_hidden_states=output_hidden_states,
     )
     last_hidden_state = getattr(base_outputs, "last_hidden_state", None)
     if last_hidden_state is None:
@@ -1597,7 +1599,54 @@ def low_memory_scoring_pass(
     scoring_stop = scoring_start + completion_width
     scoring_hidden_states = last_hidden_state[:, scoring_start:scoring_stop, :]
     scoring_logits = apply_output_head_with_model_postprocessing(model, scoring_hidden_states)
-    return scoring_logits, last_hidden_state
+    
+    all_hidden_states = getattr(base_outputs, "hidden_states", None)
+    return scoring_logits, last_hidden_state, all_hidden_states
+
+
+def project_hidden_features(hidden_vector: np.ndarray, target_dim: int = 64, seed: int = 42) -> np.ndarray:
+    """Projects a hidden state vector to a lower dimension using a deterministic random projection."""
+    D = hidden_vector.shape[0]
+    rng = np.random.RandomState(seed)
+    proj_matrix = rng.normal(size=(D, target_dim)) / np.sqrt(target_dim)
+    return np.dot(hidden_vector, proj_matrix)
+
+
+def find_answer_token_indices(completion_ids: torch.Tensor, raw_text: str, answer_str: str, prompt_mode: str, tokenizer: Any) -> list[int]:
+    """Finds the indices of tokens in completion_ids that correspond to the answer_str."""
+    if not answer_str:
+        return []
+        
+    char_start = -1
+    if prompt_mode == "structured_four_line":
+        # Search for ANSWER: <answer_str>
+        match = re.search(r"ANSWER\s*:\s*" + re.escape(answer_str), raw_text, re.IGNORECASE)
+        if match:
+            char_start = match.end(0) - len(answer_str)
+    elif prompt_mode == "minimal_json":
+        # Search for "answer"\s*:\s*"<answer_str>"
+        match = re.search(r'"answer"\s*:\s*"' + re.escape(answer_str) + r'"', raw_text)
+        if match:
+            char_start = match.end(0) - len(answer_str) - 1 # exclude closing quote
+            
+    if char_start == -1:
+        char_start = raw_text.rfind(answer_str)
+        
+    if char_start == -1:
+        return []
+        
+    char_end = char_start + len(answer_str)
+    
+    token_indices = []
+    for idx in range(len(completion_ids)):
+        prefix_text_prev = tokenizer.decode(completion_ids[:idx], skip_special_tokens=True)
+        prefix_text_curr = tokenizer.decode(completion_ids[:idx+1], skip_special_tokens=True)
+        tok_start = len(prefix_text_prev)
+        tok_end = len(prefix_text_curr)
+        # Check overlap
+        if max(tok_start, char_start) < min(tok_end, char_end):
+            token_indices.append(idx)
+    return token_indices
 
 
 def generate_batch_with_diagnostics(
@@ -1607,6 +1656,9 @@ def generate_batch_with_diagnostics(
     actual_device: str,
     temperature: float,
     max_new_tokens: int,
+    answer_types: list[str] | None = None,
+    prompt_mode: str = "structured_four_line",
+    enable_extended_observables: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     if actual_device == "cuda" and torch.cuda.is_available():
         torch.cuda.synchronize()
@@ -1659,12 +1711,13 @@ def generate_batch_with_diagnostics(
             dim=1,
         )
         try:
-            scoring_logits, final_hidden_states = low_memory_scoring_pass(
+            scoring_logits, final_hidden_states, all_hidden_states = low_memory_scoring_pass(
                 model=model,
                 generated_ids=generated_ids,
                 generated_attention_mask=generated_attention_mask,
                 prompt_width=prompt_width,
                 completion_width=completion_width,
+                output_hidden_states=enable_extended_observables,
             )
         except Exception as exc:
             logging.warning("Low-memory scoring path failed; falling back to wrapper forward: %s", exc)
@@ -1676,6 +1729,7 @@ def generate_batch_with_diagnostics(
             )
             scoring_logits = forward_outputs.logits[:, prompt_width - 1 : prompt_width - 1 + completion_width, :]
             final_hidden_states = forward_outputs.hidden_states[-1]
+            all_hidden_states = forward_outputs.hidden_states
         if actual_device == "cuda" and torch.cuda.is_available():
             torch.cuda.synchronize()
         forward_seconds = time.perf_counter() - forward_started_at
@@ -1700,6 +1754,14 @@ def generate_batch_with_diagnostics(
         generated_length = int(completion_ids.shape[0])
         raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
 
+        # Default extended observables
+        answer_span_mean_logprob = float("nan")
+        answer_span_min_logprob = float("nan")
+        answer_span_mean_entropy = float("nan")
+        answer_span_std_entropy = 0.0
+        mid_hidden_1_proj_str = ""
+        mid_hidden_2_proj_str = ""
+
         if generated_length > 0:
             completion_scoring_logits = scoring_logits[index, :generated_length]
             log_probs = torch.log_softmax(completion_scoring_logits, dim=-1)
@@ -1707,6 +1769,39 @@ def generate_batch_with_diagnostics(
             token_logprobs = log_probs.gather(1, completion_ids.unsqueeze(1)).squeeze(1)
             token_entropies = -(probs * log_probs).sum(dim=-1)
             pooled_hidden = final_hidden_states[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+            
+            if enable_extended_observables and answer_types is not None:
+                # N8a: Answer-span token diagnostics
+                ans_type = answer_types[index]
+                parsed = parse_generation(raw_text, ans_type, prompt_mode)
+                ans_str = parsed["answer"]
+                ans_tokens = find_answer_token_indices(completion_ids, raw_text, ans_str, prompt_mode, tokenizer)
+                
+                if ans_tokens:
+                    ans_logprobs = token_logprobs[ans_tokens]
+                    ans_entropies = token_entropies[ans_tokens]
+                    
+                    answer_span_mean_logprob = float(ans_logprobs.mean().item())
+                    answer_span_min_logprob = float(ans_logprobs.min().item())
+                    answer_span_mean_entropy = float(ans_entropies.mean().item())
+                    answer_span_std_entropy = float(ans_entropies.std().item()) if len(ans_entropies) > 1 else 0.0
+                
+                # N8b: Pooled mid-layer hidden states projection
+                if all_hidden_states is not None:
+                    # all_hidden_states has length num_layers + 1 (layer 0 is inputs)
+                    num_layers = len(all_hidden_states) - 1
+                    L1_idx = num_layers // 3
+                    L2_idx = 2 * num_layers // 3
+                    
+                    # mean pool hidden states across generated completion range
+                    L1_tensor = all_hidden_states[L1_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+                    L2_tensor = all_hidden_states[L2_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+                    
+                    L1_proj = project_hidden_features(L1_tensor, target_dim=64, seed=42)
+                    L2_proj = project_hidden_features(L2_tensor, target_dim=64, seed=42)
+                    
+                    mid_hidden_1_proj_str = ",".join(f"{x:.6f}" for x in L1_proj)
+                    mid_hidden_2_proj_str = ",".join(f"{x:.6f}" for x in L2_proj)
         else:
             token_logprobs = torch.empty(0)
             token_entropies = torch.empty(0)
@@ -1720,6 +1815,12 @@ def generate_batch_with_diagnostics(
                 "mean_entropy": float(token_entropies.mean().item()) if len(token_entropies) else float("nan"),
                 "entropy_std": float(token_entropies.std().item()) if len(token_entropies) > 1 else 0.0,
                 "pooled_hidden": pooled_hidden,
+                "answer_span_mean_logprob": answer_span_mean_logprob,
+                "answer_span_min_logprob": answer_span_min_logprob,
+                "answer_span_mean_entropy": answer_span_mean_entropy,
+                "answer_span_std_entropy": answer_span_std_entropy,
+                "mid_hidden_1_proj": mid_hidden_1_proj_str,
+                "mid_hidden_2_proj": mid_hidden_2_proj_str,
             }
         )
     if actual_device == "cuda" and torch.cuda.is_available():
@@ -1763,6 +1864,9 @@ def safe_generate_batch_with_diagnostics(
     temperature: float,
     max_new_tokens: int,
     allow_single_retry: bool = True,
+    answer_types: list[str] | None = None,
+    prompt_mode: str = "structured_four_line",
+    enable_extended_observables: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     oom_occurred = False
     try:
@@ -1773,6 +1877,9 @@ def safe_generate_batch_with_diagnostics(
             actual_device=actual_device,
             temperature=temperature,
             max_new_tokens=max_new_tokens,
+            answer_types=answer_types,
+            prompt_mode=prompt_mode,
+            enable_extended_observables=enable_extended_observables,
         )
     except RuntimeError as exc:
         if actual_device != "cuda" or "out of memory" not in str(exc).lower():
@@ -1796,6 +1903,9 @@ def safe_generate_batch_with_diagnostics(
                 temperature=temperature,
                 max_new_tokens=max_new_tokens,
                 allow_single_retry=False,
+                answer_types=answer_types,
+                prompt_mode=prompt_mode,
+                enable_extended_observables=enable_extended_observables,
             )
             retry_metrics["oom_retry_count"] = int(retry_metrics.get("oom_retry_count", 0)) + 1
             return retry_results, retry_metrics
@@ -1810,6 +1920,9 @@ def safe_generate_batch_with_diagnostics(
             temperature=temperature,
             max_new_tokens=max_new_tokens,
             allow_single_retry=allow_single_retry,
+            answer_types=answer_types[:midpoint] if answer_types else None,
+            prompt_mode=prompt_mode,
+            enable_extended_observables=enable_extended_observables,
         )
         release_cuda_memory()
         gc.collect()
@@ -1822,6 +1935,9 @@ def safe_generate_batch_with_diagnostics(
             temperature=temperature,
             max_new_tokens=max_new_tokens,
             allow_single_retry=allow_single_retry,
+            answer_types=answer_types[midpoint:] if answer_types else None,
+            prompt_mode=prompt_mode,
+            enable_extended_observables=enable_extended_observables,
         )
         merged_metrics = {
             "batch_size": int(first_metrics["batch_size"]) + int(second_metrics["batch_size"]),
@@ -1981,6 +2097,8 @@ def run_batch_traces(
     is_baseline: bool,
     hidden_dir: Path,
     io_manager: IOManager | None = None,
+    enable_k2_agreement: bool = False,
+    enable_extended_observables: bool = False,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     if not tasks:
         return [], [], []
@@ -2015,6 +2133,7 @@ def run_batch_traces(
             for context in contexts
         ]
 
+        # First path generation (main trajectory)
         generated_batch, batch_metrics = safe_generate_batch_with_diagnostics(
             model=model,
             tokenizer=tokenizer,
@@ -2022,9 +2141,31 @@ def run_batch_traces(
             actual_device=actual_device,
             temperature=temperature,
             max_new_tokens=max_new_tokens,
+            answer_types=[context["task"].answer_type for context in contexts],
+            prompt_mode=actual_prompt_mode,
+            enable_extended_observables=enable_extended_observables,
         )
+        
+        # Second path generation (N7: k=2 agreement)
+        k2_batch = None
+        if enable_k2_agreement and not is_baseline:
+            k2_batch, _ = safe_generate_batch_with_diagnostics(
+                model=model,
+                tokenizer=tokenizer,
+                prompt_texts=prompts,
+                actual_device=actual_device,
+                temperature=temperature,
+                max_new_tokens=max_new_tokens,
+                answer_types=None,
+                prompt_mode=actual_prompt_mode,
+                enable_extended_observables=False,
+            )
+
         batch_elapsed_seconds = float(batch_metrics["total_seconds"])
         batch_tokens = sum(item["generated_tokens"] for item in generated_batch)
+        if k2_batch is not None:
+            batch_tokens += sum(item["generated_tokens"] for item in k2_batch)
+            
         batch_examples_per_second = len(contexts) / max(batch_elapsed_seconds, 1e-6)
         batch_tokens_per_second = batch_tokens / max(batch_elapsed_seconds, 1e-6)
         batch_metric_rows.append(
@@ -2069,7 +2210,7 @@ def run_batch_traces(
             int(batch_metrics.get("oom_retry_count", 0)),
         )
 
-        for context, generated in zip(contexts, generated_batch, strict=True):
+        for idx, (context, generated) in enumerate(zip(contexts, generated_batch, strict=True)):
             history = context["history"]
             parsed = parse_generation(generated["raw_text"], context["task"].answer_type, actual_prompt_mode)
             normalized_answer = normalize_answer(parsed["answer"], context["task"].answer_type)
@@ -2092,6 +2233,19 @@ def run_batch_traces(
             hit_max_new_tokens = int(generated["generated_tokens"] == max_new_tokens)
             truncated_output_suspected = int(hit_max_new_tokens and not parsed["parse_success"])
             tokens_per_second = generated["generated_tokens"] / max(batch_elapsed_seconds, 1e-6)
+
+            # N7: k=2 agreement extraction
+            k2_agreement = -1
+            k2_tokens = 0
+            if k2_batch is not None:
+                k2_gen = k2_batch[idx]
+                parsed_k2 = parse_generation(k2_gen["raw_text"], context["task"].answer_type, actual_prompt_mode)
+                normalized_k2 = normalize_answer(parsed_k2["answer"], context["task"].answer_type)
+                if context["task"].answer_type == "math":
+                    k2_agreement = int(math_answers_equivalent(normalized_answer, normalized_k2))
+                else:
+                    k2_agreement = int(normalized_answer == normalized_k2)
+                k2_tokens = k2_gen["generated_tokens"]
 
             row = {
                 "run_id": context["run_id"],
@@ -2141,6 +2295,16 @@ def run_batch_traces(
                 "raw_text_length_chars": len(generated["raw_text"]),
                 "raw_text_length_tokens": generated["generated_tokens"],
                 "raw_text": generated["raw_text"],
+                # N7 Columns
+                "k2_agreement": k2_agreement,
+                "k2_raw_generation_tokens": k2_tokens,
+                # N8 Columns
+                "answer_span_mean_logprob": generated.get("answer_span_mean_logprob", float("nan")),
+                "answer_span_min_logprob": generated.get("answer_span_min_logprob", float("nan")),
+                "answer_span_mean_entropy": generated.get("answer_span_mean_entropy", float("nan")),
+                "answer_span_std_entropy": generated.get("answer_span_std_entropy", 0.0),
+                "mid_hidden_1_proj": generated.get("mid_hidden_1_proj", ""),
+                "mid_hidden_2_proj": generated.get("mid_hidden_2_proj", ""),
             }
             history.append(row)
             context["rows"].append(row)
@@ -2369,6 +2533,8 @@ def main() -> None:
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
     parser.add_argument("--io-threads", type=int, default=4, help="Number of background threads for IO operations")
     parser.add_argument("--no-resume", dest="resume", action="store_false")
+    parser.add_argument("--enable-k2-agreement", action="store_true", help="Enable k=2 self-consistency agreement recording (N7)")
+    parser.add_argument("--enable-extended-observables", action="store_true", help="Enable answer-span metrics and mid-layer hidden projections (N8)")
     parser.set_defaults(resume=True)
     args = parser.parse_args()
 
@@ -2512,6 +2678,8 @@ def main() -> None:
                             is_baseline=args.run_baseline,
                             hidden_dir=hidden_dir,
                             io_manager=io_manager,
+                            enable_k2_agreement=args.enable_k2_agreement,
+                            enable_extended_observables=args.enable_extended_observables,
                         )
                         append_records(paths["steps"], batch_rows)
                         append_records(paths["runs"], batch_runs)

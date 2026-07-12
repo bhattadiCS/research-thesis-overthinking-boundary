@@ -618,7 +618,10 @@ def _sanitize_step_frame(frame: pd.DataFrame) -> tuple[pd.DataFrame, int]:
     that are now cleanly numeric so downstream math works. Returns (clean, n_dropped)."""
     numeric_guard = [c for c in ("step", "correct", "confidence", "hidden_l2_shift",
                                  "hidden_cosine_shift", "hidden_norm", "entropy_mean",
-                                 "utility", "elapsed_seconds", "seed") if c in frame.columns]
+                                 "utility", "elapsed_seconds", "seed",
+                                 "k2_agreement", "k2_raw_generation_tokens",
+                                 "answer_span_mean_logprob", "answer_span_min_logprob",
+                                 "answer_span_mean_entropy", "answer_span_std_entropy") if c in frame.columns]
     # step/correct are the run index and the label: every analyzable row must have
     # both as clean numbers. A field-shift can leave them empty (NaN) rather than a
     # string, so guard them on NaN too (correct.astype(int) later can't take NaN).
