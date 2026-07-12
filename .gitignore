@@ -1,5 +1,6 @@
 .venv/
 __pycache__/
+.agents/
 *.pyc
 *.pyo
 *.pyd
@@ -54,4 +55,6 @@ ThesisDocs/*
 !ThesisDocs/*.md
 !ThesisDocs/rigor_audit/
 !ThesisDocs/rigor_audit/*.md
+!ThesisDocs/archive/
+!ThesisDocs/archive/*
 

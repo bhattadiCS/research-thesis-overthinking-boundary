@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overthinking Boundary in Reasoning LLMs</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.82in;
+    }
+
+    :root {
+      --text: #000000;
+      --muted: #444444;
+      --line: #000000;
+      --accent: #000000;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0 auto;
+      max-width: 8.5in;
+      color: var(--text);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 11.15pt;
+      line-height: 1.33;
+    }
+
+    header {
+      text-align: left;
+      margin-bottom: 0.16in;
+      padding-bottom: 0in;
+      border: none;
+    }
+
+    h1 {
+      font-family: "Times New Roman", Times, serif;
+      font-weight: 700;
+      font-size: 16pt;
+      line-height: 1.2;
+      margin: 0 0 0.02in;
+      text-transform: none; /* Removed uppercase to allow 'LLMs' */
+      letter-spacing: 0.2pt;
+    }
+
+    .subtitle {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 10.3pt;
+      font-weight: 600;
+      margin-bottom: 0.07in;
+      color: var(--muted);
+    }
+
+    .meta {
+      display: block;
+      margin: 0;
+      text-align: left;
+      font-size: 10pt;
+    }
+
+    .meta div {
+      margin-bottom: 0.025in;
+    }
+
+    h2 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 11.4pt;
+      font-weight: 700;
+      margin: 0.16in 0 0.055in;
+      page-break-after: avoid;
+      border-bottom: 0.75pt solid var(--line);
+      padding-bottom: 0.02in;
+      text-transform: none; /* More conservative academic look */
+    }
+
+    h3 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 10.6pt;
+      font-weight: 700;
+      margin: 0.1in 0 0.04in;
+      color: var(--text);
+    }
+
+    p {
+      margin: 0 0 0.05in;
+      text-align: justify;
+    }
+
+    .equation-block {
+      border: 0.9pt solid var(--line);
+      background: none;
+      padding: 0.07in 0.1in;
+      margin: 0.08in 0 0.09in;
+      page-break-inside: avoid;
+    }
+
+    .definition-box {
+      border: 0.9pt solid var(--line);
+      background: none;
+      padding: 0.07in 0.1in;
+      margin: 0.08in 0 0.09in;
+      page-break-inside: avoid;
+    }
+
+    .definition-grid {
+      display: grid;
+      grid-template-columns: 0.62in 1fr;
+      column-gap: 0.08in;
+      row-gap: 0.035in;
+      align-items: start;
+      font-size: 10.6pt;
+    }
+
+    .definition-term {
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    .equation-label {
+      font-size: 8.8pt;
+      font-weight: 700;
+      letter-spacing: 0.5pt;
+      text-transform: uppercase;
+      margin-bottom: 0.04in;
+    }
+
+    .formula {
+      text-align: center;
+      font-family: "Times New Roman", serif;
+      font-size: 11.1pt;
+      line-height: 1.24;
+      margin: 0;
+    }
+
+    .formula + .formula {
+      margin-top: 0.03in;
+    }
+
+    .callout {
+      border-left: 2pt solid var(--line);
+      padding: 0.015in 0 0.015in 0.07in;
+      margin: 0.04in 0;
+    }
+
+    .label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      margin: 0.02in 0 0.05in;
+      padding-left: 0.22in;
+    }
+
+    li {
+      margin-bottom: 0.022in;
+    }
+
+    .highlight {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Overthinking Boundary in Reasoning LLMs</h1>
+    <div class="subtitle">Master's Thesis Proposal for 625.803&ndash;804</div>
+    <div class="meta">
+      <div><span class="label">Student:</span> Aditya Bhatt (Applied &amp; Computational Mathematics)</div>
+      <div><span class="label">Research Adviser:</span> Dr. Zerotti Woods</div>
+      <div><span class="label">Second Reader:</span> Dr. Moustapha Pemy</div>
+    </div>
+  </header>
+
+  <section>
+    <h2>1. Problem Motivation</h2>
+    <p>Reasoning-oriented large language models often benefit from intermediate steps, but the marginal value of further reasoning is not uniformly positive. Beyond a model-dependent and task-dependent point, additional inference can revise a correct answer, drift away from the relevant solution path, or consume compute without improving correctness. This thesis studies that transition point, called the <span class="highlight">overthinking boundary</span>, and asks whether it can be defined mathematically, detected empirically, and used as a practical stopping rule.</p>
+    <p>This topic fits applied and computational mathematics because it combines stochastic modeling, sequential decision-making, hazard processes, uncertainty quantification, and empirical analysis of computational systems. The phenomenon is analogous to <span class="highlight">batch overtraining</span> in supervised learning and to overthinking an exam question and changing a correct answer to a wrong one.</p>
+  </section>
+
+  <section>
+    <h2>2. Research Question and Contribution</h2>
+    <p><span class="highlight">The main research question is whether the point at which further reasoning becomes counterproductive in a reasoning language model can be characterized as a mathematically meaningful stopping boundary and estimated from observable trace features.</span></p>
+    <p>Recent literature on adaptive test-time compute suggests that longer chain-of-thought is not uniformly beneficial, but much of that work relies on proxy scores or heuristics rather than an explicit continuation-value formulation. The intended contribution is to formalize <em>overthinking</em> as an optimal stopping problem with distinct repair and corruption hazards and to test that framework on real traces from open-weight reasoning models. Unlike a pure confidence or entropy heuristic, the framework separates beneficial continuation from harmful continuation and places the problem at the intersection of stochastic processes, sequential inference, and modern AI systems. The thesis therefore aims to formalize a continuation-value framework, study whether its drift admits an operational stopping boundary, estimate the latent quantities from observable traces, and compare the resulting rules against fixed-length, never-stop, and sequential-detection baselines.</p>
+  </section>
+
+  <section>
+    <h2>3. Proposed Methodology</h2>
+    <p><span class="label">Analytical formalization.</span> To detect the overthinking boundary, this study treats each reasoning trace as a jump process with competing repair and corruption hazards. Let <i>&tau;</i> be a stopping time with respect to the observable filtration <i>F</i><sub>t</sub>. For a fixed problem instance, let <i>G</i> denote the deterministic ground-truth answer, let <i>A</i><sub>t</sub> denote the candidate answer produced after step <i>t</i>, and define correctness by <i>C</i><sub>t</sub> = I(<i>A</i><sub>t</sub> = <i>G</i>). Even though <i>G</i> is fixed, <i>A</i><sub>t</sub> and <i>C</i><sub>t</sub> are random because the model's reasoning trajectory is stochastic. The randomness enters through the sampled reasoning path and the stopping time, not through the truth itself.</p>
+
+    <div class="definition-box">
+      <div class="equation-label">Core Objects</div>
+      <div class="definition-grid">
+        <div class="definition-term"><i>G</i></div>
+        <div>fixed ground-truth answer</div>
+        <div class="definition-term"><i>A</i><sub>t</sub></div>
+        <div>candidate answer after <i>t</i> steps</div>
+        <div class="definition-term"><i>C</i><sub>t</sub></div>
+        <div>correctness indicator, equal to 1 when <i>A</i><sub>t</sub> = <i>G</i></div>
+        <div class="definition-term"><i>q</i><sub>t</sub></div>
+        <div>conditional probability of correctness</div>
+      </div>
+    </div>
+
+    <div class="equation-block">
+      <div class="equation-label">Objective</div>
+      <div class="formula">E[<i>C</i><sub><i>&tau;</i></sub> - <i>&lambda;&tau;</i> | <i>F</i><sub>0</sub>]</div>
+    </div>
+
+    <p>The expectation is over repeated sampled reasoning paths, together with the induced stopping time, not over the objective truth of the answer. Conditioning on the observed trace gives the current correctness belief <i>q</i><sub>t</sub> = P(<i>C</i><sub>t</sub> = 1 | <i>F</i><sub>t</sub>) = E[<i>C</i><sub>t</sub> | <i>F</i><sub>t</sub>]. Let <i>S</i><sub>t</sub> = <i>q</i><sub>t</sub> - <i>&lambda;t</i> denote the expected utility of stopping immediately at step <i>t</i>. The Bellman recursion then compares stopping now against continuing one more step.</p>
+
+    <div class="equation-block">
+      <div class="equation-label">Bellman Recursion</div>
+      <div class="formula"><i>U</i><sub>t</sub> = max{<i>S</i><sub>t</sub>, E[<i>U</i><sub>t+1</sub> | <i>F</i><sub>t</sub>]}</div>
+    </div>
+
+    <p>This recursion is distinct from the one-step continuation gain. The latter is the marginal value of one more reasoning step rather than the recursion itself.</p>
+
+    <div class="equation-block">
+      <div class="equation-label">One-Step Continuation Gain</div>
+      <div class="formula"><i>&mu;</i><sub>t</sub> = E[<i>S</i><sub>t+1</sub> - <i>S</i><sub>t</sub> | <i>F</i><sub>t</sub>]</div>
+      <div class="formula">= (1 - <i>q</i><sub>t</sub>) <i>&alpha;</i><sub>t</sub> - <i>q</i><sub>t</sub> <i>&beta;</i><sub>t</sub> - <i>&lambda;</i></div>
+    </div>
+
+    <p>Here <i>&alpha;</i><sub>t</sub> = P(<i>C</i><sub>t+1</sub> = 1 | <i>C</i><sub>t</sub> = 0, <i>F</i><sub>t</sub>) is the repair hazard, <i>&beta;</i><sub>t</sub> = P(<i>C</i><sub>t+1</sub> = 0 | <i>C</i><sub>t</sub> = 1, <i>F</i><sub>t</sub>) is the corruption hazard, and <i>&lambda;</i> is the per-step compute cost. In plain terms, <i>&alpha;</i><sub>t</sub> is the chance that one more step fixes a currently wrong answer, while <i>&beta;</i><sub>t</sub> is the chance that one more step breaks a currently correct answer. Under a one-crossing latent model, the canonical boundary is the first step at which <i>&mu;</i><sub>t</sub> becomes nonpositive. In empirical traces, nonmonotone drift can require distinguishing an early warning crossing from the last usable positive window. If <i>q</i><sub>t</sub> rises early while <i>&alpha;</i><sub>t</sub> falls and <i>&beta;</i><sub>t</sub> rises, then <i>&mu;</i><sub>t</sub> should plausibly cross zero at most once, yielding the candidate boundary</p>
+
+    <div class="equation-block">
+      <div class="equation-label">Candidate Boundary</div>
+      <div class="formula"><i>T</i>* = inf{<i>t</i> : <i>&mu;</i><sub>t</sub> &le; 0}</div>
+    </div>
+
+    <p>Equivalently, <i>&mu;</i><sub>t</sub> &gt; 0 defines a continuation region in which another step has positive expected value, whereas <i>&mu;</i><sub>t</sub> &le; 0 marks the stopping region.</p>
+
+    <div class="callout">
+      <div class="equation-label">Toy Trace Interpretation</div>
+      <p>Suppose a model starts an arithmetic problem with a wrong answer, repairs it, and later changes that correct answer after excessive reflection. Early on, repair can dominate corruption, so <i>&mu;</i><sub>t</sub> &gt; 0 and continuation helps; later, corruption can dominate, so <i>&mu;</i><sub>t</sub> &le; 0 and stopping is preferable. This matches early stopping in training and exam-answer overthinking.</p>
+    </div>
+
+    <p><span class="label">Estimation and experiment.</span> The hidden variable in the problem is correctness during the trace: at inference time, the model does not reveal whether its current answer is actually correct. The thesis will therefore estimate <i>q</i><sub>t</sub>, <i>&alpha;</i><sub>t</sub>, and <i>&beta;</i><sub>t</sub> from observable trace features including answer revisions, entropy summaries, trace length, and hidden-state proxies where available. These quantities will be estimated in two layers: a correctness model for <i>q</i><sub>t</sub> and transition models for repair and corruption at the next step. Because the stop rule scans the trace repeatedly, the thesis will compare pointwise concentration methods with anytime-valid procedures such as empirical-Bernstein bounds and e-process-style detectors.</p>
+
+    <p>Offline, benchmark problems with known answers allow traces to be labeled for training and evaluation. Online, the rule sees only observable trace features, so it must act on predicted values of <i>q</i><sub>t</sub>, <i>&alpha;</i><sub>t</sub>, and <i>&beta;</i><sub>t</sub> rather than on ground-truth correctness itself.</p>
+
+    <p>The empirical study will use real traces from DeepSeek-R1-Distill-Qwen-1.5B, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, and Mistral-7B-Instruct on GSM8K-style exact-answer problems. The main comparisons will be among hazard-based drift rules, statistically valid sequential detectors, fixed-length policies, and never-stop baselines, with evaluation by answer accuracy at stop time, average stop step, compute-adjusted utility, oracle regret, and robustness across tasks and model families.</p>
+  </section>
+
+  <section>
+    <h2>4. Expected Results and Significance</h2>
+    <p>The expected outcome is a mathematically rigorous and empirically validated framework showing that overthinking can be analyzed as a stopping phenomenon. The thesis does not require one universal stop step shared by every model family; rather, it aims to identify a common hazard-based framework whose boundary location depends on the balance between repair and corruption. Theoretically, this formalizes the optimal-compute problem for autoregressive reasoning; practically, it enables higher answer accuracy and lower inference latency in resource-constrained environments.</p>
+    <p>An important distinction is between the latent boundary <i>T</i>* defined using idealized correctness quantities and the operational stopping rule <i>&#x03C4;&#770;</i>, which must be computed from observable trace features alone. A successful outcome is therefore not merely defining the ideal boundary, but showing that a data-driven rule can track it closely enough to achieve low regret relative to the oracle boundary while saving test-time compute.</p>
+  </section>
+
+  <section>
+    <h2>5. Preliminary Work and Semester Plan</h2>
+    <p>Substantial preliminary work has already been completed, including the mathematical framework, a full trace-generation and evaluation pipeline, and instrumented runs on DeepSeek, Qwen, and Mistral families on GSM8K-style tasks. Current evidence suggests that the boundary is capability-dependent: stronger families can sustain longer repair-dominant windows before corruption dominates. Phase 1 (625.803) will finalize the stochastic formulation, complete the literature survey, and consolidate the cross-family evaluation pipeline. Phase 2 (625.804) will run larger empirical studies, evaluate robustness across difficulty strata and model families, and complete the final thesis and defense materials. This research will be conducted under the guidance of Dr. Woods and Dr. Pemy and prepared in accordance with the Johns Hopkins University Master's thesis guidelines.</p>
+  </section>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 11pt;
+    color: #000000;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 850px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 10pt;
+  }
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 6px 8px;
+  }
+  th {
+    background-color: #4472C4;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  .done {
+    color: #1a7a1a;
+    font-weight: bold;
+  }
+  .smoke {
+    color: #b8860b;
+    font-weight: bold;
+  }
+  .needed {
+    color: #cc0000;
+    font-weight: bold;
+  }
+  .zone-label {
+    background-color: #e2efda;
+    font-weight: bold;
+    text-align: center;
+    font-size: 10pt;
+    color: #375623;
+  }
+</style>
+</head>
+<body>
+
+<p>Hi Dr. Woods,</p>
+
+<p>Thanks for checking! I will need the full 1 GPU allocation (which typically provides 40GB or 80GB of VRAM).</p>
+
+<p>The current 1/10th limit (~9.7 GB) only lets us run very small models (like 1.5B parameters). These models simply aren't capable enough to demonstrate the overthinking boundary we are studying.</p>
+
+<p>To properly test capable, state-of-the-art models, the memory requirement scales from ~16GB up to ~73GB. We also have to run them at full precision&mdash;if we try to compress them to fit a smaller GPU, it introduces numerical noise that breaks the hidden state metrics the thesis relies on.</p>
+
+<p>Here is a breakdown of the specific models we need to test to prove cross-family robustness, along with our current data collection progress:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model Name</th>
+      <th>Size (Billions)</th>
+      <th>Min VRAM (FP16)</th>
+      <th>Data Status</th>
+      <th>Purpose in Thesis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Already completed (small GPU) -->
+    <tr>
+      <td colspan="5" class="zone-label">&#9989; Already Completed (Small GPU)</td>
+    </tr>
+    <tr>
+      <td><b>Qwen2.5-0.5B-Instruct</b></td>
+      <td>0.5</td>
+      <td>~3 GB</td>
+      <td class="done">&#9989; Completed</td>
+      <td>Minimal capability baseline</td>
+    </tr>
+    <tr>
+      <td><b>DeepSeek-R1-Distill-1.5B</b></td>
+      <td>1.5</td>
+      <td>~5 GB</td>
+      <td class="done">&#9989; Completed</td>
+      <td>Weak-regime early-boundary control</td>
+    </tr>
+    <tr>
+      <td><b>Gemma-4-E4B-It</b></td>
+      <td>4.0</td>
+      <td>~10 GB</td>
+      <td class="smoke">&#128168; Smoke Only</td>
+      <td>Edge boundary control</td>
+    </tr>
+
+    <!-- Needs 1 GPU: 16-32 GB zone -->
+    <tr>
+      <td colspan="5" class="zone-label">&#128308; Needs Full GPU &mdash; 16&ndash;32 GB Zone</td>
+    </tr>
+    <tr>
+      <td><b>Mathstral-7B-v0.1</b></td>
+      <td>7.3</td>
+      <td>~16 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Math-specific training vs base Mistral</td>
+    </tr>
+    <tr>
+      <td><b>NuminaMath-7B-CoT</b></td>
+      <td>7.0</td>
+      <td>~16 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>AIMO winner, optimized CoT</td>
+    </tr>
+    <tr>
+      <td><b>Mistral-7B-Instruct</b></td>
+      <td>7.3</td>
+      <td>~16 GB</td>
+      <td class="done">&#9989; Completed</td>
+      <td>First non-Qwen cross-family test</td>
+    </tr>
+    <tr>
+      <td><b>DeepSeek-R1-Distill-7B</b></td>
+      <td>7.6</td>
+      <td>~17 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Distilled reasoning control</td>
+    </tr>
+    <tr>
+      <td><b>Qwen2.5-7B-Instruct</b></td>
+      <td>7.6</td>
+      <td>~17 GB</td>
+      <td class="done">&#9989; Completed</td>
+      <td>Primary late-boundary witness</td>
+    </tr>
+    <tr>
+      <td><b>Llama-3.1-8B-Instruct</b></td>
+      <td>8.0</td>
+      <td>~18 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Standard non-reasoning baseline</td>
+    </tr>
+    <tr>
+      <td><b>DeepSeek-R1-Distill-Llama-8B</b></td>
+      <td>8.0</td>
+      <td>~18 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Cross-architecture reasoning (Llama-based)</td>
+    </tr>
+    <tr>
+      <td><b>Qwen-3.5-9B</b></td>
+      <td>9.0</td>
+      <td>~21 GB</td>
+      <td class="smoke">&#128168; Smoke Only</td>
+      <td>Next-gen capability baseline</td>
+    </tr>
+    <tr>
+      <td><b>Gemma-2-9B-It</b></td>
+      <td>9.2</td>
+      <td>~22 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Alternative attention architecture</td>
+    </tr>
+    <tr>
+      <td><b>Phi-4</b></td>
+      <td>14.0</td>
+      <td>~30 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Dense textbook-data logic test</td>
+    </tr>
+    <tr>
+      <td><b>DeepSeek-R1-Distill-14B</b></td>
+      <td>14.7</td>
+      <td>~32 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Mid-weight capability gate</td>
+    </tr>
+
+    <!-- Needs 1 GPU: 40-80 GB zone -->
+    <tr>
+      <td colspan="5" class="zone-label">&#128308; Needs Full GPU &mdash; 40&ndash;80 GB Zone (Frontier)</td>
+    </tr>
+    <tr>
+      <td><b>InternLM2-20B</b></td>
+      <td>20.0</td>
+      <td>~43 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Independent family (Shanghai AI Lab)</td>
+    </tr>
+    <tr>
+      <td><b>GPT-OSS-20B</b> (OpenAI)</td>
+      <td>21.0</td>
+      <td>~44 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>OpenAI open model, configurable reasoning</td>
+    </tr>
+    <tr>
+      <td><b>Mistral-Small-3.1-24B</b></td>
+      <td>24.0</td>
+      <td>~51 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>High-density reasoning baseline</td>
+    </tr>
+    <tr>
+      <td><b>Qwen3.6-27B</b></td>
+      <td>27.0</td>
+      <td>~56 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Novel hybrid attention architecture</td>
+    </tr>
+    <tr>
+      <td><b>Gemma-2-27B-It</b></td>
+      <td>27.2</td>
+      <td>~58 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Google alternating local/global attention</td>
+    </tr>
+    <tr>
+      <td><b>Qwen3-30B-A3B</b> (MoE)</td>
+      <td>30.5</td>
+      <td>~63 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Think/non-think mode toggle</td>
+    </tr>
+    <tr>
+      <td><b>Gemma-4-31B-It</b></td>
+      <td>31.0</td>
+      <td>~65 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Advanced non-Qwen frontier</td>
+    </tr>
+    <tr>
+      <td><b>QwQ-32B</b></td>
+      <td>32.5</td>
+      <td>~68 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Primary frontier reasoning</td>
+    </tr>
+    <tr>
+      <td><b>DeepSeek-R1-Distill-32B</b></td>
+      <td>32.5</td>
+      <td>~68 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Distilled reasoning twin of QwQ</td>
+    </tr>
+    <tr>
+      <td><b>Yi-34B-Chat</b></td>
+      <td>34.0</td>
+      <td>~71 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>Independent 01.AI family test</td>
+    </tr>
+    <tr>
+      <td><b>Command-R-08-2024</b></td>
+      <td>35.0</td>
+      <td>~73 GB</td>
+      <td class="needed">&#10060; Not Yet Run</td>
+      <td>RAG/tool-use reasoning style</td>
+    </tr>
+    <tr>
+      <td><b>Qwen-3.5-35B-MoE</b></td>
+      <td>35.0</td>
+      <td>~73 GB</td>
+      <td class="smoke">&#128168; Smoke Only</td>
+      <td>MoE architectural test</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>("Smoke Only" = data pipeline and hidden-state extraction code was successfully tested, but the full experimental dataset has not been generated yet due to hardware limits).</em></p>
+
+<p>As you can see, the frontier 40&ndash;80 GB zone alone contains 12 models that are critical for proving cross-family robustness. The full 1 GPU allocation would let us run every single model on this list. Let me know if we can proceed with the <code>jlab-one-gpu-student</code> template!</p>
+
+<p>Thanks,<br>Aditya</p>
+
+</body>
+</html>
