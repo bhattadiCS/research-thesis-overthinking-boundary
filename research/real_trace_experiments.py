@@ -1179,7 +1179,7 @@ def _escape_control_chars(frame: pd.DataFrame) -> pd.DataFrame:
     # quoting; everything else in C0 gets replaced.
     pattern = re.compile(r"[\x00-\x08\x0b-\x1f]")
     for column in frame.columns:
-        if frame[column].dtype == object:
+        if frame[column].dtype == object or pd.api.types.is_string_dtype(frame[column]):
             frame[column] = frame[column].map(
                 lambda value: pattern.sub(" ", value) if isinstance(value, str) else value
             )

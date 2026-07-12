@@ -639,7 +639,7 @@ def _sanitize_step_frame(frame: pd.DataFrame) -> tuple[pd.DataFrame, int]:
     # Stray strings forced these columns to object dtype; now that the garbage rows
     # are gone, restore numeric dtype for any column whose non-null values all parse.
     for c in frame.columns:
-        if frame[c].dtype == object:
+        if frame[c].dtype == object or pd.api.types.is_string_dtype(frame[c]):
             coerced = pd.to_numeric(frame[c], errors="coerce")
             non_null = frame[c].notna().sum()
             if non_null > 0 and coerced.notna().sum() == non_null:
