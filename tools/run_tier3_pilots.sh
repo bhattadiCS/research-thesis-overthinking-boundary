@@ -24,6 +24,7 @@ echo "=== Running GSM8K Pilot ===" | tee -a "$LOG"
     --seeds 7 \
     --enable-k2-agreement \
     --enable-extended-observables \
+    --attn-implementation sdpa \
     --output-dir "$V2/tier3_pilot_gsm8k" 2>&1 | tee -a "$LOG"
 
 # 3. Run the MATH Pilot
@@ -36,6 +37,7 @@ echo "=== Running MATH Pilot ===" | tee -a "$LOG"
     --seeds 7 \
     --enable-k2-agreement \
     --enable-extended-observables \
+    --attn-implementation sdpa \
     --output-dir "$V2/tier3_pilot_math" 2>&1 | tee -a "$LOG"
 
 echo "=== Pilots complete. Committing and pushing results... ===" | tee -a "$LOG"
