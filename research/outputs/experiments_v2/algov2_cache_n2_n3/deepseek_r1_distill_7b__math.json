@@ -1,0 +1,1 @@
+{"cell": "deepseek_r1_distill_7b__math", "baseline": {"n": 1500, "du_1param": 75.35, "du_2param": 75.1}, "n2a": {"n": 1500, "du_1param": -597.25, "du_2param": -521.4}, "n2b": {"n": 1500, "du_1param": -637.4000000000001, "du_2param": -541.5999999999999}, "n2c": {"n": 1500, "du_1param": 77.65, "du_2param": 72.75}, "n3": {"n": 1500, "du_1param": 78.65, "du_2param": 78.65}}

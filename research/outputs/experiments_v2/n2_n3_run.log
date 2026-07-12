@@ -1,0 +1,62 @@
+=== N2/N3 experiment run starting on 2026-07-12 16:18:49 ===
+Computing global transition counts for N3 EB hazards...
+[1/52] deepseek_r1_distill_1p5b__arc baseline(1p/2p)=+9.2/+6.5 n2a=-74.1 n2b=-66.8 n2c=+3.6 n3=+5.4
+[2/52] deepseek_r1_distill_1p5b__gpqa baseline(1p/2p)=-1.9/-1.9 n2a=-143.7 n2b=-172.4 n2c=-5.5 n3=-0.3
+[3/52] deepseek_r1_distill_1p5b__gsm8k baseline(1p/2p)=+57.3/+57.1 n2a=+29.8 n2b=+4.8 n2c=+51.4 n3=+42.8
+[4/52] deepseek_r1_distill_1p5b__math baseline(1p/2p)=+25.4/+25.4 n2a=-696.0 n2b=-695.2 n2c=+24.9 n3=+24.2
+[5/52] deepseek_r1_distill_7b__arc baseline(1p/2p)=-14.6/-19.7 n2a=-0.9 n2b=-6.3 n2c=-21.1 n3=-0.9
+[6/52] deepseek_r1_distill_7b__gpqa baseline(1p/2p)=-5.7/-7.3 n2a=-293.9 n2b=-327.7 n2c=-2.4 n3=-0.0
+[7/52] deepseek_r1_distill_7b__gsm8k baseline(1p/2p)=-7.8/-13.7 n2a=-8.9 n2b=-18.8 n2c=-1.4 n3=+3.6
+[8/52] deepseek_r1_distill_7b__math baseline(1p/2p)=+75.3/+75.1 n2a=-597.2 n2b=-637.4 n2c=+77.7 n3=+78.7
+[9/52] internlm3_8b_instruct__arc baseline(1p/2p)=+31.0/+31.5 n2a=+36.8 n2b=+40.6 n2c=+28.6 n3=+37.7
+[10/52] internlm3_8b_instruct__gpqa baseline(1p/2p)=+14.8/+25.4 n2a=+11.4 n2b=+1.2 n2c=+19.4 n3=+26.4
+[11/52] internlm3_8b_instruct__gsm8k baseline(1p/2p)=+1.5/+4.4 n2a=-38.1 n2b=-16.9 n2c=-7.4 n3=-1.9
+[12/52] internlm3_8b_instruct__math baseline(1p/2p)=+59.8/+70.8 n2a=-25.0 n2b=-14.3 n2c=+70.1 n3=+119.9
+[13/52] llama_3p1_8b_instruct__arc baseline(1p/2p)=-9.7/-6.0 n2a=-10.2 n2b=-10.3 n2c=-3.9 n3=-11.3
+[14/52] llama_3p1_8b_instruct__gpqa baseline(1p/2p)=+26.9/+21.7 n2a=-63.1 n2b=-57.5 n2c=+19.7 n3=+35.5
+[15/52] llama_3p1_8b_instruct__gsm8k baseline(1p/2p)=+1.9/+1.9 n2a=+20.6 n2b=+3.5 n2c=+26.4 n3=-38.5
+[16/52] llama_3p1_8b_instruct__math baseline(1p/2p)=+55.3/+62.3 n2a=-155.0 n2b=-163.1 n2c=+50.6 n3=+91.9
+[17/52] mistral_7b_instruct_v0p3__arc baseline(1p/2p)=+6.5/+7.2 n2a=+8.2 n2b=-1.3 n2c=+5.0 n3=-2.1
+[18/52] mistral_7b_instruct_v0p3__gpqa baseline(1p/2p)=+7.0/+6.9 n2a=-74.3 n2b=-77.2 n2c=+12.8 n3=+12.7
+[19/52] mistral_7b_instruct_v0p3__gsm8k baseline(1p/2p)=+46.6/+53.0 n2a=+12.9 n2b=-4.8 n2c=+47.6 n3=+25.7
+[20/52] mistral_7b_instruct_v0p3__math baseline(1p/2p)=+65.7/+87.5 n2a=-222.8 n2b=-234.4 n2c=+97.4 n3=+145.0
+[21/52] mistral_small_24b_2409__arc baseline(1p/2p)=-0.0/-1.1 n2a=-24.9 n2b=-44.1 n2c=-7.4 n3=-16.7
+[22/52] mistral_small_24b_2409__gpqa baseline(1p/2p)=+31.3/+28.4 n2a=-41.5 n2b=-56.2 n2c=+32.8 n3=+21.5
+[23/52] mistral_small_24b_2409__gsm8k baseline(1p/2p)=+122.6/+115.0 n2a=+164.4 n2b=+153.3 n2c=+123.0 n3=+133.3
+[24/52] mistral_small_24b_2409__math baseline(1p/2p)=+145.0/+159.9 n2a=+15.3 n2b=+10.4 n2c=+134.2 n3=+182.6
+[25/52] phi_4_mini_instruct__arc baseline(1p/2p)=+11.6/+15.9 n2a=+1.4 n2b=+3.6 n2c=+8.8 n3=-2.2
+[26/52] phi_4_mini_instruct__gpqa baseline(1p/2p)=-1.3/-0.1 n2a=-59.8 n2b=-65.2 n2c=+20.0 n3=+9.2
+[27/52] phi_4_mini_instruct__gsm8k baseline(1p/2p)=-7.3/-8.0 n2a=+9.7 n2b=+6.0 n2c=-7.4 n3=+3.0
+[28/52] phi_4_mini_instruct__math baseline(1p/2p)=+64.8/+104.8 n2a=-109.9 n2b=-106.9 n2c=+116.7 n3=+100.3
+[29/52] qwen2p5_0p5b__arc baseline(1p/2p)=+24.9/+24.8 n2a=+9.6 n2b=+15.2 n2c=+25.4 n3=+27.6
+[30/52] qwen2p5_0p5b__gpqa baseline(1p/2p)=+14.2/+14.2 n2a=-139.0 n2b=-137.9 n2c=+11.5 n3=+16.4
+[31/52] qwen2p5_0p5b__gsm8k baseline(1p/2p)=+44.4/+49.5 n2a=-98.1 n2b=-99.7 n2c=+39.1 n3=+55.7
+[32/52] qwen2p5_0p5b__math baseline(1p/2p)=+33.9/+40.3 n2a=-102.2 n2b=-96.8 n2c=+37.1 n3=+69.0
+[33/52] qwen2p5_14b__arc baseline(1p/2p)=+47.3/+47.3 n2a=+60.7 n2b=+62.3 n2c=+50.0 n3=+61.6
+[34/52] qwen2p5_14b__gpqa baseline(1p/2p)=+34.4/+35.2 n2a=-11.6 n2b=-15.6 n2c=+31.6 n3=+40.1
+[35/52] qwen2p5_14b__gsm8k baseline(1p/2p)=+31.2/+36.2 n2a=+116.8 n2b=+80.0 n2c=+75.2 n3=-22.5
+[36/52] qwen2p5_14b__math baseline(1p/2p)=+34.4/+78.1 n2a=+12.4 n2b=+16.5 n2c=+95.8 n3=+179.7
+[37/52] qwen2p5_32b__arc baseline(1p/2p)=+79.3/+81.0 n2a=+100.9 n2b=+104.9 n2c=+91.1 n3=+102.8
+[38/52] qwen2p5_32b__gpqa baseline(1p/2p)=-0.6/-0.2 n2a=-10.3 n2b=-6.3 n2c=+1.6 n3=-0.0
+[39/52] qwen2p5_32b__gsm8k baseline(1p/2p)=+15.0/+9.4 n2a=-64.5 n2b=-93.2 n2c=+22.6 n3=+37.0
+[40/52] qwen2p5_32b__math baseline(1p/2p)=+3.8/+0.8 n2a=+19.0 n2b=+30.1 n2c=-9.2 n3=+7.6
+[41/52] qwen2p5_3b__arc baseline(1p/2p)=+6.8/+5.5 n2a=+14.4 n2b=+4.3 n2c=+8.7 n3=+7.7
+[42/52] qwen2p5_3b__gpqa baseline(1p/2p)=+19.4/+19.8 n2a=-123.0 n2b=-146.9 n2c=+20.4 n3=+22.8
+[43/52] qwen2p5_3b__gsm8k baseline(1p/2p)=+2.1/-0.7 n2a=+43.3 n2b=+8.4 n2c=+22.2 n3=+9.5
+[44/52] qwen2p5_3b__math baseline(1p/2p)=+107.8/+121.8 n2a=-138.2 n2b=-152.4 n2c=+117.4 n3=+174.2
+[45/52] qwen2p5_7b__arc baseline(1p/2p)=+36.5/+36.7 n2a=+53.4 n2b=+52.1 n2c=+38.2 n3=+53.5
+[46/52] qwen2p5_7b__gpqa baseline(1p/2p)=+20.4/+24.0 n2a=-37.5 n2b=-26.6 n2c=+19.6 n3=+18.3
+[47/52] qwen2p5_7b__gsm8k baseline(1p/2p)=+1.0/-5.6 n2a=-17.4 n2b=-10.0 n2c=-28.0 n3=+21.8
+[48/52] qwen2p5_7b__math baseline(1p/2p)=+43.3/+47.3 n2a=+29.8 n2b=+32.0 n2c=+61.2 n3=+42.4
+[49/52] yi_1p5_9b_chat__arc baseline(1p/2p)=-0.5/-0.4 n2a=+5.7 n2b=+4.1 n2c=-0.4 n3=+1.3
+[50/52] yi_1p5_9b_chat__gpqa baseline(1p/2p)=+17.6/+18.7 n2a=-22.8 n2b=-29.1 n2c=+16.8 n3=+24.2
+[51/52] yi_1p5_9b_chat__gsm8k baseline(1p/2p)=+3.9/+0.1 n2a=+28.7 n2b=-6.8 n2c=+13.2 n3=+6.8
+[52/52] yi_1p5_9b_chat__math baseline(1p/2p)=+107.0/+116.5 n2a=-187.1 n2b=-179.0 n2c=+115.4 n3=+150.2
+
+=== Tier 1 (N2/N3) Aggregated Out-of-Fold dU Gains vs Baseline (Hazard Drift at delta=0) ===
+Arm baseline   | 1-param calibrated OOF dU: +1540.05 | 2-param calibrated OOF dU: +1704.05
+Arm n2a        | 1-param calibrated OOF dU: -2785.05 | 2-param calibrated OOF dU: -1811.60
+Arm n2b        | 1-param calibrated OOF dU: -3142.90 | 2-param calibrated OOF dU: -2163.00
+Arm n2c        | 1-param calibrated OOF dU: +1791.70 | 2-param calibrated OOF dU: +1874.95
+Arm n3         | 1-param calibrated OOF dU: +2133.60 | 2-param calibrated OOF dU: +2179.60
+=== run complete ===
