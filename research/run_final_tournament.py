@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Final Tournament Script:
 1. Loads baseline and enriched telemetry features.
-2. Trains step-level Logistic Regression models (Baseline and N8b).
-3. Trains sequence models (GRU & LSTM) in PyTorch to capture trace-level dynamics.
-4. Evaluates the hybrid Gated Self-Consistency Policy.
-5. Prints the final OOF expected utility and decision accuracy comparison.
+2. Optimizes Pandas overhead by pre-sorting and pre-extracting trajectories.
+3. Accumulates OOF predictions in a single pass to eliminate redundant training.
+4. Trains GRU & LSTM models on CUDA/CPU.
+5. Simulates dynamic Gated SC Policy.
+6. Prints final OOF Expected Utility and Win/Tie/Loss summary.
 """
 import argparse
 import logging
@@ -16,12 +17,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import roc_auc_score
-from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
+from typing import Any
 
 logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
 
@@ -132,32 +133,24 @@ class TrajectoryRNN(nn.Module):
 
 
 def train_rnn(
-    train_runs: list[pd.DataFrame],
-    feature_cols: list[str],
+    run_ids: np.ndarray,
+    run_dict: dict[str, dict[str, Any]],
     rnn_type: str = "GRU",
     epochs: int = 20,
     device: str = "cpu"
 ) -> TrajectoryRNN:
-    """Trains a sequence model on run trajectories."""
-    sequences = []
-    targets = []
-    lengths = []
-    
-    for run in train_runs:
-        run = run.sort_values("step")
-        seq = run[feature_cols].to_numpy()
-        tar = run["correct"].astype(int).to_numpy()
-        sequences.append(seq)
-        targets.append(tar)
-        lengths.append(len(seq))
+    """Trains a sequence model on run trajectories using pre-extracted numpy arrays."""
+    sequences = [run_dict[rid]["features"] for rid in run_ids]
+    targets = [run_dict[rid]["correct"] for rid in run_ids]
+    lengths = [run_dict[rid]["length"] for rid in run_ids]
         
     dataset = SequenceDataset(sequences, targets, lengths)
     dataloader = DataLoader(dataset, batch_size=1024, shuffle=True, collate_fn=pad_collate_fn)
     
-    input_dim = len(feature_cols)
+    input_dim = sequences[0].shape[-1]
     model = TrajectoryRNN(input_dim, rnn_type=rnn_type).to(device)
     optimizer = optim.Adam(model.parameters(), lr=0.005)
-    criterion = nn.CrossEntropyLoss(ignore_index=-1)  # ignore padding
+    criterion = nn.CrossEntropyLoss(ignore_index=-1)
     
     model.train()
     for epoch in range(epochs):
@@ -166,7 +159,6 @@ def train_rnn(
             optimizer.zero_grad()
             logits = model(seqs)
             
-            # Flatten for cross-entropy
             loss = criterion(logits.view(-1, 2), targs.view(-1))
             loss.backward()
             optimizer.step()
@@ -174,33 +166,39 @@ def train_rnn(
     return model
 
 
-def predict_rnn(model: TrajectoryRNN, runs: list[pd.DataFrame], feature_cols: list[str], device: str = "cpu") -> list[np.ndarray]:
+def predict_rnn(
+    model: TrajectoryRNN,
+    run_ids: np.ndarray,
+    run_dict: dict[str, dict[str, Any]],
+    device: str = "cpu"
+) -> dict[str, np.ndarray]:
+    """Generates out-of-fold sequence model predictions."""
     model.eval()
-    predictions = []
+    predictions = {}
     with torch.no_grad():
-        for run in runs:
-            run = run.sort_values("step")
-            seq = torch.tensor(run[feature_cols].to_numpy(), dtype=torch.float32).unsqueeze(0).to(device)
+        for rid in run_ids:
+            seq = torch.tensor(run_dict[rid]["features"], dtype=torch.float32).unsqueeze(0).to(device)
             logits = model(seq).squeeze(0)
             probs = torch.softmax(logits, dim=-1)[:, 1].cpu().numpy()
-            predictions.append(probs)
+            predictions[rid] = probs
     return predictions
 
 
 # --- Evaluation Policies ---
 
 def evaluate_rnn_policy(
-    test_runs: list[pd.DataFrame],
-    oof_q: list[np.ndarray],
+    test_run_ids: np.ndarray,
+    run_dict: dict[str, dict[str, Any]],
+    oof_q: dict[str, np.ndarray],
     repair_model: Any,
     corruption_model: Any,
     feature_cols: list[str]
 ) -> pd.DataFrame:
     """Evaluates stopping policy using sequence model correctness belief."""
     results = []
-    for run_idx, run in enumerate(test_runs):
-        run = run.sort_values("step").reset_index(drop=True)
-        q = oof_q[run_idx]
+    for rid in test_run_ids:
+        run = run_dict[rid]["run"]
+        q = oof_q[rid]
         
         run_haz = run[run["step"] >= T_MIN]
         if not run_haz.empty:
@@ -230,7 +228,7 @@ def evaluate_rnn_policy(
         stop_correct = int(run[run["step"] == stop_step].iloc[0]["correct"])
         
         results.append({
-            "run_id": run.iloc[0]["run_id"],
+            "run_id": rid,
             "stop_step": stop_step,
             "never_stop_step": final_step,
             "stop_correct": stop_correct,
@@ -244,17 +242,18 @@ def evaluate_rnn_policy(
 
 
 def evaluate_gated_sc_policy(
-    test_runs: list[pd.DataFrame],
-    oof_q: list[np.ndarray],
+    test_run_ids: np.ndarray,
+    run_dict: dict[str, dict[str, Any]],
+    oof_q: dict[str, np.ndarray],
     repair_model: Any,
     corruption_model: Any,
     feature_cols: list[str]
 ) -> pd.DataFrame:
     """Evaluates the Gated Self-Consistency Policy."""
     results = []
-    for run_idx, run in enumerate(test_runs):
-        run = run.sort_values("step").reset_index(drop=True)
-        q = oof_q[run_idx]
+    for rid in test_run_ids:
+        run = run_dict[rid]["run"]
+        q = oof_q[rid]
         
         run_haz = run[run["step"] >= T_MIN]
         if not run_haz.empty:
@@ -277,15 +276,11 @@ def evaluate_gated_sc_policy(
             alpha_t = alpha[haz_idx] if haz_idx < len(alpha) else 0.0
             beta_t = beta[haz_idx] if haz_idx < len(beta) else 0.0
             
-            # Decide stopping base mu
             mu = (1.0 - q_t) * alpha_t - q_t * beta_t - STEP_COST
             
-            # Gating Logic: Trigger SC if model is confused (0.1 < q_t < 0.9)
             if 0.10 < q_t < 0.90:
                 sc_triggered_steps.append(step)
                 k2_agreement = int(run.iloc[idx].get("k2_agreement", 0))
-                
-                # If agreement is 0, model is unstable => force continuation (do not stop)
                 if k2_agreement == 0:
                     continue
                     
@@ -297,7 +292,6 @@ def evaluate_gated_sc_policy(
         never_stop_correct = int(run.iloc[-1]["correct"])
         stop_correct = int(run[run["step"] == stop_step].iloc[0]["correct"])
         
-        # Cost accounting: charge extra path only on steps where SC was triggered
         tokens_stop = run[run["step"] <= stop_step]["thought_token_count"].sum()
         for s in sc_triggered_steps:
             if s <= stop_step:
@@ -305,35 +299,38 @@ def evaluate_gated_sc_policy(
                 
         tokens_ns = run["thought_token_count"].sum() + run[run["step"] <= final_step]["k2_raw_generation_tokens"].sum()
         
-        u_stop_token = stop_correct - TOKEN_PRICE * tokens_stop
-        u_ns_token = never_stop_correct - TOKEN_PRICE * tokens_ns
-        
         results.append({
-            "run_id": run.iloc[0]["run_id"],
+            "run_id": rid,
             "stop_step": stop_step,
             "never_stop_step": final_step,
             "stop_correct": stop_correct,
             "never_stop_correct": never_stop_correct,
             "stop_utility": stop_correct - STEP_COST * (stop_step - 1),
             "never_stop_utility": never_stop_correct - STEP_COST * (final_step - 1),
-            "stop_utility_token": u_stop_token,
-            "never_stop_utility_token": u_ns_token
+            "stop_utility_token": stop_correct - TOKEN_PRICE * tokens_stop,
+            "never_stop_utility_token": never_stop_correct - TOKEN_PRICE * tokens_ns
         })
     return pd.DataFrame(results)
 
 
 def evaluate_standard_policy(
-    test_runs: list[pd.DataFrame],
-    probe: Any,
+    test_run_ids: np.ndarray,
+    run_dict: dict[str, dict[str, Any]],
+    oof_q: np.ndarray,
+    test_step_indices: np.ndarray,
     repair_model: Any,
     corruption_model: Any,
     feature_cols: list[str]
 ) -> pd.DataFrame:
-    """Standard tabular stopping policy baseline simulation."""
+    """Standard tabular stopping policy simulation."""
     results = []
-    for run in test_runs:
-        run = run.sort_values("step").reset_index(drop=True)
-        q = probe.predict_proba(run[feature_cols])[:, 1]
+    # Create mapping from absolute step index in df to oof score
+    step_score_map = dict(zip(test_step_indices, oof_q))
+    
+    for rid in test_run_ids:
+        run = run_dict[rid]["run"]
+        # Retrieve scores using indices
+        q = [step_score_map[idx] for idx in run.index]
         
         run_haz = run[run["step"] >= T_MIN]
         if not run_haz.empty:
@@ -363,7 +360,7 @@ def evaluate_standard_policy(
         stop_correct = int(run[run["step"] == stop_step].iloc[0]["correct"])
         
         results.append({
-            "run_id": run.iloc[0]["run_id"],
+            "run_id": rid,
             "stop_step": stop_step,
             "never_stop_step": final_step,
             "stop_correct": stop_correct,
@@ -382,14 +379,11 @@ def main():
     args = parser.parse_args()
 
     v2_dir = Path(args.dir)
-    
-    # Locate all collected trace steps (including pilots and final sweep targets)
     trace_paths = list(v2_dir.glob("**/trace_steps.csv"))
     if not trace_paths:
         logging.error(f"No trace steps CSVs found in {v2_dir}.")
         return
 
-    # Load and combine all available trace steps
     logging.info(f"Scanning and loading {len(trace_paths)} dataset cells...")
     dfs = []
     for path in trace_paths:
@@ -399,6 +393,9 @@ def main():
             logging.warning(f"Failed to read {path}: {e}")
             
     df = pd.concat(dfs, ignore_index=True)
+    
+    # Sort globally by run and step to align all operations contiguously
+    df = df.sort_values(["run_id", "step"]).reset_index(drop=True)
     logging.info(f"Loaded {df['run_id'].nunique()} unique run trajectories ({len(df)} total steps).")
 
     # 1. Clean missing values and transitions on base df first (prevents fragmentation warning)
@@ -414,7 +411,6 @@ def main():
     proj2 = parse_projections(df, "mid_hidden_2_proj")
     proj_cols = list(proj1.columns) + list(proj2.columns)
     
-    # Merge projections back to df
     df = pd.concat([df, proj1, proj2], axis=1)
     df = df.copy()  # Defragment memory
 
@@ -426,17 +422,29 @@ def main():
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
 
-    # Setup device
+    # Pre-extract run dictionary for O(1) trajectory lookups
+    logging.info("Pre-extracting numpy arrays per trajectory...")
+    n8b_features = BASELINE_FEATURES + proj_cols
+    run_dict = {}
+    for rid, group in df.groupby("run_id"):
+        run_dict[rid] = {
+            "features": group[n8b_features].to_numpy(),
+            "correct": group["correct"].to_numpy(),
+            "length": len(group),
+            "run": group
+        }
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
     logging.info(f"Using device for PyTorch sequence training: {device}")
 
-    # 3. Setup configurations
-    n8b_features = BASELINE_FEATURES + proj_cols
-    
-    # Folds setup
-    gkf = GroupKFold(n_splits=5)
-    
-    # Store fold outputs
+    # Setup out-of-fold predictions arrays
+    oof_predictions = {
+        "Baseline (Linear)": np.full(len(df), np.nan),
+        "N8b (Linear Proj)": np.full(len(df), np.nan),
+        "GRU (Sequence)": {},
+        "LSTM (Sequence)": {}
+    }
+
     results = {
         "Baseline (Linear)": [],
         "N8b (Linear Proj)": [],
@@ -445,16 +453,19 @@ def main():
         "Gated SC (Hysteresis)": []
     }
 
+    unique_run_ids = df["run_id"].unique()
+    gkf = GroupKFold(n_splits=5)
+
     logging.info("Starting cross-validation tournament...")
     for fold, (train_idx, test_idx) in enumerate(gkf.split(df, groups=df["run_id"])):
         logging.info(f"--- FOLD {fold+1}/5 ---")
         train = df.iloc[train_idx]
         test = df.iloc[test_idx]
         
-        # Base datasets
-        test_runs = [run for _, run in test.groupby("run_id")]
+        train_run_ids = train["run_id"].unique()
+        test_run_ids = test["run_id"].unique()
         
-        # Prepare transitions for hazard estimation
+        # Prepare transitions for hazards
         transitions = train[train["has_next"] == 1].copy()
         transitions["repair"] = ((transitions["correct"] == 0) & (transitions["next_correct"] == 1)).astype(int)
         transitions["corruption"] = ((transitions["correct"] == 1) & (transitions["next_correct"] == 0)).astype(int)
@@ -464,44 +475,51 @@ def main():
         probe_base = fit_binary_model(train, "correct", BASELINE_FEATURES)
         rep_base = fit_binary_model(haz[haz["correct"] == 0], "repair", BASELINE_FEATURES)
         corr_base = fit_binary_model(haz[haz["correct"] == 1], "corruption", BASELINE_FEATURES)
+        
+        oof_predictions["Baseline (Linear)"][test_idx] = probe_base.predict_proba(test[BASELINE_FEATURES])[:, 1]
         results["Baseline (Linear)"].append(
-            evaluate_standard_policy(test_runs, probe_base, rep_base, corr_base, BASELINE_FEATURES)
+            evaluate_standard_policy(test_run_ids, run_dict, oof_predictions["Baseline (Linear)"], test_idx, rep_base, corr_base, BASELINE_FEATURES)
         )
         
         # 2. N8b Linear Proj
         probe_n8b = fit_binary_model(train, "correct", n8b_features)
         rep_n8b = fit_binary_model(haz[haz["correct"] == 0], "repair", n8b_features)
         corr_n8b = fit_binary_model(haz[haz["correct"] == 1], "corruption", n8b_features)
+        
+        oof_predictions["N8b (Linear Proj)"][test_idx] = probe_n8b.predict_proba(test[n8b_features])[:, 1]
         results["N8b (Linear Proj)"].append(
-            evaluate_standard_policy(test_runs, probe_n8b, rep_n8b, corr_n8b, n8b_features)
+            evaluate_standard_policy(test_run_ids, run_dict, oof_predictions["N8b (Linear Proj)"], test_idx, rep_n8b, corr_n8b, n8b_features)
         )
         
         # 3. PyTorch GRU Model
-        train_runs = [run for _, run in train.groupby("run_id")]
-        gru_model = train_rnn(train_runs, n8b_features, rnn_type="GRU", epochs=20, device=device)
-        gru_oof_q = predict_rnn(gru_model, test_runs, n8b_features, device=device)
+        gru_model = train_rnn(train_run_ids, run_dict, rnn_type="GRU", epochs=20, device=device)
+        gru_oof_q = predict_rnn(gru_model, test_run_ids, run_dict, device=device)
+        oof_predictions["GRU (Sequence)"].update(gru_oof_q)
         results["GRU (Sequence)"].append(
-            evaluate_rnn_policy(test_runs, gru_oof_q, rep_n8b, corr_n8b, n8b_features)
+            evaluate_rnn_policy(test_run_ids, run_dict, gru_oof_q, rep_n8b, corr_n8b, n8b_features)
         )
         
         # 4. PyTorch LSTM Model
-        lstm_model = train_rnn(train_runs, n8b_features, rnn_type="LSTM", epochs=20, device=device)
-        lstm_oof_q = predict_rnn(lstm_model, test_runs, n8b_features, device=device)
+        lstm_model = train_rnn(train_run_ids, run_dict, rnn_type="LSTM", epochs=20, device=device)
+        lstm_oof_q = predict_rnn(lstm_model, test_run_ids, run_dict, device=device)
+        oof_predictions["LSTM (Sequence)"].update(lstm_oof_q)
         results["LSTM (Sequence)"].append(
-            evaluate_rnn_policy(test_runs, lstm_oof_q, rep_n8b, corr_n8b, n8b_features)
+            evaluate_rnn_policy(test_run_ids, run_dict, lstm_oof_q, rep_n8b, corr_n8b, n8b_features)
         )
         
-        # 5. Gated SC Policy (uses GRU correctness scores)
+        # 5. Gated SC Policy (uses GRU scores)
         results["Gated SC (Hysteresis)"].append(
-            evaluate_gated_sc_policy(test_runs, gru_oof_q, rep_n8b, corr_n8b, n8b_features)
+            evaluate_gated_sc_policy(test_run_ids, run_dict, gru_oof_q, rep_n8b, corr_n8b, n8b_features)
         )
 
-    # 4. Summarize and Print results
+    # 5. Summarize and Print results
     print("\n" + "=" * 80)
     print("                 FINAL DEEP RESEARCH TOURNAMENT SUMMARY")
     print("=" * 80)
     print(f"{'Configuration':<25} | {'OOF AUC':<8} | {'Utility (Step)':<14} | {'Utility (Token)':<15} | {'Win/Tie/Loss':<12}")
     print("-" * 80)
+
+    y_all = df["correct"].astype(int).to_numpy()
 
     for name in results:
         runs_df = pd.concat(results[name], ignore_index=True)
@@ -513,40 +531,25 @@ def main():
         mean_u_step = runs_df["stop_utility"].mean()
         mean_u_token = runs_df["stop_utility_token"].mean()
         
-        # Standard accuracy AUC
-        # We can extract the corresponding fold scores
-        oof_scores = np.full(len(df), np.nan)
-        for fold, (train_idx, test_idx) in enumerate(gkf.split(df, groups=df["run_id"])):
-            train = df.iloc[train_idx]
-            test = df.iloc[test_idx]
-            test_runs = [run for _, run in test.groupby("run_id")]
-            
-            if "Linear" in name:
-                cols = BASELINE_FEATURES if "Baseline" in name else n8b_features
-                probe = fit_binary_model(train, "correct", cols)
-                oof_scores[test_idx] = probe.predict_proba(test[cols])[:, 1]
-            elif "SC" in name or "GRU" in name:
-                train_runs = [run for _, run in train.groupby("run_id")]
-                gru_model = train_rnn(train_runs, n8b_features, rnn_type="GRU", epochs=20, device=device)
-                gru_oof_q = predict_rnn(gru_model, test_runs, n8b_features, device=device)
-                # Populate oof_scores
-                pos = 0
-                for q_run in gru_oof_q:
-                    run_len = len(q_run)
-                    oof_scores[test_idx[pos:pos+run_len]] = q_run
-                    pos += run_len
-            elif "LSTM" in name:
-                train_runs = [run for _, run in train.groupby("run_id")]
-                lstm_model = train_rnn(train_runs, n8b_features, rnn_type="LSTM", epochs=20, device=device)
-                lstm_oof_q = predict_rnn(lstm_model, test_runs, n8b_features, device=device)
-                pos = 0
-                for q_run in lstm_oof_q:
-                    run_len = len(q_run)
-                    oof_scores[test_idx[pos:pos+run_len]] = q_run
-                    pos += run_len
-
-        y_all = df["correct"].astype(int).to_numpy()
-        auc = roc_auc_score(y_all, oof_scores)
+        # Extract the OOF score vector for AUC calculation
+        if "Linear" in name:
+            auc = roc_auc_score(y_all, oof_predictions[name])
+        elif "SC" in name or "GRU" in name:
+            gru_scores = np.full(len(df), np.nan)
+            pos = 0
+            for rid in unique_run_ids:
+                run_len = run_dict[rid]["length"]
+                gru_scores[pos:pos+run_len] = oof_predictions["GRU (Sequence)"][rid]
+                pos += run_len
+            auc = roc_auc_score(y_all, gru_scores)
+        elif "LSTM" in name:
+            lstm_scores = np.full(len(df), np.nan)
+            pos = 0
+            for rid in unique_run_ids:
+                run_len = run_dict[rid]["length"]
+                lstm_scores[pos:pos+run_len] = oof_predictions["LSTM (Sequence)"][rid]
+                pos += run_len
+            auc = roc_auc_score(y_all, lstm_scores)
         
         u_step_str = f"{mean_u_step:+.4f}"
         u_tok_str = f"{mean_u_token:+.4f}"
