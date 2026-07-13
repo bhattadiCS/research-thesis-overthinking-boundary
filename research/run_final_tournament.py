@@ -63,7 +63,7 @@ def fit_binary_model(train_frame: pd.DataFrame, target_column: str, feature_cols
     return Pipeline(
         [
             ("scale", StandardScaler()),
-            ("model", LogisticRegression(max_iter=2000, class_weight="balanced", solver="lbfgs")),
+            ("model", LogisticRegression(max_iter=2000, class_weight="balanced", solver="lbfgs", n_jobs=-1)),
         ]
     ).fit(train_frame[feature_cols], target)
 
@@ -152,7 +152,7 @@ def train_rnn(
         lengths.append(len(seq))
         
     dataset = SequenceDataset(sequences, targets, lengths)
-    dataloader = DataLoader(dataset, batch_size=32, shuffle=True, collate_fn=pad_collate_fn)
+    dataloader = DataLoader(dataset, batch_size=1024, shuffle=True, collate_fn=pad_collate_fn)
     
     input_dim = len(feature_cols)
     model = TrajectoryRNN(input_dim, rnn_type=rnn_type).to(device)
@@ -401,19 +401,22 @@ def main():
     df = pd.concat(dfs, ignore_index=True)
     logging.info(f"Loaded {df['run_id'].nunique()} unique run trajectories ({len(df)} total steps).")
 
-    # 1. Parse mid-layer projections (N8b)
+    # 1. Clean missing values and transitions on base df first (prevents fragmentation warning)
+    df["correct"] = pd.to_numeric(df["correct"], errors="coerce").fillna(0).astype(int)
+    df["k2_agreement"] = pd.to_numeric(df["k2_agreement"], errors="coerce").fillna(0).astype(int)
+    df["k2_raw_generation_tokens"] = pd.to_numeric(df["k2_raw_generation_tokens"], errors="coerce").fillna(0).astype(int)
+    df["has_next"] = (df.groupby("run_id")["step"].shift(-1).notna()).astype(int)
+    df["next_correct"] = df.groupby("run_id")["correct"].shift(-1).fillna(0).astype(int)
+
+    # 2. Parse mid-layer projections (N8b)
     logging.info("Parsing mid-layer projections...")
     proj1 = parse_projections(df, "mid_hidden_1_proj")
     proj2 = parse_projections(df, "mid_hidden_2_proj")
     proj_cols = list(proj1.columns) + list(proj2.columns)
     
+    # Merge projections back to df
     df = pd.concat([df, proj1, proj2], axis=1)
     df = df.copy()  # Defragment memory
-
-    # 2. Clean missing values and transitions
-    df["correct"] = pd.to_numeric(df["correct"], errors="coerce").fillna(0).astype(int)
-    df["k2_agreement"] = pd.to_numeric(df["k2_agreement"], errors="coerce").fillna(0).astype(int)
-    df["k2_raw_generation_tokens"] = pd.to_numeric(df["k2_raw_generation_tokens"], errors="coerce").fillna(0).astype(int)
 
     # Fill NaNs on all features
     all_numeric = list(set(BASELINE_FEATURES + ["k2_agreement"] + 
@@ -422,9 +425,6 @@ def main():
     for col in all_numeric:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
-
-    df["has_next"] = (df.groupby("run_id")["step"].shift(-1).notna()).astype(int)
-    df["next_correct"] = df.groupby("run_id")["correct"].shift(-1).fillna(0).astype(int)
 
     # Setup device
     device = "cuda" if torch.cuda.is_available() else "cpu"
