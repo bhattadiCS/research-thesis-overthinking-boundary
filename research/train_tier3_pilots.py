@@ -207,6 +207,7 @@ def main():
     
     # Merge projections back to df
     df = pd.concat([df, proj1, proj2], axis=1)
+    df = df.copy()  # Defragment DataFrame to avoid pandas PerformanceWarning
 
     # Clean CSV shifts and missing values
     df["correct"] = pd.to_numeric(df["correct"], errors="coerce").fillna(0).astype(int)
