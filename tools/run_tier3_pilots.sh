@@ -45,11 +45,11 @@ echo "=== Pilots complete. Committing and pushing results... ===" | tee -a "$LOG
 # 4. Stage and push results
 git add "$V2/tier3_pilot_gsm8k/trace_steps.csv" \
         "$V2/tier3_pilot_gsm8k/trace_runs.csv" \
-        "$V2/tier3_pilot_gsm8k/trace_batch_metrics.csv" \
+        "$V2/tier3_pilot_gsm8k/batch_metrics.csv" \
         "$V2/tier3_pilot_gsm8k/runtime_metadata.json" \
         "$V2/tier3_pilot_math/trace_steps.csv" \
         "$V2/tier3_pilot_math/trace_runs.csv" \
-        "$V2/tier3_pilot_math/trace_batch_metrics.csv" \
+        "$V2/tier3_pilot_math/batch_metrics.csv" \
         "$V2/tier3_pilot_math/runtime_metadata.json"
 
 git commit -m "results: Tier-3 Qwen-7B GSM8K/MATH pilot telemetry collected" | tee -a "$LOG"

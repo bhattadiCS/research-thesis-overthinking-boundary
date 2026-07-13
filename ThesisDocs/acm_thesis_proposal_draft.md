@@ -1,76 +1,88 @@
 # Overthinking Boundary in Reasoning LLMs
 
-Master's Thesis Proposal for 625.803-804  
-Aditya Bhatt  
-M.S. in Applied and Computational Mathematics  
-Research Adviser: Dr. Zerotti Woods  
-Proposed Second Reader: Dr. Moustapha Pemy  
-Project Repository: https://github.com/bhattadiCS/research-thesis-overthinking-boundary
+**Master's Thesis Proposal for 625.803-804**  
+**Student:** Aditya Bhattacharya  
+**Program:** M.S. in Applied and Computational Mathematics, Johns Hopkins University  
+**Research Adviser:** Dr. Zerotti Woods  
+**Proposed Second Reader:** Dr. Moustapha Pemy  
+**Project Repository:** [research-thesis-overthinking-boundary](https://github.com/bhattadiCS/research-thesis-overthinking-boundary)
 
-## Problem Motivation
+---
 
-Reasoning-oriented large language models often benefit from intermediate steps, but the marginal value of further reasoning is not uniformly positive. Beyond a model-dependent and task-dependent point, additional inference can revise a correct answer, drift away from the relevant solution path, or consume compute without improving correctness. This thesis studies that transition point, called the **overthinking boundary**, and asks whether it can be defined mathematically, detected empirically, and used as a practical stopping rule.
+## 1. Problem Motivation & Background
 
-The topic fits applied and computational mathematics because it combines stochastic modeling, sequential decision-making, hazard processes, uncertainty quantification, and empirical analysis of computational systems.
+Reasoning-oriented Large Language Models (LLMs) employing Chain-of-Thought (CoT) generate intermediate reasoning tokens before arriving at a final answer. While this computation generally improves task performance, the marginal utility of further reasoning is not uniformly positive. Beyond a model-dependent and task-dependent transition point—which we define as the **overthinking boundary**—additional inference steps can cause the model to revise a correct answer to an incorrect one, enter infinite loops, or accumulate significant token costs without any improvement in accuracy. 
 
-## Research Question and Objectives
+This thesis investigates the mathematical formalization, empirical detection, and online application of this overthinking boundary. The topic directly interfaces with applied and computational mathematics, combining stochastic modeling, optimal stopping theory, hazard rate processes, uncertainty quantification, and sequential decision-making.
 
-**The main research question is whether the point at which further reasoning becomes counterproductive in a reasoning language model can be characterized as a mathematically meaningful stopping boundary and estimated from observable trace features.**
+---
 
-The thesis will pursue four objectives: (1) formalize a continuation-value framework for reasoning traces using current correctness belief, repair probability, corruption probability, and per-step compute cost; (2) study whether the resulting drift admits a one-crossing structure that defines an operational stopping boundary; (3) estimate the relevant quantities from empirical traces using observables such as answer revisions, entropy-related signals, and hidden-state-derived proxies where available; and (4) compare the resulting stopping rules against fixed-length, never-stop, and alternative sequential-detection baselines.
+## 2. Research Question & Objectives
 
-## Background and Original Contribution
+**The primary research question is whether the point at which further reasoning becomes counterproductive can be characterized as a mathematically structured stopping boundary and estimated online from observable intermediate trace features.**
 
-Recent literature on reasoning models and adaptive test-time compute suggests that longer chain-of-thought is not uniformly beneficial, but much of that work relies on proxy scores or heuristics rather than an explicit continuation-value formulation. The intended contribution is to formalize overthinking as an optimal stopping problem with distinct repair and corruption hazards, then test that framework on real traces from open-weight reasoning models. This places the project at the intersection of stochastic processes, sequential inference, and modern AI systems.
+To answer this, we pursue four objectives:
+1. **Analytical Formalization**: Formalize a continuation-value framework for reasoning trajectories using a one-step Bellman equation governed by conditional repair and corruption hazards.
+2. **Structural Characterization**: Determine the mathematical conditions under which the continuation-value sequence admits a single-crossing structure, defining an operational stopping boundary.
+3. **Empirical Calibration & Upgrades**: Develop online estimation strategies for correctness belief ($q_t$) and hazards ($\alpha_t, \beta_t$) using step-level observables (e.g., semantic entropy, logprobs, answer churn, hidden states).
+4. **Generalization & Validation**: Evaluate stopping policies across a massive, heterogeneous corpus of LLM reasoning traces under out-of-fold cross-validation, comparing them against static length thresholds, "never-stop" baselines, and oracle hindsight.
 
-The proposal is mathematically centered in two ways. First, it treats reasoning as a controlled stochastic process rather than as a prompt-engineering phenomenon. Second, it asks for a boundary that is both structurally interpretable and statistically estimable from partial observables, which makes the work suitable for ACM rather than purely empirical machine learning.
+---
 
-## 4. Proposed Methodology
+## 3. Analytical Framework & Optimal Stopping Formulation
 
-The project will begin with a focused literature survey on overthinking in reasoning models, adaptive test-time compute, sequential stopping rules, and hazard- or drift-based decision models.
+Let the reasoning trajectory of a model on a given task be represented as a discrete-time stochastic process on a filtration $(\mathcal{F}_t)_{t \ge 0}$ generated by observable intermediate outputs and derived trace features. Let $A_t$ be the answer candidate at step $t$, let $y$ be the ground truth, and let $C_t = \mathbb{I}(A_t \approx y)$ be the correctness indicator. 
 
-### 4.1. Analytical Formalization of Stopping Criteria
-To detect the overthinking boundary, the study treats each reasoning trace as a jump process with competing repair and corruption hazards. Let &tau; be the stopping time relative to the observable filtration *F*<sub>t</sub>. The objective is to maximize expected correctness net of cumulative compute cost:
+The stopping time $\tau$ is a random variable chosen to maximize the expected utility net of cumulative compute cost:
+$$\max_{\tau} \mathbb{E} \left[ C_{\tau} - \lambda \tau \mid \mathcal{F}_0 \right]$$
+where $\lambda > 0$ represents the per-step token/compute cost. 
 
-E[ *C*<sub>&tau;</sub> - &lambda;&tau; | *F*<sub>0</sub> ]
+By the principle of optimality, the decision to continue from step $t$ depends on the one-step continuation value:
+$$\mu_t = \mathbb{E} \left[ U(C_{t+1}, t+1) - U(C_t, t) \mid \mathcal{F}_t \right]$$
+Expanding this in terms of the online correctness belief $q_t = \mathbb{P}(C_t = 1 \mid \mathcal{F}_t)$ yields:
+$$\mu_t = (1 - q_t) \alpha_t - q_t \beta_t - \lambda$$
+where:
+* **$\alpha_t = \mathbb{P}(C_{t+1} = 1 \mid C_t = 0, \mathcal{F}_t)$** is the conditional repair hazard (the probability that the model corrects a wrong answer).
+* **$\beta_t = \mathbb{P}(C_{t+1} = 0 \mid C_t = 1, \mathcal{F}_t)$** is the conditional corruption hazard (the probability that the model corrupts a correct answer).
+* **$\lambda$** is the per-step cost.
 
-Optimal continuation follows a Bellman equation, so stopping occurs at the first step where the one-step continuation value &mu;<sub>t</sub> becomes nonpositive. The sequential-analysis link is through stopping times, threshold rules, and anytime-valid detector variants. The study will examine the calibration of the correctness belief *q*<sub>t</sub>, using trace-level proxies such as semantic entropy and answer revision cycles as observables for the latent state.
+The optimal stopping policy is governed by the boundary $T^* = \inf \{ t \ge 2 : \mu_t \le 0 \}$. We investigate the **structural hypothesis** that under regularized decay of $\alpha_t$ and stabilization of $\beta_t$, $\mu_t$ crosses zero at most once, guaranteeing a single, well-defined overthinking boundary.
 
-The analytical core models each reasoning trace as a discrete-time stochastic process on a filtration generated by observable intermediate outputs and derived trace features. Let *A*<sub>t</sub> denote the answer after step *t*, let *C*<sub>t</sub> denote correctness relative to ground truth, and let *q*<sub>t</sub> be the current correctness belief.
+---
 
-*&mu;*<sub>*t*</sub> = (1 - *q*<sub>*t*</sub>) *&alpha;*<sub>*t*</sub> - *q*<sub>*t*</sub> *&beta;*<sub>*t*</sub> - *&lambda;*
+## 4. Methodology & Scope of Work
 
-Here *&alpha;*<sub>*t*</sub> = P(*C*<sub>*t*+1</sub> = 1 | *C*<sub>*t*</sub> = 0, *F*<sub>*t*</sub>) is the conditional repair hazard, *&beta;*<sub>*t*</sub> = P(*C*<sub>*t*+1</sub> = 0 | *C*<sub>*t*</sub> = 1, *F*<sub>*t*</sub>) is the conditional corruption hazard, and *&lambda;* is a per-step compute cost. The *overthinking boundary* is the first step at which *&mu;*<sub>*t*</sub> becomes nonpositive.
+### 4.1. Massive Census Corpus
+Rather than relying on isolated case studies, we evaluate our stopping rules on a massive, standardized corpus of **75,965 reasoning runs** across **52 distinct cells** (13 models, 4 benchmarks):
+* **Models**: Distilled reasoning models (e.g., `DeepSeek-R1-Distill-Qwen` 1.5B/7B/14B/32B), general instruct models (e.g., `Qwen2.5` 0.5B/3B/7B/14B/32B, `Llama-3.1-8B-Instruct`, `Mistral-7B-Instruct-v0.3`, `Mistral-Small-Instruct-22B`), and chat models (`Yi-1.5-9B-Chat`).
+* **Benchmarks**: GSM8K, MATH, ARC-Challenge, and GPQA.
+* **Baseline Audit**: Our initial audit established a baseline loss rate of **7.55%** across the entire corpus, representing runs where the stopping policy stopped too early and missed a late self-correction.
 
-**Structural hypothesis.** If correctness belief *q*<sub>*t*</sub> tends to rise early in the trace, repair hazard *&alpha;*<sub>*t*</sub> decreases as the remaining mistakes become harder to fix, and corruption hazard *&beta;*<sub>*t*</sub> rises once the model begins to revise stable answers, then *&mu;*<sub>*t*</sub> should cross zero at most once. This produces a mathematically interpretable candidate stopping boundary *T** = inf{*t* : *&mu;*<sub>*t*</sub> &le; 0}.
+### 4.2. Experimental Design (Tier 1, Tier 2, and Tier 3)
+We utilize a rigorous, flag-gated experimental matrix where each experiment alters exactly one Independent Variable (IV) while keeping all other parameters constant (ceteris paribus):
+1. **N1 (Meta-Calibration)**: Evaluates whether the optimal stopping threshold $\delta_{\text{cell}}$ can be predicted from cheap cell-level statistics (accuracy, churn, entropy) under Leave-One-Cell-Out (LOCO) and Leave-One-Model-Out (LOMO) cross-validation.
+2. **N2 (Probe Upgrades)**: Compares linear logistic regression probes against non-linear models (GBT), isotonic calibration, and rolling temporal history lags (N2c) to isolate the best representation of online correctness $q_t$.
+3. **N3 (Empirical Bayes Hazards)**: Shrinks sparse, late-step cell-specific hazard estimates toward global, step-specific averages using hierarchical Empirical Bayes to stabilize the stopping boundary in trace tails.
+4. **N4 (Dynamic Difficulty)**: Introduces a two-parameter stopping threshold modulated by step-2 answer churn to adapt the patience parameter to online task difficulty.
+5. **N5 & N6 (GPU Causal Tests)**: Isolates the causal impact of token budget constraints (N5) and precision quantization (N6) under strict, confound-free environments.
+6. **N7 & N8 (Feature Enrichment Pilots)**: Tests the addition of multi-sample agreement ($k=2$ self-consistency) under honest cost accounting, answer-span token diagnostics, and projected mid-layer hidden states.
 
-Optimal continuation follows a Bellman equation, so stopping occurs at the first step where the one-step continuation value &mu;<sub>t</sub> becomes nonpositive. The sequential-analysis link is through stopping times, threshold rules, and anytime-valid detector variants rather than ad hoc cutoffs. The mathematical goal is not only to define the boundary, but also to state conditions under which a one-crossing rule is plausible and to understand how estimation error perturbs the stopping decision.
+---
 
-### 4.2. Estimation Strategy
+## 5. Preliminary Findings & Significance
 
-The hidden variable in the problem is correctness during the trace: at inference time, the model does not reveal whether its current answer is actually correct. The thesis will therefore estimate *q*<sub>t</sub>, &alpha;<sub>t</sub>, and &beta;<sub>t</sub> from observable trace features. Candidate observables include answer revisions, self-consistency changes, token-level uncertainty or entropy summaries, trace length, and hidden-state-derived features when available.
+Our research has already yielded significant, validated findings:
+* **Algorithmic Breakthroughs**: Empirical Bayes Hazard Shrinkage (N3) achieved the single largest utility gain (**$+593.55$ OOF utility**), proving that hazard model variance at late steps was the dominant stop-defect. Introducing history lags (N2c) added **$+251.65$**, and 2-parameter difficulty modulation (N4) added **$+159.50$**.
+* **Causal Insights**: Quantization was proven to degrade step-2 accuracy by 14.3% ($Z=9.79$), while extending generation budgets (N5) had zero impact on overthinking loops, falsifying the truncation hypothesis.
 
-These quantities will be estimated in two layers. First, a correctness model will map observables at step *t* to an estimate of *q*<sub>t</sub>. Second, transition models will estimate the probability that an incorrect state repairs or a correct state corrupts at the next step. This decomposition is important because it separates useful continuation from harmful continuation instead of collapsing both effects into a single proxy score.
+By formalizing the overthinking boundary, this thesis provides a critical diagnostic and operational framework for high-stakes sequential LLM inference (e.g., automated theorem proving, medical diagnosis guards, and code synthesis pipelines), proving that test-time compute can be dynamically optimized through stochastic optimal stopping.
 
-A second mathematical issue is sequential validity. Since the stopping rule checks the evolving trace repeatedly, the thesis will compare pointwise concentration methods with anytime-valid procedures such as empirical-Bernstein bounds and e-process-style detectors. This makes the proposal relevant to sequential analysis, not only to predictive modeling.
+---
 
-### 4.3. Experimental Design
+## 6. Project Timeline & Semester Plan
 
-The empirical study will use real traces from open-weight reasoning models, currently centered on DeepSeek-R1-Distill-Qwen-1.5B and Qwen2.5-0.5B-Instruct, on mathematical question-answering tasks such as GSM8K-style exact-answer problems. For each prompt, the pipeline records stepwise outputs, answer revisions, stopping depth, uncertainty features, and hidden-state proxies where feasible.
+The project is structured across the two-semester 625.803–804 sequence:
+* **ACM 625.803 (Semester 1)**: Focuses on stochastic formulation, literature review, baseline audit, database alignment, and implementation of Tier-1 and Tier-2 OOF evaluations. (Completed)
+* **ACM 625.804 (Semester 2)**: Focuses on Tier-3 GPU pilot collection, feature-enriched stopping rules, multi-model generalization testing, drafting the formal thesis document, and preparing the oral defense.
 
-The main comparisons will be among hazard-based drift rules, statistically valid sequential detectors, fixed-length policies, and never-stop baselines. Performance will be evaluated using answer accuracy at stop time, average stop step, compute-adjusted utility under the chosen &lambda;, regret relative to an oracle hindsight stopping point, and robustness across tasks and model families.
-
-The experimental program will also include ablation studies. In particular, the thesis will test which observable families matter most for estimating the boundary, whether the detected boundary transfers across benchmarks, and whether the same boundary structure appears in both weaker and stronger open-weight models. These experiments make the project large enough for a full two-semester thesis rather than a narrow single-model case study.
-
-## 5. Expected Results and Significance
-The expected outcome is a mathematically rigorous and empirically validated framework showing that overthinking can be analyzed as a stopping phenomenon. Successful identification of conditions under which reasoning traces move from a beneficial to a harmful regime provides both theoretical and practical value. Theoretically, it formalizes the "optimal compute" problem for autoregressive reasoning. Practically, it enables higher answer accuracy and lower inference latency in resource-constrained environments.
-
-The significance of this work extends to the broader reliability of large-scale reasoning systems. By establishing a formal **overthinking boundary**, we provide a diagnostic tool for high-stakes decision systems—such as automated theorem-proving or code-generation pipelines—where "over-generating" leads to hallucination or catastrophic repair failure. The hazard-based approach therefore serves as a general-purpose methodology for uncertainty quantification in sequential model outputs.
-
-## 6. Preliminary Work and Semester Plan
-Substantial preliminary work has already been completed, including an initial mathematical framework and pilot results using the DeepSeek-R1-Distill family on the GSM8K benchmark. The project will proceed in two phases aligned with the 625.803&ndash;804 sequence:
-
-*   **Phase 1 (625.803):** Focus on finalizing the stochastic mathematical formulation, completing the comprehensive literature survey, and establishing the unified data generation and evaluation pipeline for the Qwen and DeepSeek model families. The semester will conclude with a status report detailing baseline detector performance against oracle hindsight.
-*   **Phase 2 (625.804):** Focus on large-scale empirical evaluation, statistical significance testing of the hazard-based rules, and final thesis documentation. This phase will conclude with the final thesis draft submitted for university review and the public defense presentation to the committee.
-
-This research will be conducted under the frequent guidance and technical supervision of Dr. Woods and Dr. Pemy, whose expertise in stochastic optimal stopping and AI reliability will be foundational to the project's success. The final thesis and defense will be prepared in full accordance with the Johns Hopkins University Master's thesis guidelines.
+Dr. Zerotti Woods (Research Adviser) and Dr. Moustapha Pemy (Proposed Second Reader) will oversee the project to ensure mathematical precision and alignment with JHU thesis guidelines.
