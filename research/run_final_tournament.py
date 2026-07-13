@@ -236,12 +236,19 @@ def main():
     df = df.sort_values(["run_id", "step"]).reset_index(drop=True)
     logging.info(f"Loaded {df['run_id'].nunique()} unique run trajectories ({len(df)} total steps).")
 
-    # 1. Clean missing values and transitions on base df first (prevents fragmentation warning)
+    # 1. Clean missing values, transitions, and fill NaNs on base df first
     df["correct"] = pd.to_numeric(df["correct"], errors="coerce").fillna(0).astype(int)
     df["k2_agreement"] = pd.to_numeric(df["k2_agreement"], errors="coerce").fillna(0).astype(int)
     df["k2_raw_generation_tokens"] = pd.to_numeric(df["k2_raw_generation_tokens"], errors="coerce").fillna(0).astype(int)
     df["has_next"] = (df.groupby("run_id")["step"].shift(-1).notna()).astype(int)
     df["next_correct"] = df.groupby("run_id")["correct"].shift(-1).fillna(0).astype(int)
+
+    base_numeric = list(set(BASELINE_FEATURES + ["k2_agreement", "k2_raw_generation_tokens"] + 
+                            ["answer_span_mean_logprob", "answer_span_min_logprob", 
+                             "answer_span_mean_entropy", "answer_span_std_entropy"]))
+    for col in base_numeric:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
 
     # 2. Parse mid-layer projections (N8b)
     logging.info("Parsing mid-layer projections...")
@@ -249,16 +256,9 @@ def main():
     proj2 = parse_projections(df, "mid_hidden_2_proj")
     proj_cols = list(proj1.columns) + list(proj2.columns)
     
+    # Merge projections back to df
     df = pd.concat([df, proj1, proj2], axis=1)
     df = df.copy()  # Defragment memory
-
-    # Fill NaNs on all features
-    all_numeric = list(set(BASELINE_FEATURES + ["k2_agreement"] + 
-                           ["answer_span_mean_logprob", "answer_span_min_logprob", 
-                            "answer_span_mean_entropy", "answer_span_std_entropy"] + proj_cols))
-    for col in all_numeric:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
 
     # 3. Setup device and build static sequences tensors
     device = "cuda" if torch.cuda.is_available() else "cpu"
