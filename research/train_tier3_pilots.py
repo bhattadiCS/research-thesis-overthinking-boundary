@@ -213,6 +213,16 @@ def main():
     df["k2_agreement"] = pd.to_numeric(df["k2_agreement"], errors="coerce").fillna(0).astype(int)
     df["k2_raw_generation_tokens"] = pd.to_numeric(df["k2_raw_generation_tokens"], errors="coerce").fillna(0).astype(int)
 
+    # Fill NaNs on all feature columns
+    all_numeric_features = list(set(
+        BASELINE_FEATURES + ["k2_agreement"] + 
+        ["answer_span_mean_logprob", "answer_span_min_logprob", "answer_span_mean_entropy", "answer_span_std_entropy"] +
+        proj_cols
+    ))
+    for col in all_numeric_features:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
+
     # Group transitions
     df["has_next"] = (df.groupby("run_id")["step"].shift(-1).notna()).astype(int)
     df["next_correct"] = df.groupby("run_id")["correct"].shift(-1).fillna(0).astype(int)
