@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+qwen2p5_7b,Qwen/Qwen2.5-7B-Instruct,Qwen2.5 instruct,7B,200,200,1.93,3.87,3.205,1.8,0.14022303584590554,38.278634306907655,0.15771092488344537,0.07559124560592405,103,transformers+torch(cuda),cuda

@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+mistral_small_24b_2409,mistralai/Mistral-Small-Instruct-2409,Mistral Small,22B,200,200,2.11,4.03,3.925,1.475,0.1992747356891632,50.926843647003174,0.16662974071997433,0.08987811340752518,104,transformers+torch(cuda),cuda
