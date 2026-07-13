@@ -63,7 +63,7 @@ def fit_binary_model(train_frame: pd.DataFrame, target_column: str, feature_cols
     return Pipeline(
         [
             ("scale", StandardScaler()),
-            ("model", LogisticRegression(max_iter=2000, class_weight="balanced", solver="lbfgs", n_jobs=-1)),
+            ("model", LogisticRegression(max_iter=2000, class_weight="balanced", solver="lbfgs")),
         ]
     ).fit(train_frame[feature_cols], target)
 
