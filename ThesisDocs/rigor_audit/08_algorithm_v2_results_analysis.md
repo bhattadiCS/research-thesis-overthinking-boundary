@@ -123,16 +123,38 @@ N1 tested whether we can predict a cell's optimal stopping threshold $\delta_{\t
 
 ---
 
-## 8. Conclusions & Deep Research Follow-ups
+## 8. Tier-3 Telemetry Pilots (N7 & N8) Results
+
+We executed the pre-registered pilots for **N7** (Self-Consistency) and **N8** (Extended Observables) on 1,000 traces ($Qwen2.5-7B-Instruct$, $T=0.6$, seed 7, splits `train` on GSM8K and `test` on MATH) to test if enriching the model's observation space can resolve the remaining unpredictable overthinking losses.
+
+### Findings (5-Fold GroupKFold Cross-Validation)
+
+| Configuration | OOF AUC | Utility (Step) | Utility (Token) | Win / Tie / Loss |
+|---|---|---|---|---|
+| **Baseline (10-feat)** | 0.7974 | +0.2291 | +0.3292 | 761 / 166 / 73 |
+| **N7 (SC Agreement)** | 0.8050 | +0.2315 | +0.3067 | 755 / 172 / 73 |
+| **N8a (Answer-Span)** | 0.8165 | +0.2314 | **+0.3370** | 723 / 210 / 67 |
+| **N8b (Mid-Layer Proj)** | **0.8552** | **+0.2371** | **+0.3411** | 713 / 226 / **61** |
+| **Combined (All Enriched)** | **0.8606** | +0.2353 | +0.3136 | 718 / 218 / 64 |
+
+### Research Implications
+1. **N8b Mid-Layer Projections are a Major Success (PASSED)**: Mean-pooling and projecting hidden states at layers $L/3$ and $2L/3$ to $64$ dimensions captures representation stability. It boosted OOF correctness AUC from **$0.7974$ to $0.8552$** and raised step utility to **$+0.2371$** (token utility to **$+0.3411$**) with **zero token generation overhead**, reducing bad stops (Losses) by **16.4%** (73 to 61).
+2. **N8a Answer-Span Diagnostics filters CoT Noise (PASSED)**: Isolating token statistics strictly to the answer span raised AUC to **$0.8165$** and increased token-cost utility to **$+0.3370$**.
+3. **N7 Self-Consistency fails honest token-cost accounting (FAILED)**: While SC agreement raised AUC to **$0.8050$**, the cost of generating a second continuation path at each step was too high. Under honest token-cost accounting, the policy's utility dropped from **$+0.3292$ to $+0.3067$**, failing its pre-registered charged success bar.
+
+---
+
+## 9. Conclusions & Next Operational Steps
 
 ### Key Conclusions
 1. **Algorithmic Breakthroughs Confirmed**: We achieved massive utility boosts over the calibrated lookup ceiling:
    * **$+593.55$ OOF utility** via Empirical Bayes Hazard Shrinkage (N3)
    * **$+251.65$ OOF utility** via Rolling History Windows (N2c)
    * **$+159.50$ OOF utility** via Two-Parameter Difficulty Modulation (N4)
-2. **Confound Eliminated**: isolated quantization testing proves precision degradation directly harms early CoT accuracy (N6).
-3. **Budget Extensions Falsified**: Doubling generation token budget does not cure late overthinking loops (N5).
+2. **Causal Insights**: Quantization degrades early correctness by 14.3% ($Z=9.79$), while budget expansion has zero impact on overthinking loops.
+3. **Telemetry Enrichment**: Mid-layer hidden projections (N8b) and answer-span diagnostics (N8a) represent clear breakthroughs in observation quality.
 
-### Next Steps for Deep Research
-* **N7 (Self-Consistency k=2 Pilot)**: Introduction of the agreement of a second short candidate path to see if multi-sample belief can dissolve the remaining unpredictable E/F-losses.
-* **N8 (Extended Observables)**: Pilot the extraction of answer-span logprobs and projected mid-layer hidden states to capture features that raw token probabilities miss.
+### Next Steps
+* **Full-Scale Sweep**: Integrate N8b and N8a features into the primary trace analysis pipeline and re-train the global stopping policy models across the full 52 cells.
+* **Thesis Draft Integration**: Port these findings directly into the draft proposal and Chapter 3 (Methodology & Results) of the JHU ACM Master's Thesis.
+
