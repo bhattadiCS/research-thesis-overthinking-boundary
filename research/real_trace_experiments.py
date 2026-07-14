@@ -1604,12 +1604,33 @@ def low_memory_scoring_pass(
     return scoring_logits, last_hidden_state, all_hidden_states
 
 
-def project_hidden_features(hidden_vector: np.ndarray, target_dim: int = 64, seed: int = 42) -> np.ndarray:
-    """Projects a hidden state vector to a lower dimension using a deterministic random projection."""
-    D = hidden_vector.shape[0]
-    rng = np.random.RandomState(seed)
-    proj_matrix = rng.normal(size=(D, target_dim)) / np.sqrt(target_dim)
-    return np.dot(hidden_vector, proj_matrix)
+_PROJECTION_MATRIX_CACHE = {}
+
+def project_hidden_features(hidden_vector: Any, target_dim: int = 64, seed: int = 42) -> np.ndarray:
+    """Projects a hidden state vector/tensor to a lower dimension using a cached projection matrix."""
+    if isinstance(hidden_vector, torch.Tensor):
+        D = hidden_vector.shape[-1]
+        device = hidden_vector.device
+        dtype = hidden_vector.dtype
+        cache_key = (D, target_dim, seed, str(device), str(dtype))
+        
+        if cache_key not in _PROJECTION_MATRIX_CACHE:
+            # Generate on CPU with manual seed for reproducibility across backends
+            g = torch.Generator(device="cpu").manual_seed(seed)
+            proj = torch.randn((D, target_dim), generator=g, dtype=dtype, device="cpu") / np.sqrt(target_dim)
+            _PROJECTION_MATRIX_CACHE[cache_key] = proj.to(device)
+            
+        proj_matrix = _PROJECTION_MATRIX_CACHE[cache_key]
+        proj_tensor = torch.matmul(hidden_vector, proj_matrix)
+        return proj_tensor.float().cpu().numpy()
+    else:
+        D = hidden_vector.shape[0]
+        cache_key = (D, target_dim, seed, "cpu", "numpy")
+        if cache_key not in _PROJECTION_MATRIX_CACHE:
+            rng = np.random.RandomState(seed)
+            _PROJECTION_MATRIX_CACHE[cache_key] = rng.normal(size=(D, target_dim)) / np.sqrt(target_dim)
+        proj_matrix = _PROJECTION_MATRIX_CACHE[cache_key]
+        return np.dot(hidden_vector, proj_matrix)
 
 
 def find_answer_token_indices(completion_ids: torch.Tensor, raw_text: str, answer_str: str, prompt_mode: str, tokenizer: Any) -> list[int]:
@@ -1793,9 +1814,9 @@ def generate_batch_with_diagnostics(
                     L1_idx = num_layers // 3
                     L2_idx = 2 * num_layers // 3
                     
-                    # mean pool hidden states across generated completion range
-                    L1_tensor = all_hidden_states[L1_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
-                    L2_tensor = all_hidden_states[L2_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+                    # mean pool hidden states across generated completion range (keep on GPU)
+                    L1_tensor = all_hidden_states[L1_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0)
+                    L2_tensor = all_hidden_states[L2_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0)
                     
                     L1_proj = project_hidden_features(L1_tensor, target_dim=64, seed=42)
                     L2_proj = project_hidden_features(L2_tensor, target_dim=64, seed=42)
