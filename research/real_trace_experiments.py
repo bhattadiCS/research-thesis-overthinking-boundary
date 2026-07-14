@@ -1748,11 +1748,24 @@ def generate_batch_with_diagnostics(
     generated_ids_cpu = generated_ids.detach().cpu()
     scoring_logits = scoring_logits.float().cpu()
     final_hidden_states = final_hidden_states.float().cpu()
+    
+    # Extract and copy only the 2 required layers to CPU memory immediately before clearing GPU cache
+    L1_hidden_cpu = None
+    L2_hidden_cpu = None
+    if enable_extended_observables and all_hidden_states is not None:
+        num_layers = len(all_hidden_states) - 1
+        L1_idx = num_layers // 3
+        L2_idx = 2 * num_layers // 3
+        L1_hidden_cpu = all_hidden_states[L1_idx + 1].float().cpu()
+        L2_hidden_cpu = all_hidden_states[L2_idx + 1].float().cpu()
+        
     if actual_device == "cuda":
         del input_ids
         del attention_mask
         del generated_ids
         del generated_attention_mask
+        if "all_hidden_states" in locals():
+            del all_hidden_states
         release_cuda_memory()
 
     results: list[dict[str, Any]] = []
@@ -1797,15 +1810,10 @@ def generate_batch_with_diagnostics(
                     answer_span_std_entropy = float(ans_entropies.std().item()) if len(ans_entropies) > 1 else 0.0
                 
                 # N8b: Pooled mid-layer hidden states projection
-                if all_hidden_states is not None:
-                    # all_hidden_states has length num_layers + 1 (layer 0 is inputs)
-                    num_layers = len(all_hidden_states) - 1
-                    L1_idx = num_layers // 3
-                    L2_idx = 2 * num_layers // 3
-                    
-                    # mean pool hidden states across generated completion range
-                    L1_tensor = all_hidden_states[L1_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
-                    L2_tensor = all_hidden_states[L2_idx + 1][index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+                if L1_hidden_cpu is not None and L2_hidden_cpu is not None:
+                    # mean pool hidden states across generated completion range directly on CPU
+                    L1_tensor = L1_hidden_cpu[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).numpy()
+                    L2_tensor = L2_hidden_cpu[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).numpy()
                     
                     L1_proj = project_hidden_features(L1_tensor, target_dim=64, seed=42)
                     L2_proj = project_hidden_features(L2_tensor, target_dim=64, seed=42)
