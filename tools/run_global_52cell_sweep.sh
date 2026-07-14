@@ -17,19 +17,20 @@ echo "=== Global 52-Cell Telemetry Sweep starting on $(date '+%F %T') ===" | tee
 # 13 Models in the census
 MODELS=(
     "qwen2p5_0p5b"
-    "qwen2p5_1p5b"
     "qwen2p5_3b"
     "qwen2p5_7b"
     "qwen2p5_14b"
+    "qwen2p5_32b"
     "deepseek_r1_distill_1p5b"
     "deepseek_r1_distill_7b"
-    "deepseek_r1_distill_8b"
-    "mistral_7b_v0p3"
+    "llama_3p1_8b_instruct"
+    "mistral_7b_instruct_v0p3"
     "mistral_small_24b_2409"
-    "llama3p1_8b"
-    "llama3p2_1b"
-    "llama3p2_3b"
+    "phi_4_mini_instruct"
+    "yi_1p5_9b_chat"
+    "qwen_3p5_9b"
 )
+
 
 # 4 Reasoning Datasets
 DATASETS=(
