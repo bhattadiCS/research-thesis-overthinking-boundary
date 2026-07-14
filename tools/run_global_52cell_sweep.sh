@@ -58,12 +58,12 @@ for model in "${MODELS[@]}"; do
             SPLIT="test"
         fi
         
-        # Blackwell GPU Batch Size tuning: Use larger batch sizes for smaller models
-        BATCH_SIZE=32
-        if [[ "$model" == *"0p5b"* || "$model" == *"1b"* || "$model" == *"1p5b"* ]]; then
-            BATCH_SIZE=128
-        elif [[ "$model" == *"3b"* || "$model" == *"7b"* || "$model" == *"8b"* ]]; then
+        # Blackwell GPU Batch Size tuning: Use safer batch sizes to prevent container cgroup freezes
+        BATCH_SIZE=16
+        if [[ "$model" == *"0p5b"* ]]; then
             BATCH_SIZE=64
+        elif [[ "$model" == *"3b"* || "$model" == *"1p5b"* ]]; then
+            BATCH_SIZE=32
         fi
         
         # Run generation
