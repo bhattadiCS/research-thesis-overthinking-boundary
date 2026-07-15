@@ -645,6 +645,7 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
         from sympy.parsing.sympy_parser import (
             parse_expr, standard_transformations, implicit_multiplication_application,
         )
+        import signal
         transforms = standard_transformations + (implicit_multiplication_application,)
         def _sympy_ready(expr: str) -> str:
             # Digit-letter adjacency like '0x^2' tokenizes as a broken hex
@@ -655,9 +656,26 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
 
         expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
         expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
-        if sympy.simplify(expr_a - expr_b) == 0:
+
+        # Use signal-based alarm to prevent infinite loops in sympy's simplify
+        # which can get stuck on complex/recursive expressions from LLM outputs.
+        has_sigalrm = hasattr(signal, "SIGALRM")
+        if has_sigalrm:
+            def handler(signum, frame):
+                raise TimeoutError("SymPy simplify timed out")
+            old_handler = signal.signal(signal.SIGALRM, handler)
+            signal.alarm(5)  # 5-second timeout
+
+        try:
+            is_equiv = sympy.simplify(expr_a - expr_b) == 0
+        finally:
+            if has_sigalrm:
+                signal.alarm(0)
+                signal.signal(signal.SIGALRM, old_handler)
+
+        if is_equiv:
             return True
-    except Exception:  # noqa: BLE001 -- unparseable expressions just fall through
+    except Exception:  # noqa: BLE001 -- unparseable expressions or timeouts just fall through
         pass
     return False
 
