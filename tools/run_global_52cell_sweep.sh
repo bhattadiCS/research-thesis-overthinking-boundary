@@ -7,6 +7,13 @@ set -eu
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO"
+
+# Automatically load HF_TOKEN from .hf_token if it exists on disk
+if [ -z "${HF_TOKEN:-}" ] && [ -f "$REPO/.hf_token" ]; then
+    export HF_TOKEN="$(tr -d '[:space:]' < "$REPO/.hf_token")"
+    echo "Loaded HF_TOKEN from .hf_token file"
+fi
+
 PY="${PYTHON:-python}"
 V2="research/outputs/experiments_v2"
 LOG="$V2/global_sweep.log"
