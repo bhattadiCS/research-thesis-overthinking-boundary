@@ -61,8 +61,10 @@ for model in "${MODELS[@]}"; do
         # Blackwell GPU Batch Size tuning: Use safer batch sizes to prevent container cgroup freezes
         BATCH_SIZE=16
         if [[ "$model" == *"0p5b"* ]]; then
-            BATCH_SIZE=64
+            BATCH_SIZE=128
         elif [[ "$model" == *"3b"* || "$model" == *"1p5b"* ]]; then
+            BATCH_SIZE=64
+        elif [[ "$model" == *"7b"* || "$model" == *"8b"* || "$model" == *"9b"* || "$model" == *"14b"* ]]; then
             BATCH_SIZE=32
         fi
         
@@ -72,7 +74,7 @@ for model in "${MODELS[@]}"; do
             --model "$model" \
             --task-source "$dataset" \
             --dataset-split "$SPLIT" \
-            --max-tasks 1000 \
+            --max-tasks 500 \
             --temperatures 0.6 \
             --seeds 7 \
             --batch-size "$BATCH_SIZE" \
