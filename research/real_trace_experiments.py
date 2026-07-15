@@ -1749,16 +1749,33 @@ def generate_batch_with_diagnostics(
     scoring_logits = scoring_logits.float().cpu()
     final_hidden_states = final_hidden_states.float().cpu()
     
-    # Extract and copy only the 2 required layers to CPU memory immediately before clearing GPU cache
-    L1_hidden_cpu = None
-    L2_hidden_cpu = None
+    # Perform GPU-side mean pooling BEFORE clearing the cache.
+    # This reduces the CPU copy size from 1 GB (entire layer) to 1 MB (mean pooled vector).
+    L1_pooled_list = []
+    L2_pooled_list = []
     if enable_extended_observables and all_hidden_states is not None:
         num_layers = len(all_hidden_states) - 1
         L1_idx = num_layers // 3
         L2_idx = 2 * num_layers // 3
-        L1_hidden_cpu = all_hidden_states[L1_idx + 1].float().cpu()
-        L2_hidden_cpu = all_hidden_states[L2_idx + 1].float().cpu()
+        L1_layer = all_hidden_states[L1_idx + 1]
+        L2_layer = all_hidden_states[L2_idx + 1]
         
+        batch_size = scoring_logits.shape[0]
+        for index in range(batch_size):
+            raw_completion_ids = generated_ids_cpu[index, prompt_width:]
+            completion_ids = trim_completion_ids(raw_completion_ids, tokenizer.pad_token_id, tokenizer.eos_token_id)
+            generated_length = int(completion_ids.shape[0])
+            
+            if generated_length > 0:
+                L1_pooled = L1_layer[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+                L2_pooled = L2_layer[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+            else:
+                L1_pooled = np.zeros((model.config.hidden_size,), dtype=np.float32)
+                L2_pooled = np.zeros((model.config.hidden_size,), dtype=np.float32)
+                
+            L1_pooled_list.append(L1_pooled)
+            L2_pooled_list.append(L2_pooled)
+            
     if actual_device == "cuda":
         del input_ids
         del attention_mask
@@ -1810,10 +1827,9 @@ def generate_batch_with_diagnostics(
                     answer_span_std_entropy = float(ans_entropies.std().item()) if len(ans_entropies) > 1 else 0.0
                 
                 # N8b: Pooled mid-layer hidden states projection
-                if L1_hidden_cpu is not None and L2_hidden_cpu is not None:
-                    # mean pool hidden states across generated completion range directly on CPU
-                    L1_tensor = L1_hidden_cpu[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).numpy()
-                    L2_tensor = L2_hidden_cpu[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).numpy()
+                if L1_pooled_list and L2_pooled_list:
+                    L1_tensor = L1_pooled_list[index]
+                    L2_tensor = L2_pooled_list[index]
                     
                     L1_proj = project_hidden_features(L1_tensor, target_dim=64, seed=42)
                     L2_proj = project_hidden_features(L2_tensor, target_dim=64, seed=42)
