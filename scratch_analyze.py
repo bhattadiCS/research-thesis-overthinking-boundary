@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-ROOT = r"C:\Aditya_Data\Personal\ResearchThesis\research\outputs\experiment_matrix"
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "research", "outputs", "experiment_matrix")
 MODELS = [
     "deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_3b",
     "qwen2p5_7b", "qwen2p5_14b", "qwen2p5_32b", "mistral_7b_instruct_v0p3",
