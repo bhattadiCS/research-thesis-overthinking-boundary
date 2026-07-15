@@ -1208,7 +1208,7 @@ def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
     if not rows:
         return
     frame = _escape_control_chars(pd.DataFrame(rows))
-    if path.exists():
+    if path.exists() and path.stat().st_size > 0:
         existing_columns = pd.read_csv(path, nrows=0).columns.tolist()
         for column in existing_columns:
             if column not in frame.columns:
@@ -1299,8 +1299,8 @@ def reconcile_existing_outputs(
     expected_steps = expected_steps_per_run(is_baseline, max_steps)
     expected_step_sequence = list(range(1, expected_steps + 1))
 
-    steps_frame = pd.read_csv(paths["steps"]) if paths["steps"].exists() else pd.DataFrame()
-    runs_frame = pd.read_csv(paths["runs"]) if paths["runs"].exists() else pd.DataFrame()
+    steps_frame = pd.read_csv(paths["steps"]) if (paths["steps"].exists() and paths["steps"].stat().st_size > 0) else pd.DataFrame()
+    runs_frame = pd.read_csv(paths["runs"]) if (paths["runs"].exists() and paths["runs"].stat().st_size > 0) else pd.DataFrame()
     steps_frame, truncated_step_rows = _drop_truncated_rows(steps_frame, ["run_id", "step"])
     runs_frame, truncated_run_rows = _drop_truncated_rows(runs_frame, ["run_id"])
     if truncated_step_rows or truncated_run_rows:
@@ -1406,11 +1406,11 @@ def reconcile_existing_outputs(
 
 def load_existing_outputs(output_dir: Path, is_baseline: bool) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
     paths = output_paths(output_dir, is_baseline)
-    if paths["steps"].exists():
+    if paths["steps"].exists() and paths["steps"].stat().st_size > 0:
         existing_steps = pd.read_csv(paths["steps"]).to_dict("records")
     else:
         existing_steps = []
-    if paths["runs"].exists():
+    if paths["runs"].exists() and paths["runs"].stat().st_size > 0:
         existing_runs = pd.read_csv(paths["runs"]).to_dict("records")
     else:
         existing_runs = []
