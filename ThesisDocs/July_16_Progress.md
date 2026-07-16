@@ -8,7 +8,6 @@
 * **Completed Global Sweep**: Collected **19,948 reasoning paths** (147,740 steps) across 52 experimental cells.
 * **3.5x Run Optimization**: Restricted max tasks to 500 per cell and doubled batch sizes to leverage the NVIDIA RTX Pro 6000 Blackwell GPU, cutting sweep time from 22 hours to **8 hours**.
 * **System Hardening**: Hardened trace saving against VM restarts and added a 5-second SymPy timeout to prevent evaluation hangs on pathological LLM equation strings.
-* **Interactive Dashboard**: Created [thesis_presentation_dashboard.html](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/thesis_presentation_dashboard.html) for live ceteris paribus variable comparison.
 
 ---
 
@@ -180,5 +179,5 @@ graph LR
     S1[1. Abstract & Intro] --> S2[2. Related Work] --> S3[3. Methodology] --> S4[4. Experimental Setup] --> S5[5. Evaluation] --> S6[6. Discussion]
 ```
 * **Methodology**: Use the "Pencil-Down Math Exam" metaphor to explain cognitive drift.
-* **Evaluation**: Embed the CV tournament results and link the interactive dashboard.
+* **Evaluation**: Embed the CV tournament results and describe sequence model performance.
 * **Discussion**: Focus on quantization transferability (proves detectors generalize across precision formats).
