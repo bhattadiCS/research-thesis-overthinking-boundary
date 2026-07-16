@@ -110,6 +110,8 @@ graph TD
       Correct -->|Consistent Logic| Correct
       Correct -->|Overthinking Drift| Incorrect
   ```
+  * **What is "Final Correctness"?** The accuracy score of the **very last step** of the model's reasoning path (if we let it run to the end without stopping it).
+
 
 * **Variable 7: Stopping Drift / Overthinking ($D$)**: When a model reaches a correct answer at step $t$ but continues generating until it outputs a wrong final answer.
   ![Overthinking Drift Curve](images/overthinking_drift_by_step.png)
