@@ -275,6 +275,43 @@ To explain this table to Dr. Woods without getting lost in math, here is what ea
    * **Sequence Models Win**: Our LSTM sequence model achieves an **0.8714 AUC**, beating the static linear baseline by **13.3%**.
    * **Why?** Overthinking is a process that unfolds over time. A static linear classifier only looks at a single step, which is like trying to guess the end of a movie from a single frame. The LSTM analyzes the entire reasoning path, making it highly accurate in predicting when a model is about to make a mistake.
 
+### 4.1. Deep Dive: What Are These Stopping Methods and Why Did We Test Them?
+
+To help you explain this to Dr. Woods, here is the breakdown of the 5 stopping methods, their differences, and the scientific hypothesis behind each one:
+
+```mermaid
+graph TD
+    Root[Stopping Methods] --> Static[Static Snapshots]
+    Root --> Sequence[Sequence Tracking]
+    Root --> Consensus[Consensus Voting]
+    
+    Static --> Baseline[1. Baseline Linear: Looks only at current step]
+    Static --> N8b[2. N8b Proj: Cleans current step representations]
+    
+    Sequence --> LSTM[3. LSTM & GRU: Tracks confidence history over time]
+    
+    Consensus --> GatedSC[4. Gated SC: Generates multiple paths to vote]
+```
+
+#### 1. Baseline (Linear)
+* **What is it?** A simple model that looks only at the internal hidden states of the **current step** to make a stop decision. It ignores the history of how the model got there.
+* **Why did we test it?** To establish our baseline. We wanted to see if a model with **zero memory of past steps** is enough to predict overthinking. 
+* **What did we prove?** At **0.7380 AUC**, it performs poorly. This proves that overthinking is a progressive process, and looking at a single step in isolation does not give enough context.
+
+#### 2. N8b (Linear Proj)
+* **What is it?** An improved version of the linear baseline. It still looks at only the current step, but it compresses the hidden representations first to remove background noise.
+* **Why did we test it?** To see if the baseline's poor performance was just due to noise. 
+* **What did we prove?** It improved performance to **0.8104 AUC**. This showed that cleaning the representations helps, but it still falls short of sequence models because it has no memory of past steps.
+
+#### 3. GRU & LSTM (Sequence Models)
+* **What are they?** Recurrent neural network models that read the hidden states step-by-step from Step 1 to the current step. They maintain an internal "memory state" that updates at each step.
+* **Why did we test them?** **This is our core contribution.** We hypothesized that overthinking is a temporal process where confidence and reasoning stability drift gradually. By testing LSTMs and GRUs, we wanted to prove that tracking the *history* of steps is the most accurate way to detect overthinking.
+* **What did we prove?** They achieved our top score of **0.8714 AUC** and saved the most tokens. This proved our hypothesis: tracking the reasoning trajectory over time is key to catching overthinking.
+
+#### 4. Gated Self-Consistency (Gated SC)
+* **What is it?** A traditional consensus-based stopping method. Instead of reading internal hidden states, it generates multiple complete reasoning paths and votes on the final answer, using a confidence gate to stop early if the paths agree.
+* **Why did we test it?** To compare our internal-state stopping methods against **the industry standard** (Self-Consistency voting).
+* **What did we prove?** Gated SC scored **0.8686 AUC**, showing strong performance. However, **it is highly expensive** because it requires running multiple full reasoning paths to vote. Our LSTM model achieves better accuracy using only a single reasoning path, saving massive compute resources.
 
 ---
 
