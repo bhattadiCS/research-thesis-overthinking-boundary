@@ -47,7 +47,7 @@ graph TD
     end
 
     independent_variables --> dependent_variables
-    control_variables -.--> |Controls Confounding Noise| dependent_variables
+    control_variables -. Controls Confounding Noise .-> dependent_variables
 ```
 
 ---
@@ -63,17 +63,13 @@ Each variable in our system plays a specific role in either manipulating the gen
 * **Cross-Variable Interaction**: Interacts strongly with Temperature $T$ (higher temperatures lead to exponential branching divergence as $N_{steps}$ increases). It is independent of Model Scale $S$, though larger models are more resilient to longer step budgets.
 * **Visualization (Trace Timeline)**:
   ```mermaid
-  gantt
-      title Reasoning Step Sequence (Max N = 10)
-      dateFormat  X
-      axisFormat %s
-      section Step Sequence
-      Step 1 (Setup)           :active, 0, 1
-      Step 2 (Execution)       :active, 1, 2
-      Step 3 (Extraction)      :active, 2, 3
-      Step 4 (Drift Inflection):crit, 3, 5
-      Step 5 (Degradation)     :crit, 5, 8
-      Step 6 (Incorrect Final) :crit, 8, 10
+  graph LR
+      S1[Step 1: Setup] --> S2[Step 2: Execution]
+      S2 --> S3[Step 3: Extraction]
+      S3 --> S4{Optimal Stop}
+      S4 -->|Overthinking| S5[Step 4: Drift Inflection]
+      S5 --> S6[Step 5: Degradation]
+      S6 --> S7[Step 6: Incorrect Final]
   ```
 
 ### Variable 2: Softmax Temperature ($T$)
@@ -111,7 +107,7 @@ Each variable in our system plays a specific role in either manipulating the gen
       subgraph quantized4 ["4-bit Quantization (GPTQ/AWQ)"]
           W2[Quantized Weights + Noise] -->|Generates Noisier States| H2((Identical Trajectory Shape))
       end
-      H1 -.-> |Transfer AUC = 0.86| H2
+      H1 -. Transfer AUC = 0.86 .-> H2
   ```
 
 ### Variable 5: Model Family & Architecture ($A_{family}$)
@@ -136,12 +132,12 @@ Each variable in our system plays a specific role in either manipulating the gen
 * **Cross-Variable Interaction**: Interacts directly with Stopping Drift (which is defined as a transition in $C_t$).
 * **Visualization (State Transition Diagram)**:
   ```mermaid
-  stateDiagram-v2
-      [*] --> Incorrect: Start
-      Incorrect --> Correct: Solve Step
-      Correct --> Correct: Maintain Reasoning
-      Correct --> Incorrect: Logical Drift / Overthinking
-      Incorrect --> Incorrect: Loop / Failure
+  graph TD
+      Start([Start]) --> Incorrect[Incorrect State]
+      Incorrect -->|Model Solves Problem| Correct[Correct State]
+      Correct -->|Consistent Logic| Correct
+      Correct -->|Overthinking Drift| Incorrect
+      Incorrect -->|Logical Loop / Failure| Incorrect
   ```
 
 ### Variable 7: Stopping Drift / Overthinking ($D$)
@@ -294,16 +290,12 @@ Trajectory State (Latent space confidence)
 We are targeting the upcoming ACM/IEEE conference. Here is our writing structure:
 
 ```mermaid
-gantt
-    title Thesis Paper Writing Timeline (July-August)
-    dateFormat  YYYY-MM-DD
-    section Sections
-    1. Abstract & Introduction    :active, 2026-07-16, 5d
-    2. Related Work               : 2026-07-21, 4d
-    3. Methodology (Variables)    : 2026-07-25, 6d
-    4. Experimental Setup         : 2026-07-31, 5d
-    5. Evaluation & Results       : 2026-08-05, 7d
-    6. Discussion & Future Work   : 2026-08-12, 5d
+graph LR
+    S1[1. Abstract & Intro] --> S2[2. Related Work]
+    S2 --> S3[3. Methodology]
+    S3 --> S4[4. Experimental Setup]
+    S4 --> S5[5. Evaluation & Results]
+    S5 --> S6[6. Discussion & Future]
 ```
 
 ### Action Items for Writing
