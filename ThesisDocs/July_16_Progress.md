@@ -294,9 +294,14 @@ graph TD
 ```
 
 #### 1. Baseline (Linear)
-* **What is it?** A simple model that looks only at the internal hidden states of the **current step** to make a stop decision. It ignores the history of how the model got there.
-* **Why did we test it?** To establish our baseline. We wanted to see if a model with **zero memory of past steps** is enough to predict overthinking. 
-* **What did we prove?** At **0.7380 AUC**, it performs poorly. This proves that overthinking is a progressive process, and looking at a single step in isolation does not give enough context.
+* **What is it?** This is the **composition of the three logistic regression models** we use to estimate our three key step-level transition factors:
+  1. **$q_t$ (Correctness Probe)**: The probability that the model's active state is currently correct.
+  2. **$\alpha_t$ (Repair Hazard)**: The probability that the model transitions from incorrect at step $t-1$ to correct at step $t$.
+  3. **$\beta_t$ (Corruption Hazard / Drift)**: The probability that the model transitions from correct at step $t-1$ to incorrect at step $t$ (overthinking).
+  * It is called "Baseline Linear" because **logistic regression** is a generalized linear model that calculates these probabilities based only on the current step's 10 observable features, with zero memory of previous steps.
+* **Why did we test it?** To establish our baseline. We wanted to see if modeling these three transition probabilities using a simple, static model (with zero memory of past steps) was enough to catch overthinking.
+* **What did we prove?** At **0.7380 AUC**, it is the weakest performer. This proves that overthinking is a progressive sequence process: estimating transition risks like $q_t$, $\alpha_t$, and $\beta_t$ requires looking at the history of steps, not just a static snapshot of the current step.
+
 
 #### 2. N8b (Linear Proj)
 * **What is it?** An improved version of the linear baseline. It still looks at only the current step, but it compresses the hidden representations first to remove background noise.
