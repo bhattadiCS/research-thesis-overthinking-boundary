@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+llama_3p1_8b_instruct,meta-llama/Llama-3.1-8B-Instruct,Llama 3.1,8B,500,500,2.06,3.956,4.876,2.254,0.3684976694509387,20.35405669593811,0.16368538091889695,0.2132657521443557,263,transformers+torch(cuda),cuda
