@@ -77,10 +77,11 @@ graph TD
   * **Scientific Analysis**: The data shows that intermediate reasoning accuracy peaks early (around step 2 or 3) and decays by up to 15% as $N_{steps}$ continues to increase. This decay is driven by **context accumulation**: as the model generates more steps, it attends to its own previous writing, compounding any minor logical slips or typos made earlier in the context window.
   * *Advisor Follow-up Prep:* If asked why the model gets worse with more steps, explain that LLMs are forced to attend to their own generated tokens. If they make a subtle error in Step 2, that error acts as a distractor in Step 3 and 4, causing a cascade of logical drift.
 
-* **Variable 2: Temperature ($T$)**: Controls output randomness. High temperature ($T=0.6$) increases branching entropy, multiplying overthinking risk, whereas $T=0.0$ is highly stable.
-  ![Softmax Temperature Impact: T=0.0 vs T=0.6](images/temperature_drift_profile.png)
-  * **Scientific Analysis**: Higher temperature makes the model's writing more random, which normally causes it to make more mistakes. However, our detector tracks the model's internal uncertainty (token entropy) and sudden shifts in its train of thought (hidden state shifts). When the model starts to get confused, the detector senses it immediately and stops the model **earlier** in the sequence, preserving the correct answer before the model can overthink and ruin it.
+* **Variable 2: Temperature ($T$)**: Controls output randomness. We evaluate $T \in \{0.1, 0.6, 1.0\}$. Low temperature ($T=0.1$) acts as a highly stable, deterministic baseline proxy, while higher temperatures ($T=0.6$ and $T=1.0$) introduce decoding noise and increase overthinking risk.
+  ![Softmax Temperature Impact: T=0.1, T=0.6, T=1.0](images/temperature_drift_profile.png)
+  * **Scientific Analysis**: Higher temperature makes the model's writing more random, which normally causes it to make more mistakes (accuracy drops and drift rates increase). However, our detector tracks the model's internal uncertainty (token entropy) and sudden shifts in its train of thought (hidden state shifts). When the model starts to get confused under high temperature, the detector senses it immediately and stops the model **earlier** in the sequence, preserving the correct answer before the model can overthink and ruin it.
   * *Advisor Follow-up Prep:* If asked if stopping earlier under high temperature harms output completeness, explain that we trade redundant explanation steps for correctness, which is why the net utility is maximized by stopping early.
+
 
 * **Variable 3: Model Scale ($S$)**: Parameter size (0.5B to 32B). Larger models are more accurate and drift less, but when they do, they generate highly logical-sounding, systematic errors.
   ![Model Scale vs. Correctness/Drift](images/model_scale_accuracy_drift.png)

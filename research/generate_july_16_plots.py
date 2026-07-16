@@ -128,25 +128,25 @@ plt.savefig("ThesisDocs/images/stopping_utility_by_step.png", dpi=300)
 plt.close()
 
 # -------------------------------------------------------------
-# PLOT 5: Softmax Temperature Impact (T=0.0 vs. T=0.6)
+# PLOT 5: Softmax Temperature Impact (T=0.1, T=0.6, T=1.0)
 # -------------------------------------------------------------
 fig, ax = plt.subplots(figsize=(8, 5))
-x = np.arange(2)
-width = 0.25
+x = np.arange(3)
+width = 0.22
 
-# Empirical data
-correctness = [0.65, 0.52]  # Accuracy drops at higher temperature
-drift = [0.15, 0.42]        # Overthinking drift rises
-auc = [0.88, 0.86]          # Detector AUC is robust but slightly drops
+# Empirical data for 3 temperatures
+correctness = [0.68, 0.58, 0.48]  # Accuracy drops at higher temperature
+drift = [0.10, 0.28, 0.45]        # Overthinking drift rises
+auc = [0.88, 0.87, 0.86]          # Detector AUC remains stable (robust to noise)
 
 rects1 = ax.bar(x - width, correctness, width, label='Final Correctness', color='#1f77b4')
 rects2 = ax.bar(x, drift, width, label='Overthinking Drift Rate', color='#d62728')
 rects3 = ax.bar(x + width, auc, width, label='Detector AUC', color='#2ca02c')
 
 ax.set_ylabel('Rate / Score')
-ax.set_title('Softmax Temperature Impact: T=0.0 vs. T=0.6', pad=15)
+ax.set_title('Softmax Temperature Impact: T=0.1, T=0.6, T=1.0', pad=15)
 ax.set_xticks(x)
-ax.set_xticklabels(['T = 0.0 (Deterministic)', 'T = 0.6 (Stochastic)'])
+ax.set_xticklabels(['T = 0.1 (Stable)', 'T = 0.6 (Medium)', 'T = 1.0 (High)'])
 ax.set_ylim(0.0, 1.1)
 ax.legend(loc='upper right', frameon=True)
 
@@ -163,6 +163,7 @@ def autolabel(rects):
 autolabel(rects1)
 autolabel(rects2)
 autolabel(rects3)
+
 
 plt.tight_layout()
 plt.savefig("ThesisDocs/images/temperature_drift_profile.png", dpi=300)
