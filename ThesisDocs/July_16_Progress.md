@@ -5,7 +5,7 @@
 
 ## 1. Quick Progress Milestones (July 1 – July 16)
 
-* **Completed Global Sweep**: Collected **19,948 reasoning paths** (147,740 steps) across 52 experimental cells.
+* **Completed Global Sweep**: Collected **28,928 reasoning paths** (192,640 steps) across 60 experimental cells.
 * **3.5x Run Optimization**: Restricted max tasks to 500 per cell and doubled batch sizes to leverage the NVIDIA RTX Pro 6000 Blackwell GPU, cutting sweep time from 22 hours to **8 hours**.
 * **System Hardening**: Hardened trace saving against VM restarts and added a 5-second SymPy timeout to prevent evaluation hangs on pathological LLM equation strings.
 
@@ -13,10 +13,11 @@
 
 To explain this to Dr. Woods, here is what this data collection actually means:
 * **The Goal**: To train our detectors (like the LSTM) to recognize when an AI is about to overthink, we first needed to collect a large dataset showing exactly what an AI looks like when it reasons correctly vs. when it gets confused. The **Global Sweep** was this data collection phase.
-* **The 52 Cells**: An "experimental cell" is a unique combination of **1 Model** solving **1 Dataset** (e.g., Qwen 2.5 7B solving GSM8K math). We tested 13 models across 4 datasets, giving us $13 \times 4 = 52$ unique cells.
-* **The 19,948 Paths & 147,740 Steps**: 
-  * A **Reasoning Path** is one full attempt by a model to solve a single question from start to finish. We collected 19,948 of these paths.
-  * A **Step** is a single line of thought in that path. In total, models generated 147,740 steps.
+* **The 60 Cells**: An "experimental cell" is a unique combination of **1 Model** solving **1 Dataset** (e.g., Qwen 2.5 7B solving GSM8K math). We tested 15 models across 4 datasets, giving us $15 \times 4 = 60$ unique cells.
+* **The 28,928 Paths & 192,640 Steps**: 
+  * A **Reasoning Path** is one full attempt by a model to solve a single question from start to finish. We collected 28,928 of these paths.
+  * A **Step** is a single line of thought in that path. In total, models generated 192,640 steps.
+
   * **What we saved**: For every single step, we recorded the model's internal brain activations (hidden states), its uncertainty (entropy), and whether it was correct or incorrect. We used this massive dataset to train and validate our stopping classifiers.
 
 ### 1.2. Why is this new sweep different from our old traces?
@@ -174,22 +175,22 @@ graph TD
       Seed[Seed = 7] --> Run1[Trace 1: Answer 42] & Run2[Trace 2: Answer 42] & Run3[Trace 3: Answer 42]
   ```
   * **Scientific Purpose**: When temperature is above 0, models select words randomly. If we did not fix the random seed, running the same question twice would yield different reasoning paths purely by chance. Fixing the seed to `seed=7` ensures that all runs are 100% reproducible and that any changes in drift are caused by our inputs, not random luck.
-  * *Advisor Follow-up Prep:* If asked if the detector is overfitted to a single seed, explain that we train across 19,948 unique questions and contexts, which teaches the detector universal reasoning patterns rather than seed-specific shortcuts.
+  * *Advisor Follow-up Prep:* If asked if the detector is overfitted to a single seed, explain that we train across 28,928 unique questions and contexts, which teaches the detector universal reasoning patterns rather than seed-specific shortcuts.
 
 
 ---
 
 ## 4. Cross-Validation Tournament Results
 
-Evaluated over **19,948 unique trajectories** (147,740 steps) under 5-Fold Group Cross-Validation:
+Evaluated over **28,928 unique trajectories** (192,640 steps) under 5-Fold Group Cross-Validation:
 
 | Stopping Method | Prediction Accuracy (OOF AUC) | Step Cost Utility | Token Cost Utility | Head-to-Head Record (W/T/L) |
 | :--- | :---: | :---: | :---: | :---: |
-| **Baseline (Linear)** | 0.7380 | +0.3705 | +0.4524 | 14,966 / 2,968 / 2,014 |
-| **N8b (Linear Proj)** | 0.8104 | +0.3818 | +0.4637 | 15,441 / 2,660 / 1,847 |
-| **Gated SC (Consensus)** | 0.8686 | +0.3640 | +0.4579 | 10,879 / 8,067 / 1,002 |
-| **GRU (Sequence)** | 0.8686 | +0.3760 | **+0.4786** | 12,737 / 5,669 / 1,542 |
-| **LSTM (Sequence)** | **0.8714** | **+0.3784** | +0.4759 | **13,196 / 5,114 / 1,638** |
+| **Baseline (Linear)** | 0.7208 | +0.3321 | +0.4134 | 22,245 / 4,357 / 2,326 |
+| **N8b (Linear Proj)** | 0.7819 | +0.3383 | +0.4202 | 22,384 / 4,362 / 2,182 |
+| **Gated SC (Consensus)** | 0.8474 | +0.3161 | +0.4071 | 14,614 / 13,209 / 1,105 |
+| **GRU (Sequence)** | 0.8474 | +0.3254 | **+0.4311** | 16,878 / 10,271 / 1,779 |
+| **LSTM (Sequence)** | **0.8503** | **+0.3257** | +0.4300 | **17,181 / 9,931 / 1,816** |
 
 * **OOF AUC (Out-of-Fold Area Under the ROC Curve)**: The accuracy score (0.0 to 1.0) of our stopping detector on unseen data.
 * **Utility (Step/Token)**: The economic score of saving computation steps/tokens while preserving the correct answer (higher positive = greater savings).
@@ -197,10 +198,11 @@ Evaluated over **19,948 unique trajectories** (147,740 steps) under 5-Fold Group
 
 
 ### 4.1. The Stopping Methods Explained Simply
-* **Baseline (Linear)**: Uses logistic regression on current step features ($q_t, \alpha_t, \beta_t$) with **zero memory** of the past. Disadvantage: Treats steps in isolation, yielding poor predictions (0.738 AUC).
+* **Baseline (Linear)**: Uses logistic regression on current step features ($q_t, \alpha_t, \beta_t$) with **zero memory** of the past. Disadvantage: Treats steps in isolation, yielding poor predictions (0.7208 AUC).
 * **N8b (Linear Proj)**: Linear model on mid-layer compressed representations. Filters background token noise, but still lacks memory.
-* **GRU & LSTM (Sequence)**: Recurrent networks that track the model's confidence trajectory over steps. **Core finding**: Tracks the temporal buildup of logical drift, boosting prediction accuracy to **0.8714 AUC** (an 8:1 win-to-loss ratio).
-* **Gated SC (Consensus)**: Industry standard voting system. Strong accuracy (0.868 AUC) but **highly expensive** (requires 5-10 parallel runs). Our LSTM model beats it using only a **single reasoning run**.
+* **GRU & LSTM (Sequence)**: Recurrent networks that track the model's confidence trajectory over steps. **Core finding**: Tracks the temporal buildup of logical drift, boosting prediction accuracy to **0.8503 AUC** (a 9:1 win-to-loss ratio).
+* **Gated SC (Consensus)**: Industry standard voting system. Strong accuracy (0.8474 AUC) but **highly expensive** (requires 5-10 parallel runs). Our LSTM model beats it using only a **single reasoning run**.
+
 
 ---
 
