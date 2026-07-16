@@ -247,9 +247,34 @@ Here are the results of our tournament evaluated over **19,948 unique runs**. Th
 | **GRU (Sequence)** | 0.8686 | +0.3760 | **+0.4786** | 12,737 / 5,669 / 1,542 |
 | **LSTM (Sequence)** | **0.8714** | **+0.3784** | +0.4759 | **13,196 / 5,114 / 1,638** |
 
-### The Core Conclusion for Your Advisor:
-* **Sequence Models Win**: Our LSTM sequence model achieves an **0.8714 AUC**, beating the static linear baseline by **13.3%**.
-* **Why?** Overthinking is a process that unfolds over time. A static linear classifier only looks at a single step, which is like trying to guess the end of a movie from a single frame. The LSTM analyzes the entire reasoning path, making it highly accurate in predicting when a model is about to make a mistake.
+### Plain-English Breakdown of the Tournament Table
+
+To explain this table to Dr. Woods without getting lost in math, here is what each term and column means:
+
+1. **What is a "Tournament"?**
+   * It is a direct head-to-head comparison of different "stopping models" to see which one is best at predicting when to tell the main LLM to stop thinking.
+2. **The Stopping Methods (The Competitors)**:
+   * **Baseline (Linear)**: A simple method that only looks at a snapshot of the current step to make a decision. (Like deciding whether to stop reading a book based *only* on the last page).
+   * **GRU & LSTM (Sequence)**: Smarter models that read the entire history of reasoning steps. (Like reading the whole summary to see how the plot progressed).
+3. **Prediction Accuracy (OOF AUC)**:
+   * Out-of-Fold Area Under the ROC Curve.
+   * *In simple terms*: This is the model's accuracy grade (from 0.0 to 1.0) at predicting when the AI is about to overthink. A score of 0.50 is random guessing; 1.0 is a perfect psychic. 
+   * *The Finding*: Our **LSTM achieved 0.8714**, which is exceptionally high and beats the baseline by **13.3%**.
+4. **Step Cost / Token Cost Utility**:
+   * *In simple terms*: This measures the "economic benefit" of stopping early. It answers: *Did we save computation cost (steps/tokens) without hurting the accuracy of the answer?*
+   * A higher positive number means we saved a lot of computational resources. The **LSTM and GRU save the most tokens (+0.47)**.
+5. **Head-to-Head Record (Wins/Ties/Losses)**:
+   * *In simple terms*: Out of the 19,948 test cases:
+     * **Win**: Our stopping model successfully stopped the AI early, preserving the correct answer and saving tokens.
+     * **Tie**: It made the same decision as letting the model run to the end.
+     * **Loss**: It stopped the AI too early (missing a correct answer) or let it run too long (wasting tokens).
+   * *The Finding*: The LSTM has an **8-to-1 win-to-loss ratio** (13,196 wins vs. 1,638 losses), proving that early stopping is highly beneficial.
+6. **What is "5-Fold Cross-Validation"?**
+   * *In simple terms*: We split our data into 5 equal piles. We train the detector on 4 piles, and test it on the 5th pile (which it has never seen before). We rotate this 5 times so every single run is tested fairly. This guarantees that our results are real and not just "memorized" by the detector.
+7. **The Core Conclusion for Your Advisor**:
+   * **Sequence Models Win**: Our LSTM sequence model achieves an **0.8714 AUC**, beating the static linear baseline by **13.3%**.
+   * **Why?** Overthinking is a process that unfolds over time. A static linear classifier only looks at a single step, which is like trying to guess the end of a movie from a single frame. The LSTM analyzes the entire reasoning path, making it highly accurate in predicting when a model is about to make a mistake.
+
 
 ---
 
