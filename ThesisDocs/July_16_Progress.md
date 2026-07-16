@@ -9,7 +9,18 @@
 * **3.5x Run Optimization**: Restricted max tasks to 500 per cell and doubled batch sizes to leverage the NVIDIA RTX Pro 6000 Blackwell GPU, cutting sweep time from 22 hours to **8 hours**.
 * **System Hardening**: Hardened trace saving against VM restarts and added a 5-second SymPy timeout to prevent evaluation hangs on pathological LLM equation strings.
 
+### 1.1. In Simple Terms: What is the Global Sweep?
+
+To explain this to Dr. Woods, here is what this data collection actually means:
+* **The Goal**: To train our detectors (like the LSTM) to recognize when an AI is about to overthink, we first needed to collect a large dataset showing exactly what an AI looks like when it reasons correctly vs. when it gets confused. The **Global Sweep** was this data collection phase.
+* **The 52 Cells**: An "experimental cell" is a unique combination of **1 Model** solving **1 Dataset** (e.g., Qwen 2.5 7B solving GSM8K math). We tested 13 models across 4 datasets, giving us $13 \times 4 = 52$ unique cells.
+* **The 19,948 Paths & 147,740 Steps**: 
+  * A **Reasoning Path** is one full attempt by a model to solve a single question from start to finish. We collected 19,948 of these paths.
+  * A **Step** is a single line of thought in that path. In total, models generated 147,740 steps.
+  * **What we saved**: For every single step, we recorded the model's internal brain activations (hidden states), its uncertainty (entropy), and whether it was correct or incorrect. We used this massive dataset to train and validate our stopping classifiers.
+
 ---
+
 
 ## 2. Global Experimental Architecture
 
