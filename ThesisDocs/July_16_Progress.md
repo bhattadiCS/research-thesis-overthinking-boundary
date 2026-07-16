@@ -119,9 +119,12 @@ graph TD
   1.0 |                   .------------------ LSTM / GRU (AUC = 0.87)
   0.8 |             .-----
   0.6 |          .-'    .---------------------- Linear Head (AUC = 0.73)
+  0.4 |       .-'    .-'
+  0.2 |    .-'    .-'
   0.0 |---+----+----+----+--------------------- FPR (False Positive Rate)
       0.0  0.2  0.4  0.6  0.8  1.0
   ```
+
 
 * **Variable 9: Stopping Utility ($U$)**: Accuracy gains balanced against token/step compute costs.
   ![Early Stopping Policy Utility Curves](images/stopping_utility_by_step.png)
@@ -173,9 +176,14 @@ Evaluated over **19,948 unique trajectories** (147,740 steps) under 5-Fold Group
 | :--- | :---: | :---: | :---: | :---: |
 | **Baseline (Linear)** | 0.7380 | +0.3705 | +0.4524 | 14,966 / 2,968 / 2,014 |
 | **N8b (Linear Proj)** | 0.8104 | +0.3818 | +0.4637 | 15,441 / 2,660 / 1,847 |
-| **Gated SC (Hysteresis)** | 0.8686 | +0.3640 | +0.4579 | 10,879 / 8,067 / 1,002 |
+| **Gated SC (Consensus)** | 0.8686 | +0.3640 | +0.4579 | 10,879 / 8,067 / 1,002 |
 | **GRU (Sequence)** | 0.8686 | +0.3760 | **+0.4786** | 12,737 / 5,669 / 1,542 |
 | **LSTM (Sequence)** | **0.8714** | **+0.3784** | +0.4759 | **13,196 / 5,114 / 1,638** |
+
+* **OOF AUC (Out-of-Fold Area Under the ROC Curve)**: The accuracy score (0.0 to 1.0) of our stopping detector on unseen data.
+* **Utility (Step/Token)**: The economic score of saving computation steps/tokens while preserving the correct answer (higher positive = greater savings).
+* **W/T/L (Win / Tie / Loss)**: In how many runs early stopping helped save tokens (Win), made no difference (Tie), or stopped too early (Loss).
+
 
 ### 4.1. The Stopping Methods Explained Simply
 * **Baseline (Linear)**: Uses logistic regression on current step features ($q_t, \alpha_t, \beta_t$) with **zero memory** of the past. Disadvantage: Treats steps in isolation, yielding poor predictions (0.738 AUC).
