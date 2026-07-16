@@ -74,23 +74,29 @@ graph TD
       S1[Step 1: Setup] --> S2[Step 2: Execution] --> S3[Step 3: Extraction] --> S4{Optimal Stop}
       S4 -->|Overthinking| S5[Step 4: Drift] --> S6[Step 5: Degradation] --> S7[Step 6: Error]
   ```
-  * **Scientific Analysis**: The data shows that intermediate reasoning accuracy peaks early (around step 2 or 3) and decays by up to 15% as $N_{steps}$ continues to increase. Limiting the step budget dynamically is critical to preventing the model from wandering into logical loops and arithmetic errors.
+  * **Scientific Analysis**: The data shows that intermediate reasoning accuracy peaks early (around step 2 or 3) and decays by up to 15% as $N_{steps}$ continues to increase. This decay is driven by **context accumulation**: as the model generates more steps, it attends to its own previous writing, compounding any minor logical slips or typos made earlier in the context window.
+  * *Advisor Follow-up Prep:* If asked why the model gets worse with more steps, explain that LLMs are forced to attend to their own generated tokens. If they make a subtle error in Step 2, that error acts as a distractor in Step 3 and 4, causing a cascade of logical drift.
 
 * **Variable 2: Temperature ($T$)**: Controls output randomness. High temperature ($T=0.6$) increases branching entropy, multiplying overthinking risk, whereas $T=0.0$ is highly stable.
   ![Softmax Temperature Impact: T=0.0 vs T=0.6](images/temperature_drift_profile.png)
   * **Scientific Analysis**: Higher temperature makes the model's writing more random, which normally causes it to make more mistakes. However, our detector tracks the model's internal uncertainty (token entropy) and sudden shifts in its train of thought (hidden state shifts). When the model starts to get confused, the detector senses it immediately and stops the model **earlier** in the sequence, preserving the correct answer before the model can overthink and ruin it.
+  * *Advisor Follow-up Prep:* If asked if stopping earlier under high temperature harms output completeness, explain that we trade redundant explanation steps for correctness, which is why the net utility is maximized by stopping early.
 
 * **Variable 3: Model Scale ($S$)**: Parameter size (0.5B to 32B). Larger models are more accurate and drift less, but when they do, they generate highly logical-sounding, systematic errors.
   ![Model Scale vs. Correctness/Drift](images/model_scale_accuracy_drift.png)
-  * **Scientific Analysis**: While larger models decrease random mistakes, their drift is highly structured. Simple linear classifiers fail to catch this, but recurrent models (like LSTMs) succeed by reading the entire trajectory history to isolate the subtle signature of overthinking.
+  * **Scientific Analysis**: While larger models decrease random mistakes, their drift is highly structured. Instead of making arithmetic typos like small models, large models (32B) write highly coherent, grammatically perfect, but logically flawed self-rationalizations for incorrect steps. Because the model remains confident, catching these errors requires sequence-based tracking (like LSTMs) to read the entire path history.
+  * *Advisor Follow-up Prep:* If asked why linear probes fail on large models, explain that large models hide their errors in coherent prose. A static snapshot cannot distinguish a correct step from a highly confident incorrect step; we must analyze how the state transitions over time.
 
 * **Variable 4: Quantization ($Q$)**: Weight compression (16-bit vs 4-bit). Compressing weights introduces noise and drops base accuracy slightly, but preserves the *shape* of hidden state trajectories.
   ![Quantization Generalization: Detector Transferability](images/quantization_generalization.png)
-  * **Scientific Analysis**: Compressing model weights degrades static baseline correctness, but our detectors generalize perfectly with zero loss in prediction AUC (~0.86). This confirms that weight precision does not affect the geometric shape of the reasoning path, allowing cross-precision transfer.
+  * **Scientific Analysis**: Compressing model weights degrades static baseline correctness, but our detectors generalize perfectly with zero loss in prediction AUC (~0.86). Quantization introduces high-frequency random noise to the weights, which shifts the absolute coordinates of the hidden states, but the **relative trajectory** (confidence changes between steps) remains identical.
+  * *Advisor Follow-up Prep:* If asked how we can transfer a detector across precisions, explain that the detector does not look at absolute coordinate values. It looks at relative step transitions, which are preserved because both models perform the same underlying semantic operations.
 
 * **Variable 5: Model Family ($A_{family}$)**: Architectural lineage (Qwen vs DeepSeek vs Llama). Dictates pretraining distributions and hidden representation styles.
   ![Baseline Correctness vs. Overthinking Drift by Model Family](images/model_family_performance.png)
-  * **Scientific Analysis**: Architectures pre-trained with Reinforcement Learning (like DeepSeek R1 Distill) display a slower, highly deliberate buildup of confidence and lower drift rates compared to traditional dense architectures. This variation demonstrates the need for family-specific baseline calibration.
+  * **Scientific Analysis**: Architectures pre-trained with Reinforcement Learning (like DeepSeek R1 Distill) display a slower, highly deliberate buildup of confidence and lower drift rates compared to traditional dense architectures. Because RL trains models to search and verify their work, they produce structurally different `<thought>` traces, requiring family-specific baseline calibration.
+  * *Advisor Follow-up Prep:* If asked why RL models behave differently, explain that RL directly optimizes for reasoning path verification, making the hidden states exhibit a stable, progressive confidence curve rather than standard instruction-tuned fluctuations.
+
 
 
 ### 3.2. Dependent Variables (Outputs)
@@ -119,6 +125,9 @@ graph TD
 
 * **Variable 9: Stopping Utility ($U$)**: Accuracy gains balanced against token/step compute costs.
   ![Early Stopping Policy Utility Curves](images/stopping_utility_by_step.png)
+  * **Scientific Analysis**: We sweep the penalty parameter $\lambda \in [0.02, 0.10]$ and confirm that our stopping policy's net utility remains robustly positive across the entire range. This shows that the economic value of early stopping is not highly sensitive to fine-tuning the exact step cost, making it stable for deployment.
+  * *Advisor Follow-up Prep:* If asked how sensitive the utility is to changes in cost formulation, explain that the early stop benefit is large enough that the positive utility curve holds across a wide range of step-cost weights.
+
 
 * **Variable 10: Inference Token Count ($L_{tokens}$)**: Amount of text written. Determines api cost and latency.
   ```
@@ -138,6 +147,9 @@ graph TD
   ```
   Difficulty Spectrum: [GSM8K (Easy)] ------------> [MATH (Medium)] ------------> [GPQA (Hard)]
   ```
+  * **Scientific Analysis**: On easy datasets (GSM8K), models either solve the problem instantly in step 1 or fail immediately, leaving little room for overthinking. On complex datasets (GPQA/MATH), models generate long, multi-step chains where they reach the correct conclusion at step 2 but continue writing, creating high rates of overthinking drift. Consequently, early stopping provides the highest accuracy gains and token savings on high-difficulty reasoning domains.
+  * *Advisor Follow-up Prep:* If asked why the stopping policy is most useful on GPQA/MATH, explain that easy datasets do not show overthinking behavior (since the reasoning paths are extremely short), so the detector naturally defaults to letting the model finish.
+
 
 * **Variable 13: System Prompt Template ($P_{prompt}$)**: Enforces step-by-step formatting so reasoning states align across steps.
   ```mermaid
