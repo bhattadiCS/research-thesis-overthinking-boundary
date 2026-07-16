@@ -28,15 +28,9 @@
   "prompt_mode": "structured_four_line",
   "system_prompt_mode": "default",
   "resume_enabled": true,
-  "completed_run_count": 0,
-  "pending_run_count": 500,
-  "next_pending_run": {
-    "run_id": "qwen2p5_3b__math_test_00000_5a6bb412__temp0.60__seed7",
-    "task_id": "math_test_00000_5a6bb412",
-    "task_source_index": 0,
-    "temperature": 0.6,
-    "seed": 7
-  },
+  "completed_run_count": 500,
+  "pending_run_count": 0,
+  "next_pending_run": null,
   "checkpoint_reconciliation": {
     "expected_steps_per_run": 5,
     "completed_run_count": 0,
