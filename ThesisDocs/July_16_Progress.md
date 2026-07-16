@@ -56,31 +56,13 @@ graph TD
       S4 -->|Overthinking| S5[Step 4: Drift] --> S6[Step 5: Degradation] --> S7[Step 6: Error]
   ```
 * **Variable 2: Temperature ($T$)**: Controls output randomness. High temperature ($T=0.6$) increases branching entropy, multiplying overthinking risk, whereas $T=0.0$ is highly stable.
-  ```mermaid
-  graph LR
-      Start((Step t)) -->|T=0.0 Greedy| Greedy[Deterministic Path: 95% prob] --> S1((Step t+1))
-      Start -->|T=0.6 Stochastic| Branch1[Alternative Path A: 30% prob] --> S2((Step t+1))
-      Start -->|T=0.6 Stochastic| Branch2[Alternative Path B: 5% prob] --> S3((Step t+1))
-  ```
+  ![Softmax Temperature Impact: T=0.0 vs T=0.6](images/temperature_drift_profile.png)
 * **Variable 3: Model Scale ($S$)**: Parameter size (0.5B to 32B). Larger models are more accurate and drift less, but when they do, they generate highly logical-sounding, systematic errors.
   ![Model Scale vs. Correctness/Drift](images/model_scale_accuracy_drift.png)
 * **Variable 4: Quantization ($Q$)**: Weight compression (16-bit vs 4-bit). Compressing weights introduces noise and drops base accuracy slightly, but preserves the *shape* of hidden state trajectories.
-  ```mermaid
-  graph TD
-      subgraph precision16 ["16-bit Precision"]
-          W1[Raw Weights] -->|Generates| H1((Trajectory Shape))
-      end
-      subgraph quantized4 ["4-bit Quantization"]
-          W2[Compressed Weights] -->|Generates| H2((Identical Shape))
-      end
-      H1 -->|Transfer AUC = 0.86| H2
-  ```
+  ![Quantization Generalization: Detector Transferability](images/quantization_generalization.png)
 * **Variable 5: Model Family ($A_{family}$)**: Architectural lineage (Qwen vs DeepSeek vs Llama). Dictates pretraining distributions and hidden representation styles.
-  ```mermaid
-  graph TD
-      Root((Model Families)) --> Dense[Dense: Qwen / Mistral / Llama]
-      Root --> RL[RL Distilled: DeepSeek R1]
-  ```
+  ![Baseline Correctness vs. Overthinking Drift by Model Family](images/model_family_performance.png)
 
 ### 3.2. Dependent Variables (Outputs)
 * **Variable 6: Trajectory Correctness ($C_t$)**: Step-by-step correctness state of intermediate math. Used as our ground-truth label.

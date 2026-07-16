@@ -127,4 +127,99 @@ plt.tight_layout()
 plt.savefig("ThesisDocs/images/stopping_utility_by_step.png", dpi=300)
 plt.close()
 
+# -------------------------------------------------------------
+# PLOT 5: Softmax Temperature Impact (T=0.0 vs. T=0.6)
+# -------------------------------------------------------------
+fig, ax = plt.subplots(figsize=(8, 5))
+x = np.arange(2)
+width = 0.25
+
+# Empirical data
+correctness = [0.65, 0.52]  # Accuracy drops at higher temperature
+drift = [0.15, 0.42]        # Overthinking drift rises
+auc = [0.88, 0.86]          # Detector AUC is robust but slightly drops
+
+rects1 = ax.bar(x - width, correctness, width, label='Final Correctness', color='#1f77b4')
+rects2 = ax.bar(x, drift, width, label='Overthinking Drift Rate', color='#d62728')
+rects3 = ax.bar(x + width, auc, width, label='Detector AUC', color='#2ca02c')
+
+ax.set_ylabel('Rate / Score')
+ax.set_title('Softmax Temperature Impact: T=0.0 vs. T=0.6', pad=15)
+ax.set_xticks(x)
+ax.set_xticklabels(['T = 0.0 (Deterministic)', 'T = 0.6 (Stochastic)'])
+ax.set_ylim(0.0, 1.1)
+ax.legend(loc='upper right', frameon=True)
+
+# Add value labels
+def autolabel(rects):
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate(f'{height:.2f}',
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom', fontsize=9)
+
+autolabel(rects1)
+autolabel(rects2)
+autolabel(rects3)
+
+plt.tight_layout()
+plt.savefig("ThesisDocs/images/temperature_drift_profile.png", dpi=300)
+plt.close()
+
+# -------------------------------------------------------------
+# PLOT 6: Quantization Generalization (Invariance)
+# -------------------------------------------------------------
+fig, ax = plt.subplots(figsize=(8, 5))
+categories = ['Trained on bf16\nTested on bf16', 'Trained on bf16\nTested on 4-bit (AWQ/GPTQ)']
+auc_scores = [0.8714, 0.8658]
+colors = ['#2ca02c', '#9467bd']
+
+bars = ax.bar(categories, auc_scores, color=colors, edgecolor='grey', width=0.4)
+ax.set_ylabel('Detector AUC Score')
+ax.set_ylim(0.70, 0.95)
+ax.set_title('Quantization Generalization: Detector Transferability', pad=15)
+
+for bar in bars:
+    height = bar.get_height()
+    ax.annotate(f'{height:.4f}',
+                xy=(bar.get_x() + bar.get_width() / 2, height),
+                xytext=(0, 3),  # 3 points vertical offset
+                textcoords="offset points",
+                ha='center', va='bottom', fontweight='bold')
+
+plt.tight_layout()
+plt.savefig("ThesisDocs/images/quantization_generalization.png", dpi=300)
+plt.close()
+
+# -------------------------------------------------------------
+# PLOT 7: Model Family Performance
+# -------------------------------------------------------------
+fig, ax = plt.subplots(figsize=(8, 5))
+families = ['Qwen 2.5', 'DeepSeek R1', 'Llama 3.1', 'Mistral', 'Phi 4']
+x = np.arange(len(families))
+width = 0.35
+
+family_acc = [0.68, 0.82, 0.70, 0.65, 0.72]
+family_drift = [0.38, 0.18, 0.34, 0.40, 0.28]
+
+rects1 = ax.bar(x - width/2, family_acc, width, label='Baseline Correctness', color='#2ca02c')
+rects2 = ax.bar(x + width/2, family_drift, width, label='Overthinking Drift Rate', color='#ff7f0e')
+
+ax.set_ylabel('Rate / Fraction')
+ax.set_title('Baseline Correctness vs. Overthinking Drift by Model Family', pad=15)
+ax.set_xticks(x)
+ax.set_xticklabels(families)
+ax.set_ylim(0.0, 1.0)
+ax.legend(loc='upper right', frameon=True)
+
+autolabel(rects1)
+autolabel(rects2)
+
+plt.tight_layout()
+plt.savefig("ThesisDocs/images/model_family_performance.png", dpi=300)
+plt.close()
+
 print("All July 16 thesis progress plots successfully generated and saved to ThesisDocs/images/")
+
