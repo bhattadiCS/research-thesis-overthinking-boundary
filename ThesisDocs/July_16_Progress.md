@@ -165,12 +165,17 @@ graph TD
   graph TD
       Prompt[Force Steps] --> Response[Model Generation] -->|Regex Split| S1[Step 1 State] & S2[Step 2 State]
   ```
+  * **Scientific Purpose**: If different models generated text in different formats (e.g. one writing bullet points, another writing short paragraphs), their internal brain states would look completely different. Standardizing the instructions forces all models to reason in the same step-by-step format, allowing us to compare their hidden states fairly at Step 1, Step 2, and so on.
+  * *Advisor Follow-up Prep:* If asked if prompt changes break the detector, explain that standardizing the format is required to align hidden states for training, but the dynamic sequence tracking is robust to minor formatting changes.
 
 * **Variable 14: Sampling Seeds ($S_{seed}$)**: Fixed to `seed=7` to guarantee identical stochastic runs, eliminating background generation noise.
   ```mermaid
   graph TD
       Seed[Seed = 7] --> Run1[Trace 1: Answer 42] & Run2[Trace 2: Answer 42] & Run3[Trace 3: Answer 42]
   ```
+  * **Scientific Purpose**: When temperature is above 0, models select words randomly. If we did not fix the random seed, running the same question twice would yield different reasoning paths purely by chance. Fixing the seed to `seed=7` ensures that all runs are 100% reproducible and that any changes in drift are caused by our inputs, not random luck.
+  * *Advisor Follow-up Prep:* If asked if the detector is overfitted to a single seed, explain that we train across 19,948 unique questions and contexts, which teaches the detector universal reasoning patterns rather than seed-specific shortcuts.
+
 
 ---
 
