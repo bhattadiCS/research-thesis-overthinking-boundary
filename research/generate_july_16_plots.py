@@ -21,8 +21,8 @@ plt.rcParams.update({
 # PLOT 1: Out-of-Fold AUC Comparison
 # -------------------------------------------------------------
 fig, ax = plt.subplots(figsize=(8, 5))
-configs = ['Baseline\n(Linear)', 'N8b\n(Linear Proj)', 'Gated SC\n(Hysteresis)', 'GRU\n(Sequence)', 'LSTM\n(Sequence)']
-aucs = [0.7380, 0.8104, 0.8686, 0.8686, 0.8714]
+configs = ['Baseline\n(Linear)', 'N8b\n(Linear Proj)', 'Gated SC\n(Consensus)', 'GRU\n(Sequence)', 'LSTM\n(Sequence)']
+aucs = [0.7208, 0.7819, 0.8474, 0.8474, 0.8503]
 colors = ['#aec7e8', '#ffbb78', '#ff9896', '#98df8a', '#2ca02c']
 
 bars = ax.bar(configs, aucs, color=colors, edgecolor='grey', width=0.55)
@@ -174,7 +174,7 @@ plt.close()
 # -------------------------------------------------------------
 fig, ax = plt.subplots(figsize=(8, 5))
 categories = ['Trained on bf16\nTested on bf16', 'Trained on bf16\nTested on 4-bit (AWQ/GPTQ)']
-auc_scores = [0.8714, 0.8658]
+auc_scores = [0.8503, 0.8451]
 colors = ['#2ca02c', '#9467bd']
 
 bars = ax.bar(categories, auc_scores, color=colors, edgecolor='grey', width=0.4)
