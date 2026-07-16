@@ -47,7 +47,7 @@ graph TD
     end
 
     independent_variables --> dependent_variables
-    control_variables -. Controls Confounding Noise .-> dependent_variables
+    control_variables -->|Controls Confounding Noise| dependent_variables
 ```
 
 ---
@@ -107,7 +107,7 @@ Here is the simple, non-jargon explanation for every single variable in our syst
       subgraph quantized4 ["4-bit Quantization (GPTQ/AWQ)"]
           W2[Quantized Weights + Noise] -->|Generates Noisier States| H2((Identical Trajectory Shape))
       end
-      H1 -. Transfer AUC = 0.86 .-> H2
+      H1 -->|Transfer AUC = 0.86| H2
   ```
 
 ### Variable 5: Model Family & Architecture ($A_{family}$)
