@@ -1,0 +1,2 @@
+model_alias,model_name,family,parameter_count,n_runs,n_tasks,mean_oracle_stop,mean_first_correct_step,mean_model_stop_step,mean_revision_count,mean_entropy,mean_hidden_shift,repair_rate_overall,corruption_rate_overall,runs_ever_correct,backend,device
+deepseek_r1_distill_7b,deepseek-ai/DeepSeek-R1-Distill-Qwen-7B,DeepSeek-R1 distill,7B,500,500,1.444,1.764,2.582,1.406,0.31369672113657,16.94159857521057,0.46300597686327694,0.15765565084981245,460,transformers+torch(cuda),cuda

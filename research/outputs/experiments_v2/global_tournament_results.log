@@ -1,0 +1,26 @@
+[INFO] Scanning and loading 41 dataset cells...
+[INFO] Loaded 19948 unique run trajectories (147740 total steps).
+[INFO] Parsing mid-layer projections...
+[INFO] Using device for PyTorch sequence training: cuda
+[INFO] Starting cross-validation tournament...
+[INFO] --- FOLD 1/5 ---
+[INFO] --- FOLD 2/5 ---
+[INFO] --- FOLD 3/5 ---
+[INFO] --- FOLD 4/5 ---
+[INFO] --- FOLD 5/5 ---
+
+================================================================================
+                 FINAL DEEP RESEARCH TOURNAMENT SUMMARY
+================================================================================
+Configuration             | OOF AUC  | Utility (Step) | Utility (Token) | Win/Tie/Loss
+--------------------------------------------------------------------------------
+Baseline (Linear)         | 0.7380   | +0.3705        | +0.4524         | 14966/2968/2014
+N8b (Linear Proj)         | 0.8104   | +0.3818        | +0.4637         | 15441/2660/1847
+GRU (Sequence)            | 0.8686   | +0.3760        | +0.4786         | 12737/5669/1542
+LSTM (Sequence)           | 0.8714   | +0.3784        | +0.4759         | 13196/5114/1638
+Gated SC (Hysteresis)     | 0.8686   | +0.3640        | +0.4579         | 10879/8067/1002
+================================================================================
+Standard step cost uses: correct - 0.05 * (step - 1)
+Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
+================================================================================
+
