@@ -112,6 +112,7 @@ graph TD
 
 * **Variable 7: Stopping Drift / Overthinking ($D$)**: When a model reaches a correct answer at step $t$ but continues generating until it outputs a wrong final answer.
   ![Overthinking Drift Curve](images/overthinking_drift_by_step.png)
+  * **What is "Overthinking Drift Rate"?** The percentage of problem-solving runs where the model got the answer right early on, but overthought itself into a wrong answer at the end. For example, a 30% drift rate means 3 out of 10 correct runs were ruined by overthinking.
 
 * **Variable 8: Detector AUC ($AUC_{det}$)**: Out-of-fold stopping classifier performance. Tracks predictive signal strength in hidden states.
   ```
@@ -124,6 +125,8 @@ graph TD
   0.0 |---+----+----+----+--------------------- FPR (False Positive Rate)
       0.0  0.2  0.4  0.6  0.8  1.0
   ```
+  * **What is "Detector AUC"?** The accuracy score (0.0 to 1.0) of our stopping detector. A score of 0.50 is random coin-flipping, while 1.00 is a perfect psychic. Our LSTM scored **0.87**, proving that overthinking has a clear, predictable internal pattern.
+
 
 
 * **Variable 9: Stopping Utility ($U$)**: Accuracy gains balanced against token/step compute costs.
