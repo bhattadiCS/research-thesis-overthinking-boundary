@@ -23,7 +23,7 @@ Our system analyzes the step-by-step reasoning path of Large Language Models (LL
 
 ```mermaid
 graph TD
-    subgraph Independent Variables [Independent Variables (Manipulated)]
+    subgraph independent_variables ["Independent Variables (Manipulated)"]
         V1[N_steps: Step Budget]
         V2[T: Temperature]
         V3[S: Model Parameter Scale]
@@ -31,7 +31,7 @@ graph TD
         V5[A: Model Family]
     end
 
-    subgraph Dependent Variables [Dependent Variables (Measured)]
+    subgraph dependent_variables ["Dependent Variables (Measured)"]
         V6[C_t: Trajectory Correctness]
         V7[D: Stopping Drift / Overthinking]
         V8[AUC: Detector Performance]
@@ -40,14 +40,14 @@ graph TD
         V11[Lat: Compute Latency]
     end
 
-    subgraph Control Variables [Control Variables (Held Constant)]
+    subgraph control_variables ["Control Variables (Fixed)"]
         V12[Dom: Dataset Domain]
         V13[P: System Prompt Template]
         V14[Seed: Sampling Seed]
     end
 
-    Independent Variables --> Dependent Variables
-    Control Variables -.-> |Controls Confounding Noise| Dependent Variables
+    independent_variables --> dependent_variables
+    control_variables -.--> |Controls Confounding Noise| dependent_variables
 ```
 
 ---
