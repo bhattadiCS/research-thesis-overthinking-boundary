@@ -80,9 +80,9 @@ Here is the simple, non-jargon explanation for every single variable in our syst
 * **Visual Graph**:
   ```mermaid
   graph LR
-      Start((Step t)) -->|T=0.0 (Greedy)| Greedy[Deterministic Path: 95% prob] --> S1((Step t+1))
-      Start -->|T=0.6 (Stochastic)| Branch1[Alternative Path A: 30% prob] --> S2((Step t+1))
-      Start -->|T=0.6 (Stochastic)| Branch2[Alternative Path B: 5% prob] --> S3((Step t+1))
+      Start((Step t)) -->|T=0.0 Greedy| Greedy[Deterministic Path: 95% prob] --> S1((Step t+1))
+      Start -->|T=0.6 Stochastic| Branch1[Alternative Path A: 30% prob] --> S2((Step t+1))
+      Start -->|T=0.6 Stochastic| Branch2[Alternative Path B: 5% prob] --> S3((Step t+1))
   ```
 
 ### Variable 3: Model Scale / Parameter Count ($S$)
