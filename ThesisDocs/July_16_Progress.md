@@ -95,13 +95,7 @@ Each variable in our system plays a specific role in either manipulating the gen
 * **Causal Mechanism**: Larger models have higher dimensional latent spaces and more capacity for complex reasoning. They have higher baseline correctness. Their failure modes are systematic rather than random; when they drift, they construct highly convincing but wrong rationales.
 * **Cross-Variable Interaction**: Interacts directly with Detector AUC. Simple linear heads fail to detect overthinking in large models because the error is buried in systematic reasoning. Sequence models (LSTM/GRU) are required to analyze the temporal trajectory of the hidden states to catch this drift.
 * **Visualization (Scale vs. Drift Spectrum)**:
-  ```
-  Model Scale vs. Correctness/Drift Profile:
-  0.5B Size  | Accuracy [===          ] 25% | Drift Rate [=========   ] 75%
-  3.0B Size  | Accuracy [======       ] 50% | Drift Rate [======      ] 50%
-  7.0B Size  | Accuracy [========     ] 70% | Drift Rate [====        ] 35%
-  32.0B Size | Accuracy [==========   ] 85% | Drift Rate [==          ] 15%
-  ```
+  ![Impact of Model Parameter Scale on Accuracy and Drift](images/model_scale_accuracy_drift.png)
 
 ### Variable 4: Quantization Level ($Q$)
 * **Classification**: Independent Variable (Manipulated).
@@ -162,6 +156,7 @@ Each variable in our system plays a specific role in either manipulating the gen
   Step 3: "However, if we consider negative roots..."       --> [Incorrect] (Drift Starts)
   Step 4: "Therefore, the answer must be x = -4."          --> [Incorrect] (Final Failure)
   ```
+  ![The Overthinking Boundary: Accuracy Decay vs. Drift](images/overthinking_drift_by_step.png)
 
 ### Variable 8: Off-Policy Detector OOF AUC ($AUC_{det}$)
 * **Classification**: Dependent Variable (Measured).
@@ -186,13 +181,7 @@ Each variable in our system plays a specific role in either manipulating the gen
 * **Causal Mechanism**: Balances the preservation of correct intermediate states against the cost of generation.
 * **Cross-Variable Interaction**: Dependent on Dataset Complexity (high complexity $\rightarrow$ high utility) and Model Scale.
 * **Visualization (Utility Gain Curve by Step)**:
-  ```
-  Utility Value
-  +1.0 |      * (Optimal Stop Step 2: Utility = +0.90)
-  +0.5 |    /   \
-  +0.0 |--*------+---+---+---+---+---> Steps
-  -0.5 | 1       3   4   5   6   7 (Continuous overthinking degrades utility)
-  ```
+  ![Early Stopping Policy Utility Curves](images/stopping_utility_by_step.png)
 
 ### Variable 10: Inference Token Count ($L_{tokens}$)
 * **Classification**: Dependent Variable (Measured).
@@ -273,6 +262,8 @@ Below is the summary of the 5-fold cross-validation tournament trained over the 
 | **GRU (Sequence)** | 0.8686 | +0.3760 | +0.4786 | 12,737 / 5,669 / 1,542 |
 | **LSTM (Sequence)** | **0.8714** | **+0.3784** | **+0.4759** | **13,196 / 5,114 / 1,638** |
 | **Gated SC (Hysteresis)** | 0.8686 | +0.3640 | +0.4579 | 10,879 / 8,067 / 1,002 |
+
+![Out-of-Fold AUC Comparison Across Configurations](images/oof_auc_comparison.png)
 
 ---
 
