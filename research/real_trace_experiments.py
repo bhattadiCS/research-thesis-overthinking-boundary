@@ -654,19 +654,18 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
             # leaving scientific notation (2e3) alone.
             return re.sub(r"(\d)(?![eE][0-9])([a-zA-Z(])", r"\1*\2", expr.replace("^", "**"))
 
-        expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
-        expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
-
-        # Use signal-based alarm to prevent infinite loops in sympy's simplify
+        # Use signal-based alarm to prevent infinite loops in sympy's parse_expr or simplify
         # which can get stuck on complex/recursive expressions from LLM outputs.
         has_sigalrm = hasattr(signal, "SIGALRM")
         if has_sigalrm:
             def handler(signum, frame):
-                raise TimeoutError("SymPy simplify timed out")
+                raise TimeoutError("SymPy evaluation timed out")
             old_handler = signal.signal(signal.SIGALRM, handler)
             signal.alarm(5)  # 5-second timeout
 
         try:
+            expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
+            expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
             is_equiv = sympy.simplify(expr_a - expr_b) == 0
         finally:
             if has_sigalrm:
