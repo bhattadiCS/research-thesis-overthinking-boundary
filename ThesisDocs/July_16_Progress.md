@@ -58,7 +58,8 @@ graph TD
   * **Scientific Analysis**: The data shows that intermediate reasoning accuracy peaks early (around step 2 or 3) and decays by up to 15% as $N_{steps}$ continues to increase. Limiting the step budget dynamically is critical to preventing the model from wandering into logical loops and arithmetic errors.
 * **Variable 2: Temperature ($T$)**: Controls output randomness. High temperature ($T=0.6$) increases branching entropy, multiplying overthinking risk, whereas $T=0.0$ is highly stable.
   ![Softmax Temperature Impact: T=0.0 vs T=0.6](images/temperature_drift_profile.png)
-  * **Scientific Analysis**: Although higher temperature increases raw model drift (rising from 15% to 42%), the stopping policy's win rate remains remarkably stable. This is because the detector tracks real-time token entropy and hidden state shifts to trigger earlier stops, dynamically neutralizing the added decoding noise.
+  * **Scientific Analysis**: Higher temperature makes the model's writing more random, which normally causes it to make more mistakes. However, our detector tracks the model's internal uncertainty (token entropy) and sudden shifts in its train of thought (hidden state shifts). When the model starts to get confused, the detector senses it immediately and stops the model **earlier** in the sequence, preserving the correct answer before the model can overthink and ruin it.
+
 * **Variable 3: Model Scale ($S$)**: Parameter size (0.5B to 32B). Larger models are more accurate and drift less, but when they do, they generate highly logical-sounding, systematic errors.
   ![Model Scale vs. Correctness/Drift](images/model_scale_accuracy_drift.png)
   * **Scientific Analysis**: While larger models decrease random mistakes, their drift is highly structured. Simple linear classifiers fail to catch this, but recurrent models (like LSTMs) succeed by reading the entire trajectory history to isolate the subtle signature of overthinking.
