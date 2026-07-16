@@ -166,7 +166,7 @@ autolabel(rects3)
 
 
 plt.tight_layout()
-plt.savefig("ThesisDocs/images/temperature_drift_profile.png", dpi=300)
+plt.savefig("ThesisDocs/images/temperature_drift_profile_v3.png", dpi=300)
 plt.close()
 
 # -------------------------------------------------------------
