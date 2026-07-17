@@ -1,26 +1,4 @@
-[INFO] Scanning and loading 60 dataset cells...
-[INFO] Loaded 28928 unique run trajectories (192640 total steps).
-[INFO] Parsing mid-layer projections...
-[INFO] Using device for PyTorch sequence training: cuda
-[INFO] Starting cross-validation tournament...
-[INFO] --- FOLD 1/5 ---
-[INFO] --- FOLD 2/5 ---
-[INFO] --- FOLD 3/5 ---
-[INFO] --- FOLD 4/5 ---
-[INFO] --- FOLD 5/5 ---
-
-================================================================================
-                 FINAL DEEP RESEARCH TOURNAMENT SUMMARY
-================================================================================
-Configuration             | OOF AUC  | Utility (Step) | Utility (Token) | Win/Tie/Loss
---------------------------------------------------------------------------------
-Baseline (Linear)         | 0.7208   | +0.3321        | +0.4134         | 22245/4357/2326
-N8b (Linear Proj)         | 0.7819   | +0.3383        | +0.4202         | 22384/4362/2182
-GRU (Sequence)            | 0.8474   | +0.3254        | +0.4311         | 16878/10271/1779
-LSTM (Sequence)           | 0.8503   | +0.3257        | +0.4300         | 17181/9931/1816
-Gated SC (Hysteresis)     | 0.8474   | +0.3161        | +0.4071         | 14614/13209/1105
-================================================================================
-Standard step cost uses: correct - 0.05 * (step - 1)
-Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
-================================================================================
-
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/run_final_tournament.py", line 20, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

@@ -55474,3 +55474,86 @@ Standard step cost uses: correct - 0.05 * (step - 1)
 Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
 ================================================================================
 
+=== Global 52-Cell Telemetry Sweep starting on 2026-07-17 22:41:54 ===
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_math
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_3b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_3b_math
+Checkpoint found: skipping completed cell global_qwen2p5_3b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_3b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_7b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_7b_math
+Checkpoint found: skipping completed cell global_qwen2p5_7b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_7b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_14b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_14b_math
+Checkpoint found: skipping completed cell global_qwen2p5_14b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_14b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_32b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_32b_math
+Checkpoint found: skipping completed cell global_qwen2p5_32b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_32b_gpqa
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_gsm8k
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_math
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_arc
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_gpqa
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_gsm8k
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_math
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_arc
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_gpqa
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_gsm8k
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_math
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_arc
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_gpqa
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_gsm8k
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_math
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_arc
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_gpqa
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_gsm8k
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_math
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_arc
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_gpqa
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_gsm8k
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_math
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_arc
+=== Launching Cell: phi_4_mini_instruct on gpqa ===
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 24, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Cell complete: global_phi_4_mini_instruct_gpqa
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_gsm8k
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_math
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_arc
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_gpqa
+=== Launching Cell: qwen_3p5_9b on gsm8k ===
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 24, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Cell complete: global_qwen_3p5_9b_gsm8k
+=== Launching Cell: qwen_3p5_9b on math ===
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 24, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Cell complete: global_qwen_3p5_9b_math
+=== Launching Cell: qwen_3p5_9b on arc ===
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 24, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Cell complete: global_qwen_3p5_9b_arc
+=== Launching Cell: qwen_3p5_9b on gpqa ===
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 24, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Cell complete: global_qwen_3p5_9b_gpqa
+=== Global Sweep Complete on 2026-07-17 22:42:08 ===
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/run_final_tournament.py", line 20, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
