@@ -9,17 +9,33 @@ echo "=========================================================="
 echo "      AUTONOMOUS HYPER-OPTIMIZATION RUNNER & SYNC"
 echo "=========================================================="
 
+# Detect virtual environment python
+if [ -f ".venv/bin/python" ]; then
+    PY=".venv/bin/python"
+    echo "[INFO] Detected local virtualenv python: $PY"
+elif [ -f "../.venv/bin/python" ]; then
+    PY="../.venv/bin/python"
+    echo "[INFO] Detected parent virtualenv python: $PY"
+else
+    # Try activating virtual env if present
+    if [ -f ".venv/bin/activate" ]; then
+        echo "[INFO] Activating local virtualenv..."
+        source .venv/bin/activate
+    fi
+    PY="python"
+fi
+
 # 1. Sync repository before running
 echo "[INFO] Pulling latest changes from remote main..."
 git pull origin main
 
 # Check if CUDA is available via python
 echo "[INFO] Checking CUDA environment..."
-python -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('Device Name:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None')"
+"$PY" -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('Device Name:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None')"
 
 # 2. Run Smoke Test first to verify compiling and logic
 echo "[INFO] Running Preflight Smoke Test..."
-python research/run_advanced_hyper_optimization.py --smoke-test
+"$PY" research/run_advanced_hyper_optimization.py --smoke-test
 
 echo "[INFO] Smoke Test passed successfully. Staging results..."
 git add research/outputs/experiments_v2/advanced_tournament_results.log
@@ -28,7 +44,7 @@ git push origin main || echo "[INFO] Git push skipped or failed."
 
 # 3. Start the main full hyper-optimization tournament in the background
 echo "[INFO] Starting full hyper-optimization tournament in background..."
-python -u research/run_advanced_hyper_optimization.py > run_advanced_hyper_opt.log 2>&1 &
+"$PY" -u research/run_advanced_hyper_optimization.py > run_advanced_hyper_opt.log 2>&1 &
 PID=$!
 
 echo "[INFO] Background process started with PID $PID. Monitoring and syncing folds periodically..."
@@ -45,7 +61,7 @@ while kill -0 $PID 2>/dev/null; do
     # Check if checkpoint exists
     if [ -f "$CHECKPOINT_FILE" ]; then
         # Check if we can read the completed fold using a quick python print
-        CURRENT_FOLD=$(python -c "import torch; cp=torch.load('$CHECKPOINT_FILE', map_location='cpu'); print(cp.get('fold', -1))" 2>/dev/null || echo "-1")
+        CURRENT_FOLD=$("$PY" -c "import torch; cp=torch.load('$CHECKPOINT_FILE', map_location='cpu', weights_only=False); print(cp.get('fold', -1))" 2>/dev/null || echo "-1")
         
         # If the fold has progressed, commit and push the checkpoint
         if [ "$CURRENT_FOLD" -ne "-1" ] && [ "$CURRENT_FOLD" -ne "$LAST_FOLD" ]; then
