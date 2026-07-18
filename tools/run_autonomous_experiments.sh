@@ -44,7 +44,7 @@ git push origin main || echo "[INFO] Git push skipped or failed."
 
 # 3. Start the main full hyper-optimization tournament in the background
 echo "[INFO] Starting full hyper-optimization tournament in background..."
-"$PY" -u research/run_advanced_hyper_optimization.py > run_advanced_hyper_opt.log 2>&1 &
+"$PY" -u research/run_advanced_hyper_optimization.py --deep-search > run_advanced_hyper_opt.log 2>&1 &
 PID=$!
 
 echo "[INFO] Background process started with PID $PID. Monitoring and syncing folds periodically..."

@@ -320,19 +320,19 @@ def train_neural_model(
         n_layers = config.get("num_layers", 2)
         drop = config.get("dropout", 0.3)
         model = DeepBiGRU(input_dim, hidden_dim=h_dim, num_layers=n_layers, dropout=drop).to(device)
-        optimizer = optim.AdamW(model.parameters(), lr=0.003, weight_decay=1e-4)
+        optimizer = optim.AdamW(model.parameters(), lr=config.get("lr", 0.003), weight_decay=config.get("weight_decay", 1e-4))
         criterion = nn.CrossEntropyLoss(ignore_index=-1)
     elif model_type == "TCN":
         channels = config.get("num_channels", [128, 256, 256])
         k_size = config.get("kernel_size", 2)
         drop = config.get("dropout", 0.2)
         model = TrajectoryTCN(input_dim, num_channels=channels, kernel_size=k_size, dropout=drop).to(device)
-        optimizer = optim.AdamW(model.parameters(), lr=0.003, weight_decay=1e-4)
+        optimizer = optim.AdamW(model.parameters(), lr=config.get("lr", 0.003), weight_decay=config.get("weight_decay", 1e-4))
         criterion = nn.CrossEntropyLoss(ignore_index=-1)
     elif model_type == "BetaLikelihood":
         h_dim = config.get("hidden_dim", 256)
         model = BetaLikelihoodNetwork(input_dim, hidden_dim=h_dim).to(device)
-        optimizer = optim.AdamW(model.parameters(), lr=0.003, weight_decay=1e-4)
+        optimizer = optim.AdamW(model.parameters(), lr=config.get("lr", 0.003), weight_decay=config.get("weight_decay", 1e-4))
         
     use_cuda = (device == "cuda")
     scaler = torch.amp.GradScaler('cuda', enabled=use_cuda)
@@ -459,6 +459,83 @@ def calculate_ece(probs: np.ndarray, targets: np.ndarray, num_bins: int = 10) ->
 
 # --- Hyperparameter Tuning Search Routines ---
 
+import random
+
+def sample_config(model_type: str) -> Dict[str, Any]:
+    if model_type == "BiGRU":
+        return {
+            "hidden_dim": random.choice([128, 256, 512, 1024]),
+            "num_layers": random.choice([1, 2, 3, 4]),
+            "dropout": random.choice([0.0, 0.1, 0.2, 0.3, 0.4, 0.5]),
+            "lr": random.choice([5e-4, 1e-3, 2e-3, 3e-3, 5e-3]),
+            "weight_decay": random.choice([1e-5, 1e-4, 1e-3, 1e-2])
+        }
+    elif model_type == "TCN":
+        return {
+            "num_channels": random.choice([
+                [128, 128, 128],
+                [256, 256, 256],
+                [512, 512, 512],
+                [128, 256, 512],
+                [256, 512, 1024],
+                [512, 1024, 1024]
+            ]),
+            "kernel_size": random.choice([2, 3, 5, 7]),
+            "dropout": random.choice([0.0, 0.1, 0.2, 0.3, 0.4, 0.5]),
+            "lr": random.choice([5e-4, 1e-3, 2e-3, 3e-3, 5e-3]),
+            "weight_decay": random.choice([1e-5, 1e-4, 1e-3, 1e-2])
+        }
+    elif model_type == "BetaLikelihood":
+        return {
+            "hidden_dim": random.choice([128, 256, 512, 1024]),
+            "eta": random.choice([0.0, 0.01, 0.05, 0.1, 0.2, 0.3, 0.5]),
+            "lr": random.choice([5e-4, 1e-3, 2e-3, 3e-3, 5e-3]),
+            "weight_decay": random.choice([1e-5, 1e-4, 1e-3, 1e-2])
+        }
+    return {}
+
+def generate_exhaustive_grid(model_type: str) -> List[Dict[str, Any]]:
+    if model_type == "BiGRU":
+        keys = ["hidden_dim", "num_layers", "dropout", "lr", "weight_decay"]
+        values = [
+            [64, 128, 256, 512],
+            [1, 2, 3],
+            [0.1, 0.3, 0.5],
+            [1e-3, 3e-3, 5e-3],
+            [1e-5, 1e-4, 1e-3]
+        ]
+        return [dict(zip(keys, item)) for item in itertools.product(*values)]
+        
+    elif model_type == "TCN":
+        keys = ["num_channels", "kernel_size", "dropout", "lr", "weight_decay"]
+        values = [
+            [
+                [128, 128, 128],
+                [256, 256, 256],
+                [128, 256, 512],
+                [256, 512, 512],
+                [512, 512, 512],
+                [512, 1024, 1024]
+            ],
+            [2, 3, 5],
+            [0.1, 0.3, 0.5],
+            [1e-3, 3e-3, 5e-3],
+            [1e-4, 1e-3, 1e-2]
+        ]
+        return [dict(zip(keys, item)) for item in itertools.product(*values)]
+        
+    elif model_type == "BetaLikelihood":
+        keys = ["hidden_dim", "eta", "lr", "weight_decay"]
+        values = [
+            [128, 256, 512, 1024],
+            [0.0, 0.05, 0.1, 0.2, 0.5],
+            [1e-3, 3e-3, 5e-3],
+            [1e-5, 1e-4, 1e-3]
+        ]
+        return [dict(zip(keys, item)) for item in itertools.product(*values)]
+        
+    return []
+
 def tune_hyperparameters(
     train_run_indices: np.ndarray,
     features_tensor: torch.Tensor,
@@ -466,12 +543,33 @@ def tune_hyperparameters(
     lengths_np: np.ndarray,
     model_type: str = "BiGRU",
     epochs: int = 10,
+    n_iter: int = 10,
     device: str = "cuda",
-    batch_size: int = 4096
+    batch_size: int = 4096,
+    is_exhaustive: bool = False
 ) -> Dict[str, Any]:
     """Runs a nested sub-split to select the best hyperparameter set dynamically"""
-    grid = BIGRU_GRID if model_type == "BiGRU" else (TCN_GRID if model_type == "TCN" else BETA_GRID)
-    
+    if is_exhaustive:
+        configs = generate_exhaustive_grid(model_type)
+    else:
+        if n_iter <= 3:
+            configs = BIGRU_GRID if model_type == "BiGRU" else (TCN_GRID if model_type == "TCN" else BETA_GRID)
+            configs = configs[:n_iter]
+        else:
+            # Sample n_iter unique configurations randomly
+            configs = []
+            seen = set()
+            for _ in range(n_iter * 2):
+                cfg = sample_config(model_type)
+                frozen = tuple(sorted((k, str(v)) for k, v in cfg.items()))
+                if frozen not in seen:
+                    seen.add(frozen)
+                    configs.append(cfg)
+                if len(configs) == n_iter:
+                    break
+            if not configs:
+                configs = [sample_config(model_type)]
+            
     # Internal sub-split for validation (simple 80/20 task sub-split)
     num_train = len(train_run_indices)
     val_size = int(num_train * 0.20)
@@ -485,11 +583,11 @@ def tune_hyperparameters(
         y_val.append(targets_tensor[idx][:lengths_np[idx]].cpu().numpy())
     y_val = np.concatenate(y_val)
     
-    best_config = grid[0]
+    best_config = configs[0]
     best_auc = -1.0
     
-    logging.info(f"Tuning {model_type} configurations...")
-    for idx, config in enumerate(grid):
+    logging.info(f"Tuning {model_type} configurations (n_iter={len(configs)})...")
+    for idx, config in enumerate(configs):
         try:
             # Train on sub-train
             model = train_neural_model(
@@ -507,7 +605,7 @@ def tune_hyperparameters(
             flat_probs = np.concatenate(flat_probs)
             
             auc = roc_auc_score(y_val, flat_probs)
-            logging.info(f"Config {idx+1}/{len(grid)}: {config} | Val AUC: {auc:.4f}")
+            logging.info(f"Config {idx+1}/{len(configs)}: {config} | Val AUC: {auc:.4f}")
             
             if auc > best_auc:
                 best_auc = auc
@@ -521,6 +619,7 @@ def tune_hyperparameters(
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--smoke-test", action="store_true", help="Run a quick verification pass with 2 folds, 1 epoch, and small batch")
+    parser.add_argument("--deep-search", action="store_true", help="Run a deep multi-hour randomized hyperparameter search tournament")
     args = parser.parse_args()
 
     v2_dir = Path("research/outputs/experiments_v2")
@@ -616,14 +715,31 @@ def main():
     }
 
     # Set hyperparameters based on mode
-    n_splits = 2 if args.smoke_test else 5
-    epochs = 1 if args.smoke_test else 60
-    tuning_epochs = 1 if args.smoke_test else 15
-    batch_size = 512 if args.smoke_test else 4096
+    if args.smoke_test:
+        n_splits = 2
+        epochs = 1
+        tuning_epochs = 1
+        n_iter = 2
+        batch_size = 512
+    elif args.deep_search:
+        n_splits = 5
+        epochs = 200        # Train final selected configurations for 200 epochs
+        tuning_epochs = 40  # Explore each search candidate for 40 epochs
+        n_iter = 80         # Test 80 random unique config combinations per model type per fold
+        batch_size = 4096
+    else:
+        n_splits = 5
+        epochs = 60
+        tuning_epochs = 15
+        n_iter = 10
+        batch_size = 4096
+
+    is_exhaustive = args.deep_search
 
     # GroupKFold by task_id to prevent semantic leakage
     gkf = GroupKFold(n_splits=n_splits)
-    logging.info(f"Starting nested cross-validation grid search ({n_splits} folds)...")
+    search_type = "exhaustive cartesian grid" if is_exhaustive else "randomized"
+    logging.info(f"Starting nested cross-validation ({n_splits} folds) using {search_type} search...")
     
     task_to_grp = {tid: i for i, tid in enumerate(df["task_id"].unique())}
     groups = df["task_id"].map(task_to_grp).to_numpy()
@@ -696,7 +812,7 @@ def main():
         results["Dynamic (Trajectory features)"].append(evaluate_policy([g for _, g in test_dyn.groupby("run_id")]))
         
         # 3. Deep BiGRU Sequence Probe (Tuned)
-        best_bigru_config = tune_hyperparameters(train_run_indices, features_tensor, targets_tensor, lengths_np, "BiGRU", epochs=tuning_epochs, device=device, batch_size=batch_size)
+        best_bigru_config = tune_hyperparameters(train_run_indices, features_tensor, targets_tensor, lengths_np, "BiGRU", epochs=tuning_epochs, n_iter=n_iter, device=device, batch_size=batch_size, is_exhaustive=is_exhaustive)
         bigru = train_neural_model(train_run_indices, features_tensor, targets_tensor, lengths_np, "BiGRU", config=best_bigru_config, epochs=epochs, device=device, batch_size=batch_size)
         bigru_probs = predict_neural_model(bigru, test_run_indices, features_tensor, "BiGRU", device=device)
         mask = np.arange(max_len) < lengths_np[test_run_indices][:, None]
@@ -710,7 +826,7 @@ def main():
         results["BiGRU (Sequence)"].append(evaluate_policy([g for _, g in test_bigru.groupby("run_id")]))
         
         # 4. Dilated Temporal Conv Net (TCN - Tuned)
-        best_tcn_config = tune_hyperparameters(train_run_indices, features_tensor, targets_tensor, lengths_np, "TCN", epochs=tuning_epochs, device=device, batch_size=batch_size)
+        best_tcn_config = tune_hyperparameters(train_run_indices, features_tensor, targets_tensor, lengths_np, "TCN", epochs=tuning_epochs, n_iter=n_iter, device=device, batch_size=batch_size, is_exhaustive=is_exhaustive)
         tcn_model = train_neural_model(train_run_indices, features_tensor, targets_tensor, lengths_np, "TCN", config=best_tcn_config, epochs=epochs, device=device, batch_size=batch_size)
         tcn_probs = predict_neural_model(tcn_model, test_run_indices, features_tensor, "TCN", device=device)
         oof_predictions["TCN (Temporal Conv)"][test_idx] = tcn_probs[mask]
@@ -723,7 +839,7 @@ def main():
         results["TCN (Temporal Conv)"].append(evaluate_policy([g for _, g in test_tcn.groupby("run_id")]))
         
         # 5. Beta Likelihood Expected Reward Model (Tuned)
-        best_beta_config = tune_hyperparameters(train_run_indices, features_tensor, targets_tensor, lengths_np, "BetaLikelihood", epochs=tuning_epochs, device=device, batch_size=batch_size)
+        best_beta_config = tune_hyperparameters(train_run_indices, features_tensor, targets_tensor, lengths_np, "BetaLikelihood", epochs=tuning_epochs, n_iter=n_iter, device=device, batch_size=batch_size, is_exhaustive=is_exhaustive)
         beta_model = train_neural_model(train_run_indices, features_tensor, targets_tensor, lengths_np, "BetaLikelihood", config=best_beta_config, epochs=epochs, device=device, batch_size=batch_size)
         beta_probs = predict_neural_model(beta_model, test_run_indices, features_tensor, "BetaLikelihood", device=device)
         oof_predictions["BetaLikelihood (Expected Reward)"][test_idx] = beta_probs[mask]
