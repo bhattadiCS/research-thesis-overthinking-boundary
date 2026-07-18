@@ -61052,3 +61052,141 @@ Standard step cost uses: correct - 0.05 * (step - 1)
 Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
 ================================================================================
 
+=== Global 52-Cell Telemetry Sweep starting on 2026-07-18 01:55:45 ===
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_math
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_3b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_3b_math
+Checkpoint found: skipping completed cell global_qwen2p5_3b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_3b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_7b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_7b_math
+Checkpoint found: skipping completed cell global_qwen2p5_7b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_7b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_14b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_14b_math
+Checkpoint found: skipping completed cell global_qwen2p5_14b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_14b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_32b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_32b_math
+Checkpoint found: skipping completed cell global_qwen2p5_32b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_32b_gpqa
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_gsm8k
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_math
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_arc
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_gpqa
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_gsm8k
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_math
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_arc
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_gpqa
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_gsm8k
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_math
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_arc
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_gpqa
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_gsm8k
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_math
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_arc
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_gpqa
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_gsm8k
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_math
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_arc
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_gpqa
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_gsm8k
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_math
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_arc
+=== Launching Cell: phi_4_mini_instruct on gpqa ===
+[INFO] HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/main/README.md "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/gpqa.py "HTTP/1.1 404 Not Found"
+[INFO] HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Idavidrein/gpqa/Idavidrein/gpqa.py "HTTP/1.1 404 Not Found"
+[INFO] HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/revision/633f5ee89ab8ad4522a9f850766b73f62147ffdd "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[INFO] HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Idavidrein/gpqa "HTTP/1.1 200 OK"
+[INFO] HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/tree/633f5ee89ab8ad4522a9f850766b73f62147ffdd?recursive=false&expand=false "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/dataset_infos.json "HTTP/1.1 404 Not Found"
+[INFO] Loaded 448 tasks from gpqa.
+[INFO] Requested runs=448 | pending runs=448
+[INFO] Next pending run: task_index=0 | temperature=0.60 | seed=7 | run_id=phi_4_mini_instruct__gpqa_main_00000_e61ff7fc__temp0.60__seed7
+[INFO] Precision auto-tuning: bfloat16 detected for 4B model.
+[INFO] Attention implementation: sdpa (native FA2 kernels via SDPA).
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/config.json "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/configuration_phi3.py "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/configuration_phi3.py "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/config.json "HTTP/1.1 200 OK"
+[transformers] This model config has set a `rope_parameters['original_max_position_embeddings']` field, to be used together with `max_position_embeddings` to determine a scaling factor. Please set the `factor` field of `rope_parameters`with this ratio instead -- we recommend the use of this field over `original_max_position_embeddings`, as it is compatible with most model architectures.
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/tokenizer_config.json "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/tokenizer_config.json "HTTP/1.1 200 OK"
+[INFO] HTTP Request: GET https://huggingface.co/api/models/microsoft/Phi-4-mini-instruct/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+[INFO] HTTP Request: GET https://huggingface.co/api/models/microsoft/Phi-4-mini-instruct/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+[INFO] HTTP Request: GET https://huggingface.co/api/models/microsoft/Phi-4-mini-instruct "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/config.json "HTTP/1.1 200 OK"
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/configuration_phi3.py "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/configuration_phi3.py "HTTP/1.1 200 OK"
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[INFO] HTTP Request: HEAD https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/modeling_phi3.py "HTTP/1.1 307 Temporary Redirect"
+[INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/microsoft/Phi-4-mini-instruct/cfbefacb99257ffa30c83adab238a50856ac3083/modeling_phi3.py "HTTP/1.1 200 OK"
+[WARNING] Primary model load failed for microsoft/Phi-4-mini-instruct: cannot import name 'LossKwargs' from 'transformers.utils' (/workspace-persist/research-thesis-overthinking-boundary/.venv/lib/python3.11/site-packages/transformers/utils/__init__.py)
+Traceback (most recent call last):
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 2858, in <module>
+    main()
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 2670, in main
+    model, tokenizer, actual_device, backend = load_model(
+                                               ^^^^^^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/research/real_trace_experiments.py", line 1548, in load_model
+    model = model_class.from_pretrained(model_source, **load_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/.venv/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 378, in from_pretrained
+    model_class = get_class_from_dynamic_module(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/.venv/lib/python3.11/site-packages/transformers/dynamic_module_utils.py", line 623, in get_class_from_dynamic_module
+    return get_class_in_module(class_name, final_module, force_reload=force_download)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace-persist/research-thesis-overthinking-boundary/.venv/lib/python3.11/site-packages/transformers/dynamic_module_utils.py", line 309, in get_class_in_module
+    module_spec.loader.exec_module(module)
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/jovyan/.cache/huggingface/modules/transformers_modules/microsoft/Phi_hyphen_4_hyphen_mini_hyphen_instruct/cfbefacb99257ffa30c83adab238a50856ac3083/modeling_phi3.py", line 37, in <module>
+    from transformers.utils import (
+ImportError: cannot import name 'LossKwargs' from 'transformers.utils' (/workspace-persist/research-thesis-overthinking-boundary/.venv/lib/python3.11/site-packages/transformers/utils/__init__.py)
+Cell complete: global_phi_4_mini_instruct_gpqa
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_gsm8k
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_math
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_arc
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_gpqa
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_gsm8k
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_math
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_arc
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_gpqa
+=== Global Sweep Complete on 2026-07-18 01:55:53 ===
+[INFO] Scanning and loading 64 dataset cells...
+[INFO] Loaded 30440 unique run trajectories (200200 total steps).
+[INFO] Parsing mid-layer projections...
+[INFO] Using device for PyTorch sequence training: cuda
+[INFO] Starting cross-validation tournament...
+[INFO] --- FOLD 1/5 ---
+[INFO] --- FOLD 2/5 ---
+[INFO] --- FOLD 3/5 ---
+[INFO] --- FOLD 4/5 ---
+[INFO] --- FOLD 5/5 ---
+
+================================================================================
+                 FINAL DEEP RESEARCH TOURNAMENT SUMMARY
+================================================================================
+Configuration             | OOF AUC  | Utility (Step) | Utility (Token) | Win/Tie/Loss
+--------------------------------------------------------------------------------
+Baseline (Linear)         | 0.7248   | +0.3198        | +0.4017         | 23380/4579/2481
+N8b (Linear Proj)         | 0.7843   | +0.3242        | +0.4084         | 23094/5045/2301
+GRU (Sequence)            | 0.8499   | +0.3080        | +0.4173         | 16884/11676/1880
+LSTM (Sequence)           | 0.8518   | +0.3118        | +0.4249         | 16553/12253/1634
+Gated SC (Hysteresis)     | 0.8499   | +0.2985        | +0.3869         | 14480/14825/1135
+================================================================================
+Standard step cost uses: correct - 0.05 * (step - 1)
+Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
+================================================================================
+
