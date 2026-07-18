@@ -543,7 +543,26 @@ def main():
     task_to_grp = {tid: i for i, tid in enumerate(df["task_id"].unique())}
     groups = df["task_id"].map(task_to_grp).to_numpy()
 
+    checkpoint_file = Path("research/outputs/experiments_v2/advanced_tournament_checkpoint.pth")
+    start_fold = 0
+
+    if checkpoint_file.exists():
+        try:
+            checkpoint = torch.load(checkpoint_file, map_location="cpu")
+            if checkpoint.get("smoke_test") == args.smoke_test:
+                start_fold = checkpoint["fold"] + 1
+                oof_predictions = checkpoint["oof_predictions"]
+                results = checkpoint["results"]
+                logging.info(f"Loaded checkpoint from {checkpoint_file}. Resuming from Fold {start_fold + 1}/{n_splits}...")
+            else:
+                logging.info("Checkpoint configuration mismatch (smoke-test flag difference). Ignoring checkpoint.")
+        except Exception as e:
+            logging.error(f"Failed to load checkpoint: {e}")
+
     for fold, (train_idx, test_idx) in enumerate(gkf.split(df, groups=groups)):
+        if fold < start_fold:
+            logging.info(f"Skipping Fold {fold+1}/{n_splits} (already completed in checkpoint)")
+            continue
         logging.info(f"--- FOLD {fold+1}/{n_splits} ---")
         train = df.iloc[train_idx]
         test = df.iloc[test_idx].copy()
@@ -631,11 +650,25 @@ def main():
         # 6. Gated SC Policy
         results["Gated SC (Hysteresis)"].append(evaluate_policy([g for _, g in test_bigru.groupby("run_id")], is_gated_sc=True))
 
-    print("\n" + "=" * 110)
-    print("                 ADVANCED HYPER-OPTIMIZATION TOURNAMENT VERDICT SUMMARY")
-    print("=" * 110)
-    print(f"{'Configuration':<32} | {'OOF AUC':<8} | {'ECE':<6} | {'Utility (Step)':<14} | {'Utility (Token)':<15} | {'Win/Tie/Loss':<12}")
-    print("-" * 110)
+        # Save checkpoint
+        checkpoint_data = {
+            "fold": fold,
+            "smoke_test": args.smoke_test,
+            "oof_predictions": oof_predictions,
+            "results": results
+        }
+        try:
+            torch.save(checkpoint_data, checkpoint_file)
+            logging.info(f"Saved checkpoint for Fold {fold+1}/{n_splits} to {checkpoint_file}")
+        except Exception as e:
+            logging.error(f"Failed to save checkpoint: {e}")
+
+    summary_lines = []
+    summary_lines.append("\n" + "=" * 110)
+    summary_lines.append("                 ADVANCED HYPER-OPTIMIZATION TOURNAMENT VERDICT SUMMARY")
+    summary_lines.append("=" * 110)
+    summary_lines.append(f"{'Configuration':<32} | {'OOF AUC':<8} | {'ECE':<6} | {'Utility (Step)':<14} | {'Utility (Token)':<15} | {'Win/Tie/Loss':<12}")
+    summary_lines.append("-" * 110)
 
     y_all = df["correct"].astype(int).to_numpy()
 
@@ -662,9 +695,29 @@ def main():
             auc = roc_auc_score(y_all[valid_mask], oof_predictions["BiGRU (Sequence)"][valid_mask])
             ece = calculate_ece(oof_predictions["BiGRU (Sequence)"][valid_mask], y_all[valid_mask])
             
-        print(f"{name:<32} | {auc:<8.4f} | {ece:<6.4f} | {mean_u_step:<+14.4f} | {mean_u_token:<+15.4f} | {win_count}/{tie_count}/{loss_count}")
+        summary_lines.append(f"{name:<32} | {auc:<8.4f} | {ece:<6.4f} | {mean_u_step:<+14.4f} | {mean_u_token:<+15.4f} | {win_count}/{tie_count}/{loss_count}")
         
-    print("=" * 110)
+    summary_lines.append("=" * 110)
+
+    for line in summary_lines:
+        print(line)
+
+    out_file = Path("research/outputs/experiments_v2/advanced_tournament_results.log")
+    out_file.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write("\n".join(summary_lines) + "\n")
+        logging.info(f"Saved tournament verdict to {out_file}")
+    except Exception as e:
+        logging.error(f"Failed to save tournament verdict: {e}")
+
+    # Delete checkpoint file after successful completion
+    if checkpoint_file.exists():
+        try:
+            checkpoint_file.unlink()
+            logging.info("Cleaned up final checkpoint file.")
+        except Exception as e:
+            logging.error(f"Failed to clean up checkpoint file: {e}")
 
 if __name__ == "__main__":
     main()
