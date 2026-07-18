@@ -61190,3 +61190,1579 @@ Standard step cost uses: correct - 0.05 * (step - 1)
 Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
 ================================================================================
 
+=== Global 52-Cell Telemetry Sweep starting on 2026-07-18 02:14:42 ===
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_math
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_0p5b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_3b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_3b_math
+Checkpoint found: skipping completed cell global_qwen2p5_3b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_3b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_7b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_7b_math
+Checkpoint found: skipping completed cell global_qwen2p5_7b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_7b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_14b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_14b_math
+Checkpoint found: skipping completed cell global_qwen2p5_14b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_14b_gpqa
+Checkpoint found: skipping completed cell global_qwen2p5_32b_gsm8k
+Checkpoint found: skipping completed cell global_qwen2p5_32b_math
+Checkpoint found: skipping completed cell global_qwen2p5_32b_arc
+Checkpoint found: skipping completed cell global_qwen2p5_32b_gpqa
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_gsm8k
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_math
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_arc
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_1p5b_gpqa
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_gsm8k
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_math
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_arc
+Checkpoint found: skipping completed cell global_deepseek_r1_distill_7b_gpqa
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_gsm8k
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_math
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_arc
+Checkpoint found: skipping completed cell global_llama_3p1_8b_instruct_gpqa
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_gsm8k
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_math
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_arc
+Checkpoint found: skipping completed cell global_mistral_7b_instruct_v0p3_gpqa
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_gsm8k
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_math
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_arc
+Checkpoint found: skipping completed cell global_mistral_small_24b_2409_gpqa
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_gsm8k
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_math
+Checkpoint found: skipping completed cell global_phi_4_mini_instruct_arc
+=== Launching Cell: phi_4_mini_instruct on gpqa ===
+[INFO] Loaded 448 tasks from gpqa.
+[INFO] Requested runs=448 | pending runs=448
+[INFO] Next pending run: task_index=0 | temperature=0.60 | seed=7 | run_id=phi_4_mini_instruct__gpqa_main_00000_e61ff7fc__temp0.60__seed7
+[INFO] Precision auto-tuning: bfloat16 detected for 4B model.
+[INFO] Attention implementation: sdpa (native FA2 kernels via SDPA).
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:14<00:14, 14.20s/it]Fetching 2 files: 100%|██████████| 2/2 [00:14<00:00,  7.10s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 141.70it/s]
+[INFO] Model loaded: microsoft/Phi-4-mini-instruct | backend=transformers+torch(cuda) | device=cuda
+temp=0.60 seed=7:   0%|          | 0/28 [00:00<?, ?batch/s][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.62 | tok_s=827.60 | gpu_peak_alloc_gb=13.98 | gpu_peak_reserved_gb=17.16 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.82 | tok_s=931.84 | gpu_peak_alloc_gb=14.10 | gpu_peak_reserved_gb=17.46 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.76 | tok_s=899.82 | gpu_peak_alloc_gb=14.34 | gpu_peak_reserved_gb=18.30 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.61 | tok_s=824.67 | gpu_peak_alloc_gb=14.83 | gpu_peak_reserved_gb=19.96 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.53 | tok_s=782.90 | gpu_peak_alloc_gb=15.12 | gpu_peak_reserved_gb=20.48 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00000_e61ff7fc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00000_e61ff7fc__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00001_eadb944e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00001_eadb944e__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00002_1250771f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00002_1250771f__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00003_6e947a5f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0027
+[INFO] completed phi_4_mini_instruct__gpqa_main_00003_6e947a5f__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00004_265cc24d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0033
+[INFO] completed phi_4_mini_instruct__gpqa_main_00004_265cc24d__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00005_f53e97d9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0034
+[INFO] completed phi_4_mini_instruct__gpqa_main_00005_f53e97d9__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00006_3739a204__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0036
+[INFO] completed phi_4_mini_instruct__gpqa_main_00006_3739a204__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00007_6c27f522__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0037
+[INFO] completed phi_4_mini_instruct__gpqa_main_00007_6c27f522__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00008_726ae877__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0038
+[INFO] completed phi_4_mini_instruct__gpqa_main_00008_726ae877__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00009_a047a4da__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0039
+[INFO] completed phi_4_mini_instruct__gpqa_main_00009_a047a4da__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00010_fa834623__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0040
+[INFO] completed phi_4_mini_instruct__gpqa_main_00010_fa834623__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00011_159b66c2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0041
+[INFO] completed phi_4_mini_instruct__gpqa_main_00011_159b66c2__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00012_33e3f184__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0042
+[INFO] completed phi_4_mini_instruct__gpqa_main_00012_33e3f184__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00013_c6091900__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0044
+[INFO] completed phi_4_mini_instruct__gpqa_main_00013_c6091900__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00014_cc7b0408__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0046
+[INFO] completed phi_4_mini_instruct__gpqa_main_00014_cc7b0408__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00015_c0c657da__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0047
+[INFO] completed phi_4_mini_instruct__gpqa_main_00015_c0c657da__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+temp=0.60 seed=7:   0%|          | 0/28 [01:35<?, ?batch/s, correct=8, runs=16]temp=0.60 seed=7:   4%|▎         | 1/28 [01:35<42:58, 95.52s/batch, correct=8, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.34 | tok_s=685.41 | gpu_peak_alloc_gb=15.96 | gpu_peak_reserved_gb=23.25 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.33 | tok_s=679.05 | gpu_peak_alloc_gb=16.06 | gpu_peak_reserved_gb=23.57 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.30 | tok_s=666.44 | gpu_peak_alloc_gb=16.13 | gpu_peak_reserved_gb=23.81 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.29 | tok_s=660.04 | gpu_peak_alloc_gb=16.23 | gpu_peak_reserved_gb=24.13 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.26 | tok_s=644.51 | gpu_peak_alloc_gb=16.33 | gpu_peak_reserved_gb=24.45 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00016_fc851e3b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00016_fc851e3b__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00017_2e9ec04d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00017_2e9ec04d__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00018_e6715add__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00018_e6715add__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00019_9002350e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00019_9002350e__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00020_2e5b70ec__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00020_2e5b70ec__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00021_766a20c4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00021_766a20c4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00022_f1830e1a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00022_f1830e1a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00023_17e6f25c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00023_17e6f25c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00024_09d249e2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00024_09d249e2__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00025_3a4dd8d0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00025_3a4dd8d0__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00026_c9f73204__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00026_c9f73204__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00027_c27e0667__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00027_c27e0667__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00028_31c650a3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00028_31c650a3__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00029_dd14b86f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00029_dd14b86f__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00030_36ae2620__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00030_36ae2620__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00031_1a959528__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0026
+[INFO] completed phi_4_mini_instruct__gpqa_main_00031_1a959528__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+temp=0.60 seed=7:   4%|▎         | 1/28 [03:39<42:58, 95.52s/batch, correct=4, runs=16]temp=0.60 seed=7:   7%|▋         | 2/28 [03:39<48:37, 112.21s/batch, correct=4, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.47 | tok_s=750.92 | gpu_peak_alloc_gb=15.33 | gpu_peak_reserved_gb=21.19 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.43 | tok_s=731.30 | gpu_peak_alloc_gb=15.53 | gpu_peak_reserved_gb=21.80 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.40 | tok_s=718.19 | gpu_peak_alloc_gb=15.62 | gpu_peak_reserved_gb=22.12 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.39 | tok_s=711.83 | gpu_peak_alloc_gb=15.72 | gpu_peak_reserved_gb=22.48 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.37 | tok_s=701.34 | gpu_peak_alloc_gb=15.82 | gpu_peak_reserved_gb=22.79 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00032_2c712926__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00032_2c712926__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00033_d3ee1999__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00033_d3ee1999__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00034_5ed642db__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00034_5ed642db__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00035_417e5d47__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00035_417e5d47__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00036_deca6480__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00036_deca6480__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00037_b23e47c3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00037_b23e47c3__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00038_5118fb47__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00038_5118fb47__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00039_6668ab07__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00039_6668ab07__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00040_bae470e5__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00040_bae470e5__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00041_9eba97c4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00041_9eba97c4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00042_1c5915cd__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00042_1c5915cd__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00043_89746543__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00043_89746543__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00044_d2fb10c0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00044_d2fb10c0__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00045_c1330d93__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00045_c1330d93__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00046_12ede6c2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0026
+[INFO] completed phi_4_mini_instruct__gpqa_main_00046_12ede6c2__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00047_89c7b030__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0026
+[INFO] completed phi_4_mini_instruct__gpqa_main_00047_89c7b030__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=4
+temp=0.60 seed=7:   7%|▋         | 2/28 [05:33<48:37, 112.21s/batch, correct=10, runs=16]temp=0.60 seed=7:  11%|█         | 3/28 [05:33<47:08, 113.15s/batch, correct=10, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.40 | tok_s=717.77 | gpu_peak_alloc_gb=15.65 | gpu_peak_reserved_gb=22.21 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.38 | tok_s=706.09 | gpu_peak_alloc_gb=15.82 | gpu_peak_reserved_gb=22.79 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.32 | tok_s=675.65 | gpu_peak_alloc_gb=16.04 | gpu_peak_reserved_gb=23.49 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.30 | tok_s=665.80 | gpu_peak_alloc_gb=16.16 | gpu_peak_reserved_gb=23.89 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.28 | tok_s=655.26 | gpu_peak_alloc_gb=16.25 | gpu_peak_reserved_gb=24.21 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00048_3aa0f799__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00048_3aa0f799__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00049_5cb9f19f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00049_5cb9f19f__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00050_9a779a90__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00050_9a779a90__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00051_79920c11__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00051_79920c11__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00052_52612165__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00052_52612165__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00053_13e4c192__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00053_13e4c192__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00054_36008b3f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00054_36008b3f__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00055_ed74cd1f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00055_ed74cd1f__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00056_1037a31a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00056_1037a31a__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00057_80133a98__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00057_80133a98__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00058_d544fceb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00058_d544fceb__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00059_5a8f2e6c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00059_5a8f2e6c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00060_f925e8b8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00060_f925e8b8__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00061_0cc030d5__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00061_0cc030d5__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00062_569f9895__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00062_569f9895__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00063_e8681b1e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00063_e8681b1e__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+temp=0.60 seed=7:  11%|█         | 3/28 [07:34<47:08, 113.15s/batch, correct=13, runs=16]temp=0.60 seed=7:  14%|█▍        | 4/28 [07:34<46:28, 116.20s/batch, correct=13, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.86 | tok_s=952.35 | gpu_peak_alloc_gb=14.13 | gpu_peak_reserved_gb=17.54 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.77 | tok_s=906.32 | gpu_peak_alloc_gb=14.29 | gpu_peak_reserved_gb=18.13 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.72 | tok_s=879.97 | gpu_peak_alloc_gb=14.54 | gpu_peak_reserved_gb=18.95 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=851.06 | gpu_peak_alloc_gb=14.68 | gpu_peak_reserved_gb=19.44 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.61 | tok_s=823.35 | gpu_peak_alloc_gb=14.80 | gpu_peak_reserved_gb=19.88 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00064_3c82cd27__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00064_3c82cd27__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00065_91a75aec__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00065_91a75aec__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00066_d28aecb0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00066_d28aecb0__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00067_98327b58__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00067_98327b58__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00068_6c7ef3a0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00068_6c7ef3a0__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00069_918919e3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0015
+[INFO] completed phi_4_mini_instruct__gpqa_main_00069_918919e3__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00070_86d76bc1__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00070_86d76bc1__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00071_c59afe1e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00071_c59afe1e__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00072_f9c1cbbe__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00072_f9c1cbbe__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00073_9c9b36e7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00073_9c9b36e7__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00074_2532bbea__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00074_2532bbea__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00075_7266bfd8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00075_7266bfd8__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00076_10647ec7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00076_10647ec7__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00077_745cfcef__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00077_745cfcef__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00078_73f997d6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00078_73f997d6__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00079_1cbde218__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00079_1cbde218__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+temp=0.60 seed=7:  14%|█▍        | 4/28 [09:08<46:28, 116.20s/batch, correct=5, runs=16] temp=0.60 seed=7:  18%|█▊        | 5/28 [09:08<41:26, 108.12s/batch, correct=5, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.74 | tok_s=889.21 | gpu_peak_alloc_gb=14.46 | gpu_peak_reserved_gb=18.69 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.67 | tok_s=853.77 | gpu_peak_alloc_gb=14.58 | gpu_peak_reserved_gb=19.10 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=850.06 | gpu_peak_alloc_gb=14.71 | gpu_peak_reserved_gb=19.52 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.62 | tok_s=829.66 | gpu_peak_alloc_gb=14.80 | gpu_peak_reserved_gb=19.88 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.58 | tok_s=809.48 | gpu_peak_alloc_gb=14.92 | gpu_peak_reserved_gb=19.84 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00080_7084e443__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00080_7084e443__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00081_1364bf2b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00081_1364bf2b__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00082_d13a7dd8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00082_d13a7dd8__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00083_02aae537__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00083_02aae537__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00084_f5f728fd__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00084_f5f728fd__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00085_49345192__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00085_49345192__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00086_1039e804__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00086_1039e804__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00087_473d9541__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00087_473d9541__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00088_5c8ec699__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00088_5c8ec699__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00089_a9708bcf__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00089_a9708bcf__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00090_21db580d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00090_21db580d__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00091_6860665e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00091_6860665e__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00092_d8c2ea99__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00092_d8c2ea99__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00093_527f0ce0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00093_527f0ce0__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00094_350bfe6f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00094_350bfe6f__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00095_a64c34c6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00095_a64c34c6__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=0 | revisions=2
+temp=0.60 seed=7:  18%|█▊        | 5/28 [10:45<41:26, 108.12s/batch, correct=8, runs=16]temp=0.60 seed=7:  21%|██▏       | 6/28 [10:45<38:19, 104.51s/batch, correct=8, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.81 | tok_s=926.82 | gpu_peak_alloc_gb=14.27 | gpu_peak_reserved_gb=18.04 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.68 | tok_s=860.89 | gpu_peak_alloc_gb=14.58 | gpu_peak_reserved_gb=19.10 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.65 | tok_s=845.40 | gpu_peak_alloc_gb=14.68 | gpu_peak_reserved_gb=19.44 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.64 | tok_s=839.45 | gpu_peak_alloc_gb=14.78 | gpu_peak_reserved_gb=19.79 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.60 | tok_s=819.01 | gpu_peak_alloc_gb=14.91 | gpu_peak_reserved_gb=19.76 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00096_eb241194__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00096_eb241194__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00097_526b98ff__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00097_526b98ff__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00098_e261c3eb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00098_e261c3eb__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00099_42030505__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00099_42030505__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00100_0cae39c7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00100_0cae39c7__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00101_95129e5c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00101_95129e5c__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00102_98d6642e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00102_98d6642e__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00103_da44de6f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00103_da44de6f__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00104_8c2be5fc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00104_8c2be5fc__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00105_abf87818__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00105_abf87818__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00106_c822f17d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00106_c822f17d__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00107_a059a65e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00107_a059a65e__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00108_9be8fad9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00108_9be8fad9__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00109_60b4dab8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00109_60b4dab8__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00110_3d5ff2e5__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00110_3d5ff2e5__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00111_05d68dbc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00111_05d68dbc__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+temp=0.60 seed=7:  21%|██▏       | 6/28 [12:22<38:19, 104.51s/batch, correct=9, runs=16]temp=0.60 seed=7:  25%|██▌       | 7/28 [12:22<35:41, 102.00s/batch, correct=9, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.77 | tok_s=907.07 | gpu_peak_alloc_gb=14.32 | gpu_peak_reserved_gb=18.21 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.70 | tok_s=869.31 | gpu_peak_alloc_gb=14.56 | gpu_peak_reserved_gb=19.02 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=849.46 | gpu_peak_alloc_gb=14.71 | gpu_peak_reserved_gb=19.52 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=7968 | ex_s=1.60 | tok_s=796.56 | gpu_peak_alloc_gb=14.88 | gpu_peak_reserved_gb=19.68 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.56 | tok_s=798.48 | gpu_peak_alloc_gb=15.02 | gpu_peak_reserved_gb=20.15 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00112_002f83ef__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00112_002f83ef__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00113_6e7866fc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00113_6e7866fc__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00114_cc31d190__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00114_cc31d190__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00115_f09b1ce6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00115_f09b1ce6__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00116_7520098b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00116_7520098b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00117_f4e6822b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00117_f4e6822b__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00118_6fe6c4fc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00118_6fe6c4fc__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00119_b0be202a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00119_b0be202a__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00120_2b22cec3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00120_2b22cec3__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00121_a2dacad8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00121_a2dacad8__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00122_acd8adff__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00122_acd8adff__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00123_80535b91__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00123_80535b91__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00124_2b980ea3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00124_2b980ea3__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00125_bcca5972__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00125_bcca5972__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00126_41edbbb2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00126_41edbbb2__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00127_27ee120e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00127_27ee120e__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+temp=0.60 seed=7:  25%|██▌       | 7/28 [14:00<35:41, 102.00s/batch, correct=8, runs=16]temp=0.60 seed=7:  29%|██▊       | 8/28 [14:00<33:32, 100.62s/batch, correct=8, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.95 | tok_s=996.13 | gpu_peak_alloc_gb=13.86 | gpu_peak_reserved_gb=16.62 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.93 | tok_s=990.31 | gpu_peak_alloc_gb=13.98 | gpu_peak_reserved_gb=17.04 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.77 | tok_s=906.67 | gpu_peak_alloc_gb=14.32 | gpu_peak_reserved_gb=18.21 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.71 | tok_s=877.88 | gpu_peak_alloc_gb=14.46 | gpu_peak_reserved_gb=18.69 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.70 | tok_s=868.18 | gpu_peak_alloc_gb=14.56 | gpu_peak_reserved_gb=19.02 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00128_f11f2684__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00128_f11f2684__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00129_2f8554c6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00129_2f8554c6__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00130_9039df5f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00130_9039df5f__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00131_a3de2fa4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00131_a3de2fa4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00132_684b4fef__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00132_684b4fef__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00133_72635616__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00133_72635616__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00134_a19bb999__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00134_a19bb999__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00135_276511ab__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00135_276511ab__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00136_8ac7ed16__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00136_8ac7ed16__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00137_f40f3f0e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00137_f40f3f0e__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00138_97ad12f8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00138_97ad12f8__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00139_1b7ec9b2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00139_1b7ec9b2__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00140_6b42cd4e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00140_6b42cd4e__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00141_c52952ce__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00141_c52952ce__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00142_48dd05c3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00142_48dd05c3__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00143_4bf94519__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00143_4bf94519__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=2
+temp=0.60 seed=7:  29%|██▊       | 8/28 [15:29<33:32, 100.62s/batch, correct=10, runs=16]temp=0.60 seed=7:  32%|███▏      | 9/28 [15:29<30:44, 97.09s/batch, correct=10, runs=16] [INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.82 | tok_s=929.44 | gpu_peak_alloc_gb=14.27 | gpu_peak_reserved_gb=18.04 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.75 | tok_s=894.41 | gpu_peak_alloc_gb=14.42 | gpu_peak_reserved_gb=18.53 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.71 | tok_s=875.43 | gpu_peak_alloc_gb=14.54 | gpu_peak_reserved_gb=18.95 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.69 | tok_s=866.40 | gpu_peak_alloc_gb=14.63 | gpu_peak_reserved_gb=19.27 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=847.82 | gpu_peak_alloc_gb=14.73 | gpu_peak_reserved_gb=19.61 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00144_ac11b79a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00144_ac11b79a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00145_a67db00d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00145_a67db00d__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00146_044cafc9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00146_044cafc9__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00147_6f31c236__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00147_6f31c236__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00148_c519ab74__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00148_c519ab74__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00149_e15b02e7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00149_e15b02e7__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00150_9fdee674__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00150_9fdee674__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00151_8f3455dd__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00151_8f3455dd__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00152_92ddb9c3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00152_92ddb9c3__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00153_c382ef86__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00153_c382ef86__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00154_56a283a4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00154_56a283a4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00155_ef7c5ac3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00155_ef7c5ac3__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00156_1b37f3cb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00156_1b37f3cb__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00157_26fa8e9d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00157_26fa8e9d__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00158_545ab294__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00158_545ab294__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00159_fe767d2c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00159_fe767d2c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+temp=0.60 seed=7:  32%|███▏      | 9/28 [17:03<30:44, 97.09s/batch, correct=8, runs=16] temp=0.60 seed=7:  36%|███▌      | 10/28 [17:03<28:49, 96.10s/batch, correct=8, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.68 | tok_s=860.43 | gpu_peak_alloc_gb=14.54 | gpu_peak_reserved_gb=18.95 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=852.31 | gpu_peak_alloc_gb=14.68 | gpu_peak_reserved_gb=19.44 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.63 | tok_s=832.06 | gpu_peak_alloc_gb=14.78 | gpu_peak_reserved_gb=19.79 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.60 | tok_s=819.16 | gpu_peak_alloc_gb=14.91 | gpu_peak_reserved_gb=19.76 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.57 | tok_s=803.16 | gpu_peak_alloc_gb=15.00 | gpu_peak_reserved_gb=20.08 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00160_32e3e102__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00160_32e3e102__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00161_dc8fac4d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00161_dc8fac4d__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00162_27ef3e9b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00162_27ef3e9b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00163_bda51262__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00163_bda51262__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00164_85a125b7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00164_85a125b7__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00165_8d5befe3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00165_8d5befe3__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00166_f4d02054__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00166_f4d02054__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00167_a1ee2f06__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00167_a1ee2f06__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00168_5d802271__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00168_5d802271__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00169_bb6e6c5c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00169_bb6e6c5c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00170_39d42ed0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00170_39d42ed0__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00171_5d86c58a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00171_5d86c58a__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00172_0d7f923c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00172_0d7f923c__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00173_d897c34a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00173_d897c34a__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00174_85bb4f67__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00174_85bb4f67__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00175_08bf9b0b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00175_08bf9b0b__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+temp=0.60 seed=7:  36%|███▌      | 10/28 [18:42<28:49, 96.10s/batch, correct=6, runs=16]temp=0.60 seed=7:  39%|███▉      | 11/28 [18:42<27:30, 97.06s/batch, correct=6, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.81 | tok_s=927.59 | gpu_peak_alloc_gb=14.25 | gpu_peak_reserved_gb=17.94 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.74 | tok_s=892.66 | gpu_peak_alloc_gb=14.39 | gpu_peak_reserved_gb=18.45 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.72 | tok_s=881.91 | gpu_peak_alloc_gb=14.49 | gpu_peak_reserved_gb=18.78 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.68 | tok_s=861.74 | gpu_peak_alloc_gb=14.58 | gpu_peak_reserved_gb=19.10 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.61 | tok_s=823.21 | gpu_peak_alloc_gb=14.68 | gpu_peak_reserved_gb=19.44 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00176_c93a8388__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00176_c93a8388__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00177_39c14454__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00177_39c14454__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00178_3464a094__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00178_3464a094__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00179_25586c53__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00179_25586c53__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00180_fa4e4fb8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00180_fa4e4fb8__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00181_dc88c45c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00181_dc88c45c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00182_8f12b565__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00182_8f12b565__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00183_726d98d9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00183_726d98d9__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00184_f51b1f5d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00184_f51b1f5d__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00185_62c58d34__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00185_62c58d34__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00186_d511e8c7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00186_d511e8c7__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00187_afa78f63__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00187_afa78f63__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00188_9f7f42ba__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00188_9f7f42ba__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00189_466d8ca0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00189_466d8ca0__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00190_97420e84__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00190_97420e84__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00191_2f1f1b06__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0026
+[INFO] completed phi_4_mini_instruct__gpqa_main_00191_2f1f1b06__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+temp=0.60 seed=7:  39%|███▉      | 11/28 [20:16<27:30, 97.06s/batch, correct=11, runs=16]temp=0.60 seed=7:  43%|████▎     | 12/28 [20:16<25:39, 96.19s/batch, correct=11, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.84 | tok_s=941.78 | gpu_peak_alloc_gb=14.10 | gpu_peak_reserved_gb=17.46 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.77 | tok_s=904.67 | gpu_peak_alloc_gb=14.34 | gpu_peak_reserved_gb=18.30 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.74 | tok_s=889.67 | gpu_peak_alloc_gb=14.44 | gpu_peak_reserved_gb=18.62 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.69 | tok_s=865.31 | gpu_peak_alloc_gb=14.63 | gpu_peak_reserved_gb=19.27 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.65 | tok_s=844.74 | gpu_peak_alloc_gb=14.75 | gpu_peak_reserved_gb=19.70 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00192_c7d17646__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00192_c7d17646__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00193_097b870b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00193_097b870b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00194_73a1cae0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00194_73a1cae0__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00195_501b7e14__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00195_501b7e14__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00196_7c3f035c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00196_7c3f035c__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00197_28172790__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00197_28172790__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00198_e996ebed__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00198_e996ebed__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00199_a539c3c1__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00199_a539c3c1__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00200_9a535d17__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00200_9a535d17__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00201_07d9ffdb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00201_07d9ffdb__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00202_1c09d7fa__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00202_1c09d7fa__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00203_9b1f500b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00203_9b1f500b__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00204_d1e8a934__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00204_d1e8a934__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00205_816a2ae6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00205_816a2ae6__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00206_4cd4e27a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00206_4cd4e27a__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00207_bb5cd8a0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00207_bb5cd8a0__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=1 | revisions=1
+temp=0.60 seed=7:  43%|████▎     | 12/28 [21:49<25:39, 96.19s/batch, correct=8, runs=16] temp=0.60 seed=7:  46%|████▋     | 13/28 [21:49<23:48, 95.20s/batch, correct=8, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.79 | tok_s=918.38 | gpu_peak_alloc_gb=14.29 | gpu_peak_reserved_gb=18.13 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.73 | tok_s=884.35 | gpu_peak_alloc_gb=14.42 | gpu_peak_reserved_gb=18.53 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.71 | tok_s=875.72 | gpu_peak_alloc_gb=14.54 | gpu_peak_reserved_gb=18.95 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=851.00 | gpu_peak_alloc_gb=14.63 | gpu_peak_reserved_gb=19.27 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.63 | tok_s=833.85 | gpu_peak_alloc_gb=14.75 | gpu_peak_reserved_gb=19.70 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00208_7f899d0c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00208_7f899d0c__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00209_9b29ec4f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00209_9b29ec4f__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00210_586c589b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00210_586c589b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00211_aedfb29b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00211_aedfb29b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00212_8eff331a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00212_8eff331a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00213_492d4089__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00213_492d4089__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00214_27f3723f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00214_27f3723f__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00215_77a3547a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00215_77a3547a__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00216_55828faf__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00216_55828faf__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00217_3365c33f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00217_3365c33f__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00218_02d04c15__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00218_02d04c15__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00219_29005e92__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00219_29005e92__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00220_b3735bfc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00220_b3735bfc__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00221_89cd7a60__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00221_89cd7a60__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00222_f3cfed83__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00222_f3cfed83__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00223_ac2c11a2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00223_ac2c11a2__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=4
+temp=0.60 seed=7:  46%|████▋     | 13/28 [23:24<23:48, 95.20s/batch, correct=9, runs=16]temp=0.60 seed=7:  50%|█████     | 14/28 [23:24<22:11, 95.08s/batch, correct=9, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.59 | tok_s=816.40 | gpu_peak_alloc_gb=14.91 | gpu_peak_reserved_gb=19.76 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.53 | tok_s=782.75 | gpu_peak_alloc_gb=15.07 | gpu_peak_reserved_gb=20.31 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.52 | tok_s=776.10 | gpu_peak_alloc_gb=15.16 | gpu_peak_reserved_gb=20.63 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.47 | tok_s=750.21 | gpu_peak_alloc_gb=15.29 | gpu_peak_reserved_gb=21.04 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.47 | tok_s=750.80 | gpu_peak_alloc_gb=15.38 | gpu_peak_reserved_gb=21.36 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00224_a80cf561__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00224_a80cf561__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00225_cc8fab48__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00225_cc8fab48__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00226_ab52acf9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00226_ab52acf9__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00227_459c95ee__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00227_459c95ee__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00228_9653fab6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00228_9653fab6__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00229_c2b44943__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00229_c2b44943__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00230_3c51fcc3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00230_3c51fcc3__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00231_4ed833be__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00231_4ed833be__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00232_bf9458a0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00232_bf9458a0__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00233_b7604037__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00233_b7604037__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00234_79c13331__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00234_79c13331__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00235_7c0db7ab__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00235_7c0db7ab__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00236_27a3c9c1__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00236_27a3c9c1__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00237_a9c9104c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00237_a9c9104c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00238_b0802316__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00238_b0802316__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00239_6bd82de1__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00239_6bd82de1__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+temp=0.60 seed=7:  50%|█████     | 14/28 [25:11<22:11, 95.08s/batch, correct=7, runs=16]temp=0.60 seed=7:  54%|█████▎    | 15/28 [25:11<21:21, 98.55s/batch, correct=7, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=0.73 | tok_s=372.21 | gpu_peak_alloc_gb=28.89 | gpu_peak_reserved_gb=40.05 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=0.72 | tok_s=366.55 | gpu_peak_alloc_gb=29.25 | gpu_peak_reserved_gb=40.72 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=0.71 | tok_s=363.96 | gpu_peak_alloc_gb=29.49 | gpu_peak_reserved_gb=40.87 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=0.70 | tok_s=356.57 | gpu_peak_alloc_gb=29.72 | gpu_peak_reserved_gb=41.10 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=0.70 | tok_s=359.38 | gpu_peak_alloc_gb=29.90 | gpu_peak_reserved_gb=41.34 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00240_cc2a3a9b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00240_cc2a3a9b__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00241_55f70ebc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00241_55f70ebc__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00242_f4a67935__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00242_f4a67935__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00243_d0d2c840__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00243_d0d2c840__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00244_b19e7cd4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00244_b19e7cd4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00245_edcea74a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00245_edcea74a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00246_93457621__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00246_93457621__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00247_32317f7f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00247_32317f7f__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00248_dd767e3e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00248_dd767e3e__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00249_acde8a9d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00249_acde8a9d__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00250_89cd3e17__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00250_89cd3e17__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00251_de807e33__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00251_de807e33__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00252_74ba0b46__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00252_74ba0b46__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00253_5f0c9af9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00253_5f0c9af9__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00254_fa7ed815__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00254_fa7ed815__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00255_760ae13a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00255_760ae13a__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+temp=0.60 seed=7:  54%|█████▎    | 15/28 [28:57<21:21, 98.55s/batch, correct=11, runs=16]temp=0.60 seed=7:  57%|█████▋    | 16/28 [28:57<27:24, 137.04s/batch, correct=11, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.69 | tok_s=866.39 | gpu_peak_alloc_gb=14.37 | gpu_peak_reserved_gb=18.37 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.69 | tok_s=866.71 | gpu_peak_alloc_gb=14.54 | gpu_peak_reserved_gb=18.95 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=849.06 | gpu_peak_alloc_gb=14.63 | gpu_peak_reserved_gb=19.27 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.62 | tok_s=829.02 | gpu_peak_alloc_gb=14.80 | gpu_peak_reserved_gb=19.88 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.58 | tok_s=806.81 | gpu_peak_alloc_gb=14.97 | gpu_peak_reserved_gb=19.99 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00256_69260179__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00256_69260179__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00257_3b6aa64c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00257_3b6aa64c__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00258_1dfce2be__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00258_1dfce2be__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=1 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00259_60698255__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0015
+[INFO] completed phi_4_mini_instruct__gpqa_main_00259_60698255__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00260_4e44a3f6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00260_4e44a3f6__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00261_274c61d4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00261_274c61d4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00262_ba0aa2e6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00262_ba0aa2e6__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00263_3beaf352__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00263_3beaf352__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00264_07f2ec54__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00264_07f2ec54__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00265_5da0a844__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00265_5da0a844__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00266_9f63ee0c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00266_9f63ee0c__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00267_2a750ab1__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00267_2a750ab1__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00268_d4029386__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00268_d4029386__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00269_4baadd2b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0026
+[INFO] completed phi_4_mini_instruct__gpqa_main_00269_4baadd2b__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00270_5f35815b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0026
+[INFO] completed phi_4_mini_instruct__gpqa_main_00270_5f35815b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00271_d1dfbf52__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0027
+[INFO] completed phi_4_mini_instruct__gpqa_main_00271_d1dfbf52__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+temp=0.60 seed=7:  57%|█████▋    | 16/28 [30:35<27:24, 137.04s/batch, correct=9, runs=16] temp=0.60 seed=7:  61%|██████    | 17/28 [30:35<22:58, 125.32s/batch, correct=9, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.34 | tok_s=687.37 | gpu_peak_alloc_gb=15.87 | gpu_peak_reserved_gb=22.93 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.32 | tok_s=675.40 | gpu_peak_alloc_gb=16.01 | gpu_peak_reserved_gb=23.41 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.27 | tok_s=649.26 | gpu_peak_alloc_gb=16.13 | gpu_peak_reserved_gb=23.81 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.21 | tok_s=619.79 | gpu_peak_alloc_gb=16.30 | gpu_peak_reserved_gb=24.37 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.18 | tok_s=604.37 | gpu_peak_alloc_gb=16.45 | gpu_peak_reserved_gb=24.68 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00272_33956b5d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00272_33956b5d__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00273_e1a90e91__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00273_e1a90e91__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00274_8d681e27__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00274_8d681e27__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00275_350edb15__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00275_350edb15__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00276_990624c3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00276_990624c3__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00277_8e18ba29__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00277_8e18ba29__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00278_bc50f6a6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00278_bc50f6a6__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00279_4d6c047c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00279_4d6c047c__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00280_6d4c5056__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0029
+[INFO] completed phi_4_mini_instruct__gpqa_main_00280_6d4c5056__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00281_7e9f4918__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0033
+[INFO] completed phi_4_mini_instruct__gpqa_main_00281_7e9f4918__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00282_f1846120__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0035
+[INFO] completed phi_4_mini_instruct__gpqa_main_00282_f1846120__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00283_eabc5aea__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0035
+[INFO] completed phi_4_mini_instruct__gpqa_main_00283_eabc5aea__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00284_806b2796__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0037
+[INFO] completed phi_4_mini_instruct__gpqa_main_00284_806b2796__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00285_ab897308__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0037
+[INFO] completed phi_4_mini_instruct__gpqa_main_00285_ab897308__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00286_991ec35a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0038
+[INFO] completed phi_4_mini_instruct__gpqa_main_00286_991ec35a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00287_e2c36941__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0038
+[INFO] completed phi_4_mini_instruct__gpqa_main_00287_e2c36941__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+temp=0.60 seed=7:  61%|██████    | 17/28 [32:43<22:58, 125.32s/batch, correct=10, runs=16]temp=0.60 seed=7:  64%|██████▍   | 18/28 [32:43<20:59, 125.93s/batch, correct=10, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.79 | tok_s=914.77 | gpu_peak_alloc_gb=14.15 | gpu_peak_reserved_gb=17.62 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.73 | tok_s=886.44 | gpu_peak_alloc_gb=14.37 | gpu_peak_reserved_gb=18.37 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.67 | tok_s=854.86 | gpu_peak_alloc_gb=14.63 | gpu_peak_reserved_gb=19.27 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.61 | tok_s=824.06 | gpu_peak_alloc_gb=14.85 | gpu_peak_reserved_gb=19.59 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.55 | tok_s=791.13 | gpu_peak_alloc_gb=15.07 | gpu_peak_reserved_gb=20.31 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00288_a4c02b31__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00288_a4c02b31__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00289_9c11eaa7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00289_9c11eaa7__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00290_000b6cf3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00290_000b6cf3__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00291_9728a424__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00291_9728a424__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00292_2fcd62aa__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00292_2fcd62aa__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00293_0c9f20f4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00293_0c9f20f4__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00294_a8be7316__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00294_a8be7316__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00295_7617aa20__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00295_7617aa20__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00296_b10458b1__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00296_b10458b1__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00297_79ccfa48__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00297_79ccfa48__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00298_b625be1e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00298_b625be1e__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00299_d15781f9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00299_d15781f9__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00300_4c3cbb02__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00300_4c3cbb02__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00301_627dfbec__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00301_627dfbec__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00302_15b4ea6e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00302_15b4ea6e__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00303_a57ec377__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00303_a57ec377__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+temp=0.60 seed=7:  64%|██████▍   | 18/28 [34:19<20:59, 125.93s/batch, correct=7, runs=16] temp=0.60 seed=7:  68%|██████▊   | 19/28 [34:19<17:34, 117.13s/batch, correct=7, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.88 | tok_s=960.31 | gpu_peak_alloc_gb=14.05 | gpu_peak_reserved_gb=17.29 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.84 | tok_s=940.47 | gpu_peak_alloc_gb=14.15 | gpu_peak_reserved_gb=17.62 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.78 | tok_s=910.79 | gpu_peak_alloc_gb=14.32 | gpu_peak_reserved_gb=18.21 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.63 | tok_s=836.09 | gpu_peak_alloc_gb=14.80 | gpu_peak_reserved_gb=19.88 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.60 | tok_s=819.03 | gpu_peak_alloc_gb=14.92 | gpu_peak_reserved_gb=19.84 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00304_7034d319__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00304_7034d319__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00305_fae05632__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00305_fae05632__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00306_1eefe6b2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00306_1eefe6b2__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00307_d4a08739__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00307_d4a08739__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00308_523cf725__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00308_523cf725__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00309_4b7d172e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00309_4b7d172e__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00310_b3410876__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00310_b3410876__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00311_11558311__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00311_11558311__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00312_2e4e81cb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00312_2e4e81cb__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00313_c73cf854__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00313_c73cf854__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00314_4228b372__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00314_4228b372__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00315_2d50c228__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00315_2d50c228__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00316_6afdf0fa__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00316_6afdf0fa__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00317_f5386a48__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00317_f5386a48__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00318_fe6b411a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00318_fe6b411a__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00319_ffaeb502__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00319_ffaeb502__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+temp=0.60 seed=7:  68%|██████▊   | 19/28 [35:52<17:34, 117.13s/batch, correct=12, runs=16]temp=0.60 seed=7:  71%|███████▏  | 20/28 [35:52<14:39, 109.91s/batch, correct=12, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.84 | tok_s=939.82 | gpu_peak_alloc_gb=14.15 | gpu_peak_reserved_gb=17.62 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.80 | tok_s=923.86 | gpu_peak_alloc_gb=14.25 | gpu_peak_reserved_gb=17.94 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.77 | tok_s=908.09 | gpu_peak_alloc_gb=14.34 | gpu_peak_reserved_gb=18.30 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.74 | tok_s=891.77 | gpu_peak_alloc_gb=14.46 | gpu_peak_reserved_gb=18.69 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.70 | tok_s=871.53 | gpu_peak_alloc_gb=14.56 | gpu_peak_reserved_gb=19.02 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00320_c86ec6b7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00320_c86ec6b7__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00321_e67ab018__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00321_e67ab018__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00322_8748469d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00322_8748469d__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00323_419b4f70__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00323_419b4f70__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00324_8c990373__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00324_8c990373__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00325_3c32688a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00325_3c32688a__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00326_50ec334c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00326_50ec334c__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00327_73efd34b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00327_73efd34b__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00328_f944f591__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00328_f944f591__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00329_c1811584__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00329_c1811584__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00330_8373f105__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00330_8373f105__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00331_2ee5281c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00331_2ee5281c__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00332_5d02acae__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00332_5d02acae__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00333_f2583e2a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00333_f2583e2a__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00334_116076b6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00334_116076b6__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00335_378a75a2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00335_378a75a2__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+temp=0.60 seed=7:  71%|███████▏  | 20/28 [37:23<14:39, 109.91s/batch, correct=11, runs=16]temp=0.60 seed=7:  75%|███████▌  | 21/28 [37:23<12:09, 104.26s/batch, correct=11, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.81 | tok_s=925.05 | gpu_peak_alloc_gb=14.27 | gpu_peak_reserved_gb=18.04 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.77 | tok_s=907.87 | gpu_peak_alloc_gb=14.34 | gpu_peak_reserved_gb=18.30 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.71 | tok_s=873.67 | gpu_peak_alloc_gb=14.46 | gpu_peak_reserved_gb=18.69 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.69 | tok_s=866.65 | gpu_peak_alloc_gb=14.56 | gpu_peak_reserved_gb=19.02 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.67 | tok_s=853.53 | gpu_peak_alloc_gb=14.68 | gpu_peak_reserved_gb=19.44 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00336_b4c1a40c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00336_b4c1a40c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00337_f7434df3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00337_f7434df3__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00338_8eaea3e4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00338_8eaea3e4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00339_0a1747c7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00339_0a1747c7__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00340_3e95512b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00340_3e95512b__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00341_ece4bdbc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00341_ece4bdbc__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00342_469cc479__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00342_469cc479__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00343_de6a3c6a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00343_de6a3c6a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00344_a23941d0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00344_a23941d0__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00345_c19af936__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00345_c19af936__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00346_a265fd53__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00346_a265fd53__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00347_b1777e21__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00347_b1777e21__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00348_8cc49dae__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00348_8cc49dae__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00349_184e31cb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00349_184e31cb__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00350_2eea3549__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00350_2eea3549__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00351_cf2bcfec__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00351_cf2bcfec__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=3
+temp=0.60 seed=7:  75%|███████▌  | 21/28 [38:57<12:09, 104.26s/batch, correct=8, runs=16] temp=0.60 seed=7:  79%|███████▊  | 22/28 [38:57<10:06, 101.00s/batch, correct=8, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.73 | tok_s=886.67 | gpu_peak_alloc_gb=14.46 | gpu_peak_reserved_gb=18.69 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.70 | tok_s=869.17 | gpu_peak_alloc_gb=14.58 | gpu_peak_reserved_gb=19.10 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.64 | tok_s=840.03 | gpu_peak_alloc_gb=14.75 | gpu_peak_reserved_gb=19.70 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.60 | tok_s=818.29 | gpu_peak_alloc_gb=14.88 | gpu_peak_reserved_gb=19.68 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.58 | tok_s=809.90 | gpu_peak_alloc_gb=14.97 | gpu_peak_reserved_gb=19.99 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00352_3e37d78d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00352_3e37d78d__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00353_bf19b2b8__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00353_bf19b2b8__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00354_145e7a97__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00354_145e7a97__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00355_655c40f1__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00355_655c40f1__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00356_f766415e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00356_f766415e__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00357_a261a73a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00357_a261a73a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00358_18e4c22a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00358_18e4c22a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00359_c923a0df__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00359_c923a0df__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00360_33971b75__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00360_33971b75__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00361_8534e01c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00361_8534e01c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00362_261d55a0__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00362_261d55a0__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00363_8685d7d7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00363_8685d7d7__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00364_230b5ead__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00364_230b5ead__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00365_131dc842__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00365_131dc842__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00366_bcc3c310__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00366_bcc3c310__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00367_3fa3248e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0025
+[INFO] completed phi_4_mini_instruct__gpqa_main_00367_3fa3248e__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+temp=0.60 seed=7:  79%|███████▊  | 22/28 [40:35<10:06, 101.00s/batch, correct=8, runs=16]temp=0.60 seed=7:  82%|████████▏ | 23/28 [40:35<08:20, 100.09s/batch, correct=8, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.79 | tok_s=914.76 | gpu_peak_alloc_gb=14.27 | gpu_peak_reserved_gb=18.04 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.76 | tok_s=898.62 | gpu_peak_alloc_gb=14.39 | gpu_peak_reserved_gb=18.45 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.72 | tok_s=882.69 | gpu_peak_alloc_gb=14.51 | gpu_peak_reserved_gb=18.86 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.67 | tok_s=856.99 | gpu_peak_alloc_gb=14.68 | gpu_peak_reserved_gb=19.44 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.60 | tok_s=818.40 | gpu_peak_alloc_gb=14.83 | gpu_peak_reserved_gb=19.96 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00368_a5f72a0b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00368_a5f72a0b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00369_da8d46cf__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00369_da8d46cf__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00370_f7af3092__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00370_f7af3092__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00371_9b0a472b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00371_9b0a472b__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00372_7f6e2742__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00372_7f6e2742__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00373_11572832__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00373_11572832__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00374_342188ce__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00374_342188ce__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00375_9841633c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00375_9841633c__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00376_711623b2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00376_711623b2__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00377_ed2f5045__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00377_ed2f5045__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00378_62c170c6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00378_62c170c6__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00379_bafa85e3__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00379_bafa85e3__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00380_de04ca91__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00380_de04ca91__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00381_a37e9de5__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00381_a37e9de5__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00382_30eb2ed4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00382_30eb2ed4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00383_c906182b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00383_c906182b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+temp=0.60 seed=7:  82%|████████▏ | 23/28 [42:10<08:20, 100.09s/batch, correct=7, runs=16]temp=0.60 seed=7:  86%|████████▌ | 24/28 [42:10<06:34, 98.51s/batch, correct=7, runs=16] [INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.67 | tok_s=855.38 | gpu_peak_alloc_gb=14.63 | gpu_peak_reserved_gb=19.27 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.61 | tok_s=823.85 | gpu_peak_alloc_gb=14.85 | gpu_peak_reserved_gb=19.59 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=7973 | ex_s=1.57 | tok_s=784.39 | gpu_peak_alloc_gb=14.97 | gpu_peak_reserved_gb=19.99 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.54 | tok_s=790.06 | gpu_peak_alloc_gb=15.07 | gpu_peak_reserved_gb=20.31 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.52 | tok_s=776.37 | gpu_peak_alloc_gb=15.16 | gpu_peak_reserved_gb=20.63 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00384_73f2ebfe__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00384_73f2ebfe__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00385_842b7edb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00385_842b7edb__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00386_d4826573__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00386_d4826573__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00387_6627d13f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00387_6627d13f__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00388_f1464a6f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00388_f1464a6f__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00389_5252fa29__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00389_5252fa29__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00390_9272bf23__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00390_9272bf23__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00391_263cb0f2__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00391_263cb0f2__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00392_39153e1b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00392_39153e1b__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00393_fa735caf__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00393_fa735caf__temp0.60__seed7 | ever_correct=1 | first_correct=5 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00394_d514cb2a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00394_d514cb2a__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00395_42c17c6a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00395_42c17c6a__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00396_fb4c86e9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00396_fb4c86e9__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00397_ceae12d7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00397_ceae12d7__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00398_0f351743__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0023
+[INFO] completed phi_4_mini_instruct__gpqa_main_00398_0f351743__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=4
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00399_2c2a0a46__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0024
+[INFO] completed phi_4_mini_instruct__gpqa_main_00399_2c2a0a46__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+temp=0.60 seed=7:  86%|████████▌ | 24/28 [43:52<06:34, 98.51s/batch, correct=9, runs=16]temp=0.60 seed=7:  89%|████████▉ | 25/28 [43:52<04:58, 99.57s/batch, correct=9, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.88 | tok_s=964.61 | gpu_peak_alloc_gb=14.03 | gpu_peak_reserved_gb=17.21 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.88 | tok_s=961.38 | gpu_peak_alloc_gb=14.13 | gpu_peak_reserved_gb=17.54 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.83 | tok_s=935.26 | gpu_peak_alloc_gb=14.25 | gpu_peak_reserved_gb=17.94 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.80 | tok_s=920.94 | gpu_peak_alloc_gb=14.32 | gpu_peak_reserved_gb=18.21 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.73 | tok_s=886.67 | gpu_peak_alloc_gb=14.42 | gpu_peak_reserved_gb=18.53 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00400_c1820249__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00400_c1820249__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00401_365183a5__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0003
+[INFO] completed phi_4_mini_instruct__gpqa_main_00401_365183a5__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00402_67971e64__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00402_67971e64__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00403_d28db0aa__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00403_d28db0aa__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00404_31792c4b__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00404_31792c4b__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00405_6ba4defb__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0011
+[INFO] completed phi_4_mini_instruct__gpqa_main_00405_6ba4defb__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00406_a9e0929f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00406_a9e0929f__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00407_ab1c0c85__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00407_ab1c0c85__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00408_3fafc42d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0016
+[INFO] completed phi_4_mini_instruct__gpqa_main_00408_3fafc42d__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00409_0be354a9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0017
+[INFO] completed phi_4_mini_instruct__gpqa_main_00409_0be354a9__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00410_5faf4c8f__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00410_5faf4c8f__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00411_0e949c53__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00411_0e949c53__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00412_324a1be9__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0018
+[INFO] completed phi_4_mini_instruct__gpqa_main_00412_324a1be9__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00413_d4ec0493__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00413_d4ec0493__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00414_55ff36c4__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00414_55ff36c4__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00415_15ab7d86__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0022
+[INFO] completed phi_4_mini_instruct__gpqa_main_00415_15ab7d86__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+temp=0.60 seed=7:  89%|████████▉ | 25/28 [45:20<04:58, 99.57s/batch, correct=7, runs=16]temp=0.60 seed=7:  93%|█████████▎| 26/28 [45:20<03:12, 96.29s/batch, correct=7, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.66 | tok_s=848.81 | gpu_peak_alloc_gb=14.58 | gpu_peak_reserved_gb=19.10 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.62 | tok_s=827.88 | gpu_peak_alloc_gb=14.68 | gpu_peak_reserved_gb=19.44 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.61 | tok_s=823.09 | gpu_peak_alloc_gb=14.80 | gpu_peak_reserved_gb=19.88 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.58 | tok_s=807.18 | gpu_peak_alloc_gb=14.92 | gpu_peak_reserved_gb=19.84 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.55 | tok_s=795.96 | gpu_peak_alloc_gb=15.04 | gpu_peak_reserved_gb=20.23 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00416_7ae1c7cd__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00416_7ae1c7cd__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00417_2357930a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00417_2357930a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00418_cd0dbc6e__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00418_cd0dbc6e__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00419_2ba49537__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00419_2ba49537__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00420_c4041998__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00420_c4041998__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00421_15a1cf8a__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0007
+[INFO] completed phi_4_mini_instruct__gpqa_main_00421_15a1cf8a__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00422_5c746005__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00422_5c746005__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00423_36aecc17__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0012
+[INFO] completed phi_4_mini_instruct__gpqa_main_00423_36aecc17__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00424_01a2327d__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00424_01a2327d__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00425_708ad3bc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00425_708ad3bc__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00426_d693ccf7__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00426_d693ccf7__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00427_bf24ff79__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00427_bf24ff79__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00428_faf86a33__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00428_faf86a33__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00429_b2a8aaff__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00429_b2a8aaff__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00430_3ae8e9bc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00430_3ae8e9bc__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=3
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00431_9935bfcc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00431_9935bfcc__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=0 | revisions=3
+temp=0.60 seed=7:  93%|█████████▎| 26/28 [47:01<03:12, 96.29s/batch, correct=5, runs=16]temp=0.60 seed=7:  96%|█████████▋| 27/28 [47:01<01:37, 97.60s/batch, correct=5, runs=16][INFO] temp=0.60 seed=7 step=1/5 | batch=16 | generated_tokens=8192 | ex_s=1.90 | tok_s=970.62 | gpu_peak_alloc_gb=13.96 | gpu_peak_reserved_gb=16.95 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=2/5 | batch=16 | generated_tokens=8192 | ex_s=1.84 | tok_s=940.95 | gpu_peak_alloc_gb=14.13 | gpu_peak_reserved_gb=17.54 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=3/5 | batch=16 | generated_tokens=8192 | ex_s=1.76 | tok_s=899.96 | gpu_peak_alloc_gb=14.32 | gpu_peak_reserved_gb=18.21 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=4/5 | batch=16 | generated_tokens=8192 | ex_s=1.73 | tok_s=888.17 | gpu_peak_alloc_gb=14.44 | gpu_peak_reserved_gb=18.62 | splits=1 | oom_retries=0
+[INFO] temp=0.60 seed=7 step=5/5 | batch=16 | generated_tokens=8192 | ex_s=1.72 | tok_s=878.64 | gpu_peak_alloc_gb=14.54 | gpu_peak_reserved_gb=18.95 | splits=1 | oom_retries=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00432_c3bff138__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0002
+[INFO] completed phi_4_mini_instruct__gpqa_main_00432_c3bff138__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00433_051e33e5__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00433_051e33e5__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00434_345c8399__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00434_345c8399__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00435_27c5b9b6__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0004
+[INFO] completed phi_4_mini_instruct__gpqa_main_00435_27c5b9b6__temp0.60__seed7 | ever_correct=1 | first_correct=3 | final_correct=1 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00436_bcde7b81__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0005
+[INFO] completed phi_4_mini_instruct__gpqa_main_00436_bcde7b81__temp0.60__seed7 | ever_correct=1 | first_correct=4 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00437_99b6c8bc__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0006
+[INFO] completed phi_4_mini_instruct__gpqa_main_00437_99b6c8bc__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00438_a11c4201__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0008
+[INFO] completed phi_4_mini_instruct__gpqa_main_00438_a11c4201__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00439_34da7d63__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0009
+[INFO] completed phi_4_mini_instruct__gpqa_main_00439_34da7d63__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00440_5ede3d09__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0010
+[INFO] completed phi_4_mini_instruct__gpqa_main_00440_5ede3d09__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00441_0530d735__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0013
+[INFO] completed phi_4_mini_instruct__gpqa_main_00441_0530d735__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=0 | revisions=1
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00442_e46cea32__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0014
+[INFO] completed phi_4_mini_instruct__gpqa_main_00442_e46cea32__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00443_bfda03bd__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0015
+[INFO] completed phi_4_mini_instruct__gpqa_main_00443_bfda03bd__temp0.60__seed7 | ever_correct=1 | first_correct=1 | final_correct=1 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00444_171336c5__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0019
+[INFO] completed phi_4_mini_instruct__gpqa_main_00444_171336c5__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00445_971d4176__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0020
+[INFO] completed phi_4_mini_instruct__gpqa_main_00445_971d4176__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=2
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00446_48347b70__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00446_48347b70__temp0.60__seed7 | ever_correct=0 | first_correct=5 | final_correct=0 | revisions=0
+[INFO] IOManager: Background saving started for phi_4_mini_instruct__gpqa_main_00447_61deeb5c__temp0.60__seed7.npz
+[INFO] batch_metrics: hidden_state_write_seconds = 0.0021
+[INFO] completed phi_4_mini_instruct__gpqa_main_00447_61deeb5c__temp0.60__seed7 | ever_correct=1 | first_correct=2 | final_correct=1 | revisions=4
+temp=0.60 seed=7:  96%|█████████▋| 27/28 [48:31<01:37, 97.60s/batch, correct=10, runs=16]temp=0.60 seed=7: 100%|██████████| 28/28 [48:31<00:00, 95.44s/batch, correct=10, runs=16]temp=0.60 seed=7: 100%|██████████| 28/28 [48:31<00:00, 104.00s/batch, correct=10, runs=16]
+phi_4_mini_instruct: runs=448, ever_correct=238, oracle=1.37, first_correct=3.25, repair=0.104, corruption=0.207, device=cuda
+Wrote real-trace artifacts to: research/outputs/experiments_v2/global_phi_4_mini_instruct_gpqa
+Cell complete: global_phi_4_mini_instruct_gpqa
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_gsm8k
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_math
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_arc
+Checkpoint found: skipping completed cell global_yi_1p5_9b_chat_gpqa
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_gsm8k
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_math
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_arc
+Checkpoint found: skipping completed cell global_qwen_3p5_9b_gpqa
+=== Global Sweep Complete on 2026-07-18 03:03:40 ===
+[INFO] Scanning and loading 65 dataset cells...
+[INFO] Loaded 30888 unique run trajectories (202440 total steps).
+[INFO] Parsing mid-layer projections...
+[INFO] Using device for PyTorch sequence training: cuda
+[INFO] Starting cross-validation tournament...
+[INFO] --- FOLD 1/5 ---
+[INFO] --- FOLD 2/5 ---
+[INFO] --- FOLD 3/5 ---
+[INFO] --- FOLD 4/5 ---
+[INFO] --- FOLD 5/5 ---
+
+================================================================================
+                 FINAL DEEP RESEARCH TOURNAMENT SUMMARY
+================================================================================
+Configuration             | OOF AUC  | Utility (Step) | Utility (Token) | Win/Tie/Loss
+--------------------------------------------------------------------------------
+Baseline (Linear)         | 0.7227   | +0.3188        | +0.4004         | 23756/4623/2509
+N8b (Linear Proj)         | 0.7824   | +0.3230        | +0.4070         | 23492/5081/2315
+GRU (Sequence)            | 0.8418   | +0.3093        | +0.4223         | 17079/12117/1692
+LSTM (Sequence)           | 0.8460   | +0.3089        | +0.4248         | 16430/12878/1580
+Gated SC (Hysteresis)     | 0.8418   | +0.2965        | +0.3859         | 14440/15374/1074
+================================================================================
+Standard step cost uses: correct - 0.05 * (step - 1)
+Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
+================================================================================
+

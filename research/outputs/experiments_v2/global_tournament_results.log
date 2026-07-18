@@ -1,5 +1,5 @@
-[INFO] Scanning and loading 64 dataset cells...
-[INFO] Loaded 30440 unique run trajectories (200200 total steps).
+[INFO] Scanning and loading 65 dataset cells...
+[INFO] Loaded 30888 unique run trajectories (202440 total steps).
 [INFO] Parsing mid-layer projections...
 [INFO] Using device for PyTorch sequence training: cuda
 [INFO] Starting cross-validation tournament...
@@ -14,11 +14,11 @@
 ================================================================================
 Configuration             | OOF AUC  | Utility (Step) | Utility (Token) | Win/Tie/Loss
 --------------------------------------------------------------------------------
-Baseline (Linear)         | 0.7248   | +0.3198        | +0.4017         | 23380/4579/2481
-N8b (Linear Proj)         | 0.7843   | +0.3242        | +0.4084         | 23094/5045/2301
-GRU (Sequence)            | 0.8499   | +0.3080        | +0.4173         | 16884/11676/1880
-LSTM (Sequence)           | 0.8518   | +0.3118        | +0.4249         | 16553/12253/1634
-Gated SC (Hysteresis)     | 0.8499   | +0.2985        | +0.3869         | 14480/14825/1135
+Baseline (Linear)         | 0.7227   | +0.3188        | +0.4004         | 23756/4623/2509
+N8b (Linear Proj)         | 0.7824   | +0.3230        | +0.4070         | 23492/5081/2315
+GRU (Sequence)            | 0.8418   | +0.3093        | +0.4223         | 17079/12117/1692
+LSTM (Sequence)           | 0.8460   | +0.3089        | +0.4248         | 16430/12878/1580
+Gated SC (Hysteresis)     | 0.8418   | +0.2965        | +0.3859         | 14440/15374/1074
 ================================================================================
 Standard step cost uses: correct - 0.05 * (step - 1)
 Honest token cost uses:  correct - 0.0002 * total_tokens (Gated SC charges for k2 only when triggered)
