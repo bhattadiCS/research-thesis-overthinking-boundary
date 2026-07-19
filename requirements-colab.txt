@@ -13,3 +13,4 @@ numpy>=2.0.0
 numexpr>=2.14.1
 bottleneck>=1.6.0
 tqdm>=4.67
+optuna>=4.7
