@@ -123,16 +123,19 @@ print("Torch CUDA runtime:", torch.version.cuda)
 print("Torch architectures:", ", ".join(torch.cuda.get_arch_list()) if torch.cuda.is_available() else "n/a")
 print("Optuna installed:", importlib.util.find_spec("optuna") is not None)
 if not torch.cuda.is_available():
-    raise SystemExit("CUDA is required for the full Blackwell protocol")
+    raise SystemExit("CUDA is required for the full GPU protocol")
 props = torch.cuda.get_device_properties(0)
 print("GPU:", props.name)
 print("Compute capability:", f"sm_{props.major}{props.minor}")
 print("Visible VRAM GiB:", round(props.total_memory / 2**30, 2))
-if props.major < 12 or props.total_memory < 90 * 2**30:
-    raise SystemExit("This launcher requires a Blackwell-class GPU with >=90 GiB visible VRAM")
-if importlib.util.find_spec("optuna") is None:
-    raise SystemExit("Install optuna>=4 before starting the full tournament")
+if props.total_memory < 70 * 2**30:
+    raise SystemExit("This launcher requires a high-capacity GPU with >=70 GiB visible VRAM")
 PY
+
+if ! "${PYTHON_BIN}" -c "import optuna" 2>/dev/null; then
+    echo "[INFO] Optuna not detected. Installing optuna into ${PYTHON_BIN}..."
+    "${PYTHON_BIN}" -m pip install "optuna>=4.0.0"
+fi
 
 echo "[INFO] Running real-model VRAM / power / BF16 throughput audit..."
 "${PYTHON_BIN}" research/run_ultimate_multi_day_tournament.py \
