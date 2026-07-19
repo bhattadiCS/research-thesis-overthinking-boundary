@@ -1,0 +1,27 @@
+{
+  "completed_at": 1784470719.402017,
+  "fold": 1,
+  "outer_test_runs": 5779,
+  "outer_test_task_count": 591,
+  "outer_train_runs": 23109,
+  "outer_train_task_count": 2357,
+  "selected_config": {
+    "attention_heads": 8,
+    "beta_variance_weight": 0.0,
+    "brier_weight": 0.1439499143743544,
+    "concentration_weight": 0.00011249012419939323,
+    "d_model": 256,
+    "dropout": 0.10195835778938282,
+    "fno_modes": 4,
+    "gate_temperature": 0.8365417671111786,
+    "hazard_weight": 0.3095440622167538,
+    "lr": 0.0011399977587509783,
+    "mine_weight": 0.0,
+    "moe_balance_weight": 0.01149937233717869,
+    "ssm_state": 16,
+    "tcn_blocks": 3,
+    "transformer_layers": 1,
+    "weight_decay": 0.00020852546453967435
+  },
+  "status": "complete"
+}
