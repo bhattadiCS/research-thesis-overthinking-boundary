@@ -31,6 +31,8 @@ BATCH_SIZE="${BATCH_SIZE:-4096}"
 MAX_BATCH_SIZE="${MAX_BATCH_SIZE:-8192}"
 MAX_HOURS="${MAX_HOURS:-71.5}"
 SYNC_SECONDS="${SYNC_SECONDS:-900}"
+NUM_WORKERS="${NUM_WORKERS:-0}"
+TUNE_NUM_WORKERS="${TUNE_NUM_WORKERS:-0}"
 RUN_LOG="${RUN_LOG:-run_ultimate_multi_day_tournament.log}"
 SMOKE_OUTPUT_DIR="${OUTPUT_DIR}/ultimate_smoke"
 RUN_PID=""
@@ -159,6 +161,7 @@ echo "[INFO] Starting resumable 72-hour tournament; log: ${RUN_LOG}"
     --epochs "${EPOCHS}" \
     --batch-size "${BATCH_SIZE}" --max-batch-size "${MAX_BATCH_SIZE}" \
     --max-hours "${MAX_HOURS}" \
+    --num-workers "${NUM_WORKERS}" --tune-num-workers "${TUNE_NUM_WORKERS}" \
     --require-blackwell --resume \
     > "${RUN_LOG}" 2>&1 &
 RUN_PID=$!

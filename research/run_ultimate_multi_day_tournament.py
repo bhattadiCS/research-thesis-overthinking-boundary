@@ -2818,7 +2818,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-batch-size", type=int, default=8192)
     parser.add_argument("--eval-batch-size", type=int, default=8192)
     parser.add_argument("--cap-batch-to-data", action=argparse.BooleanOptionalAction, default=False)
-    parser.add_argument("--num-workers", type=int, default=8)
+    parser.add_argument("--num-workers", type=int, default=0, help="Default to 0 in containers to prevent /dev/shm IPC shared memory exhaustion")
     parser.add_argument("--tune-num-workers", type=int, default=0, help="Avoid worker churn across hundreds of trials")
     parser.add_argument("--precision", choices=["bf16", "fp16"], default="bf16")
     parser.add_argument("--compile", action=argparse.BooleanOptionalAction, default=True)
@@ -2855,6 +2855,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    try:
+        import torch.multiprocessing as mp
+        mp.set_sharing_strategy('file_system')
+    except Exception:
+        pass
     parser = build_parser()
     args = parser.parse_args()
     if args.self_test:
