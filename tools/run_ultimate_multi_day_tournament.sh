@@ -11,7 +11,18 @@
 
 set -Eeuo pipefail
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
+if [[ -z "${PYTHON_BIN:-}" ]]; then
+    if [[ -f ".venv/bin/python" ]]; then
+        PYTHON_BIN=".venv/bin/python"
+    elif [[ -f "../.venv/bin/python" ]]; then
+        PYTHON_BIN="../.venv/bin/python"
+    else
+        if [[ -f ".venv/bin/activate" ]]; then
+            source .venv/bin/activate 2>/dev/null || true
+        fi
+        PYTHON_BIN="python"
+    fi
+fi
 INPUT_DIR="${INPUT_DIR:-research/outputs/experiments_v2}"
 OUTPUT_DIR="${OUTPUT_DIR:-research/outputs/experiments_v2}"
 TRIALS_PER_FOLD="${TRIALS_PER_FOLD:-500}"
