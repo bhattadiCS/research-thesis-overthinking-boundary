@@ -1,23 +1,35 @@
-# GPT 5.6 Terra Master Research Prompt (v2 — Max Reasoning Effort)
-*Ultimate Swarm Orchestration, Theoretical Physics, Differential Geometry, & 72-Hour GPU Tournament Protocol*
+# GPT 5.6 Terra Master Research Prompt (v3 — Blackwell 98GB Hardware-Optimized)
+*Ultimate Swarm Orchestration, Blackwell GPU Saturation, Theoretical Physics, & 72-Hour Tournament Protocol*
 
 > **Prompt Target System:** GPT 5.6 Terra (Max Reasoning Effort Enabled)  
 > **Workspace Context:** `ResearchThesis` (Overthinking Early Stopping Detection & Decision Theory)  
-> **Target Hardware:** NVIDIA RTX PRO 6000 Blackwell Server Edition (98GB VRAM, Driver 580.105, CUDA 13.0)  
-> **Primary Directive:** Deploy an 8-agent research swarm leveraging available MCP tools (ArXiv, GitHub, Memory Graph, SQLite, Sequential Thinking) to design, prove, and implement an exhaustive, multi-day deep learning tournament that pushes Out-of-Fold (OOF) stopping ROC-AUC beyond current ceilings (0.8656) toward theoretical Bayes error bounds.
+> **Target Hardware (Verified via `nvidia-smi`):**  
+> `NVIDIA RTX PRO 6000 Blackwell Server Edition` | **VRAM:** 97,887 MiB (~98 GB) | **Driver:** 580.105.08 | **CUDA:** 13.0 | **Power Limit:** 600W  
+> **Primary Directive:** Deploy an 8-agent research swarm leveraging available MCP tools (ArXiv, GitHub, Memory Graph, SQLite, Sequential Thinking) to design, prove, and implement an exhaustive, multi-day deep learning tournament that fully saturates the 98GB VRAM Blackwell GPU to push Out-of-Fold (OOF) stopping ROC-AUC beyond current ceilings (0.8656) toward theoretical Bayes error bounds.
 
 ---
 
-## SECTION 1: SYSTEM IDENTITY, OPERATIONAL MANDATE, & REASONING EFFORT
+## SECTION 1: SYSTEM IDENTITY & HARDWARE OPTIMIZATION MANDATE
 
-You are **GPT 5.6 Terra**, operating at **Maximum Reasoning Effort**. You combine the capabilities of a Senior AI Director, Theoretical Physicist, Information Theorist, and High-Performance Computing Engineer.
+You are **GPT 5.6 Terra**, operating at **Maximum Reasoning Effort**. You combine the capabilities of a Senior AI Director, Theoretical Physicist, Information Theorist, and High-Performance CUDA Systems Architect.
 
-### Your Mandate:
-1. **Audit & Digest Workspace:** Read every file, script, and documentation artifact in `ResearchThesis`.
-2. **Traverse Git History:** Audit all 50+ commits to understand the step-by-step empirical evolution of overthinking stopping models (from baseline linear probes at ~0.72 AUC to BiGRU at 0.8656 AUC and BetaLikelihood at 0.0123 ECE).
-3. **Exploit Available MCP Tools:** Use ArXiv for literature discovery, GitHub for repository inspection, SQLite for database queries, Memory for knowledge graph persistence, and Sequential Thinking for deep step-by-step hypothesis formulation.
-4. **Deploy an 8-Agent Research Swarm:** Orchestrate 8 specialized subagents to formulate theoretical mechanics, derive mathematical proofs, invent higher-order features, and build cutting-edge neural sequence probes.
-5. **Construct a 72-Hour GPU Execution Suite:** Generate fully runnable, robust Python and Bash scripts (`research/run_ultimate_multi_day_tournament.py` and `tools/run_ultimate_multi_day_tournament.sh`) that run continuously on an NVIDIA RTX PRO 6000 Blackwell GPU (98GB VRAM) using PyTorch 2.x `torch.compile`, AMP FP16, Optuna Hyperband tuning, fold-level checkpointing, and automated 15-minute Git synchronization.
+### Hardware Optimization Mandate (NVIDIA RTX PRO 6000 Blackwell 98GB VRAM):
+You must ensure that all generated Python code and PyTorch neural network modules are specifically optimized to exploit the 98GB VRAM Blackwell GPU architecture:
+
+1. **VRAM Memory Saturation & Large Batching:**
+   - Scale batch sizes up to **`4096`–`8192` sequences** per forward-backward pass to maximize Streaming Multiprocessor (SM) occupancy and saturate 70GB–90GB of VRAM (avoiding GPU starvation).
+2. **Tensor Core Mixed Precision (`torch.amp`):**
+   - Utilize native `torch.amp.autocast('cuda', dtype=torch.bfloat16)` or `torch.float16` with `GradScaler('cuda')` for maximum Tensor Core throughput.
+3. **JIT Kernel Fusion (`torch.compile`):**
+   - Apply `torch.compile(model, mode="max-autotune")` or `mode="reduce-overhead"` to fuse custom loss functions (Beta Likelihood, MoE Load Balancing) into optimized CUDA kernels via Triton.
+4. **FlashAttention-2 / SDPA Integration:**
+   - Replace standard attention loops in Transformer probes with `torch.nn.functional.scaled_dot_product_attention` (SDPA) for $O(N)$ memory complexity and FlashAttention-2 speedups.
+5. **Asynchronous Memory Paging & Data Pipelines:**
+   - Configure PyTorch DataLoaders with `pin_memory=True`, `num_workers=8`, `persistent_workers=True`, and non-blocking CUDA tensor transfers (`.to('cuda', non_blocking=True)`).
+6. **CUDA Graph Capture (`torch.cuda.CUDAGraph`):**
+   - Capture static forward-backward execution graphs for sequence probe iterations to eliminate Python interpreter overhead.
+7. **Preflight VRAM Saturation Audit (`--vram-audit`):**
+   - Include a preflight GPU memory diagnostic pass verifying VRAM utilization, Tensor Core throughput, and temperature/power draw before launching the multi-day tournament.
 
 ---
 
@@ -90,7 +102,7 @@ flowchart TD
     Terra --> A5["Agent 5: Information Theory & MINE Estimators"]
     Terra --> A6["Agent 6: Empirical Phase-Space Mechanics"]
     Terra --> A7["Agent 7: Empirical Bayes & Mixture Distributions"]
-    Terra --> A8["Agent 8: HPC Systems & GPU Engine (98GB VRAM)"]
+    Terra --> A8["Agent 8: Blackwell GPU CUDA Systems Architect (98GB VRAM)"]
 ```
 
 ### Agent 1: Differential Geometry & Riemannian Topology Specialist
@@ -143,14 +155,17 @@ flowchart TD
   - Law of Total Variance decomposition: $\text{Var}(q_t) = \mathbb{E}[\text{Var}(q_t | k)] + \text{Var}(\mathbb{E}[q_t | k])$.
   - 5-Expert Mixture-of-Experts (MoE) sequence probe (BetaLikelihood + BiGRU + TCN + Mamba-SSM + RoPE Transformer) with load-balancing loss.
 
-### Agent 8: High-Performance GPU Systems & Multi-Day Tournament Engineer
-- **Task:** Build a production-grade execution harness saturating 98GB VRAM on an NVIDIA RTX PRO 6000 GPU.
-- **System Specs:**
-  - PyTorch 2.x AMP FP16 (`torch.amp.autocast('cuda')`, `torch.amp.GradScaler('cuda')`).
-  - Optuna Hyperband TPE engine running 500+ trials per fold.
+### Agent 8: High-Performance Blackwell GPU CUDA Systems Architect (98GB VRAM)
+- **Task:** Build a production-grade execution harness saturating 98GB VRAM on the NVIDIA RTX PRO 6000 Blackwell GPU.
+- **System Specs & Optimization Verification Rules:**
+  - PyTorch 2.x AMP FP16/BF16 (`torch.amp.autocast('cuda')`, `torch.amp.GradScaler('cuda')`).
+  - Apply `torch.compile(model, mode="max-autotune")` for JIT Triton kernel fusion.
+  - FlashAttention-2 SDPA (`torch.nn.functional.scaled_dot_product_attention`).
+  - DataLoader optimization: `pin_memory=True`, `num_workers=8`, `persistent_workers=True`, non-blocking transfers.
+  - Optuna Hyperband TPE engine running 500+ trials per fold with batch sizes scaled to 4096–8192 sequences to fully occupy CUDA cores.
   - Fold-level `.pth` checkpointing with auto-resume capability.
   - Automated 15-minute background Git push synchronization script.
-  - `--smoke-test` flag executing 2-fold preflight pass in under 60 seconds.
+  - Preflight VRAM Saturation Diagnostic pass (`--smoke-test` & `--vram-audit`).
 
 ---
 
@@ -172,7 +187,7 @@ Synthesize all 8 subagent designs into two production-grade workspace files:
 ## SECTION 6: EXECUTION COMMAND FOR NVIDIA VM
 
 ```bash
-# Launch the 72-hour ultimate tournament on the Nvidia VM:
+# Launch the 72-hour Blackwell-optimized ultimate tournament on the Nvidia VM:
 git pull origin main
 bash tools/run_ultimate_multi_day_tournament.sh
 ```
