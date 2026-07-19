@@ -1,0 +1,313 @@
+{
+  "dataset_fingerprint": "59551e6e5fc1b1b6577671001e169026fe69c78434d05ca9ac31989ac89e6eb9",
+  "feature_count": 199,
+  "feature_fingerprint": "28f9b3c7023bbdfbdcbce6bfb6efd593d9a2124858d5a6f8241aece75703547b",
+  "files": [
+    {
+      "bytes": 8153203,
+      "path": "global_deepseek_r1_distill_1p5b_arc/trace_steps.csv",
+      "sha256": "fd6245986503a71fea9cedb70a4e7d4b0d29f72b5aafd18be6ab5270e7664081"
+    },
+    {
+      "bytes": 7096274,
+      "path": "global_deepseek_r1_distill_1p5b_gpqa/trace_steps.csv",
+      "sha256": "aba962cec5a6e5eecbbc8e242e76758dda380f5b8d640f07e6e2d0bde638f5d8"
+    },
+    {
+      "bytes": 7493709,
+      "path": "global_deepseek_r1_distill_1p5b_gsm8k/trace_steps.csv",
+      "sha256": "4207e5c9eba34f32409e60013cd046a1a4d5a28c408c547634edd51ee13110be"
+    },
+    {
+      "bytes": 7807673,
+      "path": "global_deepseek_r1_distill_1p5b_math/trace_steps.csv",
+      "sha256": "cde3a1218f0bbb17f68d0907aab858cad8445053c6e2ac24ab7ebbd3ce1a5bb5"
+    },
+    {
+      "bytes": 7869793,
+      "path": "global_deepseek_r1_distill_7b_arc/trace_steps.csv",
+      "sha256": "3262798c549da6832461efd0eef40fa32d38cca5d7ee3d8bcbba7c9d38c8cf69"
+    },
+    {
+      "bytes": 7128249,
+      "path": "global_deepseek_r1_distill_7b_gpqa/trace_steps.csv",
+      "sha256": "ce398c993741f71d19be1e3bc8fe936925eee18e85e6fc55763a3358da874e9d"
+    },
+    {
+      "bytes": 7025670,
+      "path": "global_deepseek_r1_distill_7b_gsm8k/trace_steps.csv",
+      "sha256": "c08c870d03948b03daca6fac03753dd6698ac2626b89aed77223863ef8394a63"
+    },
+    {
+      "bytes": 7609246,
+      "path": "global_deepseek_r1_distill_7b_math/trace_steps.csv",
+      "sha256": "6de8b338caf54a62c05a58ab5ba2e4a448d5a2d3b4f8b711dd3f3a1409721152"
+    },
+    {
+      "bytes": 5223759,
+      "path": "global_llama_3p1_8b_instruct_arc/trace_steps.csv",
+      "sha256": "f3e296ce1597b8ae1eac1be09bbf7aed5f97df86693a179953b9fd0f7b86f01b"
+    },
+    {
+      "bytes": 4838266,
+      "path": "global_llama_3p1_8b_instruct_gpqa/trace_steps.csv",
+      "sha256": "ae641cf9c74def3ddf47e97fcddcb09149d44768a91ee50f0c65304ff7d923f2"
+    },
+    {
+      "bytes": 5187440,
+      "path": "global_llama_3p1_8b_instruct_gsm8k/trace_steps.csv",
+      "sha256": "ec50747a64ae9b0daa21f7400c21c48bce4f6106d00b8f05ab2768aa11975a55"
+    },
+    {
+      "bytes": 5248621,
+      "path": "global_llama_3p1_8b_instruct_math/trace_steps.csv",
+      "sha256": "02529ac4b2ed36d80a85b695828d97d18bae89b3c742190647e15d0c58dcb8ee"
+    },
+    {
+      "bytes": 5530505,
+      "path": "global_mistral_7b_instruct_v0p3_arc/trace_steps.csv",
+      "sha256": "390ac2db6558222cebeeb7347f88461b714aec2d07803dc05f0ff11e2b5bb7f9"
+    },
+    {
+      "bytes": 5294525,
+      "path": "global_mistral_7b_instruct_v0p3_gpqa/trace_steps.csv",
+      "sha256": "f10062e088f279e82258b2c28f592a70cd69584887b35e505a4252dad1a04860"
+    },
+    {
+      "bytes": 5477005,
+      "path": "global_mistral_7b_instruct_v0p3_gsm8k/trace_steps.csv",
+      "sha256": "1df9246986c6318c8b80ac62dd9cb94d45fc99d05b41feacfc3c2246b98802de"
+    },
+    {
+      "bytes": 5627587,
+      "path": "global_mistral_7b_instruct_v0p3_math/trace_steps.csv",
+      "sha256": "a2a0dbe35e83ed2a6794a98563eefe7a73f35b57908b8396f2ff298e33ec6729"
+    },
+    {
+      "bytes": 5071571,
+      "path": "global_mistral_small_24b_2409_arc/trace_steps.csv",
+      "sha256": "691751a398ffd2811b4b5756ddc1561b04df9dfbee634b8090438abe3a745f33"
+    },
+    {
+      "bytes": 4628690,
+      "path": "global_mistral_small_24b_2409_gpqa/trace_steps.csv",
+      "sha256": "98b4ceb5545c499e8bee02605a65537ec918a521c63af6a9d50e6a35a923fa37"
+    },
+    {
+      "bytes": 5079184,
+      "path": "global_mistral_small_24b_2409_gsm8k/trace_steps.csv",
+      "sha256": "9a4780d676a915897dde5a5da57fee445732597c2cce7a2a139229936f451bb9"
+    },
+    {
+      "bytes": 5149940,
+      "path": "global_mistral_small_24b_2409_math/trace_steps.csv",
+      "sha256": "61111bd29f4bfb8312fd6a317f5701dc1e74ede0775f871a59097cb2bf81bd4f"
+    },
+    {
+      "bytes": 7536340,
+      "path": "global_phi_4_mini_instruct_arc/trace_steps.csv",
+      "sha256": "ae3adc01b32946e4e873bc53e5642fba7c5c1884c4ec7253a5f69ac2e08db3d7"
+    },
+    {
+      "bytes": 6581242,
+      "path": "global_phi_4_mini_instruct_gpqa/trace_steps.csv",
+      "sha256": "e093ed9f8db9bd9da7f807210a934b4b0ea38ab0d4c9844d43b63c0ec5e77e06"
+    },
+    {
+      "bytes": 7360533,
+      "path": "global_phi_4_mini_instruct_gsm8k/trace_steps.csv",
+      "sha256": "c5d9e8edbd874488d65463055017e1ec2e238f293d007656d802db8f218708e8"
+    },
+    {
+      "bytes": 7138752,
+      "path": "global_phi_4_mini_instruct_math/trace_steps.csv",
+      "sha256": "810275bc35592852215e4a75c8b4303ed04addfad2486e9ca5b0711669fa4a81"
+    },
+    {
+      "bytes": 10469083,
+      "path": "global_qwen2p5_0p5b_arc/trace_steps.csv",
+      "sha256": "80d2dfab471257e14e11eda31e95d3a04abc5581e83856c983971dae48388552"
+    },
+    {
+      "bytes": 4712966,
+      "path": "global_qwen2p5_0p5b_gpqa/trace_steps.csv",
+      "sha256": "5927288407b146b039db66e76987881b668fe857a848fb5f75c7104c925a93ab"
+    },
+    {
+      "bytes": 10217077,
+      "path": "global_qwen2p5_0p5b_gsm8k/trace_steps.csv",
+      "sha256": "63cb5dd6b85a74bdab4d3a1e243db710bfc51ffec84cd305e51ab9846fd002c8"
+    },
+    {
+      "bytes": 5339771,
+      "path": "global_qwen2p5_0p5b_math/trace_steps.csv",
+      "sha256": "655e0805b92e07c21e7c4ad77eb060ffc9863c7db823cf5c664cd7092cb90a20"
+    },
+    {
+      "bytes": 9948721,
+      "path": "global_qwen2p5_14b_arc/trace_steps.csv",
+      "sha256": "cfe9a88778c4a31f1a24fdbd5fb4c7f36e1159a439466895b2c60fdd90934fcb"
+    },
+    {
+      "bytes": 4585738,
+      "path": "global_qwen2p5_14b_gpqa/trace_steps.csv",
+      "sha256": "12d66f46531eab83c34686b3f7a4ec189ab6c0db6b51f3bba09bdf332133d91c"
+    },
+    {
+      "bytes": 10025122,
+      "path": "global_qwen2p5_14b_gsm8k/trace_steps.csv",
+      "sha256": "7f220d2848d2eb57371471cd75c3ea35ba3f28dded262f52fe1ba8cf355c87d9"
+    },
+    {
+      "bytes": 5056791,
+      "path": "global_qwen2p5_14b_math/trace_steps.csv",
+      "sha256": "a65349e870c214c68e6d478d90b6d9f3b2a42405474005e5f6673ca9cb7862ea"
+    },
+    {
+      "bytes": 5132450,
+      "path": "global_qwen2p5_32b_arc/trace_steps.csv",
+      "sha256": "d207716f18fbc3d3d5dac134e4878b6c185c4e409666964fc9615cb33ad1757f"
+    },
+    {
+      "bytes": 4753765,
+      "path": "global_qwen2p5_32b_gpqa/trace_steps.csv",
+      "sha256": "464701337400ed92f9b0d71e3274d7c95fbf8bea6a672b509c37ff68527aa8ec"
+    },
+    {
+      "bytes": 10294294,
+      "path": "global_qwen2p5_32b_gsm8k/trace_steps.csv",
+      "sha256": "59760ea0e8f50d2e63cb4745c2bcd656467c8a0450d1118b7308d2a9a63c147c"
+    },
+    {
+      "bytes": 5247433,
+      "path": "global_qwen2p5_32b_math/trace_steps.csv",
+      "sha256": "6fbd51f84697e95bf26ad7132dd5d5b442609e2b54b1b6173fe8fc9fb1a8ebcd"
+    },
+    {
+      "bytes": 10538547,
+      "path": "global_qwen2p5_3b_arc/trace_steps.csv",
+      "sha256": "9f27f266bb77f1a269e3359ba105448e239e87a08f3487a974ff85200c28b479"
+    },
+    {
+      "bytes": 4915399,
+      "path": "global_qwen2p5_3b_gpqa/trace_steps.csv",
+      "sha256": "815029f74d012862f12fec29db3fa095d5acf01bf7246def6edfee62af97d4e6"
+    },
+    {
+      "bytes": 5297295,
+      "path": "global_qwen2p5_3b_gsm8k/trace_steps.csv",
+      "sha256": "b8277db549a285fe8d710f3c5c06981f22a4ecacb85198453a553a17215dba79"
+    },
+    {
+      "bytes": 5413700,
+      "path": "global_qwen2p5_3b_math/trace_steps.csv",
+      "sha256": "4f47b0f451e6ca8aacc156aea58b983de4b60a620d91dcf342df52f1fcfd1f06"
+    },
+    {
+      "bytes": 9627638,
+      "path": "global_qwen2p5_7b_arc/trace_steps.csv",
+      "sha256": "cc9ed737b6d8fc794e6ad7d72a8fad8d4642e786dbd51e05bbd51150f1f676a7"
+    },
+    {
+      "bytes": 4424463,
+      "path": "global_qwen2p5_7b_gpqa/trace_steps.csv",
+      "sha256": "042615d465ce50f5dfbcfbc1b09e3410e703baa21d5be66cf5addfa444b455f5"
+    },
+    {
+      "bytes": 9762745,
+      "path": "global_qwen2p5_7b_gsm8k/trace_steps.csv",
+      "sha256": "fa450d1ca53282088d5367b6d6bf91eef448d438bfbc3de520db7aaae2f52a08"
+    },
+    {
+      "bytes": 4925466,
+      "path": "global_qwen2p5_7b_math/trace_steps.csv",
+      "sha256": "a4179b549390a75f728a3dabf1789842c0318ccf2e58d341859e20a3c26c7d77"
+    },
+    {
+      "bytes": 6864870,
+      "path": "global_qwen_3p5_9b_arc/trace_steps.csv",
+      "sha256": "a99860c049abeed0c6ddab3a119de57c0d71d833a4f7edfda1df8c5c6a2b69f9"
+    },
+    {
+      "bytes": 5965650,
+      "path": "global_qwen_3p5_9b_gpqa/trace_steps.csv",
+      "sha256": "a29ece270d315fab3ef2ca59dbb12c73b9c030855ce80c40dc62d1f9e8ddfc4c"
+    },
+    {
+      "bytes": 832469,
+      "path": "global_qwen_3p5_9b_gsm8k/trace_steps.csv",
+      "sha256": "bb09caa91a0139c08671edb6b2ed566ac96ee164a4d0f202ebc2bb284766b9d3"
+    },
+    {
+      "bytes": 6568961,
+      "path": "global_qwen_3p5_9b_math/trace_steps.csv",
+      "sha256": "b11d18c7cf4bdf6c2338014623288729f3655602ee881ffc8320776546e1a42e"
+    },
+    {
+      "bytes": 5183397,
+      "path": "global_yi_1p5_9b_chat_arc/trace_steps.csv",
+      "sha256": "57205cf6fa89e3b86cabaa957a30457304f0b98f47bf61cfe1bb20f3268894e8"
+    },
+    {
+      "bytes": 4823879,
+      "path": "global_yi_1p5_9b_chat_gpqa/trace_steps.csv",
+      "sha256": "676653d9a5348aa73e79602b18de5d1c882e162fdda29b29461a608374f187f5"
+    },
+    {
+      "bytes": 5124402,
+      "path": "global_yi_1p5_9b_chat_gsm8k/trace_steps.csv",
+      "sha256": "fce63786dbb386f055c80f9f6321ea9fb69d20042252fe490390311271bbeaea"
+    },
+    {
+      "bytes": 5151156,
+      "path": "global_yi_1p5_9b_chat_math/trace_steps.csv",
+      "sha256": "ba37d3a89fce4fa64997e1205e87514b7a8a0c24d105ad5005c843c0fa0df2c3"
+    }
+  ],
+  "include_all_cells": false,
+  "input_dir": "research/outputs/experiments_v2",
+  "preflight": {
+    "compute_capability": "sm_120",
+    "cuda_available": true,
+    "cuda_runtime": "13.0",
+    "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "nvidia_smi": {
+      "memory_total_mib": 97887.0,
+      "memory_used_mib": 3.0,
+      "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "power_draw_w": 48.49,
+      "power_limit_w": 600.0,
+      "temperature_c": 24.0,
+      "utilization_gpu_percent": 0.0
+    },
+    "torch_arch_list": [
+      "sm_75",
+      "sm_80",
+      "sm_86",
+      "sm_90",
+      "sm_100",
+      "sm_120"
+    ],
+    "torch_version": "2.13.0+cu130",
+    "total_memory_mib": 97250
+  },
+  "protocol": {
+    "outer_folds": 5,
+    "outer_grouping": "task_id",
+    "persistent_homology": true,
+    "precision": "bf16",
+    "step_cost": 0.05,
+    "t_min": 2,
+    "trajectory_key": "source_cell::run_id"
+  },
+  "raw_run_id_cross_cell_collisions": 0,
+  "raw_run_ids": 28888,
+  "rows": 144440,
+  "run_fingerprint": "a91fbab3667b2cacc8b29953457274d2534e02a725aa9b0e188e87e3ffdde367",
+  "selected_cell_count": 52,
+  "sequence_length_distribution": {
+    "5": 28888
+  },
+  "source_qualified_trajectories": 28888,
+  "task_ids": 2948
+}
