@@ -275,9 +275,9 @@
       "memory_total_mib": 97887.0,
       "memory_used_mib": 3.0,
       "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-      "power_draw_w": 48.49,
+      "power_draw_w": 48.04,
       "power_limit_w": 600.0,
-      "temperature_c": 24.0,
+      "temperature_c": 25.0,
       "utilization_gpu_percent": 0.0
     },
     "torch_arch_list": [
@@ -303,7 +303,7 @@
   "raw_run_id_cross_cell_collisions": 0,
   "raw_run_ids": 28888,
   "rows": 144440,
-  "run_fingerprint": "a91fbab3667b2cacc8b29953457274d2534e02a725aa9b0e188e87e3ffdde367",
+  "run_fingerprint": "70c611c6fd774b120eb72af979e8c7ce1ec18bb6a264d0c09e2a6f2d0ccf085b",
   "selected_cell_count": 52,
   "sequence_length_distribution": {
     "5": 28888
