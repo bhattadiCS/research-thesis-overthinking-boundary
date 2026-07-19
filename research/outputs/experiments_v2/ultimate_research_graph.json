@@ -1,0 +1,304 @@
+{
+  "entities": [
+    {
+      "id": "dataset:59551e6e5fc1b1b6",
+      "observations": {
+        "cells": 52,
+        "source_qualified": true,
+        "task_ids": 2948,
+        "trajectories": 28888
+      },
+      "type": "TrajectoryCorpus"
+    },
+    {
+      "id": "model:fold_1",
+      "observations": {
+        "attention_heads": 8,
+        "beta_variance_weight": 0.0,
+        "brier_weight": 0.1439499143743544,
+        "concentration_weight": 0.00011249012419939323,
+        "d_model": 256,
+        "dropout": 0.10195835778938282,
+        "fno_modes": 4,
+        "gate_temperature": 0.8365417671111786,
+        "hazard_weight": 0.3095440622167538,
+        "lr": 0.0011399977587509783,
+        "mine_weight": 0.0,
+        "moe_balance_weight": 0.01149937233717869,
+        "ssm_state": 16,
+        "tcn_blocks": 3,
+        "transformer_layers": 1,
+        "weight_decay": 0.00020852546453967435
+      },
+      "type": "StoppingProbe"
+    },
+    {
+      "id": "model:fold_2",
+      "observations": {
+        "attention_heads": 8,
+        "beta_variance_weight": 0.0,
+        "brier_weight": 0.11993216811453303,
+        "concentration_weight": 0.00011643256524251555,
+        "d_model": 128,
+        "dropout": 0.06399122174375563,
+        "fno_modes": 12,
+        "gate_temperature": 1.1559630647665455,
+        "hazard_weight": 0.3101697933816666,
+        "lr": 0.00139235856902307,
+        "mine_weight": 0.0,
+        "moe_balance_weight": 0.00833449218084682,
+        "ssm_state": 24,
+        "tcn_blocks": 2,
+        "transformer_layers": 3,
+        "weight_decay": 3.826880091272983e-05
+      },
+      "type": "StoppingProbe"
+    },
+    {
+      "id": "model:fold_3",
+      "observations": {
+        "attention_heads": 8,
+        "beta_variance_weight": 0.0,
+        "brier_weight": 0.04093753210927028,
+        "concentration_weight": 0.00020823010743520708,
+        "d_model": 256,
+        "dropout": 0.021927923956997376,
+        "fno_modes": 8,
+        "gate_temperature": 1.3685123291627623,
+        "hazard_weight": 0.21941271625646575,
+        "lr": 0.001481184513386015,
+        "mine_weight": 0.0,
+        "moe_balance_weight": 0.023417939456004823,
+        "ssm_state": 16,
+        "tcn_blocks": 2,
+        "transformer_layers": 2,
+        "weight_decay": 0.0005375735818492235
+      },
+      "type": "StoppingProbe"
+    },
+    {
+      "id": "model:fold_4",
+      "observations": {
+        "attention_heads": 8,
+        "beta_variance_weight": 0.0,
+        "brier_weight": 0.17931728185440854,
+        "concentration_weight": 0.0007834965078654797,
+        "d_model": 256,
+        "dropout": 0.18974179899892205,
+        "fno_modes": 12,
+        "gate_temperature": 1.4294236647215257,
+        "hazard_weight": 0.37238866706740487,
+        "lr": 0.00119549512716598,
+        "mine_weight": 0.0,
+        "moe_balance_weight": 0.0363546181161476,
+        "ssm_state": 24,
+        "tcn_blocks": 2,
+        "transformer_layers": 1,
+        "weight_decay": 3.8441077083370265e-06
+      },
+      "type": "StoppingProbe"
+    },
+    {
+      "id": "model:fold_5",
+      "observations": {
+        "attention_heads": 8,
+        "beta_variance_weight": 0.0,
+        "brier_weight": 0.18152732112103753,
+        "concentration_weight": 0.00013250750966414048,
+        "d_model": 256,
+        "dropout": 0.017631284805613972,
+        "fno_modes": 12,
+        "gate_temperature": 0.7809665194736606,
+        "hazard_weight": 0.4008637079893654,
+        "lr": 0.001032384050248358,
+        "mine_weight": 0.0,
+        "moe_balance_weight": 0.0011549276825285409,
+        "ssm_state": 32,
+        "tcn_blocks": 3,
+        "transformer_layers": 1,
+        "weight_decay": 1.3431878479835124e-05
+      },
+      "type": "StoppingProbe"
+    },
+    {
+      "id": "result:Baseline Linear (task-grouped)",
+      "observations": {
+        "ECE": 0.08329631960311887,
+        "OOF ROC-AUC": 0.8294155789424573,
+        "Step Utility": 0.32437344225976183,
+        "Token Utility": 0.4112740445859873,
+        "Win/Tie/Loss": "21597/6050/1241",
+        "configuration": "Baseline Linear (task-grouped)"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Truncated Beta Mixture",
+      "observations": {
+        "ECE": 0.06706324483204579,
+        "OOF ROC-AUC": 0.8630402755483724,
+        "Step Utility": 0.33111672666851283,
+        "Token Utility": 0.4141805663251177,
+        "Win/Tie/Loss": "22933/4764/1191",
+        "configuration": "Truncated Beta Mixture"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Causal GRU (prefix-safe)",
+      "observations": {
+        "ECE": 0.0624693145350935,
+        "OOF ROC-AUC": 0.8743264229443097,
+        "Step Utility": 0.3264486984214899,
+        "Token Utility": 0.4170733384104126,
+        "Win/Tie/Loss": "21559/6382/947",
+        "configuration": "Causal GRU (prefix-safe)"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Causal Residual TCN",
+      "observations": {
+        "ECE": 0.06629157692539395,
+        "OOF ROC-AUC": 0.8647353247716407,
+        "Step Utility": 0.3315321240653558,
+        "Token Utility": 0.4094527900858488,
+        "Win/Tie/Loss": "24199/3284/1405",
+        "configuration": "Causal Residual TCN"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Selective SSM (ZOH)",
+      "observations": {
+        "ECE": 0.06192753125578444,
+        "OOF ROC-AUC": 0.8663041295514514,
+        "Step Utility": 0.3325533093325948,
+        "Token Utility": 0.4056607518692883,
+        "Win/Tie/Loss": "24256/3111/1521",
+        "configuration": "Selective SSM (ZOH)"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Causal RoPE SDPA Transformer",
+      "observations": {
+        "ECE": 0.06487499197351446,
+        "OOF ROC-AUC": 0.8638368057706193,
+        "Step Utility": 0.3331227499307671,
+        "Token Utility": 0.4135814040432013,
+        "Win/Tie/Loss": "23474/4175/1239",
+        "configuration": "Causal RoPE SDPA Transformer"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Causal Fourier Neural Operator",
+      "observations": {
+        "ECE": 0.06537020249509932,
+        "OOF ROC-AUC": 0.8708488199220289,
+        "Step Utility": 0.32887011908058716,
+        "Token Utility": 0.40975572556078654,
+        "Win/Tie/Loss": "23796/3777/1315",
+        "configuration": "Causal Fourier Neural Operator"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Five-Expert Causal MoE",
+      "observations": {
+        "ECE": 0.06610397186587726,
+        "OOF ROC-AUC": 0.8583428575761042,
+        "Step Utility": 0.33102499307671,
+        "Token Utility": 0.40041910135696485,
+        "Win/Tie/Loss": "24867/2283/1738",
+        "configuration": "Five-Expert Causal MoE"
+      },
+      "type": "OOFResult"
+    },
+    {
+      "id": "result:Five-Expert Causal MoE + Hysteresis",
+      "observations": {
+        "ECE": 0.06610397186587726,
+        "OOF ROC-AUC": 0.8583428575761042,
+        "Step Utility": 0.32172874549986147,
+        "Token Utility": 0.37009835225699256,
+        "Win/Tie/Loss": "22956/4681/1251",
+        "configuration": "Five-Expert Causal MoE + Hysteresis"
+      },
+      "type": "OOFResult"
+    }
+  ],
+  "relations": [
+    {
+      "from": "model:fold_1",
+      "relation": "trained_on",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "model:fold_2",
+      "relation": "trained_on",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "model:fold_3",
+      "relation": "trained_on",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "model:fold_4",
+      "relation": "trained_on",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "model:fold_5",
+      "relation": "trained_on",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Baseline Linear (task-grouped)",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Truncated Beta Mixture",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Causal GRU (prefix-safe)",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Causal Residual TCN",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Selective SSM (ZOH)",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Causal RoPE SDPA Transformer",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Causal Fourier Neural Operator",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Five-Expert Causal MoE",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    },
+    {
+      "from": "result:Five-Expert Causal MoE + Hysteresis",
+      "relation": "evaluates",
+      "to": "dataset:59551e6e5fc1b1b6"
+    }
+  ]
+}

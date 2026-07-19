@@ -1,0 +1,19 @@
+ULTIMATE CAUSAL MULTI-DAY TOURNAMENT VERDICT
+================================================================================================================
+Corpus: 52 cells, 28888 source-qualified trajectories, 2948 task groups.
+Integrity note: historical all-cell raw-run-id scores (including 0.8656) are not directly comparable; this table uses source-qualified trajectories and task-grouped outer folds.
+
+                      configuration OOF ROC-AUC    ECE Step Utility Token Utility    Win/Tie/Loss
+           Causal GRU (prefix-safe)      0.8743 0.0625      +0.3264       +0.4171  21559/6382/947
+     Causal Fourier Neural Operator      0.8708 0.0654      +0.3289       +0.4098 23796/3777/1315
+                Selective SSM (ZOH)      0.8663 0.0619      +0.3326       +0.4057 24256/3111/1521
+                Causal Residual TCN      0.8647 0.0663      +0.3315       +0.4095 24199/3284/1405
+       Causal RoPE SDPA Transformer      0.8638 0.0649      +0.3331       +0.4136 23474/4175/1239
+             Truncated Beta Mixture      0.8630 0.0671      +0.3311       +0.4142 22933/4764/1191
+             Five-Expert Causal MoE      0.8583 0.0661      +0.3310       +0.4004 24867/2283/1738
+Five-Expert Causal MoE + Hysteresis      0.8583 0.0661      +0.3217       +0.3701 22956/4681/1251
+     Baseline Linear (task-grouped)      0.8294 0.0833      +0.3244       +0.4113 21597/6050/1241
+
+Stopping policy: mu=(1-q)*P(repair|currently wrong)-q*P(corruption|currently correct)-0.05; stop when mu<=0.
+Token utility: correctness - 0.0002 * generated reasoning tokens.
+================================================================================================================
