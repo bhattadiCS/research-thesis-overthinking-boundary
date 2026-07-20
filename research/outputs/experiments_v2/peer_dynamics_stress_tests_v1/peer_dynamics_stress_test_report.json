@@ -1,0 +1,88 @@
+{
+  "schema_version": "peer-dynamics-stress-tests-v1",
+  "started_at_unix": 1784553053.095764,
+  "input_dir": "research\\outputs\\experiments_v2",
+  "total_rows": 144440,
+  "total_tasks": 2948,
+  "arm_1_adversarial_noise": {
+    "corrupt_k_0": {
+      "corrupted_peers": 0,
+      "oof_auc": 0.9546638703930357
+    },
+    "corrupt_k_1": {
+      "corrupted_peers": 1,
+      "oof_auc": 0.9534844989515575
+    },
+    "corrupt_k_2": {
+      "corrupted_peers": 2,
+      "oof_auc": 0.9525649928706081
+    },
+    "corrupt_k_3": {
+      "corrupted_peers": 3,
+      "oof_auc": 0.9512602480384261
+    },
+    "corrupt_k_5": {
+      "corrupted_peers": 5,
+      "oof_auc": 0.950621710809657
+    }
+  },
+  "arm_2_lodo_transfer": {
+    "arc": {
+      "test_rows": 42500,
+      "lodo_auc": 0.9688358201477562
+    },
+    "gpqa": {
+      "test_rows": 29120,
+      "lodo_auc": 0.7003052330292147
+    },
+    "gsm8k": {
+      "test_rows": 40320,
+      "lodo_auc": 0.927792574971085
+    },
+    "math": {
+      "test_rows": 32500,
+      "lodo_auc": 0.8688821304509986
+    }
+  },
+  "arm_3_roster_scaling": {
+    "roster_M_2": {
+      "roster_size": 2,
+      "oof_auc": 0.9437163020804302
+    },
+    "roster_M_3": {
+      "roster_size": 3,
+      "oof_auc": 0.9513255259666705
+    },
+    "roster_M_5": {
+      "roster_size": 5,
+      "oof_auc": 0.9495066153598208
+    },
+    "roster_M_7": {
+      "roster_size": 7,
+      "oof_auc": 0.9545218281454181
+    },
+    "roster_M_9": {
+      "roster_size": 9,
+      "oof_auc": 0.9480080658450252
+    },
+    "roster_M_11": {
+      "roster_size": 11,
+      "oof_auc": 0.9532225494784426
+    },
+    "roster_M_13": {
+      "roster_size": 13,
+      "oof_auc": 0.9546638703930357
+    }
+  },
+  "arm_4_permutation_null": {
+    "permuted_null_auc": 0.9472865928873206
+  },
+  "arm_5_early_exit_utility": {
+    "brier_score": 0.07742118505315677,
+    "ece_15": 0.012067134647887778,
+    "stopped_fraction": 0.6623857657158682,
+    "stopped_accuracy": 0.10979879801411027
+  },
+  "completed_at_unix": 1784554098.6228251,
+  "status": "complete"
+}
