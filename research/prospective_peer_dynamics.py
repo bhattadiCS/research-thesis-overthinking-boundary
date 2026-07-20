@@ -72,6 +72,7 @@ ANSWER_SPAN_COLUMNS = (
     "answer_span_mean_logprob",
     "answer_span_min_logprob",
     "answer_span_mean_entropy",
+    "answer_span_std_entropy",
 )
 
 

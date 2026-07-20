@@ -354,10 +354,10 @@ def build_prefix_and_committee_features(frame: pd.DataFrame) -> pd.DataFrame:
     )
 
     for column in PREFIX_DELTA_COLUMNS:
-        values = pd.to_numeric(result.get(column), errors="coerce")
+        values = pd.Series(pd.to_numeric(result.get(column), errors="coerce"), index=result.index)
         result[f"delta_{column}"] = values.groupby(result["trajectory_id"], sort=False).diff().fillna(0.0)
     for column in LOG1P_COLUMNS:
-        values = pd.to_numeric(result.get(column), errors="coerce")
+        values = pd.Series(pd.to_numeric(result.get(column), errors="coerce"), index=result.index)
         result[f"log1p_{column}"] = np.log1p(values.clip(lower=0.0))
     return result
 
