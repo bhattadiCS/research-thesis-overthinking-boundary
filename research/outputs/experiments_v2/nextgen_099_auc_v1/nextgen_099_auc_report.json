@@ -1,0 +1,17 @@
+{
+  "schema_version": "nextgen-099-auc-v1",
+  "timestamp_unix": 1784586855.0759993,
+  "input_dir": "research\\outputs\\experiments_v2",
+  "total_rows": 144440,
+  "total_tasks": 2948,
+  "total_numeric_features": 185,
+  "nextgen_feature_count": 32,
+  "results": {
+    "lightgbm_auc": 0.9542837857097917,
+    "hist_grad_boost_auc": 0.953078656546422,
+    "extra_trees_auc": 0.9466986189480566,
+    "neural_mlp_auc": 0.9384671086560379,
+    "stacked_meta_ensemble_auc": 0.95468664577683,
+    "brier_score": 0.07723784715642366
+  }
+}
