@@ -1,0 +1,19 @@
+{
+  "schema_version": "scientific-verification-v1",
+  "timestamp_unix": 1784590125.435517,
+  "input_dir": "research\\outputs\\experiments_v2",
+  "total_rows": 144440,
+  "total_tasks": 2948,
+  "control_baseline_auc": 0.9428587768340694,
+  "h1_conv1d_bigru_auc": 0.9476880782693476,
+  "hybrid_meta_ensemble_auc": 0.9553778890238235,
+  "hybrid_brier_loss": 0.07635392153080738,
+  "bootstrap_results": {
+    "mean_baseline_auc": 0.9427912371552755,
+    "mean_model_auc": 0.9553230482889955,
+    "mean_delta_auc": 0.012531811133720101,
+    "ci_95_low": 0.010991412203845103,
+    "ci_95_high": 0.013970106117906089,
+    "p_value_delta_greater_zero": 1.0
+  }
+}
