@@ -1,0 +1,20 @@
+{
+  "schema_version": "iteration-suite-v1",
+  "started_at_unix": 1784588794.1653864,
+  "input_dir": "research\\outputs\\experiments_v2",
+  "total_rows": 144440,
+  "total_tasks": 2948,
+  "hybrid_feature_dim": 186,
+  "pytorch_probe_oof_auc": 0.9462141242361412,
+  "hybrid_meta_ensemble_oof_auc": 0.9554243460526066,
+  "hybrid_brier_loss": 0.0766736206845349,
+  "leakage_audit": {
+    "no_target_label_in_features": true,
+    "no_model_alias_in_features": true,
+    "no_wall_clock_in_features": true,
+    "task_group_held_out_folds": true,
+    "valid_probabilities": true,
+    "finite_auc": true
+  },
+  "status": "complete"
+}
