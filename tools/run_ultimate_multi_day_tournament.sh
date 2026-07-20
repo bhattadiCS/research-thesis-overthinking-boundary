@@ -24,16 +24,25 @@ if [[ -z "${PYTHON_BIN:-}" ]]; then
     fi
 fi
 INPUT_DIR="${INPUT_DIR:-research/outputs/experiments_v2}"
-OUTPUT_DIR="${OUTPUT_DIR:-research/outputs/experiments_v2}"
+# Every production launch gets an isolated artifact namespace.  To resume, pass
+# the printed OUTPUT_DIR (or the same RUN_ID) explicitly; do not point a new run
+# at the historical shared experiments_v2 directory.
+RUN_ID="${RUN_ID:-ultimate_$(date -u +%Y%m%dT%H%M%SZ)}"
+OUTPUT_DIR="${OUTPUT_DIR:-${INPUT_DIR}/ultimate_runs/${RUN_ID}}"
+AUDIT_OUTPUT_DIR="${AUDIT_OUTPUT_DIR:-${OUTPUT_DIR}/preflight}"
 TRIALS_PER_FOLD="${TRIALS_PER_FOLD:-500}"
 EPOCHS="${EPOCHS:-60}"
 BATCH_SIZE="${BATCH_SIZE:-4096}"
 MAX_BATCH_SIZE="${MAX_BATCH_SIZE:-8192}"
 MAX_HOURS="${MAX_HOURS:-71.5}"
 SYNC_SECONDS="${SYNC_SECONDS:-900}"
-NUM_WORKERS="${NUM_WORKERS:-0}"
+# The dedicated Blackwell VM has the RAM/CPU budget for an asynchronous pinned
+# input pipeline.  A caller running in a constrained container can still set
+# NUM_WORKERS=0 explicitly; the production launcher should not silently starve
+# the GPU by default.
+NUM_WORKERS="${NUM_WORKERS:-8}"
 TUNE_NUM_WORKERS="${TUNE_NUM_WORKERS:-0}"
-RUN_LOG="${RUN_LOG:-run_ultimate_multi_day_tournament.log}"
+RUN_LOG="${RUN_LOG:-${OUTPUT_DIR}/run_ultimate_multi_day_tournament.log}"
 SMOKE_OUTPUT_DIR="${OUTPUT_DIR}/ultimate_smoke"
 RUN_PID=""
 SYNC_PID=""
@@ -71,9 +80,13 @@ sync_git() {
         artifacts+=("${OUTPUT_DIR}"/ultimate_tournament_manifest.json)
         artifacts+=("${OUTPUT_DIR}"/ultimate_tournament_status.json)
         artifacts+=("${OUTPUT_DIR}"/ultimate_fold_*_summary.json)
+        artifacts+=("${OUTPUT_DIR}"/ultimate_tournament_runtime.log)
+        artifacts+=("${RUN_LOG}")
+        artifacts+=("${AUDIT_OUTPUT_DIR}"/ultimate_vram_audit.json)
         if [[ "${phase}" == "final" ]]; then
             artifacts+=("${OUTPUT_DIR}"/ultimate_tournament_results.log)
             artifacts+=("${OUTPUT_DIR}"/ultimate_tournament_results.csv)
+            artifacts+=("${OUTPUT_DIR}"/ultimate_tournament_results_manifest.json)
             artifacts+=("${OUTPUT_DIR}"/ultimate_oof_predictions.npz)
             artifacts+=("${OUTPUT_DIR}"/ultimate_research_graph.json)
         fi
@@ -85,10 +98,12 @@ sync_git() {
             echo "[WARN] Git staging skipped for ${phase} artifacts." >&2
             exit 0
         }
-        if git diff --cached --quiet; then
+        if git diff --cached --quiet -- "${artifacts[@]}"; then
             exit 0
         fi
-        git commit -m "results: ultimate tournament ${phase} sync" || {
+        # ``--only`` prevents unrelated user-staged work from being included in a
+        # background results commit.
+        git commit --only -m "results: ultimate tournament ${phase} sync" -- "${artifacts[@]}" || {
             echo "[WARN] Git commit failed; local artifacts are retained." >&2
             exit 0
         }
@@ -113,7 +128,10 @@ echo "==============================================================="
 echo "[INFO] Python: ${PYTHON_BIN}"
 echo "[INFO] Input: ${INPUT_DIR}"
 echo "[INFO] Output: ${OUTPUT_DIR}"
+echo "[INFO] Run ID: ${RUN_ID}"
+echo "[INFO] Resume with: OUTPUT_DIR=${OUTPUT_DIR} bash tools/run_ultimate_multi_day_tournament.sh"
 echo "[INFO] No git pull is performed here; synchronize before launch."
+mkdir -p "${OUTPUT_DIR}"
 
 "${PYTHON_BIN}" - <<'PY'
 import importlib.util
@@ -142,16 +160,23 @@ fi
 echo "[INFO] Running real-model VRAM / power / BF16 throughput audit..."
 "${PYTHON_BIN}" research/run_ultimate_multi_day_tournament.py \
     --input-dir "${INPUT_DIR}" \
-    --output-dir "${OUTPUT_DIR}" \
+    --output-dir "${AUDIT_OUTPUT_DIR}" \
     --vram-audit --audit-only \
     --batch-size "${BATCH_SIZE}" --max-batch-size "${MAX_BATCH_SIZE}" \
     --require-blackwell
 
-echo "[INFO] Running a two-cell, one-epoch causal smoke test..."
-"${PYTHON_BIN}" research/run_ultimate_multi_day_tournament.py \
-    --input-dir "${INPUT_DIR}" \
-    --output-dir "${SMOKE_OUTPUT_DIR}" \
-    --smoke-test --no-resume --no-compile --no-require-blackwell
+if [[ -f "${OUTPUT_DIR}/ultimate_tournament_manifest.json" || -f "${SMOKE_OUTPUT_DIR}/ultimate_tournament_manifest.json" ]]; then
+    # A smoke run is deliberately immutable (`--no-resume`).  Re-running it
+    # against the same namespace makes an otherwise valid production resume
+    # fail before the resumable tournament process is launched.
+    echo "[INFO] Existing tournament or smoke manifest found; skipping immutable smoke test for resume."
+else
+    echo "[INFO] Running a two-cell, one-epoch causal smoke test..."
+    "${PYTHON_BIN}" research/run_ultimate_multi_day_tournament.py \
+        --input-dir "${INPUT_DIR}" \
+        --output-dir "${SMOKE_OUTPUT_DIR}" \
+        --smoke-test --no-resume --no-compile --no-require-blackwell
+fi
 
 echo "[INFO] Starting resumable 72-hour tournament; log: ${RUN_LOG}"
 "${PYTHON_BIN}" -u research/run_ultimate_multi_day_tournament.py \
@@ -182,6 +207,7 @@ wait "${SYNC_PID}" 2>/dev/null || true
 SYNC_PID=""
 
 if [[ "${RUN_STATUS}" -ne 0 ]]; then
+    sync_git checkpoint || true
     echo "[ERROR] Tournament exited with status ${RUN_STATUS}. Check ${RUN_LOG}; checkpoints were retained." >&2
     tail -n 120 "${RUN_LOG}" || true
     exit "${RUN_STATUS}"

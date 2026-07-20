@@ -1,0 +1,155 @@
+{
+  "analysis_script_sha256": "b9fc358a46da4bc086b3e98400cbb5b5d4f5e6db8cdb37b954104363ab8d3bdf",
+  "arms": {
+    "anonymous_minimal": {
+      "categorical_features": [],
+      "numeric_feature_count": 153,
+      "oof_auc": 0.9546638703930357,
+      "peer_dynamics_features": 110,
+      "per_domain_auc": {
+        "arc": 0.9787454650717272,
+        "gpqa": 0.7140385927549678,
+        "gsm8k": 0.9754944416155564,
+        "math": 0.928578649954029
+      }
+    },
+    "anonymous_minimal_baseline": {
+      "categorical_features": [],
+      "numeric_feature_count": 43,
+      "oof_auc": 0.9453355857281374,
+      "peer_dynamics_features": 0,
+      "per_domain_auc": {
+        "arc": 0.9736818722087481,
+        "gpqa": 0.703601471079552,
+        "gsm8k": 0.9641456741333182,
+        "math": 0.915879850356579
+      }
+    },
+    "roster_no_timing": {
+      "categorical_features": [
+        "model_alias"
+      ],
+      "numeric_feature_count": 160,
+      "oof_auc": 0.9562361953046122,
+      "peer_dynamics_features": 110,
+      "per_domain_auc": {
+        "arc": 0.9790806761372508,
+        "gpqa": 0.716266500689242,
+        "gsm8k": 0.9771561403500078,
+        "math": 0.9335605238743652
+      }
+    },
+    "roster_no_timing_baseline": {
+      "categorical_features": [
+        "model_alias"
+      ],
+      "numeric_feature_count": 50,
+      "oof_auc": 0.9473052847025384,
+      "peer_dynamics_features": 0,
+      "per_domain_auc": {
+        "arc": 0.9742454984902922,
+        "gpqa": 0.7042692894108543,
+        "gsm8k": 0.9667738315211585,
+        "math": 0.9219798003363098
+      }
+    }
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20260725,
+    "unit": "task_id"
+  },
+  "contracts": [
+    "anonymous_minimal",
+    "anonymous_minimal_baseline",
+    "roster_no_timing",
+    "roster_no_timing_baseline"
+  ],
+  "interpretation": "Matched task-held-out retrospective feature ablation; not a synchronized deployment claim.",
+  "pair_names": [
+    "anonymous",
+    "roster"
+  ],
+  "paired_deltas": {
+    "anonymous_minimal_minus_anonymous_minimal_baseline": {
+      "bootstrap_probability_delta_gt_zero": 1.0,
+      "observed_delta_auc": 0.009328284664898323,
+      "task_cluster_bootstrap_delta_auc_95_ci": [
+        0.008027515453664837,
+        0.01063899083996089
+      ]
+    },
+    "roster_no_timing_minus_roster_no_timing_baseline": {
+      "bootstrap_probability_delta_gt_zero": 1.0,
+      "observed_delta_auc": 0.00893091060207385,
+      "task_cluster_bootstrap_delta_auc_95_ci": [
+        0.007669566310782738,
+        0.010169066064329199
+      ]
+    }
+  },
+  "preflight": {
+    "comparison_key": [
+      "task_id",
+      "trajectory_id",
+      "model_alias",
+      "domain",
+      "step"
+    ],
+    "identical_labels_and_folds": true,
+    "identical_shared_manifest_fields": [
+      "schema_version",
+      "script_sha256",
+      "peer_feature_script_sha256",
+      "base_script_sha256",
+      "input_dir",
+      "files",
+      "rows",
+      "task_groups",
+      "trajectories",
+      "n_splits",
+      "seed",
+      "lightgbm",
+      "fixed_panel_filter",
+      "peer_profile"
+    ],
+    "optional_manifest_field_status": {
+      "fixed_panel_filter": "uniformly_absent_legacy",
+      "peer_profile": "uniformly_absent_legacy"
+    }
+  },
+  "provenance": {
+    "anonymous_minimal": {
+      "manifest_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\anonymous_minimal\\peer_dynamics_manifest.json",
+      "manifest_sha256": "58f983d059fa5ec781400bab8eee87e470c214c7a8e4daebbdf36ae9f8ae3531",
+      "prediction_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\anonymous_minimal\\peer_dynamics_predictions.csv",
+      "prediction_sha256": "981f9ba974fff1df6ad2fe7e134749f506e15fe2d87772f9fee888aeed89c5d4",
+      "shared_manifest_sha256": "f756984249f93aac1dc3b9c70813199ddd2524528430dad2584a3d49e28a2b12"
+    },
+    "anonymous_minimal_baseline": {
+      "manifest_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\anonymous_minimal_baseline\\peer_dynamics_manifest.json",
+      "manifest_sha256": "fb3a12c9120fb2ad141dc0d1e7d91da17619f704b54c38b056b55358f93dc3fd",
+      "prediction_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\anonymous_minimal_baseline\\peer_dynamics_predictions.csv",
+      "prediction_sha256": "130443c5d4e61f1acc5075c128af2fc422cf35dab8ef0dd77ab0b1b231030338",
+      "shared_manifest_sha256": "f756984249f93aac1dc3b9c70813199ddd2524528430dad2584a3d49e28a2b12"
+    },
+    "roster_no_timing": {
+      "manifest_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\roster_no_timing\\peer_dynamics_manifest.json",
+      "manifest_sha256": "c1c42b4e1b988c8a478ddca2ba06a2c2a5ee6b29575673cb2339708b5544e836",
+      "prediction_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\roster_no_timing\\peer_dynamics_predictions.csv",
+      "prediction_sha256": "f9378760f5c23238e62f90a8666f92b5b961087c4ddd75902253b4231dd2f1b8",
+      "shared_manifest_sha256": "f756984249f93aac1dc3b9c70813199ddd2524528430dad2584a3d49e28a2b12"
+    },
+    "roster_no_timing_baseline": {
+      "manifest_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\roster_no_timing_baseline\\peer_dynamics_manifest.json",
+      "manifest_sha256": "a7d33635bbf0cbd7087e3e4c01cde90d7855966584c4885a3016be8edc6713f6",
+      "prediction_path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\roster_no_timing_baseline\\peer_dynamics_predictions.csv",
+      "prediction_sha256": "89f6b70f85e57c7f2acf2a2973294c03bb70ba7766497eba88e188a46bc3f2ee",
+      "shared_manifest_sha256": "f756984249f93aac1dc3b9c70813199ddd2524528430dad2584a3d49e28a2b12"
+    }
+  },
+  "root": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3",
+  "rows": 144440,
+  "schema_version": "committee-peer-dynamics-ablation-v1",
+  "task_groups": 2948
+}

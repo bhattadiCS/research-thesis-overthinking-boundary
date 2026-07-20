@@ -1,0 +1,144 @@
+{
+  "categorical_features": [],
+  "cross_fold_platt_brier": 0.08720843505076795,
+  "cross_fold_platt_ece_15": 0.035159048850981575,
+  "eligible_step_gte_2_auc": 0.9477817731398249,
+  "fold_auc": [
+    0.9443307361926544,
+    0.9434559556599366,
+    0.9469400238654915,
+    0.9452620880836895,
+    0.9472271081112426
+  ],
+  "fold_auc_mean": 0.9454431823826029,
+  "fold_auc_std": 0.0016311289915352852,
+  "name": "anonymous_minimal_baseline",
+  "numeric_features": [
+    "step",
+    "confidence",
+    "model_stop_flag",
+    "answer_changed",
+    "thought_token_count",
+    "raw_generation_tokens",
+    "mean_token_logprob",
+    "entropy_mean",
+    "entropy_std",
+    "lexical_echo",
+    "verbose_confidence_proxy",
+    "parse_success",
+    "hit_max_new_tokens",
+    "truncated_output_suspected",
+    "answer_span_mean_logprob",
+    "answer_span_min_logprob",
+    "answer_span_mean_entropy",
+    "answer_span_std_entropy",
+    "raw_text_length_chars",
+    "raw_text_length_tokens",
+    "answer_nonempty",
+    "answer_char_len",
+    "same_prev_answer",
+    "n_answer_changes_prefix",
+    "delta_confidence",
+    "delta_mean_token_logprob",
+    "delta_entropy_mean",
+    "delta_entropy_std",
+    "delta_answer_span_mean_logprob",
+    "delta_answer_span_min_logprob",
+    "delta_answer_span_mean_entropy",
+    "delta_answer_span_std_entropy",
+    "log1p_thought_token_count",
+    "log1p_raw_generation_tokens",
+    "log1p_raw_text_length_chars",
+    "log1p_raw_text_length_tokens",
+    "log1p_answer_char_len",
+    "committee_panel_nonempty",
+    "independent_vote_count",
+    "independent_peer_count",
+    "independent_vote_fraction",
+    "committee_has_independent_match",
+    "committee_nonempty_fraction"
+  ],
+  "oof_auc": 0.9453355857281374,
+  "per_domain": {
+    "arc": {
+      "auc": 0.9736818722087481,
+      "rows": 42500
+    },
+    "gpqa": {
+      "auc": 0.703601471079552,
+      "rows": 29120
+    },
+    "gsm8k": {
+      "auc": 0.9641456741333182,
+      "rows": 40320
+    },
+    "math": {
+      "auc": 0.915879850356579,
+      "rows": 32500
+    }
+  },
+  "per_model_alias": {
+    "deepseek_r1_distill_1p5b": {
+      "auc": 0.9176528066528067,
+      "rows": 9740
+    },
+    "deepseek_r1_distill_7b": {
+      "auc": 0.9309637026093851,
+      "rows": 9740
+    },
+    "llama_3p1_8b_instruct": {
+      "auc": 0.9387606366779587,
+      "rows": 9740
+    },
+    "mistral_7b_instruct_v0p3": {
+      "auc": 0.9553289432678529,
+      "rows": 9740
+    },
+    "mistral_small_24b_2409": {
+      "auc": 0.9496118437862344,
+      "rows": 9740
+    },
+    "phi_4_mini_instruct": {
+      "auc": 0.9172880893091753,
+      "rows": 9740
+    },
+    "qwen2p5_0p5b": {
+      "auc": 0.9582925705505838,
+      "rows": 14740
+    },
+    "qwen2p5_14b": {
+      "auc": 0.9250579146242255,
+      "rows": 14740
+    },
+    "qwen2p5_32b": {
+      "auc": 0.9194627078382768,
+      "rows": 12240
+    },
+    "qwen2p5_3b": {
+      "auc": 0.9407351004792988,
+      "rows": 12240
+    },
+    "qwen2p5_7b": {
+      "auc": 0.9457489242421255,
+      "rows": 14740
+    },
+    "qwen_3p5_9b": {
+      "auc": 0.9268260624824093,
+      "rows": 7560
+    },
+    "yi_1p5_9b_chat": {
+      "auc": 0.9544295077447245,
+      "rows": 9740
+    }
+  },
+  "raw_brier": 0.08536994128069561,
+  "raw_ece_15": 0.006626700649168616,
+  "rows": 144440,
+  "task_cluster_bootstrap_auc_95_ci": [
+    0.9406262104552208,
+    0.9496129816875203
+  ],
+  "task_groups": 2948,
+  "task_macro_auc": 0.8639814415906526,
+  "tasks_with_both_classes_for_macro_auc": 2679
+}

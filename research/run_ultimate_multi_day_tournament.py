@@ -74,6 +74,7 @@ except ImportError:  # pragma: no cover - exercised only on minimally provisione
 
 LOG = logging.getLogger("ultimate_tournament")
 
+RUNNER_SCHEMA_VERSION = "ultimate-tournament-v2-strict-k2"
 T_MIN = 2
 STEP_COST = 0.05
 AVG_TOKENS_PER_STEP = 250.0
@@ -97,8 +98,6 @@ BASE_NUMERIC_COLUMNS = [
     "verbose_confidence_proxy",
     "elapsed_seconds",
     "tokens_per_second",
-    "k2_agreement",
-    "k2_raw_generation_tokens",
     "answer_span_mean_logprob",
     "answer_span_min_logprob",
     "answer_span_mean_entropy",
@@ -119,8 +118,10 @@ class SequenceStore:
     row_ids: np.ndarray  # [runs, time], dataframe row IDs, -1 when padded
     steps: np.ndarray  # [runs, time]
     thought_tokens: np.ndarray  # [runs, time]
+    generation_tokens: np.ndarray  # [runs, time], primary generated-token accounting
     k2_tokens: np.ndarray  # [runs, time]
-    k2_agreement: np.ndarray  # [runs, time]
+    k2_agreement: np.ndarray  # [runs, time], valid only where k2_available=1
+    k2_available: np.ndarray  # [runs, time], K2 is a separately invoked generation
     trajectory_ids: np.ndarray  # [runs], object
     task_ids: np.ndarray  # [runs], object
     source_cells: np.ndarray  # [runs], object
@@ -231,24 +232,52 @@ class TelemetryDB:
         self.conn.close()
 
 
-def configure_logging(output_dir: Path) -> None:
-    output_dir.mkdir(parents=True, exist_ok=True)
+def configure_logging(output_dir: Path, *, file_log: bool = True) -> None:
+    if file_log:
+        output_dir.mkdir(parents=True, exist_ok=True)
     LOG.setLevel(logging.INFO)
     LOG.handlers.clear()
     formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
     console = logging.StreamHandler(sys.stdout)
     console.setFormatter(formatter)
-    file_handler = logging.FileHandler(output_dir / "ultimate_tournament_runtime.log", encoding="utf-8")
-    file_handler.setFormatter(formatter)
     LOG.addHandler(console)
-    LOG.addHandler(file_handler)
+    if file_log:
+        file_handler = logging.FileHandler(output_dir / "ultimate_tournament_runtime.log", encoding="utf-8")
+        file_handler.setFormatter(formatter)
+        LOG.addHandler(file_handler)
 
 
 def sha256_file(path: Path) -> str:
+    """Return the raw on-disk SHA-256 for tamper-evident local provenance."""
+
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
+    return digest.hexdigest()
+
+
+def canonical_lf_sha256_file(path: Path) -> str:
+    """Hash text bytes after CRLF/LF normalization for portable resume identity.
+
+    Git can check CSVs out with CRLF on Windows and LF on Linux.  Raw-byte hashes
+    then identify the same parsed corpus as different, so the run fingerprint must
+    use this canonical digest while retaining ``sha256_file`` for local audit.
+    """
+
+    digest = hashlib.sha256()
+    trailing_cr = b""
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            block = trailing_cr + block
+            if block.endswith(b"\r"):
+                trailing_cr = b"\r"
+                block = block[:-1]
+            else:
+                trailing_cr = b""
+            digest.update(block.replace(b"\r\n", b"\n").replace(b"\r", b"\n"))
+    if trailing_cr:
+        digest.update(b"\n")
     return digest.hexdigest()
 
 
@@ -261,6 +290,13 @@ def atomic_json_dump(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(value, indent=2, sort_keys=True, default=str), encoding="utf-8")
+    os.replace(temporary, path)
+
+
+def atomic_write_text(path: Path, value: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(value, encoding="utf-8")
     os.replace(temporary, path)
 
 
@@ -602,7 +638,18 @@ def load_trace_frame(args: argparse.Namespace) -> tuple[pd.DataFrame, dict[str, 
         cell["source_cell"] = source_cell
         cell["source_path"] = relative
         frames.append(cell)
-        files.append({"path": relative, "bytes": path.stat().st_size, "sha256": sha256_file(path)})
+        raw_hash = sha256_file(path)
+        files.append(
+            {
+                "path": relative,
+                "bytes": path.stat().st_size,
+                # ``sha256`` is retained for older audit readers; it is raw and
+                # platform-specific.  Resume identity uses canonical LF hashes.
+                "sha256": raw_hash,
+                "raw_sha256": raw_hash,
+                "canonical_lf_sha256": canonical_lf_sha256_file(path),
+            }
+        )
     frame = pd.concat(frames, ignore_index=True, sort=False)
     required = {"run_id", "task_id", "step", "correct", "source_cell"}
     missing = sorted(required - set(frame.columns))
@@ -646,7 +693,13 @@ def load_trace_frame(args: argparse.Namespace) -> tuple[pd.DataFrame, dict[str, 
             for length, count in frame.groupby("trajectory_id", sort=False).size().value_counts().sort_index().items()
         },
     }
-    manifest["dataset_fingerprint"] = stable_json_hash(manifest["files"])
+    canonical_files = [
+        {"path": item["path"], "canonical_lf_sha256": item["canonical_lf_sha256"]}
+        for item in manifest["files"]
+    ]
+    raw_files = [{"path": item["path"], "raw_sha256": item["raw_sha256"]} for item in manifest["files"]]
+    manifest["dataset_fingerprint"] = stable_json_hash(canonical_files)
+    manifest["raw_dataset_fingerprint"] = stable_json_hash(raw_files)
     LOG.info(
         "Loaded %d cells, %d source-qualified trajectories, %d rows, %d task groups (raw-ID collisions=%d).",
         manifest["selected_cell_count"],
@@ -672,14 +725,21 @@ def build_sequence_store(frame: pd.DataFrame, features: pd.DataFrame) -> Sequenc
     row_ids = np.full((run_count, max_len), -1, dtype=np.int64)
     steps = np.zeros((run_count, max_len), dtype=np.int64)
     thought_tokens = np.zeros((run_count, max_len), dtype=np.float32)
+    generation_tokens = np.zeros((run_count, max_len), dtype=np.float32)
     k2_tokens = np.zeros((run_count, max_len), dtype=np.float32)
     k2_agreement = np.zeros((run_count, max_len), dtype=np.int64)
+    k2_available = np.zeros((run_count, max_len), dtype=np.int64)
     trajectory_ids: list[str] = []
     task_ids: list[str] = []
     source_cells: list[str] = []
     raw_thought, _ = safe_float_series(frame, "thought_token_count")
+    raw_generation, _ = safe_float_series(frame, "raw_generation_tokens")
     raw_k2, _ = safe_float_series(frame, "k2_raw_generation_tokens")
-    raw_agreement, _ = safe_float_series(frame, "k2_agreement")
+    if "k2_agreement" in frame.columns:
+        raw_agreement = pd.to_numeric(frame["k2_agreement"], errors="coerce").to_numpy(dtype=np.float64)
+    else:
+        raw_agreement = np.full(len(frame), np.nan, dtype=np.float64)
+    valid_k2_agreement = np.isfinite(raw_agreement) & np.isin(raw_agreement, [0.0, 1.0])
     for run_index, (trajectory_id, group) in enumerate(groups):
         indices = group.index.to_numpy(dtype=np.int64)
         length = len(indices)
@@ -693,8 +753,10 @@ def build_sequence_store(frame: pd.DataFrame, features: pd.DataFrame) -> Sequenc
         row_ids[run_index, :length] = group["row_id"].to_numpy(dtype=np.int64)
         steps[run_index, :length] = group["step"].to_numpy(dtype=np.int64)
         thought_tokens[run_index, :length] = raw_thought[indices]
+        generation_tokens[run_index, :length] = raw_generation[indices]
         k2_tokens[run_index, :length] = raw_k2[indices]
-        k2_agreement[run_index, :length] = raw_agreement[indices].astype(np.int64)
+        k2_agreement[run_index, :length] = np.where(valid_k2_agreement[indices], raw_agreement[indices], 0).astype(np.int64)
+        k2_available[run_index, :length] = valid_k2_agreement[indices].astype(np.int64)
         trajectory_ids.append(str(trajectory_id))
         task_ids.append(str(group["task_id"].iloc[0]))
         source_cells.append(str(group["source_cell"].iloc[0]))
@@ -706,8 +768,10 @@ def build_sequence_store(frame: pd.DataFrame, features: pd.DataFrame) -> Sequenc
         row_ids=row_ids,
         steps=steps,
         thought_tokens=thought_tokens,
+        generation_tokens=generation_tokens,
         k2_tokens=k2_tokens,
         k2_agreement=k2_agreement,
+        k2_available=k2_available,
         trajectory_ids=np.asarray(trajectory_ids, dtype=object),
         task_ids=np.asarray(task_ids, dtype=object),
         source_cells=np.asarray(source_cells, dtype=object),
@@ -1293,7 +1357,23 @@ class LossWeights:
     corruption: float
 
 
-def derive_loss_weights(y: np.ndarray, next_y: np.ndarray, lengths: np.ndarray) -> LossWeights:
+def derive_loss_weights(
+    y: np.ndarray,
+    next_y: np.ndarray,
+    lengths: np.ndarray,
+    *,
+    class_balanced: bool = False,
+) -> LossWeights:
+    """Return proper-loss weights unless an explicit ranking-only ablation opts in.
+
+    Class weighting shifts a fitted logit's posterior intercept.  That can be
+    useful for a ranking ablation, but it is incompatible with presenting q and
+    transition hazards as calibrated probabilities unless the shift is explicitly
+    corrected.  The deployed default is therefore unweighted proper log loss.
+    """
+
+    if not class_balanced:
+        return LossWeights(correctness=1.0, repair=1.0, corruption=1.0)
     mask = np.arange(y.shape[1])[None, :] < lengths[:, None]
     has_next = np.arange(y.shape[1])[None, :] < (lengths[:, None] - 1)
     repair_mask = mask & has_next & (y == 0)
@@ -1351,7 +1431,9 @@ def tournament_loss(
     concentration_prior = ((beta_log_concentration - math.log(8.0)).square() * mask.float()).sum()
     concentration_prior = concentration_prior / mask.float().sum().clamp_min(1.0)
     variance_penalty = (beta_variance * mask.float()).sum() / mask.float().sum().clamp_min(1.0)
-    mine_bound = mine_lower_bound(model.mine_critic, representation, y, mask)
+    # MINE is materially expensive and creates an auxiliary autograd graph.  Do
+    # not compute it merely to multiply by zero in the default configuration.
+    mine_bound = mine_lower_bound(model.mine_critic, representation, y, mask) if config.mine_weight != 0.0 else q_logit.new_zeros(())
     total = (
         correctness
         + config.brier_weight * brier
@@ -1552,7 +1634,9 @@ def train_probe(
     use_scaler = device.type == "cuda" and args.precision == "fp16"
     # BF16's exponent range makes scaling unnecessary; FP16 uses the requested scaler.
     scaler = torch.amp.GradScaler("cuda", enabled=use_scaler)
-    weights = derive_loss_weights(train_y, train_next_y, train_lengths)
+    weights = derive_loss_weights(
+        train_y, train_next_y, train_lengths, class_balanced=args.class_balanced_loss
+    )
     loader = make_train_loader(
         train_x,
         train_y,
@@ -1651,37 +1735,47 @@ def train_probe(
 
 
 @dataclass
-class TemperatureScaler:
-    temperature: float = 1.0
+class PlattScaler:
+    """Fold-local sigmoid calibration with both slope and intercept."""
 
-    def fit(self, logits: np.ndarray, targets: np.ndarray) -> "TemperatureScaler":
+    slope: float = 1.0
+    intercept: float = 0.0
+
+    def fit(self, logits: np.ndarray, targets: np.ndarray) -> "PlattScaler":
         logits = np.asarray(logits, dtype=np.float32)
         targets = np.asarray(targets, dtype=np.float32)
         finite = np.isfinite(logits) & np.isfinite(targets)
         if finite.sum() < 8 or np.unique(targets[finite]).size < 2:
-            self.temperature = 1.0
+            prior = float(targets[finite].mean()) if finite.any() else 0.5
+            prior = float(np.clip(prior, 1.0e-5, 1.0 - 1.0e-5))
+            self.slope = 0.0
+            self.intercept = math.log(prior / (1.0 - prior))
             return self
         raw_logits = torch.tensor(logits[finite], dtype=torch.float32)
         raw_targets = torch.tensor(targets[finite], dtype=torch.float32)
-        log_temperature = torch.zeros((), dtype=torch.float32, requires_grad=True)
-        optimizer = torch.optim.LBFGS([log_temperature], lr=0.25, max_iter=50, line_search_fn="strong_wolfe")
+        slope = torch.ones((), dtype=torch.float32, requires_grad=True)
+        intercept = torch.zeros((), dtype=torch.float32, requires_grad=True)
+        optimizer = torch.optim.LBFGS([slope, intercept], lr=0.25, max_iter=75, line_search_fn="strong_wolfe")
 
         def closure() -> torch.Tensor:
             optimizer.zero_grad()
-            temperature = torch.exp(log_temperature).clamp(0.05, 10.0)
-            loss = F.binary_cross_entropy_with_logits(raw_logits / temperature, raw_targets)
+            calibrated_logits = slope.clamp(-10.0, 10.0) * raw_logits + intercept.clamp(-20.0, 20.0)
+            loss = F.binary_cross_entropy_with_logits(calibrated_logits, raw_targets)
             loss.backward()
             return loss
 
         try:
             optimizer.step(closure)
-            self.temperature = float(torch.exp(log_temperature).detach().clamp(0.05, 10.0))
+            self.slope = float(slope.detach().clamp(-10.0, 10.0))
+            self.intercept = float(intercept.detach().clamp(-20.0, 20.0))
         except RuntimeError:
-            self.temperature = 1.0
+            self.slope = 1.0
+            self.intercept = 0.0
         return self
 
     def transform(self, logits: np.ndarray) -> np.ndarray:
-        return 1.0 / (1.0 + np.exp(-np.clip(np.asarray(logits, dtype=np.float64) / self.temperature, -30.0, 30.0)))
+        calibrated_logits = self.slope * np.asarray(logits, dtype=np.float64) + self.intercept
+        return 1.0 / (1.0 + np.exp(-np.clip(calibrated_logits, -30.0, 30.0)))
 
 
 class ConstantLogitModel:
@@ -1699,7 +1793,7 @@ def fit_logit_model(x: np.ndarray, targets: np.ndarray) -> LogisticRegression | 
         return ConstantLogitModel(0.5)
     if np.unique(targets).size < 2:
         return ConstantLogitModel(float(targets.mean()))
-    model = LogisticRegression(max_iter=1500, class_weight="balanced", solver="lbfgs")
+    model = LogisticRegression(max_iter=1500, solver="lbfgs")
     model.fit(x, targets)
     return model
 
@@ -1757,11 +1851,11 @@ def classical_baseline_predictions(
     cal_mask, cal_has_next = mask_for(calibration_indices)
     cal_y = store.y[calibration_indices]
     cal_next = store.next_y[calibration_indices]
-    q_temperature = TemperatureScaler().fit(calibration_logits[0][cal_mask], cal_y[cal_mask])
+    q_temperature = PlattScaler().fit(calibration_logits[0][cal_mask], cal_y[cal_mask])
     repair_condition = cal_mask & cal_has_next & (cal_y == 0)
     corruption_condition = cal_mask & cal_has_next & (cal_y == 1)
-    repair_temperature = TemperatureScaler().fit(calibration_logits[1][repair_condition], cal_next[repair_condition])
-    corruption_temperature = TemperatureScaler().fit(
+    repair_temperature = PlattScaler().fit(calibration_logits[1][repair_condition], cal_next[repair_condition])
+    corruption_temperature = PlattScaler().fit(
         calibration_logits[2][corruption_condition], (1 - cal_next[corruption_condition])
     )
     test_logits = predict(test_indices)
@@ -2024,7 +2118,11 @@ def evaluate_stopping_policy(
             q_t = float(q[local_index, position])
             repair_t = float(repair[local_index, position])
             corruption_t = float(corruption[local_index, position])
-            if hysteresis and lower < q_t < upper:
+            if hysteresis and lower < q_t < upper and int(store.k2_available[run_index, position]) == 1:
+                # K2 is a paid second generation.  It is never available to the
+                # base correctness/hazard probes, and an absent/malformed K2
+                # observation must fall back to the ordinary decision rather than
+                # silently becoming disagreement.
                 triggered_k2_positions.append(position)
                 if int(store.k2_agreement[run_index, position]) == 0:
                     continue
@@ -2036,11 +2134,12 @@ def evaluate_stopping_policy(
         final_step = int(store.steps[run_index, final_position])
         stopped_correct = int(store.y[run_index, stop_position])
         final_correct = int(store.y[run_index, final_position])
-        stopped_tokens = float(store.thought_tokens[run_index, : stop_position + 1].sum())
-        all_tokens = float(store.thought_tokens[run_index, :length].sum())
+        # Raw generation tokens are the actual resource unit. Parsed thought word
+        # counts undercharge this corpus by roughly 5x and are not a token budget.
+        stopped_tokens = float(store.generation_tokens[run_index, : stop_position + 1].sum())
+        all_tokens = float(store.generation_tokens[run_index, :length].sum())
         if hysteresis:
             stopped_tokens += float(sum(store.k2_tokens[run_index, p] for p in triggered_k2_positions if p <= stop_position))
-            all_tokens += float(store.k2_tokens[run_index, :length].sum())
         records.append(
             {
                 "trajectory_id": str(store.trajectory_ids[run_index]),
@@ -2065,6 +2164,56 @@ def policy_summary(policy: pd.DataFrame) -> tuple[float, float, str]:
     ties = int((np.abs(delta) <= 1.0e-12).sum())
     losses = int((delta < -1.0e-12).sum())
     return float(policy["stop_utility"].mean()), float(policy["stop_utility_token"].mean()), f"{wins}/{ties}/{losses}"
+
+
+def policy_accounting_self_test() -> None:
+    """Regression test: unavailable K2 is not disagreement and raw tokens are billed."""
+
+    common = dict(
+        x=np.zeros((1, 3, 1), dtype=np.float32),
+        y=np.asarray([[0, 1, 1]], dtype=np.int64),
+        next_y=np.asarray([[1, 1, 1]], dtype=np.int64),
+        lengths=np.asarray([3], dtype=np.int64),
+        row_ids=np.asarray([[0, 1, 2]], dtype=np.int64),
+        steps=np.asarray([[1, 2, 3]], dtype=np.int64),
+        thought_tokens=np.asarray([[1.0, 1.0, 1.0]], dtype=np.float32),
+        generation_tokens=np.asarray([[10.0, 10.0, 10.0]], dtype=np.float32),
+        k2_tokens=np.asarray([[7.0, 7.0, 7.0]], dtype=np.float32),
+        trajectory_ids=np.asarray(["synthetic"], dtype=object),
+        task_ids=np.asarray(["synthetic-task"], dtype=object),
+        source_cells=np.asarray(["synthetic-cell"], dtype=object),
+        feature_names=["synthetic"],
+    )
+    q = np.asarray([[0.5, 0.5, 0.5]], dtype=np.float32)
+    hazard = np.zeros_like(q)
+    unavailable = SequenceStore(
+        **common,
+        k2_agreement=np.asarray([[0, 0, 0]], dtype=np.int64),
+        k2_available=np.asarray([[0, 0, 0]], dtype=np.int64),
+    )
+    unavailable_policy = evaluate_stopping_policy(
+        unavailable, np.asarray([0]), q, hazard, hazard, hysteresis=True
+    )
+    if int(unavailable_policy.iloc[0]["stop_step"]) != 2:
+        raise AssertionError("Unavailable K2 must fall back to the normal stop decision")
+    expected_unavailable = 1.0 - TOKEN_PRICE * 20.0
+    if not math.isclose(float(unavailable_policy.iloc[0]["stop_utility_token"]), expected_unavailable, abs_tol=1.0e-8):
+        raise AssertionError("Token utility must charge raw primary-generation tokens")
+
+    disagreement = SequenceStore(
+        **common,
+        k2_agreement=np.asarray([[0, 0, 0]], dtype=np.int64),
+        k2_available=np.asarray([[0, 1, 0]], dtype=np.int64),
+    )
+    disagreement_policy = evaluate_stopping_policy(
+        disagreement, np.asarray([0]), q, hazard, hazard, hysteresis=True
+    )
+    if int(disagreement_policy.iloc[0]["stop_step"]) != 3:
+        raise AssertionError("Available K2 disagreement should defer the hysteresis decision")
+    expected_disagreement = 1.0 - TOKEN_PRICE * 37.0
+    if not math.isclose(float(disagreement_policy.iloc[0]["stop_utility_token"]), expected_disagreement, abs_tol=1.0e-8):
+        raise AssertionError("Invoked K2 must be charged exactly once through the selected stop point")
+    print("K2 availability and raw-token accounting self-test passed.")
 
 
 # ---------------------------------------------------------------------------
@@ -2285,6 +2434,82 @@ def write_research_graph(
     atomic_json_dump(output_dir / "ultimate_research_graph.json", {"entities": entities, "relations": links})
 
 
+def read_json_artifact(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"Unreadable JSON artifact {path}: {error}") from error
+    if not isinstance(value, dict):
+        raise RuntimeError(f"JSON artifact {path} must contain an object")
+    return value
+
+
+def validate_or_prepare_run_directory(
+    output_dir: Path,
+    fingerprint: str,
+    *,
+    resume: bool,
+    n_splits: int,
+) -> dict[str, Any] | None:
+    """Fail closed instead of mixing checkpoints/results from different runs.
+
+    The old shared output directory allowed a later full run to coexist with a
+    two-cell smoke checkpoint and final table.  A run directory is valid only when
+    every identity-bearing artifact agrees with the requested fingerprint.
+    """
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = output_dir / "ultimate_tournament_manifest.json"
+    status_path = output_dir / "ultimate_tournament_status.json"
+    fold_paths = sorted(output_dir.glob("ultimate_fold_*_summary.json"))
+    result_manifest_path = output_dir / "ultimate_tournament_results_manifest.json"
+    non_manifest_artifacts = [
+        output_dir / "ultimate_tournament_checkpoint.pth",
+        output_dir / "ultimate_tournament_results.csv",
+        output_dir / "ultimate_tournament_results.log",
+        output_dir / "ultimate_oof_predictions.npz",
+        output_dir / "ultimate_tournament_telemetry.sqlite3",
+        output_dir / "ultimate_research_graph.json",
+        output_dir / "ultimate_tournament_runtime.log",
+        *fold_paths,
+    ]
+    existing_manifest = read_json_artifact(manifest_path)
+    existing_status = read_json_artifact(status_path)
+    existing_results = read_json_artifact(result_manifest_path)
+    if existing_manifest is None:
+        if existing_status is not None or existing_results is not None or any(path.exists() for path in non_manifest_artifacts):
+            raise RuntimeError(
+                f"Refusing to use nonempty output directory without a manifest: {output_dir}. "
+                "Choose a new --output-dir rather than mixing artifact provenance."
+            )
+        return None
+
+    recorded = existing_manifest.get("run_fingerprint")
+    if recorded != fingerprint:
+        raise RuntimeError(
+            f"Output directory belongs to fingerprint {recorded!r}, not this run {fingerprint!r}. "
+            "Choose a new --output-dir; do not overwrite or blend runs."
+        )
+    if not resume:
+        raise RuntimeError(
+            f"Output directory already contains this run's manifest: {output_dir}. "
+            "Use --resume or choose a new --output-dir."
+        )
+    for label, artifact in [("status", existing_status), ("results manifest", existing_results)]:
+        if artifact is not None and artifact.get("fingerprint") != fingerprint:
+            raise RuntimeError(f"{label} fingerprint does not match manifest in {output_dir}")
+    for path in fold_paths:
+        fold = read_json_artifact(path)
+        if fold is None or fold.get("fingerprint") != fingerprint:
+            raise RuntimeError(f"Fold summary provenance mismatch: {path}")
+        fold_number = int(fold.get("fold", -1))
+        if fold_number < 1 or fold_number > n_splits:
+            raise RuntimeError(f"Fold summary has invalid fold number {fold_number}: {path}")
+    return existing_status
+
+
 def load_checkpoint(path: Path, fingerprint: str) -> dict[str, Any] | None:
     if not path.exists():
         return None
@@ -2332,6 +2557,12 @@ def write_result_artifacts(
     selected_configs: dict[str, Any],
 ) -> list[dict[str, Any]]:
     mask = store.valid_mask_np()
+    incomplete = [key for key, probability in oof_q.items() if not np.isfinite(probability[mask]).all()]
+    if incomplete:
+        raise RuntimeError(
+            "Refusing to publish a final tournament table with incomplete OOF predictions for "
+            + ", ".join(incomplete)
+        )
     rows: list[dict[str, Any]] = []
     all_indices = np.arange(store.n_runs)
     display = {
@@ -2387,7 +2618,12 @@ def write_result_artifacts(
     if not table.empty:
         table = table.sort_values("OOF ROC-AUC", ascending=False, kind="stable")
     output_dir.mkdir(parents=True, exist_ok=True)
-    table.to_csv(output_dir / "ultimate_tournament_results.csv", index=False)
+    if not table.empty:
+        table.insert(0, "run_fingerprint", manifest["run_fingerprint"])
+    csv_path = output_dir / "ultimate_tournament_results.csv"
+    csv_temporary = csv_path.with_suffix(csv_path.suffix + ".tmp")
+    table.to_csv(csv_temporary, index=False)
+    os.replace(csv_temporary, csv_path)
     header = [
         "ULTIMATE CAUSAL MULTI-DAY TOURNAMENT VERDICT",
         "=" * 112,
@@ -2395,6 +2631,7 @@ def write_result_artifacts(
             f"Corpus: {manifest['selected_cell_count']} cells, {manifest['source_qualified_trajectories']} "
             f"source-qualified trajectories, {manifest['task_ids']} task groups."
         ),
+        f"Run fingerprint: {manifest['run_fingerprint']}",
         (
             "Integrity note: historical all-cell raw-run-id scores (including 0.8656) are not directly comparable; "
             "this table uses source-qualified trajectories and task-grouped outer folds."
@@ -2413,17 +2650,41 @@ def write_result_artifacts(
     footer = [
         "",
         "Stopping policy: mu=(1-q)*P(repair|currently wrong)-q*P(corruption|currently correct)-0.05; stop when mu<=0.",
-        "Token utility: correctness - 0.0002 * generated reasoning tokens.",
+        "Token utility: correctness - 0.0002 * raw primary-generation tokens; optional K2 is charged only when invoked.",
         "=" * 112,
     ]
-    (output_dir / "ultimate_tournament_results.log").write_text("\n".join(header + [body] + footer) + "\n", encoding="utf-8")
-    np.savez_compressed(
-        output_dir / "ultimate_oof_predictions.npz",
-        **{f"q__{key}": value for key, value in oof_q.items()},
-        **{f"repair__{key}": value for key, value in oof_repair.items()},
-        **{f"corruption__{key}": value for key, value in oof_corruption.items()},
-    )
+    log_path = output_dir / "ultimate_tournament_results.log"
+    atomic_write_text(log_path, "\n".join(header + [body] + footer) + "\n")
+    npz_path = output_dir / "ultimate_oof_predictions.npz"
+    npz_temporary = npz_path.with_suffix(npz_path.suffix + ".tmp")
+    with npz_temporary.open("wb") as handle:
+        np.savez_compressed(
+            handle,
+            run_fingerprint=np.asarray(manifest["run_fingerprint"]),
+            **{f"q__{key}": value for key, value in oof_q.items()},
+            **{f"repair__{key}": value for key, value in oof_repair.items()},
+            **{f"corruption__{key}": value for key, value in oof_corruption.items()},
+        )
+    os.replace(npz_temporary, npz_path)
     write_research_graph(output_dir, manifest, selected_configs, rows)
+    graph_path = output_dir / "ultimate_research_graph.json"
+    atomic_json_dump(
+        output_dir / "ultimate_tournament_results_manifest.json",
+        {
+            "artifact_schema_version": RUNNER_SCHEMA_VERSION,
+            "fingerprint": manifest["run_fingerprint"],
+            "dataset_fingerprint": manifest["dataset_fingerprint"],
+            "feature_fingerprint": manifest["feature_fingerprint"],
+            "expected_folds": manifest["protocol"]["outer_folds"],
+            "completed_folds": list(range(1, int(manifest["protocol"]["outer_folds"]) + 1)),
+            "model_keys": sorted(oof_q),
+            "files": {
+                path.name: sha256_file(path)
+                for path in [csv_path, log_path, npz_path, graph_path]
+            },
+            "created_at": time.time(),
+        },
+    )
     return rows
 
 
@@ -2527,11 +2788,11 @@ def neural_predictions_with_calibration(
     cal_has_next = np.arange(store.max_len)[None, :] < (store.lengths[calibration_indices, None] - 1)
     cal_y = store.y[calibration_indices]
     cal_next = store.next_y[calibration_indices]
-    q_temperature = TemperatureScaler().fit(calibration_logits[0][cal_mask], cal_y[cal_mask])
+    q_temperature = PlattScaler().fit(calibration_logits[0][cal_mask], cal_y[cal_mask])
     repair_condition = cal_mask & cal_has_next & (cal_y == 0)
     corruption_condition = cal_mask & cal_has_next & (cal_y == 1)
-    repair_temperature = TemperatureScaler().fit(calibration_logits[1][repair_condition], cal_next[repair_condition])
-    corruption_temperature = TemperatureScaler().fit(
+    repair_temperature = PlattScaler().fit(calibration_logits[1][repair_condition], cal_next[repair_condition])
+    corruption_temperature = PlattScaler().fit(
         calibration_logits[2][corruption_condition], 1 - cal_next[corruption_condition]
     )
     test_logits = infer_probe(
@@ -2551,7 +2812,6 @@ def neural_predictions_with_calibration(
 
 def run_tournament(args: argparse.Namespace) -> int:
     output_dir = Path(args.output_dir)
-    configure_logging(output_dir)
     device, preflight = cuda_preflight(args)
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
@@ -2563,8 +2823,23 @@ def run_tournament(args: argparse.Namespace) -> int:
     frame, manifest = load_trace_frame(args)
     features = build_feature_frame(frame, args.persistent_homology, args.topology_window)
     store = build_sequence_store(frame, features)
+    initial_config = base_model_config(args)
+    # Diagnostics deliberately do not publish a tournament manifest/status or
+    # touch a resumable run directory.  The launcher sends them to a dedicated
+    # preflight directory for the same reason.
+    if args.audit_only:
+        configure_logging(output_dir, file_log=False)
+        run_vram_audit(store, initial_config, args, device, preflight)
+        LOG.info("Audit-only mode completed without creating tournament state.")
+        return 0
+    if args.dry_run:
+        configure_logging(output_dir, file_log=False)
+        LOG.info("Dry run completed: source-qualified ingestion and feature construction passed.")
+        return 0
     manifest.update(
         {
+            "artifact_schema_version": RUNNER_SCHEMA_VERSION,
+            "runner_canonical_lf_sha256": canonical_lf_sha256_file(Path(__file__).resolve()),
             "feature_count": len(store.feature_names),
             "feature_fingerprint": stable_json_hash(store.feature_names),
             "preflight": preflight,
@@ -2576,42 +2851,90 @@ def run_tournament(args: argparse.Namespace) -> int:
                 "step_cost": STEP_COST,
                 "precision": args.precision,
                 "persistent_homology": args.persistent_homology,
+                "k2_contract": "post_query_only",
+                "token_accounting": "raw_generation_tokens",
+                "probability_calibration": "unweighted_proper_loss_plus_platt",
             },
         }
     )
     protocol_args = {
-        key: value
-        for key, value in vars(args).items()
-        if not key.startswith("_") and key not in {"output_dir", "audit_only", "vram_audit", "dry_run", "resume"}
+        "include_all_cells": args.include_all_cells,
+        "max_cells": args.max_cells,
+        "persistent_homology": args.persistent_homology,
+        "topology_window": args.topology_window,
+        "n_splits": args.n_splits,
+        "models": args.models,
+        "trials_per_fold": args.trials_per_fold,
+        "tune_epochs": args.tune_epochs,
+        "epochs": args.epochs,
+        "early_stopping_patience": args.early_stopping_patience,
+        "batch_size": args.batch_size,
+        "max_batch_size": args.max_batch_size,
+        "eval_batch_size": args.eval_batch_size,
+        "cap_batch_to_data": args.cap_batch_to_data,
+        "num_workers": args.num_workers,
+        "tune_num_workers": args.tune_num_workers,
+        "precision": args.precision,
+        "compile": args.compile,
+        "compile_mode": args.compile_mode,
+        "cuda_graphs": args.cuda_graphs,
+        "d_model": args.d_model,
+        "attention_heads": args.attention_heads,
+        "tcn_blocks": args.tcn_blocks,
+        "transformer_layers": args.transformer_layers,
+        "ssm_state": args.ssm_state,
+        "fno_modes": args.fno_modes,
+        "dropout": args.dropout,
+        "learning_rate": args.learning_rate,
+        "weight_decay": args.weight_decay,
+        "hazard_weight": args.hazard_weight,
+        "brier_weight": args.brier_weight,
+        "moe_balance_weight": args.moe_balance_weight,
+        "concentration_weight": args.concentration_weight,
+        "beta_variance_weight": args.beta_variance_weight,
+        "mine_weight": args.mine_weight,
+        "class_balanced_loss": args.class_balanced_loss,
+        "gate_temperature": args.gate_temperature,
+        "seed": args.seed,
     }
     fingerprint = stable_json_hash(
         {
+            "schema": RUNNER_SCHEMA_VERSION,
+            "runner": manifest["runner_canonical_lf_sha256"],
             "dataset": manifest["dataset_fingerprint"],
             "features": manifest["feature_fingerprint"],
             "protocol": protocol_args,
         }
     )
     manifest["run_fingerprint"] = fingerprint
-    atomic_json_dump(output_dir / "ultimate_tournament_manifest.json", manifest)
+    existing_status = validate_or_prepare_run_directory(
+        output_dir, fingerprint, resume=args.resume, n_splits=args.n_splits
+    )
+    configure_logging(output_dir)
+    manifest_path = output_dir / "ultimate_tournament_manifest.json"
+    if not manifest_path.exists():
+        atomic_json_dump(manifest_path, manifest)
+    started_at = float(existing_status.get("started_at", time.time())) if existing_status else time.time()
     atomic_json_dump(
         output_dir / "ultimate_tournament_status.json",
-        {"status": "running", "complete": False, "fingerprint": fingerprint, "started_at": time.time()},
+        {
+            "artifact_schema_version": RUNNER_SCHEMA_VERSION,
+            "status": "running",
+            "complete": False,
+            "fingerprint": fingerprint,
+            "started_at": started_at,
+            "updated_at": time.time(),
+            "completed_folds": list(existing_status.get("completed_folds", [])) if existing_status else [],
+        },
     )
     telemetry = TelemetryDB(output_dir / "ultimate_tournament_telemetry.sqlite3")
     telemetry.put_meta("manifest", manifest)
     telemetry.put_meta("run_fingerprint", fingerprint)
     write_research_graph(output_dir, manifest, {})
     try:
-        initial_config = base_model_config(args)
         if args.vram_audit:
             audit = run_vram_audit(store, initial_config, args, device, preflight)
             telemetry.event("vram_audit", audit)
-        if args.audit_only:
-            LOG.info("Audit-only mode completed.")
-            return 0
-        if args.dry_run:
-            LOG.info("Dry run completed: source-qualified ingestion and feature construction passed.")
-            return 0
 
         model_kinds = parse_model_kinds(args.models)
         all_keys = ["linear", *model_kinds]
@@ -2662,9 +2985,11 @@ def run_tournament(args: argparse.Namespace) -> int:
                 atomic_json_dump(
                     output_dir / "ultimate_tournament_status.json",
                     {
+                        "artifact_schema_version": RUNNER_SCHEMA_VERSION,
                         "status": "time_budget_reached",
                         "complete": False,
                         "fingerprint": fingerprint,
+                        "started_at": started_at,
                         "completed_folds": sorted(completed_folds),
                         "updated_at": time.time(),
                     },
@@ -2686,6 +3011,19 @@ def run_tournament(args: argparse.Namespace) -> int:
                 len(calibration),
             )
             telemetry.fold(fold + 1, "running", {"outer_train": len(outer_train), "outer_test": len(outer_test)})
+            atomic_json_dump(
+                output_dir / "ultimate_tournament_status.json",
+                {
+                    "artifact_schema_version": RUNNER_SCHEMA_VERSION,
+                    "status": "running",
+                    "complete": False,
+                    "fingerprint": fingerprint,
+                    "started_at": started_at,
+                    "current_fold": fold + 1,
+                    "completed_folds": sorted(completed_folds),
+                    "updated_at": time.time(),
+                },
+            )
 
             tuning_scaler = FoldRobustScaler().fit(store.x, store.lengths, tuning_train)
             tuning_x = tuning_scaler.transform(store.x, store.lengths)
@@ -2726,10 +3064,13 @@ def run_tournament(args: argparse.Namespace) -> int:
                     atomic_json_dump(
                         output_dir / "ultimate_tournament_status.json",
                         {
+                            "artifact_schema_version": RUNNER_SCHEMA_VERSION,
                             "status": "time_budget_reached",
                             "complete": False,
                             "fingerprint": fingerprint,
+                            "started_at": started_at,
                             "completed_folds": sorted(completed_folds),
+                            "current_fold": fold + 1,
                             "updated_at": time.time(),
                         },
                     )
@@ -2763,8 +3104,13 @@ def run_tournament(args: argparse.Namespace) -> int:
 
             completed_folds.add(fold)
             fold_summary = {
+                "artifact_schema_version": RUNNER_SCHEMA_VERSION,
                 "fold": fold + 1,
                 "status": "complete",
+                "fingerprint": fingerprint,
+                "dataset_fingerprint": manifest["dataset_fingerprint"],
+                "feature_fingerprint": manifest["feature_fingerprint"],
+                "expected_folds": args.n_splits,
                 "outer_train_runs": int(len(outer_train)),
                 "outer_test_runs": int(len(outer_test)),
                 "outer_train_task_count": int(len(np.unique(store.task_ids[outer_train]))),
@@ -2772,13 +3118,25 @@ def run_tournament(args: argparse.Namespace) -> int:
                 "selected_config": asdict(config),
                 "completed_at": time.time(),
             }
-            atomic_json_dump(output_dir / f"ultimate_fold_{fold + 1:02d}_summary.json", fold_summary)
             save_fold_checkpoint(
                 checkpoint_path, fingerprint, completed_folds, oof_q, oof_repair, oof_corruption, selected_configs
             )
+            atomic_json_dump(output_dir / f"ultimate_fold_{fold + 1:02d}_summary.json", fold_summary)
             telemetry.fold(fold + 1, "complete", fold_summary)
             telemetry.event("fold_complete", fold_summary)
             write_research_graph(output_dir, manifest, selected_configs)
+            atomic_json_dump(
+                output_dir / "ultimate_tournament_status.json",
+                {
+                    "artifact_schema_version": RUNNER_SCHEMA_VERSION,
+                    "status": "running",
+                    "complete": False,
+                    "fingerprint": fingerprint,
+                    "started_at": started_at,
+                    "completed_folds": sorted(completed_folds),
+                    "updated_at": time.time(),
+                },
+            )
 
         result_rows = write_result_artifacts(
             output_dir, store, oof_q, oof_repair, oof_corruption, manifest, selected_configs
@@ -2787,15 +3145,35 @@ def run_tournament(args: argparse.Namespace) -> int:
         atomic_json_dump(
             output_dir / "ultimate_tournament_status.json",
             {
+                "artifact_schema_version": RUNNER_SCHEMA_VERSION,
                 "status": "complete",
                 "complete": True,
                 "fingerprint": fingerprint,
+                "started_at": started_at,
                 "completed_folds": sorted(completed_folds),
                 "completed_at": time.time(),
             },
         )
         LOG.info("Tournament complete. Results: %s", output_dir / "ultimate_tournament_results.log")
         return 0
+    except BaseException as error:
+        failure = {
+            "artifact_schema_version": RUNNER_SCHEMA_VERSION,
+            "status": "failed",
+            "complete": False,
+            "fingerprint": fingerprint,
+            "started_at": started_at,
+            "completed_folds": sorted(completed_folds) if "completed_folds" in locals() else [],
+            "error_type": type(error).__name__,
+            "error": str(error),
+            "updated_at": time.time(),
+        }
+        try:
+            telemetry.event("tournament_failed", failure)
+            atomic_json_dump(output_dir / "ultimate_tournament_status.json", failure)
+        except Exception as status_error:
+            LOG.error("Failed to publish terminal tournament status: %s", status_error)
+        raise
     finally:
         telemetry.close()
 
@@ -2839,6 +3217,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--concentration-weight", type=float, default=0.002)
     parser.add_argument("--beta-variance-weight", type=float, default=0.0)
     parser.add_argument("--mine-weight", type=float, default=0.0, help="Opt-in MINE auxiliary; zero keeps it diagnostic")
+    parser.add_argument(
+        "--class-balanced-loss",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="Opt into class-weighted ranking losses; off keeps correctness/hazard probabilities proper by default",
+    )
     parser.add_argument("--gate-temperature", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=20260718)
     parser.add_argument("--max-hours", type=float, default=71.5, help="Graceful checkpoint/resume budget; <=0 disables")
@@ -2864,6 +3248,7 @@ def main() -> int:
     args = parser.parse_args()
     if args.self_test:
         causality_self_test()
+        policy_accounting_self_test()
         return 0
     if args.output_dir is None:
         args.output_dir = args.input_dir

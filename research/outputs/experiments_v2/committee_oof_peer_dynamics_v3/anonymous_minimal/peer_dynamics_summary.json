@@ -1,0 +1,28 @@
+{
+  "contract": "anonymous_minimal",
+  "interpretation": "task-held-out retrospective closed-barrier peer-dynamics screen; not prospective proof without timestamped synchronization.",
+  "oof_auc": 0.9546638703930357,
+  "peer_dynamics_features": 110,
+  "per_domain": {
+    "arc": {
+      "auc": 0.9787454650717272,
+      "rows": 42500
+    },
+    "gpqa": {
+      "auc": 0.7140385927549678,
+      "rows": 29120
+    },
+    "gsm8k": {
+      "auc": 0.9754944416155564,
+      "rows": 40320
+    },
+    "math": {
+      "auc": 0.928578649954029,
+      "rows": 32500
+    }
+  },
+  "task_cluster_bootstrap_auc_95_ci": [
+    0.9498707682973847,
+    0.9587566314577937
+  ]
+}

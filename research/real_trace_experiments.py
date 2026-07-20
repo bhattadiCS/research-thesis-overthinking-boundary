@@ -989,12 +989,20 @@ def extract_gsm8k_reference_answer(answer_text: str) -> str:
     return normalize_answer(answer_text, "number")
 
 
-def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+def load_gsm8k_tasks(
+    max_tasks: int,
+    dataset_split: str,
+    shuffle_seed: int | None,
+    dataset_revision: str | None = None,
+) -> list[TaskSpec]:
     if load_dataset is None:
         raise ImportError("datasets is required for --task-source gsm8k. Install it with pip install datasets evaluate bitsandbytes tqdm.")
 
     try:
-        dataset = load_dataset("openai/gsm8k", "main", split=dataset_split)
+        load_kwargs: dict[str, Any] = {"split": dataset_split}
+        if dataset_revision:
+            load_kwargs["revision"] = dataset_revision
+        dataset = load_dataset("openai/gsm8k", "main", **load_kwargs)
     except Exception as exc:
         raise RuntimeError(
             f"Failed to download or load the GSM8K dataset from HuggingFace. "
@@ -1028,7 +1036,12 @@ def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | Non
     return tasks
 
 
-def load_math_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+def load_math_tasks(
+    max_tasks: int,
+    dataset_split: str,
+    shuffle_seed: int | None,
+    dataset_revision: str | None = None,
+) -> list[TaskSpec]:
     """Competition MATH. Uses HuggingFaceH4/MATH-500 (500 problems, openly
     available); falls back to lighteval/MATH. Answers are graded with
     math_answers_equivalent (LaTeX-normalized + numeric + sympy fallback)."""
@@ -1041,7 +1054,10 @@ def load_math_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None
     # problems and silently breaking cross-model comparability.
     repo = "HuggingFaceH4/MATH-500"
     try:
-        dataset = load_dataset(repo, split=split)
+        load_kwargs: dict[str, Any] = {"split": split}
+        if dataset_revision:
+            load_kwargs["revision"] = dataset_revision
+        dataset = load_dataset(repo, **load_kwargs)
     except Exception as exc:
         raise RuntimeError(
             f"Failed to load the pinned MATH dataset {repo} (split={split}). Failing hard rather than "
@@ -1079,14 +1095,22 @@ def load_math_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None
     return tasks
 
 
-def load_arc_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+def load_arc_tasks(
+    max_tasks: int,
+    dataset_split: str,
+    shuffle_seed: int | None,
+    dataset_revision: str | None = None,
+) -> list[TaskSpec]:
     """ARC-Challenge (allenai/ai2_arc, public). Multiple choice; all options are
     relabeled A,B,C(,D,E) and the gold answerKey is mapped to the new letter."""
     if load_dataset is None:
         raise ImportError("datasets is required for --task-source arc.")
     split = dataset_split if dataset_split and dataset_split not in {"train", "main"} else "test"
     try:
-        dataset = load_dataset("allenai/ai2_arc", "ARC-Challenge", split=split)
+        load_kwargs: dict[str, Any] = {"split": split}
+        if dataset_revision:
+            load_kwargs["revision"] = dataset_revision
+        dataset = load_dataset("allenai/ai2_arc", "ARC-Challenge", **load_kwargs)
     except Exception as exc:
         raise RuntimeError(f"Failed to load allenai/ai2_arc ARC-Challenge (split={split}). Error: {exc}") from exc
     if shuffle_seed is not None:
@@ -1112,13 +1136,21 @@ def load_arc_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None)
     return tasks
 
 
-def load_gpqa_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+def load_gpqa_tasks(
+    max_tasks: int,
+    dataset_split: str,
+    shuffle_seed: int | None,
+    dataset_revision: str | None = None,
+) -> list[TaskSpec]:
     """GPQA main (Idavidrein/gpqa, GATED -- needs HF_TOKEN + accepted terms).
     The correct + 3 incorrect answers are deterministically shuffled per item."""
     if load_dataset is None:
         raise ImportError("datasets is required for --task-source gpqa.")
     try:
-        dataset = load_dataset("Idavidrein/gpqa", "gpqa_main", split="train")
+        load_kwargs: dict[str, Any] = {"split": "train"}
+        if dataset_revision:
+            load_kwargs["revision"] = dataset_revision
+        dataset = load_dataset("Idavidrein/gpqa", "gpqa_main", **load_kwargs)
     except Exception as exc:
         raise RuntimeError(
             "Failed to load Idavidrein/gpqa (gpqa_main). It is GATED: accept the terms on the dataset "
@@ -1148,17 +1180,43 @@ def load_gpqa_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None
     return tasks
 
 
-def load_tasks(task_source: str, max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
+def load_tasks(
+    task_source: str,
+    max_tasks: int,
+    dataset_split: str,
+    shuffle_seed: int | None,
+    dataset_revision: str | None = None,
+) -> list[TaskSpec]:
     if task_source == "builtin":
         return BUILTIN_TASKS[:max_tasks]
     if task_source == "gsm8k":
-        return load_gsm8k_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+        return load_gsm8k_tasks(
+            max_tasks=max_tasks,
+            dataset_split=dataset_split,
+            shuffle_seed=shuffle_seed,
+            dataset_revision=dataset_revision,
+        )
     if task_source == "math":
-        return load_math_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+        return load_math_tasks(
+            max_tasks=max_tasks,
+            dataset_split=dataset_split,
+            shuffle_seed=shuffle_seed,
+            dataset_revision=dataset_revision,
+        )
     if task_source == "arc":
-        return load_arc_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+        return load_arc_tasks(
+            max_tasks=max_tasks,
+            dataset_split=dataset_split,
+            shuffle_seed=shuffle_seed,
+            dataset_revision=dataset_revision,
+        )
     if task_source == "gpqa":
-        return load_gpqa_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
+        return load_gpqa_tasks(
+            max_tasks=max_tasks,
+            dataset_split=dataset_split,
+            shuffle_seed=shuffle_seed,
+            dataset_revision=dataset_revision,
+        )
     raise ValueError(f"Unsupported task source: {task_source}")
 
 
@@ -1438,6 +1496,7 @@ def load_model(
     attn_implementation: str,
     model_path_override: str | None = None,
     offload_folder: str | None = None,
+    model_revision: str | None = None,
 ) -> tuple[Any, Any, str, str]:
     actual_device = device if device != "auto" else ("cuda" if torch.cuda.is_available() else "cpu")
     model_source = model_path_override or model_spec.hf_name
@@ -1455,6 +1514,8 @@ def load_model(
             
     backend = "transformers+torch(cpu)"
     load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
+    if model_revision:
+        load_kwargs["revision"] = model_revision
     compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
     dtype_label = "bfloat16" if compute_dtype == torch.bfloat16 else "float16"
     logging.info("Precision auto-tuning: %s detected for %s model.", dtype_label, model_spec.parameter_count)
@@ -1484,11 +1545,17 @@ def load_model(
     # Loading handle (Processor for multimodal, Tokenizer for vanilla)
     if is_multimodal:
         from transformers import AutoProcessor
-        processor = AutoProcessor.from_pretrained(model_source, trust_remote_code=True)
+        processor_kwargs: dict[str, Any] = {"trust_remote_code": True}
+        if model_revision:
+            processor_kwargs["revision"] = model_revision
+        processor = AutoProcessor.from_pretrained(model_source, **processor_kwargs)
         # Use the inner tokenizer for text encoding; it also has apply_chat_template
         tokenizer = getattr(processor, "tokenizer", processor)
     else:
-        tokenizer = AutoTokenizer.from_pretrained(model_source, trust_remote_code=True)
+        tokenizer_kwargs: dict[str, Any] = {"trust_remote_code": True}
+        if model_revision:
+            tokenizer_kwargs["revision"] = model_revision
+        tokenizer = AutoTokenizer.from_pretrained(model_source, **tokenizer_kwargs)
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token

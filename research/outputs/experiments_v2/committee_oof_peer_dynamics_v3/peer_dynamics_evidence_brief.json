@@ -1,0 +1,151 @@
+{
+  "compact_topology_rejection": {
+    "baseline": {
+      "numeric_feature_count": 43,
+      "oof_auc": 0.9453355857281374,
+      "peer_dynamics_features": 0
+    },
+    "delta": {
+      "bootstrap_probability_delta_gt_zero": 1.0,
+      "observed_delta_auc": 0.0028020436092657253,
+      "task_cluster_bootstrap_delta_auc_95_ci": [
+        0.002045885118354687,
+        0.003536859326261479
+      ]
+    },
+    "reason": "The equality/count-only profile improves over baseline but remains below the 0.95 historical ROC-AUC gate.",
+    "rows": 144440,
+    "task_groups": 2948,
+    "topology_profile": {
+      "numeric_feature_count": 63,
+      "oof_auc": 0.9481376293374031,
+      "peer_dynamics_features": 20
+    }
+  },
+  "decision": {
+    "candidate_description": "anonymous closed-barrier full peer-telemetry profile",
+    "historical_candidate": "anonymous_minimal",
+    "historical_gate_met": true,
+    "historical_oof_auc": 0.9546638703930357,
+    "identity_free_learner_inputs": true,
+    "roc_auc_gate": 0.95,
+    "status": "retrospective_candidate_only",
+    "threshold_or_deployed_stop_rule": null,
+    "threshold_status": "intentionally_unassigned_pending_preregistered_development_split",
+    "timing_metadata_excluded": true
+  },
+  "fixed_13_member_panel_sensitivity": {
+    "anonymous_baseline": {
+      "numeric_feature_count": 43,
+      "oof_auc": 0.931266134763085,
+      "peer_dynamics_features": 0
+    },
+    "anonymous_delta": {
+      "bootstrap_probability_delta_gt_zero": 1.0,
+      "observed_delta_auc": 0.008743034188696375,
+      "task_cluster_bootstrap_delta_auc_95_ci": [
+        0.006653037849561558,
+        0.010881746822712101
+      ]
+    },
+    "anonymous_full": {
+      "numeric_feature_count": 153,
+      "oof_auc": 0.9400091689517813,
+      "peer_dynamics_features": 110
+    },
+    "interpretation": "The incremental peer signal persists after fixing the panel size; this harder subset does not independently clear the absolute 0.95 gate.",
+    "rows": 98280,
+    "task_groups": 1512
+  },
+  "fresh_confirmation_requirements": [
+    "Pre-register the anonymous full peer-telemetry feature contract, model-training split, calibration method, and stopping threshold before accessing fresh evaluation labels.",
+    "Use a frozen roster with pinned model/tokenizer and dataset revisions on a fresh task set disjoint from the historical corpus.",
+    "Close and timestamp every full peer barrier before calculating a candidate score; record immutable event, barrier, decision, and token ledgers.",
+    "Run the hardware preflight on the actual target GPU and retain its device, VRAM, temperature, power, and software-version provenance.",
+    "Report the fresh task-held-out ROC-AUC, calibration, token utility, and audit status separately from this retrospective evidence."
+  ],
+  "full_corpus_matched_ablation": {
+    "anonymous_baseline": {
+      "numeric_feature_count": 43,
+      "oof_auc": 0.9453355857281374,
+      "peer_dynamics_features": 0
+    },
+    "anonymous_delta": {
+      "bootstrap_probability_delta_gt_zero": 1.0,
+      "observed_delta_auc": 0.009328284664898323,
+      "task_cluster_bootstrap_delta_auc_95_ci": [
+        0.008027515453664837,
+        0.01063899083996089
+      ]
+    },
+    "anonymous_full": {
+      "numeric_feature_count": 153,
+      "oof_auc": 0.9546638703930357,
+      "peer_dynamics_features": 110
+    },
+    "roster_baseline": {
+      "numeric_feature_count": 50,
+      "oof_auc": 0.9473052847025384,
+      "peer_dynamics_features": 0
+    },
+    "roster_delta": {
+      "bootstrap_probability_delta_gt_zero": 1.0,
+      "observed_delta_auc": 0.00893091060207385,
+      "task_cluster_bootstrap_delta_auc_95_ci": [
+        0.007669566310782738,
+        0.010169066064329199
+      ]
+    },
+    "roster_full": {
+      "numeric_feature_count": 160,
+      "oof_auc": 0.9562361953046122,
+      "peer_dynamics_features": 110
+    },
+    "rows": 144440,
+    "task_groups": 2948
+  },
+  "legacy_manifest_disclosure": {
+    "meaning": "Uniformly absent legacy fields prove no cross-arm mismatch, but do not retroactively prove their values for already-completed v3 runs.",
+    "optional_manifest_field_status": {
+      "fixed_panel_filter": "uniformly_absent_legacy",
+      "peer_profile": "uniformly_absent_legacy"
+    }
+  },
+  "non_claims": [
+    "This brief does not establish a deployed early-stopping policy or a prospective ROC-AUC result.",
+    "This brief does not assign a stopping threshold from the historical evaluation corpus.",
+    "The roster-aware arm is corroborating evidence, not the selected candidate, because the selected candidate avoids model-identity learner inputs."
+  ],
+  "provenance": {
+    "generator_sha256": "affe9f2257385e4ef4aad5a06a5dabd1709d86694f18858adac625da42fccc62",
+    "inputs": {
+      "fixed_panel_report": {
+        "path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_fixed13_v2\\peer_dynamics_ablation_report.json",
+        "sha256": "69efdb434f5028d501ea43bdcd8927696ba3b9abee450c9c7b4722e77dd18c96"
+      },
+      "full_report": {
+        "path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\peer_dynamics_ablation_report.json",
+        "sha256": "0f2709e25d45d4e2344205d262f2b575382ea88d8acf5243d8607950f37546cc"
+      },
+      "selected_candidate_manifest": {
+        "path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_v3\\anonymous_minimal\\peer_dynamics_manifest.json",
+        "sha256": "58f983d059fa5ec781400bab8eee87e470c214c7a8e4daebbdf36ae9f8ae3531"
+      },
+      "topology_report": {
+        "path": "research\\outputs\\experiments_v2\\committee_oof_peer_dynamics_topology_v1\\peer_dynamics_ablation_report.json",
+        "sha256": "6020adeef3e2c58ec4d995d9b149b1eb19b97cf256e4a5c234a7085127b3237e"
+      }
+    }
+  },
+  "schema_version": "peer-dynamics-evidence-brief-v1",
+  "visibility_contract": {
+    "feature_variant": "peer_dynamics",
+    "historical_limit": "legacy traces do not record timestamped peer completion before each candidate score",
+    "learner_categorical_features": [],
+    "outer_group": "task_id",
+    "peer_visibility": "same task/current step/full barrier/distinct model aliases; scored response excluded from every peer aggregate",
+    "production_requirement": "all peer outputs must be complete and timestamped before emitting a decision score",
+    "removed": "elapsed_seconds, tokens_per_second, log1p_elapsed_seconds, task/domain/difficulty/parser/prompt/device metadata, raw answer/text, labels",
+    "temporal_visibility": "same candidate trajectory and prior closed task barrier only"
+  }
+}

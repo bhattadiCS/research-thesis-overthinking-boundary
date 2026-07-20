@@ -1,0 +1,153 @@
+{
+  "categorical_features": [
+    "model_alias"
+  ],
+  "cross_fold_platt_brier": 0.08592189493923637,
+  "cross_fold_platt_ece_15": 0.035941435255694786,
+  "eligible_step_gte_2_auc": 0.9494465443080724,
+  "fold_auc": [
+    0.946115378836728,
+    0.9452584063523777,
+    0.9489547022212211,
+    0.9474375475049344,
+    0.9492622650952305
+  ],
+  "fold_auc_mean": 0.9474056600020984,
+  "fold_auc_std": 0.0017409088720589517,
+  "name": "roster_no_timing_baseline",
+  "numeric_features": [
+    "step",
+    "confidence",
+    "model_stop_flag",
+    "answer_changed",
+    "thought_token_count",
+    "raw_generation_tokens",
+    "mean_token_logprob",
+    "entropy_mean",
+    "entropy_std",
+    "hidden_norm",
+    "hidden_l2_shift",
+    "hidden_cosine_shift",
+    "lexical_echo",
+    "verbose_confidence_proxy",
+    "temperature",
+    "parse_success",
+    "hit_max_new_tokens",
+    "truncated_output_suspected",
+    "answer_span_mean_logprob",
+    "answer_span_min_logprob",
+    "answer_span_mean_entropy",
+    "answer_span_std_entropy",
+    "raw_text_length_chars",
+    "raw_text_length_tokens",
+    "answer_nonempty",
+    "answer_char_len",
+    "same_prev_answer",
+    "n_answer_changes_prefix",
+    "delta_confidence",
+    "delta_mean_token_logprob",
+    "delta_entropy_mean",
+    "delta_entropy_std",
+    "delta_hidden_norm",
+    "delta_hidden_l2_shift",
+    "delta_hidden_cosine_shift",
+    "delta_answer_span_mean_logprob",
+    "delta_answer_span_min_logprob",
+    "delta_answer_span_mean_entropy",
+    "delta_answer_span_std_entropy",
+    "log1p_thought_token_count",
+    "log1p_raw_generation_tokens",
+    "log1p_raw_text_length_chars",
+    "log1p_raw_text_length_tokens",
+    "log1p_answer_char_len",
+    "committee_panel_nonempty",
+    "independent_vote_count",
+    "independent_peer_count",
+    "independent_vote_fraction",
+    "committee_has_independent_match",
+    "committee_nonempty_fraction"
+  ],
+  "oof_auc": 0.9473052847025384,
+  "per_domain": {
+    "arc": {
+      "auc": 0.9742454984902922,
+      "rows": 42500
+    },
+    "gpqa": {
+      "auc": 0.7042692894108543,
+      "rows": 29120
+    },
+    "gsm8k": {
+      "auc": 0.9667738315211585,
+      "rows": 40320
+    },
+    "math": {
+      "auc": 0.9219798003363098,
+      "rows": 32500
+    }
+  },
+  "per_model_alias": {
+    "deepseek_r1_distill_1p5b": {
+      "auc": 0.9188113883113884,
+      "rows": 9740
+    },
+    "deepseek_r1_distill_7b": {
+      "auc": 0.9339356001467791,
+      "rows": 9740
+    },
+    "llama_3p1_8b_instruct": {
+      "auc": 0.9403987024880719,
+      "rows": 9740
+    },
+    "mistral_7b_instruct_v0p3": {
+      "auc": 0.9560962953055446,
+      "rows": 9740
+    },
+    "mistral_small_24b_2409": {
+      "auc": 0.9509627594545271,
+      "rows": 9740
+    },
+    "phi_4_mini_instruct": {
+      "auc": 0.9168070817095764,
+      "rows": 9740
+    },
+    "qwen2p5_0p5b": {
+      "auc": 0.9592322429713436,
+      "rows": 14740
+    },
+    "qwen2p5_14b": {
+      "auc": 0.9279807229958884,
+      "rows": 14740
+    },
+    "qwen2p5_32b": {
+      "auc": 0.924003896974368,
+      "rows": 12240
+    },
+    "qwen2p5_3b": {
+      "auc": 0.9424727410618762,
+      "rows": 12240
+    },
+    "qwen2p5_7b": {
+      "auc": 0.9480579946065599,
+      "rows": 14740
+    },
+    "qwen_3p5_9b": {
+      "auc": 0.9312789192231917,
+      "rows": 7560
+    },
+    "yi_1p5_9b_chat": {
+      "auc": 0.9543791264349767,
+      "rows": 9740
+    }
+  },
+  "raw_brier": 0.08396115538508253,
+  "raw_ece_15": 0.006377027363335736,
+  "rows": 144440,
+  "task_cluster_bootstrap_auc_95_ci": [
+    0.9425113400185862,
+    0.9515704843196164
+  ],
+  "task_groups": 2948,
+  "task_macro_auc": 0.8693315038210667,
+  "tasks_with_both_classes_for_macro_auc": 2679
+}
