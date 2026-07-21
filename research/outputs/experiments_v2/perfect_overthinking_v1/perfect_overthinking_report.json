@@ -1,0 +1,14 @@
+{
+  "schema_version": "perfect-overthinking-v1",
+  "timestamp_unix": 1784609706.4358742,
+  "total_rows": 144440,
+  "total_tasks": 2948,
+  "total_features": 189,
+  "clean_oof_auc": 0.954282596356452,
+  "brier_score": 0.07755671697896292,
+  "weakness_stress_tests": {
+    "false_consensus_bandwagon_auc": 0.9526350135045211,
+    "long_horizon_auc": 0.9574872200271651,
+    "noisy_entropy_auc": 0.9526960624985854
+  }
+}
