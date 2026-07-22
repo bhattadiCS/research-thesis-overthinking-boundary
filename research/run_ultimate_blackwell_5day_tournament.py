@@ -88,6 +88,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=20260725)
     parser.add_argument("--jobs", type=int, default=12)
     parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--smoke-test", action="store_true", help="Run fast 2-fold mini-batch smoke test verifying end-to-end execution and git auto-push.")
     return parser.parse_args()
 
 
@@ -299,10 +300,10 @@ class DeepHybridMoEProbe(nn.Module):
 
         # Gated MoE Softmax Combination
         gate_logits = self.gate(h)
-        gate_weights = F.softmax(gate_logits, dim=-1)  # (B, T, 3)
+        gate_weights = F.softmax(gate_logits, dim=-1)  # (B, T, E)
 
-        experts = torch.stack([tcn_out, gru_out, tx_out], dim=-1)  # (B, T, H, 3)
-        fused = torch.einsum("bth,bthe->bth", gate_weights, experts)
+        experts = torch.stack([tcn_out, gru_out, tx_out], dim=-1)  # (B, T, H, E)
+        fused = torch.einsum("bte,bthe->bth", gate_weights, experts)
 
         # Extract final step representation
         lengths = lengths.to(x.device)
@@ -329,7 +330,8 @@ def train_eval_moe_probe(
     model = DeepHybridMoEProbe(input_dim=input_dim).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
     criterion = nn.BCEWithLogitsLoss()
-    scaler = torch.cuda.amp.GradScaler(enabled=(device.type == "cuda"))
+    device_type = "cuda" if device.type == "cuda" else "cpu"
+    scaler = torch.amp.GradScaler(device_type, enabled=(device_type == "cuda"))
 
     model.train()
     for epoch in range(epochs):
@@ -337,7 +339,7 @@ def train_eval_moe_probe(
             seqs, lbls, lens = seqs.to(device, non_blocking=True), lbls.to(device, non_blocking=True), lens.to(device, non_blocking=True)
             optimizer.zero_grad()
 
-            with torch.cuda.amp.autocast(dtype=torch.bfloat16, enabled=(device.type == "cuda")):
+            with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
                 logits = model(seqs, lens)
                 loss = criterion(logits, lbls)
 
@@ -350,9 +352,9 @@ def train_eval_moe_probe(
     with torch.no_grad():
         for seqs, _, lens in test_loader:
             seqs, lens = seqs.to(device, non_blocking=True), lens.to(device, non_blocking=True)
-            with torch.cuda.amp.autocast(dtype=torch.bfloat16, enabled=(device.type == "cuda")):
+            with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
                 logits = model(seqs, lens)
-                p = torch.sigmoid(logits).cpu().numpy()
+                p = torch.sigmoid(logits).float().cpu().numpy()
             probs.extend(p)
 
     return np.array(probs, dtype=np.float64)
@@ -420,6 +422,15 @@ def main() -> int:
 
     base_module = sys.modules["run_committee_oof_experiments"]
     raw_frame, files = load_canonical_panel(args.input_dir)
+
+    if args.smoke_test:
+        print("[SMOKE TEST] Fast end-to-end smoke test mode enabled. Using subset of 50 tasks, 2 splits, 1 epoch, 100 bootstrap draws.", flush=True)
+        top_tasks = raw_frame["task_id"].unique()[:50]
+        raw_frame = raw_frame[raw_frame["task_id"].isin(top_tasks)].copy()
+        args.n_splits = 2
+        args.epochs = 1
+        args.bootstrap_draws = 100
+
     raw_frame = build_prefix_and_committee_features(raw_frame)
     frame, peer_cols = build_peer_dynamics_features(raw_frame.copy())
     frame, ultimate_cols = build_ultimate_representation_features(frame)
