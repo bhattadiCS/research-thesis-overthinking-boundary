@@ -9,10 +9,18 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${SCRIPT_DIR}"
 
-PYTHON_BIN="${PYTHON_BIN:-.venv/bin/python}"
-if [ ! -x "${PYTHON_BIN}" ]; then
-  PYTHON_BIN="python3"
+if [ -z "${PYTHON_BIN:-}" ]; then
+  if [ -x ".venv/bin/python" ]; then
+    PYTHON_BIN=".venv/bin/python"
+  elif command -v python &> /dev/null; then
+    PYTHON_BIN="python"
+  else
+    PYTHON_BIN="python3"
+  fi
 fi
+
+# Auto-install lightgbm if missing in the environment
+"${PYTHON_BIN}" -c "import lightgbm" 2>/dev/null || "${PYTHON_BIN}" -m pip install --quiet lightgbm scikit-learn scipy pandas
 
 INPUT_DIR="${INPUT_DIR:-research/outputs/experiments_v2}"
 OUTPUT_DIR="${OUTPUT_DIR:-research/outputs/experiments_v2/blackwell_5day_tournament_v1}"
