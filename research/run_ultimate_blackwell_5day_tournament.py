@@ -27,6 +27,7 @@ import numpy as np
 import pandas as pd
 from scipy.signal import savgol_filter
 from sklearn.ensemble import ExtraTreesClassifier, HistGradientBoostingClassifier
+import subprocess
 from sklearn.metrics import brier_score_loss, roc_auc_score
 from sklearn.model_selection import GroupKFold
 
@@ -54,6 +55,26 @@ from run_committee_oof_peer_dynamics import contract_columns
 
 DEFAULT_INPUT = Path("research/outputs/experiments_v2")
 DEFAULT_OUTPUT_DIR = Path("research/outputs/experiments_v2/blackwell_5day_tournament_v1")
+
+
+def save_checkpoint_and_git_push(output_dir: Path, commit_msg: str) -> None:
+    """Save training progress and execute git commit & push to GitHub origin main."""
+    try:
+        rel_path = str(output_dir.relative_to(Path.cwd()))
+    except ValueError:
+        rel_path = str(output_dir)
+
+    print(f"\n[CHECKPOINT & PUSH] Committing progress: '{commit_msg}'...", flush=True)
+    try:
+        subprocess.run(["git", "add", rel_path], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "commit", "-m", f"checkpoint: {commit_msg}"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        res = subprocess.run(["git", "push", "origin", "main"], check=False, capture_output=True, text=True)
+        if res.returncode == 0:
+            print("  -> Git Checkpoint Successfully Pushed to GitHub main!", flush=True)
+        else:
+            print(f"  -> Git push note: {res.stderr.strip() or 'already up to date'}", flush=True)
+    except Exception as e:
+        print(f"  -> Checkpoint push warning: {e}", flush=True)
 
 
 def parse_args() -> argparse.Namespace:
@@ -457,6 +478,7 @@ def main() -> int:
 
     auc_moe = float(roc_auc_score(traj_lbls_np, oof_moe_probe))
     print(f"  [Phase 2 Result] PyTorch Deep Hybrid MoE Trajectory OOF AUC: {auc_moe:.6f}", flush=True)
+    save_checkpoint_and_git_push(args.output_dir, f"Phase 2 Complete - PyTorch Deep Hybrid MoE Trajectory OOF AUC: {auc_moe:.6f}")
 
     # Attach MoE Probe to Tabular Frame
     meta_df["moe_probe_q"] = oof_moe_probe
@@ -490,10 +512,12 @@ def main() -> int:
     brier_hybrid = float(brier_score_loss(labels, oof_hybrid))
 
     print(f"  [Phase 3 Result] STACKED HYBRID META-ENSEMBLE OOF ROC-AUC: {auc_hybrid:.6f}", flush=True)
+    save_checkpoint_and_git_push(args.output_dir, f"Phase 3 Complete - Stacked Meta-Ensemble OOF AUC: {auc_hybrid:.6f}")
 
     # 4. Phase 4: Multi-Seed Bootstrap (10,000 Draws) Confidence Interval Verification
     print(f"\n--- Phase 4: Multi-Seed Bootstrap ({args.bootstrap_draws:,} Draws) Statistical Significance ---", flush=True)
     boot_res = compute_bootstrap_ci(labels, oof_control, oof_hybrid, task_ids, n_bootstraps=args.bootstrap_draws, seed=args.seed)
+    save_checkpoint_and_git_push(args.output_dir, f"Phase 4 Complete - 10,000-Draw Bootstrap Significance P(Delta>0)={boot_res['p_value_delta_greater_zero']*100:.2f}%")
 
     print("\n=================== TOURNAMENT MASTER VERDICT ===================")
     print(f" Control Baseline (No Peers) OOF AUC: {auc_control:.6f}")
