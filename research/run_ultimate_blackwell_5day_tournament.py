@@ -245,8 +245,8 @@ class RotaryPositionalEmbedding(nn.Module):
 
 
 def apply_rope(x, freqs):
-    sin = freqs.sin().unsqueeze(0)
-    cos = freqs.cos().unsqueeze(0)
+    sin = freqs.sin().unsqueeze(0).to(x.dtype)
+    cos = freqs.cos().unsqueeze(0).to(x.dtype)
     x_rot = torch.cat((-x[..., x.shape[-1]//2:], x[..., :x.shape[-1]//2]), dim=-1)
     return (x * cos) + (x_rot * sin)
 
@@ -344,6 +344,8 @@ def train_eval_moe_probe(
                 loss = criterion(logits, lbls)
 
             scaler.scale(loss).backward()
+            scaler.unscale_(optimizer)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             scaler.step(optimizer)
             scaler.update()
 
@@ -355,9 +357,11 @@ def train_eval_moe_probe(
             with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
                 logits = model(seqs, lens)
                 p = torch.sigmoid(logits).float().cpu().numpy()
+                p = np.nan_to_num(p, nan=0.5, posinf=1.0, neginf=0.0)
             probs.extend(p)
 
-    return np.array(probs, dtype=np.float64)
+    probs_arr = np.nan_to_num(np.array(probs, dtype=np.float64), nan=0.5, posinf=1.0, neginf=0.0)
+    return probs_arr
 
 
 # ==============================================================================
@@ -467,7 +471,7 @@ def main() -> int:
 
     for traj_id, group in grouped:
         group_sorted = group.sort_values("step", kind="stable")
-        seq_feats = group_sorted[all_features].fillna(0.0).to_numpy(dtype=np.float32)
+        seq_feats = np.nan_to_num(group_sorted[all_features].fillna(0.0).to_numpy(dtype=np.float32), nan=0.0, posinf=0.0, neginf=0.0)
         trajectory_seqs.append(seq_feats)
         trajectory_labels.append(int(group_sorted["correct"].iloc[-1]))
         trajectory_meta.append({"trajectory_id": traj_id, "task_id": group_sorted["task_id"].iloc[-1]})
