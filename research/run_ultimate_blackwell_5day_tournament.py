@@ -138,7 +138,7 @@ def build_ultimate_representation_features(frame: pd.DataFrame) -> tuple[pd.Data
         ).astype(np.float32)
         new_cols.extend(["fleiss_kappa_consensus", "entropy_dampened_support"])
 
-    # 4. Trajectory Savitzky-Golay Entropy Smoothing
+    # 4. Trajectory Savitzky-Golay Entropy Smoothing & ArXiv 2026 SOTA Signals (CoDE-Stop & Renewal Dynamics)
     if "entropy_mean" in work.columns:
         def smooth_trajectory(series: pd.Series) -> pd.Series:
             arr = series.to_numpy(dtype=np.float32)
@@ -152,6 +152,27 @@ def build_ultimate_representation_features(frame: pd.DataFrame) -> tuple[pd.Data
             .astype(np.float32)
         )
         new_cols.append("entropy_mean_smoothed")
+
+    # 5. CoDE-Stop Confidence Monotonicity & Rolling Volatility (Hosseini et al. arXiv:2604.04930)
+    if "peer_support_fraction" in work.columns:
+        work["confidence_rolling_var"] = (
+            work.groupby("trajectory_id", sort=False)["peer_support_fraction"]
+            .transform(lambda x: x.expanding().var().fillna(0.0))
+            .astype(np.float32)
+        )
+        work["confidence_cum_max"] = (
+            work.groupby("trajectory_id", sort=False)["peer_support_fraction"]
+            .transform(lambda x: x.cummax())
+            .astype(np.float32)
+        )
+        new_cols.extend(["confidence_rolling_var", "confidence_cum_max"])
+
+    # 6. Prefix Sufficiency & Harmful Overthinking Drift Protection (Caldarella et al. arXiv:2606.02835)
+    if "peer_support_fraction" in work.columns and "panel_response_entropy" in work.columns:
+        work["prefix_sufficiency_signal"] = (
+            work["confidence_cum_max"] * (1.0 - (work["panel_response_entropy"] / 3.0).clip(0.0, 1.0))
+        ).astype(np.float32)
+        new_cols.append("prefix_sufficiency_signal")
 
     # Clean missing values
     for col in new_cols:
