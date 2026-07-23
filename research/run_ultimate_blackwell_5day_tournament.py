@@ -87,7 +87,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=256)
     parser.add_argument("--hidden-dim", type=int, default=256)
     parser.add_argument("--num-seeds", type=int, default=1)
-    parser.add_argument("--mode", type=str, default="quick", choices=["quick", "overnight", "marathon"], help="Execution scale: quick (15m), overnight (12h), marathon (5d)")
+    parser.add_argument("--mode", type=str, default="quick", choices=["quick", "overnight", "marathon", "ultra"], help="Execution scale: quick (15m), overnight (12h), marathon (3d), ultra (5d+ deep research)")
     parser.add_argument("--n-splits", type=int, default=5)
     parser.add_argument("--bootstrap-draws", type=int, default=10000)
     parser.add_argument("--seed", type=int, default=20260725)
