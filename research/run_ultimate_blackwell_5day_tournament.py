@@ -471,6 +471,7 @@ def main() -> int:
 
     auc_control = float(roc_auc_score(labels, oof_control))
     print(f"  Control Baseline OOF ROC-AUC: {auc_control:.6f}", flush=True)
+    save_checkpoint_and_git_push(args.output_dir, f"Phase 1 Complete - Control Baseline OOF AUC: {auc_control:.6f}")
 
     # 2. PyTorch Deep Hybrid MoE Probe Training
     print("\n--- Phase 2: Training PyTorch Deep Hybrid MoE Sequence Probe (AMP bfloat16) ---", flush=True)
@@ -499,7 +500,9 @@ def main() -> int:
 
         probs = train_eval_moe_probe(tr_s, tr_l, te_s, te_l, len(all_features), args.epochs, args.batch_size, device)
         oof_moe_probe[te_idx] = probs
-        print(f"  [Deep Hybrid MoE Probe] Fold {fold}/{args.n_splits} Trajectory AUC: {roc_auc_score(te_l, probs):.6f}", flush=True)
+        fold_auc = roc_auc_score(te_l, probs)
+        print(f"  [Deep Hybrid MoE Probe] Fold {fold}/{args.n_splits} Trajectory AUC: {fold_auc:.6f}", flush=True)
+        save_checkpoint_and_git_push(args.output_dir, f"Deep Hybrid MoE Probe Fold {fold}/{args.n_splits} AUC: {fold_auc:.6f}")
 
     auc_moe = float(roc_auc_score(traj_lbls_np, oof_moe_probe))
     print(f"  [Phase 2 Result] PyTorch Deep Hybrid MoE Trajectory OOF AUC: {auc_moe:.6f}", flush=True)
