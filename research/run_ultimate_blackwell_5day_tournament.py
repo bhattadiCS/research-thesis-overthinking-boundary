@@ -83,8 +83,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-dir", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
-    parser.add_argument("--epochs", type=int, default=15)
+    parser.add_argument("--epochs", type=int, default=20)
     parser.add_argument("--batch-size", type=int, default=256)
+    parser.add_argument("--hidden-dim", type=int, default=256)
+    parser.add_argument("--num-seeds", type=int, default=1)
+    parser.add_argument("--mode", type=str, default="quick", choices=["quick", "overnight", "marathon"], help="Execution scale: quick (15m), overnight (12h), marathon (5d)")
     parser.add_argument("--n-splits", type=int, default=5)
     parser.add_argument("--bootstrap-draws", type=int, default=10000)
     parser.add_argument("--seed", type=int, default=20260725)
@@ -254,7 +257,7 @@ def apply_rope(x, freqs):
 
 
 class DeepHybridMoEProbe(nn.Module):
-    def __init__(self, input_dim: int, hidden_dim: int = 128, num_experts: int = 3):
+    def __init__(self, input_dim: int, hidden_dim: int = 256, num_experts: int = 3):
         super().__init__()
         self.proj_in = nn.Linear(input_dim, hidden_dim)
 
@@ -271,7 +274,8 @@ class DeepHybridMoEProbe(nn.Module):
 
         # Expert 3: Causal Transformer
         self.rope = RotaryPositionalEmbedding(hidden_dim)
-        self.transformer_layer = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=4, dim_feedforward=hidden_dim * 2, batch_first=True)
+        nhead = 8 if hidden_dim >= 256 else 4
+        self.transformer_layer = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=nhead, dim_feedforward=hidden_dim * 2, batch_first=True)
 
         # MoE Gating Network
         self.gate = nn.Linear(hidden_dim, num_experts)
@@ -325,6 +329,9 @@ def train_eval_moe_probe(
     epochs: int,
     batch_size: int,
     device: torch.device,
+    hidden_dim: int = 256,
+    num_seeds: int = 1,
+    seed: int = 42,
 ) -> np.ndarray:
     # Feature Standard Scaling for Neural Network Stability & High AUC Convergence
     tr_flat = np.concatenate(tr_seqs, axis=0)
@@ -337,41 +344,48 @@ def train_eval_moe_probe(
     train_loader = DataLoader(SequenceDataset(tr_seqs_scaled, tr_lbls), batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
     test_loader = DataLoader(SequenceDataset(te_seqs_scaled, te_lbls), batch_size=batch_size, shuffle=False, collate_fn=collate_fn)
 
-    model = DeepHybridMoEProbe(input_dim=input_dim).to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
-    criterion = nn.BCEWithLogitsLoss()
     device_type = "cuda" if device.type == "cuda" else "cpu"
-    scaler = torch.amp.GradScaler(device_type, enabled=(device_type == "cuda"))
+    all_seed_probs = []
 
-    model.train()
-    for epoch in range(epochs):
-        for seqs, lbls, lens in train_loader:
-            seqs, lbls, lens = seqs.to(device, non_blocking=True), lbls.to(device, non_blocking=True), lens.to(device, non_blocking=True)
-            optimizer.zero_grad()
+    for s_idx in range(num_seeds):
+        torch.manual_seed(seed + s_idx * 100)
+        model = DeepHybridMoEProbe(input_dim=input_dim, hidden_dim=hidden_dim).to(device)
+        optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=max(1, epochs), eta_min=1e-5)
+        criterion = nn.BCEWithLogitsLoss()
+        scaler = torch.amp.GradScaler(device_type, enabled=(device_type == "cuda"))
 
-            with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
-                logits = model(seqs, lens)
-                loss = criterion(logits, lbls)
+        model.train()
+        for epoch in range(epochs):
+            for seqs, lbls, lens in train_loader:
+                seqs, lbls, lens = seqs.to(device, non_blocking=True), lbls.to(device, non_blocking=True), lens.to(device, non_blocking=True)
+                optimizer.zero_grad()
 
-            scaler.scale(loss).backward()
-            scaler.unscale_(optimizer)
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-            scaler.step(optimizer)
-            scaler.update()
+                with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
+                    logits = model(seqs, lens)
+                    loss = criterion(logits, lbls)
 
-    model.eval()
-    probs = []
-    with torch.no_grad():
-        for seqs, _, lens in test_loader:
-            seqs, lens = seqs.to(device, non_blocking=True), lens.to(device, non_blocking=True)
-            with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
-                logits = model(seqs, lens)
-                p = torch.sigmoid(logits).float().cpu().numpy()
-                p = np.nan_to_num(p, nan=0.5, posinf=1.0, neginf=0.0)
-            probs.extend(p)
+                scaler.scale(loss).backward()
+                scaler.unscale_(optimizer)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+                scaler.step(optimizer)
+                scaler.update()
+            scheduler.step()
 
-    probs_arr = np.nan_to_num(np.array(probs, dtype=np.float64), nan=0.5, posinf=1.0, neginf=0.0)
-    return probs_arr
+        model.eval()
+        probs = []
+        with torch.no_grad():
+            for seqs, _, lens in test_loader:
+                seqs, lens = seqs.to(device, non_blocking=True), lens.to(device, non_blocking=True)
+                with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
+                    logits = model(seqs, lens)
+                    p = torch.sigmoid(logits).float().cpu().numpy()
+                    p = np.nan_to_num(p, nan=0.5, posinf=1.0, neginf=0.0)
+                probs.extend(p)
+        all_seed_probs.append(np.array(probs, dtype=np.float64))
+
+    mean_probs = np.mean(all_seed_probs, axis=0)
+    return np.nan_to_num(mean_probs, nan=0.5, posinf=1.0, neginf=0.0)
 
 
 # ==============================================================================
@@ -444,6 +458,18 @@ def main() -> int:
         args.n_splits = 2
         args.epochs = 1
         args.bootstrap_draws = 100
+    elif args.mode == "overnight":
+        print("[OVERNIGHT MODE] Scaling to 50 Epochs, 256 Hidden Dim, 3 Random Seeds per fold (15 PyTorch MoE Probes total). Estimated run time: ~12-18 Hours.", flush=True)
+        args.epochs = 50
+        args.hidden_dim = 256
+        args.num_seeds = 3
+        args.bootstrap_draws = 25000
+    elif args.mode == "marathon":
+        print("[MARATHON 5-DAY MODE] Scaling to 100 Epochs, 512 Hidden Dim, 5 Random Seeds per fold (25 PyTorch MoE Probes total). Estimated run time: ~3-5 Days.", flush=True)
+        args.epochs = 100
+        args.hidden_dim = 512
+        args.num_seeds = 5
+        args.bootstrap_draws = 50000
 
     raw_frame = build_prefix_and_committee_features(raw_frame)
     frame, peer_cols = build_peer_dynamics_features(raw_frame.copy())
@@ -474,7 +500,7 @@ def main() -> int:
     save_checkpoint_and_git_push(args.output_dir, f"Phase 1 Complete - Control Baseline OOF AUC: {auc_control:.6f}")
 
     # 2. PyTorch Deep Hybrid MoE Probe Training
-    print("\n--- Phase 2: Training PyTorch Deep Hybrid MoE Sequence Probe (AMP bfloat16) ---", flush=True)
+    print(f"\n--- Phase 2: Training PyTorch Deep Hybrid MoE Sequence Probe (AMP bfloat16, Hidden={args.hidden_dim}, Seeds={args.num_seeds}) ---", flush=True)
     grouped = frame.groupby("trajectory_id", sort=False)
     trajectory_seqs = []
     trajectory_labels = []
@@ -498,7 +524,10 @@ def main() -> int:
         te_s = [trajectory_seqs[i] for i in te_idx]
         te_l = [trajectory_labels[i] for i in te_idx]
 
-        probs = train_eval_moe_probe(tr_s, tr_l, te_s, te_l, len(all_features), args.epochs, args.batch_size, device)
+        probs = train_eval_moe_probe(
+            tr_s, tr_l, te_s, te_l, len(all_features), args.epochs, args.batch_size, device,
+            hidden_dim=args.hidden_dim, num_seeds=args.num_seeds, seed=args.seed + fold * 10
+        )
         oof_moe_probe[te_idx] = probs
         fold_auc = roc_auc_score(te_l, probs)
         print(f"  [Deep Hybrid MoE Probe] Fold {fold}/{args.n_splits} Trajectory AUC: {fold_auc:.6f}", flush=True)

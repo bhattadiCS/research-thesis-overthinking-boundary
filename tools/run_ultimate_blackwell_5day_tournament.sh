@@ -24,19 +24,18 @@ fi
 
 INPUT_DIR="${INPUT_DIR:-research/outputs/experiments_v2}"
 OUTPUT_DIR="${OUTPUT_DIR:-research/outputs/experiments_v2/blackwell_5day_tournament_v1}"
-EPOCHS="${EPOCHS:-20}"
+MODE="${MODE:-overnight}"
 BATCH_SIZE="${BATCH_SIZE:-512}"
-BOOTSTRAP_DRAWS="${BOOTSTRAP_DRAWS:-10000}"
 JOBS="${JOBS:-16}"
 
 echo "==============================================================="
-echo " ULTIMATE BLACKWELL 5-DAY TOURNAMENT LAUNCHER"
+echo " ULTIMATE BLACKWELL GPU TOURNAMENT LAUNCHER"
 echo "==============================================================="
 echo "[INFO] Python Binary: ${PYTHON_BIN}"
+echo "[INFO] Mode: ${MODE} (quick, overnight, or marathon)"
 echo "[INFO] Input Directory: ${INPUT_DIR}"
 echo "[INFO] Output Directory: ${OUTPUT_DIR}"
-echo "[INFO] Epochs: ${EPOCHS} | Batch Size: ${BATCH_SIZE} | Jobs: ${JOBS}"
-echo "[INFO] Bootstrap Draws: ${BOOTSTRAP_DRAWS}"
+echo "[INFO] Batch Size: ${BATCH_SIZE} | Jobs: ${JOBS}"
 echo "==============================================================="
 
 "${PYTHON_BIN}" -c "
@@ -52,13 +51,12 @@ if torch.cuda.is_available():
 echo "[INFO] Running Self-Test..."
 "${PYTHON_BIN}" research/run_ultimate_blackwell_5day_tournament.py --self-test
 
-echo "[INFO] Launching Blackwell 5-Day Tournament..."
+echo "[INFO] Launching Blackwell GPU Tournament (Mode: ${MODE})..."
 "${PYTHON_BIN}" research/run_ultimate_blackwell_5day_tournament.py \
   --input-dir "${INPUT_DIR}" \
   --output-dir "${OUTPUT_DIR}" \
-  --epochs "${EPOCHS}" \
+  --mode "${MODE}" \
   --batch-size "${BATCH_SIZE}" \
-  --bootstrap-draws "${BOOTSTRAP_DRAWS}" \
   --jobs "${JOBS}"
 
 echo "==============================================================="
