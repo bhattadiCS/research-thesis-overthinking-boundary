@@ -28,6 +28,7 @@ import pandas as pd
 from scipy.signal import savgol_filter
 from sklearn.ensemble import ExtraTreesClassifier, HistGradientBoostingClassifier
 import subprocess
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import brier_score_loss, roc_auc_score
 from sklearn.model_selection import GroupKFold
 
@@ -65,14 +66,15 @@ def save_checkpoint_and_git_push(output_dir: Path, commit_msg: str) -> None:
         rel_path = str(output_dir)
 
     print(f"\n[CHECKPOINT & PUSH] Committing progress: '{commit_msg}'...", flush=True)
+    env_noninteractive = {**os.environ, "GIT_TERMINAL_PROMPT": "0"}
     try:
-        subprocess.run(["git", "add", rel_path], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run(["git", "commit", "-m", f"checkpoint: {commit_msg}"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        res = subprocess.run(["git", "push", "origin", "main"], check=False, capture_output=True, text=True)
+        subprocess.run(["git", "add", rel_path], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env_noninteractive)
+        subprocess.run(["git", "commit", "-m", f"checkpoint: {commit_msg}"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env_noninteractive)
+        res = subprocess.run(["git", "push", "origin", "main"], check=False, capture_output=True, text=True, env=env_noninteractive)
         if res.returncode == 0:
             print("  -> Git Checkpoint Successfully Pushed to GitHub main!", flush=True)
         else:
-            print(f"  -> Git push note: {res.stderr.strip() or 'already up to date'}", flush=True)
+            print(f"  -> Git push status: {res.stderr.strip() or 'local checkpoint saved (push skipped due to non-cached auth)'}", flush=True)
     except Exception as e:
         print(f"  -> Checkpoint push warning: {e}", flush=True)
 
@@ -324,8 +326,16 @@ def train_eval_moe_probe(
     batch_size: int,
     device: torch.device,
 ) -> np.ndarray:
-    train_loader = DataLoader(SequenceDataset(tr_seqs, tr_lbls), batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
-    test_loader = DataLoader(SequenceDataset(te_seqs, te_lbls), batch_size=batch_size, shuffle=False, collate_fn=collate_fn)
+    # Feature Standard Scaling for Neural Network Stability & High AUC Convergence
+    tr_flat = np.concatenate(tr_seqs, axis=0)
+    scaler_feat = StandardScaler()
+    scaler_feat.fit(tr_flat)
+
+    tr_seqs_scaled = [scaler_feat.transform(s).astype(np.float32) for s in tr_seqs]
+    te_seqs_scaled = [scaler_feat.transform(s).astype(np.float32) for s in te_seqs]
+
+    train_loader = DataLoader(SequenceDataset(tr_seqs_scaled, tr_lbls), batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+    test_loader = DataLoader(SequenceDataset(te_seqs_scaled, te_lbls), batch_size=batch_size, shuffle=False, collate_fn=collate_fn)
 
     model = DeepHybridMoEProbe(input_dim=input_dim).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
