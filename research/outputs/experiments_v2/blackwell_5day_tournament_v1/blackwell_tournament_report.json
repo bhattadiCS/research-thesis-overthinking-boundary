@@ -1,17 +1,17 @@
 {
   "schema_version": "blackwell-tournament-v1",
-  "timestamp_unix": 1784766343.7123468,
+  "timestamp_unix": 1784786062.1191561,
   "total_rows": 144440,
   "total_tasks": 2948,
   "total_features": 195,
   "control_baseline_auc": 0.9432225590934173,
-  "deep_hybrid_moe_auc": 0.9159153367546709,
-  "stacked_meta_ensemble_auc": 0.9544867670516324,
-  "brier_score": 0.07709493243642938,
+  "deep_hybrid_moe_auc": 0.9384245688340871,
+  "stacked_meta_ensemble_auc": 0.9551402918827281,
+  "brier_score": 0.07645562775149846,
   "bootstrap_results": {
-    "mean_delta_auc": 0.011265457092948055,
-    "ci_95_low": 0.009819041923529174,
-    "ci_95_high": 0.012722878356793834,
+    "mean_delta_auc": 0.011920244897824096,
+    "ci_95_low": 0.010427765870313063,
+    "ci_95_high": 0.013417052809399019,
     "p_value_delta_greater_zero": 1.0
   }
 }
