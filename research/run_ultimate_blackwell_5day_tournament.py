@@ -426,6 +426,8 @@ def train_eval_moe_probe(
                 scaler2.update()
             sch2.step()
 
+        print(f"    [Seed {s_idx+1}/{num_seeds}] Trained MoE Probe & Residual BiGRU ({epochs} Epochs)...", flush=True)
+
         m1.eval()
         m2.eval()
         probs = []
@@ -517,16 +519,25 @@ def main() -> int:
         args.epochs = 1
         args.bootstrap_draws = 100
     elif args.mode == "overnight":
-        print("[OVERNIGHT MODE] Scaling to 50 Epochs, 256 Hidden Dim, 3 Random Seeds per fold (15 PyTorch MoE Probes total). Estimated run time: ~12-18 Hours.", flush=True)
-        args.epochs = 50
+        print("[OVERNIGHT MODE] Scaling to 300 Epochs (batch_size=32), 256 Hidden Dim, 5 Random Seeds per fold (50 PyTorch Models total). Estimated run time: ~8-12 Hours.", flush=True)
+        args.epochs = 300
+        args.batch_size = 32
         args.hidden_dim = 256
-        args.num_seeds = 3
+        args.num_seeds = 5
         args.bootstrap_draws = 25000
     elif args.mode == "marathon":
-        print("[MARATHON 5-DAY MODE] Scaling to 100 Epochs, 512 Hidden Dim, 5 Random Seeds per fold (25 PyTorch MoE Probes total). Estimated run time: ~3-5 Days.", flush=True)
-        args.epochs = 100
+        print("[MARATHON MODE] Scaling to 500 Epochs (batch_size=32), 512 Hidden Dim, 8 Random Seeds per fold (80 PyTorch Models total). Estimated run time: ~24-36 Hours.", flush=True)
+        args.epochs = 500
+        args.batch_size = 32
         args.hidden_dim = 512
-        args.num_seeds = 5
+        args.num_seeds = 8
+        args.bootstrap_draws = 50000
+    elif args.mode == "ultra":
+        print("[ULTRA DEEP RESEARCH MODE] Scaling to 1,000 Epochs (batch_size=32), 512 Hidden Dim, 10 Random Seeds per fold (100 PyTorch Models total across 4 Neural Probe Architectures). Estimated run time: ~3-5 Days Non-Stop.", flush=True)
+        args.epochs = 1000
+        args.batch_size = 32
+        args.hidden_dim = 512
+        args.num_seeds = 10
         args.bootstrap_draws = 50000
 
     raw_frame = build_prefix_and_committee_features(raw_frame)
