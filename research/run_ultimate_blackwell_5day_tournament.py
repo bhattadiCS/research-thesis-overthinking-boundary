@@ -102,12 +102,12 @@ def parse_args() -> argparse.Namespace:
 # ==============================================================================
 
 def build_ultimate_representation_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
-    """Construct 200+ feature space: 3rd order Jerk, Torsion, Curvature, Fleiss Kappa, 8-scale EMA."""
+    """Construct 250+ feature space: 5th-order Crackle, Torsion, Curvature, Fleiss Kappa, 16-scale EMA."""
     work = frame.copy()
     work = work.sort_values(["trajectory_id", "step"], kind="stable")
     new_cols: list[str] = []
 
-    # 1. High-Order Differential Trajectory Physics (Velocity, Acceleration, Jerk, Curvature, Torsion)
+    # 1. High-Order Differential Trajectory Physics (Velocity, Acceleration, Jerk, Snap, Crackle)
     for source_col in ["peer_support_fraction", "panel_response_entropy", "peer_support_margin_count"]:
         if source_col not in work.columns:
             continue
@@ -115,22 +115,30 @@ def build_ultimate_representation_features(frame: pd.DataFrame) -> tuple[pd.Data
         p1 = work.groupby("trajectory_id", sort=False)[source_col].shift(1).fillna(0.0)
         p2 = work.groupby("trajectory_id", sort=False)[source_col].shift(2).fillna(0.0)
         p3 = work.groupby("trajectory_id", sort=False)[source_col].shift(3).fillna(0.0)
+        p4 = work.groupby("trajectory_id", sort=False)[source_col].shift(4).fillna(0.0)
+        p5 = work.groupby("trajectory_id", sort=False)[source_col].shift(5).fillna(0.0)
 
         v_t = (work[source_col] - p1).astype(np.float32)
         a_t = (v_t - (p1 - p2)).astype(np.float32)
         j_t = (a_t - (p1 - 2 * p2 + p3)).astype(np.float32)
+        s_t = (j_t - (p1 - 3 * p2 + 3 * p3 - p4)).astype(np.float32)
+        c_t = (s_t - (p1 - 4 * p2 + 6 * p3 - 4 * p4 + p5)).astype(np.float32)
 
         col_v = f"v_{source_col}"
         col_a = f"a_{source_col}"
         col_j = f"j_{source_col}"
+        col_s = f"snap_{source_col}"
+        col_c = f"crackle_{source_col}"
 
         work[col_v] = v_t
         work[col_a] = a_t
         work[col_j] = j_t
-        new_cols.extend([col_v, col_a, col_j])
+        work[col_s] = s_t
+        work[col_c] = c_t
+        new_cols.extend([col_v, col_a, col_j, col_s, col_c])
 
-        # 8-Scale Exponential Memory Decay Spectrum
-        for gamma in [0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9]:
+        # 16-Scale Exponential Memory Decay Spectrum
+        for gamma in [0.001, 0.005, 0.01, 0.02, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95]:
             ema_col = f"ema_{gamma}_{source_col}"
             work[ema_col] = (
                 work.groupby("trajectory_id", sort=False)[source_col]
@@ -320,6 +328,30 @@ class DeepHybridMoEProbe(nn.Module):
         return logits
 
 
+class CausalAttractorGRU(nn.Module):
+    def __init__(self, input_dim: int, hidden_dim: int = 256):
+        super().__init__()
+        self.proj_in = nn.Linear(input_dim, hidden_dim)
+        self.bigru = nn.GRU(hidden_dim, hidden_dim // 2, num_layers=3, batch_first=True, bidirectional=True, dropout=0.2)
+        self.norm = nn.LayerNorm(hidden_dim)
+        self.fc_out = nn.Sequential(
+            nn.Linear(hidden_dim, 128),
+            nn.SiLU(),
+            nn.Dropout(0.2),
+            nn.Linear(128, 1)
+        )
+
+    def forward(self, x, lengths):
+        h = F.silu(self.proj_in(x))
+        out, _ = self.bigru(h)
+        out = self.norm(out + h)
+        B, T, H = out.size()
+        lengths = lengths.to(x.device)
+        final_idx = (lengths - 1).unsqueeze(1).unsqueeze(2).expand(B, 1, H)
+        final_h = out.gather(1, final_idx).squeeze(1)
+        return self.fc_out(final_h).squeeze(-1)
+
+
 def train_eval_moe_probe(
     tr_seqs: list[np.ndarray],
     tr_lbls: list[int],
@@ -348,38 +380,64 @@ def train_eval_moe_probe(
     all_seed_probs = []
 
     for s_idx in range(num_seeds):
+        # 1. Probe Architecture 1: DeepHybridMoEProbe (Transformer + BiGRU + TCN)
         torch.manual_seed(seed + s_idx * 100)
-        model = DeepHybridMoEProbe(input_dim=input_dim, hidden_dim=hidden_dim).to(device)
-        optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=max(1, epochs), eta_min=1e-5)
-        criterion = nn.BCEWithLogitsLoss()
-        scaler = torch.amp.GradScaler(device_type, enabled=(device_type == "cuda"))
+        m1 = DeepHybridMoEProbe(input_dim=input_dim, hidden_dim=hidden_dim).to(device)
+        opt1 = torch.optim.AdamW(m1.parameters(), lr=1e-3, weight_decay=1e-4)
+        sch1 = torch.optim.lr_scheduler.CosineAnnealingLR(opt1, T_max=max(1, epochs), eta_min=1e-5)
+        crit1 = nn.BCEWithLogitsLoss()
+        scaler1 = torch.amp.GradScaler(device_type, enabled=(device_type == "cuda"))
 
-        model.train()
+        m1.train()
         for epoch in range(epochs):
             for seqs, lbls, lens in train_loader:
                 seqs, lbls, lens = seqs.to(device, non_blocking=True), lbls.to(device, non_blocking=True), lens.to(device, non_blocking=True)
-                optimizer.zero_grad()
-
+                opt1.zero_grad()
                 with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
-                    logits = model(seqs, lens)
-                    loss = criterion(logits, lbls)
+                    logits = m1(seqs, lens)
+                    loss = crit1(logits, lbls)
+                scaler1.scale(loss).backward()
+                scaler1.unscale_(opt1)
+                torch.nn.utils.clip_grad_norm_(m1.parameters(), max_norm=1.0)
+                scaler1.step(opt1)
+                scaler1.update()
+            sch1.step()
 
-                scaler.scale(loss).backward()
-                scaler.unscale_(optimizer)
-                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-                scaler.step(optimizer)
-                scaler.update()
-            scheduler.step()
+        # 2. Probe Architecture 2: CausalAttractorGRU (Residual 3-Layer BiGRU)
+        torch.manual_seed(seed + s_idx * 100 + 7)
+        m2 = CausalAttractorGRU(input_dim=input_dim, hidden_dim=hidden_dim).to(device)
+        opt2 = torch.optim.AdamW(m2.parameters(), lr=1e-3, weight_decay=1e-4)
+        sch2 = torch.optim.lr_scheduler.CosineAnnealingLR(opt2, T_max=max(1, epochs), eta_min=1e-5)
+        crit2 = nn.BCEWithLogitsLoss()
+        scaler2 = torch.amp.GradScaler(device_type, enabled=(device_type == "cuda"))
 
-        model.eval()
+        m2.train()
+        for epoch in range(epochs):
+            for seqs, lbls, lens in train_loader:
+                seqs, lbls, lens = seqs.to(device, non_blocking=True), lbls.to(device, non_blocking=True), lens.to(device, non_blocking=True)
+                opt2.zero_grad()
+                with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
+                    logits = m2(seqs, lens)
+                    loss = crit2(logits, lbls)
+                scaler2.scale(loss).backward()
+                scaler2.unscale_(opt2)
+                torch.nn.utils.clip_grad_norm_(m2.parameters(), max_norm=1.0)
+                scaler2.step(opt2)
+                scaler2.update()
+            sch2.step()
+
+        m1.eval()
+        m2.eval()
         probs = []
         with torch.no_grad():
             for seqs, _, lens in test_loader:
                 seqs, lens = seqs.to(device, non_blocking=True), lens.to(device, non_blocking=True)
                 with torch.amp.autocast(device_type, dtype=torch.bfloat16 if device_type == "cuda" else torch.float32, enabled=(device_type == "cuda")):
-                    logits = model(seqs, lens)
-                    p = torch.sigmoid(logits).float().cpu().numpy()
+                    l1 = m1(seqs, lens)
+                    l2 = m2(seqs, lens)
+                    p1 = torch.sigmoid(l1).float().cpu().numpy()
+                    p2 = torch.sigmoid(l2).float().cpu().numpy()
+                    p = 0.5 * (p1 + p2)
                     p = np.nan_to_num(p, nan=0.5, posinf=1.0, neginf=0.0)
                 probs.extend(p)
         all_seed_probs.append(np.array(probs, dtype=np.float64))
