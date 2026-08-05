@@ -14,7 +14,7 @@
 | :--- | ---: | ---: | :--- |
 | **Control Baseline (No Peers)** | **0.943223** | 0.0892 | Baseline Reference |
 | **PyTorch Deep Hybrid MoE Probe** | **0.936430** | 0.0815 | Sequence Neural Probe |
-| **STACKED HYBRID META-ENSEMBLE** | **0.955156** | **0.076396** | **[0.951156, 0.959156]** |
+| **STACKED HYBRID META-ENSEMBLE** | **0.955156** | **0.076396** | Bootstrap lift CI in the JSON: **[0.010384, 0.013480]** |
 
 ---
 
@@ -22,5 +22,7 @@
 
 - **Mean Delta AUC Lift:** `+0.011937`
 - **95% Bootstrap Confidence Interval:** `[0.010384, 0.013480]`
-- **Statistical Significance $P(\Delta > 0)$:** **`100.00%`**
+- **Empirical bootstrap proportion $\Pr^*(\Delta > 0)$:** **`100.00%`**
+
+The persisted interval is for the task-clustered AUC lift over the control, not a standalone confidence interval for the absolute stacked AUC. The reported proportion is an empirical bootstrap proportion, not a conventional hypothesis-test $p$-value.
 
