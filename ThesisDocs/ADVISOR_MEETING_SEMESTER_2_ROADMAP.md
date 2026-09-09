@@ -13,7 +13,7 @@
 
 ## 🎯 At-a-Glance: The 60-Second Meeting Elevator Pitch
 
-> *"Dr. Woods, over Semester 1 we completed the heavy empirical lifting: we captured over **75,000 reasoning traces** across 13 models and 4 domains, conducted an adversarial scientific audit, proved the mathematical necessity of the $T_{\min}=2$ boundary floor, and trained a Blackwell GPU Stacked Meta-Ensemble achieving **0.955 OOF ROC-AUC**.*
+> *"Dr. Woods, over Semester 1 we completed the heavy empirical lifting: we captured over **75,000 reasoning traces** across 13 models and 4 domains, conducted an adversarial scientific audit, proved the mathematical necessity of the boundary floor ($T_{\min} = 2$), and trained a Blackwell GPU Stacked Meta-Ensemble achieving **0.955 OOF ROC-AUC**.*
 >
 > *For this final semester, our goal is not to run more compute sweeps. It is to **turn these retrospective findings into a defended thesis**:*
 > 1. *Deploy a **prefix-safe live stopping controller** and map the accuracy-vs-compute Pareto curve.*
@@ -27,10 +27,16 @@
 ### Figure 1: The Core Phenomenon — Overthinking Drift & Optimal Stopping
 When reasoning models think for too long, they often find the right answer early on and then corrupt it through excessive self-doubt.
 
-| (a) Overthinking Drift (Accuracy Degradation) | (b) Optimal Stopping Utility ($U = C - 0.05(t-1)$) |
+| (a) Overthinking Drift (Accuracy Degradation) | (b) Optimal Stopping Utility: $U_t = C_t - 0.05(t - 1)$ |
 | :---: | :---: |
 | ![Overthinking Drift](images/overthinking_drift_by_step.png) | ![Stopping Utility](images/stopping_utility_by_step.png) |
 | *Accuracy peaks at steps 2–3, then degrades by up to 15% as models overthink.* | *Expected net utility crosses zero; stopping at peak utility saves compute and preserves correctness.* |
+
+The realized stopping utility balances correctness $C_t \in \{0, 1\}$ against step cost $\lambda = 0.05$:
+
+$$
+U_t = C_t - \lambda(t - 1)
+$$
 
 ---
 
@@ -40,16 +46,16 @@ When reasoning models think for too long, they often find the right answer early
 flowchart LR
     subgraph EarlySteps["Early Reasoning Steps (t = 1 to 3)"]
         direction TB
-        R1["Repair Hazard (α_t) is HIGH<br/>Model is fixing initial arithmetic mistakes"]
+        R1["Repair Hazard (α_t) is HIGH<br/>Model is fixing initial mistakes"]
         C1["Corruption Hazard (β_t) is LOW<br/>Model hasn't started second-guessing"]
         G1["Continuation Gain μ_t > 0<br/>KEEP REASONING ✅"]
         R1 --> G1
         C1 --> G1
     end
 
-    subgraph Transition["THE BOUNDARY: T* = inf { t ≥ 2 : μ_t ≤ 0 }"]
+    subgraph Transition["THE BOUNDARY: T* = inf(t ≥ 2 : μ_t ≤ 0)"]
         direction TB
-        B["Break-even Point<br/>(1-q_t)α_t - q_t·β_t = λ"]
+        B["Break-even Point<br/>(1 - q_t)α_t - q_t·β_t = λ"]
     end
 
     subgraph LateSteps["Late Reasoning Steps (t ≥ 4)"]
@@ -64,9 +70,21 @@ flowchart LR
     EarlySteps --> Transition --> LateSteps
 ```
 
+The one-step continuation gain decomposes into competing repair and corruption forces:
+
+$$
+\mu_t = \mathbb{E}[V_{t+1} - V_t \mid \mathcal{F}_t] = (1 - q_t)\alpha_t - q_t\beta_t - \lambda
+$$
+
+And the canonical stopping boundary is the first step where continuing yields zero or negative expected benefit:
+
+$$
+T^* = \inf \{ t \ge 2 : \mu_t \le 0 \}
+$$
+
 **The Empirical Proof (Fixed 13-Model GSM8K Panel, 19,500 Traces):**
-- **Step 2:** Net drift $\widehat{D}_2 = \mathbf{+0.0513}$ (95% CI $[+0.0433, +0.0593]$) $\to$ **Strongly positive** (repair dominates).
-- **Step 4:** Net drift $\widehat{D}_4 = \mathbf{-0.0127}$ (95% CI $[-0.0186, -0.0065]$) $\to$ **Significantly negative** (corruption & cost dominate).
+- **Step 2:** Net drift $\widehat{D}_2 = +0.0513$ (95% CI $[+0.0433, +0.0593]$) $\to$ **Strongly positive** (repair dominates).
+- **Step 4:** Net drift $\widehat{D}_4 = -0.0127$ (95% CI $[-0.0186, -0.0065]$) $\to$ **Significantly negative** (corruption & cost dominate).
 - *Both 10,000-draw task-cluster bootstrap intervals strictly exclude zero.*
 
 ---
@@ -100,7 +118,7 @@ S --> R["FINAL OOF ROC-AUC: 0.955156<br/>(+0.0119 lift, 95% CI [0.0104, 0.0135])
 | (a) Model Scale vs Accuracy Drift | (b) BF16 vs 4-bit Quantization Impact |
 | :---: | :---: |
 | ![Model Scale Accuracy Drift](images/model_scale_accuracy_drift.png) | ![Quantization Generalization](images/quantization_generalization.png) |
-| *Larger models (14B, 32B) sustain positive repair drift longer than smaller models (0.5B, 3B).* | *Causal isolation (N6): 4-bit quantization degrades early reasoning by 14.3 pp (Z = 9.79).* |
+| *Larger models (14B, 32B) sustain positive repair drift longer than smaller models (0.5B, 3B).* | *Causal isolation (N6): 4-bit quantization degrades early reasoning by 14.3 pp ($Z = 9.79$).* |
 
 ---
 
@@ -130,7 +148,7 @@ We followed the scientific method rigorously—not just confirming what worked, 
 #### Where Did the 7.55% Decision Losses Go? (Loss Taxonomy)
 Every single loss in our canonical 75,965-trace matrix was categorized by [`research/classify_losses.py`](file:///C:/Aditya_Data/Personal/ResearchThesis/research/classify_losses.py):
 - **100% of losses are missed late corrections** (the model was wrong when stopped, but became correct later). Zero grading bugs.
-- **52.2%** stopped at the theoretical $T_{\min}=2$ floor.
+- **52.2%** stopped at the theoretical $T_{\min} = 2$ floor.
 - **48.5%** required repairs $\ge 2$ steps later (fundamental online uncertainty limit).
 
 ---
@@ -175,10 +193,10 @@ gantt
 | :---: | :--- | :--- | :--- |
 | **W1** | Sep 9 – Sep 13 | Freeze `data_manifest_v1.json` with SHA-256 hashes; resolve GPQA split metadata. | Clean-clone reproduction test; lock software dependencies. |
 | **W2** | Sep 14 – Sep 20 | Build `online_stopping_controller.py`; enforce causal prefix-only feature reads. | Verify byte-identical prefix outputs on 100 paired tasks; measure wall-clock latency. |
-| **W3** | Sep 21 – Sep 27 | Run nested task-grouped Bayesian sweep over $\lambda \in [0.01, 0.15]$ and offset $\delta$. | Pareto report selecting *Conservative* ($|\Delta \text{Acc}| \le 0.5\%$) vs *Efficiency* ($>40\%$ token savings) rules. |
+| **W3** | Sep 21 – Sep 27 | Run nested task-grouped Bayesian sweep over $\lambda \in [0.01, 0.15]$ and offset $\delta$. | Pareto report selecting *Conservative* ($\lvert \Delta\text{Acc} \rvert \le 0.5\%$) vs *Efficiency* ($>40\%$ token savings) rules. |
 | **W4** | Sep 28 – Oct 4 | Deploy 5-family adversarial stress suite (distractors, traps, anchoring, paraphrasing). | Generalization & OOD stress test report; document GPQA boundary conditions. |
 | **W5** | Oct 5 – Oct 11 | Formalize jump Markov process; write Theorem 1 OSLA proof; audit one-crossing conditions. | **Draft Chapter 2 (Mathematical Formulation & Theory).** |
-| **W6** | Oct 12 – Oct 18 | Derive drift perturbation bound $|\widehat{\mu}_t - \mu_t|$ and stopping displacement $|T^* - \widehat{\tau}|$. | **Draft Chapter 1 (Introduction) & Chapter 3 (Experimental Methodology).** |
+| **W6** | Oct 12 – Oct 18 | Derive drift perturbation bound $\lvert \widehat{\mu}_t - \mu_t \rvert$ and stopping displacement $\lvert T^* - \widehat{\tau} \rvert$. | **Draft Chapter 1 (Introduction) & Chapter 3 (Experimental Methodology).** |
 | **W7** | Oct 19 – Oct 25 | Integrate empirical results, tables, and failure taxonomy. | **Draft Chapters 4–6; SUBMIT FULL DRAFT v1.0 TO COMMITTEE (OCTOBER 23 TARGET).** |
 | **W8** | Oct 26 – Nov 1 | Establish Feedback Ledger; generate colorblind-safe publication vector figures. | Committee Revision Cycle 1; update manuscript to Draft v1.1. |
 | **W9** | Nov 2 – Nov 8 | Format core contributions into 25-page double-spaced technical paper for refereed venue. | Submit technical paper to referee portal / prepare preprint. |
