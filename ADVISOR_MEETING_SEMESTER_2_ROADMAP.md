@@ -18,10 +18,10 @@
 > - We confirmed that models reach peak accuracy early (at **step 2 or 3**), and that continuing beyond that point causes **overthinking drift**—the model second-guesses itself and changes right answers to wrong ones.
 > - We trained a classifier on an NVIDIA Blackwell GPU that tells apart correct and incorrect reasoning paths with **95.5% reliability (0.955 ROC-AUC)**.
 >
-> For this final semester, we do not need more large compute sweeps. Our focus is turning this research into a completed, defended thesis:
-> 1. **Build a live 'stop' button:** Make our detector stop models in real time while they generate text, cutting computing costs by 30% to 40% with no loss in accuracy.
-> 2. **Write the math theory:** Lay out the step-by-step proofs showing why stopping early is mathematically optimal.
-> 3. **Draft the thesis chapters & defend:** Submit Draft v1.0 by **October 23**, incorporate your feedback, and hold our oral defense in **late November**."*
+> For this final semester, we do not need more large compute sweeps. We want to **pull the writing timeline forward immediately** so we have plenty of time for revisions:
+> 1. **Start writing right now:** Because our Semester 1 data and experiments are already documented, we can draft Chapters 1–4 this month and deliver **Draft v1.0 by October 9**.
+> 2. **Build a live 'stop' button in parallel:** In Weeks 1–3, we turn our detector into a real-time tool that stops models during generation, saving 30% to 40% on compute.
+> 3. **4-Week Revision Window:** Submitting Draft v1 by October 9 gives you and Dr. Pemy a full month for feedback, so our late-November defense will be polished and stress-free."*
 
 ---
 
@@ -156,31 +156,33 @@ We inspected every single mistake made by our detector:
 
 ---
 
-## 📅 Semester 2 Roadmap: How We Finish in 14 Weeks
+## 📅 Semester 2 Accelerated Roadmap (Draft v1 by October 9)
+
+By pulling the writing schedule forward to run in parallel with engineering, we submit **Draft v1.0 by October 9** and unlock a **full 4-week revision period** with Dr. Woods and Dr. Pemy.
 
 ```mermaid
 flowchart LR
-    P1["Phase 1: Weeks 1 to 4<br/><b>Live Stopping Tool</b><br/>Test real-time stopping & measure compute savings"] --> P2["Phase 2: Weeks 5 to 7<br/><b>Write Thesis Draft</b><br/>Formalize math proofs & deliver Draft v1 by Oct 23"]
-    P2 --> P3["Phase 3: Weeks 8 to 9<br/><b>Committee Review</b><br/>Incorporate advisor feedback & prep conference paper"]
-    P3 --> P4["Phase 4: Weeks 10 to 14<br/><b>Defense & Graduation</b><br/>Rehearse slide deck, oral defense, library submission"]
+    P1["Phase 1: Weeks 1 to 3<br/><b>Write Ch 1-4 & Build Live Tool</b><br/>Intro, Background, Setup & Math while building online stopper"] --> P2["Phase 2: Weeks 4 to 5<br/><b>Finish Draft v1.0</b><br/>Ch 5-6 Results & Discussion<br/><b>SUBMIT DRAFT v1 BY OCT 9</b> 🎯"]
+    P2 --> P3["Phase 3: Weeks 6 to 9<br/><b>4-Week Committee Revision Window</b><br/>Two full feedback cycles with Dr. Woods + conference paper prep"]
+    P3 --> P4["Phase 4: Weeks 10 to 14<br/><b>Rehearse, Defend & Graduate</b><br/>Mock defenses, oral defense in late Nov, library archival"]
 ```
 
-### Weekly Schedule (15–20 Hours per Week)
+### Accelerated Week-by-Week Milestones
 
-| Week | Target Dates | Engineering & Code Goals | Writing & Thesis Deliverables |
+| Week | Target Dates | Engineering & Code Goals | Pulled-Forward Writing Deliverables |
 | :---: | :--- | :--- | :--- |
-| **W1** | Sep 9 – Sep 13 | Lock dataset hashes and package code cleanly. | Write down clean reproduction instructions. |
-| **W2** | Sep 14 – Sep 20 | Build `online_stopping_controller.py` to stop models live. | Verify live controller speed (fast real-time checks). |
-| **W3** | Sep 21 – Sep 27 | Measure token savings vs accuracy trade-offs. | Choose conservative rule (keep 99.5% accuracy) vs efficiency rule (save 40% tokens). |
-| **W4** | Sep 28 – Oct 4 | Test against tricky and deceptive math/science problems. | Document where the stopping rule works best and where it struggles. |
-| **W5** | Oct 5 – Oct 11 | Clean up mathematical formulas and step-by-step logic. | **Draft Chapter 2 (Mathematical Formulation & Theory).** |
-| **W6** | Oct 12 – Oct 18 | Add error-bound math for how close we get to the optimal stop. | **Draft Chapter 1 (Introduction) and Chapter 3 (Methodology).** |
-| **W7** | Oct 19 – Oct 25 | Put all results, charts, and failure analyses together. | **Draft Chapters 4–6; SUBMIT COMPLETE DRAFT v1.0 (OCTOBER 23 TARGET).** |
-| **W8** | Oct 26 – Nov 1 | Address first round of advisor edits and polish figures. | Complete Committee Revision Cycle 1; update to Draft v1.1. |
-| **W9** | Nov 2 – Nov 8 | Format key findings into a 25-page paper for conference submission. | Finalize conference/journal submission package. |
-| **W10** | Nov 9 – Nov 15 | Create 25 defense presentation slides (30-minute presentation). | Run first practice timing rehearsal. |
-| **W11** | Nov 16 – Nov 22 | Conduct two recorded mock defenses (with peers and advisor Q&A prep). | Finalize defense announcement and committee schedule. |
-| **W12** | Nov 23 – Nov 29 | **PUBLIC ORAL DEFENSE (30-min talk + 30-min Q&A).** | Committee evaluation and signature approval. |
+| **W1** | Sep 9 – Sep 13 | Lock dataset hashes and package code cleanly. | **Draft Chapter 1 (Introduction & Motivation) and Chapter 3 (Experimental Setup & 13 Models).** |
+| **W2** | Sep 14 – Sep 20 | Build `online_stopping_controller.py` to stop models live. | **Draft Chapter 4 (Empirical Evidence of Overthinking & Scaling Drift across 4 Benchmarks).** |
+| **W3** | Sep 21 – Sep 27 | Measure live token savings vs accuracy trade-offs. | **Draft Chapter 2 (Mathematical Formulation & Stopping Theory).** |
+| **W4** | Sep 28 – Oct 4 | Test against tricky adversarial questions and traps. | **Draft Chapter 5 (Live Online Stopping Results & Pareto Analysis) and Chapter 6 (Discussion & Limitations).** |
+| **W5** | Oct 5 – Oct 11 | Compile complete manuscript, figures, and bibliography. | **SUBMIT COMPLETE THESIS DRAFT v1.0 TO DR. WOODS & COMMITTEE (OCTOBER 9 TARGET)! 🚀** |
+| **W6** | Oct 12 – Oct 18 | Address initial committee feedback on structure and proofs. | **Committee Revision Cycle 1** (incorporate high-level advisor feedback). |
+| **W7** | Oct 19 – Oct 25 | Polish text and format figures; produce Draft v1.1. | Format core findings into a 25-page paper for conference/journal submission. |
+| **W8** | Oct 26 – Nov 1 | Fine-tune mathematical proofs and text clarity. | **Committee Revision Cycle 2** (line-by-line advisor polish; produce Draft v2.0). |
+| **W9** | Nov 2 – Nov 8 | Finalize conference submission package. | Build 25-slide defense deck (30-minute presentation). |
+| **W10** | Nov 9 – Nov 15 | Practice presentation timing and transitions. | **Mock Defense #1** (recorded practice talk with peers/lab group). |
+| **W11** | Nov 16 – Nov 22 | Adviser Q&A preparation; test tough defense questions. | **Mock Defense #2** (adviser dry run); confirm defense logistics & announcement. |
+| **W12** | Nov 23 – Nov 29 | **PUBLIC ORAL DEFENSE (30-min presentation + 30-min Q&A).** | Committee evaluation and signature approval. |
 | **W13** | Nov 30 – Dec 6 | Final formatting checks for JHU Sheridan Libraries (PDF/A). | **Submit final thesis to JHU ETD library repository.** |
 | **W14** | Dec 7 – Dec 11 | Submit signed completion paperwork to the JHU Registrar. | **Degree clearance and final grade recorded.** |
 
@@ -205,14 +207,14 @@ flowchart TD
     Q1["1. Are 75,000 reasoning traces enough, or do you want any more data runs?"]
     Q2["2. For our live stopping tool, do you prefer saving max compute (save 40% tokens) or max accuracy (stay within 0.5% of peak)?"]
     Q3["3. For Chapter 2 (Math Theory), what level of proof detail do you and Dr. Pemy want to see?"]
-    Q4["4. Does October 23 work well for receiving Draft v1.0, aiming for a late-November defense?"]
+    Q4["4. Does October 9 work well for receiving Draft v1.0, giving us a full month for revisions before the defense?"]
     Q1 --> Q2 --> Q3 --> Q4
 ```
 
 1. **Data Completeness:** Confirm that our 75,965 traces across 13 models are more than enough data so we can focus 100% on writing and live testing.
 2. **Stopping Rule Preference:** In production, do we want a **Conservative rule** (keep accuracy drop below 0.5%) or an **Efficiency rule** (cut computing costs by 40%+)?
 3. **Math Depth:** Dr. Woods and Dr. Pemy's expectations for proof rigor in Chapter 2.
-4. **Calendar:** Confirm the **October 23 delivery date for Draft v1.0** and the **late-November window for the oral defense**.
+4. **Accelerated Calendar:** Propose the **October 9 delivery date for Draft v1.0** (two weeks early!) to give the committee **4 full weeks of revision time** before the late-November defense.
 
 ---
 
