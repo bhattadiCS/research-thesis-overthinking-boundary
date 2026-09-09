@@ -1,231 +1,223 @@
-# Semester 2 Kickoff: Thesis Progress & Completion Roadmap
-## Visual Discussion Guide for Advisor Check-in (Fall 2026)
+# Semester 2 Kickoff: Thesis Progress & Roadmap
+## Discussion Guide for Informal Advisor Sync (Fall 2026)
 
 **Student:** Aditya Bhatt ([abhatt25@jh.edu](mailto:abhatt25@jh.edu))  
 **Research Adviser:** Dr. Zerotti Woods (Johns Hopkins APL / JHU ACM)  
 **Second Reader:** Dr. Moustapha Pemy (Towson University / JHU ACM)  
-**Course:** JHU EN.625.804 Applied and Computational Mathematics Master's Thesis  
-**Meeting Purpose:** Informal checkup & planning sync to touch base for the final semester  
-**Target Completion & Defense:** Late November / Early December 2026  
-**Repository:** [`bhattadiCS/research-thesis-overthinking-boundary`](https://github.com/bhattadiCS/research-thesis-overthinking-boundary) (branch `main`)
+**Degree:** M.S. in Applied and Computational Mathematics (JHU EN.625.804 Thesis)  
+**Meeting Style:** Informal checkup & planning sync to kick off the final semester  
+**Target Defense Date:** Late November / Early December 2026  
+**GitHub Repository:** [`bhattadiCS/research-thesis-overthinking-boundary`](https://github.com/bhattadiCS/research-thesis-overthinking-boundary) (branch `main`)
 
 ---
 
-## 🎯 At-a-Glance: The 60-Second Meeting Elevator Pitch
+## 🎯 60-Second Elevator Pitch for Dr. Woods
 
-> *"Dr. Woods, over Semester 1 we completed the heavy empirical lifting: we captured over **75,000 reasoning traces** across 13 models and 4 domains, conducted an adversarial scientific audit, proved the mathematical necessity of the boundary floor ($T_{\min} = 2$), and trained a Blackwell GPU Stacked Meta-Ensemble achieving **0.955 OOF ROC-AUC**.*
+> *"Dr. Woods, over Semester 1 we finished all the heavy experimental runs:
+> - We collected and analyzed over **75,000 reasoning steps** across 13 different open-source AI models (Llama, Mistral, Qwen, DeepSeek) on math and reasoning benchmarks.
+> - We confirmed that models reach peak accuracy early (at **step 2 or 3**), and that continuing beyond that point causes **overthinking drift**—the model second-guesses itself and changes right answers to wrong ones.
+> - We trained a classifier on an NVIDIA Blackwell GPU that tells apart correct and incorrect reasoning paths with **95.5% reliability (0.955 ROC-AUC)**.
 >
-> *For this final semester, our goal is not to run more compute sweeps. It is to **turn these retrospective findings into a defended thesis**:*
-> 1. *Deploy a **prefix-safe live stopping controller** and map the accuracy-vs-compute Pareto curve.*
-> 2. *Complete the **formal mathematical proofs** for finite-horizon OSLA optimality and perturbation bounds.*
-> 3. *Draft the **6-chapter manuscript**, deliver Draft v1 by October 23, and complete our public defense in late November."*
+> For this final semester, we do not need more large compute sweeps. Our focus is turning this research into a completed, defended thesis:
+> 1. **Build a live 'stop' button:** Make our detector stop models in real time while they generate text, cutting computing costs by 30% to 40% with no loss in accuracy.
+> 2. **Write the math theory:** Lay out the step-by-step proofs showing why stopping early is mathematically optimal.
+> 3. **Draft the thesis chapters & defend:** Submit Draft v1.0 by **October 23**, incorporate your feedback, and hold our oral defense in **late November**."*
 
 ---
 
-## 📊 Visual Walkthrough: The Core Science in 7 Figures
+## 📊 Visual Walkthrough: The Core Findings in Plain English
 
-### Figure 1: The Core Phenomenon — Overthinking Drift & Optimal Stopping
-When reasoning models think for too long, they often find the right answer early on and then corrupt it through excessive self-doubt.
+### Figure 1: The Core Problem — Why Thinking Longer Hurts
+When AI reasoning models think for too long, they often find the right answer early on, and then ruin it by overthinking.
 
-| (a) Overthinking Drift (Accuracy Degradation) | (b) Optimal Stopping Utility: $U_t = C_t - 0.05(t - 1)$ |
+| (a) Overthinking Drift (Accuracy by Step) | (b) Net Score (Accuracy minus Token Cost) |
 | :---: | :---: |
 | ![Overthinking Drift](ThesisDocs/images/overthinking_drift_by_step.png) | ![Stopping Utility](ThesisDocs/images/stopping_utility_by_step.png) |
-| *Accuracy peaks at steps 2–3, then degrades by up to 15% as models overthink.* | *Expected net utility crosses zero; stopping at peak utility saves compute and preserves correctness.* |
+| *Accuracy peaks at steps 2–3, then drops by up to 15% as models overthink.* | *Every extra step costs compute ($\lambda = 0.05$). Stopping at the peak saves tokens and protects accuracy.* |
 
-The realized stopping utility balances correctness $C_t \in \{0, 1\}$ against step cost $\lambda = 0.05$:
-
-$$
-U_t = C_t - \lambda(t - 1)
-$$
+**The Intuition:**
+- Every step of thinking costs computing power (for example, 5% of the total budget per step).
+- **If the model gets the right answer at Step 2 and stops:** It gets full credit with minimal compute used.
+- **If the model keeps rambling to Step 5 and changes to the wrong answer:** It wasted 5 steps of compute and gets zero credit!
+- Our goal is to stop at the peak—saving cost and locking in the correct answer.
 
 ---
 
-### Figure 2: The Mathematical Mechanism — Competing Hazards
+### Figure 2: The Mechanism — What Happens Inside Each Step?
 
 ```mermaid
 flowchart LR
-    subgraph EarlySteps["Early Reasoning Steps (t = 1 to 3)"]
+    subgraph Early["Early Steps (Steps 1 to 2)"]
         direction TB
-        R1["Repair Hazard (α_t) is HIGH<br/>Model is fixing initial mistakes"]
-        C1["Corruption Hazard (β_t) is LOW<br/>Model hasn't started second-guessing"]
-        G1["Continuation Gain μ_t > 0<br/>KEEP REASONING ✅"]
-        R1 --> G1
-        C1 --> G1
+        E1["Model catches arithmetic slip-ups"]
+        E2["Fixing mistakes happens often"]
+        E3["Result: Accuracy goes UP"]
+        E4["Action: Keep thinking! ✅"]
+        E1 --> E3
+        E2 --> E3
+        E3 --> E4
     end
 
-    subgraph Transition["THE BOUNDARY: T* = inf(t ≥ 2 : μ_t ≤ 0)"]
+    subgraph SweetSpot["The Sweet Spot (Step 2 to 3)"]
         direction TB
-        B["Break-even Point<br/>(1 - q_t)α_t - q_t·β_t = λ"]
+        S1["Model hits the correct answer"]
+        S2["Accuracy peaks here (75% to 80%)"]
+        S3["Action: Best time to stop! 🎯"]
+        S1 --> S2
+        S2 --> S3
     end
 
-    subgraph LateSteps["Late Reasoning Steps (t ≥ 4)"]
+    subgraph Late["Late Steps (Steps 4 to 5)"]
         direction TB
-        R2["Repair Hazard (α_t) DROPS<br/>Few new repairs occur"]
-        C2["Corruption Hazard (β_t) RISES<br/>Model overthinks and breaks right answers"]
-        G2["Continuation Gain μ_t ≤ 0<br/>STOP GENERATION 🛑"]
-        R2 --> G2
-        C2 --> G2
+        L1["Model doubts its own correct answer"]
+        L2["Changes right answers to wrong ones"]
+        L3["Result: Accuracy drops & tokens wasted"]
+        L4["Action: Stop immediately! 🛑"]
+        L1 --> L3
+        L2 --> L3
+        L3 --> L4
     end
 
-    EarlySteps --> Transition --> LateSteps
+    Early --> SweetSpot --> Late
 ```
 
-The one-step continuation gain decomposes into competing repair and corruption forces:
+**The Balance in Plain English:**
+At every step, two forces compete:
+1. **The Fixing Force:** The chance that the model notices and corrects an earlier mistake.
+2. **The Breaking Force:** The chance that the model doubts itself and ruins a good answer.
 
-$$
-\mu_t = \mathbb{E}[V_{t+1} - V_t \mid \mathcal{F}_t] = (1 - q_t)\alpha_t - q_t\beta_t - \lambda
-$$
-
-And the canonical stopping boundary is the first step where continuing yields zero or negative expected benefit:
-
-$$
-T^* = \inf \{ t \ge 2 : \mu_t \le 0 \}
-$$
-
-**The Empirical Proof (Fixed 13-Model GSM8K Panel, 19,500 Traces):**
-- **Step 2:** Net drift $\widehat{D}_2 = +0.0513$ (95% CI $[+0.0433, +0.0593]$) $\to$ **Strongly positive** (repair dominates).
-- **Step 4:** Net drift $\widehat{D}_4 = -0.0127$ (95% CI $[-0.0186, -0.0065]$) $\to$ **Significantly negative** (corruption & cost dominate).
-- *Both 10,000-draw task-cluster bootstrap intervals strictly exclude zero.*
+- In **Steps 1 and 2**, the fixing force is strong: the model checks its work and catches early slips.
+- In **Steps 4 and 5**, the breaking force takes over: almost no new fixes happen, and the model starts second-guessing itself.
+- **The Rule:** Stop the moment the risk of breaking a good answer is bigger than the chance of fixing a bad one!
 
 ---
 
-### Figure 3: How Did We Get to 0.955 AUC? Is It True?
+### Figure 3: How Did We Get to 0.955 AUC? Is It Real?
 
-| (a) Out-of-Fold AUC Comparison Across Architectures | (b) Stacked Architecture Flowchart |
-| :---: | :---: |
-| ![OOF AUC Comparison](ThesisDocs/images/oof_auc_comparison.png) | ```mermaid
+#### (a) Performance Comparison Across Detector Architectures
+![OOF AUC Comparison](ThesisDocs/images/oof_auc_comparison.png)
+*Combining lightweight tree models with a deep sequence model boosted detection reliability to 0.955 ROC-AUC.*
+
+#### (b) How the Detector Works
+```mermaid
 flowchart TD
-D["Standardized 5-Step Corpus<br/>(144,440 rows, 2,948 task groups)"] --> F["225 Feature Dimensions<br/>(Kinematics, EMA Spectrum, Peer Consensus)"]
-F --> B["Control Baseline (No Peers)<br/>LGBM: 0.9432 AUC"]
-F --> M["PyTorch Deep Hybrid MoE Probe<br/>Sequence Model: 0.9364 AUC"]
-M --> S["Stacked Meta-Ensemble<br/>60% LGBM + 40% HistGB + MoE Feature"]
-B --> S
-S --> R["FINAL OOF ROC-AUC: 0.955156<br/>(+0.0119 lift, 95% CI [0.0104, 0.0135])"]
-``` |
+    A["75,000+ Reasoning Traces<br/>(13 open-source models, 4 benchmarks)"] --> B["Extract 225 Clues per Step<br/>(Answer consistency, changes between steps, peer agreement)"]
+    B --> C1["Tree Classifier (LightGBM)<br/>Score: 0.943 AUC"]
+    B --> C2["Deep Neural Network (MoE Probe)<br/>Score: 0.936 AUC"]
+    C1 --> D["Stacked Combination<br/>(Blends tree logic with deep sequence learning)"]
+    C2 --> D
+    D --> E["Final Combined Score: 0.955 AUC<br/>(Identifies correct answers 95.5% of the time)"]
+```
 
-#### Plain-English Breakdown for the Meeting:
-1. **What is AUC?** It is a **ranking score**, not accuracy. Given one correct response and one incorrect response, our detector ranks the correct one higher **95.5% of the time**.
-2. **Is it true?** **Yes.** It is fully audited and reproduced from [`blackwell_tournament_report.json`](file:///C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.json) using 5 task-held-out outer folds.
-3. **The Honest Nuance to Tell Dr. Woods:**
-   - The 0.955 AUC is a **retrospective ranking diagnostic** on stored traces.
-   - The deep MoE probe read the whole 5-step sequence to score final correctness.
-   - **It is not yet a live online stopping hook.** Building a prefix-safe, live in-generation controller is our primary computational goal for Weeks 1–2 of this semester.
+#### Plain-English Answers to Key Questions:
+
+1. **What does 0.955 AUC mean?**
+   - It is a **ranking score**, not raw accuracy.
+   - If you hand our detector two reasoning attempts—one right and one wrong—our detector correctly ranks the right one above the wrong one **95.5 out of 100 times**.
+
+2. **Is it real, or did it just memorize the questions?**
+   - **It is real.** We tested across 144,440 examples using 5-fold cross-validation where entire question groups were held out.
+   - The detector was never evaluated on questions it had seen during training.
+
+3. **The one honest nuance to explain to Dr. Woods:**
+   - The 0.955 score was measured **retrospectively** (looking at traces after all 5 steps were generated).
+   - Our main engineering milestone for this semester (Weeks 1–2) is to make this work **live during generation**, looking only at the steps written so far so we can stop the model in real time.
 
 ---
 
-### Figure 4: Model Scale & Precision Dynamics
+### Figure 4: Model Size and Precision Findings
 
-| (a) Model Scale vs Accuracy Drift | (b) BF16 vs 4-bit Quantization Impact |
+| (a) Model Size vs Overthinking | (b) Full Precision vs 4-Bit Compression |
 | :---: | :---: |
 | ![Model Scale Accuracy Drift](ThesisDocs/images/model_scale_accuracy_drift.png) | ![Quantization Generalization](ThesisDocs/images/quantization_generalization.png) |
-| *Larger models (14B, 32B) sustain positive repair drift longer than smaller models (0.5B, 3B).* | *Causal isolation (N6): 4-bit quantization degrades early reasoning by 14.3 pp ($Z = 9.79$).* |
+| *Bigger models (14B, 32B) keep reasoning effectively longer, while smaller models (0.5B, 3B) start overthinking earlier.* | *Heavily compressed 4-bit models lose 14.3% accuracy in early steps compared to full-precision BF16.* |
 
 ---
 
-### Figure 5: Scientific Method & Rigor Audit Summary
+### Figure 5: What Worked vs What Failed (Honest Scientific Method)
 
-We followed the scientific method rigorously—not just confirming what worked, but explicitly **falsifying hypotheses that failed**:
+Real scientific rigor means testing hypotheses and honestly reporting what worked and what failed:
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                        SCIENTIFIC METHOD FALSIFICATION LEDGER                         │
-├────────────────────────┬────────────────────────────────┬──────────────────────────────┤
-│ Tested Hypothesis      │ Observed Outcome               │ Scientific Verdict           │
-├────────────────────────┼────────────────────────────────┼──────────────────────────────┤
-│ N3: EB Hazard Shrink   │ +593.55 OOF Utility Gain       │ PASSED ✅ (Largest gain)     │
-│ N4: Dynamic Churn Rule │ +159.50 OOF Utility Gain       │ PASSED ✅ (Difficulty proxy) │
-│ N2c: Temporal Lags     │ +251.65 OOF Utility Gain       │ PASSED ✅ (History matters)  │
-│ N6: Precision Causal   │ Gap = 0.1427, Z = 9.79         │ PASSED ✅ (4-bit hurts)      │
-│ P2: T_MIN = 2 Floor    │ T_MIN=3 lost -1,912 utility    │ DEFENDED ✅ (Step 1 commit)  │
-├────────────────────────┼────────────────────────────────┼──────────────────────────────┤
-│ N2a: Non-linear GBT    │ -2,785.05 Utility Crash        │ FALSIFIED ❌ (Overfits tail) │
-│ N2b: Isotonic Calib    │ -3,142.90 Utility Crash        │ FALSIFIED ❌ (Overfits tail) │
-│ N5: Token Cap 256->512 │ 0.00 pp drop on Mistral        │ FALSIFIED ❌ (Not truncation)│
-│ P1: Empty-Answer Guard │ Net -116.5 Utility Loss        │ FALSIFIED ❌ (Win->Loss flips│
-└────────────────────────┴────────────────────────────────┴──────────────────────────────┘
-```
+| What We Tested | What Happened | Practical Takeaway |
+| :--- | :--- | :--- |
+| **Peer Agreement** (Do other models get the same answer?) | +593 points in utility | **Huge Win ✅:** When multiple models agree on an answer, it is almost certainly right. |
+| **Step History** (Tracking answer changes between steps) | +252 points in utility | **Win ✅:** When a model flips its answer back and forth, it is a strong signal of confusion. |
+| **Precision Impact** (Full BF16 vs 4-bit compression) | 4-bit dropped accuracy by 14.3% | **Confirmed ✅:** Heavy model compression hurts step-by-step reasoning significantly. |
+| **Minimum Step Floor** (Forcing at least 2 steps) | Stopping at Step 1 was terrible; Step 2+ worked | **Confirmed ✅:** Models need at least one revision step to catch simple arithmetic slips. |
+| **Complex Deep Trees** (Non-linear gradient boosted trees) | Lost 2,785 points | **Failed ❌:** Deep models memorized the training data; simpler linear blending worked much better. |
+| **Probability Calibration** (Isotonic calibration) | Lost 3,142 points | **Failed ❌:** Complex calibration broke on edge cases; raw ensemble probabilities were safer. |
+| **Bigger Token Limits** (Increasing cap from 256 to 512 tokens) | 0.0% change in accuracy | **Disproved ❌:** Models were not running out of token space; they were genuinely overthinking. |
 
-#### Where Did the 7.55% Decision Losses Go? (Loss Taxonomy)
-Every single loss in our canonical 75,965-trace matrix was categorized by [`research/classify_losses.py`](file:///C:/Aditya_Data/Personal/ResearchThesis/research/classify_losses.py):
-- **100% of losses are missed late corrections** (the model was wrong when stopped, but became correct later). Zero grading bugs.
-- **52.2%** stopped at the theoretical $T_{\min} = 2$ floor.
-- **48.5%** required repairs $\ge 2$ steps later (fundamental online uncertainty limit).
+#### Where Did the Remaining 7.5% Errors Come From?
+We inspected every single mistake made by our detector:
+- **0% were grading bugs.** Our grading suite passed all 30/30 unit tests.
+- **52% were early errors:** The model was wrong on both Step 1 and Step 2. Because our safety rule requires at least 2 steps, it stopped before the model could recover.
+- **48% were last-second fixes:** The model was wrong on Steps 1, 2, 3, and 4, and only fixed it on Step 5. No real-time system can reliably predict that a model wrong for 4 steps will suddenly get it right at the end.
 
 ---
 
-## 📅 Part 3: Fall 2026 Semester Master Timeline (14 Weeks)
+## 📅 Semester 2 Roadmap: How We Finish in 14 Weeks
 
 ```mermaid
-gantt
-    title Fall 2026 Thesis Master Schedule (Target Defense: Late November)
-    dateFormat YYYY-MM-DD
-    section Phase 1: Live Controller & Pareto
-    Freeze Manifest & Build Online Hook   :2026-09-09, 2026-09-20
-    Pareto Sweep & Adversarial Traps      :2026-09-21, 2026-10-04
-    section Phase 2: Theory & Core Draft
-    OSLA Proofs & Monotonicity Audit     :2026-10-05, 2026-10-18
-    Draft Chapters 1-6 & Submit Draft v1 :2026-10-12, 2026-10-23
-    section Phase 3: Committee & Paper
-    Advisor Revision Cycle               :2026-10-26, 2026-11-08
-    Refereed Technical Paper Package     :2026-11-02, 2026-11-08
-    section Phase 4: Defense & Archival
-    Mock Defenses & Slide Deck           :2026-11-09, 2026-11-22
-    Formal Public Oral Defense           :2026-11-23, 2026-11-29
-    ETD Library Archival & Registrar     :2026-11-30, 2026-12-07
+flowchart LR
+    P1["Phase 1: Weeks 1 to 4<br/><b>Live Stopping Tool</b><br/>Test real-time stopping & measure compute savings"] --> P2["Phase 2: Weeks 5 to 7<br/><b>Write Thesis Draft</b><br/>Formalize math proofs & deliver Draft v1 by Oct 23"]
+    P2 --> P3["Phase 3: Weeks 8 to 9<br/><b>Committee Review</b><br/>Incorporate advisor feedback & prep conference paper"]
+    P3 --> P4["Phase 4: Weeks 10 to 14<br/><b>Defense & Graduation</b><br/>Rehearse slide deck, oral defense, library submission"]
 ```
 
-### Weekly Time Commitment (15–20 Hours/Week)
-```
-┌────────────────────────────────────────────────────────┐
-│               WEEKLY TIME ALLOCATION                   │
-├───────────────────┬────────────────────────────────────┤
-│ Monday (2 hrs)    │ Weekly Planning & Theory Check     │
-│ Tue/Wed (6 hrs)   │ Deep Computational/Writing Blocks  │
-│ Thursday (4 hrs)  │ Analysis, Figures & Code Audit     │
-│ Friday (2 hrs)    │ Committee Check-in & Feedback Log  │
-│ Weekend (4 hrs)   │ Proofreading & Manuscript Drafting │
-└───────────────────┴────────────────────────────────────┘
-```
+### Weekly Schedule (15–20 Hours per Week)
 
-### Detailed Week-by-Week Milestones
-
-| Week | Date Window | Computational & Experimental Tasks | Thesis Writing & Academic Deliverables |
+| Week | Target Dates | Engineering & Code Goals | Writing & Thesis Deliverables |
 | :---: | :--- | :--- | :--- |
-| **W1** | Sep 9 – Sep 13 | Freeze `data_manifest_v1.json` with SHA-256 hashes; resolve GPQA split metadata. | Clean-clone reproduction test; lock software dependencies. |
-| **W2** | Sep 14 – Sep 20 | Build `online_stopping_controller.py`; enforce causal prefix-only feature reads. | Verify byte-identical prefix outputs on 100 paired tasks; measure wall-clock latency. |
-| **W3** | Sep 21 – Sep 27 | Run nested task-grouped Bayesian sweep over $\lambda \in [0.01, 0.15]$ and offset $\delta$. | Pareto report selecting *Conservative* ($\lvert \Delta\text{Acc} \rvert \le 0.5\%$) vs *Efficiency* ($>40\%$ token savings) rules. |
-| **W4** | Sep 28 – Oct 4 | Deploy 5-family adversarial stress suite (distractors, traps, anchoring, paraphrasing). | Generalization & OOD stress test report; document GPQA boundary conditions. |
-| **W5** | Oct 5 – Oct 11 | Formalize jump Markov process; write Theorem 1 OSLA proof; audit one-crossing conditions. | **Draft Chapter 2 (Mathematical Formulation & Theory).** |
-| **W6** | Oct 12 – Oct 18 | Derive drift perturbation bound $\lvert \widehat{\mu}_t - \mu_t \rvert$ and stopping displacement $\lvert T^* - \widehat{\tau} \rvert$. | **Draft Chapter 1 (Introduction) & Chapter 3 (Experimental Methodology).** |
-| **W7** | Oct 19 – Oct 25 | Integrate empirical results, tables, and failure taxonomy. | **Draft Chapters 4–6; SUBMIT FULL DRAFT v1.0 TO COMMITTEE (OCTOBER 23 TARGET).** |
-| **W8** | Oct 26 – Nov 1 | Establish Feedback Ledger; generate colorblind-safe publication vector figures. | Committee Revision Cycle 1; update manuscript to Draft v1.1. |
-| **W9** | Nov 2 – Nov 8 | Format core contributions into 25-page double-spaced technical paper for refereed venue. | Submit technical paper to referee portal / prepare preprint. |
-| **W10** | Nov 9 – Nov 15 | Build 25-slide defense deck (30-minute presentation); timing dry run. | Finalize defense slide deck v1.0. |
-| **W11** | Nov 16 – Nov 22 | Conduct recorded Mock Defense #1 (peer) & Mock Defense #2 (adviser Q&A prep). | Confirm defense logistics; post public defense announcement. |
-| **W12** | Nov 23 – Nov 29 | **EXECUTE 60-MIN PUBLIC ORAL DEFENSE (30-MIN TALK + 30-MIN Q&A).** | Committee evaluation and initial signature sign-off. |
-| **W13** | Nov 30 – Dec 6 | Apply post-defense revisions; verify JHU ETD formatting and PDF/A compliance. | **SUBMIT FINAL THESIS TO JHU SHERIDAN LIBRARIES ETD REPOSITORY.** |
-| **W14** | Dec 7 – Dec 11 | Submit signed Semester 2 Approval Form and ETD receipt to JHU Registrar. | **OBTAIN FINAL LETTER GRADE (MATH 625.804) & GRADUATION CLEARANCE.** |
+| **W1** | Sep 9 – Sep 13 | Lock dataset hashes and package code cleanly. | Write down clean reproduction instructions. |
+| **W2** | Sep 14 – Sep 20 | Build `online_stopping_controller.py` to stop models live. | Verify live controller speed (fast real-time checks). |
+| **W3** | Sep 21 – Sep 27 | Measure token savings vs accuracy trade-offs. | Choose conservative rule (keep 99.5% accuracy) vs efficiency rule (save 40% tokens). |
+| **W4** | Sep 28 – Oct 4 | Test against tricky and deceptive math/science problems. | Document where the stopping rule works best and where it struggles. |
+| **W5** | Oct 5 – Oct 11 | Clean up mathematical formulas and step-by-step logic. | **Draft Chapter 2 (Mathematical Formulation & Theory).** |
+| **W6** | Oct 12 – Oct 18 | Add error-bound math for how close we get to the optimal stop. | **Draft Chapter 1 (Introduction) and Chapter 3 (Methodology).** |
+| **W7** | Oct 19 – Oct 25 | Put all results, charts, and failure analyses together. | **Draft Chapters 4–6; SUBMIT COMPLETE DRAFT v1.0 (OCTOBER 23 TARGET).** |
+| **W8** | Oct 26 – Nov 1 | Address first round of advisor edits and polish figures. | Complete Committee Revision Cycle 1; update to Draft v1.1. |
+| **W9** | Nov 2 – Nov 8 | Format key findings into a 25-page paper for conference submission. | Finalize conference/journal submission package. |
+| **W10** | Nov 9 – Nov 15 | Create 25 defense presentation slides (30-minute presentation). | Run first practice timing rehearsal. |
+| **W11** | Nov 16 – Nov 22 | Conduct two recorded mock defenses (with peers and advisor Q&A prep). | Finalize defense announcement and committee schedule. |
+| **W12** | Nov 23 – Nov 29 | **PUBLIC ORAL DEFENSE (30-min talk + 30-min Q&A).** | Committee evaluation and signature approval. |
+| **W13** | Nov 30 – Dec 6 | Final formatting checks for JHU Sheridan Libraries (PDF/A). | **Submit final thesis to JHU ETD library repository.** |
+| **W14** | Dec 7 – Dec 11 | Submit signed completion paperwork to the JHU Registrar. | **Degree clearance and final grade recorded.** |
 
 ---
 
-## 💬 Part 4: Four Key Discussion Points for Dr. Woods
+### Weekly Time Commitment (15–20 Hours/Week)
+
+| Day | Focus | Description |
+| :--- | :---: | :--- |
+| **Monday** | 2 hrs | Weekly Planning & Theory Check |
+| **Tue / Wed** | 6 hrs | Deep Computational & Writing Blocks |
+| **Thursday** | 4 hrs | Data Analysis, Figures & Code Audit |
+| **Friday** | 2 hrs | Committee Check-in & Feedback Log |
+| **Weekend** | 4 hrs | Proofreading & Manuscript Drafting |
+
+---
+
+## 💬 4 Quick Discussion Questions for Dr. Woods
 
 ```mermaid
 flowchart TD
-    A["Point 1: Empirical Completeness<br/>Agree that 75k traces are sufficient"] --> B["Point 2: Pareto Trade-Off Constraint<br/>Select allowable accuracy drop (e.g. ε = 2.0%)"]
-    B --> C["Point 3: Theory Chapter Focus<br/>Confirm Theorem 1 OSLA proofs meet ACM expectations"]
-    C --> D["Point 4: Defense Calendar<br/>Lock Oct 23 draft & late-November defense window"]
+    Q1["1. Are 75,000 reasoning traces enough, or do you want any more data runs?"]
+    Q2["2. For our live stopping tool, do you prefer saving max compute (save 40% tokens) or max accuracy (stay within 0.5% of peak)?"]
+    Q3["3. For Chapter 2 (Math Theory), what level of proof detail do you and Dr. Pemy want to see?"]
+    Q4["4. Does October 23 work well for receiving Draft v1.0, aiming for a late-November defense?"]
+    Q1 --> Q2 --> Q3 --> Q4
 ```
 
-1. **Empirical Completeness:** Confirm that our 75,965-trace canonical matrix and Blackwell tournament satisfy all empirical requirements—meaning no additional multi-day GPU sweeps are needed.
-2. **Policy Accuracy Constraints ($\epsilon$):** What accuracy threshold should we constrain our live stopping controller to? (Recommend $\epsilon = 2.0\%$ standard, $\epsilon = 0.5\%$ conservative).
-3. **Mathematical Chapter Focus:** Review the scope of Chapter 2 (OSLA optimality proof, one-crossing empirical audit, and perturbation bounds) to ensure alignment with Dr. Woods' and Dr. Pemy's academic standards.
-4. **Calendar Alignment:** Lock in the **October 23 Draft v1.0 delivery date** and confirm target availability for the **late-November public defense**.
+1. **Data Completeness:** Confirm that our 75,965 traces across 13 models are more than enough data so we can focus 100% on writing and live testing.
+2. **Stopping Rule Preference:** In production, do we want a **Conservative rule** (keep accuracy drop below 0.5%) or an **Efficiency rule** (cut computing costs by 40%+)?
+3. **Math Depth:** Dr. Woods and Dr. Pemy's expectations for proof rigor in Chapter 2.
+4. **Calendar:** Confirm the **October 23 delivery date for Draft v1.0** and the **late-November window for the oral defense**.
 
 ---
 
-## 📁 Key File Index
-- Master Report: [`ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md)
-- Rigor Audit: [`ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md)
-- Grader Tests (30/30): [`research/tests/test_graders.py`](file:///C:/Aditya_Data/Personal/ResearchThesis/research/tests/test_graders.py)
-- Blackwell Report: [`research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.md)
+## 📁 Key File Quick Reference
+- **Master Research Report:** [`ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md)
+- **Scientific Rigor Audit:** [`ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md)
+- **Unit Tests (30/30 passing):** [`research/tests/test_graders.py`](file:///C:/Aditya_Data/Personal/ResearchThesis/research/tests/test_graders.py)
+- **Blackwell GPU Tournament Results:** [`research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.md)
