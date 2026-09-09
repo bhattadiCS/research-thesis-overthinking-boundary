@@ -186,17 +186,6 @@ flowchart LR
 | **W13** | Nov 30 – Dec 6 | Final formatting checks for JHU Sheridan Libraries (PDF/A). | **Submit final thesis to JHU ETD library repository.** |
 | **W14** | Dec 7 – Dec 11 | Submit signed completion paperwork to the JHU Registrar. | **Degree clearance and final grade recorded.** |
 
----
-
-### Weekly Time Commitment (15–20 Hours/Week)
-
-| Day | Focus | Description |
-| :--- | :---: | :--- |
-| **Monday** | 2 hrs | Weekly Planning & Theory Check |
-| **Tue / Wed** | 6 hrs | Deep Computational & Writing Blocks |
-| **Thursday** | 4 hrs | Data Analysis, Figures & Code Audit |
-| **Friday** | 2 hrs | Committee Check-in & Feedback Log |
-| **Weekend** | 4 hrs | Proofreading & Manuscript Drafting |
 
 ---
 
