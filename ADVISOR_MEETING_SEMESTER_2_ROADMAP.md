@@ -94,33 +94,44 @@ At every step, two forces compete:
 
 ### Figure 3: How Did We Get to 0.955 AUC? Is It Real?
 
+To understand how we reached **0.955 ROC-AUC**, it helps to separate the project into two distinct groups of AI models:
+- **The "Students" (13 LLMs like Llama-3, Mistral, Qwen):** They solved thousands of math and science word problems, writing out 5 steps per problem. Often, they found the right answer at Step 2, and then ruined it at Step 5. We collected **144,440 reasoning steps** from them.
+- **The "Referees" (Our AI Detectors):** Algorithms whose only job is to look at a student's scratchpad and predict: *"Is this answer correct? Should they stop now?"*
+
+```mermaid
+flowchart TD
+    A["144,440 Reasoning Steps from 13 LLMs<br/>(Llama-3, Mistral, Qwen, DeepSeek)"] --> B1["<b>Referee 1: The Accountant (Decision Trees / LightGBM)</b><br/>Checks 225 tabular clues: answer flips, text length, peer agreement.<br/><b>Solo Score: 0.943 AUC</b>"]
+    A --> B2["<b>Referee 2: The Detective (Deep Sequence Network / PyTorch MoE)</b><br/>Watches the 5-step sequence like a movie to sense 'thinking momentum'.<br/><b>Solo Score: 0.936 AUC</b>"]
+    B1 --> C["<b>The Super-Team (Stacked Hybrid Ensemble)</b><br/>Passes the Detective's opinion into the Accountant's checklist<br/><b>Blend: 60% LightGBM + 40% HistGradientBoost</b>"]
+    B2 --> C
+    C --> D["🏆 <b>FINAL COMBINED SCORE: 0.955156 ROC-AUC</b><br/>(+0.0119 lift over baseline; won 100% of 10,000 statistical re-checks)"]
+```
+
 #### (a) Performance Comparison Across Detector Architectures
 ![OOF AUC Comparison](ThesisDocs/images/oof_auc_comparison.png)
 *Combining lightweight tree models with a deep sequence model boosted detection reliability to 0.955 ROC-AUC.*
 
-#### (b) How the Detector Works
-```mermaid
-flowchart TD
-    A["75,000+ Reasoning Traces<br/>(13 open-source models, 4 benchmarks)"] --> B["Extract 225 Clues per Step<br/>(Answer consistency, changes between steps, peer agreement)"]
-    B --> C1["Tree Classifier (LightGBM)<br/>Score: 0.943 AUC"]
-    B --> C2["Deep Neural Network (MoE Probe)<br/>Score: 0.936 AUC"]
-    C1 --> D["Stacked Combination<br/>(Blends tree logic with deep sequence learning)"]
-    C2 --> D
-    D --> E["Final Combined Score: 0.955 AUC<br/>(Identifies correct answers 95.5% of the time)"]
-```
-
 #### Plain-English Answers to Key Questions:
 
-1. **What does 0.955 AUC mean?**
-   - It is a **ranking score**, not raw accuracy.
-   - If you hand our detector two reasoning attempts—one right and one wrong—our detector correctly ranks the right one above the wrong one **95.5 out of 100 times**.
+1. **Who competed in the "Tournament"?**
+   - The LLMs (Llama, Mistral, Qwen) did **not** compete against each other—they were the students.
+   - The **tournament was between different Referee algorithms** on an NVIDIA Blackwell GPU to find the best way to detect correct answers and overthinking.
 
-2. **Is it real, or did it just memorize the questions?**
-   - **It is real.** We tested across 144,440 examples using 5-fold cross-validation where entire question groups were held out.
-   - The detector was never evaluated on questions it had seen during training.
+2. **Why did "Stacking" create the winning Super-Team?**
+   - The **Accountant (Trees)** was great at fast factual checks (like *"did 3 other models agree on this answer?"*), scoring **0.943 AUC**.
+   - The **Detective (Neural Net)** was great at watching the timeline of the whole reasoning path, scoring **0.936 AUC**.
+   - **Stacking** gave the Detective's gut-feeling score directly to the Accountant as an extra clue, then blended their final votes ($60\% + 40\%$). Together, they caught errors neither could spot alone, jumping to **0.955 AUC**!
 
-3. **The one honest nuance to explain to Dr. Woods:**
-   - The 0.955 score was measured **retrospectively** (looking at traces after all 5 steps were generated).
+3. **What does 0.955 AUC mean? (The Blind Taste-Test Analogy)**
+   - AUC is a **ranking score**, not raw accuracy.
+   - If you hand our detector 100 pairs of student exam sheets (where one sheet has the right answer and one has a mistake), **our detector successfully gives the higher score to the correct sheet 95.5 out of 100 times**.
+
+4. **Is it real, or did it just memorize the questions?**
+   - **It is real.** We tested across 5 held-out folds where entire question groups were locked away. The detector was never evaluated on questions it had seen during training.
+   - In 10,000 random bootstrap re-tests, the stacked team beat individual models in **10,000 out of 10,000 runs (100.0%)**.
+
+5. **The one honest nuance to explain to Dr. Woods:**
+   - The 0.955 score was measured **retrospectively** (looking at traces after all 5 steps were already generated).
    - Our main engineering milestone for this semester (Weeks 1–2) is to make this work **live during generation**, looking only at the steps written so far so we can stop the model in real time.
 
 ---
