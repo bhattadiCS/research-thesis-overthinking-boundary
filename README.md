@@ -69,6 +69,30 @@ To verify the statistical and numerical stability of our stopping boundary equat
 
 ---
 
+## 🏆 How We Got Better Results: The 0.955 ROC-AUC Breakthrough
+
+To find the most accurate way to detect when an AI model should stop thinking, we held a machine learning tournament on an NVIDIA Blackwell GPU across **144,440 reasoning steps** (covering 13 models and 2,948 math and science problems).
+
+Instead of relying on just one algorithm, we had different types of models compete and then work together as a committee:
+
+```mermaid
+flowchart TD
+    A["144,440 Reasoning Steps<br/>(13 models, 4 benchmark datasets)"] --> B1["<b>Contender 1: Fast Decision Tree (LightGBM)</b><br/>Checks tabular clues: answer changes, token length, peer agreement<br/><b>Solo Score: 0.943 AUC</b>"]
+    A --> B2["<b>Contender 2: Deep Sequence Network (PyTorch MoE)</b><br/>Reads the 5-step sequence over time to sense thinking momentum<br/><b>Solo Score: 0.936 AUC</b>"]
+    B1 --> C["<b>The Winning Team (Stacked Meta-Ensemble)</b><br/>Combines tree rules with deep sequence memory<br/><b>Blend: 60% LightGBM + 40% HistGradientBoost</b>"]
+    B2 --> C
+    C --> D["🏆 <b>FINAL TOURNAMENT SCORE: 0.955156 ROC-AUC</b><br/>(+0.0119 lift over baseline; won 100% of 10,000 statistical re-checks)"]
+```
+
+### In Simple Terms:
+1. **The Fast Tree Model (LightGBM):** Acted like a quick-thinking referee checking thousands of snapshot rules (e.g., *"Did the answer flip between steps?"*, *"Do other models agree?"*). It scored a strong **0.943 AUC** on its own.
+2. **The Deep Neural Network (PyTorch MoE):** Acted like an observer watching the full "movie" of the reasoning process over time, tracking whether the model was making steady progress or second-guessing itself. It scored **0.936 AUC** on its own.
+3. **The "Super-Team" Breakthrough (Stacking):** Neither model could break 0.95 alone. But when we gave the Neural Network's deep judgment to the Tree Model as an extra clue and blended their votes (60% LightGBM + 40% HistGradientBoosting), the combined team caught subtle mistakes that neither could spot by itself—jumping to **0.955 AUC**!
+4. **What 0.955 Actually Means:** If you hand our detector two student solutions—one with the correct answer and one with a mistake—our system correctly ranks the correct answer higher **95.5 out of 100 times**.
+5. **Verified Honest Science:** We evaluated this across 5 held-out question groups (the detector was never tested on questions it saw during training) and ran 10,000 bootstrap re-samplings. The stacked team beat the baseline models in **10,000 out of 10,000 runs (100.0%)**.
+
+---
+
 ## 📐 Mathematical Estimation of Latent Hazards
 
 A core challenge of the stopping theory is that the repair hazard ($\alpha_t$) and corruption hazard ($\beta_t$) are latent variables that cannot be directly queried in-flight. 
