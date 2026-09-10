@@ -240,6 +240,31 @@ flowchart LR
 
 ---
 
+
+
+---
+
+### 📋 Day-by-Day Tactical Checklist (Next 14 Days)
+
+| Day | Date Window | Primary Focus | Exact File or Script | Tangible Deliverable |
+| :---: | :--- | :--- | :--- | :--- |
+| **D1** | Wed, Sep 9 | Freeze Tournament Data | Scan 52 canonical files in `research/outputs/` | `data_manifest_v1.json` with 52 SHA-256 hashes |
+| **D2** | Thu, Sep 10 | Lock Software & Grader Check | `pip freeze` & `pytest research/tests/test_graders.py` | `requirements.lock.txt` + verified 30/30 tests |
+| **D3** | Fri, Sep 11 | Draft Chapter 1 (Part 1) | Create `ThesisDocs/chapters/chapter1_intro.md` | Background on chain-of-thought & drift (4 pages) |
+| **D4** | Sat, Sep 12 | Draft Chapter 1 (Part 2) | Edit `ThesisDocs/chapters/chapter1_intro.md` | Research questions & 4 thesis contributions (4 pages) |
+| **D5** | Sun, Sep 13 | Draft Chapter 3 (Part 1) | Create `ThesisDocs/chapters/chapter3_methodology.md` | Specifications of 13 models & 4 benchmarks (5 pages) |
+| **D6** | Mon, Sep 14 | Draft Chapter 3 (Part 2) | Edit `ThesisDocs/chapters/chapter3_methodology.md` | 5-step sampling protocol & grading pipeline (5 pages) |
+| **D7** | Tue, Sep 15 | Week 1 Git Checkpoint | Review Ch 1 & 3; commit to repository | Clean git commit: `draft: complete Chapters 1 & 3` |
+| **D8** | Wed, Sep 16 | Code Online Controller Core | Create `research/online_stopping_controller.py` | Python class enforcing boundary floor ($T_{\min} = 2$) |
+| **D9** | Thu, Sep 17 | Code Decision Thresholds | Add `controller.evaluate_step()` logic | Real-time stopping rules (confidence + peer agreement) |
+| **D10** | Fri, Sep 18 | Speed & Latency Benchmark | Create `research/tests/test_online_controller.py` | Verified latency under 10ms on 100 sample problems |
+| **D11** | Sat, Sep 19 | Draft Chapter 4 (Part 1) | Create `ThesisDocs/chapters/chapter4_empirical.md` | Overthinking drift curves & competing hazards (5 pages) |
+| **D12** | Sun, Sep 20 | Draft Chapter 4 (Part 2) | Edit `ThesisDocs/chapters/chapter4_empirical.md` | Model scale dynamics & 4-bit quantization impacts (5 pages) |
+| **D13** | Mon, Sep 21 | Draft Chapter 4 (Part 3) | Edit `ThesisDocs/chapters/chapter4_empirical.md` | Falsification ledger & 7.55% loss taxonomy (4 pages) |
+| **D14** | Tue, Sep 22 | Week 2 Checkpoint & Integration | Review code & compile drafted chapters | 3 complete chapters drafted + working online controller |
+
+---
+
 ## 📁 Key File Quick Reference
 - **Master Research Report:** [`ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md)
 - **Scientific Rigor Audit:** [`ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md)
