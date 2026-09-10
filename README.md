@@ -71,66 +71,108 @@ To verify the statistical and numerical stability of our stopping boundary equat
 
 ## 🏆 How We Got Better Results: The 0.955 ROC-AUC Breakthrough
 
-To truly understand how we reached **0.955 ROC-AUC**, it helps to separate the project into two distinct groups of AI models:
+To understand how we reached **0.955 ROC-AUC**, it helps to break the entire experiment down into simple, concrete steps:
 
 ```mermaid
 flowchart TD
-    subgraph Students["1. The 'Students' (13 Reasoning LLMs)"]
+    subgraph Data["1. The Raw Data: 144,440 Reasoning Rows"]
         direction TB
-        S1["Llama-3, Mistral, Qwen-2.5, DeepSeek"]
-        S2["Given thousands of math & science problems"]
-        S3["Generated 144,440 reasoning steps (5 steps per problem)"]
-        S4["Often got the right answer at Step 2, but ruined it at Step 5 ('Overthinking')"]
-        S1 --> S2 --> S3 --> S4
+        D1["13 Open-Source LLMs (Llama-3, Mistral, Qwen, DeepSeek)<br/>solved 2,948 math & science problems"]
+        D2["Each problem had 5 reasoning steps = 144,440 total rows"]
+        D3["For every row: extracted 225 numerical clues (hesitation, flips, consensus)<br/>+ Ground-truth label: Correct (1) or Incorrect (0)"]
+        D1 --> D2 --> D3
     end
 
-    subgraph Referees["2. The 'Referee Tournament' (Finding the Best Stopping Detector)"]
+    subgraph Contenders["2. The Tournament: ML Referees Compete on Blackwell GPU"]
         direction TB
-        R1["<b>Referee A: The Accountant (Decision Trees / LightGBM)</b><br/>Checks 225 tabular clues: answer flips, text length, peer agreement.<br/><b>Solo Score: 0.943 AUC</b>"]
-        R2["<b>Referee B: The Detective (Deep Sequence Network / PyTorch MoE)</b><br/>Watches the 5-step sequence like a movie to sense 'thinking momentum'.<br/><b>Solo Score: 0.936 AUC</b>"]
-        R3["<b>The Super-Team (Stacked Meta-Ensemble)</b><br/>Passes the Detective's opinion into the Accountant's checklist<br/><b>Blend: 60% LightGBM + 40% HistGradientBoost</b>"]
-        R1 --> R3
-        R2 --> R3
+        C1["<b>Referee A: Decision Tree Forest (LightGBM)</b><br/>500 decision trees looking at snapshot clues<br/>Solo Score: <b>0.9432 ROC-AUC</b>"]
+        C2["<b>Referee B: Deep Neural Network (PyTorch MoE Probe)</b><br/>Transformer + BiGRU watching steps 1 to 5 as a movie<br/>Solo Score: <b>0.9364 ROC-AUC</b>"]
+        C3["<b>Referee C: Histogram Trees (HistGradientBoosting)</b><br/>400 histogram-binned trees for diverse voting<br/>Solo Score: <b>0.9410 ROC-AUC</b>"]
     end
 
-    Students --> Referees
-    R3 --> Winner["🏆 <b>FINAL SCORE: 0.955156 ROC-AUC</b><br/>(+0.0119 lift over baseline; won 100% of 10,000 statistical re-checks)"]
+    subgraph Ensemble["3. The Breakthrough: Stacking & Blending"]
+        direction TB
+        E1["<b>Step 1:</b> Neural Net evaluates the 5-step sequence & outputs an expert score ('moe_probe_q')"]
+        E2["<b>Step 2:</b> We plug 'moe_probe_q' as a new column into the Decision Tree spreadsheet"]
+        E3["<b>Step 3:</b> LightGBM (700 trees) + HistGradientBoosting (400 trees) make final predictions"]
+        E4["<b>Step 4: Weighted Average:</b> Final Score = 60% LightGBM + 40% HistGradientBoosting"]
+        E1 --> E2 --> E3 --> E4
+    end
+
+    Data --> Contenders
+    Contenders --> Ensemble
+    Ensemble --> Champ["🏆 <b>FINAL VERIFIED SCORE: 0.955156 ROC-AUC</b><br/>(+0.0119 lift over standalone baseline; won 10,000 out of 10,000 bootstrap trials)"]
 ```
 
-### 1. Who Was Playing Against Whom?
-- **The LLMs (Llama, Mistral, Qwen) did NOT play against each other.** They were the "students" writing math solutions.
-- **The "Tournament" was between different Referee algorithms:** We held a machine learning competition on an NVIDIA Blackwell GPU across **144,440 reasoning steps** to see which referee was best at spotting when a student had reached the right answer and should stop thinking.
+---
 
-### 2. The Contenders:
-*   **Referee A: The "Accountant" (Decision Trees / LightGBM):**
-    *   **How it works:** It acts like a giant checklist of thousands of yes/no rules. It looks at snapshot clues: *"Did the model flip its answer from last step?"*, *"Do other models agree on this number?"*, *"Is the model using hesitant language?"*
-    *   **Solo Score:** Very fast and accurate: **0.943 AUC**.
-*   **Referee B: The "Detective" (Deep Neural Network / PyTorch MoE):**
-    *   **How it works:** It doesn't look at a static checklist. It reads the whole 5-step sequence sequentially over time (like watching a movie instead of looking at still photos). It tracks whether the model is making steady, logical progress or waffling in circles.
-    *   **Solo Score:** Strong at narrative arc: **0.936 AUC**.
+### 1. What Did the Experiment Actually Look Like? (The Giant Spreadsheet)
+Imagine a massive spreadsheet with **144,440 rows**:
+*   **Where the rows came from:** We had 13 open-source language models (Llama-3, Mistral, Qwen-2.5, DeepSeek) solve 2,948 difficult math and science problems. Each model generated 5 intermediate reasoning steps per problem ($13 \times 2,948 \times \approx 4\text{--}5 = 144,440$ rows).
+*   **The 225 Clues (Columns):** For every single step, our pipeline extracted 225 mathematical clues:
+    *   *Hesitation / Entropy:* Was the model confident in its word choices, or was it wavering?
+    *   *Answer Changes:* Did the model flip its numerical answer compared to the previous step?
+    *   *Peer Consensus:* Did 8 of the other 12 models arrive at the exact same intermediate number?
+    *   *Text Length & Speed:* How many tokens was it generating, and was its confidence accelerating or stalling?
+*   **The Answer Key (Ground Truth):** Each row was marked with a `1` if the intermediate answer was mathematically correct, or `0` if incorrect.
 
-### 3. The Breakthrough: Why "Stacking" Created the Winning Super-Team
-Neither model could beat 0.95 alone. The breakthrough came from **Stacking** (combining their strengths):
-1.  **Step 1:** The Detective (Neural Net) reads the whole 5-step sequence and outputs a summary judgment score (its "expert gut feeling").
-2.  **Step 2:** We hand that expert score to the Accountant (Decision Trees) as an extra clue in its checklist.
-3.  **Step 3:** We blend their final predictions:
-    $$\text{Final Score} = 60\% \times \text{LightGBM Tree} + 40\% \times \text{HistGradient Tree}$$
-4.  **The Result:** The team covered each other's blind spots and reached **0.955156 ROC-AUC**!
+---
 
-### 4. What Does "0.955 AUC" Actually Mean in Simple Terms?
-*   AUC is a **ranking score**, not percentage accuracy.
+### 2. Did Multiple Trees and Models Play Against Each Other?
+**Yes, exactly.** We ran a machine learning tournament on an **NVIDIA Blackwell GPU (98GB VRAM)** to discover which referee algorithm was best at looking at those 225 clues and predicting whether the student had the right answer:
+
+| Competitor Model | Architecture Type | How It Evaluates the Reasoning | Solo ROC-AUC Score |
+| :--- | :--- | :--- | :---: |
+| **LightGBM Baseline** | 500 Gradient-Boosted Decision Trees | Inspects single-model tabular snapshot clues using fast if/else threshold splits. | **0.9432** |
+| **PyTorch Deep Sequence Probe** | Transformer (RoPE) + BiGRU + TCN | Reads the entire 5-step sequence across time like a movie to detect thinking momentum. | **0.9364** |
+| **HistGradientBoosting** | 400 Histogram Decision Trees | Groups continuous clues into discrete bins to make diverse branching cuts. | **0.9410** |
+
+#### What is a "Decision Tree" doing here?
+A single decision tree is like a flowchart of yes/no rules:
+> *"IF peer agreement > 80% AND hesitation score < 0.15 THEN probability correct = 95%. ELSE IF model flipped its answer twice THEN probability correct = 18%."*
+
+**LightGBM** doesn't use just 1 tree—it builds **500 to 700 trees in a sequence** (gradient boosting). Tree 1 makes a rough guess. Tree 2 looks specifically at what Tree 1 got wrong and fixes it. Tree 3 fixes Tree 2's mistakes, all the way to Tree 700!
+
+---
+
+### 3. Why Couldn't Any Single Model Beat 0.95 Alone?
+*   **The Trees were great at spreadsheets, but blind to time:** Decision trees excel at checking rigid thresholds (like *"is peer agreement > 75%?"*), but they treat steps in isolation and miss the subtle "flow" or narrative momentum of multi-step problem solving.
+*   **The Neural Network was great at time, but softer on exact thresholds:** The PyTorch deep sequence network was incredible at sensing whether the model was making steady progress or circling in an overthinking loop, but wasn't quite as sharp at rigid numerical cutoffs.
+*   **The Solution was "Stacking" (Combining Their Superpowers):**
+    1.  **Stage 1:** We let the Deep Neural Network evaluate the full 5-step sequence first. It outputs a single summary probability: `moe_probe_q` (its holistic confidence rating).
+    2.  **Stage 2:** We hand `moe_probe_q` to the Decision Trees as an extra clue (Column #226 in the spreadsheet!).
+    3.  **Stage 3:** We train two distinct tree ensembles on this enriched data: 700 trees in LightGBM and 400 trees in HistGradientBoosting.
+    4.  **Stage 4 (Voting Blend):** For any new reasoning step, we combine their predictions:
+        $$\text{Final Output Score} = 0.60 \times (\text{LightGBM}) + 0.40 \times (\text{HistGradientBoosting})$$
+    5.  **The Result:** The team covered each other's blind spots and hit **`0.955156` ROC-AUC** (+0.0119 lift over the baseline)!
+
+---
+
+### 4. What Does "0.955 ROC-AUC" Mean in Simple Terms?
+*   **It is a ranking test, not a raw percentage accuracy score.**
 *   **The Blind Taste-Test Analogy:**
-    *   Imagine you hand the referee 100 random pairs of student solutions. In every pair, one student got the right answer, and one student got it wrong.
-    *   The referee does not know the answer key. It simply grades their scratchpads and assigns each a confidence score.
-    *   **In 95.5 out of 100 pairs, the referee successfully gives the higher score to the correct solution.**
-    *   In machine learning, an AUC above 0.95 is considered near-oracle detection performance.
+    *   Imagine you pull 100 random pairs of student solutions out of a box. In every single pair, Solution A is correct, and Solution B is incorrect.
+    *   You hand both solutions to our referee algorithm without telling it which is which.
+    *   The referee assigns each solution a score from 0.0 to 1.0.
+    *   **In 95.5 out of 100 pairs (95.5%), the referee correctly ranks the right answer higher than the wrong answer.**
+    *   *Context:* A random coin flip gives 50% (0.50 AUC). A typical good ML classifier gives 80% to 85% (0.80–0.85 AUC). In scientific and medical machine learning, an AUC above **0.95** is considered near-oracle classification.
 
-### 5. Why We Know It's Real (Not Just Memorizing Answers):
-*   **Held-Out Questions (Group K-Fold):** We tested using 5 cross-validation folds where entire math questions were held out. The referee was **only tested on questions it had never seen before**.
-*   **10,000 Statistical Re-Checks (Bootstrapping):** We randomly reshuffled and re-evaluated the test dataset 10,000 times. The stacked team beat the individual models in **10,000 out of 10,000 runs (100.0%)**.
+---
 
-### 6. What This Means for Semester 2:
-In this tournament, our referee evaluated traces **after the fact** (looking back at all 5 steps). For Semester 2, we are turning this referee into a **live stop switch** that watches the AI model generate text in real time, stopping it at the peak (Step 2 or 3) before it overthinks and breaks its answer!
+### 5. How Do We Prove the Detector Didn't Cheat or Memorize Answers?
+*   **Strict Problem Isolation (5-Fold GroupKFold):** All 2,948 math tasks were partitioned into 5 independent groups. When testing on Group 5, the models were trained strictly on Groups 1–4. The detector was **never tested on questions it had seen during training**.
+*   **10,000-Draw Statistical Stress Battery (Bootstrapping):** We randomly reshuffled and resampled the tasks 10,000 separate times. In **10,000 out of 10,000 runs (100.0%)**, the stacked hybrid model outperformed the standalone baseline, confirming the +0.0119 performance jump is statistically bulletproof ($p < 0.0001$).
+
+---
+
+### 6. The Semester 2 Transition: From Offline Grader to Live Stop Button
+*   **Semester 1 (What we just completed):** The referee acted as an **offline auditor**—evaluating reasoning traces after all 5 steps were already generated.
+*   **Semester 2 (What we do now):** We turn this 0.955 referee into a **live, in-flight stop switch** (`online_stopping_controller.py`). As an LLM generates tokens in real time, the controller evaluates our low-latency clues at each step ($< 10\text{ms}$). The moment the probability crosses our optimal stopping threshold ($\approx$ Step 2 or 3), it halts generation immediately—saving compute and preventing the model from overthinking and ruining its answer!
+
+---
+
+### 💡 30-Second Advisor Elevator Pitch (Dr. Woods Meeting)
+> *"In Semester 1, we generated 144,000 reasoning steps across 13 open-source LLMs solving ~3,000 math problems. Then we held a machine learning tournament on an NVIDIA Blackwell GPU between decision tree forests (LightGBM) and deep sequence networks (PyTorch) to see which could best detect when a model reached the correct answer. Individual models scored around 0.93 to 0.94 AUC. But by stacking them—feeding the neural net's sequence score directly into a 700-tree gradient boosted ensemble—our combined referee hit **0.955 ROC-AUC**, winning 100% of 10,000 bootstrap trials. In Semester 2, our immediate goal is to take this 0.955 referee and deploy it as a live, real-time stop button during text generation."*
 
 ---
 

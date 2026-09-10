@@ -113,22 +113,27 @@ flowchart TD
 
 #### Plain-English Answers to Key Questions:
 
-1. **Who competed in the "Tournament"?**
-   - The LLMs (Llama, Mistral, Qwen) did **not** compete against each other—they were the students.
-   - The **tournament was between different Referee algorithms** on an NVIDIA Blackwell GPU to find the best way to detect correct answers and overthinking.
+1. **Who competed in the "Tournament"? Did models play against each other?**
+   - The 13 LLMs (Llama, Mistral, Qwen) did **not** play against each other—they were the "students" whose 144,440 reasoning steps formed our training dataset (a giant spreadsheet with 225 clues per step).
+   - The **tournament was between different referee algorithms** on an NVIDIA Blackwell GPU:
+     - **LightGBM:** A forest of 500 gradient-boosted decision trees looking at snapshot clues (Solo AUC: `0.9432`).
+     - **PyTorch Deep Probe:** A sequence neural network (Transformer + BiGRU) reading the 5 steps across time like a movie (Solo AUC: `0.9364`).
+     - **HistGradientBoosting:** Another forest of 400 histogram-binned trees (Solo AUC: `0.9410`).
 
 2. **Why did "Stacking" create the winning Super-Team?**
-   - The **Accountant (Trees)** was great at fast factual checks (like *"did 3 other models agree on this answer?"*), scoring **0.943 AUC**.
-   - The **Detective (Neural Net)** was great at watching the timeline of the whole reasoning path, scoring **0.936 AUC**.
-   - **Stacking** gave the Detective's gut-feeling score directly to the Accountant as an extra clue, then blended their final votes ($60\% + 40\%$). Together, they caught errors neither could spot alone, jumping to **0.955 AUC**!
+   - **The Trees** were masters at spreadsheets (checking rigid numerical cutoffs like *"peer consensus > 75%"*), but blind to sequential time flow.
+   - **The Neural Net** was a master at watching the time flow, but softer on rigid cutoff thresholds.
+   - **Stacking** let the Neural Net evaluate the sequence first and output an expert score (`moe_probe_q`). We fed that score directly into the tree ensembles as Column #226.
+   - We blended the trees' final votes ($60\% \text{ LightGBM} + 40\% \text{ HistGradientBoosting}$). The combination covered each other's blind spots and leaped to **0.955156 ROC-AUC** (+0.0119 lift)!
 
 3. **What does 0.955 AUC mean? (The Blind Taste-Test Analogy)**
-   - AUC is a **ranking score**, not raw accuracy.
-   - If you hand our detector 100 pairs of student exam sheets (where one sheet has the right answer and one has a mistake), **our detector successfully gives the higher score to the correct sheet 95.5 out of 100 times**.
+   - AUC is a **ranking score**, not raw percentage accuracy.
+   - If you hand our referee 100 random pairs of student solutions (where one sheet is correct and one is wrong), **our detector successfully assigns the higher score to the correct sheet 95.5 out of 100 times**.
+   - A random coin flip gives 50% (0.50 AUC); standard good models get 80–85%. An AUC of 0.955 represents near-oracle detection.
 
 4. **Is it real, or did it just memorize the questions?**
-   - **It is real.** We tested across 5 held-out folds where entire question groups were locked away. The detector was never evaluated on questions it had seen during training.
-   - In 10,000 random bootstrap re-tests, the stacked team beat individual models in **10,000 out of 10,000 runs (100.0%)**.
+   - **It is strictly verified.** We used 5-Fold GroupKFold validation where entire math questions were held out. The detector was never evaluated on questions it had seen during training.
+   - In 10,000 random bootstrap stress re-tests, the stacked ensemble beat individual models in **10,000 out of 10,000 runs (100.0%)**.
 
 5. **The one honest nuance to explain to Dr. Woods:**
    - The 0.955 score was measured **retrospectively** (looking at traces after all 5 steps were already generated).
