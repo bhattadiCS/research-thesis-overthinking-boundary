@@ -171,8 +171,8 @@ flowchart LR
 
 | Week | Target Dates | Engineering & Code Goals | Pulled-Forward Writing Deliverables |
 | :---: | :--- | :--- | :--- |
-| **W1** | Sep 9 – Sep 13 | Lock dataset hashes and package code cleanly. | **Draft Chapter 1 (Introduction & Motivation) and Chapter 3 (Experimental Setup & 13 Models).** |
-| **W2** | Sep 14 – Sep 20 | Build `online_stopping_controller.py` to stop models live. | **Draft Chapter 4 (Empirical Evidence of Overthinking & Scaling Drift across 4 Benchmarks).** |
+| **W1** | Sep 9 – Sep 13 | Create master data fingerprint (`data_manifest_v1.json`) & lock software versions. | **Draft Chapter 1 (Introduction & Motivation) and Chapter 3 (Experimental Setup & 13 Models).** |
+| **W2** | Sep 14 – Sep 20 | Build live real-time stopping tool (`online_stopping_controller.py`) & test speed. | **Draft Chapter 4 (Empirical Evidence of Overthinking & Scaling Drift across 4 Benchmarks).** |
 | **W3** | Sep 21 – Sep 27 | Measure live token savings vs accuracy trade-offs. | **Draft Chapter 2 (Mathematical Formulation & Stopping Theory).** |
 | **W4** | Sep 28 – Oct 4 | Test against tricky adversarial questions and traps. | **Draft Chapter 5 (Live Online Stopping Results & Pareto Analysis) and Chapter 6 (Discussion & Limitations).** |
 | **W5** | Oct 5 – Oct 11 | Compile complete manuscript, figures, and bibliography. | **SUBMIT COMPLETE THESIS DRAFT v1.0 TO DR. WOODS & COMMITTEE (OCTOBER 9 TARGET)! 🚀** |
@@ -185,25 +185,6 @@ flowchart LR
 | **W12** | Nov 23 – Nov 29 | **PUBLIC ORAL DEFENSE (30-min presentation + 30-min Q&A).** | Committee evaluation and signature approval. |
 | **W13** | Nov 30 – Dec 6 | Final formatting checks for JHU Sheridan Libraries (PDF/A). | **Submit final thesis to JHU ETD library repository.** |
 | **W14** | Dec 7 – Dec 11 | Submit signed completion paperwork to the JHU Registrar. | **Degree clearance and final grade recorded.** |
-
-
----
-
-## 💬 4 Quick Discussion Questions for Dr. Woods
-
-```mermaid
-flowchart TD
-    Q1["1. Are 75,000 reasoning traces enough, or do you want any more data runs?"]
-    Q2["2. For our live stopping tool, do you prefer saving max compute (save 40% tokens) or max accuracy (stay within 0.5% of peak)?"]
-    Q3["3. For Chapter 2 (Math Theory), what level of proof detail do you and Dr. Pemy want to see?"]
-    Q4["4. Does October 9 work well for receiving Draft v1.0, giving us a full month for revisions before the defense?"]
-    Q1 --> Q2 --> Q3 --> Q4
-```
-
-1. **Data Completeness:** Confirm that our 75,965 traces across 13 models are more than enough data so we can focus 100% on writing and live testing.
-2. **Stopping Rule Preference:** In production, do we want a **Conservative rule** (keep accuracy drop below 0.5%) or an **Efficiency rule** (cut computing costs by 40%+)?
-3. **Math Depth:** Dr. Woods and Dr. Pemy's expectations for proof rigor in Chapter 2.
-4. **Accelerated Calendar:** Propose the **October 9 delivery date for Draft v1.0** (two weeks early!) to give the committee **4 full weeks of revision time** before the late-November defense.
 
 ---
 
