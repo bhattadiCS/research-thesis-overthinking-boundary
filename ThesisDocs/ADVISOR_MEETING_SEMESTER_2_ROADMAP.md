@@ -188,6 +188,58 @@ flowchart LR
 
 ---
 
+### 🔍 Deep Dive: What You Are Doing in Weeks 1 & 2 (In Simple Terms)
+
+#### Week 1 (Sep 9 – Sep 13): Freezing the Data & Writing Chapters 1 & 3
+
+1. **"Create master data fingerprint (`data_manifest_v1.json`)"**
+   - **What it is:** In computer science, a *hash* (SHA-256) is a unique 64-character digital fingerprint of a file. If even a single comma or digit in a file changes, its fingerprint changes completely.
+   - **What you will do:** Run a short Python script that calculates the exact digital fingerprint for all 52 tournament data files (144,440 data points) and records them into `data_manifest_v1.json`.
+   - **Why it matters:** It permanently locks your Semester 1 experiments. It proves to Dr. Woods, Dr. Pemy, and any academic reviewer that your 0.955 AUC results are 100% reproducible and were never altered or cherry-picked.
+
+2. **"Lock software versions (`requirements.txt`)"**
+   - **What it is:** A complete "software recipe" listing the exact version numbers of every library you used (PyTorch, LightGBM, Transformers, Python 3.11).
+   - **What you will do:** Export your current clean environment (`pip freeze > requirements.lock.txt`).
+   - **Why it matters:** Anyone else can install these exact versions on their computer and get the exact same results with zero installation headaches or version conflicts.
+
+3. **"Draft Chapter 1 (Introduction & Motivation)"**
+   - **What goes in:** 
+     - How modern AI reasoning works (step-by-step thinking).
+     - The problem of **overthinking drift**: why AI models often find the right answer early on, and then ruin it by second-guessing themselves.
+     - Your core thesis question: *Can an algorithm predict the sweet spot where the model should stop thinking to save compute and keep peak accuracy?*
+
+4. **"Draft Chapter 3 (Experimental Setup & 13 Models)"**
+   - **What goes in:** 
+     - Documenting the 13 open-source models you tested (Llama 3, Mistral, Qwen 2.5, DeepSeek).
+     - The 4 benchmarks tested (GSM8K, MATH, SVAMP, GPQA).
+     - How 75,000+ reasoning steps were generated, stored, and checked by our verified 30/30 grading suite.
+
+---
+
+#### Week 2 (Sep 14 – Sep 20): Building the Live Stopper & Writing Chapter 4
+
+1. **"Build live real-time stopping tool (`online_stopping_controller.py`)"**
+   - **What it is:** In Semester 1, our 0.955 AUC detector looked backward at traces *after* all 5 steps were already written. In Week 2, we turn this detector into an active, real-time "stop button".
+   - **What you will do:** Write a Python module that hooks directly into the generation loop:
+     - After Step 1 $\to$ *Keep going (minimum 2 steps required).*
+     - After Step 2 $\to$ *Evaluate confidence and peer agreement. If high $\to$ STOP immediately!*
+     - After Step 3+ $\to$ *If confidence drops or answers start wobbling $\to$ STOP before corruption occurs!*
+   - **Why it matters:** This actually stops the AI model from generating unneeded tokens, saving 30% to 40% on computing power in real time with zero accuracy drop.
+
+2. **"Test speed on 100 math problems"**
+   - **What you will do:** Run the live controller on 100 sample problems and measure its execution time per step.
+   - **Goal:** Verify that the stop/go decision takes **under 10 milliseconds**, ensuring it never slows down the AI's response time.
+   - **Safety check:** Confirm that the controller **only looks backward** at what the model has already written, with zero peeking ahead.
+
+3. **"Draft Chapter 4 (Empirical Evidence of Overthinking Drift)"**
+   - **What goes in:** Writing down all your verified Semester 1 findings:
+     - The Overthinking Curve: accuracy peaks at steps 2–3, then drops by up to 15%.
+     - The Competing Forces: Step 2 fixes mistakes (+5.1%), while Step 4 breaks right answers (-1.3%).
+     - Model Size: Bigger models (14B, 32B) think effectively longer; smaller models (0.5B, 3B) overthink much earlier.
+     - Compression (Quantization): 4-bit compression degrades early reasoning accuracy by 14.3%.
+
+---
+
 ## 📁 Key File Quick Reference
 - **Master Research Report:** [`ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/Thesis_Semester1_Research_Report_Fall_2026.md)
 - **Scientific Rigor Audit:** [`ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md`](file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md)
