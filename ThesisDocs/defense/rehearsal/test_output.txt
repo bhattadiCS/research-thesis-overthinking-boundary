@@ -1,0 +1,93 @@
+SYNTHETIC SOFTWARE TESTS ONLY; no rehearsal occurred.
+Command: C:\Users\bhatt\AppData\Local\Programs\Python\Python312\python.exe -m unittest discover -s ThesisDocs/defense/rehearsal -p test_rehearsal_logger.py -v
+test_actual_sequence_produces_measured_timing_not_planned_substitution (test_rehearsal_logger.RehearsalContractTests.test_actual_sequence_produces_measured_timing_not_planned_substitution) ... ok
+test_audit_output_cannot_overwrite_actual_ledger (test_rehearsal_logger.RehearsalContractTests.test_audit_output_cannot_overwrite_actual_ledger) ... Rehearsal logger: Audit outputs must be distinct from each other and from the observed ledger.
+ok
+test_blank_template_is_incomplete_and_has_no_actual_duration (test_rehearsal_logger.RehearsalContractTests.test_blank_template_is_incomplete_and_has_no_actual_duration) ... ok
+test_changed_evidence_bytes_reopen_incomplete_status (test_rehearsal_logger.RehearsalContractTests.test_changed_evidence_bytes_reopen_incomplete_status) ... ok
+test_cli_manual_input_validates_and_reports_incomplete_without_filling_times (test_rehearsal_logger.RehearsalContractTests.test_cli_manual_input_validates_and_reports_incomplete_without_filling_times) ... Rehearsal logger: Refusing to overwrite an existing ledger/template: C:\Users\bhatt\AppData\Local\Temp\tmpxfhuq54v\SYNTHETIC_CLI_ONLY.json
+ok
+test_complete_evidence_is_separate_from_timing_target (test_rehearsal_logger.RehearsalContractTests.test_complete_evidence_is_separate_from_timing_target) ... ok
+test_dry_run_requires_adviser_and_accepts_unrecorded_dated_record (test_rehearsal_logger.RehearsalContractTests.test_dry_run_requires_adviser_and_accepts_unrecorded_dated_record) ... ok
+test_interactive_quit_preserves_an_empty_ledger (test_rehearsal_logger.RehearsalContractTests.test_interactive_quit_preserves_an_empty_ledger) ... ok
+test_known_consent_cannot_be_inferred_and_decline_blocks_recording (test_rehearsal_logger.RehearsalContractTests.test_known_consent_cannot_be_inferred_and_decline_blocks_recording) ... ok
+test_late_grant_does_not_retroactively_cover_recording (test_rehearsal_logger.RehearsalContractTests.test_late_grant_does_not_retroactively_cover_recording) ... ok
+test_phase_and_slide_invariants (test_rehearsal_logger.RehearsalContractTests.test_phase_and_slide_invariants) ... ok
+test_prior_peer_link_requires_complete_evidence_and_preserves_question_ids (test_rehearsal_logger.RehearsalContractTests.test_prior_peer_link_requires_complete_evidence_and_preserves_question_ids) ... ok
+test_recording_reference_and_witness_are_both_required (test_rehearsal_logger.RehearsalContractTests.test_recording_reference_and_witness_are_both_required) ... ok
+test_revisits_accumulate_actual_time_and_keep_first_start (test_rehearsal_logger.RehearsalContractTests.test_revisits_accumulate_actual_time_and_keep_first_start) ... ok
+test_schema_lists_the_same_event_types (test_rehearsal_logger.RehearsalContractTests.test_schema_lists_the_same_event_types) ... ok
+test_skipped_slide_and_no_question_remain_incomplete (test_rehearsal_logger.RehearsalContractTests.test_skipped_slide_and_no_question_remain_incomplete) ... ok
+test_source_or_event_tampering_is_detected (test_rehearsal_logger.RehearsalContractTests.test_source_or_event_tampering_is_detected) ... ok
+test_time_order_future_and_timezone_guards (test_rehearsal_logger.RehearsalContractTests.test_time_order_future_and_timezone_guards) ... ok
+test_unasked_or_unsupported_answer_is_rejected (test_rehearsal_logger.RehearsalContractTests.test_unasked_or_unsupported_answer_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.780s
+
+OK
+Empty session created; rehearsal evidence remains incomplete.
+Observed event appended; original earlier events preserved.
+Event/plan invariants passed. This is not a completed rehearsal assertion.
+{
+  "evidence_status": "incomplete",
+  "observed_event_count": 1,
+  "blockers": [
+    "Missing observed boundary: talk_start",
+    "Missing observed boundary: talk_end",
+    "Missing observed boundary: qa_start",
+    "Missing observed boundary: qa_end",
+    "Missing observed boundary: session_end",
+    "Slide 1 has no complete positive-duration observation.",
+    "Slide 2 has no complete positive-duration observation.",
+    "Slide 3 has no complete positive-duration observation.",
+    "Slide 4 has no complete positive-duration observation.",
+    "Slide 5 has no complete positive-duration observation.",
+    "Slide 6 has no complete positive-duration observation.",
+    "Slide 7 has no complete positive-duration observation.",
+    "Slide 8 has no complete positive-duration observation.",
+    "Slide 9 has no complete positive-duration observation.",
+    "Slide 10 has no complete positive-duration observation.",
+    "Slide 11 has no complete positive-duration observation.",
+    "Slide 12 has no complete positive-duration observation.",
+    "Slide 13 has no complete positive-duration observation.",
+    "Slide 14 has no complete positive-duration observation.",
+    "Slide 15 has no complete positive-duration observation.",
+    "Slide 16 has no complete positive-duration observation.",
+    "Slide 17 has no complete positive-duration observation.",
+    "Slide 18 has no complete positive-duration observation.",
+    "Slide 19 has no complete positive-duration observation.",
+    "Slide 20 has no complete positive-duration observation.",
+    "Slide 21 has no complete positive-duration observation.",
+    "Slide 22 has no complete positive-duration observation.",
+    "Slide 23 has no complete positive-duration observation.",
+    "Slide 24 has no complete positive-duration observation.",
+    "Slide 25 has no complete positive-duration observation.",
+    "Missing actual peer attendee before the talk.",
+    "Unknown recording-consent status: test_speaker",
+    "No actual verbatim Q&A question recorded.",
+    "No reviewed recording with coverage/consent.",
+    "Missing explicit post-session witness attestation for acceptable evidence."
+  ],
+  "timing": {
+    "talk": {
+      "target_seconds": 1800,
+      "actual_seconds": null,
+      "deviation_seconds": null,
+      "within_predeclared_tolerance": null
+    },
+    "qa": {
+      "target_seconds": 1800,
+      "actual_seconds": null,
+      "deviation_seconds": null,
+      "within_predeclared_tolerance": null
+    }
+  },
+  "timing_targets_met": false
+}
+Manual observations only. No audio/video capture, invites, or messages are sent.
+Commands: participant, consent, talk-start, next [Enter], slide N, talk-end,
+qa-start, question, outcome, qa-end, end, evidence, attest, audit, quit.
+Use append --event-file for retrospective timestamps in chronological order.
+
+Exit code: 0

@@ -1,0 +1,20 @@
+gate,status,deadline_or_condition,observed_at_utc,evidence_reference,verified_by,notes
+semester2_status_approval,unverified,end_of_semester1_before_625804_registration,,,,Check existing filing; do not infer approval or prepare duplicate signed form
+graduation_application,unverified,2026-11-30,,,,Retain actual SIS confirmation
+degree_audit,unverified,academic_adviser_verification,,,,Cohort and transcript not established from repository
+committee_draft_delivery,pending,target_2026-10-09,,,,Draft message prepared but not sent
+committee_cycle1,pending,real_comments_and_resolutions,,,,Header-only revision ledger
+committee_cycle2,pending,real_comments_and_resolutions,,,,Internal agent review does not count
+peer_mock_defense,pending,actual_consented_recorded_rehearsal,,,,Use observation logger; template is incomplete
+adviser_dry_run,pending,actual_adviser_rehearsal,,,,Use observation logger; template is incomplete
+defense_booking,pending,program_date_and_availability_confirmation,,,,Prefer outside November23-29 holidays
+defense_announcement,pending,program_lead_time_confirmation,,,,Unpublished draft only
+public_defense,pending,actual_adviser_and_second_reader_attendance,,,,No defense outcome recorded
+faculty_completion_certification,pending,defense_and_final_thesis_complete,,,,Actual adviser and reader records required
+chair_final_approval,pending,actual_final_thesis_approval,,,,Chair approval precedes course grade
+final_archival_export,pending,final_approved_revision_and_format,,,,Draft2b candidate validated; final bytes still pending
+etd_agreement_access_rights,pending,student_decisions_and_agreement,,,,No attestation or embargo inferred
+etd_fee,pending,actual_submission,,,,Checked library fee60USD; not paid
+library_acceptance,pending,actual_approval_receipt,,,,Allow processing and corrections before EP cutoff
+course_grade,pending,adviser_assignment_after_chair_approval,,,,No grade inferred
+registrar_clearance,pending,actual_institutional_confirmation,,,,No degree clearance inferred

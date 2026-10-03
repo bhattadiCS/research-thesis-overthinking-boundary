@@ -1,0 +1,62 @@
+{
+  "schema": "isolated-archival-tool-provenance-v1",
+  "recorded_at_utc": "2026-10-03T03:12:49.002463+00:00",
+  "isolated_authoring_environment": "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\pdfa_tools\\venv",
+  "research_environment_unchanged": true,
+  "installation_scope": "task-local tmp/pdfs/pdfa_tools only",
+  "research_environment_inventory_comparison": {
+    "unique_distributions": 334,
+    "matches_requirements_lock": true,
+    "pikepdf_installed_globally": false,
+    "lock_sha256": "e979c5ac4eb31eb95d21d2fe19126bbc142bb27fcba69ce2115121de54ce41cb"
+  },
+  "python_version": "3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]",
+  "packages": {
+    "pikepdf": "10.16.0",
+    "PyMuPDF": "1.27.2.2",
+    "numpy": "2.3.5",
+    "reportlab": "5.0.0",
+    "fonttools": "4.53.1",
+    "jsonschema": "4.23.0",
+    "referencing": "0.35.1"
+  },
+  "pikepdf_wheel_url": "https://files.pythonhosted.org/packages/e3/98/ec12df6997fa969b40f92240f9828e2d9d48b98126fd34931f2fa02bb7b5/pikepdf-10.16.0-cp312-cp312-win_amd64.whl",
+  "pikepdf_wheel_sha256": "58ea87e6d674f93fb909219b695ed2f67f0896d35ff95867675dd0bf43f9b471",
+  "verapdf_version": "1.30.2",
+  "verapdf_jar_sha256": "889075253fb9df4db5482efb8f8208fb3b4f2e00f5f7e1b1e31edf6fb4b69bb6",
+  "publisher_downloads": [
+    {
+      "url": "https://software.verapdf.org/releases/verapdf-installer.zip",
+      "resolved_url": "https://software.verapdf.org/releases/verapdf-installer.zip",
+      "file": "verapdf-installer.zip",
+      "bytes": 32923960,
+      "sha256": "6cc6341cb1af644044054b81f00a6590a7918abb18f762243de115258bcad838"
+    },
+    {
+      "url": "https://software.verapdf.org/releases/verapdf-installer.zip.asc",
+      "resolved_url": "https://software.verapdf.org/releases/verapdf-installer.zip.asc",
+      "file": "verapdf-installer.zip.asc",
+      "bytes": 659,
+      "sha256": "f33175e402f28c42e80866aa62aa337c5d7d7a16a4ea1ae4ff50b0f13343ff26"
+    },
+    {
+      "url": "https://software.verapdf.org/keys/KEY",
+      "resolved_url": "https://software.verapdf.org/keys/KEY",
+      "file": "KEY",
+      "bytes": 5613,
+      "sha256": "30f1dc7fb7c9f3d9796dd9f9dd5d344ebbcf45bef9632d9c47c39cdf254249f2"
+    }
+  ],
+  "signature_verified": true,
+  "valid_signature_fingerprint": "13DD102B4DD69354D12DE5A83184863278B17FE7",
+  "fingerprint_source": "https://docs.verapdf.org/install/",
+  "signature_verification_receipt": "ThesisDocs/archival/publisher_signature_verification.txt",
+  "signature_receipt_sha256": "db7b1f6af852162e3013f79fee513fad94cf453e3e8d732c3b1c17907c8053cf",
+  "key_trust_note": "Detached signature verifies cryptographically against the fingerprint published by veraPDF; no personal web-of-trust certification is claimed.",
+  "java_version_output": "java version \"1.8.0_481\"\nJava(TM) SE Runtime Environment (build 1.8.0_481-b10)\nJava HotSpot(TM) 64-Bit Server VM (build 25.481-b10, mixed mode)",
+  "sources": [
+    "https://docs.verapdf.org/install/",
+    "https://pikepdf.readthedocs.io/en/latest/topics/pdfa.html",
+    "https://pypi.org/pypi/pikepdf/10.16.0/json"
+  ]
+}

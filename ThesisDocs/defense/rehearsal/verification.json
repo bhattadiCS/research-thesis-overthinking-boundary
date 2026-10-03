@@ -1,0 +1,231 @@
+{
+  "schema": "defense-rehearsal-infrastructure-verification-v1",
+  "scope": "Software/template verification only; zero actual rehearsals and zero recordings performed.",
+  "actual_rehearsals_performed": 0,
+  "actual_recordings_created": 0,
+  "external_messages_sent": 0,
+  "pdfs_created": 0,
+  "python_executable": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]",
+  "test_command": [
+    "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "ThesisDocs\\defense\\rehearsal",
+    "-p",
+    "test_rehearsal_logger.py",
+    "-v"
+  ],
+  "tests_passed": 19,
+  "test_elapsed_seconds": 0.78,
+  "test_exit_code": 0,
+  "test_output_path": "ThesisDocs\\defense\\rehearsal\\test_output.txt",
+  "schema_validation": "Draft202012 schema valid; refreshed blank ledgers validated with format checks",
+  "help_command": [
+    "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "tools/record_defense_rehearsal.py",
+    "--help"
+  ],
+  "help_exit_code": 0,
+  "blank_ledger_checks": [
+    {
+      "kind": "peer_mock",
+      "ledger": "ThesisDocs\\defense\\rehearsal\\peer_mock_blank.json",
+      "ledger_sha256": "0dae204ab0b480dcffb914fb134febbcd205833fc5bd0125e236aa0054049ef9",
+      "validate_command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "tools/record_defense_rehearsal.py",
+        "validate",
+        "--ledger",
+        "ThesisDocs\\defense\\rehearsal\\peer_mock_blank.json"
+      ],
+      "validate_exit_code": 0,
+      "audit_command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "tools/record_defense_rehearsal.py",
+        "audit",
+        "--ledger",
+        "ThesisDocs\\defense\\rehearsal\\peer_mock_blank.json",
+        "--output",
+        "ThesisDocs\\defense\\rehearsal\\peer_mock_blank_audit.json",
+        "--timing-csv",
+        "ThesisDocs\\defense\\rehearsal\\peer_mock_blank_timing.csv"
+      ],
+      "audit_exit_code": 2,
+      "expected_incomplete_exit_code": 2,
+      "audit_path": "ThesisDocs\\defense\\rehearsal\\peer_mock_blank_audit.json",
+      "csv_path": "ThesisDocs\\defense\\rehearsal\\peer_mock_blank_timing.csv",
+      "evidence_status": "incomplete",
+      "observed_events": 0,
+      "actual_talk_seconds": null,
+      "actual_qa_seconds": null,
+      "plan_sha256": "2a18b4f349a189b6af86aec0c0ce9f1f58ff0bdb9ce9213df950b665362030a7",
+      "source_checks": [
+        {
+          "source": "deck_json",
+          "path": "ThesisDocs/defense/defense_slides.json",
+          "frozen_sha256": "a6b0a7d45d2d976ec8ee7617ff7023448a4977bacaa50d63496cc6a619819968",
+          "current_sha256": "a6b0a7d45d2d976ec8ee7617ff7023448a4977bacaa50d63496cc6a619819968",
+          "matches": true
+        },
+        {
+          "source": "timing_plan",
+          "path": "ThesisDocs/defense/timing_plan.md",
+          "frozen_sha256": "ede9bb7567eb67b0442cf3867a638cad43a442d6305867372ac3d3d7d32093af",
+          "current_sha256": "ede9bb7567eb67b0442cf3867a638cad43a442d6305867372ac3d3d7d32093af",
+          "matches": true
+        },
+        {
+          "source": "speaker_notes",
+          "path": "ThesisDocs/defense/speaker_notes_30_minutes.md",
+          "frozen_sha256": "2363f2002a5f4adbcdf42d8e79522a43e55f2dc22954a9e47d5e3af38b5add70",
+          "current_sha256": "2363f2002a5f4adbcdf42d8e79522a43e55f2dc22954a9e47d5e3af38b5add70",
+          "matches": true
+        },
+        {
+          "source": "question_bank",
+          "path": "ThesisDocs/defense/defense_question_bank.md",
+          "frozen_sha256": "ea142595889becd852b924db196a7570866744c18ac035d0ccd08158b36894ea",
+          "current_sha256": "ea142595889becd852b924db196a7570866744c18ac035d0ccd08158b36894ea",
+          "matches": true
+        },
+        {
+          "source": "review_procedure",
+          "path": "ThesisDocs/committee_review_package_v1.md",
+          "frozen_sha256": "b054b07662a3eea1a5712e7feb6d3f35ef33fd179ace6a0042f28159d8b97678",
+          "current_sha256": "b054b07662a3eea1a5712e7feb6d3f35ef33fd179ace6a0042f28159d8b97678",
+          "matches": true
+        },
+        {
+          "source": "deck_pptx",
+          "path": "output/presentation/Thesis_Defense_v1_Aditya_Bhatt.pptx",
+          "frozen_sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+          "current_sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "kind": "adviser_dry_run",
+      "ledger": "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank.json",
+      "ledger_sha256": "697b0b71fc98a518820c582ece79b9c23865faf7dad752afc8e43d5175d45448",
+      "validate_command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "tools/record_defense_rehearsal.py",
+        "validate",
+        "--ledger",
+        "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank.json"
+      ],
+      "validate_exit_code": 0,
+      "audit_command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "tools/record_defense_rehearsal.py",
+        "audit",
+        "--ledger",
+        "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank.json",
+        "--output",
+        "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank_audit.json",
+        "--timing-csv",
+        "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank_timing.csv"
+      ],
+      "audit_exit_code": 2,
+      "expected_incomplete_exit_code": 2,
+      "audit_path": "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank_audit.json",
+      "csv_path": "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank_timing.csv",
+      "evidence_status": "incomplete",
+      "observed_events": 0,
+      "actual_talk_seconds": null,
+      "actual_qa_seconds": null,
+      "plan_sha256": "2a18b4f349a189b6af86aec0c0ce9f1f58ff0bdb9ce9213df950b665362030a7",
+      "source_checks": [
+        {
+          "source": "deck_json",
+          "path": "ThesisDocs/defense/defense_slides.json",
+          "frozen_sha256": "a6b0a7d45d2d976ec8ee7617ff7023448a4977bacaa50d63496cc6a619819968",
+          "current_sha256": "a6b0a7d45d2d976ec8ee7617ff7023448a4977bacaa50d63496cc6a619819968",
+          "matches": true
+        },
+        {
+          "source": "timing_plan",
+          "path": "ThesisDocs/defense/timing_plan.md",
+          "frozen_sha256": "ede9bb7567eb67b0442cf3867a638cad43a442d6305867372ac3d3d7d32093af",
+          "current_sha256": "ede9bb7567eb67b0442cf3867a638cad43a442d6305867372ac3d3d7d32093af",
+          "matches": true
+        },
+        {
+          "source": "speaker_notes",
+          "path": "ThesisDocs/defense/speaker_notes_30_minutes.md",
+          "frozen_sha256": "2363f2002a5f4adbcdf42d8e79522a43e55f2dc22954a9e47d5e3af38b5add70",
+          "current_sha256": "2363f2002a5f4adbcdf42d8e79522a43e55f2dc22954a9e47d5e3af38b5add70",
+          "matches": true
+        },
+        {
+          "source": "question_bank",
+          "path": "ThesisDocs/defense/defense_question_bank.md",
+          "frozen_sha256": "ea142595889becd852b924db196a7570866744c18ac035d0ccd08158b36894ea",
+          "current_sha256": "ea142595889becd852b924db196a7570866744c18ac035d0ccd08158b36894ea",
+          "matches": true
+        },
+        {
+          "source": "review_procedure",
+          "path": "ThesisDocs/committee_review_package_v1.md",
+          "frozen_sha256": "b054b07662a3eea1a5712e7feb6d3f35ef33fd179ace6a0042f28159d8b97678",
+          "current_sha256": "b054b07662a3eea1a5712e7feb6d3f35ef33fd179ace6a0042f28159d8b97678",
+          "matches": true
+        },
+        {
+          "source": "deck_pptx",
+          "path": "output/presentation/Thesis_Defense_v1_Aditya_Bhatt.pptx",
+          "frozen_sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+          "current_sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+          "matches": true
+        }
+      ]
+    }
+  ],
+  "files_sha256": {
+    "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank.json": "697b0b71fc98a518820c582ece79b9c23865faf7dad752afc8e43d5175d45448",
+    "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank_audit.json": "ade6bbbc463682e42f405e0721aa78d93462b89ccdc1eadd3058dab633285d5c",
+    "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank_timing.csv": "dcee8a5787a848c2deb73b98bfbaabf6d67ffb990a4af91df2663c3ca6c713e3",
+    "ThesisDocs\\defense\\rehearsal\\peer_mock_blank.json": "0dae204ab0b480dcffb914fb134febbcd205833fc5bd0125e236aa0054049ef9",
+    "ThesisDocs\\defense\\rehearsal\\peer_mock_blank_audit.json": "9a8af96ac7a5816017495bc6ab4a6b03bc45b61ad3f9fb822950c1829717a4c3",
+    "ThesisDocs\\defense\\rehearsal\\peer_mock_blank_timing.csv": "dcee8a5787a848c2deb73b98bfbaabf6d67ffb990a4af91df2663c3ca6c713e3",
+    "ThesisDocs\\defense\\rehearsal\\README.md": "8f82350034d9e352111dca52df0a951c1fc822bbc0a4514aac3f4549d3861634",
+    "ThesisDocs\\defense\\rehearsal\\rehearsal_schema_v1.json": "030587f96b9db93a34f7f68cfc8e90b9e936a6005b9f9939836de480eed66a01",
+    "ThesisDocs\\defense\\rehearsal\\test_output.txt": "aa9c599289441fe3ed79f0122ce663a5332ffd03367d132f2c293c6982102de0",
+    "ThesisDocs\\defense\\rehearsal\\test_rehearsal_logger.py": "6095d16f2db01b6b8318aef32d796c0e470a270edc80b25e672b3edcc0af51c1",
+    "tools\\record_defense_rehearsal.py": "3ad5977bfdf9ca4a9fb38d5065c1c1be12f62903180bb384a99482143bd08edf"
+  },
+  "verified_at_utc": "2026-10-03T03:11:57.060396Z",
+  "blank_csv_checks": [
+    {
+      "kind": "peer_mock",
+      "path": "ThesisDocs\\defense\\rehearsal\\peer_mock_blank_timing.csv",
+      "rows": 25,
+      "observed_visits": 0,
+      "all_actual_time_fields_blank": true,
+      "bytes_unchanged_from_prior_blank": true
+    },
+    {
+      "kind": "adviser_dry_run",
+      "path": "ThesisDocs\\defense\\rehearsal\\adviser_dry_run_blank_timing.csv",
+      "rows": 25,
+      "observed_visits": 0,
+      "all_actual_time_fields_blank": true,
+      "bytes_unchanged_from_prior_blank": true
+    }
+  ],
+  "source_refresh": {
+    "reason": "Root updated committee review procedure; refresh blank planning snapshots only.",
+    "old_review_procedure_sha256": "f245e7325a667bef90ce2a12007d114ed0ca2d195c9b6ac7361ea52314fe4e7e",
+    "new_review_procedure_sha256": "b054b07662a3eea1a5712e7feb6d3f35ef33fd179ace6a0042f28159d8b97678",
+    "only_source_field_changed": true,
+    "software_tests_rerun": false,
+    "original_verification_at_utc": "2026-10-03T03:08:58.815484Z",
+    "preserved_test_output_sha256": "aa9c599289441fe3ed79f0122ce663a5332ffd03367d132f2c293c6982102de0",
+    "preserved_tests_passed": 19,
+    "preserved_test_exit_code": 0
+  }
+}

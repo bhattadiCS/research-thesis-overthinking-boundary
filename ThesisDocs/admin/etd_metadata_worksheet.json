@@ -1,0 +1,32 @@
+{
+  "schema": "etd-metadata-preparation-v1",
+  "status": "draft_not_submitted",
+  "candidate_title": "Cost aware stopping boundaries in reasoning language models",
+  "author": "Aditya Bhatt",
+  "degree_context": "M.S. in Applied and Computational Mathematics, JHU Engineering for Professionals",
+  "research_adviser": "Zerotti Woods",
+  "second_reader": "Moustapha Pemy",
+  "language": "English",
+  "proposed_keywords_for_author_review": ["optimal stopping", "reasoning language models", "sequential decision theory", "prefix prediction", "computational cost"],
+  "final_approved_title": null,
+  "actual_submission_month_year": null,
+  "final_approved_abstract": null,
+  "degree_statement_confirmed": false,
+  "required_pdfa_profile_confirmed": false,
+  "program_internal_deadline": null,
+  "orcid": null,
+  "embargo_or_access_choice": null,
+  "rights_and_permissions_attestation": null,
+  "submission_agreement": null,
+  "supplementary_files_approved_for_deposit": [],
+  "prospective_supplement_inventory": [
+    {"path": "research/mathematical_foundations.md", "purpose": "Formal mathematical source", "rights_review": "pending"},
+    {"path": "data_manifest_v1.json", "purpose": "Evidence identity manifest", "rights_review": "pending"},
+    {"path": "software_provenance_v1.json", "purpose": "Environment disclosure", "rights_review": "pending"},
+    {"path": "research/outputs/semester2/online_stopping_20261002/", "purpose": "Actual generation ledgers and summaries", "rights_review": "pending"}
+  ],
+  "fee_payment_receipt": null,
+  "deposited_pdf_sha256": null,
+  "library_acceptance_receipt": null,
+  "notes": "Prepared fields are repository-supported or proposed. Nulls preserve missing personal decisions and institutional evidence. No signature, permission, payment, agreement or acceptance is inferred."
+}

@@ -9,6 +9,8 @@
 **Target Defense Date:** Late November / Early December 2026  
 **GitHub Repository:** [`bhattadiCS/research-thesis-overthinking-boundary`](https://github.com/bhattadiCS/research-thesis-overthinking-boundary) (branch `main`)
 
+> **Current execution and calendar, October 2, 2026.** Use `ThesisDocs/CURRENT_ADVISOR_BRIEF_2026-10-02.md` for the current meeting pitch; the early findings/pitch below are superseded historical planning material. The EP Fall graduation application is due **November 30**; the proposed November 23–29 defense week overlaps EP holidays. Confirm a defense window, program approval/grade cutoff, announcement lead time and binding requirement before scheduling. The July 13, 2026 ACM procedure governs adviser/reader certification and chair approval. See `ThesisDocs/completion_and_submission_plan_2026.md` for official sources and actual pending records.
+
 > **Execution evidence update, October 2, 2026.** This roadmap retains the planned dates and historical discussion material. The current scientific account is the six-chapter draft in `ThesisDocs/Masters_Thesis_Draft_v1.md`, with rigorous proofs in `research/mathematical_foundations.md` and frozen sources in `data_manifest_v1.json`. The matrix contains 75,965 analyzed trajectories, not 75,000 reasoning steps. The standardized detector corpus contains 144,440 rows over ARC, GPQA, GSM8K, and MATH; SVAMP is not in that selection. The 0.955156 score is retrospective, uses future-step features, and is non-nested. It is not a live correctness guarantee. A universal step-2/3 peak and 30-40% live savings without accuracy loss are not established; runtime savings and accuracy must be measured jointly. Passing grader regression cases does not certify every corpus label. Committee review, defense, signatures, library deposit, and degree clearance require actual external evidence.
 
 ---
@@ -199,10 +201,10 @@ flowchart LR
 | **W8** | Oct 26 – Nov 1 | Fine-tune mathematical proofs and text clarity. | **Committee Revision Cycle 2** (line-by-line advisor polish; produce Draft v2.0). |
 | **W9** | Nov 2 – Nov 8 | Finalize conference submission package. | Build 25-slide defense deck (30-minute presentation). |
 | **W10** | Nov 9 – Nov 15 | Practice presentation timing and transitions. | **Mock Defense #1** (recorded practice talk with peers/lab group). |
-| **W11** | Nov 16 – Nov 22 | Adviser Q&A preparation; test tough defense questions. | **Mock Defense #2** (adviser dry run); confirm defense logistics & announcement. |
-| **W12** | Nov 23 – Nov 29 | **PUBLIC ORAL DEFENSE (30-min presentation + 30-min Q&A).** | Committee evaluation and signature approval. |
-| **W13** | Nov 30 – Dec 6 | Final formatting checks for JHU Sheridan Libraries (PDF/A). | **Submit final thesis to JHU ETD library repository.** |
-| **W14** | Dec 7 – Dec 11 | Submit signed completion paperwork to the JHU Registrar. | **Degree clearance and final grade recorded.** |
+| **W11** | Nov 16 – Nov 22 | Adviser Q&A preparation; test tough defense questions. Verify graduation application before November 30. | **Mock Defense #2** (adviser dry run); confirm defense availability, announcement and EP approval/grade cutoff. |
+| **W12** | Date TBC; original Nov 23–29 overlaps EP holidays | **PUBLIC ORAL DEFENSE (30-min presentation + 30-min Q&A)** on a program-confirmed date. | Actual adviser/second-reader attendance, evaluation and completion certification; final chair approval remains required. |
+| **W13** | Nov 30 – Dec 6 planning window; EP cutoff TBC | Final approved edits, Sheridan formatting, required PDF/A profile and exact-byte validation. Graduation application due Nov 30. | **Submit final approved thesis to JHU ETD** with at least two full working days before the confirmed approval cutoff; retain actual acceptance. |
+| **W14** | Dec 7 – Dec 11 planning window; EP cutoff TBC | Verify existing Semester 2 registration approval; retain faculty certification, chair approval and institutional receipts. | **Actual final course grade and degree clearance.** The Semester 2 status form is not a post-defense certificate; graduation application must already be filed by Nov 30. |
 
 ---
 

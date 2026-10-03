@@ -1,0 +1,26 @@
+slide,title,planned_start_seconds,planned_duration_seconds,actual_first_start_seconds,visit_count,actual_closed_duration_seconds,start_deviation_seconds,duration_deviation_seconds,observation_complete
+1,Cost aware stopping boundaries in reasoning language models,0,45,,0,,,,False
+2,When is another reasoning increment worth its cost?,45,55,,0,,,,False
+3,Two corpora answer different questions,100,65,,0,,,,False
+4,The observation unit is a complete revision response,165,75,,0,,,,False
+5,Correctness is hidden from the stopping policy,240,70,,0,,,,False
+6,"Accuracy, utility and computation are separate outcomes",310,65,,0,,,,False
+7,Conditional repair and corruption yield the exact drift,375,80,,0,,,,False
+8,Bellman continuation value defines the optimal stop,455,105,,0,,,,False
+9,A first drift crossing is valid under persistent signs,560,95,,0,,,,False
+10,Delayed repair defeats a myopic stopping rule,655,95,,0,,,,False
+11,A ranking score is not a calibrated probability,750,70,,0,,,,False
+12,Repeated checking needs a valid sequential target,820,65,,0,,,,False
+13,The freeze makes claims traceable,885,60,,0,,,,False
+14,Repair and corruption use different denominators,945,75,,0,,,,False
+15,The observed crossing depends on the cell,1020,65,,0,,,,False
+16,More expressive estimators did not always help,1085,70,,0,,,,False
+17,A paired precision contrast has a large local effect,1155,70,,0,,,,False
+18,Pooled causal discrimination hides a weak domain,1225,65,,0,,,,False
+19,The retrospective 0.955 score is not a live guarantee,1290,90,,0,,,,False
+20,The controller prevents future response calls,1380,80,,0,,,,False
+21,A portable trained model estimates current and next correctness,1460,65,,0,,,,False
+22,The trained drift policy nearly reduces to fixed two,1525,80,,0,,,,False
+23,Actual generation yields different policy trade-offs,1605,65,,0,,,,False
+24,Trap questions probe the policy's failure modes,1670,65,,0,,,,False
+25,The contribution is a testable stopping framework,1735,65,,0,,,,False

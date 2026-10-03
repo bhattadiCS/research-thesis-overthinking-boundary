@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:research-thesis:defense-rehearsal-ledger:v1",
+  "title": "Manually observed defense rehearsal ledger",
+  "description": "Structural contract only. Runtime validates chronology, phase, hash chains, consent, source notes and evidence completeness. A blank ledger is not a rehearsal.",
+  "type": "object",
+  "required": ["schema", "template", "session_id", "kind", "operator", "created_at", "logger_source", "plan", "plan_sha256", "prior_peer_mock", "events"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "defense-rehearsal-ledger-v1"},
+    "template": {"type": "boolean"},
+    "session_id": {"type": ["string", "null"]},
+    "kind": {"enum": ["peer_mock", "adviser_dry_run"]},
+    "operator": {"type": ["string", "null"]},
+    "created_at": {"anyOf": [{"$ref": "#/$defs/timestamp"}, {"type": "null"}]},
+    "logger_source": {"type": "object", "required": ["path", "sha256", "python_version"], "additionalProperties": false,
+      "properties": {"path": {"const": "tools/record_defense_rehearsal.py"}, "sha256": {"$ref": "#/$defs/hash"}, "python_version": {"$ref": "#/$defs/text"}}},
+    "plan": {"$ref": "#/$defs/plan"},
+    "plan_sha256": {"$ref": "#/$defs/hash"},
+    "prior_peer_mock": {
+      "anyOf": [
+        {"type": "null"},
+        {"type": "object", "required": ["path", "sha256", "session_id", "questions"], "additionalProperties": false,
+         "properties": {"path": {"$ref": "#/$defs/text"}, "sha256": {"$ref": "#/$defs/hash"}, "session_id": {"$ref": "#/$defs/text"}, "questions": {"type": "array", "items": {"$ref": "#/$defs/text"}}}}
+      ]
+    },
+    "events": {"type": "array", "items": {"$ref": "#/$defs/event"}}
+  },
+  "allOf": [
+    {"if": {"properties": {"template": {"const": true}}},
+     "then": {"properties": {"session_id": {"type": "null"}, "operator": {"type": "null"}, "created_at": {"type": "null"}, "events": {"maxItems": 0}}},
+     "else": {"properties": {"session_id": {"$ref": "#/$defs/text"}, "operator": {"$ref": "#/$defs/text"}, "created_at": {"$ref": "#/$defs/timestamp"}}}}
+  ],
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "timestamp": {"type": "string", "format": "date-time", "pattern": "(?:Z|[+-][0-9]{2}:[0-9]{2})$"},
+    "source": {"type": "object", "required": ["path", "sha256", "bytes"], "additionalProperties": false,
+      "properties": {"path": {"$ref": "#/$defs/text"}, "sha256": {"$ref": "#/$defs/hash"}, "bytes": {"type": "integer", "minimum": 1}}},
+    "slidePlan": {
+      "type": "object", "additionalProperties": false,
+      "required": ["number", "title", "planned_seconds", "planned_start_seconds", "planned_end_seconds", "speaker_notes", "speaker_notes_utf8_sha256"],
+      "properties": {
+        "number": {"type": "integer", "minimum": 1, "maximum": 25},
+        "title": {"$ref": "#/$defs/text"}, "planned_seconds": {"type": "integer", "minimum": 1},
+        "planned_start_seconds": {"type": "integer", "minimum": 0}, "planned_end_seconds": {"type": "integer", "minimum": 1},
+        "speaker_notes": {"$ref": "#/$defs/text"}, "speaker_notes_utf8_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "plan": {
+      "type": "object", "additionalProperties": false,
+      "required": ["slide_count", "talk_target_seconds", "qa_target_seconds", "timing_tolerance_seconds", "sources", "speaker_notes_markdown", "slides"],
+      "properties": {
+        "slide_count": {"const": 25}, "talk_target_seconds": {"const": 1800}, "qa_target_seconds": {"const": 1800},
+        "timing_tolerance_seconds": {"type": "integer", "minimum": 0},
+        "speaker_notes_markdown": {"$ref": "#/$defs/text"},
+        "sources": {"type": "object", "required": ["deck_json", "timing_plan", "speaker_notes", "question_bank", "review_procedure", "deck_pptx"], "additionalProperties": {"$ref": "#/$defs/source"}},
+        "slides": {"type": "array", "minItems": 25, "maxItems": 25, "items": {"$ref": "#/$defs/slidePlan"}}
+      }
+    },
+    "payloadRules": {
+      "allOf": [
+        {"if": {"properties": {"type": {"const": "participant"}}}, "then": {"properties": {"data": {"type": "object", "required": ["id", "name", "role"], "properties": {"id": {"$ref": "#/$defs/text"}, "name": {"$ref": "#/$defs/text"}, "role": {"enum": ["presenter", "observer", "peer", "adviser"]}}}}}},
+        {"if": {"properties": {"type": {"const": "consent"}}}, "then": {"properties": {"data": {"type": "object", "required": ["participant_id", "scope", "status"], "properties": {"participant_id": {"$ref": "#/$defs/text"}, "scope": {"const": "recording"}, "status": {"enum": ["unknown", "granted", "declined", "not_requested"]}, "reference": {"$ref": "#/$defs/text"}}, "allOf": [{"if": {"properties": {"status": {"const": "granted"}}}, "then": {"required": ["reference"]}}]}}}},
+        {"if": {"properties": {"type": {"enum": ["talk_start", "talk_end", "qa_start", "qa_end", "session_end"]}}}, "then": {"properties": {"data": {"type": "object", "maxProperties": 0}}}},
+        {"if": {"properties": {"type": {"const": "slide"}}}, "then": {"properties": {"data": {"type": "object", "required": ["number"], "properties": {"number": {"type": "integer", "minimum": 1, "maximum": 25}}}}}},
+        {"if": {"properties": {"type": {"const": "question"}}}, "then": {"properties": {"data": {"type": "object", "required": ["id", "asker_id", "text"], "properties": {"id": {"$ref": "#/$defs/text"}, "asker_id": {"$ref": "#/$defs/text"}, "text": {"$ref": "#/$defs/text"}, "from_peer_question_id": {"$ref": "#/$defs/text"}}}}}},
+        {"if": {"properties": {"type": {"const": "outcome"}}}, "then": {"properties": {"data": {"type": "object", "required": ["question_id", "disposition"], "properties": {"question_id": {"$ref": "#/$defs/text"}, "stage": {"enum": ["qa", "follow_up"]}, "disposition": {"enum": ["answered", "needs_followup", "deferred", "not_answered"]}, "answer_summary": {"type": "string"}, "supporting_references": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}}, "action": {"$ref": "#/$defs/text"}}, "allOf": [{"if": {"properties": {"disposition": {"const": "answered"}}}, "then": {"required": ["answer_summary", "supporting_references"], "properties": {"answer_summary": {"$ref": "#/$defs/text"}}}, "else": {"required": ["action"]}}]}}}},
+        {"if": {"properties": {"type": {"const": "evidence"}}}, "then": {"properties": {"data": {"type": "object", "required": ["id", "kind", "reference", "coverage_start", "coverage_end", "reviewed_by_id", "description", "reviewed"], "properties": {"id": {"$ref": "#/$defs/text"}, "kind": {"enum": ["recording", "dated_record"]}, "reference": {"$ref": "#/$defs/text"}, "coverage_start": {"$ref": "#/$defs/timestamp"}, "coverage_end": {"$ref": "#/$defs/timestamp"}, "reviewed_by_id": {"$ref": "#/$defs/text"}, "description": {"$ref": "#/$defs/text"}, "reviewed": {"type": "boolean"}, "resolved_local_path": {"$ref": "#/$defs/text"}, "file_sha256": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]}, "file_bytes": {"type": ["integer", "null"], "minimum": 0}}}}}},
+        {"if": {"properties": {"type": {"const": "attestation"}}}, "then": {"properties": {"data": {"type": "object", "required": ["witness_id", "evidence_ids", "observed_session", "complete_attendee_roster", "reviewed_evidence", "no_fabricated_events"], "properties": {"witness_id": {"$ref": "#/$defs/text"}, "evidence_ids": {"type": "array", "items": {"$ref": "#/$defs/text"}}, "observed_session": {"type": "boolean"}, "complete_attendee_roster": {"type": "boolean"}, "reviewed_evidence": {"type": "boolean"}, "no_fabricated_events": {"type": "boolean"}}}}}}
+      ]
+    },
+    "event": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sequence", "type", "occurred_at", "recorded_at", "entry_mode", "logger_source_sha256", "data", "previous_event_sha256", "event_sha256"],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 1},
+        "type": {"enum": ["participant", "consent", "talk_start", "slide", "talk_end", "qa_start", "question", "outcome", "qa_end", "session_end", "evidence", "attestation"]},
+        "occurred_at": {"$ref": "#/$defs/timestamp"}, "recorded_at": {"$ref": "#/$defs/timestamp"},
+        "entry_mode": {"enum": ["observed_now", "manual_timestamp"]}, "data": {"type": "object"},
+        "logger_source_sha256": {"$ref": "#/$defs/hash"},
+        "previous_event_sha256": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+        "event_sha256": {"$ref": "#/$defs/hash"}
+      },
+      "allOf": [{"$ref": "#/$defs/payloadRules"}]
+    },
+    "manualEvent": {
+      "description": "Input to append --event-file; the CLI adds logging time, sequence and chain hashes.",
+      "type": "object", "additionalProperties": false, "required": ["type", "data"],
+      "properties": {
+        "type": {"enum": ["participant", "consent", "talk_start", "slide", "talk_end", "qa_start", "question", "outcome", "qa_end", "session_end", "evidence", "attestation"]},
+        "occurred_at": {"$ref": "#/$defs/timestamp"}, "data": {"type": "object"}
+      },
+      "allOf": [{"$ref": "#/$defs/payloadRules"}]
+    }
+  }
+}

@@ -16,12 +16,12 @@ The accelerated milestones now have a data freeze, formal proofs, an actual gene
 | 25-slide defense | [Editable PowerPoint](output/presentation/Thesis_Defense_v1_Aditya_Bhatt.pptx) · [30-minute notes and 46-question bank](ThesisDocs/defense/) |
 | Milestone and committee review | [Completion audit](ThesisDocs/milestone_completion_audit_v1.md) · [Delivery draft and review procedure](ThesisDocs/committee_review_package_v1.md) |
 
-The NeurIPS version uses the published 2026 main-track style. That cycle's submission deadline has passed; next-cycle requirements must be rechecked before any submission. Committee revision cycles, recorded rehearsals, public defense, signatures, final PDF/A validation, ETD acceptance and registrar clearance remain pending actual academic events. No manuscript submission or committee message has been sent.
+The NeurIPS version uses the published 2026 main-track style. That cycle's submission deadline has passed; next-cycle requirements must be rechecked before any submission. The separate draft archival candidate passes PDF/A-2b validation; [its reports and limitations](ThesisDocs/archival/README.md) preserve the distinction from a final approved deposit. Committee revision cycles, recorded rehearsals, public defense, signatures, validation of the final approved revision, ETD acceptance and registrar clearance remain pending actual academic events. The [current advisor brief](ThesisDocs/CURRENT_ADVISOR_BRIEF_2026-10-02.md), [rehearsal records](ThesisDocs/defense/rehearsal/) and [EP completion plan](ThesisDocs/completion_and_submission_plan_2026.md) support the next real steps. The Fall graduation application is due November 30; the original defense week overlaps EP holidays. No manuscript submission or committee message has been sent.
 
 Build commands and exact artifact hashes are recorded with the respective source directories. Verify the scientific freeze with `python tools/freeze_research_data.py verify`; a checkout that changes historical CSV line endings must explicitly use `--allow-line-ending-changes`, which accepts only canonical LF equivalence and still rejects changed content. Current workstation locks and partial historical environment evidence are separate records.
 
 > [!TIP]
-> **New to the project?** Start with the [Simplified Research Summary](#simplified-research-summary) below for a primer on our methods and findings.
+> **Current account:** Start with the [advisor brief](ThesisDocs/CURRENT_ADVISOR_BRIEF_2026-10-02.md). The simplified summary and 0.955 breakthrough narrative below retain historical development material; their performance promises are superseded by the audited October 2026 evidence above.
 
 ---
 
