@@ -1,0 +1,30 @@
+{
+  "source": "live_paired_results.csv",
+  "source_sha256": "c223a0263f254f4318159eb6d024e56d23e55f79a4c51026b81873de33eb5adf",
+  "analysis_code_sha256": "63110a2afc61b65e9115aab873a6017fdaef12bcea7198bafe0d18d33a24ce42",
+  "independent_aggregate_audit": "passed",
+  "counts": {
+    "problems_or_trajectories": 100,
+    "paired_improved": 0,
+    "paired_worsened": 0,
+    "baseline_correct": 6,
+    "active_correct": 6,
+    "baseline_generated_tokens": 22244,
+    "active_generated_tokens": 21591
+  },
+  "accuracy_delta": 0.0,
+  "accuracy_delta_conservative_exact_95ci": [
+    -0.042874030238438526,
+    0.042874030238438526
+  ],
+  "accuracy_interval_method": "Bonferroni simultaneous 97.5% Clopper-Pearson intervals on paired improvement and worsening probabilities",
+  "completion_token_savings": 0.02935623089372419,
+  "completion_token_savings_cluster_bootstrap_95ci": [
+    0.008507177794051532,
+    0.056295744544285375
+  ],
+  "bootstrap_draws": 10000,
+  "bootstrap_seed": 804,
+  "scope": "iid task-pair reference model conditional on this fixed development policy; bootstrap interval is approximate and does not establish untouched external evaluation",
+  "noninferiority": "No noninferiority margin was prespecified; no noninferiority claim is made"
+}

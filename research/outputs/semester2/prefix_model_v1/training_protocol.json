@@ -1,0 +1,125 @@
+{
+  "base": "unweighted LogisticRegression C=1, lbfgs, max_iter=2000",
+  "bootstrap": "2000 task-cluster percentile replicates, seed 20261002",
+  "calibration_role": "fit calibrators on independent calibration tasks only",
+  "calibrator": "unweighted one-dimensional Platt logistic C=1000, max_iter=2000",
+  "data_freeze": {
+    "bytes": 441752,
+    "canonical_lf_sha256": "6e2d1add18b88efbb8fd1f5f87f6efc80cb8db9453734cbc84259a2575ffa4c9",
+    "path": "data_manifest_v1.json",
+    "sha256": "6e2d1add18b88efbb8fd1f5f87f6efc80cb8db9453734cbc84259a2575ffa4c9"
+  },
+  "eligibility_census": {
+    "included_step_rows": 7500,
+    "included_trajectories": 1500,
+    "reconstructed_candidate_disagreement_rows": 4269,
+    "reconstructed_label_disagreement_rows": 43,
+    "source_trajectories": 1500,
+    "strict_json_rows": 0
+  },
+  "excluded_public_task_id_count": 120,
+  "feature_contract": "observation-prefix-probability-v1",
+  "feature_names": [
+    "step",
+    "parse_success",
+    "answer_present",
+    "confidence_centered",
+    "confidence_missing",
+    "confidence_delta",
+    "prefix_confidence_mean",
+    "log_generated_tokens",
+    "log_cumulative_generated_tokens",
+    "answer_changed",
+    "answer_streak",
+    "prefix_answer_changes",
+    "log_answer_characters",
+    "log_thought_characters",
+    "thought_numeric_density",
+    "thought_uncertainty_density",
+    "thought_verification_density",
+    "domain_gsm8k",
+    "domain_math",
+    "step_confidence_interaction",
+    "streak_confidence_interaction"
+  ],
+  "label_reconstruction": "same verify_answer as archive; reconstructed live-parser candidate, never live gold",
+  "policy": "first p_next-q_current-0.05 <= 0 at steps 2..4; otherwise step 5",
+  "public_exclusions": [
+    {
+      "bytes": 35832,
+      "canonical_lf_sha256": "ff59b3fbf094acac04eb2ea54b87260403944b0bdbf985bd6706692d7d09520c",
+      "path": "research/outputs/semester2/online_stopping_20261002/live_public_tasks.jsonl",
+      "sha256": "ff59b3fbf094acac04eb2ea54b87260403944b0bdbf985bd6706692d7d09520c"
+    },
+    {
+      "bytes": 5131,
+      "canonical_lf_sha256": "6046358cb8e8d8c47c1cec4fc26ddda0ea48308e177e32b06b99d10952037836",
+      "path": "research/adversarial_tasks_v1.jsonl",
+      "sha256": "6046358cb8e8d8c47c1cec4fc26ddda0ea48308e177e32b06b99d10952037836"
+    }
+  ],
+  "scaler": "StandardScaler fitted on train tasks only",
+  "selection": "latest nonempty observed answer",
+  "software": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.2",
+    "python": "3.12.4",
+    "sklearn": "1.8.0"
+  },
+  "sources": [
+    {
+      "bytes": 10237935,
+      "canonical_lf_sha256": "63cb5dd6b85a74bdab4d3a1e243db710bfc51ffec84cd305e51ab9846fd002c8",
+      "path": "research/outputs/experiments_v2/global_qwen2p5_0p5b_gsm8k/trace_steps.csv",
+      "sha256": "efdcf815b1bc95490dc5d74ac5e8b7088626bd92abce15a83ee9d2389e8a4116"
+    },
+    {
+      "bytes": 5351020,
+      "canonical_lf_sha256": "655e0805b92e07c21e7c4ad77eb060ffc9863c7db823cf5c664cd7092cb90a20",
+      "path": "research/outputs/experiments_v2/global_qwen2p5_0p5b_math/trace_steps.csv",
+      "sha256": "1dcc0ce4754c8ab3f9b378e58d115ece4fa0d8aa06a230a87423ad029adef7ff"
+    }
+  ],
+  "split": "task hash: 60% train, 20% calibration, 20% evaluation",
+  "split_salt": "prefix-model-v1-task-split-fixed-20261002",
+  "targets": "offline archive-gold regrading of reconstructed selected current/next candidate",
+  "task_counts": {
+    "calibration": 322,
+    "evaluation": 276,
+    "train": 902
+  },
+  "task_counts_by_domain": [
+    {
+      "domain": "gsm8k",
+      "split": "calibration",
+      "tasks": 225
+    },
+    {
+      "domain": "gsm8k",
+      "split": "evaluation",
+      "tasks": 176
+    },
+    {
+      "domain": "gsm8k",
+      "split": "train",
+      "tasks": 599
+    },
+    {
+      "domain": "math",
+      "split": "calibration",
+      "tasks": 97
+    },
+    {
+      "domain": "math",
+      "split": "evaluation",
+      "tasks": 100
+    },
+    {
+      "domain": "math",
+      "split": "train",
+      "tasks": 303
+    }
+  ],
+  "task_split_sha256": "d23f54010b85b3071e7ffb5c58ce5a890365e84174d19154c3efb2f19517fee0",
+  "threshold_selection": "fixed cost; no evaluation/live/trap threshold tuning"
+}

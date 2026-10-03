@@ -1,0 +1,20 @@
+{
+  "official_template_url": "https://media.neurips.cc/Conferences/NeurIPS2026/Formatting_Instructions_For_NeurIPS_2026.zip",
+  "official_template_archive_sha256": "82473931e3ef710fcd3f4a8cd4119b9de32e56825f90f9e5a6d55f2d01b817d9",
+  "retained_template_files": {
+    "ThesisDocs/neurips/template/neurips_2026.tex": "cf4cee7991665306d1daaa3985be4feec7f8889d6d072ffa12f99a8e1537d797",
+    "ThesisDocs/neurips/template/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+    "ThesisDocs/neurips/template/neurips_2026.sty": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a"
+  },
+  "portable_engine": {
+    "version": "0.17.0",
+    "url": "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-pc-windows-msvc.zip",
+    "archive_sha256": "f61ce51f0b0ade1015b7de7ef368541c5424e9756ecbd0d7af97d6d48030845f"
+  },
+  "target": "Future NeurIPS main-track preparation using the published 2026 style; next-cycle rules must be rechecked",
+  "sources": [
+    "https://neurips.cc/Conferences/2026/CallForPapers",
+    "https://neurips.cc/Conferences/2026/MainTrackHandbook",
+    "https://github.com/tectonic-typesetting/tectonic/releases/tag/tectonic%400.17.0"
+  ]
+}

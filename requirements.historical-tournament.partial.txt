@@ -1,0 +1,5 @@
+# PARTIAL historical tournament version evidence; not a complete installable training lock.
+# Source: research/outputs/experiments_v2/ultimate_tournament_manifest.json
+# Recorded CUDA runtime: 13.0
+# Original Python and all unrecorded package versions/wheel sources are unknown.
+torch==2.13.0+cu130

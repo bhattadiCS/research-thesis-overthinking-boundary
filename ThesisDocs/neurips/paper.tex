@@ -1,0 +1,558 @@
+\documentclass{article}
+\PassOptionsToPackage{numbers,compress}{natbib}
+\usepackage[main]{neurips_2026}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,tabularx}
+\usepackage{hyperref,url}
+\usepackage{xcolor}
+\usepackage{microtype}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\F}{\mathcal F}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\esssup}{\operatorname*{ess\,sup}}
+\title{Causal Stopping for Revision-Based Language-Model Reasoning:\\
+Theory, Audit, and Live Cost Trade-offs}
+\author{Anonymous Authors}
+\hypersetup{pdftitle={Causal Stopping for Revision-Based Language-Model Reasoning},pdfauthor={Anonymous}}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Stopping a reasoning model requires information available before its unseen
+continuation, whereas full-trajectory classification can exploit later answers.
+We study complete response-and-revision increments and separate immediate
+correctness drift from optimal continuation value. A finite-horizon formulation
+specializes the Snell envelope to correctness minus charged computation; a drift
+crossing is optimal under persistent conditional signs, but two exact
+counterexamples invalidate weaker population or myopic arguments. We audit a
+75,965-trajectory revision matrix and a separate 28,888-trajectory five-step
+detector corpus. A retrospective stacked AUC of 0.955156 uses future information
+and non-nested fitting; task-grouped causal-prefix GRU AUC is 0.874326 in a
+different evaluation. We implement a causal runtime and train portable current
+and next-correctness predictors using disjoint task groups. On 100 actual
+Qwen2.5-0.5B generations, the frozen learned policy saves 56.51\% of completion
+tokens, with seven correct answers versus six for the full horizon. Every task
+stops at two responses, and the accuracy interval includes harm. Thus actual
+avoided generation is established, while added value over fixed-two stopping,
+live calibration, and accuracy noninferiority are not.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+Additional reasoning can repair an answer, repeat an unproductive calculation,
+or replace a correct candidate with an incorrect revision. Final-answer accuracy
+conceals these transitions. A stopping system must decide after an observed
+prefix whether a further increment has enough expected benefit to justify its
+cost. This is a conditional allocation problem, not a claim that longer
+reasoning is invariably helpful or harmful. It also differs from identifying
+the best step after the complete trajectory has been graded.
+
+We investigate repeated \emph{complete responses}: a model emits a thought,
+candidate answer, and telemetry, and the next prompt includes its earlier
+responses. An increment is consequently a response-and-revision event rather
+than an arbitrary token or an observation of hidden cognition. This contract
+makes both the decision information and the avoided model calls inspectable.
+Its conclusions need not transfer to uninterrupted internal reasoning.
+
+Three distinctions motivate the study. First, corruption, insufficient
+cost-adjusted benefit, and regret against a comparator are different endpoints.
+Accuracy can increase while net utility drift is negative. Second, immediate
+drift omits the option of future repair, so its sign need not determine an
+optimal stop. Third, ranking, probability calibration, and stopping utility
+are different statistical targets. A high full-trajectory AUC cannot be
+inherited by a controller that cannot see those future observations.
+
+Our contribution is an integrated theoretical and empirical audit rather than
+a claim to invent the Snell envelope. We state the admissible stopping problem,
+prove the specialized reward reduction and conditional transition identity,
+give a sufficient persistent-sign condition, and exhibit exact failures of
+weaker arguments. We then bind two overlapping experimental corpora to
+explicit denominators, retain matched negative results, and distinguish an
+inadmissible retrospective diagnostic from causal-prefix evaluation. Finally,
+we execute an observation-only controller with a serialized trained predictor,
+separate fitting from calibration and evaluation, and report actual generation
+costs alongside low absolute task accuracy. The learned rule's near collapse to
+a fixed-two baseline is itself an important negative finding.
+
+\paragraph{Related work.}
+Chain-of-thought prompting demonstrates the utility of explicit intermediate
+reasoning \citep{wei2022}, while self-consistency aggregates sampled reasoning
+paths \citep{wang2022}. Outcome verification and process supervision address
+different forms of answer assessment \citep{cobbe2021,lightman2023}; neither
+alone defines an admissible stopping time with all assessment costs charged.
+Work on overthinking in long-reasoning models motivates economical
+inference \citep{chen2024}. Our observational unit and controlled revision
+prompt are narrower, and we do not treat our counts as measurements of those
+models' latent thoughts. The benchmarks are GSM8K, MATH, ARC-Challenge and
+GPQA \citep{cobbe2021,hendrycks2021,clark2018,rein2023}. GRU and rotary-position
+architectures supply reference sequence components \citep{cho2014,su2021}.
+Classical finite-horizon stopping theory supplies the general optimum
+\citep{ferguson,peskir2006}; concentration and confidence-sequence theory
+clarify the additional assumptions needed for uncertainty certificates
+\citep{hoeffding1963,howard2021}. We use these results to delimit empirical
+claims, rather than equating a fitted score with their conditional objects.
+
+\section{Decision model and optimality limits}
+\label{sec:theory}
+Fix a finite horizon \(N\) and earliest permitted stop \(m\). On a probability
+space, let \(\F_t\) be the growing declared decision information after response
+\(t\). A causal selector emits \(A_t\); \(C_t=\ind\{A_t=Y^*\}\) denotes its
+correctness against the reference, with the benchmark grader replacing exact
+equality where appropriate. Cumulative computation cost \(K_t\) is nonnegative,
+nondecreasing, adapted and integrable. All executed probes and peers enter both
+the information and cost ledgers. Offline gold and future responses are not
+runtime inputs. An admissible stopping time satisfies
+\(m\le\tau\le N\) and \(\{\tau\le t\}\in\F_t\).
+
+This is a statistical information model, not a formalization of computational
+hardness. If the reference is a known measurable deterministic function of a
+fully revealed task, then \(C_t\) is measurable and its conditional probability
+equals its label, regardless of a gold API field. Nondegenerate uncertainty
+requires a latent-reference model or an explicitly coarser decision-statistic
+filtration. A fitted posterior over prefix summaries does not condition on all
+mathematical semantics. No such sufficiency is inferred from its AUC.
+
+Put \(q_t=\E[C_t\mid\F_t]\) and \(G_t=q_t-K_t\). For every admissible \(\tau\),
+\begin{equation}
+ \E[C_\tau-K_\tau]=\E[G_\tau].
+ \label{eq:reduction}
+\end{equation}
+Indeed, \(\{\tau=t\}\) is measurable in \(\F_t\), so multiplying \(C_t\) and
+\(q_t\) by its indicator preserves expectation; sum over the bounded times.
+The candidate selector is material. Our learned and full-horizon arms select
+the latest nonempty available answer, so a blank current response can carry
+an earlier answer forward. The heuristic adds causal retention branches
+specified below.
+
+\paragraph{Conditional transitions.}
+Define repair and corruption masses
+\(r_t=\PP(C_t=0,C_{t+1}=1\mid\F_t)\) and
+\(s_t=\PP(C_t=1,C_{t+1}=0\mid\F_t)\).
+Set \(\alpha_t=r_t/(1-q_t)\) when \(q_t<1\) and
+\(\beta_t=s_t/q_t\) when \(q_t>0\), assigning zero on null states. With
+\(c_t=\E[K_{t+1}-K_t\mid\F_t]\),
+\begin{equation}
+ \mu_t:=\E[G_{t+1}-G_t\mid\F_t]
+       =(1-q_t)\alpha_t-q_t\beta_t-c_t .
+ \label{eq:drift}
+\end{equation}
+The binary increment is a repair indicator minus a corruption indicator, and
+the tower property gives the identity. It requires neither Markov structure
+nor independent transitions. The hazards have different eligible denominators;
+their unweighted difference is not accuracy drift. For correct-answer value
+\(v\) and incorrect-answer penalty \(p\), the reward is
+\((v+p)q_t-p-K_t\), and the accuracy part of the drift is multiplied by \(v+p\).
+
+\begin{theorem}[Finite-horizon optimum]
+\label{thm:snell}
+Under the stated integrability, adaptation and bounded stopping assumptions,
+define \(S_N=G_N\) and
+\begin{equation}
+ S_t=\max\{G_t,\E[S_{t+1}\mid\F_t]\},\quad m\le t<N.
+ \label{eq:snell}
+\end{equation}
+Then \(S\) is the smallest integrable supermartingale dominating \(G\), and
+\(\tau_t^*=\inf\{s\ge t:S_s=G_s\}\) attains
+\(S_t=\esssup_{\tau\ge t}\E[G_\tau\mid\F_t]\).
+\end{theorem}
+\noindent
+Backward induction establishes domination and minimality. Bounded optional
+sampling upper-bounds every admissible reward by \(S_t\). Before first contact,
+the recursion holds with continuation equality; the stopped process is a
+martingale from \(t\) and attains the bound at contact. Appendix
+\ref{app:proofs} gives complete proofs. This is the standard finite-horizon
+construction \citep{ferguson,peskir2006}, specialized to the declared selector
+and floor.
+
+Optimal continuation advantage includes an additional option:
+\begin{equation}
+ \Delta_t^*=\E[S_{t+1}\mid\F_t]-G_t
+ =\mu_t+\E[S_{t+1}-G_{t+1}\mid\F_t]\ge\mu_t.
+ \label{eq:option}
+\end{equation}
+Thus positive immediate drift favors continuation, but nonpositive drift alone
+does not establish an optimal stop.
+
+\begin{proposition}[Persistent-sign sufficient condition]
+\label{prop:persistence}
+Let \(T_c\) be the first admissible \(t<N\) with \(\mu_t\le0\), or \(N\).
+If, almost surely, every later conditional drift stays nonpositive, then
+\(T_c\) maximizes expected reward over admissible stopping times.
+\end{proposition}
+\noindent
+For any bounded \(\tau\), the drift decomposition gives
+\(\E G_\tau=\E G_m+\E\sum_{s=m}^{N-1}\ind\{\tau>s\}\mu_s\).
+Before \(T_c\), stopping earlier omits positive terms; afterward, continuing
+adds nonpositive terms. This proves the comparison. Pathwise increasing \(q\),
+decreasing \(\alpha\), increasing \(\beta\), and nondecreasing predictable cost
+are sufficient for nonincreasing drift, but are not established for the model
+panels. A single crossing of a population curve is weaker.
+
+\paragraph{Two exact counterexamples.}
+With \(q=(0,0,1)\) and cost \(0.1\) per increment, immediate drift at zero is
+\(-0.1\); myopic stopping earns zero, while stopping at two earns \(0.8\).
+The example shifts to any floor. A second construction starts at \(q_0=0.5\),
+observes a fair branch with \(q_1=0.4\) or \(0.6\), then has \(q_2=1\) or \(0\)
+respectively. Both unconditional drifts are \(-0.1\), yet continuing once and
+then continuing only on the first branch earns \(0.65>0.5\). Appendix
+\ref{app:counterexamples} realizes both with one common reference answer;
+neither uses a hindsight decision.
+
+\paragraph{Estimation and uncertainty.}
+A feature-conditional predictor need not equal \(q_t\) or provide a sufficient
+state for a compressed Bellman recursion. Calibration is a separate prediction
+objective \citep{guo2017}; marginal calibration need not imply history-conditional
+calibration (Appendix \ref{app:calibration}). Weighted binary log loss
+has optimum \(r=w_1q/[w_1q+w_0(1-q)]\), requiring correction or independent
+calibration before probability interpretation. If simultaneous upper bounds
+cover \(\mu_t\), stopping on a nonpositive bound controls false positive-drift
+stops at the coverage error; it does not prove Bellman optimality or
+noninferiority. Probe independence must be stated given pre-probe information
+with a named target. Post-probe drift can differ. Conditional supermartingale
+assumptions likewise cannot be replaced by favorable unconditional means
+\citep{hoeffding1963,howard2021}. We do not claim such live certificates.
+
+\section{Corpora, audit protocol, and trained controller}
+\label{sec:methods}
+\paragraph{Two overlapping records.}
+The revision matrix contains 52 model-domain cells, 13 model configurations,
+75,965 sanitized trajectories, 798,770 raw step rows and 1,948 unique tasks.
+Recorded horizons are 8 for ARC, 10 for GSM8K/GPQA and 14 for MATH. The
+standardized detector selection contains 52 cells, 13 configurations,
+28,888 five-step trajectories, 144,440 rows and 2,948 tasks; it replaces
+InternLM with Qwen3.5-9B. They overlap and must not be summed. Historical
+generation uses seed 7 at temperatures 0.1, 0.6 and 1.0, not independent
+generation seeds. GPQA metadata and loader split provenance differ; the
+selected record has no SVAMP result. These details limit generalization.
+
+The freeze distinguishes exact local bytes and canonical LF content to handle
+checkout line endings. Hashes bind selected records, not their truth,
+representativeness or every grader outcome. Primary archive analyses retain
+stored labels; new training labels are a separately audited version. Task
+resampling preserves repeated trajectories, while matched estimator
+contrasts use their declared 52-cell uncertainty unit. Historical environment
+metadata are incomplete. We provide verifiable saved-result reanalysis rather
+than claim bitwise reexecution on arbitrary hardware.
+
+\paragraph{Causal runtime.}
+The controller accepts one new completed observation, stores its own prefix,
+rejects skipped/repeated steps, and closes after stopping. It cannot receive
+gold, correctness, a future row or a full-sequence score. The live generator
+requests one response at a time and removes stopped tasks from later calls.
+Confidence is trusted as \emph{observed telemetry} only after strict validation
+of the required JSON fields; fallback defaults become missing confidence.
+Reported confidence is not a calibrated posterior. Optional peers require a
+complete same-step roster with a barrier preceding the decision and fully
+charged costs; these experiments use no peers or verifier.
+
+Both active and full-horizon arms use floor two, horizon five and the same
+response boundary. Learned and baseline selection use the latest nonempty
+answer. The heuristic freezes confidence 90, stability two, confidence drop
+15 and two changes as its wobble setting; its drop branch retains the previous
+answer and its wobble branch retains the highest observed valid confidence.
+Neither retention branch fires in the reported live panels, so realized
+selection uses the common default.
+The learned rule instead stops on
+\(\widehat p_{\mathrm{next}}-\widehat q_t-0.05\le0\) after the floor. The cost is
+a declared utility preference, not a universal monetary rate. At the horizon
+no next-step head is queried.
+
+\paragraph{Prefix probability fitting.}
+We train on all 1,500 archived Qwen2.5-0.5B GSM8K-training and MATH trajectories
+\citep{qwen2024}. A fixed salted hash of public domain/task identity assigns
+902 tasks to training, 322 to calibration and 276 to evaluation before parser
+availability or outcomes. Public identities of the live 100 tasks and 20 traps
+are excluded. Each task's rows remain in one role. Two unweighted logistic
+heads target correctness of the latest nonempty candidate currently selected
+and of the candidate selected by the same rule after one more increment.
+Train-only standardization and logistic coefficients use \(C=1\),
+L-BFGS and 2,000 maximum iterations. Independent one-dimensional logistic
+calibrators use only calibration tasks, \(C=1000\) and the same iteration cap.
+No evaluation/live/trap label selects a feature, cost or threshold.
+
+The 21-feature contract uses current/prior step, parse success, answer presence,
+valid confidence and prefix summaries, generated-token lengths, answer changes
+and streak, answer/thought characters, fixed thought numeric and keyword
+densities, public domain and predetermined interactions. It excludes hidden
+states, labels, future responses and retrospective normalization. Runtime
+requires only the standard library: ordered coefficients, scalers and
+calibrators are serialized with source and task-split identities.
+
+Reconstructing archived candidates through the actual live JSON/fallback parser
+produces 4,269 string disagreements among 7,500 rows. We regrade against
+\emph{archived} references under the existing verifier; 43 correctness labels
+change. A row-level audit preserves both versions and the original corpus.
+Requiring all five candidates to agree would select an early prefix using
+later observations, so that provisional eligibility approach was rejected.
+All complete trajectories are retained. None is strict-valid live JSON,
+leaving confidence-related features without archive variation; the live prompt
+and emitted-EOS accounting are material transport changes.
+
+\paragraph{Causality, transport and artifact validation.}
+The split protects three distinct statistical operations: coefficient fitting,
+probability calibration, and final development measurement. A standardizer
+estimated on evaluation prefixes would breach that boundary even without
+reading their labels; a trajectory-agreement eligibility filter would breach
+it by reading unavailable future candidates. Our selected-row and
+serialization checks address these concrete failure modes. Current/next targets
+also refer to selected answers, not merely the most recently emitted string.
+Ignoring carry-forward selection creates a different supervised target precisely
+when a response is empty or cannot be parsed.
+
+These protections do not establish transport to the JSON live prompt.
+The seven parse/confidence-related feature coefficients are zero in both
+heads because their archived inputs are constant. The deployed rule is therefore
+a learned function of the other supported prefix statistics, not evidence that
+self-reported confidence has been calibrated. Independently calibrated
+logistic heads can also have different approximation errors; subtracting their
+probabilities does not guarantee an unbiased drift or a uniformly covered
+conditional gain. We retain both head diagnostics and evaluate their actual
+stopping actions instead of calling the probability difference a certified
+hazard. No monotonicity constraint or Bellman transition model is fitted.
+
+Runtime validation rejects wrong feature order, nonfinite coefficients,
+nonpositive scaler denominators and unsupported horizons/domains. Standard-library
+predictions are checked against the offline implementation. These are useful
+deployment consistency checks, but they verify execution of the frozen model,
+not its statistical correctness. The anonymous review supplement contains
+source/evidence documentation and sanitized review copies with original/review
+identities. It omits large raw archives and model weights, so it supports
+focused audit rather than complete historical rerunning.
+
+\paragraph{Verification boundary and AI assistance.}
+LLM coding agents contributed mathematical drafting, source audits, implementation,
+label-reconstruction design, and manuscript preparation. Verification includes
+independent finite-policy enumeration, numeric serialization checks,
+task-partition and prefix-invariance tests, artifact hashes and primary-source
+reference checks. Agents are not authors, and these checks are not a completed
+human author or independent reviewer attestation. Human verification and
+release/license review remain pending for this preparation draft.
+
+\section{Results}
+\label{sec:results}
+\subsection{Population transitions and controlled contrasts}
+At the pooled GSM8K step-two prefix, 3,145 repairs occur among 14,818 incorrect
+candidates and 1,170 corruptions among 4,682 correct candidates. On the common
+19,500-trajectory, 500-task panel, their difference divided by trajectory count
+and minus cost 0.05 is \(+0.0513\). At prefix four, accuracy still increases by
+approximately \(0.0373\), yet net drift is \(-0.0127\). Consequently a negative
+utility drift is not necessarily an accuracy decline.
+
+Selected cells also contradict a universal early crossing. Qwen2.5-7B/GSM8K
+has drift \(+0.01933\) at prefix four and \(-0.02533\) at five; 32B/MATH has
+\(+0.01867\) at five and \(-0.01333\) at six. Each cell has 1,500 trajectories
+over 500 tasks. These are descriptive conditional-on-panel summaries, not
+per-question posterior bounds or proof of persistent conditional signs.
+
+\begin{table}[t]
+\centering
+\caption{Matched archival development utility contrasts per trajectory.
+Intervals are percentile resamples of the 52 selected model-domain cells,
+not independent generation-seed uncertainty.}
+\label{tab:contrasts}
+\begin{tabular}{lrr}
+\toprule
+Modification relative to matched control & Mean contrast & 95\% interval\\
+\midrule
+Empirical-Bayes hazards & \(+0.00781\) & \([+0.00276,+0.01355]\)\\
+Lagged logistic features & \(+0.00331\) & \([+0.00062,+0.00633]\)\\
+Gradient-boosted probe & \(-0.05694\) & \([-0.08716,-0.03145]\)\\
+Isotonic calibration & \(-0.06165\) & \([-0.09168,-0.03547]\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table \ref{tab:contrasts} retains both positive and negative matched results.
+More expressive probability fitting does not automatically improve a
+thresholded stopping policy. The summed \(+593.55\) hazard contrast divided by
+75,965 produces its reported per-trajectory effect; it is not a peer-agreement
+effect. The isotonic result also does not prove that calibration is inherently
+harmful. Estimator, sample, target and downstream policy jointly determine
+utility.
+
+A paired Qwen2.5-7B/GSM8K precision contrast has 418/1,500 step-two correct
+answers under BF16 versus 204/1,500 under four-bit weights: 14.27 absolute
+percentage points, task-bootstrap interval [11.13,17.53]. This is not a
+relative percentage or universal quantization law. In the separate
+Mistral-Small-22B/GSM8K 256-versus-512-token comparison, both arms have 454
+policy-loss indicators with zero discordant pairs. That null endpoint does
+not imply equal token sequences, time or all labels, or eliminate truncation
+elsewhere.
+
+\subsection{Retrospective ranking and fitted prefix probabilities}
+The stored task-grouped causal GRU has micro AUC 0.874326, task-macro 0.821392,
+domain-macro 0.810242 and worst-domain GPQA AUC 0.631253. Task AUC requires both
+classes; 2,679 of 2,948 groups are eligible. A causal RoPE transformer has
+lower micro AUC 0.863837 but slightly higher recorded step utility
+0.333123 versus 0.326449. Their descriptive fold intervals overlap;
+no statistically unique architecture winner follows.
+
+The retrospective stacked score is 0.955156 versus 0.943223 for its
+reduced-feature LightGBM control, with lift interval [0.010384,0.013480].
+The interval concerns the difference, not the absolute stacked AUC.
+Bidirectional all-five-step scoring and centered smoothing consume future
+observations, while meta-training is not nested within reported scoring outer
+folds. The nominal \emph{No Peers} control retains committee aggregates. Hence the
+stored lift isolates neither live correctness nor a pure peer effect.
+Bootstrap repetition does not repair information leakage. Moreover the
+0.955156 and 0.874326 numbers are different evaluations; subtracting them cannot
+identify a causal effect of removing future features.
+
+\begin{table}[t]
+\centering
+\caption{Portable predictor on 276 task-disjoint archived evaluation tasks.
+Calibration uses a separate 322-task panel; scores are marginal development
+diagnostics, not certified live posteriors.}
+\label{tab:probabilities}
+\begin{tabular}{lrrrr}
+\toprule
+Target & Prefix rows & AUC & Brier & 10-bin ECE\\
+\midrule
+Current selected correctness & 1,380 & 0.710094 & 0.097599 & 0.022227\\
+Next selected correctness & 1,104 & 0.692308 & 0.099697 & 0.020928\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The serialized model's results are separate from both earlier detectors
+(Table \ref{tab:probabilities}). Calibrated Brier scores improve modestly over
+raw values 0.098540 and 0.100677. Its held-out replay stops 275/276 tasks at two
+and one at three. Accuracy is 11.96\% against full-horizon 10.51\%; the paired
+task-bootstrap difference interval is [-1.45,+4.35] points. Archived completion
+savings are 51.29\%, interval [49.31,53.09]. Accuracy equals fixed two, while
+cost is slightly higher. Thus little additional policy value is demonstrated.
+A distinct in-sample 7B/GSM8K replay saved 54.34\% but lost 6.33 accuracy points;
+it remains a development diagnostic and is not live evidence.
+
+\subsection{Actual generation, costs and latency}
+We execute local Qwen2.5-0.5B with greedy CUDA generation, batch size 32,
+128-token completion cap, floor two and horizon five. A cached GSM8K-test
+100-task panel is fixed before collection; a separate 20-question handpicked
+mathematical bank covers rates, changing bases, dependent draws and answer
+contracts. Public prompts are separated from grading ledgers. The learned
+artifact is frozen before its active runs and paired with the actually executed
+prior full-horizon baseline linked by hashes. Reusing that baseline avoids
+redundant GPU work without converting active execution into saved-prefix replay.
+Shared-prefix agreement is nevertheless measured, not presumed from greedy
+decoding.
+
+\begin{table}[t]
+\centering
+\caption{Actual generated completion costs, including EOS. Both learned arms
+stop every task at two. Accuracy is low; intervals allow harm and no
+noninferiority margin was prespecified. The two panels have different scope.}
+\label{tab:live}
+\begin{tabular}{llrrrr}
+\toprule
+Panel & Arm & Correct & Tokens & Saving & Prefix agreement\\
+\midrule
+100 GSM8K tasks & Full horizon & 6/100 & 22,244 & --- & reference\\
+ & Heuristic & 6/100 & 21,591 & 2.94\% & 94/100\\
+ & Learned drift & 7/100 & 9,674 & 56.51\% & 100/100\\
+20 traps & Full horizon & 1/20 & 4,736 & --- & reference\\
+ & Heuristic & 1/20 & 4,578 & 3.34\% & 20/20\\
+ & Learned drift & 1/20 & 2,268 & 52.11\% & 20/20\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table \ref{tab:live} reports actual avoided generation. The main learned
+completion-saving task-bootstrap interval is [54.83,58.01]\%; its accuracy
+change of one point has conservative exact interval [-4.27,+6.21] points.
+This uses simultaneous 97.5\% Clopper--Pearson intervals \citep{clopper1934} for improvement and
+worsening probabilities, whose difference has at least 95\% coverage under an
+iid task-pair reference model. The trap saving resampling interval is
+[45.86,57.17]\%; accuracy-change bounds span [-19.68,+19.68] points.
+For that handpicked bank the iid-reference bound and resampling are
+descriptive, not randomized adversarial-population coverage. No accuracy
+noninferiority claim follows.
+
+All 100 learned main tasks and 20 traps terminate at two, so the result cannot
+establish an advantage over fixed two. The original heuristic's modest 2.94\%
+main saving is far below a 30--40\% target. Baseline strict JSON success is only
+88/500 responses; confidence guarding largely forces its mean stop to 4.85.
+The learned rule ignores full-trajectory scores and improves compute avoidance,
+but its low absolute accuracy and absent archive JSON support constrain its
+statistical interpretation.
+
+The observed action equivalence is particularly informative. On these runs,
+every permitted first decision terminates the task; none uses later prefixes
+to choose between repair and corruption. A deterministic two-response budget
+would choose the same stopping indices on the realized histories. The model's
+held-out AUC therefore cannot be interpreted as evidence of useful adaptive
+allocation on this live panel. A separate independently executed fixed-two
+arm is not reported, and the historical one-trace exception at response three
+does not overcome this limitation. The comparison with never-stop still
+measures avoided actual generation under a declared common response contract.
+
+Only one main task changes correctness between learned and full-horizon arms.
+The exact paired interval accordingly includes accuracy loss despite a
+positive point estimate, and the trap panel is both smaller and purposively
+selected. More repeated timing measurements cannot narrow this task-level
+accuracy uncertainty or make the bank representative. Prespecifying a tolerance
+and powering a future study for that tolerance would change the evidentiary
+question; inspecting these results cannot retroactively register a margin.
+Similarly, unchanged aggregate accuracy for the original heuristic is not
+proof of accuracy preservation on a new task population.
+
+Prompt and physical work differ from emitted tokens. Main baseline versus
+learned totals are 142,498 versus 43,874 input tokens, 57,856 versus 23,564
+decode slots, and 1,127.05 versus 343.25 model seconds. These observed ledger
+quantities are not interchangeable with energy or universal speedup. Peers and
+verifier generation are zero. A final saved-MATH prepared-observation benchmark
+has 18,880 combined heuristic/control decisions over 100 problems and 20
+repeats, maximum 0.4383 ms. The separate learned-main benchmark has 4,000
+decisions and maximum 0.9369 ms, including both calibrated heads. These exclude
+model loading, generation, tokenization and peer waits, and are worst observed
+values rather than worst-case timing proofs.
+
+\section{Limitations, impact, and conclusion}
+\label{sec:limits}
+The study establishes a causal interface and measured development trade-offs,
+not universal economical reasoning. Its theoretical optimality is conditional
+on a specified process, filtration, selector and reward; persistent conditional
+signs and feature-state sufficiency are unverified empirically. The live model
+is small, responses often fail the structured contract, prompts differ from
+training, and the frozen learned policy reduces to fixed two. Task groups
+protect fitting boundaries but do not establish untouched external development
+history, representative adversarial coverage or multi-seed generalization.
+The historical detector's upstream evaluation dependence is retained as a
+limitation, not repaired by downstream bootstrap statistics.
+
+Avoiding unnecessary calls can reduce inference work, but a controller can
+also terminate before repair or hide failures behind confident stable answers.
+Low accuracy and subgroup variation make a cost-only deployment claim
+inappropriate. No energy benefit is measured. A stronger confirmatory study
+needs unseen tasks, prespecified accuracy tolerance, several generation seeds,
+a frozen transported model, subgroup analysis and all prompt/probe costs.
+Human verification and an anonymous licensed artifact release remain pending.
+An anonymous review capsule is prepared, but complete public release and
+asset-license review are different steps. Before a confirmatory run, the
+decision information, candidate selector, cost units, model/parser versions,
+data roles, minimum budget and tie convention should be frozen together.
+Changing a prompt to improve JSON validity changes the observation law and
+requires new transport validation, rather than reuse of the present calibration
+claim. Subgroup auditing should distinguish benchmark, task difficulty and
+parser failures while keeping all held-out tasks in the declared denominator.
+Any higher-stakes application must evaluate the consequences of missed repair,
+not infer suitability from economical generation alone.
+The framework makes those requirements testable and exposes where attractive
+retrospective numbers cease to justify an online decision.
+
+% MAIN_CONTENT_END: content through this label must occupy no more than nine pages.
+\label{sec:main-text-end}
+\clearpage
+\input{references.tex}
+\clearpage
+\appendix
+\input{technical_appendix.tex}
+\clearpage
+\input{paper_checklist.tex}
+\end{document}

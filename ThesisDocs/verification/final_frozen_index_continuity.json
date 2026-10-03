@@ -1,0 +1,9 @@
+{
+  "schema": "frozen-index-continuity-v1",
+  "status": "pass",
+  "paths_compared": 733,
+  "method": "Compare each final staged Git blob object ID with the previously SHA256-audited blob for all731 frozen files plus authority/master; object identities are unchanged after final authoring restage.",
+  "frozen_oid_map_sha256": "ba1a3818de378e6a9f044dc63f72da3abf94c91c1496da0b4b24c681433317ea",
+  "mismatches": [],
+  "previous_full_audit_sha256": "67d9025e1e1db55bc8a35790eac88b028a9892b2e45a1744efe90719260750dd"
+}

@@ -1,0 +1,276 @@
+{
+  "output": "output/presentation/Thesis_Defense_v1_Aditya_Bhatt.pptx",
+  "sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+  "preview_pdf": "output/pdf/Thesis_Defense_Preview_v1_Aditya_Bhatt.pdf",
+  "preview_pdf_sha256": "645c0f693e745ddcc28159a0a9299b34c83213321b21775273257a3e3801e78f",
+  "source": "ThesisDocs/defense/defense_slides.json",
+  "source_sha256": "a6b0a7d45d2d976ec8ee7617ff7023448a4977bacaa50d63496cc6a619819968",
+  "slide_count": 25,
+  "timing_seconds": 1800,
+  "native_tables": 13,
+  "native_charts": 3,
+  "application": "Microsoft PowerPoint; user-approved renderer fallback",
+  "visual_review": {
+    "status": "pass",
+    "slides_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "basis": "All25 slides previously inspected individually; the final note-only rebuild has pixel-identical PowerPoint PNGs for all25 slides, independently compared. Final notes and all native content separately re-audited.",
+    "source_render_sha256": {
+      "slide_01.png": "05c8086a51e186189f18e1940e2d7caa2fe296c48263246f2b5de0e19a06f81d",
+      "slide_02.png": "0384a1009491e614ef2d9d5b6684d8984fe0701a84b0b919b29bb3ed91eeabbd",
+      "slide_03.png": "f94afc61e215575efa45ea5411b75516463314c22c5ac45b61d30a08f480c7f0",
+      "slide_04.png": "e08c18e0bf9483430ea049837005aa41cdb2f33ba7dcb1003c91506827ea3888",
+      "slide_05.png": "e65981afd42c28195d94992d4810f3cfd2656a917c7d0748d620845bb81ebae9",
+      "slide_06.png": "96f9dbaff401e18e98894cee2f72b89d14dbbab0de1ffc26c86c08c16faf505e",
+      "slide_07.png": "3a80174d137aa07715cbdcaa981bfedbf70278fd233c0cce2cb6cd50e6268656",
+      "slide_08.png": "b58ccf4c32a6feb1b9859916299870fc6017c15a9b6bfa9493ca3c2edd9a3e41",
+      "slide_09.png": "8cf453b63129286043a8b1c7079d83d70ce0ea4587e45b050ccbb689b4fc5170",
+      "slide_10.png": "333e5906b632ba3537b1194cf7e5aee4e509ffec4fd0ece1792bfa3b6fdc346e",
+      "slide_11.png": "f4eca49fa1173075f8ba98e7b44a036b6054925757a536ff754ba1e9bace7533",
+      "slide_12.png": "ef0a0be8b6b54e372393573bbf2b287bc12f93f134b1c110293415aaa19b4a8a",
+      "slide_13.png": "5363584b33e668b56d69b4d8b37d8af73ff04492c4e2b278a53e4ccaa4daa9a4",
+      "slide_14.png": "643d43f2219030bb2411bac68ef282e2408b3d8a4e75fe94e3a04b6c798d7b7b",
+      "slide_15.png": "b1f7fea8618eb74ac2d285da785e16f2ad538c2ce921a6057362b5d53f2b124e",
+      "slide_16.png": "6cd1cc34e39473cba0c83f17be038cb9d610bb18ae9926bb14278282f8cce7ae",
+      "slide_17.png": "9490f3f0e50691d7034eb4bb5e9a271cbb12d0df63e4a9211e6459d88be28cce",
+      "slide_18.png": "76a505b48d93096d22ba1dfb83f98d870ca55b4c913910c2acea4de863095c66",
+      "slide_19.png": "0cc43386db738b1ef3e3b737def3a61f3ed5ae4926ca7e9847ca7a28dc0c1484",
+      "slide_20.png": "767a25b2e1ca19b7f7ec61af58fcfd7c8ef7e1f5d64b93e37181e53f2ce7bba0",
+      "slide_21.png": "c19c4da7748fe7e66d6866151e6c58092f17e7976a10c00d5c7e4b66b510302f",
+      "slide_22.png": "965f7c43207868f83fb3b624ce32cc0b030c007d5d0386d5b641cdde9e9324b0",
+      "slide_23.png": "fec52d2418cccb3ba56f0eef3642e0b6e496fcc6f76b8d5ff2deaa55b3f4c693",
+      "slide_24.png": "c51dbe56cb9240868a3915877091bc2822b689ed6a000637f20e541f67c56ed1",
+      "slide_25.png": "eaad277adbc22d2676719547cd7f508da1f4566a714e36cc47fe14499947ec04"
+    },
+    "final_rebuild_pixel_comparison": [
+      {
+        "slide": 1,
+        "previous_png_sha256": "05c8086a51e186189f18e1940e2d7caa2fe296c48263246f2b5de0e19a06f81d",
+        "current_png_sha256": "05c8086a51e186189f18e1940e2d7caa2fe296c48263246f2b5de0e19a06f81d",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 2,
+        "previous_png_sha256": "0384a1009491e614ef2d9d5b6684d8984fe0701a84b0b919b29bb3ed91eeabbd",
+        "current_png_sha256": "0384a1009491e614ef2d9d5b6684d8984fe0701a84b0b919b29bb3ed91eeabbd",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 3,
+        "previous_png_sha256": "f94afc61e215575efa45ea5411b75516463314c22c5ac45b61d30a08f480c7f0",
+        "current_png_sha256": "f94afc61e215575efa45ea5411b75516463314c22c5ac45b61d30a08f480c7f0",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 4,
+        "previous_png_sha256": "e08c18e0bf9483430ea049837005aa41cdb2f33ba7dcb1003c91506827ea3888",
+        "current_png_sha256": "e08c18e0bf9483430ea049837005aa41cdb2f33ba7dcb1003c91506827ea3888",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 5,
+        "previous_png_sha256": "e65981afd42c28195d94992d4810f3cfd2656a917c7d0748d620845bb81ebae9",
+        "current_png_sha256": "e65981afd42c28195d94992d4810f3cfd2656a917c7d0748d620845bb81ebae9",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 6,
+        "previous_png_sha256": "96f9dbaff401e18e98894cee2f72b89d14dbbab0de1ffc26c86c08c16faf505e",
+        "current_png_sha256": "96f9dbaff401e18e98894cee2f72b89d14dbbab0de1ffc26c86c08c16faf505e",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 7,
+        "previous_png_sha256": "3a80174d137aa07715cbdcaa981bfedbf70278fd233c0cce2cb6cd50e6268656",
+        "current_png_sha256": "3a80174d137aa07715cbdcaa981bfedbf70278fd233c0cce2cb6cd50e6268656",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 8,
+        "previous_png_sha256": "b58ccf4c32a6feb1b9859916299870fc6017c15a9b6bfa9493ca3c2edd9a3e41",
+        "current_png_sha256": "b58ccf4c32a6feb1b9859916299870fc6017c15a9b6bfa9493ca3c2edd9a3e41",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 9,
+        "previous_png_sha256": "8cf453b63129286043a8b1c7079d83d70ce0ea4587e45b050ccbb689b4fc5170",
+        "current_png_sha256": "8cf453b63129286043a8b1c7079d83d70ce0ea4587e45b050ccbb689b4fc5170",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 10,
+        "previous_png_sha256": "333e5906b632ba3537b1194cf7e5aee4e509ffec4fd0ece1792bfa3b6fdc346e",
+        "current_png_sha256": "333e5906b632ba3537b1194cf7e5aee4e509ffec4fd0ece1792bfa3b6fdc346e",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 11,
+        "previous_png_sha256": "f4eca49fa1173075f8ba98e7b44a036b6054925757a536ff754ba1e9bace7533",
+        "current_png_sha256": "f4eca49fa1173075f8ba98e7b44a036b6054925757a536ff754ba1e9bace7533",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 12,
+        "previous_png_sha256": "ef0a0be8b6b54e372393573bbf2b287bc12f93f134b1c110293415aaa19b4a8a",
+        "current_png_sha256": "ef0a0be8b6b54e372393573bbf2b287bc12f93f134b1c110293415aaa19b4a8a",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 13,
+        "previous_png_sha256": "5363584b33e668b56d69b4d8b37d8af73ff04492c4e2b278a53e4ccaa4daa9a4",
+        "current_png_sha256": "5363584b33e668b56d69b4d8b37d8af73ff04492c4e2b278a53e4ccaa4daa9a4",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 14,
+        "previous_png_sha256": "643d43f2219030bb2411bac68ef282e2408b3d8a4e75fe94e3a04b6c798d7b7b",
+        "current_png_sha256": "643d43f2219030bb2411bac68ef282e2408b3d8a4e75fe94e3a04b6c798d7b7b",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 15,
+        "previous_png_sha256": "b1f7fea8618eb74ac2d285da785e16f2ad538c2ce921a6057362b5d53f2b124e",
+        "current_png_sha256": "b1f7fea8618eb74ac2d285da785e16f2ad538c2ce921a6057362b5d53f2b124e",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 16,
+        "previous_png_sha256": "6cd1cc34e39473cba0c83f17be038cb9d610bb18ae9926bb14278282f8cce7ae",
+        "current_png_sha256": "6cd1cc34e39473cba0c83f17be038cb9d610bb18ae9926bb14278282f8cce7ae",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 17,
+        "previous_png_sha256": "9490f3f0e50691d7034eb4bb5e9a271cbb12d0df63e4a9211e6459d88be28cce",
+        "current_png_sha256": "9490f3f0e50691d7034eb4bb5e9a271cbb12d0df63e4a9211e6459d88be28cce",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 18,
+        "previous_png_sha256": "76a505b48d93096d22ba1dfb83f98d870ca55b4c913910c2acea4de863095c66",
+        "current_png_sha256": "76a505b48d93096d22ba1dfb83f98d870ca55b4c913910c2acea4de863095c66",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 19,
+        "previous_png_sha256": "0cc43386db738b1ef3e3b737def3a61f3ed5ae4926ca7e9847ca7a28dc0c1484",
+        "current_png_sha256": "0cc43386db738b1ef3e3b737def3a61f3ed5ae4926ca7e9847ca7a28dc0c1484",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 20,
+        "previous_png_sha256": "767a25b2e1ca19b7f7ec61af58fcfd7c8ef7e1f5d64b93e37181e53f2ce7bba0",
+        "current_png_sha256": "767a25b2e1ca19b7f7ec61af58fcfd7c8ef7e1f5d64b93e37181e53f2ce7bba0",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 21,
+        "previous_png_sha256": "c19c4da7748fe7e66d6866151e6c58092f17e7976a10c00d5c7e4b66b510302f",
+        "current_png_sha256": "c19c4da7748fe7e66d6866151e6c58092f17e7976a10c00d5c7e4b66b510302f",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 22,
+        "previous_png_sha256": "965f7c43207868f83fb3b624ce32cc0b030c007d5d0386d5b641cdde9e9324b0",
+        "current_png_sha256": "965f7c43207868f83fb3b624ce32cc0b030c007d5d0386d5b641cdde9e9324b0",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 23,
+        "previous_png_sha256": "fec52d2418cccb3ba56f0eef3642e0b6e496fcc6f76b8d5ff2deaa55b3f4c693",
+        "current_png_sha256": "fec52d2418cccb3ba56f0eef3642e0b6e496fcc6f76b8d5ff2deaa55b3f4c693",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 24,
+        "previous_png_sha256": "c51dbe56cb9240868a3915877091bc2822b689ed6a000637f20e541f67c56ed1",
+        "current_png_sha256": "c51dbe56cb9240868a3915877091bc2822b689ed6a000637f20e541f67c56ed1",
+        "same_file_bytes": true,
+        "same_pixels": true
+      },
+      {
+        "slide": 25,
+        "previous_png_sha256": "eaad277adbc22d2676719547cd7f508da1f4566a714e36cc47fe14499947ec04",
+        "current_png_sha256": "eaad277adbc22d2676719547cd7f508da1f4566a714e36cc47fe14499947ec04",
+        "same_file_bytes": true,
+        "same_pixels": true
+      }
+    ]
+  },
+  "package_integrity": "pass; zero findings",
+  "geometry_font_heading_bullet_audit": "pass; zero findings",
+  "geometry_warnings_reviewed": [
+    {
+      "slide": 18,
+      "decision": "Native PowerPoint render shows clear fitted table cells; conservative estimator warning is not an observed overflow."
+    },
+    {
+      "slide": 23,
+      "decision": "All table cells and qualification caption fit in the native PowerPoint render; no clipping or footer overlap."
+    }
+  ],
+  "roundtrip": {
+    "workbook_cell_after": 0.020333333333333325,
+    "workbook_cell_before": 0.019333333333333324,
+    "native_tables": 13,
+    "chart_resize_persisted": true,
+    "native_charts": 3,
+    "source_candidate_modified": false,
+    "candidate_sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+    "slide_count": 25,
+    "embedded_workbook_cell_edit_executed": true,
+    "native_table_edit_persisted": true,
+    "saved_candidate_reopened": true
+  },
+  "content_audit": "ThesisDocs/defense/native_content_audit.json",
+  "content_audit_sha256": "25cfe4b25df3ae12f4f2a4773d37f32da4881db42cfd85f341924fb654ee2f57",
+  "notes": "Timed speaker notes and primary citations embedded. No defense or rehearsal completion asserted."
+}

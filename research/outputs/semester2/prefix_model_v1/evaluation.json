@@ -1,0 +1,787 @@
+{
+  "artifact_sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+  "eligibility_census": {
+    "included_step_rows": 7500,
+    "included_trajectories": 1500,
+    "reconstructed_candidate_disagreement_rows": 4269,
+    "reconstructed_label_disagreement_rows": 43,
+    "source_trajectories": 1500,
+    "strict_json_rows": 0
+  },
+  "kind": "fixed task-disjoint archived development holdout",
+  "limitations": [
+    "Only archived Qwen2.5-0.5B GSM8K training and MATH traces enter fitting.",
+    "Archived four-line output and live JSON prompts differ; this is a material transport limitation.",
+    "Strict JSON confidence is reconstructed from raw output; fallback defaults are missing, not trusted confidence.",
+    "Archives omit emitted EOS tokens while the live generator charges them.",
+    "Reconstructed candidates are regraded against archived gold offline; source labels/data are unchanged.",
+    "A row-level audit preserves old/reconstructed candidates and labels, including parser disagreements.",
+    "Task-disjoint archive calibration is marginal validation, not a guarantee of conditional live calibration.",
+    "The direct one-step drift policy is myopic; it does not approximate a proven Bellman continuation value.",
+    "No live benchmark or adversarial trap outcomes select coefficients, calibrators, features, cost or threshold.",
+    "Bootstrap intervals describe repeated task-cluster sampling from this held-out development panel."
+  ],
+  "live_compute_savings_measured": false,
+  "policies": {
+    "fixed_2": {
+      "accuracy": 0.11956521739130435,
+      "accuracy_difference": 0.014492753623188406,
+      "active_completion_tokens": 37863,
+      "baseline_accuracy": 0.10507246376811594,
+      "baseline_completion_tokens": 77799,
+      "baseline_utility": -0.09492753623188402,
+      "completion_token_saving_fraction": 0.5133227933520996,
+      "mean_stop_step": 2.0,
+      "stop_step_counts": {
+        "2": 276
+      },
+      "task_cluster_95_percentile_intervals": {
+        "accuracy_difference": [
+          -0.014492753623188406,
+          0.043478260869565216
+        ],
+        "completion_token_saving_fraction": [
+          0.4937230893202258,
+          0.5313334420642515
+        ],
+        "mean_stop_step": [
+          2.0,
+          2.0
+        ],
+        "utility_difference": [
+          0.1355072463768108,
+          0.19347826086956435
+        ]
+      },
+      "tasks": 276,
+      "trajectories": 276,
+      "utility": 0.06956521739130433,
+      "utility_difference": 0.16449275362318844
+    },
+    "fixed_3": {
+      "accuracy": 0.13043478260869565,
+      "accuracy_difference": 0.025362318840579712,
+      "active_completion_tokens": 52351,
+      "baseline_accuracy": 0.10507246376811594,
+      "baseline_completion_tokens": 77799,
+      "baseline_utility": -0.09492753623188402,
+      "completion_token_saving_fraction": 0.32709932004267406,
+      "mean_stop_step": 3.0,
+      "stop_step_counts": {
+        "3": 276
+      },
+      "task_cluster_95_percentile_intervals": {
+        "accuracy_difference": [
+          -0.0036231884057971015,
+          0.05434782608695652
+        ],
+        "completion_token_saving_fraction": [
+          0.3112693219002224,
+          0.3422188223124947
+        ],
+        "mean_stop_step": [
+          3.0,
+          3.0
+        ],
+        "utility_difference": [
+          0.09637681159420328,
+          0.15434782608695727
+        ]
+      },
+      "tasks": 276,
+      "trajectories": 276,
+      "utility": 0.030434782608695646,
+      "utility_difference": 0.12536231884057972
+    },
+    "fixed_4": {
+      "accuracy": 0.11594202898550725,
+      "accuracy_difference": 0.010869565217391304,
+      "active_completion_tokens": 65148,
+      "baseline_accuracy": 0.10507246376811594,
+      "baseline_completion_tokens": 77799,
+      "baseline_utility": -0.09492753623188402,
+      "completion_token_saving_fraction": 0.16261134461882543,
+      "mean_stop_step": 4.0,
+      "stop_step_counts": {
+        "4": 276
+      },
+      "task_cluster_95_percentile_intervals": {
+        "accuracy_difference": [
+          -0.018115942028985508,
+          0.03985507246376811
+        ],
+        "completion_token_saving_fraction": [
+          0.15162271404126154,
+          0.1734566900920639
+        ],
+        "mean_stop_step": [
+          4.0,
+          4.0
+        ],
+        "utility_difference": [
+          0.03188405797101449,
+          0.08985507246376846
+        ]
+      },
+      "tasks": 276,
+      "trajectories": 276,
+      "utility": -0.03405797101449277,
+      "utility_difference": 0.06086956521739132
+    },
+    "learned_drift": {
+      "accuracy": 0.11956521739130435,
+      "accuracy_difference": 0.014492753623188406,
+      "active_completion_tokens": 37897,
+      "baseline_accuracy": 0.10507246376811594,
+      "baseline_completion_tokens": 77799,
+      "baseline_utility": -0.09492753623188402,
+      "completion_token_saving_fraction": 0.5128857697399709,
+      "mean_stop_step": 2.003623188405797,
+      "stop_step_counts": {
+        "2": 275,
+        "3": 1
+      },
+      "task_cluster_95_percentile_intervals": {
+        "accuracy_difference": [
+          -0.014492753623188406,
+          0.043478260869565216
+        ],
+        "completion_token_saving_fraction": [
+          0.49306083790431354,
+          0.5308723320909621
+        ],
+        "mean_stop_step": [
+          2.0,
+          2.010869565217391
+        ],
+        "utility_difference": [
+          0.13532155797101367,
+          0.1934782608695643
+        ]
+      },
+      "tasks": 276,
+      "trajectories": 276,
+      "utility": 0.06938405797101448,
+      "utility_difference": 0.16431159420289856
+    },
+    "never": {
+      "accuracy": 0.10507246376811594,
+      "accuracy_difference": 0.0,
+      "active_completion_tokens": 77799,
+      "baseline_accuracy": 0.10507246376811594,
+      "baseline_completion_tokens": 77799,
+      "baseline_utility": -0.09492753623188402,
+      "completion_token_saving_fraction": 0.0,
+      "mean_stop_step": 5.0,
+      "stop_step_counts": {
+        "5": 276
+      },
+      "task_cluster_95_percentile_intervals": {
+        "accuracy_difference": [
+          0.0,
+          0.0
+        ],
+        "completion_token_saving_fraction": [
+          0.0,
+          0.0
+        ],
+        "mean_stop_step": [
+          5.0,
+          5.0
+        ],
+        "utility_difference": [
+          0.0,
+          0.0
+        ]
+      },
+      "tasks": 276,
+      "trajectories": 276,
+      "utility": -0.09492753623188402,
+      "utility_difference": 0.0
+    }
+  },
+  "probabilities": {
+    "p_next": {
+      "by_domain": {
+        "gsm8k": {
+          "auc": 0.6635445362718091,
+          "brier": 0.11675353032485929,
+          "calibration_bins": [
+            {
+              "bin": 0,
+              "count": 277,
+              "mean_probability": 0.07282138781501805,
+              "prevalence": 0.07220216606498195
+            },
+            {
+              "bin": 1,
+              "count": 385,
+              "mean_probability": 0.1329158223400659,
+              "prevalence": 0.17142857142857143
+            },
+            {
+              "bin": 2,
+              "count": 40,
+              "mean_probability": 0.23896322499541683,
+              "prevalence": 0.275
+            },
+            {
+              "bin": 3,
+              "count": 2,
+              "mean_probability": 0.3094043401270755,
+              "prevalence": 1.0
+            },
+            {
+              "bin": 4,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 5,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 6,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 7,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 8,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 9,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            }
+          ],
+          "ece_10_equal_width": 0.02531476582920995,
+          "log_loss": 0.3887230272882027,
+          "mean_probability": 0.11579751946840372,
+          "prevalence": 0.140625,
+          "rows": 704
+        },
+        "math": {
+          "auc": 0.7164961972200368,
+          "brier": 0.06967790819952799,
+          "calibration_bins": [
+            {
+              "bin": 0,
+              "count": 327,
+              "mean_probability": 0.047757346904083085,
+              "prevalence": 0.05198776758409786
+            },
+            {
+              "bin": 1,
+              "count": 68,
+              "mean_probability": 0.12456342898274511,
+              "prevalence": 0.20588235294117646
+            },
+            {
+              "bin": 2,
+              "count": 4,
+              "mean_probability": 0.24476964206830554,
+              "prevalence": 0.0
+            },
+            {
+              "bin": 3,
+              "count": 1,
+              "mean_probability": 0.3084332334510865,
+              "prevalence": 0.0
+            },
+            {
+              "bin": 4,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 5,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 6,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 7,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 8,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 9,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            }
+          ],
+          "ece_10_equal_width": 0.02050136548315618,
+          "log_loss": 0.2559808685472797,
+          "mean_probability": 0.06343619352546537,
+          "prevalence": 0.0775,
+          "rows": 400
+        }
+      },
+      "calibrated": {
+        "auc": 0.6923076923076923,
+        "brier": 0.0996971454968407,
+        "calibration_bins": [
+          {
+            "bin": 0,
+            "count": 604,
+            "mean_probability": 0.05925194844767413,
+            "prevalence": 0.061258278145695365
+          },
+          {
+            "bin": 1,
+            "count": 453,
+            "mean_probability": 0.13166204143874624,
+            "prevalence": 0.17660044150110377
+          },
+          {
+            "bin": 2,
+            "count": 44,
+            "mean_probability": 0.2394910810929521,
+            "prevalence": 0.25
+          },
+          {
+            "bin": 3,
+            "count": 3,
+            "mean_probability": 0.30908063790174584,
+            "prevalence": 0.6666666666666666
+          },
+          {
+            "bin": 4,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 5,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 6,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 7,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 8,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 9,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          }
+        ],
+        "ece_10_equal_width": 0.020927598626863816,
+        "log_loss": 0.3406280422371436,
+        "mean_probability": 0.09682602456154198,
+        "prevalence": 0.11775362318840579,
+        "rows": 1104
+      },
+      "raw": {
+        "auc": 0.6923076923076923,
+        "brier": 0.1006767737830066,
+        "calibration_bins": [
+          {
+            "bin": 0,
+            "count": 757,
+            "mean_probability": 0.0602433322603244,
+            "prevalence": 0.08058124174372523
+          },
+          {
+            "bin": 1,
+            "count": 319,
+            "mean_probability": 0.1282707212877705,
+            "prevalence": 0.18808777429467086
+          },
+          {
+            "bin": 2,
+            "count": 28,
+            "mean_probability": 0.23195179483240838,
+            "prevalence": 0.32142857142857145
+          },
+          {
+            "bin": 3,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 4,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 5,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 6,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 7,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 8,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 9,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          }
+        ],
+        "ece_10_equal_width": 0.03349890138843135,
+        "log_loss": 0.34506189065181686,
+        "mean_probability": 0.08425472179997445,
+        "prevalence": 0.11775362318840579,
+        "rows": 1104
+      }
+    },
+    "q_current": {
+      "by_domain": {
+        "gsm8k": {
+          "auc": 0.6686491630260823,
+          "brier": 0.11553659863847733,
+          "calibration_bins": [
+            {
+              "bin": 0,
+              "count": 372,
+              "mean_probability": 0.07025926518781195,
+              "prevalence": 0.07258064516129033
+            },
+            {
+              "bin": 1,
+              "count": 448,
+              "mean_probability": 0.1374277951646175,
+              "prevalence": 0.17857142857142858
+            },
+            {
+              "bin": 2,
+              "count": 44,
+              "mean_probability": 0.23742723916019254,
+              "prevalence": 0.25
+            },
+            {
+              "bin": 3,
+              "count": 16,
+              "mean_probability": 0.33681602599659954,
+              "prevalence": 0.25
+            },
+            {
+              "bin": 4,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 5,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 6,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 7,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 8,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 9,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            }
+          ],
+          "ece_10_equal_width": 0.024134271601457313,
+          "log_loss": 0.383888687164891,
+          "mean_probability": 0.11765903843478268,
+          "prevalence": 0.13863636363636364,
+          "rows": 880
+        },
+        "math": {
+          "auc": 0.7523787286206292,
+          "brier": 0.06602889431339927,
+          "calibration_bins": [
+            {
+              "bin": 0,
+              "count": 391,
+              "mean_probability": 0.04479987232830806,
+              "prevalence": 0.03836317135549872
+            },
+            {
+              "bin": 1,
+              "count": 99,
+              "mean_probability": 0.13245388818813125,
+              "prevalence": 0.21212121212121213
+            },
+            {
+              "bin": 2,
+              "count": 7,
+              "mean_probability": 0.24071911416005168,
+              "prevalence": 0.14285714285714285
+            },
+            {
+              "bin": 3,
+              "count": 1,
+              "mean_probability": 0.3182983978476705,
+              "prevalence": 0.0
+            },
+            {
+              "bin": 4,
+              "count": 2,
+              "mean_probability": 0.43092556049421177,
+              "prevalence": 0.0
+            },
+            {
+              "bin": 5,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 6,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 7,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 8,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            },
+            {
+              "bin": 9,
+              "count": 0,
+              "mean_probability": null,
+              "prevalence": null
+            }
+          ],
+          "ece_10_equal_width": 0.024537996935399826,
+          "log_loss": 0.24304462701891635,
+          "mean_probability": 0.06698973665789978,
+          "prevalence": 0.074,
+          "rows": 500
+        }
+      },
+      "calibrated": {
+        "auc": 0.7100943138678989,
+        "brier": 0.09759902460765196,
+        "calibration_bins": [
+          {
+            "bin": 0,
+            "count": 763,
+            "mean_probability": 0.057212577628092384,
+            "prevalence": 0.05504587155963303
+          },
+          {
+            "bin": 1,
+            "count": 547,
+            "mean_probability": 0.1365275816533339,
+            "prevalence": 0.1846435100548446
+          },
+          {
+            "bin": 2,
+            "count": 51,
+            "mean_probability": 0.23787906514056537,
+            "prevalence": 0.23529411764705882
+          },
+          {
+            "bin": 3,
+            "count": 17,
+            "mean_probability": 0.3357267537525449,
+            "prevalence": 0.23529411764705882
+          },
+          {
+            "bin": 4,
+            "count": 2,
+            "mean_probability": 0.43092556049421177,
+            "prevalence": 0.0
+          },
+          {
+            "bin": 5,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 6,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 7,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 8,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 9,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          }
+        ],
+        "ece_10_equal_width": 0.02222728103102273,
+        "log_loss": 0.3328582305902625,
+        "mean_probability": 0.09930059576199901,
+        "prevalence": 0.11521739130434783,
+        "rows": 1380
+      },
+      "raw": {
+        "auc": 0.7100943138678989,
+        "brier": 0.09854047319130825,
+        "calibration_bins": [
+          {
+            "bin": 0,
+            "count": 942,
+            "mean_probability": 0.05285664490892784,
+            "prevalence": 0.06900212314225053
+          },
+          {
+            "bin": 1,
+            "count": 383,
+            "mean_probability": 0.13332748284036616,
+            "prevalence": 0.206266318537859
+          },
+          {
+            "bin": 2,
+            "count": 37,
+            "mean_probability": 0.23806243251080852,
+            "prevalence": 0.32432432432432434
+          },
+          {
+            "bin": 3,
+            "count": 15,
+            "mean_probability": 0.32939676832279624,
+            "prevalence": 0.2
+          },
+          {
+            "bin": 4,
+            "count": 3,
+            "mean_probability": 0.42712870380577944,
+            "prevalence": 0.0
+          },
+          {
+            "bin": 5,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 6,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 7,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 8,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          },
+          {
+            "bin": 9,
+            "count": 0,
+            "mean_probability": null,
+            "prevalence": null
+          }
+        ],
+        "ece_10_equal_width": 0.035912059566151525,
+        "log_loss": 0.3376248846168731,
+        "mean_probability": 0.08397538628349961,
+        "prevalence": 0.11521739130434783,
+        "rows": 1380
+      }
+    }
+  },
+  "task_counts": {
+    "calibration": 322,
+    "evaluation": 276,
+    "train": 902
+  },
+  "uncertainty": "2000 task-cluster percentile replicates, seed 20261002"
+}

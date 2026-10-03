@@ -1,0 +1,9 @@
+policy,kind,problems,generated_tokens,accuracy,correct,completion_savings,mean_stop_step,pareto_nondominated_in_displayed_set
+fixed_2,replay_of_live_baseline_prefixes,100,9674,0.07,7,0.5650962057183959,2.0,True
+fixed_3,replay_of_live_baseline_prefixes,100,13913,0.06,6,0.37452796259665533,3.0,False
+fixed_4,replay_of_live_baseline_prefixes,100,18089,0.06,6,0.18679194389498288,4.0,False
+confidence_80,replay_of_live_baseline_prefixes,100,21530,0.06,6,0.03209854342744112,4.82,False
+confidence_90,replay_of_live_baseline_prefixes,100,21617,0.06,6,0.028187376371156314,4.85,False
+confidence_95,replay_of_live_baseline_prefixes,100,21617,0.06,6,0.028187376371156314,4.85,False
+never,actual_live_generation,100,22244,0.06,6,0.0,5.0,False
+learned_prefix_drift_v1,actual_live_generation,100,9674,0.07,7,0.5650962057183959,2,True

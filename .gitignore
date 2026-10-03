@@ -8,6 +8,11 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .vscode/
+/tmp/pdfs/master_thesis/
+/tmp/thesis_pdf_runtime/
+/tmp/presentations/defense/
+/tmp/neurips_build/
+/tmp/pdfs/stopping_paper/
 .ipynb_checkpoints/
 .DS_Store
 Thumbs.db
@@ -57,4 +62,19 @@ ThesisDocs/*
 !ThesisDocs/rigor_audit/*.md
 !ThesisDocs/archive/
 !ThesisDocs/archive/*
+!ThesisDocs/chapters/
+!ThesisDocs/chapters/**
+!ThesisDocs/defense/
+!ThesisDocs/defense/**
+!ThesisDocs/images/
+!ThesisDocs/images/thesis_v1/
+!ThesisDocs/images/thesis_v1/**
+!ThesisDocs/paper/
+!ThesisDocs/paper/**
+!ThesisDocs/neurips/
+!ThesisDocs/neurips/**
+!ThesisDocs/committee_revision_ledger_v1.csv
+!ThesisDocs/thesis_build_manifest.json
+!ThesisDocs/verification/
+!ThesisDocs/verification/**
 

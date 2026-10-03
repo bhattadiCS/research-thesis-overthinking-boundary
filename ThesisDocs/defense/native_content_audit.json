@@ -1,0 +1,1161 @@
+{
+  "schema": "independent-native-defense-content-audit-v1",
+  "made_at_utc": "2026-10-03T02:20:41.291512+00:00",
+  "pptx": "C:\\Aditya_Data\\Personal\\ResearchThesis\\output\\presentation\\Thesis_Defense_v1_Aditya_Bhatt.pptx",
+  "pptx_sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+  "source": "C:\\Aditya_Data\\Personal\\ResearchThesis\\ThesisDocs\\defense\\defense_slides.json",
+  "source_sha256": "a6b0a7d45d2d976ec8ee7617ff7023448a4977bacaa50d63496cc6a619819968",
+  "checker_sha256": "6bf21f47f9e8643796108c7b2aa287157e49c5644cc1130bcbd66f5648487e83",
+  "method": "ZIP/XML + openpyxl read-only; no COM, PowerPoint opening, rendering or rebuild",
+  "numeric_absolute_tolerance": 1e-14,
+  "slide_count": 25,
+  "native_table_count": 13,
+  "expected_native_table_count": 13,
+  "native_chart_count": 3,
+  "notes_duration_seconds": 1800,
+  "pending_result_text": [],
+  "charts": [
+    {
+      "slide_number": 15,
+      "chart_part": "ppt/charts/chart1.xml",
+      "embedded_workbook": "ppt/embeddings/Microsoft_Excel_Worksheet.xlsx",
+      "categories": [
+        "7B/GSM, t=4",
+        "7B/GSM, t=5",
+        "32B/MATH, t=5",
+        "32B/MATH, t=6"
+      ],
+      "series": [
+        {
+          "name": "Net drift",
+          "expected_values": [
+            0.019333333333333324,
+            -0.025333333333333333,
+            0.018666666666666658,
+            -0.013333333333333338
+          ],
+          "cached_values": [
+            0.019333333333333324,
+            -0.025333333333333333,
+            0.018666666666666654,
+            -0.013333333333333338
+          ],
+          "embedded_worksheet_values": [
+            0.019333333333333324,
+            -0.025333333333333333,
+            0.018666666666666654,
+            -0.013333333333333338
+          ],
+          "maximum_absolute_cache_error": 3.469446951953614e-18,
+          "formulas": {
+            "name": "Sheet1!$B$1",
+            "categories": "Sheet1!$A$2:$A$5",
+            "values": "Sheet1!$B$2:$B$5"
+          }
+        }
+      ],
+      "embedded_matrix": [
+        [
+          "Model / domain and completed prefix",
+          "Net drift"
+        ],
+        [
+          "7B/GSM, t=4",
+          0.019333333333333324
+        ],
+        [
+          "7B/GSM, t=5",
+          -0.025333333333333333
+        ],
+        [
+          "32B/MATH, t=5",
+          0.018666666666666654
+        ],
+        [
+          "32B/MATH, t=6",
+          -0.013333333333333338
+        ]
+      ]
+    },
+    {
+      "slide_number": 17,
+      "chart_part": "ppt/charts/chart2.xml",
+      "embedded_workbook": "ppt/embeddings/Microsoft_Excel_Worksheet1.xlsx",
+      "categories": [
+        "BF16",
+        "4-bit"
+      ],
+      "series": [
+        {
+          "name": "Step-two accuracy",
+          "expected_values": [
+            0.2786666666666667,
+            0.136
+          ],
+          "cached_values": [
+            0.2786666666666667,
+            0.136
+          ],
+          "embedded_worksheet_values": [
+            0.2786666666666667,
+            0.136
+          ],
+          "maximum_absolute_cache_error": 0.0,
+          "formulas": {
+            "name": "Sheet1!$B$1",
+            "categories": "Sheet1!$A$2:$A$3",
+            "values": "Sheet1!$B$2:$B$3"
+          }
+        }
+      ],
+      "embedded_matrix": [
+        [
+          "Weight precision",
+          "Step-two accuracy"
+        ],
+        [
+          "BF16",
+          0.2786666666666667
+        ],
+        [
+          "4-bit",
+          0.136
+        ]
+      ]
+    },
+    {
+      "slide_number": 18,
+      "chart_part": "ppt/charts/chart3.xml",
+      "embedded_workbook": "ppt/embeddings/Microsoft_Excel_Worksheet2.xlsx",
+      "categories": [
+        "Micro",
+        "Task macro",
+        "Domain macro",
+        "Worst domain"
+      ],
+      "series": [
+        {
+          "name": "Causal GRU AUC",
+          "expected_values": [
+            0.8743264229443097,
+            0.8213923134886576,
+            0.8102415230146596,
+            0.6312532126006337
+          ],
+          "cached_values": [
+            0.8743264229443097,
+            0.8213923134886576,
+            0.8102415230146596,
+            0.6312532126006337
+          ],
+          "embedded_worksheet_values": [
+            0.8743264229443097,
+            0.8213923134886576,
+            0.8102415230146596,
+            0.6312532126006337
+          ],
+          "maximum_absolute_cache_error": 0.0,
+          "formulas": {
+            "name": "Sheet1!$B$1",
+            "categories": "Sheet1!$A$2:$A$5",
+            "values": "Sheet1!$B$2:$B$5"
+          }
+        }
+      ],
+      "embedded_matrix": [
+        [
+          "Aggregation rule",
+          "Causal GRU AUC"
+        ],
+        [
+          "Micro",
+          0.8743264229443097
+        ],
+        [
+          "Task macro",
+          0.8213923134886576
+        ],
+        [
+          "Domain macro",
+          0.8102415230146596
+        ],
+        [
+          "Worst domain",
+          0.6312532126006337
+        ]
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "slide_number": 3,
+      "source_key": "table",
+      "rows": [
+        [
+          "Quantity",
+          "Revision matrix",
+          "Detector corpus"
+        ],
+        [
+          "Model-domain cells",
+          "52",
+          "52"
+        ],
+        [
+          "Model configurations",
+          "13",
+          "13 (different selection)"
+        ],
+        [
+          "Trajectories",
+          "75,965",
+          "28,888"
+        ],
+        [
+          "Step rows",
+          "798,770 raw",
+          "144,440"
+        ],
+        [
+          "Unique tasks",
+          "1,948",
+          "2,948"
+        ],
+        [
+          "Horizon",
+          "8 / 10 / 14 by domain",
+          "5 in every cell"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 4,
+      "source_key": "table",
+      "rows": [
+        [
+          "Setting",
+          "Declared value"
+        ],
+        [
+          "Historical seed / temperatures",
+          "7 / 0.1, 0.6, 1.0"
+        ],
+        [
+          "Live generator",
+          "Local Qwen2.5-0.5B, greedy"
+        ],
+        [
+          "Live completion cap",
+          "128 tokens per response"
+        ],
+        [
+          "Live floor / horizon",
+          "2 / 5 responses"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 5,
+      "source_key": "table",
+      "rows": [
+        [
+          "Runtime permits",
+          "Evaluation keeps separate"
+        ],
+        [
+          "Current / prior answer and thought",
+          "Reference answer and correctness"
+        ],
+        [
+          "Strict parsing and observed confidence",
+          "Future response and future label"
+        ],
+        [
+          "Charged tokens and public domain",
+          "Bidirectional full-trajectory score"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 10,
+      "source_key": "table",
+      "rows": [
+        [
+          "Time",
+          "Correctness q",
+          "Cumulative cost",
+          "Stop reward"
+        ],
+        [
+          "0",
+          "0",
+          "0.00",
+          "0.00"
+        ],
+        [
+          "1",
+          "0",
+          "0.10",
+          "−0.10"
+        ],
+        [
+          "2",
+          "1",
+          "0.20",
+          "0.80"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 14,
+      "source_key": "table",
+      "rows": [
+        [
+          "Prefix t",
+          "Repair / eligible",
+          "Corruption / eligible",
+          "Net utility drift"
+        ],
+        [
+          "2",
+          "3145 / 14818",
+          "1170 / 4682",
+          "+0.0513"
+        ],
+        [
+          "4",
+          "1830 / 11661",
+          "1102 / 7839",
+          "-0.0127"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 16,
+      "source_key": "table",
+      "rows": [
+        [
+          "Matched modification",
+          "Utility / trajectory",
+          "95% cell interval"
+        ],
+        [
+          "Empirical-Bayes hazards",
+          "+0.00781",
+          "[+0.00276, +0.01355]"
+        ],
+        [
+          "Lagged logistic",
+          "+0.00331",
+          "[+0.00062, +0.00633]"
+        ],
+        [
+          "Gradient-boosted probe",
+          "-0.05694",
+          "[-0.08716, -0.03145]"
+        ],
+        [
+          "Isotonic calibration",
+          "-0.06165",
+          "[-0.09168, -0.03547]"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 18,
+      "source_key": "table_secondary",
+      "rows": [
+        [
+          "Configuration",
+          "Micro AUC",
+          "Step utility"
+        ],
+        [
+          "Causal GRU",
+          "0.8743",
+          "0.3264"
+        ],
+        [
+          "Causal RoPE transformer",
+          "0.8638",
+          "0.3331"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 19,
+      "source_key": "table",
+      "rows": [
+        [
+          "Evidence",
+          "Permitted claim"
+        ],
+        [
+          "Stacked AUC 0.955156",
+          "Retrospective development diagnostic"
+        ],
+        [
+          "Causal GRU AUC 0.874326",
+          "Task-grouped archive prefix ranking"
+        ],
+        [
+          "Portable prefix model",
+          "Separate train / calibration / holdout"
+        ],
+        [
+          "Actual online run",
+          "Measured generated-cost / accuracy trade-off"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 20,
+      "source_key": "table",
+      "rows": [
+        [
+          "Prepared-observation decisions",
+          "Latency"
+        ],
+        [
+          "Median (saved MATH)",
+          "0.0034 ms"
+        ],
+        [
+          "95th percentile (saved MATH)",
+          "0.0079 ms"
+        ],
+        [
+          "99th percentile (saved MATH)",
+          "0.0130 ms"
+        ],
+        [
+          "Maximum (saved MATH)",
+          "0.4383 ms"
+        ],
+        [
+          "Learned maximum (4,000 main decisions)",
+          "0.9369 ms"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 21,
+      "source_key": "table",
+      "rows": [
+        [
+          "Held-out target",
+          "Rows",
+          "AUC",
+          "Calibrated Brier"
+        ],
+        [
+          "Selected current correctness",
+          "1380",
+          "0.7101",
+          "0.0976"
+        ],
+        [
+          "Selected next correctness",
+          "1104",
+          "0.6923",
+          "0.0997"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 22,
+      "source_key": "table",
+      "rows": [
+        [
+          "Archive holdout policy",
+          "Accuracy",
+          "Completion saving",
+          "Mean stop"
+        ],
+        [
+          "Full horizon",
+          "10.51%",
+          "0.00%",
+          "5.000"
+        ],
+        [
+          "Fixed two",
+          "11.96%",
+          "51.33%",
+          "2.000"
+        ],
+        [
+          "Learned drift",
+          "11.96%",
+          "51.29%",
+          "2.004"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 23,
+      "source_key": "table",
+      "rows": [
+        [
+          "Actual outcome",
+          "Never",
+          "Heuristic",
+          "Learned"
+        ],
+        [
+          "Selected-answer accuracy",
+          "6.00%",
+          "6.00%",
+          "7.00%"
+        ],
+        [
+          "Generated completion tokens",
+          "22244",
+          "21591",
+          "9674"
+        ],
+        [
+          "Completion-token saving",
+          "0%",
+          "2.94%",
+          "56.51%"
+        ],
+        [
+          "Mean stopping step",
+          "5.00",
+          "4.85",
+          "2.00"
+        ],
+        [
+          "Shared-prefix identical tasks",
+          "Reference",
+          "94 / 100",
+          "100 / 100"
+        ]
+      ],
+      "source_matches": true
+    },
+    {
+      "slide_number": 24,
+      "source_key": "table",
+      "rows": [
+        [
+          "Trap policy",
+          "Accuracy",
+          "Completion saving",
+          "Paired changes"
+        ],
+        [
+          "Heuristic",
+          "1 / 20",
+          "3.34%",
+          "0 worsened / 0 improved"
+        ],
+        [
+          "Learned",
+          "1 / 20",
+          "52.11%",
+          "0 worsened / 0 improved"
+        ]
+      ],
+      "source_matches": true
+    }
+  ],
+  "slides": [
+    {
+      "number": 1,
+      "slide_part": "ppt/slides/slide1.xml",
+      "notes_part": "ppt/notesSlides/notesSlide1.xml",
+      "title": "Cost aware stopping boundaries in reasoning language models",
+      "notes_duration_seconds": 45
+    },
+    {
+      "number": 2,
+      "slide_part": "ppt/slides/slide2.xml",
+      "notes_part": "ppt/notesSlides/notesSlide2.xml",
+      "title": "When is another reasoning increment worth its cost?",
+      "notes_duration_seconds": 55
+    },
+    {
+      "number": 3,
+      "slide_part": "ppt/slides/slide3.xml",
+      "notes_part": "ppt/notesSlides/notesSlide3.xml",
+      "title": "Two corpora answer different questions",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 4,
+      "slide_part": "ppt/slides/slide4.xml",
+      "notes_part": "ppt/notesSlides/notesSlide4.xml",
+      "title": "The observation unit is a complete revision response",
+      "notes_duration_seconds": 75
+    },
+    {
+      "number": 5,
+      "slide_part": "ppt/slides/slide5.xml",
+      "notes_part": "ppt/notesSlides/notesSlide5.xml",
+      "title": "Correctness is hidden from the stopping policy",
+      "notes_duration_seconds": 70
+    },
+    {
+      "number": 6,
+      "slide_part": "ppt/slides/slide6.xml",
+      "notes_part": "ppt/notesSlides/notesSlide6.xml",
+      "title": "Accuracy, utility and computation are separate outcomes",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 7,
+      "slide_part": "ppt/slides/slide7.xml",
+      "notes_part": "ppt/notesSlides/notesSlide7.xml",
+      "title": "Conditional repair and corruption yield the exact drift",
+      "notes_duration_seconds": 80
+    },
+    {
+      "number": 8,
+      "slide_part": "ppt/slides/slide8.xml",
+      "notes_part": "ppt/notesSlides/notesSlide8.xml",
+      "title": "Bellman continuation value defines the optimal stop",
+      "notes_duration_seconds": 105
+    },
+    {
+      "number": 9,
+      "slide_part": "ppt/slides/slide9.xml",
+      "notes_part": "ppt/notesSlides/notesSlide9.xml",
+      "title": "A first drift crossing is valid under persistent signs",
+      "notes_duration_seconds": 95
+    },
+    {
+      "number": 10,
+      "slide_part": "ppt/slides/slide10.xml",
+      "notes_part": "ppt/notesSlides/notesSlide10.xml",
+      "title": "Delayed repair defeats a myopic stopping rule",
+      "notes_duration_seconds": 95
+    },
+    {
+      "number": 11,
+      "slide_part": "ppt/slides/slide11.xml",
+      "notes_part": "ppt/notesSlides/notesSlide11.xml",
+      "title": "A ranking score is not a calibrated probability",
+      "notes_duration_seconds": 70
+    },
+    {
+      "number": 12,
+      "slide_part": "ppt/slides/slide12.xml",
+      "notes_part": "ppt/notesSlides/notesSlide12.xml",
+      "title": "Repeated checking needs a valid sequential target",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 13,
+      "slide_part": "ppt/slides/slide13.xml",
+      "notes_part": "ppt/notesSlides/notesSlide13.xml",
+      "title": "The freeze makes claims traceable",
+      "notes_duration_seconds": 60
+    },
+    {
+      "number": 14,
+      "slide_part": "ppt/slides/slide14.xml",
+      "notes_part": "ppt/notesSlides/notesSlide14.xml",
+      "title": "Repair and corruption use different denominators",
+      "notes_duration_seconds": 75
+    },
+    {
+      "number": 15,
+      "slide_part": "ppt/slides/slide15.xml",
+      "notes_part": "ppt/notesSlides/notesSlide15.xml",
+      "title": "The observed crossing depends on the cell",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 16,
+      "slide_part": "ppt/slides/slide16.xml",
+      "notes_part": "ppt/notesSlides/notesSlide16.xml",
+      "title": "More expressive estimators did not always help",
+      "notes_duration_seconds": 70
+    },
+    {
+      "number": 17,
+      "slide_part": "ppt/slides/slide17.xml",
+      "notes_part": "ppt/notesSlides/notesSlide17.xml",
+      "title": "A paired precision contrast has a large local effect",
+      "notes_duration_seconds": 70
+    },
+    {
+      "number": 18,
+      "slide_part": "ppt/slides/slide18.xml",
+      "notes_part": "ppt/notesSlides/notesSlide18.xml",
+      "title": "Pooled causal discrimination hides a weak domain",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 19,
+      "slide_part": "ppt/slides/slide19.xml",
+      "notes_part": "ppt/notesSlides/notesSlide19.xml",
+      "title": "The retrospective 0.955 score is not a live guarantee",
+      "notes_duration_seconds": 90
+    },
+    {
+      "number": 20,
+      "slide_part": "ppt/slides/slide20.xml",
+      "notes_part": "ppt/notesSlides/notesSlide20.xml",
+      "title": "The controller prevents future response calls",
+      "notes_duration_seconds": 80
+    },
+    {
+      "number": 21,
+      "slide_part": "ppt/slides/slide21.xml",
+      "notes_part": "ppt/notesSlides/notesSlide21.xml",
+      "title": "A portable trained model estimates current and next correctness",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 22,
+      "slide_part": "ppt/slides/slide22.xml",
+      "notes_part": "ppt/notesSlides/notesSlide22.xml",
+      "title": "The trained drift policy nearly reduces to fixed two",
+      "notes_duration_seconds": 80
+    },
+    {
+      "number": 23,
+      "slide_part": "ppt/slides/slide23.xml",
+      "notes_part": "ppt/notesSlides/notesSlide23.xml",
+      "title": "Actual generation yields different policy trade-offs",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 24,
+      "slide_part": "ppt/slides/slide24.xml",
+      "notes_part": "ppt/notesSlides/notesSlide24.xml",
+      "title": "Trap questions probe the policy's failure modes",
+      "notes_duration_seconds": 65
+    },
+    {
+      "number": 25,
+      "slide_part": "ppt/slides/slide25.xml",
+      "notes_part": "ppt/notesSlides/notesSlide25.xml",
+      "title": "The contribution is a testable stopping framework",
+      "notes_duration_seconds": 65
+    }
+  ],
+  "scientific_chart_sources": [
+    {
+      "slide_number": 15,
+      "scientific_source": "research\\outputs\\thesis_v1\\evidence\\boundary_selected_cell_step_metrics.csv",
+      "source_sha256": "5ec076bcb204548566f8b414179137fe9f088d4879c10adcef63855fe6b57fc2",
+      "selection": {
+        "cell_step_keys": [
+          [
+            "qwen2p5_7b__gsm8k",
+            "4"
+          ],
+          [
+            "qwen2p5_7b__gsm8k",
+            "5"
+          ],
+          [
+            "qwen2p5_32b__math",
+            "5"
+          ],
+          [
+            "qwen2p5_32b__math",
+            "6"
+          ]
+        ],
+        "column": "net_drift"
+      },
+      "derived_values": [
+        0.019333333333333324,
+        -0.025333333333333333,
+        0.018666666666666658,
+        -0.013333333333333338
+      ]
+    },
+    {
+      "slide_number": 17,
+      "scientific_source": "research\\outputs\\thesis_v1\\evidence\\algorithm_v2_normalized_effects.csv",
+      "source_sha256": "f901865f855b86643713ee97eba517a916c379e2d9a7587054f9d970c378a679",
+      "selection": {
+        "experiment": "N6",
+        "count_numerators": [
+          418,
+          204
+        ],
+        "count_denominators": [
+          1500,
+          1500
+        ]
+      },
+      "derived_values": [
+        0.2786666666666667,
+        0.136
+      ]
+    },
+    {
+      "slide_number": 18,
+      "scientific_source": "research\\outputs\\thesis_v1\\evidence\\tournament_balanced_summary.csv",
+      "source_sha256": "663488b1414a74b40c20861582bce6d7f1722e1557bc15f025be089963c924b7",
+      "selection": {
+        "configuration": "Causal GRU",
+        "columns": [
+          "micro_oof_auc",
+          "task_macro_auc",
+          "domain_macro_auc",
+          "worst_domain_auc"
+        ]
+      },
+      "derived_values": [
+        0.8743264229443097,
+        0.8213923134886576,
+        0.8102415230146596,
+        0.6312532126006337
+      ]
+    }
+  ],
+  "appendix_d_review": {
+    "appendix_sha256": "e48824ffe8969e1c45e1a6ea188731353539654c01acd2690d926fe0da66ac77",
+    "uncertainty_tool_sha256": "63110a2afc61b65e9115aab873a6017fdaef12bcea7198bafe0d18d33a24ce42",
+    "proof_assessment": "Correct conditional on the stated iid task-pair law: each marginal is Binomial(n,pi); two CP intervals have marginal error<=.025; a union bound gives joint error<=.05 without independence between discordance categories; interval subtraction bounds delta.",
+    "assumption_limits": [
+      "Unique task IDs do not establish independent, identically distributed sampling. The tool checks uniqueness/binary outcomes, not the scientific sampling law.",
+      "The shuffled cached GSM8K panel is selected without replacement; the iid CP interval is a declared reference-model calculation, not exact finite-population design coverage.",
+      "The handpicked trap bank has no randomized adversarial-population coverage; no adaptive policy selection, cross-model generalization, or noninferiority guarantee is covered.",
+      "Paired token bootstrap resamples whole problem pairs and computes 1-sum(active)/sum(baseline); its percentile interval is descriptive, not an exact finite-sample certificate."
+    ],
+    "intervals": [
+      {
+        "folder": "research\\outputs\\semester2\\online_stopping_20261002",
+        "n": 100,
+        "improved": 0,
+        "worsened": 0,
+        "independent_accuracy_delta_interval": [
+          -0.04287403023843849,
+          0.04287403023843849
+        ],
+        "recorded_accuracy_delta_interval": [
+          -0.042874030238438526,
+          0.042874030238438526
+        ]
+      },
+      {
+        "folder": "research\\outputs\\semester2\\online_stopping_20261002\\adversarial_live",
+        "n": 20,
+        "improved": 0,
+        "worsened": 0,
+        "independent_accuracy_delta_interval": [
+          -0.1967596797046254,
+          0.1967596797046254
+        ],
+        "recorded_accuracy_delta_interval": [
+          -0.19675967970462555,
+          0.19675967970462555
+        ]
+      },
+      {
+        "folder": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main",
+        "n": 100,
+        "improved": 1,
+        "worsened": 0,
+        "independent_accuracy_delta_interval": [
+          -0.04274825032732565,
+          0.06211922021093347
+        ],
+        "recorded_accuracy_delta_interval": [
+          -0.04274825032732631,
+          0.06211922021093292
+        ]
+      },
+      {
+        "folder": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial",
+        "n": 20,
+        "improved": 0,
+        "worsened": 0,
+        "independent_accuracy_delta_interval": [
+          -0.1967596797046254,
+          0.1967596797046254
+        ],
+        "recorded_accuracy_delta_interval": [
+          -0.19675967970462555,
+          0.19675967970462555
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "source declares 25 slides": true,
+    "source slide numbers consecutive": true,
+    "source durations sum to 1800 seconds": true,
+    "source declares 12 primary native tables": true,
+    "source declares 3 native charts": true,
+    "source has no pending outcomes": true,
+    "PPTX ZIP CRC integrity": true,
+    "PPTX has 25 ordered slides": true,
+    "slide 1: title matches source": true,
+    "slide 1: native table count": true,
+    "slide 1: native chart count": true,
+    "slide 1: one linked notes part": true,
+    "slide 1: notes duration matches source": true,
+    "slide 1: full speaker notes present": true,
+    "slide 1: source references in notes": true,
+    "slide 2: title matches source": true,
+    "slide 2: native table count": true,
+    "slide 2: native chart count": true,
+    "slide 2: one linked notes part": true,
+    "slide 2: notes duration matches source": true,
+    "slide 2: full speaker notes present": true,
+    "slide 2: source references in notes": true,
+    "slide 3: title matches source": true,
+    "slide 3: native table count": true,
+    "slide 3: table all cells match": true,
+    "slide 3: native chart count": true,
+    "slide 3: one linked notes part": true,
+    "slide 3: notes duration matches source": true,
+    "slide 3: full speaker notes present": true,
+    "slide 3: source references in notes": true,
+    "slide 4: title matches source": true,
+    "slide 4: native table count": true,
+    "slide 4: table all cells match": true,
+    "slide 4: native chart count": true,
+    "slide 4: one linked notes part": true,
+    "slide 4: notes duration matches source": true,
+    "slide 4: full speaker notes present": true,
+    "slide 4: source references in notes": true,
+    "slide 5: title matches source": true,
+    "slide 5: native table count": true,
+    "slide 5: table all cells match": true,
+    "slide 5: native chart count": true,
+    "slide 5: one linked notes part": true,
+    "slide 5: notes duration matches source": true,
+    "slide 5: full speaker notes present": true,
+    "slide 5: source references in notes": true,
+    "slide 6: title matches source": true,
+    "slide 6: native table count": true,
+    "slide 6: native chart count": true,
+    "slide 6: one linked notes part": true,
+    "slide 6: notes duration matches source": true,
+    "slide 6: full speaker notes present": true,
+    "slide 6: source references in notes": true,
+    "slide 7: title matches source": true,
+    "slide 7: native table count": true,
+    "slide 7: native chart count": true,
+    "slide 7: one linked notes part": true,
+    "slide 7: notes duration matches source": true,
+    "slide 7: full speaker notes present": true,
+    "slide 7: source references in notes": true,
+    "slide 8: title matches source": true,
+    "slide 8: native table count": true,
+    "slide 8: native chart count": true,
+    "slide 8: one linked notes part": true,
+    "slide 8: notes duration matches source": true,
+    "slide 8: full speaker notes present": true,
+    "slide 8: source references in notes": true,
+    "slide 9: title matches source": true,
+    "slide 9: native table count": true,
+    "slide 9: native chart count": true,
+    "slide 9: one linked notes part": true,
+    "slide 9: notes duration matches source": true,
+    "slide 9: full speaker notes present": true,
+    "slide 9: source references in notes": true,
+    "slide 10: title matches source": true,
+    "slide 10: native table count": true,
+    "slide 10: table all cells match": true,
+    "slide 10: native chart count": true,
+    "slide 10: one linked notes part": true,
+    "slide 10: notes duration matches source": true,
+    "slide 10: full speaker notes present": true,
+    "slide 10: source references in notes": true,
+    "slide 11: title matches source": true,
+    "slide 11: native table count": true,
+    "slide 11: native chart count": true,
+    "slide 11: one linked notes part": true,
+    "slide 11: notes duration matches source": true,
+    "slide 11: full speaker notes present": true,
+    "slide 11: source references in notes": true,
+    "slide 12: title matches source": true,
+    "slide 12: native table count": true,
+    "slide 12: native chart count": true,
+    "slide 12: one linked notes part": true,
+    "slide 12: notes duration matches source": true,
+    "slide 12: full speaker notes present": true,
+    "slide 12: source references in notes": true,
+    "slide 13: title matches source": true,
+    "slide 13: native table count": true,
+    "slide 13: native chart count": true,
+    "slide 13: one linked notes part": true,
+    "slide 13: notes duration matches source": true,
+    "slide 13: full speaker notes present": true,
+    "slide 13: source references in notes": true,
+    "slide 14: title matches source": true,
+    "slide 14: native table count": true,
+    "slide 14: table all cells match": true,
+    "slide 14: native chart count": true,
+    "slide 14: one linked notes part": true,
+    "slide 14: notes duration matches source": true,
+    "slide 14: full speaker notes present": true,
+    "slide 14: source references in notes": true,
+    "slide 15: title matches source": true,
+    "slide 15: native table count": true,
+    "slide 15: native chart count": true,
+    "slide 15: native column-chart kind": true,
+    "slide 15: series count": true,
+    "slide 15, series 0: cached categories": true,
+    "slide 15, series 0: cached series name": true,
+    "slide 15, series 0: worksheet categories": true,
+    "slide 15, series 0: worksheet series name": true,
+    "slide 15, series 0: cached numerical values": true,
+    "slide 15, series 0: worksheet numerical values": true,
+    "slide 15, series 0: cache/worksheet identity": true,
+    "slide 15: one embedded data sheet": true,
+    "slide 15: full embedded worksheet (no stale sample data)": true,
+    "slide 15: category axis title": true,
+    "slide 15: value axis title": true,
+    "slide 15: value-axis min": true,
+    "slide 15: value-axis max": true,
+    "slide 15: one linked notes part": true,
+    "slide 15: notes duration matches source": true,
+    "slide 15: full speaker notes present": true,
+    "slide 15: source references in notes": true,
+    "slide 16: title matches source": true,
+    "slide 16: native table count": true,
+    "slide 16: table all cells match": true,
+    "slide 16: native chart count": true,
+    "slide 16: one linked notes part": true,
+    "slide 16: notes duration matches source": true,
+    "slide 16: full speaker notes present": true,
+    "slide 16: source references in notes": true,
+    "slide 17: title matches source": true,
+    "slide 17: native table count": true,
+    "slide 17: native chart count": true,
+    "slide 17: native column-chart kind": true,
+    "slide 17: series count": true,
+    "slide 17, series 0: cached categories": true,
+    "slide 17, series 0: cached series name": true,
+    "slide 17, series 0: worksheet categories": true,
+    "slide 17, series 0: worksheet series name": true,
+    "slide 17, series 0: cached numerical values": true,
+    "slide 17, series 0: worksheet numerical values": true,
+    "slide 17, series 0: cache/worksheet identity": true,
+    "slide 17: one embedded data sheet": true,
+    "slide 17: full embedded worksheet (no stale sample data)": true,
+    "slide 17: category axis title": true,
+    "slide 17: value axis title": true,
+    "slide 17: value-axis min": true,
+    "slide 17: value-axis max": true,
+    "slide 17: one linked notes part": true,
+    "slide 17: notes duration matches source": true,
+    "slide 17: full speaker notes present": true,
+    "slide 17: source references in notes": true,
+    "slide 18: title matches source": true,
+    "slide 18: native table count": true,
+    "slide 18: table_secondary all cells match": true,
+    "slide 18: native chart count": true,
+    "slide 18: native column-chart kind": true,
+    "slide 18: series count": true,
+    "slide 18, series 0: cached categories": true,
+    "slide 18, series 0: cached series name": true,
+    "slide 18, series 0: worksheet categories": true,
+    "slide 18, series 0: worksheet series name": true,
+    "slide 18, series 0: cached numerical values": true,
+    "slide 18, series 0: worksheet numerical values": true,
+    "slide 18, series 0: cache/worksheet identity": true,
+    "slide 18: one embedded data sheet": true,
+    "slide 18: full embedded worksheet (no stale sample data)": true,
+    "slide 18: category axis title": true,
+    "slide 18: value axis title": true,
+    "slide 18: value-axis min": true,
+    "slide 18: value-axis max": true,
+    "slide 18: one linked notes part": true,
+    "slide 18: notes duration matches source": true,
+    "slide 18: full speaker notes present": true,
+    "slide 18: source references in notes": true,
+    "slide 19: title matches source": true,
+    "slide 19: native table count": true,
+    "slide 19: table all cells match": true,
+    "slide 19: native chart count": true,
+    "slide 19: one linked notes part": true,
+    "slide 19: notes duration matches source": true,
+    "slide 19: full speaker notes present": true,
+    "slide 19: source references in notes": true,
+    "slide 20: title matches source": true,
+    "slide 20: native table count": true,
+    "slide 20: table all cells match": true,
+    "slide 20: native chart count": true,
+    "slide 20: one linked notes part": true,
+    "slide 20: notes duration matches source": true,
+    "slide 20: full speaker notes present": true,
+    "slide 20: source references in notes": true,
+    "slide 21: title matches source": true,
+    "slide 21: native table count": true,
+    "slide 21: table all cells match": true,
+    "slide 21: native chart count": true,
+    "slide 21: one linked notes part": true,
+    "slide 21: notes duration matches source": true,
+    "slide 21: full speaker notes present": true,
+    "slide 21: source references in notes": true,
+    "slide 22: title matches source": true,
+    "slide 22: native table count": true,
+    "slide 22: table all cells match": true,
+    "slide 22: native chart count": true,
+    "slide 22: one linked notes part": true,
+    "slide 22: notes duration matches source": true,
+    "slide 22: full speaker notes present": true,
+    "slide 22: source references in notes": true,
+    "slide 23: title matches source": true,
+    "slide 23: native table count": true,
+    "slide 23: table all cells match": true,
+    "slide 23: native chart count": true,
+    "slide 23: one linked notes part": true,
+    "slide 23: notes duration matches source": true,
+    "slide 23: full speaker notes present": true,
+    "slide 23: source references in notes": true,
+    "slide 24: title matches source": true,
+    "slide 24: native table count": true,
+    "slide 24: table all cells match": true,
+    "slide 24: native chart count": true,
+    "slide 24: one linked notes part": true,
+    "slide 24: notes duration matches source": true,
+    "slide 24: full speaker notes present": true,
+    "slide 24: source references in notes": true,
+    "slide 25: title matches source": true,
+    "slide 25: native table count": true,
+    "slide 25: native chart count": true,
+    "slide 25: one linked notes part": true,
+    "slide 25: notes duration matches source": true,
+    "slide 25: full speaker notes present": true,
+    "slide 25: source references in notes": true,
+    "all 3 chart parts are linked to expected slides": true,
+    "all 25 notes parts are linked once": true,
+    "PPTX has all 13 native editable source tables": true,
+    "25 notes durations sum to 1800 seconds": true,
+    "no pending result text in slide/source/notes": true,
+    "slide 15: numerical JSON inputs match scientific CSV": true,
+    "slide 17: numerical JSON inputs match scientific CSV": true,
+    "slide 18: secondary table configuration in scientific source": true,
+    "slide 18: secondary table rounded AUC/utility values match scientific source": true,
+    "slide 18: numerical JSON inputs match scientific CSV": true,
+    "Appendix D: declared marginal/tail errors match 97.5% two-sided CP": true,
+    "Appendix D: iid across task pairs, no within-pair independence assumption": true,
+    "Appendix D: fixed challenge bank reference-model qualification": true,
+    "Appendix D: independent binomial inversion matches heuristic_main": true,
+    "Appendix D: zero-discordance formula n=100": true,
+    "Appendix D: independent binomial inversion matches adversarial_live": true,
+    "Appendix D: zero-discordance formula n=20": true,
+    "Appendix D: independent binomial inversion matches learned_main": true,
+    "Appendix D: independent binomial inversion matches learned_adversarial": true,
+    "PPTX bytes unchanged by read-only audit": true
+  },
+  "defects": [],
+  "all_passed": true,
+  "scope": "Native content/editability and numerical identity only; PowerPoint reopen and visual fit remain separate checks."
+}

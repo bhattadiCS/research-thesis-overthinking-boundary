@@ -1,0 +1,20 @@
+{
+  "generation": "greedy, SDPA, KV cache, one complete JSON object per incremental step",
+  "model_dtype": "float16 on CUDA",
+  "model_loading": "local_files_only=True",
+  "observed_at_utc": "2026-10-03T00:55:31.873965+00:00",
+  "packages": {
+    "datasets": "4.8.5",
+    "matplotlib": "3.10.8",
+    "numpy": "2.3.5",
+    "pandas": "2.2.2",
+    "safetensors": "0.7.0",
+    "scikit-learn": "1.8.0",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.8.0"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.4",
+  "python_executable": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "runtime": "global Python; no .venv dependencies changed"
+}

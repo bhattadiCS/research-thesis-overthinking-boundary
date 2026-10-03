@@ -1,0 +1,15 @@
+{
+  "output": "output/neurips/anonymous_stopping_supplement_v1.zip",
+  "sha256": "0e65afa642d7c16bbe0227aafa10c6d1930ec50cc32538c84fed0dfa3eaf7a57",
+  "bytes": 1600808,
+  "source_files": 169,
+  "sanitized_files": 10,
+  "master_data_content_fingerprint": "4c950d56495aa204a50a4db9b1daa823b279ff9d582d033832769d6b7bb4800c",
+  "zip_integrity": "passed",
+  "review_copy_tests": {
+    "command": "python -m unittest discover -s research/tests -p test_*.py",
+    "exit_code": 0
+  },
+  "submitted": false,
+  "accepted": false
+}

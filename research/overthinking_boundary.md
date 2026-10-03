@@ -1,5 +1,13 @@
 # Overthinking Boundary in Reasoning LLMs
 
+> **Mathematical corrigendum (2026-10-02).** The first nonpositive one-step
+> drift is optimal only under explicit persistence assumptions. A valid
+> general finite-horizon policy uses the Bellman/Snell continuation value.
+> Historical fitted probabilities and across-task uncertainty summaries do
+> not establish a calibrated live stopping guarantee. See the canonical
+> [mathematical foundations](mathematical_foundations.md) for full proofs,
+> counterexamples, and the precise coverage conditions.
+
 > ⚠️ **SUPERSEDED (2026-07-02).** This file predates the `research/reports/deep_code_audit.md` findings
 > and the `ef45dda` grader/leakage/boundary remediation commit — its boundary and AUC numbers were
 > computed under the pre-audit pipeline (unfixed graders, in-sample leakage, unfloored boundary) and

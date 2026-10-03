@@ -1,0 +1,7 @@
+{
+  "status": "provisional_model_cpu_preflight_only_never_deployed",
+  "artifact_sha256": "f8aad312fdc9abd024e47084efe091addd376f95cb01d7b43932e75dce0764ab",
+  "reason": "Math agent identified future-dependent training eligibility filter and is correcting; final predictor will be independently frozen and benchmarked.",
+  "gold_read_by_this_preflight": false,
+  "real_llm_generation_performed_by_this_preflight": false
+}

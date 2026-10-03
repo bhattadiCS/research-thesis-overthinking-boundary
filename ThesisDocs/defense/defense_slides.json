@@ -1,0 +1,917 @@
+{
+  "schema": "thesis-defense-content-v1",
+  "title": "Cost aware stopping boundaries in reasoning language models",
+  "author": "Aditya Bhatt",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "slide_count": 25,
+  "total_seconds": 1800,
+  "style": {
+    "background": "#FFFFFF",
+    "ink": "#112437",
+    "accent": "#004B87",
+    "font": "Calibri",
+    "title_min_points": 32,
+    "body_min_points": 17,
+    "cover_title_min_points": 42,
+    "evidence": "editable native PowerPoint tables and charts; no evidence screenshots"
+  },
+  "artifact_status": "content complete; PPTX authoring and visual QA are separate",
+  "model_artifact_sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+  "slides": [
+    {
+      "number": 1,
+      "title": "Cost aware stopping boundaries in reasoning language models",
+      "kicker": "Master's thesis defense • Applied and Computational Mathematics",
+      "bullets": [
+        "Aditya Bhatt • Johns Hopkins University",
+        "Research adviser: Dr. Zerotti Woods",
+        "Second reader: Dr. Moustapha Pemy",
+        "Research evidence frozen October 2026"
+      ],
+      "seconds": 45,
+      "speaker_notes": "My thesis studies a decision that a reasoning system must make repeatedly: after the current answer, is another response worth its computation? The study concerns complete response-and-revision increments. It does not observe every internal thought or locate an optimal token inside a response. I will first establish the mathematical decision problem, then examine the two frozen experimental corpora, and finally show the implementable causal stopper and its measured limits. The key separation throughout is between information available at a decision and information visible only after a full trajectory. These are research findings and a defense package; institutional approval and degree completion require the committee's actual review.",
+      "sources": [
+        "ThesisDocs/Masters_Thesis_Draft_v1.md",
+        "ThesisDocs/ADVISOR_MEETING_SEMESTER_2_ROADMAP.md"
+      ],
+      "layout": "cover"
+    },
+    {
+      "number": 2,
+      "title": "When is another reasoning increment worth its cost?",
+      "kicker": "Research question",
+      "bullets": [
+        "Repair: an incorrect candidate becomes correct.",
+        "Corruption: a correct candidate becomes incorrect.",
+        "Unproductive continuation: benefit falls below declared cost.",
+        "A causal stop uses the observed prefix and a declared answer selector."
+      ],
+      "seconds": 55,
+      "speaker_notes": "A final-answer score hides important changes along a revision trajectory. A model can repair an initially wrong answer, and it can replace a correct answer with a wrong revision. I use repair and corruption as changes in externally graded candidates, not as claims about hidden cognition. There is also a separate economic outcome: continuation can be unproductive even if average accuracy still increases, because the increase may be smaller than the cost. The first research question is where this happens in the recorded panels. The second is what a policy can infer from a permitted prefix. The third is whether actual generation can be avoided while retaining an acceptable accuracy trade-off. The thesis evaluates these separately. Neither a high classifier AUC nor a fast controller call establishes that the system preserves accuracy.",
+      "sources": [
+        "ThesisDocs/chapters/chapter1_intro.md",
+        "research/mathematical_foundations.md"
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Two corpora answer different questions",
+      "kicker": "Experimental scope",
+      "bullets": [
+        "The corpora overlap; their counts must not be added.",
+        "GSM8K, MATH, ARC-Challenge and GPQA are the recorded benchmarks."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The canonical revision matrix and the standardized detector corpus have different observation rules and denominators. The first supports the boundary and matched estimator analyses. Its 75,965 observations here are trajectories, not reasoning steps; the corresponding raw step table contains 798,770 rows. The second supports five-step detector evaluation and contains 28,888 trajectories, or 144,440 rows. Both have 52 model-domain cells, but the standardized selection replaces InternLM with Qwen3.5-9B. Their task sets overlap, so summing the task or trajectory counts would double count evidence. A table or claim must identify its own corpus. GPQA also has a recorded metadata-versus-loader split discrepancy; the manuscript retains that provenance limitation. No SVAMP result is claimed in this selected corpus.",
+      "sources": [
+        "data_manifest_v1.json",
+        "ThesisDocs/chapters/chapter3_methodology.md"
+      ],
+      "table": {
+        "headers": [
+          "Quantity",
+          "Revision matrix",
+          "Detector corpus"
+        ],
+        "rows": [
+          [
+            "Model-domain cells",
+            "52",
+            "52"
+          ],
+          [
+            "Model configurations",
+            "13",
+            "13 (different selection)"
+          ],
+          [
+            "Trajectories",
+            "75,965",
+            "28,888"
+          ],
+          [
+            "Step rows",
+            "798,770 raw",
+            "144,440"
+          ],
+          [
+            "Unique tasks",
+            "1,948",
+            "2,948"
+          ],
+          [
+            "Horizon",
+            "8 / 10 / 14 by domain",
+            "5 in every cell"
+          ]
+        ]
+      },
+      "table_caption": "Overlapping corpora; counts are not additive."
+    },
+    {
+      "number": 4,
+      "title": "The observation unit is a complete revision response",
+      "kicker": "Generation protocol",
+      "bullets": [
+        "One increment produces a thought, candidate answer and telemetry.",
+        "The next prompt contains the previously observed response history.",
+        "The floor is two increments; it is a protocol constraint.",
+        "Historical temperatures are repeated settings of one recorded seed."
+      ],
+      "seconds": 75,
+      "speaker_notes": "The repeated-response experiment supplies a concrete point at which to observe a candidate and decide whether to schedule another response. A revision is therefore not merely another token in one uninterrupted internal chain. The archive records candidate answers, parse outcomes, token counts and additional instrumentation. In the live adapter, the required JSON response boundary is shared by active and full-horizon arms. Both enforce a floor of two and maximum of five. The floor protects the declared task protocol; it is not a theorem that two increments are universally necessary or sufficient. The historical panel uses seed seven at three temperatures. Those are three temperature settings, not independent generation seeds. A controller can stop future calls only after the currently observed increment completes. Within-call cancellation is a separate engineering control.",
+      "sources": [
+        "ThesisDocs/chapters/chapter3_methodology.md",
+        "research/online_generation.py",
+        "research/online_stopping_controller.py"
+      ],
+      "table": {
+        "headers": [
+          "Setting",
+          "Declared value"
+        ],
+        "rows": [
+          [
+            "Historical seed / temperatures",
+            "7 / 0.1, 0.6, 1.0"
+          ],
+          [
+            "Live generator",
+            "Local Qwen2.5-0.5B, greedy"
+          ],
+          [
+            "Live completion cap",
+            "128 tokens per response"
+          ],
+          [
+            "Live floor / horizon",
+            "2 / 5 responses"
+          ]
+        ]
+      },
+      "table_caption": "The floor and horizon are declared protocol constraints."
+    },
+    {
+      "number": 5,
+      "title": "Correctness is hidden from the stopping policy",
+      "kicker": "Filtration and admissibility",
+      "bullets": [
+        "Fₜ contains declared decision information and completed prefix observations.",
+        "Cₜ is the selected candidate's correctness against an unobserved reference.",
+        "qₜ = E[Cₜ | Fₜ] is a conditional probability, not a known label.",
+        "τ is admissible when {τ ≤ t} belongs to Fₜ; m ≤ τ ≤ N."
+      ],
+      "seconds": 70,
+      "speaker_notes": "The filtration formalizes the declared decision information. It grows when a response or a probe finishes. Offline correctness labels evaluate execution and are not supplied to the runtime. The candidate selector is part of the policy contract. The default carries forward the latest nonempty available answer; baseline and learned arms use it. The heuristic can retain the previous answer on a confidence drop or the best observed valid confidence on wobble. Neither branch triggered in the reported runs. C denotes correctness of the selected candidate, and q is its theoretical conditional expectation; reported confidence is not automatically q. A stopping time is admissible when deciding to stop by time t uses information present by t. A full-trajectory score or unseen future answer violates that declared interface. Mathematical measurability is a separate assumption: a known deterministic reference can make q equal C even without a gold field.",
+      "sources": [
+        "research/mathematical_foundations.md",
+        "research/online_stopping_controller.py"
+      ],
+      "table": {
+        "headers": [
+          "Runtime permits",
+          "Evaluation keeps separate"
+        ],
+        "rows": [
+          [
+            "Current / prior answer and thought",
+            "Reference answer and correctness"
+          ],
+          [
+            "Strict parsing and observed confidence",
+            "Future response and future label"
+          ],
+          [
+            "Charged tokens and public domain",
+            "Bidirectional full-trajectory score"
+          ]
+        ]
+      },
+      "table_caption": "The runtime interface excludes gold and future responses; statistical measurability has separate assumptions."
+    },
+    {
+      "number": 6,
+      "title": "Accuracy, utility and computation are separate outcomes",
+      "kicker": "Objective and accounting",
+      "bullets": [
+        "Gₜ = qₜ − Kₜ; maximize E[Gτ] over admissible stops.",
+        "A response-cost example uses Kₜ = 0.05(t − 1).",
+        "Affine stakes give Gₜ = (v + p)qₜ − p − Kₜ.",
+        "Completion tokens, repeated prompts, peers and wall time need separate ledgers."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The cost-sensitive reward is expected correctness minus cumulative computation cost. The cost process is adapted, integrable and nondecreasing in the natural computation setting. A unit response penalty of point zero five is a declared preference: it is not a measured price of every response. The token-weighted analyses use their separately declared scaling, and actual completion-token savings do not inherit that scaling as a dollar or energy saving. For a correct answer worth v and an incorrect answer penalized by p, the coefficient of correctness becomes v plus p. Under a fixed potential process, unchanged prompts, selector and nondecreasing costs, higher stakes produce nested earliest optimal stopping sets. That corollary does not apply when changing stakes also changes generation. The empirical report therefore presents accuracy, utility, generated tokens, prompt work and time side by side rather than converting one into all the others.",
+      "sources": [
+        "research/mathematical_foundations.md",
+        "ThesisDocs/chapters/chapter5_online.md"
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Conditional repair and corruption yield the exact drift",
+      "kicker": "Binary correctness identity",
+      "bullets": [
+        "αₜ = P(Cₜ₊₁ = 1 | Cₜ = 0, Fₜ).",
+        "βₜ = P(Cₜ₊₁ = 0 | Cₜ = 1, Fₜ).",
+        "μₜ = (1 − qₜ)αₜ − qₜβₜ − cₜ.",
+        "cₜ = E[Kₜ₊₁ − Kₜ | Fₜ]; zero denominators have zero mass."
+      ],
+      "seconds": 80,
+      "speaker_notes": "The drift identity follows by separating the only two transitions that change a binary correctness label. The increment C next minus C current equals the repair indicator minus the corruption indicator. Conditional expectation given the current observed information gives the repair joint mass minus the corruption joint mass. Factoring these masses gives one minus q times alpha and q times beta. Subtract the expected next cost to obtain mu. The conditional probabilities are defined through these joint masses, so an event with zero conditional probability contributes zero rather than an undefined ratio. This resolves a common denominator error: repair rate divides by currently incorrect candidates, whereas corruption rate divides by currently correct candidates. Subtracting those two conditional rates directly would not equal population accuracy drift. With affine stakes, the accuracy part is multiplied by v plus p, then the same incremental cost is subtracted. This identity is exact; estimating its terms is a separate statistical problem.",
+      "sources": [
+        "research/mathematical_foundations.md"
+      ],
+      "references": [
+        {
+          "title": "Ferguson, Optimal Stopping and Applications, finite horizon",
+          "url": "https://www.math.ucla.edu/~tom/Stopping/sr3.pdf"
+        },
+        {
+          "title": "Peskir and Shiryaev, Optimal Stopping and Free-Boundary Problems (2006)",
+          "url": "https://doi.org/10.1007/978-3-7643-7390-0"
+        }
+      ],
+      "equation": "E[Gₜ₊₁ − Gₜ | Fₜ] = (1 − qₜ)αₜ − qₜβₜ − cₜ"
+    },
+    {
+      "number": 8,
+      "title": "Bellman continuation value defines the optimal stop",
+      "kicker": "Finite-horizon Snell envelope",
+      "bullets": [
+        "S_N = G_N; Sₜ = max{Gₜ, E[Sₜ₊₁ | Fₜ]}.",
+        "τ* = first t ≥ m with Sₜ = Gₜ.",
+        "Δ*ₜ = μₜ + E[Sₜ₊₁ − Gₜ₊₁ | Fₜ] ≥ μₜ.",
+        "Nonpositive immediate drift alone does not imply an optimal stop."
+      ],
+      "seconds": 105,
+      "speaker_notes": "The finite-horizon theorem is the main optimality result. Start at the terminal reward, then recursively compare stopping now with the conditional value of continuing one step and following an optimal later policy. Backward induction makes S adapted and integrable, shows it dominates G, and makes it a supermartingale. Any integrable supermartingale dominating G must dominate S by the same backward induction, so S is the smallest such process. Optional stopping in the finite bounded horizon gives an upper bound S at the current time for every admissible stopping reward. Before the first contact with G, the recursion uses conditional continuation with equality. The Snell process stopped at that first contact is therefore a martingale from the chosen starting time. At contact its value equals the reward, so that stopping rule attains the upper bound. The displayed continuation advantage subtracts G now from expected S next. It splits into immediate drift plus a nonnegative future option value. A positive drift forces continuation in this reward model. A nonpositive drift can still be outweighed by that future value.",
+      "sources": [
+        "research/mathematical_foundations.md",
+        "research/tests/test_mathematical_foundations.py"
+      ],
+      "references": [
+        {
+          "title": "Ferguson, Optimal Stopping and Applications, finite horizon",
+          "url": "https://www.math.ucla.edu/~tom/Stopping/sr3.pdf"
+        },
+        {
+          "title": "Peskir and Shiryaev, Optimal Stopping and Free-Boundary Problems (2006)",
+          "url": "https://doi.org/10.1007/978-3-7643-7390-0"
+        }
+      ],
+      "equation": "Sₜ = max(Gₜ, E[Sₜ₊₁ | Fₜ])"
+    },
+    {
+      "number": 9,
+      "title": "A first drift crossing is valid under persistent signs",
+      "kicker": "Sufficient condition, not a universal law",
+      "bullets": [
+        "τμ = first admissible time with μₜ ≤ 0, otherwise N.",
+        "If all later conditional drifts stay nonpositive pathwise, τμ is optimal.",
+        "Proof: telescope the stopped drift sum before and after the crossing.",
+        "A declining population mean is weaker than this assumption."
+      ],
+      "seconds": 95,
+      "speaker_notes": "The boundary result is deliberately narrower than the Bellman theorem. Suppose the conditional drift is positive before its first nonpositive value and remains nonpositive afterward along every admissible realized path. For any competing stop, decompose the expected reward difference using the Doob decomposition and the bounded stopping times. If the competitor stops before the crossing, it omits positive conditional drifts. If it stops after the crossing, it adds only nonpositive conditional drifts. Both differences are nonnegative in favor of the first crossing. This proves optimality under the persistent-sign condition. One sufficient structural pattern is increasing q, decreasing repair hazard, increasing corruption hazard, and constant or nondecreasing predictable cost, all pathwise. These are strong hypotheses, not claims established for every language model. Average negative drift at every time still permits an adaptive policy to exploit subgroups. The source includes a second exact counterexample where all population drifts are negative yet observation-dependent continuation improves value. The empirical crossing curves are descriptive unless the required conditional structure is established.",
+      "sources": [
+        "research/mathematical_foundations.md",
+        "research/tests/test_mathematical_foundations.py"
+      ],
+      "equation": "E[Gσ − Gτ] = Σₛ E[(1{σ>s} − 1{τ>s}) μₛ]"
+    },
+    {
+      "number": 10,
+      "title": "Delayed repair defeats a myopic stopping rule",
+      "kicker": "Exact counterexample",
+      "bullets": [
+        "q₀ = 0, q₁ = 0, q₂ = 1; each continuation costs 0.10.",
+        "Immediate drift at t = 0 is −0.10.",
+        "Stopping now earns 0; continuing to t = 2 earns 0.80.",
+        "The missed future repair is a continuation option."
+      ],
+      "seconds": 95,
+      "speaker_notes": "This small deterministic example is enough to disprove a universal first-negative-drift rule. The first extra response remains wrong. The second extra response produces the correct answer. Each response costs one tenth. A one-step policy at the first time sees no correctness improvement and a positive cost, so it stops and receives zero. A policy that pays for both responses earns one minus two tenths, or point eight. The Bellman recursion also gives point eight at the first time because it carries forward the future repair opportunity. This example is realizable with candidates judged against one fixed reference answer; it is not an impossible collection of unrelated marginal probabilities. The mathematical source supplies that realization and independently enumerated verification. The conclusion is about scope: a learned estimate of immediate drift can be causally valid and still fail to be globally optimal. Empirical success of a drift heuristic does not remove this counterexample. Approximating Bellman value would require a transition model or direct continuation-value learning with appropriate validation.",
+      "sources": [
+        "research/mathematical_foundations.md",
+        "research/tests/test_mathematical_foundations.py"
+      ],
+      "table": {
+        "headers": [
+          "Time",
+          "Correctness q",
+          "Cumulative cost",
+          "Stop reward"
+        ],
+        "rows": [
+          [
+            "0",
+            "0",
+            "0.00",
+            "0.00"
+          ],
+          [
+            "1",
+            "0",
+            "0.10",
+            "−0.10"
+          ],
+          [
+            "2",
+            "1",
+            "0.20",
+            "0.80"
+          ]
+        ]
+      },
+      "table_caption": "Immediate drift is negative at zero, yet optimal continuation value is 0.80."
+    },
+    {
+      "number": 11,
+      "title": "A ranking score is not a calibrated probability",
+      "kicker": "Prediction assumptions",
+      "bullets": [
+        "AUC measures ordering, not agreement with outcome frequencies.",
+        "Class weighting changes the fitted posterior unless corrected.",
+        "A small set of prefix features need not be a sufficient state.",
+        "Independent task calibration supports marginal checks, not certainty at every prefix."
+      ],
+      "seconds": 70,
+      "speaker_notes": "The theory requires conditional probabilities under the runtime information filtration. A fitted score is an estimator, and a feature-restricted model generally estimates a coarser target. High AUC shows ranking discrimination; it does not show that a score of point nine corresponds to ninety percent correctness. Weighted logistic loss changes the population optimum: with class weights a and b, its probability is a times q divided by a times q plus b times one minus q. The original posterior can be recovered algebraically only under that loss-and-population model or calibrated with independent representative labels. The new portable predictor avoids class weighting and uses independent task groups for Platt calibration. Even then, Brier score and reliability bins are finite-sample marginal diagnostics. They do not prove conditional calibration on every prefix or transfer to a changed prompt. Treating the public domain and a few current and past response statistics as a Markov state would require an additional transition-sufficiency assumption; the thesis does not assert it.",
+      "sources": [
+        "research/mathematical_foundations.md",
+        "research/prefix_stopping_model.py",
+        "research/outputs/semester2/prefix_model_v1/evaluation.json"
+      ]
+    },
+    {
+      "number": 12,
+      "title": "Repeated checking needs a valid sequential target",
+      "kicker": "Uncertainty guarantees",
+      "bullets": [
+        "A simultaneous upper bound can control false negative-drift stops.",
+        "Its coverage must hold over all decision times for the actual target.",
+        "Conditional probe independence and pre-probe information must be stated.",
+        "Population diagnostics do not certify one task's unseen continuation."
+      ],
+      "seconds": 65,
+      "speaker_notes": "A sign certificate has a precise form. If upper bounds cover the true conditional drift simultaneously at all admissible decision times, stopping when the upper bound is nonpositive controls stopping on a positive true drift by the coverage error. It does not certify Bellman optimality or zero accuracy loss. A Hoeffding construction requires a named pre-probe sigma-field, bounded independent probes given that field, and a conditional mean target. Once probes are observed, the policy's information changes. A bound on the pre-probe mean must not be relabeled as a bound on the post-probe drift without a comparison argument. Similarly, a nonnegative e-process needs conditional supermartingale increments under its declared null, not just favorable unconditional averages. The source proves the elementary claim and supplies a shared-sign dependence counterexample. The repository's across-task empirical-Bayes or e-process diagnostics can describe a population panel; they cannot automatically issue a safe live certificate for one question.",
+      "sources": [
+        "research/mathematical_foundations.md"
+      ],
+      "references": [
+        {
+          "title": "Hoeffding (1963), Probability inequalities for sums of bounded random variables",
+          "url": "https://doi.org/10.1080/01621459.1963.10500830"
+        },
+        {
+          "title": "Howard et al. (2021), Time-uniform, nonparametric, nonasymptotic confidence sequences",
+          "url": "https://doi.org/10.1214/20-AOS1991"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "title": "The freeze makes claims traceable",
+      "kicker": "Reproducibility and provenance",
+      "bullets": [
+        "Exact bytes and canonical LF content have separate hashes.",
+        "Corpus identity, exclusions, partitions and analysis units are explicit.",
+        "Generated proofs are verified by exact finite-system enumeration.",
+        "A hash records identity; it does not certify truth or representativeness."
+      ],
+      "seconds": 60,
+      "speaker_notes": "The reproducibility freeze binds each reported number to a selected source and a documented transformation. On this Windows checkout, canonical LF content and exact local file bytes can have different hashes, so the manifest records both and checks the intended rule. That solves line-ending identity; it does not excuse other changes. The mathematical tests compare Bellman values against independently enumerated admissible policies in 4,374 finite reward trees and check stake ordering in another 2,187 bounded systems. These are meaningful verification of identities and implementations, not empirical evidence about language models. The new prefix model has a serialized coefficient order, scaler, calibrators, source hashes, task roles and row-level label reconstruction audit. The original archived corpus remains unchanged. A preserved copy of the baseline freeze used in training prevents a later manifest refresh from obscuring the training inputs. Missing historical environment details remain limitations rather than being replaced by the current workstation's versions.",
+      "sources": [
+        "data_manifest_v1.json",
+        "research/tests/test_mathematical_foundations.py",
+        "research/tests/test_prefix_stopping_model.py",
+        "research/outputs/semester2/prefix_model_v1/training_protocol.json"
+      ]
+    },
+    {
+      "number": 14,
+      "title": "Repair and corruption use different denominators",
+      "kicker": "Pooled GSM8K transitions",
+      "bullets": [
+        "19,500 trajectories over 500 task clusters at each shown transition.",
+        "Net drift subtracts the declared 0.05 response cost.",
+        "Negative utility drift can coexist with increasing accuracy."
+      ],
+      "seconds": 75,
+      "speaker_notes": "This table connects the conditional identity to observable transition counts. At the step-two GSM8K prefix, the current incorrect candidates form the repair denominator and the current correct candidates form the corruption denominator. The counts are 3,145 repairs among 14,818 incorrect candidates and 1,170 corruptions among 4,682 correct candidates. Their difference divided by 19,500 is the accuracy change, and subtracting point zero five gives net utility drift about plus point zero five one three. At step four, the positive accuracy change is about point zero three seven three; after the same cost, net drift is about minus point zero one two seven. Thus the answer accuracy can still improve while continuation is economically unproductive under this utility. These are pooled panel quantities over model configurations and temperatures. They do not reveal which individual task should stop. Uncertainty uses task clusters rather than treating all repeated trajectories as independent questions.",
+      "sources": [
+        "research/outputs/thesis_v1/evidence/boundary_domain_step_metrics.csv"
+      ],
+      "table": {
+        "headers": [
+          "Prefix t",
+          "Repair / eligible",
+          "Corruption / eligible",
+          "Net utility drift"
+        ],
+        "rows": [
+          [
+            "2",
+            "3145 / 14818",
+            "1170 / 4682",
+            "+0.0513"
+          ],
+          [
+            "4",
+            "1830 / 11661",
+            "1102 / 7839",
+            "-0.0127"
+          ]
+        ]
+      },
+      "table_caption": "This population utility drift can turn negative while average accuracy still increases."
+    },
+    {
+      "number": 15,
+      "title": "The observed crossing depends on the cell",
+      "kicker": "Selected model-domain contrasts",
+      "bullets": [
+        "7B/GSM: crossing 4 → 5.",
+        "32B/MATH: crossing 5 → 6.",
+        "500 tasks per cell; three temperatures."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The selected-cell contrasts show why a universal step-two or step-three boundary is not supported. In the Qwen2.5-7B GSM8K cell, expected accuracy improvement minus the response cost is positive at the step-four prefix and negative at step five. For Qwen2.5-32B on MATH, the displayed transition is positive at step five and negative at step six. The same declared utility can therefore produce different descriptive crossing locations across model-domain cells. Each cell has 500 questions at three temperatures, giving 1,500 trajectories; those are not 1,500 independent questions. The graph plots stored net drifts for these exact prefixes, not a fitted smooth curve. It should not be extrapolated to other cells, an uninterrupted token-level thought chain, or a policy-optimal per-instance stopping time. The theorem's persistent conditional signs remain an additional assumption.",
+      "sources": [
+        "research/outputs/thesis_v1/evidence/boundary_selected_cell_step_metrics.csv"
+      ],
+      "chart": {
+        "kind": "column",
+        "categories": [
+          "7B/GSM, t=4",
+          "7B/GSM, t=5",
+          "32B/MATH, t=5",
+          "32B/MATH, t=6"
+        ],
+        "series": [
+          {
+            "name": "Net drift",
+            "values": [
+              0.019333333333333324,
+              -0.025333333333333333,
+              0.018666666666666658,
+              -0.013333333333333338
+            ]
+          }
+        ],
+        "x_title": "Model / domain and completed prefix",
+        "y_axis_title": "Accuracy change − 0.05 cost",
+        "y_axis_min": -0.04,
+        "y_axis_max": 0.04
+      }
+    },
+    {
+      "number": 16,
+      "title": "More expressive estimators did not always help",
+      "kicker": "Matched development comparisons",
+      "bullets": [
+        "Effects are utility differences per trajectory relative to matched controls.",
+        "Intervals resample 52 model-domain cells.",
+        "These analyses do not establish a universally best estimator."
+      ],
+      "seconds": 70,
+      "speaker_notes": "Matched comparisons are more informative than comparing a new arm to an unrelated aggregate. The empirical-Bayes hazard replacement improves the recorded step utility by about point zero zero seven eight per trajectory relative to its matched local logistic estimator. Lagged features add a smaller positive contrast. Gradient boosting and isotonic calibration show substantial negative utility contrasts in their recorded experiments. Those outcomes should remain in the thesis; they constrain the claim that a richer score or a calibration layer automatically improves stopping. The intervals are percentile resamples of the 52 selected model-domain cells, not independent generation seeds and not uncertainty over every possible language model. The historical plus 593.55 figure for the hazard arm is a summed utility change over 75,965 trajectories. It is not a peer-agreement effect and must not be reassigned to that mechanism. Nor does the isotonic result prove that calibration is inherently harmful: the model, sample, target and downstream threshold jointly determine policy performance.",
+      "sources": [
+        "research/outputs/thesis_v1/evidence/algorithm_v2_normalized_effects.csv"
+      ],
+      "table": {
+        "headers": [
+          "Matched modification",
+          "Utility / trajectory",
+          "95% cell interval"
+        ],
+        "rows": [
+          [
+            "Empirical-Bayes hazards",
+            "+0.00781",
+            "[+0.00276, +0.01355]"
+          ],
+          [
+            "Lagged logistic",
+            "+0.00331",
+            "[+0.00062, +0.00633]"
+          ],
+          [
+            "Gradient-boosted probe",
+            "-0.05694",
+            "[-0.08716, -0.03145]"
+          ],
+          [
+            "Isotonic calibration",
+            "-0.06165",
+            "[-0.09168, -0.03547]"
+          ]
+        ]
+      },
+      "table_caption": "Matched utility contrasts, with 52-cell descriptive bootstrap intervals."
+    },
+    {
+      "number": 17,
+      "title": "A paired precision contrast has a large local effect",
+      "kicker": "Qwen2.5-7B / GSM8K / step two",
+      "bullets": [
+        "BF16: 418 correct out of 1,500; 4-bit: 204 out of 1,500.",
+        "Absolute accuracy difference: 14.27 percentage points.",
+        "Task-cluster interval: [11.13, 17.53] points."
+      ],
+      "seconds": 70,
+      "speaker_notes": "The numerical precision comparison is a paired local result. BF16 produces 418 correct candidates and four-bit weights 204 at the recorded step-two endpoint, among the same 1,500 task-temperature trajectories. The difference is 214 over 1,500, or 14.27 percentage points. It is an absolute accuracy contrast, not a fourteen percent relative reduction and not a result for every quantized language model. The task-cluster interval is approximately 11.13 to 17.53 points. A separate cap comparison for Mistral-Small-22B on GSM8K finds 454 losses in each of the 256- and 512-token arms with zero discordant loss indicators. That negative result applies to the specified binary policy-loss endpoint. It does not prove that token sequences, timing or all correctness outcomes are identical, and it does not rule out truncation across other cells. Both comparisons retain their original endpoint, unit and paired design.",
+      "sources": [
+        "research/outputs/thesis_v1/evidence/algorithm_v2_normalized_effects.csv",
+        "ThesisDocs/chapters/chapter4_empirical.md"
+      ],
+      "chart": {
+        "kind": "column",
+        "categories": [
+          "BF16",
+          "4-bit"
+        ],
+        "series": [
+          {
+            "name": "Step-two accuracy",
+            "values": [
+              0.2786666666666667,
+              0.136
+            ]
+          }
+        ],
+        "x_title": "Weight precision",
+        "y_axis_title": "Correct / 1,500 trajectories",
+        "y_axis_min": 0,
+        "y_axis_max": 0.35
+      }
+    },
+    {
+      "number": 18,
+      "title": "Pooled causal discrimination hides a weak domain",
+      "kicker": "Five-step task-grouped detector evaluation",
+      "bullets": [
+        "GRU micro AUC: 0.8743.",
+        "Worst domain GPQA: 0.6313.",
+        "AUC and policy utility rank differently."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The standardized corpus allows a prefix-safe sequence comparison under task-grouped evaluation. The causal GRU's micro AUC is point eight seven four three, but task-macro and domain-macro summaries are lower. The worst-domain GPQA score is about point six three one three. This difference matters for deployment: a pooled score can be driven by easier or larger groups while leaving a weak subgroup. Task-macro AUC is defined only for tasks with both classes; 2,679 of the 2,948 task groups are eligible. The causal RoPE transformer has slightly lower micro AUC and slightly higher recorded step utility than the GRU. Their descriptive fold intervals overlap, so the summaries do not establish a unique architecture winner. These are stored archive predictions. They support retrospective causal-prefix scoring and replay; they are not the new portable model's live AUC, and they do not establish conditional calibration.",
+      "sources": [
+        "research/outputs/thesis_v1/evidence/tournament_balanced_summary.csv",
+        "research/outputs/thesis_v1/evidence/tournament_per_domain.csv"
+      ],
+      "chart": {
+        "kind": "column",
+        "categories": [
+          "Micro",
+          "Task macro",
+          "Domain macro",
+          "Worst domain"
+        ],
+        "series": [
+          {
+            "name": "Causal GRU AUC",
+            "values": [
+              0.8743264229443097,
+              0.8213923134886576,
+              0.8102415230146596,
+              0.6312532126006337
+            ]
+          }
+        ],
+        "x_title": "Aggregation rule",
+        "y_axis_title": "ROC AUC",
+        "y_axis_min": 0.5,
+        "y_axis_max": 1.0
+      },
+      "table_secondary": {
+        "headers": [
+          "Configuration",
+          "Micro AUC",
+          "Step utility"
+        ],
+        "rows": [
+          [
+            "Causal GRU",
+            "0.8743",
+            "0.3264"
+          ],
+          [
+            "Causal RoPE transformer",
+            "0.8638",
+            "0.3331"
+          ]
+        ]
+      }
+    },
+    {
+      "number": 19,
+      "title": "The retrospective 0.955 score is not a live guarantee",
+      "kicker": "Information and evaluation audit",
+      "bullets": [
+        "Stacked development AUC: 0.955156; reduced-feature control: 0.943223.",
+        "Bidirectional scoring and centered smoothing use future responses.",
+        "Meta-training is not nested within the scoring outer fold.",
+        "The 0.8743 causal result comes from a different evaluation."
+      ],
+      "seconds": 90,
+      "speaker_notes": "The most attractive historical number needs the clearest qualification. The stacked hybrid has stored AUC point nine five five one five six, versus point nine four three two two three for its reduced-feature LightGBM control. The task-bootstrap lift interval describes their difference on this development evaluation. It is not an absolute AUC interval. The bidirectional component reads all five saved steps and copies a trajectory score to earlier rows, while centered smoothing also uses later observations. Those inputs are unavailable at an early runtime stop. In addition, upstream meta-training is not confined to each reported outer training fold, so task-grouped scoring does not remove that dependence. The control labeled No Peers retains committee aggregates, preventing a pure peer-effect interpretation. The point nine five five and point eight seven four three scores therefore cannot be presented as before-and-after evidence that removing future information caused a particular AUC drop. They are different evaluations. The portable live stopper consumes neither of these full-sequence scores.",
+      "sources": [
+        "ThesisDocs/chapters/chapter4_empirical.md",
+        "ThesisDocs/chapters/chapter6_discussion.md"
+      ],
+      "table": {
+        "headers": [
+          "Evidence",
+          "Permitted claim"
+        ],
+        "rows": [
+          [
+            "Stacked AUC 0.955156",
+            "Retrospective development diagnostic"
+          ],
+          [
+            "Causal GRU AUC 0.874326",
+            "Task-grouped archive prefix ranking"
+          ],
+          [
+            "Portable prefix model",
+            "Separate train / calibration / holdout"
+          ],
+          [
+            "Actual online run",
+            "Measured generated-cost / accuracy trade-off"
+          ]
+        ]
+      },
+      "table_caption": "Future-step inputs and non-nested meta-fitting preclude a live 0.955 claim."
+    },
+    {
+      "number": 20,
+      "title": "The controller prevents future response calls",
+      "kicker": "Runtime implementation and measured latency",
+      "bullets": [
+        "It owns the prefix, rejects future/out-of-order inputs, and closes permanently on stop.",
+        "Strict JSON telemetry authorizes confidence; fallbacks carry confidence=None.",
+        "Peers require a complete same-step barrier and fully charged computation.",
+        "Saved-MATH benchmark: 18,880 decisions; worst observed 0.4383 ms."
+      ],
+      "seconds": 80,
+      "speaker_notes": "The controller accepts one newly completed Observation with no gold, future row or full-sequence score. It owns the prefix, rejects skipped or repeated steps, and permanently closes after stopping. Strict JSON is necessary for trusted confidence: a legacy fallback default must remain missing. A peer panel requires the complete declared same-step roster, a barrier before the decision and charged peer computation. The default live policy uses no peers or verifier. The final saved-MATH benchmark has 100 problems, 20 repeats and 18,880 combined heuristic/control decisions. Median latency is 0.0034 ms and maximum 0.4383 ms. This covers prepared-observation validation, policy features, selection and closure, excluding telemetry extraction, loading, generation and peer waits. It establishes a worst-observed under-ten-millisecond result on this workload, not a worst-case execution-time proof. Separately, the learned main-panel benchmark makes 4,000 decisions over 100 problems and 20 repeats. Its maximum is 0.9369 ms, including prefix features, both calibrated heads and the controller, and excluding generation, loading, tokenization and peer waits.",
+      "sources": [
+        "research/online_stopping_controller.py",
+        "research/online_generation.py",
+        "research/outputs/semester2/online_stopping_20261002/latency_summary.json",
+        "research/outputs/semester2/online_stopping_20261002/learned_main/learned_latency_summary.json"
+      ],
+      "table": {
+        "headers": [
+          "Prepared-observation decisions",
+          "Latency"
+        ],
+        "rows": [
+          [
+            "Median (saved MATH)",
+            "0.0034 ms"
+          ],
+          [
+            "95th percentile (saved MATH)",
+            "0.0079 ms"
+          ],
+          [
+            "99th percentile (saved MATH)",
+            "0.0130 ms"
+          ],
+          [
+            "Maximum (saved MATH)",
+            "0.4383 ms"
+          ],
+          [
+            "Learned maximum (4,000 main decisions)",
+            "0.9369 ms"
+          ]
+        ]
+      },
+      "table_caption": "Controller timing excludes LM generation/loading, tokenization and peer waits."
+    },
+    {
+      "number": 21,
+      "title": "A portable trained model estimates current and next correctness",
+      "kicker": "Fixed task-disjoint probability fitting",
+      "bullets": [
+        "1,500 archived tasks: 902 train, 322 calibration, 276 evaluation.",
+        "Two unweighted logistic models; train-only scaling and separate Platt calibration.",
+        "21 features use only current/prior Observation fields plus public domain.",
+        "No live GSM8K-test or trap outcomes select the model or threshold."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The thesis now includes a trained deployable artifact rather than only a confidence heuristic. It fits two probabilities: correctness of the latest nonempty currently available candidate and correctness of the same selector after one more response. Public task identity fixes roles before fitting or parser availability. All 1,500 archived Qwen2.5-0.5B tasks are retained: 902 training, 322 calibration and 276 evaluation. The scaler and base logistic coefficients are fitted only on training tasks; Platt calibrators use only the independent calibration tasks. Evaluation enters neither fit. The feature contract contains current and prior answer churn, response and thought length, observed confidence when strict-valid, fixed text-density summaries, step and public domain. It excludes labels, timestamps and future rows. Archive-only gold regrading aligns reconstructed live-parser candidates with targets: 4,269 of 7,500 candidate strings differ from saved strings, but only 43 correctness labels change. The original corpus is preserved. These held-out scores validate marginal archive prediction, not runtime conditional certainty.",
+      "sources": [
+        "research/prefix_stopping_model.py",
+        "research/train_prefix_stopping_model.py",
+        "research/outputs/semester2/prefix_model_v1/training_protocol.json",
+        "research/outputs/semester2/prefix_model_v1/label_reconstruction_audit.csv"
+      ],
+      "table": {
+        "headers": [
+          "Held-out target",
+          "Rows",
+          "AUC",
+          "Calibrated Brier"
+        ],
+        "rows": [
+          [
+            "Selected current correctness",
+            "1380",
+            "0.7101",
+            "0.0976"
+          ],
+          [
+            "Selected next correctness",
+            "1104",
+            "0.6923",
+            "0.0997"
+          ]
+        ]
+      },
+      "table_caption": "Separate task roles; archive calibration does not establish live calibration (0 / 7,500 strict-valid JSON)."
+    },
+    {
+      "number": 22,
+      "title": "The trained drift policy nearly reduces to fixed two",
+      "kicker": "Held-out archive replay and transport limits",
+      "bullets": [
+        "Stop when p̂next − q̂current − 0.05 ≤ 0, with floor 2 / horizon 5.",
+        "275 of 276 held-out tasks stop at two; one stops at three.",
+        "No material policy advantage over fixed-two is demonstrated.",
+        "Archive strict JSON support is zero: live prompt transport is a major limitation."
+      ],
+      "seconds": 80,
+      "speaker_notes": "The declared policy is myopic: subtract current probability and the fixed response cost from the next-correctness estimate, and stop at the first nonpositive result after the floor. It does not approximate a validated Bellman continuation value. On the 276 held-out archive tasks, 275 stop at step two and one at step three. The learned policy has essentially the same accuracy as fixed two and slightly greater recorded cost. It therefore does not demonstrate added policy value over that simple baseline. Relative to full horizon, its paired accuracy difference is plus 1.45 percentage points with a task-cluster interval from minus 1.45 to plus 4.35 points. Replay completion-token savings are 51.29 percent, with a task-cluster interval about 49.31 to 53.09 percent; those are archived counts, not measured live savings. Archive outputs contain no strict-valid JSON records, so confidence-related features lack training support. Live JSON prompting and charged EOS tokens also differ. A historical in-sample 7B replay saved 54.34 percent while losing 6.33 accuracy points; it remains a separate development diagnostic.",
+      "sources": [
+        "research/outputs/semester2/prefix_model_v1/evaluation.json",
+        "research/outputs/semester2/prefix_model_v1/heldout_policy_replay.csv",
+        "research/outputs/thesis_v1/evidence/offline_replay_metrics.csv"
+      ],
+      "table": {
+        "headers": [
+          "Archive holdout policy",
+          "Accuracy",
+          "Completion saving",
+          "Mean stop"
+        ],
+        "rows": [
+          [
+            "Full horizon",
+            "10.51%",
+            "0.00%",
+            "5.000"
+          ],
+          [
+            "Fixed two",
+            "11.96%",
+            "51.33%",
+            "2.000"
+          ],
+          [
+            "Learned drift",
+            "11.96%",
+            "51.29%",
+            "2.004"
+          ]
+        ]
+      },
+      "table_caption": "Learned drift nearly equals fixed two; these archived token counts are not measured live savings."
+    },
+    {
+      "number": 23,
+      "title": "Actual generation yields different policy trade-offs",
+      "kicker": "100-task GSM8K test development panel",
+      "bullets": [
+        "Learned completion saving: 56.51%; interval [54.83%, 58.01%].",
+        "Learned accuracy: 7 / 100 versus 6 / 100; change interval [-4.27, +6.21] points.",
+        "All 100 learned tasks stop at two; no registered noninferiority margin.",
+        "Baseline strict JSON: 88 / 500; learned shared prefixes: 100 / 100."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The frozen learned policy now has actual generation results. It produces 9,674 completion tokens versus the prior full-horizon arm's 22,244, a 56.51 percent reduction; the task bootstrap interval is 54.83 to 58.01 percent. It answers seven of 100 tasks correctly versus six for baseline. The conservative paired interval for the one-point improvement is minus 4.27 to plus 6.21 points. No noninferiority margin was registered. Every task stops at two, so the result cannot establish added value over fixed two. Shared prefixes match on all 100 tasks. This learned arm is separately generated, not replay; its baseline is the actually executed prior arm linked by hash. The original heuristic saved 2.94 percent with six correct in each arm and shared-prefix agreement on 94 tasks. Baseline JSON success is only 88 of 500 responses. Absolute accuracy is low. Prompt work, padded slots and model seconds have separate ledgers. These are one-model development outcomes; no label was used to tune the frozen policy.",
+      "sources": [
+        "research/outputs/semester2/online_stopping_20261002/live_metrics.json",
+        "research/outputs/semester2/online_stopping_20261002/live_paired_results.csv",
+        "research/outputs/semester2/online_stopping_20261002/learned_main/live_metrics.json",
+        "research/outputs/semester2/online_stopping_20261002/learned_main/live_uncertainty.json"
+      ],
+      "table": {
+        "headers": [
+          "Actual outcome",
+          "Never",
+          "Heuristic",
+          "Learned"
+        ],
+        "rows": [
+          [
+            "Selected-answer accuracy",
+            "6.00%",
+            "6.00%",
+            "7.00%"
+          ],
+          [
+            "Generated completion tokens",
+            "22244",
+            "21591",
+            "9674"
+          ],
+          [
+            "Completion-token saving",
+            "0%",
+            "2.94%",
+            "56.51%"
+          ],
+          [
+            "Mean stopping step",
+            "5.00",
+            "4.85",
+            "2.00"
+          ],
+          [
+            "Shared-prefix identical tasks",
+            "Reference",
+            "94 / 100",
+            "100 / 100"
+          ]
+        ]
+      },
+      "pending_outcomes": [],
+      "outcome_refresh": {
+        "source": "research/outputs/semester2/online_stopping_20261002/learned_main/live_metrics.json"
+      },
+      "table_caption": "All learned tasks stop at two; added value over fixed two and accuracy noninferiority are not established."
+    },
+    {
+      "number": 24,
+      "title": "Trap questions probe the policy's failure modes",
+      "kicker": "Adversarial bank and limits",
+      "bullets": [
+        "20 mathematical prompts with separately derived gold answers.",
+        "Changing bases, dependent sampling, rates, precedence and answer contracts.",
+        "Wrong stable answers and delayed repair can defeat a working controller.",
+        "One small model, one frozen prompt and a development panel limit generalization."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The frozen bank contains 20 mathematical traps with independent short derivations: changing percentage bases, dependent draws, harmonic rates, endpoint counting, exponent precedence and answer contracts. The learned arm emits 2,268 completion tokens against 4,736 for full horizon, saving 52.11 percent; descriptive resampling gives 45.86 to 57.17 percent. Both arms answer one question correctly. All 20 learned tasks stop at two, and every shared prefix matches. The conservative iid-reference accuracy-change interval spans minus 19.68 to plus 19.68 points. Because the bank is handpicked, this is not randomized-population adversarial coverage. The heuristic separately saves 3.34 percent with one correct in each arm. A wrong stable answer or a missed late repair can defeat the policy without a software bug. Malformed observations and forged peer receipts belong to the separate state-machine tests. No trap result changes the coefficients, calibrators or threshold. Classic puzzle forms may occur in pretraining; the evidence is robustness on this bank and protocol, not exhaustive worst-case risk.",
+      "sources": [
+        "research/adversarial_tasks_v1.jsonl",
+        "research/adversarial_gold_v1.jsonl",
+        "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_metrics.json",
+        "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_metrics.json",
+        "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_uncertainty.json"
+      ],
+      "table": {
+        "headers": [
+          "Trap policy",
+          "Accuracy",
+          "Completion saving",
+          "Paired changes"
+        ],
+        "rows": [
+          [
+            "Heuristic",
+            "1 / 20",
+            "3.34%",
+            "0 worsened / 0 improved"
+          ],
+          [
+            "Learned",
+            "1 / 20",
+            "52.11%",
+            "0 worsened / 0 improved"
+          ]
+        ]
+      },
+      "pending_outcomes": [],
+      "table_caption": "Handpicked bank: descriptive robustness only; all learned tasks stop at two."
+    },
+    {
+      "number": 25,
+      "title": "The contribution is a testable stopping framework",
+      "kicker": "Conclusion and next confirmatory study",
+      "bullets": [
+        "Exact conditional drift and finite-horizon optimal-stopping proofs.",
+        "Frozen empirical contrasts retain subgroup and negative results.",
+        "A causal runtime and serialized task-disjoint trained predictor.",
+        "Next: unseen tasks, prespecified accuracy margin, multiple seeds and full costs."
+      ],
+      "seconds": 65,
+      "speaker_notes": "The thesis contributes a rigorous decision framework, a traceable empirical record and an implementable causal stopping system. The general optimum is the Snell-envelope first-contact rule; a first drift crossing needs persistent conditional signs. The empirical panels show local repair, corruption, cost crossings and estimator contrasts, while preserving negative outcomes and uncertainty at the correct cluster level. The engineering system actually prevents future response generation and keeps labels outside its runtime interface. The trained predictor is serializable and calibrated on separate task groups, but its archive policy largely collapses to fixed two and its live transport has limited support. These are honest limits of the completed research result. A confirmatory extension should freeze an unseen task panel, prompt, fitted model and cost preference, state a meaningful accuracy noninferiority margin, use several generation seeds, and report prompt, completion, peer and timing costs. Defense, committee signatures and institutional deposit remain real external events; a generated package cannot substitute for them. I welcome questions about the mathematics, evidence boundaries and deployment trade-offs.",
+      "sources": [
+        "research/mathematical_foundations.md",
+        "ThesisDocs/chapters/chapter6_discussion.md",
+        "ThesisDocs/requirements_acceptance_matrix.md"
+      ]
+    }
+  ]
+}

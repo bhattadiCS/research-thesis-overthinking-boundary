@@ -1,0 +1,45 @@
+{
+  "bootstrap_draws": 10000,
+  "bootstrap_seed": 804,
+  "files": {
+    "algorithm_v2_normalized_effects.csv": {
+      "bytes": 5642,
+      "sha256": "f901865f855b86643713ee97eba517a916c379e2d9a7587054f9d970c378a679"
+    },
+    "boundary_domain_step_metrics.csv": {
+      "bytes": 10837,
+      "sha256": "7c63f8cd42e0ff94c3b035c23d0398dc46eb2641a03e4ce8ae9eafa4869bcc4a"
+    },
+    "boundary_selected_cell_step_metrics.csv": {
+      "bytes": 5142,
+      "sha256": "5ec076bcb204548566f8b414179137fe9f088d4879c10adcef63855fe6b57fc2"
+    },
+    "offline_replay_metrics.csv": {
+      "bytes": 588,
+      "sha256": "3e49e3ac71d7f8c76ace783af90fcb82c882de4454fc885ef311247650d52c4d"
+    },
+    "tournament_balanced_summary.csv": {
+      "bytes": 3212,
+      "sha256": "663488b1414a74b40c20861582bce6d7f1722e1557bc15f025be089963c924b7"
+    },
+    "tournament_per_domain.csv": {
+      "bytes": 4034,
+      "sha256": "6f6c8da021429a8cd4a57bc0673a52073db9e3ef819918469dc47439d7b47c13"
+    },
+    "tournament_per_fold.csv": {
+      "bytes": 5089,
+      "sha256": "27bcbd60a0531d40bd11ff71de508a0d384d4e0ede9d7236509086fb8543b20d"
+    }
+  },
+  "schema": "progress-report-review-metrics-v1",
+  "source_artifacts": {
+    "canonical_matrix": "research/outputs/experiment_matrix/*/trace_steps.csv",
+    "n1_n4_cache": "research/outputs/experiments_v2/algov2_cache/*.json",
+    "n2_n3_cache": "research/outputs/experiments_v2/algov2_cache_n2_n3/*.json",
+    "n5_n6_arms": "research/outputs/experiments_v2/p4b_* and p8_*",
+    "offline_replay": "research/outputs/real_traces_bf16_ladder/qwen2p5_7b/trace_steps.csv",
+    "tournament_manifest": "research/outputs/experiments_v2/ultimate_tournament_manifest.json",
+    "tournament_predictions": "research/outputs/experiments_v2/ultimate_oof_predictions.npz"
+  },
+  "step_cost": 0.05
+}

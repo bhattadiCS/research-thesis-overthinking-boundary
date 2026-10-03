@@ -1,4 +1,14 @@
 # The OBE System: The Grand Unified Law of Overthinking
+> **Historical monograph; mathematical claims corrected (2026-10-02).**
+> The universal-law and unconditional optimality language below is retained
+> as historical project prose, not as an established result. The general
+> finite-horizon solution is the Bellman/Snell policy; a drift-sign rule
+> requires persistent nonpositive drift after crossing. Raw fitted
+> probabilities and population sequential diagnostics do not certify a live
+> stopping guarantee. Use the canonical
+> [mathematical foundations](mathematical_foundations.md) and current audited
+> empirical reports when citing the thesis's supported claims.
+
 **A Monograph on the Stochastic Boundary of Recursive LLM Reasoning**
 
 **Aditya Bhatt**  

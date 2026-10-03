@@ -9,6 +9,8 @@
 **Target Defense Date:** Late November / Early December 2026  
 **GitHub Repository:** [`bhattadiCS/research-thesis-overthinking-boundary`](https://github.com/bhattadiCS/research-thesis-overthinking-boundary) (branch `main`)
 
+> **Execution evidence update, October 2, 2026.** This roadmap retains the planned dates and historical discussion material. The current scientific account is the six-chapter draft in `ThesisDocs/Masters_Thesis_Draft_v1.md`, with rigorous proofs in `research/mathematical_foundations.md` and frozen sources in `data_manifest_v1.json`. The matrix contains 75,965 analyzed trajectories, not 75,000 reasoning steps. The standardized detector corpus contains 144,440 rows over ARC, GPQA, GSM8K, and MATH; SVAMP is not in that selection. The 0.955156 score is retrospective, uses future-step features, and is non-nested. It is not a live correctness guarantee. A universal step-2/3 peak and 30-40% live savings without accuracy loss are not established; runtime savings and accuracy must be measured jointly. Passing grader regression cases does not certify every corpus label. Committee review, defense, signatures, library deposit, and degree clearance require actual external evidence.
+
 ---
 
 ## 🎯 60-Second Elevator Pitch for Dr. Woods

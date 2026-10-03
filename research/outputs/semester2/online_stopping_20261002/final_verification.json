@@ -1,0 +1,18 @@
+{
+  "all_passed": true,
+  "checks": {
+    "30_runtime_accounting_tests_passed": true,
+    "actual_pair_and_metrics_unchanged": true,
+    "frozen_manifest_cannot_be_overwritten": true,
+    "new_manifest_records_actual_interpreter": true,
+    "new_manifest_records_package_versions": true,
+    "preserved_execution_sources_match_manifests": true,
+    "source_copies_frozen_before_collector": true
+  },
+  "errors": 0,
+  "failures": 0,
+  "kind": "post_collection_source_and_provenance_verification",
+  "made_at_utc": "2026-10-03T01:37:25.548543+00:00",
+  "preflight_note": "Temporary stub weight bytes check manifest/source freezing only; no model loaded or generated in this preflight. Real model results reside in four previously completed live folders.",
+  "tests_run": 30
+}

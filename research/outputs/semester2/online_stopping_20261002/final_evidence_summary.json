@@ -1,0 +1,763 @@
+{
+  "archive_replay": {
+    "kind": "retrospective_locked_policy_replay",
+    "live_compute_savings_measured": false,
+    "peer_tokens": "no peer features requested; recorded second-path tokens included when present",
+    "policies": [
+      {
+        "accuracy_delta": 0.0,
+        "active_accuracy": 0.09533333333333334,
+        "active_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "active_auxiliary_tokens": 415367,
+        "active_correct": 143,
+        "active_generated_tokens": 418845,
+        "active_prompt_tokens": null,
+        "baseline_accuracy": 0.09533333333333334,
+        "baseline_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "baseline_auxiliary_tokens": 415367,
+        "baseline_correct": 143,
+        "baseline_generated_tokens": 418845,
+        "baseline_prompt_tokens": null,
+        "completion_plus_auxiliary_token_savings": 0.0,
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 5,
+        "measured_completion_token_savings": 0.0,
+        "paired_improved": 0,
+        "paired_unchanged": 1500,
+        "paired_worsened": 0,
+        "pareto_nondominated": false,
+        "policy": "never",
+        "policy_sha256": "88e31f7f44550bcd36674bc5550379864294d013de11d8aeb9cb702187be5f54",
+        "problems_or_trajectories": 1500,
+        "total_prompt_completion_auxiliary_token_savings": null
+      },
+      {
+        "accuracy_delta": 0.0006666666666666666,
+        "active_accuracy": 0.096,
+        "active_accuracy_wilson_95ci": [
+          0.08210722136943202,
+          0.11195675865247462
+        ],
+        "active_auxiliary_tokens": 203102,
+        "active_correct": 144,
+        "active_generated_tokens": 204011,
+        "active_prompt_tokens": null,
+        "baseline_accuracy": 0.09533333333333334,
+        "baseline_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "baseline_auxiliary_tokens": 415367,
+        "baseline_correct": 143,
+        "baseline_generated_tokens": 418845,
+        "baseline_prompt_tokens": null,
+        "completion_plus_auxiliary_token_savings": 0.5119789693746913,
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 2,
+        "measured_completion_token_savings": 0.5129200539579081,
+        "paired_improved": 32,
+        "paired_unchanged": 1437,
+        "paired_worsened": 31,
+        "pareto_nondominated": true,
+        "policy": "fixed_2",
+        "policy_sha256": "b93823a1227ded3adf7e906ecf85f27b2b39b9dd26eb66fbad658fe630f3508f",
+        "problems_or_trajectories": 1500,
+        "total_prompt_completion_auxiliary_token_savings": null
+      },
+      {
+        "accuracy_delta": 0.004,
+        "active_accuracy": 0.09933333333333333,
+        "active_accuracy_wilson_95ci": [
+          0.08520481966175386,
+          0.1155087974886849
+        ],
+        "active_auxiliary_tokens": 277782,
+        "active_correct": 149,
+        "active_generated_tokens": 278444,
+        "active_prompt_tokens": null,
+        "baseline_accuracy": 0.09533333333333334,
+        "baseline_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "baseline_auxiliary_tokens": 415367,
+        "baseline_correct": 143,
+        "baseline_generated_tokens": 418845,
+        "baseline_prompt_tokens": null,
+        "completion_plus_auxiliary_token_savings": 0.3332318403475376,
+        "mcnemar_exact_two_sided_p": 0.4613911821367651,
+        "mean_active_stop_step": 3,
+        "measured_completion_token_savings": 0.3352099225250391,
+        "paired_improved": 26,
+        "paired_unchanged": 1454,
+        "paired_worsened": 20,
+        "pareto_nondominated": true,
+        "policy": "fixed_3",
+        "policy_sha256": "aac7621ee774f509bde866984f59e94767377275e1da94738bb1e002e67c71cc",
+        "problems_or_trajectories": 1500,
+        "total_prompt_completion_auxiliary_token_savings": null
+      },
+      {
+        "accuracy_delta": 0.002,
+        "active_accuracy": 0.09733333333333333,
+        "active_accuracy_wilson_95ci": [
+          0.08334562185385308,
+          0.1133782130194664
+        ],
+        "active_auxiliary_tokens": 347389,
+        "active_correct": 146,
+        "active_generated_tokens": 349254,
+        "active_prompt_tokens": null,
+        "baseline_accuracy": 0.09533333333333334,
+        "baseline_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "baseline_auxiliary_tokens": 415367,
+        "baseline_correct": 143,
+        "baseline_generated_tokens": 418845,
+        "baseline_prompt_tokens": null,
+        "completion_plus_auxiliary_token_savings": 0.16490892003471536,
+        "mcnemar_exact_two_sided_p": 0.7492586247608415,
+        "mean_active_stop_step": 4,
+        "measured_completion_token_savings": 0.16614976900762812,
+        "paired_improved": 21,
+        "paired_unchanged": 1461,
+        "paired_worsened": 18,
+        "pareto_nondominated": false,
+        "policy": "fixed_4",
+        "policy_sha256": "8a152040334bfaaf3ab86b210d146ec7791cb168d0c202590c87d0a4479de138",
+        "problems_or_trajectories": 1500,
+        "total_prompt_completion_auxiliary_token_savings": null
+      },
+      {
+        "accuracy_delta": 0.0006666666666666666,
+        "active_accuracy": 0.096,
+        "active_accuracy_wilson_95ci": [
+          0.08210722136943202,
+          0.11195675865247462
+        ],
+        "active_auxiliary_tokens": 372525,
+        "active_correct": 144,
+        "active_generated_tokens": 374129,
+        "active_prompt_tokens": null,
+        "baseline_accuracy": 0.09533333333333334,
+        "baseline_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "baseline_auxiliary_tokens": 415367,
+        "baseline_correct": 143,
+        "baseline_generated_tokens": 418845,
+        "baseline_prompt_tokens": null,
+        "completion_plus_auxiliary_token_savings": 0.10495893130283429,
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 4.332666666666666,
+        "measured_completion_token_savings": 0.10676025737444639,
+        "paired_improved": 5,
+        "paired_unchanged": 1491,
+        "paired_worsened": 4,
+        "pareto_nondominated": false,
+        "policy": "confidence_80",
+        "policy_sha256": "cb49529fc057d6ecab43640c0267603720a8ca7219cf1b0c50684ad79836c7ff",
+        "problems_or_trajectories": 1500,
+        "total_prompt_completion_auxiliary_token_savings": null
+      },
+      {
+        "accuracy_delta": 0.0006666666666666666,
+        "active_accuracy": 0.096,
+        "active_accuracy_wilson_95ci": [
+          0.08210722136943202,
+          0.11195675865247462
+        ],
+        "active_auxiliary_tokens": 375576,
+        "active_correct": 144,
+        "active_generated_tokens": 377172,
+        "active_prompt_tokens": null,
+        "baseline_accuracy": 0.09533333333333334,
+        "baseline_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "baseline_auxiliary_tokens": 415367,
+        "baseline_correct": 143,
+        "baseline_generated_tokens": 418845,
+        "baseline_prompt_tokens": null,
+        "completion_plus_auxiliary_token_savings": 0.09765383379764381,
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 4.3773333333333335,
+        "measured_completion_token_savings": 0.09949503993123943,
+        "paired_improved": 5,
+        "paired_unchanged": 1491,
+        "paired_worsened": 4,
+        "pareto_nondominated": false,
+        "policy": "confidence_90",
+        "policy_sha256": "50f7cb86f74d431f60c74e44139f596e27fa43da4dcaca2da2130f1c85be8f14",
+        "problems_or_trajectories": 1500,
+        "total_prompt_completion_auxiliary_token_savings": null
+      },
+      {
+        "accuracy_delta": 0.0,
+        "active_accuracy": 0.09533333333333334,
+        "active_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "active_auxiliary_tokens": 381229,
+        "active_correct": 143,
+        "active_generated_tokens": 382981,
+        "active_prompt_tokens": null,
+        "baseline_accuracy": 0.09533333333333334,
+        "baseline_accuracy_wilson_95ci": [
+          0.08148834642447474,
+          0.11124570617172551
+        ],
+        "baseline_auxiliary_tokens": 415367,
+        "baseline_correct": 143,
+        "baseline_generated_tokens": 418845,
+        "baseline_prompt_tokens": null,
+        "completion_plus_auxiliary_token_savings": 0.0839139211615273,
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 4.468,
+        "measured_completion_token_savings": 0.08562594754622832,
+        "paired_improved": 4,
+        "paired_unchanged": 1492,
+        "paired_worsened": 4,
+        "pareto_nondominated": false,
+        "policy": "confidence_95",
+        "policy_sha256": "ebb81036526b37b79eb00ce7c57fc105455583602b0ca5e155c9dfe86431e608",
+        "problems_or_trajectories": 1500,
+        "total_prompt_completion_auxiliary_token_savings": null
+      }
+    ],
+    "prompt_tokens_available": false,
+    "qualification": "saved legacy-instrument trajectories; identical latest-nonempty terminal selection in both arms; correctness evaluated outside controller; not prospective and no threshold confirmation; missing prompt costs are not treated as zero",
+    "real_completion_token_lengths_available": true
+  },
+  "controller_100_math_latency": {
+    "all": {
+      "all_under_10ms": true,
+      "decisions": 18880,
+      "max_ms": 0.4383,
+      "mean_ms": 0.0043061493644067795,
+      "median_ms": 0.0034,
+      "over_10ms": 0,
+      "p95_ms": 0.0079,
+      "p99_ms": 0.013
+    },
+    "cold_first_repeat": {
+      "all_under_10ms": true,
+      "decisions": 944,
+      "max_ms": 0.0542,
+      "mean_ms": 0.0039870762711864405,
+      "median_ms": 0.0033,
+      "over_10ms": 0,
+      "p95_ms": 0.006569999999999982,
+      "p99_ms": 0.01245599999999995
+    },
+    "distinct_problems": 100,
+    "includes": "validation, prefix-state update, actual confidence/stability policy, answer selection and terminal decisions; excludes model generation, loading, telemetry extraction or peer wait",
+    "kind": "controller_only_on_saved_math_prefixes",
+    "policies": {
+      "confidence_stability_v1": {
+        "all_under_10ms": true,
+        "decisions": 8880,
+        "max_ms": 0.4383,
+        "mean_ms": 0.005017556306306306,
+        "median_ms": 0.0042,
+        "over_10ms": 0,
+        "p95_ms": 0.0089,
+        "p99_ms": 0.015341999999999825
+      },
+      "never": {
+        "all_under_10ms": true,
+        "decisions": 10000,
+        "max_ms": 0.1109,
+        "mean_ms": 0.00367442,
+        "median_ms": 0.0034,
+        "over_10ms": 0,
+        "p95_ms": 0.0055,
+        "p99_ms": 0.0106
+      }
+    },
+    "repeats": 20,
+    "runtime": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.12.4"
+    },
+    "timer": "perf_counter_ns"
+  },
+  "kind": "actual_local_llm_evaluation_summary",
+  "learned_100_prefix_latency": {
+    "all_under_10ms": true,
+    "decisions": 4000,
+    "distinct_problems": 100,
+    "excludes": "model generation/loading, tokenization, peer waits",
+    "includes": "feature extraction, current/next probability heads, calibration, runtime drift and validation",
+    "kind": "learned_controller_only_on_actual_baseline_prefixes",
+    "max_ms": 0.9369,
+    "mean_ms": 0.0803434,
+    "median_ms": 0.059,
+    "over_10ms": 0,
+    "p95_ms": 0.2224,
+    "p99_ms": 0.3143149999999997,
+    "repeats": 20
+  },
+  "made_at_utc": "2026-10-03T01:37:25.548543+00:00",
+  "prefix_model_tests": {
+    "summary": "research/outputs/semester2/prefix_model_v1/test_summary.json",
+    "tests_passed": 14
+  },
+  "runs": {
+    "heuristic_adversarial": {
+      "active_only_actual_decision_latency": {
+        "all_under_10ms": true,
+        "decisions": 95,
+        "max_ms": 0.0432,
+        "mean_ms": 0.00891578947368421,
+        "median_ms": 0.0062,
+        "over_10ms": 0,
+        "p95_ms": 0.021509999999999998,
+        "p99_ms": 0.028724000000000034
+      },
+      "artifact_directory": "research\\outputs\\semester2\\online_stopping_20261002\\adversarial_live",
+      "ledger_audit_passed": true,
+      "manifest_sha256": "cd75aed1d5f0d3e8117f3b0a78e0a74b455480e743e835f961cb2bf2d10b7faa",
+      "metrics": {
+        "accuracy_delta": 0.0,
+        "active_accuracy": 0.05,
+        "active_accuracy_wilson_95ci": [
+          0.008881448800795402,
+          0.23613119344674205
+        ],
+        "active_auxiliary_tokens": 0,
+        "active_correct": 1,
+        "active_generated_tokens": 4578,
+        "active_parse_success_steps": 11,
+        "active_prompt_tokens": 26143,
+        "baseline_accuracy": 0.05,
+        "baseline_accuracy_wilson_95ci": [
+          0.008881448800795402,
+          0.23613119344674205
+        ],
+        "baseline_auxiliary_tokens": 0,
+        "baseline_correct": 1,
+        "baseline_generated_tokens": 4736,
+        "baseline_parse_success_steps": 14,
+        "baseline_prompt_tokens": 27641,
+        "batch_compute": {
+          "confidence_stability_v1": {
+            "calls": 5,
+            "decode_token_slots": 12030,
+            "model_seconds": 231.66791289998218,
+            "padded_prefill_token_slots": 38847,
+            "tokenize_seconds": 0.14575270004570484
+          },
+          "never": {
+            "calls": 5,
+            "decode_token_slots": 12660,
+            "model_seconds": 245.13545120006893,
+            "padded_prefill_token_slots": 41560,
+            "tokenize_seconds": 0.20585500006563962
+          }
+        },
+        "completion_plus_auxiliary_token_savings": 0.033361486486486513,
+        "decision_latency": {
+          "all_under_10ms": true,
+          "decisions": 195,
+          "max_ms": 0.0432,
+          "mean_ms": 0.006202051282051282,
+          "median_ms": 0.0039,
+          "over_10ms": 0,
+          "p95_ms": 0.01610999999999999,
+          "p99_ms": 0.026860000000000002
+        },
+        "development_only": true,
+        "kind": "actual_local_llm_paired_generation",
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 4.75,
+        "measured_completion_token_savings": 0.033361486486486513,
+        "model": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "paired_improved": 0,
+        "paired_unchanged": 20,
+        "paired_worsened": 0,
+        "peer_generation_tokens": 0,
+        "policy_sha256": "3063ace5f3af0a71cf65cc1b9c73c016e3d5a76f9a65e07513b716c855c8a8ca",
+        "problems_or_trajectories": 20,
+        "risk_note": "model-reported confidence is uncalibrated; this is a heuristic development test, not deployment of the full-sequence 0.955 detector",
+        "runtime_api_used_gold_or_future": false,
+        "shared_prefix_identical_problems": 20,
+        "stop_reasons": {
+          "stable_high_confidence": 2,
+          "terminal_horizon": 18
+        },
+        "token_note": "actual generated completion tokens including EOS, excludes padded decoder slots; all repeated prompt tokens reported separately; no proxy or unit-step savings",
+        "total_prompt_completion_auxiliary_token_savings": 0.051147419464434685,
+        "verifier_generation_tokens": 0
+      },
+      "metrics_sha256": "3b44645e08872bf4a71dc3197da5f95da0800571b038249973a8f8cdef531b86",
+      "paired_bootstrap": {
+        "accuracy_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "completion_token_savings_95ci": [
+          0.0,
+          0.08950398554022591
+        ],
+        "noninferiority_margin_registered": false,
+        "qualification": "descriptive paired bootstrap; no proof of zero loss or population safety",
+        "resampling_unit": "paired problem",
+        "samples": 10000,
+        "seed": 20261002
+      },
+      "paired_results_sha256": "5f1e02917543d8e351c0c434a79c4a2152ac4ca47a56170233729875c224981e"
+    },
+    "heuristic_main": {
+      "active_only_actual_decision_latency": {
+        "all_under_10ms": true,
+        "decisions": 485,
+        "max_ms": 0.0418,
+        "mean_ms": 0.006870515463917526,
+        "median_ms": 0.0042,
+        "over_10ms": 0,
+        "p95_ms": 0.017979999999999993,
+        "p99_ms": 0.032547999999999994
+      },
+      "artifact_directory": "research\\outputs\\semester2\\online_stopping_20261002",
+      "ledger_audit_passed": true,
+      "manifest_sha256": "cdf10e924110c59aa85b6d64b016426f1fdcf518771d1174a67e6344a966e081",
+      "metrics": {
+        "accuracy_delta": 0.0,
+        "active_accuracy": 0.06,
+        "active_accuracy_wilson_95ci": [
+          0.027786123963188192,
+          0.1247681544589592
+        ],
+        "active_auxiliary_tokens": 0,
+        "active_correct": 6,
+        "active_generated_tokens": 21591,
+        "active_parse_success_steps": 86,
+        "active_prompt_tokens": 137574,
+        "baseline_accuracy": 0.06,
+        "baseline_accuracy_wilson_95ci": [
+          0.027786123963188192,
+          0.1247681544589592
+        ],
+        "baseline_auxiliary_tokens": 0,
+        "baseline_correct": 6,
+        "baseline_generated_tokens": 22244,
+        "baseline_parse_success_steps": 88,
+        "baseline_prompt_tokens": 142498,
+        "batch_compute": {
+          "confidence_stability_v1": {
+            "calls": 20,
+            "decode_token_slots": 56128,
+            "model_seconds": 1099.2063722996973,
+            "padded_prefill_token_slots": 222781,
+            "tokenize_seconds": 0.7527260002680123
+          },
+          "never": {
+            "calls": 20,
+            "decode_token_slots": 57856,
+            "model_seconds": 1127.0454995000036,
+            "padded_prefill_token_slots": 231856,
+            "tokenize_seconds": 0.6630873997928575
+          }
+        },
+        "completion_plus_auxiliary_token_savings": 0.02935623089372419,
+        "decision_latency": {
+          "all_under_10ms": true,
+          "decisions": 985,
+          "max_ms": 0.0418,
+          "mean_ms": 0.0051580710659898475,
+          "median_ms": 0.0031,
+          "over_10ms": 0,
+          "p95_ms": 0.0143,
+          "p99_ms": 0.023379999999999984
+        },
+        "development_only": true,
+        "kind": "actual_local_llm_paired_generation",
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 4.85,
+        "measured_completion_token_savings": 0.02935623089372419,
+        "model": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "paired_improved": 0,
+        "paired_unchanged": 100,
+        "paired_worsened": 0,
+        "peer_generation_tokens": 0,
+        "policy_sha256": "3063ace5f3af0a71cf65cc1b9c73c016e3d5a76f9a65e07513b716c855c8a8ca",
+        "problems_or_trajectories": 100,
+        "risk_note": "model-reported confidence is uncalibrated; this is a heuristic development test, not deployment of the full-sequence 0.955 detector",
+        "runtime_api_used_gold_or_future": false,
+        "shared_prefix_identical_problems": 94,
+        "stop_reasons": {
+          "stable_high_confidence": 6,
+          "terminal_horizon": 94
+        },
+        "token_note": "actual generated completion tokens including EOS, excludes padded decoder slots; all repeated prompt tokens reported separately; no proxy or unit-step savings",
+        "total_prompt_completion_auxiliary_token_savings": 0.033852933678114816,
+        "verifier_generation_tokens": 0
+      },
+      "metrics_sha256": "2ab97fe8a906dd7bddfe7b9690f8a9cf50ada8d332025a8fb426dc151255d73d",
+      "paired_bootstrap": {
+        "accuracy_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "completion_token_savings_95ci": [
+          0.008299064972257412,
+          0.054074758472412776
+        ],
+        "noninferiority_margin_registered": false,
+        "qualification": "descriptive paired bootstrap; no proof of zero loss or population safety",
+        "resampling_unit": "paired problem",
+        "samples": 10000,
+        "seed": 20261002
+      },
+      "paired_results_sha256": "c223a0263f254f4318159eb6d024e56d23e55f79a4c51026b81873de33eb5adf"
+    },
+    "learned_adversarial": {
+      "active_only_actual_decision_latency": {
+        "all_under_10ms": true,
+        "decisions": 40,
+        "max_ms": 0.4158,
+        "mean_ms": 0.1168175,
+        "median_ms": 0.09325,
+        "over_10ms": 0,
+        "p95_ms": 0.3607849999999999,
+        "p99_ms": 0.409053
+      },
+      "artifact_directory": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial",
+      "ledger_audit_passed": true,
+      "manifest_sha256": "24c1d713450cc718a7aa5beab3a135384d373c5553d4deaa2c0fdfa555a0d5ea",
+      "metrics": {
+        "accuracy_delta": 0.0,
+        "active_accuracy": 0.05,
+        "active_accuracy_wilson_95ci": [
+          0.008881448800795402,
+          0.23613119344674205
+        ],
+        "active_auxiliary_tokens": 0,
+        "active_correct": 1,
+        "active_generated_tokens": 2268,
+        "active_parse_success_steps": 10,
+        "active_prompt_tokens": 8115,
+        "baseline_accuracy": 0.05,
+        "baseline_accuracy_wilson_95ci": [
+          0.008881448800795402,
+          0.23613119344674205
+        ],
+        "baseline_auxiliary_tokens": 0,
+        "baseline_correct": 1,
+        "baseline_execution_reused": true,
+        "baseline_generated_tokens": 4736,
+        "baseline_manifest_sha256": "cd75aed1d5f0d3e8117f3b0a78e0a74b455480e743e835f961cb2bf2d10b7faa",
+        "baseline_parse_success_steps": 14,
+        "baseline_prompt_tokens": 27641,
+        "batch_compute": {
+          "learned_prefix_drift_v1": {
+            "calls": 2,
+            "decode_token_slots": 5100,
+            "model_seconds": 74.1156049000565,
+            "padded_prefill_token_slots": 10420,
+            "tokenize_seconds": 0.08663729997351766
+          },
+          "never": {
+            "calls": 5,
+            "decode_token_slots": 12660,
+            "model_seconds": 245.13545120006893,
+            "padded_prefill_token_slots": 41560,
+            "tokenize_seconds": 0.20585500006563962
+          }
+        },
+        "completion_plus_auxiliary_token_savings": 0.5211148648648649,
+        "decision_latency": {
+          "all_under_10ms": true,
+          "decisions": 140,
+          "max_ms": 0.4158,
+          "mean_ms": 0.035965,
+          "median_ms": 0.00405,
+          "over_10ms": 0,
+          "p95_ms": 0.2040449999999997,
+          "p99_ms": 0.38301699999999944
+        },
+        "development_only": true,
+        "kind": "actual_local_llm_learned_prefix_policy_paired_with_actual_prior_baseline",
+        "learned_stop_reasons": {
+          "estimated_drift_nonpositive": 20
+        },
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 2,
+        "measured_completion_token_savings": 0.5211148648648649,
+        "model": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "paired_improved": 0,
+        "paired_unchanged": 20,
+        "paired_worsened": 0,
+        "peer_generation_tokens": 0,
+        "policy_sha256": "b98d71560f22aa7fc320771eea08713b227bd78b42a3076385d532e3bfd6b898",
+        "predictor_sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+        "problems_or_trajectories": 20,
+        "risk_note": "prefix-trained calibrated development predictor; covariate shift from archived instrument and no registered noninferiority margin",
+        "runtime_api_used_gold_or_future": false,
+        "shared_prefix_identical_problems": 20,
+        "stop_reasons": {
+          "estimated_drift_nonpositive": 20
+        },
+        "token_note": "actual generated completion tokens including EOS, excludes padded decoder slots; all repeated prompt tokens reported separately; no proxy or unit-step savings",
+        "total_prompt_completion_auxiliary_token_savings": 0.6793093862927386,
+        "verifier_generation_tokens": 0
+      },
+      "metrics_sha256": "ad17bab1a7e85ced464010ebcef388de05769eca4c96d90b9a001c83ac4fc18d",
+      "paired_bootstrap": {
+        "accuracy_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "completion_token_savings_95ci": [
+          0.45872593357596436,
+          0.5726627070436673
+        ],
+        "noninferiority_margin_registered": false,
+        "qualification": "descriptive paired bootstrap; no proof of zero loss or population safety",
+        "resampling_unit": "paired problem",
+        "samples": 10000,
+        "seed": 20261002
+      },
+      "paired_results_sha256": "75e4b826bfd6bc064de6a8c4dec71abac1cded0039afb6ea4d53ac66cc8cf9f4"
+    },
+    "learned_main": {
+      "active_only_actual_decision_latency": {
+        "all_under_10ms": true,
+        "decisions": 200,
+        "max_ms": 0.7038,
+        "mean_ms": 0.078016,
+        "median_ms": 0.03735,
+        "over_10ms": 0,
+        "p95_ms": 0.24459499999999976,
+        "p99_ms": 0.378534
+      },
+      "artifact_directory": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main",
+      "ledger_audit_passed": true,
+      "manifest_sha256": "ee064a32f7cfb309589de9e77c17e265b072353859f63d3ca392c9da42c6c729",
+      "metrics": {
+        "accuracy_delta": 0.01,
+        "active_accuracy": 0.07,
+        "active_accuracy_wilson_95ci": [
+          0.03431926106727268,
+          0.137495147390735
+        ],
+        "active_auxiliary_tokens": 0,
+        "active_correct": 7,
+        "active_generated_tokens": 9674,
+        "active_parse_success_steps": 83,
+        "active_prompt_tokens": 43874,
+        "baseline_accuracy": 0.06,
+        "baseline_accuracy_wilson_95ci": [
+          0.027786123963188192,
+          0.1247681544589592
+        ],
+        "baseline_auxiliary_tokens": 0,
+        "baseline_correct": 6,
+        "baseline_execution_reused": true,
+        "baseline_generated_tokens": 22244,
+        "baseline_manifest_sha256": "cdf10e924110c59aa85b6d64b016426f1fdcf518771d1174a67e6344a966e081",
+        "baseline_parse_success_steps": 88,
+        "baseline_prompt_tokens": 142498,
+        "batch_compute": {
+          "learned_prefix_drift_v1": {
+            "calls": 8,
+            "decode_token_slots": 23564,
+            "model_seconds": 343.2535203997977,
+            "padded_prefill_token_slots": 58624,
+            "tokenize_seconds": 0.2055147000355646
+          },
+          "never": {
+            "calls": 20,
+            "decode_token_slots": 57856,
+            "model_seconds": 1127.0454995000036,
+            "padded_prefill_token_slots": 231856,
+            "tokenize_seconds": 0.6630873997928575
+          }
+        },
+        "completion_plus_auxiliary_token_savings": 0.5650962057183959,
+        "decision_latency": {
+          "all_under_10ms": true,
+          "decisions": 700,
+          "max_ms": 0.7038,
+          "mean_ms": 0.024788142857142856,
+          "median_ms": 0.00455,
+          "over_10ms": 0,
+          "p95_ms": 0.14984499999999978,
+          "p99_ms": 0.290406
+        },
+        "development_only": true,
+        "kind": "actual_local_llm_learned_prefix_policy_paired_with_actual_prior_baseline",
+        "learned_stop_reasons": {
+          "estimated_drift_nonpositive": 100
+        },
+        "mcnemar_exact_two_sided_p": 1.0,
+        "mean_active_stop_step": 2,
+        "measured_completion_token_savings": 0.5650962057183959,
+        "model": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "paired_improved": 1,
+        "paired_unchanged": 99,
+        "paired_worsened": 0,
+        "peer_generation_tokens": 0,
+        "policy_sha256": "b98d71560f22aa7fc320771eea08713b227bd78b42a3076385d532e3bfd6b898",
+        "predictor_sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+        "problems_or_trajectories": 100,
+        "risk_note": "prefix-trained calibrated development predictor; covariate shift from archived instrument and no registered noninferiority margin",
+        "runtime_api_used_gold_or_future": false,
+        "shared_prefix_identical_problems": 100,
+        "stop_reasons": {
+          "estimated_drift_nonpositive": 100
+        },
+        "token_note": "actual generated completion tokens including EOS, excludes padded decoder slots; all repeated prompt tokens reported separately; no proxy or unit-step savings",
+        "total_prompt_completion_auxiliary_token_savings": 0.6749584198322225,
+        "verifier_generation_tokens": 0
+      },
+      "metrics_sha256": "b3348a486b481eeb490b254d09e760ec9c6a8bb180d60bb24df6423364fdcd55",
+      "paired_bootstrap": {
+        "accuracy_delta_95ci": [
+          0.0,
+          0.03
+        ],
+        "completion_token_savings_95ci": [
+          0.548069020991024,
+          0.5801043609850318
+        ],
+        "noninferiority_margin_registered": false,
+        "qualification": "descriptive paired bootstrap; no proof of zero loss or population safety",
+        "resampling_unit": "paired problem",
+        "samples": 10000,
+        "seed": 20261002
+      },
+      "paired_results_sha256": "f6abd0aeb1cc0eb6b3328b53be661902b3d9ea4c43e2593ee570ca04ded99850"
+    }
+  },
+  "tests": {
+    "log": "online_and_learned_test_results.txt",
+    "owned_tests_passed": 30,
+    "test_sources_sha256": {
+      "test_learned_online_controller.py": "019614a09b0c48cc300aa494cd5abdd176fae7392c3ae418e792ccd04edc801e",
+      "test_online_controller.py": "9d4d296e549fc6f38afd6a23fa1b9e84de24110714298fa95d25649d34e2f3dd",
+      "test_online_replay_accounting.py": "47fe7dfeb278a54dffb127c6cddc8358ecd7e75d139b34c504b843a45c848f4a"
+    }
+  },
+  "verification": {
+    "30_runtime_accounting_tests_passed": true,
+    "actual_pair_and_metrics_unchanged": true,
+    "frozen_manifest_cannot_be_overwritten": true,
+    "new_manifest_records_actual_interpreter": true,
+    "new_manifest_records_package_versions": true,
+    "preserved_execution_sources_match_manifests": true,
+    "source_copies_frozen_before_collector": true
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schema": "final-research-package-verification-v1",
+  "date_local": "2026-10-02",
+  "digital_package_status": "pass",
+  "artifacts": [
+    {
+      "name": "thesis",
+      "output": "output/pdf/Masters_Thesis_Draft_v1_Aditya_Bhatt.pdf",
+      "sha256": "833651e74486ff986e52466b758d4eddf686589b2409badfea41f1f079b45e27",
+      "bytes": 1830594,
+      "build_manifest": "ThesisDocs/thesis_build_manifest.json",
+      "build_manifest_sha256": "af98700be38c96e10cb4a8a03d6de985a380235414aadc61865202b1a3539164",
+      "staged_exact_bytes": true,
+      "pages": 86
+    },
+    {
+      "name": "long_paper",
+      "output": "output/pdf/Overthinking_Stopping_Research_Paper_v1_Aditya_Bhatt.pdf",
+      "sha256": "0e8393c86fbe6d70b215e9e599477a9637f051eef9a50431e5086a720e834344",
+      "bytes": 616249,
+      "build_manifest": "ThesisDocs/paper/paper_build_manifest.json",
+      "build_manifest_sha256": "5654ff7434966336633bcc3b30c761b55fa373456989ae087b69dc4e508799fa",
+      "staged_exact_bytes": true,
+      "pages": 25
+    },
+    {
+      "name": "neurips",
+      "output": "output/pdf/NeurIPS_Anonymous_Draft_v1.pdf",
+      "sha256": "13d045985740865a494ae20f4dac4f53d5a2f1a6fea5355bb192331329df91f1",
+      "bytes": 204374,
+      "build_manifest": "ThesisDocs/neurips/build_manifest.json",
+      "build_manifest_sha256": "1c16c1f78474d526ee5be622f55c7825c7173644286d451db9278a0e2fc6a340",
+      "staged_exact_bytes": true,
+      "pages": 22
+    },
+    {
+      "name": "defense",
+      "output": "output/presentation/Thesis_Defense_v1_Aditya_Bhatt.pptx",
+      "sha256": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+      "bytes": 174398,
+      "build_manifest": "ThesisDocs/defense/final_build_manifest.json",
+      "build_manifest_sha256": "b768d53bcd3e19a7a444b4e8b9b7a73f2b5176c32e790b292c0e06bbc4ddb090",
+      "staged_exact_bytes": true,
+      "slides": 25,
+      "native_tables": 13,
+      "native_charts": 3,
+      "timing_seconds": 1800,
+      "preview_pdf": "output/pdf/Thesis_Defense_Preview_v1_Aditya_Bhatt.pdf",
+      "preview_pdf_sha256": "645c0f693e745ddcc28159a0a9299b34c83213321b21775273257a3e3801e78f",
+      "all25_final_pngs_byte_identical_to_reviewed_renders": true
+    },
+    {
+      "name": "anonymous_supplement",
+      "output": "output/neurips/anonymous_stopping_supplement_v1.zip",
+      "sha256": "0e65afa642d7c16bbe0227aafa10c6d1930ec50cc32538c84fed0dfa3eaf7a57",
+      "bytes": 1600808,
+      "build_manifest": "output/neurips/anonymous_supplement_build_manifest.json",
+      "build_manifest_sha256": "7b714ab7f0c1e1a9a075e11925fecf64af9db9c035a55e51734e8cb5af6a0237",
+      "staged_exact_bytes": true
+    }
+  ],
+  "combined_pytest": {
+    "passed": 107,
+    "warnings": 2,
+    "exit_code": 0,
+    "receipt": "ThesisDocs/verification/final_test_results.txt",
+    "receipt_canonical_lf_sha256": "1d93d5cd79b806ca4c3f5d8a1c2a9fd70cae18ad33dc5483e38e19075e5ddcff"
+  },
+  "standalone_boundary_floor": {
+    "exit_code": 0,
+    "existing_counter_discrepancy": "Seven OK checks; printed summary6/6. No inflated aggregate."
+  },
+  "actual_extracted_anonymous_capsule_tests": {
+    "passed": 107,
+    "exit_code": 0
+  },
+  "frozen_data_files": 731,
+  "frozen_files_plus_authority_master_unchanged_in_final_index": 733,
+  "frozen_continuity_receipt": "ThesisDocs/verification/final_frozen_index_continuity.json",
+  "master_content_fingerprint": "4c950d56495aa204a50a4db9b1daa823b279ff9d582d033832769d6b7bb4800c",
+  "deployed_predictor_sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+  "authored_source_whitespace_check": "pass with CR-at-EOL handling; frozen generated data/SVG, verbatim official templates/checklist and intentional Markdown hard-break lines excluded",
+  "publication_binary_checkout_policy": "output/.gitattributes explicitly preserves PDF/PPTX/ZIP bytes; all deliverables also compared directly with staged Git blobs",
+  "scientific_limit": "Every learned live task stops at two. Low absolute accuracy and intervals allowing harm establish neither adaptive benefit nor noninferiority.",
+  "pending_real_events": [
+    "Committee delivery and two feedback cycles",
+    "Peer recording and adviser rehearsal",
+    "Future-cycle NeurIPS rules, human author/license review and actual submission",
+    "Defense booking, announcement and oral defense",
+    "Committee approval and signatures",
+    "Final approved PDF/A validation and ETD acceptance",
+    "Registrar forms, final grade and degree clearance"
+  ]
+}

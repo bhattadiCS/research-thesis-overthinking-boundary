@@ -2,6 +2,24 @@
 
 This repository contains the theoretical framework, mathematical models, and empirical analyses to address the overthinking problem in large reasoning language models (LLMs) utilizing Chain-of-Thought (CoT) prompting.
 
+> **October 2026 evidence update.** The current mathematical reference is [Mathematical foundations](research/mathematical_foundations.md), and the six-chapter manuscript source is [Thesis Draft v1](ThesisDocs/Masters_Thesis_Draft_v1.md). The frozen standardized corpus contains 144,440 rows from 28,888 five-step trajectories over ARC, GPQA, GSM8K, and MATH; it is separate from the 75,965-trajectory variable-horizon matrix. The historical 0.955156 stacked AUC uses future steps and non-nested meta-training and is a retrospective development diagnostic. It does not establish live correctness or savings. The first nonpositive drift is optimal only under additional conditions; the general solution uses conditional continuation value. Historical explanations below must be read with these corrections.
+
+## Completed research package, October 2026
+
+The accelerated milestones now have a data freeze, formal proofs, an actual generation controller, a task-disjoint fitted prefix predictor, four paired live evaluations, a complete six-chapter thesis, and defense materials. The learned main arm saves 56.51% of completion tokens with 7/100 correct answers versus 6/100 at the full horizon; the trap arm saves 52.11% with 1/20 correct in both arms. Every learned task stops at step two. These small, low-accuracy development panels do not establish adaptive benefit over a fixed budget, accuracy noninferiority, or broad robustness. The original confidence heuristic saves 2.94% and 3.34%, respectively. See the [full implementation and results](ThesisDocs/ONLINE_STOPPING_IMPLEMENTATION_AND_RESULTS_2026-10-02.md) for paired uncertainty, prompt costs, timing, source snapshots and distribution shift.
+
+| Deliverable | Editable source and review artifact |
+| --- | --- |
+| Master's thesis | [Chapter sources](ThesisDocs/chapters/) · [Review PDF](output/pdf/Masters_Thesis_Draft_v1_Aditya_Bhatt.pdf) |
+| 25-page research paper | [Manuscript](ThesisDocs/paper/overthinking_stopping_paper_v1.md) · [PDF](output/pdf/Overthinking_Stopping_Research_Paper_v1_Aditya_Bhatt.pdf) |
+| NeurIPS preparation | [Official-style anonymous source](ThesisDocs/neurips/) · [Draft PDF](output/pdf/NeurIPS_Anonymous_Draft_v1.pdf) · [Anonymous code/evidence supplement](output/neurips/anonymous_stopping_supplement_v1.zip) |
+| 25-slide defense | [Editable PowerPoint](output/presentation/Thesis_Defense_v1_Aditya_Bhatt.pptx) · [30-minute notes and 46-question bank](ThesisDocs/defense/) |
+| Milestone and committee review | [Completion audit](ThesisDocs/milestone_completion_audit_v1.md) · [Delivery draft and review procedure](ThesisDocs/committee_review_package_v1.md) |
+
+The NeurIPS version uses the published 2026 main-track style. That cycle's submission deadline has passed; next-cycle requirements must be rechecked before any submission. Committee revision cycles, recorded rehearsals, public defense, signatures, final PDF/A validation, ETD acceptance and registrar clearance remain pending actual academic events. No manuscript submission or committee message has been sent.
+
+Build commands and exact artifact hashes are recorded with the respective source directories. Verify the scientific freeze with `python tools/freeze_research_data.py verify`; a checkout that changes historical CSV line endings must explicitly use `--allow-line-ending-changes`, which accepts only canonical LF equivalence and still rejects changed content. Current workstation locks and partial historical environment evidence are separate records.
+
 > [!TIP]
 > **New to the project?** Start with the [Simplified Research Summary](#simplified-research-summary) below for a primer on our methods and findings.
 
@@ -35,8 +53,10 @@ $$\mathbb{E}[q_{t+1} - q_t \mid q_t] = (1 - q_t)\alpha_t - q_t\beta_t$$
 Substituting the expected state transition into the value function yields the complete, value-aware drift equation:
 $$\mu_t = \left[ (1 - q_t)\alpha_t - q_t\beta_t \right] (v + c) - \lambda$$
 
-The optimal stopping boundary $T^*$ is reached when the expected marginal utility of continuing reasoning turns non-positive:
-$$T^*$ = \inf \{ t \ge T_{\min} : \mu_t \le 0 \}$$
+The myopic stopping boundary $T_{\mathrm{myopic}}$ is reached when the expected one-step marginal utility turns non-positive:
+$$T_{\mathrm{myopic}} = \inf \{ t \ge T_{\min} : \mu_t \le 0 \}.$$
+
+This rule is not generally optimal: a later repair can justify a negative immediate gain. The finite-horizon optimal rule compares the immediate reward with the Bellman/Snell continuation value. [The canonical mathematical reference](research/mathematical_foundations.md) proves the general rule, a sufficient persistent-sign condition for myopic optimality, and exact counterexamples when that condition fails.
 
 In low-stakes environments ($v+c$ is minimal), the persistent step cost $\lambda$ quickly dominates the equation, forcing aggressive early stopping. In high-stakes environments ($v+c$ is massive), the proxy tolerates lower repair hazards ($\alpha_t$) and higher corruption hazards ($\beta_t$), allowing extended reasoning traces to maximize correctness.
 

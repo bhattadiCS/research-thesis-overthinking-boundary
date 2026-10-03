@@ -1,0 +1,5 @@
+# Publication artifacts must retain exact bytes on every platform. Some PDFs
+# contain only ASCII in their first8KB and otherwise look like text to Git.
+*.pdf binary
+*.pptx binary
+*.zip binary

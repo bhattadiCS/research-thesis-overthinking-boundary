@@ -1,0 +1,284 @@
+{
+  "archived_later_analysis_environments": [
+    {
+      "manifest": {
+        "bytes": 29382,
+        "canonical_lf_bytes": 29382,
+        "canonical_lf_sha256": "8ed939a0694cf32e38ab9a4da8a28c85c18266a4e37b78437f7b0e3f37078455",
+        "path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/prepared_manifest.json",
+        "sha256": "8ed939a0694cf32e38ab9a4da8a28c85c18266a4e37b78437f7b0e3f37078455"
+      },
+      "recorded_versions": {
+        "lightgbm": "4.6.0",
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "selected-answer-causal-dynamics-oof-v1"
+    },
+    {
+      "manifest": {
+        "bytes": 16573,
+        "canonical_lf_bytes": 16573,
+        "canonical_lf_sha256": "415ed3c67a02864ae9053d969a28bd37746c4f56898fbc8c1c8f33f3443e0367",
+        "path": "research/outputs/experiments_v2/selected_answer_content_oof_v1/prepared_selected_answer_content_manifest.json",
+        "sha256": "415ed3c67a02864ae9053d969a28bd37746c4f56898fbc8c1c8f33f3443e0367"
+      },
+      "recorded_versions": {
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "selected-answer-content-oof-v1"
+    },
+    {
+      "manifest": {
+        "bytes": 16702,
+        "canonical_lf_bytes": 16702,
+        "canonical_lf_sha256": "f6374560e713ecc7fec8f2a6624ac015511def664928603a4121195b63eda74b",
+        "path": "research/outputs/experiments_v2/selected_answer_content_oof_v2_sanitized_thought/prepared_selected_answer_thought_content_manifest.json",
+        "sha256": "f6374560e713ecc7fec8f2a6624ac015511def664928603a4121195b63eda74b"
+      },
+      "recorded_versions": {
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "selected-answer-content-oof-v2-sanitized-thought"
+    },
+    {
+      "manifest": {
+        "bytes": 16834,
+        "canonical_lf_bytes": 16834,
+        "canonical_lf_sha256": "5915167a02daef22be89b6e931d3b6cb0300563c5dc78c03637ca1d32cceff0e",
+        "path": "research/outputs/experiments_v2/selected_answer_content_oof_v3_reasoning_only/prepared_selected_answer_thought_content_manifest.json",
+        "sha256": "5915167a02daef22be89b6e931d3b6cb0300563c5dc78c03637ca1d32cceff0e"
+      },
+      "recorded_versions": {
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "selected-answer-content-oof-v3-sanitized-thought"
+    },
+    {
+      "manifest": {
+        "bytes": 16846,
+        "canonical_lf_bytes": 16846,
+        "canonical_lf_sha256": "242022cd07a7ca37d342e422d4cc86189002b8a8a28787eda298688fc3d66661",
+        "path": "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/prepared_selected_answer_thought_content_manifest.json",
+        "sha256": "242022cd07a7ca37d342e422d4cc86189002b8a8a28787eda298688fc3d66661"
+      },
+      "recorded_versions": {
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "selected-answer-content-oof-v4-sanitized-thought"
+    },
+    {
+      "manifest": {
+        "bytes": 24151,
+        "canonical_lf_bytes": 24151,
+        "canonical_lf_sha256": "b02457aed7620b7b6601a0f9f18a08212fda8bfad7b6c658f1515d52b9f67f5e",
+        "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v2/prepared_manifest.json",
+        "sha256": "b02457aed7620b7b6601a0f9f18a08212fda8bfad7b6c658f1515d52b9f67f5e"
+      },
+      "recorded_versions": {
+        "lightgbm": "4.6.0",
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "selected-answer-temporal-shape-oof-v2"
+    },
+    {
+      "manifest": {
+        "bytes": 24149,
+        "canonical_lf_bytes": 24149,
+        "canonical_lf_sha256": "3b94d7a7f3acce8b70743d3f4569a079aa600266f0332909e57488d91c796050",
+        "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/prepared_manifest.json",
+        "sha256": "3b94d7a7f3acce8b70743d3f4569a079aa600266f0332909e57488d91c796050"
+      },
+      "recorded_versions": {
+        "lightgbm": "4.6.0",
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "selected-answer-temporal-shape-oof-v3"
+    },
+    {
+      "manifest": {
+        "bytes": 19678,
+        "canonical_lf_bytes": 19678,
+        "canonical_lf_sha256": "af323dec7b82ac8fb9afcf6a6e73ee81666b47bab82648e85541a0e8596c906f",
+        "path": "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/prepared_manifest.json",
+        "sha256": "af323dec7b82ac8fb9afcf6a6e73ee81666b47bab82648e85541a0e8596c906f"
+      },
+      "recorded_versions": {
+        "lightgbm": "4.6.0",
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "strict-tabular-stopping-oof-v1"
+    },
+    {
+      "manifest": {
+        "bytes": 18198,
+        "canonical_lf_bytes": 18198,
+        "canonical_lf_sha256": "afbed217f7344d8d91466c025d6de47bc017e8f9e16678cd078cf60f4a098731",
+        "path": "research/outputs/experiments_v2/strict_text_stopping_oof_v1/prepared_manifest.json",
+        "sha256": "afbed217f7344d8d91466c025d6de47bc017e8f9e16678cd078cf60f4a098731"
+      },
+      "recorded_versions": {
+        "numpy": "2.3.5",
+        "pandas": "2.2.2",
+        "python": "3.12.4",
+        "scikit_learn": "1.8.0"
+      },
+      "schema_version": "strict-text-stopping-oof-v1"
+    }
+  ],
+  "archived_tournament_environment": {
+    "limitations": "Only recorded values are historical evidence; a current pip/package inventory cannot reconstruct this environment.",
+    "partial_lock_file": "requirements.historical-tournament.partial.txt",
+    "recorded_preflight": {
+      "compute_capability": "sm_120",
+      "cuda_available": true,
+      "cuda_runtime": "13.0",
+      "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "nvidia_smi": {
+        "memory_total_mib": 97887.0,
+        "memory_used_mib": 3.0,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "power_draw_w": 48.04,
+        "power_limit_w": 600.0,
+        "temperature_c": 25.0,
+        "utilization_gpu_percent": 0.0
+      },
+      "torch_arch_list": [
+        "sm_75",
+        "sm_80",
+        "sm_86",
+        "sm_90",
+        "sm_100",
+        "sm_120"
+      ],
+      "torch_version": "2.13.0+cu130",
+      "total_memory_mib": 97250
+    },
+    "source": {
+      "bytes": 11287,
+      "canonical_lf_bytes": 10975,
+      "canonical_lf_sha256": "37ebbd4f4a419e01d00b460bd520f1884270f0fc0d7eead738bc75cb6c6da3a4",
+      "path": "research/outputs/experiments_v2/ultimate_tournament_manifest.json",
+      "sha256": "2449b79bcae9017eeeb3f12dddea9f48260ded8304db0f84195d65092467fe6c"
+    },
+    "unknown": [
+      "Python version",
+      "NumPy",
+      "pandas",
+      "SciPy",
+      "scikit-learn",
+      "LightGBM",
+      "Transformers",
+      "generation model and dataset revision hashes",
+      "exact package wheel sources/hashes"
+    ]
+  },
+  "captured_utc": "2026-10-03T01:11:37.957829Z",
+  "current_local_environment": {
+    "distributions_with_direct_install_metadata": [
+      "aic-firewall",
+      "short-option-recommenders",
+      "stockpredictionsmodel"
+    ],
+    "executable": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "installed_distribution_count": 334,
+    "limitations": "Version inventory; package indexes, wheel hashes, external system libraries and direct-install source URLs are not reconstructed.",
+    "lock_file": "requirements.local-environment.lock.txt",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "purpose": "Current audit/reanalysis environment only; not evidence of original training versions.",
+    "python": "3.12.4",
+    "python_implementation": "CPython",
+    "relevant_packages": {
+      "accelerate": "1.13.0",
+      "bitsandbytes": "0.49.2",
+      "datasets": "4.8.5",
+      "evaluate": "0.4.6",
+      "lightgbm": "4.6.0",
+      "matplotlib": "3.10.8",
+      "numpy": "2.3.5",
+      "optuna": "4.7.0",
+      "pandas": "2.2.2",
+      "pytest": "8.4.0",
+      "safetensors": "0.7.0",
+      "scikit-learn": "1.8.0",
+      "scipy": "1.17.1",
+      "sentencepiece": "0.2.1",
+      "torch": "2.11.0+cu128",
+      "tqdm": "4.67.1",
+      "transformers": "5.8.0"
+    },
+    "roadmap_lock_alias": "requirements.lock.txt"
+  },
+  "repository_generation_requirements": {
+    "declared_constraints": [
+      "transformers==4.53.3",
+      "accelerate>=1.13.0",
+      "datasets>=3.4",
+      "evaluate>=0.4",
+      "bitsandbytes>=0.49.0",
+      "sentencepiece>=0.2",
+      "safetensors>=0.4",
+      "pandas>=2.2",
+      "scikit-learn>=1.6",
+      "scipy>=1.15",
+      "matplotlib>=3.10",
+      "numpy>=2.0.0",
+      "numexpr>=2.14.1",
+      "bottleneck>=1.6.0",
+      "tqdm>=4.67",
+      "optuna>=4.7",
+      "lightgbm>=4.6"
+    ],
+    "interpretation": "Declared repository constraints, not an observed original experiment lock; most versions are lower bounds.",
+    "source": {
+      "bytes": 285,
+      "canonical_lf_bytes": 268,
+      "canonical_lf_sha256": "f90f1e610bbf4798b876735034d33570c2d3a35f8aabcae9b943bad6bdedf1af",
+      "path": "requirements-colab.txt",
+      "sha256": "c00dba8ff8635d0891e705768faec49970afe0091d251652ec32030309c34348"
+    }
+  },
+  "schema_version": "research-software-provenance-v1",
+  "separately_observed_current_environments": [
+    {
+      "lock": {
+        "bytes": 1892,
+        "canonical_lf_bytes": 1892,
+        "canonical_lf_sha256": "7c270d47b12eed871be6174ac3e45ebee7bcd38509aa307e89c0bc157ac47dc2",
+        "path": "requirements.repository-venv.lock.txt",
+        "sha256": "7c270d47b12eed871be6174ac3e45ebee7bcd38509aa307e89c0bc157ac47dc2"
+      },
+      "provenance": {
+        "bytes": 3571,
+        "canonical_lf_bytes": 3571,
+        "canonical_lf_sha256": "796272f91cbbccb2e6991be4b74a4ec8416c6b2e69130855e7b66dd109f0ba8e",
+        "path": "software_repository_venv_observed_v1.json",
+        "sha256": "796272f91cbbccb2e6991be4b74a4ec8416c6b2e69130855e7b66dd109f0ba8e"
+      },
+      "purpose": "Repository .venv used for the new failure-classification command; base audit, live generation, and prefix training use the primary observed environment."
+    }
+  ]
+}

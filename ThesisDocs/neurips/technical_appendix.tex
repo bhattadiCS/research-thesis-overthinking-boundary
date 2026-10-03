@@ -1,0 +1,568 @@
+\section{Full derivations and finite-horizon proofs}
+\label{app:proofs}
+
+Throughout this section, time is discrete, \(m,N\) are fixed finite integers,
+\((\F_t)_{t=0}^N\) is a filtration, and all random variables are defined on one
+probability space. Correctness \(C_t\in\{0,1\}\) need not be observable.
+Its conditional expectation \(q_t=\E[C_t\mid\F_t]\) is adapted. Cost \(K_t\)
+is adapted and integrable; nondecreasing cost is needed for the stakes
+comparison but not for the Snell construction. Versions of conditional
+expectations can be chosen consistently outside one null set because only
+finitely many times occur. Policies and candidate selection are restricted
+to the declared information. All assertions involving inequalities between
+conditional quantities hold almost surely.
+
+\subsection{Stopped reward and transition identity}
+\begin{lemma}[Observable reward reduction]
+\label{lem:reduction-full}
+For every stopping time \(m\le\tau\le N\),
+\(\E[C_\tau-K_\tau]=\E[q_\tau-K_\tau]\).
+\end{lemma}
+\begin{proof}
+For each \(t\), the event \(\{\tau=t\}\) belongs to \(\F_t\). Thus
+\[
+ \E[\ind\{\tau=t\}C_t]
+ =\E[\ind\{\tau=t\}\E[C_t\mid\F_t]]
+ =\E[\ind\{\tau=t\}q_t].
+\]
+Sum over \(t=m,\ldots,N\) and subtract the common integrable cost.
+No conditional independence or measurability of \(C_t\) itself is required.
+\end{proof}
+
+\begin{lemma}[Binary conditional drift]
+\label{lem:drift-full}
+With \(r_t,s_t,\alpha_t,\beta_t,c_t\) defined as in
+Section \ref{sec:theory}, \(r_t=(1-q_t)\alpha_t\),
+\(s_t=q_t\beta_t\), and Equation \eqref{eq:drift} holds.
+\end{lemma}
+\begin{proof}
+The conditional repair mass is at most
+\(\PP(C_t=0\mid\F_t)=1-q_t\), and the corruption mass is at most \(q_t\).
+They therefore vanish on the respective denominator-zero events. The stated
+ratio definitions and zero conventions give the mass equalities everywhere
+outside a null set, with \(0\le\alpha_t,\beta_t\le1\). Pointwise,
+\[
+ C_{t+1}-C_t
+ =\ind\{C_t=0,C_{t+1}=1\}
+  -\ind\{C_t=1,C_{t+1}=0\}.
+\]
+Since \(\F_t\subseteq\F_{t+1}\), the tower property gives
+\(\E[q_{t+1}\mid\F_t]=\E[C_{t+1}\mid\F_t]\).
+Subtract \(q_t\) and the conditional cost increment to obtain the identity.
+\end{proof}
+
+For finite-sample descriptive transitions, if the same \(n\) trajectories
+provide all adjacent binary outcomes, let \(n_{01}\) and \(n_{10}\) be the
+repair and corruption counts. Their difference divided by \(n\), rather than
+the difference of the two eligible-subgroup rates, is the empirical accuracy
+increment. This is an exact counting identity, not a population inference.
+An affine reward \(vC_t-p(1-C_t)-K_t\) reduces to
+\((v+p)q_t-p-K_t\); its drift is
+\((v+p)[(1-q_t)\alpha_t-q_t\beta_t]-c_t\).
+
+\subsection{Proof of Theorem \ref{thm:snell}}
+The recursion in Equation \eqref{eq:snell} constructs an adapted integrable
+process: finite maxima of integrable variables remain integrable.
+It dominates \(G\) and satisfies
+\(\E[S_{t+1}\mid\F_t]\le S_t\).
+If an integrable supermartingale \(Z\) dominates \(G\), then \(Z_N\ge S_N\).
+Backward induction yields
+\[
+ Z_t\ge G_t,\qquad
+ Z_t\ge\E[Z_{t+1}\mid\F_t]\ge\E[S_{t+1}\mid\F_t],
+\]
+so \(Z_t\ge S_t\). This proves minimality.
+
+Fix a deterministic start \(t\ge m\). First contact
+\(\tau_t^*=\inf\{s\in\{t,\ldots,N\}:S_s=G_s\}\) exists since contact holds
+at \(N\), and is a stopping time since \(S_s,G_s\) are adapted.
+For any bounded \(\tau\ge t\), telescoping the stopped supermartingale gives
+\[
+ S_\tau=S_t+\sum_{s=t}^{N-1}\ind\{\tau>s\}(S_{s+1}-S_s).
+\]
+Each indicator is \(\F_s\)-measurable. Conditioning first on \(\F_s\) and
+then on \(\F_t\) shows
+\(\E[S_\tau\mid\F_t]\le S_t\), and hence
+\(\E[G_\tau\mid\F_t]\le S_t\).
+
+Before contact, \(S_s>G_s\), so the recursion forces
+\(S_s=\E[S_{s+1}\mid\F_s]\). Consequently, for \(s\ge t\),
+\[
+ \E[S_{(s+1)\wedge\tau_t^*}\mid\F_s]=S_{s\wedge\tau_t^*}.
+\]
+This stopped process is a martingale from the chosen start \(t\).
+At terminal contact \(S_{\tau_t^*}=G_{\tau_t^*}\); repeated conditional
+expectation yields \(S_t=\E[G_{\tau_t^*}\mid\F_t]\).
+Every admissible conditional reward is bounded by \(S_t\), and one admissible
+reward attains it, proving the essential-supremum representation and optimum.
+This also proves the claims for an imposed floor without permitting stops
+before that floor. The proof is the finite discrete specialization of
+\citet{ferguson,peskir2006}.
+
+Equation \eqref{eq:option} follows by adding and subtracting
+\(\E[G_{t+1}\mid\F_t]\). Domination \(S_{t+1}\ge G_{t+1}\) proves the
+nonnegative option term; no bound on its size is supplied by an AUC.
+If a finite measurable candidate set is available at a stop, replace the
+immediate reward by the maximum of its conditional candidate rewards.
+This extension requires candidate-specific estimates and does not justify
+selecting a candidate using unavailable gold.
+
+\subsection{Compensator and persistent signs}
+\begin{lemma}[Finite drift decomposition]
+\label{lem:doob-full}
+Define
+\[
+ D_t=\sum_{s=m}^{t-1}\mu_s,\qquad M_t=G_t-G_m-D_t,\qquad t\ge m.
+\]
+Then \(M\) is an integrable martingale with \(M_m=0\), and for any admissible
+\(\tau\),
+\begin{equation}
+ \E G_\tau=\E G_m+
+ \E\sum_{s=m}^{N-1}\ind\{\tau>s\}\mu_s .
+ \label{eq:stopped-drift-full}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Adaptation and integrability follow from finite sums.
+The next conditional increment of \(M\) is
+\(\E[G_{t+1}-G_t-\mu_t\mid\F_t]=0\).
+Alternatively, expand \(G_\tau-G_m\) as the stopped telescoping sum;
+measurability of \(\ind\{\tau>s\}\) gives Equation
+\eqref{eq:stopped-drift-full} directly.
+\end{proof}
+
+To prove Proposition \ref{prop:persistence}, first observe that \(T_c\)
+is a stopping time because each \(\mu_t\) is \(\F_t\)-measurable.
+For every \(s<T_c\), \(\mu_s>0\) and \(\ind\{T_c>s\}=1\).
+For every \(s\ge T_c\), the hypothesis gives \(\mu_s\le0\), while
+\(\ind\{T_c>s\}=0\). For every competitor \(\tau\), therefore,
+\[
+ (\ind\{T_c>s\}-\ind\{\tau>s\})\mu_s\ge0
+\]
+on each path. Sum and apply Equation \eqref{eq:stopped-drift-full} to both
+times. Equality can hold for other policies when some drifts vanish;
+the proposition claims optimality, not uniqueness.
+
+The structural sufficient condition stated in the main text is proved by
+subtracting adjacent expressions:
+\begin{align}
+ \mu_{t+1}-\mu_t={}&
+ (1-q_{t+1})(\alpha_{t+1}-\alpha_t)
+ \alpha_t(q_t-q_{t+1}) \nonumber\\
+ &-q_{t+1}(\beta_{t+1}-\beta_t)
+ -\beta_t(q_{t+1}-q_t)-(c_{t+1}-c_t).
+ \label{eq:monotone-drift-full}
+\end{align}
+Each term is nonpositive under the pathwise conditions
+\(q_{t+1}\ge q_t\), \(\alpha_{t+1}\le\alpha_t\),
+\(\beta_{t+1}\ge\beta_t\), and \(c_{t+1}\ge c_t\).
+Constant cost is a special case. No population-average replacement of these
+conditions is used.
+
+\begin{corollary}[Stakes ordering for an unchanged potential process]
+\label{cor:stakes-full}
+Let \(0<w_1\le w_2\), where \(w=v+p\). Keep the potential trace law,
+filtration, candidate selector, floor, horizon and pathwise nondecreasing
+cost process fixed. With first-contact tie-breaking, the optimal times
+satisfy \(\tau^*(w_1)\le\tau^*(w_2)\) almost surely.
+\end{corollary}
+\begin{proof}
+The constant incorrect-answer offset cancels from continuation comparisons.
+The normalized advantage of being forced to continue at least once is
+\[
+ \frac{\Delta_t^*(w)}{w}
+ =\esssup_{\tau:\,t+1\le\tau\le N}
+ \E\left[q_\tau-q_t-\frac{K_\tau-K_t}{w}\,\middle|\,\F_t\right].
+\]
+The Snell representation proves this identity by optimizing the remaining
+bounded stop after the mandatory increment. Since \(K_\tau-K_t\ge0\),
+each expression inside the essential supremum is nondecreasing in \(w\).
+So is the supremum. Strict continuation for \(w_1\) implies strict
+continuation for \(w_2\) at that same history. If the higher-stakes first
+contact preceded lower-stakes contact on any path, this implication at the
+earlier time would be contradicted. The common forced terminal stop
+handles \(N\).
+\end{proof}
+Stakes must not change the prompt, generation law, selection, or cost.
+The result neither asserts strictly increasing accuracy nor applies
+automatically to estimated myopic boundaries.
+
+\section{Common-reference counterexamples}
+\label{app:counterexamples}
+\paragraph{Delayed repair.}
+Let \(Y^*\in\{0,1\}\) have a fair prior. At times zero and one the generator
+outputs the surely incorrect symbol 2, and at time two it outputs \(Y^*\).
+Before the last response the visible observations reveal no reference value.
+The decision filtration is generated by the observed responses; gold is not
+an input. Therefore \(q=(0,0,1)\). With \(K_t=t/10\), rewards are
+\((0,-1/10,4/5)\). The first immediate drift is negative, but time two is
+optimal. A system that instead always outputs symbol 2 has the same time-zero
+\((q,\alpha,\beta,c)=(0,0,0,1/10)\), but stopping immediately is optimal.
+Thus an exact current posterior/hazard triple need not identify a multistep
+optimum. Prefixing either construction by uninformative responses realizes
+the example at any desired minimum-step floor.
+
+\paragraph{Unconditional drift misses adaptation.}
+Give the joint signal/reference distribution the four atoms
+\[
+ \PP(A,Y^*=1)=1/5,\quad \PP(A,Y^*=0)=3/10,\quad
+ \PP(B,Y^*=1)=3/10,\quad \PP(B,Y^*=0)=1/5 .
+\]
+At times zero and one the candidate is 1; the signal is revealed at time one.
+Its two branches each have probability \(1/2\), so
+\(q_0=1/2\), \(q_1=2/5\) on \(A\), and \(q_1=3/5\) on \(B\).
+At time two the generator returns \(Y^*\) on \(A\), and the surely incorrect
+symbol 2 on \(B\). Hence \(q_2=\ind\{A\}\). With cost \(t/10\),
+the expected deterministic-time rewards are \(1/2,2/5,3/10\);
+both unconditional reward increments equal \(-1/10\).
+The causal policy that continues at zero, then continues on \(A\) and stops
+on \(B\), earns
+\[
+ \tfrac12(1-2/10)+\tfrac12(3/5-1/10)=13/20>1/2 .
+\]
+Its decision uses only the observed signal, not the future answer or its
+correctness. The time-one conditional drift is \(1/2\) on \(A\) and
+\(-7/10\) on \(B\); its average is negative. The signal creates the
+continuation option missed by the population crossing.
+
+\section{Prediction, calibration and uncertainty conditions}
+\label{app:calibration}
+\subsection{Compressed information and weighted loss}
+If \(Z_t\) is a causal feature of the prefix, conditional transition algebra
+also holds given \(\sigma(Z_t)\). It need not give the same conditional
+quantity as the full history, and the fields \(\sigma(Z_t)\) at successive
+times need not be nested. Bellman compression additionally requires that,
+given the compressed state, the conditional future observation, cost and
+reward law not depend on omitted history. A correctly specified partially
+observed Markov model can instead use its full latent-state posterior.
+The portable logistic heads provide neither such model nor sufficiency proof.
+
+For \(0<p<1\), positive weights \(w_1,w_0\), and \(0<r<1\), weighted conditional
+Bernoulli loss is
+\[
+ L(r)=-w_1p\log r-w_0(1-p)\log(1-r).
+\]
+Its derivative vanishes uniquely at
+\[
+ r=\frac{w_1p}{w_1p+w_0(1-p)},\qquad
+ p=\frac{w_0r}{w_1(1-r)+w_0r},
+\]
+because its second derivative is strictly positive.
+Endpoint optima are interpreted by limits. This inversion concerns an
+unconstrained population optimum; regularization, misspecification and
+estimated weights still matter. We avoid class weights for the new heads.
+AUC is invariant to strictly increasing score transforms, whereas probability
+drift thresholds are not. Even a constant \(1/2\) score is marginally
+calibrated in a balanced population whose available history fully reveals
+correctness. It is not that history's conditional posterior.
+
+\subsection{Algebraic bounds and their premises}
+Let all probability arguments lie in \([0,1]\), with genuine pointwise errors
+\(|\widehat q-q|\le\epsilon_q\),
+\(|\widehat\alpha-\alpha|\le\epsilon_\alpha\),
+\(|\widehat\beta-\beta|\le\epsilon_\beta\), and
+\(|\widehat c-c|\le\epsilon_c\). Subtraction gives
+\[
+ \widehat\mu-\mu
+ =(1-\widehat q)(\widehat\alpha-\alpha)
+ -\widehat q(\widehat\beta-\beta)
+ -(\widehat q-q)(\alpha+\beta)-(\widehat c-c),
+\]
+so the triangle inequality yields
+\[
+ |\widehat\mu-\mu|
+ \le 2\epsilon_q+(1-\widehat q)\epsilon_\alpha
+       +\widehat q\epsilon_\beta+\epsilon_c .
+\]
+For valid rectangular intervals contained in \([0,1]\), exact extrema are
+\[
+ L=(1-q_U)a_L-q_Ub_U-c_U,\qquad
+ U=(1-q_L)a_U-q_Lb_L-c_L .
+\]
+The drift increases with \(\alpha\) and decreases with \(q,\beta,c\);
+the indicated corners attain the extrema. For the direct two-head identity
+\(\mu=p_{\mathrm{next}}-q-c\), hypothetical pointwise head errors instead
+give \(|\widehat\mu-\mu|\le\epsilon_{\mathrm{next}}+\epsilon_q+\epsilon_c\).
+Reported Brier, ECE and AUC do not supply any of these pointwise premises.
+
+\subsection{A scoped sequential sign certificate}
+Assume observable upper bounds \(U_t\) satisfy
+\(\PP(\exists t\in\{m,\ldots,N-1\}:\mu_t>U_t)\le\delta\).
+Let \(\tau_U\) be the first \(U_t\le0\), with terminal fallback.
+On the simultaneous coverage event, every nonterminal stop obeys
+\(\mu_{\tau_U}\le U_{\tau_U}\le0\). Thus
+\[
+ \PP(\tau_U<N,\ \mu_{\tau_U}>0)\le\delta .
+\]
+This is a one-step sign guarantee, not optimality or retained accuracy.
+Replacing the target by the full Bellman advantage would require a separately
+valid bound for that advantage.
+
+To obtain a conditional Hoeffding construction, name the pre-probe field
+\(\mathcal H_t\) and its measurable target \(\theta_t\).
+Suppose \(n_t\) is fixed before observing probes, and conditional on
+\(\mathcal H_t\), probes \(X_{t,i}\in[a,b]\) are independent, each with mean
+\(\theta_t\). Conditional Hoeffding gives
+\[
+ \PP\left(\theta_t>\overline X_t+
+ (b-a)\sqrt{\frac{\log(1/\delta_t)}{2n_t}}\ \middle|\ \mathcal H_t\right)
+ \le\delta_t .
+\]
+Taking \(\delta_t=\delta/[r(r+1)]\), \(r=t-m+1\), and summing yields
+simultaneous coverage of the \(\theta_t\) targets. Cross-time independence
+is unnecessary. Within-time conditional independence and the named means
+remain necessary. The post-probe field includes the probes and their costs;
+a bound for \(\theta_t\) covers post-probe \(\mu_t\) only when equality or a
+justified comparison is established. Fixed-count Hoeffding does not license
+adaptively choosing the probe count without further uniformity
+\citep{hoeffding1963,howard2021}.
+
+For an elementary sequential check, suppose \(X_i\in[-1,1]\) is adapted to
+\(\mathcal G_i\), and the null satisfies
+\(\E[X_i\mid\mathcal G_{i-1}]\ge0\) at every \(i\).
+For fixed \(0\le\eta<1\),
+\[
+ E_n^{(\eta)}=\prod_{i=1}^n(1-\eta X_i)
+\]
+is nonnegative and has next conditional expectation at most its current
+value. A fixed convex mixture also starts at one and is a supermartingale.
+If \(T\) is its first crossing of \(1/\delta\), bounded optional sampling
+gives \(1\ge\E[E_{T\wedge n}]\ge\PP(T\le n)/\delta\); let \(n\) increase.
+Hence \(\PP(\sup_n E_n\ge1/\delta)\le\delta\).
+This tests the specified conditional-mean null. If instead \(X_i=B\) for all
+\(i\), with one fair shared sign, each marginal mean is zero but the ten-factor
+product with \(\eta=1/2\) exceeds 20 with probability \(1/2\).
+Favorable marginal means alone therefore cannot establish a 5\% guarantee.
+Neither sequential construction is claimed for the live fitted controller.
+
+\section{Task roles, feature contract and execution details}
+\label{app:protocol}
+\subsection{Training and label reconstruction}
+The model source comprises two five-step global archives: 1,000 GSM8K-training
+tasks and 500 MATH tasks. The task key is public domain joined to task identity.
+A SHA-256 mapping with fixed salt
+\texttt{prefix-model-v1-task-split-fixed-20261002} and thresholds \(0.6,0.8\)
+assigns every task before parser checks, labels or model fitting.
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Domain & Train & Calibration & Evaluation\\
+\midrule
+GSM8K & 599 & 225 & 176\\
+MATH & 303 & 97 & 100\\
+Total & 902 & 322 & 276\\
+\bottomrule
+\end{tabular}
+\end{center}
+Public identities for the 100 live tasks and 20 traps are excluded without
+reading their outcomes. Within each complete trace, the candidate for a
+prefix is the latest nonempty answer available there; both targets use this
+same causal selection, with the next target evaluated after one additional
+response. Gold access is confined to offline reconstruction of archived
+training/calibration/evaluation labels and final external grading.
+
+The strict parser requires string thought and nonempty string answer, integer
+confidence in \(0,\ldots,100\) excluding booleans, and boolean stop.
+It scans decodable JSON objects and accepts one satisfying all fields.
+Otherwise the existing numeric/math fallback extracts an answer, but confidence
+is missing. Answer-change features casefold and normalize whitespace; they
+do not use reference-based numeral normalization. Offline verification
+regrades the reconstructed answer against its stored archive reference.
+The audit keeps old candidate/label and reconstructed candidate/label for
+all 7,500 rows. The 4,269 string changes and 43 label changes do not justify a
+claim that every new label is correct.
+
+The serialized feature order is given by the explicit indices:
+\begin{center}
+\begin{tabular}{rl}
+\toprule
+Index & Feature name\\
+\midrule
+1 & \texttt{step}\\
+2 & \texttt{parse\_success}\\
+3 & \texttt{answer\_present}\\
+4 & \texttt{confidence\_centered}\\
+5 & \texttt{confidence\_missing}\\
+6 & \texttt{confidence\_delta}\\
+7 & \texttt{prefix\_confidence\_mean}\\
+8 & \texttt{log\_generated\_tokens}\\
+9 & \texttt{log\_cumulative\_generated\_tokens}\\
+10 & \texttt{answer\_changed}\\
+11 & \texttt{answer\_streak}\\
+12 & \texttt{prefix\_answer\_changes}\\
+13 & \texttt{log\_answer\_characters}\\
+14 & \texttt{log\_thought\_characters}\\
+15 & \texttt{thought\_numeric\_density}\\
+16 & \texttt{thought\_uncertainty\_density}\\
+17 & \texttt{thought\_verification\_density}\\
+18 & \texttt{domain\_gsm8k}\\
+19 & \texttt{domain\_math}\\
+20 & \texttt{step\_confidence\_interaction}\\
+21 & \texttt{streak\_confidence\_interaction}\\
+\bottomrule
+\end{tabular}
+\end{center}
+Lengths use \(\log(1+x)\). Centered confidence is \((h-50)/50\) when valid
+and zero otherwise, with a separate missing indicator. Consecutive confidence
+difference is divided by 100 and is zero when either response is invalid.
+Prefix mean uses only valid confidences divided by 100, with default \(0.5\).
+Streak counts consecutive equal answer keys, and changes count adjacent
+unequal keys. Numeric density is digit characters divided by thought
+characters. Lowercase alphabetic words define the other densities:
+uncertainty words are maybe, uncertain, unsure, however, alternatively, doubt;
+verification words are check, verify, recheck, calculate, confirm, verification.
+Zero-length denominators are replaced by one. Interactions multiply centered
+confidence by step or streak. None reads timing, a hidden state or future row.
+
+Both base heads use unweighted \(L_2\)-regularized logistic regression with
+\(C=1\), L-BFGS and 2,000 maximum iterations. Each train-only standardizer is
+reused for the calibration and evaluation panels. Calibration fits an
+unweighted logistic transform of that head's raw logit with \(C=1000\)
+on calibration tasks only. The runtime reproduces the standardized affine
+logit and calibrated sigmoid from finite serialized numbers, verifies schema,
+feature order, scales, domain and floor/horizon, and hashes exact artifact bytes.
+No strict JSON row exists in the archives: parse and confidence-related features
+are constant there and their corresponding fitted coefficients are zero.
+Thus their presence in the interface does not demonstrate learned calibration
+on live confidence. An EOS token emitted in live generation is charged;
+archival token counts omit that possible extra token.
+
+The final model identity is
+\begin{quote}
+\texttt{92fe0af86ac0f204d514a6938d0a29da}\\
+\texttt{ce2b3cdffa24800cc4e2c85a2d51879f}.
+\end{quote}
+Its task-split byte identity is
+\begin{quote}
+\texttt{d23f54010b85b3071e7ffb5c58ce5a89}\\
+\texttt{0365e84174d19154c3efb2f19517fee0}.
+\end{quote}
+The original manifest used during training is preserved alongside the model;
+later master-freeze refreshes do not replace this provenance object.
+The rejected agreement-filtered provisional model is retained as a superseded
+development record and is not the executed artifact.
+
+\subsection{Live prompt and controls}
+The system message requests a careful mathematical solution; the user prompt
+contains the public task, current step of five, and all previously emitted
+thought/answer/confidence observations. It asks for one short reasoning or
+verification sentence and an updated current answer, using exactly one JSON
+object with thought, answer, integer confidence, and boolean stop; the answer
+field contains only the current final answer. History is the same observed
+prefix for either policy when prefixes agree. Chat-template formatting is
+performed by the model tokenizer.
+
+Each generator call ends on a valid complete JSON object, EOS, a 128-token
+completion cap, or external cancellation. The full-horizon baseline has the
+same response boundary; its policy continues through five responses.
+The heuristic requires valid confidence for confidence-based checks and uses
+confidence 90, two equal answers, confidence drop 15 and two changes.
+The learned controller requires two observations, then stops on
+\(\widehat p_{\mathrm{next}}-\widehat q-0.05\le0\) and otherwise continues.
+It forces stop at five before calling a nonexistent next head.
+The model-reported stop field is recorded telemetry, not an independent
+correctness oracle. The default selector carries forward the last nonempty
+answer. The heuristic drop branch instead retains the immediately previous
+answer, and its wobble branch chooses the highest-confidence valid observed
+answer, breaking ties toward the earliest step. Neither branch occurs in
+these actual main or trap runs; learned/baseline use the default selector.
+No verifier or peer is executed in these experiments.
+
+Controllers accept only consecutive Observation objects, own the prefix,
+and reject an append after closure. The generation adapter checks caller
+cancellation during decoding.
+Optional peer measurements must use same-step complete rosters, reject future
+entries and broken barriers, and charge all peer work. Tests check those API
+invariants; an API field restriction alone does not prove the statistical
+filtration is sufficient. Frozen executed sources and copied predictor bytes
+are bound by the run manifests. Greedy batched generation can change when
+batch composition changes, so the observed 94/100 heuristic and 100/100
+learned shared prefixes are explicitly recorded.
+
+\subsection{Hardware, software and accounting}
+Actual generation runs on one NVIDIA GeForce GTX 1650 with 4,096 MiB device
+memory, using float16 CUDA/SDPA, greedy decoding, batch size 32,
+seed 20261002 and a local Qwen2.5-0.5B snapshot.
+The recorded environment is Python 3.12.4, PyTorch 2.11.0+cu128,
+Transformers 5.8.0, NumPy 2.3.5, pandas 2.2.2 and scikit-learn 1.8.0
+on Windows 11. Historical generation metadata are incomplete and are not
+replaced by these current-environment details.
+
+Completion tokens are emitted tokens including EOS, distinct from padded
+prefill and physical decode slots. Main baseline/learned values are
+22,244/9,674 completion tokens, 142,498/43,874 prompt tokens,
+231,856/58,624 padded prefill slots, 57,856/23,564 decode slots and
+1,127.05/343.25 model seconds. Trap baseline/learned model times are
+245.14/74.12 seconds. These timings exclude model loading and are not
+total project compute or energy. Input/padding histories and batch composition
+preclude deriving a universal speedup from the completion-saving percentage.
+Failed historical runs and full development compute were not comprehensively
+logged. CPU fitting and local source/document work are additional unmetered
+development work.
+
+The prepared-observation heuristic/control microbenchmark covers 18,880
+decisions, median 0.0034 ms, 99th percentile 0.0130 ms, maximum 0.4383 ms.
+The learned-main feature/head/controller microbenchmark covers 4,000 decisions,
+median 0.0590 ms, 99th percentile 0.314315 ms, maximum 0.9369 ms.
+Neither includes generation, model loading, tokenization, telemetry extraction
+from raw text or peer barriers. Repeats measure the same saved problem prefixes,
+not 20 independently generated task samples.
+
+\section{Uncertainty and reproducibility boundaries}
+\label{app:uncertainty}
+Archived learned replay uses 2,000 paired task-cluster percentile bootstrap
+replicates with seed 20261002. All rows of a selected task move together.
+Live cost intervals use 10,000 paired task resamples with seed 804, recomputing
+\(1-\sum_i T_i^{\mathrm{active}}/\sum_i T_i^{\mathrm{baseline}}\) in each
+replicate. They are empirical percentile intervals under resampling assumptions,
+not exact distribution-free finite-sample guarantees, and do not include
+across-seed generation uncertainty. The selected 52-cell contrasts use cells,
+not rows, as their separately declared resampling units.
+
+For paired correctness, define improvement indicator
+\(I_i=\ind\{C_i^{\mathrm{active}}=1,C_i^{\mathrm{baseline}}=0\}\)
+and worsening indicator
+\(W_i=\ind\{C_i^{\mathrm{active}}=0,C_i^{\mathrm{baseline}}=1\}\).
+Under an iid task-pair reference model, their totals each have a binomial
+marginal distribution, even though \(I_i,W_i\) are mutually exclusive.
+Let \([L_I,U_I]\) and \([L_W,U_W]\) be two-sided Clopper--Pearson
+intervals at confidence 97.5\%, computed by binomial tail inversion
+\citep{clopper1934}. Each marginal interval has coverage at least 97.5\%.
+A union bound, without independence of the two margins, gives simultaneous
+coverage at least 95\%. On that event
+\[
+ \PP(I_i=1)-\PP(W_i=1)
+ \in[L_I-U_W,\ U_I-L_W].
+\]
+Main learned counts \(n=100,I=1,W=0\) give
+\([-0.0427483,0.0621192]\). Trap counts \(n=20,I=W=0\) give
+\([-0.196760,0.196760]\). The latter is an iid-reference calculation for a
+handpicked fixed bank, not coverage for a randomized adversarial population.
+No noninferiority margin was registered, and observing no worsened task
+does not establish absence of harm.
+
+Exact mathematical checks use rational arithmetic for conditional probability
+identities, class-weight inversion, interval corners, persistent-sign stopping,
+both counterexamples and dependence failures. They compare backward induction
+against independently enumerated causal policies on 4,374 finite reward trees
+and check 2,187 stakes-ordering systems. Twelve mathematical tests and
+fourteen portable-model tests passed; thirty separate runtime tests passed.
+Finite checks supplement rather than replace the general proofs.
+Portable-model checks include task-role disjointness, absence of future-dependent
+eligibility, selector-aligned labels, prefix invariance, runtime/gold separation,
+zero-variation archive features and prediction agreement with serialized
+scikit-learn heads. They do not verify every benchmark grading label.
+
+The local reproducibility records include the training protocol, task-role CSV,
+label-reconstruction audit, held-out prefix scores and replay rows, immutable
+training freeze, final model JSON, executed source snapshots, live public tasks,
+actual observations, decisions, cost ledgers and uncertainty recipes.
+They are documented in a prepared anonymous review capsule containing 169
+selected files and explicit original/review-copy identities; large raw archives
+and model weights are omitted. This is not yet a public license-reviewed
+release. Public task references, model licenses,
+historical generation provenance and human author verification require review
+before submission. Checksums establish byte identity and audit linkage, not
+scientific correctness or representativeness. A late archive eligibility filter
+and a future-dependent retrospective stack were explicitly excluded from
+causal live claims rather than relabeled as corrected experiments.

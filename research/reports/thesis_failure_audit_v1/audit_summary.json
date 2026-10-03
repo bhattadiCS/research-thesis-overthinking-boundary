@@ -1,0 +1,64 @@
+{
+  "command": ".venv/Scripts/python.exe research/classify_losses.py --matrix-root research/outputs/experiment_matrix --out research/reports/thesis_failure_audit_v1",
+  "followup_command": "python tools/summarize_failure_audit.py",
+  "audit": "passed: unique paired runs, complete loss partition, utility arithmetic, and binary endpoint reconstruction",
+  "trajectory_count": 75965,
+  "verdict_counts": {
+    "win": 68095,
+    "loss": 5735,
+    "tie": 2135
+  },
+  "verdict_rates": {
+    "win": 0.8963996577371158,
+    "loss": 0.07549529388534193,
+    "tie": 0.02810504837754229
+  },
+  "categories": [
+    {
+      "category": "B_stopped_on_empty_answer",
+      "description": "No extracted candidate at the stop",
+      "count": 196,
+      "share_of_losses": 0.034176111595466435
+    },
+    {
+      "category": "C_passed_earlier_correct",
+      "description": "An earlier decision-eligible candidate was correct",
+      "count": 460,
+      "share_of_losses": 0.08020924149956409
+    },
+    {
+      "category": "D_step1_only_correct",
+      "description": "Step one was correct; no eligible pre-stop answer was correct",
+      "count": 600,
+      "share_of_losses": 0.1046207497820401
+    },
+    {
+      "category": "E_next_step_repair",
+      "description": "First eligible correct answer arrived one step after the stop",
+      "count": 1706,
+      "share_of_losses": 0.2974716652136007
+    },
+    {
+      "category": "F_late_repair",
+      "description": "First eligible correct answer arrived at least two steps after the stop",
+      "count": 2773,
+      "share_of_losses": 0.4835222319093287
+    }
+  ],
+  "scope": "Archived fitted hazard policy versus full recorded horizon, using frozen correctness labels; descriptive development evidence",
+  "regrade_executed": false,
+  "new_probe_training_executed": false,
+  "historical_category_tags": "Ignore embedded old probe AUCs and claims about prediction limits; they were not recomputed by this command",
+  "source_sha256": {
+    "research/reports/thesis_failure_audit_v1/loss_classification.csv": "cdaf8b406d0f116afb8d611c6c148dcac2edb31ade781152989d9517e4b4c43f",
+    "research/reports/thesis_failure_audit_v1/loss_step_histories.csv": "3c3e9b35a098472e04961203c0f465cce74c87fee3a48e3ba05b5f44735cc4ba",
+    "research/reports/thesis_failure_audit_v1/per_run_verdicts.csv": "c1c3ef675c57155cd5ef76d5fe5bd6e98b1ad5bfe38405e7ec2ce5a3877cee10",
+    "research/reports/thesis_failure_audit_v1/taxonomy_summary.csv": "87592115c1c99193e41f1a82ff09ac2dde69dd77dcbe3941a549a0c8eab1f36e",
+    "research/reports/thesis_failure_audit_v1/join_audit.txt": "fe86e2ccd3cddea1eff2ea3e9695e706c88e67ce105240f7267a29aff882f588",
+    "research/reports/thesis_failure_audit_v1/slice_tables.txt": "1d26d03ca8675afe0cff019bf0b75cb1b7fea0afb636a692e8a41bfd577e43e9",
+    "research/classify_losses.py": "e394affb641f8541cc8a35e3f73356de8e4de10d57a084bcbb8c6918a3d311cd",
+    "research/analyze_runs.py": "f6953762211ce44a20757d3b1b17036b410feda09ec165a7055f088eaadc4c03",
+    "research/trace_analysis.py": "29e1a91d6f66b82048893975d18b1397b94a0bb542cf8d26b30897b6d1d5fe5e",
+    "tools/summarize_failure_audit.py": "b66b60bc40b6eccf0267990130ae6c001354ee5ad647b0685749ac5017d751d7"
+  }
+}

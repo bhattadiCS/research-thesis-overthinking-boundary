@@ -1,0 +1,88 @@
+{
+  "official_template_sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+  "questions_preserved": 16,
+  "instruction_block_removed": true,
+  "answers": [
+    {
+      "item": 1,
+      "answer": "Yes",
+      "justification_tex": "Sections \\ref{sec:intro}--\\ref{sec:limits} distinguish conditional theory, retrospective diagnostics, and actual development generation; the abstract explicitly reports fixed-two behavior and inconclusive accuracy."
+    },
+    {
+      "item": 2,
+      "answer": "Yes",
+      "justification_tex": "Section \\ref{sec:limits} and Appendices \\ref{app:calibration}--\\ref{app:uncertainty} discuss filtration, calibration, parser/prompt shift, low accuracy, dependence, and incomplete historical provenance."
+    },
+    {
+      "item": 3,
+      "answer": "Yes",
+      "justification_tex": "Section \\ref{sec:theory} states the decision assumptions and gives proof sketches; Appendices \\ref{app:proofs}--\\ref{app:calibration} provide full proofs and common-reference counterexamples. Finite verification checks supplement rather than replace the proofs."
+    },
+    {
+      "item": 4,
+      "answer": "No",
+      "justification_tex": "Appendix \\ref{app:protocol} fully specifies the new fitted controller and live protocol, and saved records permit numerical reanalysis. Complete historical generation/training environments and all development choices are unavailable, so full independent reexecution of every historical result is not established."
+    },
+    {
+      "item": 5,
+      "answer": "No",
+      "justification_tex": "The documented anonymous review capsule provides selected sources and evidence, but omits large raw archives and model weights (Appendix \\ref{app:uncertainty}). Public open-access hosting and a complete license-reviewed release are not established."
+    },
+    {
+      "item": 6,
+      "answer": "No",
+      "justification_tex": "Section \\ref{sec:methods} and Appendix \\ref{app:protocol} provide task roles, ordered features, optimization/calibration settings, cost, and decoding controls for the new controller. Some historical detector-training and generation metadata remain incomplete and are not inferred from current software."
+    },
+    {
+      "item": 7,
+      "answer": "Yes",
+      "justification_tex": "Section \\ref{sec:results} and Appendix \\ref{app:uncertainty} define paired task/cell resampling units and exact binomial-reference bounds, including their independence and handpicked-bank limitations. No accuracy noninferiority or universal timing guarantee is claimed."
+    },
+    {
+      "item": 8,
+      "answer": "No",
+      "justification_tex": "Appendix \\ref{app:protocol} reports the live GPU, memory, software, decoding, model seconds, and token/padding ledgers. Full historical project compute, failed runs, and additional development CPU work were not comprehensively measured."
+    },
+    {
+      "item": 9,
+      "answer": "NA",
+      "justification_tex": "A completed human author review of the NeurIPS Code of Ethics is not available for this agent-assisted preparation draft. Section \\ref{sec:methods} discloses this verification boundary; license and release review remain pending."
+    },
+    {
+      "item": 10,
+      "answer": "Yes",
+      "justification_tex": "Section \\ref{sec:limits} discusses potential compute accessibility benefits and harms from premature stopping, low accuracy, and subgroup variation. It calls for confirmatory accuracy/subgroup evaluation and avoids unmeasured energy claims."
+    },
+    {
+      "item": 11,
+      "answer": "NA",
+      "justification_tex": "The work does not introduce or release a new high-risk foundation model or scraped image dataset. It studies public reasoning benchmarks and a small probability controller; a broader licensed artifact release remains pending."
+    },
+    {
+      "item": 12,
+      "answer": "No",
+      "justification_tex": "The benchmark, model, architecture, and theory creators are cited in the references. A complete version-by-version asset license/terms audit and release packaging are still pending, so compliance is not represented as fully verified."
+    },
+    {
+      "item": 13,
+      "answer": "Yes",
+      "justification_tex": "Appendices \\ref{app:protocol}--\\ref{app:uncertainty} specify the new model, audits, decisions, tests, and scope limits. The accompanying anonymous review capsule contains the portable artifact and protocol/report/README documentation; final license review and public release remain pending."
+    },
+    {
+      "item": 14,
+      "answer": "NA",
+      "justification_tex": "No new crowdsourcing or recruited human-subject experiment is conducted; evaluation uses existing public benchmarks and a handpicked mathematical task bank."
+    },
+    {
+      "item": 15,
+      "answer": "NA",
+      "justification_tex": "No new crowdsourcing or recruited human-subject research is conducted. The manuscript does not invent an institutional approval or human verification attestation."
+    },
+    {
+      "item": 16,
+      "answer": "Yes",
+      "justification_tex": "Section \\ref{sec:methods} explicitly describes LLM coding agents' contributions to theory, auditing, implementation, label reconstruction, and manuscript preparation, and the remaining human verification. The response-generation LLM is also a core experimental component whose protocol is specified."
+    }
+  ],
+  "scope": "Preparation draft; no human review or public release attestation invented"
+}

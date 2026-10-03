@@ -1,0 +1,30 @@
+{
+  "command": "python -m unittest research/tests/test_prefix_stopping_model.py -v",
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_seconds": 26.0,
+  "observed_process_exit_code": 0,
+  "result": "OK",
+  "artifact_sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+  "scope": "Last completed focused test run; structured record of captured tool output, not a new execution",
+  "checks": [
+    "Exact model-file hash agrees with evaluation ledger",
+    "Portable probability scores agree with independent vector expression",
+    "Task roles are disjoint and live/trap public IDs excluded",
+    "Training-freeze copy preserves protocol byte identity",
+    "Reconstruction audit covers every complete archived row",
+    "Later input changes do not change earlier features",
+    "Only declared observation fields influence predictions",
+    "Fallback confidence remains missing",
+    "Candidate churn and stability use observed answer keys",
+    "Labeled rows, skipped/future steps and unsupported domains fail closed",
+    "Independent logistic/calibration arithmetic matches",
+    "Invalid serialization and nonfinite values fail closed",
+    "Terminal horizon has no next-step estimate",
+    "Offline archive regrading and latest-nonempty carry-forward agree"
+  ],
+  "nonfailure_warnings": [
+    "SwigPyPacked, SwigPyObject and swigvar import deprecation warnings in offline training imports"
+  ]
+}

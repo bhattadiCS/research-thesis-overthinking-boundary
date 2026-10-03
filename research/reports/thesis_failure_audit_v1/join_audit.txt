@@ -1,0 +1,6 @@
+mistral_small_3p1_24b_instruct__gsm8k: NO detector_comparison_by_run.csv (skipped)
+llama_3p1_8b_instruct__gpqa: sanitizer dropped 24 corrupt rows [1348 -> 1342 distinct run_ids]
+qwen2p5_0p5b__gpqa: sanitizer dropped 41 corrupt rows [1354 -> 1342 distinct run_ids]
+qwen2p5_3b__gpqa: sanitizer dropped 20 corrupt rows [1349 -> 1343 distinct run_ids]
+yi_1p5_9b_chat__gpqa: sanitizer dropped 25 corrupt rows [1349 -> 1343 distinct run_ids]
+yi_1p5_9b_chat__math: sanitizer dropped 14 corrupt rows [1500 -> 1499 distinct run_ids]

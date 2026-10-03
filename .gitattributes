@@ -3,3 +3,39 @@
 # with "bad interpreter: /usr/bin/env bash^M".
 *.sh text eol=lf
 *.py text eol=lf
+
+# Audit/provenance records and observed locks are authored with explicit LF.
+.gitattributes text eol=lf
+data_manifest_v1.json text eol=lf
+software_provenance_v1.json text eol=lf
+software_repository_venv_observed_v1.json text eol=lf
+requirements*.lock.txt text eol=lf
+requirements.historical-tournament.partial.txt text eol=lf
+research/adversarial_tasks_v1.jsonl text eol=lf
+research/adversarial_gold_v1.jsonl text eol=lf
+research/reports/data_freeze_verification_2026-10-02.md text eol=lf
+research/mathematical_foundations.md text eol=lf
+tools/render_thesis_math.mjs text eol=lf
+
+# Collected outputs contain opaque file-byte bindings. The deployed predictor,
+# for example, was frozen with CRLF bytes; normalization changes its identity.
+# Preserve all new frozen semester2 artifacts exactly on every checkout.
+research/outputs/semester2/** -text
+research/reports/thesis_failure_audit_v1/** -text
+research/outputs/thesis_v1/** -text
+
+# Authoring manifests bind the exact bytes of the new manuscript sources.
+# Preserve those sources and generated identities without legacy renormalization.
+ThesisDocs/chapters/** -text
+ThesisDocs/paper/** -text
+ThesisDocs/defense/** -text
+ThesisDocs/neurips/** -text
+ThesisDocs/Masters_Thesis_Draft_v1.md -text
+ThesisDocs/references.md -text
+ThesisDocs/appendices.md -text
+ThesisDocs/thesis_build_manifest.json -text
+ThesisDocs/committee_review_package_v1.md -text
+ThesisDocs/committee_revision_ledger_v1.csv -text
+ThesisDocs/milestone_completion_audit_v1.md -text
+ThesisDocs/ONLINE_STOPPING_IMPLEMENTATION_AND_RESULTS_2026-10-02.md -text
+output/neurips/** -text

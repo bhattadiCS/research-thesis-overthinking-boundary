@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import importlib.util
 import sys
+import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -65,6 +66,30 @@ EQ_CASES = [
     ("Hybrid: 250 gallons saved", "550", False, "different number -> not a false positive"),
     (r'"answer": "3"', r"\frac{7}{2}", False, "nested-json wrong answer stays wrong"),
 ]
+
+
+class GraderRegressionTests(unittest.TestCase):
+    """Expose the same historical thirty cases to unittest and pytest discovery."""
+
+
+def _normalization_test(case):
+    def test(self):
+        fn, value, expected, label = case
+        self.assertEqual(fn(value), expected, label)
+    return test
+
+
+def _equivalence_test(case):
+    def test(self):
+        a, b, expected = case[:3]
+        self.assertEqual(math_eq(a, b), expected, case[3] if len(case) > 3 else f"{a} vs {b}")
+    return test
+
+
+for _index, _case in enumerate(CASES, 1):
+    setattr(GraderRegressionTests, f"test_normalization_{_index:02}", _normalization_test(_case))
+for _index, _case in enumerate(EQ_CASES, 1):
+    setattr(GraderRegressionTests, f"test_equivalence_{_index:02}", _equivalence_test(_case))
 
 def main() -> int:
     failures = 0

@@ -1,0 +1,135 @@
+{
+  "kind": "preserved_execution_sources_vs_post_collection_source",
+  "made_at_utc": "2026-10-03T01:37:25.548543+00:00",
+  "revision_reason": "After every real generation process exited, replay terminal selection was aligned with the runtime latest-nonempty selector, missing prompt costs were marked unknown, the controller benchmark was expanded to both policies on 100 competition MATH tasks, chart labels were spaced, and future runs gained automatic interpreter/package/source-snapshot provenance. No executed generator/controller or completed real collection source was changed during actual generation. Original manifests, locked execution sources, paired CSVs and live_metrics remain intact.",
+  "runs": {
+    "heuristic_adversarial": {
+      "code_bindings": {
+        "online_generation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\adversarial_live\\locked_code\\online_generation.py",
+          "executed_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "final_working_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "working_copy_matches_execution": true
+        },
+        "online_stopping_controller.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\adversarial_live\\locked_code\\online_stopping_controller.py",
+          "executed_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "final_working_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "working_copy_matches_execution": true
+        },
+        "run_online_stopping_evaluation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\adversarial_live\\locked_code\\run_online_stopping_evaluation.py",
+          "executed_sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+          "final_working_sha256": "232facbbbc7b39acc7b537533fcbd6ea64cc3bc4819552aad28306367815c865",
+          "working_copy_matches_execution": false
+        }
+      },
+      "manifest_sha256": "cd75aed1d5f0d3e8117f3b0a78e0a74b455480e743e835f961cb2bf2d10b7faa"
+    },
+    "heuristic_main": {
+      "code_bindings": {
+        "online_generation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\locked_code\\online_generation.py",
+          "executed_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "final_working_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "working_copy_matches_execution": true
+        },
+        "online_stopping_controller.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\locked_code\\online_stopping_controller.py",
+          "executed_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "final_working_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "working_copy_matches_execution": true
+        },
+        "run_online_stopping_evaluation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\locked_code\\run_online_stopping_evaluation.py",
+          "executed_sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+          "final_working_sha256": "232facbbbc7b39acc7b537533fcbd6ea64cc3bc4819552aad28306367815c865",
+          "working_copy_matches_execution": false
+        }
+      },
+      "manifest_sha256": "cdf10e924110c59aa85b6d64b016426f1fdcf518771d1174a67e6344a966e081"
+    },
+    "learned_adversarial": {
+      "code_bindings": {
+        "learned_online_stopping_controller.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial\\locked_code\\learned_online_stopping_controller.py",
+          "executed_sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+          "final_working_sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+          "working_copy_matches_execution": true
+        },
+        "online_generation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial\\locked_code\\online_generation.py",
+          "executed_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "final_working_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "working_copy_matches_execution": true
+        },
+        "online_stopping_controller.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial\\locked_code\\online_stopping_controller.py",
+          "executed_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "final_working_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "working_copy_matches_execution": true
+        },
+        "prefix_stopping_model.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial\\locked_code\\prefix_stopping_model.py",
+          "executed_sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+          "final_working_sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+          "working_copy_matches_execution": true
+        },
+        "run_learned_online_stopping.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial\\locked_code\\run_learned_online_stopping.py",
+          "executed_sha256": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934",
+          "final_working_sha256": "68cd4d8dcdd759041cc0bb8d7370ccb0dadda3f8c59bd211db9bd0a247eb4adf",
+          "working_copy_matches_execution": false
+        },
+        "run_online_stopping_evaluation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_adversarial\\locked_code\\run_online_stopping_evaluation.py",
+          "executed_sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+          "final_working_sha256": "232facbbbc7b39acc7b537533fcbd6ea64cc3bc4819552aad28306367815c865",
+          "working_copy_matches_execution": false
+        }
+      },
+      "manifest_sha256": "24c1d713450cc718a7aa5beab3a135384d373c5553d4deaa2c0fdfa555a0d5ea"
+    },
+    "learned_main": {
+      "code_bindings": {
+        "learned_online_stopping_controller.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main\\locked_code\\learned_online_stopping_controller.py",
+          "executed_sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+          "final_working_sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+          "working_copy_matches_execution": true
+        },
+        "online_generation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main\\locked_code\\online_generation.py",
+          "executed_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "final_working_sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+          "working_copy_matches_execution": true
+        },
+        "online_stopping_controller.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main\\locked_code\\online_stopping_controller.py",
+          "executed_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "final_working_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+          "working_copy_matches_execution": true
+        },
+        "prefix_stopping_model.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main\\locked_code\\prefix_stopping_model.py",
+          "executed_sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+          "final_working_sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+          "working_copy_matches_execution": true
+        },
+        "run_learned_online_stopping.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main\\locked_code\\run_learned_online_stopping.py",
+          "executed_sha256": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934",
+          "final_working_sha256": "68cd4d8dcdd759041cc0bb8d7370ccb0dadda3f8c59bd211db9bd0a247eb4adf",
+          "working_copy_matches_execution": false
+        },
+        "run_online_stopping_evaluation.py": {
+          "executed_copy": "research\\outputs\\semester2\\online_stopping_20261002\\learned_main\\locked_code\\run_online_stopping_evaluation.py",
+          "executed_sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+          "final_working_sha256": "232facbbbc7b39acc7b537533fcbd6ea64cc3bc4819552aad28306367815c865",
+          "working_copy_matches_execution": false
+        }
+      },
+      "manifest_sha256": "ee064a32f7cfb309589de9e77c17e265b072353859f63d3ca392c9da42c6c729"
+    }
+  }
+}

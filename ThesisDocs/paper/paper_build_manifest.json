@@ -1,0 +1,29 @@
+{
+  "audit": {
+    "blank_pages": 0,
+    "full_page_detail_checks": [
+      3,
+      11,
+      12,
+      23,
+      24,
+      25
+    ],
+    "pages": 25,
+    "pdfa_conformance": "not asserted",
+    "rendered_pages": 25,
+    "text_margin_defects": 0,
+    "unembedded_fonts": 0,
+    "visual_review": "passed: all 25 pages previously inspected with unchanged body layout; corrected bibliography page 25 reinspected after final citation revision; no clipping or overlap observed",
+    "visual_reviewed_page_count": 25
+  },
+  "body_leading_pt": 15.0,
+  "dependency_map_sha256": "c27eef6b21e8b31ae03b404595b42da121ccca7a1213d376cf0986abdfd20783",
+  "display_equations": 6,
+  "interim_live_results_permitted": false,
+  "output": "output/pdf/Overthinking_Stopping_Research_Paper_v1_Aditya_Bhatt.pdf",
+  "schema_version": "stopping-paper-build-v1",
+  "sha256": "0e8393c86fbe6d70b215e9e599477a9637f051eef9a50431e5086a720e834344",
+  "source_sha256": "b4dc05b5b0efd821573ab274e879dab69d8f545586461da6c7e0dddd7ad9a0ed",
+  "word_count": 9269
+}

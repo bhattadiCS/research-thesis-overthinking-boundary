@@ -1,0 +1,161 @@
+== FRESH GLOBAL BREAKDOWN ==
+runs=75965 (distinct run_ids=75965)
+win: 68095 (89.6400%)
+tie: 2135 (2.8105%)
+loss: 5735 (7.5495%)
+tie-detection sensitivity (exact vs |diff|<=eps):
+  eps=0        win=  68095 tie=  2135 loss=  5735
+  eps=1e-12    win=  68095 tie=  2135 loss=  5735
+  eps=1e-09    win=  68095 tie=  2135 loss=  5735
+  eps=1e-06    win=  68095 tie=  2135 loss=  5735
+  eps=0.001    win=  68095 tie=  2135 loss=  5735
+  eps=0.01     win=  68095 tie=  2135 loss=  5735
+  smallest nonzero |diff| = 0.05 (one step-cost quantum = 0.05)
+
+== SLICES: ALL CELLS (n=75965) ==
+
+-- by dataset --
+verdict      n    win   tie  loss  win_rate_pct  tie_rate_pct  loss_rate_pct  loss_se_pp
+dataset                                                                                 
+arc      19500  18452   130   918       94.6256        0.6667         4.7077      0.1517
+gpqa     17466  16078   100  1288       92.0531        0.5725         7.3743      0.1978
+gsm8k    19500  16638   673  2189       85.3231        3.4513        11.2256      0.2261
+math     19499  16927  1232  1340       86.8096        6.3183         6.8721      0.1812
+
+-- by temperature --
+verdict          n    win  tie  loss  win_rate_pct  tie_rate_pct  loss_rate_pct  loss_se_pp
+temperature                                                                                
+0.1          25322  22756  813  1753       89.8665        3.2106         6.9228      0.1595
+0.6          25321  22787  641  1893       89.9925        2.5315         7.4760      0.1653
+1.0          25322  22552  681  2089       89.0609        2.6894         8.2497      0.1729
+
+-- by model --
+verdict                      n   win  tie  loss  win_rate_pct  tie_rate_pct  loss_rate_pct  loss_se_pp
+model                                                                                                 
+deepseek_r1_distill_1p5b  5844  5207  111   526       89.0999        1.8994         9.0007      0.3744
+deepseek_r1_distill_7b    5844  5247   99   498       89.7844        1.6940         8.5216      0.3652
+internlm3_8b_instruct     5844  5492   83   269       93.9767        1.4203         4.6030      0.2741
+llama_3p1_8b_instruct     5842  5103   86   653       87.3502        1.4721        11.1777      0.4122
+mistral_7b_instruct_v0p3  5844  5490  119   235       93.9425        2.0363         4.0212      0.2570
+mistral_small_24b_2409    5844  4641  243   960       79.4148        4.1581        16.4271      0.4847
+phi_4_mini_instruct       5844  5214  137   493       89.2197        2.3443         8.4360      0.3636
+qwen2p5_0p5b              5842  5658   66   118       96.8504        1.1298         2.0199      0.1841
+qwen2p5_14b               5844  4531  824   489       77.5325       14.0999         8.3676      0.3622
+qwen2p5_32b               5844  5327   53   464       91.1533        0.9069         7.9398      0.3537
+qwen2p5_3b                5843  5297   94   452       90.6555        1.6088         7.7358      0.3495
+qwen2p5_7b                5844  5523   36   285       94.5072        0.6160         4.8768      0.2817
+yi_1p5_9b_chat            5842  5365  184   293       91.8350        3.1496         5.0154      0.2856
+
+-- by model x dataset (loss rate %) --
+dataset                     arc   gpqa  gsm8k   math
+model                                               
+deepseek_r1_distill_1p5b  12.67   8.71  10.80   3.80
+deepseek_r1_distill_7b    12.07   9.60   8.20   4.33
+internlm3_8b_instruct      0.60   3.50   7.73   6.47
+llama_3p1_8b_instruct      6.13  17.21  12.27   9.73
+mistral_7b_instruct_v0p3   3.20   8.56   3.73   1.07
+mistral_small_24b_2409     5.27  12.80  30.27  17.00
+phi_4_mini_instruct        9.60   9.67   9.60   5.00
+qwen2p5_0p5b               4.73   2.76   0.53   0.13
+qwen2p5_14b                0.27   2.53  18.53  11.53
+qwen2p5_32b                0.33   3.50  12.73  14.73
+qwen2p5_3b                 3.13   7.45  14.87   5.47
+qwen2p5_7b                 0.60   3.57   9.13   6.07
+yi_1p5_9b_chat             2.60   6.03   7.53   4.00
+
+== SLICES: EXCLUDING qwen2p5_7b__math (n=74465) ==
+
+-- by dataset --
+verdict      n    win   tie  loss  win_rate_pct  tie_rate_pct  loss_rate_pct  loss_se_pp
+dataset                                                                                 
+arc      19500  18452   130   918       94.6256        0.6667         4.7077      0.1517
+gpqa     17466  16078   100  1288       92.0531        0.5725         7.3743      0.1978
+gsm8k    19500  16638   673  2189       85.3231        3.4513        11.2256      0.2261
+math     17999  15553  1197  1249       86.4104        6.6504         6.9393      0.1894
+
+-- by temperature --
+verdict          n    win  tie  loss  win_rate_pct  tie_rate_pct  loss_rate_pct  loss_se_pp
+temperature                                                                                
+0.1          24822  22299  798  1725       89.8356        3.2149         6.9495      0.1614
+0.6          24821  22326  630  1865       89.9480        2.5382         7.5138      0.1673
+1.0          24822  22096  672  2054       89.0178        2.7073         8.2749      0.1749
+
+-- by model --
+verdict                      n   win  tie  loss  win_rate_pct  tie_rate_pct  loss_rate_pct  loss_se_pp
+model                                                                                                 
+deepseek_r1_distill_1p5b  5844  5207  111   526       89.0999        1.8994         9.0007      0.3744
+deepseek_r1_distill_7b    5844  5247   99   498       89.7844        1.6940         8.5216      0.3652
+internlm3_8b_instruct     5844  5492   83   269       93.9767        1.4203         4.6030      0.2741
+llama_3p1_8b_instruct     5842  5103   86   653       87.3502        1.4721        11.1777      0.4122
+mistral_7b_instruct_v0p3  5844  5490  119   235       93.9425        2.0363         4.0212      0.2570
+mistral_small_24b_2409    5844  4641  243   960       79.4148        4.1581        16.4271      0.4847
+phi_4_mini_instruct       5844  5214  137   493       89.2197        2.3443         8.4360      0.3636
+qwen2p5_0p5b              5842  5658   66   118       96.8504        1.1298         2.0199      0.1841
+qwen2p5_14b               5844  4531  824   489       77.5325       14.0999         8.3676      0.3622
+qwen2p5_32b               5844  5327   53   464       91.1533        0.9069         7.9398      0.3537
+qwen2p5_3b                5843  5297   94   452       90.6555        1.6088         7.7358      0.3495
+qwen2p5_7b                4344  4149    1   194       95.5110        0.0230         4.4659      0.3134
+yi_1p5_9b_chat            5842  5365  184   293       91.8350        3.1496         5.0154      0.2856
+
+-- by model x dataset (loss rate %) --
+dataset                     arc   gpqa  gsm8k   math
+model                                               
+deepseek_r1_distill_1p5b  12.67   8.71  10.80   3.80
+deepseek_r1_distill_7b    12.07   9.60   8.20   4.33
+internlm3_8b_instruct      0.60   3.50   7.73   6.47
+llama_3p1_8b_instruct      6.13  17.21  12.27   9.73
+mistral_7b_instruct_v0p3   3.20   8.56   3.73   1.07
+mistral_small_24b_2409     5.27  12.80  30.27  17.00
+phi_4_mini_instruct        9.60   9.67   9.60   5.00
+qwen2p5_0p5b               4.73   2.76   0.53   0.13
+qwen2p5_14b                0.27   2.53  18.53  11.53
+qwen2p5_32b                0.33   3.50  12.73  14.73
+qwen2p5_3b                 3.13   7.45  14.87   5.47
+qwen2p5_7b                 0.60   3.57   9.13    NaN
+yi_1p5_9b_chat             2.60   6.03   7.53   4.00
+
+== ORACLE-GAP CAPTURE (hd-ns)/(oracle-ns), run-pooled ==
+all cells: oracle=0.4720 hd=0.2856 ns=-0.0408 capture=63.65%
+arc: oracle=0.7715 hd=0.6539 ns=0.3783 capture=70.09%
+gpqa: oracle=0.3576 hd=0.1993 ns=-0.1562 capture=69.20%
+gsm8k: oracle=0.5427 hd=0.3034 ns=0.0398 capture=52.43%
+math: oracle=0.2042 hd=-0.0233 ns=-0.4371 capture=64.53%
+12 late-boundary cells (run-pooled): oracle=0.5559 hd=0.3332 ns=0.1068 capture=50.41%
+11 late-boundary cells excl qwen2p5_7b__math (run-pooled): oracle=0.5775 hd=0.3538 ns=0.1402 capture=48.84%
+12 late cells, published cell-mean aggregation: oracle=0.5559 hd=0.3332 ns=0.1068 capture=50.41%
+
+mechanical signature (loss => stopped-wrong & final-correct): 5735/5735
+
+== TAXONOMY (loss population n=5735; counts sum=5735) ==
+                           count  share_pct                                                                                                        tag
+category                                                                                                                                              
+B_stopped_on_empty_answer    196       3.42                                 (i) pipeline/policy-guard bug (empty-candidate stop state; probe AUC~0.99)
+C_passed_earlier_correct     460       8.02                          (iii) fixable-with-better-feature (visible earlier correct state; probe AUC~0.82)
+D_step1_only_correct         600      10.46  (iii) qualified: T_MIN=2 floor made the ideal stop unreachable, but repair signal exists (probe AUC~0.75)
+E_next_step_repair          1706      29.75                                   (iii) fixable-with-better-feature (repair one step away; probe AUC~0.67)
+F_late_repair               2773      48.35   (ii) hard online-decision limit at the required foresight horizon; residual signal weak (probe AUC~0.68)
+
+-- category x dataset --
+dataset                    arc  gpqa  gsm8k  math
+category                                         
+B_stopped_on_empty_answer   58   128      6     4
+C_passed_earlier_correct    73    54    286    47
+D_step1_only_correct       185   197    150    68
+E_next_step_repair         259   326    734   387
+F_late_repair              343   583   1013   834
+
+-- category x model --
+model                      deepseek_r1_distill_1p5b  deepseek_r1_distill_7b  internlm3_8b_instruct  llama_3p1_8b_instruct  mistral_7b_instruct_v0p3  mistral_small_24b_2409  phi_4_mini_instruct  qwen2p5_0p5b  qwen2p5_14b  qwen2p5_32b  qwen2p5_3b  qwen2p5_7b  yi_1p5_9b_chat
+category                                                                                                                                                                                                                                                                        
+B_stopped_on_empty_answer                         5                       7                      2                     59                        13                      54                    3             6            4            8          18           2              15
+C_passed_earlier_correct                         42                      62                     10                     51                        20                     128                   36             9            9           39          12          10              32
+D_step1_only_correct                            148                     104                     14                     24                        67                      11                  102            30           11            6          37          17              29
+E_next_step_repair                               88                     132                    111                    182                        59                     220                  152            26          182          162         174         144              74
+F_late_repair                                   243                     193                    132                    337                        76                     547                  200            47          283          249         211         112             143
+
+-- examples (first 3 run_ids per category, sorted) --
+  B_stopped_on_empty_answer: deepseek_r1_distill_1p5b__arc_test_00249_d6f66ee0__temp0.10__seed7, deepseek_r1_distill_1p5b__arc_test_00467_824e4f06__temp0.60__seed7, deepseek_r1_distill_1p5b__arc_test_00467_824e4f06__temp1.00__seed7
+  C_passed_earlier_correct: deepseek_r1_distill_1p5b__arc_test_00092_25cc90e9__temp0.10__seed7, deepseek_r1_distill_1p5b__gpqa_main_00257_3b6aa64c__temp0.10__seed7, deepseek_r1_distill_1p5b__gsm8k_train_00004_3ee48c01__temp0.60__seed7
+  D_step1_only_correct: deepseek_r1_distill_1p5b__arc_test_00004_89613a4b__temp0.60__seed7, deepseek_r1_distill_1p5b__arc_test_00010_38aa3c95__temp0.60__seed7, deepseek_r1_distill_1p5b__arc_test_00016_75d83e3f__temp0.60__seed7
+  E_next_step_repair: deepseek_r1_distill_1p5b__arc_test_00000_398537ec__temp0.10__seed7, deepseek_r1_distill_1p5b__arc_test_00010_38aa3c95__temp0.10__seed7, deepseek_r1_distill_1p5b__arc_test_00015_495befc7__temp0.60__seed7
+  F_late_repair: deepseek_r1_distill_1p5b__arc_test_00003_c16c54fb__temp0.10__seed7, deepseek_r1_distill_1p5b__arc_test_00022_51e7e2c1__temp1.00__seed7, deepseek_r1_distill_1p5b__arc_test_00023_56ce0db0__temp0.60__seed7

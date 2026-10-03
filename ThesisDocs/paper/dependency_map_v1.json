@@ -1,0 +1,701 @@
+{
+  "claim_sources": {
+    "boundary_curves": "research/outputs/thesis_v1/evidence/boundary_domain_step_metrics.csv",
+    "causal_detector_scores": "research/outputs/thesis_v1/evidence/tournament_balanced_summary.csv",
+    "controlled_effects": "research/outputs/thesis_v1/evidence/algorithm_v2_normalized_effects.csv",
+    "historical_replay": "research/outputs/thesis_v1/evidence/offline_replay_metrics.csv",
+    "historical_stacked_diagnostic": "research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.json",
+    "runtime_and_adversarial": [
+      "research/outputs/semester2/online_stopping_20261002",
+      "research/outputs/semester2/online_stopping_20261002/adversarial_live"
+    ],
+    "theorems": "research/mathematical_foundations.md"
+  },
+  "created_utc": "2026-10-03T02:07:28.612908Z",
+  "files": {
+    "ThesisDocs/paper/figures/controlled_estimator_effects.png": {
+      "bytes": 77984,
+      "sha256": "a04297f1a343f2a5c25cb67ecd66cae88d9fdb861083f71d45e56cc47dd5abcc"
+    },
+    "ThesisDocs/paper/figures/population_continuation.png": {
+      "bytes": 209788,
+      "sha256": "c0b468402bb0e62e51c4a6148bab9b78b73f6bfd45b59fc7004e2f6e711b0b3d"
+    },
+    "ThesisDocs/paper/overthinking_stopping_paper_v1.md": {
+      "bytes": 66378,
+      "sha256": "b4dc05b5b0efd821573ab274e879dab69d8f545586461da6c7e0dddd7ad9a0ed"
+    },
+    "data_manifest_v1.json": {
+      "bytes": 503302,
+      "sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b"
+    },
+    "requirements.lock.txt": {
+      "bytes": 6459,
+      "sha256": "e979c5ac4eb31eb95d21d2fe19126bbc142bb27fcba69ce2115121de54ce41cb"
+    },
+    "research/adversarial_gold_v1.jsonl": {
+      "bytes": 3168,
+      "sha256": "576fc8ca014966d19dd43eecf7d64091b903e07c0774ce8dbb20b4bc017f5e50"
+    },
+    "research/adversarial_tasks_v1.jsonl": {
+      "bytes": 5131,
+      "sha256": "6046358cb8e8d8c47c1cec4fc26ddda0ea48308e177e32b06b99d10952037836"
+    },
+    "research/analyze_online_stopping_results.py": {
+      "bytes": 11757,
+      "sha256": "f20a2832e8e0771e7aeb54cc3a7f0c47be9791baed2152c6a2c6c45396d1d541"
+    },
+    "research/learned_online_stopping_controller.py": {
+      "bytes": 4607,
+      "sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a"
+    },
+    "research/mathematical_foundations.md": {
+      "bytes": 27920,
+      "sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf"
+    },
+    "research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.json": {
+      "bytes": 548,
+      "sha256": "5477784ddfe754498aa50cf7105102ff902dcbbab5f795e8cf822bee54043db5"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/baseline_replay_policies.json": {
+      "bytes": 1816,
+      "sha256": "c54645795812417076db0793a676b20b8a06d15ece1d4ace12dd842754fd2aab"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_and_baseline_replay_pareto.csv": {
+      "bytes": 824,
+      "sha256": "e1d61cd1fe0e0cfd58786b59bf6a80fc5cb1511993fb4549bd9cadf4dc1814fc"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_batch_metrics.csv": {
+      "bytes": 951,
+      "sha256": "a7149d95d44680579d024cdd1558032ec32ea3692afc625a3e5567183df4ba9c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_collection_runtime.json": {
+      "bytes": 212,
+      "sha256": "ae683ce405ae89bab8b046a7a35fc1413cc90ffa49e33aa028f7f62fbd73ab55"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_controller_latency.csv": {
+      "bytes": 8418,
+      "sha256": "50516a4145c3fe32bbf91305cdfbc72e579cbb6b061e7fa705a9219e9acf893c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_generation_results.jsonl": {
+      "bytes": 148271,
+      "sha256": "e17358d74203341d994b2626aaa76ff7604bf0de04b4fe90cd1b71cda9a44f77"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_ledger_audit.json": {
+      "bytes": 699,
+      "sha256": "f36dd268f5e7a05774e93152559bed2f965ac3b29150e7be9c12a72b48de975e"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_manifest.json": {
+      "bytes": 2929,
+      "sha256": "cd75aed1d5f0d3e8117f3b0a78e0a74b455480e743e835f961cb2bf2d10b7faa"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_metrics.json": {
+      "bytes": 2121,
+      "sha256": "3b44645e08872bf4a71dc3197da5f95da0800571b038249973a8f8cdef531b86"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_paired_results.csv": {
+      "bytes": 2458,
+      "sha256": "5f1e02917543d8e351c0c434a79c4a2152ac4ca47a56170233729875c224981e"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_posthoc_analysis.json": {
+      "bytes": 2329,
+      "sha256": "ae39866ebb5b63cd19df0262e33ec0f6bbfc12ce3777c2e5c7b8517500f59c79"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_public_tasks.jsonl": {
+      "bytes": 5131,
+      "sha256": "9c911f3212ef4f69a4e8847999ad1bf3e3504264048d804920ebd30e1ee8a0c4"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_sealed_gold.jsonl": {
+      "bytes": 3168,
+      "sha256": "9dad6ec35ce7f35e7167b7e3a58ee5085bc564dec31a5dd135c3046bebd12d57"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_uncertainty.json": {
+      "bytes": 1211,
+      "sha256": "0083caa3f5c975b00ebe14b865af79144bfba289815527e1485758d1011662ef"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/code_bindings.json": {
+      "bytes": 312,
+      "sha256": "7ef5e78269f8fb9ebc1cfce96445f6f984f1f8984c6abb2f7919da20846707ba"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/online_generation.py": {
+      "bytes": 9341,
+      "sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/online_stopping_controller.py": {
+      "bytes": 13190,
+      "sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/run_online_stopping_evaluation.py": {
+      "bytes": 29925,
+      "sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/online_stopping_pareto.png": {
+      "bytes": 92464,
+      "sha256": "abe8bfe7a0d3a04d9ba08ece23ecbf917024ec0c1251cd5d8105e76bcc4a37a5"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/online_stopping_pareto.svg": {
+      "bytes": 59757,
+      "sha256": "d64566df2810800e2a8205a8dd60bb417f9ca839a868ca06c5c70cd395808490"
+    },
+    "research/outputs/semester2/online_stopping_20261002/adversarial_live/runtime_environment.json": {
+      "bytes": 708,
+      "sha256": "8684f28d784f902067efa8e1dd709979786925d058c73c888d61369ce8911b3c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/baseline_replay_policies.json": {
+      "bytes": 1816,
+      "sha256": "c54645795812417076db0793a676b20b8a06d15ece1d4ace12dd842754fd2aab"
+    },
+    "research/outputs/semester2/online_stopping_20261002/final_evidence_summary.json": {
+      "bytes": 30610,
+      "sha256": "4738ec5b22c1ec4d978f7572df864f73364b728ddb839c26d0e15ea597604090"
+    },
+    "research/outputs/semester2/online_stopping_20261002/final_verification.json": {
+      "bytes": 792,
+      "sha256": "5d54a37a7082223c38d0778129a6e96774c8dfd2637720df69d81fadb59843a1"
+    },
+    "research/outputs/semester2/online_stopping_20261002/latency_100_math_problems.csv": {
+      "bytes": 2528512,
+      "sha256": "49d0a08968b0929ff32aed2ab0ae3cabad4f78b3fd0839fcacd6b5304d18b2e2"
+    },
+    "research/outputs/semester2/online_stopping_20261002/latency_summary.json": {
+      "bytes": 1093,
+      "sha256": "f408cd2022dd63528e381bc6fde7df7cf1a854ccf1dc9959df57a0ad514bc467"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/baseline_replay_policies.json": {
+      "bytes": 1816,
+      "sha256": "c54645795812417076db0793a676b20b8a06d15ece1d4ace12dd842754fd2aab"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/frozen_prefix_predictor.json": {
+      "bytes": 6324,
+      "sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/learned_decision_latency_repeated_prefixes.csv": {
+      "bytes": 24645,
+      "sha256": "8b14c652bab55a8de21878d8c555f4a1b2baaf2017d3513218097378fb458019"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/learned_latency_summary.json": {
+      "bytes": 414,
+      "sha256": "37e2d0d9489158ebee5f436d9fc0c83235e853e6fd7312dcbae517481f85a265"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_and_baseline_replay_pareto.csv": {
+      "bytes": 818,
+      "sha256": "710ae08d583b1f34b8c8545b1e657fa527c81a8abbdc31348bd8d510772bb23b"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_batch_metrics.csv": {
+      "bytes": 682,
+      "sha256": "feb59a5e0f3993c3b01adea54af6058e42f82d5eb51a91f2455d57dafac5ad7f"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_collection_runtime.json": {
+      "bytes": 317,
+      "sha256": "ad61920f1e9a6b169d997b9649818b37ab6db9a3031a3f8fc5eae6af8ef90976"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_controller_latency.csv": {
+      "bytes": 5558,
+      "sha256": "4c0a4d3d2e480dbd91198d402c7d2a6ccae19b3f15ceccb27bfc0685f43fae60"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_generation_results.jsonl": {
+      "bytes": 120426,
+      "sha256": "3329495c991d39421d090391d25ee201cb6f5f997d9ede5711da9b8284fbc0f1"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_ledger_audit.json": {
+      "bytes": 699,
+      "sha256": "f36dd268f5e7a05774e93152559bed2f965ac3b29150e7be9c12a72b48de975e"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_manifest.json": {
+      "bytes": 4274,
+      "sha256": "24c1d713450cc718a7aa5beab3a135384d373c5553d4deaa2c0fdfa555a0d5ea"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_metrics.json": {
+      "bytes": 2386,
+      "sha256": "ad17bab1a7e85ced464010ebcef388de05769eca4c96d90b9a001c83ac4fc18d"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_paired_results.csv": {
+      "bytes": 2638,
+      "sha256": "75e4b826bfd6bc064de6a8c4dec71abac1cded0039afb6ea4d53ac66cc8cf9f4"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_posthoc_analysis.json": {
+      "bytes": 2338,
+      "sha256": "0dac5f8e56ab4f6ba596c5495a737d15b900d94ca889e2b6d11ab2417684e223"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_public_tasks.jsonl": {
+      "bytes": 5131,
+      "sha256": "9c911f3212ef4f69a4e8847999ad1bf3e3504264048d804920ebd30e1ee8a0c4"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_sealed_gold.jsonl": {
+      "bytes": 3168,
+      "sha256": "9dad6ec35ce7f35e7167b7e3a58ee5085bc564dec31a5dd135c3046bebd12d57"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_uncertainty.json": {
+      "bytes": 1224,
+      "sha256": "e710f732214748d607f80f217e229e28b36f493545bde8f22ed41ef9ded80414"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/code_bindings.json": {
+      "bytes": 595,
+      "sha256": "6efe4c4ab672e61cee3cd1d1229a5f5027ccffea16b8b827136d7ea07c16f2ae"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/learned_online_stopping_controller.py": {
+      "bytes": 4607,
+      "sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/online_generation.py": {
+      "bytes": 9341,
+      "sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/online_stopping_controller.py": {
+      "bytes": 13190,
+      "sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/prefix_stopping_model.py": {
+      "bytes": 9024,
+      "sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/run_learned_online_stopping.py": {
+      "bytes": 13143,
+      "sha256": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/run_online_stopping_evaluation.py": {
+      "bytes": 29925,
+      "sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/online_stopping_pareto.png": {
+      "bytes": 93402,
+      "sha256": "1782bd1a56e07fb16bebddb0fa53ba583b422c72666b14b055f7d6467ed49cad"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/online_stopping_pareto.svg": {
+      "bytes": 59756,
+      "sha256": "99c6326ce72aabff5eaa7b8e4c01dbca78ae98aabebe6eac8ad60477464fd998"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/runtime_environment.json": {
+      "bytes": 708,
+      "sha256": "8684f28d784f902067efa8e1dd709979786925d058c73c888d61369ce8911b3c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/baseline_replay_policies.json": {
+      "bytes": 1816,
+      "sha256": "c54645795812417076db0793a676b20b8a06d15ece1d4ace12dd842754fd2aab"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/frozen_prefix_predictor.json": {
+      "bytes": 6324,
+      "sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/learned_decision_latency_repeated_prefixes.csv": {
+      "bytes": 153556,
+      "sha256": "9a2eacd6eb2a2dc42f49ff610c6aca4667ebdaa4fee362e5554e3f44bd8e6237"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/learned_latency_summary.json": {
+      "bytes": 422,
+      "sha256": "c19396fe97a3d9b4e027c7c05d852ba8d43f2b5c89e197e43935f9a922b455d1"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_and_baseline_replay_pareto.csv": {
+      "bytes": 832,
+      "sha256": "03e4a8e03d92731fd60af59848b60c73c6eb361b60d43f02faf6ad8ea7865cfc"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_batch_metrics.csv": {
+      "bytes": 2309,
+      "sha256": "06dde13d6002aad30ca17bb2405c58b912a3449a227814e8893fb592a7949dee"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_collection_runtime.json": {
+      "bytes": 300,
+      "sha256": "1b96ce627b9ddc393bbb4ea1036d68497fefc91655ed731fb23d066ef810a6c6"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_controller_latency.csv": {
+      "bytes": 32966,
+      "sha256": "945d6df47f423dbea2e0c1f31800c135830f33ab5303dc1453029c4daa94c1bb"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_generation_results.jsonl": {
+      "bytes": 563425,
+      "sha256": "8a439f55df1275a6efd6ec63c3a9051d4df3b641be73a86d5b6efdf976632de1"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_ledger_audit.json": {
+      "bytes": 699,
+      "sha256": "f36dd268f5e7a05774e93152559bed2f965ac3b29150e7be9c12a72b48de975e"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_manifest.json": {
+      "bytes": 4711,
+      "sha256": "ee064a32f7cfb309589de9e77c17e265b072353859f63d3ca392c9da42c6c729"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_metrics.json": {
+      "bytes": 2394,
+      "sha256": "b3348a486b481eeb490b254d09e760ec9c6a8bb180d60bb24df6423364fdcd55"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_paired_results.csv": {
+      "bytes": 11041,
+      "sha256": "f6abd0aeb1cc0eb6b3328b53be661902b3d9ea4c43e2593ee570ca04ded99850"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_posthoc_analysis.json": {
+      "bytes": 2351,
+      "sha256": "7ea04f767d97bd4829c7c0d816d891658606fdf98b58e78aea26978dd77b6fdf"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_public_tasks.jsonl": {
+      "bytes": 35832,
+      "sha256": "ff59b3fbf094acac04eb2ea54b87260403944b0bdbf985bd6706692d7d09520c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_sealed_gold.jsonl": {
+      "bytes": 10544,
+      "sha256": "8b58494002e5fe1d1a4e3e5660866c8e42c605cc0fbd5ca61e42c28c44382773"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_uncertainty.json": {
+      "bytes": 1253,
+      "sha256": "f88b77751b8f885c1dac26782972d1cc769f1a97c4cfaf9ab3ccf95a2411150e"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/code_bindings.json": {
+      "bytes": 595,
+      "sha256": "6efe4c4ab672e61cee3cd1d1229a5f5027ccffea16b8b827136d7ea07c16f2ae"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/learned_online_stopping_controller.py": {
+      "bytes": 4607,
+      "sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/online_generation.py": {
+      "bytes": 9341,
+      "sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/online_stopping_controller.py": {
+      "bytes": 13190,
+      "sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/prefix_stopping_model.py": {
+      "bytes": 9024,
+      "sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/run_learned_online_stopping.py": {
+      "bytes": 13143,
+      "sha256": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/run_online_stopping_evaluation.py": {
+      "bytes": 29925,
+      "sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/online_stopping_pareto.png": {
+      "bytes": 96024,
+      "sha256": "3ef71a37a5f93e3376358ab19cd7f604b1aacf1371004ac09eca049f8f76fac9"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/online_stopping_pareto.svg": {
+      "bytes": 59329,
+      "sha256": "b916f180f698120228c40bf1532a820aa97c2d1cd82af6580d0d90a35e852c79"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_main/runtime_environment.json": {
+      "bytes": 708,
+      "sha256": "8684f28d784f902067efa8e1dd709979786925d058c73c888d61369ce8911b3c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_preflight/PROVISIONAL_STATUS.json": {
+      "bytes": 429,
+      "sha256": "9eebcf7cce8f11093f3d2c67f669edcda6534233b3abfbcac11b651a592e3cd7"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_preflight/learned_decision_latency_repeated_prefixes.csv": {
+      "bytes": 153587,
+      "sha256": "dd119ce8e16e781b55cfd23955ac0423c4b20b7e98a8ebdfa17def45f9f8f128"
+    },
+    "research/outputs/semester2/online_stopping_20261002/learned_preflight/learned_latency_summary.json": {
+      "bytes": 425,
+      "sha256": "09f5039373bd2156bd28cc4e3f22dca21d764f2da37134a1d67dfe24146a16c2"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_and_baseline_replay_pareto.csv": {
+      "bytes": 838,
+      "sha256": "86aff695001a4bfb28db95d5cc6c12418a563a3e6ae6693f1417c359815f8e7c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_batch_metrics.csv": {
+      "bytes": 3406,
+      "sha256": "cde3fcbc70e974fa0a7b118bdc2a9c883aeafe0f18cc3023020775e6ca96f302"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_collection_runtime.json": {
+      "bytes": 213,
+      "sha256": "f1bb8b091efd5d94a73201473ccae85e748d74bf66be02f44b46dc64e7fe847b"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_controller_latency.csv": {
+      "bytes": 50032,
+      "sha256": "be14aaf1a25ca0f3482e970ea9e17467d54cfdacbe2e8fabbc5df47f7fb1ebc3"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_generation_results.jsonl": {
+      "bytes": 704725,
+      "sha256": "8faed5f644daef157baa714903c926121be31fecd1741d3c32d03ddd19ddeeba"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_ledger_audit.json": {
+      "bytes": 699,
+      "sha256": "f36dd268f5e7a05774e93152559bed2f965ac3b29150e7be9c12a72b48de975e"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_manifest.json": {
+      "bytes": 3384,
+      "sha256": "cdf10e924110c59aa85b6d64b016426f1fdcf518771d1174a67e6344a966e081"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_metrics.json": {
+      "bytes": 2113,
+      "sha256": "2ab97fe8a906dd7bddfe7b9690f8a9cf50ada8d332025a8fb426dc151255d73d"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_paired_results.csv": {
+      "bytes": 10140,
+      "sha256": "c223a0263f254f4318159eb6d024e56d23e55f79a4c51026b81873de33eb5adf"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_posthoc_analysis.json": {
+      "bytes": 2361,
+      "sha256": "ad1ac29edc9f278f2f6b3fb5e8e34f78fc033fa58b7687294677fc0595a687c5"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_public_tasks.jsonl": {
+      "bytes": 35832,
+      "sha256": "ff59b3fbf094acac04eb2ea54b87260403944b0bdbf985bd6706692d7d09520c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_sealed_gold.jsonl": {
+      "bytes": 10544,
+      "sha256": "8b58494002e5fe1d1a4e3e5660866c8e42c605cc0fbd5ca61e42c28c44382773"
+    },
+    "research/outputs/semester2/online_stopping_20261002/live_uncertainty.json": {
+      "bytes": 1260,
+      "sha256": "a6b4f754fc8461162f1ad672b6a71a7240cbce543a9c7dcf14b43bf4237e9e42"
+    },
+    "research/outputs/semester2/online_stopping_20261002/locked_code/code_bindings.json": {
+      "bytes": 312,
+      "sha256": "7ef5e78269f8fb9ebc1cfce96445f6f984f1f8984c6abb2f7919da20846707ba"
+    },
+    "research/outputs/semester2/online_stopping_20261002/locked_code/online_generation.py": {
+      "bytes": 9341,
+      "sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    "research/outputs/semester2/online_stopping_20261002/locked_code/online_stopping_controller.py": {
+      "bytes": 13190,
+      "sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    "research/outputs/semester2/online_stopping_20261002/locked_code/run_online_stopping_evaluation.py": {
+      "bytes": 29925,
+      "sha256": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    },
+    "research/outputs/semester2/online_stopping_20261002/locked_replay_policies.json": {
+      "bytes": 2489,
+      "sha256": "b857c546c91195c1e88833d4459b92ac89c2b8653fe9c6426a599346a4ee2aea"
+    },
+    "research/outputs/semester2/online_stopping_20261002/online_and_learned_test_results.txt": {
+      "bytes": 5084,
+      "sha256": "d28adf686f334503afc5f8444e67514f3ee1016aa20c9daeff74a95a7659f565"
+    },
+    "research/outputs/semester2/online_stopping_20261002/online_stopping_pareto.png": {
+      "bytes": 95941,
+      "sha256": "05abbac964399699a554e5214ceedc3126a6b5b47723483bce5801dfc69be75c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/online_stopping_pareto.svg": {
+      "bytes": 59130,
+      "sha256": "8a6e7f676dca6856683cc81d00d8107c08cf99ca956fa222e8879f98b28110ae"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_confidence_80_paired.csv": {
+      "bytes": 265268,
+      "sha256": "5a23cec08daf83f442ed9c65bf90c57a77b1772893d2dc7a83bdeb669bdc2e2b"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_confidence_90_paired.csv": {
+      "bytes": 265041,
+      "sha256": "138a913038ad5d75a0094370ce7171e1988eaebdeb5e9552ded32b1fd24ae15a"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_confidence_95_paired.csv": {
+      "bytes": 264574,
+      "sha256": "628a8803d5e15c0c1dae5770cc07ea059e73a56df77ab59b1f000979497b942a"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_fixed_2_paired.csv": {
+      "bytes": 245280,
+      "sha256": "87037d807811c906ee7e0a197d52d7a1e0d1383634d19927d9a7a633352e426d"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_fixed_3_paired.csv": {
+      "bytes": 246056,
+      "sha256": "ed6cb33ee87fa9942674ac10cb21ab31d7c11d48338bc4b08778cee7bc5dcbdc"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_fixed_4_paired.csv": {
+      "bytes": 246328,
+      "sha256": "5f41028eb5a14a0b0c1688e090be53b5d387e48cd4b7c7600a8fb38e1dd8b622"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_metrics.json": {
+      "bytes": 7177,
+      "sha256": "48fa7e4bedb1032531ec733a68e91641494375f8b4b109f1e4222ae1ac83a47c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_never_paired.csv": {
+      "bytes": 249369,
+      "sha256": "819adfbbb17a56fdb97eac71ecafa9e2b0d785196503529674a66be56168ace5"
+    },
+    "research/outputs/semester2/online_stopping_20261002/replay_pareto.csv": {
+      "bytes": 2824,
+      "sha256": "20e8e2f33deeeaec6c79cbeb0f2c33b6ec97c317c775d98759e5dc788dff8f1c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/runtime_environment.json": {
+      "bytes": 708,
+      "sha256": "8684f28d784f902067efa8e1dd709979786925d058c73c888d61369ce8911b3c"
+    },
+    "research/outputs/semester2/online_stopping_20261002/source_revision_notes.json": {
+      "bytes": 9493,
+      "sha256": "1cb25e06c872262c0a9b1bf4f896aff350c7db32648cc36951481ba78e276ffa"
+    },
+    "research/outputs/semester2/prefix_model_v1/data_freeze_at_training.json": {
+      "bytes": 441752,
+      "sha256": "6e2d1add18b88efbb8fd1f5f87f6efc80cb8db9453734cbc84259a2575ffa4c9"
+    },
+    "research/outputs/semester2/prefix_model_v1/evaluation.json": {
+      "bytes": 22993,
+      "sha256": "659eca8d5e3a5949bbeb60df79c77654144fc76d221585d71d10a7b0afb3abf9"
+    },
+    "research/outputs/semester2/prefix_model_v1/excluded_trajectories.csv": {
+      "bytes": 33,
+      "sha256": "e09f568f30398bb03374c1c5f2efb7c3c248d72cee21a70be592854271542fbe"
+    },
+    "research/outputs/semester2/prefix_model_v1/heldout_policy_replay.csv": {
+      "bytes": 238092,
+      "sha256": "e68de793d7f5b1495fc36f9f930cb877a8a6cc36b58f845eecadec6c0a7ee6ae"
+    },
+    "research/outputs/semester2/prefix_model_v1/heldout_prefix_predictions.csv": {
+      "bytes": 501244,
+      "sha256": "f71337213c2ebc10a3fbc95452a811f781f1300b072dc097a3256b0df4e43473"
+    },
+    "research/outputs/semester2/prefix_model_v1/label_reconstruction_audit.csv": {
+      "bytes": 1331481,
+      "sha256": "ff7a789cc04880830a3484d6c77b4d791b810a0afbb76d68ab78918e0843f534"
+    },
+    "research/outputs/semester2/prefix_model_v1/prefix_model.json": {
+      "bytes": 6324,
+      "sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/README.md": {
+      "bytes": 1028,
+      "sha256": "95a6347364a991ea6a3044a4c705f840557bc98386b5080f5e8a8a1768419c95"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/evaluation.json": {
+      "bytes": 22533,
+      "sha256": "853e428341670136368209d23582c40f91e52b2b02bc041536a71e6500f2b887"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/heldout_policy_replay.csv": {
+      "bytes": 48806,
+      "sha256": "dc27e82f7c58941bcd13e692ea76e5f380ae11d0143abf994738e61ab841c3e9"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/heldout_prefix_predictions.csv": {
+      "bytes": 102994,
+      "sha256": "6067f08d3365e4b33e7884136cbfa4a145a186c3a8caf71c641e8eff08a8c8f1"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/prefix_model.json": {
+      "bytes": 6084,
+      "sha256": "f8aad312fdc9abd024e47084efe091addd376f95cb01d7b43932e75dce0764ab"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/report.md": {
+      "bytes": 2202,
+      "sha256": "2538dfa6a073fd658671474b9191fd148df724bf8e67e5a5a5095da99ff2976a"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/task_split.csv": {
+      "bytes": 16992,
+      "sha256": "a24a0e39aec2debe6788024db02d2c3a458958af1850dee47760ac609361e0db"
+    },
+    "research/outputs/semester2/prefix_model_v1/provisional_candidate_agreement/training_protocol.json": {
+      "bytes": 4138,
+      "sha256": "e81eb02d42a23aa1d40aed2c19439c7e403e767ba927cd3d2a5d7ac2bafcf02a"
+    },
+    "research/outputs/semester2/prefix_model_v1/report.md": {
+      "bytes": 2321,
+      "sha256": "dcefca9e9c21c315b43f61ab2556324d6291253a780b3233352228376f7489fc"
+    },
+    "research/outputs/semester2/prefix_model_v1/task_split.csv": {
+      "bytes": 70334,
+      "sha256": "d23f54010b85b3071e7ffb5c58ce5a890365e84174d19154c3efb2f19517fee0"
+    },
+    "research/outputs/semester2/prefix_model_v1/test_summary.json": {
+      "bytes": 1434,
+      "sha256": "8a511c958701e335c185c3d6fa2e19f543703d5d2283eaae36876e0f2ba87706"
+    },
+    "research/outputs/semester2/prefix_model_v1/training_protocol.json": {
+      "bytes": 4322,
+      "sha256": "69c755ac71533a7b31f34c9ed4e448e0690cd11846fcabb9ed191da59e508d85"
+    },
+    "research/outputs/thesis_v1/evidence/algorithm_v2_normalized_effects.csv": {
+      "bytes": 5642,
+      "sha256": "f901865f855b86643713ee97eba517a916c379e2d9a7587054f9d970c378a679"
+    },
+    "research/outputs/thesis_v1/evidence/boundary_domain_step_metrics.csv": {
+      "bytes": 10837,
+      "sha256": "7c63f8cd42e0ff94c3b035c23d0398dc46eb2641a03e4ce8ae9eafa4869bcc4a"
+    },
+    "research/outputs/thesis_v1/evidence/boundary_selected_cell_step_metrics.csv": {
+      "bytes": 5142,
+      "sha256": "5ec076bcb204548566f8b414179137fe9f088d4879c10adcef63855fe6b57fc2"
+    },
+    "research/outputs/thesis_v1/evidence/manifest.json": {
+      "bytes": 2502,
+      "sha256": "0af11a9241c68ea3e4da558359a3fa25efa1c0ebb28802be4f8350b93500f9d4"
+    },
+    "research/outputs/thesis_v1/evidence/offline_replay_metrics.csv": {
+      "bytes": 588,
+      "sha256": "3e49e3ac71d7f8c76ace783af90fcb82c882de4454fc885ef311247650d52c4d"
+    },
+    "research/outputs/thesis_v1/evidence/tournament_balanced_summary.csv": {
+      "bytes": 3212,
+      "sha256": "663488b1414a74b40c20861582bce6d7f1722e1557bc15f025be089963c924b7"
+    },
+    "research/outputs/thesis_v1/evidence/tournament_per_domain.csv": {
+      "bytes": 4034,
+      "sha256": "6f6c8da021429a8cd4a57bc0673a52073db9e3ef819918469dc47439d7b47c13"
+    },
+    "research/outputs/thesis_v1/evidence/tournament_per_fold.csv": {
+      "bytes": 5089,
+      "sha256": "27bcbd60a0531d40bd11ff71de508a0d384d4e0ede9d7236509086fb8543b20d"
+    },
+    "research/prefix_stopping_model.py": {
+      "bytes": 9024,
+      "sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117"
+    },
+    "research/reports/thesis_failure_audit_v1/audit_summary.json": {
+      "bytes": 3214,
+      "sha256": "71781dc284f881ab417d135fc22e1676091e9b608befc38b49505428a41aefa2"
+    },
+    "research/reports/thesis_failure_audit_v1/join_audit.txt": {
+      "bytes": 528,
+      "sha256": "fe86e2ccd3cddea1eff2ea3e9695e706c88e67ce105240f7267a29aff882f588"
+    },
+    "research/reports/thesis_failure_audit_v1/loss_classification.csv": {
+      "bytes": 2028782,
+      "sha256": "cdaf8b406d0f116afb8d611c6c148dcac2edb31ade781152989d9517e4b4c43f"
+    },
+    "research/reports/thesis_failure_audit_v1/loss_step_histories.csv": {
+      "bytes": 21369168,
+      "sha256": "3c3e9b35a098472e04961203c0f465cce74c87fee3a48e3ba05b5f44735cc4ba"
+    },
+    "research/reports/thesis_failure_audit_v1/per_run_verdicts.csv": {
+      "bytes": 11708144,
+      "sha256": "c1c3ef675c57155cd5ef76d5fe5bd6e98b1ad5bfe38405e7ec2ce5a3877cee10"
+    },
+    "research/reports/thesis_failure_audit_v1/slice_tables.txt": {
+      "bytes": 12974,
+      "sha256": "1d26d03ca8675afe0cff019bf0b75cb1b7fea0afb636a692e8a41bfd577e43e9"
+    },
+    "research/reports/thesis_failure_audit_v1/taxonomy_summary.csv": {
+      "bytes": 633,
+      "sha256": "87592115c1c99193e41f1a82ff09ac2dde69dd77dcbe3941a549a0c8eab1f36e"
+    },
+    "research/run_learned_online_stopping.py": {
+      "bytes": 13097,
+      "sha256": "68cd4d8dcdd759041cc0bb8d7370ccb0dadda3f8c59bd211db9bd0a247eb4adf"
+    },
+    "research/tests/test_mathematical_foundations.py": {
+      "bytes": 17223,
+      "sha256": "47c7510883ed540d12e4f7d4781145c0fcf95f915c3b43ed015f84f4d6afe800"
+    },
+    "research/train_prefix_stopping_model.py": {
+      "bytes": 26946,
+      "sha256": "caf9a316220ecd2d36ec7479500ad8cdb0b9112b64b50c569aa17911045311a2"
+    },
+    "software_provenance_v1.json": {
+      "bytes": 10624,
+      "sha256": "cb09491fdc602c93cfc8780347b06cab8f67345f5da3dff7fd0464b63e8cb94f"
+    },
+    "tools/analyze_live_stopping_uncertainty.py": {
+      "bytes": 5324,
+      "sha256": "63110a2afc61b65e9115aab873a6017fdaef12bcea7198bafe0d18d33a24ce42"
+    },
+    "tools/build_stopping_paper.py": {
+      "bytes": 21431,
+      "sha256": "f9b7787fcfe60794ebe96de70836d811c8d16278f8fc1b2dd2e514b8f6709e5d"
+    },
+    "tools/compute_progress_report_review_metrics.py": {
+      "bytes": 34059,
+      "sha256": "44be80678923ecf01067d6b45c10df479b6310a8ce061d346164078b7742cacc"
+    },
+    "tools/recompute_thesis_evidence.py": {
+      "bytes": 2266,
+      "sha256": "42c2cd95e3291ded80438954e78b235e68df1d6ef7a0bbfef50fe5dd60026624"
+    },
+    "tools/summarize_failure_audit.py": {
+      "bytes": 4755,
+      "sha256": "b66b60bc40b6eccf0267990130ae6c001354ee5ad647b0685749ac5017d751d7"
+    }
+  },
+  "interpretation": "Authoring/evidence dependencies; upstream experimental bytes are selected by the separately verified master data freeze.",
+  "live_evidence_complete_required": true,
+  "master_data_content_fingerprint": "4c950d56495aa204a50a4db9b1daa823b279ff9d582d033832769d6b7bb4800c",
+  "schema_version": "stopping-paper-dependencies-v1"
+}

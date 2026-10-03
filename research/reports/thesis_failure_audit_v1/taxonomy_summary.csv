@@ -1,0 +1,6 @@
+category,count,share_pct,tag
+B_stopped_on_empty_answer,196,3.42,(i) pipeline/policy-guard bug (empty-candidate stop state; probe AUC~0.99)
+C_passed_earlier_correct,460,8.02,(iii) fixable-with-better-feature (visible earlier correct state; probe AUC~0.82)
+D_step1_only_correct,600,10.46,"(iii) qualified: T_MIN=2 floor made the ideal stop unreachable, but repair signal exists (probe AUC~0.75)"
+E_next_step_repair,1706,29.75,(iii) fixable-with-better-feature (repair one step away; probe AUC~0.67)
+F_late_repair,2773,48.35,(ii) hard online-decision limit at the required foresight horizon; residual signal weak (probe AUC~0.68)

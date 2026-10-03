@@ -1,0 +1,20 @@
+{"answer_type":"number","derivation":"2b+1=1.10; b=0.05","expected_answer":"0.05","task_id":"trap_bat_ball","trap_category":"linear_difference"}
+{"answer_type":"number","derivation":"Each machine makes one widget per five minutes; 100 machines make 100 in five minutes","expected_answer":"5","task_id":"trap_machines","trap_category":"parallel_rate"}
+{"answer_type":"number","derivation":"Previous day has half the next day's area","expected_answer":"47","task_id":"trap_lily","trap_category":"exponential_growth"}
+{"answer_type":"number","derivation":"120/(60/30+60/60)=40","expected_answer":"40","task_id":"trap_average_speed","trap_category":"harmonic_mean"}
+{"answer_type":"number","derivation":"100*1.2*0.8=96","expected_answer":"96","task_id":"trap_discount","trap_category":"changing_percent_base"}
+{"answer_type":"number","derivation":"Alice=100; (100-80)/100*100=20","expected_answer":"20","task_id":"trap_percent_base","trap_category":"changing_percent_base"}
+{"answer_type":"number","derivation":"B/A=0.9; when A runs 110 meters B runs 99","expected_answer":"99","task_id":"trap_head_start","trap_category":"rate_head_start"}
+{"answer_type":"number","derivation":"11 ordered outcomes have at least one six; one has two sixes","expected_answer":"1/11","task_id":"trap_conditional_dice","trap_category":"conditional_probability"}
+{"answer_type":"number","derivation":"10*9/2=45","expected_answer":"45","task_id":"trap_pairwise_handshakes","trap_category":"double_counting"}
+{"answer_type":"number","derivation":"Distinct roots are 0 and 2, so count=2","expected_answer":"2","task_id":"trap_zero_product","trap_category":"answer_contract"}
+{"answer_type":"number","derivation":"Principal square root is nonnegative","expected_answer":"7","task_id":"trap_square_root","trap_category":"principal_root"}
+{"answer_type":"number","derivation":"-(3^2)=-9","expected_answer":"-9","task_id":"trap_exponent_sign","trap_category":"unary_precedence"}
+{"answer_type":"number","derivation":"(-3)*(-3)=9","expected_answer":"9","task_id":"trap_negative_product","trap_category":"parentheses_precedence"}
+{"answer_type":"number","derivation":"(3/5)*(2/4)=3/10","expected_answer":"3/10","task_id":"trap_without_replacement","trap_category":"dependent_probability"}
+{"answer_type":"number","derivation":"1/(1/3+1/6)=2","expected_answer":"2","task_id":"trap_reciprocal_rate","trap_category":"reciprocal_rates"}
+{"answer_type":"number","derivation":"43-17+1=27","expected_answer":"27","task_id":"trap_inclusive_count","trap_category":"inclusive_endpoints"}
+{"answer_type":"number","derivation":"(50-40)/40*100=25","expected_answer":"25","task_id":"trap_percent_points","trap_category":"relative_vs_absolute"}
+{"answer_type":"number","derivation":"100=14*7+2","expected_answer":"2","task_id":"trap_weekday_cycle","trap_category":"modular_arithmetic"}
+{"answer_type":"number","derivation":"(2*10+3*20)/(2+3)=16","expected_answer":"16","task_id":"trap_mixture","trap_category":"weighted_mean"}
+{"answer_type":"number","derivation":"Ownership=120+15=135; lending does not change ownership","expected_answer":"135","task_id":"trap_irrelevant_fact","trap_category":"irrelevant_detail"}

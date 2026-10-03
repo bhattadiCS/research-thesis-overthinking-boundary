@@ -1,0 +1,30 @@
+{
+  "source": "live_paired_results.csv",
+  "source_sha256": "5f1e02917543d8e351c0c434a79c4a2152ac4ca47a56170233729875c224981e",
+  "analysis_code_sha256": "63110a2afc61b65e9115aab873a6017fdaef12bcea7198bafe0d18d33a24ce42",
+  "independent_aggregate_audit": "passed",
+  "counts": {
+    "problems_or_trajectories": 20,
+    "paired_improved": 0,
+    "paired_worsened": 0,
+    "baseline_correct": 1,
+    "active_correct": 1,
+    "baseline_generated_tokens": 4736,
+    "active_generated_tokens": 4578
+  },
+  "accuracy_delta": 0.0,
+  "accuracy_delta_conservative_exact_95ci": [
+    -0.19675967970462555,
+    0.19675967970462555
+  ],
+  "accuracy_interval_method": "Bonferroni simultaneous 97.5% Clopper-Pearson intervals on paired improvement and worsening probabilities",
+  "completion_token_savings": 0.033361486486486513,
+  "completion_token_savings_cluster_bootstrap_95ci": [
+    0.0,
+    0.0879643121175892
+  ],
+  "bootstrap_draws": 10000,
+  "bootstrap_seed": 804,
+  "scope": "Handpicked question bank: iid-reference accuracy interval and descriptive resampling only; no randomized adversarial-population coverage",
+  "noninferiority": "No noninferiority margin was prespecified; no noninferiority claim is made"
+}
