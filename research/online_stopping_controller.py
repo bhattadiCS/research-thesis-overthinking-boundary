@@ -23,6 +23,11 @@ SCHEMA_VERSION = "prefix-online-stopper-v1"
 T_MIN = 2
 
 
+def _integer_at_least(value: int, name: str, minimum: int) -> None:
+    if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
+        raise ValueError(f"{name} must be an integer at least {minimum}")
+
+
 @dataclass(frozen=True, slots=True)
 class PublicTask:
     """Generation input.  Evaluator labels must be held in a separate ledger."""
@@ -91,8 +96,15 @@ class ClosedPeerPanel:
     closed_ns: int
 
     def validate(self, step: int, decision_ns: int) -> None:
-        if not self.roster or len(self.roster) != len(set(self.roster)):
+        _integer_at_least(self.step, "peer panel step", 1)
+        _integer_at_least(self.closed_ns, "peer barrier clock", 1)
+        _integer_at_least(decision_ns, "decision clock", 1)
+        if (not isinstance(self.roster, tuple) or not isinstance(self.votes, tuple)
+                or not self.roster or not all(isinstance(peer, str) and peer.strip() for peer in self.roster)
+                or len(self.roster) != len(set(self.roster))):
             raise ValueError("peer roster must be frozen, nonempty and unique")
+        if any(not isinstance(vote, PeerVote) for vote in self.votes):
+            raise ValueError("peer votes must be immutable PeerVote records")
         if self.step != step or {v.peer_id for v in self.votes} != set(self.roster):
             raise ValueError("a full same-step peer roster is required")
         if len(self.votes) != len(self.roster):
@@ -100,9 +112,12 @@ class ClosedPeerPanel:
         if self.closed_ns <= 0 or decision_ns < self.closed_ns:
             raise ValueError("peer barrier must close before the decision")
         for vote in self.votes:
+            _integer_at_least(vote.step, "peer vote step", 1)
+            _integer_at_least(vote.completed_ns, "peer completion clock", 1)
+            _integer_at_least(vote.generated_tokens, "peer generated tokens", 0)
             if vote.step != step or not 0 < vote.completed_ns <= self.closed_ns:
                 raise ValueError("future, stale, or uncompleted peer vote")
-            if not vote.answer.strip() or vote.generated_tokens < 0:
+            if not isinstance(vote.answer, str) or not vote.answer.strip() or vote.generated_tokens < 0:
                 raise ValueError("peer answer and token accounting are required")
 
 
@@ -129,6 +144,8 @@ class PolicyConfig:
     peer_agreement_threshold: float = 1.0
 
     def __post_init__(self) -> None:
+        for name in ("max_steps", "min_steps", "fixed_step", "stable_steps", "wobble_changes", "min_peers"):
+            _integer_at_least(getattr(self, name), name, 0)
         if self.mode not in {"heuristic", "never", "fixed"}:
             raise ValueError("unsupported stopping mode")
         if self.min_steps < T_MIN or self.max_steps < self.min_steps:
@@ -182,6 +199,7 @@ class OnlineStoppingController:
     ) -> Decision:
         started = time.perf_counter_ns()
         now = time.monotonic_ns() if decision_ns is None else decision_ns
+        _integer_at_least(now, "decision clock", 1)
         if self._closed:
             raise RuntimeError("cannot feed observations after a terminal STOP")
         if observation.step != len(self._prefix) + 1 or observation.step > self.config.max_steps:
@@ -218,7 +236,8 @@ class OnlineStoppingController:
             if valid and stable and observation.confidence >= self.config.confidence_threshold and peers_ready:
                 stop, reason = True, "stable_high_confidence"
             elif valid and observation.step >= max(3, self.config.min_steps) and peers_ready:
-                if previous.parse_success and previous.confidence is not None and previous.confidence - observation.confidence >= self.config.confidence_drop:
+                if (previous.parse_success and previous.answer.strip() and previous.confidence is not None
+                        and previous.confidence - observation.confidence >= self.config.confidence_drop):
                     stop, reason, selected = True, "confidence_drop_retain_previous", previous
                 else:
                     valid_prefix = [o for o in self._prefix if o.parse_success and o.answer.strip()]

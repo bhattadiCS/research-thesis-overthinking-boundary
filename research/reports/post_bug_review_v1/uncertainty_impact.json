@@ -1,0 +1,166 @@
+{
+  "purpose": "Read-only corrected-source recomputation; no historical receipt is replaced",
+  "corrected_analysis_code_sha256": "445a6241db7328ca7d84f76cfb761f194324d95d9f23f5d7a12df20f995f0cf6",
+  "panels": [
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002",
+      "historical_receipt_sha256": "a6b4f754fc8461162f1ad672b6a71a7240cbce543a9c7dcf14b43bf4237e9e42",
+      "counts_equal": true,
+      "source_sha256_equal": true,
+      "comparisons": {
+        "accuracy_delta": {
+          "historical": 0.0,
+          "corrected": 0.0,
+          "max_absolute_difference": 0.0
+        },
+        "accuracy_delta_conservative_exact_95ci": {
+          "historical": [
+            -0.042874030238438526,
+            0.042874030238438526
+          ],
+          "corrected": [
+            -0.042874030238438526,
+            0.042874030238438526
+          ],
+          "max_absolute_difference": 0.0
+        },
+        "completion_token_savings": {
+          "historical": 0.02935623089372419,
+          "corrected": 0.02935623089372415,
+          "max_absolute_difference": 3.8163916471489756e-17
+        },
+        "completion_token_savings_cluster_bootstrap_95ci": {
+          "historical": [
+            0.008507177794051532,
+            0.056295744544285375
+          ],
+          "corrected": [
+            0.008507177794051558,
+            0.05629574454428539
+          ],
+          "max_absolute_difference": 2.6020852139652106e-17
+        }
+      }
+    },
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002/adversarial_live",
+      "historical_receipt_sha256": "0083caa3f5c975b00ebe14b865af79144bfba289815527e1485758d1011662ef",
+      "counts_equal": true,
+      "source_sha256_equal": true,
+      "comparisons": {
+        "accuracy_delta": {
+          "historical": 0.0,
+          "corrected": 0.0,
+          "max_absolute_difference": 0.0
+        },
+        "accuracy_delta_conservative_exact_95ci": {
+          "historical": [
+            -0.19675967970462555,
+            0.19675967970462555
+          ],
+          "corrected": [
+            -0.19675967970462555,
+            0.19675967970462555
+          ],
+          "max_absolute_difference": 0.0
+        },
+        "completion_token_savings": {
+          "historical": 0.033361486486486513,
+          "corrected": 0.033361486486486486,
+          "max_absolute_difference": 2.7755575615628914e-17
+        },
+        "completion_token_savings_cluster_bootstrap_95ci": {
+          "historical": [
+            0.0,
+            0.0879643121175892
+          ],
+          "corrected": [
+            0.0,
+            0.0879643121175892
+          ],
+          "max_absolute_difference": 0.0
+        }
+      }
+    },
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "historical_receipt_sha256": "f88b77751b8f885c1dac26782972d1cc769f1a97c4cfaf9ab3ccf95a2411150e",
+      "counts_equal": true,
+      "source_sha256_equal": true,
+      "comparisons": {
+        "accuracy_delta": {
+          "historical": 0.01,
+          "corrected": 0.01,
+          "max_absolute_difference": 0.0
+        },
+        "accuracy_delta_conservative_exact_95ci": {
+          "historical": [
+            -0.04274825032732631,
+            0.06211922021093292
+          ],
+          "corrected": [
+            -0.04274825032732631,
+            0.06211922021093292
+          ],
+          "max_absolute_difference": 0.0
+        },
+        "completion_token_savings": {
+          "historical": 0.5650962057183959,
+          "corrected": 0.565096205718396,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "completion_token_savings_cluster_bootstrap_95ci": {
+          "historical": [
+            0.5482569426373755,
+            0.5801191943551758
+          ],
+          "corrected": [
+            0.5482569426373755,
+            0.5801191943551758
+          ],
+          "max_absolute_difference": 0.0
+        }
+      }
+    },
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "historical_receipt_sha256": "e710f732214748d607f80f217e229e28b36f493545bde8f22ed41ef9ded80414",
+      "counts_equal": true,
+      "source_sha256_equal": true,
+      "comparisons": {
+        "accuracy_delta": {
+          "historical": 0.0,
+          "corrected": 0.0,
+          "max_absolute_difference": 0.0
+        },
+        "accuracy_delta_conservative_exact_95ci": {
+          "historical": [
+            -0.19675967970462555,
+            0.19675967970462555
+          ],
+          "corrected": [
+            -0.19675967970462555,
+            0.19675967970462555
+          ],
+          "max_absolute_difference": 0.0
+        },
+        "completion_token_savings": {
+          "historical": 0.5211148648648649,
+          "corrected": 0.5211148648648649,
+          "max_absolute_difference": 0.0
+        },
+        "completion_token_savings_cluster_bootstrap_95ci": {
+          "historical": [
+            0.4585667925964603,
+            0.5717264824294295
+          ],
+          "corrected": [
+            0.45856679259646027,
+            0.5717264824294295
+          ],
+          "max_absolute_difference": 5.551115123125783e-17
+        }
+      }
+    }
+  ]
+}

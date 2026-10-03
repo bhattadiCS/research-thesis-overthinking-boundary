@@ -135,6 +135,14 @@ class ControllerTests(unittest.TestCase):
         self.assertTrue(decision.stop)
         self.assertEqual((decision.selected_answer, decision.selected_step), ("25", 2))
 
+    def test_confidence_drop_cannot_replace_an_answer_with_an_empty_candidate(self) -> None:
+        controller = OnlineStoppingController(PolicyConfig(confidence_threshold=100))
+        controller.observe(observation(1, "25", 70))
+        controller.observe(observation(2, "", 95))
+        decision = controller.observe(observation(3, "26", 60))
+        self.assertFalse(decision.stop)
+        self.assertEqual((decision.selected_answer, decision.selected_step), ("26", 3))
+
     def test_answer_wobble_selection_uses_observed_confidence(self) -> None:
         controller = OnlineStoppingController(PolicyConfig(confidence_threshold=100, confidence_drop=100))
         controller.observe(observation(1, "10", 75))
@@ -181,6 +189,48 @@ class ControllerTests(unittest.TestCase):
         for tokens in (-1, .5, True):
             with self.assertRaises(ValueError):
                 observation(1, tokens=tokens)
+
+    def test_fractional_nonfinite_and_boolean_policy_counts_are_rejected(self) -> None:
+        for name in ("max_steps", "min_steps", "fixed_step", "stable_steps", "wobble_changes", "min_peers"):
+            for value in (2.5, math.nan, math.inf, True):
+                with self.subTest(name=name, value=value), self.assertRaises(ValueError):
+                    PolicyConfig(**{name: value})
+
+    def test_invalid_decision_clock_does_not_consume_an_observation(self) -> None:
+        for value in (math.nan, math.inf, 50.5, True, 0, -1):
+            controller = OnlineStoppingController()
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                controller.observe(dataclasses.replace(observation(1), observed_ns=51), decision_ns=value)
+            self.assertEqual(controller.prefix, ())
+            self.assertFalse(controller.observe(observation(1), decision_ns=60).stop)
+
+    def test_malformed_peer_clock_and_token_counts_are_rejected_before_prefix_update(self) -> None:
+        valid_vote = PeerVote("a", 2, "25", 30, 8)
+        cases = []
+        for name in ("step", "completed_ns", "generated_tokens"):
+            for value in (2.5, math.nan, math.inf, True):
+                cases.append(ClosedPeerPanel(2, ("a",), (dataclasses.replace(valid_vote, **{name: value}),), 40))
+        cases.extend(dataclasses.replace(ClosedPeerPanel(2, ("a",), (valid_vote,), 40), **{name: value})
+                     for name in ("step", "closed_ns") for value in (2.5, math.nan, math.inf, True))
+        for panel in cases:
+            controller = OnlineStoppingController(PolicyConfig(min_peers=1))
+            controller.observe(observation(1))
+            with self.subTest(panel=panel), self.assertRaises(ValueError):
+                controller.observe(observation(2), peers=panel, decision_ns=50)
+            self.assertEqual(len(controller.prefix), 1)
+
+    def test_peer_roster_and_votes_require_immutable_typed_records(self) -> None:
+        vote = PeerVote("a", 2, "25", 30, 8)
+        panels = (
+            ClosedPeerPanel(2, ["a"], (vote,), 40),
+            ClosedPeerPanel(2, ("a",), [vote], 40),
+            ClosedPeerPanel(2, (1,), (dataclasses.replace(vote, peer_id=1),), 40),
+            ClosedPeerPanel(2, ("a",), (dataclasses.replace(vote, answer=25),), 40),
+            ClosedPeerPanel(2, ("a",), ({"peer_id": "a"},), 40),
+        )
+        for panel in panels:
+            with self.subTest(panel=panel), self.assertRaises(ValueError):
+                panel.validate(2, 50)
 
     def test_peer_requirement_waits_for_complete_same_step_panel(self) -> None:
         controller = OnlineStoppingController(PolicyConfig(min_peers=2))

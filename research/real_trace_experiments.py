@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import gc
 import hashlib
 import importlib.util
@@ -490,9 +491,43 @@ def extract_word_fraction_values(text: str) -> list[str]:
     return values
 
 
+_NUMBER_LITERAL = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
+_NUMERIC_TOKEN = re.compile(rf"{_NUMBER_LITERAL}(?:\s*/\s*{_NUMBER_LITERAL})?")
+# The symbolic grader has a finite computation budget, independent of platform
+# signal support. These are parser limits, not claims about mathematical truth.
+_MAX_LITERAL_DIGITS = 1024
+_MAX_DECIMAL_EXPONENT = 1000
+_MAX_ARITHMETIC_BITS = 8192
+_SYMBOLIC_FUNCTION_NAMES = (
+    "sqrt", "sin", "cos", "tan", "cot", "sec", "csc", "asin", "acos", "atan",
+    "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "log", "exp", "floor",
+    "ceiling", "factorial", "factorial2", "Abs",
+)
+
+
+def _bounded_numeric_literal(value: str) -> bool:
+    if len(value) > _MAX_LITERAL_DIGITS + 16 or not re.fullmatch(_NUMBER_LITERAL, value):
+        return False
+    mantissa, *exponents = re.split("[eE]", value)
+    if sum(char.isdigit() for char in mantissa) > _MAX_LITERAL_DIGITS:
+        return False
+    if exponents:
+        exponent = exponents[0].lstrip("+-").lstrip("0") or "0"
+        if len(exponent) > 4 or int(exponent) > _MAX_DECIMAL_EXPONENT:
+            return False
+    return True
+
+
 def _canonical_fraction(value: str) -> str:
+    parts = value.split("/")
+    if len(parts) > 2 or not all(_bounded_numeric_literal(part.strip()) for part in parts):
+        return value
     try:
-        normalized = Fraction(value)
+        if value.count("/") == 1:
+            numerator, denominator = value.split("/")
+            normalized = Fraction(numerator.strip()) / Fraction(denominator.strip())
+        else:
+            normalized = Fraction(value)
     except (ValueError, ZeroDivisionError):
         return value
     return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
@@ -504,27 +539,19 @@ def extract_numeric_candidate(text: str) -> str:
     # The previous implementation scanned fractions first and returned a leading
     # fraction even when the real answer was the trailing integer, deflating
     # GSM8K correctness on ratio-flavoured problems.
-    stripped = text.strip().lower().replace(",", "")
+    stripped = re.sub(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?",
+                      lambda match: match.group().replace(",", ""), text.strip().lower())
     if not stripped:
         return ""
 
-    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", stripped)
-    if boxed_matches:
-        stripped = boxed_matches[-1].strip().lower().replace(",", "")
-
-    candidates: list[tuple[int, str]] = []
-    fraction_spans: list[tuple[int, int]] = []
-    for match in re.finditer(r"-?\d+\s*/\s*-?\d+", stripped):
-        fraction_spans.append((match.start(), match.end()))
-        candidates.append((match.start(), _canonical_fraction(match.group().replace(" ", ""))))
-    for match in re.finditer(r"-?\d+(?:\.\d+)?", stripped):
-        if any(start <= match.start() < end for start, end in fraction_spans):
-            continue  # already covered by a fraction match
-        candidates.append((match.start(), _canonical_fraction(match.group())))
-
+    boxed_content = _last_boxed_content(stripped)
+    if boxed_content is not None:
+        stripped = boxed_content.strip()
+    stripped = re.sub(rf"\\(?:d|t)?frac\{{\s*({_NUMBER_LITERAL})\s*\}}\{{\s*({_NUMBER_LITERAL})\s*\}}",
+                      r"\1/\2", stripped)
+    candidates = list(_NUMERIC_TOKEN.finditer(stripped))
     if candidates:
-        candidates.sort(key=lambda item: item[0])
-        return candidates[-1][1]
+        return _canonical_fraction(candidates[-1].group())
 
     word_fraction_matches = extract_word_fraction_values(stripped)
     if word_fraction_matches:
@@ -582,7 +609,11 @@ def _strip_latex_math(text: str) -> str:
         s = s.replace(token, "")
     s = s.replace("{", "").replace("}", "").replace("\\", "")
     s = re.sub(r"(?<=\d),(?=\d{3}\b)", "", s)  # 1,000 -> 1000
-    return s.replace(" ", "").rstrip(".").strip()
+    # Preserve a function/argument separator for SymPy's supported implicit
+    # application (e.g. "sqrt 4"); other layout whitespace is immaterial.
+    functions = "|".join(_SYMBOLIC_FUNCTION_NAMES + ("abs", "ln", "ceil"))
+    return re.sub(r"\s+", lambda match: " " if re.search(rf"\b(?:{functions})$", s[:match.start()],
+                                                       flags=re.IGNORECASE) else "", s).rstrip(".").strip()
 
 
 def normalize_math_answer(raw_answer: str) -> str:
@@ -591,26 +622,150 @@ def normalize_math_answer(raw_answer: str) -> str:
     s = _strip_latex_math(raw_answer)
     if s == "":
         return ""
-    bare = s.replace("(", "").replace(")", "")
-    if re.fullmatch(r"-?\d+(\.\d+)?", bare) or re.fullmatch(r"-?\d+/-?\d+", bare):
-        try:
-            frac = Fraction(bare).limit_denominator(10**6)
-            return str(frac.numerator) if frac.denominator == 1 else f"{frac.numerator}/{frac.denominator}"
-        except (ValueError, ZeroDivisionError):
-            pass
+    def peel_outer_group(value: str) -> str:
+        # Only remove parentheses enclosing the entire expression. Removing all
+        # groups changes the implicit product (1)(2) into the number 12.
+        while value.startswith("(") and value.endswith(")"):
+            depth = 0
+            for index, char in enumerate(value):
+                depth += (char == "(") - (char == ")")
+                if depth == 0:
+                    break
+            if index != len(value) - 1:
+                break
+            value = value[1:-1]
+        return value
+
+    bare = peel_outer_group(s)
+    if bare.count("/") == 1:
+        numerator, denominator = (peel_outer_group(part) for part in bare.split("/"))
+        if re.fullmatch(_NUMBER_LITERAL, numerator) and re.fullmatch(_NUMBER_LITERAL, denominator):
+            return _canonical_fraction(f"{numerator}/{denominator}")
+    if re.fullmatch(_NUMBER_LITERAL, bare):
+        return _canonical_fraction(bare)
     return s.lower()
 
 
-def _as_number(text: str | None) -> float | None:
+def _as_number(text: str | None) -> Fraction | None:
     if not text:
         return None
+    parts = text.split("/")
+    if len(parts) > 2 or not all(_bounded_numeric_literal(part.strip()) for part in parts):
+        return None
     try:
-        return float(Fraction(text))
-    except (ValueError, ZeroDivisionError):
-        try:
-            return float(text)
-        except (ValueError, TypeError):
-            return None
+        return Fraction(parts[0]) if len(parts) == 1 else Fraction(parts[0]) / Fraction(parts[1])
+    except (ValueError, ZeroDivisionError, OverflowError):
+        return None
+
+
+def _safe_symbolic_expression(text: str):
+    """Parse supported scalar math without evaluating Python from model text.
+
+    SymPy's tokenizer supplies implicit multiplication, but its generated syntax
+    is interpreted using only arithmetic, numeric/symbol constructors and this
+    explicit function list. Attributes, imports, strings as expressions, keyword
+    arguments and arbitrary Python calls are rejected.
+    """
+    import sympy
+    from sympy.parsing.sympy_parser import (
+        stringify_expr, standard_transformations, implicit_multiplication_application,
+    )
+    functions = {name: getattr(sympy, name) for name in _SYMBOLIC_FUNCTION_NAMES}
+    functions.update({"abs": sympy.Abs, "ln": sympy.log, "ceil": sympy.ceiling})
+    constants = {"pi": sympy.pi, "oo": sympy.oo}
+    constructors = {name: getattr(sympy, name) for name in ("Symbol", "Integer", "Float", "Rational")}
+    if len(text) > 4096:
+        raise ValueError("Symbolic answer exceeds supported parse length")
+    if any(not _bounded_numeric_literal(match.group()) for match in re.finditer(_NUMBER_LITERAL, text)):
+        raise ValueError("Numeric literal exceeds the grader computation budget")
+    expression = re.sub(r"(?<![A-Za-z_])(\d)(?![eE][+-]?\d)([a-zA-Z(])", r"\1*\2", text.replace("^", "**"))
+    transformed = stringify_expr(expression, {**functions, **constants}, constructors,
+                                  standard_transformations + (implicit_multiplication_application,))
+    tree = ast.parse(transformed, mode="eval")
+    if sum(1 for _ in ast.walk(tree)) > 256:
+        raise ValueError("Symbolic answer exceeds supported parse complexity")
+
+    def number_bits(value):
+        if isinstance(value, (int, sympy.Integer)):
+            return abs(int(value)).bit_length()
+        if isinstance(value, sympy.Rational):
+            return max(abs(int(value.p)).bit_length(), int(value.q).bit_length())
+        return 0
+
+    def interpret(node):
+        if isinstance(node, ast.Constant) and type(node.value) in (str, int, float):
+            return node.value
+        if isinstance(node, ast.Name) and node.id in constants:
+            return constants[node.id]
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+            value = interpret(node.operand)
+            if isinstance(value, str):
+                raise ValueError("Strings are not arithmetic operands")
+            return value if isinstance(node.op, ast.UAdd) else -value
+        if isinstance(node, ast.BinOp):
+            left, right = interpret(node.left), interpret(node.right)
+            if isinstance(left, str) or isinstance(right, str):
+                raise ValueError("Strings are not arithmetic operands")
+            if isinstance(node.op, ast.Add):
+                if number_bits(left) + number_bits(right) + 1 > _MAX_ARITHMETIC_BITS:
+                    raise ValueError("Arithmetic result exceeds the grader computation budget")
+                return left + right
+            if isinstance(node.op, ast.Sub):
+                if number_bits(left) + number_bits(right) + 1 > _MAX_ARITHMETIC_BITS:
+                    raise ValueError("Arithmetic result exceeds the grader computation budget")
+                return left - right
+            if isinstance(node.op, ast.Mult):
+                if number_bits(left) + number_bits(right) > _MAX_ARITHMETIC_BITS:
+                    raise ValueError("Arithmetic result exceeds the grader computation budget")
+                return left * right
+            if isinstance(node.op, ast.Div):
+                if number_bits(left) + number_bits(right) > _MAX_ARITHMETIC_BITS:
+                    raise ValueError("Arithmetic result exceeds the grader computation budget")
+                return left / right
+            if isinstance(node.op, ast.Pow):
+                if (not isinstance(right, (int, sympy.Rational)) or abs(right) > 1000
+                        or isinstance(right, sympy.Rational) and right.q > 1000):
+                    raise ValueError("Power exceeds the grader computation budget")
+                if number_bits(left) * max(1, math.ceil(abs(right))) > _MAX_ARITHMETIC_BITS:
+                    raise ValueError("Power result exceeds the grader computation budget")
+                if (isinstance(right, sympy.Rational) and right.q != 1 and number_bits(left) > 40):
+                    raise ValueError("Radical exceeds the grader computation budget")
+                if (isinstance(left, sympy.Expr) and left.free_symbols
+                        and (1 + sympy.count_ops(left)) ** math.ceil(abs(right)) > 10000):
+                    raise ValueError("Symbolic expansion exceeds the grader computation budget")
+                return left ** right
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and not node.keywords:
+            name = node.func.id
+            args = [interpret(arg) for arg in node.args]
+            if name == "Symbol" and len(args) == 1 and isinstance(args[0], str):
+                if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", args[0]):
+                    return sympy.Symbol(args[0])
+            elif name in ("Integer", "Float", "Rational") and 1 <= len(args) <= 2:
+                if all((isinstance(arg, (int, float, sympy.Number))
+                        or isinstance(arg, str) and _bounded_numeric_literal(arg)) for arg in args):
+                    if any(number_bits(arg) > _MAX_ARITHMETIC_BITS for arg in args):
+                        raise ValueError("Number exceeds the grader computation budget")
+                    # Decimal tokens represent exact rationals in arithmetic,
+                    # avoiding binary-float equality of distinct large values.
+                    return sympy.Rational(*args) if name == "Float" else constructors[name](*args)
+            elif name in functions and args and all(isinstance(arg, (int, float, sympy.Expr)) for arg in args):
+                if len(args) != 1 and not (name in ("log", "ln") and len(args) == 2):
+                    raise ValueError("Unsupported function arity")
+                for arg in args:
+                    if name in ("factorial", "factorial2"):
+                        if not isinstance(arg, (int, sympy.Integer)) or not 0 <= arg <= 200:
+                            raise ValueError("Factorial exceeds the grader computation budget")
+                    elif isinstance(arg, (int, sympy.Rational)) and abs(arg) > 1000000:
+                        raise ValueError("Function argument exceeds the grader computation budget")
+                    elif isinstance(arg, sympy.Expr) and arg.is_number and arg.has(sympy.exp, sympy.factorial, sympy.factorial2):
+                        raise ValueError("Nested numeric function exceeds the grader computation budget")
+                return functions[name](*args)
+        raise ValueError("Unsupported symbolic syntax")
+
+    result = interpret(tree.body)
+    if not isinstance(result, (int, float, sympy.Expr)):
+        raise ValueError("Not a scalar mathematical expression")
+    return sympy.sympify(result)
 
 
 def math_answers_equivalent(candidate: str, expected: str) -> bool:
@@ -620,41 +775,36 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
         return False
     if norm_candidate == norm_expected:
         return True
-    try:
-        if abs(float(norm_candidate) - float(norm_expected)) < 1e-6:
-            return True
-    except (ValueError, TypeError):
-        pass
-    # VALIDATION FIX: when the gold answer is purely numeric, the model often
-    # gives the right number wrapped in words/units ("Savings: 550 gallons",
-    # "1.25 miles"). Compare the candidate's trailing numeric token by value.
-    # Gated on a numeric gold answer so a verbose wrong answer that merely
-    # mentions a different number cannot become a false positive.
+    candidate_num = _as_number(norm_candidate)
     exp_num = _as_number(norm_expected)
+    if candidate_num is not None and exp_num is not None and abs(candidate_num - exp_num) < Fraction(1, 10**6):
+        return True
+    # Permit a single prose/unit-wrapped numeric quantity ("Savings: 550 gallons")
+    # while preserving arithmetic expressions for the symbolic comparison.
     candidate_str = str(candidate)
-    # Only number-grab from PROSE-wrapped numbers, never from symbolic answers
-    # (equations/expressions: '=', '^', '\', or digit-letter adjacency like "5r"),
-    # so "5x-7y+11z+4=0" is never reduced to its trailing "0".
-    looks_symbolic = bool(re.search(r"[=^\\]|\d[a-zA-Z]|[a-zA-Z]\d", candidate_str))
-    if exp_num is not None and not looks_symbolic:
-        cand_num = _as_number(extract_numeric_candidate(candidate_str))
-        if cand_num is not None and abs(cand_num - exp_num) < 1e-6:
+    quantity_text = re.sub(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?",
+                           lambda match: match.group().replace(",", ""), candidate_str)
+    quantities = list(_NUMERIC_TOKEN.finditer(quantity_text))
+    prose_quantity = False
+    if len(quantities) == 1:
+        match = quantities[0]
+        surrounding = quantity_text[:match.start()] + quantity_text[match.end():]
+        prefix_words = re.findall(r"[A-Za-z]+", quantity_text[:match.start()].lower())
+        mathematical_words = {name.lower() for name in _SYMBOLIC_FUNCTION_NAMES} | {"abs", "ln", "ceil", "pi", "oo"}
+        prose_quantity = (bool(re.search(r"[A-Za-z]", surrounding))
+                          and not re.search(r"[=^\\+*/(){}\[\]'\"-]", surrounding)
+                          and not (match.start() and quantity_text[match.start() - 1].isalnum())
+                          and not (match.end() < len(quantity_text) and quantity_text[match.end()].isalnum())
+                          and not mathematical_words.intersection(re.findall(r"[A-Za-z]+", surrounding.lower()))
+                          and not (len(prefix_words) == 1 and len(prefix_words[0]) == 1))
+    if exp_num is not None and prose_quantity:
+        cand_num = _as_number(_canonical_fraction(quantities[0].group()))
+        if cand_num is not None and abs(cand_num - exp_num) < Fraction(1, 10**6):
             return True
     try:  # symbolic fallback; sympy ships as an indirect torch dependency
         import sympy
-        from sympy.parsing.sympy_parser import (
-            parse_expr, standard_transformations, implicit_multiplication_application,
-        )
         import signal
-        transforms = standard_transformations + (implicit_multiplication_application,)
-        def _sympy_ready(expr: str) -> str:
-            # Digit-letter adjacency like '0x^2' tokenizes as a broken hex
-            # literal BEFORE sympy's implicit-multiplication transform runs
-            # (TokenError; rigor_audit/01 §4c) -- make the product explicit,
-            # leaving scientific notation (2e3) alone.
-            return re.sub(r"(\d)(?![eE][0-9])([a-zA-Z(])", r"\1*\2", expr.replace("^", "**"))
-
-        # Use signal-based alarm to prevent infinite loops in sympy's parse_expr or simplify
+        # Use a signal-based alarm where available for symbolic parsing/simplify.
         # which can get stuck on complex/recursive expressions from LLM outputs.
         has_sigalrm = hasattr(signal, "SIGALRM")
         if has_sigalrm:
@@ -664,8 +814,8 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
             signal.alarm(5)  # 5-second timeout
 
         try:
-            expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
-            expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
+            expr_a = _safe_symbolic_expression(norm_candidate)
+            expr_b = _safe_symbolic_expression(norm_expected)
             is_equiv = sympy.simplify(expr_a - expr_b) == 0
         finally:
             if has_sigalrm:
@@ -692,15 +842,17 @@ def normalize_mcq_answer(raw_answer: str) -> str:
     if boxed is not None:
         s = boxed
     s = s.upper()
-    for pattern in (r"(?:ANSWER|OPTION|CHOICE)\s*(?:IS|:|=)?\s*\(?([A-H])\)?",
+    if re.search(r"(?<![A-Z0-9])(?:[A-H]|\([A-H]\))\s*/\s*(?:[A-H]|\([A-H]\))(?![A-Z0-9])", s):
+        return ""  # Slash-separated alternatives do not name a single choice.
+    for pattern in (r"\b(?:ANSWER|OPTION|CHOICE)\b\s*(?:IS\b|:|=)?\s*\(?([A-H])(?![A-Z0-9/])\)?",
                     r"\(([A-H])\)",
                     # '/' guards: a bare letter adjacent to a slash is part of a
                     # token like 'N/A', not a choice (rigor_audit/01 §4a).
-                    r"(?<![A-Z/])([A-H])(?![A-Z/])"):
+                    r"(?<![A-Z0-9/])([A-H])(?![A-Z0-9/])"):
         matches = re.findall(pattern, s)
         if matches:
             return matches[-1]
-    return s[:1] if s[:1] in _MCQ_LETTERS else ""
+    return ""
 
 
 def _format_mcq_prompt(question: str, labeled_options: list[tuple[str, str]]) -> str:
@@ -729,11 +881,7 @@ def normalize_answer(raw_answer: str, answer_type: str) -> str:
                 return day_name
         return text.split()[0]
 
-    if answer_type == "int":
-        match = re.findall(r"-?\d+", text)
-        return match[-1] if match else text
-
-    if answer_type in {"fraction", "number"}:
+    if answer_type in {"int", "fraction", "number"}:
         numeric_candidate = extract_numeric_candidate(text)
         return numeric_candidate or text
 

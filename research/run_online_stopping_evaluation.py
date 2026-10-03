@@ -356,22 +356,28 @@ def collect_policy_batch(tasks: list[PublicTask], config: PolicyConfig, generato
     decision_rows: list[list[dict[str, Any]]] = [[] for _ in tasks]
     active = list(range(len(tasks)))
     start = time.perf_counter()
-    for step in range(1, config.max_steps + 1):
-        before = len(generator.metrics)
-        observations = generator.generate_batch([tasks[i] for i in active], [controllers[i].prefix for i in active], step, [tokens[i] for i in active])
-        batches.extend(asdict(metric) | {"policy": config.name, "chunk": chunk, "step": step} for metric in generator.metrics[before:])
-        survivors = []
-        for i, observation in zip(active, observations):
-            decision = controllers[i].observe(observation)
-            decision_rows[i].append(asdict(decision))
-            if decision.stop:
-                tokens[i].cancel()
-            else:
-                survivors.append(i)
-        active = survivors
-        if not active:
-            break
-    generator.cancel()
+    try:
+        for step in range(1, config.max_steps + 1):
+            before = len(generator.metrics)
+            observations = generator.generate_batch([tasks[i] for i in active], [controllers[i].prefix for i in active], step, [tokens[i] for i in active])
+            if len(observations) != len(active):
+                raise ValueError("generator must return one observation per active task")
+            batches.extend(asdict(metric) | {"policy": config.name, "chunk": chunk, "step": step} for metric in generator.metrics[before:])
+            survivors = []
+            for i, observation in zip(active, observations):
+                decision = controllers[i].observe(observation)
+                decision_rows[i].append(asdict(decision))
+                if decision.stop:
+                    tokens[i].cancel()
+                else:
+                    survivors.append(i)
+            active = survivors
+            if not active:
+                break
+    finally:
+        for token in tokens:
+            token.cancel()
+        generator.cancel()
     if active:
         raise AssertionError("terminal policy failed to close all tasks")
     elapsed = time.perf_counter() - start

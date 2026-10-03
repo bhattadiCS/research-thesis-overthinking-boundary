@@ -93,6 +93,8 @@ def collect_batch(tasks: list[PublicTask], predictor: Any, policy: LearnedPolicy
         for step in range(1, policy.max_steps + 1):
             before = len(generator.metrics)
             observations = generator.generate_batch([tasks[i] for i in active], [controllers[i].prefix for i in active], step, [tokens[i] for i in active])
+            if len(observations) != len(active):
+                raise ValueError("generator must return one observation per active task")
             batches.extend(asdict(metric) | {"policy": policy.name, "chunk": chunk, "step": step} for metric in generator.metrics[before:])
             survivors = []
             for i, observation in zip(active, observations):
@@ -106,6 +108,8 @@ def collect_batch(tasks: list[PublicTask], predictor: Any, policy: LearnedPolicy
             if not active:
                 break
     finally:
+        for token in tokens:
+            token.cancel()
         generator.cancel()
     if active:
         raise AssertionError("learned terminal policy failed to close all tasks")

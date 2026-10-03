@@ -131,6 +131,7 @@ def new_ledger(kind, operator=None, session_id=None, plan=None, template=False,
     plan = copy.deepcopy(plan if plan is not None else source_plan())
     prior = None
     if prior_peer_ledger is not None:
+        require(kind == "adviser_dry_run", "Only an adviser dry-run can link a prior peer mock.")
         p = Path(prior_peer_ledger).resolve()
         previous = read_ledger(p)
         previous_audit = audit_ledger(previous)
@@ -208,6 +209,7 @@ def _data_contract(event):
 
 
 def validate_ledger(ledger):
+    require(isinstance(ledger, dict), "Ledger JSON must be an object.")
     require(ledger.get("schema") == SCHEMA, "Unsupported ledger schema.")
     require(ledger.get("kind") in KINDS and type(ledger.get("template")) is bool,
             "Invalid rehearsal kind/template flag.")
@@ -220,18 +222,33 @@ def validate_ledger(ledger):
         instant(ledger.get("created_at"))
     require(isinstance(ledger.get("events"), list), "Events must be an explicit list.")
     logger = ledger.get("logger_source", {})
-    require(isinstance(logger.get("sha256"), str) and len(logger["sha256"]) == 64
+    require(isinstance(logger, dict) and isinstance(logger.get("sha256"), str) and len(logger["sha256"]) == 64
             and all(c in "0123456789abcdef" for c in logger["sha256"]), "Missing initial logger source hash.")
+    prior = ledger.get("prior_peer_mock")
+    if prior is not None:
+        require(isinstance(prior, dict) and ledger["kind"] == "adviser_dry_run",
+                "A prior peer link is an object belonging to an adviser dry-run.")
+        for key in ("path", "session_id", "sha256"):
+            text_field(prior, key)
+        require(len(prior["sha256"]) == 64 and all(c in "0123456789abcdef" for c in prior["sha256"]),
+                "Invalid prior peer ledger hash.")
+        require(isinstance(prior.get("questions"), list)
+                and all(isinstance(q, str) and bool(q.strip()) for q in prior["questions"])
+                and len(set(prior["questions"])) == len(prior["questions"]),
+                "Prior peer question IDs must be unique nonempty strings.")
     plan = ledger.get("plan")
     require(isinstance(plan, dict) and canonical_digest(plan) == ledger.get("plan_sha256"),
             "Frozen source/notes plan hash changed.")
+    require(isinstance(plan.get("slides"), list) and isinstance(plan.get("sources"), dict),
+            "Frozen plan needs explicit slide and source collections.")
     require(len(plan.get("slides", [])) == plan.get("slide_count") == 25
             and sum(s["planned_seconds"] for s in plan["slides"]) == plan["talk_target_seconds"] == 1800
             and plan.get("qa_target_seconds") == 1800,
             "The frozen contract is a 25-slide/30-minute talk plus 30-minute Q&A.")
     elapsed = 0
     for number, s in enumerate(plan["slides"], 1):
-        require(s["number"] == number and type(s["planned_seconds"]) is int and s["planned_seconds"] > 0
+        require(isinstance(s, dict) and type(s.get("number")) is int and s["number"] == number
+                and type(s["planned_seconds"]) is int and s["planned_seconds"] > 0
                 and s["planned_start_seconds"] == elapsed
                 and s["planned_end_seconds"] == elapsed + s["planned_seconds"]
                 and digest_bytes(s["speaker_notes"].encode("utf-8")) == s["speaker_notes_utf8_sha256"],
@@ -244,6 +261,7 @@ def validate_ledger(ledger):
              "evidence": {}, "attestations": [], "boundaries": {}}
     previous_hash, previous_time = None, None
     for index, event in enumerate(ledger.get("events", []), 1):
+        require(isinstance(event, dict), "Each observed event must be an object.")
         require(not ledger["template"], "A blank template cannot contain observed events; initialize a session.")
         require(event.get("sequence") == index and event.get("type") in EVENT_TYPES,
                 "Event sequence/type is invalid.")
@@ -324,8 +342,17 @@ def validate_ledger(ledger):
 
 
 def local_reference(reference, root=ROOT):
-    if urlparse(reference).scheme in ("http", "https"):
-        return None
+    require(isinstance(reference, str) and bool(reference.strip()), "Evidence reference must be nonempty text.")
+    try:
+        parsed = urlparse(reference)
+        if parsed.scheme in ("http", "https"):
+            require(bool(parsed.netloc) and bool(parsed.hostname)
+                    and not any(c.isspace() for c in reference),
+                    "An HTTP(S) evidence reference needs a host and no whitespace.")
+            parsed.port  # Reject malformed ports without opening or accessing the URL.
+            return None
+    except ValueError as exc:
+        raise LedgerError("Invalid evidence reference: " + reference) from exc
     p = Path(reference).expanduser()
     return p if p.is_absolute() else Path(root) / p
 
@@ -335,7 +362,10 @@ def append_event(ledger, typ, data=None, occurred_at=None, root=ROOT, entry_mode
     validate_ledger(ledger)
     updated = copy.deepcopy(ledger)
     recorded = utc_now()
-    payload = copy.deepcopy(data or {})
+    require(data is None or isinstance(data, dict), "Event data must be an object.")
+    payload = copy.deepcopy({} if data is None else data)
+    observed = recorded if occurred_at is None else occurred_at
+    instant(observed)
     if typ == "evidence":
         ref = local_reference(payload.get("reference", ""), root)
         if ref is not None:
@@ -343,8 +373,8 @@ def append_event(ledger, typ, data=None, occurred_at=None, root=ROOT, entry_mode
             payload["file_sha256"] = digest_bytes(ref.read_bytes()) if ref.is_file() else None
             payload["file_bytes"] = ref.stat().st_size if ref.is_file() else None
     event = {"sequence": len(updated["events"]) + 1, "type": typ,
-             "occurred_at": occurred_at or recorded, "recorded_at": recorded,
-             "entry_mode": entry_mode or ("manual_timestamp" if occurred_at else "observed_now"),
+             "occurred_at": observed, "recorded_at": recorded,
+             "entry_mode": entry_mode if entry_mode is not None else ("manual_timestamp" if occurred_at is not None else "observed_now"),
              "logger_source_sha256": logger_source_hash(),
              "data": payload, "previous_event_sha256": updated["events"][-1]["event_sha256"] if updated["events"] else None}
     event["event_sha256"] = canonical_digest(event)
@@ -357,6 +387,31 @@ def _seconds(a, b):
     return round((instant(b) - instant(a)).total_seconds(), 6)
 
 
+def prior_peer_check(ledger, root=ROOT):
+    """Check optional lineage without rewriting either rehearsal record."""
+    prior = ledger.get("prior_peer_mock")
+    if prior is None:
+        return {"status": "not_linked", "reason": None}
+    path = Path(prior["path"])
+    if not path.is_absolute():
+        path = Path(root) / path
+    try:
+        if not path.is_file():
+            return {"status": "missing", "reason": "Linked prior peer ledger is missing."}
+        if digest_bytes(path.read_bytes()) != prior["sha256"]:
+            return {"status": "changed", "reason": "Linked prior peer ledger bytes changed."}
+        peer = read_ledger(path)
+        require(peer["kind"] == "peer_mock" and peer["session_id"] == prior["session_id"],
+                "Linked prior peer session identity does not match its snapshot.")
+        questions = [e["data"]["id"] for e in peer["events"] if e["type"] == "question"]
+        require(questions == prior["questions"], "Linked prior peer question snapshot does not match its record.")
+        peer_audit = audit_ledger(peer, root)
+        require(peer_audit["evidence_status"] == "complete", "Linked prior peer evidence is no longer complete.")
+        return {"status": "matched", "reason": None, "session_end": peer_audit["actual_boundaries"]["session_end"]}
+    except (LedgerError, OSError, KeyError, TypeError, ValueError) as exc:
+        return {"status": "invalid", "reason": "Linked prior peer record cannot be verified: " + str(exc)}
+
+
 def audit_ledger(ledger, root=ROOT):
     state = validate_ledger(ledger)
     blockers = []
@@ -366,6 +421,11 @@ def audit_ledger(ledger, root=ROOT):
             blockers.append("Missing observed boundary: " + marker)
     slides = []
     talk_start = boundaries.get("talk_start")
+    prior_check = prior_peer_check(ledger, root)
+    if prior_check["reason"] is not None:
+        blockers.append(prior_check["reason"])
+    elif prior_check["status"] == "matched" and talk_start and instant(talk_start) < instant(prior_check["session_end"]):
+        blockers.append("The adviser talk begins before its linked prior peer session ends.")
     for planned in ledger["plan"]["slides"]:
         visits = [v for v in state["visits"] if v["number"] == planned["number"]]
         closed = [v for v in visits if v["end"] is not None]
@@ -446,8 +506,11 @@ def audit_ledger(ledger, root=ROOT):
         current = digest_bytes(p.read_bytes()) if p.is_file() else None
         source_checks.append({"source": name, "path": source["path"], "frozen_sha256": source["sha256"],
                               "current_sha256": current, "matches": current == source["sha256"]})
+    current_outcomes = dict(state["qa_outcomes"])
+    for outcome in state["follow_up_outcomes"]:
+        current_outcomes[outcome["question_id"]] = outcome
     pending_actions = [{"question_id": qid, "disposition": d["disposition"], "action": d.get("action", "")}
-                       for qid, d in state["qa_outcomes"].items() if d["disposition"] != "answered"]
+                       for qid, d in current_outcomes.items() if d["disposition"] != "answered"]
     return {"schema": "defense-rehearsal-audit-v1", "session_id": ledger["session_id"],
             "kind": ledger["kind"], "is_template": ledger["template"],
             "audit_generated_at": utc_now(), "ledger_content_sha256": canonical_digest(ledger),
@@ -460,10 +523,11 @@ def audit_ledger(ledger, root=ROOT):
             "timing_targets_met": all(t["within_predeclared_tolerance"] is True for t in timing.values()),
             "slide_timings": slides, "participants": list(people.values()),
             "consent_history": state["consents"], "question_count": len(state["questions"]),
-            "questions": [{**q, "qa_outcome": state["qa_outcomes"].get(qid)} for qid, q in state["questions"].items()],
+            "questions": [{**q, "qa_outcome": state["qa_outcomes"].get(qid), "current_outcome": current_outcomes.get(qid)} for qid, q in state["questions"].items()],
             "follow_up_outcomes": state["follow_up_outcomes"], "pending_question_actions": pending_actions,
             "evidence_checks": evidence_checks, "witness_attestation_count": len(state["attestations"]),
             "prior_peer_mock": ledger.get("prior_peer_mock"),
+            "prior_peer_mock_check": prior_check,
             "peer_questions_revisited": [q["from_peer_question_id"] for q in state["questions"].values() if q.get("from_peer_question_id")],
             "current_source_checks": source_checks,
             "institutional_status": "Defense scheduling, announcement, committee approval, signatures and degree clearance are not established by this log."}
@@ -512,7 +576,11 @@ def interactive(ledger_path):
     while True:
         ledger = read_ledger(ledger_path)
         state = validate_ledger(ledger)
-        line = input(f'{state["phase"]}> ').strip()
+        try:
+            line = input(f'{state["phase"]}> ').strip()
+        except EOFError:
+            print("Input ended; existing events remain unchanged. Completion is not inferred.")
+            return
         command_time = utc_now()
         if line == "quit":
             return
@@ -560,6 +628,9 @@ def interactive(ledger_path):
             updated = append_event(ledger, typ, data, occurred_at=observed_time, entry_mode="observed_now")
             write_json(ledger_path, updated)
             print(f'Saved observed event {len(updated["events"])} at {updated["events"][-1]["occurred_at"]}.')
+        except EOFError:
+            print("Input ended during entry; no partial event was saved.")
+            return
         except (LedgerError, ValueError) as exc:
             print("Not saved: " + str(exc), file=sys.stderr)
 
@@ -606,7 +677,13 @@ def main(argv=None):
             print("Event/plan invariants passed. This is not a completed rehearsal assertion.")
         elif args.command == "append":
             event = json.loads(args.event_file.read_text(encoding="utf-8"))
-            ledger = append_event(read_ledger(args.ledger), event["type"], event.get("data", {}), event.get("occurred_at"))
+            require(isinstance(event, dict) and {"type", "data"} <= event.keys()
+                    and event.keys() <= {"type", "data", "occurred_at"},
+                    "Manual event JSON needs type/data and only an optional occurred_at field.")
+            require(isinstance(event["data"], dict), "Manual event data must be an object.")
+            if "occurred_at" in event:
+                instant(event["occurred_at"])
+            ledger = append_event(read_ledger(args.ledger), event["type"], event["data"], event.get("occurred_at"))
             write_json(args.ledger, ledger)
             print("Observed event appended; original earlier events preserved.")
         elif args.command == "audit":
@@ -621,7 +698,10 @@ def main(argv=None):
             print(json.dumps({k: report[k] for k in ("evidence_status", "observed_event_count", "blockers", "timing", "timing_targets_met")}, indent=2))
             return 0 if report["evidence_status"] == "complete" or args.allow_incomplete else 2
         return 0
-    except (LedgerError, OSError, KeyError, json.JSONDecodeError) as exc:
+    except KeyboardInterrupt:
+        print("Logging interrupted; existing events are preserved and completion is not inferred.", file=sys.stderr)
+        return 130
+    except (LedgerError, OSError, KeyError, TypeError, ValueError) as exc:
         print("Rehearsal logger: " + str(exc), file=sys.stderr)
         return 1
 

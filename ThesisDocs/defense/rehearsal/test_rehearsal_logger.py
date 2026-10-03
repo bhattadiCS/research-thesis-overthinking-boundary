@@ -13,7 +13,7 @@ from tools.record_defense_rehearsal import (
 )
 
 
-def test_plan():
+def synthetic_plan():
     return {"slide_count": 25, "talk_target_seconds": 1800, "qa_target_seconds": 1800,
             "timing_tolerance_seconds": 120, "sources": {}, "speaker_notes_markdown": "SYNTHETIC TEST ONLY",
             "slides": [{"number": i, "title": f"TEST ONLY slide {i}", "planned_seconds": 72,
@@ -27,7 +27,7 @@ class RehearsalContractTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
         self.start = datetime(2020, 1, 1, 12, tzinfo=timezone.utc)
-        self.ledger = new_ledger("peer_mock", "SYNTHETIC TEST OPERATOR", "TEST_ONLY", test_plan())
+        self.ledger = new_ledger("peer_mock", "SYNTHETIC TEST OPERATOR", "TEST_ONLY", synthetic_plan())
 
     def tearDown(self):
         self.temp.cleanup()
@@ -70,7 +70,7 @@ class RehearsalContractTests(unittest.TestCase):
                                       **{flag: flag_values for flag in ATTESTATION_FLAGS}})
 
     def test_blank_template_is_incomplete_and_has_no_actual_duration(self):
-        blank = new_ledger("peer_mock", plan=test_plan(), template=True)
+        blank = new_ledger("peer_mock", plan=synthetic_plan(), template=True)
         report = audit_ledger(blank, self.root)
         self.assertEqual(report["evidence_status"], "incomplete")
         self.assertEqual(report["observed_event_count"], 0)
@@ -168,7 +168,7 @@ class RehearsalContractTests(unittest.TestCase):
         self.assertEqual(audit_ledger(self.ledger, self.root)["evidence_status"], "incomplete")
 
     def test_dry_run_requires_adviser_and_accepts_unrecorded_dated_record(self):
-        self.ledger = new_ledger("adviser_dry_run", "TEST OPERATOR", "TEST_ONLY", test_plan())
+        self.ledger = new_ledger("adviser_dry_run", "TEST OPERATOR", "TEST_ONLY", synthetic_plan())
         self.roster(audience="adviser", consent="not_requested")
         self.session()
         self.evidence(kind="dated_record")
@@ -262,16 +262,148 @@ class RehearsalContractTests(unittest.TestCase):
         path = self.root / "SYNTHETIC_PEER_ONLY.json"
         path.write_text(json.dumps(self.ledger), encoding="utf-8")
         with self.assertRaises(LedgerError):
-            new_ledger("adviser_dry_run", "TEST ONLY", plan=test_plan(), prior_peer_ledger=path)
+            new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
         self.roster()
         self.session()
         self.evidence()
         self.attest()
         path.write_text(json.dumps(self.ledger), encoding="utf-8")
-        adviser = new_ledger("adviser_dry_run", "TEST ONLY", plan=test_plan(), prior_peer_ledger=path)
+        adviser = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
         self.assertEqual(adviser["prior_peer_mock"]["sha256"], digest_bytes(path.read_bytes()))
         self.assertEqual(adviser["prior_peer_mock"]["questions"], ["q1"])
         self.assertEqual(adviser["events"], [])
+
+    def test_empty_retrospective_timestamp_is_not_replaced_by_current_time(self):
+        self.roster()
+        self.add("talk_start", 0)
+        for timestamp in ("", False, 0):
+            with self.subTest(timestamp=timestamp), self.assertRaises(LedgerError):
+                append_event(self.ledger, "talk_end", {}, timestamp)
+
+    def test_falsy_boundary_payload_is_not_replaced_by_empty_object(self):
+        self.roster()
+        self.add("talk_start", 0)
+        for payload in (False, 0, "", []):
+            with self.subTest(payload=payload), self.assertRaises(LedgerError):
+                append_event(self.ledger, "talk_end", payload, self.timestamp(1800))
+
+    def test_cli_rejects_malformed_manual_event_without_changing_ledger(self):
+        self.roster()
+        self.add("talk_start", 0)
+        path = self.root / "SYNTHETIC_MALFORMED_LEDGER_ONLY.json"
+        event_file = self.root / "SYNTHETIC_MALFORMED_EVENT_ONLY.json"
+        path.write_text(json.dumps(self.ledger), encoding="utf-8")
+        original = path.read_bytes()
+        cases = [[], None,
+                 {"type": "talk_end", "occurred_at": self.timestamp(1800)},
+                 {"type": "talk_end", "data": [], "occurred_at": self.timestamp(1800)},
+                 {"type": "talk_end", "data": {}, "occurred_at": None},
+                 {"type": "talk_end", "data": {}, "occurred_at": self.timestamp(1800), "recorded_at": self.timestamp(1800)}]
+        for event in cases:
+            with self.subTest(event=event):
+                event_file.write_text(json.dumps(event), encoding="utf-8")
+                self.assertEqual(main(["append", "--ledger", str(path), "--event-file", str(event_file)]), 1)
+                self.assertEqual(path.read_bytes(), original)
+
+    def test_interactive_eof_preserves_an_empty_ledger(self):
+        path = self.root / "SYNTHETIC_EOF_ONLY.json"
+        path.write_text(json.dumps(self.ledger), encoding="utf-8")
+        original = path.read_bytes()
+        for inputs in ([EOFError()], ["participant", "test_id", EOFError()]):
+            with self.subTest(inputs=inputs), patch("builtins.input", side_effect=inputs):
+                interactive(path)
+            self.assertEqual(path.read_bytes(), original)
+
+    def test_changed_or_missing_prior_peer_record_blocks_linked_completion(self):
+        self.roster()
+        self.session()
+        self.evidence()
+        self.attest()
+        path = self.root / "SYNTHETIC_PRIOR_PEER_ONLY.json"
+        path.write_text(json.dumps(self.ledger), encoding="utf-8")
+        self.ledger = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
+        self.start += timedelta(days=1)
+        self.roster(audience="adviser", consent="not_requested")
+        self.session()
+        self.evidence(kind="dated_record")
+        self.attest()
+        self.assertEqual(audit_ledger(self.ledger, self.root)["evidence_status"], "complete")
+        path.write_bytes(path.read_bytes() + b"\n")
+        changed = audit_ledger(self.ledger, self.root)
+        self.assertEqual(changed["evidence_status"], "incomplete")
+        self.assertTrue(any("prior" in reason.lower() for reason in changed["blockers"]))
+        path.unlink()
+        self.assertEqual(audit_ledger(self.ledger, self.root)["evidence_status"], "incomplete")
+
+    def test_prior_question_snapshot_must_match_the_bound_peer_record(self):
+        self.roster()
+        self.session()
+        self.evidence()
+        self.attest()
+        path = self.root / "SYNTHETIC_PRIOR_SNAPSHOT_ONLY.json"
+        path.write_text(json.dumps(self.ledger), encoding="utf-8")
+        adviser = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
+        adviser["prior_peer_mock"]["questions"] = ["UNASKED TEST QUESTION"]
+        report = audit_ledger(adviser, self.root)
+        self.assertTrue(any("prior" in reason.lower() and "question" in reason.lower() for reason in report["blockers"]))
+
+    def test_a_peer_mock_cannot_link_another_peer_as_adviser_preparation(self):
+        self.roster()
+        self.session()
+        self.evidence()
+        self.attest()
+        path = self.root / "SYNTHETIC_CROSS_KIND_PRIOR_ONLY.json"
+        path.write_text(json.dumps(self.ledger), encoding="utf-8")
+        with self.assertRaises(LedgerError):
+            new_ledger("peer_mock", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
+
+    def test_adviser_dry_run_cannot_precede_its_linked_peer_session(self):
+        self.roster()
+        self.session()
+        self.evidence()
+        self.attest()
+        path = self.root / "SYNTHETIC_PRIOR_CHRONOLOGY_ONLY.json"
+        path.write_text(json.dumps(self.ledger), encoding="utf-8")
+        self.ledger = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
+        # Deliberately keep the same synthetic start: this cannot be a later rehearsal.
+        self.roster(audience="adviser", consent="not_requested")
+        self.session()
+        self.evidence(kind="dated_record")
+        self.attest()
+        report = audit_ledger(self.ledger, self.root)
+        self.assertEqual(report["evidence_status"], "incomplete")
+        self.assertIn("The adviser talk begins before its linked prior peer session ends.", report["blockers"])
+
+    def test_answered_follow_up_clears_pending_action_without_rewriting_qa(self):
+        self.roster()
+        self.add("talk_start", 0)
+        for i in range(2, 26):
+            self.add("slide", (i-1)*72, {"number": i})
+        self.add("talk_end", 1800)
+        self.add("qa_start", 1810)
+        self.add("question", 1820, {"id": "q", "asker_id": "audience", "text": "TEST ONLY question"})
+        self.add("outcome", 1830, {"question_id": "q", "disposition": "needs_followup", "action": "TEST ONLY: verify proof"})
+        self.add("qa_end", 3610)
+        self.add("session_end", 3611)
+        self.add("outcome", 3700, {"question_id": "q", "stage": "follow_up", "disposition": "answered", "answer_summary": "TEST ONLY verified later", "supporting_references": ["TEST ONLY checked proof"]})
+        report = audit_ledger(self.ledger, self.root)
+        self.assertEqual(report["questions"][0]["qa_outcome"]["disposition"], "needs_followup")
+        self.assertEqual(report["pending_question_actions"], [])
+        self.assertEqual(len(report["follow_up_outcomes"]), 1)
+
+    def test_http_evidence_reference_requires_a_real_host(self):
+        self.roster()
+        for reference in ("http:unfinished", "https://", "https://@", "https://bad host"):
+            data = {"id": "bad_ref", "kind": "recording", "reference": reference,
+                    "coverage_start": self.timestamp(0), "coverage_end": self.timestamp(1),
+                    "reviewed_by_id": "audience", "description": "TEST ONLY", "reviewed": True}
+            with self.subTest(reference=reference), self.assertRaises(LedgerError):
+                append_event(self.ledger, "evidence", data, self.timestamp(2), root=self.root)
+
+    def test_malformed_ledger_root_returns_a_cli_error(self):
+        path = self.root / "SYNTHETIC_BAD_ROOT_ONLY.json"
+        path.write_text("[]", encoding="utf-8")
+        self.assertEqual(main(["validate", "--ledger", str(path)]), 1)
 
 
 if __name__ == "__main__":

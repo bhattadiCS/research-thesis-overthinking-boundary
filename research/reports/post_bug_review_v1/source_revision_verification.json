@@ -1,0 +1,161 @@
+{
+  "kind": "post_bug_review_source_revision_verification_v1",
+  "recorded_utc": "2026-10-03T04:37:35.777989+00:00",
+  "historical_git_revision": "09225c95c676ab3cae1c4b9586d74f7f803f519f",
+  "historical_manifest_sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b",
+  "historical_content_fingerprint": "4c950d56495aa204a50a4db9b1daa823b279ff9d582d033832769d6b7bb4800c",
+  "current_manifest": "data_manifest_post_review_v1.json",
+  "current_manifest_sha256": "00e9f04d5801dc3b8c71c96e6171a9cdfc39579c51f9855ad1ee4f94a06da23f",
+  "current_content_fingerprint": "6e014794a68e74558683862a942ef223cdce6e1d7f66583d5e7038653b1eff1a",
+  "current_source_freeze_verification": {
+    "status": "verified",
+    "audit_mode": "strict_bytes",
+    "data_files": 52,
+    "auxiliary_files": 688,
+    "rows": 144440,
+    "trajectories": 28888,
+    "line_ending_only_changes": [],
+    "content_fingerprint": "6e014794a68e74558683862a942ef223cdce6e1d7f66583d5e7038653b1eff1a"
+  },
+  "historical_source_freeze_verification": {
+    "status": "verified",
+    "audit_mode": "canonical_lf",
+    "data_files": 52,
+    "auxiliary_files": 679,
+    "rows": 144440,
+    "trajectories": 28888,
+    "line_ending_only_changes": [
+      "research/outputs/experiment_matrix/internlm3_8b_instruct__gsm8k/trace_steps.csv",
+      "research/outputs/experiments_v2/blackwell_5day_tournament_v1/blackwell_tournament_report.md",
+      "research/trace_analysis.py"
+    ],
+    "content_fingerprint": "4c950d56495aa204a50a4db9b1daa823b279ff9d582d033832769d6b7bb4800c"
+  },
+  "unchanged_tournament_records": 52,
+  "unchanged_corpus": true,
+  "changed_historical_auxiliary_files": [
+    {
+      "path": ".gitattributes",
+      "historical_sha256": "6b22561bd0b04b1731661783a788c56ada935764f1a4a7da415b077505ad5f0f",
+      "current_sha256": "aa1c46594d9e645b87ad5fd8ff441143305694068a39b49d55156375a6a62d92"
+    },
+    {
+      "path": "research/analyze_online_stopping_results.py",
+      "historical_sha256": "f20a2832e8e0771e7aeb54cc3a7f0c47be9791baed2152c6a2c6c45396d1d541",
+      "current_sha256": "39332a411e29c96e8c46214ae0e4495364f11492112ecb9672eb3a56625c6ba6"
+    },
+    {
+      "path": "research/learned_online_stopping_controller.py",
+      "historical_sha256": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+      "current_sha256": "d7443c9f7c73882db9ae6e845e6c826acc923977c63646fea15667636efe74fe"
+    },
+    {
+      "path": "research/online_stopping_controller.py",
+      "historical_sha256": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "current_sha256": "f49c5252e2d47c1cdd31fbeecbb2f124dc9468af807cc4beb3b3198684c1cad0"
+    },
+    {
+      "path": "research/real_trace_experiments.py",
+      "historical_sha256": "9f547a1eeb8e8cfe8475992e3f89526318509f91b51595967e36ed41717dbd3a",
+      "current_sha256": "78136a39c4491c4fbb63694fffde0db35fc29bb34ccad708f83205e032bc06cf"
+    },
+    {
+      "path": "research/run_learned_online_stopping.py",
+      "historical_sha256": "68cd4d8dcdd759041cc0bb8d7370ccb0dadda3f8c59bd211db9bd0a247eb4adf",
+      "current_sha256": "7c22db38786875b06f6f0d2f04736b07ae6420eab955665e78369d633235c93b"
+    },
+    {
+      "path": "research/run_online_stopping_evaluation.py",
+      "historical_sha256": "232facbbbc7b39acc7b537533fcbd6ea64cc3bc4819552aad28306367815c865",
+      "current_sha256": "a10f61098b6a2d015c536ebabdf71b92c73810ad96859b18257c91a02e3687e8"
+    },
+    {
+      "path": "research/tests/test_data_freeze.py",
+      "historical_sha256": "257238a79237b2c691402fe0bbf8b56a57dc709a4f928529d32b175e38b11374",
+      "current_sha256": "f11768ca1fcb7b881110693c06d1f9b66709ef9686a1b0296d6a8833aa6297c6"
+    },
+    {
+      "path": "research/tests/test_graders.py",
+      "historical_sha256": "fad17ec5a5f5265f54b7bd23a4bfa6753c9cf6a7da24235844bb3a85485f8eb2",
+      "current_sha256": "736d3c6a276817dd759ea5c94e93b2b41503ca89cb766b7a3ce2245b4af6e67c"
+    },
+    {
+      "path": "research/tests/test_learned_online_controller.py",
+      "historical_sha256": "019614a09b0c48cc300aa494cd5abdd176fae7392c3ae418e792ccd04edc801e",
+      "current_sha256": "c2ea311b44165964248284191b714a07fcde9ba6e7f2a167d68d3ce0453c79ee"
+    },
+    {
+      "path": "research/tests/test_live_uncertainty.py",
+      "historical_sha256": "40a173f3ded1b93f03bf2f488bb63e7a4a5aea64e8f6b0b0ddf1fc87ce6ceef6",
+      "current_sha256": "463ee4239afc56741cea5fd4f14d2cc28bbef83d933e52139b63603efae620cc"
+    },
+    {
+      "path": "research/tests/test_online_controller.py",
+      "historical_sha256": "9d4d296e549fc6f38afd6a23fa1b9e84de24110714298fa95d25649d34e2f3dd",
+      "current_sha256": "32886123f291d418e72f5381ce552194bb4a13954c39605ec5374d3ae48ee523"
+    },
+    {
+      "path": "tools/analyze_live_stopping_uncertainty.py",
+      "historical_sha256": "63110a2afc61b65e9115aab873a6017fdaef12bcea7198bafe0d18d33a24ce42",
+      "current_sha256": "445a6241db7328ca7d84f76cfb761f194324d95d9f23f5d7a12df20f995f0cf6"
+    },
+    {
+      "path": "tools/freeze_research_data.py",
+      "historical_sha256": "4a63efb2205e93cd9f6d83c5be25eb7307b355decb87f624af94e794742b013a",
+      "current_sha256": "4f1fad145f16630dbf9b9f385c543393b56b448089a15fc3878884b150d73d9a"
+    }
+  ],
+  "added_auxiliary_files": [
+    "README.md",
+    "ThesisDocs/defense/rehearsal/README.md",
+    "ThesisDocs/defense/rehearsal/test_rehearsal_logger.py",
+    "research/reports/post_bug_review_v1/behavior_verification.json",
+    "research/reports/post_bug_review_v1/grader_impact.json",
+    "research/reports/post_bug_review_v1/uncertainty_impact.json",
+    "research/tests/test_live_ledger_audit.py",
+    "tools/record_defense_rehearsal.py",
+    "tools/verify_post_review_behavior.py"
+  ],
+  "unchanged_historical_auxiliary_files": 665,
+  "preserved_artifact_sha256": {
+    "ThesisDocs/verification/frozen_index_audit.json": "67d9025e1e1db55bc8a35790eac88b028a9892b2e45a1744efe90719260750dd",
+    "output/pdf/Masters_Thesis_Draft_v1_Aditya_Bhatt.pdf": "833651e74486ff986e52466b758d4eddf686589b2409badfea41f1f079b45e27",
+    "output/pdf/Overthinking_Stopping_Research_Paper_v1_Aditya_Bhatt.pdf": "0e8393c86fbe6d70b215e9e599477a9637f051eef9a50431e5086a720e834344",
+    "output/pdf/NeurIPS_Anonymous_Draft_v1.pdf": "13d045985740865a494ae20f4dac4f53d5a2f1a6fea5355bb192331329df91f1",
+    "output/pdf/Masters_Thesis_Archival_Candidate_v1_Aditya_Bhatt.pdf": "59524abe287751bdbe2a20c5c4f9baca5c29fdf8a501518d62d1de126762bce7",
+    "output/presentation/Thesis_Defense_v1_Aditya_Bhatt.pptx": "83a1a54db93c11aab391af3cc68dc1d2a9f7eea7983d63b4a6ab7b599e9f0da6",
+    "output/neurips/anonymous_stopping_supplement_v1.zip": "0e65afa642d7c16bbe0227aafa10c6d1930ec50cc32538c84fed0dfa3eaf7a57",
+    "ThesisDocs/defense/rehearsal/peer_mock_blank.json": "0dae204ab0b480dcffb914fb134febbcd205833fc5bd0125e236aa0054049ef9",
+    "ThesisDocs/defense/rehearsal/adviser_dry_run_blank.json": "697b0b71fc98a518820c582ece79b9c23865faf7dad752afc8e43d5175d45448",
+    "ThesisDocs/defense/rehearsal/verification.json": "a49b7b9bb12a98648f7ff883063d674749f7af90a9f8b35a79c194f9d4c6c3d7",
+    "ThesisDocs/defense/rehearsal/test_output.txt": "aa9c599289441fe3ed79f0122ce663a5332ffd03367d132f2c293c6982102de0",
+    "research/outputs/semester2/prefix_model_v1/prefix_model.json": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f"
+  },
+  "pytest": {
+    "command": [
+      "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-m",
+      "pytest",
+      "research/tests/test_data_freeze.py",
+      "research/tests/test_graders.py",
+      "research/tests/test_live_uncertainty.py",
+      "research/tests/test_online_controller.py",
+      "research/tests/test_online_replay_accounting.py",
+      "research/tests/test_prefix_stopping_model.py",
+      "research/tests/test_learned_online_controller.py",
+      "research/tests/test_mathematical_foundations.py",
+      "research/tests/test_live_ledger_audit.py",
+      "ThesisDocs/defense/rehearsal/test_rehearsal_logger.py",
+      "-q"
+    ],
+    "passed": 243,
+    "exit_code": 0,
+    "output_sha256": "160e4aba178082204bdebf8c01833c7fd5aabeee5a80159a1d5ecece0354fb62"
+  },
+  "boundary_floor_exit_code": 0,
+  "diff_check_exit_code": 0,
+  "behavior_verification_sha256": "76c69bd710983d163c50f2ad1d4e508f101e77c70a0d92a9b4aa6ad165135b28",
+  "grader_impact_sha256": "291bc15ccf884ee27f2c874ae74ee7fc938f77e7b5435ebda74b6ea9a80af3fe",
+  "uncertainty_impact_sha256": "8dfee4be496b687d028615cd2042e76020c450e78792d142903b300c9251f4f2",
+  "claim_limit": "Current-code regression verification and saved-data impact checks. Original scientific records, training artifact and delivered manuscripts remain historical. No new model training or generation and no rehearsal or academic event occurred."
+}

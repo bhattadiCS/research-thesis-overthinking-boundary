@@ -17,6 +17,13 @@ SPEC.loader.exec_module(MODULE)
 
 
 class PairedUncertaintyTests(unittest.TestCase):
+    def test_binomial_interval_rejects_invalid_counts_and_error_rates(self):
+        for k, n, error in ((-1, 4, .05), (5, 4, .05), (1.5, 4, .05),
+                            (1, 4.5, .05), (0, 0, .05), (True, 4, .05),
+                            (1, 4, 0), (1, 4, 1), (1, 4, 1.5), (1, 4, float("nan"))):
+            with self.subTest(k=k, n=n, error=error), self.assertRaises(ValueError):
+                MODULE.clopper_pearson(k, n, error)
+
     def test_exact_coverage_over_multinomial_outcomes(self):
         # Enumerate every possible (improvement,worsening,concordance) outcome.
         # This checks coverage of the final difference interval, including the
@@ -86,6 +93,55 @@ class PairedUncertaintyTests(unittest.TestCase):
             frame, _ = self.fixture(folder)
             frame["active_generated_tokens"] = frame.active_generated_tokens.astype(float)
             frame.loc[0, "active_generated_tokens"] = 50.5
+            frame.to_csv(folder / "live_paired_results.csv", index=False)
+            with self.assertRaisesRegex(ValueError, "nonnegative integers"):
+                MODULE.analyze(folder, 100, 804)
+
+    def test_rejects_missing_or_blank_task_identifiers(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            for identifier in (None, "", "  ", "\t"):
+                with self.subTest(identifier=identifier):
+                    frame, _ = self.fixture(folder)
+                    frame.loc[0, "task_id"] = identifier
+                    frame.to_csv(folder / "live_paired_results.csv", index=False)
+                    with self.assertRaisesRegex(ValueError, "unique task"):
+                        MODULE.analyze(folder, 100, 804)
+
+    def test_exact_token_totals_and_small_savings_above_float_integer_precision(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            for baseline, active in ((2**53 + 1, 2**53), (2**54, 2**54 - 1),
+                                     (2**64 + 1, 2**64)):
+                with self.subTest(baseline=baseline, active=active):
+                    pd.DataFrame({"task_id": ["NA"], "baseline_correct": [1], "active_correct": [1],
+                                  "baseline_generated_tokens": [baseline],
+                                  "active_generated_tokens": [active]}).to_csv(
+                                      folder / "live_paired_results.csv", index=False)
+                    reported = {"problems_or_trajectories": 1, "paired_improved": 0, "paired_worsened": 0,
+                                "baseline_correct": 1, "active_correct": 1,
+                                "baseline_generated_tokens": baseline, "active_generated_tokens": active}
+                    (folder / "live_metrics.json").write_text(json.dumps(reported), encoding="utf-8")
+                    result = MODULE.analyze(folder, 100, 804)
+                    self.assertEqual(result["counts"], reported)
+                    expected = (baseline - active) / baseline
+                    self.assertEqual(result["completion_token_savings"], expected)
+                    self.assertEqual(result["completion_token_savings_cluster_bootstrap_95ci"], [expected, expected])
+
+    def test_direct_analysis_rejects_invalid_bootstrap_draw_count(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            self.fixture(folder)
+            for draws in (0, -1, 1.5, True):
+                with self.subTest(draws=draws), self.assertRaisesRegex(ValueError, "draws"):
+                    MODULE.analyze(folder, draws, 804)
+
+    def test_token_exponent_budget_precedes_integer_materialization(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            frame, _ = self.fixture(folder)
+            frame["active_generated_tokens"] = frame.active_generated_tokens.astype(str)
+            frame.loc[0, "active_generated_tokens"] = "1e1000000000"
             frame.to_csv(folder / "live_paired_results.csv", index=False)
             with self.assertRaisesRegex(ValueError, "nonnegative integers"):
                 MODULE.analyze(folder, 100, 804)

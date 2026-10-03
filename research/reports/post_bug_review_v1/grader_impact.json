@@ -1,0 +1,175 @@
+{
+  "purpose": "Read-only post-review comparison; historical labels, outcomes and manifests are not replaced",
+  "historical_commit": "09225c95c676ab3cae1c4b9586d74f7f803f519f",
+  "historical_grader_sha256": "9f547a1eeb8e8cfe8475992e3f89526318509f91b51595967e36ed41717dbd3a",
+  "corrected_grader": {
+    "path": "research/real_trace_experiments.py",
+    "sha256": "78136a39c4491c4fbb63694fffde0db35fc29bb34ccad708f83205e032bc06cf"
+  },
+  "panels": [
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002",
+      "inputs": [
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/live_generation_results.jsonl",
+          "sha256": "8faed5f644daef157baa714903c926121be31fecd1741d3c32d03ddd19ddeeba"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/live_sealed_gold.jsonl",
+          "sha256": "8b58494002e5fe1d1a4e3e5660866c8e42c605cc0fbd5ca61e42c28c44382773"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/live_paired_results.csv",
+          "sha256": "c223a0263f254f4318159eb6d024e56d23e55f79a4c51026b81873de33eb5adf"
+        }
+      ],
+      "answer_types": [
+        "number"
+      ],
+      "policies": {
+        "never": {
+          "rows": 100,
+          "historical_correct": 6,
+          "corrected_correct": 6,
+          "changed_labels": 0
+        },
+        "confidence_stability_v1": {
+          "rows": 100,
+          "historical_correct": 6,
+          "corrected_correct": 6,
+          "changed_labels": 0
+        }
+      },
+      "historical_labels_match_saved_pairs": true,
+      "historical_vs_saved_mismatches": [],
+      "final_answer_label_changes": [],
+      "final_answer_normalization_changes": [],
+      "saved_observation_rows": 985,
+      "observation_label_changes": []
+    },
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002/adversarial_live",
+      "inputs": [
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_generation_results.jsonl",
+          "sha256": "e17358d74203341d994b2626aaa76ff7604bf0de04b4fe90cd1b71cda9a44f77"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_sealed_gold.jsonl",
+          "sha256": "9dad6ec35ce7f35e7167b7e3a58ee5085bc564dec31a5dd135c3046bebd12d57"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_paired_results.csv",
+          "sha256": "5f1e02917543d8e351c0c434a79c4a2152ac4ca47a56170233729875c224981e"
+        }
+      ],
+      "answer_types": [
+        "number"
+      ],
+      "policies": {
+        "never": {
+          "rows": 20,
+          "historical_correct": 1,
+          "corrected_correct": 1,
+          "changed_labels": 0
+        },
+        "confidence_stability_v1": {
+          "rows": 20,
+          "historical_correct": 1,
+          "corrected_correct": 1,
+          "changed_labels": 0
+        }
+      },
+      "historical_labels_match_saved_pairs": true,
+      "historical_vs_saved_mismatches": [],
+      "final_answer_label_changes": [],
+      "final_answer_normalization_changes": [],
+      "saved_observation_rows": 195,
+      "observation_label_changes": []
+    },
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "inputs": [
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_generation_results.jsonl",
+          "sha256": "8a439f55df1275a6efd6ec63c3a9051d4df3b641be73a86d5b6efdf976632de1"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_sealed_gold.jsonl",
+          "sha256": "8b58494002e5fe1d1a4e3e5660866c8e42c605cc0fbd5ca61e42c28c44382773"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_paired_results.csv",
+          "sha256": "f6abd0aeb1cc0eb6b3328b53be661902b3d9ea4c43e2593ee570ca04ded99850"
+        }
+      ],
+      "answer_types": [
+        "number"
+      ],
+      "policies": {
+        "never": {
+          "rows": 100,
+          "historical_correct": 6,
+          "corrected_correct": 6,
+          "changed_labels": 0
+        },
+        "learned_prefix_drift_v1": {
+          "rows": 100,
+          "historical_correct": 7,
+          "corrected_correct": 7,
+          "changed_labels": 0
+        }
+      },
+      "historical_labels_match_saved_pairs": true,
+      "historical_vs_saved_mismatches": [],
+      "final_answer_label_changes": [],
+      "final_answer_normalization_changes": [],
+      "saved_observation_rows": 700,
+      "observation_label_changes": []
+    },
+    {
+      "panel": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "inputs": [
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_generation_results.jsonl",
+          "sha256": "3329495c991d39421d090391d25ee201cb6f5f997d9ede5711da9b8284fbc0f1"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_sealed_gold.jsonl",
+          "sha256": "9dad6ec35ce7f35e7167b7e3a58ee5085bc564dec31a5dd135c3046bebd12d57"
+        },
+        {
+          "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_paired_results.csv",
+          "sha256": "75e4b826bfd6bc064de6a8c4dec71abac1cded0039afb6ea4d53ac66cc8cf9f4"
+        }
+      ],
+      "answer_types": [
+        "number"
+      ],
+      "policies": {
+        "never": {
+          "rows": 20,
+          "historical_correct": 1,
+          "corrected_correct": 1,
+          "changed_labels": 0
+        },
+        "learned_prefix_drift_v1": {
+          "rows": 20,
+          "historical_correct": 1,
+          "corrected_correct": 1,
+          "changed_labels": 0
+        }
+      },
+      "historical_labels_match_saved_pairs": true,
+      "historical_vs_saved_mismatches": [],
+      "final_answer_label_changes": [],
+      "final_answer_normalization_changes": [],
+      "saved_observation_rows": 140,
+      "observation_label_changes": []
+    }
+  ],
+  "independence_note": "Saved records include reused baselines and shared-prefix observations; counts are audit rows, not independent experimental samples.",
+  "evaluation_scope": "Gold read only for this post-review audit; no archived training labels, learned coefficients, policies, frozen live labels, statistical receipts or manuscript claims are replaced. All four live panels use number answers; the int-mode regression is verified separately.",
+  "total_final_answer_records": 480,
+  "total_saved_observation_rows": 2020
+}

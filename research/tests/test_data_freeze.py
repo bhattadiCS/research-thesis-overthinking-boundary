@@ -66,6 +66,19 @@ class FreezeTests(unittest.TestCase):
     def manifest(self, selection=None):
         return freeze.build_manifest(self.root, selection=selection, created_utc="2026-10-02T00:00:00Z")
 
+    def use_canonical_authority(self):
+        record = freeze.file_record(self.root, self.source)
+        entry = self.authority["files"][0]
+        entry["canonical_lf_sha256"] = record["canonical_lf_sha256"]
+        entry["raw_sha256"] = record["sha256"]
+        self.authority["dataset_fingerprint"] = freeze.stable_hash([
+            {"path": entry["path"], "canonical_lf_sha256": entry["canonical_lf_sha256"]}
+        ])
+        self.authority["raw_dataset_fingerprint"] = freeze.stable_hash([
+            {"path": entry["path"], "raw_sha256": entry["raw_sha256"]}
+        ])
+        self.write(freeze.AUTHORITY, json.dumps(self.authority) + "\n")
+
     def test_clean_corpus_verifies_and_is_deterministic(self):
         manifest = self.manifest()
         self.assertEqual(manifest, self.manifest())
@@ -159,6 +172,54 @@ class FreezeTests(unittest.TestCase):
         with self.assertRaisesRegex(freeze.IntegrityError, "Rebuilt scope"):
             freeze.verify_manifest(self.root, manifest)
 
+    def test_nested_provenance_fields_are_not_ignored(self):
+        for portable in (False, True):
+            for location, key in [("scope", "created_utc"), ("preflight", "content_fingerprint"),
+                                  ("model", "created_utc")]:
+                with self.subTest(portable=portable, location=location, key=key):
+                    manifest = self.manifest()
+                    parent = {"scope": manifest["scope"],
+                              "preflight": manifest["authority"]["recorded_preflight"],
+                              "model": manifest["generation_configurations"][0]["recorded_configuration"]["model"]}[location]
+                    parent[key] = "forged source provenance"
+                    manifest["content_fingerprint"] = freeze.content_fingerprint(manifest)
+                    with self.assertRaisesRegex(freeze.IntegrityError, "Rebuilt scope"):
+                        freeze.verify_manifest(self.root, manifest, allow_line_ending_changes=portable)
+
+    def test_portable_hash_exclusions_apply_only_to_file_records(self):
+        self.write(self.metadata, json.dumps({"model": {"alias": "fixture", "canonical_lf_sha256": "model field",
+                                                       "sha256": "recorded model identity", "bytes": 12},
+                                             "task_source": "gsm8k", "dataset_split": "train", "max_steps": 5}))
+        manifest = self.manifest()
+        model = manifest["generation_configurations"][0]["recorded_configuration"]["model"]
+        model["sha256"] = "forged model identity"
+        manifest["content_fingerprint"] = freeze.content_fingerprint(manifest)
+        with self.assertRaisesRegex(freeze.IntegrityError, "Rebuilt scope"):
+            freeze.verify_manifest(self.root, manifest, allow_line_ending_changes=True)
+
+    def test_canonical_authority_verifies_across_line_endings(self):
+        self.use_canonical_authority()
+        manifest = self.manifest()
+        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
+        path = self.root / self.source
+        path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+        result = freeze.verify_manifest(self.root, manifest, allow_line_ending_changes=True)
+        self.assertEqual(result["line_ending_only_changes"], [self.source])
+
+    def test_canonical_authority_aggregate_must_match(self):
+        self.use_canonical_authority()
+        self.authority["dataset_fingerprint"] = "0" * 64
+        self.write(freeze.AUTHORITY, json.dumps(self.authority) + "\n")
+        with self.assertRaisesRegex(freeze.IntegrityError, "canonical dataset fingerprint"):
+            self.manifest()
+
+    def test_declared_raw_authority_aggregate_must_match(self):
+        self.use_canonical_authority()
+        self.authority["raw_dataset_fingerprint"] = "0" * 64
+        self.write(freeze.AUTHORITY, json.dumps(self.authority) + "\n")
+        with self.assertRaisesRegex(freeze.IntegrityError, "raw dataset fingerprint"):
+            self.manifest()
+
     def test_duplicate_frozen_entries_rejected(self):
         manifest = self.manifest()
         manifest["files"].append(copy.deepcopy(manifest["files"][0]))
@@ -201,6 +262,63 @@ class FreezeTests(unittest.TestCase):
         with self.assertRaisesRegex(freeze.IntegrityError, "Output exists"):
             freeze.write_output(path, "replacement", replace=False)
         self.assertEqual(path.read_text(), "user data\n")
+
+    def test_cli_replace_cannot_overwrite_any_selected_source(self):
+        originals = {relative: (self.root / relative).read_bytes()
+                     for relative in (self.source, self.metadata, freeze.AUTHORITY)}
+        for relative in originals:
+            with self.subTest(output=relative):
+                for source, content in originals.items():
+                    self.write(source, content)
+                with patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()) as error:
+                    status = freeze.main(["--root", str(self.root), "freeze", "--profile", "tournament",
+                                          "--output", relative, "--replace"])
+                self.assertEqual(status, 1)
+                self.assertIn("overwrite a selected input", error.getvalue())
+                self.assertEqual({source: (self.root / source).read_bytes() for source in originals}, originals)
+
+    def test_cli_output_cannot_add_a_tournament_cell(self):
+        relative = f"{freeze.DATA_ROOT}/global_extra_gsm8k/trace_steps.csv"
+        with patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()) as error:
+            status = freeze.main(["--root", str(self.root), "freeze", "--profile", "tournament", "--output", relative])
+        self.assertEqual(status, 1)
+        self.assertIn("tournament file membership", error.getvalue())
+        self.assertFalse((self.root / relative).exists())
+
+    def test_cli_output_cannot_enter_its_own_glob_membership(self):
+        for relative in ("evidence/review_manifest.json", "evidence/nested/review_manifest.json"):
+            with self.subTest(output=relative), patch.object(freeze, "THESIS_FIXED", [self.metadata]), \
+                    patch.object(freeze, "THESIS_GLOBS", ["evidence/**/*.json"]), \
+                    patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()) as error:
+                status = freeze.main(["--root", str(self.root), "freeze", "--output", relative])
+                self.assertEqual(status, 1)
+                self.assertIn("own evidence membership", error.getvalue())
+                self.assertFalse((self.root / relative).exists())
+
+    def test_separate_new_manifest_output_is_verifiable(self):
+        relative = "review_manifest.json"
+        with patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()):
+            status = freeze.main(["--root", str(self.root), "freeze", "--profile", "tournament", "--output", relative])
+        self.assertEqual(status, 0)
+        manifest = freeze.read_object(self.root / relative)
+        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
+
+    def test_explicitly_excluded_manifest_output_is_verifiable(self):
+        relative = "evidence/review_manifest.json"
+        selection = {"profile": "fixture", "fixed": [self.metadata], "globs": ["evidence/**/*.json"],
+                     "exclude_globs": [relative]}
+        manifest = self.manifest(selection)
+        output = freeze.checked_freeze_output(self.root, relative, manifest)
+        freeze.write_output(output, json.dumps(manifest) + "\n", replace=False)
+        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
+
+    def test_directory_only_glob_does_not_block_a_manifest_file(self):
+        relative = "evidence/review_manifest.json"
+        selection = {"profile": "fixture", "fixed": [self.metadata], "globs": ["evidence/**"]}
+        manifest = self.manifest(selection)
+        output = freeze.checked_freeze_output(self.root, relative, manifest)
+        freeze.write_output(output, json.dumps(manifest) + "\n", replace=False)
+        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
 
     def test_local_and_historical_versions_are_separate(self):
         class Distribution:

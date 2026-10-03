@@ -34,14 +34,21 @@ class LearnedPolicy:
     step_cost: float = 0.05
 
     def __post_init__(self) -> None:
+        for name in ("min_steps", "max_steps"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int):
+                raise ValueError(f"{name} must be an integer")
         if self.min_steps < 2 or self.max_steps < self.min_steps:
             raise ValueError("learned controller requires at least two completed steps")
         if len(self.predictor_sha256) != 64 or any(c not in "0123456789abcdef" for c in self.predictor_sha256):
             raise ValueError("frozen predictor SHA256 is required")
         if any(not math.isfinite(v) or v < 0 for v in (self.reward_value, self.wrong_penalty, self.step_cost)):
             raise ValueError("utility constants must be finite and nonnegative")
-        if self.reward_value + self.wrong_penalty <= 0:
-            raise ValueError("the reward/penalty scale must be positive")
+        scale = self.reward_value + self.wrong_penalty
+        if not math.isfinite(scale) or scale <= 0:
+            raise ValueError("the reward/penalty scale must be finite and positive")
+        if not math.isfinite(scale + self.step_cost):
+            raise ValueError("utility constants must permit finite drift at every valid probability")
 
     @property
     def sha256(self) -> str:

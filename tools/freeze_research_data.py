@@ -21,9 +21,11 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+from copy import deepcopy
 import csv
 import fnmatch
 from datetime import datetime, timezone
+from functools import lru_cache
 import hashlib
 import importlib.metadata
 import json
@@ -267,6 +269,41 @@ def evidence_paths(root: Path, selection: dict[str, Any]) -> list[str]:
     return sorted(selected)
 
 
+def glob_matches(relative: str, pattern: str) -> bool:
+    """Match a file path as pathlib does, including zero-directory ``**``."""
+    parts = PurePosixPath(relative).parts
+    tokens = PurePosixPath(pattern).parts
+    # A terminal ``**`` selects directories, not files, in Path.glob.
+    if tokens and tokens[-1] == "**":
+        return False
+
+    @lru_cache(maxsize=None)
+    def match(part: int, token: int) -> bool:
+        if token == len(tokens):
+            return part == len(parts)
+        if tokens[token] == "**":
+            return match(part, token + 1) or (part < len(parts) and match(part + 1, token))
+        return part < len(parts) and fnmatch.fnmatch(parts[part], tokens[token]) and match(part + 1, token + 1)
+
+    return match(0, 0)
+
+
+def checked_freeze_output(root: Path, relative: str, manifest: dict[str, Any]) -> Path:
+    """Refuse source overwrites and outputs that would change frozen membership."""
+    output = checked_path(root, relative)
+    records = [manifest["authority"], *manifest["files"], *manifest["auxiliary_evidence"]["files"]]
+    if any(output == checked_path(root, record["path"]) for record in records):
+        raise IntegrityError(f"Freeze output would overwrite a selected input: {relative}")
+    if glob_matches(relative, f"{manifest['scope']['data_root']}/global_*/trace_steps.csv"):
+        raise IntegrityError(f"Freeze output would change tournament file membership: {relative}")
+    selection = manifest["auxiliary_evidence"]["selection"]
+    included = relative in selection["fixed"] or any(glob_matches(relative, pattern) for pattern in selection["globs"])
+    excluded = any(fnmatch.fnmatchcase(relative, pattern) for pattern in selection.get("exclude_globs", []))
+    if included and not excluded:
+        raise IntegrityError(f"Freeze output would enter its own evidence membership: {relative}")
+    return output
+
+
 def build_manifest(
     root: Path,
     *,
@@ -374,8 +411,20 @@ def build_manifest(
     # Historical manifests hashed {path,bytes,sha256}; newer runners hash
     # {path,canonical_lf_sha256}. Store both formats and state their provenance.
     legacy_fingerprint = stable_hash(archived_files)
-    if not any("canonical_lf_sha256" in entry for entry in declared_files) and legacy_fingerprint != authority.get("dataset_fingerprint"):
-        raise IntegrityError("Reconstructed legacy dataset fingerprint differs from the authority")
+    canonical_runner_fingerprint = stable_hash([
+        {"path": entry["path"], "canonical_lf_sha256": record["canonical_lf_sha256"]}
+        for entry, record in zip(declared_files, records)
+    ])
+    canonical_authority = any("canonical_lf_sha256" in entry for entry in declared_files)
+    expected_fingerprint = canonical_runner_fingerprint if canonical_authority else legacy_fingerprint
+    if expected_fingerprint != authority.get("dataset_fingerprint"):
+        kind = "canonical" if canonical_authority else "legacy"
+        raise IntegrityError(f"Reconstructed {kind} dataset fingerprint differs from the authority")
+    if "raw_dataset_fingerprint" in authority:
+        raw_files = [{"path": entry["path"], "raw_sha256": entry.get("raw_sha256", entry.get("sha256"))}
+                     for entry in declared_files]
+        if stable_hash(raw_files) != authority["raw_dataset_fingerprint"]:
+            raise IntegrityError("Reconstructed raw dataset fingerprint differs from the authority")
     selected = selection or {"profile": "tournament-only", "fixed": [config["metadata_path"] for config in cell_configs], "globs": []}
     auxiliary = [file_record(root, relative) for relative in evidence_paths(root, selected)]
     manifest = {
@@ -390,7 +439,7 @@ def build_manifest(
                           "claim_limit": "File identity and corpus structure; not model retraining, labels' semantic validity, or prospective effectiveness."},
         "authority": {**file_record(root, authority_relative), "recorded_dataset_fingerprint": authority.get("dataset_fingerprint"),
                       "reconstructed_legacy_dataset_fingerprint": legacy_fingerprint,
-                      "canonical_runner_dataset_fingerprint": stable_hash([{"path": entry["path"], "canonical_lf_sha256": record["canonical_lf_sha256"]} for entry, record in zip(declared_files, records)]),
+                      "canonical_runner_dataset_fingerprint": canonical_runner_fingerprint,
                       "recorded_feature_count": authority.get("feature_count"), "recorded_feature_fingerprint": authority.get("feature_fingerprint"),
                       "recorded_protocol": authority.get("protocol"), "recorded_preflight": authority.get("preflight")},
         "corpus": corpus, "files": records, "generation_configurations": cell_configs,
@@ -440,16 +489,20 @@ def verify_manifest(root: Path, manifest: dict[str, Any], *, allow_line_ending_c
     # Byte matches alone do not justify silently accepting a forged metadata
     # summary or hash declaration. Compare all rebuilt declarations after removing
     # only the raw fields an explicitly portable audit is permitted to differ on.
-    def portable(value: Any) -> Any:
-        if isinstance(value, list):
-            return [portable(item) for item in value]
-        if isinstance(value, dict):
-            excluded = {"content_fingerprint", "created_utc"}
-            if allow_line_ending_changes and "canonical_lf_sha256" in value:
-                excluded.update({"bytes", "sha256", "archived_match"})
-            return {key: portable(item) for key, item in value.items() if key not in excluded}
-        return value
-    if portable(actual) != portable(manifest):
+    def comparable(value: dict[str, Any]) -> dict[str, Any]:
+        result = deepcopy(value)
+        # Only the freeze's own timestamp/fingerprint are comparison metadata.
+        # Identically named fields nested in source provenance remain protected.
+        result.pop("content_fingerprint", None)
+        result.pop("created_utc", None)
+        if allow_line_ending_changes:
+            records = [result["authority"], *result["files"], *result["auxiliary_evidence"]["files"]]
+            for record in records:
+                if "canonical_lf_sha256" in record:
+                    for key in ("bytes", "sha256", "archived_match"):
+                        record.pop(key, None)
+        return result
+    if comparable(actual) != comparable(manifest):
         raise IntegrityError("Rebuilt scope, provenance, hashes, or structure differs from freeze")
     return {"status": "verified", "audit_mode": "canonical_lf" if allow_line_ending_changes else "strict_bytes",
             "data_files": len(manifest["files"]), "auxiliary_files": len(manifest["auxiliary_evidence"]["files"]),
@@ -575,7 +628,7 @@ def main(argv: list[str] | None = None) -> int:
                 for relative in args.extra_evidence:
                     selection["globs" if any(token in relative for token in "*?[") else "fixed"].append(relative)
             manifest = build_manifest(root, selection=selection)
-            write_output(checked_path(root, args.output), json.dumps(manifest, indent=2, sort_keys=True) + "\n", replace=args.replace)
+            write_output(checked_freeze_output(root, args.output, manifest), json.dumps(manifest, indent=2, sort_keys=True) + "\n", replace=args.replace)
             result = {"status": "frozen", "output": args.output, "data_files": len(manifest["files"]),
                       "auxiliary_files": len(manifest["auxiliary_evidence"]["files"]), "corpus": manifest["corpus"],
                       "content_fingerprint": manifest["content_fingerprint"]}

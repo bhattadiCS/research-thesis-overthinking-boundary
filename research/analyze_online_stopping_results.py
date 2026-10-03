@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+from collections import Counter
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
@@ -38,6 +39,10 @@ def paired_bootstrap(rows: list[dict[str, str]], *, seed: int = 20261002, sample
 def audit_ledgers(output: Path) -> dict[str, Any]:
     manifest = json.loads((output / "live_manifest.json").read_text(encoding="utf-8"))
     results = read_jsonl(output / "live_generation_results.jsonl")
+    public_tasks = read_jsonl(output / "live_public_tasks.jsonl")
+    task_ids = [task["task_id"] for task in public_tasks]
+    gold_ids = [row["task_id"] for row in read_jsonl(output / "live_sealed_gold.jsonl")]
+    policy_names = (manifest["active_policy"]["name"], manifest["baseline_policy"]["name"])
     checks: dict[str, bool] = {}
     checks["public_tasks_match_frozen_hash"] = file_sha256(output / "live_public_tasks.jsonl") == manifest["public_tasks_sha256"]
     checks["gold_ledger_matches_frozen_hash"] = file_sha256(output / "live_sealed_gold.jsonl") == manifest["sealed_gold_sha256"]
@@ -46,19 +51,50 @@ def audit_ledgers(output: Path) -> dict[str, Any]:
         (locked / name).is_file() and file_sha256(locked / name) == digest for name, digest in manifest["code_sha256"].items()
     )
     checks["paired_result_count"] = len(results) == 2 * manifest["public_task_count"]
+    checks["public_task_ids_unique"] = bool(task_ids) and len(task_ids) == len(set(task_ids)) == manifest["public_task_count"]
+    checks["gold_task_coverage"] = Counter(gold_ids) == Counter(task_ids)
+    checks["paired_task_policy_coverage"] = len(set(policy_names)) == 2 and Counter(
+        (row["task_id"], row["policy"]) for row in results
+    ) == Counter((task_id, policy) for task_id in task_ids for policy in policy_names)
     checks["minimum_two_steps"] = all(r["stopped_at_step"] >= 2 for r in results)
     checks["no_future_steps_after_stop"] = all([o["step"] for o in r["observations"]] == list(range(1, r["stopped_at_step"] + 1)) for r in results)
+    checks["one_decision_per_observation"] = all([d["step"] for d in r["decisions"]] == [o["step"] for o in r["observations"]] for r in results)
     checks["exactly_one_terminal_decision"] = all(sum(d["stop"] for d in r["decisions"]) == 1 and r["decisions"][-1]["stop"] for r in results)
-    checks["selected_answer_already_observed"] = all(1 <= r["selected_step"] <= r["stopped_at_step"] and r["answer"] == r["observations"][r["selected_step"] - 1]["answer"] for r in results)
+    checks["terminal_decision_matches_result"] = all(r["decisions"] and
+        r["decisions"][-1]["step"] == r["stopped_at_step"] and
+        r["decisions"][-1]["selected_step"] == r["selected_step"] and
+        r["decisions"][-1]["selected_answer"] == r["answer"] and
+        r["decisions"][-1].get("reason") == r.get("reason") for r in results)
+    checks["selected_answer_already_observed"] = all(1 <= r["selected_step"] <= min(r["stopped_at_step"], len(r["observations"])) and r["answer"] == r["observations"][r["selected_step"] - 1]["answer"] for r in results)
+    checks["decision_selections_already_observed"] = all(
+        1 <= d["selected_step"] <= min(d["step"], len(r["observations"])) and
+        d["selected_answer"] == r["observations"][d["selected_step"] - 1]["answer"]
+        for r in results for d in r["decisions"])
     checks["observations_precede_decisions"] = all(o["observed_ns"] <= d["decision_ns"] for r in results for o, d in zip(r["observations"], r["decisions"]))
+    checks["decision_precedes_next_observation"] = all(d["decision_ns"] <= o["observed_ns"]
+        for r in results for d, o in zip(r["decisions"][:-1], r["observations"][1:]))
+    costs = [row.get(name, 0) for row in results for name in ("generated_tokens", "prompt_tokens", "auxiliary_tokens", "peer_tokens")]
+    costs.extend(o.get(name, 0) for row in results for o in row["observations"] for name in ("generated_tokens", "prompt_tokens", "auxiliary_tokens"))
+    costs.extend(d.get("peer_tokens", 0) for row in results for d in row["decisions"])
+    checks["nonnegative_integer_costs"] = all(type(value) is int and value >= 0 for value in costs)
     checks["completion_cost_sum"] = all(r["generated_tokens"] == sum(o["generated_tokens"] for o in r["observations"]) for r in results)
     checks["input_cost_sum"] = all(r["prompt_tokens"] == sum(o["prompt_tokens"] for o in r["observations"]) for r in results)
+    checks["auxiliary_cost_sum"] = all(r.get("auxiliary_tokens", 0) == sum(o.get("auxiliary_tokens", 0) for o in r["observations"]) for r in results)
+    checks["peer_cost_sum"] = all(r.get("peer_tokens", 0) == sum(d.get("peer_tokens", 0) for d in r["decisions"]) for r in results)
     forbidden = {"gold", "gold_answer", "expected_answer", "correct", "selected_correct", "oracle_stop", "utility"}
-    checks["no_label_keys_in_runtime_task_or_event"] = not any(forbidden.intersection(o) for r in results for o in r["observations"]) and not any(forbidden.intersection(t) for t in read_jsonl(output / "live_public_tasks.jsonl"))
+    checks["no_label_keys_in_runtime_task_or_event"] = not any(forbidden.intersection(o) for r in results for o in r["observations"]) and not any(forbidden.intersection(t) for t in public_tasks)
     with (output / "live_batch_metrics.csv").open(encoding="utf-8", newline="") as handle:
         batches = list(csv.DictReader(handle))
-    checks["batch_completion_cost_sum"] = all(sum(int(b["generated_tokens"]) for b in batches if b["policy"] == policy) == sum(r["generated_tokens"] for r in results if r["policy"] == policy) for policy in {r["policy"] for r in results})
-    checks["decoder_padding_accounted"] = all(int(b["decode_token_slots"]) >= int(b["generated_tokens"]) for b in batches)
+    checks["batch_policies_registered"] = all(batch["policy"] in policy_names for batch in batches)
+    batch_costs = [batch.get(name, "0") for batch in batches for name in ("generated_tokens", "prompt_tokens", "padded_prefill_token_slots", "decode_token_slots")]
+    checks["batch_nonnegative_integer_costs"] = all(isinstance(value, str) and value.isascii() and value.isdecimal() for value in batch_costs)
+    checks["batch_completion_cost_sum"] = checks["batch_nonnegative_integer_costs"] and all(sum(int(b["generated_tokens"]) for b in batches if b["policy"] == policy) == sum(r["generated_tokens"] for r in results if r["policy"] == policy) for policy in {r["policy"] for r in results})
+    checks["batch_input_cost_sum"] = checks["batch_nonnegative_integer_costs"] and all(
+        sum(int(b.get("prompt_tokens", "0")) for b in batches if b["policy"] == policy) ==
+        sum(r["prompt_tokens"] for r in results if r["policy"] == policy) for policy in policy_names)
+    checks["prefill_padding_accounted"] = checks["batch_nonnegative_integer_costs"] and all(
+        int(b.get("padded_prefill_token_slots", "0")) >= int(b.get("prompt_tokens", "0")) for b in batches)
+    checks["decoder_padding_accounted"] = checks["batch_nonnegative_integer_costs"] and all(int(b["decode_token_slots"]) >= int(b["generated_tokens"]) for b in batches)
     report = {"kind": "live_prefix_and_accounting_ledger_audit", "checks": checks, "all_passed": all(checks.values()),
               "qualification": "structural audit and preserved execution sources; these checks establish runtime provenance, not model accuracy"}
     write_json(output / "live_ledger_audit.json", report)

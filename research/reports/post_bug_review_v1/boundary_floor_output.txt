@@ -1,0 +1,9 @@
+  OK trace_analysis.first_zero_crossing floors at T_MIN: got 5 (want 5)
+  OK run_stakes_sweep.find_boundary never returns step < T_MIN: got 2 (T_MIN=2)
+  OK run_stakes_sweep.find_boundary floors the empty-input fallback: got 2
+  OK compare_prompted_vs_distilled boundary path respects T_MIN: got 5 (want 5)
+  OK run_stakes_sweep.find_boundary delegates to trace_analysis.first_zero_crossing (no local scan loop)
+  OK compare_prompted_vs_distilled.main delegates to first_zero_crossing (no local unfloored filter)
+  OK both scripts import (not redefine) trace_analysis.T_MIN
+
+6/6 passed

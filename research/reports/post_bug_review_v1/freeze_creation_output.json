@@ -1,0 +1,107 @@
+{
+  "auxiliary_files": 688,
+  "content_fingerprint": "6e014794a68e74558683862a942ef223cdce6e1d7f66583d5e7038653b1eff1a",
+  "corpus": {
+    "benchmark_count": 4,
+    "benchmarks": {
+      "arc": {
+        "rows": 42500,
+        "task_ids": 1000,
+        "trajectories": 8500
+      },
+      "gpqa": {
+        "rows": 29120,
+        "task_ids": 448,
+        "trajectories": 5824
+      },
+      "gsm8k": {
+        "rows": 40320,
+        "task_ids": 1000,
+        "trajectories": 8064
+      },
+      "math": {
+        "rows": 32500,
+        "task_ids": 500,
+        "trajectories": 6500
+      }
+    },
+    "model_count": 13,
+    "models": {
+      "deepseek_r1_distill_1p5b": {
+        "rows": 9740,
+        "trajectories": 1948
+      },
+      "deepseek_r1_distill_7b": {
+        "rows": 9740,
+        "trajectories": 1948
+      },
+      "llama_3p1_8b_instruct": {
+        "rows": 9740,
+        "trajectories": 1948
+      },
+      "mistral_7b_instruct_v0p3": {
+        "rows": 9740,
+        "trajectories": 1948
+      },
+      "mistral_small_24b_2409": {
+        "rows": 9740,
+        "trajectories": 1948
+      },
+      "phi_4_mini_instruct": {
+        "rows": 9740,
+        "trajectories": 1948
+      },
+      "qwen2p5_0p5b": {
+        "rows": 14740,
+        "trajectories": 2948
+      },
+      "qwen2p5_14b": {
+        "rows": 14740,
+        "trajectories": 2948
+      },
+      "qwen2p5_32b": {
+        "rows": 12240,
+        "trajectories": 2448
+      },
+      "qwen2p5_3b": {
+        "rows": 12240,
+        "trajectories": 2448
+      },
+      "qwen2p5_7b": {
+        "rows": 14740,
+        "trajectories": 2948
+      },
+      "qwen_3p5_9b": {
+        "rows": 7560,
+        "trajectories": 1512
+      },
+      "yi_1p5_9b_chat": {
+        "rows": 9740,
+        "trajectories": 1948
+      }
+    },
+    "raw_run_id_cross_cell_collisions": 0,
+    "raw_run_ids": 28888,
+    "rows": 144440,
+    "rows_by_correctness_label": {
+      "0": 89602,
+      "1": 54838
+    },
+    "rows_by_step": {
+      "1": 28888,
+      "2": 28888,
+      "3": 28888,
+      "4": 28888,
+      "5": 28888
+    },
+    "selected_cell_count": 52,
+    "sequence_length_distribution": {
+      "5": 28888
+    },
+    "source_qualified_trajectories": 28888,
+    "task_ids": 2948
+  },
+  "data_files": 52,
+  "output": "data_manifest_post_review_v1.json",
+  "status": "frozen"
+}

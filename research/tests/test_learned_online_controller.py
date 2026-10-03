@@ -13,7 +13,8 @@ sys.path.insert(0, str(RESEARCH))
 
 from learned_online_stopping_controller import LearnedOnlineStoppingController, LearnedPolicy
 from online_generation import BatchMetrics
-from online_stopping_controller import Observation, PublicTask
+from online_stopping_controller import Observation, PolicyConfig, PublicTask
+from run_online_stopping_evaluation import collect_policy_batch
 from run_learned_online_stopping import collect_batch
 
 
@@ -52,6 +53,53 @@ class FakeBatchDecoder:
 
 
 class LearnedControllerTests(unittest.TestCase):
+    def test_batch_collectors_abort_misaligned_results_without_scheduling_future_work(self):
+        tasks = [PublicTask("one", "12+13"), PublicTask("two", "13+12")]
+        for learned in (False, True):
+            for difference in (-1, 1):
+                class MisalignedDecoder(FakeBatchDecoder):
+                    def generate_batch(self, tasks, histories, step, cancellations):
+                        self.tokens = list(cancellations)
+                        result = super().generate_batch(tasks, histories, step, cancellations)
+                        return result[:-1] if difference < 0 else result + [obs(step)]
+
+                generator = MisalignedDecoder()
+                with self.subTest(learned=learned, difference=difference), self.assertRaises(ValueError):
+                    if learned:
+                        collect_batch(tasks, FakePredictor(), LearnedPolicy("a" * 64), generator, 0, [])
+                    else:
+                        collect_policy_batch(tasks, PolicyConfig(), generator, 0, [])
+                self.assertEqual(len(generator.calls), 1)
+                self.assertTrue(generator.cancelled)
+                self.assertTrue(all(token.cancelled for token in generator.tokens))
+
+    def test_batch_collectors_cancel_all_tasks_when_generation_fails(self):
+        tasks = [PublicTask("one", "12+13")]
+        for learned in (False, True):
+            class FailingDecoder(FakeBatchDecoder):
+                def generate_batch(self, tasks, histories, step, cancellations):
+                    self.tokens = list(cancellations)
+                    raise InterruptedError("test generation aborted")
+
+            generator = FailingDecoder()
+            with self.subTest(learned=learned), self.assertRaises(InterruptedError):
+                if learned:
+                    collect_batch(tasks, FakePredictor(), LearnedPolicy("a" * 64), generator, 0, [])
+                else:
+                    collect_policy_batch(tasks, PolicyConfig(), generator, 0, [])
+            self.assertTrue(generator.cancelled)
+            self.assertTrue(all(token.cancelled for token in generator.tokens))
+
+    def test_policy_rejects_noninteger_horizons_and_overflowing_utility_scale(self):
+        for name in ("min_steps", "max_steps"):
+            for value in (2.5, math.nan, math.inf, True):
+                with self.subTest(name=name, value=value), self.assertRaises(ValueError):
+                    LearnedPolicy("a" * 64, **{name: value})
+        with self.assertRaises(ValueError):
+            LearnedPolicy("a" * 64, reward_value=1e308, wrong_penalty=1e308)
+        with self.assertRaises(ValueError):
+            LearnedPolicy("a" * 64, reward_value=1e308, step_cost=1e308)
+
     def test_predictor_not_queried_before_minimum_two_steps(self):
         predictor = FakePredictor()
         controller = LearnedOnlineStoppingController(predictor, "gsm8k", LearnedPolicy("a" * 64))
