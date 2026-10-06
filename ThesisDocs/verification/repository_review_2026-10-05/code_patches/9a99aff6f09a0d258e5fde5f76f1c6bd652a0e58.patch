@@ -1,0 +1,113 @@
+commit 9a99aff6f09a0d258e5fde5f76f1c6bd652a0e58
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun May 17 18:54:02 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun May 17 18:54:02 2026 -0400
+
+    fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint)
+    
+    - Switch hf_name to principled-intelligence/gemma-4-E4B-it-text-only
+      (community text-only checkpoint, vision/audio weights stripped)
+    - Add 'text-only' family override to is_multimodal detection so
+      AutoModelForCausalLM + AutoTokenizer are used instead of
+      AutoModelForMultimodalLM + AutoProcessor, eliminating the
+      torchvision.transforms.v2.functional import chain
+    - Remove dead resolve_low_vram_device_map vision/audio tower mapping
+    - Remove torchvision from requirements-colab.txt (was pulling CPU-only
+      build from PyPI, conflicting with CUDA torch)
+    - Add ensure_torchvision_from_cuda_index() safety net in
+      run_colab_experiment.py to install torchvision from the correct
+      PyTorch CUDA wheel index when needed
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index c97ca84..b4be8a4 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -140,17 +140,7 @@ def resolve_low_vram_device_map(
+         return device_map
+     if actual_device != "cuda" or target_precision != "4bit":
+         return None
+-    if model_spec.alias != "gemma_4_e4b_it":
+-        return None
+-
+-    return {
+-        "model.language_model": 0,
+-        "model.vision_tower": "cpu",
+-        "model.audio_tower": "cpu",
+-        "model.embed_vision": "cpu",
+-        "model.embed_audio": "cpu",
+-        "lm_head": "cpu",
+-    }
++    return None
+ 
+ 
+ DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
+@@ -377,8 +367,8 @@ MODEL_CATALOG = {
+     ),
+     "gemma_4_e4b_it": ModelSpec(
+         alias="gemma_4_e4b_it",
+-        hf_name="google/gemma-4-E4B-it",
+-        family="Gemma 4 Edge",
++        hf_name="principled-intelligence/gemma-4-E4B-it-text-only",
++        family="Gemma 4 Edge (text-only)",
+         parameter_count="4B",
+     ),
+     "qwen_3p5_9b": ModelSpec(
+@@ -1050,7 +1040,12 @@ def load_model(
+             load_kwargs["attn_implementation"] = attn_implementation
+             logging.info("Attention implementation: %s (native FA2 kernels via SDPA).", attn_implementation)
+ 
+-    is_multimodal = any(f in model_spec.family.lower() for f in ["gemma 4", "llama 4", "qwen3.5"])
++    _MULTIMODAL_FAMILIES = ["gemma 4", "llama 4", "qwen3.5"]
++    _TEXT_ONLY_OVERRIDE = "text-only" in model_spec.family.lower()
++    is_multimodal = (
++        not _TEXT_ONLY_OVERRIDE
++        and any(f in model_spec.family.lower() for f in _MULTIMODAL_FAMILIES)
++    )
+     if is_multimodal:
+         from transformers import AutoModelForMultimodalLM
+         model_class = AutoModelForMultimodalLM
+diff --git a/tools/run_colab_experiment.py b/tools/run_colab_experiment.py
+index 866d3f1..6e2dc1e 100644
+--- a/tools/run_colab_experiment.py
++++ b/tools/run_colab_experiment.py
+@@ -178,6 +178,31 @@ def ensure_packages(skip_install: bool) -> None:
+     print(f"[setup] Verified Python package baseline: {', '.join(satisfied)}", flush=True)
+ 
+ 
++def ensure_torchvision_from_cuda_index() -> None:
++    """Install torchvision from the PyTorch CUDA wheel index if missing or CPU-only."""
++    try:
++        import torch
++        import torchvision  # noqa: F401
++        if torch.cuda.is_available() and "+cpu" in getattr(torchvision, "__version__", ""):
++            raise ImportError("CPU-only torchvision detected on a CUDA machine")
++        print(f"[setup] torchvision {torchvision.__version__} is available.", flush=True)
++        return
++    except ImportError:
++        pass
++
++    cuda_index = "https://download.pytorch.org/whl/cu128"
++    try:
++        import torch
++        cuda_ver = (torch.version.cuda or "").replace(".", "")
++        if cuda_ver:
++            cuda_index = f"https://download.pytorch.org/whl/cu{cuda_ver}"
++    except Exception:
++        pass
++
++    print(f"[setup] Installing torchvision from CUDA wheel index: {cuda_index}", flush=True)
++    run_command([PYTHON, "-m", "pip", "install", "-q", "torchvision", "--index-url", cuda_index])
++
++
+ def print_environment() -> str:
+     import torch
+ 
+@@ -383,6 +408,7 @@ def main() -> None:
+ 
+     started_at = time.time()
+     ensure_packages(skip_install=args.skip_install)
++    ensure_torchvision_from_cuda_index()
+     device = print_environment()
+     smoke_model = args.smoke_model or args.model
+ 

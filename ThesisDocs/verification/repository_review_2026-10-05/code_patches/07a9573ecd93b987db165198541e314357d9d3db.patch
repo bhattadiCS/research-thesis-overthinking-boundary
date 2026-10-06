@@ -1,0 +1,48 @@
+commit 07a9573ecd93b987db165198541e314357d9d3db
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Fri Jul 10 10:12:40 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Fri Jul 10 10:12:40 2026 -0400
+
+    docs: post-audit corrections + regenerate MATH aggregate on repaired cell
+    
+    - July_1_Checkin: dated correction addendum (canonical headline 75,965/
+      7.5495%; impossible 'stopped too late' clause; 50.9% capture caption
+      with honest variants incl. 63.66% all-cells; loss-concentration
+      correction GSM8K>GPQA>MATH>ARC; train/test split disclosure; 22B
+      roster mislabel + 3p1 substitution; union-bound e-process naming;
+      label-integrity status; MATH narrative revision).
+    - Scientific Method reports (both): CONFIRMED-WITH-NAMED-CORRECTIONS
+      banners pointing at rigor_audit/01 with the enumerated corrections.
+    - Startup_Research_Prompt: resolve the three flagged contradictions;
+      strike the inverted 'prefer step 1' guidance.
+    - research/outputs/cross_family/: SUPERSEDED README extending the
+      banner to the raw pre-remediation CSVs (3 floor-violating values).
+    - Relocate _thesis_audit_latecells.py out of the outputs tree ->
+      research/thesis_audit_latecells.py (runs from new home; 10/12 cells,
+      capture 49.7% mean-of-ratios / 50.41% ratio-of-means post-repair).
+    - Regenerate _aggregate/math on the repaired 1,500-run cell. FINDING:
+      qwen2p5_7b__math boundary is step 4 (weakened support) on full data,
+      not the step-5 clear-late reading from the defective 75-run subset;
+      MATH late-boundary story is now 32B-only-clear (step 6).
+    
+    Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+diff --git a/research/outputs/experiment_matrix/_thesis_audit_latecells.py b/research/thesis_audit_latecells.py
+similarity index 93%
+rename from research/outputs/experiment_matrix/_thesis_audit_latecells.py
+rename to research/thesis_audit_latecells.py
+index 3e79d9d..06a53d0 100644
+--- a/research/outputs/experiment_matrix/_thesis_audit_latecells.py
++++ b/research/thesis_audit_latecells.py
+@@ -1,7 +1,9 @@
+ import os
+ import pandas as pd, numpy as np
+ 
+-ROOT = os.path.dirname(os.path.abspath(__file__))
++# Relocated out of research/outputs/experiment_matrix/ (audit lever H6):
++# analysis code must not live inside the outputs tree.
++ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs", "experiment_matrix")
+ late=[("qwen2p5_3b","gsm8k"),("qwen2p5_7b","gsm8k"),("qwen2p5_7b","math"),("qwen2p5_14b","gsm8k"),
+ ("qwen2p5_32b","gsm8k"),("qwen2p5_32b","math"),("mistral_7b_instruct_v0p3","gsm8k"),
+ ("internlm3_8b_instruct","gsm8k"),("yi_1p5_9b_chat","gsm8k"),("mistral_small_24b_2409","gsm8k"),

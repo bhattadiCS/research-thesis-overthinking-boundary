@@ -1,0 +1,35 @@
+commit ae8067f70718d7859a92f62b96da0e86851e6250
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Wed Jul 22 19:33:05 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Wed Jul 22 19:33:05 2026 -0400
+
+    fix: auto-detect active python environment and auto-install lightgbm if missing
+
+diff --git a/tools/run_ultimate_blackwell_5day_tournament.sh b/tools/run_ultimate_blackwell_5day_tournament.sh
+index 09ce8b3..cc87367 100644
+--- a/tools/run_ultimate_blackwell_5day_tournament.sh
++++ b/tools/run_ultimate_blackwell_5day_tournament.sh
+@@ -9,11 +9,19 @@ set -euo pipefail
+ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ cd "${SCRIPT_DIR}"
+ 
+-PYTHON_BIN="${PYTHON_BIN:-.venv/bin/python}"
+-if [ ! -x "${PYTHON_BIN}" ]; then
+-  PYTHON_BIN="python3"
++if [ -z "${PYTHON_BIN:-}" ]; then
++  if [ -x ".venv/bin/python" ]; then
++    PYTHON_BIN=".venv/bin/python"
++  elif command -v python &> /dev/null; then
++    PYTHON_BIN="python"
++  else
++    PYTHON_BIN="python3"
++  fi
+ fi
+ 
++# Auto-install lightgbm if missing in the environment
++"${PYTHON_BIN}" -c "import lightgbm" 2>/dev/null || "${PYTHON_BIN}" -m pip install --quiet lightgbm scikit-learn scipy pandas
++
+ INPUT_DIR="${INPUT_DIR:-research/outputs/experiments_v2}"
+ OUTPUT_DIR="${OUTPUT_DIR:-research/outputs/experiments_v2/blackwell_5day_tournament_v1}"
+ EPOCHS="${EPOCHS:-20}"

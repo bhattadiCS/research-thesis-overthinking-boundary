@@ -1,0 +1,355 @@
+{
+  "schema": "formal-thesis-assigned-visual-review-v2",
+  "reviewer": "/root/data_freeze",
+  "review_date": "2026-10-04",
+  "status": "no_material_defects_found",
+  "scope": "Final converted front matter, Chapter 6 and Appendices A-D; the separate consolidated receipt records full-document team coverage.",
+  "semester_approvals": "user-confirmed complete",
+  "institutional_format_acceptance": "not asserted",
+  "consolidated_visual_receipt": "ThesisDocs/formal/visual_review_v2.json",
+  "consolidated_visual_receipt_sha256": "0f82e23eef22cf0b4a43bc840be77e6c1e848099b4eb311df951cbe6055f0f74",
+  "editions": [
+    {
+      "edition": "digital",
+      "pdf": "output/pdf/Masters_Thesis_Formal_v2_Aditya_Bhatt.pdf",
+      "sha256_at_successful_conversion": "5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240",
+      "sha256_after_direct_visual_review": "5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240",
+      "source": "tmp/pdfs/formal_thesis/digital/source.pdf",
+      "source_sha256": "c2af6fb89d4236d6b7bfb746d6d3b33b86de7d9f3ed2d98e2e3c449daef3dc8d",
+      "converter_manifest": "ThesisDocs/archival/formal_v2_digital_build_manifest.json",
+      "converter_manifest_sha256": "c840b73882a05895df639d328101f0ef479a52cc121a94907bd1cf5228260a65",
+      "dpi": 144,
+      "directly_viewed_physical_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94
+      ],
+      "direct_viewed_count": 20,
+      "review_method": "Each listed final converted-page PNG was opened with view_image at full-page detail; these final ranges do not rely on a prior identity or carry-forward.",
+      "findings": {
+        "material_defects": [],
+        "front_matter": "All-capital title and exact Master of Science degree statement, abstract/readers, contents and distinct sixteen-table/four-figure lists are clear.",
+        "chapter6": "Paragraphs, headings, continuations, margins and bottom folios are clear.",
+        "appendices": "Explicit PowerShell continuations preserve command tokens. Tables 15 and 16 have clear captions and complete rows. A, B, C and D begin separately. Appendix D equations and final folios are legible."
+      },
+      "reviewed_images": [
+        {
+          "physical_page": 1,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_001.png",
+          "png_sha256": "b2504ffb845b9cceb649ab180fcdf0d23703d5d1460d245013697c4a3272ed57"
+        },
+        {
+          "physical_page": 2,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_002.png",
+          "png_sha256": "b3cdbb1ba4c62988f47588bf2e04153f6c2499c67ad801579f33101726a7f879"
+        },
+        {
+          "physical_page": 3,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_003.png",
+          "png_sha256": "e42d1e94ba05744d6d934f3da2ec6e59108d2915be07aa3a7267c6c1f324188d"
+        },
+        {
+          "physical_page": 4,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_004.png",
+          "png_sha256": "66717485ea83a144847d6df72187b133c7643876c921c2cb539f3ab0dbae2779"
+        },
+        {
+          "physical_page": 5,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_005.png",
+          "png_sha256": "bef98bf5e74418fdfdbf1223b72eae16b2ec18a1a81251ab6172dce3c53f300e"
+        },
+        {
+          "physical_page": 76,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_076.png",
+          "png_sha256": "7b2dc1030af93688c23078b86a189bacb813cd4fda19627f92bd073c708ae9bc"
+        },
+        {
+          "physical_page": 77,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_077.png",
+          "png_sha256": "7d3d7ee8c6d2312a2695ec1387942017dc6b848f1d4ee31d5c8ab77649d15189"
+        },
+        {
+          "physical_page": 78,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_078.png",
+          "png_sha256": "cb8906a6eb455b65418d6161c591e5e5056dc061678af7272bce4b28cf674e9d"
+        },
+        {
+          "physical_page": 79,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_079.png",
+          "png_sha256": "b7a2426605b6f253cb3140543c25c30921af743aae002e52cc56c8d79d61e9d9"
+        },
+        {
+          "physical_page": 80,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_080.png",
+          "png_sha256": "9bb399bab4b9c494ba70c2c186cd0fd64d67e4b6e07b6b33ff99b92004bedc7d"
+        },
+        {
+          "physical_page": 81,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_081.png",
+          "png_sha256": "6f98a3dea945f5c4a72af32a0f8535396fcd889ca84ce7df845e49594e45b188"
+        },
+        {
+          "physical_page": 82,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_082.png",
+          "png_sha256": "1b95bcfe33d6408d1aca1482ed3efb332ab9060d10ef0bb485e1e280006c162b"
+        },
+        {
+          "physical_page": 87,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_087.png",
+          "png_sha256": "bb1da12d5f0f7bb4bb595385ca741ba7700b553acb393aa8380e783da5f30d2b"
+        },
+        {
+          "physical_page": 88,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_088.png",
+          "png_sha256": "12d93eccaf35f74fc261df48a1016f512b4743b94e4b5f5f7697fa7893cbca7c"
+        },
+        {
+          "physical_page": 89,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_089.png",
+          "png_sha256": "10a17df0dfebb001e21535c3d7de7806d7b42664e6608364657f088c44a8476e"
+        },
+        {
+          "physical_page": 90,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_090.png",
+          "png_sha256": "977ffe34a3937b8ed38946c0c97f2092c96174a77fc58b357e7b30ac946b3dff"
+        },
+        {
+          "physical_page": 91,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_091.png",
+          "png_sha256": "cdbb16dfc86610b3ee7228db3802c6c502fb9f28b3271beb77430d50cc73a41d"
+        },
+        {
+          "physical_page": 92,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_092.png",
+          "png_sha256": "aa624dc9e97bf22554f35ea52c3dfbfb20e26fb9eca2c80be2744bee3832e8a7"
+        },
+        {
+          "physical_page": 93,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_093.png",
+          "png_sha256": "1f16c85f5cb427170fb442f2802c6994a66bd58a8f2b76adf55e237af3f068ee"
+        },
+        {
+          "physical_page": 94,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/page_094.png",
+          "png_sha256": "310768a931f6deff236cbc9cda0d7a515f68375b55b451d212266cdb6e3d8fbe"
+        }
+      ]
+    },
+    {
+      "edition": "print",
+      "pdf": "output/pdf/Masters_Thesis_Formal_v2_Print_Aditya_Bhatt.pdf",
+      "sha256_at_successful_conversion": "b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1",
+      "sha256_after_direct_visual_review": "b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1",
+      "source": "tmp/pdfs/formal_thesis/print/source.pdf",
+      "source_sha256": "a3839620e4b272910754589f014f4e072af206b7da7b4d8a20f462e9b122e299",
+      "converter_manifest": "ThesisDocs/archival/formal_v2_print_build_manifest.json",
+      "converter_manifest_sha256": "0615d7928836aea51d2f3ac3f6d774b7f79c9e238982c6a617b2f8484e441d86",
+      "dpi": 144,
+      "directly_viewed_physical_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97
+      ],
+      "direct_viewed_count": 21,
+      "review_method": "Each listed final converted-page PNG was opened with view_image at full-page detail; these final ranges do not rely on a prior identity or carry-forward.",
+      "findings": {
+        "material_defects": [],
+        "front_matter": "All-capital title and exact Master of Science degree statement, abstract/readers, contents and distinct sixteen-table/four-figure lists are clear.",
+        "chapter6": "Paragraphs, headings, continuations, margins and bottom folios are clear.",
+        "appendices": "Explicit PowerShell continuations preserve command tokens. Tables 15 and 16 have clear captions and complete rows. A, B, C and D begin separately. Appendix D equations and final folios are legible."
+      },
+      "reviewed_images": [
+        {
+          "physical_page": 1,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_001.png",
+          "png_sha256": "368a55d7435e3e95095bd0d371fe6cfef86767d7b509d9f11a2af779d5f2c77f"
+        },
+        {
+          "physical_page": 2,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_002.png",
+          "png_sha256": "01798d203d76ccb5e89b2dac8bc76b3a834e2b4d01e7d0fa6d2286b69dd6c3f0"
+        },
+        {
+          "physical_page": 3,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_003.png",
+          "png_sha256": "32bb30c4e98de250e21121d645e7155aef08529d341639e4036819fd85eec0b6"
+        },
+        {
+          "physical_page": 4,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_004.png",
+          "png_sha256": "0a0ed4f40711fa21a1287dd13c7f39584111be1b40768d5a189070cedd84d59a"
+        },
+        {
+          "physical_page": 5,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_005.png",
+          "png_sha256": "e9e68fd1e41d83aa2b709309dc25ab681292c1f8c0de02b7ba80c8483a8ab03c"
+        },
+        {
+          "physical_page": 78,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_078.png",
+          "png_sha256": "5604efca702ba1e53fcc7c192c7e198d20d5e1458ecd8aa155fb67bc72ebf9a6"
+        },
+        {
+          "physical_page": 79,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_079.png",
+          "png_sha256": "b8aa77923c07eafd12631b02412ca1cbcb1b0dd454d911dde74d5a58a63e6596"
+        },
+        {
+          "physical_page": 80,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_080.png",
+          "png_sha256": "d2983c6b56313f0ad97c1b7556cac0da381f644d3e58a095de70dfed9c3d26de"
+        },
+        {
+          "physical_page": 81,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_081.png",
+          "png_sha256": "8a6998c2705cec9699930ddfa24507068dec86b596a62017e762764ad61cca88"
+        },
+        {
+          "physical_page": 82,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_082.png",
+          "png_sha256": "ce55d5fd772ab3789031917e7fef17054b33bf3e64e4e7d990a4cc680dc13c31"
+        },
+        {
+          "physical_page": 83,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_083.png",
+          "png_sha256": "d60b4cc7775ab2940747aee9ba1baf722145f12079ed5d33c4dee2bf4c6bdf5f"
+        },
+        {
+          "physical_page": 84,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_084.png",
+          "png_sha256": "da472c612a27e9b13dec6ea5e02da47c3dbfc1241aa6dade1a6a2c2ecafa28ec"
+        },
+        {
+          "physical_page": 89,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_089.png",
+          "png_sha256": "da41eecb4ebdbc57d93d907ba4dfeeeba3ccb2ccd168703f1c29d0de067e28ed"
+        },
+        {
+          "physical_page": 90,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_090.png",
+          "png_sha256": "bc6234142410a80c63c177d98d8c1608bf0552c63c16194a05b61d328892e80c"
+        },
+        {
+          "physical_page": 91,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_091.png",
+          "png_sha256": "fe97793f4550204f6062e2ead2f9ed86a167b8d02913455f5330f8f52cca6a83"
+        },
+        {
+          "physical_page": 92,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_092.png",
+          "png_sha256": "fd46228c1b691b105b13a3020adcfb483ee1bcb0415f745f23a13c81265ec90c"
+        },
+        {
+          "physical_page": 93,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_093.png",
+          "png_sha256": "b549a35c79bfe9e5cf2ed97fec5a83939a743a04707855072bf6bcd06d254813"
+        },
+        {
+          "physical_page": 94,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_094.png",
+          "png_sha256": "c465a879dcc08c5a22c40cc1c60fc9baa58f14b35780cdf621acfdbd1dc4ff38"
+        },
+        {
+          "physical_page": 95,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_095.png",
+          "png_sha256": "18f4708a9edba07f487c6d87cdbd7af53267e8860843e406c6cadac3b8f89538"
+        },
+        {
+          "physical_page": 96,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_096.png",
+          "png_sha256": "17bb11b4f6584127477f905a3bdc605ecdc2c59814080c663b7f225bb541f59c"
+        },
+        {
+          "physical_page": 97,
+          "png": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/page_097.png",
+          "png_sha256": "e01f0543d5a12bba1c8a1adca898c4d533432b675530b34b08eb129a9965ac46"
+        }
+      ]
+    }
+  ],
+  "historical_v1_preservation": [
+    {
+      "path": "output/pdf/Masters_Thesis_Draft_v1_Aditya_Bhatt.pdf",
+      "expected_sha256": "833651e74486ff986e52466b758d4eddf686589b2409badfea41f1f079b45e27",
+      "actual_sha256": "833651e74486ff986e52466b758d4eddf686589b2409badfea41f1f079b45e27",
+      "unchanged": true
+    },
+    {
+      "path": "output/pdf/Masters_Thesis_Archival_Candidate_v1_Aditya_Bhatt.pdf",
+      "expected_sha256": "59524abe287751bdbe2a20c5c4f9baca5c29fdf8a501518d62d1de126762bce7",
+      "actual_sha256": "59524abe287751bdbe2a20c5c4f9baca5c29fdf8a501518d62d1de126762bce7",
+      "unchanged": true
+    },
+    {
+      "path": "ThesisDocs/archival/candidate_build_manifest.json",
+      "expected_sha256": "dd5940483863d4564e11beb1beb26d7df984a2ffb1554fb919ca8b015f3410e5",
+      "actual_sha256": "dd5940483863d4564e11beb1beb26d7df984a2ffb1554fb919ca8b015f3410e5",
+      "unchanged": true
+    },
+    {
+      "path": "ThesisDocs/archival/candidate_verapdf_2b.xml",
+      "expected_sha256": "5b9c3237d4db72d1428ac3f5d41481ff112396670479f2c7da45c3d09fe70a22",
+      "actual_sha256": "5b9c3237d4db72d1428ac3f5d41481ff112396670479f2c7da45c3d09fe70a22",
+      "unchanged": true
+    },
+    {
+      "path": "ThesisDocs/archival/visual_review.json",
+      "expected_sha256": "4c22078c4951092ad406457ddfb7046d411bf7204fcd1330d2825fdb0664e84e",
+      "actual_sha256": "4c22078c4951092ad406457ddfb7046d411bf7204fcd1330d2825fdb0664e84e",
+      "unchanged": true
+    },
+    {
+      "path": "ThesisDocs/archival/tool_provenance.json",
+      "expected_sha256": "7ebb55605a9e0970e987f92612e5b2ba87838971f4707d234249c25f23343b01",
+      "actual_sha256": "7ebb55605a9e0970e987f92612e5b2ba87838971f4707d234249c25f23343b01",
+      "unchanged": true
+    },
+    {
+      "path": "ThesisDocs/archival/formatting_audit.md",
+      "expected_sha256": "3e881317ee2c7e9785eefab156b78cb359dcab909769b34835a02114a68d54a6",
+      "actual_sha256": "3e881317ee2c7e9785eefab156b78cb359dcab909769b34835a02114a68d54a6",
+      "unchanged": true
+    },
+    {
+      "path": "ThesisDocs/archival/README.md",
+      "expected_sha256": "720837ac0d06b895a7f47d4e56416f9cf2140066cdd92258076494cf5976799d",
+      "actual_sha256": "720837ac0d06b895a7f47d4e56416f9cf2140066cdd92258076494cf5976799d",
+      "unchanged": true
+    }
+  ]
+}

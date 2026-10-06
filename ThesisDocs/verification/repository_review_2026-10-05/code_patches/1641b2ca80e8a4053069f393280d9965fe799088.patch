@@ -1,0 +1,80 @@
+commit 1641b2ca80e8a4053069f393280d9965fe799088
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Thu Apr 2 23:39:24 2026 +0000
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Thu Apr 2 23:39:24 2026 +0000
+
+    fix: restore mistral l4 runtime
+
+diff --git a/research/_vendor/torchvision_stub/torchvision/__init__.py b/research/_vendor/torchvision_stub/torchvision/__init__.py
+new file mode 100644
+index 0000000..b232f0a
+--- /dev/null
++++ b/research/_vendor/torchvision_stub/torchvision/__init__.py
+@@ -0,0 +1,3 @@
++from . import io, transforms
++
++__all__ = ["io", "transforms"]
+\ No newline at end of file
+diff --git a/research/_vendor/torchvision_stub/torchvision/io.py b/research/_vendor/torchvision_stub/torchvision/io.py
+new file mode 100644
+index 0000000..ff32299
+--- /dev/null
++++ b/research/_vendor/torchvision_stub/torchvision/io.py
+@@ -0,0 +1,2 @@
++def read_video(*args, **kwargs):
++    raise NotImplementedError("The local torchvision shim does not implement video I/O because the thesis harness is text-only.")
+\ No newline at end of file
+diff --git a/research/_vendor/torchvision_stub/torchvision/transforms.py b/research/_vendor/torchvision_stub/torchvision/transforms.py
+new file mode 100644
+index 0000000..103b450
+--- /dev/null
++++ b/research/_vendor/torchvision_stub/torchvision/transforms.py
+@@ -0,0 +1,13 @@
++from __future__ import annotations
++
++from enum import Enum
++
++
++class InterpolationMode(str, Enum):
++    NEAREST = "nearest"
++    NEAREST_EXACT = "nearest-exact"
++    BOX = "box"
++    BILINEAR = "bilinear"
++    HAMMING = "hamming"
++    BICUBIC = "bicubic"
++    LANCZOS = "lanczos"
+\ No newline at end of file
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 7f384d3..1f63e91 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -8,6 +8,7 @@ import logging
+ import math
+ import re
+ import shutil
++import sys
+ import time
+ from dataclasses import asdict, dataclass
+ from fractions import Fraction
+@@ -18,6 +19,11 @@ import numpy as np
+ import pandas as pd
+ import torch
+ from tqdm.auto import tqdm
++
++TORCHVISION_STUB_ROOT = Path(__file__).resolve().parent / "_vendor" / "torchvision_stub"
++if TORCHVISION_STUB_ROOT.exists() and str(TORCHVISION_STUB_ROOT) not in sys.path:
++    sys.path.insert(0, str(TORCHVISION_STUB_ROOT))
++
+ from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
+ 
+ try:
+@@ -815,7 +821,7 @@ def load_model(
+     load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
+     compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
+     if actual_device == "cuda":
+-        load_kwargs["dtype"] = compute_dtype
++        load_kwargs["torch_dtype"] = compute_dtype
+         if attn_implementation != "eager":
+             load_kwargs["attn_implementation"] = "sdpa" if attn_implementation == "auto" else attn_implementation
+ 

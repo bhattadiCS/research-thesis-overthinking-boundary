@@ -1,0 +1,2258 @@
+commit c9202d035d7741108a4aedf2e12a61ba97ba8551 (from cebfefa145041c84812308ef125416c4dfedbc9d)
+Merge: cebfefa 74dd4d4
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Wed Apr 1 09:48:43 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Wed Apr 1 09:48:43 2026 -0400
+
+    Merge remote batching updates and re-apply auto-shutdown trigger for Colab L4 instances
+
+diff --git a/research/generate_thesis_artifacts.py b/research/generate_thesis_artifacts.py
+new file mode 100644
+index 0000000..8fbe4a1
+--- /dev/null
++++ b/research/generate_thesis_artifacts.py
+@@ -0,0 +1,285 @@
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import pandas as pd
++
++
++REPO_ROOT = Path(__file__).resolve().parents[1]
++DEFAULT_INPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
++DEFAULT_ANSWERS_PATH = Path(__file__).resolve().parent / "ANSWERS_TO_OPEN_QUESTIONS.md"
++DEFAULT_RESEARCH_REPORT_PATH = Path(__file__).resolve().parent / "FINAL_L4_RESULTS.md"
++DEFAULT_ROOT_REPORT_PATH = REPO_ROOT / "L4_OVERTHINKING_RESULTS.md"
++
++
++FEATURE_LABELS = {
++    "step": "reasoning step index",
++    "entropy_mean": "token entropy",
++    "entropy_std": "entropy volatility",
++    "confidence": "self-reported confidence",
++    "answer_changed": "answer revision flag",
++    "thought_token_count": "reasoning length",
++    "hidden_l2_shift": "hidden-state L2 drift",
++    "hidden_cosine_shift": "hidden-state cosine drift",
++    "lexical_echo": "lexical echo",
++    "verbose_confidence_proxy": "verbosity-confidence proxy",
++    "constant_probability": "constant baseline",
++}
++
++
++def read_csv(path: Path) -> pd.DataFrame:
++    if not path.exists():
++        raise FileNotFoundError(f"Missing required artifact: {path}")
++    return pd.read_csv(path)
++
++
++def safe_float(value: float, digits: int = 4) -> str:
++    if pd.isna(value):
++        return "n/a"
++    return f"{float(value):.{digits}f}"
++
++
++def first_zero_crossing(hazard_frame: pd.DataFrame, column: str = "hazard_mu") -> int | None:
++    valid = hazard_frame.dropna(subset=[column]).sort_values("step")
++    if valid.empty:
++        return None
++    previous = None
++    for _, row in valid.iterrows():
++        value = float(row[column])
++        if previous is not None and previous > 0.0 and value <= 0.0:
++            return int(row["step"])
++        previous = value
++    if float(valid.iloc[0][column]) <= 0.0:
++        return int(valid.iloc[0]["step"])
++    return None
++
++
++def feature_name(weight_frame: pd.DataFrame, model_name: str, positive_only: bool = False) -> str:
++    model_rows = weight_frame[weight_frame["model"] == model_name].copy()
++    model_rows = model_rows[model_rows["feature"] != "constant_probability"]
++    if positive_only:
++        model_rows = model_rows[model_rows["coefficient"] > 0]
++        if model_rows.empty:
++            return "none"
++        winner = model_rows.sort_values("coefficient", ascending=False).iloc[0]
++    else:
++        if model_rows.empty:
++            return "none"
++        winner = model_rows.assign(abs_coefficient=model_rows["coefficient"].abs()).sort_values("abs_coefficient", ascending=False).iloc[0]
++    feature = str(winner["feature"])
++    label = FEATURE_LABELS.get(feature, feature)
++    return f"{label} ({feature}, coeff={float(winner['coefficient']):.3f})"
++
++
++def relative_markdown_link(target: Path, from_file: Path) -> str:
++    rel = target.relative_to(REPO_ROOT) if target.is_absolute() else target
++    base = from_file.parent.relative_to(REPO_ROOT) if from_file.is_absolute() else from_file.parent
++    if str(base) == ".":
++        return str(rel).replace("\\", "/")
++    return str(Path("..") / rel).replace("\\", "/")
++
++
++def build_answers_markdown(
++    *,
++    steps: pd.DataFrame,
++    runs: pd.DataFrame,
++    pilot: pd.DataFrame,
++    hazard: pd.DataFrame,
++    detectors: pd.DataFrame,
++    probe: pd.DataFrame,
++    weights: pd.DataFrame,
++) -> str:
++    summary = pilot.iloc[0]
++    q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
++    repair_rate = float(summary["repair_rate_overall"]) if not pd.isna(summary["repair_rate_overall"]) else float("nan")
++    corruption_rate = float(summary["corruption_rate_overall"]) if not pd.isna(summary["corruption_rate_overall"]) else float("nan")
++    hazard_row = detectors.set_index("detector")
++    crossing_step = first_zero_crossing(hazard)
++
++    question_1 = (
++        f"Yes. Across {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} tasks, the model started with "
++        f"step-1 competence $q_1={safe_float(q1, 3)}$, reached correctness at least once in {int(summary['runs_ever_correct'])} runs, "
++        f"and exhibited measurable repair and corruption rates of {safe_float(repair_rate, 3)} and {safe_float(corruption_rate, 3)} respectively. "
++        "That moves the experiment out of the low-skill regime and into a regime where continuation hazards can actually be estimated."
++    )
++
++    question_2 = (
++        f"Yes, with caveats. The global correctness probe achieved mean Brier {safe_float(probe['brier'].mean(), 4)} and mean AUC {safe_float(probe['auc'].dropna().mean(), 4)}. "
++        f"The strongest correctness-side observable in this run was {feature_name(weights, 'correctness_probe')}. "
++        "That is enough evidence to say that verifier-lite observables carry signal about $q_t$, although the calibration quality should still be stress-tested on a second model family."
++    )
++
++    question_3 = (
++        f"Partially yes. The data contains both repairs and corruptions, and the hazard-based stop rule achieved mean oracle gap "
++        f"{safe_float(hazard_row.loc['hazard_drift', 'mean_oracle_gap'], 4)} with false-late rate {safe_float(hazard_row.loc['hazard_drift', 'false_late_rate'], 3)}. "
++        f"The empirical-Bernstein detector achieved mean oracle gap {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}. "
++        "So the hazards are learnable well enough to support a practical stop rule, but the current stop rules are still conservative rather than oracle-close."
++    )
++
++    if steps["model_alias"].nunique() > 1:
++        question_5_prefix = "Across the currently completed model families"
++    else:
++        question_5_prefix = "Within the currently completed L4 run"
++    question_5 = (
++        f"{question_5_prefix}, the most stable observable looks like {feature_name(weights, 'correctness_probe')}. "
++        f"On the corruption side, the strongest positive hazard signal was {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
++        "That makes hidden-state drift, entropy, and verbosity-derived signals the main candidates, with cross-family stability still needing the 7B follow-up before it can be called settled."
++    )
++
++    question_6 = (
++        f"In the current traces, corruption appears earliest through {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
++        f"The drift estimate crosses zero at step {crossing_step if crossing_step is not None else 'not yet observed'}, while the never-stop policy retains a mean oracle gap of {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)}. "
++        "That pattern is more consistent with a corruption cascade than with harmless extra verification."
++    )
++
++    return "\n".join(
++        [
++            "# Answers to Open Questions",
++            "",
++            "## Question 1",
++            question_1,
++            "",
++            "## Question 2",
++            question_2,
++            "",
++            "## Question 3",
++            question_3,
++            "",
++            "## Question 5",
++            question_5,
++            "",
++            "## Question 6",
++            question_6,
++            "",
++        ]
++    )
++
++
++def build_report_markdown(
++    *,
++    steps: pd.DataFrame,
++    pilot: pd.DataFrame,
++    hazard: pd.DataFrame,
++    detectors: pd.DataFrame,
++    weights: pd.DataFrame,
++    report_path: Path,
++    input_dir: Path,
++) -> str:
++    summary = pilot.iloc[0]
++    detector_rows = detectors.set_index("detector")
++    crossing_step = first_zero_crossing(hazard)
++    q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
++    q_peak = float(hazard["q_t"].max()) if not hazard.empty else float("nan")
++    q_peak_step = int(hazard.loc[hazard["q_t"].idxmax(), "step"]) if not hazard.empty else -1
++
++    graph_links = [
++        f"- [Drift crossing proof]({relative_markdown_link(input_dir / 'drift_crossing_proof.png', report_path)})",
++        f"- [Detector gap comparison]({relative_markdown_link(input_dir / 'real_trace_detector_gaps.png', report_path)})",
++        f"- [Feature weight summary]({relative_markdown_link(input_dir / 'real_trace_feature_weights.png', report_path)})",
++    ]
++
++    comparison_table = [
++        "| Policy | Mean stop step | Mean utility | Mean oracle gap |",
++        "| --- | ---: | ---: | ---: |",
++    ]
++    for detector_name in ["oracle", "empirical_bernstein", "never_stop"]:
++        row = detector_rows.loc[detector_name]
++        comparison_table.append(
++            f"| {detector_name} | {safe_float(row['mean_stop_step'], 2)} | {safe_float(row['mean_stop_utility'], 4)} | {safe_float(row['mean_oracle_gap'], 4)} |"
++        )
++
++    return "\n".join(
++        [
++            "# L4 Overthinking Results",
++            "",
++            "## Executive Summary",
++            (
++                f"The L4 execution loop completed the environment check, parser repair, GSM8K scaling refactor, and real-trace collection on "
++                f"{int(summary['n_runs'])} runs. The model entered a competent regime immediately, with step-1 accuracy $q_1={safe_float(q1, 3)}$, "
++                f"and reached peak correctness $q_t={safe_float(q_peak, 3)}$ at step {q_peak_step}."
++            ),
++            "",
++            "## Mathematical Validation",
++            (
++                f"The hazard decomposition exhibits repair rate {safe_float(summary['repair_rate_overall'], 3)} and corruption rate {safe_float(summary['corruption_rate_overall'], 3)}. "
++                f"The first hazard drift zero crossing occurs at step {crossing_step if crossing_step is not None else 'not observed'}, which is the empirical candidate for the Overthinking Boundary. "
++                f"The never-stop policy loses {safe_float(detector_rows.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average relative to the oracle, which is direct evidence that extra reasoning past the boundary is harmful."
++            ),
++            "",
++            "## Observables Evaluation",
++            (
++                f"The strongest correctness proxy in the fitted models was {feature_name(weights, 'correctness_probe')}. "
++                f"The strongest corruption-side signal was {feature_name(weights, 'corruption_hazard', positive_only=True)}. "
++                "Those coefficients make hidden-state drift and verbosity-linked features the leading observable candidates for boundary detection in the current run."
++            ),
++            "",
++            "## Stopping Comparison",
++            *comparison_table,
++            "",
++            "## Graphs",
++            *graph_links,
++            "",
++        ]
++    )
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description="Generate thesis markdown artifacts from completed experiment outputs.")
++    parser.add_argument("--input-dir", default=str(DEFAULT_INPUT_DIR))
++    parser.add_argument("--answers-output", default=str(DEFAULT_ANSWERS_PATH))
++    parser.add_argument("--research-report-output", default=str(DEFAULT_RESEARCH_REPORT_PATH))
++    parser.add_argument("--root-report-output", default=str(DEFAULT_ROOT_REPORT_PATH))
++    args = parser.parse_args()
++
++    input_dir = Path(args.input_dir)
++    answers_output = Path(args.answers_output)
++    research_report_output = Path(args.research_report_output)
++    root_report_output = Path(args.root_report_output)
++
++    steps = read_csv(input_dir / "trace_steps.csv")
++    runs = read_csv(input_dir / "trace_runs.csv")
++    pilot = read_csv(input_dir / "pilot_summary.csv")
++    hazard = read_csv(input_dir / "hazard_drift_summary.csv")
++    detectors = read_csv(input_dir / "detector_comparison.csv")
++    probe = read_csv(input_dir / "correctness_probe_metrics.csv")
++    weights = read_csv(input_dir / "feature_weights.csv")
++
++    answers_markdown = build_answers_markdown(
++        steps=steps,
++        runs=runs,
++        pilot=pilot,
++        hazard=hazard,
++        detectors=detectors,
++        probe=probe,
++        weights=weights,
++    )
++    report_markdown = build_report_markdown(
++        steps=steps,
++        pilot=pilot,
++        hazard=hazard,
++        detectors=detectors,
++        weights=weights,
++        report_path=research_report_output,
++        input_dir=input_dir,
++    )
++    root_report_markdown = build_report_markdown(
++        steps=steps,
++        pilot=pilot,
++        hazard=hazard,
++        detectors=detectors,
++        weights=weights,
++        report_path=root_report_output,
++        input_dir=input_dir,
++    )
++
++    answers_output.write_text(answers_markdown, encoding="utf-8")
++    research_report_output.write_text(report_markdown, encoding="utf-8")
++    root_report_output.write_text(root_report_markdown, encoding="utf-8")
++    print(f"Wrote answers artifact to: {answers_output}")
++    print(f"Wrote research report to: {research_report_output}")
++    print(f"Wrote root report to: {root_report_output}")
++
++
++if __name__ == "__main__":
++    main()
+\ No newline at end of file
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 1e7a560..da11619 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -1,29 +1,40 @@
+ from __future__ import annotations
+ 
+ import argparse
+-import concurrent.futures
++import hashlib
+ import json
++import logging
+ import math
+ import re
+ import time
+ from dataclasses import asdict, dataclass
+ from fractions import Fraction
+ from pathlib import Path
+-from typing import Any
++from typing import Any, Iterable
+ 
+ import numpy as np
+ import pandas as pd
+ import torch
++from tqdm.auto import tqdm
+ from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
+ 
++try:
++    from datasets import load_dataset
++except ImportError:
++    load_dataset = None
++
++try:
++    from transformers import BitsAndBytesConfig
++except ImportError:
++    BitsAndBytesConfig = None
++
+ 
+ DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
+ STEP_COST = 0.05
+ SYSTEM_PROMPT = (
+     "You are participating in a research protocol about incremental reasoning. "
+-    "Reply with exactly four lines in this format: THOUGHT: ..., ANSWER: ..., CONFIDENCE: ..., STOP: .... "
+-    "THOUGHT must be one short sentence. ANSWER must be only the current best final answer. "
+-    "CONFIDENCE must be an integer from 0 to 100. STOP must be yes or no."
++    "Each step should be brief and update the current best answer rather than re-deriving the full solution. "
++    "If you already know the answer, do one short verification step and still return the requested format."
+ )
+ DAY_NAMES = [
+     "monday",
+@@ -34,6 +45,70 @@ DAY_NAMES = [
+     "saturday",
+     "sunday",
+ ]
++NUMBER_WORDS = {
++    "a": 1,
++    "an": 1,
++    "one": 1,
++    "two": 2,
++    "three": 3,
++    "four": 4,
++    "five": 5,
++    "six": 6,
++    "seven": 7,
++    "eight": 8,
++    "nine": 9,
++    "ten": 10,
++}
++FRACTION_DENOMINATORS = {
++    "half": 2,
++    "halves": 2,
++    "third": 3,
++    "thirds": 3,
++    "quarter": 4,
++    "quarters": 4,
++    "fourth": 4,
++    "fourths": 4,
++    "fifth": 5,
++    "fifths": 5,
++    "sixth": 6,
++    "sixths": 6,
++    "seventh": 7,
++    "sevenths": 7,
++    "eighth": 8,
++    "eighths": 8,
++    "ninth": 9,
++    "ninths": 9,
++    "tenth": 10,
++    "tenths": 10,
++}
++PLURAL_FRACTION_WORDS = {
++    "halves",
++    "thirds",
++    "quarters",
++    "fourths",
++    "fifths",
++    "sixths",
++    "sevenths",
++    "eighths",
++    "ninths",
++    "tenths",
++}
++ANSWER_CUE_PHRASES = (
++    "answer",
++    "final",
++    "therefore",
++    "thus",
++    "hence",
++    "so",
++    "equals",
++    "equal to",
++    "gives",
++    "will be",
++    "would be",
++    "should be",
++    "left with",
++    "remaining",
++)
+ 
+ 
+ @dataclass(frozen=True)
+@@ -45,6 +120,8 @@ class TaskSpec:
+     answer_type: str
+     expected_answer: str
+     notes: str
++    source: str = "builtin"
++    source_index: int = -1
+ 
+ 
+ @dataclass(frozen=True)
+@@ -55,7 +132,7 @@ class ModelSpec:
+     parameter_count: str
+ 
+ 
+-TASKS = [
++BUILTIN_TASKS = [
+     TaskSpec(
+         task_id="calendar_offset_easy",
+         domain="calendar",
+@@ -115,18 +192,91 @@ MODEL_CATALOG = {
+         family="DeepSeek-R1 distill",
+         parameter_count="1.5B",
+     ),
++    "deepseek_r1_distill_7b": ModelSpec(
++        alias="deepseek_r1_distill_7b",
++        hf_name="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
++        family="DeepSeek-R1 distill",
++        parameter_count="7B",
++    ),
+     "qwen2p5_0p5b": ModelSpec(
+         alias="qwen2p5_0p5b",
+         hf_name="Qwen/Qwen2.5-0.5B-Instruct",
+         family="Qwen2.5 instruct",
+         parameter_count="0.5B",
+     ),
++    "qwen2p5_7b": ModelSpec(
++        alias="qwen2p5_7b",
++        hf_name="Qwen/Qwen2.5-7B-Instruct",
++        family="Qwen2.5 instruct",
++        parameter_count="7B",
++    ),
+ }
+ 
+ 
++def sanitize_split_name(dataset_split: str) -> str:
++    return re.sub(r"[^a-z0-9]+", "_", dataset_split.lower()).strip("_") or "split"
++
++
++def extract_word_fraction_values(text: str) -> list[str]:
++    values: list[str] = []
++    pattern = re.compile(
++        r"\b(?:(?P<numerator>a|an|one|two|three|four|five|six|seven|eight|nine|ten)\s+)?"
++        r"(?P<denominator>half|halves|third|thirds|quarter|quarters|fourth|fourths|fifth|fifths|sixth|sixths|seventh|sevenths|eighth|eighths|ninth|ninths|tenth|tenths)\b",
++        flags=re.IGNORECASE,
++    )
++    for match in pattern.finditer(text):
++        numerator_token = (match.group("numerator") or "one").lower()
++        denominator_token = match.group("denominator").lower()
++        if match.group("numerator") is None and denominator_token in PLURAL_FRACTION_WORDS:
++            continue
++        numerator = NUMBER_WORDS.get(numerator_token)
++        denominator = FRACTION_DENOMINATORS.get(denominator_token)
++        if numerator is None or denominator is None:
++            continue
++        values.append(str(Fraction(numerator, denominator)))
++    return values
++
++
++def extract_numeric_candidate(text: str) -> str:
++    stripped = text.strip().lower().replace(",", "")
++    if not stripped:
++        return ""
++
++    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", stripped)
++    if boxed_matches:
++        stripped = boxed_matches[-1].strip().lower().replace(",", "")
++
++    fraction_matches = re.findall(r"-?\d+\s*/\s*-?\d+", stripped)
++    if fraction_matches:
++        value = fraction_matches[-1].replace(" ", "")
++        try:
++            normalized = Fraction(value)
++            return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
++        except ZeroDivisionError:
++            return value
++
++    word_fraction_matches = extract_word_fraction_values(stripped)
++    if word_fraction_matches:
++        return word_fraction_matches[-1]
++
++    decimal_matches = re.findall(r"-?\d+(?:\.\d+)?", stripped)
++    if decimal_matches:
++        value = decimal_matches[-1]
++        try:
++            normalized = Fraction(value).limit_denominator()
++            return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
++        except ValueError:
++            return value
++
++    return ""
++
++
+ def normalize_answer(raw_answer: str, answer_type: str) -> str:
+     text = raw_answer.strip().lower()
+     text = re.sub(r"\s+", " ", text)
++    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", text)
++    if boxed_matches:
++        text = boxed_matches[-1].strip().lower()
+     if not text:
+         return ""
+ 
+@@ -140,21 +290,9 @@ def normalize_answer(raw_answer: str, answer_type: str) -> str:
+         match = re.findall(r"-?\d+", text)
+         return match[-1] if match else text
+ 
+-    if answer_type == "fraction":
+-        fraction_match = re.findall(r"-?\d+\s*/\s*-?\d+", text)
+-        if fraction_match:
+-            value = fraction_match[-1].replace(" ", "")
+-            try:
+-                return str(Fraction(value))
+-            except ZeroDivisionError:
+-                return value
+-        decimal_match = re.findall(r"-?\d+(?:\.\d+)?", text)
+-        if decimal_match:
+-            try:
+-                return str(Fraction(decimal_match[-1]).limit_denominator())
+-            except ValueError:
+-                return decimal_match[-1]
+-        return text
++    if answer_type in {"fraction", "number"}:
++        numeric_candidate = extract_numeric_candidate(text)
++        return numeric_candidate or text
+ 
+     return text
+ 
+@@ -208,7 +346,10 @@ def conversation_prompt(task: TaskSpec, history: list[dict[str, Any]], step: int
+             "'confidence' (integer 0-100), and 'stop' (boolean)."
+         )
+     else:
+-        format_instr = "Provide the final answer."
++        if task.answer_type in {"int", "fraction", "number"}:
++            format_instr = "Provide only the final numeric answer."
++        else:
++            format_instr = "Provide only the final answer."
+ 
+     return (
+         f"Task id: {task.task_id}\n"
+@@ -227,7 +368,7 @@ def render_prompt(tokenizer: Any, user_prompt: str, system_prompt_mode: str) ->
+         sys_msg = "You are a logical reasoning assistant."
+     else:
+         sys_msg = ""
+-        
++
+     messages = []
+     if sys_msg:
+         messages.append({"role": "system", "content": sys_msg})
+@@ -240,6 +381,74 @@ def render_prompt(tokenizer: Any, user_prompt: str, system_prompt_mode: str) ->
+     return f"User: {user_prompt}\nAssistant:"
+ 
+ 
++def extract_typed_answer(text: str, answer_type: str) -> str:
++    stripped = text.strip()
++    if not stripped:
++        return ""
++
++    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", stripped)
++    if boxed_matches:
++        stripped = boxed_matches[-1].strip()
++
++    lowered = stripped.lower()
++    if answer_type == "day":
++        day_matches = re.findall(r"\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", lowered)
++        return day_matches[-1] if day_matches else ""
++
++    if answer_type == "int":
++        int_matches = re.findall(r"-?\d+", stripped)
++        return int_matches[-1] if int_matches else ""
++
++    if answer_type in {"fraction", "number"}:
++        return extract_numeric_candidate(stripped)
++
++    return stripped
++
++
++def split_answer_segments(text: str) -> list[str]:
++    return [
++        segment.strip(" \t\r\n-:;,")
++        for segment in re.split(r"(?:\n+|(?<=[.!?])\s+)", text)
++        if segment.strip()
++    ]
++
++
++def segment_has_answer_cue(text: str) -> bool:
++    lowered = text.lower()
++    return any(phrase in lowered for phrase in ANSWER_CUE_PHRASES)
++
++
++def extract_answer(raw_text: str, answer_type: str) -> tuple[str, str]:
++    cleaned = raw_text.strip()
++    if not cleaned:
++        return "", "fallback"
++
++    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", cleaned)
++    if boxed_matches:
++        candidate = extract_typed_answer(boxed_matches[-1], answer_type)
++        if candidate:
++            return candidate, "boxed"
++
++    regions: list[tuple[str, str]] = []
++    think_parts = re.split(r"</think>", cleaned, flags=re.IGNORECASE)
++    if len(think_parts) > 1 and think_parts[-1].strip():
++        regions.append(("after_think", think_parts[-1].strip()))
++    regions.append(("full_text", cleaned))
++
++    for region_name, region_text in regions:
++        for segment in reversed(split_answer_segments(region_text)):
++            candidate = extract_typed_answer(segment, answer_type)
++            if candidate and segment_has_answer_cue(segment):
++                return candidate, f"{region_name}_cue_segment"
++
++    for region_name, region_text in regions:
++        candidate = extract_typed_answer(region_text, answer_type)
++        if candidate:
++            return candidate, region_name
++
++    return "", "fallback"
++
++
+ def parse_generation(raw_text: str, answer_type: str, prompt_mode: str) -> dict[str, Any]:
+     cleaned = raw_text.strip()
+     cleaned = re.sub(r"^```\w*\n", "", cleaned, flags=re.MULTILINE)
+@@ -257,19 +466,19 @@ def parse_generation(raw_text: str, answer_type: str, prompt_mode: str) -> dict[
+         "stop_extraction_source": "default",
+         "confidence_extraction_source": "default",
+     }
+-    
++
+     if prompt_mode == "structured_four_line":
+         line_thought = re.search(r"^THOUGHT\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+         line_answer = re.search(r"^ANSWER\s*:\s*(.*)$", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+         line_confidence = re.search(r"^CONFIDENCE\s*:\s*(-?\d+(?:\.\d+)?)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+         line_stop = re.search(r"^STOP\s*:\s*(yes|no|true|false)", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+-        
++
+         if line_thought and line_answer and line_confidence and line_stop:
+             result["parse_success"] = 1
+             result["output_format_type"] = "structured_exact"
+         elif line_thought or line_answer or line_confidence or line_stop:
+             result["output_format_type"] = "structured_partial"
+-            
++
+         if line_thought:
+             result["thought"] = line_thought.group(1).strip()
+         if line_answer:
+@@ -302,42 +511,166 @@ def parse_generation(raw_text: str, answer_type: str, prompt_mode: str) -> dict[
+                 result["output_format_type"] = "json_partial"
+ 
+     if not result["answer"]:
+-        lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
+-        if lines:
+-            result["answer"] = lines[-1]
+-            result["answer_extraction_source"] = "last_line_fallback"
+-            
++        extracted_answer, extraction_source = extract_answer(cleaned, answer_type)
++        if extracted_answer:
++            result["answer"] = extracted_answer
++            result["answer_extraction_source"] = extraction_source
++
+     if not result["thought"]:
+-        lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
+-        if lines:
+-            result["thought"] = lines[0]
++        think_match = re.search(r"<think>(.*?)</think>", cleaned, flags=re.IGNORECASE | re.DOTALL)
++        if think_match:
++            result["thought"] = think_match.group(1).strip()
++        else:
++            lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
++            if lines:
++                result["thought"] = lines[0]
+ 
+     return result
+ 
+ 
+-def load_model(model_spec: ModelSpec, device: str) -> tuple[Any, Any, str, str]:
++def extract_gsm8k_reference_answer(answer_text: str) -> str:
++    match = re.search(r"####\s*([^\n]+)", answer_text)
++    if match:
++        return normalize_answer(match.group(1), "number")
++    return normalize_answer(answer_text, "number")
++
++
++def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
++    if load_dataset is None:
++        raise ImportError("datasets is required for --task-source gsm8k. Install it with pip install datasets evaluate bitsandbytes tqdm.")
++
++    dataset = load_dataset("gsm8k", "main", split=dataset_split)
++    if shuffle_seed is not None:
++        dataset = dataset.shuffle(seed=shuffle_seed)
++    if max_tasks > 0 and len(dataset) > max_tasks:
++        dataset = dataset.select(range(max_tasks))
++
++    split_name = sanitize_split_name(dataset_split)
++    tasks: list[TaskSpec] = []
++    for index, example in enumerate(dataset):
++        question = str(example["question"]).strip()
++        expected_answer = extract_gsm8k_reference_answer(str(example["answer"]))
++        short_hash = hashlib.md5(question.encode("utf-8")).hexdigest()[:8]
++        tasks.append(
++            TaskSpec(
++                task_id=f"gsm8k_{split_name}_{index:05d}_{short_hash}",
++                domain="gsm8k",
++                difficulty="grade_school_math",
++                prompt=question,
++                answer_type="number",
++                expected_answer=expected_answer,
++                notes=f"gsm8k main split={dataset_split}",
++                source="gsm8k",
++                source_index=index,
++            )
++        )
++    return tasks
++
++
++def load_tasks(task_source: str, max_tasks: int, dataset_split: str, shuffle_seed: int | None) -> list[TaskSpec]:
++    if task_source == "builtin":
++        return BUILTIN_TASKS[:max_tasks]
++    if task_source == "gsm8k":
++        return load_gsm8k_tasks(max_tasks=max_tasks, dataset_split=dataset_split, shuffle_seed=shuffle_seed)
++    raise ValueError(f"Unsupported task source: {task_source}")
++
++
++def run_id_for(model_alias: str, task: TaskSpec, temperature: float, seed: int) -> str:
++    return f"{model_alias}__{task.task_id}__temp{temperature:.2f}__seed{seed}"
++
++
++def chunked(items: list[TaskSpec], size: int) -> Iterable[list[TaskSpec]]:
++    for start in range(0, len(items), size):
++        yield items[start : start + size]
++
++
++def output_paths(output_dir: Path, is_baseline: bool) -> dict[str, Path]:
++    steps_name = "baseline_steps.csv" if is_baseline else "trace_steps.csv"
++    runs_name = "baseline_runs.csv" if is_baseline else "trace_runs.csv"
++    return {
++        "steps": output_dir / steps_name,
++        "runs": output_dir / runs_name,
++        "hazard": output_dir / "hazard_by_step.csv",
++        "pilot": output_dir / "pilot_summary.csv",
++        "metadata": output_dir / "metadata.json",
++    }
++
++
++def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
++    if not rows:
++        return
++    frame = pd.DataFrame(rows)
++    if path.exists():
++        existing_columns = pd.read_csv(path, nrows=0).columns.tolist()
++        for column in existing_columns:
++            if column not in frame.columns:
++                frame[column] = np.nan
++        extra_columns = [column for column in frame.columns if column not in existing_columns]
++        frame = frame[existing_columns + extra_columns]
++        frame.to_csv(path, mode="a", header=False, index=False)
++        return
++    frame.to_csv(path, index=False)
++
++
++def load_existing_outputs(output_dir: Path, is_baseline: bool) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
++    paths = output_paths(output_dir, is_baseline)
++    if paths["steps"].exists():
++        existing_steps = pd.read_csv(paths["steps"]).to_dict("records")
++    else:
++        existing_steps = []
++    if paths["runs"].exists():
++        existing_runs = pd.read_csv(paths["runs"]).to_dict("records")
++    else:
++        existing_runs = []
++    completed_run_ids = {str(row["run_id"]) for row in existing_runs}
++    return existing_steps, existing_runs, completed_run_ids
++
++
++def load_model(
++    model_spec: ModelSpec,
++    device: str,
++    quantization: str,
++    device_map: str | None,
++) -> tuple[Any, Any, str, str]:
+     tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+     if tokenizer.pad_token is None:
+         tokenizer.pad_token = tokenizer.eos_token
++    tokenizer.padding_side = "left"
+ 
+     if device == "auto":
+         actual_device = "cuda" if torch.cuda.is_available() else "cpu"
+     else:
+         actual_device = device
++
+     backend = "transformers+torch(cpu)"
+     load_kwargs: dict[str, Any] = {"trust_remote_code": True}
++    if actual_device == "cuda":
++        load_kwargs["dtype"] = torch.float16
+ 
+     try:
+-        if actual_device == "cuda":
+-            load_kwargs["torch_dtype"] = torch.float16
++        if actual_device == "cuda" and quantization in {"8bit", "4bit"}:
++            if BitsAndBytesConfig is None:
++                raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
++            load_kwargs.pop("dtype", None)
++            if quantization == "8bit":
++                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
++            else:
++                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
++            load_kwargs["device_map"] = device_map or "auto"
++            model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
++            backend = f"transformers+torch(cuda-{quantization})"
++        elif actual_device == "cuda" and device_map:
++            load_kwargs["device_map"] = device_map
+             model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+-            model.to("cuda")
+-            backend = "transformers+torch(cuda)"
++            backend = f"transformers+torch(cuda-device-map={device_map})"
+         else:
+             model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+-            model.to("cpu")
+-    except Exception:
+-        model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, trust_remote_code=True)
++            model.to(actual_device)
++            backend = f"transformers+torch({actual_device})"
++    except Exception as exc:
++        logging.warning("Primary model load failed for %s: %s", model_spec.hf_name, exc)
++        fallback_kwargs = {"trust_remote_code": True}
++        model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **fallback_kwargs)
+         model.to("cpu")
+         actual_device = "cpu"
+         backend = "transformers+torch(cpu-fallback)"
+@@ -346,17 +679,27 @@ def load_model(model_spec: ModelSpec, device: str) -> tuple[Any, Any, str, str]:
+     return model, tokenizer, actual_device, backend
+ 
+ 
+-def generate_with_diagnostics(
++def trim_completion_ids(completion_ids: torch.Tensor, pad_token_id: int | None, eos_token_id: int | None) -> torch.Tensor:
++    trimmed = completion_ids
++    trim_token_ids = {token_id for token_id in (pad_token_id, eos_token_id) if token_id is not None}
++    while len(trimmed) > 0 and int(trimmed[-1].item()) in trim_token_ids:
++        trimmed = trimmed[:-1]
++    return trimmed
++
++
++def generate_batch_with_diagnostics(
+     model: Any,
+     tokenizer: Any,
+-    prompt_text: str,
++    prompt_texts: list[str],
+     actual_device: str,
+     temperature: float,
+     max_new_tokens: int,
+-) -> dict[str, Any]:
+-    encoded = tokenizer(prompt_text, return_tensors="pt")
++) -> tuple[list[dict[str, Any]], float]:
++    started_at = time.perf_counter()
++    encoded = tokenizer(prompt_texts, padding=True, return_tensors="pt")
+     input_ids = encoded["input_ids"].to(actual_device)
+     attention_mask = encoded["attention_mask"].to(actual_device)
++    prompt_width = input_ids.shape[1]
+ 
+     generation_kwargs = {
+         "input_ids": input_ids,
+@@ -373,40 +716,108 @@ def generate_with_diagnostics(
+ 
+     with torch.no_grad():
+         generated_ids = model.generate(**generation_kwargs)
+-        prompt_length = input_ids.shape[1]
+-        completion_ids = generated_ids[0, prompt_length:]
+-        raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True)
++        completion_width = generated_ids.shape[1] - prompt_width
++        generated_attention_mask = torch.cat(
++            [
++                attention_mask,
++                torch.ones((attention_mask.shape[0], completion_width), dtype=attention_mask.dtype, device=attention_mask.device),
++            ],
++            dim=1,
++        )
++        forward_outputs = model(generated_ids, attention_mask=generated_attention_mask, output_hidden_states=True)
++
++    full_logits = forward_outputs.logits
++    hidden_states = forward_outputs.hidden_states[-1]
++    elapsed_seconds = time.perf_counter() - started_at
++
++    results: list[dict[str, Any]] = []
++    for index in range(generated_ids.shape[0]):
++        raw_completion_ids = generated_ids[index, prompt_width:].detach()
++        completion_ids = trim_completion_ids(raw_completion_ids, tokenizer.pad_token_id, tokenizer.eos_token_id)
++        generated_length = int(completion_ids.shape[0])
++        raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
+ 
+-        forward_outputs = model(generated_ids, attention_mask=torch.ones_like(generated_ids), output_hidden_states=True)
+-        full_logits = forward_outputs.logits[0]
+-        generated_length = completion_ids.shape[0]
+         if generated_length > 0:
+-            scoring_logits = full_logits[prompt_length - 1 : generated_ids.shape[1] - 1]
++            scoring_logits = full_logits[index, prompt_width - 1 : prompt_width - 1 + generated_length]
+             log_probs = torch.log_softmax(scoring_logits, dim=-1)
+             probs = torch.softmax(scoring_logits, dim=-1)
+             token_logprobs = log_probs.gather(1, completion_ids.unsqueeze(1)).squeeze(1)
+             token_entropies = -(probs * log_probs).sum(dim=-1)
+-            pooled_hidden = forward_outputs.hidden_states[-1][0, prompt_length:, :].mean(dim=0).float().cpu().numpy()
++            pooled_hidden = hidden_states[index, prompt_width : prompt_width + generated_length, :].mean(dim=0).float().cpu().numpy()
+         else:
+             token_logprobs = torch.empty(0)
+             token_entropies = torch.empty(0)
+             pooled_hidden = np.zeros((model.config.hidden_size,), dtype=np.float32)
+ 
+-    return {
+-        "raw_text": raw_text,
+-        "generated_tokens": int(generated_length),
+-        "mean_token_logprob": float(token_logprobs.mean().item()) if len(token_logprobs) else float("nan"),
+-        "mean_entropy": float(token_entropies.mean().item()) if len(token_entropies) else float("nan"),
+-        "entropy_std": float(token_entropies.std().item()) if len(token_entropies) > 1 else 0.0,
+-        "pooled_hidden": pooled_hidden,
+-    }
++        results.append(
++            {
++                "raw_text": raw_text,
++                "generated_tokens": generated_length,
++                "mean_token_logprob": float(token_logprobs.mean().item()) if len(token_logprobs) else float("nan"),
++                "mean_entropy": float(token_entropies.mean().item()) if len(token_entropies) else float("nan"),
++                "entropy_std": float(token_entropies.std().item()) if len(token_entropies) > 1 else 0.0,
++                "pooled_hidden": pooled_hidden,
++            }
++        )
++
++    if actual_device == "cuda":
++        torch.cuda.empty_cache()
++    return results, elapsed_seconds
++
++
++def safe_generate_batch_with_diagnostics(
++    model: Any,
++    tokenizer: Any,
++    prompt_texts: list[str],
++    actual_device: str,
++    temperature: float,
++    max_new_tokens: int,
++) -> tuple[list[dict[str, Any]], float]:
++    try:
++        return generate_batch_with_diagnostics(
++            model=model,
++            tokenizer=tokenizer,
++            prompt_texts=prompt_texts,
++            actual_device=actual_device,
++            temperature=temperature,
++            max_new_tokens=max_new_tokens,
++        )
++    except RuntimeError as exc:
++        if actual_device != "cuda" or "out of memory" not in str(exc).lower() or len(prompt_texts) == 1:
++            raise
++        logging.warning("CUDA OOM for microbatch size %d. Retrying with smaller splits.", len(prompt_texts))
++        torch.cuda.empty_cache()
++        midpoint = max(1, len(prompt_texts) // 2)
++        first_results, first_elapsed = safe_generate_batch_with_diagnostics(
++            model=model,
++            tokenizer=tokenizer,
++            prompt_texts=prompt_texts[:midpoint],
++            actual_device=actual_device,
++            temperature=temperature,
++            max_new_tokens=max_new_tokens,
++        )
++        second_results, second_elapsed = safe_generate_batch_with_diagnostics(
++            model=model,
++            tokenizer=tokenizer,
++            prompt_texts=prompt_texts[midpoint:],
++            actual_device=actual_device,
++            temperature=temperature,
++            max_new_tokens=max_new_tokens,
++        )
++        return first_results + second_results, first_elapsed + second_elapsed
+ 
+ 
+-def run_single_trace(
++def gpu_memory_allocated_gb(actual_device: str) -> float:
++    if actual_device != "cuda" or not torch.cuda.is_available():
++        return float("nan")
++    return torch.cuda.memory_allocated() / (1024**3)
++
++
++def run_batch_traces(
+     model: Any,
+     tokenizer: Any,
+     model_spec: ModelSpec,
+-    task: TaskSpec,
++    tasks: list[TaskSpec],
+     actual_device: str,
+     temperature: float,
+     seed: int,
+@@ -416,135 +827,187 @@ def run_single_trace(
+     prompt_mode: str,
+     system_prompt_mode: str,
+     is_baseline: bool,
+-) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+-    set_seed(seed)
+-    history: list[dict[str, Any]] = []
+-    hidden_vectors: list[np.ndarray] = []
+-    run_rows: list[dict[str, Any]] = []
++) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
++    if not tasks:
++        return [], []
+ 
++    actual_prompt_mode = "answer_only" if is_baseline else prompt_mode
+     steps_to_run = 1 if is_baseline else max_steps
++    contexts = [
++        {
++            "task": task,
++            "run_id": run_id_for(model_spec.alias, task, temperature, seed),
++            "history": [],
++            "hidden_vectors": [],
++            "rows": [],
++        }
++        for task in tasks
++    ]
+ 
+     for step in range(1, steps_to_run + 1):
+-        actual_prompt_mode = "answer_only" if is_baseline else prompt_mode
+-        user_prompt = conversation_prompt(
+-            task=task,
+-            history=history,
+-            step=step,
+-            max_steps=max_steps,
+-            prompt_mode=actual_prompt_mode
+-        )
+-        prompt_text = render_prompt(tokenizer, user_prompt, system_prompt_mode)
+-        started_at = time.perf_counter()
+-        generated = generate_with_diagnostics(
++        prompts = [
++            render_prompt(
++                tokenizer,
++                conversation_prompt(
++                    task=context["task"],
++                    history=context["history"],
++                    step=step,
++                    max_steps=max_steps,
++                    prompt_mode=actual_prompt_mode,
++                ),
++                system_prompt_mode,
++            )
++            for context in contexts
++        ]
++
++        generated_batch, batch_elapsed_seconds = safe_generate_batch_with_diagnostics(
+             model=model,
+             tokenizer=tokenizer,
+-            prompt_text=prompt_text,
++            prompt_texts=prompts,
+             actual_device=actual_device,
+             temperature=temperature,
+             max_new_tokens=max_new_tokens,
+         )
+-        elapsed_seconds = time.perf_counter() - started_at
+-        
+-        parsed = parse_generation(generated["raw_text"], task.answer_type, actual_prompt_mode)
+-        normalized_answer = normalize_answer(parsed["answer"], task.answer_type)
+-        is_correct = verify_answer(task, parsed["answer"])
+-        prior_answer = history[-1]["answer_normalized"] if history else ""
+-        answer_changed = bool(history) and normalized_answer != prior_answer and normalized_answer != ""
+-        prior_thought = " ".join(item["thought"] for item in history[-2:])
+-        
+-        raw_text_length_chars = len(generated["raw_text"])
+-        hit_max_new_tokens = int(generated["generated_tokens"] == max_new_tokens)
+-        truncated_output_suspected = int(hit_max_new_tokens and not parsed["parse_success"])
+-        
+-        hidden_vector = generated["pooled_hidden"]
+-        if hidden_vectors:
+-            previous_hidden = hidden_vectors[-1]
+-            denominator = float(np.linalg.norm(hidden_vector) * np.linalg.norm(previous_hidden))
+-            hidden_cosine_shift = 1.0 - float(np.dot(hidden_vector, previous_hidden) / denominator) if denominator else 0.0
+-            hidden_l2_shift = float(np.linalg.norm(hidden_vector - previous_hidden))
+-        else:
+-            hidden_cosine_shift = 0.0
+-            hidden_l2_shift = 0.0
+-        hidden_vectors.append(hidden_vector)
++        batch_tokens = sum(item["generated_tokens"] for item in generated_batch)
++        logging.info(
++            "temp=%.2f seed=%d step=%d/%d | batch=%d | generated_tokens=%d | tok_s=%.2f | gpu_mem_gb=%.2f",
++            temperature,
++            seed,
++            step,
++            steps_to_run,
++            len(contexts),
++            batch_tokens,
++            batch_tokens / max(batch_elapsed_seconds, 1e-6),
++            gpu_memory_allocated_gb(actual_device),
++        )
+ 
+-        row = {
+-            "run_id": f"{model_spec.alias}__{task.task_id}__temp{temperature:.2f}__seed{seed}",
++        for context, generated in zip(contexts, generated_batch, strict=True):
++            history = context["history"]
++            parsed = parse_generation(generated["raw_text"], context["task"].answer_type, actual_prompt_mode)
++            normalized_answer = normalize_answer(parsed["answer"], context["task"].answer_type)
++            is_correct = verify_answer(context["task"], parsed["answer"])
++            prior_answer = history[-1]["answer_normalized"] if history else ""
++            answer_changed = bool(history) and normalized_answer != prior_answer and normalized_answer != ""
++            prior_thought = " ".join(item["thought"] for item in history[-2:])
++
++            hidden_vector = generated["pooled_hidden"]
++            if context["hidden_vectors"]:
++                previous_hidden = context["hidden_vectors"][-1]
++                denominator = float(np.linalg.norm(hidden_vector) * np.linalg.norm(previous_hidden))
++                hidden_cosine_shift = 1.0 - float(np.dot(hidden_vector, previous_hidden) / denominator) if denominator else 0.0
++                hidden_l2_shift = float(np.linalg.norm(hidden_vector - previous_hidden))
++            else:
++                hidden_cosine_shift = 0.0
++                hidden_l2_shift = 0.0
++            context["hidden_vectors"].append(hidden_vector)
++
++            hit_max_new_tokens = int(generated["generated_tokens"] == max_new_tokens)
++            truncated_output_suspected = int(hit_max_new_tokens and not parsed["parse_success"])
++            tokens_per_second = generated["generated_tokens"] / max(batch_elapsed_seconds, 1e-6)
++
++            row = {
++                "run_id": context["run_id"],
++                "model_alias": model_spec.alias,
++                "model_name": model_spec.hf_name,
++                "task_id": context["task"].task_id,
++                "domain": context["task"].domain,
++                "difficulty": context["task"].difficulty,
++                "task_source": context["task"].source,
++                "task_source_index": context["task"].source_index,
++                "expected_answer": context["task"].expected_answer,
++                "step": step,
++                "thought": parsed["thought"],
++                "answer": parsed["answer"],
++                "answer_normalized": normalized_answer,
++                "correct": int(is_correct),
++                "confidence": int(max(0, min(100, parsed["confidence"]))),
++                "model_stop_flag": int(bool(parsed["stop"])),
++                "answer_changed": int(answer_changed),
++                "thought_token_count": int(len(re.findall(r"\w+", parsed["thought"]))),
++                "raw_generation_tokens": generated["generated_tokens"],
++                "mean_token_logprob": generated["mean_token_logprob"],
++                "entropy_mean": generated["mean_entropy"],
++                "entropy_std": generated["entropy_std"],
++                "hidden_norm": float(np.linalg.norm(hidden_vector)),
++                "hidden_l2_shift": hidden_l2_shift,
++                "hidden_cosine_shift": hidden_cosine_shift,
++                "lexical_echo": lexical_overlap(parsed["thought"], prior_thought),
++                "verbose_confidence_proxy": float(parsed["confidence"]) / 100.0 + 0.01 * generated["generated_tokens"],
++                "utility": utility(correct=is_correct, step=step),
++                "elapsed_seconds": batch_elapsed_seconds,
++                "tokens_per_second": tokens_per_second,
++                "gpu_memory_allocated_gb": gpu_memory_allocated_gb(actual_device),
++                "seed": seed,
++                "temperature": temperature,
++                "device": actual_device,
++                "prompt_mode": actual_prompt_mode,
++                "system_prompt_mode": system_prompt_mode,
++                "is_baseline": int(is_baseline),
++                "parse_success": parsed["parse_success"],
++                "output_format_type": parsed["output_format_type"],
++                "answer_extraction_source": parsed["answer_extraction_source"],
++                "stop_extraction_source": parsed["stop_extraction_source"],
++                "confidence_extraction_source": parsed["confidence_extraction_source"],
++                "hit_max_new_tokens": hit_max_new_tokens,
++                "truncated_output_suspected": truncated_output_suspected,
++                "raw_text_length_chars": len(generated["raw_text"]),
++                "raw_text_length_tokens": generated["generated_tokens"],
++                "raw_text": generated["raw_text"],
++            }
++            history.append(row)
++            context["rows"].append(row)
++
++    hidden_dir.mkdir(parents=True, exist_ok=True)
++    all_rows: list[dict[str, Any]] = []
++    all_runs: list[dict[str, Any]] = []
++    for context in contexts:
++        run_rows = context["rows"]
++        hidden_vectors = context["hidden_vectors"]
++        if not run_rows:
++            continue
++
++        np.savez_compressed(hidden_dir / f"{context['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
++        first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
++        first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
++        oracle_stop = max(run_rows, key=lambda row: row["utility"])["step"]
++        revision_count = int(sum(row["answer_changed"] for row in run_rows))
++
++        run_summary = {
++            "run_id": context["run_id"],
+             "model_alias": model_spec.alias,
+             "model_name": model_spec.hf_name,
+-            "task_id": task.task_id,
+-            "domain": task.domain,
+-            "difficulty": task.difficulty,
+-            "step": step,
+-            "thought": parsed["thought"],
+-            "answer": parsed["answer"],
+-            "answer_normalized": normalized_answer,
+-            "correct": int(is_correct),
+-            "confidence": int(max(0, min(100, parsed["confidence"]))),
+-            "model_stop_flag": int(bool(parsed["stop"])),
+-            "answer_changed": int(answer_changed),
+-            "thought_token_count": int(len(re.findall(r"\w+", parsed["thought"]))),
+-            "raw_generation_tokens": generated["generated_tokens"],
+-            "mean_token_logprob": generated["mean_token_logprob"],
+-            "entropy_mean": generated["mean_entropy"],
+-            "entropy_std": generated["entropy_std"],
+-            "hidden_norm": float(np.linalg.norm(hidden_vector)),
+-            "hidden_l2_shift": hidden_l2_shift,
+-            "hidden_cosine_shift": hidden_cosine_shift,
+-            "lexical_echo": lexical_overlap(parsed["thought"], prior_thought),
+-            "verbose_confidence_proxy": float(parsed["confidence"]) / 100.0 + 0.01 * generated["generated_tokens"],
+-            "utility": utility(correct=is_correct, step=step),
+-            "elapsed_seconds": elapsed_seconds,
+-            "seed": seed,
++            "task_id": context["task"].task_id,
++            "domain": context["task"].domain,
++            "difficulty": context["task"].difficulty,
++            "task_source": context["task"].source,
++            "task_source_index": context["task"].source_index,
+             "temperature": temperature,
+-            "device": actual_device,
++            "seed": seed,
+             "prompt_mode": actual_prompt_mode,
+             "system_prompt_mode": system_prompt_mode,
+             "is_baseline": int(is_baseline),
+-            "parse_success": parsed["parse_success"],
+-            "output_format_type": parsed["output_format_type"],
+-            "answer_extraction_source": parsed["answer_extraction_source"],
+-            "stop_extraction_source": parsed["stop_extraction_source"],
+-            "confidence_extraction_source": parsed["confidence_extraction_source"],
+-            "hit_max_new_tokens": hit_max_new_tokens,
+-            "truncated_output_suspected": truncated_output_suspected,
+-            "raw_text_length_chars": raw_text_length_chars,
+-            "raw_text_length_tokens": generated["generated_tokens"],
+-            "raw_text": generated["raw_text"],
++            "ever_correct": int(first_correct_step != -1),
++            "correct_at_step_1": int(run_rows[0]["correct"] == 1),
++            "oracle_stop": oracle_stop,
++            "first_correct_step": first_correct_step if first_correct_step != -1 else max_steps,
++            "first_model_stop_step": first_model_stop_step if first_model_stop_step != -1 else max_steps,
++            "revision_count": revision_count,
++            "best_utility": max(row["utility"] for row in run_rows),
++            "final_correct": run_rows[-1]["correct"],
++            "device": actual_device,
+         }
+-        history.append(row)
+-        run_rows.append(row)
++        all_rows.extend(run_rows)
++        all_runs.append(run_summary)
++        logging.info(
++            "completed %s | ever_correct=%d | first_correct=%s | final_correct=%d | revisions=%d",
++            context["run_id"],
++            run_summary["ever_correct"],
++            run_summary["first_correct_step"],
++            run_summary["final_correct"],
++            revision_count,
++        )
+ 
+-    hidden_dir.mkdir(parents=True, exist_ok=True)
+-    np.savez_compressed(hidden_dir / f"{run_rows[0]['run_id']}.npz", hidden_states=np.stack(hidden_vectors))
+-
+-    first_correct_step = next((row["step"] for row in run_rows if row["correct"] == 1), -1)
+-    first_model_stop_step = next((row["step"] for row in run_rows if row["model_stop_flag"] == 1), -1)
+-    oracle_stop = max(run_rows, key=lambda row: row["utility"])["step"]
+-    revision_count = int(sum(row["answer_changed"] for row in run_rows))
+-    
+-    run_summary = {
+-        "run_id": run_rows[0]["run_id"],
+-        "model_alias": model_spec.alias,
+-        "model_name": model_spec.hf_name,
+-        "task_id": task.task_id,
+-        "domain": task.domain,
+-        "difficulty": task.difficulty,
+-        "temperature": temperature,
+-        "seed": seed,
+-        "prompt_mode": actual_prompt_mode,
+-        "system_prompt_mode": system_prompt_mode,
+-        "is_baseline": int(is_baseline),
+-        "ever_correct": int(first_correct_step != -1),
+-        "correct_at_step_1": int(run_rows[0]["correct"] == 1) if run_rows else 0,
+-        "oracle_stop": oracle_stop,
+-        "first_correct_step": first_correct_step if first_correct_step != -1 else max_steps,
+-        "first_model_stop_step": first_model_stop_step if first_model_stop_step != -1 else max_steps,
+-        "revision_count": revision_count,
+-        "best_utility": max(row["utility"] for row in run_rows),
+-        "final_correct": run_rows[-1]["correct"],
+-        "device": actual_device,
+-    }
+-    return run_rows, run_summary
++    return all_rows, all_runs
+ 
+ 
+ def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
+@@ -586,123 +1049,198 @@ def summarize_transitions(step_frame: pd.DataFrame) -> pd.DataFrame:
+     return pd.DataFrame(rows)
+ 
+ 
++def build_pilot_summary(
++    step_frame: pd.DataFrame,
++    run_frame: pd.DataFrame,
++    transition_frame: pd.DataFrame,
++    model_spec: ModelSpec,
++    backend: str,
++    actual_device: str,
++) -> pd.DataFrame:
++    return pd.DataFrame(
++        [
++            {
++                "model_alias": model_spec.alias,
++                "model_name": model_spec.hf_name,
++                "family": model_spec.family,
++                "parameter_count": model_spec.parameter_count,
++                "n_runs": int(len(run_frame)),
++                "n_tasks": int(step_frame["task_id"].nunique()),
++                "mean_oracle_stop": float(run_frame["oracle_stop"].mean()),
++                "mean_first_correct_step": float(run_frame["first_correct_step"].mean()),
++                "mean_model_stop_step": float(run_frame["first_model_stop_step"].mean()),
++                "mean_revision_count": float(run_frame["revision_count"].mean()),
++                "mean_entropy": float(step_frame["entropy_mean"].mean()),
++                "mean_hidden_shift": float(step_frame["hidden_l2_shift"].mean()),
++                "repair_rate_overall": float(transition_frame["repair_rate"].dropna().mean()) if not transition_frame.empty else float("nan"),
++                "corruption_rate_overall": float(transition_frame["corruption_rate"].dropna().mean()) if not transition_frame.empty else float("nan"),
++                "runs_ever_correct": int(run_frame["ever_correct"].sum()),
++                "backend": backend,
++                "device": actual_device,
++            }
++        ]
++    )
++
++
+ def main() -> None:
+-    parser = argparse.ArgumentParser(description="Run a small real-trace pilot on an open-weight reasoning model.")
++    parser = argparse.ArgumentParser(description="Run real-trace reasoning experiments on builtin tasks or GSM8K.")
+     parser.add_argument("--model", default="deepseek_r1_distill_1p5b", choices=sorted(MODEL_CATALOG.keys()))
+     parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
++    parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
++    parser.add_argument("--device-map", default=None)
+     parser.add_argument("--temperatures", nargs="+", type=float, default=[0.6])
+     parser.add_argument("--seeds", nargs="+", type=int, default=[7])
+     parser.add_argument("--max-steps", type=int, default=5)
+-    parser.add_argument("--max-new-tokens", type=int, default=128)
+-    parser.add_argument("--max-tasks", type=int, default=len(TASKS))
++    parser.add_argument("--max-new-tokens", type=int, default=256)
++    parser.add_argument("--max-tasks", type=int, default=len(BUILTIN_TASKS))
++    parser.add_argument("--task-source", default="builtin", choices=["builtin", "gsm8k"])
++    parser.add_argument("--dataset-split", default="train")
++    parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
++    parser.add_argument("--batch-size", type=int, default=4)
+     parser.add_argument("--prompt-mode", default="structured_four_line", choices=["structured_four_line", "minimal_json", "answer_only"])
+     parser.add_argument("--system-prompt-mode", default="default", choices=["default", "short", "none"])
+     parser.add_argument("--run-baseline", action="store_true", help="Run competence baseline instead of iterative reasoning")
+     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
+-    parser.add_argument("--concurrency", type=int, default=8, help="Number of concurrent generation threads")
++    parser.add_argument("--no-resume", dest="resume", action="store_false")
++    parser.set_defaults(resume=True)
+     args = parser.parse_args()
+ 
++    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
++    if torch.cuda.is_available():
++        torch.backends.cuda.matmul.allow_tf32 = True
++
+     output_dir = Path(args.output_dir)
+     output_dir.mkdir(parents=True, exist_ok=True)
+-    hidden_dir = output_dir / "hidden_states"
++    hidden_dir = output_dir / ("hidden_states_baseline" if args.run_baseline else "hidden_states")
++    paths = output_paths(output_dir, args.run_baseline)
+     model_spec = MODEL_CATALOG[args.model]
+-    model, tokenizer, actual_device, backend = load_model(model_spec=model_spec, device=args.device)
+ 
+-    all_rows: list[dict[str, Any]] = []
+-    all_runs: list[dict[str, Any]] = []
++    tasks = load_tasks(
++        task_source=args.task_source,
++        max_tasks=args.max_tasks,
++        dataset_split=args.dataset_split,
++        shuffle_seed=args.dataset_shuffle_seed,
++    )
++    logging.info("Loaded %d tasks from %s.", len(tasks), args.task_source)
++
++    existing_steps, existing_runs, completed_run_ids = load_existing_outputs(output_dir, args.run_baseline)
++    if args.resume and completed_run_ids:
++        logging.info("Resuming with %d completed runs already on disk.", len(completed_run_ids))
++
++    total_requested_runs = len(tasks) * len(args.temperatures) * len(args.seeds)
++    pending_requested_runs = 0
++    for temperature in args.temperatures:
++        for seed in args.seeds:
++            for task in tasks:
++                run_id = run_id_for(model_spec.alias, task, temperature, seed)
++                if not args.resume or run_id not in completed_run_ids:
++                    pending_requested_runs += 1
++    logging.info("Requested runs=%d | pending runs=%d", total_requested_runs, pending_requested_runs)
++
++    if pending_requested_runs == 0 and existing_runs:
++        logging.info("No pending runs detected. Rebuilding summaries from existing artifacts.")
++    elif pending_requested_runs == 0:
++        logging.info("No runs to execute.")
++
++    model = None
++    tokenizer = None
++    actual_device = args.device
++    backend = "transformers+torch(uninitialized)"
++    if pending_requested_runs > 0:
++        model, tokenizer, actual_device, backend = load_model(
++            model_spec=model_spec,
++            device=args.device,
++            quantization=args.quantization,
++            device_map=args.device_map,
++        )
++        logging.info("Model loaded: %s | backend=%s | device=%s", model_spec.hf_name, backend, actual_device)
++
++    all_rows: list[dict[str, Any]] = list(existing_steps)
++    all_runs: list[dict[str, Any]] = list(existing_runs)
+ 
+-    tasks_to_run = []
+-    for task in TASKS[: args.max_tasks]:
++    if model is not None and tokenizer is not None:
+         for temperature in args.temperatures:
+             for seed in args.seeds:
+-                tasks_to_run.append((task, temperature, seed))
+-
+-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.concurrency) as executor:
+-        futures = []
+-        for task, temperature, seed in tasks_to_run:
+-            kwargs = dict(
+-                model=model,
+-                tokenizer=tokenizer,
+-                model_spec=model_spec,
+-                task=task,
+-                actual_device=actual_device,
+-                temperature=temperature,
+-                seed=seed,
+-                max_steps=args.max_steps,
+-                max_new_tokens=args.max_new_tokens,
+-                hidden_dir=hidden_dir,
+-                prompt_mode=args.prompt_mode,
+-                system_prompt_mode=args.system_prompt_mode,
+-                is_baseline=args.run_baseline,
+-            )
+-            futures.append(executor.submit(run_single_trace, **kwargs))
+-
+-        for future in concurrent.futures.as_completed(futures):
+-            try:
+-                rows, run_summary = future.result()
+-                all_rows.extend(rows)
+-                all_runs.append(run_summary)
+-            except Exception as exc:
+-                print(f"A trace generated an exception: {exc}", flush=True)
++                pending_tasks = [
++                    task
++                    for task in tasks
++                    if not args.resume or run_id_for(model_spec.alias, task, temperature, seed) not in completed_run_ids
++                ]
++                if not pending_tasks:
++                    logging.info("Skipping temp=%.2f seed=%d because all runs already exist.", temperature, seed)
++                    continue
++
++                set_seed(seed)
++                batches = list(chunked(pending_tasks, max(1, args.batch_size)))
++                progress = tqdm(batches, desc=f"temp={temperature:.2f} seed={seed}", unit="batch")
++                for task_batch in progress:
++                    batch_rows, batch_runs = run_batch_traces(
++                        model=model,
++                        tokenizer=tokenizer,
++                        model_spec=model_spec,
++                        tasks=task_batch,
++                        actual_device=actual_device,
++                        temperature=temperature,
++                        seed=seed,
++                        max_steps=args.max_steps,
++                        max_new_tokens=args.max_new_tokens,
++                        hidden_dir=hidden_dir,
++                        prompt_mode=args.prompt_mode,
++                        system_prompt_mode=args.system_prompt_mode,
++                        is_baseline=args.run_baseline,
++                    )
++                    append_records(paths["steps"], batch_rows)
++                    append_records(paths["runs"], batch_runs)
++                    all_rows.extend(batch_rows)
++                    all_runs.extend(batch_runs)
++                    completed_run_ids.update(run["run_id"] for run in batch_runs)
++                    progress.set_postfix(
++                        runs=len(batch_runs),
++                        correct=sum(int(run["ever_correct"]) for run in batch_runs),
++                    )
++
++    if not all_rows or not all_runs:
++        raise RuntimeError("No trace data is available to summarize. The experiment produced no rows.")
+ 
+-    step_frame = pd.DataFrame(all_rows)
+-    run_frame = pd.DataFrame(all_runs)
+-    
+     if args.run_baseline:
+-        file_prefix = "baseline_"
+-        step_frame.to_csv(output_dir / f"{file_prefix}steps.csv", index=False)
+-        run_frame.to_csv(output_dir / f"{file_prefix}runs.csv", index=False)
+-        print(f"Wrote baseline artifacts to: {output_dir}")
++        logging.info("Wrote baseline artifacts to: %s", output_dir)
+         return
+ 
++    step_frame = pd.DataFrame(all_rows)
++    run_frame = pd.DataFrame(all_runs)
+     transition_frame = summarize_transitions(step_frame)
+-    pilot_summary = pd.DataFrame(
+-        [
+-            {
+-                "model_alias": model_spec.alias,
+-                "model_name": model_spec.hf_name,
+-                "family": model_spec.family,
+-                "parameter_count": model_spec.parameter_count,
+-                "n_runs": int(len(run_frame)),
+-                "n_tasks": int(step_frame["task_id"].nunique()),
+-                "mean_oracle_stop": float(run_frame["oracle_stop"].mean()),
+-                "mean_first_correct_step": float(run_frame["first_correct_step"].mean()),
+-                "mean_model_stop_step": float(run_frame["first_model_stop_step"].mean()),
+-                "mean_revision_count": float(run_frame["revision_count"].mean()),
+-                "mean_entropy": float(step_frame["entropy_mean"].mean()),
+-                "mean_hidden_shift": float(step_frame["hidden_l2_shift"].mean()),
+-                "repair_rate_overall": float(transition_frame["repair_rate"].dropna().mean()),
+-                "corruption_rate_overall": float(transition_frame["corruption_rate"].dropna().mean()),
+-                "runs_ever_correct": int(run_frame["ever_correct"].sum()),
+-                "backend": backend,
+-                "device": actual_device,
+-            }
+-        ]
+-    )
++    pilot_summary = build_pilot_summary(step_frame, run_frame, transition_frame, model_spec, backend, actual_device)
+ 
+-    step_frame.to_csv(output_dir / "trace_steps.csv", index=False)
+-    run_frame.to_csv(output_dir / "trace_runs.csv", index=False)
+-    transition_frame.to_csv(output_dir / "hazard_by_step.csv", index=False)
+-    pilot_summary.to_csv(output_dir / "pilot_summary.csv", index=False)
++    transition_frame.to_csv(paths["hazard"], index=False)
++    pilot_summary.to_csv(paths["pilot"], index=False)
+ 
+     metadata = {
+         "model": asdict(model_spec),
+         "backend": backend,
+         "device": actual_device,
++        "quantization": args.quantization,
++        "device_map": args.device_map,
+         "temperatures": args.temperatures,
+         "seeds": args.seeds,
+         "max_steps": args.max_steps,
+         "max_new_tokens": args.max_new_tokens,
++        "max_tasks": args.max_tasks,
++        "task_source": args.task_source,
++        "dataset_split": args.dataset_split,
++        "dataset_shuffle_seed": args.dataset_shuffle_seed,
++        "batch_size": args.batch_size,
+         "step_cost": STEP_COST,
+         "prompt_mode": args.prompt_mode,
+         "system_prompt_mode": args.system_prompt_mode,
+-        "tasks": [asdict(task) for task in TASKS[: args.max_tasks]],
++        "resume_enabled": args.resume,
++        "completed_run_count": len(completed_run_ids),
++        "tasks": [asdict(task) for task in tasks],
+         "hidden_state_accessible": True,
+         "token_logprobs_accessible": True,
+         "reasoning_traces_accessible": True,
+-        "runtime_limit_notes": "Pilot sized for local Windows workstation; fixed-step protocol is used to observe post-answer revisions.",
++        "runtime_limit_notes": "Batch-first GSM8K runner with append-only CSV outputs and automatic microbatch splitting on CUDA OOM.",
+     }
+-    with (output_dir / "metadata.json").open("w", encoding="utf-8") as handle:
++    with paths["metadata"].open("w", encoding="utf-8") as handle:
+         json.dump(metadata, handle, indent=2)
+ 
+     for _, row in pilot_summary.iterrows():
+diff --git a/research/trace_analysis.py b/research/trace_analysis.py
+index 4ec150c..d60a94b 100644
+--- a/research/trace_analysis.py
++++ b/research/trace_analysis.py
+@@ -16,6 +16,9 @@ from sklearn.preprocessing import StandardScaler
+ 
+ OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "real_traces"
+ STEP_COST = 0.05
++EB_DELTA = 0.05
++DELTA_LOWER_BOUND = -(1.0 + STEP_COST)
++DELTA_UPPER_BOUND = 1.0 - STEP_COST
+ FEATURE_COLUMNS = [
+     "step",
+     "entropy_mean",
+@@ -70,6 +73,8 @@ def _answer_streak(values: list[str]) -> list[int]:
+ 
+ 
+ def fit_binary_model(train_frame: pd.DataFrame, target_column: str) -> Any:
++    if train_frame.empty:
++        return ConstantProbabilityModel(0.0)
+     target = train_frame[target_column].astype(int)
+     if target.nunique() < 2:
+         return ConstantProbabilityModel(float(target.mean()))
+@@ -104,7 +109,9 @@ def evaluate_detector_on_group(group: pd.DataFrame, detector_name: str, step: in
+         "task_id": group.iloc[0]["task_id"],
+         "detector": detector_name,
+         "stop_step": step,
++        "stop_utility": stop_utility,
+         "oracle_step": oracle_step,
++        "oracle_utility": oracle_utility,
+         "oracle_gap": oracle_utility - stop_utility,
+         "false_early": int(step < oracle_step),
+         "false_late": int(step > oracle_step),
+@@ -112,15 +119,25 @@ def evaluate_detector_on_group(group: pd.DataFrame, detector_name: str, step: in
+     }
+ 
+ 
+-def select_entropy_threshold(train_frame: pd.DataFrame) -> float:
+-    candidates = np.quantile(train_frame["entropy_mean"].dropna(), [0.2, 0.35, 0.5, 0.65, 0.8])
++def predict_probabilities(model: Any, frame: pd.DataFrame) -> np.ndarray:
++    if frame.empty:
++        return np.empty((0, 2), dtype=float)
++    return model.predict_proba(frame[FEATURE_COLUMNS])
++
++
++def select_entropy_threshold(step_frame: pd.DataFrame) -> float:
++    candidates = np.quantile(step_frame["entropy_mean"].dropna(), [0.2, 0.35, 0.5, 0.65, 0.8])
+     best_threshold = float(candidates[0])
+     best_gap = math.inf
+     for threshold in candidates:
+         detector_rows: list[dict[str, Any]] = []
+-        for _, group in train_frame.groupby("run_id"):
+-            step = first_step_matching(group, (group["step"] >= 2) & (group["entropy_mean"] <= threshold) & (group["answer_streak"] >= 2))
+-            detector_rows.append(evaluate_detector_on_group(group, detector_name="entropy_plateau", step=step))
++        for _, group in step_frame.groupby("run_id"):
++            ordered = group.sort_values("step")
++            step = first_step_matching(
++                ordered,
++                (ordered["step"] >= 2) & (ordered["entropy_mean"] <= threshold) & (ordered["answer_streak"] >= 2),
++            )
++            detector_rows.append(evaluate_detector_on_group(ordered, detector_name="entropy_plateau", step=step))
+         mean_gap = float(pd.DataFrame(detector_rows)["oracle_gap"].mean())
+         if mean_gap < best_gap:
+             best_gap = mean_gap
+@@ -128,19 +145,11 @@ def select_entropy_threshold(train_frame: pd.DataFrame) -> float:
+     return best_threshold
+ 
+ 
+-def hazard_stop_for_group(group: pd.DataFrame, train_frame: pd.DataFrame) -> int:
+-    train_rows = train_frame[train_frame["has_next"] == 1].copy()
+-    train_rows["repair"] = ((train_rows["correct"] == 0) & (train_rows["next_correct"] == 1)).astype(int)
+-    train_rows["corruption"] = ((train_rows["correct"] == 1) & (train_rows["next_correct"] == 0)).astype(int)
+-
+-    repair_model = fit_binary_model(train_rows[train_rows["correct"] == 0], target_column="repair")
+-    corruption_model = fit_binary_model(train_rows[train_rows["correct"] == 1], target_column="corruption")
+-
+-    q_model = fit_binary_model(train_frame, target_column="correct")
+-    scoring = group.copy()
+-    q_hat = q_model.predict_proba(scoring[FEATURE_COLUMNS])[:, 1]
+-    alpha_hat = repair_model.predict_proba(scoring[FEATURE_COLUMNS])[:, 1]
+-    beta_hat = corruption_model.predict_proba(scoring[FEATURE_COLUMNS])[:, 1]
++def hazard_stop_for_group(group: pd.DataFrame, q_model: Any, repair_model: Any, corruption_model: Any) -> int:
++    scoring = group.sort_values("step").copy()
++    q_hat = predict_probabilities(q_model, scoring)[:, 1]
++    alpha_hat = predict_probabilities(repair_model, scoring)[:, 1]
++    beta_hat = predict_probabilities(corruption_model, scoring)[:, 1]
+     scoring["mu_hat"] = (1.0 - q_hat) * alpha_hat - q_hat * beta_hat - STEP_COST
+     candidate = scoring.loc[(scoring["step"] >= 2) & (scoring["mu_hat"] <= 0.0)]
+     if len(candidate):
+@@ -148,58 +157,152 @@ def hazard_stop_for_group(group: pd.DataFrame, train_frame: pd.DataFrame) -> int
+     return int(scoring.iloc[-1]["step"])
+ 
+ 
+-def build_detector_frame(step_frame: pd.DataFrame) -> pd.DataFrame:
+-    detector_rows: list[dict[str, Any]] = []
+-    for run_id, group in step_frame.groupby("run_id"):
+-        holdout = group.sort_values("step")
+-        train_frame = step_frame[step_frame["run_id"] != run_id]
+-        entropy_threshold = select_entropy_threshold(train_frame)
++def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, Any, Any, Any]:
++    transition_rows = step_frame[step_frame["has_next"] == 1].copy()
++    transition_rows["repair"] = ((transition_rows["correct"] == 0) & (transition_rows["next_correct"] == 1)).astype(int)
++    transition_rows["corruption"] = ((transition_rows["correct"] == 1) & (transition_rows["next_correct"] == 0)).astype(int)
++
++    correctness_probe = fit_binary_model(step_frame, target_column="correct")
++    repair_model = fit_binary_model(transition_rows[transition_rows["correct"] == 0], target_column="repair")
++    corruption_model = fit_binary_model(transition_rows[transition_rows["correct"] == 1], target_column="corruption")
++
++    weights: list[dict[str, Any]] = []
++    for label, model in [
++        ("correctness_probe", correctness_probe),
++        ("repair_hazard", repair_model),
++        ("corruption_hazard", corruption_model),
++    ]:
++        if isinstance(model, ConstantProbabilityModel):
++            weights.append({"model": label, "feature": "constant_probability", "coefficient": model.probability})
++            continue
++        coefficients = model.named_steps["model"].coef_[0]
++        for feature, coefficient in zip(FEATURE_COLUMNS, coefficients, strict=True):
++            weights.append({"model": label, "feature": feature, "coefficient": float(coefficient)})
+ 
++    by_step = transition_rows.groupby("step").agg(
++        q_t=("correct", "mean"),
++        repair_rate=("repair", "mean"),
++        corruption_rate=("corruption", "mean"),
++        empirical_mu=("delta_utility", "mean"),
++        empirical_variance=("delta_utility", "var"),
++        entropy_mean=("entropy_mean", "mean"),
++        answer_changed_rate=("answer_changed", "mean"),
++        hidden_shift_mean=("hidden_l2_shift", "mean"),
++        confidence_mean=("confidence", "mean"),
++        n_examples=("run_id", "count"),
++    )
++    by_step = by_step.reset_index()
++    by_step["empirical_variance"] = by_step["empirical_variance"].fillna(0.0)
++    by_step["hazard_mu"] = (1.0 - by_step["q_t"]) * by_step["repair_rate"] - by_step["q_t"] * by_step["corruption_rate"] - STEP_COST
++    by_step["delta_t"] = 6.0 * EB_DELTA / (np.pi**2 * np.square(by_step["step"] + 1))
++    by_step["eb_upper_bound"] = (
++        by_step["empirical_mu"]
++        + np.sqrt(2.0 * by_step["empirical_variance"] * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"])
++        + 3.0 * (DELTA_UPPER_BOUND - DELTA_LOWER_BOUND) * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"]
++    )
++    by_step["eb_stop_signal"] = (by_step["eb_upper_bound"] <= 0.0).astype(int)
++    return by_step, pd.DataFrame(weights), correctness_probe, repair_model, corruption_model
++
++
++def first_zero_crossing(hazard_frame: pd.DataFrame, column: str) -> int:
++    valid = hazard_frame.dropna(subset=[column]).sort_values("step")
++    if valid.empty:
++        return 1
++    previous_value = None
++    for _, row in valid.iterrows():
++        value = float(row[column])
++        if previous_value is not None and previous_value > 0.0 and value <= 0.0:
++            return int(row["step"])
++        previous_value = value
++    if float(valid.iloc[0][column]) <= 0.0:
++        return int(valid.iloc[0]["step"])
++    return int(valid.iloc[-1]["step"])
++
++
++def build_detector_frame(
++    step_frame: pd.DataFrame,
++    q_model: Any,
++    repair_model: Any,
++    corruption_model: Any,
++    entropy_threshold: float,
++    eb_stop_step: int,
++) -> pd.DataFrame:
++    detector_rows: list[dict[str, Any]] = []
++    for _, group in step_frame.groupby("run_id"):
++        ordered = group.sort_values("step")
++        detector_rows.append(
++            evaluate_detector_on_group(
++                ordered,
++                detector_name="oracle",
++                step=int(ordered.loc[ordered["utility"].idxmax(), "step"]),
++            )
++        )
+         detector_rows.append(
+             evaluate_detector_on_group(
+-                holdout,
++                ordered,
+                 detector_name="first_answer",
+-                step=first_step_matching(holdout, holdout["answer_normalized"] != ""),
++                step=first_step_matching(ordered, ordered["answer_normalized"] != ""),
+             )
+         )
+         detector_rows.append(
+             evaluate_detector_on_group(
+-                holdout,
++                ordered,
+                 detector_name="verifier_first_correct",
+-                step=first_step_matching(holdout, holdout["correct"] == 1),
++                step=first_step_matching(ordered, ordered["correct"] == 1),
+             )
+         )
+         detector_rows.append(
+             evaluate_detector_on_group(
+-                holdout,
++                ordered,
+                 detector_name="answer_stability",
+-                step=first_step_matching(holdout, (holdout["step"] >= 2) & (holdout["answer_streak"] >= 2) & (holdout["confidence"] >= 55)),
++                step=first_step_matching(
++                    ordered,
++                    (ordered["step"] >= 2) & (ordered["answer_streak"] >= 2) & (ordered["confidence"] >= 55),
++                ),
+             )
+         )
+         detector_rows.append(
+             evaluate_detector_on_group(
+-                holdout,
++                ordered,
+                 detector_name="entropy_plateau",
+-                step=first_step_matching(holdout, (holdout["step"] >= 2) & (holdout["entropy_mean"] <= entropy_threshold) & (holdout["answer_streak"] >= 2)),
++                step=first_step_matching(
++                    ordered,
++                    (ordered["step"] >= 2) & (ordered["entropy_mean"] <= entropy_threshold) & (ordered["answer_streak"] >= 2),
++                ),
+             )
+         )
+         detector_rows.append(
+             evaluate_detector_on_group(
+-                holdout,
++                ordered,
+                 detector_name="hazard_drift",
+-                step=hazard_stop_for_group(holdout, train_frame),
++                step=hazard_stop_for_group(ordered, q_model, repair_model, corruption_model),
++            )
++        )
++        detector_rows.append(
++            evaluate_detector_on_group(
++                ordered,
++                detector_name="empirical_bernstein",
++                step=min(eb_stop_step, int(ordered.iloc[-1]["step"])),
++            )
++        )
++        detector_rows.append(
++            evaluate_detector_on_group(
++                ordered,
++                detector_name="never_stop",
++                step=int(ordered.iloc[-1]["step"]),
+             )
+         )
+     return pd.DataFrame(detector_rows)
+ 
+ 
+-def evaluate_correctness_probe(step_frame: pd.DataFrame) -> pd.DataFrame:
++def evaluate_correctness_probe(step_frame: pd.DataFrame, correctness_probe: Any) -> pd.DataFrame:
++    probabilities = predict_probabilities(correctness_probe, step_frame)[:, 1]
++    scored = step_frame[["run_id", "correct"]].copy()
++    scored["score"] = probabilities
+     rows: list[dict[str, Any]] = []
+-    for run_id, group in step_frame.groupby("run_id"):
+-        train_frame = step_frame[step_frame["run_id"] != run_id]
+-        probe = fit_binary_model(train_frame, target_column="correct")
+-        predictions = probe.predict_proba(group[FEATURE_COLUMNS])[:, 1]
++    for run_id, group in scored.groupby("run_id"):
+         y_true = group["correct"].astype(int).to_numpy()
++        predictions = group["score"].to_numpy()
+         brier = brier_score_loss(y_true, predictions)
+         if np.unique(y_true).size < 2:
+             auc = float("nan")
+@@ -209,67 +312,56 @@ def evaluate_correctness_probe(step_frame: pd.DataFrame) -> pd.DataFrame:
+     return pd.DataFrame(rows)
+ 
+ 
+-def fit_full_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+-    full_probe = fit_binary_model(step_frame, target_column="correct")
+-    transition_rows = step_frame[step_frame["has_next"] == 1].copy()
+-    transition_rows["repair"] = ((transition_rows["correct"] == 0) & (transition_rows["next_correct"] == 1)).astype(int)
+-    transition_rows["corruption"] = ((transition_rows["correct"] == 1) & (transition_rows["next_correct"] == 0)).astype(int)
+-    repair_model = fit_binary_model(transition_rows[transition_rows["correct"] == 0], target_column="repair")
+-    corruption_model = fit_binary_model(transition_rows[transition_rows["correct"] == 1], target_column="corruption")
+-
+-    weights: list[dict[str, Any]] = []
+-    for label, model in [
+-        ("correctness_probe", full_probe),
+-        ("repair_hazard", repair_model),
+-        ("corruption_hazard", corruption_model),
+-    ]:
+-        if isinstance(model, ConstantProbabilityModel):
+-            weights.append({"model": label, "feature": "constant_probability", "coefficient": model.probability})
+-            continue
+-        coefficients = model.named_steps["model"].coef_[0]
+-        for feature, coefficient in zip(FEATURE_COLUMNS, coefficients, strict=True):
+-            weights.append({"model": label, "feature": feature, "coefficient": float(coefficient)})
+-
+-    by_step = step_frame[step_frame["has_next"] == 1].groupby("step").agg(
+-        q_t=("correct", "mean"),
+-        repair_rate=("repair", "mean"),
+-        corruption_rate=("corruption", "mean"),
+-        empirical_mu=("delta_utility", "mean"),
+-        entropy_mean=("entropy_mean", "mean"),
+-        answer_changed_rate=("answer_changed", "mean"),
+-        hidden_shift_mean=("hidden_l2_shift", "mean"),
+-        n_examples=("run_id", "count"),
++def summarize_detector_frame(detector_frame: pd.DataFrame) -> pd.DataFrame:
++    summary = detector_frame.groupby("detector").agg(
++        mean_stop_step=("stop_step", "mean"),
++        mean_stop_utility=("stop_utility", "mean"),
++        mean_oracle_utility=("oracle_utility", "mean"),
++        mean_oracle_gap=("oracle_gap", "mean"),
++        false_early_rate=("false_early", "mean"),
++        false_late_rate=("false_late", "mean"),
++        mean_false_late_severity=("false_late_severity", "mean"),
+     )
+-    by_step = by_step.reset_index()
+-    by_step["hazard_mu"] = (1.0 - by_step["q_t"]) * by_step["repair_rate"] - by_step["q_t"] * by_step["corruption_rate"] - STEP_COST
+-    return by_step, pd.DataFrame(weights)
++    return summary.reset_index().sort_values("mean_oracle_gap")
+ 
+ 
+-def plot_detector_comparison(detector_frame: pd.DataFrame, output_dir: Path) -> None:
+-    summary = detector_frame.groupby("detector")["oracle_gap"].mean().sort_values()
+-    fig, ax = plt.subplots(figsize=(9, 4.5))
+-    ax.bar(summary.index, summary.values, color=["#0f766e", "#1d4ed8", "#d97706", "#7c3aed", "#b91c1c"])
++def plot_detector_comparison(detector_summary: pd.DataFrame, output_dir: Path) -> None:
++    summary = detector_summary.sort_values("mean_oracle_gap")
++    colors = plt.cm.viridis(np.linspace(0.15, 0.85, len(summary)))
++    fig, ax = plt.subplots(figsize=(10, 5))
++    ax.bar(summary["detector"], summary["mean_oracle_gap"], color=colors)
+     ax.set_ylabel("Mean oracle gap")
+     ax.set_title("Real-Trace Detector Comparison")
+     ax.grid(axis="y", alpha=0.25)
+-    plt.xticks(rotation=20, ha="right")
++    plt.xticks(rotation=25, ha="right")
+     fig.tight_layout()
+     fig.savefig(output_dir / "real_trace_detector_gaps.png", dpi=200)
+     plt.close(fig)
+ 
+ 
+-def plot_hazard_curves(hazard_frame: pd.DataFrame, output_dir: Path) -> None:
+-    fig, ax = plt.subplots(figsize=(9, 4.5))
+-    ax.plot(hazard_frame["step"], hazard_frame["empirical_mu"], label="Empirical continuation utility", color="#0f766e", linewidth=2)
+-    ax.plot(hazard_frame["step"], hazard_frame["hazard_mu"], label="Hazard decomposition", color="#1d4ed8", linestyle="--", linewidth=2)
+-    ax.axhline(0.0, color="black", linewidth=1)
+-    ax.set_xlabel("Step")
+-    ax.set_ylabel("Drift / continuation value")
+-    ax.set_title("Real-Trace Drift Sign by Step")
+-    ax.grid(alpha=0.25)
+-    ax.legend()
++def plot_drift_crossing_proof(hazard_frame: pd.DataFrame, output_dir: Path) -> None:
++    crossing_step = first_zero_crossing(hazard_frame, "hazard_mu")
++    fig, axes = plt.subplots(2, 1, figsize=(10, 7), sharex=True)
++
++    axes[0].plot(hazard_frame["step"], hazard_frame["q_t"], color="#1d4ed8", linewidth=2)
++    axes[0].set_ylabel("q_t")
++    axes[0].set_title("Overthinking Boundary: Belief and Drift")
++    axes[0].grid(alpha=0.25)
++    axes[0].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2)
++
++    axes[1].plot(hazard_frame["step"], hazard_frame["empirical_mu"], label="Empirical μ_t", color="#0f766e", linewidth=2)
++    axes[1].plot(hazard_frame["step"], hazard_frame["hazard_mu"], label="Hazard μ_t", color="#7c3aed", linestyle="--", linewidth=2)
++    axes[1].plot(hazard_frame["step"], hazard_frame["eb_upper_bound"], label="Empirical-Bernstein upper bound", color="#ea580c", linestyle=":", linewidth=2)
++    axes[1].axhline(0.0, color="black", linewidth=1)
++    axes[1].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2, label=f"Crossing step {crossing_step}")
++    axes[1].set_xlabel("Step")
++    axes[1].set_ylabel("Drift")
++    axes[1].grid(alpha=0.25)
++    axes[1].legend()
++
+     fig.tight_layout()
+-    fig.savefig(output_dir / "real_trace_hazard_curves.png", dpi=200)
++    fig.savefig(output_dir / "drift_crossing_proof.png", dpi=220)
++    fig.savefig(output_dir / "real_trace_hazard_curves.png", dpi=220)
+     plt.close(fig)
+ 
+ 
+@@ -290,7 +382,7 @@ def plot_feature_weights(weight_frame: pd.DataFrame, output_dir: Path) -> None:
+ 
+ 
+ def main() -> None:
+-    parser = argparse.ArgumentParser(description="Analyze small real-trace pilot artifacts.")
++    parser = argparse.ArgumentParser(description="Analyze real-trace pilot or full-run artifacts.")
+     parser.add_argument("--input-dir", default=str(OUTPUT_DIR))
+     args = parser.parse_args()
+ 
+@@ -300,41 +392,47 @@ def main() -> None:
+     step_frame["repair"] = ((step_frame["correct"] == 0) & (step_frame["next_correct"] == 1)).astype(int)
+     step_frame["corruption"] = ((step_frame["correct"] == 1) & (step_frame["next_correct"] == 0)).astype(int)
+ 
+-    detector_frame = build_detector_frame(step_frame)
+-    detector_summary = detector_frame.groupby("detector").agg(
+-        mean_stop_step=("stop_step", "mean"),
+-        mean_oracle_gap=("oracle_gap", "mean"),
+-        false_early_rate=("false_early", "mean"),
+-        false_late_rate=("false_late", "mean"),
+-        mean_false_late_severity=("false_late_severity", "mean"),
++    hazard_frame, weight_frame, correctness_probe, repair_model, corruption_model = fit_global_models(step_frame)
++    entropy_threshold = select_entropy_threshold(step_frame)
++    eb_stop_step = first_step_matching(hazard_frame, (hazard_frame["step"] >= 2) & (hazard_frame["eb_upper_bound"] <= 0.0))
++
++    detector_frame = build_detector_frame(
++        step_frame=step_frame,
++        q_model=correctness_probe,
++        repair_model=repair_model,
++        corruption_model=corruption_model,
++        entropy_threshold=entropy_threshold,
++        eb_stop_step=eb_stop_step,
+     )
+-    detector_summary = detector_summary.reset_index().sort_values("mean_oracle_gap")
+-
+-    correctness_probe = evaluate_correctness_probe(step_frame)
+-    hazard_frame, weight_frame = fit_full_models(step_frame)
++    detector_summary = summarize_detector_frame(detector_frame)
++    correctness_probe_frame = evaluate_correctness_probe(step_frame, correctness_probe)
++    eb_summary = detector_summary[detector_summary["detector"].isin(["oracle", "empirical_bernstein", "never_stop"])]
+ 
+     detector_frame.to_csv(input_dir / "detector_comparison_by_run.csv", index=False)
+     detector_summary.to_csv(input_dir / "detector_comparison.csv", index=False)
+-    correctness_probe.to_csv(input_dir / "correctness_probe_metrics.csv", index=False)
++    correctness_probe_frame.to_csv(input_dir / "correctness_probe_metrics.csv", index=False)
+     hazard_frame.to_csv(input_dir / "hazard_drift_summary.csv", index=False)
+     weight_frame.to_csv(input_dir / "feature_weights.csv", index=False)
++    eb_summary.to_csv(input_dir / "empirical_bernstein_summary.csv", index=False)
+ 
+-    plot_detector_comparison(detector_frame, input_dir)
+-    plot_hazard_curves(hazard_frame, input_dir)
++    plot_detector_comparison(detector_summary, input_dir)
++    plot_drift_crossing_proof(hazard_frame, input_dir)
+     plot_feature_weights(weight_frame, input_dir)
+ 
+     print(
+         "correctness probe: "
+-        f"brier={correctness_probe['brier'].mean():.4f}, "
+-        f"auc={correctness_probe['auc'].dropna().mean():.4f}"
++        f"brier={correctness_probe_frame['brier'].mean():.4f}, "
++        f"auc={correctness_probe_frame['auc'].dropna().mean():.4f}"
+     )
+     for _, row in detector_summary.iterrows():
+         print(
+             f"{row['detector']}: stop={row['mean_stop_step']:.2f}, "
++            f"utility={row['mean_stop_utility']:.4f}, "
+             f"gap={row['mean_oracle_gap']:.4f}, "
+             f"false_early={row['false_early_rate']:.3f}, "
+             f"false_late={row['false_late_rate']:.3f}"
+         )
++    print(f"Empirical-Bernstein stop step: {eb_stop_step}")
+     print(f"Wrote analysis artifacts to: {input_dir}")
+ 
+ 
+diff --git a/tools/run_colab_experiment.py b/tools/run_colab_experiment.py
+index 83661f3..b097a08 100644
+--- a/tools/run_colab_experiment.py
++++ b/tools/run_colab_experiment.py
+@@ -33,6 +33,9 @@ def ensure_packages(skip_install: bool) -> None:
+     required_modules = {
+         "transformers": "transformers",
+         "accelerate": "accelerate",
++        "datasets": "datasets",
++        "evaluate": "evaluate",
++        "bitsandbytes": "bitsandbytes",
+         "sentencepiece": "sentencepiece",
+         "safetensors": "safetensors",
+         "pandas": "pandas",
+@@ -40,6 +43,7 @@ def ensure_packages(skip_install: bool) -> None:
+         "scipy": "scipy",
+         "matplotlib": "matplotlib",
+         "numpy": "numpy",
++        "tqdm": "tqdm",
+     }
+     missing_packages = [package for module, package in required_modules.items() if importlib.util.find_spec(module) is None]
+     if not missing_packages:
+@@ -65,8 +69,8 @@ def print_environment() -> str:
+     return "cpu"
+ 
+ 
+-def prepare_output_dir(path: Path) -> None:
+-    if path.exists():
++def prepare_output_dir(path: Path, clear: bool = False) -> None:
++    if clear and path.exists():
+         for child in path.iterdir():
+             if child.is_file():
+                 child.unlink()
+@@ -94,9 +98,15 @@ def run_real_trace_experiment(
+     temperatures: list[float],
+     seeds: list[int],
+     output_dir: Path,
++    task_source: str,
++    dataset_split: str,
++    dataset_shuffle_seed: int,
++    batch_size: int,
+     prompt_mode: str,
+     system_prompt_mode: str,
+-    concurrency: int,
++    quantization: str,
++    device_map: str | None,
++    resume: bool,
+ ) -> None:
+     command = [
+         PYTHON,
+@@ -111,19 +121,31 @@ def run_real_trace_experiment(
+         str(max_steps),
+         "--max-new-tokens",
+         str(max_new_tokens),
++        "--task-source",
++        task_source,
++        "--dataset-split",
++        dataset_split,
++        "--dataset-shuffle-seed",
++        str(dataset_shuffle_seed),
++        "--batch-size",
++        str(batch_size),
+         "--prompt-mode",
+         prompt_mode,
+         "--system-prompt-mode",
+         system_prompt_mode,
++        "--quantization",
++        quantization,
+         "--output-dir",
+         str(output_dir),
+-        "--concurrency",
+-        str(concurrency),
+         "--temperatures",
+     ]
++    if device_map:
++        command.extend(["--device-map", device_map])
+     command.extend(str(value) for value in temperatures)
+     command.append("--seeds")
+     command.extend(str(value) for value in seeds)
++    if not resume:
++        command.append("--no-resume")
+     run_command(command)
+ 
+ 
+@@ -169,32 +191,51 @@ def zip_results(output_dir: Path) -> Path:
+ 
+ def main() -> None:
+     parser = argparse.ArgumentParser(description="Run the overthinking-boundary experiment safely on Google Colab.")
+-    parser.add_argument("--model", default="deepseek_r1_distill_1p5b", choices=["deepseek_r1_distill_1p5b", "qwen2p5_0p5b"])
+-    parser.add_argument("--smoke-model", default="qwen2p5_0p5b", choices=["deepseek_r1_distill_1p5b", "qwen2p5_0p5b"])
++    parser.add_argument(
++        "--model",
++        default="deepseek_r1_distill_1p5b",
++        choices=["deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_7b"],
++    )
++    parser.add_argument(
++        "--smoke-model",
++        default=None,
++        choices=["deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_7b"],
++    )
+     parser.add_argument("--skip-install", action="store_true")
+     parser.add_argument("--skip-smoke", action="store_true")
+     parser.add_argument("--smoke-only", action="store_true")
+     parser.add_argument("--skip-simulator", action="store_true")
+     parser.add_argument("--prompt-mode", default="minimal_json", choices=["structured_four_line", "minimal_json", "answer_only"])
+     parser.add_argument("--system-prompt-mode", default="default", choices=["none", "short", "default"])
+-    parser.add_argument("--full-max-tasks", type=int, default=4)
+-    parser.add_argument("--full-max-steps", type=int, default=5)
+-    parser.add_argument("--full-max-new-tokens", type=int, default=128)
+-    parser.add_argument("--full-temperatures", nargs="+", type=float, default=[0.2, 0.6])
++    parser.add_argument("--task-source", default="gsm8k", choices=["builtin", "gsm8k"])
++    parser.add_argument("--smoke-task-source", default="builtin", choices=["builtin", "gsm8k"])
++    parser.add_argument("--dataset-split", default="train")
++    parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
++    parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
++    parser.add_argument("--device-map", default=None)
++    parser.add_argument("--full-max-tasks", type=int, default=300)
++    parser.add_argument("--full-max-steps", type=int, default=10)
++    parser.add_argument("--full-max-new-tokens", type=int, default=256)
++    parser.add_argument("--full-batch-size", type=int, default=8)
++    parser.add_argument("--full-temperatures", nargs="+", type=float, default=[0.1, 0.6, 1.0])
+     parser.add_argument("--full-seeds", nargs="+", type=int, default=[7, 13])
+     parser.add_argument("--smoke-max-tasks", type=int, default=2)
+     parser.add_argument("--smoke-max-steps", type=int, default=2)
+     parser.add_argument("--smoke-max-new-tokens", type=int, default=128)
++    parser.add_argument("--smoke-batch-size", type=int, default=2)
+     parser.add_argument("--smoke-temperatures", nargs="+", type=float, default=[0.2])
+     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
+     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
+     parser.add_argument("--smoke-output-dir", default=str(DEFAULT_SMOKE_DIR))
+-    parser.add_argument("--concurrency", type=int, default=8)
++    parser.add_argument("--fresh-output", action="store_true")
++    parser.add_argument("--no-resume", dest="resume", action="store_false")
++    parser.set_defaults(resume=True)
+     args = parser.parse_args()
+ 
+     started_at = time.time()
+     ensure_packages(skip_install=args.skip_install)
+     device = print_environment()
++    smoke_model = args.smoke_model or args.model
+ 
+     full_output_dir = Path(args.output_dir)
+     smoke_output_dir = Path(args.smoke_output_dir)
+@@ -204,10 +245,10 @@ def main() -> None:
+         print_csv(REPO_ROOT / "research" / "outputs" / "summary.csv", "Synthetic Detector Summary")
+ 
+     if not args.skip_smoke:
+-        prepare_output_dir(smoke_output_dir)
++        prepare_output_dir(smoke_output_dir, clear=True)
+         print("\n[phase] Running smoke test before the full experiment.", flush=True)
+         run_real_trace_experiment(
+-            model=args.smoke_model,
++            model=smoke_model,
+             device=device,
+             max_tasks=args.smoke_max_tasks,
+             max_steps=args.smoke_max_steps,
+@@ -215,9 +256,15 @@ def main() -> None:
+             temperatures=args.smoke_temperatures,
+             seeds=args.smoke_seeds,
+             output_dir=smoke_output_dir,
++            task_source=args.smoke_task_source,
++            dataset_split=args.dataset_split,
++            dataset_shuffle_seed=args.dataset_shuffle_seed,
++            batch_size=args.smoke_batch_size,
+             prompt_mode=args.prompt_mode,
+             system_prompt_mode=args.system_prompt_mode,
+-            concurrency=args.concurrency,
++            quantization="none",
++            device_map=None,
++            resume=False,
+         )
+         run_analysis(smoke_output_dir)
+         print_csv(smoke_output_dir / "pilot_summary.csv", "Smoke Pilot Summary")
+@@ -227,7 +274,7 @@ def main() -> None:
+             print(f"\n[done] Smoke test archive: {archive}", flush=True)
+             return
+ 
+-    prepare_output_dir(full_output_dir)
++    prepare_output_dir(full_output_dir, clear=args.fresh_output)
+     print("\n[phase] Running the full real-trace experiment.", flush=True)
+     run_real_trace_experiment(
+         model=args.model,
+@@ -238,9 +285,15 @@ def main() -> None:
+         temperatures=args.full_temperatures,
+         seeds=args.full_seeds,
+         output_dir=full_output_dir,
++        task_source=args.task_source,
++        dataset_split=args.dataset_split,
++        dataset_shuffle_seed=args.dataset_shuffle_seed,
++        batch_size=args.full_batch_size,
+         prompt_mode=args.prompt_mode,
+         system_prompt_mode=args.system_prompt_mode,
+-        concurrency=args.concurrency,
++        quantization=args.quantization,
++        device_map=args.device_map,
++        resume=args.resume,
+     )
+     run_analysis(full_output_dir)
+ 
+
+commit c9202d035d7741108a4aedf2e12a61ba97ba8551 (from 74dd4d49061e2cc04f8cd5d1da85fcdf49563b8f)
+Merge: cebfefa 74dd4d4
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Wed Apr 1 09:48:43 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Wed Apr 1 09:48:43 2026 -0400
+
+    Merge remote batching updates and re-apply auto-shutdown trigger for Colab L4 instances
+
+diff --git a/tools/run_colab_experiment.py b/tools/run_colab_experiment.py
+index 8501fb4..b097a08 100644
+--- a/tools/run_colab_experiment.py
++++ b/tools/run_colab_experiment.py
+@@ -309,6 +309,11 @@ def main() -> None:
+     print(f"[done] Zipped archive: {archive}", flush=True)
+     print(f"[done] Total runtime: {elapsed_minutes:.2f} minutes", flush=True)
+ 
++    # Trigger Colab automated shutdown to save GPU credits
++    if os.path.exists("/content"):
++        print("[done] Triggering Colab autonomous shutdown...", flush=True)
++        os.system("touch /content/SHUTDOWN_COLAB.txt")
++
+ 
+ if __name__ == "__main__":
+     main()

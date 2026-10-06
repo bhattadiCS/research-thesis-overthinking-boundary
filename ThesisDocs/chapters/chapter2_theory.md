@@ -13,6 +13,8 @@ A_t=a_t(H_0,\ldots,H_t),\qquad
 C_t=\mathbf1\{A_t=Y^*\}.
 $$
 
+For empirical evaluation, correctness is the versioned domain grader $C_t=g_d(A_t,Y^*)\in\{0,1\}$. Exact answer equality is the special case displayed above. The binary-reward arguments remain unchanged for this grading predicate. This notation identifies the measured endpoint; it does not certify semantic correctness of every stored label. Appendix F illustrates the information restrictions and delayed-repair counterexample.
+
 All observations, executed peer calls, verifier outputs, and controller
 randomness used by a decision belong in this filtration. The runtime
 interface does not supply offline ground-truth fields, future revisions,
@@ -40,7 +42,7 @@ answer. If every available candidate in a finite, observable candidate
 set can be selected freely, the optimal
 immediate correctness reward is
 $\max_{a\in\mathcal B_t}\mathbb P(Y^*=a\mid\mathcal F_t)$, where
-$\mathcal B_t$ is the candidate set available at $t$.
+$\mathcal B_t$ is the candidate set available at $t$. With the empirical grading predicate, the analogous immediate reward is $\max_{a\in\mathcal B_t}\mathbb E[g_d(a,Y^*)\mid\mathcal F_t]$.
 
 A policy's stop time $\tau$ is admissible when
 
@@ -365,9 +367,11 @@ answer and use no hindsight information to make decisions.
 For a causal feature vector $Z_t=\phi_t(H_0,\ldots,H_t)$, define
 
 $$
-\widetilde q_t=\mathbb P(C_t=1\mid Z_t),\quad
-\widetilde\alpha_t=\mathbb P(C_{t+1}=1\mid C_t=0,Z_t),\quad
-\widetilde\beta_t=\mathbb P(C_{t+1}=0\mid C_t=1,Z_t).
+\begin{aligned}
+\widetilde q_t&=\mathbb P(C_t=1\mid Z_t),\\
+\widetilde\alpha_t&=\mathbb P(C_{t+1}=1\mid C_t=0,Z_t),\\
+\widetilde\beta_t&=\mathbb P(C_{t+1}=0\mid C_t=1,Z_t).
+\end{aligned}
 $$
 
 Their hazard expression equals
@@ -566,6 +570,8 @@ repository's raw fitted probabilities or historical detectors satisfy
 Proposition 7's coverage premise.
 
 ## 2.8 Scope of the empirical claims
+
+**Table 1. Mathematical objects and assumptions.**
 
 | Mathematical object | Required information or assumptions | Defensible interpretation |
 | --- | --- | --- |

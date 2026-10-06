@@ -1,0 +1,52 @@
+commit 8218a5c2270f6c0a4436be5f8d848bda13afb54d
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 12 17:50:07 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 12 17:50:07 2026 -0400
+
+    docs: consolidate all files into master Scientific Methodology and Experimental Report
+    
+    Cleans up the ThesisDocs directory, moves deprecated logs and templates into ThesisDocs/archive, updates .gitignore to ignore agent cache folders, and establishes a single source of truth report for Dr. Woods.
+
+diff --git a/ThesisDocs/archive/export_acm_proposal_pdf.ps1 b/ThesisDocs/archive/export_acm_proposal_pdf.ps1
+new file mode 100644
+index 0000000..e0985d7
+--- /dev/null
++++ b/ThesisDocs/archive/export_acm_proposal_pdf.ps1
+@@ -0,0 +1,35 @@
++param(
++    [string]$ChromePath = "C:\Program Files\Google\Chrome\Application\chrome.exe",
++    [string]$InputHtml = "$PSScriptRoot\acm_thesis_proposal_email.html",
++    [string]$OutputPdf = "$PSScriptRoot\acm_thesis_proposal_email.pdf"
++)
++
++if (-not (Test-Path $ChromePath)) {
++    throw "Chrome was not found at $ChromePath"
++}
++
++if (-not (Test-Path $InputHtml)) {
++    throw "Input HTML was not found at $InputHtml"
++}
++
++$resolvedHtml = (Resolve-Path $InputHtml).Path.Replace('\', '/')
++$resolvedPdf = Join-Path (Resolve-Path $PSScriptRoot).Path ([System.IO.Path]::GetFileName($OutputPdf))
++$fileUrl = "file:///$resolvedHtml"
++
++
++& $ChromePath --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="$resolvedPdf" "$fileUrl"
++
++$created = $false
++for ($i = 0; $i -lt 20; $i++) {
++    if (Test-Path $resolvedPdf) {
++        $created = $true
++        break
++    }
++    Start-Sleep -Milliseconds 250
++}
++
++if (-not $created) {
++    throw "PDF export did not produce $resolvedPdf"
++}
++
++Write-Output "Created PDF: $resolvedPdf"
+\ No newline at end of file

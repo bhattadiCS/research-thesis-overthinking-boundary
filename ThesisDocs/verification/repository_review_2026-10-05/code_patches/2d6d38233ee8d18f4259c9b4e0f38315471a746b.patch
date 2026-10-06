@@ -1,0 +1,24 @@
+commit 2d6d38233ee8d18f4259c9b4e0f38315471a746b
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Thu Apr 2 15:06:23 2026 +0000
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Thu Apr 2 15:06:23 2026 +0000
+
+    test: checkpoint mistral smoke run
+
+diff --git a/tools/run_colab_experiment.py b/tools/run_colab_experiment.py
+index 1addb18..c759da0 100644
+--- a/tools/run_colab_experiment.py
++++ b/tools/run_colab_experiment.py
+@@ -147,10 +147,10 @@ def run_real_trace_experiment(
+         quantization,
+         "--output-dir",
+         str(output_dir),
+-        "--temperatures",
+     ]
+     if device_map:
+         command.extend(["--device-map", device_map])
++    command.append("--temperatures")
+     command.extend(str(value) for value in temperatures)
+     command.append("--seeds")
+     command.extend(str(value) for value in seeds)

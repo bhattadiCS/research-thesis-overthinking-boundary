@@ -1,0 +1,21 @@
+commit 13ad1ff1c22d6c036cfab09aed161f08e6d8c725
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Thu Apr 2 15:57:22 2026 +0000
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Thu Apr 2 15:57:22 2026 +0000
+
+    perf: select mistral l4 runtime
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 5ffa874..7f384d3 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -848,6 +848,8 @@ def load_model(
+             backend = f"transformers+torch({actual_device})"
+     except Exception as exc:
+         logging.warning("Primary model load failed for %s: %s", model_spec.hf_name, exc)
++        if actual_device == "cuda":
++            raise
+         fallback_kwargs = {"trust_remote_code": True}
+         model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **fallback_kwargs)
+         model.to("cpu")

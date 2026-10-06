@@ -1,4 +1,4 @@
-"""Build the six-chapter thesis draft with checked math and frozen evidence.
+"""Build the formal thesis with checked math and frozen evidence.
 
 Install rendering dependencies with
   npm install --prefix tmp/thesis_pdf_runtime --save-exact katex@0.19.0
@@ -32,21 +32,30 @@ EVIDENCE = ROOT / "research/outputs/thesis_v1/evidence"
 ONLINE = ROOT / "research/outputs/semester2/online_stopping_20261002"
 ADVERSARIAL = ONLINE / "adversarial_live"
 PREFIX_MODEL = ROOT / "research/outputs/semester2/prefix_model_v1"
-IMAGES = DOCS / "images/thesis_v1"
-WORK = ROOT / "tmp/pdfs/master_thesis"
-OUTPUT = ROOT / "output/pdf/Masters_Thesis_Draft_v1_Aditya_Bhatt.pdf"
+IMAGES = DOCS / "images/thesis_v2"
+WORK = ROOT / "tmp/pdfs/formal_thesis/digital"
+OUTPUT = WORK / "source.pdf"
+LEFT = 72
+RIGHT = 540
+SUBMISSION_DATE = "October 2026"
 CHAPTERS = ["chapter1_intro.md", "chapter2_theory.md", "chapter3_methodology.md",
             "chapter4_empirical.md", "chapter5_online.md", "chapter6_discussion.md"]
 FONT = Path("C:/Windows/Fonts/arial.ttf")
 TITLE = "Cost aware stopping boundaries in reasoning language models"
-FIGURES = ["Population accuracy and one-step net gain", "Causal detector ranking across domains",
-           "Development accuracy and completion-token Pareto comparison",
-           "Actual accuracy and completion-token comparisons"]
-TABLES = ["Standardized five-step corpus", "Model configurations and corpus membership",
-          "Selected population transition estimates", "Matched estimator and systems contrasts",
-          "Causal detector metrics", "Archived policy failure taxonomy", "Controller latency", "Paired live generation",
-          "Adversarial live generation", "Deployable predictor evaluation", "Trained policy live generation",
-          "Trained policy adversarial generation", "Development replay policies", "Claim evidence sources"]
+ABSTRACT = (
+    "Additional reasoning can repair an incorrect answer, replace a correct answer, or consume computation without sufficient improvement. "
+    "This thesis formulates response-level stopping as a finite-horizon decision based on observable prefixes and hidden correctness. "
+    "It derives the binary repair-corruption drift identity, applies the standard Bellman/Snell optimal stopping construction, "
+    "gives a sufficient persistence condition for a drift-sign rule, and constructs exact counterexamples to unconditional myopic optimality. "
+    "The experimental record separates a variable-horizon matrix from a standardized corpus of 144,440 saved rows, 28,888 trajectories, and 2,948 tasks. "
+    "Recomputed cluster-based tables show model- and domain-dependent continuation value and matched effects of estimator, token-cap, and precision changes. "
+    "The historical stacked ROC-AUC of 0.955156 is retained as a retrospective non-nested diagnostic rather than an online performance guarantee. "
+    "A fitted prefix controller enforces a two-step floor and prevents future generation after stopping. "
+    "In a newly executed evaluation on 100 GSM8K questions, its actual arm saves 56.51 percent of completion tokens with 7 correct answers versus 6 at the full horizon. "
+    "On 20 traps it saves 52.11 percent, with one correct answer in each arm. "
+    "Every learned run stops at step two; adaptive benefit and accuracy noninferiority remain unestablished. "
+    "The results support protocol-specific, cost-sensitive stopping experiments while identifying limits of myopic rules, probability calibration, and accuracy preservation."
+)
 
 
 def read_json(path: Path) -> dict:
@@ -70,7 +79,9 @@ def pct(value: float) -> str:
 
 
 def build_figures(boundary: pd.DataFrame, detector: pd.DataFrame, replay: pd.DataFrame | None) -> None:
-    plt.rcParams.update({"font.size": 12, "font.family": "DejaVu Sans", "axes.spines.top": False,
+    # At the narrower six-inch print width, 13pt figure labels retain an
+    # effective size above the library's 10pt minimum (13 * 6 / 7.6).
+    plt.rcParams.update({"font.size": 13, "font.family": "DejaVu Sans", "axes.spines.top": False,
                         "axes.spines.right": False, "savefig.dpi": 240})
     fig, axes = plt.subplots(2, 2, figsize=(7.6, 6.3), constrained_layout=True)
     for ax, domain in zip(axes.flat, ["arc", "gpqa", "gsm8k", "math"]):
@@ -83,7 +94,7 @@ def build_figures(boundary: pd.DataFrame, detector: pd.DataFrame, replay: pd.Dat
                         color="#D55E00", alpha=.16)
         ax.axhline(0, color="0.3", linewidth=.7)
         ax.set(title=domain.upper(), xlabel="Current response step", ylabel="Accuracy or net gain")
-    axes[0, 0].legend(fontsize=12)
+    axes[0, 0].legend(fontsize=13)
     fig.savefig(IMAGES / "population_transitions.png")
     plt.close(fig)
     chosen = detector.iloc[:7].copy()
@@ -105,7 +116,7 @@ def build_figures(boundary: pd.DataFrame, detector: pd.DataFrame, replay: pd.Dat
             offset = {"confidence_80": (-36, 32), "confidence_90": (28, 18),
                       "confidence_95": (-15, -30), "never": (-6, 12)}.get(row.policy, (8, 9))
             ax.annotate(row.policy.replace("confidence_", "conf ").replace("fixed_", "step "),
-                        (x, row.active_accuracy), xytext=offset, textcoords="offset points", fontsize=12,
+                        (x, row.active_accuracy), xytext=offset, textcoords="offset points", fontsize=13,
                         ha="right" if row.policy in ("confidence_80", "confidence_95", "never") else "left",
                         arrowprops={"arrowstyle": "-", "color": "#0072B2", "lw": .7})
         ax.margins(x=.07, y=.16)
@@ -127,7 +138,7 @@ def build_figures(boundary: pd.DataFrame, detector: pd.DataFrame, replay: pd.Dat
                        learned["active_accuracy"], "#0072B2", (28, 15))]
             for label, x, y, color, offset in points:
                 ax.scatter(x, y, color=color, s=45)
-                ax.annotate(label, (x, y), xytext=offset, textcoords="offset points", fontsize=12,
+                ax.annotate(label, (x, y), xytext=offset, textcoords="offset points", fontsize=13,
                             ha="center", arrowprops={"arrowstyle": "-", "color": color, "lw": .7})
             ax.set(title=title, xlabel="Completion tokens / full horizon", ylabel="Answer accuracy",
                    xlim=(.35, 1.12), ylim=(.0, .11))
@@ -165,8 +176,9 @@ def evidence_inserts(allow_pending: bool) -> dict[str, str]:
     results = {
         "CORPUS_TABLE": table(["Domain", "Effective split", "Tasks", "Trajectories", "Rows"], counts, "Table 1. Standardized five-step corpus."),
         "MODEL_TABLE": table(["Model ID", "Recorded scale", "Membership"], list(roster.values()), "Table 2. Model configurations. Source: cell metadata."),
-        "BOUNDARY_TABLE": table(["Step", "Accuracy", "Repair count", "Repair prob.", "Corruption count", "Corruption prob.", "Net gain", "95% interval"], rows,
-                                "Table 3. GSM8K transition panel; 19,500 trajectories and 500 task clusters per row."),
+        "BOUNDARY_TABLE": table(["Step", "Accuracy", "Repair events / at risk<br>Probability", "Corruption events / at risk<br>Probability", "Net gain<br>95% interval"],
+                                [[r[0], r[1], f"{r[2]}<br>{r[3]}", f"{r[4]}<br>{r[5]}", f"{r[6]}<br>{r[7]}"] for r in rows],
+                                "Table 3. GSM8K transition panel; 19,500 trajectories and 500 task clusters per row. Event cells give the count and at-risk denominator above the conditional probability; the final column gives net gain above its 95% interval."),
         "CONTROLLED_TABLE": table(["Arm", "Units", "Matched effect", "95% interval", "Endpoint"],
             [[r.experiment, f"{int(r.n_units):,}", f"{r.mean_controlled_effect:+.5f}",
               f"[{r.ci_95_low:+.5f}, {r.ci_95_high:+.5f}]", r.effect_unit] for _, r in controlled.iterrows()],
@@ -251,7 +263,12 @@ def evidence_inserts(allow_pending: bool) -> dict[str, str]:
         "**Figure 4.** Actual generated arms on two development panels. Each learned arm reuses its panel's "
         "actually generated full-horizon baseline and stops at step two on every task. The plotted point "
         "therefore supplies no evidence of adaptation beyond a fixed-two-step budget. Point estimates "
-        "omit uncertainty, which is reported in Tables 8, 9, 11 and 12.") if actual_figure.exists() else pending
+        "omit uncertainty, which is reported in Tables 9, 10, 12 and 13.") if actual_figure.exists() else pending
+    # Reserve Table 1 for the mathematical scope table, which precedes the
+    # experimental evidence in the final manuscript.
+    for key, value in results.items():
+        results[key] = re.sub(r"Table (\d+)\.",
+                             lambda match: f"Table {int(match[1]) + 1}.", value)
     return results
 
 
@@ -260,6 +277,35 @@ def sync_theory() -> None:
     start = source.index("## 1.")
     end = source.index("## 9.")
     theory = source[start:end]
+    theory = theory.replace(
+        "All observations, executed peer calls, verifier outputs, and controller",
+        "For empirical evaluation, correctness is the versioned domain grader "
+        "$C_t=g_d(A_t,Y^*)\\in\\{0,1\\}$. Exact answer equality is the special "
+        "case displayed above. The binary-reward arguments remain unchanged "
+        "for this grading predicate. This notation identifies the measured "
+        "endpoint; it does not certify semantic correctness of every stored label. "
+        "Appendix F illustrates the information restrictions and delayed-repair counterexample.\n\n"
+        "All observations, executed peer calls, verifier outputs, and controller")
+    theory = theory.replace(
+        "$\\mathcal B_t$ is the candidate set available at $t$.",
+        "$\\mathcal B_t$ is the candidate set available at $t$. With the empirical "
+        "grading predicate, the analogous immediate reward is "
+        "$\\max_{a\\in\\mathcal B_t}\\mathbb E[g_d(a,Y^*)\\mid\\mathcal F_t]$.")
+    # Reflow this wide display only in the manuscript. The canonical frozen
+    # mathematical source and its historical manifest remain byte-identical.
+    theory = theory.replace(
+        "\\widetilde q_t=\\mathbb P(C_t=1\\mid Z_t),\\quad\n"
+        "\\widetilde\\alpha_t=\\mathbb P(C_{t+1}=1\\mid C_t=0,Z_t),\\quad\n"
+        "\\widetilde\\beta_t=\\mathbb P(C_{t+1}=0\\mid C_t=1,Z_t).",
+        "\\begin{aligned}\n"
+        "\\widetilde q_t&=\\mathbb P(C_t=1\\mid Z_t),\\\\\n"
+        "\\widetilde\\alpha_t&=\\mathbb P(C_{t+1}=1\\mid C_t=0,Z_t),\\\\\n"
+        "\\widetilde\\beta_t&=\\mathbb P(C_{t+1}=0\\mid C_t=1,Z_t).\n"
+        "\\end{aligned}")
+    theory = theory.replace(
+        "| Mathematical object | Required information or assumptions | Defensible interpretation |",
+        "**Table 1. Mathematical objects and assumptions.**\n\n"
+        "| Mathematical object | Required information or assumptions | Defensible interpretation |")
     theory = re.sub(r"^## (\d+)\.\s*", lambda m: f"## 2.{m[1]} ", theory, flags=re.M)
     (DOCS / "chapters/chapter2_theory.md").write_text(
         "# Chapter 2 Mathematical formulation and stopping theory\n\n" + theory,
@@ -276,7 +322,13 @@ def html_math(source: str, runtime: Path, key: str) -> str:
         expressions.append({"tex": (match[1] if match[1] is not None else match[2]).strip(),
                             "display": match[1] is not None})
         return f"MATHPLACEHOLDER{index}END"
-    protected = pattern.sub(protect, source)
+    code_blocks = []
+    def protect_code(match: re.Match) -> str:
+        index = len(code_blocks)
+        code_blocks.append(match[0])
+        return f"CODEBLOCKPLACEHOLDER{index}END"
+    prose = re.sub(r"```[^\n]*\n.*?```|`[^`\n]+`", protect_code, source, flags=re.S)
+    protected = pattern.sub(protect, prose)
     if re.search(r"(?<!\\)\$", protected):
         raise ValueError(f"Unmatched math delimiter in {key}")
     input_path, rendered_path = WORK / f"{key}_math.json", WORK / f"{key}_math_rendered.json"
@@ -284,15 +336,46 @@ def html_math(source: str, runtime: Path, key: str) -> str:
     subprocess.run(["node", str(ROOT / "tools/render_thesis_math.mjs"), str(runtime),
                     str(input_path), str(rendered_path)], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
     rendered = read_json(rendered_path)
+    for index, value in enumerate(code_blocks):
+        protected = protected.replace(f"CODEBLOCKPLACEHOLDER{index}END", value)
     content = markdown.markdown(protected, extensions=["tables", "fenced_code"])
+    if len(re.findall(r"<table>", content)) != len(re.findall(r"<p><strong>Table \d+\.", content)):
+        raise ValueError(f"Every manuscript table must have a numbered caption in {key}")
     # Keep each numbered caption with its table and keep these short evidence
     # tables intact. A repeated header alone does not prevent orphan captions.
     content = re.sub(r'(<p><strong>Table \d+\..*?</strong></p>\s*<table>.*?</table>)',
                      r'<div class="table-block">\1</div>', content, flags=re.S)
     content = re.sub(r'(<p><img\b[^>]*></p>\s*<p><strong>Figure \d+\.</strong>.*?</p>)',
                      r'<div class="figure-block">\1</div>', content, flags=re.S)
+    # Keep short proof conclusions together; equations can otherwise defeat
+    # the browser's usual widow/orphan count at a page boundary.
+    content = re.sub(r'<p>((?:(?!</?p>).)*?□)</p>',
+                     lambda match: '<p class="proof-ending">' + match[1] + '</p>'
+                     if len(re.sub(r'<[^>]+>', '', match[1]).split()) <= 80 else match[0],
+                     content, flags=re.S)
     for index, value in enumerate(rendered):
-        content = content.replace(f"MATHPLACEHOLDER{index}END", value)
+        token = f"MATHPLACEHOLDER{index}END"
+        if expressions[index]["display"]:
+            pattern = rf"(<p>(?:(?!</?p>).)*?</p>)(\s*<p>{token}</p>)"
+            content = re.sub(pattern, r'<div class="math-intro">\1\2</div>', content, flags=re.S)
+            content = content.replace(token, value)
+        else:
+            # KaTeX permits breaks between its base spans. Bind punctuation
+            # inside the final base so it cannot start the next line. Short
+            # expressions also stay intact across lines and pages.
+            def inline(match: re.Match) -> str:
+                punctuation = match[1] or ""
+                result = value
+                if punctuation:
+                    fragments = result.rsplit("</span>", 3)
+                    if len(fragments) != 4:
+                        raise ValueError(f"Unexpected inline KaTeX structure in {key}")
+                    fragments[0] += '<span class="math-punctuation">' + punctuation + '</span>'
+                    result = "</span>".join(fragments)
+                if len(expressions[index]["tex"]) <= 80:
+                    result = '<span class="math-inline-short">' + result + '</span>'
+                return result
+            content = re.sub(rf"{token}([.,;:!?])?", inline, content)
     return content
 
 
@@ -300,21 +383,28 @@ def print_chapter(source: str, name: str, chrome: Path, runtime: Path) -> Path:
     content = html_math(source, runtime, name)
     css_path = runtime / "node_modules/katex/dist/katex.min.css"
     css = """
-    @page {size:letter; margin:1in 1in 1.35in 1in;}
+    @page {size:letter; margin:1in 1in 1.35in LEFTMARGIN;}
     body {font-family:Arial,sans-serif; font-size:12pt; line-height:2; color:#111; margin:0;}
-    p {margin:0 0 12pt;} h1 {font-size:18pt;line-height:1.35;margin:0 0 25pt;break-after:avoid;}
+    p {margin:0 0 12pt;orphans:2;widows:2;} h1 {font-size:18pt;line-height:1.35;margin:0 0 25pt;break-after:avoid;break-before:page;}
+    h1:first-child {break-before:auto;}
     h2 {font-size:14pt;line-height:1.4;margin:21pt 0 11pt;break-after:avoid;}
     h3 {font-size:12pt;line-height:1.4;margin:15pt 0 9pt;break-after:avoid;}
-    table {font-size:10pt;line-height:1.35;border-collapse:collapse;width:100%;margin:12pt 0 18pt;break-inside:avoid;}
+    table {font-size:10.1pt;line-height:1.35;border-collapse:collapse;width:100%;margin:12pt 0 18pt;break-inside:avoid;}
     .table-block {break-inside:avoid;}
     .figure-block {break-inside:avoid;}
-    th {text-align:left;border-bottom:1pt solid #333;} td,th {padding:6pt 4pt;vertical-align:top;}
+    .math-intro {break-inside:avoid;}
+    .proof-ending {break-inside:avoid;}
+    .math-inline-short {white-space:nowrap;}
+    .math-punctuation {font-family:Arial,sans-serif;font-size:12pt;}
+    th {text-align:left;border-bottom:1pt solid #333;} td,th {padding:6pt 4pt;vertical-align:top;overflow-wrap:anywhere;}
     tr {break-inside:avoid;} td {border-bottom:.4pt solid #bbb;} thead {display:table-header-group;}
-    code {font-size:10pt;overflow-wrap:anywhere;} pre {font-size:10pt;line-height:1.4;white-space:pre-wrap;}
+    code {font-size:10.1pt;overflow-wrap:anywhere;} pre {font-size:10.1pt;line-height:1.4;white-space:pre;}
+    pre code {overflow-wrap:normal;}
     img {width:100%;height:auto;break-inside:avoid;} a {color:#222;overflow-wrap:anywhere;text-decoration:none;}
     .katex {font-size:1.03em;} .katex-display {margin:14pt 0;line-height:1.2;break-inside:avoid;}
     blockquote {margin:12pt 15pt;font-size:11pt;}
     """
+    css = css.replace("LEFTMARGIN", f"{LEFT / 72:g}in")
     page = (f'<!doctype html><html><head><meta charset="utf-8"><base href="{DOCS.as_uri()}/">'
             f'<link rel="stylesheet" href="{css_path.as_uri()}"><style>{css}</style></head><body>{content}</body></html>')
     input_path, output_path = WORK / f"{name}.html", WORK / f"{name}.pdf"
@@ -339,81 +429,159 @@ def roman(value: int) -> str:
     return "".join(parts)
 
 
-def wrap_canvas(c: canvas.Canvas, text: str, y: float, *, size: int = 12, leading: int = 24) -> float:
-    c.setFont("ThesisArial", size)
+def canvas_lines(text: str, size: float, width: float) -> list[str]:
+    lines = []
     line = ""
     for word in text.split():
         candidate = f"{line} {word}".strip()
-        if pdfmetrics.stringWidth(candidate, "ThesisArial", size) > 468:
-            c.drawString(72, y, line)
-            y -= leading
+        if line and pdfmetrics.stringWidth(candidate, "ThesisArial", size) > width:
+            lines.append(line)
             line = word
         else:
             line = candidate
     if line:
-        c.drawString(72, y, line)
+        lines.append(line)
+    return lines
+
+
+def wrap_canvas(c: canvas.Canvas, text: str, y: float, *, size: float = 12,
+                leading: float = 24, width: float | None = None) -> float:
+    c.setFont("ThesisArial", size)
+    for line in canvas_lines(text, size, width or RIGHT - LEFT):
+        c.drawString(LEFT, y, line)
         y -= leading
     return y
 
 
-def front_matter(chapter_lengths: list[int], chapter_titles: list[str], figure_pages: list[int], table_pages: list[int], appendix_entries: list[tuple[str, int]]) -> Path:
+def caption_titles(sources: list[str], kind: str) -> list[str]:
+    # A list repeats the caption's title sentence; subsequent sentences explain it.
+    found = {}
+    pattern = rf"\*\*{kind} (\d+)\.(?:\*\*)?\s*([^\n]+)"
+    for source in sources:
+        for match in re.finditer(pattern, source):
+            text = match[2].replace("**", "").strip()
+            title = re.split(r"(?<=\.)\s+", text, maxsplit=1)[0]
+            number = int(match[1])
+            if number in found:
+                raise ValueError(f"Duplicate {kind} caption: {number}")
+            found[number] = title
+    if sorted(found) != list(range(1, len(found) + 1)):
+        raise ValueError(f"Nonconsecutive {kind} captions: {sorted(found)}")
+    return [found[i] for i in sorted(found)]
+
+
+def list_layout(kind: str, labels: list[str], pages: list[int]) -> list[list[tuple[list[str], int]]]:
+    chunks = [[]]
+    y = 670
+    for index, (label, page) in enumerate(zip(labels, pages), 1):
+        lines = canvas_lines(f"{kind} {index}. {label}", 11, RIGHT - LEFT - 38)
+        height = len(lines) * 16 + 12
+        if y - height < 108:
+            chunks.append([])
+            y = 670
+        chunks[-1].append((lines, page))
+        y -= height
+    return chunks
+
+
+def front_matter(chapter_lengths: list[int], chapter_titles: list[str],
+                 figure_pages: list[int], table_pages: list[int],
+                 appendix_entries: list[tuple[str, int]],
+                 figures: list[str], tables: list[str],
+                 body_entries: list[tuple[int, str, int]]) -> tuple[Path, list[tuple[str, int]]]:
     pdfmetrics.registerFont(TTFont("ThesisArial", str(FONT)))
+    if len(ABSTRACT.split()) > 350:
+        raise ValueError("Abstract exceeds the JHU 350-word limit")
+    table_chunks = list_layout("Table", tables, table_pages)
+    figure_chunks = list_layout("Figure", figures, figure_pages)
+    def contents_layout(front_entries):
+        entries = [(1, title, roman(page)) for title, page in front_entries
+                   if title != "Table of contents"]
+        entries.extend((level, title, str(page)) for level, title, page in body_entries)
+        chunks = [[]]
+        y = 670
+        for index, (level, title, label) in enumerate(entries):
+            indent = (level - 1) * 14
+            lines = canvas_lines(title, 11, RIGHT - LEFT - 38 - indent)
+            height = len(lines) * 16 + (10 if level == 1 else 4)
+            reserve = 0
+            if index + 1 < len(entries) and entries[index + 1][0] > level:
+                next_level, next_title, _ = entries[index + 1]
+                reserve = len(canvas_lines(next_title, 11,
+                              RIGHT - LEFT - 38 - (next_level - 1) * 14)) * 16 + 4
+            if y - height - reserve < 108:
+                chunks.append([])
+                y = 670
+            chunks[-1].append((indent, lines, label, height))
+            y -= height
+        return chunks
+
+    # The linked JHU front-matter example includes chapter and section titles.
+    # Compute list positions from the expanded, paginated contents itself.
+    front_entries = [("Abstract", 2), ("Table of contents", 3),
+                     ("List of tables", 4), ("List of figures", 4 + len(table_chunks))]
+    contents_chunks = contents_layout(front_entries)
+    front_entries = [("Abstract", 2), ("Table of contents", 3),
+                     ("List of tables", 3 + len(contents_chunks)),
+                     ("List of figures", 3 + len(contents_chunks) + len(table_chunks))]
+    contents_chunks = contents_layout(front_entries)
+    assert front_entries[2][1] == 3 + len(contents_chunks)
     path = WORK / "front.pdf"
-    c = canvas.Canvas(str(path), pagesize=(612,792), initialFontName="ThesisArial")
+    c = canvas.Canvas(str(path), pagesize=(612, 792), initialFontName="ThesisArial")
+    center = (LEFT + RIGHT) / 2
     c.setFont("ThesisArial", 16)
-    for y, text in [(684,"COST AWARE STOPPING BOUNDARIES"),(660,"IN REASONING LANGUAGE MODELS")]:
-        c.drawCentredString(306, y, text)
-    c.setFont("ThesisArial",12)
-    c.drawCentredString(306, 580, "by")
-    c.drawCentredString(306, 556, "Aditya Bhatt")
-    for y, text in [(445,"A thesis submitted to Johns Hopkins University"),(421,"in conformity with the requirements for the degree of"),
-                    (397,"Master of Science in Applied and Computational Mathematics"),(349,"Baltimore, Maryland"),(325,"October 2026")]:
-        c.drawCentredString(306,y,text)
+    first_y = 792 - 108 - pdfmetrics.getAscent("ThesisArial", 16)
+    title_lines = ["COST AWARE STOPPING BOUNDARIES", "IN REASONING LANGUAGE MODELS"]
+    for index, text in enumerate(title_lines):
+        c.drawCentredString(center, first_y - index * 24, text)
+    by_y = first_y - 24 - 72
+    author_y = by_y - 12
+    c.setFont("ThesisArial", 12)
+    c.drawCentredString(center, by_y, "by")
+    c.drawCentredString(center, author_y, "Aditya Bhatt")
+    statement = "A thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science"
+    y = author_y - 108
+    statement_lines = canvas_lines(statement, 12, RIGHT - LEFT)
+    for line in statement_lines:
+        c.drawCentredString(center, y, line)
+        y -= 18
+    location_y = y + 18 - 36
+    c.drawCentredString(center, location_y, "Baltimore, Maryland")
+    c.drawCentredString(center, location_y - 12, SUBMISSION_DATE)
     c.showPage()
-    c.setFont("ThesisArial",16)
-    c.drawString(72,700,"Abstract")
-    abstract = ("Additional reasoning can repair an incorrect answer, replace a correct answer, or consume computation without sufficient improvement. "
-        "This thesis formulates response-level stopping as a finite-horizon decision based on observable prefixes and hidden correctness. "
-        "It proves the binary repair-corruption drift identity and the Bellman/Snell optimal stopping result, gives a sufficient persistence condition for a drift-sign rule, "
-        "and constructs exact counterexamples to unconditional myopic optimality. "
-        "The experimental record separates a variable-horizon matrix from a standardized corpus of 144,440 saved rows, 28,888 trajectories, and 2,948 tasks. "
-        "Recomputed cluster-based tables show model- and domain-dependent continuation value and matched effects of estimator, token-cap, and precision changes. "
-        "The historical stacked ROC-AUC of 0.955156 is retained as a retrospective non-nested diagnostic, rather than an online performance guarantee. "
-        "A fitted prefix controller enforces a two-step floor and prevents future generation after stopping. "
-        "On 100 new GSM8K questions, its actual arm saves 56.51 percent of completion tokens with 7 correct answers versus 6 at the full horizon. "
-        "On 20 traps it saves 52.11 percent, with one correct answer in each arm. "
-        "Every learned run stops at step two; adaptive benefit and accuracy noninferiority remain unestablished. "
-        "The results support causal, cost-sensitive stopping experiments while leaving stronger calibration, universal optimality, and external noninferiority claims unestablished.")
-    end = wrap_canvas(c,abstract,675)
-    wrap_canvas(c,"Research draft v1.0 for committee review. Defense, approval, final PDF/A validation, and institutional acceptance are pending.",end-18,size=10,leading=18)
+    c.setFont("ThesisArial", 16)
+    c.drawString(LEFT, 700, "Abstract")
+    end = wrap_canvas(c, ABSTRACT, 675)
+    if end - 44 < 108:
+        raise ValueError("Abstract and reader names do not fit within the page margins")
+    end = wrap_canvas(c, "Research adviser: Zerotti Woods", end - 12, size=11, leading=16)
+    wrap_canvas(c, "Second reader: Moustapha Pemy", end, size=11, leading=16)
     c.showPage()
-    c.setFont("ThesisArial",16)
-    c.drawString(72,700,"Table of contents")
-    y, start = 670, 1
-    for title, length in zip(chapter_titles, chapter_lengths):
-        c.setFont("ThesisArial",11)
-        c.drawString(72,y,title)
-        c.drawRightString(540,y,str(start))
-        start += length
-        y -= 36
-    for title, page in appendix_entries:
-        c.setFont("ThesisArial",11)
-        c.drawString(72,y,title)
-        c.drawRightString(540,y,str(page))
-        y -= 36
-    c.showPage()
-    for title, labels, pages in [("List of figures", FIGURES, figure_pages),("List of tables", TABLES, table_pages)]:
-        c.setFont("ThesisArial",16)
-        c.drawString(72,700,title)
-        y=670
-        for index,(label,page) in enumerate(zip(labels,pages),1):
-            y=wrap_canvas(c,f"{index}. {label}",y,size=11,leading=18)
-            c.setFont("ThesisArial",11)
-            c.drawRightString(540,y+18,str(page))
-            y-=18
+    for chunk_index, chunk in enumerate(contents_chunks):
+        c.setFont("ThesisArial", 16)
+        c.drawString(LEFT, 700, "Table of contents" + (" (continued)" if chunk_index else ""))
+        y = 670
+        for indent, lines, label, height in chunk:
+            c.setFont("ThesisArial", 11)
+            for line_index, line in enumerate(lines):
+                c.drawString(LEFT + indent, y - line_index * 16, line)
+            c.drawRightString(RIGHT, y, label)
+            y -= height
         c.showPage()
+    for title, chunks in [("List of tables", table_chunks), ("List of figures", figure_chunks)]:
+        for chunk_index, chunk in enumerate(chunks):
+            c.setFont("ThesisArial", 16)
+            c.drawString(LEFT, 700, title + (" (continued)" if chunk_index else ""))
+            y = 670
+            for lines, page in chunk:
+                c.setFont("ThesisArial", 11)
+                for line_index, line in enumerate(lines):
+                    c.drawString(LEFT, y - line_index * 16, line)
+                c.drawRightString(RIGHT, y, str(page))
+                y -= len(lines) * 16 + 12
+            c.showPage()
     c.save()
-    return path
+    return path, front_entries
 
 
 def inspect_pdf(document: fitz.Document) -> dict:
@@ -427,8 +595,8 @@ def inspect_pdf(document: fitz.Document) -> dict:
             for line in block["lines"]:
                 for span in line["spans"]:
                     x0,y0,x1,y1=span["bbox"]
-                    if x0 < 70 or x1 > 542 or y0 < 68 or y1 > 725:
-                        defects.append({"page":page_index+1,"error":"text outside digital margins","text":span["text"],"bbox":span["bbox"]})
+                    if x0 < LEFT - 2 or x1 > RIGHT + 2 or y0 < 70 or y1 > 723:
+                        defects.append({"page":page_index+1,"error":"text outside edition margins","text":span["text"],"bbox":span["bbox"]})
     if defects:
         (WORK/"layout_defects.json").write_text(json.dumps(defects,indent=2),encoding="utf-8")
         raise RuntimeError(f"PDF layout has {len(defects)} defects; see {WORK/'layout_defects.json'}")
@@ -445,21 +613,40 @@ def inspect_pdf(document: fitz.Document) -> dict:
 
 
 def main() -> None:
+    global WORK, OUTPUT, IMAGES, LEFT, SUBMISSION_DATE
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--allow-pending-live",action="store_true")
+    parser.add_argument("--edition", choices=["digital", "print"], default="digital")
+    parser.add_argument("--document-version", choices=["v2", "v3", "v4"], default="v4")
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--submission-date", default="October 2026")
     parser.add_argument("--chrome",type=Path,default=Path("C:/Program Files/Google/Chrome/Application/chrome.exe"))
     args=parser.parse_args()
+    import datetime
+    datetime.datetime.strptime(args.submission_date, "%B %Y")
+    SUBMISSION_DATE = args.submission_date
+    LEFT = 108 if args.edition == "print" else 72
+    WORK = ROOT / "tmp/pdfs/formal_thesis" / args.document_version / args.edition
+    OUTPUT = args.output.resolve() if args.output else WORK / "source.pdf"
+    IMAGES = DOCS / "images/thesis_v2"
+    formal_docs = DOCS / "formal"
+    formal_docs.mkdir(parents=True, exist_ok=True)
     for path in (WORK, IMAGES, OUTPUT.parent):
         path.mkdir(parents=True,exist_ok=True)
     runtime=ROOT/"tmp/thesis_pdf_runtime"
     if not (runtime/"node_modules/katex/dist/katex.min.css").is_file():
         raise FileNotFoundError("Install the pinned KaTeX renderer as documented in this script.")
     sync_theory()
+    if args.document_version == "v4":
+        from build_thesis_explanatory_figures import build as build_explanatory_figures
+        build_explanatory_figures()
     inserts=evidence_inserts(args.allow_pending_live)
     sources=[DOCS/"chapters"/name for name in CHAPTERS]+[DOCS/"references.md",DOCS/"appendices.md"]
     reference_source=(DOCS/"references.md").read_text(encoding="utf-8")
     ref_keys=re.findall(r"^\[([A-Za-z0-9]+)\]",reference_source,re.M)
     citations={key:str(index+1) for index,key in enumerate(ref_keys)}
+    if len(citations) != len(ref_keys):
+        raise ValueError("Duplicate bibliography keys")
     rendered_sources=[]
     for path in sources:
         source=path.read_text(encoding="utf-8")
@@ -467,12 +654,23 @@ def main() -> None:
             source=source.replace(f"[[{key}]]",value)
         if re.search(r"\[\[[A-Z_]+\]\]",source):
             raise ValueError(f"Unresolved manuscript insert in {path}")
+        citation_text = re.sub(r"```[^\n]*\n.*?```|`[^`\n]+`", "", source, flags=re.S)
+        citation_text = re.sub(r"\$\$(.+?)\$\$|(?<!\\)\$([^$]+?)(?<!\\)\$", "", citation_text, flags=re.S)
+        named_citations = set(re.findall(r"\[([A-Za-z][A-Za-z0-9]+)\](?!\()", citation_text))
+        unknown = named_citations - citations.keys()
+        if unknown:
+            raise ValueError(f"Unresolved bibliography keys in {path}: {sorted(unknown)}")
         for key,value in citations.items():
             source=source.replace(f"[{key}]",f"[{value}]")
+        source=source.replace("images/thesis_v1/", "images/thesis_v2/")
         source=source.translate(str.maketrans({c:"-" for c in "\u2010\u2011\u2012\u2013\u2014\u2015"}))
         rendered_sources.append(source)
-    compiled="\n\n".join([f"# {TITLE}\n\nAditya Bhatt. Research draft v1.0. October 2026."]+rendered_sources)
-    (DOCS/"Masters_Thesis_Draft_v1.md").write_text(compiled,encoding="utf-8",newline="\n")
+    compiled_front = (f"# {TITLE}\n\nby\n\nAditya Bhatt\n\n"
+        "A thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science\n\n"
+        f"Baltimore, Maryland\n\n{SUBMISSION_DATE}\n\n# Abstract\n\n{ABSTRACT}\n\n"
+        "Research adviser: Zerotti Woods\n\nSecond reader: Moustapha Pemy")
+    compiled="\n\n".join([compiled_front]+rendered_sources)
+    (DOCS/f"Masters_Thesis_Formal_{args.document_version}.md").write_text(compiled,encoding="utf-8",newline="\n")
     parts=[]
     for index,source in enumerate(rendered_sources):
         parts.append(print_chapter(source,f"part_{index+1}",args.chrome,runtime))
@@ -486,34 +684,61 @@ def main() -> None:
             body.insert_pdf(section)
     def locate(label: str) -> int:
         for index,page in enumerate(body):
-            if label in page.get_text():
+            # Chrome may wrap immediately after a hyphen inside a heading.
+            if re.sub(r"\s+", "", label) in re.sub(r"\s+", "", page.get_text()):
                 return index+1
         raise ValueError(f"Caption not found in PDF: {label}")
-    figure_pages=[locate(f"Figure {i}.") for i in range(1,len(FIGURES)+1)]
-    table_pages=[locate(f"Table {i}.") for i in range(1,len(TABLES)+1)]
+    figures = caption_titles(rendered_sources, "Figure")
+    tables = caption_titles(rendered_sources, "Table")
+    figure_pages=[locate(f"Figure {i}.") for i in range(1,len(figures)+1)]
+    table_pages=[locate(f"Table {i}.") for i in range(1,len(tables)+1)]
     titles=[source.splitlines()[0].lstrip("# ") for source in rendered_sources]
     appendix_entries=[(title, locate(title)) for title in re.findall(r"^# (Appendix [B-Z][^\n]*)", rendered_sources[-1], re.M)]
-    front=front_matter(lengths,titles,figure_pages,table_pages,appendix_entries)
+    body_entries = [(len(m[1]), m[2], locate(m[2])) for source in rendered_sources
+                    for m in re.finditer(r"^(#{1,3}) ([^\n]+)$", source, re.M)]
+    front, front_entries = front_matter(lengths,titles,figure_pages,table_pages,appendix_entries,figures,tables,body_entries)
     final=fitz.open(front)
     front_count=len(final)
     final.insert_pdf(body)
-    for index,page in enumerate(final):
-        if index==0:
-            continue
-        label=roman(index+1) if index<front_count else str(index-front_count+1)
-        page.insert_font(fontname="ThesisPageArial",fontfile=str(FONT))
-        width=fitz.Font(fontfile=str(FONT)).text_length(label,fontsize=10)
-        page.insert_text((306-width/2,717),label,fontsize=10,fontname="ThesisPageArial")
+    # ReportLab subsets the folio font to valid mappings. The earlier full-font
+    # insertion included six unused malformed supplementary Unicode ranges.
+    folio_path = WORK / "folios.pdf"
+    folios = canvas.Canvas(str(folio_path),pagesize=(612,792),initialFontName="ThesisArial")
+    for index in range(len(final)):
+        if index:
+            label=roman(index+1) if index<front_count else str(index-front_count+1)
+            folios.setFont("ThesisArial",10)
+            folios.drawCentredString(306,75,label)
+        folios.showPage()
+    folios.save()
+    with fitz.open(folio_path) as overlay:
+        for index in range(1,len(final)):
+            final[index].show_pdf_page(final[index].rect,overlay,index)
     # ReportLab creates an unused base-font resource. Purge unused resources,
     # then require every retained font object to have embedded font data.
     for page in final:
         page.clean_contents(sanitize=True)
-    final.set_toc([[1,title,front_count+start] for title,start in zip(titles,starts)] +
-                  [[1,title,front_count+start] for title,start in appendix_entries])
-    final.set_metadata({"title":TITLE,"author":"Aditya Bhatt","subject":"Research thesis draft v1.0; committee approval pending"})
+    final.set_toc([[1,title,page] for title,page in front_entries] +
+                  [[level,title,front_count+start] for level,title,start in body_entries])
+    final.set_metadata({"title":TITLE,"author":"Aditya Bhatt","subject":"Master of Science thesis, Applied and Computational Mathematics"})
+    final.xref_set_key(final.pdf_catalog(), "Lang", "(en-US)")
+    final.set_page_labels([{"startpage":0,"prefix":"","style":"r","firstpagenum":1},
+                          {"startpage":front_count,"prefix":"","style":"D","firstpagenum":1}])
     audit=inspect_pdf(final)
     final.save(OUTPUT,garbage=4,deflate=True)
+    # Garbage collection deduplicates retained font objects. Audit the saved
+    # file so the receipt reports the actual final count rather than memory.
+    with fitz.open(OUTPUT) as saved:
+        audit=inspect_pdf(saved)
     manifest={"output":OUTPUT.relative_to(ROOT).as_posix(),"sha256":sha(OUTPUT),"audit":audit,
+              "schema":f"formal-thesis-build-{args.document_version}","edition":args.edition,
+              "main_builder_sha256":sha(Path(__file__)),
+              "contents_body_entries":[{"level":level,"title":title,"body_page":page}
+                                      for level,title,page in body_entries],
+              "submission_month_year":SUBMISSION_DATE,"front_matter_pages":front_count,
+              "left_margin_inches":LEFT/72,"other_minimum_margins_inches":1,
+              "abstract_words":len(ABSTRACT.split()),"figure_titles":figures,"table_titles":tables,
+              "figure_body_pages":figure_pages,"table_body_pages":table_pages,
               "source_files":{p.relative_to(ROOT).as_posix():sha(p) for p in sources},
               "canonical_math_source_sha256":sha(ROOT/"research/mathematical_foundations.md"),
               "evidence_manifest_sha256":sha(EVIDENCE/"manifest.json"),"katex":"0.19.0",
@@ -522,7 +747,7 @@ def main() -> None:
               "word_count":len(re.findall(r"\b[\w'-]+\b",compiled)),
               "interim_live_results_permitted":args.allow_pending_live,
               "visual_review":"required after this build; machine checks alone do not prove visual quality"}
-    (DOCS/"thesis_build_manifest.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8",newline="\n")
+    (formal_docs/f"build_manifest_{args.edition}_{args.document_version}.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8",newline="\n")
     review=WORK/"rendered"
     review.mkdir(exist_ok=True)
     for index,page in enumerate(final):

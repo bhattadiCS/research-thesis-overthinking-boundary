@@ -1,0 +1,88 @@
+commit 6f832ea47f862f641c9fc8788c0ae764cd2e5726
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sat Jun 20 11:05:07 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sat Jun 20 11:05:07 2026 -0400
+
+    fix: correct canonical boundary operator + regenerate all results out-of-sample
+    
+    generate_thesis_artifacts.first_zero_crossing (imported by cross_family) and
+    frontier_validation_report.first_zero_crossing had the same defect as the
+    trace_analysis copy: no t>=2 floor + step-1 fallback -> theory-forbidden step-1
+    boundaries. Now T* = inf{t>=2: drift<=0}, None if never observed.
+    
+    Regenerated every cell (re-graded labels + out-of-sample analysis) and the
+    cross-family report. Net effect of the full remediation:
+    - boundaries: theory-forbidden step-1s gone (weak models now 2); late witnesses
+      unchanged (Qwen 7/14/32 = 5); capability ladder and cross-family conclusion intact.
+    - probe AUC now honest out-of-fold: max 0.91 (Qwen-14B) vs inflated in-sample 0.96;
+      most models 0.65-0.75.
+    - 545/165000 labels corrected by the re-grade.
+    
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+diff --git a/research/frontier_validation_report.py b/research/frontier_validation_report.py
+index b56c8c5..a598333 100644
+--- a/research/frontier_validation_report.py
++++ b/research/frontier_validation_report.py
+@@ -116,18 +116,14 @@ def relative_gain_pct(current: float, baseline: float) -> float:
+     return 100.0 * (current - baseline) / baseline
+ 
+ 
+-def first_zero_crossing(frame: pd.DataFrame, column: str) -> int | None:
++def first_zero_crossing(frame: pd.DataFrame, column: str, t_min: int = 2) -> int | None:
++    # AUDIT FIX: T* = inf{t >= t_min : col(t) <= 0}; None if never observed. The
++    # previous version had no t_min floor and a step-1 fallback (theory-forbidden).
+     valid = frame.dropna(subset=[column]).sort_values("step")
+-    if valid.empty:
+-        return None
+-    previous = None
+-    for _, row in valid.iterrows():
+-        value = float(row[column])
+-        if previous is not None and previous > 0.0 and value <= 0.0:
+-            return int(row["step"])
+-        previous = value
+-    if float(valid.iloc[0][column]) <= 0.0:
+-        return int(valid.iloc[0]["step"])
++    eligible = valid[valid["step"] >= t_min]
++    crossed = eligible[eligible[column] <= 0.0]
++    if len(crossed):
++        return int(crossed.iloc[0]["step"])
+     return None
+ 
+ 
+diff --git a/research/generate_thesis_artifacts.py b/research/generate_thesis_artifacts.py
+index c88c7e1..b0f7585 100644
+--- a/research/generate_thesis_artifacts.py
++++ b/research/generate_thesis_artifacts.py
+@@ -82,18 +82,19 @@ def format_boundary(step: int | None) -> str:
+     return str(step) if step is not None else "not observed"
+ 
+ 
+-def first_zero_crossing(hazard_frame: pd.DataFrame, column: str = "hazard_mu") -> int | None:
++def first_zero_crossing(hazard_frame: pd.DataFrame, column: str = "hazard_mu", t_min: int = 2) -> int | None:
++    # AUDIT FIX: implement T* = inf{t >= t_min : col(t) <= 0}, returning None when
++    # the drift never crosses within the observed window ("not observed"). The
++    # previous version required a strict positive->nonpositive transition, had no
++    # t_min floor, and fell back to step 1 when the first value was already <= 0 --
++    # reporting the theory-forbidden step 1 for several models. Returning None
++    # (rather than the last step) keeps an always-positive-drift run from being
++    # misclassified as a late-boundary witness.
+     valid = hazard_frame.dropna(subset=[column]).sort_values("step")
+-    if valid.empty:
+-        return None
+-    previous = None
+-    for _, row in valid.iterrows():
+-        value = float(row[column])
+-        if previous is not None and previous > 0.0 and value <= 0.0:
+-            return int(row["step"])
+-        previous = value
+-    if float(valid.iloc[0][column]) <= 0.0:
+-        return int(valid.iloc[0]["step"])
++    eligible = valid[valid["step"] >= t_min]
++    crossed = eligible[eligible[column] <= 0.0]
++    if len(crossed):
++        return int(crossed.iloc[0]["step"])
+     return None
+ 
+ 

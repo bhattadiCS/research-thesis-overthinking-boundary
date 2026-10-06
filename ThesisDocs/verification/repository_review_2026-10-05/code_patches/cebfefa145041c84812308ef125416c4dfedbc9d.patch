@@ -1,0 +1,151 @@
+commit cebfefa145041c84812308ef125416c4dfedbc9d
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Wed Apr 1 09:46:25 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Wed Apr 1 09:46:25 2026 -0400
+
+    Auto-shutdown keep-alive hook, concurrency flags, and recent artifact generation
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 55f0bda..1e7a560 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -1,6 +1,7 @@
+ from __future__ import annotations
+ 
+ import argparse
++import concurrent.futures
+ import json
+ import math
+ import re
+@@ -391,9 +392,6 @@ def generate_with_diagnostics(
+             token_entropies = torch.empty(0)
+             pooled_hidden = np.zeros((model.config.hidden_size,), dtype=np.float32)
+ 
+-    if actual_device == "cuda":
+-        torch.cuda.empty_cache()
+-
+     return {
+         "raw_text": raw_text,
+         "generated_tokens": int(generated_length),
+@@ -601,6 +599,7 @@ def main() -> None:
+     parser.add_argument("--system-prompt-mode", default="default", choices=["default", "short", "none"])
+     parser.add_argument("--run-baseline", action="store_true", help="Run competence baseline instead of iterative reasoning")
+     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
++    parser.add_argument("--concurrency", type=int, default=8, help="Number of concurrent generation threads")
+     args = parser.parse_args()
+ 
+     output_dir = Path(args.output_dir)
+@@ -611,26 +610,40 @@ def main() -> None:
+ 
+     all_rows: list[dict[str, Any]] = []
+     all_runs: list[dict[str, Any]] = []
++
++    tasks_to_run = []
+     for task in TASKS[: args.max_tasks]:
+         for temperature in args.temperatures:
+             for seed in args.seeds:
+-                rows, run_summary = run_single_trace(
+-                    model=model,
+-                    tokenizer=tokenizer,
+-                    model_spec=model_spec,
+-                    task=task,
+-                    actual_device=actual_device,
+-                    temperature=temperature,
+-                    seed=seed,
+-                    max_steps=args.max_steps,
+-                    max_new_tokens=args.max_new_tokens,
+-                    hidden_dir=hidden_dir,
+-                    prompt_mode=args.prompt_mode,
+-                    system_prompt_mode=args.system_prompt_mode,
+-                    is_baseline=args.run_baseline,
+-                )
++                tasks_to_run.append((task, temperature, seed))
++
++    with concurrent.futures.ThreadPoolExecutor(max_workers=args.concurrency) as executor:
++        futures = []
++        for task, temperature, seed in tasks_to_run:
++            kwargs = dict(
++                model=model,
++                tokenizer=tokenizer,
++                model_spec=model_spec,
++                task=task,
++                actual_device=actual_device,
++                temperature=temperature,
++                seed=seed,
++                max_steps=args.max_steps,
++                max_new_tokens=args.max_new_tokens,
++                hidden_dir=hidden_dir,
++                prompt_mode=args.prompt_mode,
++                system_prompt_mode=args.system_prompt_mode,
++                is_baseline=args.run_baseline,
++            )
++            futures.append(executor.submit(run_single_trace, **kwargs))
++
++        for future in concurrent.futures.as_completed(futures):
++            try:
++                rows, run_summary = future.result()
+                 all_rows.extend(rows)
+                 all_runs.append(run_summary)
++            except Exception as exc:
++                print(f"A trace generated an exception: {exc}", flush=True)
+ 
+     step_frame = pd.DataFrame(all_rows)
+     run_frame = pd.DataFrame(all_runs)
+diff --git a/tools/run_colab_experiment.py b/tools/run_colab_experiment.py
+index 5be0c2d..83661f3 100644
+--- a/tools/run_colab_experiment.py
++++ b/tools/run_colab_experiment.py
+@@ -96,6 +96,7 @@ def run_real_trace_experiment(
+     output_dir: Path,
+     prompt_mode: str,
+     system_prompt_mode: str,
++    concurrency: int,
+ ) -> None:
+     command = [
+         PYTHON,
+@@ -116,6 +117,8 @@ def run_real_trace_experiment(
+         system_prompt_mode,
+         "--output-dir",
+         str(output_dir),
++        "--concurrency",
++        str(concurrency),
+         "--temperatures",
+     ]
+     command.extend(str(value) for value in temperatures)
+@@ -186,6 +189,7 @@ def main() -> None:
+     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
+     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
+     parser.add_argument("--smoke-output-dir", default=str(DEFAULT_SMOKE_DIR))
++    parser.add_argument("--concurrency", type=int, default=8)
+     args = parser.parse_args()
+ 
+     started_at = time.time()
+@@ -213,6 +217,7 @@ def main() -> None:
+             output_dir=smoke_output_dir,
+             prompt_mode=args.prompt_mode,
+             system_prompt_mode=args.system_prompt_mode,
++            concurrency=args.concurrency,
+         )
+         run_analysis(smoke_output_dir)
+         print_csv(smoke_output_dir / "pilot_summary.csv", "Smoke Pilot Summary")
+@@ -235,6 +240,7 @@ def main() -> None:
+         output_dir=full_output_dir,
+         prompt_mode=args.prompt_mode,
+         system_prompt_mode=args.system_prompt_mode,
++        concurrency=args.concurrency,
+     )
+     run_analysis(full_output_dir)
+ 
+@@ -250,6 +256,11 @@ def main() -> None:
+     print(f"[done] Zipped archive: {archive}", flush=True)
+     print(f"[done] Total runtime: {elapsed_minutes:.2f} minutes", flush=True)
+ 
++    # Trigger Colab automated shutdown to save GPU credits
++    if os.path.exists("/content"):
++        print("[done] Triggering Colab autonomous shutdown...", flush=True)
++        os.system("touch /content/SHUTDOWN_COLAB.txt")
++
+ 
+ if __name__ == "__main__":
+     main()

@@ -1,0 +1,21 @@
+commit 1b5284bdde32c7e074bb4f9a002272eb3da669e6
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Thu Jul 23 09:26:28 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Thu Jul 23 09:26:28 2026 -0400
+
+    fix: add 'ultra' to argparse choices in run_ultimate_blackwell_5day_tournament.py
+
+diff --git a/research/run_ultimate_blackwell_5day_tournament.py b/research/run_ultimate_blackwell_5day_tournament.py
+index 77dac0f..9f1330a 100644
+--- a/research/run_ultimate_blackwell_5day_tournament.py
++++ b/research/run_ultimate_blackwell_5day_tournament.py
+@@ -87,7 +87,7 @@ def parse_args() -> argparse.Namespace:
+     parser.add_argument("--batch-size", type=int, default=256)
+     parser.add_argument("--hidden-dim", type=int, default=256)
+     parser.add_argument("--num-seeds", type=int, default=1)
+-    parser.add_argument("--mode", type=str, default="quick", choices=["quick", "overnight", "marathon"], help="Execution scale: quick (15m), overnight (12h), marathon (5d)")
++    parser.add_argument("--mode", type=str, default="quick", choices=["quick", "overnight", "marathon", "ultra"], help="Execution scale: quick (15m), overnight (12h), marathon (3d), ultra (5d+ deep research)")
+     parser.add_argument("--n-splits", type=int, default=5)
+     parser.add_argument("--bootstrap-draws", type=int, default=10000)
+     parser.add_argument("--seed", type=int, default=20260725)

@@ -1,0 +1,40 @@
+commit 074bc70dcadd49ca4488140f561ca9be77c5d687
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Thu Jul 2 19:20:27 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Thu Jul 2 19:20:27 2026 -0400
+
+    fix: handle NaN in regrade_traces.py row parsing
+    
+    int(row.get("correct", 0)) crashed on hard-kill-corrupted rows with a
+    present-but-NaN value. Fixing this and running the tool for the first
+    time (50/52 cells, dry-run) shows the previously-circulating "165,000
+    labels re-graded, 0.33% flip rate" claim is false, not merely
+    unverified: real numbers are approximately 799K rows and a 1.62% flip
+    rate -- off by about 4.8x on volume and about 5x in the wrong
+    direction on rate.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_016jFunoxRUo9oW212ZjYE14
+
+diff --git a/research/regrade_traces.py b/research/regrade_traces.py
+index 69b9bd4..9813f5e 100644
+--- a/research/regrade_traces.py
++++ b/research/regrade_traces.py
+@@ -49,11 +49,14 @@ def regrade_file(path: Path, dry_run: bool) -> tuple[int, int]:
+                             prompt="", answer_type=atype, expected_answer=exp,
+                             notes="", source=str(row.get("task_source", "")), source_index=-1)
+         correct = int(rte.verify_answer(task, ans))
+-        step = int(row.get("step", 1))
++        step_raw = row.get("step", 1)
++        step = 1 if pd.isna(step_raw) else int(step_raw)
+         new_correct.append(correct)
+         new_norm.append(rte.normalize_answer(ans, atype))
+         new_util.append(float(correct) - STEP_COST * (step - 1))
+-        if correct != int(row.get("correct", 0)):
++        prev_correct_raw = row.get("correct", 0)
++        prev_correct = 0 if pd.isna(prev_correct_raw) else int(prev_correct_raw)
++        if correct != prev_correct:
+             flipped += 1
+     if not dry_run:
+         df["correct"] = new_correct

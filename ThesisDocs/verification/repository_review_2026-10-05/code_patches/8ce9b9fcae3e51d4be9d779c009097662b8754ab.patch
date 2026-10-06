@@ -1,0 +1,261 @@
+commit 8ce9b9fcae3e51d4be9d779c009097662b8754ab
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Thu Jul 2 19:20:26 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Thu Jul 2 19:20:26 2026 -0400
+
+    fix: floor boundary detection at T_MIN=2 in ad-hoc scripts; regenerate affected reports
+    
+    run_stakes_sweep.py and compare_prompted_vs_distilled.py each
+    reimplemented boundary detection without the T_MIN=2 floor that
+    trace_analysis.py's audited hazard_stop_for_group enforces, silently
+    reintroducing the exact bug class the 2026-06-20 remediation (commit
+    ef45dda) fixed. Both now import the audited function instead of
+    reimplementing it; a new structural-guard test
+    (research/tests/test_boundary_floor.py) prevents a third recurrence.
+    Reports regenerated from real re-runs against existing trace data (no
+    GPU needed): Qwen-7B c=0 now correctly reads T*=5 (was 1), DeepSeek
+    T*=2 (was 1). Also fixes three prose passages that misdescribed their
+    own data tables (stakes-direction claim, DeepSeek repair-rate
+    comparison, and July_1_Checkin.md's First Answer row), corrected at
+    the generating scripts so the fixes survive re-runs.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_016jFunoxRUo9oW212ZjYE14
+
+diff --git a/research/compare_prompted_vs_distilled.py b/research/compare_prompted_vs_distilled.py
+index f08c25d..3313470 100644
+--- a/research/compare_prompted_vs_distilled.py
++++ b/research/compare_prompted_vs_distilled.py
+@@ -11,6 +11,7 @@ Output:
+ """
+ 
+ import os
++import sys
+ from pathlib import Path
+ import pandas as pd
+ import numpy as np
+@@ -20,6 +21,12 @@ import matplotlib.pyplot as plt
+ 
+ # Set paths
+ HERE = Path(__file__).resolve().parent
++sys.path.insert(0, str(HERE))
++# AUDIT FIX: delegate boundary detection to trace_analysis's audited
++# T_MIN-floored first_zero_crossing (commit ef45dda) instead of a local
++# unfloored "first row where mu_t <= 0" scan, which silently reintroduced
++# the same bug ef45dda fixed in trace_analysis.py.
++from trace_analysis import T_MIN, first_zero_crossing  # noqa: E402
+ MATRIX_ROOT = HERE / "outputs" / "experiment_matrix"
+ QWEN_DIR = MATRIX_ROOT / "qwen2p5_7b__gsm8k"
+ DEEPSEEK_DIR = MATRIX_ROOT / "deepseek_r1_distill_7b__gsm8k"
+@@ -138,12 +145,10 @@ def main():
+     qwen_max_step = qwen_haz.loc[qwen_haz["q_t"].idxmax()]
+     ds_max_step = ds_haz.loc[ds_haz["q_t"].idxmax()]
+     
+-    # Boundary detections
+-    qwen_boundary = qwen_haz[qwen_haz["mu_t"] <= 0]["step"].values
+-    qwen_b_val = qwen_boundary[0] if len(qwen_boundary) > 0 else 10
+-    
+-    ds_boundary = ds_haz[ds_haz["mu_t"] <= 0]["step"].values
+-    ds_b_val = ds_boundary[0] if len(ds_boundary) > 0 else 10
++    # Boundary detections (T_MIN-floored: step 1 is the forced-commit init
++    # state, not a real decision point, and can never be returned here).
++    qwen_b_val = first_zero_crossing(qwen_haz, "mu_t")
++    ds_b_val = first_zero_crossing(ds_haz, "mu_t")
+     
+     md = [
+         "# Prompted vs. Distilled Reasoning Comparison Report",
+@@ -162,7 +167,7 @@ def main():
+         f"*   **The Verdict:** **RL-Distillation pre-bakes the stopping boundary.** DeepSeek-R1 is explicitly trained via RL to generate reasoning until it reaches the answer, then halt. Thus, its correctness probability $q_t$ starts very high at step 2 ({ds_haz.iloc[1]['q_t']:.4f}) and does not improve with further reasoning. Its optimal boundary is extremely early (Step {ds_b_val}).",
+         "\n### 2. Hazard Curve Divergence",
+         f"*   **Qwen (Prompted):** Qwen starts with a low correctness solve rate at step 1 ({qwen_haz.iloc[0]['q_t']:.4f}) but has a high repair rate (alpha={qwen_haz['alpha_t'].mean():.4f}), indicating it actively fixes mistakes as it reasons. Its corruption rate is very low.",
+-        f"*   **DeepSeek-R1 (Distilled):** DeepSeek has an extremely low repair rate (alpha={ds_haz['alpha_t'].mean():.4f}) but an extremely high corruption rate (beta={ds_haz['beta_t'].mean():.4f}). Because it was RL-trained to get it right in its initial CoT output, if it fails to solve it in the first 2 steps, it gets stuck in recursive loops, and continuing to generate tokens is highly likely to corrupt any correct intermediate state.",
++        f"*   **DeepSeek-R1 (Distilled):** DeepSeek actually has a *higher* repair rate (alpha={ds_haz['alpha_t'].mean():.4f}) than Qwen, but an even more dominant corruption rate (beta={ds_haz['beta_t'].mean():.4f}). Repairs do happen, but corruptions happen just as fast, so there is no net benefit to continuing -- the two rates roughly cancel out, leaving no accuracy gain from extra reasoning. Because it was RL-trained to get it right in its initial CoT output, if it fails to solve it in the first 2 steps, it gets stuck in recursive loops where continuing to generate tokens is just as likely to corrupt a correct intermediate state as to repair an incorrect one.",
+         "\n### 3. Thesis Recommendation",
+         "Your thesis should make a distinction between prompted CoT and RL-distilled models. Standard prompted models require online dynamic stopping (like our `hazard_drift` policy) to find their boundary. Distilled models, having already pre-baked their boundaries into their weights during RL training, are best stopped immediately after their first candidate answer extraction (Step 2)."
+     ]
+diff --git a/research/run_stakes_sweep.py b/research/run_stakes_sweep.py
+index 521d9bb..cdda6ff 100644
+--- a/research/run_stakes_sweep.py
++++ b/research/run_stakes_sweep.py
+@@ -20,6 +20,7 @@ Output:
+ """
+ 
+ import os
++import sys
+ from pathlib import Path
+ import pandas as pd
+ import numpy as np
+@@ -29,6 +30,14 @@ import matplotlib.pyplot as plt
+ 
+ # Set paths
+ HERE = Path(__file__).resolve().parent
++sys.path.insert(0, str(HERE))
++# AUDIT FIX: delegate boundary detection to trace_analysis's audited
++# T_MIN-floored first_zero_crossing (commit ef45dda) instead of a local
++# reimplementation. The local reimplementation silently reintroduced the
++# unfloored-boundary bug (returning theory-forbidden step 1) that ef45dda
++# fixed in trace_analysis.py.
++from trace_analysis import T_MIN, first_zero_crossing  # noqa: E402
++
+ LADDER_OUTPUT_ROOT = HERE / "outputs" / "real_traces_bf16_ladder"
+ MODELS = ["qwen2p5_7b", "qwen2p5_14b", "qwen2p5_32b"]
+ PENALTIES = [0.0, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0]
+@@ -87,23 +96,21 @@ def compute_base_hazards(steps_df: pd.DataFrame) -> pd.DataFrame:
+ 
+ 
+ def find_boundary(haz_df: pd.DataFrame, penalty: float) -> int:
+-    """Find first step where predictable drift mu_t <= 0."""
++    """Find first eligible step (t >= T_MIN) where predictable drift mu_t <= 0.
++
++    Delegates to trace_analysis.first_zero_crossing (the audited, T_MIN-floored
++    implementation) rather than scanning locally, so step 1 -- the forced-commit
++    init state, not a real decision point -- can never be returned as a boundary.
++    """
+     if haz_df.empty:
+-        return 1
+-        
+-    for _, row in haz_df.iterrows():
+-        step = int(row["step"])
+-        q_t = row["q_t"]
+-        alpha_t = row["alpha_t"]
+-        beta_t = row["beta_t"]
+-        
+-        # mu_t = [(1 - q_t)*alpha_t - q_t*beta_t] * (v + c) - lambda
+-        mu_t = ((1 - q_t) * alpha_t - q_t * beta_t) * (REWARD_VAL + penalty) - STEP_COST
+-        
+-        if mu_t <= 0:
+-            return step
+-            
+-    return int(haz_df["step"].max())
++        return T_MIN
++
++    scored = haz_df.copy()
++    # mu_t = [(1 - q_t)*alpha_t - q_t*beta_t] * (v + c) - lambda
++    scored["mu_t"] = (
++        (1 - scored["q_t"]) * scored["alpha_t"] - scored["q_t"] * scored["beta_t"]
++    ) * (REWARD_VAL + penalty) - STEP_COST
++    return first_zero_crossing(scored, "mu_t")
+ 
+ 
+ def calculate_run_utilities(
+@@ -217,7 +224,7 @@ def main():
+         )
+         
+     md_content.append("\n## Key Insights:")
+-    md_content.append("1. **Boundary Shifts Earlier:** As error penalty ($c$) scales, the boundary step shifts to the left (e.g. from step 5 to step 2 or 3). In high-penalty regimes, the model must halt as soon as possible to avoid corruption risk.")
++    md_content.append("1. **Boundary Shifts Later:** As error penalty ($c$) scales, the boundary step shifts to the right (later), not earlier. This is expected from the utility formula: scaling $c$ amplifies the reward/penalty term $(v + c)$ relative to the fixed per-step cost $\\lambda$, so continued reasoning becomes worth more, not less, as consequences scale -- the model is incentivized to keep reasoning longer to avoid an even costlier wrong answer.")
+     md_content.append("2. **Utility Conservation:** In high-penalty sweeps (c >= 10), letting the model think indefinitely (`never_stop`) leads to severe negative utility scores due to high error accumulation. The `hazard_drift` early stopping policy prevents this degradation.")
+     
+     report_path.write_text("\n".join(md_content), encoding="utf-8")
+diff --git a/research/tests/test_boundary_floor.py b/research/tests/test_boundary_floor.py
+new file mode 100644
+index 0000000..a3576d2
+--- /dev/null
++++ b/research/tests/test_boundary_floor.py
+@@ -0,0 +1,105 @@
++#!/usr/bin/env python
++"""Regression test: boundary-detection code must respect T_MIN (the
++step-1 forced-commit floor audit fix, commit ef45dda).
++
++This guards against a THIRD script reimplementing "first step where
++predictable drift mu_t <= 0" without the T_MIN floor -- exactly the bug
++independently reintroduced by run_stakes_sweep.py's find_boundary() and
++compare_prompted_vs_distilled.py's boundary lookup before this fix. Step 1
++is the forced-commit init state (the model hasn't had a chance to revise
++anything yet), not a real decision point, and must never be returned as a
++stopping boundary.
++
++Run:  python research/tests/test_boundary_floor.py
++"""
++from __future__ import annotations
++
++import inspect
++import sys
++from pathlib import Path
++
++RESEARCH_DIR = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(RESEARCH_DIR))
++
++import pandas as pd  # noqa: E402
++
++import trace_analysis as ta  # noqa: E402
++import run_stakes_sweep as rss  # noqa: E402
++import compare_prompted_vs_distilled as cpd  # noqa: E402
++
++
++def _synthetic_haz() -> pd.DataFrame:
++    """A hazard-like frame where the step-1 drift is already <= 0 (mimicking
++    the forced-commit init state), genuine steps 2-4 are positive, and step 5
++    onward crosses back to <= 0. A T_MIN-floored detector must return 5;
++    an unfloored one would wrongly return 1."""
++    rows = []
++    for step in range(1, 8):
++        if step == 1:
++            mu = -0.5
++        elif step < 5:
++            mu = 0.1
++        else:
++            mu = -0.1
++        rows.append({"step": step, "mu_t": mu, "q_t": 0.5, "alpha_t": 0.2, "beta_t": 0.1})
++    return pd.DataFrame(rows)
++
++
++def main() -> int:
++    failures = 0
++    synthetic = _synthetic_haz()
++
++    # 1. trace_analysis.first_zero_crossing is the audited reference impl.
++    got = ta.first_zero_crossing(synthetic, "mu_t")
++    ok = got == 5 and got >= ta.T_MIN
++    failures += not ok
++    print(f"  {'OK' if ok else 'XX'} trace_analysis.first_zero_crossing floors at T_MIN: got {got} (want 5)")
++
++    # 2. run_stakes_sweep.find_boundary must produce a T_MIN-floored result
++    #    (it derives its own mu_t column internally from q_t/alpha_t/beta_t,
++    #    so drive it with a penalty of 0 against columns equivalent to the
++    #    synthetic mu_t case above).
++    haz_in = synthetic[["step", "q_t", "alpha_t", "beta_t"]].copy()
++    # alpha/beta/q_t alone don't reproduce an arbitrary mu_t curve, so instead
++    # assert the structural property directly: find_boundary never returns a
++    # step below T_MIN, on real or degenerate input.
++    got = rss.find_boundary(haz_in, penalty=0.0)
++    ok = got >= ta.T_MIN
++    failures += not ok
++    print(f"  {'OK' if ok else 'XX'} run_stakes_sweep.find_boundary never returns step < T_MIN: got {got} (T_MIN={ta.T_MIN})")
++
++    got_empty = rss.find_boundary(haz_in.iloc[0:0], penalty=0.0)
++    ok = got_empty >= ta.T_MIN
++    failures += not ok
++    print(f"  {'OK' if ok else 'XX'} run_stakes_sweep.find_boundary floors the empty-input fallback: got {got_empty}")
++
++    # 3. compare_prompted_vs_distilled's boundary lookup (now first_zero_crossing).
++    got = cpd.first_zero_crossing(synthetic, "mu_t")
++    ok = got == 5 and got >= ta.T_MIN
++    failures += not ok
++    print(f"  {'OK' if ok else 'XX'} compare_prompted_vs_distilled boundary path respects T_MIN: got {got} (want 5)")
++
++    # 4. Structural guard: neither script may reimplement first-crossing scan
++    #    logic locally -- both must delegate to trace_analysis.first_zero_crossing.
++    rss_src = inspect.getsource(rss.find_boundary)
++    ok = "first_zero_crossing" in rss_src and "for _, row in" not in rss_src
++    failures += not ok
++    print(f"  {'OK' if ok else 'XX'} run_stakes_sweep.find_boundary delegates to trace_analysis.first_zero_crossing (no local scan loop)")
++
++    cpd_main_src = inspect.getsource(cpd.main)
++    ok = "first_zero_crossing" in cpd_main_src and '<= 0]["step"].values' not in cpd_main_src
++    failures += not ok
++    print(f"  {'OK' if ok else 'XX'} compare_prompted_vs_distilled.main delegates to first_zero_crossing (no local unfloored filter)")
++
++    # 5. Both scripts must import T_MIN from trace_analysis (not redefine it).
++    ok = rss.T_MIN is ta.T_MIN and cpd.T_MIN is ta.T_MIN
++    failures += not ok
++    print(f"  {'OK' if ok else 'XX'} both scripts import (not redefine) trace_analysis.T_MIN")
++
++    total = 6
++    print(f"\n{total - failures}/{total} passed")
++    return 1 if failures else 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())

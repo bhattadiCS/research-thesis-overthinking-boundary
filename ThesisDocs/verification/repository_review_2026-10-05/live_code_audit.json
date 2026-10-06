@@ -1,0 +1,762 @@
+{
+  "schema": "live-code-history-audit-v1",
+  "reviewed_at_utc": "2026-10-06T02:10:53.105576+00:00",
+  "head": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+  "origin_main": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+  "github_main_reachable_commit_count": 484,
+  "all_local_reachable_commit_count": 600,
+  "scope": "Read-only source/diff and saved-artifact audit of experiment,generation,prospective,controller and evaluation code families. Commit subjects identify candidates only; conclusions use code/diffs/manifests/predictions. This is not a claim that every unrelated line in all commits was manually reviewed.",
+  "actions_not_performed": [
+    "new tests",
+    "model generation",
+    "retraining",
+    "builds",
+    "science/output edits",
+    "commit/push"
+  ],
+  "family_classifications": [
+    {
+      "family": "Historical generation, grading and variable-horizon analysis",
+      "implementation_commits": [
+        "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+        "ce0167c6066b0caeb85370777df6ee14b9281d30",
+        "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "6e4378bef9a98037c20d1381eb9c7b61462a6578"
+      ],
+      "sources": [
+        {
+          "path": "research/real_trace_experiments.py",
+          "sha256": "78136a39c4491c4fbb63694fffde0db35fc29bb34ccad708f83205e032bc06cf"
+        },
+        {
+          "path": "research/trace_analysis.py",
+          "sha256": "29e1a91d6f66b82048893975d18b1397b94a0bb542cf8d26b30897b6d1d5fe5e"
+        },
+        {
+          "path": "research/run_experiment_matrix.py",
+          "sha256": "072bf45b5fe9e025ed9506df2871bdd04dc1fa2dfba19273f34a94854c4fbd3c"
+        }
+      ],
+      "implemented": "Benchmark loaders, complete-response revisions, numeric/symbolic/MCQ grading, diagnostics, resume/CSV repair, and descriptive/OOF analyses. Dataset and model revision overrides added at a9bf.",
+      "actually_executed": "Canonical matrix and standardized 52-cell trace corpus are saved; subsequent grader/validator revisions do not constitute new generation.",
+      "validation_supported": "Direct diff review verifies ef45 fixes the twice-weighted marginal drift, oracle/protocol floor, and in-sample scoring via run-group OOF; ce016 adds control-character escaping and stale-analysis detection. Later primary data freezes and post-review impacts are available.",
+      "permitted_claim": "Protocol-specific descriptive repair/corruption and archived policy contrasts.",
+      "remaining_gaps": "Historical run-group splitting permits same question at other temperatures in fitting. GPQA loader still requests train regardless of requested split. Historical labels need independent adjudication; exact historical environment/regeneration is incomplete.",
+      "evidence": [
+        "research/outputs/thesis_v1/evidence/manifest.json",
+        "research/reports/post_bug_review_v1/grader_impact.json"
+      ]
+    },
+    {
+      "family": "Historical matched estimator and threshold experiments",
+      "implementation_commits": [
+        "22b23f8f5e31d9e91fdbc85a87fc0a27ccf7d343",
+        "52af188222344205c66e557ca8636f0644bfd55f"
+      ],
+      "sources": [
+        {
+          "path": "research/algorithm_v2_experiments.py",
+          "sha256": "555bd7156290ff38254a650cab0ef13385b6768a37d50c6a24969ffe8ceb1720"
+        },
+        {
+          "path": "research/algorithm_v2_experiments_n2_n3.py",
+          "sha256": "db8ba0439f0e52f7b011d98a6cebf28e7bb23c390f480bc5ed9c6dcfc7344671"
+        }
+      ],
+      "implemented": "Matched estimator, lag, hazard-pooling and threshold-grid comparisons on saved traces.",
+      "actually_executed": "Saved cell effects and normalized contrasts are present.",
+      "validation_supported": "Reviewed fitting by run_id followed by threshold fitting by task_id; the frozen normalized CSV explicitly identifies both fold levels.",
+      "permitted_claim": "Controlled development effects on the existing corpus; not an end-to-end new-question confirmation.",
+      "remaining_gaps": "Upstream models are not refit inside each threshold outer task partition. Cell bootstrap and repeated selection do not repair that dependence.",
+      "evidence": [
+        "research/outputs/thesis_v1/evidence/algorithm_v2_normalized_effects.csv"
+      ]
+    },
+    {
+      "family": "Legacy Blackwell full-sequence stack",
+      "implementation_commits": [
+        "0fb9bd1cd0e82d3d05db8af9b257a537406fa81a",
+        "20e6b22ba8d37e1129c6e9df47489df5ff9e3c98",
+        "361eaf9fdee235b11e6bbdc9d0236387fc67002c",
+        "44f693470119b285effbd6b084f6ab09e296341d"
+      ],
+      "sources": [
+        {
+          "path": "research/run_ultimate_blackwell_5day_tournament.py",
+          "sha256": "3639876b8279a462dc2c3660bc05adc32137bb1e98b42ffd177312093447b6c3"
+        }
+      ],
+      "implemented": "Deep full-sequence neural and stacked diagnostic with extensive historical tuning.",
+      "actually_executed": "Stored historical .955156 diagnostic is reported; legacy scripts remain present.",
+      "validation_supported": "Source still contains bidirectional GRUs, including the class named CausalAttractorGRU, and builds full trajectories with last-step labels (lines 280-281, 335, 578-583). A causal name does not change the computation.",
+      "permitted_claim": "Retrospective development diagnostic only.",
+      "remaining_gaps": "Future-response information and non-nested stacking prevent deployment or prefix-safe inference of its AUC. New strict pipelines are separate analyses, not a retroactive repair of this number.",
+      "evidence": []
+    },
+    {
+      "family": "Strict tabular conditional stopping heads",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442"
+      ],
+      "sources": [
+        {
+          "path": "research/run_strict_tabular_stopping_oof.py",
+          "sha256": "179de645d8ed89c9491179cf7408c32a65743458dc6d2d9b0993050ac474ca63"
+        },
+        {
+          "path": "research/run_ultimate_multi_day_tournament.py",
+          "sha256": "bac3d5da025d5fae2b2ef5c158835ca1f58277793bdd42cb1a353901fbc926d6"
+        }
+      ],
+      "implemented": "Task-group outer folds; q/current, repair/incorrect-state and corruption/correct-state heads; separate inner task calibration; fixed LightGBM configuration; timing/raw projection exclusions.",
+      "actually_executed": "All five bound fold checkpoints and 144440 row predictions exist; AUC .8495096501, replay step utility .3387513847.",
+      "validation_supported": "Recorded source hashes match current source exactly; complete 28888 trajectory index coverage across five checkpoints; prepared manifest bindings match. Code fits/calibrates all three heads inside outer training tasks.",
+      "permitted_claim": "Cleaner offline task-held-out conditional telemetry and replay policy evidence.",
+      "remaining_gaps": "No new live model calls, no deployed final fitted model artifact or independent target-prompt confirmation. Derived geometry is not a demonstrated model-universal representation; calibration applies to archived protocol.",
+      "evidence": [
+        "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/prepared_manifest.json",
+        "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/safe_scalar_lgbm_metrics.json"
+      ]
+    },
+    {
+      "family": "Strict current-output text screen",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442"
+      ],
+      "sources": [
+        {
+          "path": "research/run_strict_text_stopping_oof.py",
+          "sha256": "f50aaa05056791d07e6cebafa838d546db04eb1079f4a45882039e8e0603260d"
+        }
+      ],
+      "implemented": "Current raw-output tail only; task outer folds; TF-IDF vocabulary/classifier and independent task calibration inside outer training.",
+      "actually_executed": "Five bound folds and 144440 row predictions; AUC .8089757414.",
+      "validation_supported": "Exact source hashes, prepared binding and complete once-only five-fold coverage checked.",
+      "permitted_claim": "Offline current-output correctness screen.",
+      "remaining_gaps": "Raw output may echo task/context; this screen is not the reasoning-only content ablation. No calibrated continuation model or online stopping execution.",
+      "evidence": [
+        "research/outputs/experiments_v2/strict_text_stopping_oof_v1/prepared_manifest.json",
+        "research/outputs/experiments_v2/strict_text_stopping_oof_v1/tail512_word12_metrics.json"
+      ]
+    },
+    {
+      "family": "Candidate-level committee and anonymous peer dynamics",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "d36584547c6bef17ad3315566ed817ec3f65a58c"
+      ],
+      "sources": [
+        {
+          "path": "research/run_committee_oof_experiments.py",
+          "sha256": "2c430d338d6b291258c808d1a6747d73576aee48e5d42b8928898a119d144786"
+        },
+        {
+          "path": "research/run_committee_oof_no_timing.py",
+          "sha256": "02c1874845064f3783b2d9320a3a244a875404a2fa242227b7b1e997a4616ec9"
+        },
+        {
+          "path": "research/run_committee_oof_minimal.py",
+          "sha256": "5922a272ca4a2ae005701245880a98c6d2f3a89b9462a8167a109dfa3cc4a2a4"
+        },
+        {
+          "path": "research/run_committee_oof_peer_dynamics.py",
+          "sha256": "5d58098c2d68171777a9c8b6b7ec68ff3e69257577b08afe6f05a15bcefc952d"
+        },
+        {
+          "path": "research/committee_peer_dynamics.py",
+          "sha256": "1f973ca3744a6590992dc4c71d486f5e4a14d8d57143a8ed04b87939e3598df1"
+        }
+      ],
+      "implemented": "Same-current-step, scored-alias-excluded peer aggregates; task-group raw OOF; anonymous/no-timing ablations and fixed-panel sensitivity.",
+      "actually_executed": "Saved full-corpus anonymous peer raw AUC .9546638704 versus .9453355857 control; fixed-13 sensitivity .940009169 versus .9312661348.",
+      "validation_supported": "Source reviewed for prefix differences/current-barrier features and outer-task imputation/fitting. Evidence brief explicitly excludes timing, records absent historical event timestamps, unassigned threshold and retrospective-only status. Legacy strict_v1 script binding differs from current source, so that old bundle has weaker execution provenance. Additional executor-recovery check: anonymous_minimal-v3 runner f20ef6d621a0f4909b56f6e4466311fed46d620f7460a194549cb92a612be76a and peer module5a16373637233e4aea315df040a868964cd6f7be0f10c3a6768d10a720ec0a14 match neither current raw/LF bytes nor any reachable committed version. Its base-script63ba1ba102ee428caaf40ebffc329876fc3d6b8e71a2348296f1f8d64d3007ff matches a9bf282 Git blob.",
+      "permitted_claim": "Legacy/provenance-limited archived candidate-ranking signal; raw prediction and matched-ablation arithmetic can be independently checked. No current-source execution, selected-answer stopping, or prospective claim.",
+      "remaining_gaps": "This is not selected-answer stopping or net savings versus one model. Same-step historical panels lack real completion timestamps and complete fleet cost comparisons. Reporting cross-fold Platt maps are not fully nested; raw OOF AUC is unaffected. No final deployed score/threshold artifact. Exact executed runner/peer-feature source recovery is incomplete. Treat this result as legacy provenance-limited even after raw-score numerical verification; recover executed sources or run a separately versioned offline analysis using the existing corpus before attributing it to the current implementation.",
+      "evidence": [
+        "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/peer_dynamics_evidence_brief.json"
+      ]
+    },
+    {
+      "family": "Selected-answer plurality OOF",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442"
+      ],
+      "sources": [
+        {
+          "path": "research/run_selected_answer_oof_experiments.py",
+          "sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54"
+        }
+      ],
+      "implemented": "One deterministic current-barrier plurality answer, frozen alias-order tie break, answer equality only for selection/counts, fail-closed all-empty barriers, task outer folds, no identity/raw answer features; optional timing exclusion.",
+      "actually_executed": "v4 no-batch-timing saves 14740 decisions over2948 tasks, raw AUC .9343502984 versus vote-margin .8565565429; selected accuracy .5843962008.",
+      "validation_supported": "Current source byte hash matches both v4 manifests. CSV has all 14740 rows, all five fold IDs, common task-level target. Raw model fitting and imputation are outer-task-only.",
+      "permitted_claim": "Retrospective selected-answer correctness ranking under a declared committee selector; eligible for an updated offline account after independent numerical verification.",
+      "remaining_gaps": "All-five-step pooled AUC is not an early-stop accuracy/cost guarantee. cross_fold_platt reporting (lines510-518) uses other OOF scores whose upstream fits can include the current outer-test tasks; calibrated Brier/ECE remain diagnostic. Default timing-inclusive v4 should not be preferred over no-timing for causal transport. No deployed final LightGBM/calibration artifact or transition heads.",
+      "evidence": [
+        "research/outputs/experiments_v2/selected_answer_oof_v4_no_batch_timing/selected_answer_oof_manifest.json",
+        "research/outputs/experiments_v2/selected_answer_oof_v4_no_batch_timing/selected_answer_oof_metrics.json"
+      ]
+    },
+    {
+      "family": "Selected-answer hidden representation",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442"
+      ],
+      "sources": [
+        {
+          "path": "research/run_selected_answer_representation_oof_experiments.py",
+          "sha256": "5cc9383831c1d1abf4095b668c5d25ae82a3d39e204b911ddc85ad26f41683a9"
+        }
+      ],
+      "implemented": "Anonymous current-barrier representation summaries with fold-local median/StandardScaler/PCA.",
+      "actually_executed": "Saved representation metrics/predictions exist.",
+      "validation_supported": "Source fold_matrix (232-259) fits preprocessing solely on outer training rows; raw model scoring is task-held-out.",
+      "permitted_claim": "Exploratory historical representation ablation.",
+      "remaining_gaps": "Representation transport across model-coordinate systems is not established. Selection target differs from raw single-model correctness. Inherits non-nested reporting calibration through reference helper.",
+      "evidence": [
+        "research/outputs/experiments_v2/selected_answer_representation_oof_v1/selected_answer_representation_manifest.json"
+      ]
+    },
+    {
+      "family": "Selected-answer reasoning-only content",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442"
+      ],
+      "sources": [
+        {
+          "path": "research/run_selected_answer_content_oof.py",
+          "sha256": "59a6da648806db44cf7e4f79bbff532eb686e9478126d2e0220acdd30da948ac"
+        }
+      ],
+      "implemented": "Current selected supporters parsed thought; metadata redaction, global structured-field stripping, preserved denominator; inner-task vocabulary/classifier/calibration.",
+      "actually_executed": "v4 complete five folds, 14740 predictions, raw AUC .8669461034. Earlier v1/v2/v3 bundles explicitly rejected.",
+      "validation_supported": "v4 three source hashes match exactly, prepared binding matches, all five checkpoints cover decision indices exactly once. Sanitizer and task calibration source inspected.",
+      "permitted_claim": "Offline reasoning-only content screen on selected answers.",
+      "remaining_gaps": "v1 legacy raw_text, v2 structured fragments, v3 inline assignment residue must stay rejected and not be pooled or tuned upon as valid comparisons. Natural output distribution still changes with prompt/model; no live stopping claim.",
+      "evidence": [
+        "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/prepared_selected_answer_thought_content_manifest.json",
+        "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/plurality_supporter_reasoning_only_thought512_metrics.json"
+      ]
+    },
+    {
+      "family": "Selected-answer causal dynamics",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442"
+      ],
+      "sources": [
+        {
+          "path": "research/run_selected_answer_causal_dynamics_oof.py",
+          "sha256": "38ccfb969a9276fa1b8f9f126d7e8a5998d5d0e862c935be48370c94741326c6"
+        },
+        {
+          "path": "research/selected_answer_causal_dynamics.py",
+          "sha256": "afe3f5393372f6449ee0d814e5d18e0d8952f0fc18c9333729205f706afd74a3"
+        }
+      ],
+      "implemented": "Contiguous same-model t-1/t-2 scalar kinematics; anonymous current-barrier selected-supporter aggregates; outer-task fitting; coordinate-free primary base_dynamics/PCA0.",
+      "actually_executed": "v3 medium-capacity raw AUC .9370369330 and regularized .9359525917, each with complete five folds and14740 predictions.",
+      "validation_supported": "Four source hashes match exactly; prepared binding and once-only full checkpoint coverage pass. Manifest has feature_set base_dynamics,pca_components0,coordinate_shape[14740,0]. Source strictly checks contiguous past steps and no gap bridging/backfill/future normalization.",
+      "permitted_claim": "Retrospective task-held-out selected-answer ranking; eligible for updated offline account after independent numerical verification.",
+      "remaining_gaps": "Only current selected-answer correctness is predicted; no continuation/repair/corruption head or frozen cost-sensitive stop rule. No synchronized fleet rollout or measured actual savings. Multiple configurations remain development comparisons; .937 need not beat no-timing base significantly.",
+      "evidence": [
+        "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/prepared_manifest.json",
+        "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/medium_capacity_metrics.json"
+      ]
+    },
+    {
+      "family": "Selected-answer temporal shape",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442"
+      ],
+      "sources": [
+        {
+          "path": "research/run_selected_answer_temporal_shape_oof.py",
+          "sha256": "66eaa89b71a3e89e34f82359b3a9f015642357535d341c562230223af06f1262"
+        },
+        {
+          "path": "research/selected_answer_temporal_shape.py",
+          "sha256": "bbef1fe114e1f0934108b1542abc20923154dadab555f270c6cbb402b29217ac"
+        }
+      ],
+      "implemented": "Prefix scalar shape, outer-training model/step robust and ECDF normalization, anonymous barrier aggregation, sanitized matched base.",
+      "actually_executed": "v3 completed paired base .9325979559 /shape .9329436489 raw AUCs with five folds. v1 rejected preparation; v2 interrupted and expressly not for paired comparison.",
+      "validation_supported": "Four source hashes match exactly and completed shape fold bindings/coverage pass.",
+      "permitted_claim": "Small descriptive historical shape ablation; retain its near-null effect.",
+      "remaining_gaps": "Do not treat a completed v2 control alone as the paired shape result. No live policy benefit, model transfer, or superior-calibration guarantee.",
+      "evidence": [
+        "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/prepared_manifest.json"
+      ]
+    },
+    {
+      "family": "Prospective synchronized-fleet protocol",
+      "implementation_commits": [
+        "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "d36584547c6bef17ad3315566ed817ec3f65a58c"
+      ],
+      "sources": [
+        {
+          "path": "research/run_prospective_committee_protocol.py",
+          "sha256": "6619ea19f650ba7d4b585bffab92df00f8bd3fc57aa2d4134946c92516831fef"
+        },
+        {
+          "path": "research/audit_prospective_protocol.py",
+          "sha256": "0565042c666f40bf564af6a5d6caf6fe86ef036d874cfc312c02c98d3b994e37"
+        },
+        {
+          "path": "research/prospective_peer_dynamics.py",
+          "sha256": "e017ad68d55a9acb0982344580ca0c85ef93083f7ca4747ca9a53cf959366000"
+        },
+        {
+          "path": "research/forced_choice_verifier.py",
+          "sha256": "69893f5598f66d5747241a534c4a8939de66f17ff4aefa82e97f06f8b8e8b5fb"
+        }
+      ],
+      "implemented": "Pinned-revision-capable task/model initialization, full-barrier event/decision ledgers, consensus/legal-consensus selection, optional verifier events and audit infrastructure. Collector deliberately runs the full horizon.",
+      "actually_executed": "Only schema/audit smoke ledgers found: one completed barrier/two events; no substantive frozen-scored fleet stopping collection. Saved smoke revisions UNPINNED and confirmation_eligible false.",
+      "validation_supported": "Static selection source (1486-1598) requires complete roster and has stopping_action continue_collection,stopping_score null. Stored manifests say stopping_policy.registered false. Tiny10ns smoke timings cannot support model-speed or avoided-generation evidence.",
+      "permitted_claim": "Implemented and smoke-exercised protocol infrastructure; not actual confirmed fleet stopping.",
+      "remaining_gaps": "Install/serialize an appropriate score, task-disjoint calibration and frozen threshold, integrate real stop scheduling, then collect timestamped paired model events/costs on new tasks. load_frozen_tasks (410-475) loads sealed answers into TaskSpec before generation; no gold use in selection was found, but runtime boundary is weaker than October PublicTask architecture.",
+      "evidence": [
+        "research/outputs/experiments_v2/prospective_protocol_audit_smoke_20260719/protocol_manifest.json",
+        "research/outputs/experiments_v2/prospective_protocol_audit_smoke_20260719/protocol_status.json"
+      ]
+    },
+    {
+      "family": "Actual single-model prefix controller/generation",
+      "implementation_commits": [
+        "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "6e4378bef9a98037c20d1381eb9c7b61462a6578"
+      ],
+      "sources": [
+        {
+          "path": "research/online_stopping_controller.py",
+          "sha256": "f49c5252e2d47c1cdd31fbeecbb2f124dc9468af807cc4beb3b3198684c1cad0"
+        },
+        {
+          "path": "research/online_generation.py",
+          "sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+        },
+        {
+          "path": "research/run_online_stopping_evaluation.py",
+          "sha256": "a10f61098b6a2d015c536ebabdf71b92c73810ad96859b18257c91a02e3687e8"
+        },
+        {
+          "path": "research/learned_online_stopping_controller.py",
+          "sha256": "d7443c9f7c73882db9ae6e845e6c826acc923977c63646fea15667636efe74fe"
+        },
+        {
+          "path": "research/run_learned_online_stopping.py",
+          "sha256": "7c22db38786875b06f6f0d2f04736b07ae6420eab955665e78369d633235c93b"
+        }
+      ],
+      "implemented": "PublicTask/Observation-only response-boundary scheduling, min2/horizon/terminal behavior, cancellation and token costs; heuristic/fixed/never and learned drift adapters.",
+      "actually_executed": "Four genuine October paired collections:100 GSM8K and20 traps under heuristic/learned arms. Baselines reused explicitly; learned always stops at2.",
+      "validation_supported": "Executed locked copies and manifests retained; current source is intentionally post-review. Existing post-review saved-prefix verification preserves480 histories and live final labels, without new generation/timing.",
+      "permitted_claim": "Actual avoided response generation and scoped controller latency; development panels only.",
+      "remaining_gaps": "Low absolute accuracy/JSON validity; learned fixed2 equivalence; no prespecified noninferiority margin,power,external confirmation or multi-seed result. Six heuristic main shared-prefix mismatches limit exact counterfactual interpretation.",
+      "evidence": [
+        "research/outputs/semester2/online_stopping_20261002/live_manifest.json",
+        "research/outputs/semester2/online_stopping_20261002/learned_main/live_manifest.json",
+        "research/reports/post_bug_review_v1/behavior_verification.json"
+      ]
+    },
+    {
+      "family": "Portable prefix trained probability model",
+      "implementation_commits": [
+        "fa1c6536e83bd61f60a67aced18225d7948b084f"
+      ],
+      "sources": [
+        {
+          "path": "research/prefix_stopping_model.py",
+          "sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117"
+        },
+        {
+          "path": "research/train_prefix_stopping_model.py",
+          "sha256": "caf9a316220ecd2d36ec7479500ad8cdb0b9112b64b50c569aa17911045311a2"
+        }
+      ],
+      "implemented": "902fit/322calibration/276evaluation task split, unweighted current/next logistic heads, independent Platt maps, latest-nonempty labels, portable serialized parameters.",
+      "actually_executed": "Final artifact92fe0af... trained from1500 archived tasks and deployed in the learned October collections.",
+      "validation_supported": "Versioned label reconstruction audits all7500 rows, changes43 labels, retains all trajectories; archived-source gold only. Source and runtime artifact are bound. Provisional future-dependent candidate-agreement selection was superseded and not deployed.",
+      "permitted_claim": "Causal serialized model and actual fixed-budget outcome on the development panels.",
+      "remaining_gaps": "Archive/live output format, confidence-support and EOS count shifts; learned gain has no established Bellman/persistence validity; no adaptive advantage versus fixed2.",
+      "evidence": [
+        "research/outputs/semester2/prefix_model_v1/training_protocol.json",
+        "research/outputs/semester2/prefix_model_v1/prefix_model.json"
+      ]
+    }
+  ],
+  "numerical_recomputation_scope": "No new fits or AUC recomputation in this agent; parent data agent independently verifies raw-score numerical summaries. Values here are read from their bound artifacts.",
+  "recollection_decision": {
+    "discard_or_recollect_all_existing_traces": false,
+    "reuse_without_new_generation": [
+      "audited strict offline ranking/replay analyses",
+      "fresh outer-task refits/nested calibration on the frozen corpus",
+      "candidate-target reconstruction and independent label adjudication",
+      "baseline comparisons using saved common trajectories where valid",
+      "Peer-dynamics exact-executor gap can be closed by recovered source or a new versioned offline refit on existing traces; it does not itself require new model generations."
+    ],
+    "new_generation_needed_for": [
+      "new live prompt/output contract or unavailable observables",
+      "real timestamped synchronized-fleet stopping and total-peer-cost claims",
+      "untouched confirmatory paired evaluation of a frozen policy",
+      "multi-seed/model/domain replication and transfer"
+    ],
+    "before_generation": [
+      "consolidate complete accepted local results with hashes and claim scope",
+      "reject partial/contaminated variants and avoid selecting policies on their evaluation scores",
+      "choose one practical deployment target and a protocol-capable response contract",
+      "serialize actual scoring/transformation/calibration artifact;freeze cost/threshold/baselines and accuracy tolerance before evaluation"
+    ]
+  },
+  "important_qualifications": [
+    "Raw task-held-out OOF AUCs from newer selected/committee analyses are distinct from non-nested reporting Platt metrics.",
+    "Candidate-level committee AUC,selected-answer decision AUC,and response-boundary stopping utility use different targets and populations.",
+    "AUC>=.95 historical gate does not establish useful stopping,calibration,savings or accuracy preservation.",
+    "Untracked local result bundles require explicit packaging/provenance before being described as GitHub-published scientific evidence.",
+    "Actual completed evidence and implemented infrastructure must remain separate."
+  ],
+  "local_result_provenance_checks": [
+    {
+      "folder": "strict_tabular_stopping_oof_v1",
+      "manifest": "research\\outputs\\experiments_v2\\strict_tabular_stopping_oof_v1\\prepared_manifest.json",
+      "manifest_sha256": "af323dec7b82ac8fb9afcf6a6e73ee81666b47bab82648e85541a0e8596c906f",
+      "metrics_sha256": "f4a2e49df8b82772015982a4bfa80beda16d5007cd6bbfa04f99bc7757aaa052",
+      "prepared_manifest_binding": true,
+      "source_bindings": [
+        {
+          "path": "research\\run_strict_tabular_stopping_oof.py",
+          "recorded_sha256": "179de645d8ed89c9491179cf7408c32a65743458dc6d2d9b0993050ac474ca63",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_ultimate_multi_day_tournament.py",
+          "recorded_sha256": "bac3d5da025d5fae2b2ef5c158835ca1f58277793bdd42cb1a353901fbc926d6",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        144440
+      ]
+    },
+    {
+      "folder": "strict_text_stopping_oof_v1",
+      "manifest": "research\\outputs\\experiments_v2\\strict_text_stopping_oof_v1\\prepared_manifest.json",
+      "manifest_sha256": "afbed217f7344d8d91466c025d6de47bc017e8f9e16678cd078cf60f4a098731",
+      "metrics_sha256": "366d33ff961a0a4c29666a3de4998c0f0c58b9b45b525d128cc0713fb7049b06",
+      "prepared_manifest_binding": true,
+      "source_bindings": [
+        {
+          "path": "research\\run_strict_text_stopping_oof.py",
+          "recorded_sha256": "f50aaa05056791d07e6cebafa838d546db04eb1079f4a45882039e8e0603260d",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_ultimate_multi_day_tournament.py",
+          "recorded_sha256": "bac3d5da025d5fae2b2ef5c158835ca1f58277793bdd42cb1a353901fbc926d6",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        144440
+      ]
+    },
+    {
+      "folder": "selected_answer_oof_v4_winner_panel",
+      "manifest": "research\\outputs\\experiments_v2\\selected_answer_oof_v4_winner_panel\\selected_answer_oof_manifest.json",
+      "manifest_sha256": "5b0fa058dd4641054c1603b409cab6fbbca1a020c0eda5c0f8406275abf00855",
+      "metrics_sha256": "d0cb74f5388071c24ed228e21dbfc8034b8fc5509e0dbf6da4347067124128ed",
+      "prepared_manifest_binding": null,
+      "source_bindings": [
+        {
+          "path": "research\\run_selected_answer_oof_experiments.py",
+          "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        14740
+      ]
+    },
+    {
+      "folder": "selected_answer_oof_v4_no_batch_timing",
+      "manifest": "research\\outputs\\experiments_v2\\selected_answer_oof_v4_no_batch_timing\\selected_answer_oof_manifest.json",
+      "manifest_sha256": "76463e54512e5acb1c0fd989c8c7a58a0222ea8aa5e053eb89c1c27f84561949",
+      "metrics_sha256": "094e666d40f1d27bcae41119ae3ca6e921727e259b5520f4c78b2185beb414c4",
+      "prepared_manifest_binding": null,
+      "source_bindings": [
+        {
+          "path": "research\\run_selected_answer_oof_experiments.py",
+          "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        14740
+      ]
+    },
+    {
+      "folder": "selected_answer_content_oof_v4_reasoning_only",
+      "manifest": "research\\outputs\\experiments_v2\\selected_answer_content_oof_v4_reasoning_only\\prepared_selected_answer_thought_content_manifest.json",
+      "manifest_sha256": "242022cd07a7ca37d342e422d4cc86189002b8a8a28787eda298688fc3d66661",
+      "metrics_sha256": "e3835ee9d86726764782bad50368243822ca5ea35467bc6b579d0cd2fe08bea3",
+      "prepared_manifest_binding": true,
+      "source_bindings": [
+        {
+          "path": "research\\run_selected_answer_content_oof.py",
+          "recorded_sha256": "59a6da648806db44cf7e4f79bbff532eb686e9478126d2e0220acdd30da948ac",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_selected_answer_oof_experiments.py",
+          "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_ultimate_multi_day_tournament.py",
+          "recorded_sha256": "bac3d5da025d5fae2b2ef5c158835ca1f58277793bdd42cb1a353901fbc926d6",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        14740
+      ]
+    },
+    {
+      "folder": "selected_answer_causal_dynamics_oof_v3",
+      "manifest": "research\\outputs\\experiments_v2\\selected_answer_causal_dynamics_oof_v3\\prepared_manifest.json",
+      "manifest_sha256": "8ed939a0694cf32e38ab9a4da8a28c85c18266a4e37b78437f7b0e3f37078455",
+      "metrics_sha256": "a11970fef67813f7585f321e8bf7afffb57cd4f540dcc7045cf113abb383e50f",
+      "prepared_manifest_binding": true,
+      "source_bindings": [
+        {
+          "path": "research\\run_selected_answer_causal_dynamics_oof.py",
+          "recorded_sha256": "38ccfb969a9276fa1b8f9f126d7e8a5998d5d0e862c935be48370c94741326c6",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_selected_answer_oof_experiments.py",
+          "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_selected_answer_representation_oof_experiments.py",
+          "recorded_sha256": "5cc9383831c1d1abf4095b668c5d25ae82a3d39e204b911ddc85ad26f41683a9",
+          "match": "raw"
+        },
+        {
+          "path": "research\\selected_answer_causal_dynamics.py",
+          "recorded_sha256": "afe3f5393372f6449ee0d814e5d18e0d8952f0fc18c9333729205f706afd74a3",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        14740,
+        14740
+      ]
+    },
+    {
+      "folder": "selected_answer_temporal_shape_oof_v3",
+      "manifest": "research\\outputs\\experiments_v2\\selected_answer_temporal_shape_oof_v3\\prepared_manifest.json",
+      "manifest_sha256": "3b94d7a7f3acce8b70743d3f4569a079aa600266f0332909e57488d91c796050",
+      "metrics_sha256": "821632d153472fb678402725679c601c19b3cf782940ebd263685a20971ca443",
+      "prepared_manifest_binding": true,
+      "source_bindings": [
+        {
+          "path": "research\\run_selected_answer_oof_experiments.py",
+          "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_selected_answer_representation_oof_experiments.py",
+          "recorded_sha256": "5cc9383831c1d1abf4095b668c5d25ae82a3d39e204b911ddc85ad26f41683a9",
+          "match": "raw"
+        },
+        {
+          "path": "research\\run_selected_answer_temporal_shape_oof.py",
+          "recorded_sha256": "66eaa89b71a3e89e34f82359b3a9f015642357535d341c562230223af06f1262",
+          "match": "raw"
+        },
+        {
+          "path": "research\\selected_answer_temporal_shape.py",
+          "recorded_sha256": "bbef1fe114e1f0934108b1542abc20923154dadab555f270c6cbb402b29217ac",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        14740,
+        14740
+      ]
+    },
+    {
+      "folder": "committee_oof_strict_v1",
+      "manifest": "research\\outputs\\experiments_v2\\committee_oof_strict_v1\\committee_oof_manifest.json",
+      "manifest_sha256": "5adff53d11b72855b95fe980281dd2daae371b557f8e146c0684fb456d0a4436",
+      "metrics_sha256": "0a77ebd4875b255e17f531ee07fd5e5df69eea37f50367fcd23ddabefb66fae5",
+      "prepared_manifest_binding": null,
+      "source_bindings": [
+        {
+          "path": "research\\run_committee_oof_experiments.py",
+          "recorded_sha256": "63ba1ba102ee428caaf40ebffc329876fc3d6b8e71a2348296f1f8d64d3007ff",
+          "match": null
+        }
+      ],
+      "prediction_rows": [
+        144440
+      ]
+    },
+    {
+      "folder": "committee_oof_minimal_v1",
+      "manifest": "research\\outputs\\experiments_v2\\committee_oof_minimal_v1\\committee_minimal_manifest.json",
+      "manifest_sha256": "1d936cc1aad41d9fb3c493515505be5c7a8b82fc76d9872f0edb93bc1aace008",
+      "metrics_sha256": "604f860b264522f25e421f7bbb4681f62bbc648eaaa5754341b66d51f82cd6a2",
+      "prepared_manifest_binding": null,
+      "source_bindings": [
+        {
+          "path": "research\\run_committee_oof_minimal.py",
+          "recorded_sha256": "5922a272ca4a2ae005701245880a98c6d2f3a89b9462a8167a109dfa3cc4a2a4",
+          "match": "raw"
+        }
+      ],
+      "prediction_rows": [
+        144440
+      ]
+    }
+  ],
+  "checkpoint_coverage_checks": [
+    {
+      "folder": "strict_tabular_stopping_oof_v1",
+      "checkpoint_pattern": "safe_scalar_lgbm_fold_*.npz",
+      "files": 5,
+      "covered_indices": 28888,
+      "each_index_exactly_once": true,
+      "contiguous_index_coverage": true,
+      "prepared_manifest_bindings_match": true,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "valid_five_fold_coverage": true
+    },
+    {
+      "folder": "strict_text_stopping_oof_v1",
+      "checkpoint_pattern": "tail512_word12_fold_*.npz",
+      "files": 5,
+      "covered_indices": 144440,
+      "each_index_exactly_once": true,
+      "contiguous_index_coverage": true,
+      "prepared_manifest_bindings_match": true,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "valid_five_fold_coverage": true
+    },
+    {
+      "folder": "selected_answer_causal_dynamics_oof_v3",
+      "checkpoint_pattern": "medium_capacity_fold_*.npz",
+      "files": 5,
+      "covered_indices": 14740,
+      "each_index_exactly_once": true,
+      "contiguous_index_coverage": true,
+      "prepared_manifest_bindings_match": true,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "valid_five_fold_coverage": true
+    },
+    {
+      "folder": "selected_answer_causal_dynamics_oof_v3",
+      "checkpoint_pattern": "regularized_fold_*.npz",
+      "files": 5,
+      "covered_indices": 14740,
+      "each_index_exactly_once": true,
+      "contiguous_index_coverage": true,
+      "prepared_manifest_bindings_match": true,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "valid_five_fold_coverage": true
+    },
+    {
+      "folder": "selected_answer_content_oof_v4_reasoning_only",
+      "checkpoint_pattern": "plurality_supporter_reasoning_only_thought512_fold_*.npz",
+      "files": 5,
+      "covered_indices": 14740,
+      "each_index_exactly_once": true,
+      "contiguous_index_coverage": true,
+      "prepared_manifest_bindings_match": true,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "valid_five_fold_coverage": true
+    },
+    {
+      "folder": "selected_answer_temporal_shape_oof_v3",
+      "checkpoint_pattern": "base_sanitized_plus_temporal_shape_regularized_lgbm_fold_*.npz",
+      "files": 5,
+      "covered_indices": 14740,
+      "each_index_exactly_once": true,
+      "contiguous_index_coverage": true,
+      "prepared_manifest_bindings_match": true,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "valid_five_fold_coverage": true
+    }
+  ],
+  "detailed_supporting_artifacts": [
+    {
+      "path": "tmp/research_history_audit/live_commit_inventory.json",
+      "sha256": "d648274194b8f617ee3d4d88c8fbbb138f7d991107c130486ecd5f7d6b7666f7"
+    },
+    {
+      "path": "tmp/research_history_audit/live_source_history_inventory.json",
+      "sha256": "8376bce616f68bccb7b6615c11b0421a115192957cb5206c6750b91ed68ead63"
+    },
+    {
+      "path": "tmp/research_history_audit/live_relevant_code_changes.json",
+      "sha256": "6f44f39667394a909ff94bfad97487719fd0db6d807a5a80ff2f349930cde53c"
+    },
+    {
+      "path": "tmp/research_history_audit/live_local_results_inventory.json",
+      "sha256": "b603a3ca597366befd3029d6edcfc8e06657b21c6e6e02d73e280759b7c19d01"
+    },
+    {
+      "path": "tmp/research_history_audit/live_checkpoint_coverage.json",
+      "sha256": "9739464ac7cb80107ff9119c2ca381ad946e5c8b6bf628fcc4a869d2b647ed3f"
+    }
+  ],
+  "legacy_peer_executor_source_recovery": {
+    "manifest": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/anonymous_minimal/peer_dynamics_manifest.json",
+    "runner_recorded_sha256": "f20ef6d621a0f4909b56f6e4466311fed46d620f7460a194549cb92a612be76a",
+    "peer_module_recorded_sha256": "5a16373637233e4aea315df040a868964cd6f7be0f10c3a6768d10a720ec0a14",
+    "runner_and_peer_module_match_current_raw_or_lf": false,
+    "runner_and_peer_module_match_reachable_source_versions": false,
+    "base_script_recorded_sha256": "63ba1ba102ee428caaf40ebffc329876fc3d6b8e71a2348296f1f8d64d3007ff",
+    "base_script_recovered_revision": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+    "recovery_scope": "Each recorded source compared against current raw/LF content and Git blobs/CRLF checkout forms for every reachable change of that path."
+  }
+}

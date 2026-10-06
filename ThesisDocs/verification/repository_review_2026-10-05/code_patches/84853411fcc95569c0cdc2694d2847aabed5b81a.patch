@@ -1,0 +1,36 @@
+commit 84853411fcc95569c0cdc2694d2847aabed5b81a
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 12 11:54:17 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 12 11:54:17 2026 -0400
+
+    fix: support pyarrow-backed string dtypes in _sanitize_step_frame and _escape_control_chars
+    
+    Resolves the TypeError when running algorithm_v2_experiments.py under Arrow-backed pandas dtype engines, enabling N1/N4 checks to complete successfully and log final verdicts.
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 8a92744..a5989a3 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -1179,7 +1179,7 @@ def _escape_control_chars(frame: pd.DataFrame) -> pd.DataFrame:
+     # quoting; everything else in C0 gets replaced.
+     pattern = re.compile(r"[\x00-\x08\x0b-\x1f]")
+     for column in frame.columns:
+-        if frame[column].dtype == object:
++        if frame[column].dtype == object or pd.api.types.is_string_dtype(frame[column]):
+             frame[column] = frame[column].map(
+                 lambda value: pattern.sub(" ", value) if isinstance(value, str) else value
+             )
+diff --git a/research/trace_analysis.py b/research/trace_analysis.py
+index b81f381..4f3e944 100644
+--- a/research/trace_analysis.py
++++ b/research/trace_analysis.py
+@@ -639,7 +639,7 @@ def _sanitize_step_frame(frame: pd.DataFrame) -> tuple[pd.DataFrame, int]:
+     # Stray strings forced these columns to object dtype; now that the garbage rows
+     # are gone, restore numeric dtype for any column whose non-null values all parse.
+     for c in frame.columns:
+-        if frame[c].dtype == object:
++        if frame[c].dtype == object or pd.api.types.is_string_dtype(frame[c]):
+             coerced = pd.to_numeric(frame[c], errors="coerce")
+             non_null = frame[c].notna().sum()
+             if non_null > 0 and coerced.notna().sum() == non_null:

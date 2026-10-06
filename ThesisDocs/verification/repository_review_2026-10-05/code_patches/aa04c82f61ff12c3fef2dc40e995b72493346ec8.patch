@@ -1,0 +1,20 @@
+commit aa04c82f61ff12c3fef2dc40e995b72493346ec8
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Mon Jul 13 09:14:03 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Mon Jul 13 09:14:03 2026 -0400
+
+    fix: import Any from typing in run_final_tournament.py
+
+diff --git a/research/run_final_tournament.py b/research/run_final_tournament.py
+index ef6731f..443bc02 100644
+--- a/research/run_final_tournament.py
++++ b/research/run_final_tournament.py
+@@ -16,6 +16,7 @@ from sklearn.preprocessing import StandardScaler
+ from sklearn.linear_model import LogisticRegression
+ from sklearn.pipeline import Pipeline
+ from sklearn.metrics import roc_auc_score
++from typing import Any
+ 
+ import torch
+ import torch.nn as nn

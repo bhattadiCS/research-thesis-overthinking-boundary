@@ -1,0 +1,782 @@
+{
+ "schema": "existing-evidence-gap-map-v1",
+ "created_utc": "2026-10-06T02:17:38.395803+00:00",
+ "head": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+ "coverage": {
+  "local_artifacts": {
+   "paths": 6845,
+   "local_files": 6845,
+   "tracked_at_head": 6489,
+   "untracked_nonignored_local": 250,
+   "ignored_local": 106,
+   "bytes": 2858883505,
+   "groups": 214,
+   "json_documents_catalogued": 501,
+   "json_parse_errors": 0
+  },
+  "all_ref_commits": 600,
+  "current_main_ancestry_commits": 484,
+  "commits_touching_artifacts": 329,
+  "historical_paths_missing_locally": [
+   "research/outputs/experiment_matrix/_thesis_audit_latecells.py",
+   "research/outputs/experiments_v2/advanced_tournament_checkpoint.pth"
+  ],
+  "target_families": 33,
+  "prediction_files_read": 35,
+  "saved_prediction_rows_read": 3147280,
+  "warning": "Prediction rows repeat the same historical corpus across learners/arms; they are not independent new model-generation events. Backup/rewritten commits are not separate scientific replications."
+ },
+ "inventory_reports": [
+  {
+   "path": "tmp/research_history_audit/data_local_artifact_inventory.json",
+   "sha256": "9136af1b36b24e3bf3032efb91b6a08866d7fa596db333efd2f766159e580ebd"
+  },
+  {
+   "path": "tmp/research_history_audit/data_artifact_history_inventory.json",
+   "sha256": "c2d5f380387fd8a5aa226e56deece73c852db6b1ed294531aaaedc4b71275728"
+  },
+  {
+   "path": "tmp/research_history_audit/data_target_family_evidence.json",
+   "sha256": "1b6eecf002222d906472274907969bf09ce9f747caa073411fde75c5d2542c29"
+  },
+  {
+   "path": "tmp/research_history_audit/data_target_artifact_validation.json",
+   "sha256": "71ff47c02c5b03bdb4e18ef489272f5ffdd1dffed0edbaf70709f3f9635d4e0e"
+  },
+  {
+   "path": "tmp/research_history_audit/data_generation_metadata_summary.json",
+   "sha256": "0cd39fb1573d389430f0f5d740fd537d6103f272ac2279b96574667d35813a8e"
+  },
+  {
+   "path": "tmp/research_history_audit/data_verified_offline_results.json",
+   "sha256": "09e387f9af7a9af6bdab8c5d95e5f88c273adb45d4723bfd48554a86658a71dd"
+  },
+  {
+   "path": "tmp/research_history_audit/data_historical_source_bindings.json",
+   "sha256": "25be06b3cc2710e0a2841d611b1b5ae798229081042e0080c6c026a5638d599c"
+  }
+ ],
+ "target_family_versions_and_states": {
+  "research/outputs/experiments_v2/committee_oof_minimal_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_minimal_v1/committee_minimal_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_no_timing_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_no_timing_v1/metadata_no_timing/no_timing_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_no_timing_v1/roster_no_timing/no_timing_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_no_timing_v2": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/metadata_no_timing/no_timing_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/roster_domain_difficulty_no_timing/no_timing_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/roster_domain_no_timing/no_timing_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/roster_no_timing/no_timing_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v2": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v2/anonymous_minimal/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v2/anonymous_minimal_baseline/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_peer_dynamics_topology_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_topology_v1/anonymous_minimal/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_topology_v1/anonymous_minimal_baseline/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_peer_dynamics_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v1/anonymous_minimal/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v1/roster_no_timing/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_peer_dynamics_v2": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v2/anonymous_minimal_baseline/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3": {
+   "tracked_files": 22,
+   "latest_observed_main_history_commit": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+   "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC",
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/anonymous_minimal/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/anonymous_minimal_baseline/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/roster_no_timing/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/roster_no_timing_baseline/peer_dynamics_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/committee_oof_strict_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/committee_oof_strict_v1/committee_oof_manifest.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/prospective_protocol_audit_smoke_20260719": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "protocol_smoke_or_preparation_only; inspect confirmation eligibility and actual event content"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/prospective_protocol_audit_smoke_20260719/protocol_status.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/prospective_protocol_schema_smoke_20260719": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "protocol_smoke_or_preparation_only; inspect confirmation eligibility and actual event content"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/prospective_protocol_smoke_20260719": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "protocol_smoke_or_preparation_only; inspect confirmation eligibility and actual event content"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v1/dynamics_status.json",
+     "state": "running",
+     "action": "prepare",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v2": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v2/dynamics_status.json",
+     "state": "failed",
+     "action": "prepare_representation",
+     "error": "AssertionError: Representation-stage feature columns are not unique."
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/dynamics_status.json",
+     "state": "complete",
+     "action": "aggregate",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_content_oof_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "explicitly_rejected_protocol",
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_content_oof_v1/selected_answer_content_status.json",
+     "state": "running",
+     "action": "fold_05",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_content_oof_v2_sanitized_thought": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "explicitly_rejected_protocol",
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_content_oof_v2_sanitized_thought/selected_answer_content_status.json",
+     "state": "complete",
+     "action": "aggregate",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_content_oof_v3_reasoning_only": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "explicitly_rejected_protocol",
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_content_oof_v3_reasoning_only/selected_answer_content_status.json",
+     "state": "complete",
+     "action": "prepare",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/selected_answer_content_status.json",
+     "state": "complete",
+     "action": "aggregate",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_oof_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_oof_v2_winner_panel": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_oof_v3_no_batch_timing": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_oof_v3_winner_panel": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_oof_v4_no_batch_timing": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_oof_v4_winner_panel": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_representation_oof_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": []
+  },
+  "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "explicitly_rejected_protocol",
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v1/temporal_shape_status.json",
+     "state": "failed",
+     "action": "prepare",
+     "error": "ValueError: too many values to unpack (expected 2)"
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v2": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "explicitly_incomplete_pair_not_for_comparison",
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v2/temporal_shape_status.json",
+     "state": "running",
+     "action": "fold_01",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/temporal_shape_status.json",
+     "state": "complete",
+     "action": "aggregate",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/strict_tabular_status.json",
+     "state": "complete",
+     "action": "aggregate",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/strict_text_stopping_oof_v1": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/strict_text_stopping_oof_v1/strict_text_status.json",
+     "state": "complete",
+     "action": "aggregate",
+     "error": null
+    }
+   ]
+  },
+  "research/outputs/experiments_v2/ultimate_smoke_strict_v2": {
+   "tracked_files": 0,
+   "latest_observed_main_history_commit": null,
+   "subject": null,
+   "classification": [
+    "saved retrospective training/OOF analysis; not new model generation"
+   ],
+   "states": [
+    {
+     "path": "research/outputs/experiments_v2/ultimate_smoke_strict_v2/ultimate_fold_01_summary.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/ultimate_smoke_strict_v2/ultimate_fold_02_summary.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    },
+    {
+     "path": "research/outputs/experiments_v2/ultimate_smoke_strict_v2/ultimate_tournament_status.json",
+     "state": "complete",
+     "action": null,
+     "error": null
+    }
+   ]
+  }
+ },
+ "existing_evidence": [
+  {
+   "topic": "Strict single-trajectory retrospective baseline",
+   "artifacts": [
+    "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/prepared_manifest.json",
+    "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/safe_scalar_lgbm_predictions.csv",
+    "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/safe_scalar_lgbm_metrics.json"
+   ],
+   "status": "complete locally; outputs untracked; runner/runtime source hashes retained exactly",
+   "verified_auc": 0.8495096500918485,
+   "rows": 144440,
+   "tasks": 2948,
+   "qualification": "Fixed config, source-qualified trajectories, same-trajectory current/past scalar geometry; no fresh deployment claim. Original code has task-disjoint inner calibration; stored outputs/checkpoints/folds verified, not a new calibration audit of every historical fit."
+  },
+  {
+   "topic": "Task-disjoint content calibration baseline",
+   "artifacts": [
+    "research/outputs/experiments_v2/strict_text_stopping_oof_v1/prepared_manifest.json",
+    "research/outputs/experiments_v2/strict_text_stopping_oof_v1/tail512_word12_predictions.csv"
+   ],
+   "status": "complete locally; outputs untracked; runner/runtime source hashes retained exactly",
+   "verified_auc": 0.8089757413672247,
+   "rows": 144440,
+   "tasks": 2948,
+   "qualification": "Current output tail only, vocabulary/model fit inside model-fit tasks, separate task calibration inside outer training fold. Natural prompt echoes remain a historical content limitation; no new prospective result."
+  },
+  {
+   "topic": "Matched anonymous peer signal",
+   "artifacts": [
+    "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/anonymous_minimal/peer_dynamics_predictions.csv",
+    "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/anonymous_minimal_baseline/peer_dynamics_predictions.csv",
+    "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/peer_dynamics_evidence_brief.json"
+   ],
+   "status": "complete and committed at a9bf28244cb33e06c03e1a6a6259918dda723442",
+   "verified_aucs": [
+    0.9546638703930357,
+    0.9453355857281374
+   ],
+   "matched_delta": 0.009328284664898323,
+   "rows": 144440,
+   "tasks": 2948,
+   "qualification": "Per-candidate correctness target. Retrospective current/full-barrier peers, not timestamped historical online decisions. Threshold intentionally unassigned. Original runner/feature code hashes do not resolve in retained Git versions; base source resolves at a9bf2824. No full original executable-source reproduction claim."
+  },
+  {
+   "topic": "Fixed roster sensitivity",
+   "artifacts": [
+    "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v2/anonymous_minimal/peer_dynamics_predictions.csv",
+    "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v2/anonymous_minimal_baseline/peer_dynamics_predictions.csv"
+   ],
+   "status": "complete locally; outputs untracked",
+   "verified_aucs": [
+    0.9400091689517813,
+    0.931266134763085
+   ],
+   "matched_delta": 0.008743034188696375,
+   "rows": 98280,
+   "tasks": 1512,
+   "qualification": "Complete retrospective 13-model panels at all five steps; subgroup selection and different denominator do not establish fresh synchronous roster collection."
+  },
+  {
+   "topic": "Actual selected-answer target",
+   "artifacts": [
+    "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/medium_capacity_metrics.json",
+    "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/plurality_supporter_reasoning_only_thought512_metrics.json",
+    "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/base_sanitized_plus_temporal_shape_regularized_lgbm_metrics.json"
+   ],
+   "status": "completed aggregate states; locally untracked",
+   "reported_aucs": {
+    "causal_dynamics_medium": 0.9370369330204548,
+    "reasoning_only_content": 0.8669461034247069,
+    "temporal_shape": 0.9329436488944607
+   },
+   "decisions": 14740,
+   "tasks": 2948,
+   "qualification": "Frozen deterministic plurality target; selected_correct copied from chosen archived candidate correctness. Not the per-candidate 144440-row target, not a prospective stopped-policy result, and not a fully nested model-selection claim. Independent gold regrading was not executed in this inventory."
+  },
+  {
+   "topic": "Actual live stopping plus fixed-horizon replay",
+   "artifacts": [
+    "research/outputs/semester2/online_stopping_20261002/final_evidence_summary.json",
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_paired_results.csv",
+    "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_paired_results.csv",
+    "research/outputs/semester2/online_stopping_20261002/learned_main/live_and_baseline_replay_pareto.csv"
+   ],
+   "status": "completed committed actual generation already audited in earlier work",
+   "qualification": "100 main and20 trap tasks, baseline plus heuristic and learned arms. Learned always stopped at2; fixed2 is the necessary interpretation/control, and results do not prove adaptive benefit or accuracy noninferiority. Existing full traces support additional retrospective fixed-budget comparisons without recollection."
+  }
+ ],
+ "unresolved_or_nonconfirmatory": [
+  {
+   "topic": "Prospective committee collection",
+   "artifacts": [
+    "research/outputs/experiments_v2/prospective_protocol_audit_smoke_20260719/protocol_manifest.json",
+    "research/outputs/experiments_v2/prospective_protocol_audit_smoke_20260719/events.jsonl",
+    "research/outputs/experiments_v2/prospective_protocol_schema_smoke_20260719/events.jsonl",
+    "research/outputs/experiments_v2/prospective_protocol_smoke_20260719/protocol_manifest.json"
+   ],
+   "finding": "Three smoke/preparation folders. Audit/schema each has1 task,2 events with identical short-check telemetry and1e-8sec durations; the preparation-only folder has4 task rows and no events. confirmation_eligible=false, phase=development, model revisions UNPINNED, stopping policy unregistered. These do not establish a full real-model prospective committee run."
+  },
+  {
+   "topic": "Independent generation-seed replication",
+   "finding": "Across167 metadata files,166 declare[7] and one[42]; all52 canonical global cells declare[7]. Separate algorithm/fold seeds and bootstrap draws are not model-generation seed replication."
+  },
+  {
+   "topic": "Fully nested model-selection evaluation",
+   "finding": "Fixed-config strict baselines exist and separate inner calibration is implemented. Many selected-answer/high-capacity comparisons selected configurations using the same task-OOF screen; that does not produce a clean nested winner-performance claim. Archived data can support a new isolated nested reanalysis without new LLM generation."
+  },
+  {
+   "topic": "Labels for actual candidate emitted at a stop",
+   "finding": "The selected-answer code copies selected candidate historical correct flags at research/run_selected_answer_oof_experiments.py:374. Regrading saved candidate text against metadata gold is a CPU/archive task; this inventory reproduces stored labels rather than proving all gold grades. New raw model generation is not needed solely for that audit."
+  },
+  {
+   "topic": "Original peer-source reproducibility",
+   "finding": "Declared peer runner and feature-builder byte identities do not match any retained all-ref Git file versions; exact source cannot be claimed from current code. Existing saved predictions, corpus bytes and outer folds verify. A new current-source isolated reconstruction would be analysis/training over archived data, not recollection."
+  },
+  {
+   "topic": "Partial collection counters",
+   "finding": "Declared pending work remains in Qwen3.5-9B GSM8K (64complete/436pending), Gemma colab (5/895), and benchmark_qwen7b_bs6 (0/12). Completed stored trajectories remain distinct from completion of all originally planned tasks."
+  }
+ ],
+ "invalid_or_incomplete_exclusions": [
+  {
+   "directories": [
+    "selected_answer_content_oof_v1",
+    "selected_answer_content_oof_v2_sanitized_thought",
+    "selected_answer_content_oof_v3_reasoning_only"
+   ],
+   "reason": "Explicit REJECTED_PROTOCOL.md: legacy raw-text task/history leakage, structured fields, then residual inline answer/confidence/stop assignments. Do not treat completed metrics as eligible evidence."
+  },
+  {
+   "directory": "selected_answer_temporal_shape_oof_v1",
+   "reason": "Explicit rejected preparation with duplicate schema columns."
+  },
+  {
+   "directory": "selected_answer_temporal_shape_oof_v2",
+   "reason": "Control completed but paired treatment deliberately interrupted; explicit INCOMPLETE_NOT_FOR_COMPARISON.md."
+  },
+  {
+   "directories": [
+    "selected_answer_causal_dynamics_oof_v1",
+    "selected_answer_causal_dynamics_oof_v2",
+    "committee_oof_peer_dynamics_fixed13_v1"
+   ],
+   "reason": "Preparation-only stale running state, failed nonunique representation stage, and empty output directory respectively."
+  }
+ ],
+ "historical_report_precision_findings": [
+  {
+   "source": "research/run_perfect_overthinking_stress_test.py",
+   "lines": [
+    144,
+    156,
+    272
+   ],
+   "finding": "Saved long_horizon_auc is evaluated on step>=4, while MD caption says>=6. Analysis of existing five-step rows, not six-step generation."
+  },
+  {
+   "source": "research/run_scientific_verification_and_stress_test_suite.py",
+   "lines": [
+    149,
+    196
+   ],
+   "finding": "Multi-Seed bootstrap heading describes one RNG resampling task clusters from fixed predictions, not independently recollected/trained seeds."
+  },
+  {
+   "source": "research/run_peer_dynamics_stress_tests.py",
+   "lines": [
+    244,
+    258
+   ],
+   "finding": "OOF probs=P(correct), then q=1-probs and mu=2probs-1-.05. Low-score rows are marked stopping; reported stopped accuracy is a subset mean, not sequential return or fleet-token utility."
+  }
+ ],
+ "recollection_decision": {
+  "current_qualified_thesis": "No wholesale recollection is required to complete the already scoped, honestly qualified thesis. Strict task-held-out and matched historical evidence already exists and can be incorporated/verified from saved data.",
+  "work_possible_using_existing_data": [
+   "Integrate verified strict baselines and anonymous/fixed13 matched ablations with distinct targets and denominators.",
+   "Record/recover exact provenance and preserve rejected/incomplete bundles as excluded history.",
+   "Perform independently sealed candidate regrading using saved output/gold metadata.",
+   "If desired, perform an isolated fully nested/current-source reanalysis and seed sensitivity over archived data with a new artifact identity.",
+   "Compare archived learned/replay policies against fixed2 and other fixed completion budgets using saved traces/ledgers."
+  ],
+  "new_generation_only_for_new_claims": "Fresh task-disjoint timestamped fixed-roster generation and independently repeated seeds would be needed to establish stronger prospective committee/adaptive/transfer/noninferiority claims; the existing v3 claim limitations do not assert those results.",
+  "scope": "This is an evidence decision, not institutional academic approval or a guarantee about future experiment performance."
+ },
+ "mutations": "Only new data_* audit files under tmp/research_history_audit were written. No saved source corpus, experiment output, frozen manifest, test suite, model or document artifact was changed or executed."
+}

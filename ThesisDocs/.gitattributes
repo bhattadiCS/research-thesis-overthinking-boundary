@@ -1,0 +1,9 @@
+# Formal publication receipts bind the exact bytes on every checkout.
+CURRENT_FORMAL_THESIS.md -text
+Masters_Thesis_Formal_v*.md -text
+formal/** -text
+archival/formal_v* -text
+verification/repository_review_2026-10-05/** -text
+verification/publication_completion_2026-10-06.json -text
+images/thesis_v2/** -text
+images/thesis_v4/** -text

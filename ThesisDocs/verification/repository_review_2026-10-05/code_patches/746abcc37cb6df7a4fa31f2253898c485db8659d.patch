@@ -1,0 +1,21 @@
+commit 746abcc37cb6df7a4fa31f2253898c485db8659d
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Mon Jul 13 09:16:34 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Mon Jul 13 09:16:34 2026 -0400
+
+    fix: remove n_jobs from LogisticRegression to silence FutureWarning
+
+diff --git a/research/run_final_tournament.py b/research/run_final_tournament.py
+index 943ed7a..368f2e6 100644
+--- a/research/run_final_tournament.py
++++ b/research/run_final_tournament.py
+@@ -63,7 +63,7 @@ def fit_binary_model(train_frame: pd.DataFrame, target_column: str, feature_cols
+     return Pipeline(
+         [
+             ("scale", StandardScaler()),
+-            ("model", LogisticRegression(max_iter=2000, class_weight="balanced", solver="lbfgs", n_jobs=-1)),
++            ("model", LogisticRegression(max_iter=2000, class_weight="balanced", solver="lbfgs")),
+         ]
+     ).fit(train_frame[feature_cols], target)
+ 

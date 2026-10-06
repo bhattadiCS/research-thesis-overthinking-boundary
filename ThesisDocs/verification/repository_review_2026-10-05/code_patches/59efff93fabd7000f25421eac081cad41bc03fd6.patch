@@ -1,0 +1,26 @@
+commit 59efff93fabd7000f25421eac081cad41bc03fd6
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 12 23:38:02 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 12 23:38:02 2026 -0400
+
+    fix: correct batch metrics filename in run_tier3_pilots.sh
+
+diff --git a/tools/run_tier3_pilots.sh b/tools/run_tier3_pilots.sh
+index 1f549bf..906994a 100755
+--- a/tools/run_tier3_pilots.sh
++++ b/tools/run_tier3_pilots.sh
+@@ -45,11 +45,11 @@ echo "=== Pilots complete. Committing and pushing results... ===" | tee -a "$LOG
+ # 4. Stage and push results
+ git add "$V2/tier3_pilot_gsm8k/trace_steps.csv" \
+         "$V2/tier3_pilot_gsm8k/trace_runs.csv" \
+-        "$V2/tier3_pilot_gsm8k/trace_batch_metrics.csv" \
++        "$V2/tier3_pilot_gsm8k/batch_metrics.csv" \
+         "$V2/tier3_pilot_gsm8k/runtime_metadata.json" \
+         "$V2/tier3_pilot_math/trace_steps.csv" \
+         "$V2/tier3_pilot_math/trace_runs.csv" \
+-        "$V2/tier3_pilot_math/trace_batch_metrics.csv" \
++        "$V2/tier3_pilot_math/batch_metrics.csv" \
+         "$V2/tier3_pilot_math/runtime_metadata.json"
+ 
+ git commit -m "results: Tier-3 Qwen-7B GSM8K/MATH pilot telemetry collected" | tee -a "$LOG"

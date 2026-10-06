@@ -1,0 +1,54 @@
+commit b4e886e2d892a083c9557eba79a7b710a046ed84
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 19 09:27:51 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 19 09:28:03 2026 -0400
+
+    fix: set num_workers=0 and mp.set_sharing_strategy('file_system') to prevent container /dev/shm shared memory exhaustion
+
+diff --git a/research/run_ultimate_multi_day_tournament.py b/research/run_ultimate_multi_day_tournament.py
+index 4e1721a..578f839 100644
+--- a/research/run_ultimate_multi_day_tournament.py
++++ b/research/run_ultimate_multi_day_tournament.py
+@@ -2818,7 +2818,7 @@ def build_parser() -> argparse.ArgumentParser:
+     parser.add_argument("--max-batch-size", type=int, default=8192)
+     parser.add_argument("--eval-batch-size", type=int, default=8192)
+     parser.add_argument("--cap-batch-to-data", action=argparse.BooleanOptionalAction, default=False)
+-    parser.add_argument("--num-workers", type=int, default=8)
++    parser.add_argument("--num-workers", type=int, default=0, help="Default to 0 in containers to prevent /dev/shm IPC shared memory exhaustion")
+     parser.add_argument("--tune-num-workers", type=int, default=0, help="Avoid worker churn across hundreds of trials")
+     parser.add_argument("--precision", choices=["bf16", "fp16"], default="bf16")
+     parser.add_argument("--compile", action=argparse.BooleanOptionalAction, default=True)
+@@ -2855,6 +2855,11 @@ def build_parser() -> argparse.ArgumentParser:
+ 
+ 
+ def main() -> int:
++    try:
++        import torch.multiprocessing as mp
++        mp.set_sharing_strategy('file_system')
++    except Exception:
++        pass
+     parser = build_parser()
+     args = parser.parse_args()
+     if args.self_test:
+diff --git a/tools/run_ultimate_multi_day_tournament.sh b/tools/run_ultimate_multi_day_tournament.sh
+index 99d7f69..c0d6718 100755
+--- a/tools/run_ultimate_multi_day_tournament.sh
++++ b/tools/run_ultimate_multi_day_tournament.sh
+@@ -31,6 +31,8 @@ BATCH_SIZE="${BATCH_SIZE:-4096}"
+ MAX_BATCH_SIZE="${MAX_BATCH_SIZE:-8192}"
+ MAX_HOURS="${MAX_HOURS:-71.5}"
+ SYNC_SECONDS="${SYNC_SECONDS:-900}"
++NUM_WORKERS="${NUM_WORKERS:-0}"
++TUNE_NUM_WORKERS="${TUNE_NUM_WORKERS:-0}"
+ RUN_LOG="${RUN_LOG:-run_ultimate_multi_day_tournament.log}"
+ SMOKE_OUTPUT_DIR="${OUTPUT_DIR}/ultimate_smoke"
+ RUN_PID=""
+@@ -159,6 +161,7 @@ echo "[INFO] Starting resumable 72-hour tournament; log: ${RUN_LOG}"
+     --epochs "${EPOCHS}" \
+     --batch-size "${BATCH_SIZE}" --max-batch-size "${MAX_BATCH_SIZE}" \
+     --max-hours "${MAX_HOURS}" \
++    --num-workers "${NUM_WORKERS}" --tune-num-workers "${TUNE_NUM_WORKERS}" \
+     --require-blackwell --resume \
+     > "${RUN_LOG}" 2>&1 &
+ RUN_PID=$!

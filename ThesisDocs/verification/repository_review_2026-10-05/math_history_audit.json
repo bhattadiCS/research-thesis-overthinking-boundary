@@ -1,0 +1,1118 @@
+{
+  "schema": "math-scientific-history-audit-v1",
+  "review_date": "2026-10-05",
+  "reviewer": "math_proofs independent agent",
+  "read_only": true,
+  "actions_not_performed": [
+    "source edits",
+    "tests",
+    "model fitting",
+    "generation",
+    "dataset or historical-result mutation",
+    "PDF build/export",
+    "commit/push"
+  ],
+  "history_scope": {
+    "head": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+    "current_main_reachable_commits": 484,
+    "all_local_refs_commits": 600,
+    "remote_main_identity": "Parent independently verified GitHub main at this HEAD with 484 commits; this child used local reachable Git objects.",
+    "targeted_path_commits": 100,
+    "targeted_current_main_commits": 73,
+    "targeted_non_main_backup_commits": 27,
+    "paths": [
+      "research/mathematical_foundations.md",
+      "research/overthinking_boundary.md",
+      "ThesisDocs/archive/mathematical_foundations_proofs.md",
+      "ThesisDocs/rigor_audit",
+      "research/run_scientific_verification_and_stress_test_suite.py",
+      "research/deep_result_verification.py",
+      "research/tests/test_mathematical_foundations.py",
+      "research/real_trace_experiments.py",
+      "research/regrade_traces.py",
+      "research/tests/test_graders.py",
+      "tools/analyze_live_stopping_uncertainty.py",
+      "research/reports/post_bug_review_v1"
+    ],
+    "method": "Metadata review for every path-relevant all-ref commit, followed by targeted historical messages, proof sources, code paths, old/current result artifacts and current thesis claims. Not every irrelevant hardware/runtime patch was re-reviewed line-by-line."
+  },
+  "history_inventory": [
+    {
+      "git_commit": "6f89d5bd4266eaae7056642bcce7132b66a54393",
+      "author_date": "2026-03-31T15:39:16-04:00",
+      "subject": "Add Colab runner and research package",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "43edcb350a5b09e70c7d7597a8c8f43303be513f",
+      "author_date": "2026-03-31T15:39:16-04:00",
+      "subject": "Add Colab runner and research package",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "92681da827e4e17c63baa9582d3aa3621953f13c",
+      "author_date": "2026-03-31T16:28:47-04:00",
+      "subject": "Revamp real_trace protocol with flexible modes and baseline",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "bf4916a641ed1ccb1d8cb9cee7b7740325e48445",
+      "author_date": "2026-03-31T16:28:47-04:00",
+      "subject": "Revamp real_trace protocol with flexible modes and baseline",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "d98737742887de3019c9b6435973bca4239e6913",
+      "author_date": "2026-04-01T03:44:09Z",
+      "subject": "save progress",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "3832b1ea4c635fe61cbf541d1fe4060b6622e824",
+      "author_date": "2026-04-01T03:44:09Z",
+      "subject": "save progress",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "f6fe839ae34d22f8471b0b7089638ef1735d62dd",
+      "author_date": "2026-04-02T02:38:04Z",
+      "subject": "save records",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "a63bcedf26bbe8868dba3ea86c3df8e39e16403d",
+      "author_date": "2026-04-02T02:38:04Z",
+      "subject": "save records",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "6b5ad36915dd89067f5577dae42372234fb723d8",
+      "author_date": "2026-04-02T04:02:23Z",
+      "subject": "Preserve runtime context on refresh",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "bbb9778ec80764dc0a2220712db6a94b151d8ded",
+      "author_date": "2026-04-02T04:02:23Z",
+      "subject": "Preserve runtime context on refresh",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "afad4f0296ac72d0c3e58a29eff96ef060902edc",
+      "author_date": "2026-04-02T10:21:53-04:00",
+      "subject": "recover qwen7b run and regenerate analyses",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "fe9aeb8b3394264e7872d39a0a4ad31adf0bc6fe",
+      "author_date": "2026-04-02T10:21:53-04:00",
+      "subject": "recover qwen7b run and regenerate analyses",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "33482eac7342ed47dfdaaf031dd8562d368e082c",
+      "author_date": "2026-04-02T14:49:33Z",
+      "subject": "docs: add thesis stopping-rule algorithm",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "b2a2b94b98bc473c8c5f39c7afb5fbd386d1466f",
+      "author_date": "2026-04-02T14:49:33Z",
+      "subject": "docs: add thesis stopping-rule algorithm",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "ba7e28f3217794f057df2c7ae99b28203f38bd36",
+      "author_date": "2026-04-02T15:02:16Z",
+      "subject": "feat: add mistral l4 benchmark path",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "048036e7b3be65e4cfb224f537e76af7c63ecc14",
+      "author_date": "2026-04-02T15:02:16Z",
+      "subject": "feat: add mistral l4 benchmark path",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "13ad1ff1c22d6c036cfab09aed161f08e6d8c725",
+      "author_date": "2026-04-02T15:57:22Z",
+      "subject": "perf: select mistral l4 runtime",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "e6be9ddcaf0df163dd95a2bd576fbc905c2a37e8",
+      "author_date": "2026-04-02T15:57:22Z",
+      "subject": "perf: select mistral l4 runtime",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "1641b2ca80e8a4053069f393280d9965fe799088",
+      "author_date": "2026-04-02T23:39:24Z",
+      "subject": "fix: restore mistral l4 runtime",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "58b3a3f11a578abb63147ebbb03533771cd38e25",
+      "author_date": "2026-04-02T23:39:24Z",
+      "subject": "fix: restore mistral l4 runtime",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "2a883cc6f315acd08f1edeb9b3c53412d7de79be",
+      "author_date": "2026-04-03T10:20:40-04:00",
+      "subject": "feat(obe-system): integrate Gemma 4, Qwen 3.5, Llama 4; enable 4-bit L4 optimization and autonomous validation prompt",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "a7e3849b2f7e9ef6451e05c7d0b9995442ec8cee",
+      "author_date": "2026-04-03T10:20:40-04:00",
+      "subject": "feat(algo-x): integrate Gemma 4, Qwen 3.5, Llama 4; enable 4-bit L4 optimization and autonomous validation prompt",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "089bf59f87d43404140500875219d7520250a39f",
+      "author_date": "2026-04-03T10:28:53-04:00",
+      "subject": "[OBE-SYSTEM] Phase 2: L4 GPU Optimization + Frontier Model Integration (Gemma 4/Qwen 3.5/Llama 4)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "ef66fd4a21c727dd324da51c41df5e7988486eae",
+      "author_date": "2026-04-03T10:28:53-04:00",
+      "subject": "[ALGO-X] Phase 2: L4 GPU Optimization + Frontier Model Integration (Gemma 4/Qwen 3.5/Llama 4)",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "ad6faad4d851efc12787834d6ad604648c1dc8f1",
+      "author_date": "2026-04-03T21:39:40Z",
+      "subject": "chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "3684248483f4d38f11a5e09860eab2792ad7b90c",
+      "author_date": "2026-04-03T21:39:40Z",
+      "subject": "chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "e20fdfdcb109ab43575c20aa960577c66d7ae292",
+      "author_date": "2026-04-03T21:29:18-04:00",
+      "subject": "chore: commit from Copilot \u2014 set git user",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "39cdfa2ed4f3ddca5b8fb45822dbf5b0121246ba",
+      "author_date": "2026-04-03T21:29:18-04:00",
+      "subject": "chore: commit from Copilot \u2014 set git user",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "2291ba73af7ad787e56a99106dd1d80511bb4ec8",
+      "author_date": "2026-04-04T13:38:06Z",
+      "subject": "chore: commit agent changes \u2014 canonicalize catalog; add equation_analysis; frontier smoke validation reports",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "e797d9ef2ba29241e061693c8f57f8b94b149f62",
+      "author_date": "2026-04-04T13:38:06Z",
+      "subject": "chore: commit agent changes \u2014 canonicalize catalog; add equation_analysis; frontier smoke validation reports",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "093286b322ff4bb9c947380fc90a49fda9da980c",
+      "author_date": "2026-04-04T11:44:19-04:00",
+      "subject": "Align CPU audit, frontier analysis, and README",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "642df44114dff6825ffbd4aca18d026f16c5ff47",
+      "author_date": "2026-04-04T11:44:19-04:00",
+      "subject": "Align CPU audit, frontier analysis, and README",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "72fd52cd619167b5ab5dd5bc36113c421be76660",
+      "author_date": "2026-04-04T12:16:32-04:00",
+      "subject": "Final Infrastructure: Initialized 30-day autonomous solving protocol and performed model/equation cleanup",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "cdf5797240890f9293e2b95e5fea3791db0b4e5f",
+      "author_date": "2026-04-04T12:16:32-04:00",
+      "subject": "Final Infrastructure: Initialized 30-day autonomous solving protocol and performed model/equation cleanup",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "07e452672163b451332137f10bbf2ca2d2ef2bdc",
+      "author_date": "2026-05-11T21:45:53-04:00",
+      "subject": "Enable 4-bit CPU offload for constrained GPUs",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "a28c3d0cdfc081d9c2b8befe12fd253a19e4d9c2",
+      "author_date": "2026-05-11T21:45:53-04:00",
+      "subject": "Enable 4-bit CPU offload for constrained GPUs",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "53ce3c0b841f793dd10a3efcc6d090283c4d1b18",
+      "author_date": "2026-05-11T21:53:52-04:00",
+      "subject": "Patch 4-bit dispatch compatibility on RUN:AI",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "d2705d10840b1a47ab79e535e775981fedab23ee",
+      "author_date": "2026-05-11T21:53:52-04:00",
+      "subject": "Patch 4-bit dispatch compatibility on RUN:AI",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "64ca4e74a6a3b3c33b88bf72038e099777011188",
+      "author_date": "2026-05-11T22:00:31-04:00",
+      "subject": "Patch meta-state 4-bit hook dispatch",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "8451287357b833656203e4c11a8d04fef8b002a1",
+      "author_date": "2026-05-11T22:00:31-04:00",
+      "subject": "Patch meta-state 4-bit hook dispatch",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "7995962d069fc0219f22b0e73ef2cdd14f8bc7c6",
+      "author_date": "2026-05-11T22:05:37-04:00",
+      "subject": "Pin Gemma 4bit text path to GPU",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "e911669713f4df4db0f0cfe06fa49a944c14cc8c",
+      "author_date": "2026-05-11T22:05:37-04:00",
+      "subject": "Pin Gemma 4bit text path to GPU",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "69d2b25be9c0e8cad68fac5781d05d133792588a",
+      "author_date": "2026-05-11T22:14:28-04:00",
+      "subject": "Reduce full-run Gemma scoring memory",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "62f97100a6302ca049ec3ed3012e0cd2174e0cfb",
+      "author_date": "2026-05-11T22:14:28-04:00",
+      "subject": "Reduce full-run Gemma scoring memory",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "87036433d12b63dce04b53d1d71067014a06d818",
+      "author_date": "2026-05-11T22:21:10-04:00",
+      "subject": "Move Gemma scoring postprocess to CPU",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "81e54955beb806bd75ba7642e06bc328d3257328",
+      "author_date": "2026-05-11T22:21:10-04:00",
+      "subject": "Move Gemma scoring postprocess to CPU",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "45072d1a85d3de02f4f0103282627c7f8db07359",
+      "author_date": "2026-05-17T18:46:15-04:00",
+      "subject": "fix: lazy-import multimodal classes + add torchvision to requirements",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "0bd29f9eece5763fdf128fbbafdc8cb7d8be7c73",
+      "author_date": "2026-05-17T18:46:15-04:00",
+      "subject": "fix: lazy-import multimodal classes + add torchvision to requirements",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "9a99aff6f09a0d258e5fde5f76f1c6bd652a0e58",
+      "author_date": "2026-05-17T18:54:02-04:00",
+      "subject": "fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "658cfd4932aa6748e9159502fc29ffd1eb9c6a9d",
+      "author_date": "2026-05-17T18:54:02-04:00",
+      "subject": "fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint)",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "32963ca7ffd33be148e0ee7356db04dc101b166f",
+      "author_date": "2026-05-17T19:00:28-04:00",
+      "subject": "fix: force single-GPU device_map for small 4-bit models (meta tensor crash)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "586a8bdf889eab36f705fc76217de8fd808fa48f",
+      "author_date": "2026-05-17T19:00:28-04:00",
+      "subject": "fix: force single-GPU device_map for small 4-bit models (meta tensor crash)",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "759e9212a3b3fccf4ca9dfc00c93a2be5654e6f9",
+      "author_date": "2026-05-19T20:40:03-04:00",
+      "subject": "chore: Deep scrub of all commercial IP references in files",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "faaa80850e7d2decc60f7a9e6f146ba5b2edfc62",
+      "author_date": "2026-05-19T20:40:03-04:00",
+      "subject": "chore: Deep scrub of all commercial IP references in files",
+      "on_current_main_ancestry": false
+    },
+    {
+      "git_commit": "376254b12c7bc87970cf6092386ad481d304867f",
+      "author_date": "2026-06-12T10:49:35-04:00",
+      "subject": "robustness: add error handling for GSM8K dataset loading",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "589b7976e9567dad3efd9cd8578168c05266d36a",
+      "author_date": "2026-06-12T10:55:41-04:00",
+      "subject": "fix: load openai/gsm8k directly to avoid HF UriError with datasets v5",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "41195db8009ba31109fae05fa631325a077359b1",
+      "author_date": "2026-06-12T11:15:25-04:00",
+      "subject": "fix: resolve traceback memory leak in safe_generate_batch_with_diagnostics",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "19450224baa361408f4059f7cf885c8147fdfcdd",
+      "author_date": "2026-06-18T21:39:53-04:00",
+      "subject": "feat: add experiment-matrix orchestrator and RunAI launcher",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "08411354d39c522f073ac4f16eb3f63e97265a52",
+      "author_date": "2026-06-20T01:02:50-04:00",
+      "subject": "feat: data-driven cross-family summary + MATH dataset parser",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+      "author_date": "2026-06-20T10:31:08-04:00",
+      "subject": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "8beba2d7c5ec6ced9f5b9bdef60ecd6c2afe24f4",
+      "author_date": "2026-06-20T11:38:31-04:00",
+      "subject": "fix(grader): credit prose/unit-wrapped numeric MATH answers",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "122358a6c2787c2a7d8190c5fbc8ba7b9978b616",
+      "author_date": "2026-06-20T23:25:00-04:00",
+      "subject": "feat: text-only Mistral-Small-24B + GPQA and ARC (multiple-choice) datasets",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "c0b5ce81042609593889f864abaa758e25767c48",
+      "author_date": "2026-06-24T17:04:28-04:00",
+      "subject": "fix(harness): tolerate string-contaminated columns in cell summary",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "0fd7317f894977f0b944d207ed86d2747d975179",
+      "author_date": "2026-06-24T17:06:54-04:00",
+      "subject": "fix(harness): drop truncated CSV rows on resume reconcile",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "9819ee2cf2d5fd80616fcb0a784f06add082d85e",
+      "author_date": "2026-07-02T19:20:26-04:00",
+      "subject": "docs: add SUPERSEDED banners to pre-audit reports",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "074bc70dcadd49ca4488140f561ca9be77c5d687",
+      "author_date": "2026-07-02T19:20:27-04:00",
+      "subject": "fix: handle NaN in regrade_traces.py row parsing",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "0ea16f417f151058033ca1ba6c8451434e4d1e9b",
+      "author_date": "2026-07-10T05:55:06-04:00",
+      "subject": "audit: scientific-rigor verification + full loss autopsy (rigor_audit/)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "57cd2f5204e8ecc748a730c03803206009a9c0f1",
+      "author_date": "2026-07-10T09:45:17-04:00",
+      "subject": "fix: re-analyze qwen2p5_7b__math on full 1500-run corpus (protocol P5)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "34d76c03407d44dacabdb248996c4076596e2454",
+      "author_date": "2026-07-10T09:54:09-04:00",
+      "subject": "fix: drop hidden-state cache requirement from completeness reconciliation",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "ce0167c6066b0caeb85370777df6ee14b9281d30",
+      "author_date": "2026-07-10T10:09:04-04:00",
+      "subject": "fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "2660d40f7d9fc68d82154bb99f90da105c84b809",
+      "author_date": "2026-07-10T10:22:37-04:00",
+      "subject": "research: pre-registered offline experiments P1/P2/P3a/P13 + P6 (results)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "d2a42e852cd7c9c1fee591ca7d6b8b0747e1ba3c",
+      "author_date": "2026-07-10T10:45:59-04:00",
+      "subject": "research: P3b/P3c/P3d offline policy arm results (one survivor: P3d)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "1f2e44531aa79b4655a33b18db4018fc1a7b7fa0",
+      "author_date": "2026-07-10T10:55:36-04:00",
+      "subject": "research: P9 lambda-sensitivity results",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "cca211392e431a7a4fbe36b6095a890d60ffb48f",
+      "author_date": "2026-07-10T12:08:20-04:00",
+      "subject": "research: calibrated per-cell threshold table (P3d productization)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "36a13c9ab22671c7a2545dbd5752291a792a1cb9",
+      "author_date": "2026-07-10T12:19:28-04:00",
+      "subject": "docs: pre-registered algorithm-v2 protocols (N1-N9)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "22b23f8f5e31d9e91fdbc85a87fc0a27ccf7d343",
+      "author_date": "2026-07-10T12:33:41-04:00",
+      "subject": "research: N1/N4 harness + Nvidia-workspace runbook for algorithm-v2",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "c4e98fc552aba4253f8876fefd1c145eebda096c",
+      "author_date": "2026-07-10T12:47:10-04:00",
+      "subject": "tools: autonomous v2 driver with 20-min checkpoint pushes + verified harness",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "c0d3bc071ee4ad159c7d2f35f2604dccbfd52497",
+      "author_date": "2026-07-11T15:23:58-04:00",
+      "subject": "tools: self-detaching autonomous runner (no nohup needed), verified E2E",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "2a64791fd946610bfd0d0655f2f6c087a61ef91d",
+      "author_date": "2026-07-11T15:33:13-04:00",
+      "subject": "tools: preflight + parallel-GPU mode for the autonomous v2 run",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "000f2e60d4e0f3a066c1261b9cb485f4a8154e5d",
+      "author_date": "2026-07-11T15:38:49-04:00",
+      "subject": "fix: preflight pointed at the wrong torch install for a fresh container",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "84853411fcc95569c0cdc2694d2847aabed5b81a",
+      "author_date": "2026-07-12T11:54:17-04:00",
+      "subject": "fix: support pyarrow-backed string dtypes in _sanitize_step_frame and _escape_control_chars",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "f5ce8a1bff976937454698df198ae606a3877850",
+      "author_date": "2026-07-12T12:11:39-04:00",
+      "subject": "docs: add rigorous results analysis report for Algorithm v2 experiments",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "1f05833f0d2595010d60643fa3ce51c211648355",
+      "author_date": "2026-07-12T17:35:01-04:00",
+      "subject": "docs: update 08_algorithm_v2_results_analysis.md with N2/N3 results",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "07fedbd45e7c8a3db5d30c13735c8a1129f997f0",
+      "author_date": "2026-07-12T17:45:11-04:00",
+      "subject": "feat: implement Tier-3 pilot telemetry for N7 self-consistency and N8 extended observables",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "8218a5c2270f6c0a4436be5f8d848bda13afb54d",
+      "author_date": "2026-07-12T17:50:07-04:00",
+      "subject": "docs: consolidate all files into master Scientific Methodology and Experimental Report",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "0174611bacc8235f05e6d6791e85dd741bcdbc52",
+      "author_date": "2026-07-12T23:47:49-04:00",
+      "subject": "docs: integrate Tier-3 N7 and N8 telemetry pilot results into reports",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "a0244e0a49c73dbd74a0ad6f0a1c1569219ec771",
+      "author_date": "2026-07-13T21:15:07-04:00",
+      "subject": "fix: align global sweep script models list with valid choice aliases",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "45997657b926566035bcaa9ddc302ace823d6749",
+      "author_date": "2026-07-13T21:31:08-04:00",
+      "subject": "perf: compile-free GPU-based random projection with caching for 2x faster steps extraction",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "ee2521d30ba0ac2a8a4d34ad2337fb4a56e09487",
+      "author_date": "2026-07-14T09:25:39-04:00",
+      "subject": "fix: restore stable CPU tensor copy path for random projections to prevent CUDA deadlock hangs",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "5a06073241e1daf5101b378b57e443048d9465b0",
+      "author_date": "2026-07-14T19:36:45-04:00",
+      "subject": "perf: extract and copy L1/L2 layers to CPU and delete massive all_hidden_states tuple before clearing VRAM to prevent GPU allocator hangs",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "646b37940e6a46fb0a0090803a43ef92b3935a03",
+      "author_date": "2026-07-14T22:11:05-04:00",
+      "subject": "perf: mean pool hidden states on GPU before copying, shrinking CPU transfer size by 1000x for peak Blackwell efficiency",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "49401f81030bf2895bc27ccdf34a96f91335f9e3",
+      "author_date": "2026-07-15T08:48:08-04:00",
+      "subject": "Add signal-based alarm timeout to sympy.simplify in math_answers_equivalent to prevent hangs on complex LLM math expressions",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "03a93b8c0e4bcd7b2bd6db75f4f69c461e763c44",
+      "author_date": "2026-07-15T17:28:48-04:00",
+      "subject": "fix: safeguard read_csv calls against EmptyDataError from 0-byte placeholder files during checkpoint reconciliation",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "92efe5090ffa18337e19055f644ab2caa59e3aab",
+      "author_date": "2026-07-15T17:30:58-04:00",
+      "subject": "fix: wrap pd.read_csv in try-except blocks against EmptyDataError and load HF_TOKEN automatically from .hf_token",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "56759a9fdd5b2168cc9b52bc179cada69252afc0",
+      "author_date": "2026-07-16T00:46:56-04:00",
+      "subject": "fix: wrap sympy's parse_expr in the alarm signal timeout block to prevent hangs on pathological mathematical strings",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "ab0d31d259f1286bddc5c3e3520c0bee56f6752f",
+      "author_date": "2026-07-18T22:31:15-04:00",
+      "subject": "results: add Next-Gen Experiment Suite (Jerk, Torsion, Causal RoPE Transformer, Gated MoE Probe)",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+      "author_date": "2026-07-20T09:01:33-04:00",
+      "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "48635dfb0516156be9e173a7b4b82d0a71122d1d",
+      "author_date": "2026-07-20T19:28:53-04:00",
+      "subject": "feat: complete scientific hypothesis verification suite with 1000-draw bootstrap confidence intervals",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+      "author_date": "2026-10-02T22:36:31-04:00",
+      "subject": "Add verified thesis and live stopping research package",
+      "on_current_main_ancestry": true
+    },
+    {
+      "git_commit": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+      "author_date": "2026-10-03T00:40:13-04:00",
+      "subject": "Fix graders, stopping validation and research ledger audits",
+      "on_current_main_ancestry": true
+    }
+  ],
+  "anchor_commits": {
+    "8218a5c": {
+      "git_commit": "8218a5c2270f6c0a4436be5f8d848bda13afb54d",
+      "on_current_main_ancestry": true,
+      "subject": "docs: consolidate all files into master Scientific Methodology and Experimental Report",
+      "message": "docs: consolidate all files into master Scientific Methodology and Experimental Report\n\nCleans up the ThesisDocs directory, moves deprecated logs and templates into ThesisDocs/archive, updates .gitignore to ignore agent cache folders, and establishes a single source of truth report for Dr. Woods."
+    },
+    "ef45dda": {
+      "git_commit": "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+      "on_current_main_ancestry": true,
+      "subject": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)",
+      "message": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)\n\nGraders (real_trace_experiments.py): extract_numeric_candidate now takes the\nlast numeric token by position (no fraction-before-int); extract_word_fraction\nrequires an explicit numerator (no bare-ordinal fractions); _strip_latex_math\nonly peels a single-variable assignment (no \"0\" for a plane); balanced-brace\n\\boxed{} extractor; MATH loader fails hard instead of silently swapping corpora.\nRegression tests in research/tests/test_graders.py (18/18).\n\nAnalysis (trace_analysis.py): out-of-sample evaluation via GroupKFold-by-run_id\nfor the probe + all learned detectors + threshold/EB/e-process selection (kills\nthe in-sample leakage); first_zero_crossing implements inf{t>=2: mu<=0}; oracle\nfloored at t>=2; alpha/beta fit on genuine t>=2 transitions; pooled_proxy_drift\n= prf-pcf-lambda; EB ddof=0 and delta_t ~ step^2. cross_family uses pooled OOF.\n\nOrchestration: collection_complete is scope-aware (smoke leftover can't pass as\na full cell); atomic manifest write; smoke routed to a _smoke tree; model_offload\ngitignored. regrade_traces.py recomputes labels from stored answers (GPU-free).\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
+    },
+    "6f832ea": {
+      "git_commit": "6f832ea47f862f641c9fc8788c0ae764cd2e5726",
+      "on_current_main_ancestry": true,
+      "subject": "fix: correct canonical boundary operator + regenerate all results out-of-sample",
+      "message": "fix: correct canonical boundary operator + regenerate all results out-of-sample\n\ngenerate_thesis_artifacts.first_zero_crossing (imported by cross_family) and\nfrontier_validation_report.first_zero_crossing had the same defect as the\ntrace_analysis copy: no t>=2 floor + step-1 fallback -> theory-forbidden step-1\nboundaries. Now T* = inf{t>=2: drift<=0}, None if never observed.\n\nRegenerated every cell (re-graded labels + out-of-sample analysis) and the\ncross-family report. Net effect of the full remediation:\n- boundaries: theory-forbidden step-1s gone (weak models now 2); late witnesses\n  unchanged (Qwen 7/14/32 = 5); capability ladder and cross-family conclusion intact.\n- probe AUC now honest out-of-fold: max 0.91 (Qwen-14B) vs inflated in-sample 0.96;\n  most models 0.65-0.75.\n- 545/165000 labels corrected by the re-grade.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
+    },
+    "8beba2d": {
+      "git_commit": "8beba2d7c5ec6ced9f5b9bdef60ecd6c2afe24f4",
+      "on_current_main_ancestry": true,
+      "subject": "fix(grader): credit prose/unit-wrapped numeric MATH answers",
+      "message": "fix(grader): credit prose/unit-wrapped numeric MATH answers\n\nValidation on a 25-problem Qwen-7B MATH run surfaced false negatives where the\nmodel gave the right number wrapped in words/units (\"Savings: 550 gallons\",\n\"1.25 miles\") -> marked wrong. math_answers_equivalent now compares the\ncandidate's trailing numeric token by value when the gold answer is numeric,\nguarded so it never number-grabs from symbolic answers (=, ^, \\, or digit-letter\nadjacency like 5r) -> \"5x-7y+11z+4=0\" is not reduced to \"0\". Tests 23/23.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
+    },
+    "074bc70": {
+      "git_commit": "074bc70dcadd49ca4488140f561ca9be77c5d687",
+      "on_current_main_ancestry": true,
+      "subject": "fix: handle NaN in regrade_traces.py row parsing",
+      "message": "fix: handle NaN in regrade_traces.py row parsing\n\nint(row.get(\"correct\", 0)) crashed on hard-kill-corrupted rows with a\npresent-but-NaN value. Fixing this and running the tool for the first\ntime (50/52 cells, dry-run) shows the previously-circulating \"165,000\nlabels re-graded, 0.33% flip rate\" claim is false, not merely\nunverified: real numbers are approximately 799K rows and a 1.62% flip\nrate -- off by about 4.8x on volume and about 5x in the wrong\ndirection on rate.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_016jFunoxRUo9oW212ZjYE14"
+    },
+    "0ea16f4": {
+      "git_commit": "0ea16f417f151058033ca1ba6c8451434e4d1e9b",
+      "on_current_main_ancestry": true,
+      "subject": "audit: scientific-rigor verification + full loss autopsy (rigor_audit/)",
+      "message": "audit: scientific-rigor verification + full loss autopsy (rigor_audit/)\n\nSix-module audit of the overthinking-boundary results. Headline (74,540\nruns; 89.59/2.83/7.57 W/T/L) reproduces run-for-run via an independent\ncode path and is label-robust: real regrade drift is 1 row in 798,770 --\nthe 1.62% dry-run figure (074bc70) was regrade-tool artifacts; running\nthat tool for real would corrupt ~12,284 ARC/GPQA labels (patch first).\nAll three prior numeric contradictions closed with named causes. New\ndefects found: qwen2p5_7b__math detector stage covers 75/1500 runs\n(repair protocol pre-registered); 50.9% oracle-capture rests on a\nhardcoded 12-cell selection (honest all-cells: 63.66%); GSM8K/MATH\nloss-concentration narrative refuted (GPQA outranks MATH). Losses\nexhaustively classified (B196/C459/D599/E1652/F2740, sums to 5,646) by\nthe committed re-runnable research/classify_losses.py; ranked levers and\npre-registered protocols P1-P13 in ThesisDocs/rigor_audit/.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+    },
+    "ce0167c": {
+      "git_commit": "ce0167c6066b0caeb85370777df6ee14b9281d30",
+      "on_current_main_ancestry": true,
+      "subject": "fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12",
+      "message": "fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12\n\n- regrade_traces.py: per-dataset answer_type (arc/gpqa=mcq \u2014 running the\n  old tool for real would have rewritten ~12,284 correct labels),\n  NA-safe reads (literal 'N/A' answers survive), corruption-fragment\n  skip. Verified: patched dry-run on the two sentinel cells = 0 flips\n  in 33,000 rows.\n- normalize_mcq_answer: '/' guards stop 'N/A' matching as answer 'A'.\n- math sympy fallback: digit-letter products ('0x^2') no longer die as\n  broken hex literals; the one genuine label-drift row now grades\n  correct. Grader suite 30/30.\n- append_records: strip C0 control chars (except tab/newline) from text\n  fields at write time \u2014 the CSV row-framing corruption root cause.\n- run_experiment_matrix: analysis_complete() now requires detector\n  outputs no older than trace data (prevents the qwen7b_math 75/1500\n  staleness class); trace_counts() counts well-formed run_ids only.\n- run_stakes_sweep: harmonize to pipeline utility convention\n  lambda*(step-1); report regenerated \u2014 boundaries unchanged\n  (qwen7b T*=5/7/10 at c=0/10/100), levels uniformly +0.05.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+    },
+    "2660d40": {
+      "git_commit": "2660d40f7d9fc68d82154bb99f90da105c84b809",
+      "on_current_main_ancestry": true,
+      "subject": "research: pre-registered offline experiments P1/P2/P3a/P13 + P6 (results)",
+      "message": "research: pre-registered offline experiments P1/P2/P3a/P13 + P6 (results)\n\nCensus harness (research/offline_policy_experiments.py) over the 75,965-run\npost-repair corpus; recomputed stop utilities matched pipeline stop_utility\n75,965/75,965. Verdicts per pre-registered criteria (rigor_audit/05):\n- P1 empty-answer guard: FAILED (net dU -116.5; dissolves 140 losses but\n  118 win->loss; 1,056 wins also stop on empty answers) -- not shipped.\n- P2 T_MIN 2v3: FLOOR DEFENDED (moving to 3 costs -1,912 net utility;\n  36,527 step-2 stops are 91.9% wins).\n- P3a blanket token-cap guard: FAILED (net dU -8,034; 20,410 wins stop on\n  capped steps) -- conditional variants P3b-d remain the live levers.\n- P13 temperature trend: monotone increasing loss confirmed 4/4 datasets\n  (Cochran-Armitage Z 2.08-4.43).\n- P6 re-extraction audit: 0.188% label delta (bar 0.5%); 30 verdict-\n  relevant rows all DeepSeek-scoped (think-block fallback extraction\n  semantics, not storage truncation); bounded <=0.04pp.\n- P9 lambda sweep: running in background; results to be appended.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+    },
+    "d2a42e8": {
+      "git_commit": "d2a42e852cd7c9c1fee591ca7d6b8b0747e1ba3c",
+      "on_current_main_ancestry": true,
+      "subject": "research: P3b/P3c/P3d offline policy arm results (one survivor: P3d)",
+      "message": "research: P3b/P3c/P3d offline policy arm results (one survivor: P3d)\n\nCensus harness research/offline_policy_arms_p3.py replicates the production\nGroupKFold-by-run_id scoring exactly (recomputed hazard_drift stops match\ndetector_comparison_by_run.csv for 75,965/75,965 runs, 0 mismatches), then\nswaps only the stop rule per pre-registered arm:\n- P3b churn-gated hysteresis: FAILED (net dU -1,004; 683 E-losses dissolve\n  but 191 win->loss + delay on 15,922 moved stops dominate).\n- P3c best-so-far selection: FAILED (16/180 C-losses dissolved, 132\n  win->loss; diagnostic AUC 0.824 does not yield selection precision).\n  Step-1-inclusive sub-arm also negative (-171).\n- P3d per-cell drift-threshold calibration (fit on GroupKFold-by-task_id\n  train folds, evaluated OOF): PASSED, +1,545.85 net utility (~44% of the\n  3,543-utility loss mass); fitted offsets mean +0.08 (stop sooner).\n  Caveat recorded: utility-optimal but loss COUNT rises (~5,735 -> ~6,086)\n  -- report utility and win-rate together.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+    },
+    "1f2e445": {
+      "git_commit": "1f2e44531aa79b4655a33b18db4018fc1a7b7fa0",
+      "on_current_main_ancestry": true,
+      "subject": "research: P9 lambda-sensitivity results",
+      "message": "research: P9 lambda-sensitivity results\n\nExact analytic sweep (research/lambda_sensitivity_sweep.py): fitted models\nare lambda-independent, so mu_lambda <= 0 iff (1-q)a - q*b <= lambda; the\nrecovered out-of-fold base series gives the exact sweep with lambda in both\nthe rule and the utility. Validation: lambda=0.05 reproduces the recorded\nstops and 68,095/2,135/5,735 exactly (0 mismatches, 75,965 runs).\nResult: PASSED - win rate 87.65/88.84/89.64/90.86/98.78% at lambda\n0.01/0.02/0.05/0.10/0.20; max in-band deviation 1.26pp vs the +-5pp bar.\nHeadline is not knife-edged on the lambda=0.05 convention; lambda=0.2 is a\ndegenerate stop-everything regime, flagged as such. (The heavyweight\nout-of-place re-run approach was abandoned at 19/208 cells for runtime.)\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+    },
+    "cca2113": {
+      "git_commit": "cca211392e431a7a4fbe36b6095a890d60ffb48f",
+      "on_current_main_ancestry": true,
+      "subject": "research: calibrated per-cell threshold table (P3d productization)",
+      "message": "research: calibrated per-cell threshold table (P3d productization)\n\nGenerator research/calibrate_cell_thresholds.py + table at\n_aggregate/calibrated_cell_thresholds.csv (52 cells). Validation: 0 stop\nmismatches across all runs; sum of per-cell OOF gains = +1,545.85,\nmatching the committed P3d census exactly. Leakage recipe documented:\nquote oof_dU (GroupKFold-by-task_id, held-out), deploy delta_full_DEPLOY\n(full-cell refit), never cite cal_full_* in-sample companions as gains.\nFindings (rigor_audit/06): delta mean +0.080 -- the uncalibrated policy\nover-thinks on 45/52 cells; the 7 negative-delta cells (want MORE\npatience) are almost exactly the known late-boundary cells, i.e. the\ncalibration independently rediscovers the overthinking-boundary\nstructure. mistral_small_24b_2409__gsm8k (worst cell, 30.27% loss)\nimproves on BOTH metrics (loss -> 14.00%, +122.65 utility). Framing\ncaveat recorded: corpus-level calibration is utility-optimal, not\nwin-rate-optimal (losses 5,735 -> 6,191; supersedes the earlier ~6,086\napproximation in rigor_audit/05).\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+    },
+    "36a13c9": {
+      "git_commit": "36a13c9ab22671c7a2545dbd5752291a792a1cb9",
+      "on_current_main_ancestry": true,
+      "subject": "docs: pre-registered algorithm-v2 protocols (N1-N9)",
+      "message": "docs: pre-registered algorithm-v2 protocols (N1-N9)\n\nNext-step experimental design grounded in the offline campaign's\nverdicts: per-run guards/selectors are exhausted (P1/P3a/P3b/P3c all\nfailed census), so improvement comes from (1) context-conditioning --\ndoes P3d calibration transfer? (N1 meta-calibration LOCO, N4 two-\nparameter task modulation), (2) belief-state quality on existing\nfeatures (N2 probe suite, N3 hierarchical hazards -- all CPU), and\n(3) enriching the filtration with new observables, the only legitimate\nway to raise the online bound (N7 k=2 self-consistency agreement with\ntoken-cost-charged utility, N8 answer-span logprob + pooled mid-layer\nrecorder pilots -- GPU + engineering). Tier 2 = the already-registered\nGPU items P4b/P8. Standard OOF metrics fixed (net dU, oracle capture,\nboundary error P(|err|<=1), W/L/T with tie caveat).\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+    },
+    "f5ce8a1": {
+      "git_commit": "f5ce8a1bff976937454698df198ae606a3877850",
+      "on_current_main_ancestry": true,
+      "subject": "docs: add rigorous results analysis report for Algorithm v2 experiments",
+      "message": "docs: add rigorous results analysis report for Algorithm v2 experiments"
+    },
+    "1f05833": {
+      "git_commit": "1f05833f0d2595010d60643fa3ce51c211648355",
+      "on_current_main_ancestry": true,
+      "subject": "docs: update 08_algorithm_v2_results_analysis.md with N2/N3 results",
+      "message": "docs: update 08_algorithm_v2_results_analysis.md with N2/N3 results"
+    },
+    "48635df": {
+      "git_commit": "48635dfb0516156be9e173a7b4b82d0a71122d1d",
+      "on_current_main_ancestry": true,
+      "subject": "feat: complete scientific hypothesis verification suite with 1000-draw bootstrap confidence intervals",
+      "message": "feat: complete scientific hypothesis verification suite with 1000-draw bootstrap confidence intervals"
+    },
+    "44f6934": {
+      "git_commit": "44f693470119b285effbd6b084f6ab09e296341d",
+      "on_current_main_ancestry": true,
+      "subject": "feat: complete Blackwell GPU Ultra Tournament run and persist final master report (Stacked Meta-Ensemble OOF AUC: 0.954858 / 0.955156)",
+      "message": "feat: complete Blackwell GPU Ultra Tournament run and persist final master report (Stacked Meta-Ensemble OOF AUC: 0.954858 / 0.955156)"
+    },
+    "fa1c653": {
+      "git_commit": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+      "on_current_main_ancestry": true,
+      "subject": "Add verified thesis and live stopping research package",
+      "message": "Add verified thesis and live stopping research package\n\nFreeze distinct corpora and historical provenance; add finite-horizon proofs, deployable controllers, calibrated prefix heads, four paired GPU evaluations, and independent accounting and uncertainty audits. Include the reviewed thesis, exact 25-page paper, anonymous NeurIPS preparation draft, editable 25-slide PowerPoint, review capsule, and 107-test verification record. Preserve pending human academic milestones."
+    },
+    "6e4378b": {
+      "git_commit": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+      "on_current_main_ancestry": true,
+      "subject": "Fix graders, stopping validation and research ledger audits",
+      "message": "Fix graders, stopping validation and research ledger audits"
+    }
+  },
+  "artifact_evidence": [
+    {
+      "path": "research/mathematical_foundations.md",
+      "sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/tests/test_mathematical_foundations.py",
+      "sha256": "47c7510883ed540d12e4f7d4781145c0fcf95f915c3b43ed015f84f4d6afe800",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "ThesisDocs/archive/mathematical_foundations_proofs.md",
+      "sha256": "aa172a0786637ef6100a06fe9975ae3f70116624dc9a90493133c440b43ab19f",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md",
+      "sha256": "72c8f719d16d6eaaea845fb5a9f9c203edad35a4fab83ff4f19130c9374de618",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "ThesisDocs/rigor_audit/01_scientific_method_adversarial_verification.md",
+      "sha256": "34b566755da641f4719f427cca28d1839b21f4d816ae21f2437a08e5212ee821",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "ThesisDocs/rigor_audit/04_next_experiment_protocols.md",
+      "sha256": "0d63551935c862af4e8189b5e1462068e5a72db2d6b582cd741704217e9d60ae",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "ThesisDocs/rigor_audit/05_offline_experiment_results.md",
+      "sha256": "d525dd40ededa0f30fe78184fd56f1551e90d84045be4c235dbf12e721942933",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "ThesisDocs/rigor_audit/08_algorithm_v2_results_analysis.md",
+      "sha256": "d3e40460fdc1c7fc94293146e9270d4fb37bf1dd96ff7b83ded2e1764933e89a",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/run_scientific_verification_and_stress_test_suite.py",
+      "sha256": "f0f8b758d7a19249d8fc5cefd5900dd43561b3b876808fe2fc7317cf784cfae7",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/outputs/experiments_v2/scientific_verification_v1/scientific_verification_report.json",
+      "sha256": "f2b9a8dbd0b170191f4f50e4368e9fb74cef68cb69ca54df6297466c36a204dc",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/outputs/experiments_v2/scientific_verification_v1/scientific_verification_report.md",
+      "sha256": "1edcec65a33056573af0e0d1b3b59e6469e333c1938c69c9c88a615a9c1b53d0",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/outputs/semester2/prefix_model_v1/training_protocol.json",
+      "sha256": "69c755ac71533a7b31f34c9ed4e448e0690cd11846fcabb9ed191da59e508d85",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/outputs/semester2/prefix_model_v1/label_reconstruction_audit.csv",
+      "sha256": "ff7a789cc04880830a3484d6c77b4d791b810a0afbb76d68ab78918e0843f534",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/outputs/semester2/prefix_model_v1/evaluation.json",
+      "sha256": "659eca8d5e3a5949bbeb60df79c77654144fc76d221585d71d10a7b0afb3abf9",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/reports/thesis_failure_audit_v1/audit_summary.json",
+      "sha256": "71781dc284f881ab417d135fc22e1676091e9b608befc38b49505428a41aefa2",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/reports/post_bug_review_v1/grader_impact.json",
+      "sha256": "291bc15ccf884ee27f2c874ae74ee7fc938f77e7b5435ebda74b6ea9a80af3fe",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/reports/post_bug_review_v1/uncertainty_impact.json",
+      "sha256": "8dfee4be496b687d028615cd2042e76020c450e78792d142903b300c9251f4f2",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "research/reports/post_bug_review_v1/source_revision_verification.json",
+      "sha256": "cbfb57bc91b140ccf74a24ed2254004f44bdd4798666e5845047b26fe2e78f86",
+      "tracked": true,
+      "working_tree_status": "clean"
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter1_intro.md",
+      "sha256": "5692e914afe710f1696003cbec3afd8ed420a27ff7fb07c7ef04b1d91fee4d7a",
+      "tracked": true,
+      "working_tree_status": "M ThesisDocs/chapters/chapter1_intro.md"
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter2_theory.md",
+      "sha256": "3ebf29bc62f6ea6aa976cfe1f5ec0042cbe09fb55022c66daff24e620bc42115",
+      "tracked": true,
+      "working_tree_status": "M ThesisDocs/chapters/chapter2_theory.md"
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter3_methodology.md",
+      "sha256": "289ffc98874ce94c1be780aa0f32b21886f98e6f9e554122ed453c35aab1cb7b",
+      "tracked": true,
+      "working_tree_status": "M ThesisDocs/chapters/chapter3_methodology.md"
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter4_empirical.md",
+      "sha256": "113666d112b96fc1b9287a41aa7533607a156f10be0be25ff2280c53464f8f6e",
+      "tracked": true,
+      "working_tree_status": "M ThesisDocs/chapters/chapter4_empirical.md"
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter5_online.md",
+      "sha256": "b99551a07aa43e8f80bbfa0be54acbc6de9227d501f449cb73382556d243eb75",
+      "tracked": true,
+      "working_tree_status": "M ThesisDocs/chapters/chapter5_online.md"
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter6_discussion.md",
+      "sha256": "af97789971999559071d588fff45853c3f5ea63b84eb709c6daa7ca8234708d2",
+      "tracked": true,
+      "working_tree_status": "M ThesisDocs/chapters/chapter6_discussion.md"
+    },
+    {
+      "path": "ThesisDocs/formal/visual_math_v3.json",
+      "sha256": "fbe5fcf43a98bff589366813a3185ce8b6d792706c0f51e1fa5a45c43e542192",
+      "tracked": false,
+      "working_tree_status": "clean"
+    }
+  ],
+  "mathematics": {
+    "canonical_working_equals_HEAD": true,
+    "canonical_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+    "early_derivations_commit": "8218a5c2270f6c0a4436be5f8d848bda13afb54d",
+    "finite_horizon_canonical_and_tests_commit": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+    "proof_test_count_from_source": 12,
+    "exact_snell_systems_documented_in_test": 4374,
+    "verification_scope": "Exact finite-system checks complement general proofs: independent exhaustive causal-policy evaluation, binary hazard/count identities, latent-reference tower and reward reduction, persistence, delayed repair/adaptive branching, cost/stake ordering, probability rectangles and e-process conditional-null checks. No tests rerun by this audit.",
+    "current_formal_claims": "Valid within declared finite-horizon, integrability, fixed candidate-selection/process, conditional-information, persistence and uncertainty-coverage assumptions. Standard Bellman/Snell/monotone stopping theory is acknowledged, not claimed novel."
+  },
+  "label_history": [
+    {
+      "commit": "ef45dda / 6f832ea / 8beba2d",
+      "status": "implemented historical grader, boundary-floor and OOF remediation",
+      "evidence": "Commit messages/code and later rigor audit; 6f832ea reports545/165000 label corrections, but this message is not an authoritative full-matrix count and must not be conflated with later ~799K-row audits."
+    },
+    {
+      "commit": "074bc70 then 0ea16f4",
+      "status": "initial automated regrade headline corrected by adversarial audit",
+      "evidence": "The July02 ~1.62% result was largely a wrong-answer-type regrade tool artifact affecting ARC/GPQA. July09/10 report documents all52 cells:51 raw disagreements, decomposed into40 malformed fragments,10 NA parsing artifacts, and1 current-grader mismatch. These are recorded as-of-July findings, not a new regrade by this audit."
+    },
+    {
+      "commit": "ce0167c",
+      "status": "tooling fixes implemented",
+      "evidence": "MCQ answer types, NA-safe reads, malformed-row skipping, N/A slash ambiguity and0x product parsing fixed; commit records0 flips in33,000 sentinel rows and30 grader regression tests."
+    },
+    {
+      "commit": "2660d40 / P6 report",
+      "status": "raw-text re-extraction audit completed with scoped unresolved semantics",
+      "evidence": "Recorded0.188% label-delta rate and30 DeepSeek verdict-relevant cases. Report identifies collection-time think-block fallback/carry-forward semantics as needing matching before classifying them as true label errors; this is not evidence that30 original labels are definitely wrong."
+    },
+    {
+      "commit": "fa1c653",
+      "status": "separate selected-candidate training-target reconstruction/regrade completed",
+      "rows": 7500,
+      "tasks": 1500,
+      "candidate_string_disagreements": 4269,
+      "label_disagreements": 43,
+      "strict_JSON_archive_rows": 0,
+      "evidence": "label_reconstruction_audit.csv and training_protocol.json. Archived gold used offline only; original source labels preserved; no live gold selects fit/calibration/policy constants."
+    },
+    {
+      "commit": "6e4378b",
+      "status": "saved-live impact audit completed",
+      "final_answer_records": 480,
+      "saved_observations": 2020,
+      "final_label_changes": 0,
+      "observation_label_changes": 0,
+      "evidence": "grader_impact.json, saved numeric-answer main/trap and learned main/trap panels; reused baselines/shared prefixes are audit rows, not480 independent trials."
+    },
+    {
+      "protocol": "P7 semantic adjudication",
+      "status": "completed independent adjudication record not found in inspected Git/artifact history",
+      "evidence": "P7 remains a proposed blinded frontier-judge/human disagreement review in04_next_experiment_protocols.md. Current thesis explicitly limits semantic label-validity claims. Automated regression/agreement does not substitute for semantic adjudication.",
+      "mandatory_for_current_narrow_thesis": false,
+      "needed_for_stronger_claim": "A claim that benchmark labels are semantically adjudicated at scale."
+    }
+  ],
+  "completed_work_recommendation_reconciliation": [
+    {
+      "work": "Versioned correctness/grading and reward/selection scope",
+      "status": "substantially implemented and documented",
+      "already_done": "Multiple grader revisions, preserved source/label profiles, selected-candidate target regrading, causal selectors, horizon/floor and all-cost definitions.",
+      "remaining": "Optionally spell empirical C_t as the versioned binary grader predicate and adjust the freely selectable-candidate reward accordingly; current exact-answer theorem is a valid idealization.",
+      "category": "document clarification",
+      "new_data_required": false
+    },
+    {
+      "work": "Finite-horizon Bellman/Snell and delayed-repair analysis",
+      "status": "completed mathematics",
+      "already_done": "Canonical theorem/proof, comparison with one-step drift, persistence sufficient condition, two finite counterexamples, exact enumeration tests.",
+      "remaining": "A trained multi-step continuation-value policy was not found in inspected code/history. Existing mathematical Bellman proof must not be mistaken for such a fitted empirical policy.",
+      "category": "optional new method",
+      "new_data_required_for_current_thesis": false
+    },
+    {
+      "work": "Fixed-budget comparison and calibration",
+      "status": "already evaluated",
+      "already_done": "276-task held-out archive replay contains fixed2/fixed3/fixed4/full-horizon and learned drift, calibrated probability scores and task-cluster intervals.",
+      "remaining": "Live learned stopping is equal to fixed-two decisions; evidence does not establish adaptive added value.",
+      "category": "measured result and inference limit",
+      "new_data_required_for_current_thesis": false
+    },
+    {
+      "work": "Controlled estimator/policy experiments and failure taxonomy",
+      "status": "completed stored evidence",
+      "already_done": "July P1/P2/P3/P9/P13 and N2/N3/N4 results, plus October full75,965-run failure census. Current thesis reports bounded matched contrasts and negative outcomes.",
+      "remaining": "Some old explanations overstate universal causality or irreducibility; current narrow thesis explicitly avoids these inferences.",
+      "category": "legacy documentation scope and inference limit",
+      "new_data_required_for_current_thesis": false
+    }
+  ],
+  "stored_results": {
+    "prefix_replay": {
+      "fixed_2": {
+        "tasks": 276,
+        "accuracy": 0.11956521739130435,
+        "utility_difference": 0.16449275362318844,
+        "completion_token_saving_fraction": 0.5133227933520996,
+        "mean_stop_step": 2.0,
+        "stop_step_counts": {
+          "2": 276
+        }
+      },
+      "fixed_3": {
+        "tasks": 276,
+        "accuracy": 0.13043478260869565,
+        "utility_difference": 0.12536231884057972,
+        "completion_token_saving_fraction": 0.32709932004267406,
+        "mean_stop_step": 3.0,
+        "stop_step_counts": {
+          "3": 276
+        }
+      },
+      "fixed_4": {
+        "tasks": 276,
+        "accuracy": 0.11594202898550725,
+        "utility_difference": 0.06086956521739132,
+        "completion_token_saving_fraction": 0.16261134461882543,
+        "mean_stop_step": 4.0,
+        "stop_step_counts": {
+          "4": 276
+        }
+      },
+      "learned_drift": {
+        "tasks": 276,
+        "accuracy": 0.11956521739130435,
+        "utility_difference": 0.16431159420289856,
+        "completion_token_saving_fraction": 0.5128857697399709,
+        "mean_stop_step": 2.003623188405797,
+        "stop_step_counts": {
+          "2": 275,
+          "3": 1
+        }
+      },
+      "never": {
+        "tasks": 276,
+        "accuracy": 0.10507246376811594,
+        "utility_difference": 0.0,
+        "completion_token_saving_fraction": 0.0,
+        "mean_stop_step": 5.0,
+        "stop_step_counts": {
+          "5": 276
+        }
+      }
+    },
+    "prefix_uncertainty": "2000 task-cluster percentile replicates, seed 20261002",
+    "prefix_task_counts": {
+      "calibration": 322,
+      "evaluation": 276,
+      "train": 902
+    },
+    "failure_census": {
+      "trajectory_count": 75965,
+      "verdict_counts": {
+        "win": 68095,
+        "loss": 5735,
+        "tie": 2135
+      },
+      "scope": "Archived fitted hazard policy versus full recorded horizon, using frozen correctness labels; descriptive development evidence",
+      "historical_category_tags": "Ignore embedded old probe AUCs and claims about prediction limits; they were not recomputed by this command"
+    },
+    "original_verification_tests": 107,
+    "post_bug_recorded_tests": 243,
+    "post_bug_corpus_preserved": true,
+    "legacy_scientific_report": {
+      "total_rows": 144440,
+      "total_tasks": 2948,
+      "control_baseline_auc": 0.9428587768340694,
+      "h1_conv1d_bigru_auc": 0.9476880782693476,
+      "hybrid_meta_ensemble_auc": 0.9553778890238235,
+      "hybrid_brier_loss": 0.07635392153080738,
+      "bootstrap_results": {
+        "mean_baseline_auc": 0.9427912371552755,
+        "mean_model_auc": 0.9553230482889955,
+        "mean_delta_auc": 0.012531811133720101,
+        "ci_95_low": 0.010991412203845103,
+        "ci_95_high": 0.013970106117906089,
+        "p_value_delta_greater_zero": 1.0
+      }
+    }
+  },
+  "legacy_report_limitations": [
+    {
+      "path": "research/run_scientific_verification_and_stress_test_suite.py",
+      "finding": "Builds each sequence from a complete trajectory and its final correctness, then broadcasts that trajectory score to all step rows before hybrid fitting. This stored hybrid comparison is retrospective, not a prefix-time stopping demonstration."
+    },
+    {
+      "path": "research/run_scientific_verification_and_stress_test_suite.py",
+      "finding": "Its Markdown overall-AUC95% interval is rendered as auc_hybrid +/-0.004, rather than a computed interval. Its separately stored bootstrap lift interval is actually computed. Do not promote the fixed-window row to statistical evidence."
+    },
+    {
+      "path": "research/run_scientific_verification_and_stress_test_suite.py",
+      "finding": "Multi-Seed/1000-bootstrap terminology denotes task resampling using one RNG seed and fold-specific model seeds, not independent repeated generation experiments. Current thesis already states this distinction."
+    },
+    {
+      "path": "ThesisDocs/rigor_audit/00_EXECUTIVE_SUMMARY.md",
+      "finding": "Old late-repair linear-probe limitations and projected recoverability are not an information-theoretic impossibility theorem. Current failure audit excludes embedded old probe tags, and Chapter4 explicitly rejects that inference."
+    }
+  ],
+  "current_narrow_thesis_decision": {
+    "additional_generation_required_by_evidence_for_stated_narrow_claims": false,
+    "rationale": "Existing data support protocol-specific empirical contrasts, observed repair/corruption, failure taxonomy, held-out retrospective/replay diagnostics and actual implemented stopping with explicitly low accuracy/fixed-two equivalence. The mathematical results are conditional formal results; no empirical proof of universal optimum, calibrated live conditional hazards or broad no-loss savings is claimed.",
+    "original_contribution_case": "Application and assumption audit of established mathematics, matched estimator/generation contrasts, documented negative findings, and a reproducible causal selected-answer runtime/evidence protocol. This is an evidence-backed applied contribution case, not a certified new general theorem or guarantee of faculty acceptance.",
+    "stronger_optional_claims_requiring_further_evidence": [
+      "learned Bellman-optimal stopping",
+      "adaptive utility advantage over a fixed budget",
+      "prespecified accuracy noninferiority across independent tasks/seeds",
+      "transported live conditional calibration",
+      "semantic correctness labels adjudicated at scale",
+      "universal accuracy peak or architecture-independent savings"
+    ],
+    "scope_rule": "Unproved stronger claims and proposed P7/continuation/seed studies are not automatically mandatory JHU tasks for this narrower thesis."
+  },
+  "current_working_vs_GitHub": "The v3 formal chapter revisions, compiled sources/PDFs and v3 review receipts are current local working-tree artifacts; HEAD/GitHub remains6e4378be. Historical committed science is distinguished from current uncommitted formal presentation."
+}

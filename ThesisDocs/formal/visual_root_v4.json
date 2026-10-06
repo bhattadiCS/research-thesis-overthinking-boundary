@@ -1,0 +1,348 @@
+{
+  "schema": "root-visual-review-v4",
+  "status": "pass",
+  "editions": {
+    "digital": {
+      "pdf": "output/pdf/Masters_Thesis_Formal_v4_Aditya_Bhatt.pdf",
+      "sha256": "3ee3936ea9926b448d9bc4ea6f3a19eed0ba7b6309eeda7cc647f5e0227a47f8",
+      "pages": 104,
+      "mapped_body_comparisons": [
+        {
+          "v3_physical_page": 8,
+          "v4_physical_page": 9,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 9,
+          "v4_physical_page": 10,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 10,
+          "v4_physical_page": 11,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 11,
+          "v4_physical_page": 12,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 12,
+          "v4_physical_page": 13,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 13,
+          "v4_physical_page": 14,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 14,
+          "v4_physical_page": 15,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 15,
+          "v4_physical_page": 16,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 16,
+          "v4_physical_page": 17,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 17,
+          "v4_physical_page": 18,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 18,
+          "v4_physical_page": 19,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 19,
+          "v4_physical_page": 20,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 89,
+          "v4_physical_page": 91,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 90,
+          "v4_physical_page": 92,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 91,
+          "v4_physical_page": 93,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 92,
+          "v4_physical_page": 94,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 93,
+          "v4_physical_page": 95,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 94,
+          "v4_physical_page": 96,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 95,
+          "v4_physical_page": 97,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 96,
+          "v4_physical_page": 98,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        }
+      ],
+      "fresh_detail_required": [],
+      "front_detail_pages": [
+        1,
+        2,
+        6,
+        7,
+        8
+      ],
+      "all_second_renderer_contact_sheets_reviewed": true,
+      "front_detail_pages_freshly_inspected": [
+        1,
+        2,
+        6,
+        7,
+        8
+      ],
+      "remaining_material_defects": []
+    },
+    "print": {
+      "pdf": "output/pdf/Masters_Thesis_Formal_v4_Print_Aditya_Bhatt.pdf",
+      "sha256": "dd0195514cf97dc745db765c0da798aaf9407bd312aa658759c6cd04cd1bee2b",
+      "pages": 109,
+      "mapped_body_comparisons": [
+        {
+          "v3_physical_page": 8,
+          "v4_physical_page": 9,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 9,
+          "v4_physical_page": 10,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 10,
+          "v4_physical_page": 11,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 11,
+          "v4_physical_page": 12,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 12,
+          "v4_physical_page": 13,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 13,
+          "v4_physical_page": 14,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 14,
+          "v4_physical_page": 15,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 15,
+          "v4_physical_page": 16,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 16,
+          "v4_physical_page": 17,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 17,
+          "v4_physical_page": 18,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 18,
+          "v4_physical_page": 19,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 19,
+          "v4_physical_page": 20,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 20,
+          "v4_physical_page": 21,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 91,
+          "v4_physical_page": 94,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 92,
+          "v4_physical_page": 95,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 93,
+          "v4_physical_page": 96,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 94,
+          "v4_physical_page": 97,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 95,
+          "v4_physical_page": 98,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 96,
+          "v4_physical_page": 99,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 97,
+          "v4_physical_page": 100,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 98,
+          "v4_physical_page": 101,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        },
+        {
+          "v3_physical_page": 99,
+          "v4_physical_page": 102,
+          "body_rgb_identical": true,
+          "body_text_identical": true,
+          "body_word_geometry_identical": true
+        }
+      ],
+      "fresh_detail_required": [],
+      "front_detail_pages": [
+        1,
+        2,
+        6,
+        7,
+        8
+      ],
+      "all_second_renderer_contact_sheets_reviewed": true,
+      "front_detail_pages_freshly_inspected": [
+        1,
+        2,
+        6,
+        7,
+        8
+      ],
+      "remaining_material_defects": []
+    }
+  }
+}

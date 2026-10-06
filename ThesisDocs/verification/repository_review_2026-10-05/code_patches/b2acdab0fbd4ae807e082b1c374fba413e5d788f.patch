@@ -1,0 +1,23 @@
+commit b2acdab0fbd4ae807e082b1c374fba413e5d788f
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 12 11:59:41 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 12 11:59:41 2026 -0400
+
+    fix: replace unicode checkmarks in preflight_v2.py to avoid UnicodeEncodeError on Windows terminals
+
+diff --git a/tools/preflight_v2.py b/tools/preflight_v2.py
+index 70bb732..346a42b 100644
+--- a/tools/preflight_v2.py
++++ b/tools/preflight_v2.py
+@@ -162,8 +162,8 @@ else:
+ 
+ print()
+ if fails:
+-    print(f"\033[31m✗ PREFLIGHT FAILED — {len(fails)} blocking issue(s). Fix them, then re-run.\033[0m")
++    print(f"\033[31mX PREFLIGHT FAILED — {len(fails)} blocking issue(s). Fix them, then re-run.\033[0m")
+     sys.exit(1)
+-print(f"\033[32m✓ PREFLIGHT PASSED\033[0m" + (f" ({len(warns)} warning(s))" if warns else "")
++print(f"\033[32mOK PREFLIGHT PASSED\033[0m" + (f" ({len(warns)} warning(s))" if warns else "")
+       + " — safe to launch the autonomous run.\n")
+ sys.exit(0)

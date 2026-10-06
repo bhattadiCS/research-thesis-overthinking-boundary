@@ -1,0 +1,226 @@
+commit ce0167c6066b0caeb85370777df6ee14b9281d30
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Fri Jul 10 10:09:04 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Fri Jul 10 10:09:04 2026 -0400
+
+    fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12
+    
+    - regrade_traces.py: per-dataset answer_type (arc/gpqa=mcq — running the
+      old tool for real would have rewritten ~12,284 correct labels),
+      NA-safe reads (literal 'N/A' answers survive), corruption-fragment
+      skip. Verified: patched dry-run on the two sentinel cells = 0 flips
+      in 33,000 rows.
+    - normalize_mcq_answer: '/' guards stop 'N/A' matching as answer 'A'.
+    - math sympy fallback: digit-letter products ('0x^2') no longer die as
+      broken hex literals; the one genuine label-drift row now grades
+      correct. Grader suite 30/30.
+    - append_records: strip C0 control chars (except tab/newline) from text
+      fields at write time — the CSV row-framing corruption root cause.
+    - run_experiment_matrix: analysis_complete() now requires detector
+      outputs no older than trace data (prevents the qwen7b_math 75/1500
+      staleness class); trace_counts() counts well-formed run_ids only.
+    - run_stakes_sweep: harmonize to pipeline utility convention
+      lambda*(step-1); report regenerated — boundaries unchanged
+      (qwen7b T*=5/7/10 at c=0/10/100), levels uniformly +0.05.
+    
+    Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 6b87795..8a92744 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -646,8 +646,15 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+             parse_expr, standard_transformations, implicit_multiplication_application,
+         )
+         transforms = standard_transformations + (implicit_multiplication_application,)
+-        expr_a = parse_expr(norm_candidate.replace("^", "**"), transformations=transforms)
+-        expr_b = parse_expr(norm_expected.replace("^", "**"), transformations=transforms)
++        def _sympy_ready(expr: str) -> str:
++            # Digit-letter adjacency like '0x^2' tokenizes as a broken hex
++            # literal BEFORE sympy's implicit-multiplication transform runs
++            # (TokenError; rigor_audit/01 §4c) -- make the product explicit,
++            # leaving scientific notation (2e3) alone.
++            return re.sub(r"(\d)(?![eE][0-9])([a-zA-Z(])", r"\1*\2", expr.replace("^", "**"))
++
++        expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
++        expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
+         if sympy.simplify(expr_a - expr_b) == 0:
+             return True
+     except Exception:  # noqa: BLE001 -- unparseable expressions just fall through
+@@ -670,7 +677,9 @@ def normalize_mcq_answer(raw_answer: str) -> str:
+     s = s.upper()
+     for pattern in (r"(?:ANSWER|OPTION|CHOICE)\s*(?:IS|:|=)?\s*\(?([A-H])\)?",
+                     r"\(([A-H])\)",
+-                    r"(?<![A-Z])([A-H])(?![A-Z])"):
++                    # '/' guards: a bare letter adjacent to a slash is part of a
++                    # token like 'N/A', not a choice (rigor_audit/01 §4a).
++                    r"(?<![A-Z/])([A-H])(?![A-Z/])"):
+         matches = re.findall(pattern, s)
+         if matches:
+             return matches[-1]
+@@ -1163,10 +1172,24 @@ def expected_steps_per_run(is_baseline: bool, max_steps: int) -> int:
+     return 1 if is_baseline else max_steps
+ 
+ 
++def _escape_control_chars(frame: pd.DataFrame) -> pd.DataFrame:
++    # Control characters (\r, \f from decoded LaTeX like \rho, \frac) inside
++    # text fields break CSV row framing when writes are interrupted
++    # (rigor_audit/01 Axis 5a root cause). Tabs and newlines survive pandas
++    # quoting; everything else in C0 gets replaced.
++    pattern = re.compile(r"[\x00-\x08\x0b-\x1f]")
++    for column in frame.columns:
++        if frame[column].dtype == object:
++            frame[column] = frame[column].map(
++                lambda value: pattern.sub(" ", value) if isinstance(value, str) else value
++            )
++    return frame
++
++
+ def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
+     if not rows:
+         return
+-    frame = pd.DataFrame(rows)
++    frame = _escape_control_chars(pd.DataFrame(rows))
+     if path.exists():
+         existing_columns = pd.read_csv(path, nrows=0).columns.tolist()
+         for column in existing_columns:
+diff --git a/research/regrade_traces.py b/research/regrade_traces.py
+index 9813f5e..3a300b8 100644
+--- a/research/regrade_traces.py
++++ b/research/regrade_traces.py
+@@ -16,6 +16,7 @@ from __future__ import annotations
+ 
+ import argparse
+ import importlib.util
++import re
+ import sys
+ from pathlib import Path
+ 
+@@ -31,17 +32,40 @@ STEP_COST = 0.05
+ 
+ 
+ def _answer_type(domain: str, task_source: str) -> str:
++    # Must mirror collection-time answer_type per dataset: ARC/GPQA are
++    # multiple-choice; grading them as "number" rewrites ~12,284 correct
++    # labels (rigor_audit/01 §4b).
+     src = (task_source or domain or "").strip().lower()
+-    return "math" if src == "math" else "number"
++    if src == "math":
++        return "math"
++    if src in ("arc", "gpqa"):
++        return "mcq"
++    return "number"
++
++
++# Well-formed run_id suffix; SIGKILL-corruption fragments fail this and must
++# not be re-graded as if they were rows (rigor_audit/01 Axis 5a).
++_RUN_ID_OK = re.compile(r"__temp\d+(?:\.\d+)?__seed\d+$")
+ 
+ 
+ def regrade_file(path: Path, dry_run: bool) -> tuple[int, int]:
+-    df = pd.read_csv(path)
++    # keep_default_na=False keeps literal 'N/A'-style answers as strings
++    # (pandas would otherwise coerce them to NaN); na_values=[""] keeps
++    # genuinely empty fields detectable via pd.isna.
++    df = pd.read_csv(path, keep_default_na=False, na_values=[""])
+     if not {"answer", "expected_answer", "correct", "step"}.issubset(df.columns):
+         return (0, 0)
+     new_correct, new_norm, new_util = [], [], []
+     flipped = 0
++    skipped_fragments = 0
+     for _, row in df.iterrows():
++        rid = row.get("run_id")
++        if not isinstance(rid, str) or not _RUN_ID_OK.search(rid):
++            skipped_fragments += 1
++            new_correct.append(row.get("correct"))
++            new_norm.append(row.get("answer_normalized"))
++            new_util.append(row.get("utility"))
++            continue
+         atype = _answer_type(str(row.get("domain", "")), str(row.get("task_source", "")))
+         ans = "" if pd.isna(row.get("answer")) else str(row.get("answer"))
+         exp = "" if pd.isna(row.get("expected_answer")) else str(row.get("expected_answer"))
+@@ -50,12 +74,18 @@ def regrade_file(path: Path, dry_run: bool) -> tuple[int, int]:
+                             notes="", source=str(row.get("task_source", "")), source_index=-1)
+         correct = int(rte.verify_answer(task, ans))
+         step_raw = row.get("step", 1)
+-        step = 1 if pd.isna(step_raw) else int(step_raw)
++        try:
++            step = 1 if pd.isna(step_raw) else int(float(step_raw))
++        except (TypeError, ValueError):
++            step = 1
+         new_correct.append(correct)
+         new_norm.append(rte.normalize_answer(ans, atype))
+         new_util.append(float(correct) - STEP_COST * (step - 1))
+         prev_correct_raw = row.get("correct", 0)
+-        prev_correct = 0 if pd.isna(prev_correct_raw) else int(prev_correct_raw)
++        try:
++            prev_correct = 0 if pd.isna(prev_correct_raw) else int(float(prev_correct_raw))
++        except (TypeError, ValueError):
++            prev_correct = 0
+         if correct != prev_correct:
+             flipped += 1
+     if not dry_run:
+diff --git a/research/run_experiment_matrix.py b/research/run_experiment_matrix.py
+index 88bf3a9..d2290f0 100644
+--- a/research/run_experiment_matrix.py
++++ b/research/run_experiment_matrix.py
+@@ -213,7 +213,18 @@ def collection_complete(cdir: Path, scope: dict[str, Any] | None = None, dataset
+ 
+ 
+ def analysis_complete(cdir: Path) -> bool:
+-    return (cdir / "real_trace_feature_weights.png").exists()
++    # Existence alone let a cell whose collection later GREW keep passing as
++    # analyzed (qwen2p5_7b__math sat at 75/1500 detector-stage runs for two
++    # weeks -- rigor_audit/01 §5c). Analysis is complete only if its outputs
++    # are no older than the trace data they were computed from.
++    marker = cdir / "real_trace_feature_weights.png"
++    dcbr = cdir / "detector_comparison_by_run.csv"
++    steps = cdir / "trace_steps.csv"
++    if not (marker.exists() and dcbr.exists()):
++        return False
++    if steps.exists() and dcbr.stat().st_mtime < steps.stat().st_mtime:
++        return False
++    return True
+ 
+ 
+ def report_complete(cdir: Path) -> bool:
+@@ -226,12 +237,17 @@ def trace_counts(cdir: Path) -> tuple[int, int]:
+         return 0, 0
+     run_ids: set[str] = set()
+     rows = 0
++    # Corruption fragments (field-shifted rows from interrupted writes) carry
++    # malformed run_ids and previously inflated collected-run counts by 24
++    # phantom ids (rigor_audit/01 Axis 5a). Count well-formed run_ids only.
++    run_id_ok = re.compile(r"__temp\d+(?:\.\d+)?__seed\d+$")
+     try:
+         with steps.open(newline="", encoding="utf-8", errors="replace") as fh:
+             for row in csv.DictReader(fh):
+                 rows += 1
+-                if row.get("run_id"):
+-                    run_ids.add(row["run_id"])
++                rid = row.get("run_id")
++                if rid and run_id_ok.search(rid):
++                    run_ids.add(rid)
+     except OSError:
+         return 0, 0
+     return len(run_ids), rows
+diff --git a/research/run_stakes_sweep.py b/research/run_stakes_sweep.py
+index cdda6ff..51e8d64 100644
+--- a/research/run_stakes_sweep.py
++++ b/research/run_stakes_sweep.py
+@@ -141,8 +141,12 @@ def calculate_run_utilities(
+         step_utils = []
+         for t in range(n_steps):
+             q_val = 1.0 if correct_seq[t] else 0.0
+-            # Vt = q_val * v - (1 - q_val) * c - lambda * t
+-            ut = q_val * REWARD_VAL - (1.0 - q_val) * penalty - STEP_COST * (t + 1)
++            # Vt = q_val * v - (1 - q_val) * c - lambda * (step - 1); step = t+1.
++            # Matches the pipeline convention utility = correct - 0.05*(step-1)
++            # (real_trace_experiments.py) so utility LEVELS are cross-readable
++            # with matrix stop_utility (rigor_audit/01 Axis 6 / lever H5).
++            # Uniform +lambda offset: boundaries/argmax unaffected.
++            ut = q_val * REWARD_VAL - (1.0 - q_val) * penalty - STEP_COST * t
+             step_utils.append(ut)
+             
+         # 1. Oracle utility: max Vt over the sequence

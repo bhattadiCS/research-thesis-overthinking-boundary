@@ -1,0 +1,93 @@
+{
+  "output": "tmp/pdfs/formal_thesis/digital/source.pdf",
+  "sha256": "c2af6fb89d4236d6b7bfb746d6d3b33b86de7d9f3ed2d98e2e3c449daef3dc8d",
+  "audit": {
+    "pages": 94,
+    "text_margin_defects": 0,
+    "blank_pages": 0,
+    "embedded_font_objects": 37,
+    "pdfa_conformance": "not asserted; dedicated final validator required"
+  },
+  "schema": "formal-thesis-build-v2",
+  "edition": "digital",
+  "submission_month_year": "October 2026",
+  "front_matter_pages": 5,
+  "left_margin_inches": 1.0,
+  "other_minimum_margins_inches": 1,
+  "abstract_words": 209,
+  "figure_titles": [
+    "Population accuracy and net gain.",
+    "Micro, domain-macro, and worst-domain ranking differ substantially.",
+    "Development replay accuracy against completion-token cost.",
+    "Actual generated arms on two development panels."
+  ],
+  "table_titles": [
+    "Mathematical objects and assumptions.",
+    "Standardized five-step corpus.",
+    "Model configurations.",
+    "GSM8K transition panel; 19,500 trajectories and 500 task clusters per row.",
+    "Matched effects.",
+    "Stored causal detectors; common task-held-out development evaluation.",
+    "Mutually exclusive archived-policy loss patterns; 5,735 utility losses among 75,965 trajectories.",
+    "Controller-only latency on 100 saved math-question prefixes.",
+    "Actual paired local generation on 100 GSM8K questions.",
+    "Actual paired local generation on the 20-question trap bank.",
+    "Deployable probability heads on 276 archived held-out tasks; repeated rows are not independent trials.",
+    "Actual trained-policy generation paired with the existing 100-question live baseline.",
+    "Actual trained-policy generation paired with the existing trap-bank live baseline.",
+    "Frozen variants replayed on 1,500 saved trajectories.",
+    "Claim evidence sources.",
+    "Claim scope and required evidence."
+  ],
+  "figure_body_pages": [
+    41,
+    46,
+    68,
+    69
+  ],
+  "table_body_pages": [
+    27,
+    30,
+    31,
+    39,
+    43,
+    45,
+    48,
+    54,
+    55,
+    58,
+    61,
+    63,
+    64,
+    66,
+    84,
+    85
+  ],
+  "source_files": {
+    "ThesisDocs/chapters/chapter1_intro.md": "5692e914afe710f1696003cbec3afd8ed420a27ff7fb07c7ef04b1d91fee4d7a",
+    "ThesisDocs/chapters/chapter2_theory.md": "3ebf29bc62f6ea6aa976cfe1f5ec0042cbe09fb55022c66daff24e620bc42115",
+    "ThesisDocs/chapters/chapter3_methodology.md": "289ffc98874ce94c1be780aa0f32b21886f98e6f9e554122ed453c35aab1cb7b",
+    "ThesisDocs/chapters/chapter4_empirical.md": "113666d112b96fc1b9287a41aa7533607a156f10be0be25ff2280c53464f8f6e",
+    "ThesisDocs/chapters/chapter5_online.md": "b99551a07aa43e8f80bbfa0be54acbc6de9227d501f449cb73382556d243eb75",
+    "ThesisDocs/chapters/chapter6_discussion.md": "af97789971999559071d588fff45853c3f5ea63b84eb709c6daa7ca8234708d2",
+    "ThesisDocs/references.md": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+    "ThesisDocs/appendices.md": "abf9f51f109f89e761829b9019a961afe7522a86bad1e2506ff9ea8a1498db7a"
+  },
+  "canonical_math_source_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+  "evidence_manifest_sha256": "0af11a9241c68ea3e4da558359a3fa25efa1c0ebb28802be4f8350b93500f9d4",
+  "katex": "0.19.0",
+  "data_manifest_sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b",
+  "chapter_page_counts": {
+    "Chapter 1 Introduction and motivation": 12,
+    "Chapter 2 Mathematical formulation and stopping theory": 16,
+    "Chapter 3 Experimental setup and methods": 10,
+    "Chapter 4 Empirical evidence of overthinking": 12,
+    "Chapter 5 Online stopping and computation trade-offs": 20,
+    "Chapter 6 Discussion and limitations": 7,
+    "References": 4,
+    "Appendix A Reproducibility and evidence sources": 8
+  },
+  "word_count": 18590,
+  "interim_live_results_permitted": false,
+  "visual_review": "required after this build; machine checks alone do not prove visual quality"
+}

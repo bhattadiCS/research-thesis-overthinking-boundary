@@ -12,7 +12,7 @@ The standardized task count exceeds the canonical matrix's task count because th
 
 ## 3.2 Model roster
 
-The canonical matrix includes thirteen model configurations: DeepSeek-R1-Distill-Qwen-1.5B and 7B; Qwen2.5-0.5B, 3B, 7B, 14B, and 32B Instruct; InternLM3-8B-Instruct; Llama-3.1-8B-Instruct; Mistral-7B-Instruct-v0.3; Mistral-Small-Instruct-2409; Phi-4-mini-instruct; and Yi-1.5-9B-Chat. The standardized detector collection replaces InternLM3 with Qwen3.5-9B. These are distinct rosters, even though both have thirteen entries.
+The canonical matrix includes thirteen model configurations: DeepSeek-R1-Distill-Qwen-1.5B and 7B; Qwen2.5-0.5B, 3B, 7B, 14B, and 32B Instruct [Qwen2024]; InternLM3-8B-Instruct; Llama-3.1-8B-Instruct; Mistral-7B-Instruct-v0.3; Mistral-Small-Instruct-2409; Phi-4-mini-instruct; and Yi-1.5-9B-Chat. The standardized detector collection replaces InternLM3 with Qwen3.5-9B. These are distinct rosters, even though both have thirteen entries.
 
 [[MODEL_TABLE]]
 
@@ -44,9 +44,9 @@ Recorded signals can include candidate text, normalized answer, correctness, com
 
 Correctness labels use the benchmark's answer type. Numeric tasks use extraction and normalization; symbolic MATH tasks use the project's mathematical equivalence checks; multiple-choice tasks compare the parsed option with the exact displayed reference. Normalization must preserve information that matters to equivalence. For example, reducing an arbitrary plane equation to its right-hand side would identify distinct mathematical objects, and treating the phrase 'the third option' as the fraction one third would corrupt an MCQ answer.
 
-The grader regression script checks thirty specific cases. The minimum-boundary script checks six cases. Their execution is recorded by command, because historical standalone scripts are not necessarily thirty and six discoverable pytest functions. These checks defend the tested semantics. They do not constitute exhaustive validation of every mathematical answer or all historical parser versions.
+The historical grader receipt covers thirty specific cases. Following the software review, the revised grader exposes ninety-eight tests covering normalization, mathematical equivalence, ambiguous option labels and bounded symbolic parsing. The receipts identify the tested source versions, and finite-system stopping tests separately check the minimum boundary and termination behavior. Regression coverage concerns these specified behaviors; validity across the full answer corpus requires independent adjudication.
 
-All empirical labels used in the primary boundary tables are the stored `correct` values. The data-freeze tools do not mutate them. A future regrade must preserve the previous labels, record the grader version, compare changes by domain and answer type, and publish derived results under a new version. That procedure avoids silently changing the estimand halfway through a comparison.
+The primary boundary tables use the archived `correct` values. The predictor training in Section 5.7 uses a separately versioned reconstruction and regrade of its selected candidates. A subsequent comparison of the historical and revised graders found no changes to the final-answer labels in the four live collections. These checks leave the original labels and results intact; a corpus-wide regrade would define a new analysis version with its own label changes and dependent estimates.
 
 ## 3.6 Statistical units and grouping
 
@@ -55,6 +55,8 @@ Rows from one trajectory are dependent, and trajectories from the same task shar
 The strongest stored task-grouped detector analyses use five outer folds. For meta-model stacking, every upstream fitted component must also respect the outer split: its parameters and any calibrated thresholds must be fit using outer-training data alone. Producing a base score out of fold somewhere in the development pipeline does not automatically make a later outer-fold stacked result nested. Chapter 4 explains why the historical 0.955156 result falls short of that standard.
 
 Cluster bootstraps resample questions when the same question appears in several trajectories. Model-domain estimator comparisons use the recorded cell bootstrap for their reported interval. These intervals answer different questions. A question bootstrap estimates variability associated with the observed question population conditional on the fixed model panel; a cell bootstrap summarizes variability across the existing panel. Neither one is a multi-seed generation replication.
+
+The archived N2/N3 probe and hazard harness first uses run-group folds for upstream prediction and then separate task-group folds for threshold selection. Other-temperature trajectories of a question can enter upstream fitting. The later task folds therefore do not make that entire pipeline an untouched-question evaluation. These are controlled development contrasts. The separate strict tabular and text analyses and the new prefix predictor use their explicitly recorded task-disjoint contracts; Appendix E distinguishes their completed evidence. Appendix F summarizes the separation between offline labels, model fitting, and runtime prefix information.
 
 ## 3.7 Outcomes and computation measures
 
@@ -66,8 +68,10 @@ ROC-AUC measures ranking, with half credit for tied scores. Brier loss measures 
 
 ## 3.8 Reproducibility and evidence freeze
 
-The freeze records exact local byte hashes and canonical LF content hashes for the selected tournament files, cross-checks historical fingerprints, and pins supporting boundary and analysis artifacts. It also records source-code identities. File size and row count are checked in addition to content identity, because a compact summary alone can obscure selection errors. The reproducibility appendix gives the verification commands.
+The evidence manifests record exact local byte hashes and canonical LF content hashes for the selected tournament files, cross-check historical fingerprints, and identify supporting boundary and analysis artifacts. File size, row count and source-qualified trajectory membership are checked in addition to content identity. Appendix A gives verification and isolated reanalysis commands.
+
+The original profile, `data_manifest_v1.json`, binds the research snapshot at revision `09225c95`. The post-review profile, `data_manifest_post_review_v1.json`, binds revised graders, controllers and audit implementations at revision `6e4378be`. The fifty-two standardized trace files, fitted predictor and recorded generation outcomes are preserved across these profiles. For actual live execution, each generation manifest binds preserved source copies; the later working implementation is not substituted for the code that produced the measurements. Post-review replay checks the revised controller's decisions on saved prefixes, without producing new generations or timing results.
 
 The workstation lock and recorded historical environment are separate evidence. Stored Blackwell metadata records a CUDA 13.0 runtime and PyTorch 2.13.0+cu130, whereas the current workstation has different versions. Compiler libraries, drivers, hardware, random-state handling, and nondeterministic kernels can affect a repetition even with an exact package list. The freeze supports inspection and re-analysis of the stored corpus; bit-identical regeneration is not established.
 
-Every newly produced table and figure includes or is associated with its source paths and a hash manifest. The thesis build uses the recomputed evidence directory, not hand-edited numerical summaries. The separation allows a reader to inspect a claim, find the table that supplies it, and then verify the underlying frozen sources without reconstructing the author's conversational history.
+Tables and figures are associated with source paths and hash manifests. Their numerical inputs are generated by the recorded analysis implementations from the frozen evidence. This association links each reported estimate to its input population, label version and software profile.

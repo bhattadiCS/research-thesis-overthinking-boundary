@@ -1,0 +1,1690 @@
+commit f6fe839ae34d22f8471b0b7089638ef1735d62dd
+Author:     Aditya <bhattadi@hotmail.com>
+AuthorDate: Thu Apr 2 02:38:04 2026 +0000
+Commit:     Aditya <bhattadi@hotmail.com>
+CommitDate: Thu Apr 2 02:38:04 2026 +0000
+
+    save records
+
+diff --git a/research/cross_family_analysis.py b/research/cross_family_analysis.py
+new file mode 100644
+index 0000000..45c700b
+--- /dev/null
++++ b/research/cross_family_analysis.py
+@@ -0,0 +1,647 @@
++from __future__ import annotations
++
++import argparse
++import json
++from pathlib import Path
++from typing import Any
++
++import matplotlib.pyplot as plt
++import numpy as np
++import pandas as pd
++
++from generate_thesis_artifacts import (
++    FEATURE_LABELS,
++    capability_gate,
++    corrected_drift_column,
++    empirical_drift_column,
++    feature_name,
++    first_zero_crossing,
++    fitted_drift_column,
++    format_boundary,
++    pooled_proxy_column,
++    safe_float,
++)
++from trace_analysis import add_temporal_features, fit_global_models
++
++
++REPO_ROOT = Path(__file__).resolve().parents[1]
++DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "outputs" / "cross_family"
++DEFAULT_REPORT_PATH = Path(__file__).resolve().parent / "CROSS_FAMILY_REPORT.md"
++DEFAULT_OPEN_QUESTIONS_PATH = Path(__file__).resolve().parent / "CROSS_FAMILY_OPEN_QUESTIONS.md"
++SUMMARY_CSV = "cross_family_summary.csv"
++DETECTOR_CSV = "cross_family_detector_comparison.csv"
++SIGNAL_CSV = "cross_family_signal_summary.csv"
++BOUNDARY_FIGURE = "cross_family_boundary_comparison.png"
++DETECTOR_FIGURE = "cross_family_detector_gaps.png"
++
++
++def read_csv(path: Path) -> pd.DataFrame:
++    if not path.exists():
++        raise FileNotFoundError(f"Missing required artifact: {path}")
++    return pd.read_csv(path)
++
++
++def read_json(path: Path) -> dict[str, Any]:
++    if not path.exists():
++        raise FileNotFoundError(f"Missing required artifact: {path}")
++    return json.loads(path.read_text(encoding="utf-8"))
++
++
++def load_corrected_hazard(run_dir: Path) -> pd.DataFrame:
++    for artifact_name in ["hazard_decomposition_by_step.csv", "hazard_drift_summary.csv"]:
++        artifact_path = run_dir / artifact_name
++        if artifact_path.exists():
++            frame = pd.read_csv(artifact_path)
++            if "conditional_hazard_drift" in frame.columns or artifact_name == "hazard_decomposition_by_step.csv":
++                return frame
++
++    step_frame = read_csv(run_dir / "trace_steps.csv")
++    step_frame = add_temporal_features(step_frame)
++    hazard_frame, _, _, _, _ = fit_global_models(step_frame)
++    return hazard_frame
++
++
++def run_label(summary: pd.Series, metadata: dict[str, Any]) -> str:
++    family = str(summary.get("family", "")).strip()
++    parameter_count = str(summary.get("parameter_count", "")).strip()
++    if "DeepSeek" in family:
++        label = f"DeepSeek {parameter_count}"
++    elif "Qwen" in family:
++        label = f"Qwen {parameter_count}"
++    else:
++        label = f"{family} {parameter_count}".strip()
++    quantization = str(metadata.get("quantization", "none"))
++    if quantization != "none":
++        label = f"{label} {quantization}"
++    return label.strip()
++
++
++def top_signal_row(weight_frame: pd.DataFrame, model_name: str, positive_only: bool = False) -> dict[str, Any]:
++    model_rows = weight_frame[weight_frame["model"] == model_name].copy()
++    model_rows = model_rows[model_rows["feature"] != "constant_probability"]
++    if positive_only:
++        model_rows = model_rows[model_rows["coefficient"] > 0.0]
++        if model_rows.empty:
++            return {"feature": "none", "label": "none", "coefficient": float("nan"), "display": "none"}
++        winner = model_rows.sort_values("coefficient", ascending=False).iloc[0]
++    else:
++        if model_rows.empty:
++            return {"feature": "none", "label": "none", "coefficient": float("nan"), "display": "none"}
++        winner = model_rows.assign(abs_coefficient=model_rows["coefficient"].abs()).sort_values("abs_coefficient", ascending=False).iloc[0]
++    feature = str(winner["feature"])
++    label = FEATURE_LABELS.get(feature, feature)
++    coefficient = float(winner["coefficient"])
++    return {
++        "feature": feature,
++        "label": label,
++        "coefficient": coefficient,
++        "display": f"{label} ({feature}, coeff={coefficient:.3f})",
++    }
++
++
++def best_detector(detector_frame: pd.DataFrame) -> str:
++    eligible = detector_frame[detector_frame["detector"] != "oracle"].copy()
++    if eligible.empty:
++        return "none"
++    return str(eligible.sort_values("mean_oracle_gap").iloc[0]["detector"])
++
++
++def classify_late_boundary(summary_row: dict[str, Any]) -> str:
++    if not summary_row["capability_gate_met"]:
++        return "No late-boundary replication"
++    if summary_row["never_stop_gap"] <= 0.15:
++        return "No late-boundary replication"
++    if summary_row["peak_step"] <= 1:
++        return "No late-boundary replication"
++    if summary_row["total_repairs"] <= 0 or summary_row["total_corruptions"] <= 0:
++        return "No late-boundary replication"
++
++    boundary_step = summary_row["corrected_boundary_step"]
++    if pd.isna(boundary_step):
++        return "No late-boundary replication"
++    boundary_step = int(boundary_step)
++    if boundary_step == 7:
++        return "Exact step-7 replication"
++    if 5 <= boundary_step <= 9 and summary_row["peak_step"] >= 5:
++        return "Late-boundary replication"
++    if boundary_step > 2:
++        return "Weakened late-boundary support"
++    return "No late-boundary replication"
++
++
++def task_ids_from_metadata(metadata: dict[str, Any], step_frame: pd.DataFrame) -> list[str]:
++    tasks = metadata.get("tasks") or []
++    if tasks:
++        return [str(task["task_id"]) for task in tasks]
++    return [str(task_id) for task_id in step_frame["task_id"].drop_duplicates().tolist()]
++
++
++def compare_task_alignment(run_records: list[dict[str, Any]]) -> tuple[bool, str]:
++    if not run_records:
++        return True, "No runs loaded."
++    baseline = run_records[0]["task_ids"]
++    mismatches: list[str] = []
++    for record in run_records[1:]:
++        if record["task_ids"] != baseline:
++            mismatches.append(record["run_name"])
++    if mismatches:
++        return False, f"Task IDs differ for: {', '.join(mismatches)}. Cross-run comparability is weakened until the task sets are aligned."
++    return True, f"Task IDs align across all {len(run_records)} runs under the shared GSM8K train split and shuffle seed 17 protocol."
++
++
++def load_run_record(run_dir: Path) -> dict[str, Any]:
++    pilot = read_csv(run_dir / "pilot_summary.csv")
++    detectors = read_csv(run_dir / "detector_comparison.csv")
++    probe = read_csv(run_dir / "correctness_probe_metrics.csv")
++    weights = read_csv(run_dir / "feature_weights.csv")
++    metadata = read_json(run_dir / "metadata.json")
++    steps = read_csv(run_dir / "trace_steps.csv")
++    hazard = load_corrected_hazard(run_dir)
++
++    summary = pilot.iloc[0]
++    q_curve = steps.groupby("step")["correct"].mean().reset_index(name="q_t")
++    corrected_column = corrected_drift_column(hazard)
++    empirical_column = empirical_drift_column(hazard)
++    pooled_column = pooled_proxy_column(hazard)
++    fitted_column = fitted_drift_column(hazard)
++    corrected_boundary = first_zero_crossing(hazard, corrected_column)
++    empirical_boundary = first_zero_crossing(hazard, empirical_column)
++    pooled_boundary = first_zero_crossing(hazard, pooled_column) if pooled_column else None
++    fitted_boundary = first_zero_crossing(hazard, fitted_column) if fitted_column else None
++    correct_signal = top_signal_row(weights, "correctness_probe")
++    corrupt_signal = top_signal_row(weights, "corruption_hazard", positive_only=True)
++    detector_rows = detectors.set_index("detector")
++
++    summary_row: dict[str, Any] = {
++        "run_name": run_dir.name,
++        "run_label": run_label(summary, metadata),
++        "model_alias": str(summary["model_alias"]),
++        "model_name": str(summary["model_name"]),
++        "family": str(summary["family"]),
++        "parameter_count": str(summary["parameter_count"]),
++        "backend": str(summary["backend"]),
++        "device": str(summary["device"]),
++        "quantization": str(metadata.get("quantization", "none")),
++        "device_map": metadata.get("device_map"),
++        "task_source": str(metadata.get("task_source", "unknown")),
++        "dataset_split": str(metadata.get("dataset_split", "unknown")),
++        "dataset_shuffle_seed": int(metadata.get("dataset_shuffle_seed", -1)),
++        "max_tasks": int(metadata.get("max_tasks", q_curve.shape[0])),
++        "max_steps": int(metadata.get("max_steps", int(steps["step"].max()))),
++        "max_new_tokens": int(metadata.get("max_new_tokens", 0)),
++        "temperatures": " ".join(str(value) for value in metadata.get("temperatures", [])),
++        "seeds": " ".join(str(value) for value in metadata.get("seeds", [])),
++        "step_cost": float(metadata.get("step_cost", 0.05)),
++        "prompt_mode": str(metadata.get("prompt_mode", "unknown")),
++        "system_prompt_mode": str(metadata.get("system_prompt_mode", "unknown")),
++        "step1_accuracy": float(q_curve.loc[q_curve["step"] == 1, "q_t"].iloc[0]),
++        "peak_accuracy": float(q_curve["q_t"].max()),
++        "peak_step": int(q_curve.loc[q_curve["q_t"].idxmax(), "step"]),
++        "corrected_boundary_step": float(corrected_boundary) if corrected_boundary is not None else float("nan"),
++        "empirical_boundary_step": float(empirical_boundary) if empirical_boundary is not None else float("nan"),
++        "pooled_proxy_boundary_step": float(pooled_boundary) if pooled_boundary is not None else float("nan"),
++        "fitted_boundary_step": float(fitted_boundary) if fitted_boundary is not None else float("nan"),
++        "repair_rate_overall": float(summary["repair_rate_overall"]),
++        "corruption_rate_overall": float(summary["corruption_rate_overall"]),
++        "hazard_rule_gap": float(detector_rows.loc["hazard_drift", "mean_oracle_gap"]),
++        "e_process_gap": float(detector_rows.loc["e_process", "mean_oracle_gap"]) if "e_process" in detector_rows.index else float("nan"),
++        "never_stop_gap": float(detector_rows.loc["never_stop", "mean_oracle_gap"]),
++        "probe_brier": float(probe["brier"].mean()),
++        "probe_auc": float(probe["auc"].dropna().mean()) if probe["auc"].dropna().size else float("nan"),
++        "runs_ever_correct": int(summary["runs_ever_correct"]),
++        "capability_gate_met": capability_gate(float(q_curve.loc[q_curve["step"] == 1, "q_t"].iloc[0]), int(summary["runs_ever_correct"])),
++        "total_repairs": int(hazard["n_repairs"].fillna(0).sum()) if "n_repairs" in hazard.columns else int(steps.get("repair", pd.Series(dtype=int)).sum()),
++        "total_corruptions": int(hazard["n_corruptions"].fillna(0).sum()) if "n_corruptions" in hazard.columns else int(steps.get("corruption", pd.Series(dtype=int)).sum()),
++        "best_detector": best_detector(detectors),
++        "strongest_correctness_signal": correct_signal["display"],
++        "strongest_correctness_feature": correct_signal["feature"],
++        "strongest_corruption_signal": corrupt_signal["display"],
++        "strongest_corruption_feature": corrupt_signal["feature"],
++        "legacy_proxy_mismatch": bool(
++            not pd.isna(float(corrected_boundary) if corrected_boundary is not None else float("nan"))
++            and not pd.isna(float(pooled_boundary) if pooled_boundary is not None else float("nan"))
++            and corrected_boundary != pooled_boundary
++        ),
++    }
++    summary_row["late_boundary_assessment"] = classify_late_boundary(summary_row)
++
++    signal_row = {
++        "run_name": summary_row["run_name"],
++        "run_label": summary_row["run_label"],
++        "family": summary_row["family"],
++        "parameter_count": summary_row["parameter_count"],
++        "correctness_feature": correct_signal["feature"],
++        "correctness_label": correct_signal["label"],
++        "correctness_coefficient": correct_signal["coefficient"],
++        "correctness_display": correct_signal["display"],
++        "corruption_feature": corrupt_signal["feature"],
++        "corruption_label": corrupt_signal["label"],
++        "corruption_coefficient": corrupt_signal["coefficient"],
++        "corruption_display": corrupt_signal["display"],
++    }
++
++    return {
++        "run_dir": run_dir,
++        "run_name": summary_row["run_name"],
++        "run_label": summary_row["run_label"],
++        "family": summary_row["family"],
++        "parameter_count": summary_row["parameter_count"],
++        "summary_row": summary_row,
++        "signal_row": signal_row,
++        "detectors": detectors,
++        "hazard": hazard,
++        "q_curve": q_curve,
++        "task_ids": task_ids_from_metadata(metadata, steps),
++    }
++
++
++def build_detector_comparison(run_records: list[dict[str, Any]]) -> pd.DataFrame:
++    per_run_frames: list[pd.DataFrame] = []
++    for record in run_records:
++        frame = record["detectors"].copy()
++        frame["aggregation_level"] = "run"
++        frame["group_name"] = record["run_name"]
++        frame["run_name"] = record["run_name"]
++        frame["run_label"] = record["run_label"]
++        frame["family"] = record["family"]
++        frame["parameter_count"] = record["parameter_count"]
++        per_run_frames.append(frame)
++    per_run = pd.concat(per_run_frames, ignore_index=True) if per_run_frames else pd.DataFrame()
++
++    family = (
++        per_run.groupby(["family", "detector"], as_index=False)
++        .agg(
++            mean_stop_step=("mean_stop_step", "mean"),
++            mean_stop_utility=("mean_stop_utility", "mean"),
++            mean_oracle_utility=("mean_oracle_utility", "mean"),
++            mean_oracle_gap=("mean_oracle_gap", "mean"),
++            false_early_rate=("false_early_rate", "mean"),
++            false_late_rate=("false_late_rate", "mean"),
++            mean_false_late_severity=("mean_false_late_severity", "mean"),
++        )
++        if not per_run.empty
++        else pd.DataFrame()
++    )
++    if not family.empty:
++        family["aggregation_level"] = "family"
++        family["group_name"] = family["family"]
++        family["run_name"] = ""
++        family["run_label"] = family["family"]
++        family["parameter_count"] = "family-average"
++
++    combined = pd.concat([per_run, family], ignore_index=True, sort=False) if not family.empty else per_run
++    if combined.empty:
++        return combined
++    combined["rank"] = (
++        combined.groupby(["aggregation_level", "group_name"])["mean_oracle_gap"].rank(method="dense", ascending=True).astype(int)
++    )
++    return combined.sort_values(["aggregation_level", "group_name", "rank", "detector"])
++
++
++def plot_boundary_comparison(run_records: list[dict[str, Any]], output_path: Path) -> None:
++    colors = plt.cm.tab10(np.linspace(0.0, 1.0, max(len(run_records), 3)))
++    fig, axes = plt.subplots(3, 1, figsize=(11, 12))
++
++    for index, record in enumerate(run_records):
++        color = colors[index]
++        q_curve = record["q_curve"]
++        hazard = record["hazard"]
++        corrected_column = corrected_drift_column(hazard)
++        axes[0].plot(q_curve["step"], q_curve["q_t"], marker="o", linewidth=2, color=color, label=record["run_label"])
++        axes[1].plot(hazard["step"], hazard[corrected_column], marker="o", linewidth=2, color=color, label=record["run_label"])
++
++    axes[0].set_title("Correctness trajectories by run")
++    axes[0].set_ylabel("q_t")
++    axes[0].grid(alpha=0.25)
++    axes[0].legend()
++
++    axes[1].axhline(0.0, color="black", linewidth=1)
++    axes[1].set_title("Corrected conditional hazard drift by run")
++    axes[1].set_ylabel("drift")
++    axes[1].grid(alpha=0.25)
++    axes[1].legend()
++
++    labels = [record["run_label"] for record in run_records]
++    values = [record["summary_row"]["corrected_boundary_step"] for record in run_records]
++    axes[2].bar(labels, values, color=colors[: len(run_records)])
++    axes[2].set_title("Corrected boundary step by run")
++    axes[2].set_ylabel("step")
++    axes[2].grid(axis="y", alpha=0.25)
++    plt.setp(axes[2].get_xticklabels(), rotation=20, ha="right")
++
++    fig.tight_layout()
++    fig.savefig(output_path, dpi=220)
++    plt.close(fig)
++
++
++def plot_detector_gaps(run_records: list[dict[str, Any]], output_path: Path) -> None:
++    detectors = ["hazard_drift", "e_process", "empirical_bernstein", "never_stop"]
++    colors = plt.cm.Set2(np.linspace(0.0, 1.0, max(len(run_records), 3)))
++    x = np.arange(len(detectors))
++    width = 0.8 / max(len(run_records), 1)
++
++    fig, ax = plt.subplots(figsize=(11, 5.5))
++    for index, record in enumerate(run_records):
++        detector_rows = record["detectors"].set_index("detector")
++        values = [float(detector_rows.loc[name, "mean_oracle_gap"]) for name in detectors]
++        ax.bar(x + index * width - (width * (len(run_records) - 1) / 2), values, width=width, color=colors[index], label=record["run_label"])
++
++    ax.set_xticks(x)
++    ax.set_xticklabels(detectors, rotation=20, ha="right")
++    ax.set_ylabel("mean oracle gap")
++    ax.set_title("Detector gap comparison by run")
++    ax.grid(axis="y", alpha=0.25)
++    ax.legend()
++
++    fig.tight_layout()
++    fig.savefig(output_path, dpi=220)
++    plt.close(fig)
++
++
++def markdown_table(headers: list[str], rows: list[list[str]]) -> list[str]:
++    lines = ["| " + " | ".join(headers) + " |", "| " + " | ".join(["---"] * len(headers)) + " |"]
++    for row in rows:
++        lines.append("| " + " | ".join(row) + " |")
++    return lines
++
++
++def strongest_cross_family_conclusion(summary_df: pd.DataFrame) -> str:
++    capable = summary_df[summary_df["capability_gate_met"] == True]
++    late = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"])]
++    if capable.empty:
++        return "No run currently clears the capability gate, so the repo still lacks a theorem-facing cross-family boundary witness."
++    if late["family"].nunique() >= 2:
++        return "A late overthinking boundary now appears in at least two capable families under the matched GSM8K protocol, so cross-family support is materially stronger."
++    if late["family"].nunique() == 1:
++        return "Late-boundary evidence is still confined to a single capable family, so cross-family robustness remains unproven."
++    return "After the hazard audit, the current matched GSM8K evidence does not support a late conditional-hazard boundary in any available run."
++
++
++def build_report_markdown(
++    summary_df: pd.DataFrame,
++    detector_df: pd.DataFrame,
++    signal_df: pd.DataFrame,
++    task_alignment_note: str,
++    output_dir: Path,
++) -> str:
++    report_rows = [
++        [
++            row["run_label"],
++            row["family"],
++            row["parameter_count"],
++            row["backend"],
++            row["quantization"],
++            safe_float(row["step1_accuracy"], 4),
++            safe_float(row["peak_accuracy"], 4),
++            str(int(row["peak_step"])),
++            format_boundary(None if pd.isna(row["corrected_boundary_step"]) else int(row["corrected_boundary_step"])),
++            safe_float(row["repair_rate_overall"], 4),
++            safe_float(row["corruption_rate_overall"], 4),
++            safe_float(row["hazard_rule_gap"], 4),
++            safe_float(row["e_process_gap"], 4),
++            safe_float(row["never_stop_gap"], 4),
++            safe_float(row["probe_brier"], 4),
++            safe_float(row["probe_auc"], 4),
++            row["late_boundary_assessment"],
++        ]
++        for _, row in summary_df.iterrows()
++    ]
++    signal_rows = [
++        [
++            row["run_label"],
++            row["correctness_display"],
++            row["corruption_display"],
++        ]
++        for _, row in signal_df.iterrows()
++    ]
++    detector_rows = []
++    run_only = detector_df[detector_df["aggregation_level"] == "run"]
++    for run_name in summary_df["run_name"].tolist():
++        subset = run_only[run_only["group_name"] == run_name].sort_values(["rank", "detector"]).head(3)
++        for _, row in subset.iterrows():
++            detector_rows.append(
++                [
++                    str(row["run_label"]),
++                    str(row["detector"]),
++                    str(int(row["rank"])),
++                    safe_float(row["mean_oracle_gap"], 4),
++                    safe_float(row["false_late_rate"], 3),
++                ]
++            )
++
++    legacy_rows = [
++        [
++            row["run_label"],
++            format_boundary(None if pd.isna(row["empirical_boundary_step"]) else int(row["empirical_boundary_step"])),
++            format_boundary(None if pd.isna(row["corrected_boundary_step"]) else int(row["corrected_boundary_step"])),
++            format_boundary(None if pd.isna(row["fitted_boundary_step"]) else int(row["fitted_boundary_step"])),
++            format_boundary(None if pd.isna(row["pooled_proxy_boundary_step"]) else int(row["pooled_proxy_boundary_step"])),
++            "yes" if bool(row["legacy_proxy_mismatch"]) else "no",
++        ]
++        for _, row in summary_df.iterrows()
++    ]
++
++    lines = [
++        "# Cross-Family Report",
++        "",
++        "## Executive Summary",
++        strongest_cross_family_conclusion(summary_df),
++        "",
++        task_alignment_note,
++        "",
++        "## Run Summary",
++        *markdown_table(
++            [
++                "Run",
++                "Family",
++                "Params",
++                "Backend",
++                "Quant",
++                "Step-1 acc",
++                "Peak acc",
++                "Peak step",
++                "Corrected boundary",
++                "Repair",
++                "Corruption",
++                "Hazard gap",
++                "E-process gap",
++                "Never-stop gap",
++                "Probe Brier",
++                "Probe AUC",
++                "Assessment",
++            ],
++            report_rows,
++        ),
++        "",
++        "## Drift Audit",
++        *markdown_table(
++            ["Run", "Empirical boundary", "Corrected boundary", "Fitted boundary", "Legacy pooled proxy", "Mismatch"],
++            legacy_rows,
++        ),
++        "",
++        "## Detector Rankings",
++        *markdown_table(["Run", "Detector", "Rank", "Mean oracle gap", "False-late rate"], detector_rows),
++        "",
++        "## Signal Comparison",
++        *markdown_table(["Run", "Strongest correctness signal", "Strongest corruption signal"], signal_rows),
++        "",
++        "## Figures",
++        f"![Cross-family boundary comparison](outputs/cross_family/{BOUNDARY_FIGURE})",
++        "",
++        f"![Cross-family detector gaps](outputs/cross_family/{DETECTOR_FIGURE})",
++        "",
++    ]
++    return "\n".join(lines)
++
++
++def open_question_rows(summary_df: pd.DataFrame) -> list[dict[str, str]]:
++    capable = summary_df[summary_df["capability_gate_met"] == True]
++    qwen_family = summary_df[summary_df["family"].str.contains("Qwen", case=False, na=False)]
++    qwen_capable = qwen_family[qwen_family["capability_gate_met"] == True]
++    late_runs = capable[capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"])]
++    detector_changes = summary_df["best_detector"].nunique() > 1
++    signal_features = summary_df["strongest_corruption_feature"].dropna().unique().tolist()
++    has_qwen7 = any(summary_df["model_alias"] == "qwen2p5_7b")
++
++    if capable.empty:
++        boundary_status = "still unresolved"
++        boundary_answer = "No run currently clears the capability gate, so boundary existence is not yet robust across families."
++    elif late_runs["family"].nunique() >= 2:
++        boundary_status = "answered"
++        boundary_answer = "A late boundary is present in at least two capable families under the matched GSM8K protocol."
++    elif late_runs["family"].nunique() == 1:
++        boundary_status = "partially answered"
++        boundary_answer = "A late boundary is only supported in one capable family so far, so cross-family robustness is still unproven."
++    else:
++        boundary_status = "answered"
++        boundary_answer = "After correcting the hazard analysis, no available run shows a late conditional-hazard boundary."
++
++    if not has_qwen7:
++        capability_status = "partially answered"
++        capability_answer = "Boundary location appears capability-linked in the weak sense that Qwen 0.5B stays early and low-skill, but there is no matched higher-capability Qwen run yet."
++    elif not qwen_capable.empty and any(qwen_capable["late_boundary_assessment"].isin(["Exact step-7 replication", "Late-boundary replication", "Weakened late-boundary support"])):
++        capability_status = "answered"
++        capability_answer = "The weak Qwen control stays early while the higher-capability Qwen run moves later, which supports a capability-linked boundary location."
++    else:
++        capability_status = "partially answered"
++        capability_answer = "The weak Qwen control stays early, but the higher-capability Qwen follow-up does not show a matching late boundary, so capability linkage is still incomplete."
++
++    detector_status = "answered" if detector_changes else "partially answered"
++    detector_answer = (
++        "Detector ranking changes across runs, so ranking is not invariant across capability regimes."
++        if detector_changes
++        else "The current runs do not yet show a clear change in best detector ranking across regimes."
++    )
++
++    if len(set(signal_features)) == 1 and signal_features:
++        signal_status = "answered"
++        signal_answer = f"The same corruption-side observable ({signal_features[0]}) leads across all current runs."
++    else:
++        signal_status = "partially answered"
++        signal_answer = "Signal leadership is not stable yet: DeepSeek emphasizes answer revision, while Qwen-family evidence includes entropy or verbosity proxies."
++
++    if not has_qwen7:
++        family_status = "still unresolved"
++        family_answer = "Without a capable second-family follow-up, the current data cannot separate family effects from capability effects."
++    elif late_runs["family"].nunique() >= 2:
++        family_status = "partially answered"
++        family_answer = "A late boundary in multiple capable families weakens the case for a DeepSeek-only effect, but one benchmark and one capable run per family still leave family-versus-capability attribution incomplete."
++    else:
++        family_status = "partially answered"
++        family_answer = "The matched benchmark now includes multiple families, but the evidence still cannot cleanly isolate family effects from capability effects."
++
++    if not has_qwen7:
++        blocked_status = "answered"
++        blocked_answer = "Without the Qwen 7B second-family run, the repo cannot claim cross-family robustness, capability-linked boundary placement within Qwen, or stable detector/signal behavior in a capable second family."
++    else:
++        blocked_status = "answered"
++        blocked_answer = "Even with the Qwen 7B run, the repo still cannot claim benchmark-invariant behavior, clean family-versus-capability separation, or universal observable stability without additional families or benchmarks."
++
++    return [
++        {
++            "question": "Is the boundary robust across model families?",
++            "status": boundary_status,
++            "answer": boundary_answer,
++        },
++        {
++            "question": "Does boundary location appear capability-linked?",
++            "status": capability_status,
++            "answer": capability_answer,
++        },
++        {
++            "question": "Does detector ranking change with capability?",
++            "status": detector_status,
++            "answer": detector_answer,
++        },
++        {
++            "question": "Is answer revision or entropy more cross-family stable?",
++            "status": signal_status,
++            "answer": signal_answer,
++        },
++        {
++            "question": "Do the data support a family effect or mostly a capability effect?",
++            "status": family_status,
++            "answer": family_answer,
++        },
++        {
++            "question": "What cannot yet be claimed without the stronger second-family run?",
++            "status": blocked_status,
++            "answer": blocked_answer,
++        },
++    ]
++
++
++def build_open_questions_markdown(summary_df: pd.DataFrame) -> str:
++    rows = open_question_rows(summary_df)
++    table_rows = [[row["question"], row["status"], row["answer"]] for row in rows]
++    lines = [
++        "# Cross-Family Open Questions",
++        "",
++        *markdown_table(["Question", "Status", "Joint answer"], table_rows),
++        "",
++    ]
++    return "\n".join(lines)
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description="Aggregate multiple real-trace runs into a cross-family report.")
++    parser.add_argument("--run-dirs", nargs="+", required=True)
++    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
++    parser.add_argument("--report-output", default=str(DEFAULT_REPORT_PATH))
++    parser.add_argument("--open-questions-output", default=str(DEFAULT_OPEN_QUESTIONS_PATH))
++    args = parser.parse_args()
++
++    run_dirs = [Path(value) for value in args.run_dirs]
++    output_dir = Path(args.output_dir)
++    report_output = Path(args.report_output)
++    open_questions_output = Path(args.open_questions_output)
++    output_dir.mkdir(parents=True, exist_ok=True)
++
++    run_records = [load_run_record(run_dir) for run_dir in run_dirs]
++    summary_df = pd.DataFrame([record["summary_row"] for record in run_records])
++    signal_df = pd.DataFrame([record["signal_row"] for record in run_records])
++    detector_df = build_detector_comparison(run_records)
++    task_alignment_ok, task_alignment_note = compare_task_alignment(run_records)
++    summary_df["task_alignment_ok"] = task_alignment_ok
++    summary_df["task_alignment_note"] = task_alignment_note
++
++    summary_df.to_csv(output_dir / SUMMARY_CSV, index=False)
++    detector_df.to_csv(output_dir / DETECTOR_CSV, index=False)
++    signal_df.to_csv(output_dir / SIGNAL_CSV, index=False)
++    plot_boundary_comparison(run_records, output_dir / BOUNDARY_FIGURE)
++    plot_detector_gaps(run_records, output_dir / DETECTOR_FIGURE)
++
++    report_output.write_text(build_report_markdown(summary_df, detector_df, signal_df, task_alignment_note, output_dir), encoding="utf-8")
++    open_questions_output.write_text(build_open_questions_markdown(summary_df), encoding="utf-8")
++
++    print(f"Wrote summary csv to: {output_dir / SUMMARY_CSV}")
++    print(f"Wrote detector csv to: {output_dir / DETECTOR_CSV}")
++    print(f"Wrote signal csv to: {output_dir / SIGNAL_CSV}")
++    print(f"Wrote boundary figure to: {output_dir / BOUNDARY_FIGURE}")
++    print(f"Wrote detector figure to: {output_dir / DETECTOR_FIGURE}")
++    print(f"Wrote report to: {report_output}")
++    print(f"Wrote open questions to: {open_questions_output}")
++
++
++if __name__ == "__main__":
++    main()
+\ No newline at end of file
+diff --git a/research/generate_thesis_artifacts.py b/research/generate_thesis_artifacts.py
+index 78004aa..dce24ef 100644
+--- a/research/generate_thesis_artifacts.py
++++ b/research/generate_thesis_artifacts.py
+@@ -35,12 +35,52 @@ def read_csv(path: Path) -> pd.DataFrame:
+     return pd.read_csv(path)
+ 
+ 
++def read_hazard_artifact(input_dir: Path) -> pd.DataFrame:
++    for artifact_name in ["hazard_decomposition_by_step.csv", "hazard_drift_summary.csv", "hazard_by_step.csv"]:
++        artifact_path = input_dir / artifact_name
++        if artifact_path.exists():
++            return pd.read_csv(artifact_path)
++    raise FileNotFoundError(f"Missing required hazard artifact under: {input_dir}")
++
++
+ def safe_float(value: float, digits: int = 4) -> str:
+     if pd.isna(value):
+         return "n/a"
+     return f"{float(value):.{digits}f}"
+ 
+ 
++def corrected_drift_column(hazard_frame: pd.DataFrame) -> str:
++    if "conditional_hazard_drift" in hazard_frame.columns:
++        return "conditional_hazard_drift"
++    return "hazard_mu"
++
++
++def empirical_drift_column(hazard_frame: pd.DataFrame) -> str:
++    if "empirical_utility_drift" in hazard_frame.columns:
++        return "empirical_utility_drift"
++    return "empirical_mu"
++
++
++def pooled_proxy_column(hazard_frame: pd.DataFrame) -> str | None:
++    if "pooled_proxy_drift" in hazard_frame.columns:
++        return "pooled_proxy_drift"
++    return None
++
++
++def fitted_drift_column(hazard_frame: pd.DataFrame) -> str | None:
++    if "fitted_hazard_drift" in hazard_frame.columns:
++        return "fitted_hazard_drift"
++    return None
++
++
++def capability_gate(step1_accuracy: float, runs_ever_correct: int) -> bool:
++    return step1_accuracy >= 0.15 or runs_ever_correct >= 250
++
++
++def format_boundary(step: int | None) -> str:
++    return str(step) if step is not None else "not observed"
++
++
+ def first_zero_crossing(hazard_frame: pd.DataFrame, column: str = "hazard_mu") -> int | None:
+     valid = hazard_frame.dropna(subset=[column]).sort_values("step")
+     if valid.empty:
+@@ -110,11 +150,20 @@ def build_question_answers(
+     summary = pilot.iloc[0]
+     model_label = model_run_label(summary)
+     q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
++    runs_ever_correct = int(summary["runs_ever_correct"])
++    clears_capability_gate = capability_gate(q1, runs_ever_correct)
+     repair_rate = float(summary["repair_rate_overall"]) if not pd.isna(summary["repair_rate_overall"]) else float("nan")
+     corruption_rate = float(summary["corruption_rate_overall"]) if not pd.isna(summary["corruption_rate_overall"]) else float("nan")
+     hazard_row = detectors.set_index("detector")
+-    crossing_step = first_zero_crossing(hazard)
+-    crossings = sign_change_count(hazard)
++    corrected_column = corrected_drift_column(hazard)
++    empirical_column = empirical_drift_column(hazard)
++    pooled_column = pooled_proxy_column(hazard)
++    fitted_column = fitted_drift_column(hazard)
++    corrected_crossing = first_zero_crossing(hazard, corrected_column)
++    empirical_crossing = first_zero_crossing(hazard, empirical_column)
++    pooled_crossing = first_zero_crossing(hazard, pooled_column) if pooled_column else None
++    fitted_crossing = first_zero_crossing(hazard, fitted_column) if fitted_column else None
++    crossings = sign_change_count(hazard, corrected_column)
+     correctness_signal = feature_name(weights, "correctness_probe")
+     corruption_signal = feature_name(weights, "corruption_hazard", positive_only=True)
+     benchmark_scope = "Across the currently completed model families" if steps["model_alias"].nunique() > 1 else f"Within the current {model_label} L4 run"
+@@ -122,6 +171,11 @@ def build_question_answers(
+     e_process_gap = float(hazard_row.loc["e_process", "mean_oracle_gap"]) if has_e_process else float("nan")
+     e_process_false_late = float(hazard_row.loc["e_process", "false_late_rate"]) if has_e_process else float("nan")
+     hazard_gap = float(hazard_row.loc["hazard_drift", "mean_oracle_gap"])
++    legacy_proxy_note = ""
++    if pooled_crossing is not None and corrected_crossing is not None and pooled_crossing != corrected_crossing:
++        legacy_proxy_note = (
++            f" A legacy pooled proxy drift would cross at step {pooled_crossing}, but that quantity uses unconditional transition frequencies and is not the conditional hazard object $((1-q_t)\alpha_t - q_t\beta_t - c)$ used for theorem-facing claims."
++        )
+ 
+     if has_e_process:
+         if e_process_gap < hazard_gap:
+@@ -149,9 +203,17 @@ def build_question_answers(
+             1,
+             "Can the DeepSeek 1.5B distill or an equivalent 1B-1.5B reasoning model be run with CUDA-enabled PyTorch or quantized inference so the real-trace study leaves the low-skill regime?",
+             (
+-                f"Yes. The completed {model_label} L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
+-                f"with step-1 competence $q_1={safe_float(q1, 3)}$ and at-least-once correctness in {int(summary['runs_ever_correct'])} runs. "
+-                "That is enough to leave the low-skill regime and estimate continuation hazards on real traces rather than toy tasks."
++                (
++                    f"Yes. The completed {model_label} L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
++                    f"with step-1 competence $q_1={safe_float(q1, 3)}$ and at-least-once correctness in {runs_ever_correct} runs. "
++                    "That clears the capability gate used for cross-family boundary claims, so this run leaves the low-skill regime and supports continuation-hazard estimation on real traces rather than toy tasks."
++                )
++                if clears_capability_gate
++                else (
++                    f"Not yet. The completed {model_label} L4 run used CUDA-backed transformers inference on {int(summary['n_runs'])} runs covering {int(summary['n_tasks'])} GSM8K tasks, "
++                    f"but it only reached step-1 competence $q_1={safe_float(q1, 3)}$ and at-least-once correctness in {runs_ever_correct} runs. "
++                    "That stays below the current capability gate for a strong boundary claim, so this run is still best interpreted as a weak-regime control rather than a decisive theorem-facing witness."
++                )
+             ),
+         ),
+         (
+@@ -170,7 +232,9 @@ def build_question_answers(
+                 f"Partially yes. The hazard-based stop rule reached mean oracle gap {safe_float(hazard_row.loc['hazard_drift', 'mean_oracle_gap'], 4)} with false-late rate {safe_float(hazard_row.loc['hazard_drift', 'false_late_rate'], 3)}, "
+                 f"while the empirical-Bernstein detector reached {safe_float(hazard_row.loc['empirical_bernstein', 'mean_oracle_gap'], 4)}"
+                 f"{', and the new mixture e-process reached ' + safe_float(e_process_gap, 4) if has_e_process else ''}. "
+-                f"The pooled repair and corruption rates were {safe_float(repair_rate, 3)} and {safe_float(corruption_rate, 3)}, so the hazards are learnable enough to drive a practical detector, although still conservatively."
++                f"The corrected conditional hazard drift crosses at step {format_boundary(corrected_crossing)} and the raw empirical utility drift crosses at step {format_boundary(empirical_crossing)}"
++                f"{', while the fitted hazard drift estimate crosses at step ' + format_boundary(fitted_crossing) if fitted_crossing is not None else ''}. "
++                f"The pooled repair and corruption hazards were {safe_float(repair_rate, 3)} and {safe_float(corruption_rate, 3)}, so the hazards are learnable enough to drive a practical detector, although still conservatively.{legacy_proxy_note}"
+             ),
+         ),
+         (
+@@ -192,7 +256,7 @@ def build_question_answers(
+             "Does reward hacking in real reasoning traces show up first as verbosity bias, confidence inflation, hidden-state drift, or verifier disagreement?",
+             (
+                 f"In the current traces it shows up earliest through {corruption_signal}. "
+-                f"The hazard drift crosses zero at step {crossing_step if crossing_step is not None else 'not yet observed'}, and the never-stop policy still loses {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average. "
++                f"The corrected conditional hazard drift crosses zero at step {format_boundary(corrected_crossing)}, and the never-stop policy still loses {safe_float(hazard_row.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average. "
+                 "That pattern is more consistent with corruption through instability in the model's observable state than with harmless extra verification."
+             ),
+         ),
+@@ -200,7 +264,7 @@ def build_question_answers(
+             7,
+             "Are multiple drift crossings common on real traces, or is the one-crossing picture mostly correct once tasks are conditioned on difficulty?",
+             (
+-                f"The pooled hazard curve is currently much closer to a one-crossing story than a repeated-crossing story: the first zero crossing occurs at step {crossing_step if crossing_step is not None else 'not observed'}, and the aggregate hazard sign changes {crossings} time(s). "
++                f"The corrected conditional hazard curve is currently much closer to a one-crossing story than a repeated-crossing story: the first zero crossing occurs at step {format_boundary(corrected_crossing)}, and the aggregate corrected hazard sign changes {crossings} time(s). "
+                 "That supports the one-crossing picture at the population level, but the present artifact stack does not yet fit per-task latent-state crossing models, so repeated crossings cannot be ruled out on difficult outlier tasks."
+             ),
+         ),
+@@ -208,8 +272,8 @@ def build_question_answers(
+             8,
+             "How much of the apparent boundary is model-family specific versus benchmark specific?",
+             (
+-                f"Still unresolved from this cycle. The completed large run is concentrated on {model_label} over GSM8K, so it identifies a real boundary for that model-benchmark pair but cannot yet decompose family effects from benchmark effects. "
+-                "A comparable Qwen, Llama, or larger DeepSeek follow-up is still needed before attributing the boundary to model family rather than task distribution."
++                f"Still unresolved from this cycle. The completed large run is concentrated on {model_label} over GSM8K, so it identifies a boundary story for that model-benchmark pair but cannot yet cleanly decompose family effects from benchmark effects. "
++                "A comparable higher-capability cross-family follow-up is still needed before attributing the boundary to model family rather than task distribution."
+             ),
+         ),
+     ]
+@@ -290,12 +354,37 @@ def build_report_markdown(
+     summary = pilot.iloc[0]
+     model_label = model_run_label(summary)
+     detector_rows = detectors.set_index("detector")
+-    crossing_step = first_zero_crossing(hazard)
+     q1 = float(steps.loc[steps["step"] == 1, "correct"].mean())
+-    q_peak = float(hazard["q_t"].max()) if not hazard.empty else float("nan")
+-    q_peak_step = int(hazard.loc[hazard["q_t"].idxmax(), "step"]) if not hazard.empty else -1
++    step_accuracy = steps.groupby("step")["correct"].mean().reset_index(name="q_t")
++    q_peak = float(step_accuracy["q_t"].max()) if not step_accuracy.empty else float("nan")
++    q_peak_step = int(step_accuracy.loc[step_accuracy["q_t"].idxmax(), "step"]) if not step_accuracy.empty else -1
++    corrected_column = corrected_drift_column(hazard)
++    empirical_column = empirical_drift_column(hazard)
++    pooled_column = pooled_proxy_column(hazard)
++    fitted_column = fitted_drift_column(hazard)
++    corrected_crossing = first_zero_crossing(hazard, corrected_column)
++    empirical_crossing = first_zero_crossing(hazard, empirical_column)
++    pooled_crossing = first_zero_crossing(hazard, pooled_column) if pooled_column else None
++    fitted_crossing = first_zero_crossing(hazard, fitted_column) if fitted_column else None
++    clears_capability_gate = capability_gate(q1, int(summary["runs_ever_correct"]))
+     correctness_signal = feature_name(weights, "correctness_probe")
+     corruption_signal = feature_name(weights, "corruption_hazard", positive_only=True)
++    legacy_erratum = ""
++    if pooled_crossing is not None and corrected_crossing is not None and pooled_crossing != corrected_crossing:
++        legacy_erratum = (
++            f" A previous report cited step {pooled_crossing} from a pooled proxy drift built from unconditional transition frequencies; that proxy is retained only as an audit trail and is no longer used as the boundary witness."
++        )
++
++    drift_audit_table = [
++        "| Drift Curve | First zero crossing | Role |",
++        "| --- | ---: | --- |",
++        f"| empirical utility drift | {format_boundary(empirical_crossing)} | raw mean $\\Delta U_t$ from realized utilities |",
++        f"| conditional hazard drift | {format_boundary(corrected_crossing)} | theorem-facing $((1-q_t)\\alpha_t - q_t\\beta_t - c)$ witness |",
++    ]
++    if fitted_crossing is not None:
++        drift_audit_table.append(f"| fitted hazard drift | {format_boundary(fitted_crossing)} | model-based estimate from learned probes |")
++    if pooled_crossing is not None:
++        drift_audit_table.append(f"| pooled proxy drift | {format_boundary(pooled_crossing)} | legacy unconditional proxy kept for auditability only |")
+ 
+     graph_sections = [
+         "### Drift Crossing Proof",
+@@ -338,17 +427,22 @@ def build_report_markdown(
+             (
+                 f"The L4 execution loop completed the environment check, parser repair, GSM8K scaling refactor, and real-trace collection for {model_label} on "
+                 f"{int(summary['n_runs'])} runs. The model entered a competent regime immediately, with step-1 accuracy $q_1={safe_float(q1, 3)}$, "
+-                f"and reached peak correctness $q_t={safe_float(q_peak, 3)}$ at step {q_peak_step}."
++                f"and reached peak correctness $q_t={safe_float(q_peak, 3)}$ at step {q_peak_step}. "
++                f"{('This run clears the current capability gate for a cross-family boundary claim.' if clears_capability_gate else 'This run remains below the current capability gate, so it should be treated as a weak-regime control rather than a decisive family-level witness.')}"
+             ),
+             "",
+             "## Mathematical Validation",
+             (
+                 f"The hazard decomposition exhibits repair rate {safe_float(summary['repair_rate_overall'], 3)} and corruption rate {safe_float(summary['corruption_rate_overall'], 3)}. "
+-                f"The first hazard drift zero crossing occurs at step {crossing_step if crossing_step is not None else 'not observed'}, which is the empirical candidate for the Overthinking Boundary. "
++                f"The corrected conditional hazard drift crosses zero at step {format_boundary(corrected_crossing)}, while the raw empirical utility drift crosses at step {format_boundary(empirical_crossing)}"
++                f"{', and the fitted hazard drift estimate crosses at step ' + format_boundary(fitted_crossing) if fitted_crossing is not None else ''}. "
+                 f"The never-stop policy loses {safe_float(detector_rows.loc['never_stop', 'mean_oracle_gap'], 4)} utility on average relative to the oracle, which is direct evidence that extra reasoning past the boundary is harmful."
+-                f"{e_process_sentence}"
++                f"{e_process_sentence}{legacy_erratum}"
+             ),
+             "",
++            "## Drift Audit",
++            *drift_audit_table,
++            "",
+             "## Observables Evaluation",
+             (
+                 f"The strongest correctness proxy in the fitted models was {correctness_signal}. "
+@@ -385,7 +479,7 @@ def main() -> None:
+     steps = read_csv(input_dir / "trace_steps.csv")
+     runs = read_csv(input_dir / "trace_runs.csv")
+     pilot = read_csv(input_dir / "pilot_summary.csv")
+-    hazard = read_csv(input_dir / "hazard_drift_summary.csv")
++    hazard = read_hazard_artifact(input_dir)
+     detectors = read_csv(input_dir / "detector_comparison.csv")
+     probe = read_csv(input_dir / "correctness_probe_metrics.csv")
+     weights = read_csv(input_dir / "feature_weights.csv")
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index da11619..5716ef8 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -6,6 +6,7 @@ import json
+ import logging
+ import math
+ import re
++import shutil
+ import time
+ from dataclasses import asdict, dataclass
+ from fractions import Fraction
+@@ -596,6 +597,10 @@ def output_paths(output_dir: Path, is_baseline: bool) -> dict[str, Path]:
+     }
+ 
+ 
++def expected_steps_per_run(is_baseline: bool, max_steps: int) -> int:
++    return 1 if is_baseline else max_steps
++
++
+ def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
+     if not rows:
+         return
+@@ -612,6 +617,153 @@ def append_records(path: Path, rows: list[dict[str, Any]]) -> None:
+     frame.to_csv(path, index=False)
+ 
+ 
++def backup_for_reconciliation(path: Path) -> Path:
++    backup_path = path.with_name(f"{path.stem}.pre_reconcile{path.suffix}")
++    if path.exists() and not backup_path.exists():
++        shutil.copy2(path, backup_path)
++    return backup_path
++
++
++def summarize_run_rows(run_rows: pd.DataFrame) -> dict[str, Any]:
++    ordered = run_rows.sort_values("step").drop_duplicates(subset=["step"], keep="last").reset_index(drop=True)
++    first_row = ordered.iloc[0]
++    final_row = ordered.iloc[-1]
++    first_correct = ordered.loc[ordered["correct"] == 1, "step"]
++    first_model_stop = ordered.loc[ordered["model_stop_flag"] == 1, "step"]
++    oracle_row = ordered.loc[ordered["utility"].idxmax()]
++
++    return {
++        "run_id": str(first_row["run_id"]),
++        "model_alias": str(first_row["model_alias"]),
++        "model_name": str(first_row["model_name"]),
++        "task_id": str(first_row["task_id"]),
++        "domain": str(first_row["domain"]),
++        "difficulty": str(first_row["difficulty"]),
++        "task_source": str(first_row["task_source"]),
++        "task_source_index": int(first_row["task_source_index"]),
++        "temperature": float(first_row["temperature"]),
++        "seed": int(first_row["seed"]),
++        "prompt_mode": str(first_row["prompt_mode"]),
++        "system_prompt_mode": str(first_row["system_prompt_mode"]),
++        "is_baseline": int(first_row["is_baseline"]),
++        "ever_correct": int(ordered["correct"].max()),
++        "correct_at_step_1": int(first_row["correct"]),
++        "oracle_stop": int(oracle_row["step"]),
++        "first_correct_step": int(first_correct.iloc[0]) if not first_correct.empty else -1,
++        "first_model_stop_step": int(first_model_stop.iloc[0]) if not first_model_stop.empty else -1,
++        "revision_count": int(ordered["answer_changed"].sum()),
++        "best_utility": float(ordered["utility"].max()),
++        "final_correct": int(final_row["correct"]),
++        "device": str(first_row["device"]),
++    }
++
++
++def reconcile_existing_outputs(
++    output_dir: Path,
++    hidden_dir: Path,
++    is_baseline: bool,
++    max_steps: int,
++) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str], dict[str, Any]]:
++    paths = output_paths(output_dir, is_baseline)
++    expected_steps = expected_steps_per_run(is_baseline, max_steps)
++    expected_step_sequence = list(range(1, expected_steps + 1))
++
++    steps_frame = pd.read_csv(paths["steps"]) if paths["steps"].exists() else pd.DataFrame()
++    runs_frame = pd.read_csv(paths["runs"]) if paths["runs"].exists() else pd.DataFrame()
++    hidden_run_ids = {path.stem for path in hidden_dir.glob("*.npz")} if hidden_dir.exists() else set()
++
++    duplicate_step_rows = 0
++    duplicate_run_rows = 0
++    if not steps_frame.empty:
++        steps_frame = steps_frame.reset_index(drop=True)
++        steps_frame["_row_order"] = np.arange(len(steps_frame))
++        duplicate_step_rows = int(steps_frame.duplicated(subset=["run_id", "step"], keep=False).sum())
++        steps_frame = steps_frame.sort_values("_row_order").drop_duplicates(subset=["run_id", "step"], keep="last")
++    if not runs_frame.empty:
++        runs_frame = runs_frame.reset_index(drop=True)
++        runs_frame["_row_order"] = np.arange(len(runs_frame))
++        duplicate_run_rows = int(runs_frame.duplicated(subset=["run_id"], keep=False).sum())
++        runs_frame = runs_frame.sort_values("_row_order").drop_duplicates(subset=["run_id"], keep="last")
++
++    completed_from_steps: set[str] = set()
++    incomplete_step_run_ids: list[str] = []
++    reconstructed_runs: list[dict[str, Any]] = []
++    existing_run_ids = set(runs_frame["run_id"].astype(str)) if not runs_frame.empty else set()
++
++    if not steps_frame.empty:
++        for run_id, group in steps_frame.groupby("run_id", sort=False):
++            run_id_str = str(run_id)
++            ordered = group.sort_values("step")
++            observed_steps = [int(value) for value in ordered["step"].tolist()]
++            is_complete = observed_steps == expected_step_sequence and run_id_str in hidden_run_ids
++            if is_complete:
++                completed_from_steps.add(run_id_str)
++                if run_id_str not in existing_run_ids:
++                    reconstructed_runs.append(summarize_run_rows(ordered))
++            else:
++                incomplete_step_run_ids.append(run_id_str)
++
++    runs_without_complete_steps = sorted(existing_run_ids - completed_from_steps)
++    hidden_without_complete_steps = sorted(hidden_run_ids - completed_from_steps)
++    completed_run_ids = set(completed_from_steps)
++
++    if not steps_frame.empty:
++        sanitized_steps = steps_frame[steps_frame["run_id"].astype(str).isin(completed_run_ids)].copy()
++        sanitized_steps = sanitized_steps.sort_values(["run_id", "step", "_row_order"])
++        sanitized_steps = sanitized_steps.drop(columns=["_row_order"], errors="ignore")
++    else:
++        sanitized_steps = steps_frame
++
++    sanitized_runs_frames: list[pd.DataFrame] = []
++    if not runs_frame.empty:
++        sanitized_runs_frames.append(runs_frame[runs_frame["run_id"].astype(str).isin(completed_run_ids)].copy())
++    if reconstructed_runs:
++        sanitized_runs_frames.append(pd.DataFrame(reconstructed_runs))
++    if sanitized_runs_frames:
++        sanitized_runs = pd.concat(sanitized_runs_frames, ignore_index=True, sort=False)
++        sanitized_runs["task_source_index"] = pd.to_numeric(sanitized_runs["task_source_index"], errors="coerce").fillna(-1).astype(int)
++        sanitized_runs["temperature"] = pd.to_numeric(sanitized_runs["temperature"], errors="coerce")
++        sanitized_runs["seed"] = pd.to_numeric(sanitized_runs["seed"], errors="coerce").fillna(-1).astype(int)
++        sanitized_runs = sanitized_runs.sort_values(["temperature", "seed", "task_source_index", "run_id"])
++        sanitized_runs = sanitized_runs.drop(columns=["_row_order"], errors="ignore")
++    else:
++        sanitized_runs = pd.DataFrame(columns=runs_frame.columns.drop("_row_order", errors="ignore"))
++
++    anomalies_detected = any(
++        [
++            duplicate_step_rows,
++            duplicate_run_rows,
++            reconstructed_runs,
++            incomplete_step_run_ids,
++            runs_without_complete_steps,
++            hidden_without_complete_steps,
++        ]
++    )
++    reconciliation_report = {
++        "expected_steps_per_run": expected_steps,
++        "completed_run_count": len(completed_run_ids),
++        "hidden_state_file_count": len(hidden_run_ids),
++        "duplicate_step_rows_removed": duplicate_step_rows,
++        "duplicate_run_rows_removed": duplicate_run_rows,
++        "reconstructed_run_summaries": len(reconstructed_runs),
++        "incomplete_step_run_ids": incomplete_step_run_ids,
++        "runs_without_complete_steps": runs_without_complete_steps,
++        "hidden_without_complete_steps": hidden_without_complete_steps,
++        "anomalies_detected": bool(anomalies_detected),
++    }
++    if anomalies_detected:
++        if paths["steps"].exists():
++            backup_for_reconciliation(paths["steps"])
++        if paths["runs"].exists():
++            backup_for_reconciliation(paths["runs"])
++        sanitized_steps.to_csv(paths["steps"], index=False)
++        sanitized_runs.to_csv(paths["runs"], index=False)
++        with (output_dir / "checkpoint_reconciliation.json").open("w", encoding="utf-8") as handle:
++            json.dump(reconciliation_report, handle, indent=2)
++
++    return sanitized_steps.to_dict("records"), sanitized_runs.to_dict("records"), completed_run_ids, reconciliation_report
++
++
+ def load_existing_outputs(output_dir: Path, is_baseline: bool) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
+     paths = output_paths(output_dir, is_baseline)
+     if paths["steps"].exists():
+@@ -631,6 +783,7 @@ def load_model(
+     device: str,
+     quantization: str,
+     device_map: str | None,
++    attn_implementation: str,
+ ) -> tuple[Any, Any, str, str]:
+     tokenizer = AutoTokenizer.from_pretrained(model_spec.hf_name, trust_remote_code=True)
+     if tokenizer.pad_token is None:
+@@ -643,19 +796,29 @@ def load_model(
+         actual_device = device
+ 
+     backend = "transformers+torch(cpu)"
+-    load_kwargs: dict[str, Any] = {"trust_remote_code": True}
++    load_kwargs: dict[str, Any] = {"trust_remote_code": True, "low_cpu_mem_usage": True}
++    compute_dtype = torch.bfloat16 if actual_device == "cuda" and torch.cuda.is_bf16_supported() else torch.float16
+     if actual_device == "cuda":
+-        load_kwargs["dtype"] = torch.float16
++        load_kwargs["dtype"] = compute_dtype
++        if attn_implementation != "eager":
++            load_kwargs["attn_implementation"] = "sdpa" if attn_implementation == "auto" else attn_implementation
+ 
+     try:
+         if actual_device == "cuda" and quantization in {"8bit", "4bit"}:
+             if BitsAndBytesConfig is None:
+                 raise ImportError("bitsandbytes support is unavailable in the installed transformers stack.")
+-            load_kwargs.pop("dtype", None)
+             if quantization == "8bit":
+-                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
++                load_kwargs["quantization_config"] = BitsAndBytesConfig(
++                    load_in_8bit=True,
++                    llm_int8_enable_fp32_cpu_offload=True,
++                )
+             else:
+-                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
++                load_kwargs["quantization_config"] = BitsAndBytesConfig(
++                    load_in_4bit=True,
++                    bnb_4bit_quant_type="nf4",
++                    bnb_4bit_use_double_quant=True,
++                    bnb_4bit_compute_dtype=compute_dtype,
++                )
+             load_kwargs["device_map"] = device_map or "auto"
+             model = AutoModelForCausalLM.from_pretrained(model_spec.hf_name, **load_kwargs)
+             backend = f"transformers+torch(cuda-{quantization})"
+@@ -696,7 +859,12 @@ def generate_batch_with_diagnostics(
+     max_new_tokens: int,
+ ) -> tuple[list[dict[str, Any]], float]:
+     started_at = time.perf_counter()
+-    encoded = tokenizer(prompt_texts, padding=True, return_tensors="pt")
++    encoded = tokenizer(
++        prompt_texts,
++        padding=True,
++        pad_to_multiple_of=8 if actual_device == "cuda" else None,
++        return_tensors="pt",
++    )
+     input_ids = encoded["input_ids"].to(actual_device)
+     attention_mask = encoded["attention_mask"].to(actual_device)
+     prompt_width = input_ids.shape[1]
+@@ -714,7 +882,7 @@ def generate_batch_with_diagnostics(
+     else:
+         generation_kwargs.update({"do_sample": False})
+ 
+-    with torch.no_grad():
++    with torch.inference_mode():
+         generated_ids = model.generate(**generation_kwargs)
+         completion_width = generated_ids.shape[1] - prompt_width
+         generated_attention_mask = torch.cat(
+@@ -759,9 +927,6 @@ def generate_batch_with_diagnostics(
+                 "pooled_hidden": pooled_hidden,
+             }
+         )
+-
+-    if actual_device == "cuda":
+-        torch.cuda.empty_cache()
+     return results, elapsed_seconds
+ 
+ 
+@@ -813,6 +978,90 @@ def gpu_memory_allocated_gb(actual_device: str) -> float:
+     return torch.cuda.memory_allocated() / (1024**3)
+ 
+ 
++def first_pending_run(
++    model_spec: ModelSpec,
++    tasks: list[TaskSpec],
++    temperatures: list[float],
++    seeds: list[int],
++    completed_run_ids: set[str],
++) -> dict[str, Any] | None:
++    for temperature in temperatures:
++        for seed in seeds:
++            for task in tasks:
++                run_id = run_id_for(model_spec.alias, task, temperature, seed)
++                if run_id in completed_run_ids:
++                    continue
++                return {
++                    "run_id": run_id,
++                    "task_id": task.task_id,
++                    "task_source_index": task.source_index,
++                    "temperature": temperature,
++                    "seed": seed,
++                }
++    return None
++
++
++def write_runtime_metadata(
++    *,
++    metadata_path: Path,
++    model_spec: ModelSpec,
++    backend: str,
++    actual_device: str,
++    quantization: str,
++    device_map: str | None,
++    attn_implementation: str,
++    temperatures: list[float],
++    seeds: list[int],
++    max_steps: int,
++    max_new_tokens: int,
++    max_tasks: int,
++    task_source: str,
++    dataset_split: str,
++    dataset_shuffle_seed: int,
++    batch_size: int,
++    prompt_mode: str,
++    system_prompt_mode: str,
++    resume_enabled: bool,
++    completed_run_ids: set[str],
++    pending_run_count: int,
++    next_pending_run: dict[str, Any] | None,
++    reconciliation_report: dict[str, Any],
++    tasks: list[TaskSpec],
++) -> None:
++    metadata = {
++        "model": asdict(model_spec),
++        "backend": backend,
++        "device": actual_device,
++        "quantization": quantization,
++        "device_map": device_map,
++        "attn_implementation": attn_implementation,
++        "temperatures": temperatures,
++        "seeds": seeds,
++        "max_steps": max_steps,
++        "max_new_tokens": max_new_tokens,
++        "max_tasks": max_tasks,
++        "task_source": task_source,
++        "dataset_split": dataset_split,
++        "dataset_shuffle_seed": dataset_shuffle_seed,
++        "batch_size": batch_size,
++        "step_cost": STEP_COST,
++        "prompt_mode": prompt_mode,
++        "system_prompt_mode": system_prompt_mode,
++        "resume_enabled": resume_enabled,
++        "completed_run_count": len(completed_run_ids),
++        "pending_run_count": pending_run_count,
++        "next_pending_run": next_pending_run,
++        "checkpoint_reconciliation": reconciliation_report,
++        "tasks": [asdict(task) for task in tasks],
++        "hidden_state_accessible": True,
++        "token_logprobs_accessible": True,
++        "reasoning_traces_accessible": True,
++        "runtime_limit_notes": "Batch-first GSM8K runner with checkpoint reconciliation, append-only CSV outputs, incremental metadata snapshots, and automatic microbatch splitting on CUDA OOM.",
++    }
++    with metadata_path.open("w", encoding="utf-8") as handle:
++        json.dump(metadata, handle, indent=2)
++
++
+ def run_batch_traces(
+     model: Any,
+     tokenizer: Any,
+@@ -1088,6 +1337,7 @@ def main() -> None:
+     parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
+     parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
+     parser.add_argument("--device-map", default=None)
++    parser.add_argument("--attn-implementation", default="auto", choices=["auto", "sdpa", "flash_attention_2", "eager"])
+     parser.add_argument("--temperatures", nargs="+", type=float, default=[0.6])
+     parser.add_argument("--seeds", nargs="+", type=int, default=[7])
+     parser.add_argument("--max-steps", type=int, default=5)
+@@ -1123,7 +1373,14 @@ def main() -> None:
+     )
+     logging.info("Loaded %d tasks from %s.", len(tasks), args.task_source)
+ 
+-    existing_steps, existing_runs, completed_run_ids = load_existing_outputs(output_dir, args.run_baseline)
++    existing_steps, existing_runs, completed_run_ids, reconciliation_report = reconcile_existing_outputs(
++        output_dir=output_dir,
++        hidden_dir=hidden_dir,
++        is_baseline=args.run_baseline,
++        max_steps=args.max_steps,
++    )
++    if reconciliation_report["anomalies_detected"]:
++        logging.warning("Checkpoint reconciliation adjusted on-disk artifacts: %s", reconciliation_report)
+     if args.resume and completed_run_ids:
+         logging.info("Resuming with %d completed runs already on disk.", len(completed_run_ids))
+ 
+@@ -1136,6 +1393,21 @@ def main() -> None:
+                 if not args.resume or run_id not in completed_run_ids:
+                     pending_requested_runs += 1
+     logging.info("Requested runs=%d | pending runs=%d", total_requested_runs, pending_requested_runs)
++    next_pending_run = first_pending_run(
++        model_spec=model_spec,
++        tasks=tasks,
++        temperatures=args.temperatures,
++        seeds=args.seeds,
++        completed_run_ids=completed_run_ids if args.resume else set(),
++    )
++    if next_pending_run is not None:
++        logging.info(
++            "Next pending run: task_index=%s | temperature=%.2f | seed=%d | run_id=%s",
++            next_pending_run["task_source_index"],
++            next_pending_run["temperature"],
++            next_pending_run["seed"],
++            next_pending_run["run_id"],
++        )
+ 
+     if pending_requested_runs == 0 and existing_runs:
+         logging.info("No pending runs detected. Rebuilding summaries from existing artifacts.")
+@@ -1152,9 +1424,37 @@ def main() -> None:
+             device=args.device,
+             quantization=args.quantization,
+             device_map=args.device_map,
++            attn_implementation=args.attn_implementation,
+         )
+         logging.info("Model loaded: %s | backend=%s | device=%s", model_spec.hf_name, backend, actual_device)
+ 
++    write_runtime_metadata(
++        metadata_path=paths["metadata"],
++        model_spec=model_spec,
++        backend=backend,
++        actual_device=actual_device,
++        quantization=args.quantization,
++        device_map=args.device_map,
++        attn_implementation=args.attn_implementation,
++        temperatures=args.temperatures,
++        seeds=args.seeds,
++        max_steps=args.max_steps,
++        max_new_tokens=args.max_new_tokens,
++        max_tasks=args.max_tasks,
++        task_source=args.task_source,
++        dataset_split=args.dataset_split,
++        dataset_shuffle_seed=args.dataset_shuffle_seed,
++        batch_size=args.batch_size,
++        prompt_mode=args.prompt_mode,
++        system_prompt_mode=args.system_prompt_mode,
++        resume_enabled=args.resume,
++        completed_run_ids=completed_run_ids,
++        pending_run_count=pending_requested_runs,
++        next_pending_run=next_pending_run,
++        reconciliation_report=reconciliation_report,
++        tasks=tasks,
++    )
++
+     all_rows: list[dict[str, Any]] = list(existing_steps)
+     all_runs: list[dict[str, Any]] = list(existing_runs)
+ 
+@@ -1194,6 +1494,39 @@ def main() -> None:
+                     all_rows.extend(batch_rows)
+                     all_runs.extend(batch_runs)
+                     completed_run_ids.update(run["run_id"] for run in batch_runs)
++                    next_pending_run = first_pending_run(
++                        model_spec=model_spec,
++                        tasks=tasks,
++                        temperatures=args.temperatures,
++                        seeds=args.seeds,
++                        completed_run_ids=completed_run_ids if args.resume else set(),
++                    )
++                    write_runtime_metadata(
++                        metadata_path=paths["metadata"],
++                        model_spec=model_spec,
++                        backend=backend,
++                        actual_device=actual_device,
++                        quantization=args.quantization,
++                        device_map=args.device_map,
++                        attn_implementation=args.attn_implementation,
++                        temperatures=args.temperatures,
++                        seeds=args.seeds,
++                        max_steps=args.max_steps,
++                        max_new_tokens=args.max_new_tokens,
++                        max_tasks=args.max_tasks,
++                        task_source=args.task_source,
++                        dataset_split=args.dataset_split,
++                        dataset_shuffle_seed=args.dataset_shuffle_seed,
++                        batch_size=args.batch_size,
++                        prompt_mode=args.prompt_mode,
++                        system_prompt_mode=args.system_prompt_mode,
++                        resume_enabled=args.resume,
++                        completed_run_ids=completed_run_ids,
++                        pending_run_count=max(total_requested_runs - len(completed_run_ids), 0),
++                        next_pending_run=next_pending_run,
++                        reconciliation_report=reconciliation_report,
++                        tasks=tasks,
++                    )
+                     progress.set_postfix(
+                         runs=len(batch_runs),
+                         correct=sum(int(run["ever_correct"]) for run in batch_runs),
+@@ -1214,34 +1547,39 @@ def main() -> None:
+     transition_frame.to_csv(paths["hazard"], index=False)
+     pilot_summary.to_csv(paths["pilot"], index=False)
+ 
+-    metadata = {
+-        "model": asdict(model_spec),
+-        "backend": backend,
+-        "device": actual_device,
+-        "quantization": args.quantization,
+-        "device_map": args.device_map,
+-        "temperatures": args.temperatures,
+-        "seeds": args.seeds,
+-        "max_steps": args.max_steps,
+-        "max_new_tokens": args.max_new_tokens,
+-        "max_tasks": args.max_tasks,
+-        "task_source": args.task_source,
+-        "dataset_split": args.dataset_split,
+-        "dataset_shuffle_seed": args.dataset_shuffle_seed,
+-        "batch_size": args.batch_size,
+-        "step_cost": STEP_COST,
+-        "prompt_mode": args.prompt_mode,
+-        "system_prompt_mode": args.system_prompt_mode,
+-        "resume_enabled": args.resume,
+-        "completed_run_count": len(completed_run_ids),
+-        "tasks": [asdict(task) for task in tasks],
+-        "hidden_state_accessible": True,
+-        "token_logprobs_accessible": True,
+-        "reasoning_traces_accessible": True,
+-        "runtime_limit_notes": "Batch-first GSM8K runner with append-only CSV outputs and automatic microbatch splitting on CUDA OOM.",
+-    }
+-    with paths["metadata"].open("w", encoding="utf-8") as handle:
+-        json.dump(metadata, handle, indent=2)
++    next_pending_run = first_pending_run(
++        model_spec=model_spec,
++        tasks=tasks,
++        temperatures=args.temperatures,
++        seeds=args.seeds,
++        completed_run_ids=completed_run_ids if args.resume else set(),
++    )
++    write_runtime_metadata(
++        metadata_path=paths["metadata"],
++        model_spec=model_spec,
++        backend=backend,
++        actual_device=actual_device,
++        quantization=args.quantization,
++        device_map=args.device_map,
++        attn_implementation=args.attn_implementation,
++        temperatures=args.temperatures,
++        seeds=args.seeds,
++        max_steps=args.max_steps,
++        max_new_tokens=args.max_new_tokens,
++        max_tasks=args.max_tasks,
++        task_source=args.task_source,
++        dataset_split=args.dataset_split,
++        dataset_shuffle_seed=args.dataset_shuffle_seed,
++        batch_size=args.batch_size,
++        prompt_mode=args.prompt_mode,
++        system_prompt_mode=args.system_prompt_mode,
++        resume_enabled=args.resume,
++        completed_run_ids=completed_run_ids,
++        pending_run_count=max(total_requested_runs - len(completed_run_ids), 0),
++        next_pending_run=next_pending_run,
++        reconciliation_report=reconciliation_report,
++        tasks=tasks,
++    )
+ 
+     for _, row in pilot_summary.iterrows():
+         print(
+diff --git a/research/trace_analysis.py b/research/trace_analysis.py
+index b5d0a61..d6e59eb 100644
+--- a/research/trace_analysis.py
++++ b/research/trace_analysis.py
+@@ -127,6 +127,12 @@ def predict_probabilities(model: Any, frame: pd.DataFrame) -> np.ndarray:
+     return model.predict_proba(frame[FEATURE_COLUMNS])
+ 
+ 
++def conditional_probability(successes: int, denominator: int) -> float:
++    if denominator <= 0:
++        return float("nan")
++    return float(successes / denominator)
++
++
+ def select_entropy_threshold(step_frame: pd.DataFrame) -> float:
+     candidates = np.quantile(step_frame["entropy_mean"].dropna(), [0.2, 0.35, 0.5, 0.65, 0.8])
+     best_threshold = float(candidates[0])
+@@ -200,19 +206,71 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
+         for feature, coefficient in zip(FEATURE_COLUMNS, coefficients, strict=True):
+             weights.append({"model": label, "feature": feature, "coefficient": float(coefficient)})
+ 
+-    by_step = transition_rows.groupby("step").agg(
+-        q_t=("correct", "mean"),
+-        repair_rate=("repair", "mean"),
+-        corruption_rate=("corruption", "mean"),
+-        empirical_mu=("delta_utility", "mean"),
+-        empirical_variance=("delta_utility", "var"),
+-        entropy_mean=("entropy_mean", "mean"),
+-        answer_changed_rate=("answer_changed", "mean"),
+-        hidden_shift_mean=("hidden_l2_shift", "mean"),
+-        confidence_mean=("confidence", "mean"),
+-        n_examples=("run_id", "count"),
++    transition_rows["q_hat"] = predict_probabilities(correctness_probe, transition_rows)[:, 1]
++    transition_rows["repair_hazard_hat"] = predict_probabilities(repair_model, transition_rows)[:, 1]
++    transition_rows["corruption_hazard_hat"] = predict_probabilities(corruption_model, transition_rows)[:, 1]
++    transition_rows["fitted_hazard_drift"] = (
++        (1.0 - transition_rows["q_hat"]) * transition_rows["repair_hazard_hat"]
++        - transition_rows["q_hat"] * transition_rows["corruption_hazard_hat"]
++        - STEP_COST
+     )
+-    by_step = by_step.reset_index()
++
++    rows: list[dict[str, Any]] = []
++    for step, group in transition_rows.groupby("step"):
++        q_t = float(group["correct"].mean())
++        n_transitions = int(len(group))
++        n_correct_states = int(group["correct"].sum())
++        n_incorrect_states = int(n_transitions - n_correct_states)
++        n_repairs = int(group["repair"].sum())
++        n_corruptions = int(group["corruption"].sum())
++
++        pooled_repair_frequency = float(group["repair"].mean())
++        pooled_corruption_frequency = float(group["corruption"].mean())
++        conditional_repair_hazard = conditional_probability(n_repairs, n_incorrect_states)
++        conditional_corruption_hazard = conditional_probability(n_corruptions, n_correct_states)
++        empirical_utility_drift = float(group["delta_utility"].mean())
++        conditional_hazard_drift = (
++            (1.0 - q_t) * conditional_repair_hazard - q_t * conditional_corruption_hazard - STEP_COST
++            if not math.isnan(conditional_repair_hazard) and not math.isnan(conditional_corruption_hazard)
++            else float("nan")
++        )
++        pooled_proxy_drift = (
++            (1.0 - q_t) * pooled_repair_frequency - q_t * pooled_corruption_frequency - STEP_COST
++        )
++
++        rows.append(
++            {
++                "step": int(step),
++                "q_t": q_t,
++                "n_transitions": n_transitions,
++                "n_correct_states": n_correct_states,
++                "n_incorrect_states": n_incorrect_states,
++                "n_repairs": n_repairs,
++                "n_corruptions": n_corruptions,
++                "pooled_repair_frequency": pooled_repair_frequency,
++                "pooled_corruption_frequency": pooled_corruption_frequency,
++                "pooled_proxy_drift": pooled_proxy_drift,
++                "repair_rate": conditional_repair_hazard,
++                "corruption_rate": conditional_corruption_hazard,
++                "empirical_utility_drift": empirical_utility_drift,
++                "conditional_hazard_drift": conditional_hazard_drift,
++                "hazard_mu": conditional_hazard_drift,
++                "empirical_mu": empirical_utility_drift,
++                "empirical_variance": float(group["delta_utility"].var()),
++                "conditional_empirical_gap": conditional_hazard_drift - empirical_utility_drift,
++                "fitted_q_t": float(group["q_hat"].mean()),
++                "fitted_repair_hazard": float(group["repair_hazard_hat"].mean()),
++                "fitted_corruption_hazard": float(group["corruption_hazard_hat"].mean()),
++                "fitted_hazard_drift": float(group["fitted_hazard_drift"].mean()),
++                "entropy_mean": float(group["entropy_mean"].mean()),
++                "answer_changed_rate": float(group["answer_changed"].mean()),
++                "hidden_shift_mean": float(group["hidden_l2_shift"].mean()),
++                "confidence_mean": float(group["confidence"].mean()),
++                "n_examples": n_transitions,
++            }
++        )
++
++    by_step = pd.DataFrame(rows)
+     e_process_frame = (
+         transition_rows.groupby("step")["delta_utility"]
+         .apply(mixture_e_process_value)
+@@ -221,10 +279,9 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
+     )
+     by_step = by_step.merge(e_process_frame, on="step", how="left")
+     by_step["empirical_variance"] = by_step["empirical_variance"].fillna(0.0)
+-    by_step["hazard_mu"] = (1.0 - by_step["q_t"]) * by_step["repair_rate"] - by_step["q_t"] * by_step["corruption_rate"] - STEP_COST
+     by_step["delta_t"] = 6.0 * EB_DELTA / (np.pi**2 * np.square(by_step["step"] + 1))
+     by_step["eb_upper_bound"] = (
+-        by_step["empirical_mu"]
++        by_step["empirical_utility_drift"]
+         + np.sqrt(2.0 * by_step["empirical_variance"] * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"])
+         + 3.0 * (DELTA_UPPER_BOUND - DELTA_LOWER_BOUND) * np.log(3.0 / by_step["delta_t"]) / by_step["n_examples"]
+     )
+@@ -234,6 +291,12 @@ def fit_global_models(step_frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFr
+     return by_step, pd.DataFrame(weights), correctness_probe, repair_model, corruption_model
+ 
+ 
++def corrected_drift_column(hazard_frame: pd.DataFrame) -> str:
++    if "conditional_hazard_drift" in hazard_frame.columns:
++        return "conditional_hazard_drift"
++    return "hazard_mu"
++
++
+ def first_zero_crossing(hazard_frame: pd.DataFrame, column: str) -> int:
+     valid = hazard_frame.dropna(subset=[column]).sort_values("step")
+     if valid.empty:
+@@ -378,7 +441,8 @@ def plot_detector_comparison(detector_summary: pd.DataFrame, output_dir: Path) -
+ 
+ 
+ def plot_drift_crossing_proof(hazard_frame: pd.DataFrame, output_dir: Path) -> None:
+-    crossing_step = first_zero_crossing(hazard_frame, "hazard_mu")
++    corrected_column = corrected_drift_column(hazard_frame)
++    crossing_step = first_zero_crossing(hazard_frame, corrected_column)
+     fig, axes = plt.subplots(2, 1, figsize=(10, 7), sharex=True)
+ 
+     axes[0].plot(hazard_frame["step"], hazard_frame["q_t"], color="#1d4ed8", linewidth=2)
+@@ -387,11 +451,42 @@ def plot_drift_crossing_proof(hazard_frame: pd.DataFrame, output_dir: Path) -> N
+     axes[0].grid(alpha=0.25)
+     axes[0].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2)
+ 
+-    axes[1].plot(hazard_frame["step"], hazard_frame["empirical_mu"], label="Empirical μ_t", color="#0f766e", linewidth=2)
+-    axes[1].plot(hazard_frame["step"], hazard_frame["hazard_mu"], label="Hazard μ_t", color="#7c3aed", linestyle="--", linewidth=2)
++    axes[1].plot(
++        hazard_frame["step"],
++        hazard_frame["empirical_utility_drift"],
++        label="Empirical utility drift",
++        color="#0f766e",
++        linewidth=2,
++    )
++    axes[1].plot(
++        hazard_frame["step"],
++        hazard_frame[corrected_column],
++        label="Conditional hazard drift",
++        color="#7c3aed",
++        linestyle="--",
++        linewidth=2,
++    )
++    if "pooled_proxy_drift" in hazard_frame.columns:
++        axes[1].plot(
++            hazard_frame["step"],
++            hazard_frame["pooled_proxy_drift"],
++            label="Pooled proxy drift",
++            color="#b45309",
++            linestyle=":",
++            linewidth=2,
++        )
++    if "fitted_hazard_drift" in hazard_frame.columns:
++        axes[1].plot(
++            hazard_frame["step"],
++            hazard_frame["fitted_hazard_drift"],
++            label="Fitted hazard drift",
++            color="#2563eb",
++            linestyle="-.",
++            linewidth=2,
++        )
+     axes[1].plot(hazard_frame["step"], hazard_frame["eb_upper_bound"], label="Empirical-Bernstein upper bound", color="#ea580c", linestyle=":", linewidth=2)
+     axes[1].axhline(0.0, color="black", linewidth=1)
+-    axes[1].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2, label=f"Crossing step {crossing_step}")
++    axes[1].axvline(crossing_step, color="#dc2626", linestyle="--", linewidth=2, label=f"Corrected boundary step {crossing_step}")
+     axes[1].set_xlabel("Step")
+     axes[1].set_ylabel("Drift")
+     axes[1].grid(alpha=0.25)
+@@ -458,6 +553,7 @@ def main() -> None:
+     detector_summary.to_csv(input_dir / "detector_comparison.csv", index=False)
+     correctness_probe_frame.to_csv(input_dir / "correctness_probe_metrics.csv", index=False)
+     hazard_frame.to_csv(input_dir / "hazard_drift_summary.csv", index=False)
++    hazard_frame.to_csv(input_dir / "hazard_decomposition_by_step.csv", index=False)
+     weight_frame.to_csv(input_dir / "feature_weights.csv", index=False)
+     eb_summary.to_csv(input_dir / "empirical_bernstein_summary.csv", index=False)
+     sequential_summary.to_csv(input_dir / "sequential_detector_summary.csv", index=False)
+diff --git a/tools/run_colab_experiment.py b/tools/run_colab_experiment.py
+index b097a08..46cbc16 100644
+--- a/tools/run_colab_experiment.py
++++ b/tools/run_colab_experiment.py
+@@ -106,6 +106,7 @@ def run_real_trace_experiment(
+     system_prompt_mode: str,
+     quantization: str,
+     device_map: str | None,
++    attn_implementation: str,
+     resume: bool,
+ ) -> None:
+     command = [
+@@ -133,6 +134,8 @@ def run_real_trace_experiment(
+         prompt_mode,
+         "--system-prompt-mode",
+         system_prompt_mode,
++        "--attn-implementation",
++        attn_implementation,
+         "--quantization",
+         quantization,
+         "--output-dir",
+@@ -213,17 +216,18 @@ def main() -> None:
+     parser.add_argument("--dataset-shuffle-seed", type=int, default=17)
+     parser.add_argument("--quantization", default="none", choices=["none", "8bit", "4bit"])
+     parser.add_argument("--device-map", default=None)
++    parser.add_argument("--attn-implementation", default="sdpa", choices=["auto", "sdpa", "flash_attention_2", "eager"])
+     parser.add_argument("--full-max-tasks", type=int, default=300)
+     parser.add_argument("--full-max-steps", type=int, default=10)
+     parser.add_argument("--full-max-new-tokens", type=int, default=256)
+-    parser.add_argument("--full-batch-size", type=int, default=8)
++    parser.add_argument("--full-batch-size", type=int, default=4)
+     parser.add_argument("--full-temperatures", nargs="+", type=float, default=[0.1, 0.6, 1.0])
+-    parser.add_argument("--full-seeds", nargs="+", type=int, default=[7, 13])
++    parser.add_argument("--full-seeds", nargs="+", type=int, default=[7])
+     parser.add_argument("--smoke-max-tasks", type=int, default=2)
+     parser.add_argument("--smoke-max-steps", type=int, default=2)
+     parser.add_argument("--smoke-max-new-tokens", type=int, default=128)
+-    parser.add_argument("--smoke-batch-size", type=int, default=2)
+-    parser.add_argument("--smoke-temperatures", nargs="+", type=float, default=[0.2])
++    parser.add_argument("--smoke-batch-size", type=int, default=1)
++    parser.add_argument("--smoke-temperatures", nargs="+", type=float, default=[0.1])
+     parser.add_argument("--smoke-seeds", nargs="+", type=int, default=[7])
+     parser.add_argument("--output-dir", default=str(DEFAULT_FULL_DIR))
+     parser.add_argument("--smoke-output-dir", default=str(DEFAULT_SMOKE_DIR))
+@@ -247,6 +251,8 @@ def main() -> None:
+     if not args.skip_smoke:
+         prepare_output_dir(smoke_output_dir, clear=True)
+         print("\n[phase] Running smoke test before the full experiment.", flush=True)
++        smoke_quantization = args.quantization if smoke_model == args.model else "none"
++        smoke_device_map = args.device_map if smoke_model == args.model else None
+         run_real_trace_experiment(
+             model=smoke_model,
+             device=device,
+@@ -262,8 +268,9 @@ def main() -> None:
+             batch_size=args.smoke_batch_size,
+             prompt_mode=args.prompt_mode,
+             system_prompt_mode=args.system_prompt_mode,
+-            quantization="none",
+-            device_map=None,
++            quantization=smoke_quantization,
++            device_map=smoke_device_map,
++            attn_implementation=args.attn_implementation,
+             resume=False,
+         )
+         run_analysis(smoke_output_dir)
+@@ -293,6 +300,7 @@ def main() -> None:
+         system_prompt_mode=args.system_prompt_mode,
+         quantization=args.quantization,
+         device_map=args.device_map,
++        attn_implementation=args.attn_implementation,
+         resume=args.resume,
+     )
+     run_analysis(full_output_dir)

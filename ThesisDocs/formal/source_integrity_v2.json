@@ -1,0 +1,224 @@
+{
+  "schema": "formal-thesis-source-integrity-v2",
+  "status": "verified",
+  "compiled_manuscript": {
+    "path": "ThesisDocs/Masters_Thesis_Formal_v2.md",
+    "sha256": "ac04b787db8018a0e47e6a31bffa29d3cd88d8eca74a067797b3350699f6f6be"
+  },
+  "builder_sha256": "000619ceb14f9ac5e2e3f3132e47d16f51ddaca2912dd8c29218799aa8304766",
+  "math_renderer_sha256": "20608459a8f4019a732cec9ca4d29cc34cc2eeb9fbd3d5fa5033568f2e0dfe87",
+  "editions": {
+    "digital": {
+      "ThesisDocs/chapters/chapter1_intro.md": {
+        "expected_sha256": "5692e914afe710f1696003cbec3afd8ed420a27ff7fb07c7ef04b1d91fee4d7a",
+        "actual_sha256": "5692e914afe710f1696003cbec3afd8ed420a27ff7fb07c7ef04b1d91fee4d7a",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter2_theory.md": {
+        "expected_sha256": "3ebf29bc62f6ea6aa976cfe1f5ec0042cbe09fb55022c66daff24e620bc42115",
+        "actual_sha256": "3ebf29bc62f6ea6aa976cfe1f5ec0042cbe09fb55022c66daff24e620bc42115",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter3_methodology.md": {
+        "expected_sha256": "289ffc98874ce94c1be780aa0f32b21886f98e6f9e554122ed453c35aab1cb7b",
+        "actual_sha256": "289ffc98874ce94c1be780aa0f32b21886f98e6f9e554122ed453c35aab1cb7b",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter4_empirical.md": {
+        "expected_sha256": "113666d112b96fc1b9287a41aa7533607a156f10be0be25ff2280c53464f8f6e",
+        "actual_sha256": "113666d112b96fc1b9287a41aa7533607a156f10be0be25ff2280c53464f8f6e",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter5_online.md": {
+        "expected_sha256": "b99551a07aa43e8f80bbfa0be54acbc6de9227d501f449cb73382556d243eb75",
+        "actual_sha256": "b99551a07aa43e8f80bbfa0be54acbc6de9227d501f449cb73382556d243eb75",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter6_discussion.md": {
+        "expected_sha256": "af97789971999559071d588fff45853c3f5ea63b84eb709c6daa7ca8234708d2",
+        "actual_sha256": "af97789971999559071d588fff45853c3f5ea63b84eb709c6daa7ca8234708d2",
+        "matches": true
+      },
+      "ThesisDocs/references.md": {
+        "expected_sha256": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+        "actual_sha256": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+        "matches": true
+      },
+      "ThesisDocs/appendices.md": {
+        "expected_sha256": "abf9f51f109f89e761829b9019a961afe7522a86bad1e2506ff9ea8a1498db7a",
+        "actual_sha256": "abf9f51f109f89e761829b9019a961afe7522a86bad1e2506ff9ea8a1498db7a",
+        "matches": true
+      },
+      "research/mathematical_foundations.md": {
+        "expected_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+        "actual_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+        "matches": true
+      },
+      "research/outputs/thesis_v1/evidence/manifest.json": {
+        "expected_sha256": "0af11a9241c68ea3e4da558359a3fa25efa1c0ebb28802be4f8350b93500f9d4",
+        "actual_sha256": "0af11a9241c68ea3e4da558359a3fa25efa1c0ebb28802be4f8350b93500f9d4",
+        "matches": true
+      },
+      "data_manifest_v1.json": {
+        "expected_sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b",
+        "actual_sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b",
+        "matches": true
+      },
+      "tmp/pdfs/formal_thesis/digital/source.pdf": {
+        "expected_sha256": "c2af6fb89d4236d6b7bfb746d6d3b33b86de7d9f3ed2d98e2e3c449daef3dc8d",
+        "actual_sha256": "c2af6fb89d4236d6b7bfb746d6d3b33b86de7d9f3ed2d98e2e3c449daef3dc8d",
+        "matches": true
+      }
+    },
+    "print": {
+      "ThesisDocs/chapters/chapter1_intro.md": {
+        "expected_sha256": "5692e914afe710f1696003cbec3afd8ed420a27ff7fb07c7ef04b1d91fee4d7a",
+        "actual_sha256": "5692e914afe710f1696003cbec3afd8ed420a27ff7fb07c7ef04b1d91fee4d7a",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter2_theory.md": {
+        "expected_sha256": "3ebf29bc62f6ea6aa976cfe1f5ec0042cbe09fb55022c66daff24e620bc42115",
+        "actual_sha256": "3ebf29bc62f6ea6aa976cfe1f5ec0042cbe09fb55022c66daff24e620bc42115",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter3_methodology.md": {
+        "expected_sha256": "289ffc98874ce94c1be780aa0f32b21886f98e6f9e554122ed453c35aab1cb7b",
+        "actual_sha256": "289ffc98874ce94c1be780aa0f32b21886f98e6f9e554122ed453c35aab1cb7b",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter4_empirical.md": {
+        "expected_sha256": "113666d112b96fc1b9287a41aa7533607a156f10be0be25ff2280c53464f8f6e",
+        "actual_sha256": "113666d112b96fc1b9287a41aa7533607a156f10be0be25ff2280c53464f8f6e",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter5_online.md": {
+        "expected_sha256": "b99551a07aa43e8f80bbfa0be54acbc6de9227d501f449cb73382556d243eb75",
+        "actual_sha256": "b99551a07aa43e8f80bbfa0be54acbc6de9227d501f449cb73382556d243eb75",
+        "matches": true
+      },
+      "ThesisDocs/chapters/chapter6_discussion.md": {
+        "expected_sha256": "af97789971999559071d588fff45853c3f5ea63b84eb709c6daa7ca8234708d2",
+        "actual_sha256": "af97789971999559071d588fff45853c3f5ea63b84eb709c6daa7ca8234708d2",
+        "matches": true
+      },
+      "ThesisDocs/references.md": {
+        "expected_sha256": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+        "actual_sha256": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+        "matches": true
+      },
+      "ThesisDocs/appendices.md": {
+        "expected_sha256": "abf9f51f109f89e761829b9019a961afe7522a86bad1e2506ff9ea8a1498db7a",
+        "actual_sha256": "abf9f51f109f89e761829b9019a961afe7522a86bad1e2506ff9ea8a1498db7a",
+        "matches": true
+      },
+      "research/mathematical_foundations.md": {
+        "expected_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+        "actual_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+        "matches": true
+      },
+      "research/outputs/thesis_v1/evidence/manifest.json": {
+        "expected_sha256": "0af11a9241c68ea3e4da558359a3fa25efa1c0ebb28802be4f8350b93500f9d4",
+        "actual_sha256": "0af11a9241c68ea3e4da558359a3fa25efa1c0ebb28802be4f8350b93500f9d4",
+        "matches": true
+      },
+      "data_manifest_v1.json": {
+        "expected_sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b",
+        "actual_sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b",
+        "matches": true
+      },
+      "tmp/pdfs/formal_thesis/print/source.pdf": {
+        "expected_sha256": "a3839620e4b272910754589f014f4e072af206b7da7b4d8a20f462e9b122e299",
+        "actual_sha256": "a3839620e4b272910754589f014f4e072af206b7da7b4d8a20f462e9b122e299",
+        "matches": true
+      }
+    }
+  },
+  "post_review_frozen_manifest_verification": {
+    "command": "python tools/freeze_research_data.py verify --manifest data_manifest_post_review_v1.json --allow-line-ending-changes",
+    "status": "verified",
+    "audit_mode": "canonical_lf",
+    "line_ending_only_changes": [],
+    "auxiliary_files": 688,
+    "data_files": 52,
+    "rows": 144440,
+    "trajectories": 28888,
+    "content_fingerprint": "6e014794a68e74558683862a942ef223cdce6e1d7f66583d5e7038653b1eff1a",
+    "manifest_sha256": "00e9f04d5801dc3b8c71c96e6171a9cdfc39579c51f9855ad1ee4f94a06da23f"
+  },
+  "figures": {
+    "minimum_source_label_points": 13,
+    "source_width_inches": 7.6,
+    "print_rendered_width_inches": 6,
+    "minimum_print_effective_label_points": 10.263157894736842,
+    "files": {
+      "ThesisDocs/images/thesis_v2/actual_live_pareto.png": "18cae72fc2472968b591b6626a54fd056f9b5470d339c61aabb0165b429538c4",
+      "ThesisDocs/images/thesis_v2/causal_detector_domains.png": "0aa56385a6642486fbfb9bbf8e3282017c4a39445e9a05f90514dd804954a77f",
+      "ThesisDocs/images/thesis_v2/population_transitions.png": "a780a06654f695dc2272ebe4d568757c9a9b21e16cfdbeeddcee7eb2a2fe90d1",
+      "ThesisDocs/images/thesis_v2/replay_pareto.png": "d7c1607e8f9e66b8002fca7f8dcf1840bc8c0ee55a9b8ef609bc0a5fc8ec9eb8"
+    },
+    "measured_editions": {
+      "digital": [
+        {
+          "physical_page": 46,
+          "measured_display_width_points": 468.0,
+          "minimum_effective_label_points": 11.11842105263158
+        },
+        {
+          "physical_page": 51,
+          "measured_display_width_points": 468.0,
+          "minimum_effective_label_points": 11.11842105263158
+        },
+        {
+          "physical_page": 73,
+          "measured_display_width_points": 468.0,
+          "minimum_effective_label_points": 11.11842105263158
+        },
+        {
+          "physical_page": 74,
+          "measured_display_width_points": 468.0,
+          "minimum_effective_label_points": 11.11842105263158
+        }
+      ],
+      "print": [
+        {
+          "physical_page": 48,
+          "measured_display_width_points": 432.0,
+          "minimum_effective_label_points": 10.263157894736844
+        },
+        {
+          "physical_page": 54,
+          "measured_display_width_points": 432.0,
+          "minimum_effective_label_points": 10.263157894736844
+        },
+        {
+          "physical_page": 75,
+          "measured_display_width_points": 432.0,
+          "minimum_effective_label_points": 10.263157894736844
+        },
+        {
+          "physical_page": 76,
+          "measured_display_width_points": 432.0,
+          "minimum_effective_label_points": 10.263157894736844
+        }
+      ]
+    }
+  },
+  "table_figure_enumeration": {
+    "digital": {
+      "actual_tables": 16,
+      "numbered_list_entries": 16,
+      "actual_figures": 4,
+      "numbered_figure_list_entries": 4,
+      "status": "complete",
+      "minimum_measured_ordinary_type_points": 10.0
+    },
+    "print": {
+      "actual_tables": 16,
+      "numbered_list_entries": 16,
+      "actual_figures": 4,
+      "numbered_figure_list_entries": 4,
+      "status": "complete",
+      "minimum_measured_ordinary_type_points": 10.0
+    }
+  }
+}

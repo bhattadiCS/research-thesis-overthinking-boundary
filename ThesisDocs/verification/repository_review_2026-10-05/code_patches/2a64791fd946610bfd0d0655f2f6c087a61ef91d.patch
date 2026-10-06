@@ -1,0 +1,310 @@
+commit 2a64791fd946610bfd0d0655f2f6c087a61ef91d
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sat Jul 11 15:33:13 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sat Jul 11 15:33:13 2026 -0400
+
+    tools: preflight + parallel-GPU mode for the autonomous v2 run
+    
+    preflight_v2.py runs in the parent shell BEFORE the runner detaches, so
+    blocking problems surface in the terminal in ~10s instead of 12 hours
+    later. Hard-checks the failure modes that would silently ruin an
+    unattended run on a fresh box: git identity and `git push` auth (without
+    which every 20-min checkpoint commits locally and never reaches the
+    remote -- a box crash would then lose everything), torch/CUDA with
+    native sm_120 Blackwell kernels, bitsandbytes (the N6 4-bit arm aborts
+    without it), access to the GATED mistralai/Mistral-Small-Instruct-2409,
+    ~80GB free disk for weights, and the 52 analyzed cells N1/N4 read.
+    
+    V2_PARALLEL_GPU=1 runs N5 and N6 concurrently: peak ~52GB (Mistral-22B
+    bf16 @batch16 + KV) + ~19GB (Qwen-7B bf16 @batch32) = ~71GB of the 96GB
+    card, separate CUDA contexts => identical results, ~14h -> ~8h wall
+    clock. Explicitly documented (in code and protocol doc) that batch size,
+    attention impl, and dtype must NOT be retuned for throughput: they are
+    the held-constant variables, N5's control arm IS the recorded cell, and
+    N6 exists to remove a batch/code/hardware confound.
+    
+    Both modes re-verified end-to-end against the stubbed-collector harness
+    with a real bare remote: detach, per-stage + 20-min checkpoint commits
+    all pushed (git lock correctly serializes the concurrent stages in
+    parallel mode), success-checkers emitting pre-registered verdicts, final
+    results commit, noise files untracked.
+    
+    Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+diff --git a/tools/preflight_v2.py b/tools/preflight_v2.py
+new file mode 100644
+index 0000000..bee9185
+--- /dev/null
++++ b/tools/preflight_v2.py
+@@ -0,0 +1,155 @@
++#!/usr/bin/env python
++"""Preflight for the autonomous algorithm-v2 run (tools/run_autonomous_v2.sh).
++
++Fails FAST, in your terminal, on anything that would silently sabotage a 12-hour
++unattended run -- above all: git identity and git push credentials, without which
++every 20-minute checkpoint would fail and a box crash would lose everything.
++
++    python tools/preflight_v2.py          # exit 0 = safe to launch
++
++Checks: git identity | git push auth (dry-run) | torch+CUDA+arch | bitsandbytes
++(the N6 4-bit arm) | analysis deps | HF token + access to the GATED Mistral repo
++(N5) and GPQA | free disk for ~60GB of weights | the 52-cell matrix data that
++N1/N4 read.
++"""
++from __future__ import annotations
++
++import os
++import shutil
++import subprocess
++import sys
++from pathlib import Path
++
++REPO = Path(__file__).resolve().parent.parent
++GATED_MODEL = "mistralai/Mistral-Small-Instruct-2409"   # N5 (worst-cell token-budget arm)
++OPEN_MODEL = "Qwen/Qwen2.5-7B-Instruct"                 # N6 (both quantization arms)
++WEIGHTS_GB_NEEDED = 80                                  # ~44GB Mistral + ~15GB Qwen + headroom
++
++fails: list[str] = []
++warns: list[str] = []
++
++
++def ok(msg: str) -> None:
++    print(f"  \033[32mPASS\033[0m  {msg}")
++
++
++def bad(msg: str, fix: str) -> None:
++    print(f"  \033[31mFAIL\033[0m  {msg}\n        fix: {fix}")
++    fails.append(msg)
++
++
++def warn(msg: str, note: str) -> None:
++    print(f"  \033[33mWARN\033[0m  {msg}\n        {note}")
++    warns.append(msg)
++
++
++def sh(*args: str) -> tuple[int, str]:
++    p = subprocess.run(args, cwd=REPO, capture_output=True, text=True)
++    return p.returncode, (p.stdout + p.stderr).strip()
++
++
++print("\n=== 1. git — checkpointing depends on these ===")
++rc_n, name = sh("git", "config", "user.name")
++rc_e, email = sh("git", "config", "user.email")
++if rc_n == 0 and name and rc_e == 0 and email:
++    ok(f"git identity: {name} <{email}>")
++else:
++    bad("git identity not set — every checkpoint commit would fail",
++        'git config user.name "Aditya Bhatt" && git config user.email "you@example.com"')
++
++rc, out = sh("git", "push", "--dry-run", "origin", "HEAD:main")
++if rc == 0:
++    ok("git push authenticates (dry-run) — checkpoints will reach the remote")
++else:
++    bad("git push FAILS — checkpoints would never leave this box",
++        "set up a credential helper or a token remote, e.g.:\n"
++        "             git remote set-url origin https://<GITHUB_PAT>@github.com/bhattadiCS/"
++        "research-thesis-overthinking-boundary.git\n"
++        f"             (git said: {out.splitlines()[-1] if out else 'no output'})")
++
++print("\n=== 2. GPU stack ===")
++try:
++    import torch
++    if not torch.cuda.is_available():
++        bad("torch cannot see a GPU", "check the container's CUDA runtime / driver visibility")
++    else:
++        cap = torch.cuda.get_device_capability(0)
++        archs = torch.cuda.get_arch_list()
++        name_gpu = torch.cuda.get_device_name(0)
++        total = torch.cuda.get_device_properties(0).total_memory / 1e9
++        ok(f"torch {torch.__version__} | {name_gpu} | {total:.0f} GB | sm_{cap[0]}{cap[1]}")
++        if f"sm_{cap[0]}{cap[1]}" not in archs:
++            bad(f"this torch build has no kernels for sm_{cap[0]}{cap[1]} (built for: {', '.join(archs)})",
++                "install a torch built for Blackwell, e.g. a cu130 wheel:\n"
++                "             pip install --upgrade torch --index-url https://download.pytorch.org/whl/cu130")
++        else:
++            ok(f"torch has native sm_{cap[0]}{cap[1]} kernels")
++except ImportError:
++    bad("torch is not installed", "pip install -r requirements-colab.txt")
++
++try:
++    import bitsandbytes  # noqa: F401
++    from transformers import BitsAndBytesConfig  # noqa: F401
++    ok("bitsandbytes + BitsAndBytesConfig available (needed by the N6 4-bit arm)")
++except Exception as exc:  # noqa: BLE001
++    bad(f"4-bit stack unavailable ({type(exc).__name__}) — the N6 4-bit arm would abort",
++        "pip install 'bitsandbytes>=0.49.0'")
++
++missing = [m for m in ("pandas", "sklearn", "sympy", "transformers", "accelerate", "datasets")
++           if not __import__("importlib").util.find_spec(m)]
++if missing:
++    bad(f"missing python deps: {', '.join(missing)}", "pip install -r requirements-colab.txt")
++else:
++    ok("pandas / sklearn / sympy / transformers / accelerate / datasets present")
++
++print("\n=== 3. Hugging Face access ===")
++token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
++tok_file = REPO / ".hf_token"
++if not token and tok_file.exists():
++    token = tok_file.read_text().strip()
++    ok(".hf_token file found (autostart.sh exports it; export it yourself for a manual run)")
++if not token:
++    warn("no HF_TOKEN in env and no .hf_token file",
++         "a cached `huggingface-cli login` may still work; the gated check below is authoritative")
++try:
++    from huggingface_hub import HfApi
++    api = HfApi()
++    for repo_id, why in ((GATED_MODEL, "N5 — GATED, needs an accepted license"),
++                         (OPEN_MODEL, "N6 — both arms")):
++        try:
++            api.model_info(repo_id, token=token or True)
++            ok(f"{repo_id} accessible ({why})")
++        except Exception as exc:  # noqa: BLE001
++            bad(f"cannot access {repo_id} ({type(exc).__name__}) — {why}",
++                f"accept the license at https://huggingface.co/{repo_id} with the account that owns the "
++                "token, then:\n             export HF_TOKEN=hf_xxx   (or: echo hf_xxx > .hf_token)")
++except ImportError:
++    warn("huggingface_hub not importable — could not verify model access", "pip install huggingface_hub")
++
++print("\n=== 4. Disk + data ===")
++free_gb = shutil.disk_usage(REPO).free / 1e9
++cache = os.environ.get("HF_HOME") or os.environ.get("TRANSFORMERS_CACHE") or "~/.cache/huggingface"
++if free_gb >= WEIGHTS_GB_NEEDED:
++    ok(f"{free_gb:.0f} GB free (need ~{WEIGHTS_GB_NEEDED} GB for Mistral-22B + Qwen-7B weights)")
++else:
++    bad(f"only {free_gb:.0f} GB free; ~{WEIGHTS_GB_NEEDED} GB needed for weights",
++        f"free space, or point the cache at the persistent volume: export HF_HOME=/workspace-persist/hf_cache "
++        f"(currently: {cache})")
++if "/workspace-persist" not in str(Path(os.path.expanduser(cache))):
++    warn(f"HF cache is at {cache} (not on the persistent volume)",
++         "weights re-download if the container is recreated: export HF_HOME=/workspace-persist/hf_cache")
++
++cells = list((REPO / "research/outputs/experiment_matrix").glob("*/detector_comparison_by_run.csv"))
++if len(cells) >= 52:
++    ok(f"{len(cells)} analyzed cells present (N1/N4 read these)")
++else:
++    bad(f"only {len(cells)} analyzed cells found; N1/N4 need the full 52",
++        "git pull  (the matrix CSVs are tracked in the repo)")
++
++print()
++if fails:
++    print(f"\033[31m✗ PREFLIGHT FAILED — {len(fails)} blocking issue(s). Fix them, then re-run.\033[0m")
++    sys.exit(1)
++print(f"\033[32m✓ PREFLIGHT PASSED\033[0m" + (f" ({len(warns)} warning(s))" if warns else "")
++      + " — safe to launch the autonomous run.\n")
++sys.exit(0)
+diff --git a/tools/run_autonomous_v2.sh b/tools/run_autonomous_v2.sh
+index 2e21c8b..b439e27 100644
+--- a/tools/run_autonomous_v2.sh
++++ b/tools/run_autonomous_v2.sh
+@@ -36,6 +36,15 @@ if [ "$FOREGROUND" -eq 0 ] && [ "${V2_DETACHED:-0}" != "1" ]; then
+         echo "  tail -f $REPO/$LOG"
+         exit 0
+     fi
++    # Preflight runs HERE (parent, attached) so blocking problems -- above all a
++    # git push that cannot authenticate -- surface in your terminal now, not in
++    # a log you would read 12 hours from now. SKIP_PREFLIGHT=1 to bypass.
++    if [ "${SKIP_PREFLIGHT:-0}" != "1" ]; then
++        "$PY" tools/preflight_v2.py || {
++            echo "Preflight failed — not launching. (SKIP_PREFLIGHT=1 to override.)"
++            exit 1
++        }
++    fi
+     if command -v setsid >/dev/null 2>&1; then
+         V2_DETACHED=1 setsid nohup bash "$0" --foreground >> "$V2/nohup.out" 2>&1 < /dev/null &
+     else
+@@ -95,18 +104,61 @@ nohup nice -n 10 "$PY" research/algorithm_v2_experiments.py \
+     --cache-dir "$V2/algov2_cache" > "$V2/n1n4_results.log" 2>&1 &
+ N1_PID=$!
+ 
+-# ---- Stage 2: N5 (= P4b) token budget 256 -> 512 on the worst cell ----------
++# ---- Stages 2/3: the two GPU experiments -----------------------------------
++# The collection flags below are byte-identical to the recorded cells' commands
++# (matrix_manifest.json) EXCEPT each experiment's single independent variable.
++# Do NOT "optimize" batch size / attention impl / dtype here: those are the
++# held-constant variables. N5's control arm IS the recorded 256-token cell, and
++# N6 exists precisely to remove a batch/code/hardware confound -- retuning them
++# would reintroduce the confound the experiment is meant to kill.
+ N5_DIR="$V2/p4b_mistral_small_24b_2409__gsm8k_tok512"
+-say "Stage 2: N5/P4b collect -> $N5_DIR"
+-"$PY" research/real_trace_experiments.py --model mistral_small_24b_2409 --device cuda \
+-    --quantization none --attn-implementation sdpa --task-source gsm8k --dataset-split train \
+-    --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 512 --batch-size 16 \
+-    --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
+-    --max-tasks 500 --output-dir "$N5_DIR" >>"$LOG" 2>&1
+-say "N5 collect rc=$?"
+-ckpt "wip: N5 collection"
+-if [ -f "$N5_DIR/trace_steps.csv" ]; then
+-    "$PY" research/trace_analysis.py --input-dir "$N5_DIR" >>"$LOG" 2>&1 || say "N5 analyze FAILED"
++
++run_n5() {   # IV: --max-new-tokens 256 -> 512 (everything else = recorded cell)
++    say "N5/P4b collect -> $N5_DIR"
++    "$PY" research/real_trace_experiments.py --model mistral_small_24b_2409 --device cuda \
++        --quantization none --attn-implementation sdpa --task-source gsm8k --dataset-split train \
++        --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 512 --batch-size 16 \
++        --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
++        --max-tasks 500 --output-dir "$N5_DIR" >>"$LOG" 2>&1
++    say "N5 collect rc=$?"
++    ckpt "wip: N5 collection"
++    if [ -f "$N5_DIR/trace_steps.csv" ]; then
++        "$PY" research/trace_analysis.py --input-dir "$N5_DIR" >>"$LOG" 2>&1 || say "N5 analyze FAILED"
++    fi
++    ckpt "wip: N5 analyzed"
++}
++
++run_n6() {   # IV: --quantization none vs 4bit (same batch size BOTH arms)
++    for Q in none 4bit; do
++        ARM_DIR="$V2/p8_qwen7b_$Q"
++        say "N6/P8 arm quantization=$Q -> $ARM_DIR"
++        "$PY" research/real_trace_experiments.py --model qwen2p5_7b --device cuda \
++            --quantization "$Q" --attn-implementation sdpa --task-source gsm8k --dataset-split train \
++            --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 256 --batch-size 32 \
++            --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
++            --max-tasks 500 --output-dir "$ARM_DIR" >>"$LOG" 2>&1
++        say "N6 arm $Q collect rc=$?"
++        [ -f "$ARM_DIR/trace_steps.csv" ] && { "$PY" research/trace_analysis.py --input-dir "$ARM_DIR" >>"$LOG" 2>&1 || say "N6 arm $Q analyze FAILED"; }
++        ckpt "wip: N6 arm $Q"
++    done
++}
++
++if [ "${V2_PARALLEL_GPU:-0}" = "1" ]; then
++    # Safe on a 96GB card: peak ~52GB (Mistral-22B bf16 @batch16 + KV) + ~19GB
++    # (Qwen-7B bf16 @batch32) = ~71GB. Separate CUDA contexts => results are
++    # unchanged; only wall-clock (~14h -> ~8h) and SM contention differ.
++    say "GPU mode: PARALLEL (N5 || N6); set V2_PARALLEL_GPU=0 for sequential"
++    run_n5 & P_N5=$!
++    run_n6 & P_N6=$!
++    wait "$P_N5"; wait "$P_N6"
++else
++    say "GPU mode: SEQUENTIAL (default; V2_PARALLEL_GPU=1 runs N5 and N6 together)"
++    run_n5
++    run_n6
++fi
++
++# ---- success checks (pre-registered criteria) -------------------------------
++if [ -f "$N5_DIR/detector_comparison_by_run.csv" ]; then
+     "$PY" - "$N5_DIR" <<'EOF' 2>&1 | tee -a "$SUMMARY" | tee -a "$LOG"
+ import sys, pandas as pd
+ d = pd.read_csv(sys.argv[1] + "/detector_comparison_by_run.csv")
+@@ -116,21 +168,6 @@ print(f"N5/P4b (max_new_tokens 256->512): loss {loss:.2f}% on {len(p)} runs | "
+       f"baseline 30.27% | pre-registered PASS (<=25.3%): {loss <= 25.3}")
+ EOF
+ fi
+-ckpt "wip: N5 analyzed"
+-
+-# ---- Stage 3: N6 (= P8) clean bf16 vs 4-bit pair ----------------------------
+-for Q in none 4bit; do
+-    ARM_DIR="$V2/p8_qwen7b_$Q"
+-    say "Stage 3: N6/P8 arm quantization=$Q -> $ARM_DIR"
+-    "$PY" research/real_trace_experiments.py --model qwen2p5_7b --device cuda \
+-        --quantization "$Q" --attn-implementation sdpa --task-source gsm8k --dataset-split train \
+-        --dataset-shuffle-seed 17 --max-steps 10 --max-new-tokens 256 --batch-size 32 \
+-        --prompt-mode minimal_json --system-prompt-mode default --temperatures 0.1 0.6 1.0 --seeds 7 \
+-        --max-tasks 500 --output-dir "$ARM_DIR" >>"$LOG" 2>&1
+-    say "N6 arm $Q collect rc=$?"
+-    [ -f "$ARM_DIR/trace_steps.csv" ] && { "$PY" research/trace_analysis.py --input-dir "$ARM_DIR" >>"$LOG" 2>&1 || say "N6 arm $Q analyze FAILED"; }
+-    ckpt "wip: N6 arm $Q"
+-done
+ if [ -f "$V2/p8_qwen7b_none/trace_steps.csv" ] && [ -f "$V2/p8_qwen7b_4bit/trace_steps.csv" ]; then
+     "$PY" - "$V2" <<'EOF' 2>&1 | tee -a "$SUMMARY" | tee -a "$LOG"
+ import sys, math, pandas as pd

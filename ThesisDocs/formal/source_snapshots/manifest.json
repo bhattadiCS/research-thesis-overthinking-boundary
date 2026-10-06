@@ -1,0 +1,22 @@
+[
+  {
+    "path": "ThesisDocs/formal/source_snapshots/v2_build_master_thesis.py",
+    "sha256": "000619ceb14f9ac5e2e3f3132e47d16f51ddaca2912dd8c29218799aa8304766",
+    "matches_recorded_v2_identity": true
+  },
+  {
+    "path": "ThesisDocs/formal/source_snapshots/v2_appendices.md",
+    "sha256": "abf9f51f109f89e761829b9019a961afe7522a86bad1e2506ff9ea8a1498db7a",
+    "matches_recorded_v2_identity": true
+  },
+  {
+    "path": "ThesisDocs/formal/source_snapshots/v3_digital_build_master_thesis.py",
+    "sha256": "9ef809f3c8304ad9746ec37af92e7324ce006936855bf47078a3a4722ac46ab6",
+    "matches_recorded_v2_identity": null
+  },
+  {
+    "path": "ThesisDocs/formal/source_snapshots/v3_print_build_master_thesis.py",
+    "sha256": "096ea5a7c18d315bf26d2d802f8954a4a6c55329a4c4b4e24a575559acc6dbf0",
+    "matches_recorded_v2_identity": null
+  }
+]

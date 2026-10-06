@@ -1,0 +1,34 @@
+commit 000f2e60d4e0f3a066c1261b9cb485f4a8154e5d
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sat Jul 11 15:38:49 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sat Jul 11 15:38:49 2026 -0400
+
+    fix: preflight pointed at the wrong torch install for a fresh container
+    
+    requirements-colab.txt does NOT contain torch — the previous RunAI image
+    shipped it preinstalled, so a fresh container has no torch and the old
+    "pip install -r requirements-colab.txt" hint could not fix it. Preflight
+    now prints the Blackwell/CUDA-13 wheel command that matches the box's
+    sm_120 card and 580/CUDA-13.0 driver, and the runbook gains the full
+    fresh-container sequence (git identity, torch, deps, env, launch).
+    
+    Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+diff --git a/tools/preflight_v2.py b/tools/preflight_v2.py
+index bee9185..44740b4 100644
+--- a/tools/preflight_v2.py
++++ b/tools/preflight_v2.py
+@@ -85,7 +85,11 @@ try:
+         else:
+             ok(f"torch has native sm_{cap[0]}{cap[1]} kernels")
+ except ImportError:
+-    bad("torch is not installed", "pip install -r requirements-colab.txt")
++    bad("torch is not installed (NOTE: requirements-colab.txt does NOT include torch — "
++        "the old image shipped it preinstalled)",
++        "install the Blackwell/CUDA-13 wheel (matches the sm_120 card + driver on this box):\n"
++        "             pip install torch --index-url https://download.pytorch.org/whl/cu130\n"
++        "             (cu128 wheels also carry sm_120 kernels if cu130 is unavailable)")
+ 
+ try:
+     import bitsandbytes  # noqa: F401

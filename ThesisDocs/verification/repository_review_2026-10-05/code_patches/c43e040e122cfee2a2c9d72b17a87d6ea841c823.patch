@@ -1,0 +1,29 @@
+commit c43e040e122cfee2a2c9d72b17a87d6ea841c823
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 12 23:42:13 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 12 23:42:13 2026 -0400
+
+    fix: robustly fill NaNs in train_tier3_pilots.py
+
+diff --git a/research/train_tier3_pilots.py b/research/train_tier3_pilots.py
+index 89cd83c..62e6d77 100644
+--- a/research/train_tier3_pilots.py
++++ b/research/train_tier3_pilots.py
+@@ -213,6 +213,16 @@ def main():
+     df["k2_agreement"] = pd.to_numeric(df["k2_agreement"], errors="coerce").fillna(0).astype(int)
+     df["k2_raw_generation_tokens"] = pd.to_numeric(df["k2_raw_generation_tokens"], errors="coerce").fillna(0).astype(int)
+ 
++    # Fill NaNs on all feature columns
++    all_numeric_features = list(set(
++        BASELINE_FEATURES + ["k2_agreement"] + 
++        ["answer_span_mean_logprob", "answer_span_min_logprob", "answer_span_mean_entropy", "answer_span_std_entropy"] +
++        proj_cols
++    ))
++    for col in all_numeric_features:
++        if col in df.columns:
++            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
++
+     # Group transitions
+     df["has_next"] = (df.groupby("run_id")["step"].shift(-1).notna()).astype(int)
+     df["next_correct"] = df.groupby("run_id")["correct"].shift(-1).fillna(0).astype(int)

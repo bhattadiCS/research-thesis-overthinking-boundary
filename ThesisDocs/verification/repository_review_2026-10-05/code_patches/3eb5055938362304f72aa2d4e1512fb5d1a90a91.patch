@@ -1,0 +1,32 @@
+commit 3eb5055938362304f72aa2d4e1512fb5d1a90a91
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 19 00:08:30 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 19 00:08:30 2026 -0400
+
+    fix: auto-detect .venv/bin/python in ultimate multi-day launcher
+
+diff --git a/tools/run_ultimate_multi_day_tournament.sh b/tools/run_ultimate_multi_day_tournament.sh
+index 695d52f..f73e916 100755
+--- a/tools/run_ultimate_multi_day_tournament.sh
++++ b/tools/run_ultimate_multi_day_tournament.sh
+@@ -11,7 +11,18 @@
+ 
+ set -Eeuo pipefail
+ 
+-PYTHON_BIN="${PYTHON_BIN:-python}"
++if [[ -z "${PYTHON_BIN:-}" ]]; then
++    if [[ -f ".venv/bin/python" ]]; then
++        PYTHON_BIN=".venv/bin/python"
++    elif [[ -f "../.venv/bin/python" ]]; then
++        PYTHON_BIN="../.venv/bin/python"
++    else
++        if [[ -f ".venv/bin/activate" ]]; then
++            source .venv/bin/activate 2>/dev/null || true
++        fi
++        PYTHON_BIN="python"
++    fi
++fi
+ INPUT_DIR="${INPUT_DIR:-research/outputs/experiments_v2}"
+ OUTPUT_DIR="${OUTPUT_DIR:-research/outputs/experiments_v2}"
+ TRIALS_PER_FOLD="${TRIALS_PER_FOLD:-500}"

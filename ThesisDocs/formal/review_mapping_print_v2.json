@@ -1,0 +1,660 @@
+{
+  "edition": "print",
+  "baseline_source_sha256": "b049e20af709bf20e158bd064c671d725e21e546285db10c039bd59ed6429f05",
+  "current_source_sha256": "a3839620e4b272910754589f014f4e072af206b7da7b4d8a20f462e9b122e299",
+  "method": "Map chapters and appendices by bookmarks; compare exact 108dpi RGB pixels and word coordinates above y=700pt. Footer labels are separately verified on every page by the archival converter.",
+  "exact_body_matches": [
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 6,
+      "current_physical_page": 6,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 7,
+      "current_physical_page": 7,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 8,
+      "current_physical_page": 8,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 9,
+      "current_physical_page": 9,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 10,
+      "current_physical_page": 10,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 11,
+      "current_physical_page": 11,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 12,
+      "current_physical_page": 12,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 13,
+      "current_physical_page": 13,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 14,
+      "current_physical_page": 14,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 15,
+      "current_physical_page": 15,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 16,
+      "current_physical_page": 16,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 17,
+      "current_physical_page": 17,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 1 Introduction and motivation",
+      "previous_physical_page": 18,
+      "current_physical_page": 18,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 19,
+      "current_physical_page": 19,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 20,
+      "current_physical_page": 20,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 21,
+      "current_physical_page": 21,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 22,
+      "current_physical_page": 22,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 23,
+      "current_physical_page": 23,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 24,
+      "current_physical_page": 24,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 25,
+      "current_physical_page": 25,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 26,
+      "current_physical_page": 26,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 27,
+      "current_physical_page": 27,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 28,
+      "current_physical_page": 28,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 29,
+      "current_physical_page": 29,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 30,
+      "current_physical_page": 30,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 31,
+      "current_physical_page": 31,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 32,
+      "current_physical_page": 32,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 35,
+      "current_physical_page": 36,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 38,
+      "current_physical_page": 39,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 39,
+      "current_physical_page": 40,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 40,
+      "current_physical_page": 41,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 41,
+      "current_physical_page": 42,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 42,
+      "current_physical_page": 43,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 43,
+      "current_physical_page": 44,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 44,
+      "current_physical_page": 45,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 46,
+      "current_physical_page": 47,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 47,
+      "current_physical_page": 48,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 48,
+      "current_physical_page": 49,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 50,
+      "current_physical_page": 51,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 52,
+      "current_physical_page": 53,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 53,
+      "current_physical_page": 54,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 54,
+      "current_physical_page": 55,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 56,
+      "current_physical_page": 57,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 57,
+      "current_physical_page": 58,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 58,
+      "current_physical_page": 59,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 59,
+      "current_physical_page": 60,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 62,
+      "current_physical_page": 63,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 63,
+      "current_physical_page": 64,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 65,
+      "current_physical_page": 66,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 66,
+      "current_physical_page": 67,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 68,
+      "current_physical_page": 69,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 71,
+      "current_physical_page": 72,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 72,
+      "current_physical_page": 73,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 74,
+      "current_physical_page": 75,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 76,
+      "current_physical_page": 77,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 6 Discussion and limitations",
+      "previous_physical_page": 77,
+      "current_physical_page": 78,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 6 Discussion and limitations",
+      "previous_physical_page": 78,
+      "current_physical_page": 79,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 6 Discussion and limitations",
+      "previous_physical_page": 79,
+      "current_physical_page": 80,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 6 Discussion and limitations",
+      "previous_physical_page": 80,
+      "current_physical_page": 81,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 6 Discussion and limitations",
+      "previous_physical_page": 81,
+      "current_physical_page": 82,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 6 Discussion and limitations",
+      "previous_physical_page": 82,
+      "current_physical_page": 83,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Chapter 6 Discussion and limitations",
+      "previous_physical_page": 83,
+      "current_physical_page": 84,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "References",
+      "previous_physical_page": 84,
+      "current_physical_page": 85,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "References",
+      "previous_physical_page": 85,
+      "current_physical_page": 86,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "References",
+      "previous_physical_page": 86,
+      "current_physical_page": 87,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "References",
+      "previous_physical_page": 87,
+      "current_physical_page": 88,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Appendix A Reproducibility and evidence sources",
+      "previous_physical_page": 88,
+      "current_physical_page": 89,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Appendix A Reproducibility and evidence sources",
+      "previous_physical_page": 89,
+      "current_physical_page": 90,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Appendix A Reproducibility and evidence sources",
+      "previous_physical_page": 91,
+      "current_physical_page": 92,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Appendix B Claim scope and mathematical review",
+      "previous_physical_page": 93,
+      "current_physical_page": 94,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Appendix C Supporting research artifacts",
+      "previous_physical_page": 94,
+      "current_physical_page": 95,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Appendix D Paired accuracy uncertainty",
+      "previous_physical_page": 95,
+      "current_physical_page": 96,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    },
+    {
+      "section": "Appendix D Paired accuracy uncertainty",
+      "previous_physical_page": 96,
+      "current_physical_page": 97,
+      "body_pixels_identical": true,
+      "body_word_geometry_identical": true
+    }
+  ],
+  "changed_pages_fresh_review_required": [
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 33,
+      "current_physical_page": 33,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "previous_physical_page": 34,
+      "current_physical_page": 34,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 36,
+      "current_physical_page": 37,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 3 Experimental setup and methods",
+      "previous_physical_page": 37,
+      "current_physical_page": 38,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 45,
+      "current_physical_page": 46,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 49,
+      "current_physical_page": 50,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 51,
+      "current_physical_page": 52,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 4 Empirical evidence of overthinking",
+      "previous_physical_page": 55,
+      "current_physical_page": 56,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 60,
+      "current_physical_page": 61,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 61,
+      "current_physical_page": 62,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 64,
+      "current_physical_page": 65,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 67,
+      "current_physical_page": 68,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 69,
+      "current_physical_page": 70,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 70,
+      "current_physical_page": 71,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 73,
+      "current_physical_page": 74,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Chapter 5 Online stopping and computation trade-offs",
+      "previous_physical_page": 75,
+      "current_physical_page": 76,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Appendix A Reproducibility and evidence sources",
+      "previous_physical_page": 90,
+      "current_physical_page": 91,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    },
+    {
+      "section": "Appendix B Claim scope and mathematical review",
+      "previous_physical_page": 92,
+      "current_physical_page": 93,
+      "body_pixels_identical": false,
+      "body_word_geometry_identical": false
+    }
+  ],
+  "new_pages_fresh_review_required": [
+    {
+      "section": "Chapter 2 Mathematical formulation and stopping theory",
+      "current_physical_page": 35
+    }
+  ],
+  "front_matter_fresh_review_required": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}

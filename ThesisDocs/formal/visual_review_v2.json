@@ -1,0 +1,196 @@
+{
+  "schema": "formal-thesis-visual-review-v2",
+  "status": "pass",
+  "scope": "Document content, layout and exact archival PDF appearance; semester approvals user-confirmed complete.",
+  "editions": {
+    "digital": {
+      "output": "output/pdf/Masters_Thesis_Formal_v2_Aditya_Bhatt.pdf",
+      "output_sha256": "5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240",
+      "pages": 94,
+      "source_sha256": "c2af6fb89d4236d6b7bfb746d6d3b33b86de7d9f3ed2d98e2e3c449daef3dc8d",
+      "visually_reviewed_source_sha256": "c2af6fb89d4236d6b7bfb746d6d3b33b86de7d9f3ed2d98e2e3c449daef3dc8d",
+      "physical_page_coverage": [
+        {
+          "start": 1,
+          "end": 17,
+          "reviewer": "root"
+        },
+        {
+          "start": 18,
+          "end": 33,
+          "reviewer": "math_proofs"
+        },
+        {
+          "start": 34,
+          "end": 75,
+          "reviewer": "live_stopper"
+        },
+        {
+          "start": 76,
+          "end": 82,
+          "reviewer": "data_freeze"
+        },
+        {
+          "start": 83,
+          "end": 86,
+          "reviewer": "math_proofs"
+        },
+        {
+          "start": 87,
+          "end": 94,
+          "reviewer": "root/data_freeze"
+        }
+      ],
+      "coverage_complete": true,
+      "source_review": "All pages have visual coverage. New/changed pages were freshly inspected at full detail; earlier reviews apply only to the explicitly mapped pages with exact body RGB pixels and word geometry. Pagination is separately verified on every final page.",
+      "unchanged_body_review_mapping": "ThesisDocs/formal/review_mapping_digital_v2.json",
+      "unchanged_body_review_mapping_sha256": "f55d3ba07e034179d2a45df983bc32cf4f0e2f3256ce605804d3ef3ea7896763",
+      "exact_body_review_transfer_page_count": 70,
+      "freshly_reviewed_changed_pages": [
+        32,
+        33,
+        35,
+        36,
+        44,
+        48,
+        50,
+        53,
+        59,
+        60,
+        63,
+        66,
+        68,
+        69,
+        71,
+        74,
+        89,
+        90,
+        91
+      ],
+      "freshly_reviewed_new_pages": [],
+      "fresh_front_matter_review": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "archival_appearance": {
+        "dpi": 144,
+        "text_and_word_geometry_identical_pages": 94,
+        "pixel_identical_pages": 74,
+        "maximum_rgb_channel_difference": 1,
+        "maximum_changed_pixel_fraction": 0.01062452548359411,
+        "render_isolation": {
+          "method": "one fresh process per PDF; no shared document/image caches",
+          "source_render_manifest": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/source_comparison/render_manifest.json",
+          "source_render_manifest_sha256": "bd281a7f9b5739fbaa15ba9da9e3d423c6e4df604506ea78b7b29190416774ae",
+          "output_render_manifest": "tmp/pdfs/formal_thesis/formal_v2_digital/archival_review/5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240/render_manifest.json",
+          "output_render_manifest_sha256": "7cb2c8ad02d735008be154ce82c13d627d12f54c6696eff5fc19f636f779435c"
+        },
+        "interpretation": "Exact source/output text and word coordinates on every page; only recorded one-level ICC rounding permitted by the appearance check."
+      },
+      "conversion_receipt": "ThesisDocs/archival/formal_v2_digital_build_manifest.json",
+      "conversion_receipt_sha256": "c840b73882a05895df639d328101f0ef479a52cc121a94907bd1cf5228260a65",
+      "validator_report": "ThesisDocs/archival/formal_v2_digital_verapdf_2b.xml",
+      "validator_report_sha256": "e39406aae02e25fc5c22cacebd422b61dc9c33cd2d97c188c2ba39966ec4024c",
+      "remaining_material_layout_defects": []
+    },
+    "print": {
+      "output": "output/pdf/Masters_Thesis_Formal_v2_Print_Aditya_Bhatt.pdf",
+      "output_sha256": "b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1",
+      "pages": 97,
+      "source_sha256": "a3839620e4b272910754589f014f4e072af206b7da7b4d8a20f462e9b122e299",
+      "visually_reviewed_source_sha256": "a3839620e4b272910754589f014f4e072af206b7da7b4d8a20f462e9b122e299",
+      "physical_page_coverage": [
+        {
+          "start": 1,
+          "end": 18,
+          "reviewer": "root"
+        },
+        {
+          "start": 19,
+          "end": 35,
+          "reviewer": "math_proofs"
+        },
+        {
+          "start": 36,
+          "end": 77,
+          "reviewer": "live_stopper"
+        },
+        {
+          "start": 78,
+          "end": 84,
+          "reviewer": "data_freeze"
+        },
+        {
+          "start": 85,
+          "end": 88,
+          "reviewer": "math_proofs"
+        },
+        {
+          "start": 89,
+          "end": 97,
+          "reviewer": "root/data_freeze"
+        }
+      ],
+      "coverage_complete": true,
+      "source_review": "All pages have visual coverage. New/changed pages were freshly inspected at full detail; earlier reviews apply only to the explicitly mapped pages with exact body RGB pixels and word geometry. Pagination is separately verified on every final page.",
+      "unchanged_body_review_mapping": "ThesisDocs/formal/review_mapping_print_v2.json",
+      "unchanged_body_review_mapping_sha256": "7e2dc5073d5c1c97488cd7b8c2b02f5c19dbffd946b87eef4725fcf816c4f422",
+      "exact_body_review_transfer_page_count": 73,
+      "freshly_reviewed_changed_pages": [
+        33,
+        34,
+        37,
+        38,
+        46,
+        50,
+        52,
+        56,
+        61,
+        62,
+        65,
+        68,
+        70,
+        71,
+        74,
+        76,
+        91,
+        93
+      ],
+      "freshly_reviewed_new_pages": [
+        35
+      ],
+      "fresh_front_matter_review": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "archival_appearance": {
+        "dpi": 144,
+        "text_and_word_geometry_identical_pages": 97,
+        "pixel_identical_pages": 77,
+        "maximum_rgb_channel_difference": 1,
+        "maximum_changed_pixel_fraction": 0.00980392156862745,
+        "render_isolation": {
+          "method": "one fresh process per PDF; no shared document/image caches",
+          "source_render_manifest": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/source_comparison/render_manifest.json",
+          "source_render_manifest_sha256": "18af48f03d209d29f84c035fe4a3cff39f03ae4277f01a8bd67fce6399c2c08b",
+          "output_render_manifest": "tmp/pdfs/formal_thesis/formal_v2_print/archival_review/b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1/render_manifest.json",
+          "output_render_manifest_sha256": "e6a4b8a3c2455a10c8ceb681e27d68fb3b5a247671b4d9352e522cd8e3032b0f"
+        },
+        "interpretation": "Exact source/output text and word coordinates on every page; only recorded one-level ICC rounding permitted by the appearance check."
+      },
+      "conversion_receipt": "ThesisDocs/archival/formal_v2_print_build_manifest.json",
+      "conversion_receipt_sha256": "0615d7928836aea51d2f3ac3f6d774b7f79c9e238982c6a617b2f8484e441d86",
+      "validator_report": "ThesisDocs/archival/formal_v2_print_verapdf_2b.xml",
+      "validator_report_sha256": "1bc4865a3ea1e6560fc549e653c3e0f3fccd6d97bdf14b08bac0ebcb14a133fd",
+      "remaining_material_layout_defects": []
+    }
+  },
+  "source_integrity": "ThesisDocs/formal/source_integrity_v2.json",
+  "source_integrity_sha256": "877b7a8914a9683471ccdc4c8eded12acb7f753f0b9a78640d525d00cad28fb3"
+}

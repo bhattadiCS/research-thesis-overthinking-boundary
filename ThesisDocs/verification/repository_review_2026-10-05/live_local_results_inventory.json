@@ -1,0 +1,1353 @@
+[
+  {
+    "folder": "strict_tabular_stopping_oof_v1",
+    "manifest": "research\\outputs\\experiments_v2\\strict_tabular_stopping_oof_v1\\prepared_manifest.json",
+    "manifest_sha256": "af323dec7b82ac8fb9afcf6a6e73ee81666b47bab82648e85541a0e8596c906f",
+    "metrics_sha256": "f4a2e49df8b82772015982a4bfa80beda16d5007cd6bbfa04f99bc7757aaa052",
+    "prepared_manifest_binding": true,
+    "source_bindings": [
+      {
+        "path": "research\\run_strict_tabular_stopping_oof.py",
+        "recorded_sha256": "179de645d8ed89c9491179cf7408c32a65743458dc6d2d9b0993050ac474ca63",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_ultimate_multi_day_tournament.py",
+        "recorded_sha256": "bac3d5da025d5fae2b2ef5c158835ca1f58277793bdd42cb1a353901fbc926d6",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "fold_auc": [
+        0.8504637288408358,
+        0.8480996624794415,
+        0.8454444195438832,
+        0.8538138336427529,
+        0.8514153449368321
+      ],
+      "oof_auc": 0.8495096500918485,
+      "step_utility": 0.33875138465798943,
+      "task_cluster_bootstrap_auc_95_ci": [
+        0.8440480616813527,
+        0.8552757357734625
+      ],
+      "token_utility": 0.3624728745499861,
+      "win_tie_loss": "25449/1770/1669"
+    },
+    "contract": {
+      "allowed_geometry": "same-trajectory scalar dynamics derived from current and prior steps only",
+      "excluded": "elapsed_seconds, tokens_per_second, raw mid-layer projection coordinates, and coordinate-basis-dependent geometry",
+      "model_selection": "fixed regularized LightGBM configuration; no outer-test tuning",
+      "outer_group": "task_id",
+      "targets": "current correctness plus causal next-step repair/corruption hazards",
+      "trajectory_key": "source_cell::run_id"
+    },
+    "outer_group": null,
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\strict_tabular_stopping_oof_v1\\safe_scalar_lgbm_predictions.csv",
+        "sha256": "fa925fa1638b4c7c6627180dd4b5e44c1b13e51a0d6a3c243e83cd0b17fc878c",
+        "rows": 144440,
+        "columns": [
+          "task_id",
+          "trajectory_id",
+          "source_cell",
+          "step",
+          "correct",
+          "oof_q",
+          "oof_repair",
+          "oof_corruption"
+        ],
+        "fold_counts": {}
+      }
+    ]
+  },
+  {
+    "folder": "strict_text_stopping_oof_v1",
+    "manifest": "research\\outputs\\experiments_v2\\strict_text_stopping_oof_v1\\prepared_manifest.json",
+    "manifest_sha256": "afbed217f7344d8d91466c025d6de47bc017e8f9e16678cd078cf60f4a098731",
+    "metrics_sha256": "366d33ff961a0a4c29666a3de4998c0f0c58b9b45b525d128cc0713fb7049b06",
+    "prepared_manifest_binding": true,
+    "source_bindings": [
+      {
+        "path": "research\\run_strict_text_stopping_oof.py",
+        "recorded_sha256": "f50aaa05056791d07e6cebafa838d546db04eb1079f4a45882039e8e0603260d",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_ultimate_multi_day_tournament.py",
+        "recorded_sha256": "bac3d5da025d5fae2b2ef5c158835ca1f58277793bdd42cb1a353901fbc926d6",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "fold_auc": [
+        0.8053183281658503,
+        0.8045377822142007,
+        0.806747048027918,
+        0.8203660704206437,
+        0.8097871691488615
+      ],
+      "oof_auc": 0.8089757413672247,
+      "raw_brier": 0.16945357650508383,
+      "task_cluster_bootstrap_auc_95_ci": [
+        0.8014982753335788,
+        0.8156519200116739
+      ]
+    },
+    "contract": {
+      "calibration": "separate task-disjoint partition within each outer train fold",
+      "excluded": "prompt/task/source/model identifiers, expected answer, gold label, timing, raw answer fields, future output",
+      "outer_group": "task_id",
+      "text": "only final 512 characters of current raw model output",
+      "vocabulary": "fit inside model-fit task groups only"
+    },
+    "outer_group": null,
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\strict_text_stopping_oof_v1\\tail512_word12_predictions.csv",
+        "sha256": "a9c912d4f68f5db160944ce515c0eb280e502b16d7a68f45557080d050948d03",
+        "rows": 144440,
+        "columns": [
+          "task_id",
+          "trajectory_id",
+          "source_cell",
+          "step",
+          "correct",
+          "outer_fold",
+          "oof_probability"
+        ],
+        "fold_counts": {
+          "1": 28895,
+          "2": 28875,
+          "3": 28890,
+          "4": 28890,
+          "5": 28890
+        }
+      }
+    ]
+  },
+  {
+    "folder": "selected_answer_oof_v4_winner_panel",
+    "manifest": "research\\outputs\\experiments_v2\\selected_answer_oof_v4_winner_panel\\selected_answer_oof_manifest.json",
+    "manifest_sha256": "5b0fa058dd4641054c1603b409cab6fbbca1a020c0eda5c0f8406275abf00855",
+    "metrics_sha256": "d0cb74f5388071c24ed228e21dbfc8034b8fc5509e0dbf6da4347067124128ed",
+    "prepared_manifest_binding": null,
+    "source_bindings": [
+      {
+        "path": "research\\run_selected_answer_oof_experiments.py",
+        "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "parameter_free_vote_margin": {
+        "oof_auc": 0.8565565429213815,
+        "raw_brier": 0.22951112412723265,
+        "selected_accuracy": 0.5843962008141113,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.8477447054869939,
+          0.8658839158767342
+        ],
+        "task_macro_auc": 0.7061382878645344
+      },
+      "selected_answer_lgbm": {
+        "cross_fold_platt_brier": 0.09942789417294322,
+        "fold_auc": [
+          0.9347449415787973,
+          0.9265733783756163,
+          0.9389173890552772,
+          0.9329246207398765,
+          0.9502546663672442
+        ],
+        "oof_auc": 0.9366789033121566,
+        "raw_brier": 0.09766627006753793,
+        "selected_accuracy": 0.5843962008141113,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.9301100310987236,
+          0.9429293954117081
+        ],
+        "task_macro_auc": 0.8857008466603951
+      }
+    },
+    "contract": {
+      "answer_handling": "answer equality only for deterministic plurality/count/margin; no raw answer feature",
+      "batch_timing": "included retrospectively; future confirmation must record per-event timing",
+      "categorical_features": [],
+      "forbidden": [
+        "answer",
+        "answer_key",
+        "answer_normalized",
+        "correct",
+        "expected_answer",
+        "k2_agreement",
+        "k2_raw_generation_tokens",
+        "raw_text",
+        "run_id",
+        "selected_answer_hash",
+        "selected_answer_key",
+        "selected_correct",
+        "source_cell",
+        "task_id",
+        "task_source_index",
+        "thought",
+        "trajectory_id",
+        "utility"
+      ],
+      "historical_limit": "same-step peer availability is not timestamped in historical traces",
+      "k2": "excluded; separately-costed post-query generation",
+      "numeric_features": [
+        "step",
+        "panel_model_count",
+        "panel_nonempty_count",
+        "unique_nonempty_answers",
+        "selected_vote_count",
+        "second_vote_count",
+        "top_tie_count",
+        "no_nonempty_answer",
+        "panel_nonempty_fraction",
+        "selected_support_fraction",
+        "selected_vote_margin_count",
+        "selected_vote_margin_fraction",
+        "winner_tied",
+        "plurality_same_prev",
+        "delta_winner_vote_fraction",
+        "delta_winner_margin_fraction",
+        "delta_panel_nonempty_fraction",
+        "delta_unique_nonempty_answers",
+        "delta_winner_vote_count",
+        "panel_confidence_mean",
+        "panel_confidence_std",
+        "panel_confidence_min",
+        "panel_confidence_max",
+        "panel_model_stop_flag_mean",
+        "panel_model_stop_flag_std",
+        "panel_model_stop_flag_min",
+        "panel_model_stop_flag_max",
+        "panel_answer_changed_mean",
+        "panel_answer_changed_std",
+        "panel_answer_changed_min",
+        "panel_answer_changed_max",
+        "panel_thought_token_count_mean",
+        "panel_thought_token_count_std",
+        "panel_thought_token_count_min",
+        "panel_thought_token_count_max",
+        "panel_raw_generation_tokens_mean",
+        "panel_raw_generation_tokens_std",
+        "panel_raw_generation_tokens_min",
+        "panel_raw_generation_tokens_max",
+        "panel_mean_token_logprob_mean",
+        "panel_mean_token_logprob_std",
+        "panel_mean_token_logprob_min",
+        "panel_mean_token_logprob_max",
+        "panel_entropy_mean_mean",
+        "panel_entropy_mean_std",
+        "panel_entropy_mean_min",
+        "panel_entropy_mean_max",
+        "panel_entropy_std_mean",
+        "panel_entropy_std_std",
+        "panel_entropy_std_min",
+        "panel_entropy_std_max",
+        "panel_hidden_norm_mean",
+        "panel_hidden_norm_std",
+        "panel_hidden_norm_min",
+        "panel_hidden_norm_max",
+        "panel_hidden_l2_shift_mean",
+        "panel_hidden_l2_shift_std",
+        "panel_hidden_l2_shift_min",
+        "panel_hidden_l2_shift_max",
+        "panel_hidden_cosine_shift_mean",
+        "panel_hidden_cosine_shift_std",
+        "panel_hidden_cosine_shift_min",
+        "panel_hidden_cosine_shift_max",
+        "panel_lexical_echo_mean",
+        "panel_lexical_echo_std",
+        "panel_lexical_echo_min",
+        "panel_lexical_echo_max",
+        "panel_verbose_confidence_proxy_mean",
+        "panel_verbose_confidence_proxy_std",
+        "panel_verbose_confidence_proxy_min",
+        "panel_verbose_confidence_proxy_max",
+        "panel_elapsed_seconds_mean",
+        "panel_elapsed_seconds_std",
+        "panel_elapsed_seconds_min",
+        "panel_elapsed_seconds_max",
+        "panel_tokens_per_second_mean",
+        "panel_tokens_per_second_std",
+        "panel_tokens_per_second_min",
+        "panel_tokens_per_second_max",
+        "panel_temperature_mean",
+        "panel_temperature_std",
+        "panel_temperature_min",
+        "panel_temperature_max",
+        "panel_parse_success_mean",
+        "panel_parse_success_std",
+        "panel_parse_success_min",
+        "panel_parse_success_max",
+        "panel_hit_max_new_tokens_mean",
+        "panel_hit_max_new_tokens_std",
+        "panel_hit_max_new_tokens_min",
+        "panel_hit_max_new_tokens_max",
+        "panel_truncated_output_suspected_mean",
+        "panel_truncated_output_suspected_std",
+        "panel_truncated_output_suspected_min",
+        "panel_truncated_output_suspected_max",
+        "panel_answer_span_mean_logprob_mean",
+        "panel_answer_span_mean_logprob_std",
+        "panel_answer_span_mean_logprob_min",
+        "panel_answer_span_mean_logprob_max",
+        "panel_answer_span_min_logprob_mean",
+        "panel_answer_span_min_logprob_std",
+        "panel_answer_span_min_logprob_min",
+        "panel_answer_span_min_logprob_max",
+        "panel_answer_span_mean_entropy_mean",
+        "panel_answer_span_mean_entropy_std",
+        "panel_answer_span_mean_entropy_min",
+        "panel_answer_span_mean_entropy_max",
+        "panel_answer_span_std_entropy_mean",
+        "panel_answer_span_std_entropy_std",
+        "panel_answer_span_std_entropy_min",
+        "panel_answer_span_std_entropy_max",
+        "panel_raw_text_length_chars_mean",
+        "panel_raw_text_length_chars_std",
+        "panel_raw_text_length_chars_min",
+        "panel_raw_text_length_chars_max",
+        "panel_raw_text_length_tokens_mean",
+        "panel_raw_text_length_tokens_std",
+        "panel_raw_text_length_tokens_min",
+        "panel_raw_text_length_tokens_max",
+        "winner_confidence_mean",
+        "winner_confidence_std",
+        "winner_confidence_min",
+        "winner_confidence_max",
+        "winner_model_stop_flag_mean",
+        "winner_model_stop_flag_std",
+        "winner_model_stop_flag_min",
+        "winner_model_stop_flag_max",
+        "winner_answer_changed_mean",
+        "winner_answer_changed_std",
+        "winner_answer_changed_min",
+        "winner_answer_changed_max",
+        "winner_thought_token_count_mean",
+        "winner_thought_token_count_std",
+        "winner_thought_token_count_min",
+        "winner_thought_token_count_max",
+        "winner_raw_generation_tokens_mean",
+        "winner_raw_generation_tokens_std",
+        "winner_raw_generation_tokens_min",
+        "winner_raw_generation_tokens_max",
+        "winner_mean_token_logprob_mean",
+        "winner_mean_token_logprob_std",
+        "winner_mean_token_logprob_min",
+        "winner_mean_token_logprob_max",
+        "winner_entropy_mean_mean",
+        "winner_entropy_mean_std",
+        "winner_entropy_mean_min",
+        "winner_entropy_mean_max",
+        "winner_entropy_std_mean",
+        "winner_entropy_std_std",
+        "winner_entropy_std_min",
+        "winner_entropy_std_max",
+        "winner_hidden_norm_mean",
+        "winner_hidden_norm_std",
+        "winner_hidden_norm_min",
+        "winner_hidden_norm_max",
+        "winner_hidden_l2_shift_mean",
+        "winner_hidden_l2_shift_std",
+        "winner_hidden_l2_shift_min",
+        "winner_hidden_l2_shift_max",
+        "winner_hidden_cosine_shift_mean",
+        "winner_hidden_cosine_shift_std",
+        "winner_hidden_cosine_shift_min",
+        "winner_hidden_cosine_shift_max",
+        "winner_lexical_echo_mean",
+        "winner_lexical_echo_std",
+        "winner_lexical_echo_min",
+        "winner_lexical_echo_max",
+        "winner_verbose_confidence_proxy_mean",
+        "winner_verbose_confidence_proxy_std",
+        "winner_verbose_confidence_proxy_min",
+        "winner_verbose_confidence_proxy_max",
+        "winner_elapsed_seconds_mean",
+        "winner_elapsed_seconds_std",
+        "winner_elapsed_seconds_min",
+        "winner_elapsed_seconds_max",
+        "winner_tokens_per_second_mean",
+        "winner_tokens_per_second_std",
+        "winner_tokens_per_second_min",
+        "winner_tokens_per_second_max",
+        "winner_temperature_mean",
+        "winner_temperature_std",
+        "winner_temperature_min",
+        "winner_temperature_max",
+        "winner_parse_success_mean",
+        "winner_parse_success_std",
+        "winner_parse_success_min",
+        "winner_parse_success_max",
+        "winner_hit_max_new_tokens_mean",
+        "winner_hit_max_new_tokens_std",
+        "winner_hit_max_new_tokens_min",
+        "winner_hit_max_new_tokens_max",
+        "winner_truncated_output_suspected_mean",
+        "winner_truncated_output_suspected_std",
+        "winner_truncated_output_suspected_min",
+        "winner_truncated_output_suspected_max",
+        "winner_answer_span_mean_logprob_mean",
+        "winner_answer_span_mean_logprob_std",
+        "winner_answer_span_mean_logprob_min",
+        "winner_answer_span_mean_logprob_max",
+        "winner_answer_span_min_logprob_mean",
+        "winner_answer_span_min_logprob_std",
+        "winner_answer_span_min_logprob_min",
+        "winner_answer_span_min_logprob_max",
+        "winner_answer_span_mean_entropy_mean",
+        "winner_answer_span_mean_entropy_std",
+        "winner_answer_span_mean_entropy_min",
+        "winner_answer_span_mean_entropy_max",
+        "winner_answer_span_std_entropy_mean",
+        "winner_answer_span_std_entropy_std",
+        "winner_answer_span_std_entropy_min",
+        "winner_answer_span_std_entropy_max",
+        "winner_raw_text_length_chars_mean",
+        "winner_raw_text_length_chars_std",
+        "winner_raw_text_length_chars_min",
+        "winner_raw_text_length_chars_max",
+        "winner_raw_text_length_tokens_mean",
+        "winner_raw_text_length_tokens_std",
+        "winner_raw_text_length_tokens_min",
+        "winner_raw_text_length_tokens_max"
+      ]
+    },
+    "outer_group": "task_id",
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\selected_answer_oof_v4_winner_panel\\selected_answer_oof_predictions.csv",
+        "sha256": "2736b1281291f9b3137f741e1978abf7aa65b0d1b455149a411665d689864593",
+        "rows": 14740,
+        "columns": [
+          "task_id",
+          "step",
+          "domain",
+          "selected_model_alias",
+          "selected_answer_hash",
+          "selected_correct",
+          "selected_support_fraction",
+          "selected_vote_margin_fraction",
+          "fold",
+          "selected_answer_lgbm_oof",
+          "selected_answer_lgbm_platt"
+        ],
+        "fold_counts": {
+          "3": 2950,
+          "2": 2950,
+          "1": 2950,
+          "5": 2945,
+          "4": 2945
+        }
+      }
+    ]
+  },
+  {
+    "folder": "selected_answer_oof_v4_no_batch_timing",
+    "manifest": "research\\outputs\\experiments_v2\\selected_answer_oof_v4_no_batch_timing\\selected_answer_oof_manifest.json",
+    "manifest_sha256": "76463e54512e5acb1c0fd989c8c7a58a0222ea8aa5e053eb89c1c27f84561949",
+    "metrics_sha256": "094e666d40f1d27bcae41119ae3ca6e921727e259b5520f4c78b2185beb414c4",
+    "prepared_manifest_binding": null,
+    "source_bindings": [
+      {
+        "path": "research\\run_selected_answer_oof_experiments.py",
+        "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "parameter_free_vote_margin": {
+        "oof_auc": 0.8565565429213815,
+        "raw_brier": 0.22951112412723265,
+        "selected_accuracy": 0.5843962008141113,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.8477447054869939,
+          0.8658839158767342
+        ],
+        "task_macro_auc": 0.7061382878645344
+      },
+      "selected_answer_lgbm": {
+        "cross_fold_platt_brier": 0.10095912467649565,
+        "fold_auc": [
+          0.9313085399449035,
+          0.9235003690938448,
+          0.9363380180923103,
+          0.9314810684479214,
+          0.9495861553587501
+        ],
+        "oof_auc": 0.9343502984042028,
+        "raw_brier": 0.0993119274896961,
+        "selected_accuracy": 0.5843962008141113,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.927619090149053,
+          0.9409423936091441
+        ],
+        "task_macro_auc": 0.8806835998745689
+      }
+    },
+    "contract": {
+      "answer_handling": "answer equality only for deterministic plurality/count/margin; no raw answer feature",
+      "batch_timing": "excluded by --exclude-batch-timing",
+      "categorical_features": [],
+      "forbidden": [
+        "answer",
+        "answer_key",
+        "answer_normalized",
+        "correct",
+        "expected_answer",
+        "k2_agreement",
+        "k2_raw_generation_tokens",
+        "raw_text",
+        "run_id",
+        "selected_answer_hash",
+        "selected_answer_key",
+        "selected_correct",
+        "source_cell",
+        "task_id",
+        "task_source_index",
+        "thought",
+        "trajectory_id",
+        "utility"
+      ],
+      "historical_limit": "same-step peer availability is not timestamped in historical traces",
+      "k2": "excluded; separately-costed post-query generation",
+      "numeric_features": [
+        "step",
+        "panel_model_count",
+        "panel_nonempty_count",
+        "unique_nonempty_answers",
+        "selected_vote_count",
+        "second_vote_count",
+        "top_tie_count",
+        "no_nonempty_answer",
+        "panel_nonempty_fraction",
+        "selected_support_fraction",
+        "selected_vote_margin_count",
+        "selected_vote_margin_fraction",
+        "winner_tied",
+        "plurality_same_prev",
+        "delta_winner_vote_fraction",
+        "delta_winner_margin_fraction",
+        "delta_panel_nonempty_fraction",
+        "delta_unique_nonempty_answers",
+        "delta_winner_vote_count",
+        "panel_confidence_mean",
+        "panel_confidence_std",
+        "panel_confidence_min",
+        "panel_confidence_max",
+        "panel_model_stop_flag_mean",
+        "panel_model_stop_flag_std",
+        "panel_model_stop_flag_min",
+        "panel_model_stop_flag_max",
+        "panel_answer_changed_mean",
+        "panel_answer_changed_std",
+        "panel_answer_changed_min",
+        "panel_answer_changed_max",
+        "panel_thought_token_count_mean",
+        "panel_thought_token_count_std",
+        "panel_thought_token_count_min",
+        "panel_thought_token_count_max",
+        "panel_raw_generation_tokens_mean",
+        "panel_raw_generation_tokens_std",
+        "panel_raw_generation_tokens_min",
+        "panel_raw_generation_tokens_max",
+        "panel_mean_token_logprob_mean",
+        "panel_mean_token_logprob_std",
+        "panel_mean_token_logprob_min",
+        "panel_mean_token_logprob_max",
+        "panel_entropy_mean_mean",
+        "panel_entropy_mean_std",
+        "panel_entropy_mean_min",
+        "panel_entropy_mean_max",
+        "panel_entropy_std_mean",
+        "panel_entropy_std_std",
+        "panel_entropy_std_min",
+        "panel_entropy_std_max",
+        "panel_hidden_norm_mean",
+        "panel_hidden_norm_std",
+        "panel_hidden_norm_min",
+        "panel_hidden_norm_max",
+        "panel_hidden_l2_shift_mean",
+        "panel_hidden_l2_shift_std",
+        "panel_hidden_l2_shift_min",
+        "panel_hidden_l2_shift_max",
+        "panel_hidden_cosine_shift_mean",
+        "panel_hidden_cosine_shift_std",
+        "panel_hidden_cosine_shift_min",
+        "panel_hidden_cosine_shift_max",
+        "panel_lexical_echo_mean",
+        "panel_lexical_echo_std",
+        "panel_lexical_echo_min",
+        "panel_lexical_echo_max",
+        "panel_verbose_confidence_proxy_mean",
+        "panel_verbose_confidence_proxy_std",
+        "panel_verbose_confidence_proxy_min",
+        "panel_verbose_confidence_proxy_max",
+        "panel_temperature_mean",
+        "panel_temperature_std",
+        "panel_temperature_min",
+        "panel_temperature_max",
+        "panel_parse_success_mean",
+        "panel_parse_success_std",
+        "panel_parse_success_min",
+        "panel_parse_success_max",
+        "panel_hit_max_new_tokens_mean",
+        "panel_hit_max_new_tokens_std",
+        "panel_hit_max_new_tokens_min",
+        "panel_hit_max_new_tokens_max",
+        "panel_truncated_output_suspected_mean",
+        "panel_truncated_output_suspected_std",
+        "panel_truncated_output_suspected_min",
+        "panel_truncated_output_suspected_max",
+        "panel_answer_span_mean_logprob_mean",
+        "panel_answer_span_mean_logprob_std",
+        "panel_answer_span_mean_logprob_min",
+        "panel_answer_span_mean_logprob_max",
+        "panel_answer_span_min_logprob_mean",
+        "panel_answer_span_min_logprob_std",
+        "panel_answer_span_min_logprob_min",
+        "panel_answer_span_min_logprob_max",
+        "panel_answer_span_mean_entropy_mean",
+        "panel_answer_span_mean_entropy_std",
+        "panel_answer_span_mean_entropy_min",
+        "panel_answer_span_mean_entropy_max",
+        "panel_answer_span_std_entropy_mean",
+        "panel_answer_span_std_entropy_std",
+        "panel_answer_span_std_entropy_min",
+        "panel_answer_span_std_entropy_max",
+        "panel_raw_text_length_chars_mean",
+        "panel_raw_text_length_chars_std",
+        "panel_raw_text_length_chars_min",
+        "panel_raw_text_length_chars_max",
+        "panel_raw_text_length_tokens_mean",
+        "panel_raw_text_length_tokens_std",
+        "panel_raw_text_length_tokens_min",
+        "panel_raw_text_length_tokens_max",
+        "winner_confidence_mean",
+        "winner_confidence_std",
+        "winner_confidence_min",
+        "winner_confidence_max",
+        "winner_model_stop_flag_mean",
+        "winner_model_stop_flag_std",
+        "winner_model_stop_flag_min",
+        "winner_model_stop_flag_max",
+        "winner_answer_changed_mean",
+        "winner_answer_changed_std",
+        "winner_answer_changed_min",
+        "winner_answer_changed_max",
+        "winner_thought_token_count_mean",
+        "winner_thought_token_count_std",
+        "winner_thought_token_count_min",
+        "winner_thought_token_count_max",
+        "winner_raw_generation_tokens_mean",
+        "winner_raw_generation_tokens_std",
+        "winner_raw_generation_tokens_min",
+        "winner_raw_generation_tokens_max",
+        "winner_mean_token_logprob_mean",
+        "winner_mean_token_logprob_std",
+        "winner_mean_token_logprob_min",
+        "winner_mean_token_logprob_max",
+        "winner_entropy_mean_mean",
+        "winner_entropy_mean_std",
+        "winner_entropy_mean_min",
+        "winner_entropy_mean_max",
+        "winner_entropy_std_mean",
+        "winner_entropy_std_std",
+        "winner_entropy_std_min",
+        "winner_entropy_std_max",
+        "winner_hidden_norm_mean",
+        "winner_hidden_norm_std",
+        "winner_hidden_norm_min",
+        "winner_hidden_norm_max",
+        "winner_hidden_l2_shift_mean",
+        "winner_hidden_l2_shift_std",
+        "winner_hidden_l2_shift_min",
+        "winner_hidden_l2_shift_max",
+        "winner_hidden_cosine_shift_mean",
+        "winner_hidden_cosine_shift_std",
+        "winner_hidden_cosine_shift_min",
+        "winner_hidden_cosine_shift_max",
+        "winner_lexical_echo_mean",
+        "winner_lexical_echo_std",
+        "winner_lexical_echo_min",
+        "winner_lexical_echo_max",
+        "winner_verbose_confidence_proxy_mean",
+        "winner_verbose_confidence_proxy_std",
+        "winner_verbose_confidence_proxy_min",
+        "winner_verbose_confidence_proxy_max",
+        "winner_temperature_mean",
+        "winner_temperature_std",
+        "winner_temperature_min",
+        "winner_temperature_max",
+        "winner_parse_success_mean",
+        "winner_parse_success_std",
+        "winner_parse_success_min",
+        "winner_parse_success_max",
+        "winner_hit_max_new_tokens_mean",
+        "winner_hit_max_new_tokens_std",
+        "winner_hit_max_new_tokens_min",
+        "winner_hit_max_new_tokens_max",
+        "winner_truncated_output_suspected_mean",
+        "winner_truncated_output_suspected_std",
+        "winner_truncated_output_suspected_min",
+        "winner_truncated_output_suspected_max",
+        "winner_answer_span_mean_logprob_mean",
+        "winner_answer_span_mean_logprob_std",
+        "winner_answer_span_mean_logprob_min",
+        "winner_answer_span_mean_logprob_max",
+        "winner_answer_span_min_logprob_mean",
+        "winner_answer_span_min_logprob_std",
+        "winner_answer_span_min_logprob_min",
+        "winner_answer_span_min_logprob_max",
+        "winner_answer_span_mean_entropy_mean",
+        "winner_answer_span_mean_entropy_std",
+        "winner_answer_span_mean_entropy_min",
+        "winner_answer_span_mean_entropy_max",
+        "winner_answer_span_std_entropy_mean",
+        "winner_answer_span_std_entropy_std",
+        "winner_answer_span_std_entropy_min",
+        "winner_answer_span_std_entropy_max",
+        "winner_raw_text_length_chars_mean",
+        "winner_raw_text_length_chars_std",
+        "winner_raw_text_length_chars_min",
+        "winner_raw_text_length_chars_max",
+        "winner_raw_text_length_tokens_mean",
+        "winner_raw_text_length_tokens_std",
+        "winner_raw_text_length_tokens_min",
+        "winner_raw_text_length_tokens_max"
+      ]
+    },
+    "outer_group": "task_id",
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\selected_answer_oof_v4_no_batch_timing\\selected_answer_oof_predictions.csv",
+        "sha256": "9114967e6da1d8371189e33f163d05a203ac69f865ea0e2e60a703b6d1b14975",
+        "rows": 14740,
+        "columns": [
+          "task_id",
+          "step",
+          "domain",
+          "selected_model_alias",
+          "selected_answer_hash",
+          "selected_correct",
+          "selected_support_fraction",
+          "selected_vote_margin_fraction",
+          "fold",
+          "selected_answer_lgbm_oof",
+          "selected_answer_lgbm_platt"
+        ],
+        "fold_counts": {
+          "3": 2950,
+          "2": 2950,
+          "1": 2950,
+          "5": 2945,
+          "4": 2945
+        }
+      }
+    ]
+  },
+  {
+    "folder": "selected_answer_content_oof_v4_reasoning_only",
+    "manifest": "research\\outputs\\experiments_v2\\selected_answer_content_oof_v4_reasoning_only\\prepared_selected_answer_thought_content_manifest.json",
+    "manifest_sha256": "242022cd07a7ca37d342e422d4cc86189002b8a8a28787eda298688fc3d66661",
+    "metrics_sha256": "e3835ee9d86726764782bad50368243822ca5ea35467bc6b579d0cd2fe08bea3",
+    "prepared_manifest_binding": true,
+    "source_bindings": [
+      {
+        "path": "research\\run_selected_answer_content_oof.py",
+        "recorded_sha256": "59a6da648806db44cf7e4f79bbff532eb686e9478126d2e0220acdd30da948ac",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_selected_answer_oof_experiments.py",
+        "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_ultimate_multi_day_tournament.py",
+        "recorded_sha256": "bac3d5da025d5fae2b2ef5c158835ca1f58277793bdd42cb1a353901fbc926d6",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "fold_auc": [
+        0.8638916595421298,
+        0.8552080258541563,
+        0.8614665983227499,
+        0.8681723169657665,
+        0.8852774721697498
+      ],
+      "oof_auc": 0.8669461034247069,
+      "raw_brier": 0.14391810785683057,
+      "task_cluster_bootstrap_auc_95_ci": [
+        0.857774263235868,
+        0.8767419593390035
+      ],
+      "task_macro_auc": 0.8213781749764817
+    },
+    "contract": {
+      "calibration": "separate task-disjoint partition within each outer training fold",
+      "excluded": "raw_text completions, task/source/model identifiers, expected answers, gold labels, answer fields, timing, other-panel text, and future output",
+      "historical_limit": "same-step peer completion lacks event timestamps; natural output may quote/paraphrase the prompt",
+      "interpretation": "retrospective content signal screen, not raw stopping AUC or prospective deployment proof",
+      "selection": "nonempty normalized-answer plurality; frozen-alias tie break",
+      "target": "decision-level selected-answer correctness",
+      "text": "only final 512 characters of each reasoning-only sanitized current plurality-supporting parsed thought; known task/prompt/history echoes become a fixed sentinel, structured answer/confidence/stop fields are stripped, and supporter order is content-hash sorted",
+      "vocabulary": "fit only inside model-fit task groups"
+    },
+    "outer_group": null,
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\selected_answer_content_oof_v4_reasoning_only\\plurality_supporter_reasoning_only_thought512_predictions.csv",
+        "sha256": "0d1205d0fb6119b3fd3ebddca6528091ed94511a6543034ae9c5de3a6a97ae21",
+        "rows": 14740,
+        "columns": [
+          "task_id",
+          "step",
+          "domain",
+          "selected_correct",
+          "document_sha256",
+          "plurality_supporter_count",
+          "document_chars",
+          "outer_fold",
+          "oof_probability"
+        ],
+        "fold_counts": {
+          "3": 2950,
+          "2": 2950,
+          "1": 2950,
+          "5": 2945,
+          "4": 2945
+        }
+      }
+    ]
+  },
+  {
+    "folder": "selected_answer_causal_dynamics_oof_v3",
+    "manifest": "research\\outputs\\experiments_v2\\selected_answer_causal_dynamics_oof_v3\\prepared_manifest.json",
+    "manifest_sha256": "8ed939a0694cf32e38ab9a4da8a28c85c18266a4e37b78437f7b0e3f37078455",
+    "metrics_sha256": "a11970fef67813f7585f321e8bf7afffb57cd4f540dcc7045cf113abb383e50f",
+    "prepared_manifest_binding": true,
+    "source_bindings": [
+      {
+        "path": "research\\run_selected_answer_causal_dynamics_oof.py",
+        "recorded_sha256": "38ccfb969a9276fa1b8f9f126d7e8a5998d5d0e862c935be48370c94741326c6",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_selected_answer_oof_experiments.py",
+        "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_selected_answer_representation_oof_experiments.py",
+        "recorded_sha256": "5cc9383831c1d1abf4095b668c5d25ae82a3d39e204b911ddc85ad26f41683a9",
+        "match": "raw"
+      },
+      {
+        "path": "research\\selected_answer_causal_dynamics.py",
+        "recorded_sha256": "afe3f5393372f6449ee0d814e5d18e0d8952f0fc18c9333729205f706afd74a3",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "fold_auc": [
+        0.9351562648427851,
+        0.9229147623753388,
+        0.9403487516644711,
+        0.9349886765260955,
+        0.951945050942709
+      ],
+      "oof_auc": 0.9370369330204548,
+      "raw_brier": 0.10019667195483556,
+      "selected_accuracy": 0.5843962008141113,
+      "task_cluster_bootstrap_auc_95_ci": [
+        0.9302419727114775,
+        0.9434022711545444
+      ],
+      "task_macro_auc": 0.8915020382565069
+    },
+    "contract": {
+      "dynamics": "same-model t-1/t-2 hidden kinematics only; aggregate anonymous scalar invariants after barrier closure",
+      "excluded": "raw answers/text, task/model/run identities, gold/correctness, K2, future barriers",
+      "historical_limit": "same-step peer-completion timestamps are absent",
+      "missing_history": "contiguous history only; no gap bridging/backfill/future normalization",
+      "preprocessing": "outer-train-fold median imputation, StandardScaler, and PCA only",
+      "response_selection": "deterministic current-barrier plurality; lexical frozen-alias tie break",
+      "timing": "batch-level elapsed_seconds/tokens_per_second excluded"
+    },
+    "outer_group": "task_id",
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\selected_answer_causal_dynamics_oof_v3\\medium_capacity_predictions.csv",
+        "sha256": "ed2b5940760636c722e76e09c7f54b02136d12ef7a849964cd9610b233559875",
+        "rows": 14740,
+        "columns": [
+          "task_id",
+          "step",
+          "domain",
+          "selected_correct",
+          "oof_probability"
+        ],
+        "fold_counts": {}
+      },
+      {
+        "path": "research\\outputs\\experiments_v2\\selected_answer_causal_dynamics_oof_v3\\regularized_predictions.csv",
+        "sha256": "e1274704ba07de6c70e68cac547e7ed2037a3e4dfa6e47c33cee13a12dfaf645",
+        "rows": 14740,
+        "columns": [
+          "task_id",
+          "step",
+          "domain",
+          "selected_correct",
+          "oof_probability"
+        ],
+        "fold_counts": {}
+      }
+    ]
+  },
+  {
+    "folder": "selected_answer_temporal_shape_oof_v3",
+    "manifest": "research\\outputs\\experiments_v2\\selected_answer_temporal_shape_oof_v3\\prepared_manifest.json",
+    "manifest_sha256": "3b94d7a7f3acce8b70743d3f4569a079aa600266f0332909e57488d91c796050",
+    "metrics_sha256": "821632d153472fb678402725679c601c19b3cf782940ebd263685a20971ca443",
+    "prepared_manifest_binding": true,
+    "source_bindings": [
+      {
+        "path": "research\\run_selected_answer_oof_experiments.py",
+        "recorded_sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_selected_answer_representation_oof_experiments.py",
+        "recorded_sha256": "5cc9383831c1d1abf4095b668c5d25ae82a3d39e204b911ddc85ad26f41683a9",
+        "match": "raw"
+      },
+      {
+        "path": "research\\run_selected_answer_temporal_shape_oof.py",
+        "recorded_sha256": "66eaa89b71a3e89e34f82359b3a9f015642357535d341c562230223af06f1262",
+        "match": "raw"
+      },
+      {
+        "path": "research\\selected_answer_temporal_shape.py",
+        "recorded_sha256": "bbef1fe114e1f0934108b1542abc20923154dadab555f270c6cbb402b29217ac",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "fold_auc": [
+        0.9307143535670181,
+        0.9200062173180829,
+        0.9360419552573276,
+        0.9309453956925047,
+        0.9478188707872485
+      ],
+      "oof_auc": 0.9329436488944607,
+      "raw_brier": 0.10073510275676166,
+      "selected_accuracy": 0.5843962008141113,
+      "task_cluster_bootstrap_auc_95_ci": [
+        0.9255875630979561,
+        0.9398799846182118
+      ],
+      "task_macro_auc": 0.8810755722797116
+    },
+    "contract": {
+      "base_control": "all hidden_norm/hidden_l2_shift/hidden_cosine_shift aggregate fields removed from both control and temporal-shape feature sets",
+      "geometry": "same-model/layer current-and-prior difference geometry only; no raw coordinate, state-origin cosine, or cross-model coordinate feature",
+      "historical_limit": "same-step peer completion lacks event timestamps",
+      "interpretation": "one predeclared retrospective ablation, not a deployable stopping claim",
+      "learner_excluded": "model/task/run/source identifiers, raw coordinates, answer values, text, expected/gold labels, timing, K2, future barriers",
+      "normalization": "per-model/per-step robust median/IQR and tie-aware ECDF fit only on each outer-fold training task set, then anonymized barrier aggregation",
+      "selection": "deterministic nonempty normalized-answer plurality; frozen-alias tie break",
+      "target": "decision-level selected-answer correctness"
+    },
+    "outer_group": null,
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\selected_answer_temporal_shape_oof_v3\\base_sanitized_plus_temporal_shape_regularized_lgbm_predictions.csv",
+        "sha256": "33d85d9f5f1ef6cd25aa605019798ac33280e72517875459dc6a3ab112efe345",
+        "rows": 14740,
+        "columns": [
+          "task_id",
+          "step",
+          "domain",
+          "selected_correct",
+          "outer_fold",
+          "oof_probability"
+        ],
+        "fold_counts": {
+          "3": 2950,
+          "2": 2950,
+          "1": 2950,
+          "5": 2945,
+          "4": 2945
+        }
+      },
+      {
+        "path": "research\\outputs\\experiments_v2\\selected_answer_temporal_shape_oof_v3\\base_sanitized_regularized_lgbm_predictions.csv",
+        "sha256": "09e5512615ac5736f2857d500f5a01387fcbaa028e38c775dca3c3f16b922422",
+        "rows": 14740,
+        "columns": [
+          "task_id",
+          "step",
+          "domain",
+          "selected_correct",
+          "outer_fold",
+          "oof_probability"
+        ],
+        "fold_counts": {
+          "3": 2950,
+          "2": 2950,
+          "1": 2950,
+          "5": 2945,
+          "4": 2945
+        }
+      }
+    ]
+  },
+  {
+    "folder": "committee_oof_strict_v1",
+    "manifest": "research\\outputs\\experiments_v2\\committee_oof_strict_v1\\committee_oof_manifest.json",
+    "manifest_sha256": "5adff53d11b72855b95fe980281dd2daae371b557f8e146c0684fb456d0a4436",
+    "metrics_sha256": "0a77ebd4875b255e17f531ee07fd5e5df69eea37f50367fcd23ddabefb66fae5",
+    "prepared_manifest_binding": null,
+    "source_bindings": [
+      {
+        "path": "research\\run_committee_oof_experiments.py",
+        "recorded_sha256": "63ba1ba102ee428caaf40ebffc329876fc3d6b8e71a2348296f1f8d64d3007ff",
+        "match": null
+      }
+    ],
+    "metrics": {
+      "strict_committee": {
+        "cross_fold_platt_brier": 0.08206380939980823,
+        "eligible_step_gte_2_auc": 0.9540781165809873,
+        "fold_auc": [
+          0.9518632683330517,
+          0.9496001582016738,
+          0.9519762577502154,
+          0.9539548478026506,
+          0.9553418550960697
+        ],
+        "fold_auc_mean": 0.9525472774367323,
+        "fold_auc_std": 0.0021949010428171387,
+        "oof_auc": 0.9524516023572639,
+        "raw_brier": 0.07974580007636839,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.947900703011454,
+          0.9570610141833423
+        ],
+        "task_macro_auc": 0.874502084432293,
+        "tasks_with_both_classes_for_macro_auc": 2679
+      },
+      "telemetry": {
+        "cross_fold_platt_brier": 0.13077361369058127,
+        "eligible_step_gte_2_auc": 0.8810471450595004,
+        "fold_auc": [
+          0.8878559904467108,
+          0.8838227706933697,
+          0.8807869534909714,
+          0.8922555511659278,
+          0.8856459995342449
+        ],
+        "fold_auc_mean": 0.8860734530662449,
+        "fold_auc_std": 0.004318308171373922,
+        "oof_auc": 0.8860107897109253,
+        "raw_brier": 0.12903881496018837,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.8806617847592553,
+          0.8909234439873441
+        ],
+        "task_macro_auc": 0.8384755645898103,
+        "tasks_with_both_classes_for_macro_auc": 2679
+      }
+    },
+    "contract": {
+      "categorical": [
+        "model_alias",
+        "domain",
+        "difficulty",
+        "output_format_type",
+        "answer_extraction_source",
+        "stop_extraction_source",
+        "confidence_extraction_source",
+        "prompt_mode",
+        "system_prompt_mode",
+        "is_baseline",
+        "device"
+      ],
+      "committee_numeric": [
+        "step",
+        "confidence",
+        "model_stop_flag",
+        "answer_changed",
+        "thought_token_count",
+        "raw_generation_tokens",
+        "mean_token_logprob",
+        "entropy_mean",
+        "entropy_std",
+        "hidden_norm",
+        "hidden_l2_shift",
+        "hidden_cosine_shift",
+        "lexical_echo",
+        "verbose_confidence_proxy",
+        "elapsed_seconds",
+        "tokens_per_second",
+        "temperature",
+        "parse_success",
+        "hit_max_new_tokens",
+        "truncated_output_suspected",
+        "answer_span_mean_logprob",
+        "answer_span_min_logprob",
+        "answer_span_mean_entropy",
+        "answer_span_std_entropy",
+        "raw_text_length_chars",
+        "raw_text_length_tokens",
+        "answer_nonempty",
+        "answer_char_len",
+        "same_prev_answer",
+        "n_answer_changes_prefix",
+        "delta_confidence",
+        "delta_mean_token_logprob",
+        "delta_entropy_mean",
+        "delta_entropy_std",
+        "delta_hidden_norm",
+        "delta_hidden_l2_shift",
+        "delta_hidden_cosine_shift",
+        "delta_answer_span_mean_logprob",
+        "delta_answer_span_min_logprob",
+        "delta_answer_span_mean_entropy",
+        "delta_answer_span_std_entropy",
+        "log1p_thought_token_count",
+        "log1p_raw_generation_tokens",
+        "log1p_elapsed_seconds",
+        "log1p_raw_text_length_chars",
+        "log1p_raw_text_length_tokens",
+        "log1p_answer_char_len",
+        "committee_panel_nonempty",
+        "independent_vote_count",
+        "independent_peer_count",
+        "independent_vote_fraction",
+        "committee_has_independent_match",
+        "committee_nonempty_fraction"
+      ],
+      "committee_vote": "same task and same step; distinct model alias; scored alias excluded",
+      "excluded": [
+        "answer",
+        "answer_key",
+        "answer_normalized",
+        "correct",
+        "expected_answer",
+        "k2_agreement",
+        "k2_raw_generation_tokens",
+        "raw_text",
+        "run_id",
+        "source_cell",
+        "task_id",
+        "task_source_index",
+        "thought",
+        "trajectory_id",
+        "utility"
+      ],
+      "outer_group": "task_id",
+      "required_production_barrier": "all peer outputs timestamped complete at or before decision t",
+      "telemetry_numeric": [
+        "step",
+        "confidence",
+        "model_stop_flag",
+        "answer_changed",
+        "thought_token_count",
+        "raw_generation_tokens",
+        "mean_token_logprob",
+        "entropy_mean",
+        "entropy_std",
+        "hidden_norm",
+        "hidden_l2_shift",
+        "hidden_cosine_shift",
+        "lexical_echo",
+        "verbose_confidence_proxy",
+        "elapsed_seconds",
+        "tokens_per_second",
+        "temperature",
+        "parse_success",
+        "hit_max_new_tokens",
+        "truncated_output_suspected",
+        "answer_span_mean_logprob",
+        "answer_span_min_logprob",
+        "answer_span_mean_entropy",
+        "answer_span_std_entropy",
+        "raw_text_length_chars",
+        "raw_text_length_tokens",
+        "answer_nonempty",
+        "answer_char_len",
+        "same_prev_answer",
+        "n_answer_changes_prefix",
+        "delta_confidence",
+        "delta_mean_token_logprob",
+        "delta_entropy_mean",
+        "delta_entropy_std",
+        "delta_hidden_norm",
+        "delta_hidden_l2_shift",
+        "delta_hidden_cosine_shift",
+        "delta_answer_span_mean_logprob",
+        "delta_answer_span_min_logprob",
+        "delta_answer_span_mean_entropy",
+        "delta_answer_span_std_entropy",
+        "log1p_thought_token_count",
+        "log1p_raw_generation_tokens",
+        "log1p_elapsed_seconds",
+        "log1p_raw_text_length_chars",
+        "log1p_raw_text_length_tokens",
+        "log1p_answer_char_len"
+      ]
+    },
+    "outer_group": null,
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\committee_oof_strict_v1\\committee_oof_predictions.csv",
+        "sha256": "dba619befd75f72cfb1f17e4bfe884802bfedcfaa64407461ede0c6f4a52ce2b",
+        "rows": 144440,
+        "columns": [
+          "task_id",
+          "trajectory_id",
+          "source_cell",
+          "model_alias",
+          "domain",
+          "step",
+          "correct",
+          "fold",
+          "telemetry_score",
+          "strict_committee_score",
+          "independent_vote_count",
+          "independent_peer_count",
+          "independent_vote_fraction"
+        ],
+        "fold_counts": {
+          "1": 28895,
+          "2": 28875,
+          "3": 28890,
+          "4": 28890,
+          "5": 28890
+        }
+      }
+    ]
+  },
+  {
+    "folder": "committee_oof_minimal_v1",
+    "manifest": "research\\outputs\\experiments_v2\\committee_oof_minimal_v1\\committee_minimal_manifest.json",
+    "manifest_sha256": "1d936cc1aad41d9fb3c493515505be5c7a8b82fc76d9872f0edb93bc1aace008",
+    "metrics_sha256": "604f860b264522f25e421f7bbb4681f62bbc648eaaa5754341b66d51f82cd6a2",
+    "prepared_manifest_binding": null,
+    "source_bindings": [
+      {
+        "path": "research\\run_committee_oof_minimal.py",
+        "recorded_sha256": "5922a272ca4a2ae005701245880a98c6d2f3a89b9462a8167a109dfa3cc4a2a4",
+        "match": "raw"
+      }
+    ],
+    "metrics": {
+      "minimal_committee": {
+        "cross_fold_platt_brier": 0.08734018867965658,
+        "eligible_step_gte_2_auc": 0.9477429469443871,
+        "fold_auc": [
+          0.9444109334128887,
+          0.9434213787813478,
+          0.9468548786898111,
+          0.9454517681695798,
+          0.9468780596361701
+        ],
+        "fold_auc_mean": 0.9454034037379596,
+        "fold_auc_std": 0.0015163400795174234,
+        "oof_auc": 0.9452962265581967,
+        "raw_brier": 0.08546963560547227,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.9403596200839556,
+          0.9495826192771378
+        ],
+        "task_macro_auc": 0.8640760841895577,
+        "tasks_with_both_classes_for_macro_auc": 2679
+      },
+      "minimal_telemetry": {
+        "cross_fold_platt_brier": 0.14292165699008583,
+        "eligible_step_gte_2_auc": 0.861840466686407,
+        "fold_auc": [
+          0.8671059181780505,
+          0.8633251019486708,
+          0.8630831290784907,
+          0.8723693557180193,
+          0.8690488205599582
+        ],
+        "fold_auc_mean": 0.866986465096638,
+        "fold_auc_std": 0.003933341540896196,
+        "oof_auc": 0.8669244158845802,
+        "raw_brier": 0.14155297276303502,
+        "task_cluster_bootstrap_auc_95_ci": [
+          0.8613229852611254,
+          0.8721650943334234
+        ],
+        "task_macro_auc": 0.824058037875841,
+        "tasks_with_both_classes_for_macro_auc": 2679
+      }
+    },
+    "contract": {
+      "committee_vote": "same task and current step; scored model alias excluded",
+      "excluded": [
+        "answer",
+        "answer_key",
+        "answer_normalized",
+        "correct",
+        "expected_answer",
+        "k2_agreement",
+        "k2_raw_generation_tokens",
+        "raw_text",
+        "run_id",
+        "source_cell",
+        "task_id",
+        "task_source_index",
+        "thought",
+        "trajectory_id",
+        "utility"
+      ],
+      "historical_limit": "legacy traces lack synchronized peer completion timestamps",
+      "learner_categorical_features": [],
+      "outer_group": "task_id",
+      "removed": "elapsed/tokens-per-second, temperature, all categorical model/domain/parser/prompt/device/run metadata, hidden-state norm/shift/cosine fields",
+      "required_production_barrier": "all peer outputs timestamped complete at or before candidate decision",
+      "retained": "candidate current/prefix token-probability and output-shape telemetry plus leave-one-alias-out agreement"
+    },
+    "outer_group": null,
+    "prediction_artifacts": [
+      {
+        "path": "research\\outputs\\experiments_v2\\committee_oof_minimal_v1\\committee_minimal_predictions.csv",
+        "sha256": "f581680ff0817f89f12c51b941d93a74d920ce7ab570552e5217ee0921ebb147",
+        "rows": 144440,
+        "columns": [
+          "task_id",
+          "trajectory_id",
+          "model_alias",
+          "domain",
+          "step",
+          "correct",
+          "fold",
+          "minimal_telemetry_score",
+          "minimal_committee_score",
+          "independent_vote_count",
+          "independent_peer_count",
+          "independent_vote_fraction"
+        ],
+        "fold_counts": {
+          "1": 28895,
+          "2": 28875,
+          "3": 28890,
+          "4": 28890,
+          "5": 28890
+        }
+      }
+    ]
+  }
+]

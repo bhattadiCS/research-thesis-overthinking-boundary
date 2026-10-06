@@ -36,7 +36,7 @@ The gradient-boosted probe and isotonic calibration arms reduce utility relative
 
 The matched token-cap experiment compares 256 and 512 completion tokens for Mistral-Small-22B/GSM8K. Both arms have 454 losses among 1,500 trajectories under the recorded binary endpoint: the hazard policy has lower utility than never stopping. There are no discordant paired loss indicators. The empirical difference is zero, and the paired bootstrap is degenerate for that particular indicator.
 
-A zero difference on this endpoint does not show that all answers, token counts, timings, or accuracy values are identical between caps. It also does not prove that truncation is absent from every model-domain cell. A scientifically valid negative result preserves the tested endpoint and avoids broadening it into a claim about every mechanism.
+This equality concerns the paired binary loss indicator. Answers, token counts and timings can differ while that indicator remains unchanged. The contrast therefore measures sensitivity of the recorded policy verdict to this token cap, rather than identifying the contribution of truncation across other model-domain cells.
 
 In the matched Qwen2.5-7B/GSM8K precision comparison, 418 of 1,500 step-two answers are correct under BF16 and 204 under 4-bit weights. The observed difference is 214/1,500, or 14.27 percentage points, with the recorded task interval approximately [11.13, 17.53] points. This is an absolute accuracy difference for that model, step, task panel, and implementation. It is not a 14.3 percent relative reduction shared by every quantized model.
 
@@ -44,11 +44,15 @@ In the matched Qwen2.5-7B/GSM8K precision comparison, 418 of 1,500 step-two answ
 
 [[DETECTOR_TABLE]]
 
-The stored prefix-safe sequence comparison has a causal GRU micro AUC of 0.8743, task-macro AUC of 0.8214, and domain-macro AUC of 0.8102. Its worst domain is GPQA at approximately 0.6313. The contrast between pooled and worst-domain performance shows why a pooled score alone is inadequate for a deployment claim.
+The stored prefix-safe sequence comparison uses gated recurrent units [Cho2014]. Its causal GRU has micro AUC 0.8743, task-macro AUC 0.8214, and domain-macro AUC 0.8102. Its worst domain is GPQA at approximately 0.6313. The contrast between pooled and worst-domain performance shows why a pooled score alone is inadequate for a deployment claim.
 
-A causal RoPE transformer has lower pooled AUC than the causal GRU but slightly higher recorded micro step utility, approximately 0.3331 compared with 0.3264. Its token utility is approximately 0.3634 compared with 0.3631. The descriptive fold intervals overlap, so these stored summaries do not establish a statistically unique architecture winner. They do show that ranking and stopping utility need not rank configurations identically.
+A causal transformer with rotary position embeddings [Su2021] has lower pooled AUC than the causal GRU but slightly higher recorded micro step utility, approximately 0.3331 compared with 0.3264. Its token utility is approximately 0.3634 compared with 0.3631. The descriptive fold intervals overlap, so these stored summaries do not establish a statistically unique architecture winner. They do show that ranking and stopping utility need not rank configurations identically.
 
 Task-macro AUC is defined only for questions whose evaluated rows contain both correct and incorrect answers. There are 2,679 such tasks out of 2,948. Omitting the remaining tasks is appropriate for an undefined within-task ranking statistic, but the omission must be stated. Accuracy and utility can still include constant-label tasks.
+
+Additional analyses were completed before the live controller study. On the standardized corpus, strict task-grouped tabular and text baselines have independently recomputed saved out-of-fold AUCs of 0.849510 and 0.808976. Their persisted probabilities include the original task-disjoint calibration stage. A legacy analysis recorded under an anonymous closed-barrier peer-feature contract has raw AUC 0.954664 versus 0.945336 for its matched baseline without the additional peer-dynamics features. The recorded baseline retains vote, count and agreement inputs; this contrast concerns the extra dynamics block. Fixing the roster to thirteen members reduces the corresponding scores to 0.940009 and 0.931266. The saved scores and paired folds reproduce these contrasts, but the exact executed runner and peer-feature module were not recovered from reachable source history. The peer contrast therefore has partial executable-source provenance and remains qualified historical evidence.
+
+Selected-answer analyses use one causally chosen candidate per barrier rather than every model-row target. The no-batch-timing profile and the medium-capacity causal-dynamics profile have raw task-grouped AUCs of 0.934350 and 0.937037 over 14,740 decisions and 2,948 tasks. These endpoints and populations differ from the row-level comparisons, so their AUCs must not be ranked as a common benchmark. Configuration selection remains development work. The selected-answer and committee reporting calibrators are fit across previously computed out-of-fold scores and are not fully nested outer-fold calibration; their calibrated Brier and ECE summaries are diagnostic. The raw AUCs above use the original held-out scores. Appendix E records the completed analyses and distinguishes them from fresh prospective stopping evidence.
 
 [[DETECTOR_FIGURE]]
 
@@ -66,7 +70,7 @@ The empirical proportion of positive lifts among 10,000 bootstrap draws is 100 p
 
 The historical Qwen2.5-7B/GSM8K replay counts 827,804 full-horizon completion tokens and 377,960 tokens up to the selected stopping steps. The implied saving is 54.34 percent. Accuracy declines from 70.53 percent to 64.20 percent, an observed loss of 6.33 points. The policy is fit and evaluated on the same 1,500 traces, so this result is a development diagnostic. Chapter 5 compares it with the newly implemented runtime experiments.
 
-The newly recomputed paired failure audit covers all 75,965 sanitized variable-horizon trajectories. The archived hazard policy wins in 68,095 trajectories (89.64 percent), ties in 2,135 (2.81 percent), and loses in 5,735 (7.55 percent), relative to the full recorded horizon under the stored step utility. These are utility verdicts, not accuracy percentages. The audit reconstructs both binary endpoint labels from their utility and step cost, checks unique paired trajectories, and verifies that the taxonomy partitions every loss exactly once.
+The paired failure audit covers all 75,965 sanitized variable-horizon trajectories. The archived hazard policy wins in 68,095 trajectories (89.64 percent), ties in 2,135 (2.81 percent), and loses in 5,735 (7.55 percent), relative to the full recorded horizon under the stored step utility. These are utility verdicts, not accuracy percentages. The audit reconstructs both binary endpoint labels from their utility and step cost, checks unique paired trajectories, and verifies that the taxonomy partitions every loss exactly once.
 
 [[FAILURE_TABLE]]
 
@@ -74,10 +78,10 @@ Every observed utility loss stopped on an incorrect candidate and ended with a c
 
 The larger late-repair group is 48.35 percent of losses. It does not mean that these traces invariably repaired at step five, or that all online predictors must fail. Horizons vary in this matrix. The recomputation uses frozen labels and does not execute a new regrade or train a new probe. Old probe AUCs embedded in the classification script's descriptive tags are excluded from this table. A failed linear predictor of a late repair is evidence about that predictor and its recorded features; it is not an information-theoretic impossibility proof for every possible online signal.
 
-Passing thirty grader cases also does not establish that zero corpus errors are grading errors. The rigorous conclusion is narrower: the tested normalization and equivalence behaviors pass their regression suite, while the empirical tables use the frozen labels. An independent label audit remains a distinct source of evidence.
+The taxonomy is conditional on the archived labels and the stored policy. The versioned grader coverage described in Section 3.5 tests specified normalization and equivalence behaviors; independent corpus adjudication would assess whether labeling errors alter this partition.
 
 ## 4.8 Empirical conclusions
 
 The stored evidence supports cost-sensitive continuation decisions that vary by model and domain. Repairs can dominate early aggregate changes, later gains can fall below their cost, and estimator changes can improve or worsen utility. It also supplies direct counterexamples to several overly broad claims: pooled AUC is not live policy accuracy, a zero token-cap contrast does not establish universal absence of truncation, and replay savings need not preserve accuracy.
 
-The next scientific step is consequently specific. A policy must be fixed using permitted development information, evaluated without future-step features, executed in a loop that avoids further generation, and measured jointly on accuracy and all relevant costs. That is the subject of the online implementation and experiments in Chapter 5.
+Chapter 5 evaluates frozen policies that use only the observed prefix and directly control subsequent response generation. Their accuracy and computation measurements assess the operational consequence of these continuation trade-offs.

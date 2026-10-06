@@ -1,0 +1,21 @@
+commit deb8309011497210286eb37e1836e28cf75a8f21
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Wed Jul 15 08:52:50 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Wed Jul 15 08:52:50 2026 -0400
+
+    Make scratch_analyze.py path relative for cross-platform support on remote VM
+
+diff --git a/scratch_analyze.py b/scratch_analyze.py
+index 6169c66..611643e 100644
+--- a/scratch_analyze.py
++++ b/scratch_analyze.py
+@@ -1,7 +1,7 @@
+ import os
+ import pandas as pd
+ 
+-ROOT = r"C:\Aditya_Data\Personal\ResearchThesis\research\outputs\experiment_matrix"
++ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "research", "outputs", "experiment_matrix")
+ MODELS = [
+     "deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_3b",
+     "qwen2p5_7b", "qwen2p5_14b", "qwen2p5_32b", "mistral_7b_instruct_v0p3",

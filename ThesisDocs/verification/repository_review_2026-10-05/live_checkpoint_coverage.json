@@ -1,0 +1,104 @@
+[
+  {
+    "folder": "strict_tabular_stopping_oof_v1",
+    "checkpoint_pattern": "safe_scalar_lgbm_fold_*.npz",
+    "files": 5,
+    "covered_indices": 28888,
+    "each_index_exactly_once": true,
+    "contiguous_index_coverage": true,
+    "prepared_manifest_bindings_match": true,
+    "fold_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "valid_five_fold_coverage": true
+  },
+  {
+    "folder": "strict_text_stopping_oof_v1",
+    "checkpoint_pattern": "tail512_word12_fold_*.npz",
+    "files": 5,
+    "covered_indices": 144440,
+    "each_index_exactly_once": true,
+    "contiguous_index_coverage": true,
+    "prepared_manifest_bindings_match": true,
+    "fold_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "valid_five_fold_coverage": true
+  },
+  {
+    "folder": "selected_answer_causal_dynamics_oof_v3",
+    "checkpoint_pattern": "medium_capacity_fold_*.npz",
+    "files": 5,
+    "covered_indices": 14740,
+    "each_index_exactly_once": true,
+    "contiguous_index_coverage": true,
+    "prepared_manifest_bindings_match": true,
+    "fold_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "valid_five_fold_coverage": true
+  },
+  {
+    "folder": "selected_answer_causal_dynamics_oof_v3",
+    "checkpoint_pattern": "regularized_fold_*.npz",
+    "files": 5,
+    "covered_indices": 14740,
+    "each_index_exactly_once": true,
+    "contiguous_index_coverage": true,
+    "prepared_manifest_bindings_match": true,
+    "fold_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "valid_five_fold_coverage": true
+  },
+  {
+    "folder": "selected_answer_content_oof_v4_reasoning_only",
+    "checkpoint_pattern": "plurality_supporter_reasoning_only_thought512_fold_*.npz",
+    "files": 5,
+    "covered_indices": 14740,
+    "each_index_exactly_once": true,
+    "contiguous_index_coverage": true,
+    "prepared_manifest_bindings_match": true,
+    "fold_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "valid_five_fold_coverage": true
+  },
+  {
+    "folder": "selected_answer_temporal_shape_oof_v3",
+    "checkpoint_pattern": "base_sanitized_plus_temporal_shape_regularized_lgbm_fold_*.npz",
+    "files": 5,
+    "covered_indices": 14740,
+    "each_index_exactly_once": true,
+    "contiguous_index_coverage": true,
+    "prepared_manifest_bindings_match": true,
+    "fold_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "valid_five_fold_coverage": true
+  }
+]

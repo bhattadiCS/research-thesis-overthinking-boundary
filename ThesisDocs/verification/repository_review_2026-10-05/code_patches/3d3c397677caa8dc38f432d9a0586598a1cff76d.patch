@@ -1,0 +1,198 @@
+commit 3d3c397677caa8dc38f432d9a0586598a1cff76d
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sat Jul 18 10:00:46 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sat Jul 18 10:00:46 2026 -0400
+
+    results: add autonomous orchestrator script with fold-level checkpointing and periodic git push sync
+
+diff --git a/research/run_advanced_hyper_optimization.py b/research/run_advanced_hyper_optimization.py
+index f9fa5bf..4c945f8 100644
+--- a/research/run_advanced_hyper_optimization.py
++++ b/research/run_advanced_hyper_optimization.py
+@@ -543,7 +543,26 @@ def main():
+     task_to_grp = {tid: i for i, tid in enumerate(df["task_id"].unique())}
+     groups = df["task_id"].map(task_to_grp).to_numpy()
+ 
++    checkpoint_file = Path("research/outputs/experiments_v2/advanced_tournament_checkpoint.pth")
++    start_fold = 0
++
++    if checkpoint_file.exists():
++        try:
++            checkpoint = torch.load(checkpoint_file, map_location="cpu")
++            if checkpoint.get("smoke_test") == args.smoke_test:
++                start_fold = checkpoint["fold"] + 1
++                oof_predictions = checkpoint["oof_predictions"]
++                results = checkpoint["results"]
++                logging.info(f"Loaded checkpoint from {checkpoint_file}. Resuming from Fold {start_fold + 1}/{n_splits}...")
++            else:
++                logging.info("Checkpoint configuration mismatch (smoke-test flag difference). Ignoring checkpoint.")
++        except Exception as e:
++            logging.error(f"Failed to load checkpoint: {e}")
++
+     for fold, (train_idx, test_idx) in enumerate(gkf.split(df, groups=groups)):
++        if fold < start_fold:
++            logging.info(f"Skipping Fold {fold+1}/{n_splits} (already completed in checkpoint)")
++            continue
+         logging.info(f"--- FOLD {fold+1}/{n_splits} ---")
+         train = df.iloc[train_idx]
+         test = df.iloc[test_idx].copy()
+@@ -631,11 +650,25 @@ def main():
+         # 6. Gated SC Policy
+         results["Gated SC (Hysteresis)"].append(evaluate_policy([g for _, g in test_bigru.groupby("run_id")], is_gated_sc=True))
+ 
+-    print("\n" + "=" * 110)
+-    print("                 ADVANCED HYPER-OPTIMIZATION TOURNAMENT VERDICT SUMMARY")
+-    print("=" * 110)
+-    print(f"{'Configuration':<32} | {'OOF AUC':<8} | {'ECE':<6} | {'Utility (Step)':<14} | {'Utility (Token)':<15} | {'Win/Tie/Loss':<12}")
+-    print("-" * 110)
++        # Save checkpoint
++        checkpoint_data = {
++            "fold": fold,
++            "smoke_test": args.smoke_test,
++            "oof_predictions": oof_predictions,
++            "results": results
++        }
++        try:
++            torch.save(checkpoint_data, checkpoint_file)
++            logging.info(f"Saved checkpoint for Fold {fold+1}/{n_splits} to {checkpoint_file}")
++        except Exception as e:
++            logging.error(f"Failed to save checkpoint: {e}")
++
++    summary_lines = []
++    summary_lines.append("\n" + "=" * 110)
++    summary_lines.append("                 ADVANCED HYPER-OPTIMIZATION TOURNAMENT VERDICT SUMMARY")
++    summary_lines.append("=" * 110)
++    summary_lines.append(f"{'Configuration':<32} | {'OOF AUC':<8} | {'ECE':<6} | {'Utility (Step)':<14} | {'Utility (Token)':<15} | {'Win/Tie/Loss':<12}")
++    summary_lines.append("-" * 110)
+ 
+     y_all = df["correct"].astype(int).to_numpy()
+ 
+@@ -662,9 +695,29 @@ def main():
+             auc = roc_auc_score(y_all[valid_mask], oof_predictions["BiGRU (Sequence)"][valid_mask])
+             ece = calculate_ece(oof_predictions["BiGRU (Sequence)"][valid_mask], y_all[valid_mask])
+             
+-        print(f"{name:<32} | {auc:<8.4f} | {ece:<6.4f} | {mean_u_step:<+14.4f} | {mean_u_token:<+15.4f} | {win_count}/{tie_count}/{loss_count}")
++        summary_lines.append(f"{name:<32} | {auc:<8.4f} | {ece:<6.4f} | {mean_u_step:<+14.4f} | {mean_u_token:<+15.4f} | {win_count}/{tie_count}/{loss_count}")
+         
+-    print("=" * 110)
++    summary_lines.append("=" * 110)
++
++    for line in summary_lines:
++        print(line)
++
++    out_file = Path("research/outputs/experiments_v2/advanced_tournament_results.log")
++    out_file.parent.mkdir(parents=True, exist_ok=True)
++    try:
++        with open(out_file, "w", encoding="utf-8") as f:
++            f.write("\n".join(summary_lines) + "\n")
++        logging.info(f"Saved tournament verdict to {out_file}")
++    except Exception as e:
++        logging.error(f"Failed to save tournament verdict: {e}")
++
++    # Delete checkpoint file after successful completion
++    if checkpoint_file.exists():
++        try:
++            checkpoint_file.unlink()
++            logging.info("Cleaned up final checkpoint file.")
++        except Exception as e:
++            logging.error(f"Failed to clean up checkpoint file: {e}")
+ 
+ if __name__ == "__main__":
+     main()
+diff --git a/tools/run_autonomous_experiments.sh b/tools/run_autonomous_experiments.sh
+new file mode 100755
+index 0000000..2b26690
+--- /dev/null
++++ b/tools/run_autonomous_experiments.sh
+@@ -0,0 +1,90 @@
++#!/usr/bin/env bash
++# Autonomous Hyper-Optimization Runner & Periodic Git Commit Sync
++# File: tools/run_autonomous_experiments.sh
++
++# Exit immediately if any command fails (except monitoring loop checks)
++set -e
++
++echo "=========================================================="
++echo "      AUTONOMOUS HYPER-OPTIMIZATION RUNNER & SYNC"
++echo "=========================================================="
++
++# 1. Sync repository before running
++echo "[INFO] Pulling latest changes from remote main..."
++git pull origin main
++
++# Check if CUDA is available via python
++echo "[INFO] Checking CUDA environment..."
++python -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('Device Name:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None')"
++
++# 2. Run Smoke Test first to verify compiling and logic
++echo "[INFO] Running Preflight Smoke Test..."
++python research/run_advanced_hyper_optimization.py --smoke-test
++
++echo "[INFO] Smoke Test passed successfully. Staging results..."
++git add research/outputs/experiments_v2/advanced_tournament_results.log
++git commit -m "results: VM smoke test completed successfully" || echo "[INFO] No changes to commit for smoke test."
++git push origin main || echo "[INFO] Git push skipped or failed."
++
++# 3. Start the main full hyper-optimization tournament in the background
++echo "[INFO] Starting full hyper-optimization tournament in background..."
++python -u research/run_advanced_hyper_optimization.py > run_advanced_hyper_opt.log 2>&1 &
++PID=$!
++
++echo "[INFO] Background process started with PID $PID. Monitoring and syncing folds periodically..."
++
++CHECKPOINT_FILE="research/outputs/experiments_v2/advanced_tournament_checkpoint.pth"
++RESULTS_FILE="research/outputs/experiments_v2/advanced_tournament_results.log"
++
++# Keep track of last seen fold in checkpoint to avoid redundant commits
++LAST_FOLD=-1
++
++while kill -0 $PID 2>/dev/null; do
++    sleep 30
++    
++    # Check if checkpoint exists
++    if [ -f "$CHECKPOINT_FILE" ]; then
++        # Check if we can read the completed fold using a quick python print
++        CURRENT_FOLD=$(python -c "import torch; cp=torch.load('$CHECKPOINT_FILE', map_location='cpu'); print(cp.get('fold', -1))" 2>/dev/null || echo "-1")
++        
++        # If the fold has progressed, commit and push the checkpoint
++        if [ "$CURRENT_FOLD" -ne "-1" ] && [ "$CURRENT_FOLD" -ne "$LAST_FOLD" ]; then
++            echo "[SYNC] Fold $((CURRENT_FOLD + 1)) completed. Committing progress..."
++            git add "$CHECKPOINT_FILE"
++            git commit -m "results: VM completed Fold $((CURRENT_FOLD + 1))/5 checkpoint" || echo "[INFO] Nothing to commit."
++            git push origin main || echo "[WARNING] Push failed, will retry on next fold."
++            LAST_FOLD=$CURRENT_FOLD
++        fi
++    fi
++done
++
++# Wait for background process to finalize and get exit code
++wait $PID
++EXIT_CODE=$?
++
++if [ $EXIT_CODE -ne 0 ]; then
++    echo "[ERROR] Advanced tournament script failed with exit code $EXIT_CODE!"
++    echo "[ERROR] Check run_advanced_hyper_opt.log for error traceback."
++    exit $EXIT_CODE
++fi
++
++echo "[INFO] Advanced tournament script completed successfully."
++
++# 4. Commit and push the final tournament verdict
++if [ -f "$RESULTS_FILE" ]; then
++    echo "[INFO] Staging final verdict summary..."
++    git add "$RESULTS_FILE"
++    # Stage any other log files created
++    if [ -f "run_advanced_hyper_opt.log" ]; then
++        git add run_advanced_hyper_opt.log
++    fi
++    git commit -m "results: VM advanced hyper-optimization tournament completed" || echo "[INFO] No changes to commit."
++    git push origin main || echo "[WARNING] Final push failed."
++    echo "[SUCCESS] Final tournament results synced to GitHub!"
++else
++    echo "[WARNING] Final results file $RESULTS_FILE not found."
++fi
++
++echo "=========================================================="
++echo "                    RUN COMPLETED"
++echo "=========================================================="

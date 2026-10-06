@@ -1,0 +1,26 @@
+commit e7e4d16848b23c42b003107352c9fac4beb21e5a
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Mon May 11 21:32:33 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Mon May 11 21:32:33 2026 -0400
+
+    Adjust RUN:AI Gemma launch for low-VRAM GPUs
+
+diff --git a/tools/runai/jupyter_repo_gpu_sanity.py b/tools/runai/jupyter_repo_gpu_sanity.py
+index ce03ef5..6975cfb 100644
+--- a/tools/runai/jupyter_repo_gpu_sanity.py
++++ b/tools/runai/jupyter_repo_gpu_sanity.py
+@@ -132,7 +132,12 @@ def is_ignorable_status_line(line: str) -> bool:
+     if not line.startswith("?? "):
+         return False
+     relative_path = line[3:].strip()
+-    return relative_path == "research/outputs" or relative_path.startswith("research/outputs/")
++    return (
++        relative_path == "research/outputs"
++        or relative_path.startswith("research/outputs/")
++        or relative_path == "run_logs"
++        or relative_path.startswith("run_logs/")
++    )
+ 
+ 
+ def non_ignorable_status_lines(repo_dir: Path) -> list[str]:

@@ -1,0 +1,39 @@
+commit 6ca9771823a49d694d2178d0f47a12ba184c61ea
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sat Jun 27 19:03:43 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sat Jun 27 19:03:43 2026 -0400
+
+    fix(aggregate): sanitize trace_steps before q_t curve in cross-family
+    
+    cross_family_analysis loaded trace_steps.csv raw and did groupby(step).correct.mean(),
+    so hard-kill-corrupted rows (step=0, a confidence-like value in correct) inflated the
+    accuracy curve -- e.g. llama x gpqa reported peak acc 24.23 at step 0. Apply the same
+    _sanitize_step_frame guard, then regenerate all 4 aggregates. All peak accs now in [0,1].
+    
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+diff --git a/research/cross_family_analysis.py b/research/cross_family_analysis.py
+index 70657c1..bf21b98 100644
+--- a/research/cross_family_analysis.py
++++ b/research/cross_family_analysis.py
+@@ -21,7 +21,7 @@ from generate_thesis_artifacts import (
+     pooled_proxy_column,
+     safe_float,
+ )
+-from trace_analysis import add_temporal_features, fit_global_models
++from trace_analysis import add_temporal_features, fit_global_models, _sanitize_step_frame
+ 
+ 
+ REPO_ROOT = Path(__file__).resolve().parents[1]
+@@ -167,6 +167,10 @@ def load_run_record(run_dir: Path) -> dict[str, Any]:
+     weights = read_csv(run_dir / "feature_weights.csv")
+     metadata = read_json(run_dir / "metadata.json")
+     steps = read_csv(run_dir / "trace_steps.csv")
++    # Drop hard-kill-corrupted rows (field-shift puts non-0/1 values into `correct`
++    # and step=0 into `step`, which otherwise inflate the q_t accuracy curve -- e.g.
++    # a bogus peak accuracy of 24.23 for llama x gpqa). Same guard as the per-cell analyze.
++    steps, _n_corrupt = _sanitize_step_frame(steps)
+     hazard = load_corrected_hazard(run_dir)
+ 
+     summary = pilot.iloc[0]

@@ -1,0 +1,1472 @@
+{
+ "schema": "saved-target-artifact-readonly-check-v1",
+ "created_utc": "2026-10-06T02:05:53.787261+00:00",
+ "methods": [
+  "Read every saved prediction CSV in the 33 identified target families using CSV parsing, including multiline-safe reader",
+  "Verify task IDs never span saved outer test folds",
+  "Verify metrics prepared-manifest SHA bindings against actual local manifest bytes",
+  "No pickle/checkpoint/code execution; no retraining, new generation, regrading, or test execution"
+ ],
+ "prediction_files": [
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_minimal_v1/committee_minimal_predictions.csv",
+   "sha256": "f581680ff0817f89f12c51b941d93a74d920ce7ab570552e5217ee0921ebb147",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "minimal_telemetry_score",
+    "minimal_committee_score",
+    "independent_vote_count",
+    "independent_peer_count",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_no_timing_v1/metadata_no_timing/no_timing_predictions.csv",
+   "sha256": "7a9770a658d98a47b1bd327fc6e9f40517e32d42a8379e10b78340e074df4945",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_no_timing_v1/roster_no_timing/no_timing_predictions.csv",
+   "sha256": "d4f841b89165d37daa7d5b182b447db6ccc7292c25e8d26c16e6f3d902c42ca5",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/metadata_no_timing/no_timing_predictions.csv",
+   "sha256": "7a9770a658d98a47b1bd327fc6e9f40517e32d42a8379e10b78340e074df4945",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/roster_domain_difficulty_no_timing/no_timing_predictions.csv",
+   "sha256": "3734b413e7e1549377dc467d19f5f25035c2f4098819a8c334d1055191fe3f7a",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/roster_domain_no_timing/no_timing_predictions.csv",
+   "sha256": "abd6329075a1a7f2ead67222ae1e2a633be91f4cd03d2708858beb998eea1a80",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_no_timing_v2/roster_no_timing/no_timing_predictions.csv",
+   "sha256": "d4f841b89165d37daa7d5b182b447db6ccc7292c25e8d26c16e6f3d902c42ca5",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v2/anonymous_minimal/peer_dynamics_predictions.csv",
+   "sha256": "f0841bddf1b4532632f627a6039513b57e979f38122dc873e9e58171ebc10208",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 98280,
+   "unique_task_ids": 1512,
+   "fold_field": "fold",
+   "fold_counts": {
+    "2": 19695,
+    "1": 19695,
+    "5": 19630,
+    "4": 19630,
+    "3": 19630
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 32500,
+    "gpqa": 29120,
+    "gsm8k": 4160,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 62691,
+    "1": 35589
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_fixed13_v2/anonymous_minimal_baseline/peer_dynamics_predictions.csv",
+   "sha256": "13540944ad5ca1d1e9427a7f7d3f5bbd3befcbabc2e89017eb2cc41c3233d619",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 98280,
+   "unique_task_ids": 1512,
+   "fold_field": "fold",
+   "fold_counts": {
+    "2": 19695,
+    "1": 19695,
+    "5": 19630,
+    "4": 19630,
+    "3": 19630
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 32500,
+    "gpqa": 29120,
+    "gsm8k": 4160,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 62691,
+    "1": 35589
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_topology_v1/anonymous_minimal/peer_dynamics_predictions.csv",
+   "sha256": "61bf13594ad6ba1302bdcd93eebfc842edbbc262998d92f55ac9f72f75e3c768",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_topology_v1/anonymous_minimal_baseline/peer_dynamics_predictions.csv",
+   "sha256": "130443c5d4e61f1acc5075c128af2fc422cf35dab8ef0dd77ab0b1b231030338",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v1/anonymous_minimal/peer_dynamics_predictions.csv",
+   "sha256": "d4777c735582414d508d95a507d254fbbb31733fcd914f1e44d6213d01dca702",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v1/roster_no_timing/peer_dynamics_predictions.csv",
+   "sha256": "f9378760f5c23238e62f90a8666f92b5b961087c4ddd75902253b4231dd2f1b8",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v2/anonymous_minimal_baseline/peer_dynamics_predictions.csv",
+   "sha256": "9abe96eb407f479016cd23d306311b6909a03860cb9d5a41b3e990cdc644043c",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/anonymous_minimal/peer_dynamics_predictions.csv",
+   "sha256": "981f9ba974fff1df6ad2fe7e134749f506e15fe2d87772f9fee888aeed89c5d4",
+   "tracked_at_head": true,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/anonymous_minimal_baseline/peer_dynamics_predictions.csv",
+   "sha256": "130443c5d4e61f1acc5075c128af2fc422cf35dab8ef0dd77ab0b1b231030338",
+   "tracked_at_head": true,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/roster_no_timing/peer_dynamics_predictions.csv",
+   "sha256": "f9378760f5c23238e62f90a8666f92b5b961087c4ddd75902253b4231dd2f1b8",
+   "tracked_at_head": true,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_peer_dynamics_v3/roster_no_timing_baseline/peer_dynamics_predictions.csv",
+   "sha256": "89f6b70f85e57c7f2acf2a2973294c03bb70ba7766497eba88e188a46bc3f2ee",
+   "tracked_at_head": true,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "oof_probability",
+    "independent_vote_fraction",
+    "peer_support_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/committee_oof_strict_v1/committee_oof_predictions.csv",
+   "sha256": "dba619befd75f72cfb1f17e4bfe884802bfedcfaa64407461ede0c6f4a52ce2b",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "source_cell",
+    "model_alias",
+    "domain",
+    "step",
+    "correct",
+    "fold",
+    "telemetry_score",
+    "strict_committee_score",
+    "independent_vote_count",
+    "independent_peer_count",
+    "independent_vote_fraction"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 42500,
+    "gpqa": 29120,
+    "gsm8k": 40320,
+    "math": 32500
+   },
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/medium_capacity_predictions.csv",
+   "sha256": "ed2b5940760636c722e76e09c7f54b02136d12ef7a849964cd9610b233559875",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_correct",
+    "oof_probability"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": null,
+   "fold_counts": {},
+   "every_task_in_one_test_fold": null,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/regularized_predictions.csv",
+   "sha256": "e1274704ba07de6c70e68cac547e7ed2037a3e4dfa6e47c33cee13a12dfaf645",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_correct",
+    "oof_probability"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": null,
+   "fold_counts": {},
+   "every_task_in_one_test_fold": null,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_content_oof_v2_sanitized_thought/plurality_supporter_sanitized_thought512_predictions.csv",
+   "sha256": "a2f61c13f2d4ef512b1a7d5684be11712505f0d2d7235598059aa16f6afe5d25",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_correct",
+    "document_sha256",
+    "plurality_supporter_count",
+    "document_chars",
+    "outer_fold",
+    "oof_probability"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "outer_fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/plurality_supporter_reasoning_only_thought512_predictions.csv",
+   "sha256": "0d1205d0fb6119b3fd3ebddca6528091ed94511a6543034ae9c5de3a6a97ae21",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_correct",
+    "document_sha256",
+    "plurality_supporter_count",
+    "document_chars",
+    "outer_fold",
+    "oof_probability"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "outer_fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_oof_v1/selected_answer_oof_predictions.csv",
+   "sha256": "35faf3ad819a2f5bf4c8dffbb8c13e6afdce92ee320e670d2b7740092243d44c",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_model_alias",
+    "selected_answer_hash",
+    "selected_correct",
+    "selected_support_fraction",
+    "selected_vote_margin_fraction",
+    "fold",
+    "selected_answer_lgbm_oof",
+    "selected_answer_lgbm_platt"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_oof_v2_winner_panel/selected_answer_oof_predictions.csv",
+   "sha256": "2736b1281291f9b3137f741e1978abf7aa65b0d1b455149a411665d689864593",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_model_alias",
+    "selected_answer_hash",
+    "selected_correct",
+    "selected_support_fraction",
+    "selected_vote_margin_fraction",
+    "fold",
+    "selected_answer_lgbm_oof",
+    "selected_answer_lgbm_platt"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_oof_v3_no_batch_timing/selected_answer_oof_predictions.csv",
+   "sha256": "9114967e6da1d8371189e33f163d05a203ac69f865ea0e2e60a703b6d1b14975",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_model_alias",
+    "selected_answer_hash",
+    "selected_correct",
+    "selected_support_fraction",
+    "selected_vote_margin_fraction",
+    "fold",
+    "selected_answer_lgbm_oof",
+    "selected_answer_lgbm_platt"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_oof_v3_winner_panel/selected_answer_oof_predictions.csv",
+   "sha256": "2736b1281291f9b3137f741e1978abf7aa65b0d1b455149a411665d689864593",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_model_alias",
+    "selected_answer_hash",
+    "selected_correct",
+    "selected_support_fraction",
+    "selected_vote_margin_fraction",
+    "fold",
+    "selected_answer_lgbm_oof",
+    "selected_answer_lgbm_platt"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_oof_v4_no_batch_timing/selected_answer_oof_predictions.csv",
+   "sha256": "9114967e6da1d8371189e33f163d05a203ac69f865ea0e2e60a703b6d1b14975",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_model_alias",
+    "selected_answer_hash",
+    "selected_correct",
+    "selected_support_fraction",
+    "selected_vote_margin_fraction",
+    "fold",
+    "selected_answer_lgbm_oof",
+    "selected_answer_lgbm_platt"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_oof_v4_winner_panel/selected_answer_oof_predictions.csv",
+   "sha256": "2736b1281291f9b3137f741e1978abf7aa65b0d1b455149a411665d689864593",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_model_alias",
+    "selected_answer_hash",
+    "selected_correct",
+    "selected_support_fraction",
+    "selected_vote_margin_fraction",
+    "fold",
+    "selected_answer_lgbm_oof",
+    "selected_answer_lgbm_platt"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_representation_oof_v1/selected_answer_representation_predictions.csv",
+   "sha256": "baf29bf35061c8402d87b98f97f1f13964fb83318503acf379e015f25b252672",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_model_alias",
+    "selected_answer_hash",
+    "selected_correct",
+    "fold",
+    "hidden_invariants_oof",
+    "hidden_invariants_plus_fold_pca_oof"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v2/base_sanitized_regularized_lgbm_predictions.csv",
+   "sha256": "09e5512615ac5736f2857d500f5a01387fcbaa028e38c775dca3c3f16b922422",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_correct",
+    "outer_fold",
+    "oof_probability"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "outer_fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/base_sanitized_plus_temporal_shape_regularized_lgbm_predictions.csv",
+   "sha256": "33d85d9f5f1ef6cd25aa605019798ac33280e72517875459dc6a3ab112efe345",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_correct",
+    "outer_fold",
+    "oof_probability"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "outer_fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/base_sanitized_regularized_lgbm_predictions.csv",
+   "sha256": "09e5512615ac5736f2857d500f5a01387fcbaa028e38c775dca3c3f16b922422",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "step",
+    "domain",
+    "selected_correct",
+    "outer_fold",
+    "oof_probability"
+   ],
+   "rows": 14740,
+   "unique_task_ids": 2948,
+   "fold_field": "outer_fold",
+   "fold_counts": {
+    "3": 2950,
+    "2": 2950,
+    "1": 2950,
+    "5": 2945,
+    "4": 2945
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {
+    "arc": 5000,
+    "gpqa": 2240,
+    "gsm8k": 5000,
+    "math": 2500
+   },
+   "label_field": "selected_correct",
+   "label_counts": {
+    "1": 8614,
+    "0": 6126
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/safe_scalar_lgbm_predictions.csv",
+   "sha256": "fa925fa1638b4c7c6627180dd4b5e44c1b13e51a0d6a3c243e83cd0b17fc878c",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "source_cell",
+    "step",
+    "correct",
+    "oof_q",
+    "oof_repair",
+    "oof_corruption"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": null,
+   "fold_counts": {},
+   "every_task_in_one_test_fold": null,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {},
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  },
+  {
+   "path": "research/outputs/experiments_v2/strict_text_stopping_oof_v1/tail512_word12_predictions.csv",
+   "sha256": "a9c912d4f68f5db160944ce515c0eb280e502b16d7a68f45557080d050948d03",
+   "tracked_at_head": false,
+   "columns": [
+    "task_id",
+    "trajectory_id",
+    "source_cell",
+    "step",
+    "correct",
+    "outer_fold",
+    "oof_probability"
+   ],
+   "rows": 144440,
+   "unique_task_ids": 2948,
+   "fold_field": "outer_fold",
+   "fold_counts": {
+    "1": 28895,
+    "2": 28875,
+    "3": 28890,
+    "4": 28890,
+    "5": 28890
+   },
+   "every_task_in_one_test_fold": true,
+   "tasks_split_across_test_folds": [],
+   "domain_counts": {},
+   "label_field": "correct",
+   "label_counts": {
+    "0": 89602,
+    "1": 54838
+   },
+   "scope": "Test-fold membership consistency only. Does not independently prove train/calibration split provenance or nested model selection."
+  }
+ ],
+ "prepared_manifest_bindings": [
+  {
+   "metrics_path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/medium_capacity_metrics.json",
+   "expected_prepared_manifest_sha256": "8ed939a0694cf32e38ab9a4da8a28c85c18266a4e37b78437f7b0e3f37078455",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/prepared_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/regularized_metrics.json",
+   "expected_prepared_manifest_sha256": "8ed939a0694cf32e38ab9a4da8a28c85c18266a4e37b78437f7b0e3f37078455",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/selected_answer_causal_dynamics_oof_v3/prepared_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/selected_answer_content_oof_v2_sanitized_thought/plurality_supporter_sanitized_thought512_metrics.json",
+   "expected_prepared_manifest_sha256": "f6374560e713ecc7fec8f2a6624ac015511def664928603a4121195b63eda74b",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/selected_answer_content_oof_v2_sanitized_thought/prepared_selected_answer_thought_content_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/plurality_supporter_reasoning_only_thought512_metrics.json",
+   "expected_prepared_manifest_sha256": "242022cd07a7ca37d342e422d4cc86189002b8a8a28787eda298688fc3d66661",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/selected_answer_content_oof_v4_reasoning_only/prepared_selected_answer_thought_content_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v2/base_sanitized_regularized_lgbm_metrics.json",
+   "expected_prepared_manifest_sha256": "b02457aed7620b7b6601a0f9f18a08212fda8bfad7b6c658f1515d52b9f67f5e",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v2/prepared_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/base_sanitized_plus_temporal_shape_regularized_lgbm_metrics.json",
+   "expected_prepared_manifest_sha256": "3b94d7a7f3acce8b70743d3f4569a079aa600266f0332909e57488d91c796050",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/prepared_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/base_sanitized_regularized_lgbm_metrics.json",
+   "expected_prepared_manifest_sha256": "3b94d7a7f3acce8b70743d3f4569a079aa600266f0332909e57488d91c796050",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/selected_answer_temporal_shape_oof_v3/prepared_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/safe_scalar_lgbm_metrics.json",
+   "expected_prepared_manifest_sha256": "af323dec7b82ac8fb9afcf6a6e73ee81666b47bab82648e85541a0e8596c906f",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/strict_tabular_stopping_oof_v1/prepared_manifest.json"
+   ],
+   "matches": true
+  },
+  {
+   "metrics_path": "research/outputs/experiments_v2/strict_text_stopping_oof_v1/tail512_word12_metrics.json",
+   "expected_prepared_manifest_sha256": "afbed217f7344d8d91466c025d6de47bc017e8f9e16678cd078cf60f4a098731",
+   "matching_local_manifests": [
+    "research/outputs/experiments_v2/strict_text_stopping_oof_v1/prepared_manifest.json"
+   ],
+   "matches": true
+  }
+ ],
+ "prediction_files_checked": 35,
+ "total_saved_prediction_rows_scanned": 3147280,
+ "task_partition_failures": [],
+ "prepared_manifest_binding_failures": []
+}

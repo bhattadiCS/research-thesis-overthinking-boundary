@@ -1,0 +1,37 @@
+commit 32963ca7ffd33be148e0ee7356db04dc101b166f
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun May 17 19:00:28 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun May 17 19:00:28 2026 -0400
+
+    fix: force single-GPU device_map for small 4-bit models (meta tensor crash)
+    
+    device_map='auto' uses unquantized model size estimates, causing
+    accelerate to offload 4-bit layers to CPU as meta tensors on tight
+    GPUs (9.56 GB). bitsandbytes then crashes with 'Cannot copy out of
+    meta tensor; no data!' during generate(). For models ≤ 8B params
+    at 4-bit, force device_map={'': 0} since the quantized model easily
+    fits in VRAM (~2-3 GB for a 4B model).
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index b4be8a4..b48cf94 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -140,6 +140,17 @@ def resolve_low_vram_device_map(
+         return device_map
+     if actual_device != "cuda" or target_precision != "4bit":
+         return None
++    # For small models (≤ 8B params), force single-GPU loading.
++    # device_map="auto" estimates memory using the unquantized model size,
++    # which can cause accelerate to offload 4-bit layers to CPU as meta
++    # tensors -- bitsandbytes then crashes with "Cannot copy out of meta
++    # tensor; no data!" when generate() tries to move them back to CUDA.
++    try:
++        num_params = float(re.findall(r"[\d.]+", model_spec.parameter_count)[0])
++        if num_params <= 8:
++            return {"": 0}
++    except (IndexError, ValueError):
++        pass
+     return None
+ 
+ 

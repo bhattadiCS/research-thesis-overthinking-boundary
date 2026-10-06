@@ -1,0 +1,33 @@
+commit e50953f3b627178d59a7a72df79853b24b784b5b (from fcddab39cc51b05eb6b3f18837cc0e99a6e45945)
+Merge: 92d3bb5 fcddab3
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Thu Jul 16 19:17:25 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Thu Jul 16 19:17:25 2026 -0400
+
+    Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary
+
+diff --git a/research/generate_july_16_plots.py b/research/generate_july_16_plots.py
+index 374ac0c..b1c89d0 100644
+--- a/research/generate_july_16_plots.py
++++ b/research/generate_july_16_plots.py
+@@ -21,8 +21,8 @@ plt.rcParams.update({
+ # PLOT 1: Out-of-Fold AUC Comparison
+ # -------------------------------------------------------------
+ fig, ax = plt.subplots(figsize=(8, 5))
+-configs = ['Baseline\n(Linear)', 'N8b\n(Linear Proj)', 'Gated SC\n(Hysteresis)', 'GRU\n(Sequence)', 'LSTM\n(Sequence)']
+-aucs = [0.7380, 0.8104, 0.8686, 0.8686, 0.8714]
++configs = ['Baseline\n(Linear)', 'N8b\n(Linear Proj)', 'Gated SC\n(Consensus)', 'GRU\n(Sequence)', 'LSTM\n(Sequence)']
++aucs = [0.7208, 0.7819, 0.8474, 0.8474, 0.8503]
+ colors = ['#aec7e8', '#ffbb78', '#ff9896', '#98df8a', '#2ca02c']
+ 
+ bars = ax.bar(configs, aucs, color=colors, edgecolor='grey', width=0.55)
+@@ -174,7 +174,7 @@ plt.close()
+ # -------------------------------------------------------------
+ fig, ax = plt.subplots(figsize=(8, 5))
+ categories = ['Trained on bf16\nTested on bf16', 'Trained on bf16\nTested on 4-bit (AWQ/GPTQ)']
+-auc_scores = [0.8714, 0.8658]
++auc_scores = [0.8503, 0.8451]
+ colors = ['#2ca02c', '#9467bd']
+ 
+ bars = ax.bar(categories, auc_scores, color=colors, edgecolor='grey', width=0.4)

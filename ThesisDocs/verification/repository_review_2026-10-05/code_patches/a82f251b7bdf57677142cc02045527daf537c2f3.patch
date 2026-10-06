@@ -1,0 +1,60 @@
+commit a82f251b7bdf57677142cc02045527daf537c2f3
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun May 17 18:39:30 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun May 17 18:39:30 2026 -0400
+
+    fix: convert torchvision stub transforms to package with functional submodule
+    
+    transformers imports torchvision.transforms.functional.pil_to_tensor at
+    module scope, so the stub must expose transforms as a package with a
+    functional submodule rather than a flat file.
+
+diff --git a/research/_vendor/torchvision_stub/torchvision/transforms.py b/research/_vendor/torchvision_stub/torchvision/transforms/__init__.py
+similarity index 69%
+rename from research/_vendor/torchvision_stub/torchvision/transforms.py
+rename to research/_vendor/torchvision_stub/torchvision/transforms/__init__.py
+index 103b450..563b464 100644
+--- a/research/_vendor/torchvision_stub/torchvision/transforms.py
++++ b/research/_vendor/torchvision_stub/torchvision/transforms/__init__.py
+@@ -1,7 +1,10 @@
++"""Minimal torchvision.transforms stub."""
+ from __future__ import annotations
+ 
+ from enum import Enum
+ 
++from . import functional  # noqa: F401
++
+ 
+ class InterpolationMode(str, Enum):
+     NEAREST = "nearest"
+@@ -10,4 +13,4 @@ class InterpolationMode(str, Enum):
+     BILINEAR = "bilinear"
+     HAMMING = "hamming"
+     BICUBIC = "bicubic"
+-    LANCZOS = "lanczos"
+\ No newline at end of file
++    LANCZOS = "lanczos"
+diff --git a/research/_vendor/torchvision_stub/torchvision/transforms/functional.py b/research/_vendor/torchvision_stub/torchvision/transforms/functional.py
+new file mode 100644
+index 0000000..26f652a
+--- /dev/null
++++ b/research/_vendor/torchvision_stub/torchvision/transforms/functional.py
+@@ -0,0 +1,17 @@
++"""Minimal torchvision.transforms.functional stub.
++
++Provides ``pil_to_tensor`` and ``to_pil_image`` which newer ``transformers``
++imports at module scope from ``torchvision.transforms.functional``.
++"""
++
++
++def pil_to_tensor(pic):
++    raise NotImplementedError(
++        "The local torchvision shim does not implement pil_to_tensor because the thesis harness is text-only."
++    )
++
++
++def to_pil_image(pic, mode=None):
++    raise NotImplementedError(
++        "The local torchvision shim does not implement to_pil_image because the thesis harness is text-only."
++    )

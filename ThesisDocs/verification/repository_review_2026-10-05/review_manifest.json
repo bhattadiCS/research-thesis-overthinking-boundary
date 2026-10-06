@@ -1,0 +1,217 @@
+{
+  "schema": "repository-research-completion-review-v1",
+  "created_utc": "2026-10-06T02:44:18.573619+00:00",
+  "repository": "https://github.com/bhattadiCS/research-thesis-overthinking-boundary",
+  "github_head": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+  "counts": {
+    "github_main_commits": 484,
+    "all_local_reachable_commits": 600,
+    "github_code_change_commits": 159,
+    "github_evidence_change_commits": 287,
+    "paths": 6845,
+    "local_files": 6845,
+    "tracked_at_head": 6489,
+    "untracked_nonignored_local": 250,
+    "ignored_local": 106,
+    "bytes": 2858883505,
+    "groups": 214,
+    "json_documents_catalogued": 501,
+    "json_parse_errors": 0,
+    "prediction_files_read": 35,
+    "saved_prediction_rows_read": 3147280
+  },
+  "history_method": "Non-merge commits compare to parent; merge paths include the union of diffs against every parent.",
+  "review_scope": "All reachable commits inventoried and code diffs exported; source/diff/manifests/predictions inspected by scientific code family. This is not a claim of manual line-by-line review of every unrelated file or all deleted unreachable GitHub commits.",
+  "current_thesis_wholesale_recollection_required": false,
+  "completed_components": [
+    {
+      "component": "Mathematical formulation and finite checks",
+      "status": "Completed",
+      "evidence": "fa1c653; earlier derivations 8218a5c",
+      "data_action": "No recollection"
+    },
+    {
+      "component": "Core response collections and freeze",
+      "status": "Completed",
+      "evidence": "52 standardized cells plus variable-horizon matrix",
+      "data_action": "No recollection"
+    },
+    {
+      "component": "Controlled floor, threshold, hazard and sensitivity studies",
+      "status": "Completed development experiments",
+      "evidence": "2660d40/d2a42e8/1f2e445/cca2113 and algorithm-v2 results",
+      "data_action": "No recollection"
+    },
+    {
+      "component": "Fixed-budget and full-horizon controls",
+      "status": "Completed",
+      "evidence": "prefix_model_v1/evaluation.json and replay tables",
+      "data_action": "No recollection"
+    },
+    {
+      "component": "Strict tabular/text task-disjoint evaluation",
+      "status": "Completed local results; source committed",
+      "evidence": "strict_*_stopping_oof_v1",
+      "data_action": "No recollection"
+    },
+    {
+      "component": "Selected-answer causal evaluation",
+      "status": "Completed local results; source hashes match",
+      "evidence": "selected_answer_oof_v4_no_batch_timing; causal_dynamics_oof_v3",
+      "data_action": "No recollection"
+    },
+    {
+      "component": "Peer-feature matched ablation",
+      "status": "Historical predictions verified; original executor source partial",
+      "evidence": "committee_oof_peer_dynamics_v3 and fixed13 sensitivity",
+      "data_action": "Recover/reanalyse/refit with retained traces if stronger reproducibility is needed"
+    },
+    {
+      "component": "Single-model actual avoided generation",
+      "status": "Completed prototype experiments",
+      "evidence": "four online_stopping_20261002 collections",
+      "data_action": "No recollection for documented prototype claims"
+    },
+    {
+      "component": "Fresh timestamped peer-fleet stopping",
+      "status": "Collector/auditor capability; smoke evidence only",
+      "evidence": "prospective_protocol_*",
+      "data_action": "Targeted new collection only for a prospective fleet claim"
+    },
+    {
+      "component": "Independent accuracy-preservation confirmation",
+      "status": "Not established by development evidence",
+      "evidence": "no prespecified margin/untouched powered panel",
+      "data_action": "Targeted new study only for this stronger claim"
+    },
+    {
+      "component": "Independent semantic label adjudication",
+      "status": "Grader consistency/reconstruction audits exist; independent semantic review incomplete",
+      "evidence": "July grader audits, 7500-row reconstruction, 480-answer replay",
+      "data_action": "Review retained answers; recollection is not the first remedy"
+    }
+  ],
+  "actions_completed_now": [
+    "Commit and artifact inventory",
+    "Independent saved-score/fold/corpus verification",
+    "Historical artifact recovery from exact Git blobs",
+    "Thesis evidence-scope consolidation",
+    "Grader notation and fold clarification",
+    "Two explanatory diagrams",
+    "Valid subset folio font and actual saved-file font count"
+  ],
+  "new_generation_or_retraining_performed": false,
+  "original_collected_data_and_historical_result_files_changed": false,
+  "frozen_research_pipeline_sources_unchanged": true,
+  "document_authoring_sources_updated": true,
+  "unresolved_stronger_claims": [
+    "Prospective timestamped fleet stopping",
+    "Untouched confirmatory accuracy-preservation study",
+    "Independent semantic adjudication",
+    "Complete original legacy-peer executable-source recovery"
+  ],
+  "semester_approvals": "User-confirmed complete; excluded from this research audit",
+  "institutional_acceptance": "Academic judgment and acceptance are not certified by this machine audit",
+  "evidence_receipts": [
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/code_patch_index.json",
+      "sha256": "ca7d4bab60280865ec943983887b245cadd556e2a3515f8110da117c5654d664",
+      "bytes": 84422
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/commit_inventory.json",
+      "sha256": "829a0a0ed06262bdcb27973f45fc6421e9ad187c4b326d58cb08287e105b88de",
+      "bytes": 3617547
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_artifact_history_inventory.json",
+      "sha256": "c2d5f380387fd8a5aa226e56deece73c852db6b1ed294531aaaedc4b71275728",
+      "bytes": 2205309
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_evidence_gap_map.json",
+      "sha256": "5a0991534798cf12c215df35b888d89698d9ffb9f314f4e81d25dc42e8c52693",
+      "bytes": 30923
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_generation_metadata_summary.json",
+      "sha256": "0cd39fb1573d389430f0f5d740fd537d6103f272ac2279b96574667d35813a8e",
+      "bytes": 267899
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_historical_source_bindings.json",
+      "sha256": "25be06b3cc2710e0a2841d611b1b5ae798229081042e0080c6c026a5638d599c",
+      "bytes": 1753
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_local_artifact_inventory.json",
+      "sha256": "9136af1b36b24e3bf3032efb91b6a08866d7fa596db333efd2f766159e580ebd",
+      "bytes": 2987139
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_target_artifact_validation.json",
+      "sha256": "71ff47c02c5b03bdb4e18ef489272f5ffdd1dffed0edbaf70709f3f9635d4e0e",
+      "bytes": 40590
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_target_family_evidence.json",
+      "sha256": "1b6eecf002222d906472274907969bf09ce9f747caa073411fde75c5d2542c29",
+      "bytes": 1185028
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_verified_offline_results.json",
+      "sha256": "09e387f9af7a9af6bdab8c5d95e5f88c273adb45d4723bfd48554a86658a71dd",
+      "bytes": 74230
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/live_checkpoint_coverage.json",
+      "sha256": "9739464ac7cb80107ff9119c2ca381ad946e5c8b6bf628fcc4a869d2b647ed3f",
+      "bytes": 2551
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/live_code_audit.json",
+      "sha256": "82387427867e7096d94bbb2a2f7d1b7a16c5040bed594e0a9e9fa03bb9ec931a",
+      "bytes": 42115
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/live_local_results_inventory.json",
+      "sha256": "b603a3ca597366befd3029d6edcfc8e06657b21c6e6e02d73e280759b7c19d01",
+      "bytes": 50848
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/live_relevant_code_changes.json",
+      "sha256": "6f44f39667394a909ff94bfad97487719fd0db6d807a5a80ff2f349930cde53c",
+      "bytes": 4920
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/live_source_history_inventory.json",
+      "sha256": "8376bce616f68bccb7b6615c11b0421a115192957cb5206c6750b91ed68ead63",
+      "bytes": 37922
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/math_history_audit.json",
+      "sha256": "74ab4d90aa439035cf8d0f6d049e2167159b8bc5ff577fe940b51ae396a21e52",
+      "bytes": 62768
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/recovered_artifacts.json",
+      "sha256": "b892d57e6c7e88d3cb31d89fdb44d3b262831d6e98ab951f57a2d22b17d74a7a",
+      "bytes": 1123
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_inventory_build.py",
+      "sha256": "6a56144654882ee9a70f2b838e7d5654221d5c37d143e3912dd1258140c0f70c",
+      "bytes": 8755
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_recompute_offline_results.py",
+      "sha256": "eefde55e1418f3a92bc5590a728bd87e556cf07aa3eb0cdfd2aff9b0bdaed0ea",
+      "bytes": 14481
+    },
+    {
+      "path": "ThesisDocs/verification/repository_review_2026-10-05/data_validate_saved_artifacts.py",
+      "sha256": "2cd1cc2b6ab5d3d4ca75f5632bfcf694854c98ad57fa245f3949c04af2164340",
+      "bytes": 6381
+    }
+  ]
+}

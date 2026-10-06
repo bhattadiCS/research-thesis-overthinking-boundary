@@ -1,0 +1,994 @@
+[
+  {
+    "path": "research/algorithm_v2_experiments.py",
+    "sha256": "555bd7156290ff38254a650cab0ef13385b6768a37d50c6a24969ffe8ceb1720",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "c4e98fc552aba4253f8876fefd1c145eebda096c",
+        "date": "2026-07-10T12:47:10-04:00",
+        "subject": "tools: autonomous v2 driver with 20-min checkpoint pushes + verified harness"
+      },
+      {
+        "sha": "22b23f8f5e31d9e91fdbc85a87fc0a27ccf7d343",
+        "date": "2026-07-10T12:33:41-04:00",
+        "subject": "research: N1/N4 harness + Nvidia-workspace runbook for algorithm-v2"
+      }
+    ]
+  },
+  {
+    "path": "research/algorithm_v2_experiments_n2_n3.py",
+    "sha256": "db8ba0439f0e52f7b011d98a6cebf28e7bb23c390f480bc5ed9c6dcfc7344671",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "52af188222344205c66e557ca8636f0644bfd55f",
+        "date": "2026-07-12T12:18:27-04:00",
+        "subject": "feat: add implementation and run helper for Tier-1 N2/N3 experiments"
+      }
+    ]
+  },
+  {
+    "path": "research/analyze_committee_domain_decomposition.py",
+    "sha256": "6ad4c9d0d847493746d1930dd18622ef15dd0b02440e610095e8afd06a1b4022",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/analyze_committee_factor_ablation.py",
+    "sha256": "4f5d9438313e4da7a5cfa7ed44246e9a1d5db8eb80ddff789a8b7bb57ea6ffdb",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/analyze_committee_peer_dynamics.py",
+    "sha256": "b9fc358a46da4bc086b3e98400cbb5b5d4f5e6db8cdb37b954104363ab8d3bdf",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/analyze_online_stopping_results.py",
+    "sha256": "39332a411e29c96e8c46214ae0e4495364f11492112ecb9672eb3a56625c6ba6",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+        "date": "2026-10-03T00:40:13-04:00",
+        "subject": "Fix graders, stopping validation and research ledger audits"
+      },
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  },
+  {
+    "path": "research/audit_prospective_protocol.py",
+    "sha256": "0565042c666f40bf564af6a5d6caf6fe86ef036d874cfc312c02c98d3b994e37",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/committee_peer_dynamics.py",
+    "sha256": "1f973ca3744a6590992dc4c71d486f5e4a14d8d57143a8ed04b87939e3598df1",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/learned_online_stopping_controller.py",
+    "sha256": "d7443c9f7c73882db9ae6e845e6c826acc923977c63646fea15667636efe74fe",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+        "date": "2026-10-03T00:40:13-04:00",
+        "subject": "Fix graders, stopping validation and research ledger audits"
+      },
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  },
+  {
+    "path": "research/offline_policy_experiments.py",
+    "sha256": "6b4e467a0b2f7ca16c8a0acee519dc8187f6e70c18479d7013b5d98c1f0a305a",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "2660d40f7d9fc68d82154bb99f90da105c84b809",
+        "date": "2026-07-10T10:22:37-04:00",
+        "subject": "research: pre-registered offline experiments P1/P2/P3a/P13 + P6 (results)"
+      }
+    ]
+  },
+  {
+    "path": "research/online_generation.py",
+    "sha256": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  },
+  {
+    "path": "research/online_stopping_controller.py",
+    "sha256": "f49c5252e2d47c1cdd31fbeecbb2f124dc9468af807cc4beb3b3198684c1cad0",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+        "date": "2026-10-03T00:40:13-04:00",
+        "subject": "Fix graders, stopping validation and research ledger audits"
+      },
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  },
+  {
+    "path": "research/prefix_stopping_model.py",
+    "sha256": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  },
+  {
+    "path": "research/prospective_peer_dynamics.py",
+    "sha256": "e017ad68d55a9acb0982344580ca0c85ef93083f7ca4747ca9a53cf959366000",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "d36584547c6bef17ad3315566ed817ec3f65a58c",
+        "date": "2026-07-20T09:02:12-04:00",
+        "subject": "fix: resolve pd.Series groupby type and answer_span_std_entropy in prospective peer dynamics adapter"
+      },
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/real_trace_experiments.py",
+    "sha256": "78136a39c4491c4fbb63694fffde0db35fc29bb34ccad708f83205e032bc06cf",
+    "tracked": true,
+    "change_count": 72,
+    "history": [
+      {
+        "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+        "date": "2026-10-03T00:40:13-04:00",
+        "subject": "Fix graders, stopping validation and research ledger audits"
+      },
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      },
+      {
+        "sha": "56759a9fdd5b2168cc9b52bc179cada69252afc0",
+        "date": "2026-07-16T00:46:56-04:00",
+        "subject": "fix: wrap sympy's parse_expr in the alarm signal timeout block to prevent hangs on pathological mathematical strings"
+      },
+      {
+        "sha": "92efe5090ffa18337e19055f644ab2caa59e3aab",
+        "date": "2026-07-15T17:30:58-04:00",
+        "subject": "fix: wrap pd.read_csv in try-except blocks against EmptyDataError and load HF_TOKEN automatically from .hf_token"
+      },
+      {
+        "sha": "03a93b8c0e4bcd7b2bd6db75f4f69c461e763c44",
+        "date": "2026-07-15T17:28:48-04:00",
+        "subject": "fix: safeguard read_csv calls against EmptyDataError from 0-byte placeholder files during checkpoint reconciliation"
+      },
+      {
+        "sha": "49401f81030bf2895bc27ccdf34a96f91335f9e3",
+        "date": "2026-07-15T08:48:08-04:00",
+        "subject": "Add signal-based alarm timeout to sympy.simplify in math_answers_equivalent to prevent hangs on complex LLM math expressions"
+      },
+      {
+        "sha": "646b37940e6a46fb0a0090803a43ef92b3935a03",
+        "date": "2026-07-14T22:11:05-04:00",
+        "subject": "perf: mean pool hidden states on GPU before copying, shrinking CPU transfer size by 1000x for peak Blackwell efficiency"
+      },
+      {
+        "sha": "5a06073241e1daf5101b378b57e443048d9465b0",
+        "date": "2026-07-14T19:36:45-04:00",
+        "subject": "perf: extract and copy L1/L2 layers to CPU and delete massive all_hidden_states tuple before clearing VRAM to prevent GPU allocator hangs"
+      },
+      {
+        "sha": "ee2521d30ba0ac2a8a4d34ad2337fb4a56e09487",
+        "date": "2026-07-14T09:25:39-04:00",
+        "subject": "fix: restore stable CPU tensor copy path for random projections to prevent CUDA deadlock hangs"
+      },
+      {
+        "sha": "45997657b926566035bcaa9ddc302ace823d6749",
+        "date": "2026-07-13T21:31:08-04:00",
+        "subject": "perf: compile-free GPU-based random projection with caching for 2x faster steps extraction"
+      },
+      {
+        "sha": "07fedbd45e7c8a3db5d30c13735c8a1129f997f0",
+        "date": "2026-07-12T17:45:11-04:00",
+        "subject": "feat: implement Tier-3 pilot telemetry for N7 self-consistency and N8 extended observables"
+      },
+      {
+        "sha": "84853411fcc95569c0cdc2694d2847aabed5b81a",
+        "date": "2026-07-12T11:54:17-04:00",
+        "subject": "fix: support pyarrow-backed string dtypes in _sanitize_step_frame and _escape_control_chars"
+      },
+      {
+        "sha": "ce0167c6066b0caeb85370777df6ee14b9281d30",
+        "date": "2026-07-10T10:09:04-04:00",
+        "subject": "fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12"
+      },
+      {
+        "sha": "34d76c03407d44dacabdb248996c4076596e2454",
+        "date": "2026-07-10T09:54:09-04:00",
+        "subject": "fix: drop hidden-state cache requirement from completeness reconciliation"
+      },
+      {
+        "sha": "0fd7317f894977f0b944d207ed86d2747d975179",
+        "date": "2026-06-24T17:06:54-04:00",
+        "subject": "fix(harness): drop truncated CSV rows on resume reconcile"
+      },
+      {
+        "sha": "c0b5ce81042609593889f864abaa758e25767c48",
+        "date": "2026-06-24T17:04:28-04:00",
+        "subject": "fix(harness): tolerate string-contaminated columns in cell summary"
+      },
+      {
+        "sha": "122358a6c2787c2a7d8190c5fbc8ba7b9978b616",
+        "date": "2026-06-20T23:25:00-04:00",
+        "subject": "feat: text-only Mistral-Small-24B + GPQA and ARC (multiple-choice) datasets"
+      },
+      {
+        "sha": "8beba2d7c5ec6ced9f5b9bdef60ecd6c2afe24f4",
+        "date": "2026-06-20T11:38:31-04:00",
+        "subject": "fix(grader): credit prose/unit-wrapped numeric MATH answers"
+      },
+      {
+        "sha": "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+        "date": "2026-06-20T10:31:08-04:00",
+        "subject": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)"
+      },
+      {
+        "sha": "08411354d39c522f073ac4f16eb3f63e97265a52",
+        "date": "2026-06-20T01:02:50-04:00",
+        "subject": "feat: data-driven cross-family summary + MATH dataset parser"
+      },
+      {
+        "sha": "19450224baa361408f4059f7cf885c8147fdfcdd",
+        "date": "2026-06-18T21:39:53-04:00",
+        "subject": "feat: add experiment-matrix orchestrator and RunAI launcher"
+      },
+      {
+        "sha": "41195db8009ba31109fae05fa631325a077359b1",
+        "date": "2026-06-12T11:15:25-04:00",
+        "subject": "fix: resolve traceback memory leak in safe_generate_batch_with_diagnostics"
+      },
+      {
+        "sha": "589b7976e9567dad3efd9cd8578168c05266d36a",
+        "date": "2026-06-12T10:55:41-04:00",
+        "subject": "fix: load openai/gsm8k directly to avoid HF UriError with datasets v5"
+      },
+      {
+        "sha": "376254b12c7bc87970cf6092386ad481d304867f",
+        "date": "2026-06-12T10:49:35-04:00",
+        "subject": "robustness: add error handling for GSM8K dataset loading"
+      },
+      {
+        "sha": "586a8bdf889eab36f705fc76217de8fd808fa48f",
+        "date": "2026-05-17T19:00:28-04:00",
+        "subject": "fix: force single-GPU device_map for small 4-bit models (meta tensor crash)"
+      },
+      {
+        "sha": "32963ca7ffd33be148e0ee7356db04dc101b166f",
+        "date": "2026-05-17T19:00:28-04:00",
+        "subject": "fix: force single-GPU device_map for small 4-bit models (meta tensor crash)"
+      },
+      {
+        "sha": "658cfd4932aa6748e9159502fc29ffd1eb9c6a9d",
+        "date": "2026-05-17T18:54:02-04:00",
+        "subject": "fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint)"
+      },
+      {
+        "sha": "9a99aff6f09a0d258e5fde5f76f1c6bd652a0e58",
+        "date": "2026-05-17T18:54:02-04:00",
+        "subject": "fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint)"
+      },
+      {
+        "sha": "0bd29f9eece5763fdf128fbbafdc8cb7d8be7c73",
+        "date": "2026-05-17T18:46:15-04:00",
+        "subject": "fix: lazy-import multimodal classes + add torchvision to requirements"
+      },
+      {
+        "sha": "45072d1a85d3de02f4f0103282627c7f8db07359",
+        "date": "2026-05-17T18:46:15-04:00",
+        "subject": "fix: lazy-import multimodal classes + add torchvision to requirements"
+      },
+      {
+        "sha": "81e54955beb806bd75ba7642e06bc328d3257328",
+        "date": "2026-05-11T22:21:10-04:00",
+        "subject": "Move Gemma scoring postprocess to CPU"
+      },
+      {
+        "sha": "87036433d12b63dce04b53d1d71067014a06d818",
+        "date": "2026-05-11T22:21:10-04:00",
+        "subject": "Move Gemma scoring postprocess to CPU"
+      },
+      {
+        "sha": "62f97100a6302ca049ec3ed3012e0cd2174e0cfb",
+        "date": "2026-05-11T22:14:28-04:00",
+        "subject": "Reduce full-run Gemma scoring memory"
+      },
+      {
+        "sha": "69d2b25be9c0e8cad68fac5781d05d133792588a",
+        "date": "2026-05-11T22:14:28-04:00",
+        "subject": "Reduce full-run Gemma scoring memory"
+      },
+      {
+        "sha": "e911669713f4df4db0f0cfe06fa49a944c14cc8c",
+        "date": "2026-05-11T22:05:37-04:00",
+        "subject": "Pin Gemma 4bit text path to GPU"
+      },
+      {
+        "sha": "7995962d069fc0219f22b0e73ef2cdd14f8bc7c6",
+        "date": "2026-05-11T22:05:37-04:00",
+        "subject": "Pin Gemma 4bit text path to GPU"
+      },
+      {
+        "sha": "8451287357b833656203e4c11a8d04fef8b002a1",
+        "date": "2026-05-11T22:00:31-04:00",
+        "subject": "Patch meta-state 4-bit hook dispatch"
+      },
+      {
+        "sha": "64ca4e74a6a3b3c33b88bf72038e099777011188",
+        "date": "2026-05-11T22:00:31-04:00",
+        "subject": "Patch meta-state 4-bit hook dispatch"
+      },
+      {
+        "sha": "d2705d10840b1a47ab79e535e775981fedab23ee",
+        "date": "2026-05-11T21:53:52-04:00",
+        "subject": "Patch 4-bit dispatch compatibility on RUN:AI"
+      },
+      {
+        "sha": "53ce3c0b841f793dd10a3efcc6d090283c4d1b18",
+        "date": "2026-05-11T21:53:52-04:00",
+        "subject": "Patch 4-bit dispatch compatibility on RUN:AI"
+      },
+      {
+        "sha": "a28c3d0cdfc081d9c2b8befe12fd253a19e4d9c2",
+        "date": "2026-05-11T21:45:53-04:00",
+        "subject": "Enable 4-bit CPU offload for constrained GPUs"
+      },
+      {
+        "sha": "07e452672163b451332137f10bbf2ca2d2ef2bdc",
+        "date": "2026-05-11T21:45:53-04:00",
+        "subject": "Enable 4-bit CPU offload for constrained GPUs"
+      },
+      {
+        "sha": "cdf5797240890f9293e2b95e5fea3791db0b4e5f",
+        "date": "2026-04-04T12:16:32-04:00",
+        "subject": "Final Infrastructure: Initialized 30-day autonomous solving protocol and performed model/equation cleanup"
+      },
+      {
+        "sha": "72fd52cd619167b5ab5dd5bc36113c421be76660",
+        "date": "2026-04-04T12:16:32-04:00",
+        "subject": "Final Infrastructure: Initialized 30-day autonomous solving protocol and performed model/equation cleanup"
+      },
+      {
+        "sha": "642df44114dff6825ffbd4aca18d026f16c5ff47",
+        "date": "2026-04-04T11:44:19-04:00",
+        "subject": "Align CPU audit, frontier analysis, and README"
+      },
+      {
+        "sha": "093286b322ff4bb9c947380fc90a49fda9da980c",
+        "date": "2026-04-04T11:44:19-04:00",
+        "subject": "Align CPU audit, frontier analysis, and README"
+      },
+      {
+        "sha": "e797d9ef2ba29241e061693c8f57f8b94b149f62",
+        "date": "2026-04-04T13:38:06Z",
+        "subject": "chore: commit agent changes \u2014 canonicalize catalog; add equation_analysis; frontier smoke validation reports"
+      },
+      {
+        "sha": "2291ba73af7ad787e56a99106dd1d80511bb4ec8",
+        "date": "2026-04-04T13:38:06Z",
+        "subject": "chore: commit agent changes \u2014 canonicalize catalog; add equation_analysis; frontier smoke validation reports"
+      },
+      {
+        "sha": "3684248483f4d38f11a5e09860eab2792ad7b90c",
+        "date": "2026-04-03T21:39:40Z",
+        "subject": "chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)"
+      },
+      {
+        "sha": "ad6faad4d851efc12787834d6ad604648c1dc8f1",
+        "date": "2026-04-03T21:39:40Z",
+        "subject": "chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)"
+      },
+      {
+        "sha": "ef66fd4a21c727dd324da51c41df5e7988486eae",
+        "date": "2026-04-03T10:28:53-04:00",
+        "subject": "[ALGO-X] Phase 2: L4 GPU Optimization + Frontier Model Integration (Gemma 4/Qwen 3.5/Llama 4)"
+      },
+      {
+        "sha": "089bf59f87d43404140500875219d7520250a39f",
+        "date": "2026-04-03T10:28:53-04:00",
+        "subject": "[OBE-SYSTEM] Phase 2: L4 GPU Optimization + Frontier Model Integration (Gemma 4/Qwen 3.5/Llama 4)"
+      },
+      {
+        "sha": "a7e3849b2f7e9ef6451e05c7d0b9995442ec8cee",
+        "date": "2026-04-03T10:20:40-04:00",
+        "subject": "feat(algo-x): integrate Gemma 4, Qwen 3.5, Llama 4; enable 4-bit L4 optimization and autonomous validation prompt"
+      },
+      {
+        "sha": "2a883cc6f315acd08f1edeb9b3c53412d7de79be",
+        "date": "2026-04-03T10:20:40-04:00",
+        "subject": "feat(obe-system): integrate Gemma 4, Qwen 3.5, Llama 4; enable 4-bit L4 optimization and autonomous validation prompt"
+      },
+      {
+        "sha": "58b3a3f11a578abb63147ebbb03533771cd38e25",
+        "date": "2026-04-02T23:39:24Z",
+        "subject": "fix: restore mistral l4 runtime"
+      },
+      {
+        "sha": "1641b2ca80e8a4053069f393280d9965fe799088",
+        "date": "2026-04-02T23:39:24Z",
+        "subject": "fix: restore mistral l4 runtime"
+      },
+      {
+        "sha": "e6be9ddcaf0df163dd95a2bd576fbc905c2a37e8",
+        "date": "2026-04-02T15:57:22Z",
+        "subject": "perf: select mistral l4 runtime"
+      },
+      {
+        "sha": "13ad1ff1c22d6c036cfab09aed161f08e6d8c725",
+        "date": "2026-04-02T15:57:22Z",
+        "subject": "perf: select mistral l4 runtime"
+      },
+      {
+        "sha": "048036e7b3be65e4cfb224f537e76af7c63ecc14",
+        "date": "2026-04-02T15:02:16Z",
+        "subject": "feat: add mistral l4 benchmark path"
+      },
+      {
+        "sha": "ba7e28f3217794f057df2c7ae99b28203f38bd36",
+        "date": "2026-04-02T15:02:16Z",
+        "subject": "feat: add mistral l4 benchmark path"
+      },
+      {
+        "sha": "fe9aeb8b3394264e7872d39a0a4ad31adf0bc6fe",
+        "date": "2026-04-02T10:21:53-04:00",
+        "subject": "recover qwen7b run and regenerate analyses"
+      },
+      {
+        "sha": "afad4f0296ac72d0c3e58a29eff96ef060902edc",
+        "date": "2026-04-02T10:21:53-04:00",
+        "subject": "recover qwen7b run and regenerate analyses"
+      },
+      {
+        "sha": "bbb9778ec80764dc0a2220712db6a94b151d8ded",
+        "date": "2026-04-02T04:02:23Z",
+        "subject": "Preserve runtime context on refresh"
+      },
+      {
+        "sha": "6b5ad36915dd89067f5577dae42372234fb723d8",
+        "date": "2026-04-02T04:02:23Z",
+        "subject": "Preserve runtime context on refresh"
+      },
+      {
+        "sha": "a63bcedf26bbe8868dba3ea86c3df8e39e16403d",
+        "date": "2026-04-02T02:38:04Z",
+        "subject": "save records"
+      },
+      {
+        "sha": "f6fe839ae34d22f8471b0b7089638ef1735d62dd",
+        "date": "2026-04-02T02:38:04Z",
+        "subject": "save records"
+      },
+      {
+        "sha": "3832b1ea4c635fe61cbf541d1fe4060b6622e824",
+        "date": "2026-04-01T03:44:09Z",
+        "subject": "save progress"
+      },
+      {
+        "sha": "d98737742887de3019c9b6435973bca4239e6913",
+        "date": "2026-04-01T03:44:09Z",
+        "subject": "save progress"
+      },
+      {
+        "sha": "bf4916a641ed1ccb1d8cb9cee7b7740325e48445",
+        "date": "2026-03-31T16:28:47-04:00",
+        "subject": "Revamp real_trace protocol with flexible modes and baseline"
+      },
+      {
+        "sha": "92681da827e4e17c63baa9582d3aa3621953f13c",
+        "date": "2026-03-31T16:28:47-04:00",
+        "subject": "Revamp real_trace protocol with flexible modes and baseline"
+      },
+      {
+        "sha": "43edcb350a5b09e70c7d7597a8c8f43303be513f",
+        "date": "2026-03-31T15:39:16-04:00",
+        "subject": "Add Colab runner and research package"
+      },
+      {
+        "sha": "6f89d5bd4266eaae7056642bcce7132b66a54393",
+        "date": "2026-03-31T15:39:16-04:00",
+        "subject": "Add Colab runner and research package"
+      }
+    ]
+  },
+  {
+    "path": "research/run_active_stopping.py",
+    "sha256": "8161f9eff04bdf012af41ebc911086c4278f5cb1a59de602735d62f014d1cec4",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      },
+      {
+        "sha": "5955600539f6a9a27b417872b86d3da184128935",
+        "date": "2026-07-01T18:15:54-04:00",
+        "subject": "Add active stopping simulation, stakes sweep, and prompted vs distilled comparison reports"
+      }
+    ]
+  },
+  {
+    "path": "research/run_committee_oof_experiments.py",
+    "sha256": "2c430d338d6b291258c808d1a6747d73576aee48e5d42b8928898a119d144786",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "d36584547c6bef17ad3315566ed817ec3f65a58c",
+        "date": "2026-07-20T09:02:12-04:00",
+        "subject": "fix: resolve pd.Series groupby type and answer_span_std_entropy in prospective peer dynamics adapter"
+      },
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_committee_oof_minimal.py",
+    "sha256": "5922a272ca4a2ae005701245880a98c6d2f3a89b9462a8167a109dfa3cc4a2a4",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_committee_oof_no_timing.py",
+    "sha256": "02c1874845064f3783b2d9320a3a244a875404a2fa242227b7b1e997a4616ec9",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_committee_oof_peer_dynamics.py",
+    "sha256": "5d58098c2d68171777a9c8b6b7ec68ff3e69257577b08afe6f05a15bcefc952d",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_experiment_matrix.py",
+    "sha256": "072bf45b5fe9e025ed9506df2871bdd04dc1fa2dfba19273f34a94854c4fbd3c",
+    "tracked": true,
+    "change_count": 7,
+    "history": [
+      {
+        "sha": "ce0167c6066b0caeb85370777df6ee14b9281d30",
+        "date": "2026-07-10T10:09:04-04:00",
+        "subject": "fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12"
+      },
+      {
+        "sha": "8b5391fe0295e5f2c7776905ca2d80537136cf9b",
+        "date": "2026-06-21T13:42:49-04:00",
+        "subject": "perf: 2x batch sizes + batch-aware VRAM footprint for higher decode throughput"
+      },
+      {
+        "sha": "a1d5b7d405dd5f33f0d82e98653fa04c667c7c39",
+        "date": "2026-06-21T13:06:03-04:00",
+        "subject": "perf: tighter VRAM footprint estimate + higher budget so models co-run"
+      },
+      {
+        "sha": "122358a6c2787c2a7d8190c5fbc8ba7b9978b616",
+        "date": "2026-06-20T23:25:00-04:00",
+        "subject": "feat: text-only Mistral-Small-24B + GPQA and ARC (multiple-choice) datasets"
+      },
+      {
+        "sha": "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+        "date": "2026-06-20T10:31:08-04:00",
+        "subject": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)"
+      },
+      {
+        "sha": "08411354d39c522f073ac4f16eb3f63e97265a52",
+        "date": "2026-06-20T01:02:50-04:00",
+        "subject": "feat: data-driven cross-family summary + MATH dataset parser"
+      },
+      {
+        "sha": "19450224baa361408f4059f7cf885c8147fdfcdd",
+        "date": "2026-06-18T21:39:53-04:00",
+        "subject": "feat: add experiment-matrix orchestrator and RunAI launcher"
+      }
+    ]
+  },
+  {
+    "path": "research/run_learned_online_stopping.py",
+    "sha256": "7c22db38786875b06f6f0d2f04736b07ae6420eab955665e78369d633235c93b",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+        "date": "2026-10-03T00:40:13-04:00",
+        "subject": "Fix graders, stopping validation and research ledger audits"
+      },
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  },
+  {
+    "path": "research/run_nextgen_099_auc_experiments.py",
+    "sha256": "1c54e8c5db1016f621eb589d32bbbfe63daabe1ab5d4ea07c897247dbe9a78e2",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "0cf8c297ceb4402e013fc9ab725fa553e494ae52",
+        "date": "2026-07-20T18:34:27-04:00",
+        "subject": "feat: implement Next-Gen 0.99 AUC target pipeline with high-order consensus physics and meta-ensemble"
+      }
+    ]
+  },
+  {
+    "path": "research/run_nextgen_experiments.py",
+    "sha256": "992b2c7a02bd716832a152d0abec8f7e4d4820096b58a9053adc49121bc9a142",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "ab0d31d259f1286bddc5c3e3520c0bee56f6752f",
+        "date": "2026-07-18T22:31:15-04:00",
+        "subject": "results: add Next-Gen Experiment Suite (Jerk, Torsion, Causal RoPE Transformer, Gated MoE Probe)"
+      }
+    ]
+  },
+  {
+    "path": "research/run_online_stopping_evaluation.py",
+    "sha256": "a10f61098b6a2d015c536ebabdf71b92c73810ad96859b18257c91a02e3687e8",
+    "tracked": true,
+    "change_count": 2,
+    "history": [
+      {
+        "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+        "date": "2026-10-03T00:40:13-04:00",
+        "subject": "Fix graders, stopping validation and research ledger audits"
+      },
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  },
+  {
+    "path": "research/run_optimization_experiments.py",
+    "sha256": "7f9c590d9ae867542e46501052f536ad8657e18b512b94ae5de8c748aa87e592",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "2ea955afccb58bb698f6609776802b6818acac37",
+        "date": "2026-07-18T09:48:41-04:00",
+        "subject": "results: add deep global sweep analysis report and tournament runner script"
+      }
+    ]
+  },
+  {
+    "path": "research/run_prospective_committee_protocol.py",
+    "sha256": "6619ea19f650ba7d4b585bffab92df00f8bd3fc57aa2d4134946c92516831fef",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_selected_answer_capacity_sweep.py",
+    "sha256": "befa73c84767ebcb5b1ab163c6ea2f195f0266e932566ad585ec9fd8e2916310",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_selected_answer_causal_dynamics_oof.py",
+    "sha256": "38ccfb969a9276fa1b8f9f126d7e8a5998d5d0e862c935be48370c94741326c6",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_selected_answer_content_oof.py",
+    "sha256": "59a6da648806db44cf7e4f79bbff532eb686e9478126d2e0220acdd30da948ac",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_selected_answer_oof_experiments.py",
+    "sha256": "fe068fdf1de72621514fc64a34be0376db8cefd4cbd1b299126a5f8583416e54",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_selected_answer_representation_oof_experiments.py",
+    "sha256": "5cc9383831c1d1abf4095b668c5d25ae82a3d39e204b911ddc85ad26f41683a9",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_selected_answer_temporal_shape_oof.py",
+    "sha256": "66eaa89b71a3e89e34f82359b3a9f015642357535d341c562230223af06f1262",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_strict_tabular_stopping_oof.py",
+    "sha256": "179de645d8ed89c9491179cf7408c32a65743458dc6d2d9b0993050ac474ca63",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/run_strict_text_stopping_oof.py",
+    "sha256": "f50aaa05056791d07e6cebafa838d546db04eb1079f4a45882039e8e0603260d",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/selected_answer_causal_dynamics.py",
+    "sha256": "afe3f5393372f6449ee0d814e5d18e0d8952f0fc18c9333729205f706afd74a3",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/selected_answer_temporal_shape.py",
+    "sha256": "bbef1fe114e1f0934108b1542abc20923154dadab555f270c6cbb402b29217ac",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+        "date": "2026-07-20T09:01:33-04:00",
+        "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC"
+      }
+    ]
+  },
+  {
+    "path": "research/trace_analysis.py",
+    "sha256": "29e1a91d6f66b82048893975d18b1397b94a0bb542cf8d26b30897b6d1d5fe5e",
+    "tracked": true,
+    "change_count": 12,
+    "history": [
+      {
+        "sha": "07fedbd45e7c8a3db5d30c13735c8a1129f997f0",
+        "date": "2026-07-12T17:45:11-04:00",
+        "subject": "feat: implement Tier-3 pilot telemetry for N7 self-consistency and N8 extended observables"
+      },
+      {
+        "sha": "84853411fcc95569c0cdc2694d2847aabed5b81a",
+        "date": "2026-07-12T11:54:17-04:00",
+        "subject": "fix: support pyarrow-backed string dtypes in _sanitize_step_frame and _escape_control_chars"
+      },
+      {
+        "sha": "f89ff3863f5723a63658ac5617b1f12d4c44fcc3",
+        "date": "2026-06-27T11:42:01-04:00",
+        "subject": "fix(analysis)+complete: sanitize hard-kill-corrupted rows; finish all 52 cells"
+      },
+      {
+        "sha": "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+        "date": "2026-06-20T10:31:08-04:00",
+        "subject": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)"
+      },
+      {
+        "sha": "a63bcedf26bbe8868dba3ea86c3df8e39e16403d",
+        "date": "2026-04-02T02:38:04Z",
+        "subject": "save records"
+      },
+      {
+        "sha": "f6fe839ae34d22f8471b0b7089638ef1735d62dd",
+        "date": "2026-04-02T02:38:04Z",
+        "subject": "save records"
+      },
+      {
+        "sha": "60e943ca5d1aa1cab9f4420afccebec8d74d0c7c",
+        "date": "2026-04-01T17:21:29Z",
+        "subject": "Add cross-family L4 results and README overview"
+      },
+      {
+        "sha": "2351c8f337c3ac3fb70f401fce67e46679ebad4f",
+        "date": "2026-04-01T17:21:29Z",
+        "subject": "Add cross-family L4 results and README overview"
+      },
+      {
+        "sha": "3832b1ea4c635fe61cbf541d1fe4060b6622e824",
+        "date": "2026-04-01T03:44:09Z",
+        "subject": "save progress"
+      },
+      {
+        "sha": "d98737742887de3019c9b6435973bca4239e6913",
+        "date": "2026-04-01T03:44:09Z",
+        "subject": "save progress"
+      },
+      {
+        "sha": "43edcb350a5b09e70c7d7597a8c8f43303be513f",
+        "date": "2026-03-31T15:39:16-04:00",
+        "subject": "Add Colab runner and research package"
+      },
+      {
+        "sha": "6f89d5bd4266eaae7056642bcce7132b66a54393",
+        "date": "2026-03-31T15:39:16-04:00",
+        "subject": "Add Colab runner and research package"
+      }
+    ]
+  },
+  {
+    "path": "research/train_prefix_stopping_model.py",
+    "sha256": "caf9a316220ecd2d36ec7479500ad8cdb0b9112b64b50c569aa17911045311a2",
+    "tracked": true,
+    "change_count": 1,
+    "history": [
+      {
+        "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+        "date": "2026-10-02T22:36:31-04:00",
+        "subject": "Add verified thesis and live stopping research package"
+      }
+    ]
+  }
+]

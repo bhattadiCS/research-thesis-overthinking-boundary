@@ -1,0 +1,601 @@
+﻿sha,author_date,subject,github_main,code_paths,evidence_paths,merge_parent_union
+6f89d5bd4266eaae7056642bcce7132b66a54393,2026-03-31T15:39:16-04:00,Add Colab runner and research package,True,5,25,False
+43edcb350a5b09e70c7d7597a8c8f43303be513f,2026-03-31T15:39:16-04:00,Add Colab runner and research package,False,5,25,False
+92681da827e4e17c63baa9582d3aa3621953f13c,2026-03-31T16:28:47-04:00,Revamp real_trace protocol with flexible modes and baseline,True,2,0,False
+bf4916a641ed1ccb1d8cb9cee7b7740325e48445,2026-03-31T16:28:47-04:00,Revamp real_trace protocol with flexible modes and baseline,False,2,0,False
+d98737742887de3019c9b6435973bca4239e6913,2026-04-01T03:44:09Z,save progress,True,4,303,False
+3832b1ea4c635fe61cbf541d1fe4060b6622e824,2026-04-01T03:44:09Z,save progress,False,4,303,False
+fc85a3e6fa74e63ce013870722f4c0ffa32a99ba,2026-04-01T03:46:18Z,run continuing,True,0,18,False
+1bd0f17565c720fc202efb602509fbb00317fc63,2026-04-01T03:46:18Z,run continuing,False,0,18,False
+708cddfef7312b63d53d6ed436a9f30f635cf3fb,2026-04-01T03:46:57Z,save more train data,True,0,10,False
+6c83a25cf29088401d24d8d26343357340dbfb24,2026-04-01T03:46:57Z,save more train data,False,0,10,False
+dbc5477d354dbc350664ff38156d959c818cdfb0,2026-04-01T04:15:39Z,Saving more data,True,0,118,False
+68b4399db3f7f7c11234d6eb746489cea0d9a864,2026-04-01T04:15:39Z,Saving more data,False,0,118,False
+e2921d2d1d58989128db07f318adf32960e57e7d,2026-04-01T04:31:59Z,continuing to save more data,True,0,66,False
+6f47f5026755b1f3a1bf3e6c0961188f86ab7d15,2026-04-01T04:31:59Z,continuing to save more data,False,0,66,False
+74dd4d49061e2cc04f8cd5d1da85fcdf49563b8f,2026-04-01T04:41:18Z,save again,True,0,42,False
+ef134eb21fb41d10f372b1c6dec6de551f0e93a0,2026-04-01T04:41:18Z,save again,False,0,42,False
+cebfefa145041c84812308ef125416c4dfedbc9d,2026-04-01T09:46:25-04:00,"Auto-shutdown keep-alive hook, concurrency flags, and recent artifact generation",True,2,4,False
+094552dac657a9dbec59a34c299818c422f3c5c0,2026-04-01T09:46:25-04:00,"Auto-shutdown keep-alive hook, concurrency flags, and recent artifact generation",False,2,4,False
+c9202d035d7741108a4aedf2e12a61ba97ba8551,2026-04-01T09:48:43-04:00,Merge remote batching updates and re-apply auto-shutdown trigger for Colab L4 instances,True,4,547,True
+583b022609d5d37bbcfd7524bca34afd091f7092,2026-04-01T09:48:43-04:00,Merge remote batching updates and re-apply auto-shutdown trigger for Colab L4 instances,False,4,547,True
+b7b75ab3bcfc29310613dce085ce62cf97f8630c,2026-04-01T15:40:10Z,saving optimized gpu run,True,1,358,False
+5f758884d4a1e73b848951c769cc09cfd2310573,2026-04-01T15:40:10Z,saving optimized gpu run,False,1,358,False
+bce43f6bcb3b5086d0e2d7412bc215b2e7a8f068,2026-04-01T15:40:23Z,save more,True,1,59,False
+9736c0712b2e9bd48b29f0b521859c5e7f83ac9f,2026-04-01T15:40:23Z,save more,False,1,59,False
+2351c8f337c3ac3fb70f401fce67e46679ebad4f,2026-04-01T17:21:29Z,Add cross-family L4 results and README overview,True,2,921,False
+60e943ca5d1aa1cab9f4420afccebec8d74d0c7c,2026-04-01T17:21:29Z,Add cross-family L4 results and README overview,False,2,921,False
+45ea7c23b9979d5162ebab5aa0dff6d47ffcb93e,2026-04-01T13:50:35-04:00,Clarify README research overview,True,0,0,False
+dc66954c42d28570702ba072063dc9b5eaf8ecd6,2026-04-01T13:50:35-04:00,Clarify README research overview,False,0,0,False
+9e7c527a7bc445f688a2bc8696530f93e93f5a6b,2026-04-01T13:53:11-04:00,Add thesis prep concepts to README,True,0,0,False
+1e87322a04f856b75d7cf0f6237c3be74c4efd31,2026-04-01T13:53:11-04:00,Add thesis prep concepts to README,False,0,0,False
+f0d496cc5e4a05c768126a1cbe98df6b5bd22289,2026-04-01T14:04:13-04:00,docs: add simplified research summary to README,True,0,0,False
+c1ba0f4979adb166bc93cba68a25e75954cad6f3,2026-04-01T14:04:13-04:00,docs: add simplified research summary to README,False,0,0,False
+f6fe839ae34d22f8471b0b7089638ef1735d62dd,2026-04-02T02:38:04Z,save records,True,5,286,False
+a63bcedf26bbe8868dba3ea86c3df8e39e16403d,2026-04-02T02:38:04Z,save records,False,5,286,False
+37dbf390f9b3b754ebfc4ff4af3727502ed9ce64,2026-04-02T03:10:12Z,more save,True,0,58,False
+0d653fe1e131f176aef29e41eb9f303398ab74dd,2026-04-02T03:10:12Z,more save,False,0,58,False
+f65bad67625a413f4fe075b51a376d1d538e6878,2026-04-02T03:56:03Z,save run,True,0,86,False
+e6f7116d287b4b924f5e3e5e02708709b3d271f6,2026-04-02T03:56:03Z,save run,False,0,86,False
+6b5ad36915dd89067f5577dae42372234fb723d8,2026-04-02T04:02:23Z,Preserve runtime context on refresh,True,1,0,False
+bbb9778ec80764dc0a2220712db6a94b151d8ded,2026-04-02T04:02:23Z,Preserve runtime context on refresh,False,1,0,False
+6af048fdf6f1b17a355e685904adf9f4e26825bd,2026-04-02T10:03:47-04:00,docs: add continuation prompt and ignore local backups,True,0,0,False
+162df1791de10f3bac04df29605c670e42d4cc25,2026-04-02T10:03:47-04:00,docs: add continuation prompt and ignore local backups,False,0,0,False
+afad4f0296ac72d0c3e58a29eff96ef060902edc,2026-04-02T10:21:53-04:00,recover qwen7b run and regenerate analyses,True,2,690,False
+fe9aeb8b3394264e7872d39a0a4ad31adf0bc6fe,2026-04-02T10:21:53-04:00,recover qwen7b run and regenerate analyses,False,2,690,False
+033f6d5add82ce0046088724b0c3df58a9622e26,2026-04-02T10:30:57-04:00,docs: refresh readme for audited thesis results,True,0,0,False
+2dfdde284a1c85f950dbf949e2d8c1f9eac467cb,2026-04-02T10:30:57-04:00,docs: refresh readme for audited thesis results,False,0,0,False
+295f2382929a20d25cfa746a365bbb7cfbd0e1f1,2026-04-02T10:38:26-04:00,docs: add autonomous thesis finalization prompt,True,0,0,False
+613f0102452928e152b0a20879bb3022b9ae6a25,2026-04-02T10:38:26-04:00,docs: add autonomous thesis finalization prompt,False,0,0,False
+33482eac7342ed47dfdaaf031dd8562d368e082c,2026-04-02T14:49:33Z,docs: add thesis stopping-rule algorithm,True,0,0,False
+b2a2b94b98bc473c8c5f39c7afb5fbd386d1466f,2026-04-02T14:49:33Z,docs: add thesis stopping-rule algorithm,False,0,0,False
+ba7e28f3217794f057df2c7ae99b28203f38bd36,2026-04-02T15:02:16Z,feat: add mistral l4 benchmark path,True,3,0,False
+048036e7b3be65e4cfb224f537e76af7c63ecc14,2026-04-02T15:02:16Z,feat: add mistral l4 benchmark path,False,3,0,False
+2d6d38233ee8d18f4259c9b4e0f38315471a746b,2026-04-02T15:06:23Z,test: checkpoint mistral smoke run,True,1,20,False
+9d74e3205ef2ff861fad9f32f1b764bfed73eb8f,2026-04-02T15:06:23Z,test: checkpoint mistral smoke run,False,1,20,False
+13ad1ff1c22d6c036cfab09aed161f08e6d8c725,2026-04-02T15:57:22Z,perf: select mistral l4 runtime,True,1,230,False
+e6be9ddcaf0df163dd95a2bd576fbc905c2a37e8,2026-04-02T15:57:22Z,perf: select mistral l4 runtime,False,1,230,False
+e6ea058ae5e250a61e7de5594da0e282d36873a4,2026-04-02T19:04:55-04:00,docs: update thesis finalization continuation prompt,True,0,0,False
+212b4e4c1a6753c494b345e67ffa767b48b2ead5,2026-04-02T19:04:55-04:00,docs: update thesis finalization continuation prompt,False,0,0,False
+240081c9863e0530129bd7ebca35d85835f1c820,2026-04-02T23:23:25Z,chore: add checkpointed mistral runner,True,1,0,False
+cd2824336036c909453451746df26605b996915d,2026-04-02T23:23:25Z,chore: add checkpointed mistral runner,False,1,0,False
+1641b2ca80e8a4053069f393280d9965fe799088,2026-04-02T23:39:24Z,fix: restore mistral l4 runtime,True,4,63,False
+58b3a3f11a578abb63147ebbb03533771cd38e25,2026-04-02T23:39:24Z,fix: restore mistral l4 runtime,False,4,63,False
+1bf52338fbabbee6df7fd793865d3c3c6d1d3c5e,2026-04-02T23:41:34Z,fix: normalize checkpoint driver paths,True,1,0,False
+e70eedff0ce6d8824e7bfd3203e710a069c696f3,2026-04-02T23:41:34Z,fix: normalize checkpoint driver paths,False,1,0,False
+ea225d2b8d2dfd364f6c98e0c8888b151d526e37,2026-04-02T23:57:25Z,exp: mistral checkpoint temp0.10_t028,True,0,36,False
+f7697f4406937c8c05d622ab25edbb1f625a7a45,2026-04-02T23:57:25Z,exp: mistral checkpoint temp0.10_t028,False,0,36,False
+afe782726eda5eedf8cf8daae86b88cf9f9eae28,2026-04-03T00:10:47Z,exp: mistral checkpoint temp0.10_t052,True,0,32,False
+8b5861fd09830a778810b0e9892b6676b9139228,2026-04-03T00:10:47Z,exp: mistral checkpoint temp0.10_t052,False,0,32,False
+7d7d3a5bcbda9f6148cb0e0ffc11624c01c15085,2026-04-03T00:11:03Z,feat: add mistral finalization watcher,True,2,0,False
+53b2dc864e855911a248f6cf27927dd160334d33,2026-04-03T00:11:03Z,feat: add mistral finalization watcher,False,2,0,False
+742c384e194cd59dde2af0ddfc0276f7ac6e7843,2026-04-03T00:25:37Z,exp: mistral checkpoint temp0.10_t076,True,0,32,False
+7fbb8614c01e71abe2ffc705232c8c88cc5788a2,2026-04-03T00:25:37Z,exp: mistral checkpoint temp0.10_t076,False,0,32,False
+92f58a28743b873b467eb659c277fd9172b3c0a1,2026-04-03T00:39:36Z,exp: mistral checkpoint temp0.10_t100,True,0,32,False
+2b2bf8a15e3678c9a16038dc55ccbe17491da2c1,2026-04-03T00:39:36Z,exp: mistral checkpoint temp0.10_t100,False,0,32,False
+821c524590545767e16f8e8b7d2dc01b70269fba,2026-04-03T00:55:52Z,exp: mistral checkpoint temp0.10_t128,True,0,36,False
+d698cde0c6d814cfec7d9017fc0be66dac935454,2026-04-03T00:55:52Z,exp: mistral checkpoint temp0.10_t128,False,0,36,False
+9751139730a60116835f7c2d22ad3ae05e0239a2,2026-04-03T01:07:58Z,exp: mistral checkpoint temp0.10_t152,True,0,32,False
+fd1ca7ee71df2f4eac6160891593a79ea1af580a,2026-04-03T01:07:58Z,exp: mistral checkpoint temp0.10_t152,False,0,32,False
+86d908b37d19d8b5bdb2e9fcb5b1bd158fbb4796,2026-04-03T01:23:29Z,exp: mistral checkpoint temp0.10_t176,True,0,32,False
+6e34a535f21b523136305b500f682889e18adb2a,2026-04-03T01:23:29Z,exp: mistral checkpoint temp0.10_t176,False,0,32,False
+8ae19863889a174979d1f519e152b9167bb087cd,2026-04-03T01:39:33Z,exp: mistral checkpoint temp0.10_t200,True,0,32,False
+280cb405aa5759fe7e77458c209366fc0a8fc39e,2026-04-03T01:39:33Z,exp: mistral checkpoint temp0.10_t200,False,0,32,False
+dc26e8dd116ff09b3ead97fca8a91ce65221872b,2026-04-03T01:55:57Z,exp: mistral checkpoint temp0.10_t228,True,0,36,False
+d1f31a255d4b0b65214a36c48881df158bd770f5,2026-04-03T01:55:57Z,exp: mistral checkpoint temp0.10_t228,False,0,36,False
+b287ec34520b3cdda2b28aa1382a48b5ee54a9d9,2026-04-03T02:08:38Z,exp: mistral checkpoint temp0.10_t252,True,0,32,False
+35119b062e6996effc6384728f9032a0f6fc7de5,2026-04-03T02:08:38Z,exp: mistral checkpoint temp0.10_t252,False,0,32,False
+3c3e4f5d267c8f1127b071387623390cf5a98cb5,2026-04-03T02:24:21Z,exp: mistral checkpoint temp0.10_t276,True,0,32,False
+412c5bdad9e0c5bcf8f96071af8b4d40da7c0583,2026-04-03T02:24:21Z,exp: mistral checkpoint temp0.10_t276,False,0,32,False
+a7ae8c48103d30329ecbda271217d63eeebb964c,2026-04-03T02:38:09Z,exp: mistral checkpoint temp0.10_t300,True,0,32,False
+1ebd6b1fa8c7679d0c8b485c0e08e03e2e21753e,2026-04-03T02:38:09Z,exp: mistral checkpoint temp0.10_t300,False,0,32,False
+7affd69216d893401e05e13371061d9026ebd0af,2026-04-03T02:54:49Z,exp: mistral checkpoint temp0.60_t028,True,0,36,False
+012e4b0724acb7d1c9233a5933e12b2185a24d38,2026-04-03T02:54:49Z,exp: mistral checkpoint temp0.60_t028,False,0,36,False
+a7e8fcfa3d3d1d5b473cf2b10905ff33a1a2afa2,2026-04-03T03:08:23Z,exp: mistral checkpoint temp0.60_t052,True,0,32,False
+edff400464c582971160094c88c7dad08b73a4db,2026-04-03T03:08:23Z,exp: mistral checkpoint temp0.60_t052,False,0,32,False
+21cdfd174ec122c5db62f93c0798ff8be0b9668f,2026-04-03T03:22:16Z,exp: mistral checkpoint temp0.60_t076,True,0,32,False
+74c0d7a65c0500527ceabce7a077ca260ab71baf,2026-04-03T03:22:16Z,exp: mistral checkpoint temp0.60_t076,False,0,32,False
+b01b0541679a0aed4e04412fe78b8f2858c8684a,2026-04-03T03:36:21Z,exp: mistral checkpoint temp0.60_t100,True,0,32,False
+6d64dc61ae2682100b1f852187850daad2046deb,2026-04-03T03:36:21Z,exp: mistral checkpoint temp0.60_t100,False,0,32,False
+74adcb95433f47db414e9cf0f0289347e9ec59f2,2026-04-03T03:54:51Z,exp: mistral checkpoint temp0.60_t128,True,0,36,False
+200e65d24113ff0a0cfa2ec5a5dd0c04414ede4f,2026-04-03T03:54:51Z,exp: mistral checkpoint temp0.60_t128,False,0,36,False
+8c959eb21b2e1d98be108ad8605d131238752a02,2026-04-03T04:08:19Z,exp: mistral checkpoint temp0.60_t152,True,0,32,False
+3eeae5b956469989ec227c0d8ea53cf1d3c48001,2026-04-03T04:08:19Z,exp: mistral checkpoint temp0.60_t152,False,0,32,False
+abf0dae308b98c82435161ee10121343d18c0694,2026-04-03T04:22:15Z,exp: mistral checkpoint temp0.60_t176,True,0,32,False
+1a068b13453ca2b2f3b45e430c3b8645866ae165,2026-04-03T04:22:15Z,exp: mistral checkpoint temp0.60_t176,False,0,32,False
+e2c09d8067405c8b1f52369112a5a666ed9904e2,2026-04-03T04:35:47Z,exp: mistral checkpoint temp0.60_t200,True,0,32,False
+94ef39a98091597f31e972a2cd8fd01c9ba7d676,2026-04-03T04:35:47Z,exp: mistral checkpoint temp0.60_t200,False,0,32,False
+79bbf57c18ba8e56182771f76c626ca7e4d956f1,2026-04-03T04:50:44Z,exp: mistral checkpoint temp0.60_t228,True,0,36,False
+489b909479ce873d726ade15293a4d4242bac298,2026-04-03T04:50:44Z,exp: mistral checkpoint temp0.60_t228,False,0,36,False
+dc67e9d3d86eef5645881a05aed348f68617e74c,2026-04-03T05:03:11Z,exp: mistral checkpoint temp0.60_t252,True,0,32,False
+cd13fb0a78d7eee75fa200db03bdcdee27770b58,2026-04-03T05:03:11Z,exp: mistral checkpoint temp0.60_t252,False,0,32,False
+8338902fec54b31c753d69970b5211ff3b5cd1fa,2026-04-03T05:17:54Z,exp: mistral checkpoint temp0.60_t276,True,0,32,False
+4623628d276452c70dc4025885ca7a0ea6d4e747,2026-04-03T05:17:54Z,exp: mistral checkpoint temp0.60_t276,False,0,32,False
+5c41b82dde8db6dfff921371edd732d6f2193f88,2026-04-03T05:32:08Z,exp: mistral checkpoint temp0.60_t300,True,0,32,False
+35b2e306cb4bceea740f2ef3d6c64368d19ffdad,2026-04-03T05:32:08Z,exp: mistral checkpoint temp0.60_t300,False,0,32,False
+aa4f9123fe14e6a4b693f23f6b3e46bb8c52d104,2026-04-03T05:51:09Z,exp: mistral checkpoint temp1.00_t028,True,0,36,False
+4f89e6ec564f6d947b99d1aa0260e191bce0eb5c,2026-04-03T05:51:09Z,exp: mistral checkpoint temp1.00_t028,False,0,36,False
+634d6b9e968b155cd27eec79076da91c9f141b62,2026-04-03T06:06:53Z,exp: mistral checkpoint temp1.00_t052,True,0,32,False
+5f4cdf907f4dc3c07892cd2fd7fb1ccb76fdbbc9,2026-04-03T06:06:53Z,exp: mistral checkpoint temp1.00_t052,False,0,32,False
+20f2502b19cbec82599559c72f195b1d81ce86e7,2026-04-03T06:22:12Z,exp: mistral checkpoint temp1.00_t076,True,0,32,False
+0b54ef10b857763cfa4c1798ceb02ae0c903aba9,2026-04-03T06:22:12Z,exp: mistral checkpoint temp1.00_t076,False,0,32,False
+1ce9b61c328f12e7560297d664cd2f2eb95f8f6c,2026-04-03T06:39:15Z,exp: mistral checkpoint temp1.00_t100,True,0,32,False
+307761148370e120f2270f92bf3adc57a5a1fcd3,2026-04-03T06:39:15Z,exp: mistral checkpoint temp1.00_t100,False,0,32,False
+99dba48eff0fa5f176f279c935642222030e3c21,2026-04-03T06:57:08Z,exp: mistral checkpoint temp1.00_t128,True,0,36,False
+f57b05d21d6451da48bdb6a6ec38e953f5197193,2026-04-03T06:57:08Z,exp: mistral checkpoint temp1.00_t128,False,0,36,False
+76ef883b6e83209d1cfe7bddc4f7450fc58f57db,2026-04-03T07:09:33Z,exp: mistral checkpoint temp1.00_t152,True,0,32,False
+baaf07c9995111b294b8cebc893433e858e8cc61,2026-04-03T07:09:33Z,exp: mistral checkpoint temp1.00_t152,False,0,32,False
+ed95fe3650d466147a57fcfa281bc5120d092ae7,2026-04-03T07:22:36Z,exp: mistral checkpoint temp1.00_t176,True,0,32,False
+b91e26e0d200b7195696a8a53c279697b1a34b9a,2026-04-03T07:22:36Z,exp: mistral checkpoint temp1.00_t176,False,0,32,False
+9235391560cacbd936a7e58a596a7c5407fd63c4,2026-04-03T07:36:39Z,exp: mistral checkpoint temp1.00_t200,True,0,32,False
+0e0823bbdba331f501b35d7d5a610f4eedeaf88a,2026-04-03T07:36:39Z,exp: mistral checkpoint temp1.00_t200,False,0,32,False
+c5d01efc2d963344fb5954c44154b71b59d0df39,2026-04-03T07:53:34Z,exp: mistral checkpoint temp1.00_t228,True,0,36,False
+96562d1c3b62d40f00e9d2b7dadb16f3f5f56463,2026-04-03T07:53:34Z,exp: mistral checkpoint temp1.00_t228,False,0,36,False
+ab508e01ac9d38c57351b90d8ade2b4776940d02,2026-04-03T08:08:32Z,exp: mistral checkpoint temp1.00_t252,True,0,32,False
+d5dc945698b180a546d83981d9684ecba238272c,2026-04-03T08:08:32Z,exp: mistral checkpoint temp1.00_t252,False,0,32,False
+173145eaec18abf1bd16b89c9a7bc02b453dedcb,2026-04-03T08:23:34Z,exp: mistral checkpoint temp1.00_t276,True,0,32,False
+b05f062eeb233f75e421e1f1f9c71b7c1d392a66,2026-04-03T08:23:34Z,exp: mistral checkpoint temp1.00_t276,False,0,32,False
+f2edf08c76ecbb6e172dc32e0c65a81f23c6459d,2026-04-03T08:37:40Z,exp: mistral checkpoint temp1.00_t300,True,0,32,False
+3a651ce03931fb3ff54e8a3e138a408e8b724a26,2026-04-03T08:37:40Z,exp: mistral checkpoint temp1.00_t300,False,0,32,False
+6a84323b96da1b95fa3bd6d125d6b31252ec7963,2026-04-03T08:40:14Z,analysis: finalize mistral l4 cycle,True,0,19,False
+968a96bb3d91cebe35d4bebe866ba5f859ed86e8,2026-04-03T08:40:14Z,analysis: finalize mistral l4 cycle,False,0,19,False
+c86cbd51b318db7aa4f9e6ede275753b30d2a476,2026-04-03T08:46:00Z,docs: finalize mistral thesis conclusions,True,1,0,False
+7fa0e957c3bef9ebf4e0c33c1cb8d14a3d91ff0e,2026-04-03T08:46:00Z,docs: finalize mistral thesis conclusions,False,1,0,False
+c1b5982947cc75e9c7fcfe8efbeffa6f8163855e,2026-04-03T08:50:38-04:00,prompt: add deep-dive analysis prompt for breaking inconclusive cross-family results,True,0,0,False
+aceb75c3178eaf5d9392b5dbd0679c01ace2e76a,2026-04-03T08:50:38-04:00,prompt: add deep-dive analysis prompt for breaking inconclusive cross-family results,False,0,0,False
+2a883cc6f315acd08f1edeb9b3c53412d7de79be,2026-04-03T10:20:40-04:00,"feat(obe-system): integrate Gemma 4, Qwen 3.5, Llama 4; enable 4-bit L4 optimization and autonomous validation prompt",True,4,48,False
+a7e3849b2f7e9ef6451e05c7d0b9995442ec8cee,2026-04-03T10:20:40-04:00,"feat(algo-x): integrate Gemma 4, Qwen 3.5, Llama 4; enable 4-bit L4 optimization and autonomous validation prompt",False,4,48,False
+089bf59f87d43404140500875219d7520250a39f,2026-04-03T10:28:53-04:00,[OBE-SYSTEM] Phase 2: L4 GPU Optimization + Frontier Model Integration (Gemma 4/Qwen 3.5/Llama 4),True,2,0,False
+ef66fd4a21c727dd324da51c41df5e7988486eae,2026-04-03T10:28:53-04:00,[ALGO-X] Phase 2: L4 GPU Optimization + Frontier Model Integration (Gemma 4/Qwen 3.5/Llama 4),False,2,0,False
+cfcfeca304c6b77806016d604f2ef4eb0528baa3,2026-04-03T10:59:35-04:00,[FIX] Loosen requirements for faster L4 environment setup,True,0,0,False
+a8e1f18d28ce36e9e4a1ec9b4bdd4ebea9ebe614,2026-04-03T10:59:35-04:00,[FIX] Loosen requirements for faster L4 environment setup,False,0,0,False
+ad6faad4d851efc12787834d6ad604648c1dc8f1,2026-04-03T21:39:40Z,"chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)",True,1,1,False
+3684248483f4d38f11a5e09860eab2792ad7b90c,2026-04-03T21:39:40Z,"chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)",False,1,1,False
+dea3bb22262e124b94ae4e2d9c36f7c355385afd,2026-04-03T17:43:26-04:00,"[OBE-SYSTEM] Update Phase 2 GPU validation prompt with verified baselines from Phase 2b audit: SDPA native FA2, corrected VRAM budgets, known issues, hardened commands",True,1,0,False
+a6fad284ee3889eed9b44e0e63723fe916956369,2026-04-03T17:43:26-04:00,"[ALGO-X] Update Phase 2 GPU validation prompt with verified baselines from Phase 2b audit: SDPA native FA2, corrected VRAM budgets, known issues, hardened commands",False,1,0,False
+e20fdfdcb109ab43575c20aa960577c66d7ae292,2026-04-03T21:29:18-04:00,chore: commit from Copilot — set git user,True,3,0,False
+39cdfa2ed4f3ddca5b8fb45822dbf5b0121246ba,2026-04-03T21:29:18-04:00,chore: commit from Copilot — set git user,False,3,0,False
+2291ba73af7ad787e56a99106dd1d80511bb4ec8,2026-04-04T13:38:06Z,chore: commit agent changes — canonicalize catalog; add equation_analysis; frontier smoke validation reports,True,4,73,False
+e797d9ef2ba29241e061693c8f57f8b94b149f62,2026-04-04T13:38:06Z,chore: commit agent changes — canonicalize catalog; add equation_analysis; frontier smoke validation reports,False,4,73,False
+093286b322ff4bb9c947380fc90a49fda9da980c,2026-04-04T11:44:19-04:00,"Align CPU audit, frontier analysis, and README",True,3,11,False
+642df44114dff6825ffbd4aca18d026f16c5ff47,2026-04-04T11:44:19-04:00,"Align CPU audit, frontier analysis, and README",False,3,11,False
+71e87e003abc20dace77864fc19d87b2ec431b54,2026-04-04T12:10:11-04:00,Add Phase 3 research prompt for frontier validation,True,0,0,False
+131409dd6cbfc9a2227d62ab8e7282bf449404cc,2026-04-04T12:10:11-04:00,Add Phase 3 research prompt for frontier validation,False,0,0,False
+72fd52cd619167b5ab5dd5bc36113c421be76660,2026-04-04T12:16:32-04:00,Final Infrastructure: Initialized 30-day autonomous solving protocol and performed model/equation cleanup,True,3,0,False
+cdf5797240890f9293e2b95e5fea3791db0b4e5f,2026-04-04T12:16:32-04:00,Final Infrastructure: Initialized 30-day autonomous solving protocol and performed model/equation cleanup,False,3,0,False
+4fe9ab1f6cd37080c360b4f04e7866b49784dba6,2026-04-04T12:18:14-04:00,Level 11: Launch Ready - Infinite Autonomous Scientist Protocol Initialized,True,0,0,False
+d017a833fe5371425c93b139cdadbb3dc39c62db,2026-04-04T12:18:14-04:00,Level 11: Launch Ready - Infinite Autonomous Scientist Protocol Initialized,False,0,0,False
+3d6ed46840ae89cc5e56cf1bf63e9895a817a627,2026-04-04T12:20:06-04:00,UAS-11: Launch Ready - The 1000+ Line Grand Unified Autonomous Scientist Protocol Initialized (CPU-Frontier Edition),True,0,0,False
+a49c8dba1ac0040095018ed98dd6485982bef993,2026-04-04T12:20:06-04:00,UAS-11: Launch Ready - The 1000+ Line Grand Unified Autonomous Scientist Protocol Initialized (CPU-Frontier Edition),False,0,0,False
+dac0071aafe68c2c73b634cfee7b58c1dec3fc70,2026-04-04T17:32:43-04:00,"UAS-11 Mission Success: Final Algorithm X Thesis, Bibliography, and Universal Law (ULV1) formalized. 100k-trial simulation and cross-family LOFO validation completed.",False,3,42,False
+4ab756269ed8a699fd9561c4c9309ee9ce902a0c,2026-04-04T17:32:43-04:00,"UAS-11 Mission Success: Final The OBE System Thesis, Bibliography, and Universal Law (ULV1) formalized. 100k-trial simulation and cross-family LOFO validation completed.",False,3,42,False
+30c1e498146e1e27f8d7da10fc6c1ce213253482,2026-05-11T19:26:22-04:00,Add RUN:AI and notebook bootstrap helpers,False,4,0,False
+fc85f7d2c0b4a621be91dc418d487df7d40a5143,2026-05-11T19:26:22-04:00,Add RUN:AI and notebook bootstrap helpers,False,4,0,False
+e79f482643edd92357c8793591ae3c23790c5d3d,2026-05-11T19:26:22-04:00,Add RUN:AI and notebook bootstrap helpers,True,4,0,False
+936a0681a48f903c7905302b9531caa0b755cb57,2026-05-11T19:26:22-04:00,Add RUN:AI and notebook bootstrap helpers,False,4,0,False
+f5ca26ee77b67659b1e03c6a027e0dc8b69cc630,2026-05-11T19:32:46-04:00,Push UAS-11 results without backup archive,True,3,42,False
+14c611767a325fd2905c84fd958606a38e80a01e,2026-05-11T19:32:46-04:00,Push UAS-11 results without backup archive,False,3,42,False
+df021e458ac3df279d0d6f8fa1e1fc0210d38653,2026-05-11T19:36:02-04:00,index on main: 30c1e49 Add RUN:AI and notebook bootstrap helpers,False,0,0,False
+aef72a123a28947869ef38a1ae5fd4b483b6249f,2026-05-11T19:36:02-04:00,On main: workspace-cleanup thesis drafts 20260511-193602,False,0,0,True
+69a3257a32623361ea07baa4319979c7e110a12f,2026-05-11T19:36:41-04:00,Document clean workspace layout,True,0,0,False
+7a25eebac66b01c80982850eae5d94eecc86004c,2026-05-11T19:36:41-04:00,Document clean workspace layout,False,0,0,False
+5633bf024664f388daeb728923bb5fafea12c263,2026-05-11T19:46:06-04:00,Consolidate workspace to single repo,True,0,0,False
+dfedfefdbf1199f57d81874a8d70594aa0737999,2026-05-11T19:46:06-04:00,Consolidate workspace to single repo,False,0,0,False
+c47ef2141c77acbcea723dc1009175a7e3217976,2026-05-11T21:12:29-04:00,Add Blackwell-safe RUN:AI bootstrap and dependency repair,True,3,0,False
+37c918b0b4a683ecc9a48f9b6430405e636ae0e0,2026-05-11T21:12:29-04:00,Add Blackwell-safe RUN:AI bootstrap and dependency repair,False,3,0,False
+bef4d727bc48d752af068689dbab5e402c200f47,2026-05-11T21:26:23-04:00,Harden RUN:AI terminal bootstrap for full GPU runs,True,1,0,False
+9b6f4cf3a6da13a55adaadaedaed3154999ea138,2026-05-11T21:26:23-04:00,Harden RUN:AI terminal bootstrap for full GPU runs,False,1,0,False
+e7e4d16848b23c42b003107352c9fac4beb21e5a,2026-05-11T21:32:33-04:00,Adjust RUN:AI Gemma launch for low-VRAM GPUs,True,1,0,False
+13dbf678f1055bce54258872ca6c9cda7eeeb35f,2026-05-11T21:32:33-04:00,Adjust RUN:AI Gemma launch for low-VRAM GPUs,False,1,0,False
+1f09cb0b378739f45bdbf9a667689b80acf5c60b,2026-05-11T21:35:18-04:00,Update RUN:AI notebook defaults and add smoke artifacts,True,1,18,False
+e2c6a1b7b3c8811fa3852fee537a2f5378739bf6,2026-05-11T21:35:18-04:00,Update RUN:AI notebook defaults and add smoke artifacts,False,1,18,False
+07e452672163b451332137f10bbf2ca2d2ef2bdc,2026-05-11T21:45:53-04:00,Enable 4-bit CPU offload for constrained GPUs,True,1,0,False
+a28c3d0cdfc081d9c2b8befe12fd253a19e4d9c2,2026-05-11T21:45:53-04:00,Enable 4-bit CPU offload for constrained GPUs,False,1,0,False
+53ce3c0b841f793dd10a3efcc6d090283c4d1b18,2026-05-11T21:53:52-04:00,Patch 4-bit dispatch compatibility on RUN:AI,True,1,0,False
+d2705d10840b1a47ab79e535e775981fedab23ee,2026-05-11T21:53:52-04:00,Patch 4-bit dispatch compatibility on RUN:AI,False,1,0,False
+64ca4e74a6a3b3c33b88bf72038e099777011188,2026-05-11T22:00:31-04:00,Patch meta-state 4-bit hook dispatch,True,1,0,False
+8451287357b833656203e4c11a8d04fef8b002a1,2026-05-11T22:00:31-04:00,Patch meta-state 4-bit hook dispatch,False,1,0,False
+7995962d069fc0219f22b0e73ef2cdd14f8bc7c6,2026-05-11T22:05:37-04:00,Pin Gemma 4bit text path to GPU,True,1,0,False
+e911669713f4df4db0f0cfe06fa49a944c14cc8c,2026-05-11T22:05:37-04:00,Pin Gemma 4bit text path to GPU,False,1,0,False
+69d2b25be9c0e8cad68fac5781d05d133792588a,2026-05-11T22:14:28-04:00,Reduce full-run Gemma scoring memory,True,1,0,False
+62f97100a6302ca049ec3ed3012e0cd2174e0cfb,2026-05-11T22:14:28-04:00,Reduce full-run Gemma scoring memory,False,1,0,False
+87036433d12b63dce04b53d1d71067014a06d818,2026-05-11T22:21:10-04:00,Move Gemma scoring postprocess to CPU,True,1,0,False
+81e54955beb806bd75ba7642e06bc328d3257328,2026-05-11T22:21:10-04:00,Move Gemma scoring postprocess to CPU,False,1,0,False
+c1a3c99ac5697d8308fe3c36ba57984a77e2946b,2026-05-17T18:24:37-04:00,runai: target Gemma-4-E4B-It with 4-bit quantization for ~10GB Blackwell GPU,True,2,0,False
+2e2af1c409704d7f9674dce89e4b9c57188a8705,2026-05-17T18:24:37-04:00,runai: target Gemma-4-E4B-It with 4-bit quantization for ~10GB Blackwell GPU,False,2,0,False
+edbf7f45aa2ac5193d9acfa3c725eca94c041391,2026-05-17T18:35:20-04:00,fix: add ImageReadMode and decode_image to torchvision stub for newer transformers,True,1,0,False
+106fe4148b1482891f55824cb0d964948686cd3a,2026-05-17T18:35:20-04:00,fix: add ImageReadMode and decode_image to torchvision stub for newer transformers,False,1,0,False
+a82f251b7bdf57677142cc02045527daf537c2f3,2026-05-17T18:39:30-04:00,fix: convert torchvision stub transforms to package with functional submodule,True,3,0,False
+bf9409971923d0e02c71adb465b80d316d042008,2026-05-17T18:39:30-04:00,fix: convert torchvision stub transforms to package with functional submodule,False,3,0,False
+45072d1a85d3de02f4f0103282627c7f8db07359,2026-05-17T18:46:15-04:00,fix: lazy-import multimodal classes + add torchvision to requirements,True,1,0,False
+0bd29f9eece5763fdf128fbbafdc8cb7d8be7c73,2026-05-17T18:46:15-04:00,fix: lazy-import multimodal classes + add torchvision to requirements,False,1,0,False
+9a99aff6f09a0d258e5fde5f76f1c6bd652a0e58,2026-05-17T18:54:02-04:00,fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint),True,2,0,False
+658cfd4932aa6748e9159502fc29ffd1eb9c6a9d,2026-05-17T18:54:02-04:00,fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint),False,2,0,False
+32963ca7ffd33be148e0ee7356db04dc101b166f,2026-05-17T19:00:28-04:00,fix: force single-GPU device_map for small 4-bit models (meta tensor crash),True,1,0,False
+586a8bdf889eab36f705fc76217de8fd808fa48f,2026-05-17T19:00:28-04:00,fix: force single-GPU device_map for small 4-bit models (meta tensor crash),False,1,0,False
+f2a78622a6dfd09fe01160b5a1ef84df4b141933,2026-05-17T19:12:54-04:00,chore: update default model to deepseek_r1_distill_7b for next run,True,1,0,False
+8ba1dc9467ae23c39ec7134d2691b09009b53bc9,2026-05-17T19:12:54-04:00,chore: update default model to deepseek_r1_distill_7b for next run,False,1,0,False
+56db2e59be6810f509fdcfa3763b44883e2b1d2e,2026-05-17T21:48:02-04:00,docs: add comparison between The OBE System and unidimensional heuristics from RPDI-EE 2026 paper,True,0,0,False
+cbc25be8873e0d6aec559658ddc9b8238ce313bb,2026-05-17T21:48:02-04:00,docs: add comparison between Algorithm X and unidimensional heuristics from RPDI-EE 2026 paper,False,0,0,False
+f0398db36fc76d7c35a7885995b349375d167fc7,2026-05-18T12:43:47Z,docs(research): add DeepSeek 7B distilled pilot trace metrics and detector comparison,True,0,14,False
+a84d1c864dc7b7bb2a131ad2d1bbe3f2a67d754f,2026-05-18T12:43:47Z,docs(research): add DeepSeek 7B distilled pilot trace metrics and detector comparison,False,0,14,False
+1e49d3f824bba70023d5024c37da9b917d1ddff2,2026-05-18T12:45:37Z,docs(research): add result plots for hazard curves and drift crossing,True,0,8,False
+ef413bb60b6d9a3ebab6c6f37faa5fc1db2d1e00,2026-05-18T12:45:37Z,docs(research): add result plots for hazard curves and drift crossing,False,0,8,False
+634965f0e27215c8dc48f908e921886c870e867f,2026-05-19T20:24:08-04:00,chore: Scrub commercial IP name from academic thesis,True,0,0,False
+472edfbfa5d758af19b1af67feeef2cf81ce13f8,2026-05-19T20:24:08-04:00,chore: Scrub commercial IP name from academic thesis,False,0,0,False
+759e9212a3b3fccf4ca9dfc00c93a2be5654e6f9,2026-05-19T20:40:03-04:00,chore: Deep scrub of all commercial IP references in files,True,3,5,False
+faaa80850e7d2decc60f7a9e6f146ba5b2edfc62,2026-05-19T20:40:03-04:00,chore: Deep scrub of all commercial IP references in files,False,3,5,False
+8790d1c5aec18a64df7528f05b77932c7599b734,2026-05-20T01:32:06-04:00,"Overhaul thesis README: integrate stakes-based value equations, hazard mapping, CPU audit findings, and academic IP partitioning",True,0,0,False
+aff874cf2ee85a5f8946c1eada0c7a61abb75d0d,2026-05-20T01:33:39-04:00,Remove IP partitioning and commercial references from thesis README,True,0,0,False
+4633596942cd350c71d6fc5b0ce57a483ba92083,2026-06-04T09:58:57-04:00,Add advisor meeting project plan,True,0,0,False
+e882437a1849b4155cbd234f6cb2b875b673805e,2026-06-04T10:01:33-04:00,Update Phase 1 tasks for Week 1,True,0,0,False
+daa98bca005623108f6bbf29d3dfea0560f9d477,2026-06-04T10:06:22-04:00,Add dates to weekly plan,True,0,0,False
+22c2576484515fd4c18613493fa4611093c5832c,2026-06-12T10:33:34-04:00,analysis: include DeepSeek 7B in cross-family report and update figures,True,0,5,False
+376254b12c7bc87970cf6092386ad481d304867f,2026-06-12T10:49:35-04:00,robustness: add error handling for GSM8K dataset loading,True,1,0,False
+589b7976e9567dad3efd9cd8578168c05266d36a,2026-06-12T10:55:41-04:00,fix: load openai/gsm8k directly to avoid HF UriError with datasets v5,True,1,0,False
+12b8e239495bdeeac26c22f1e4f88e7b97735bad,2026-06-12T11:03:04-04:00,fix: pin transformers to 4.53.3 to avoid LossKwargs ImportError,True,1,0,False
+41195db8009ba31109fae05fa631325a077359b1,2026-06-12T11:15:25-04:00,fix: resolve traceback memory leak in safe_generate_batch_with_diagnostics,True,1,0,False
+8d30f72f647b3031889f6214c99fda6627777d7f,2026-06-12T16:42:37Z,feat: add phi-4-mini-instruct traces and analysis results,True,0,24,False
+44645b1969d6bc2dbefd6f9600bae82e97d6b772,2026-06-12T12:43:56-04:00,feat: update cross-family report and figures with phi-4-mini-instruct data,True,0,5,False
+7e1d4bb06f7b66aaac38fdc68a58be9a3fc83ee4,2026-06-12T20:31:11Z,feat: add internlm3_8b_instruct traces and analysis results,True,0,18,False
+00fcacbaf618a656db58f696d308f95d217a8dc9,2026-06-12T20:31:31Z,some metadata,True,0,6,False
+19450224baa361408f4059f7cf885c8147fdfcdd,2026-06-18T21:39:53-04:00,feat: add experiment-matrix orchestrator and RunAI launcher,True,4,0,False
+0f08f3e588b5d7bdae735f4c22ce3de92caeaf81,2026-06-18T21:40:42-04:00,chore: enforce LF line endings for .sh/.py so they run on Linux/RunAI,True,0,0,False
+71f1c73a444adee2e080548c4b54cf88982c61d0,2026-06-19T01:45:13Z,matrix checkpoint: qwen2p5_0p5b x gsm8k,True,0,23,False
+15d4ec28e895caa24ee78647993104241b2679f7,2026-06-19T04:17:03Z,matrix checkpoint: qwen2p5_0p5b x gsm8k,True,0,23,False
+56b44d0642d7afcf5660c37835c8c7b00ccbdef0,2026-06-19T05:29:05Z,matrix checkpoint: qwen2p5_3b x gsm8k,True,0,23,False
+ee30224a86ab9641568f7924d12be64a6dfa6816,2026-06-19T05:50:16Z,matrix checkpoint: qwen2p5_7b x gsm8k,True,0,23,False
+a667ee5a4e2dd950061b35dccc8b747b72f21953,2026-06-19T06:22:41Z,matrix checkpoint: deepseek_r1_distill_1p5b x gsm8k,True,0,23,False
+a284c9b96bd36a9cc4f61d54ce34e4eb4584f709,2026-06-19T08:57:53Z,matrix checkpoint: deepseek_r1_distill_7b x gsm8k,True,0,23,False
+02c19ef12f5d87e8fd495c4158094b2c5819beb8,2026-06-19T09:03:37Z,matrix checkpoint: qwen2p5_14b x gsm8k,True,0,23,False
+257d2f8cf673888c2b389e1675c57cfc6226c875,2026-06-19T12:57:10Z,matrix checkpoint: qwen2p5_32b x gsm8k,True,0,23,False
+a15da39262849e05b342e92b9b1cbe28fff8c0ae,2026-06-19T17:49:21Z,matrix checkpoint: phi_4_mini_instruct x gsm8k,True,0,23,False
+5d0a538abc14fe10623993e8cab6dd9e39bf0814,2026-06-19T18:40:40Z,matrix checkpoint: mistral_7b_instruct_v0p3 x gsm8k,True,0,23,False
+5b7b084c374ccecba006e7c69b95d2401f516403,2026-06-19T21:04:18Z,matrix checkpoint: internlm3_8b_instruct x gsm8k,True,0,23,False
+c952043bfac11c69f35f5403ed425753290c666f,2026-06-19T21:12:05Z,matrix checkpoint: yi_1p5_9b_chat x gsm8k,True,0,23,False
+537243e2467e8d4ff1ec5439d39ff87c04dfd7f1,2026-06-19T21:12:11Z,matrix aggregate: gsm8k,True,0,8,False
+08411354d39c522f073ac4f16eb3f63e97265a52,2026-06-20T01:02:50-04:00,feat: data-driven cross-family summary + MATH dataset parser,True,3,7,False
+8546d4fd6eb0ccdceb52daf4d86dbea1cad45ec6,2026-06-20T01:38:16-04:00,docs: add 79-agent deep code-correctness audit report,True,0,1,False
+ef45ddad0f064a6cc314ef875fcab0251aadf0d8,2026-06-20T10:31:08-04:00,"fix: remediate deep-audit critical/high findings (graders, leakage, boundary)",True,7,0,False
+6f832ea47f862f641c9fc8788c0ae764cd2e5726,2026-06-20T11:05:07-04:00,fix: correct canonical boundary operator + regenerate all results out-of-sample,True,2,193,False
+f2df62b45f5232617ce93cd7b82fdebe8be36457,2026-06-20T15:33:25Z,matrix checkpoint: qwen2p5_7b x math,True,0,23,False
+8beba2d7c5ec6ced9f5b9bdef60ecd6c2afe24f4,2026-06-20T11:38:31-04:00,fix(grader): credit prose/unit-wrapped numeric MATH answers,True,2,0,False
+264237d2da177a04e8f9727294b22de7db0e2f48,2026-06-20T19:45:47Z,matrix checkpoint: qwen2p5_0p5b x math,True,0,23,False
+b236763651c833b8ae1214fd4b5c2969e565ae01,2026-06-20T22:35:00Z,matrix checkpoint: deepseek_r1_distill_1p5b x math,True,0,23,False
+bf3489725f07bd1f4748d9fffb23883e6284cd68,2026-06-20T23:00:15Z,matrix checkpoint: qwen2p5_7b x math,True,0,7,False
+122358a6c2787c2a7d8190c5fbc8ba7b9978b616,2026-06-20T23:25:00-04:00,feat: text-only Mistral-Small-24B + GPQA and ARC (multiple-choice) datasets,True,3,0,False
+a1d5b7d405dd5f33f0d82e98653fa04c667c7c39,2026-06-21T13:06:03-04:00,perf: tighter VRAM footprint estimate + higher budget so models co-run,True,1,0,False
+72703f218ded9046ff1e1df7aa6a057b5e02070d,2026-06-21T13:35:56-04:00,feat: auto-resume-on-boot helper for RunAI pod recycling,True,1,0,False
+8b5391fe0295e5f2c7776905ca2d80537136cf9b,2026-06-21T13:42:49-04:00,perf: 2x batch sizes + batch-aware VRAM footprint for higher decode throughput,True,1,0,False
+00778814f5aeb3a838b12beb1d0dfbef08369d55,2026-06-21T06:04:14Z,matrix checkpoint: deepseek_r1_distill_7b x math,True,0,23,False
+161fd31a393818457b72a47a1a87690b83da65db,2026-06-21T11:50:08Z,matrix checkpoint: qwen2p5_14b x math,True,0,23,False
+61f6d147bf5d51c32ad20aeec52c50f2a91e0317,2026-06-21T19:19:55Z,matrix checkpoint: qwen2p5_3b x math,True,0,23,False
+33c686fe08c4f46dd92ddfbcfe24b42e20761140,2026-06-21T21:25:29Z,matrix checkpoint: mistral_small_24b_2409 x gsm8k,True,0,23,False
+50187e2f891d922d20e08e3aea0fc2170cdefd7f,2026-06-21T23:35:49Z,matrix checkpoint: qwen2p5_32b x math,True,0,23,False
+47ac49557fe9822dc22e21e2dd754d1a703803f8,2026-06-22T09:33:48Z,matrix checkpoint: mistral_7b_instruct_v0p3 x math,True,0,23,False
+a81c80b2121dbbe75598cfc76629bc32a5e95ac6,2026-06-22T11:38:09Z,matrix checkpoint: internlm3_8b_instruct x math,True,0,23,False
+4d9c3aadd615d16c1718b4724b61db57400e400f,2026-06-24T09:04:56-04:00,"feat(autostart): detect hangs, not just crashes/restarts",True,1,0,False
+c0b5ce81042609593889f864abaa758e25767c48,2026-06-24T17:04:28-04:00,fix(harness): tolerate string-contaminated columns in cell summary,True,1,0,False
+0fd7317f894977f0b944d207ed86d2747d975179,2026-06-24T17:06:54-04:00,fix(harness): drop truncated CSV rows on resume reconcile,True,1,0,False
+8740d86f1aafaa779feaec3f80d0cbc44a951f91,2026-06-24T21:05:33Z,matrix checkpoint: phi_4_mini_instruct x math,True,0,23,False
+154a754089d6b86fad5b15e16ece0314ef779ccd,2026-06-24T22:37:16Z,matrix checkpoint: deepseek_r1_distill_1p5b x arc,True,0,23,False
+522b0189d17fab5f10d2219014140d8429fe1d31,2026-06-25T03:05:34Z,matrix checkpoint: mistral_small_24b_2409 x math,True,0,23,False
+c319bcb1a139a6d70d692cebd654c75a07eb7052,2026-06-25T03:35:52Z,matrix checkpoint: qwen2p5_0p5b x arc,True,0,23,False
+66edde73585f2ee86a33722c4a61a846cd313233,2026-06-25T04:09:52Z,matrix checkpoint: qwen2p5_3b x arc,True,0,23,False
+bee36a2f2826b89f1455842655717cba2068d45b,2026-06-25T04:23:53Z,matrix checkpoint: qwen2p5_7b x arc,True,0,23,False
+4aac37735ab891f40b58d0dce6df4a0adaee718e,2026-06-25T06:14:12Z,matrix checkpoint: qwen2p5_14b x arc,True,0,23,False
+beb9d7958bc102d8edbcec3cdc9ac4d2ea481d5d,2026-06-25T06:22:11Z,matrix checkpoint: deepseek_r1_distill_7b x arc,True,0,23,False
+e48abbb91e9fdb58efa98d889a6e26b99c832715,2026-06-25T08:22:59Z,matrix checkpoint: qwen2p5_32b x arc,True,0,23,False
+115c7721bf2b1c1b6da82ccc64e8196e3cea5bda,2026-06-25T10:18:22Z,matrix checkpoint: llama_3p1_8b_instruct x arc,True,0,23,False
+d2102f5a6ed12ab5322c944880f6ef5a1e55c60c,2026-06-25T11:34:35Z,matrix checkpoint: mistral_7b_instruct_v0p3 x arc,True,0,23,False
+eb6fddecb9286f12bbe21133cda8599c411581ef,2026-06-25T12:38:29Z,matrix checkpoint: phi_4_mini_instruct x arc,True,0,23,False
+29fc7ccec4afb92d9b92d49cb06a754a425aca35,2026-06-25T13:40:37Z,matrix checkpoint: yi_1p5_9b_chat x arc,True,0,23,False
+138959eaef20401f2e5fd6d473af8b38dac54644,2026-06-25T14:27:21Z,matrix checkpoint: internlm3_8b_instruct x arc,True,0,23,False
+13fce89272946e4b6f697885775e96604b8ed74b,2026-06-25T16:57:54Z,matrix checkpoint: deepseek_r1_distill_1p5b x gpqa,True,0,23,False
+9d13ec2fffbd75ccea7547fc9d5117b3599c6a5b,2026-06-25T17:31:06Z,matrix checkpoint: mistral_small_24b_2409 x arc,True,0,23,False
+ababb615a8c4b245b81f300dcea31ad91b8d643f,2026-06-25T20:26:44Z,matrix checkpoint: qwen2p5_0p5b x gpqa,True,0,7,False
+855adc555655536b0e0c4e1084556737f23f4e55,2026-06-25T22:04:58Z,matrix checkpoint: qwen2p5_3b x gpqa,True,0,7,False
+5915d470f5f8b9c90eb0e4eef45dba57bc6fc0d1,2026-06-25T22:59:11Z,matrix checkpoint: qwen2p5_7b x gpqa,True,0,23,False
+02033a80a5004a9668466d38df27eea401a47add,2026-06-26T00:35:30Z,matrix checkpoint: deepseek_r1_distill_7b x gpqa,True,0,23,False
+a7b4633fd6bde95c5dc1b59f80c061cee068bcf6,2026-06-26T02:51:48Z,matrix checkpoint: qwen2p5_14b x gpqa,True,0,23,False
+9c255eda640a7194f161d87a88b192e3337ddefc,2026-06-26T07:13:54Z,matrix checkpoint: qwen2p5_32b x gpqa,True,0,23,False
+aeb35d13ecf572ae6da6f6615b69a7196060cf6d,2026-06-26T11:29:59Z,matrix checkpoint: llama_3p1_8b_instruct x gpqa,True,0,7,False
+486dd2bcd587679de27511f78e7372de6f3e0f0f,2026-06-26T13:16:34Z,matrix checkpoint: mistral_7b_instruct_v0p3 x gpqa,True,0,23,False
+cc282df162b0f0371906a5c6383d7e13b1f9d34d,2026-06-26T19:43:50Z,matrix checkpoint: internlm3_8b_instruct x gpqa,True,0,23,False
+781db11aa1e23367453527dfb51b0210557b8227,2026-06-26T19:52:04Z,matrix checkpoint: yi_1p5_9b_chat x gpqa,True,0,7,False
+dadb1b1ace8638d3321e9bf7a6cd3acdec9b0c9f,2026-06-27T00:47:19Z,matrix checkpoint: mistral_small_24b_2409 x gpqa,True,0,23,False
+0dc64f81363d8cb1986ddf632640720c0ea01a0f,2026-06-27T00:47:26Z,matrix aggregate: gsm8k,True,0,8,False
+22f4d4eaa3aa53900ac7cfd45435605116d9abbb,2026-06-27T00:47:32Z,matrix aggregate: math,True,0,8,False
+080d415d5d874dd306aad3ca402194d6b61d555e,2026-06-27T00:47:37Z,matrix aggregate: arc,True,0,8,False
+4f86fef466ce6b3268bb8bc95d0a46153782cf14,2026-06-27T00:47:40Z,matrix aggregate: gpqa,True,0,1,False
+ca736175aa4cecb5496fdf36b152cc620a5c0d84,2026-06-27T00:53:29Z,matrix checkpoint: qwen2p5_0p5b x gpqa,True,0,1,False
+9e23edef8e3a98cf8c2a8f6a10b1a65987af7491,2026-06-27T02:48:48Z,matrix checkpoint: llama_3p1_8b_instruct x gsm8k,True,0,23,False
+827563197dfcb3c11ee56ccdec969a0b4f346950,2026-06-27T05:53:55Z,matrix checkpoint: llama_3p1_8b_instruct x math,True,0,23,False
+8b72df5e8d5eadb6e7e5532d1eac6d9764b70e5b,2026-06-27T08:57:00Z,matrix checkpoint: phi_4_mini_instruct x gpqa,True,0,23,False
+b41705cd033d591a4702db946ba6d895f2e96e8d,2026-06-27T13:45:54Z,matrix checkpoint: yi_1p5_9b_chat x math,True,0,10,False
+e08e2965aa99d838903b5b130d4c84e52453c34d,2026-06-27T13:46:04Z,matrix aggregate: gsm8k,True,0,7,False
+f7f8eb85e4524ad34f163df11c12dcd1f5d7e876,2026-06-27T13:46:09Z,matrix aggregate: math,True,0,1,False
+65eaec569b81d5723e79f5187e3898e58d996293,2026-06-27T13:46:16Z,matrix aggregate: gpqa,True,0,1,False
+f89ff3863f5723a63658ac5617b1f12d4c44fcc3,2026-06-27T11:42:01-04:00,fix(analysis)+complete: sanitize hard-kill-corrupted rows; finish all 52 cells,True,1,103,False
+6ca9771823a49d694d2178d0f47a12ba184c61ea,2026-06-27T19:03:43-04:00,fix(aggregate): sanitize trace_steps before q_t curve in cross-family,True,1,6,False
+3a5dde7a83833a5cea827a329983f66bc6041219,2026-06-30T22:51:55-04:00,"docs: add July 1 progress check-in, advisor briefing, and experiment matrix audit outputs",True,14,18,False
+c57c1d50a1b447eaeb8602f5e4d70944d9f26244,2026-06-30T22:56:55-04:00,docs: make July 1 check-in report easier to digest and correct math formulas,True,0,0,False
+68b01dbb96d82bfa664a7f76881095456b303c34,2026-06-30T22:57:24-04:00,"docs: add comprehensive details on data, metrics, performance, and key factors to checkin guide",True,0,0,False
+4bc3e01740e341fad34650e26c4ca39b735902b1,2026-06-30T22:58:33-04:00,"docs: add Mermaid flowchart, visual tables, and embedded cross-family figures to July 1 check-in guide",True,0,0,False
+9e935ce44489b98a0b3b802edc924aaa502496a0,2026-06-30T23:00:51-04:00,docs: simplify Mermaid node labels and clean up inline LaTeX to ensure rendering correctness,True,0,0,False
+41a5e55f8ef9ba90266caaa59aeb0e0a8e42a598,2026-06-30T23:02:06-04:00,docs: rewrite July 1 check-in guide to be fully self-explanatory from first principles,True,0,0,False
+197258537183d4b75816dd427d77bf83e45823c3,2026-06-30T23:06:07-04:00,docs: add Part 6 (Next Steps / Roadmap) to July 1 check-in guide,True,0,0,False
+87ca9a34200859e6c98d7db33bc0e3e221bdba1e,2026-06-30T23:08:04-04:00,docs: simplify Next Steps section in July 1 check-in guide,True,0,0,False
+6661474cecb1f758b83d573fa8b9545a7fa34778,2026-06-30T23:11:38-04:00,docs: add comprehensive model matrix data scale table to July 1 check-in guide,True,0,0,False
+e127ffb63f890e808efead8ae2c0016d106b42cf,2026-06-30T23:17:25-04:00,docs: integrate subagent explanations for utility score and oracle utility captured into July 1 check-in,True,0,0,False
+6d17e9ddcb7029e3118eee4e11ba8570b2db9105,2026-06-30T23:20:43-04:00,docs: add section detailing the real-world usefulness statistics of early stopping to July 1 check-in,True,0,0,False
+2d1a332169c92e39e7c23ab4e119225bf3a5420d,2026-06-30T23:27:13-04:00,"docs: update July 1 check-in with exact, verified run-level win/loss/tie stats across datasets and temps",True,0,0,False
+1d01d3c58fa3c9818ffb8e37bbee83739b363318,2026-06-30T23:28:23-04:00,docs: add Part 7 (Thesis Validation & Statistical Significance) with z-score calculations to check-in,True,0,0,False
+139eb28327b5fbbc85a9e5ec784b4bb93f2bc02e,2026-06-30T23:55:40-04:00,Update July 1 check-in document with verified metrics and detector explanation,True,0,0,False
+794a5ea6a6e222dcc7a6147f2330fd7f7b8c8b59,2026-06-30T23:57:36-04:00,Fix LaTeX formatting in Part 2 and add detailed real-time detector explanation,True,0,0,False
+b2c9d394d0f049315cfbabf088d343685903426b,2026-06-30T23:58:50-04:00,Remove italics around math in Part 2,True,0,0,False
+8072b6a3447e4c1654396ce3c59f9399050c4ae4,2026-07-01T00:03:31-04:00,Add exact calculation methodology for the three observables in Part 4,True,0,0,False
+bff69bcf59caa3d5990abc34c26b2c1a17bd6256,2026-07-01T12:10:32-04:00,Explain avoidable regret in simple terms,True,0,0,False
+565b6a2d3e971c48d25ae02ac43be5ded1e0cbe8,2026-07-01T12:21:43-04:00,Add note on model saturation to Roadmap,True,0,0,False
+63f62d4291598c583798dfcb19d9492ab6ab2274,2026-07-01T14:56:38-04:00,Add quick explanation of datasets to Part 3,True,0,0,False
+68c7d23f9de2a736519bb5032e7a20ffe8292436,2026-07-01T14:58:10-04:00,Add methodology for dataset correctness evaluation,True,0,0,False
+bf224ce37955d0e96142659905419d2533c24bd8,2026-07-01T15:00:55-04:00,Simplify math grading explanation,True,0,0,False
+147184b859fdb7851dea9660d82416a9d840b7fd,2026-07-01T15:06:50-04:00,Add rationale for logistic regression and pre-training methodology,True,0,0,False
+e3265d896fc66d3177c66331dbb53b3f88982f3e,2026-07-01T15:58:04-04:00,Add detailed explanation of Alpha and Beta equations,True,0,0,False
+554b43b46b511315b83a80dc274fe9c7b88daced,2026-07-01T17:36:07-04:00,"Completed capability-ladder re-verification sweep for qwen2p5_7b, qwen2p5_14b, and qwen2p5_32b, and generated final cross-family aggregated report",True,0,73,False
+5955600539f6a9a27b417872b86d3da184128935,2026-07-01T18:15:54-04:00,"Add active stopping simulation, stakes sweep, and prompted vs distilled comparison reports",True,4,5,False
+27a8b429182de05bc09123e9beeb5512fa8e68b8,2026-07-01T18:19:17-04:00,Add scientific method verification and deep analysis report,True,0,0,False
+d4fb0958629c63f63e31f5154c82962e05269f9b,2026-07-01T18:26:00-04:00,Add scientific method deep dive report and data extraction scripts,True,1,2,False
+62d825d1f23b3b0e16497e16ab4cdbb62ea950f5,2026-07-02T10:54:23-04:00,Add startup research prompt for Claude Fable 5,True,0,0,False
+8ce9b9fcae3e51d4be9d779c009097662b8754ab,2026-07-02T19:20:26-04:00,fix: floor boundary detection at T_MIN=2 in ad-hoc scripts; regenerate affected reports,True,3,3,False
+9819ee2cf2d5fd80616fcb0a784f06add082d85e,2026-07-02T19:20:26-04:00,docs: add SUPERSEDED banners to pre-audit reports,True,0,0,False
+074bc70dcadd49ca4488140f561ca9be77c5d687,2026-07-02T19:20:27-04:00,fix: handle NaN in regrade_traces.py row parsing,True,1,0,False
+32de197c7f7fccd73417a0dc7f7d5ebeb1ef7b80,2026-07-02T19:20:28-04:00,chore: add ground-truth re-verification scripts,True,2,0,False
+e049cc783155d1d3fe15ae15e6ab7db1deefee14,2026-07-02T19:20:28-04:00,docs: expand the startup research operating brief,True,0,0,False
+0ea16f417f151058033ca1ba6c8451434e4d1e9b,2026-07-10T05:55:06-04:00,audit: scientific-rigor verification + full loss autopsy (rigor_audit/),True,1,6,False
+57cd2f5204e8ecc748a730c03803206009a9c0f1,2026-07-10T09:45:17-04:00,fix: re-analyze qwen2p5_7b__math on full 1500-run corpus (protocol P5),True,0,17,False
+34d76c03407d44dacabdb248996c4076596e2454,2026-07-10T09:54:09-04:00,fix: drop hidden-state cache requirement from completeness reconciliation,True,1,0,False
+ce0167c6066b0caeb85370777df6ee14b9281d30,2026-07-10T10:09:04-04:00,fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12,True,4,1,False
+07a9573ecd93b987db165198541e314357d9d3db,2026-07-10T10:12:40-04:00,docs: post-audit corrections + regenerate MATH aggregate on repaired cell,True,2,8,False
+2660d40f7d9fc68d82154bb99f90da105c84b809,2026-07-10T10:22:37-04:00,research: pre-registered offline experiments P1/P2/P3a/P13 + P6 (results),True,1,2,False
+d2a42e852cd7c9c1fee591ca7d6b8b0747e1ba3c,2026-07-10T10:45:59-04:00,research: P3b/P3c/P3d offline policy arm results (one survivor: P3d),True,1,1,False
+1f2e44531aa79b4655a33b18db4018fc1a7b7fa0,2026-07-10T10:55:36-04:00,research: P9 lambda-sensitivity results,True,1,2,False
+cca211392e431a7a4fbe36b6095a890d60ffb48f,2026-07-10T12:08:20-04:00,research: calibrated per-cell threshold table (P3d productization),True,1,4,False
+b8fc4b51d2142384d713ec6fa2f08af0480c56f0,2026-07-10T12:16:10-04:00,docs: add CLAUDE.md for future Claude Code sessions,True,0,0,False
+36a13c9ab22671c7a2545dbd5752291a792a1cb9,2026-07-10T12:19:28-04:00,docs: pre-registered algorithm-v2 protocols (N1-N9),True,0,1,False
+22b23f8f5e31d9e91fdbc85a87fc0a27ccf7d343,2026-07-10T12:33:41-04:00,research: N1/N4 harness + Nvidia-workspace runbook for algorithm-v2,True,1,1,False
+c4e98fc552aba4253f8876fefd1c145eebda096c,2026-07-10T12:47:10-04:00,tools: autonomous v2 driver with 20-min checkpoint pushes + verified harness,True,2,1,False
+c0d3bc071ee4ad159c7d2f35f2604dccbfd52497,2026-07-11T15:23:58-04:00,"tools: self-detaching autonomous runner (no nohup needed), verified E2E",True,1,1,False
+2a64791fd946610bfd0d0655f2f6c087a61ef91d,2026-07-11T15:33:13-04:00,tools: preflight + parallel-GPU mode for the autonomous v2 run,True,2,1,False
+000f2e60d4e0f3a066c1261b9cb485f4a8154e5d,2026-07-11T15:38:49-04:00,fix: preflight pointed at the wrong torch install for a fresh container,True,1,1,False
+b28d7d541d1b0d159c23ab6fa3a88f9b614e8ad3,2026-07-11T15:46:23-04:00,fix: preflight misdiagnosed a stale branch as a push-auth failure,True,1,0,False
+a68ab365ccd9bc308c929a9ad6fd96ad8bdcb67b,2026-07-11T20:08:35Z,wip: autonomous v2 checkpoint (2026-07-11 20:08:35),True,0,38,False
+e1a67827601d200253c6d628621458896e2f7038,2026-07-11T20:28:37Z,wip: autonomous v2 checkpoint (2026-07-11 20:28:37),True,0,8,False
+0db1673235d8b4638c43f8d83b8d62152c649684,2026-07-11T20:48:39Z,wip: autonomous v2 checkpoint (2026-07-11 20:48:39),True,0,8,False
+88e55a33e31eafbfb1581d94b4774b734d6134fd,2026-07-11T21:08:41Z,wip: autonomous v2 checkpoint (2026-07-11 21:08:41),True,0,8,False
+6c002d810baf126c1c76cdb03fb7c26cf9a1069e,2026-07-11T21:28:44Z,wip: autonomous v2 checkpoint (2026-07-11 21:28:44),True,0,8,False
+862051c46160e7807009f7af20dfd574902e3fb2,2026-07-11T21:33:33Z,wip: N6 arm none (2026-07-11 21:33:33),True,0,22,False
+63da24d8c215fe340987202c55eb7911c425dc67,2026-07-11T21:48:46Z,wip: autonomous v2 checkpoint (2026-07-11 21:48:46),True,0,8,False
+92d17fb009dffb41e0d8a16fce02d7f55aac88cc,2026-07-11T22:08:48Z,wip: autonomous v2 checkpoint (2026-07-11 22:08:48),True,0,8,False
+bea2d6f4329539cf230d3437dc1f1cdd53ff683d,2026-07-11T22:28:49Z,wip: autonomous v2 checkpoint (2026-07-11 22:28:49),True,0,8,False
+9f8e30870b177d2c2239654d33c1a6a6705c8b44,2026-07-11T22:48:52Z,wip: autonomous v2 checkpoint (2026-07-11 22:48:52),True,0,8,False
+ad69b4343242d5771c613743bcd5d23b2998c207,2026-07-11T23:08:54Z,wip: autonomous v2 checkpoint (2026-07-11 23:08:54),True,0,8,False
+562fdc5fd1e3f6cc8550bae344ffbab168dc221c,2026-07-11T23:28:56Z,wip: autonomous v2 checkpoint (2026-07-11 23:28:56),True,0,8,False
+f71af1a9f3ae04ca45eb0ea255bdf2f17d76ff3c,2026-07-11T23:48:59Z,wip: autonomous v2 checkpoint (2026-07-11 23:48:59),True,0,8,False
+7c05d9518a9bb90ab8eef7d837d5a544a3ae1215,2026-07-12T00:02:17Z,wip: N6 arm 4bit (2026-07-12 00:02:17),True,0,22,False
+5e3de6189803ba12111e5394f9cb4797750f31fc,2026-07-12T00:09:03Z,wip: autonomous v2 checkpoint (2026-07-12 00:09:03),True,0,4,False
+2799fda326eb162e4c90a00d7cd316099ae04c6e,2026-07-12T00:29:05Z,wip: autonomous v2 checkpoint (2026-07-12 00:29:05),True,0,4,False
+1e4928617c92ee8a8560814481ea8d9c5c87e2f1,2026-07-12T00:41:33Z,wip: N5 collection (2026-07-12 00:41:33),True,0,6,False
+b8d5d1bad1e8265bcffa5271c75d58cf52c73405,2026-07-12T00:42:55Z,wip: N5 analyzed (2026-07-12 00:42:55),True,0,12,False
+d293766b179b9ac974b19b3d9eb5706bc1a5985f,2026-07-12T00:42:57Z,wip: N6 analyzed (2026-07-12 00:42:57),True,0,1,False
+253a05f2e29b4eef425f8036a4a0dfaa6ab7c357,2026-07-12T00:42:58Z,results: autonomous algorithm-v2 run (N1/N4 + N5/P4b + N6/P8),True,0,1,False
+84853411fcc95569c0cdc2694d2847aabed5b81a,2026-07-12T11:54:17-04:00,fix: support pyarrow-backed string dtypes in _sanitize_step_frame and _escape_control_chars,True,2,25,False
+b2acdab0fbd4ae807e082b1c374fba413e5d788f,2026-07-12T11:59:41-04:00,fix: replace unicode checkmarks in preflight_v2.py to avoid UnicodeEncodeError on Windows terminals,True,1,0,False
+b68ff43d32d5d757a5955e90c49092d3dc4a80bf,2026-07-12T16:03:40Z,wip: N5 collection (2026-07-12 16:03:40),True,0,3,False
+6008c4e7d00f5246ad6a4eed0a8c1e45794d9d0d,2026-07-12T16:06:11Z,wip: N6 arm 4bit (2026-07-12 16:06:11),True,0,2,False
+08c300d67bba9c10dff5e556acd835fbe540005f,2026-07-12T16:06:13Z,wip: N6 analyzed (2026-07-12 16:06:13),True,0,1,False
+89ff672e10dea8495e2004a0c5e2a94a138ae8e7,2026-07-12T16:06:14Z,results: autonomous algorithm-v2 run (N1/N4 + N5/P4b + N6/P8),True,0,1,False
+f5ce8a1bff976937454698df198ae606a3877850,2026-07-12T12:11:39-04:00,docs: add rigorous results analysis report for Algorithm v2 experiments,True,0,1,False
+52af188222344205c66e557ca8636f0644bfd55f,2026-07-12T12:18:27-04:00,feat: add implementation and run helper for Tier-1 N2/N3 experiments,True,2,0,False
+1f05833f0d2595010d60643fa3ce51c211648355,2026-07-12T17:35:01-04:00,docs: update 08_algorithm_v2_results_analysis.md with N2/N3 results,True,0,1,False
+4a4f745a5816b7b0e9564b6aed8a6515d9d9792d,2026-07-12T21:35:40Z,results: Tier-1 N2/N3 experiment run complete (lags and EB hazards verified),True,0,54,False
+07fedbd45e7c8a3db5d30c13735c8a1129f997f0,2026-07-12T17:45:11-04:00,feat: implement Tier-3 pilot telemetry for N7 self-consistency and N8 extended observables,True,2,1,False
+815981f8afb1365134816b23ffcab928db78deb0,2026-07-12T17:45:51-04:00,feat: add tools/run_tier3_pilots.sh for automated execution,True,1,0,False
+32b3c11255c6d5f96796136d52624663d15b3f82,2026-07-12T17:46:47-04:00,fix: override attention implementation to sdpa in run_tier3_pilots.sh,True,1,0,False
+8218a5c2270f6c0a4436be5f8d848bda13afb54d,2026-07-12T17:50:07-04:00,docs: consolidate all files into master Scientific Methodology and Experimental Report,True,1,0,False
+0bcf3baa42c432c4ef8648ec94cca7c1967b0906,2026-07-12T17:52:15-04:00,tool: add tools/verify_doc_rigor.py for document compilation and link verification,True,1,0,False
+59efff93fabd7000f25421eac081cad41bc03fd6,2026-07-12T23:38:02-04:00,fix: correct batch metrics filename in run_tier3_pilots.sh,True,1,0,False
+fc69dab99117512899338bfa9f59b27b6e24bb45,2026-07-13T03:40:17Z,results: Tier-3 Qwen-7B GSM8K/MATH pilot telemetry collected,True,0,13,False
+8731068b8c7f17c439bee7dd10b0a6b4e81e865c,2026-07-12T23:41:23-04:00,feat: add train_tier3_pilots.py for offline pilot model training and evaluation,True,1,0,False
+c43e040e122cfee2a2c9d72b17a87d6ea841c823,2026-07-12T23:42:13-04:00,fix: robustly fill NaNs in train_tier3_pilots.py,True,1,0,False
+8f5448c7fc93710575bb91e53da1ed549a55f9f8,2026-07-12T23:47:14-04:00,fix: defragment dataframe in train_tier3_pilots.py to suppress performance warnings,True,1,0,False
+0174611bacc8235f05e6d6791e85dd741bcdbc52,2026-07-12T23:47:49-04:00,docs: integrate Tier-3 N7 and N8 telemetry pilot results into reports,True,0,1,False
+828bcaa66f9292b97ff267f801f8ff8206ad1c4b,2026-07-12T23:50:27-04:00,feat: add overnight orchestrator and sequence model tournament scripts,True,2,0,False
+d6871033fbf6f142218fa1a904e32a7f7bf2a17a,2026-07-13T07:19:24Z,results: overnight deep research tournament results collected,True,0,50,False
+aa04c82f61ff12c3fef2dc40e995b72493346ec8,2026-07-13T09:14:03-04:00,fix: import Any from typing in run_final_tournament.py,True,1,0,False
+f74936358f6e6dbc873e2dcfe5d7c6b96fde3482,2026-07-13T09:15:46-04:00,"perf: optimize resource usage (multi-core, larger CUDA batch size) and silence pandas warnings",True,1,0,False
+746abcc37cb6df7a4fa31f2253898c485db8659d,2026-07-13T09:16:34-04:00,fix: remove n_jobs from LogisticRegression to silence FutureWarning,True,1,0,False
+f36b9b0341512ad5b72ff8d180a5a4de92ff4ed7,2026-07-13T09:20:53-04:00,perf: optimize sequence training by pre-sorting and caching OOF predictions to achieve 15x speedup,True,1,0,False
+40449497acb8af08dcc4b8fec41043b14c7b23e7,2026-07-13T09:22:47-04:00,perf: vectorize policy evaluation and execute PyTorch fully in GPU memory for ultimate Blackwell performance,True,1,0,False
+214210a40ff1f02bf399422a6677cae587b4f11d,2026-07-13T09:24:34-04:00,feat: add global 52-cell sweep orchestrator script for long-running GPU runs,True,1,0,False
+30c02495de7bce0d2f998fd5c2e73f20cafab382,2026-07-13T09:25:31-04:00,docs: finalize verification cycles for tournament script optimizations,True,1,0,False
+a0510b5c5d4ae40d2c21151e953be1b99890f9fa,2026-07-13T13:42:57Z,results: auto-commit cell global_qwen2p5_0p5b_gsm8k,True,0,6,False
+1dee79de14313301e2c12d3320a934275dddd09b,2026-07-13T13:55:10Z,results: auto-commit cell global_qwen2p5_0p5b_math,True,0,6,False
+f40ab296eb8c651e4570b8b528349da8f3c33136,2026-07-13T14:07:59Z,results: auto-commit cell global_qwen2p5_0p5b_arc,True,0,6,False
+18f7030a42e27fb73b23ec268619ec014e496c82,2026-07-13T14:20:37Z,results: auto-commit cell global_qwen2p5_0p5b_gpqa,True,0,6,False
+a0244e0a49c73dbd74a0ad6f0a1c1569219ec771,2026-07-13T21:15:07-04:00,fix: align global sweep script models list with valid choice aliases,True,1,1,False
+45997657b926566035bcaa9ddc302ace823d6749,2026-07-13T21:31:08-04:00,perf: compile-free GPU-based random projection with caching for 2x faster steps extraction,True,1,0,False
+ee2521d30ba0ac2a8a4d34ad2337fb4a56e09487,2026-07-14T09:25:39-04:00,fix: restore stable CPU tensor copy path for random projections to prevent CUDA deadlock hangs,True,1,0,False
+6ec39e57c19444b8a573763f4299c915a942025f,2026-07-14T19:33:42-04:00,perf: reduce sweep batch sizes to avoid container cgroup VRAM freezes on long contexts,True,1,0,False
+5a06073241e1daf5101b378b57e443048d9465b0,2026-07-14T19:36:45-04:00,perf: extract and copy L1/L2 layers to CPU and delete massive all_hidden_states tuple before clearing VRAM to prevent GPU allocator hangs,True,1,0,False
+646b37940e6a46fb0a0090803a43ef92b3935a03,2026-07-14T22:11:05-04:00,"perf: mean pool hidden states on GPU before copying, shrinking CPU transfer size by 1000x for peak Blackwell efficiency",True,1,0,False
+50806c76df8775f5cda3a15dadb7592a88ecbc1e,2026-07-15T02:13:19Z,results: auto-commit cell global_qwen2p5_3b_math,True,0,1,False
+49401f81030bf2895bc27ccdf34a96f91335f9e3,2026-07-15T08:48:08-04:00,Add signal-based alarm timeout to sympy.simplify in math_answers_equivalent to prevent hangs on complex LLM math expressions,True,1,0,False
+deb8309011497210286eb37e1836e28cf75a8f21,2026-07-15T08:52:50-04:00,Make scratch_analyze.py path relative for cross-platform support on remote VM,True,1,0,False
+87e1b614785a6e33da0918556f76bebd77a35535,2026-07-15T08:53:22-04:00,Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary,True,2,1,True
+e72fc0e140f06c1b3160ef08f55f431b37526d12,2026-07-15T13:12:03Z,results: auto-commit cell global_qwen2p5_3b_arc,True,0,6,False
+cea4cdfa215bdb78f51a8e025501dd3d3f3cf5a7,2026-07-15T09:45:18-04:00,"Update thesis documentation (Methodology Report and Proposal Draft) to align strictly with the scientific method, highlighting variable controls and Tier-3 findings",True,0,0,False
+e52d3e37e4e958f5a15281586e47073cdf7eba0a,2026-07-15T09:45:33-04:00,Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary,True,0,6,True
+b516dc1a263690249fcf8595fb6108f42575bed3,2026-07-15T09:49:39-04:00,Create interactive HTML presentation and variable isolation dashboard for advisor review,True,0,0,False
+64a56052dd0e954d58b914ef20fa7d775c8d6cad,2026-07-15T09:52:31-04:00,"Create simple, jargon-free layperson guide with exam-taking analogy to make the research accessible to non-experts",True,0,0,False
+f63991c412c7d1c5883be885e5c845e07e957e27,2026-07-15T14:43:38-04:00,Optimize global sweep parameters: cut tasks to 500 and double batch sizes for Blackwell GPU to accelerate run by 3.5x,True,1,0,False
+f4a06ea1c6306d86822a1d96ba8ad53301d26cf1,2026-07-15T13:50:08Z,results: auto-commit cell global_qwen2p5_7b_gsm8k,True,0,6,False
+4cabff239e05d813cafe6f80737a1b903eadddc7,2026-07-15T14:07:39Z,results: auto-commit cell global_qwen2p5_7b_math,True,0,6,False
+9563aa0e9b8aeab0df1e429ddfecbf84064189cd,2026-07-15T14:29:29Z,results: auto-commit cell global_qwen2p5_7b_arc,True,0,6,False
+1183b7bd83b7c74bc783b8ab29ab27619ecd6f7a,2026-07-15T15:12:35Z,results: auto-commit cell global_qwen2p5_14b_gsm8k,True,0,6,False
+90afc70b929c3a215e4b7150021c438554748340,2026-07-15T15:42:35Z,results: auto-commit cell global_qwen2p5_14b_math,True,0,6,False
+1d40019bb7ca91505b16aae95ac760544b252140,2026-07-15T16:21:53Z,results: auto-commit cell global_qwen2p5_14b_arc,True,0,6,False
+27259cb228ff2099834f10c8d66a1d0950a5fc8c,2026-07-15T17:39:26Z,results: auto-commit cell global_qwen2p5_32b_gsm8k,True,0,6,False
+8df6a99b81bf1a602ebf3cc165241b3aee10c1df,2026-07-15T18:37:47Z,results: auto-commit cell global_qwen2p5_32b_math,True,0,6,False
+43998a530317ce4e1a2f2a5260311f86cabf3f53,2026-07-15T18:47:54Z,results: auto-commit cell global_qwen2p5_3b_gsm8k,True,0,4,False
+03a93b8c0e4bcd7b2bd6db75f4f69c461e763c44,2026-07-15T17:28:48-04:00,fix: safeguard read_csv calls against EmptyDataError from 0-byte placeholder files during checkpoint reconciliation,True,1,0,False
+8939c5fa8303b3f778bec1f1be586bdd58a52cb4,2026-07-15T17:28:53-04:00,Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary,True,1,52,True
+d2bca8e45fe7579db06c192b01bd9886bb2f3416,2026-07-15T21:30:02Z,results: auto-commit cell global_qwen2p5_3b_math,True,0,4,False
+92efe5090ffa18337e19055f644ab2caa59e3aab,2026-07-15T17:30:58-04:00,fix: wrap pd.read_csv in try-except blocks against EmptyDataError and load HF_TOKEN automatically from .hf_token,True,2,0,False
+ecad9ea4956b0058a6ba53e9c29d49406c1d382d,2026-07-15T17:31:02-04:00,Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary,True,2,4,True
+4786d0b94681b05d5c60bf31f613acf4811dff10,2026-07-15T21:42:05Z,results: auto-commit cell global_qwen2p5_3b_gsm8k,True,0,8,False
+56759a9fdd5b2168cc9b52bc179cada69252afc0,2026-07-16T00:46:56-04:00,fix: wrap sympy's parse_expr in the alarm signal timeout block to prevent hangs on pathological mathematical strings,True,1,0,False
+5f09d6d62baebf6a50680965e4f1ef28373b370d,2026-07-16T04:47:21Z,results: auto-commit cell global_qwen2p5_3b_math,True,0,2,False
+d26096ad0ac3d3fa4524a16cc42e493c8500f9d1,2026-07-16T05:07:47Z,results: auto-commit cell global_qwen2p5_3b_math,True,0,6,False
+d7773d5445d913a50aa1056ca251bd084b3ec2a7,2026-07-16T05:44:11Z,results: auto-commit cell global_qwen2p5_32b_arc,True,0,9,False
+4076cb02c0b7ae3d020569330ac50b407be3cdb7,2026-07-16T06:04:56Z,results: auto-commit cell global_deepseek_r1_distill_1p5b_gsm8k,True,0,6,False
+1ff212bd3e78a5251e1144c7f2103d781c021f53,2026-07-16T06:29:12Z,results: auto-commit cell global_deepseek_r1_distill_1p5b_math,True,0,6,False
+5eca689c174a96534769598c8ed8120339aaee11,2026-07-16T06:49:52Z,results: auto-commit cell global_deepseek_r1_distill_1p5b_arc,True,0,6,False
+5209b742ce651d70247ac4a70d71cfb7eb020753,2026-07-16T07:28:45Z,results: auto-commit cell global_deepseek_r1_distill_7b_gsm8k,True,0,6,False
+7bffe5c3fe338eae29aff272275db35589ab23b3,2026-07-16T08:14:52Z,results: auto-commit cell global_deepseek_r1_distill_7b_math,True,0,6,False
+73f4a6f1e72afa6ca54c6a4b5be5de0724608337,2026-07-16T09:03:16Z,results: auto-commit cell global_deepseek_r1_distill_7b_arc,True,0,6,False
+818d5a01a70d86fe30ccbe0d4d2df6330ccc3b58,2026-07-16T09:39:30Z,results: auto-commit cell global_mistral_small_24b_2409_gsm8k,True,0,6,False
+43247bf6561cbda9db49fb593acfb6b95ce3a5b9,2026-07-16T10:34:00Z,results: auto-commit cell global_mistral_small_24b_2409_math,True,0,6,False
+7cc3c4769ee8e3f3876f70759068c539fbef1239,2026-07-16T11:05:29Z,results: auto-commit cell global_mistral_small_24b_2409_arc,True,0,6,False
+4ac9b1832b974a7ea00dd43c18e95bb702f3c5c5,2026-07-16T11:47:51Z,results: auto-commit cell global_phi_4_mini_instruct_gsm8k,True,0,6,False
+ed2ccfe2977dd791e41afed925eddbeda5c2237b,2026-07-16T12:34:37Z,results: auto-commit cell global_phi_4_mini_instruct_math,True,0,6,False
+f114f9b46e5981e6ccd6b4bb0ba4c670887491a6,2026-07-16T13:17:42Z,results: auto-commit cell global_phi_4_mini_instruct_arc,True,0,6,False
+0a58d8bd378181a54ebaa5e84c046111aaa65bc5,2026-07-16T13:23:25Z,results: global 52-cell sweep final tournament completed,True,0,2,False
+27262f273087077cec7e4fa88fd113b3fa9d8f74,2026-07-16T09:39:35-04:00,docs: add July_16_Progress.md for presentation to advisor Dr. Woods,True,0,0,False
+3f587cfe035e347ef31a277e444e8ccdaac8f85a,2026-07-16T09:39:54-04:00,Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary,True,0,91,True
+d8752cf0b311131916cc7ebae15bbee8df64f5fb,2026-07-16T09:41:29-04:00,docs: enrich July_16_Progress.md with commit log audit and 14 dedicated variable sections,True,0,0,False
+6f8d40b8b9397d7183f6fe42a885dce00009a925,2026-07-16T09:42:30-04:00,fix: resolve Mermaid syntax error in July_16_Progress.md diagram,True,0,0,False
+ed43a6f5de71be1d74cd0839e72e07eae395a389,2026-07-16T09:43:14-04:00,docs: add inline visualizations for all 14 variables in July_16_Progress.md,True,0,0,False
+3a62fb099a7456ddceb8688e28425cab6f362540,2026-07-16T09:44:27-04:00,docs: add real matplotlib plots for variables and tournament performance,True,0,0,False
+11da473642f2c52a223052dfe62899a45a03795a,2026-07-16T09:46:20-04:00,fix: resolve all Mermaid syntax errors and replace finicky charts with robust flowcharts in July_16_Progress.md,True,0,0,False
+fdc1e1354c309964d090f1863468e629405df91e,2026-07-16T09:47:58-04:00,docs: adapt July_16_Progress.md tone to be conversational and advisor-presentation friendly,True,0,0,False
+514aa79d69f941705ea777b9a8a0165ee1b0804c,2026-07-16T09:48:47-04:00,fix: resolve Mermaid parse error in Temperature diagram by removing parentheses from arrow labels,True,0,0,False
+84347f96c0e9957ac62a2c74dcf30a402cd86501,2026-07-16T09:49:49-04:00,fix: resolve Mermaid Lexical error in dotted arrow label syntax,True,0,0,False
+0c5d6937161fd8230855449bda4d5bc58d73149a,2026-07-16T09:50:43-04:00,docs: explain tournament table columns and cross-validation simply in July_16_Progress.md,True,0,0,False
+9922995791a14f0fa2baaf8dad96843378655f1e,2026-07-16T09:51:29-04:00,docs: add section 4.1 deep dive explaining the different stopping methods,True,0,0,False
+8bccc7e255eccea9cbed7a3d7287ce7fe1ca805f,2026-07-16T09:51:58-04:00,"docs: clarify Baseline Linear as the 3-model logistic regression composition of q, alpha, and beta",True,0,0,False
+c6113f8d32ba3e1cbc5755bcc8059ee9c3af2eaf,2026-07-16T09:53:37-04:00,docs: add 5-minute advisor checkpoint presentation cheat sheet and talk script,True,0,0,False
+0bda9dea36f7e87fcb3bac91d6f1932680d9f16a,2026-07-16T09:54:43-04:00,docs: condense July_16_Progress.md for advisor presentation & cleanup temporary cheat sheet,True,1,0,False
+9723fffff03192dff92692fed933692af1141b1d,2026-07-16T09:56:10-04:00,docs: remove interactive dashboard references and file to align report,True,0,0,False
+d2423bf3ef08ec2f31e7d0532c22906a0f016b4f,2026-07-16T09:57:19-04:00,docs: replace conceptual diagrams with real data-backed matplotlib plots for independent variables,True,1,0,False
+4577130c4f5554195df81cf6af9c0c79b5ba4fd5,2026-07-16T09:57:58-04:00,docs: add 2-3 sentence scientific analysis under each independent variable's visual,True,0,0,False
+5aeda1ac6a0270b9f1884194e6c58ecb1383ec04,2026-07-16T09:58:58-04:00,docs: simplify scientific analysis language for Softmax Temperature in July_16_Progress.md,True,0,0,False
+95c34a8208c08bd7d7e87f151c5538d16ffeb233,2026-07-16T09:59:54-04:00,style: add vertical spacing between variable bullets in July_16_Progress.md for enhanced aesthetics,True,0,0,False
+b1f29ca9c45ec11be4c74287c3f19652a0537c39,2026-07-16T10:00:44-04:00,docs: add section 1.1 explaining the global sweep in plain English,True,0,0,False
+bdfb1a73abd4f9559a637abfe2a3634889879e12,2026-07-16T10:01:43-04:00,docs: add section 1.2 explaining the difference from old traces in July_16_Progress.md,True,0,0,False
+74806bf5da8cef196ccb2a2876cffd295253ae44,2026-07-16T10:03:40-04:00,docs: enrich scientific analysis and add advisor follow-up preparation for all variables,True,0,0,False
+c8498b96a3f131bfe7abb669bd384f9e3cd1d702,2026-07-16T10:59:54-04:00,docs: clarify tournament table abbreviations and standardize gated sc labels,True,0,0,False
+b26d6418f0b60edaf0a476a89466df7a1f8f216a,2026-07-16T11:01:19-04:00,docs: add simple definitions of drift rate and detector auc inside July_16_Progress.md,True,0,0,False
+dc480ec8e323af09f5645e8cac75c0e61be9bd56,2026-07-16T11:02:34-04:00,"docs: correct temperature variable settings to 0.1, 0.6, 1.0 in script and report",True,1,0,False
+b3dd39d7d1179ef0d3c9b47084c9e273e9606060,2026-07-16T11:03:34-04:00,docs: add simple definition of Final Correctness under Variable 6 in July_16_Progress.md,True,0,0,False
+bd94cc11f8a813737052ba36e2bf63aa852ebe30,2026-07-16T11:05:33-04:00,docs: rename temperature plot to v3 to force markdown viewer cache refresh,True,1,0,False
+8d68c8f8d2b2b77ee0291972c8d67368f7eb16f6,2026-07-16T11:10:09-04:00,docs: explain Variable 13 (System Prompt) and Variable 14 (Sampling Seed) simply in July_16_Progress.md,True,0,0,False
+80ff842f441c663a51747e58ec1ac56710ae4046,2026-07-16T19:15:52-04:00,"docs: update progress report to reflect final tournament results (28,928 trajectories)",True,0,0,False
+7e7d84d100d20733269e2acf9f772e951632a270,2026-07-16T13:57:48Z,results: auto-commit cell global_qwen2p5_3b_gpqa,True,0,6,False
+876facfd0a85c65d8003c52548769d6c0025ea6f,2026-07-16T14:15:38Z,results: auto-commit cell global_qwen2p5_7b_gpqa,True,0,6,False
+27c05dfb38db2de661b819df99190b6cdc7708f8,2026-07-16T14:50:31Z,results: auto-commit cell global_qwen2p5_14b_gpqa,True,0,6,False
+db1b9c29d20d0cc75c59da8cd56aaca55ed3d6c6,2026-07-16T15:52:04Z,results: auto-commit cell global_qwen2p5_32b_gpqa,True,0,6,False
+ebea9a88c96763cece361e00169b44ca4edc6223,2026-07-16T16:16:37Z,results: auto-commit cell global_deepseek_r1_distill_1p5b_gpqa,True,0,6,False
+d234951e4c97074305ad5063bc6f097fe880aec3,2026-07-16T17:02:30Z,results: auto-commit cell global_deepseek_r1_distill_7b_gpqa,True,0,6,False
+08816960889200d75771a3066ca42c9ce0fd5617,2026-07-16T17:15:14Z,results: auto-commit cell global_llama_3p1_8b_instruct_gsm8k,True,0,6,False
+ee7e2458092eec4b49030d7647b549f5a55afb58,2026-07-16T17:35:18Z,results: auto-commit cell global_llama_3p1_8b_instruct_math,True,0,6,False
+80a0f77769a615b2553fba39d24d9abc36e92ea1,2026-07-16T17:46:59Z,results: auto-commit cell global_llama_3p1_8b_instruct_arc,True,0,6,False
+f54f2c9331314782ea3c088653221e82e9129356,2026-07-16T18:11:14Z,results: auto-commit cell global_llama_3p1_8b_instruct_gpqa,True,0,6,False
+4c00485f1c1913867ec7cea993b57a04a05b81f8,2026-07-16T18:32:43Z,results: auto-commit cell global_mistral_7b_instruct_v0p3_gsm8k,True,0,6,False
+f8c324f944a9160b2e76acf2cacedb312ca09bca,2026-07-16T19:03:02Z,results: auto-commit cell global_mistral_7b_instruct_v0p3_math,True,0,6,False
+6abdbf12691cb0764da2e191bb9c3572cde8839e,2026-07-16T19:19:34Z,results: auto-commit cell global_mistral_7b_instruct_v0p3_arc,True,0,6,False
+4b301e81ea95567dadd8760920930da2ed512f50,2026-07-16T19:59:47Z,results: auto-commit cell global_mistral_7b_instruct_v0p3_gpqa,True,0,6,False
+87f2627a1939568490d27c05294c8fe4de19918b,2026-07-16T20:56:26Z,results: auto-commit cell global_mistral_small_24b_2409_gpqa,True,0,6,False
+4e5a6335e3691cf14e8619fc22ffb31c8298a17f,2026-07-16T21:16:56Z,results: auto-commit cell global_yi_1p5_9b_chat_gsm8k,True,0,6,False
+448ae052acd7106564be67c267322d02944e2de0,2026-07-16T21:48:27Z,results: auto-commit cell global_yi_1p5_9b_chat_math,True,0,6,False
+7adfae16cf8b006fb91c3845d787bc43593e1c59,2026-07-16T22:07:11Z,results: auto-commit cell global_yi_1p5_9b_chat_arc,True,0,6,False
+720fe1f21290736de11c031b7d4164287865d292,2026-07-16T22:49:54Z,results: auto-commit cell global_yi_1p5_9b_chat_gpqa,True,0,6,False
+fcddab39cc51b05eb6b3f18837cc0e99a6e45945,2026-07-16T22:56:43Z,results: global 52-cell sweep final tournament completed,True,0,2,False
+92d3bb5da6d06bc419ba205b4b9299313b81eed0,2026-07-16T19:17:20-04:00,docs: regenerate plots to reflect final tournament AUC numbers,True,1,0,False
+e50953f3b627178d59a7a72df79853b24b784b5b,2026-07-16T19:17:25-04:00,Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary,True,1,116,True
+3284f91f22addc5f0a531b41179047bca2510fd4,2026-07-17T22:42:09Z,results: global 52-cell sweep final tournament completed,True,0,2,False
+5ee5cbe2394d9f2b9ce10ebd74738fcba6515a2b,2026-07-17T23:49:01Z,results: auto-commit cell global_qwen_3p5_9b_math,True,0,6,False
+cf9b0d035386a566a481df3fe45708ee35cdb131,2026-07-18T00:39:03Z,results: auto-commit cell global_qwen_3p5_9b_arc,True,0,6,False
+927b79df13a79ac503564a97a038dd1e40f30140,2026-07-18T01:35:30Z,results: auto-commit cell global_qwen_3p5_9b_gpqa,True,0,6,False
+7f3e49c63e8673596cc0a541b1e588d5b8d7bab6,2026-07-18T01:42:17Z,results: global 52-cell sweep final tournament completed,True,0,6,False
+3a8addfc0428fa766bbf1dfb0b98579f73f14789,2026-07-18T02:02:40Z,results: global 52-cell sweep final tournament completed,True,0,2,False
+d55b1c0d063b5c993e83780fea355aafa1903fc0,2026-07-18T03:03:38Z,results: auto-commit cell global_phi_4_mini_instruct_gpqa,True,0,6,False
+8ca810a16e1be728e85148f7bc3988a2b68890fd,2026-07-18T03:10:35Z,results: global 52-cell sweep final tournament completed,True,0,2,False
+2ea955afccb58bb698f6609776802b6818acac37,2026-07-18T09:48:41-04:00,results: add deep global sweep analysis report and tournament runner script,True,2,0,False
+4363048d81471bf4ef1f51c518a3bc67de104cbb,2026-07-18T09:58:28-04:00,results: add advanced hyper-optimization tournament script utilizing 96GB GPU VRAM,True,1,1,False
+3d3c397677caa8dc38f432d9a0586598a1cff76d,2026-07-18T10:00:46-04:00,results: add autonomous orchestrator script with fold-level checkpointing and periodic git push sync,True,2,0,False
+5a707420fcb9f4acc2aaba9476f180742e12ece2,2026-07-18T14:02:24Z,results: VM smoke test completed successfully,True,0,1,False
+c143ba3d85fefd978f05d2851d10c9a07e6052c7,2026-07-18T10:07:35-04:00,"results: increase full tuning epochs to 60, add stable batchnorm TCN, and add message warning filter",True,1,0,False
+30859fcc183732f4ebd71d2475eff7ea513831c1,2026-07-18T10:10:16-04:00,results: update autonomous runner to auto-detect and use local virtualenv python path,True,1,0,False
+e4dea48b0073136d2a86805fae086e1bf1104ebc,2026-07-18T14:11:43Z,results: VM smoke test completed successfully,True,0,1,False
+be0dbe67b8b0e843d075da604d0fd2166f5f3b72,2026-07-18T10:16:25-04:00,"results: support exhaustive cartesian grid search (1,170 models over 5 folds) for 24-hour run",True,2,0,False
+ba8bbce4b3fa603e7f93b279d77a3494c99061ac,2026-07-18T14:18:03Z,results: VM smoke test completed successfully,True,0,1,False
+8cbb546cb8b3129af56e6d5e63964ce945c97c3f,2026-07-18T16:38:07Z,results: VM completed Fold 1/5 checkpoint,True,0,1,False
+fd73614c373ec1dc5744499d4abb976f61f0089d,2026-07-18T19:00:50Z,results: VM completed Fold 2/5 checkpoint,True,0,1,False
+1b32b884f3a417c8bc66e2bc36ff3c941febffc6,2026-07-18T21:23:36Z,results: VM completed Fold 3/5 checkpoint,True,0,1,False
+524ec3477d2887b4c3b3d987447a1594ac1b7f08,2026-07-18T23:46:04Z,results: VM completed Fold 4/5 checkpoint,True,0,1,False
+352bf28caa290f48b2e45426f04c5c6dcfb7745d,2026-07-19T02:08:02Z,results: VM completed Fold 5/5 checkpoint,True,0,1,False
+f43ac16a1ab3bbe33fc7f5eb0388498870fe5210,2026-07-19T02:08:04Z,results: VM advanced hyper-optimization tournament completed,True,0,1,False
+ab0d31d259f1286bddc5c3e3520c0bee56f6752f,2026-07-18T22:31:15-04:00,"results: add Next-Gen Experiment Suite (Jerk, Torsion, Causal RoPE Transformer, Gated MoE Probe)",True,3,0,False
+9062ae773226b67ee660607f4ec8dc1880ec903a,2026-07-18T22:39:46-04:00,docs: add Master Research Prompt for GPT 5.6 Terra multi-agent GPU tournament,True,0,0,False
+cbad265a44297d9b7b045f079f721233861a99de,2026-07-18T22:41:16-04:00,docs: upgrade GPT 5.6 Terra Master Research Prompt to v2 with 8-agent swarm and MCP tool specs,True,0,0,False
+7a20bf665ac1282d7fc5558b27dcd271e00d5639,2026-07-18T22:48:51-04:00,docs: add NVIDIA RTX PRO 6000 Blackwell (98GB VRAM) hardware optimization specs to GPT 5.6 Terra prompt,True,0,0,False
+91a05b324057dd3882cc834576e20d10837436c5,2026-07-19T00:07:35-04:00,results: add ultimate multi-day GPU tournament suite (research/run_ultimate_multi_day_tournament.py & tools/run_ultimate_multi_day_tournament.sh),True,2,0,False
+3eb5055938362304f72aa2d4e1512fb5d1a90a91,2026-07-19T00:08:30-04:00,fix: auto-detect .venv/bin/python in ultimate multi-day launcher,True,1,0,False
+17c920dab7494f2e0642b9a2444192e28d1c5356,2026-07-19T00:09:34-04:00,fix: auto-install optuna if missing during launcher preflight,True,1,0,False
+ea564323cc62bfa1579c4e8e4e42d48b1cc6ef5d,2026-07-19T04:25:46Z,results: ultimate tournament checkpoint sync,True,0,2,False
+b4e886e2d892a083c9557eba79a7b710a046ed84,2026-07-19T09:27:51-04:00,fix: set num_workers=0 and mp.set_sharing_strategy('file_system') to prevent container /dev/shm shared memory exhaustion,True,2,0,False
+a5b2f64c628df2df4ce5d41180eb800541bebe5d,2026-07-19T13:45:25Z,results: ultimate tournament checkpoint sync,True,0,2,False
+8e6a63acfa2d238bf8787a077811615ff412e6dd,2026-07-19T14:30:26Z,results: ultimate tournament checkpoint sync,True,0,1,False
+1fd67d7568e5cabb3da91bbf87f3be0ebb3b41b3,2026-07-19T15:00:27Z,results: ultimate tournament checkpoint sync,True,0,1,False
+1abeaaf915e0df957b47e3bda4c566a91c7fa69e,2026-07-19T15:45:28Z,results: ultimate tournament checkpoint sync,True,0,1,False
+389336d0ff59cf5cca85586c3e7f7a5eef455f50,2026-07-19T16:15:30Z,results: ultimate tournament checkpoint sync,True,0,1,False
+83314c5c25b0a874c382beb39449938549930e5a,2026-07-19T16:42:24Z,results: ultimate tournament final sync,True,0,6,False
+a9bf28244cb33e06c03e1a6a6259918dda723442,2026-07-20T09:01:33-04:00,feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC,True,28,22,False
+d36584547c6bef17ad3315566ed817ec3f65a58c,2026-07-20T09:02:12-04:00,fix: resolve pd.Series groupby type and answer_span_std_entropy in prospective peer dynamics adapter,True,2,0,False
+a65e7fbf0f3f3d45e9dec77e88f9c29fa24b0c51,2026-07-20T09:28:41-04:00,feat: complete 5-arm scientific stress test battery for peer-dynamics consensus model,True,1,2,False
+0cf8c297ceb4402e013fc9ab725fa553e494ae52,2026-07-20T18:34:27-04:00,feat: implement Next-Gen 0.99 AUC target pipeline with high-order consensus physics and meta-ensemble,True,1,2,False
+84bec18cbc76b9bcd68e541d947407357389161b,2026-07-20T19:06:47-04:00,feat: complete multi-phase deep iteration suite with PyTorch CausalAttractorGRU and hybrid meta-ensemble,True,1,2,False
+48635dfb0516156be9e173a7b4b82d0a71122d1d,2026-07-20T19:28:53-04:00,feat: complete scientific hypothesis verification suite with 1000-draw bootstrap confidence intervals,True,1,2,False
+25292e5922d71302a29ef6a70f6520c785f0bbcd,2026-07-21T00:55:14-04:00,feat: complete weakness stress-test battery for perfect overthinking detector,True,1,2,False
+0fb9bd1cd0e82d3d05db8af9b257a537406fa81a,2026-07-22T19:21:59-04:00,"feat: complete master Blackwell 5-day GPU tournament and 10,000-draw bootstrap verification suite",True,2,0,False
+570a26cfff98240eba3eea082adf1b205f237622,2026-07-22T19:23:18-04:00,"feat: integrate 2026 ArXiv SOTA signals (CoDE-Stop confidence dynamics, prefix sufficiency, renewal processes)",True,1,0,False
+443872c20f23431de91a7d43fcae6feda9fac290,2026-07-22T19:27:35-04:00,feat: add automatic periodic git checkpointing and git push during 5-day tournament execution,True,1,0,False
+9969de0daea79648170d8ca5ea6405f0ecef1457,2026-07-22T19:31:11-04:00,feat: complete verified smoke test mode and bfloat16 PyTorch AMP compatibility,True,1,0,False
+ae8067f70718d7859a92f62b96da0e86851e6250,2026-07-22T19:33:05-04:00,fix: auto-detect active python environment and auto-install lightgbm if missing,True,1,0,False
+352d54c8142e0a16cd9d53b16d6b570c5295ebfc,2026-07-22T19:37:05-04:00,"fix: add gradient clipping, dtype alignment, and np.nan_to_num protection for bfloat16 PyTorch sequence probes",True,1,0,False
+e29969761cec941a57735b358e75f4f5d96e8b8f,2026-07-22T20:09:25-04:00,checkpoint: Phase 2 Complete - PyTorch Deep Hybrid MoE Trajectory OOF AUC: 0.971662,True,0,2,False
+20e6b22ba8d37e1129c6e9df47489df5ff9e3c98,2026-07-22T20:09:56-04:00,feat: add StandardScaler feature normalization (achieves 0.9717 OOF AUC sequence probe) and non-interactive GIT_TERMINAL_PROMPT=0 background push protection,True,1,0,False
+784838af6849e6fa054e79e0a90fceb2f3d2bfdc,2026-07-23T00:38:03-04:00,feat: add fold-level auto-checkpointing and git push after each fold in Phase 2,True,1,0,False
+c51a4adc5c78d88fc587293ccb6fe05f55673412,2026-07-23T00:40:08-04:00,"feat: add multi-mode scaling (quick, overnight 12h, marathon 5d) with 512-dim MoE, CosineAnnealingLR, multi-seed ensembling, and 50,000 bootstrap draws",True,2,0,False
+bd4bb9d5a7d9da84099fe3ed23ff0297a0acae73,2026-07-23T04:43:16Z,checkpoint: Phase 1 Complete - Control Baseline OOF AUC: 0.943223,True,0,2,False
+361eaf9fdee235b11e6bbdc9d0236387fc67002c,2026-07-23T08:52:34-04:00,"feat: upgrade to Ultra Deep Research Suite with dual neural architectures (MoE + CausalAttractorGRU), 5th-order Crackle physics, and 16-scale EMA spectrum",True,1,0,False
+1b5284bdde32c7e074bb4f9a002272eb3da669e6,2026-07-23T09:26:28-04:00,fix: add 'ultra' to argparse choices in run_ultimate_blackwell_5day_tournament.py,True,1,0,False
+d0f487950228c07ae3fd0409abc2668c1276a8cb,2026-07-23T13:30:58Z,checkpoint: Phase 1 Complete - Control Baseline OOF AUC: 0.943223,True,0,2,False
+0d75af9519978b10724a8b99b53ea91d718a8a98,2026-07-23T16:40:42-04:00,"feat: scale neural probes to batch_size=32 (92 mini-batches/epoch) and 1,000 epochs (100 PyTorch neural models total) for deep multi-day GPU training",True,1,0,False
+7400d3a6a855dcc850af07d70db520fd74adbd4a,2026-07-23T20:47:43Z,checkpoint: Phase 1 Complete - Control Baseline OOF AUC: 0.943223,True,0,2,False
+44f693470119b285effbd6b084f6ab09e296341d,2026-08-05T17:54:55-04:00,feat: complete Blackwell GPU Ultra Tournament run and persist final master report (Stacked Meta-Ensemble OOF AUC: 0.954858 / 0.955156),True,0,1,False
+df17f3ae386d0723defb9f6a64c3bc19ecd1d046,2026-09-09T15:28:48-04:00,docs: add visual semester 2 kickoff roadmap and advisor progress meeting guide,True,0,0,False
+a41448165a4c53b5a0085f73693caeca86b07c33,2026-09-09T15:31:41-04:00,fix(docs): resolve LaTeX math delimiters and table pipe conflicts in roadmap,True,0,0,False
+f4d6d2b979cb9f9d0ba2c9cdf17ed4a83fbcf8b2,2026-09-09T15:37:24-04:00,"fix(docs): overhaul roadmap markdown formatting, simplify language, and verify browser preview",True,0,0,False
+fedef12b7aa7e486c5e58a1c00d1749779fe8e67,2026-09-09T15:41:41-04:00,feat(docs): pull writing schedule forward to October 9 and expand advisor revision window to 4 weeks,True,0,0,False
+455d151ebecc3b8df0f6a8e5e67db1cc4dcbf830,2026-09-09T15:42:54-04:00,docs: remove weekly time commitment section from advisor meeting roadmap,True,0,0,False
+66542d460fd10e2781f4e7a71ecf8efc80deedea,2026-09-10T14:57:54-04:00,docs: remove discussion questions section and clarify W1-W2 deliverables in roadmap,True,0,0,False
+3980afdb74880db1ea3c90e91ceaf6dbf8f26fec,2026-09-10T14:59:37-04:00,docs: add plain-English deep dive for Weeks 1-2 deliverables in roadmap,True,0,0,False
+e545307ec10dfecc952a97faf9a0659cb4b43e04,2026-09-10T15:01:20-04:00,"docs: add granular 14-day tactical checklist with exact files, commands, and deliverables",True,0,0,False
+39ffd5cf0b6824e8da24bd608dfc8be822da643b,2026-09-10T15:08:10-04:00,docs(readme): add simple-terms section on 0.955 AUC tournament breakthrough,True,0,0,False
+4b415ac2ab571e89976fafb54b5e3ef247e98f2a,2026-09-10T15:11:20-04:00,docs: clarify 0.955 AUC tournament mechanism as Students vs Referees across README and roadmaps,True,0,0,False
+dbc5ade21dd111214b330fcc75bf015133a9f2ee,2026-09-10T15:13:16-04:00,"docs: expand plain-English explanation of 0.955 AUC tournament, decision trees, and stacking across README and roadmaps",True,0,0,False
+fa1c6536e83bd61f60a67aced18225d7948b084f,2026-10-02T22:36:31-04:00,Add verified thesis and live stopping research package,True,52,158,False
+09225c95c676ab3cae1c4b9586d74f7f803f519f,2026-10-02T23:16:48-04:00,Prepare validated archival thesis and EP completion records,True,3,0,False
+6e4378bef9a98037c20d1381eb9c7b61462a6578,2026-10-03T00:40:13-04:00,"Fix graders, stopping validation and research ledger audits",True,17,9,False

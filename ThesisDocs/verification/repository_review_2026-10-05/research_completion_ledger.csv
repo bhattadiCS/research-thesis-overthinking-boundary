@@ -1,0 +1,12 @@
+﻿component,status,evidence,data_action
+Mathematical formulation and finite checks,Completed,fa1c653; earlier derivations 8218a5c,No recollection
+Core response collections and freeze,Completed,52 standardized cells plus variable-horizon matrix,No recollection
+"Controlled floor, threshold, hazard and sensitivity studies",Completed development experiments,2660d40/d2a42e8/1f2e445/cca2113 and algorithm-v2 results,No recollection
+Fixed-budget and full-horizon controls,Completed,prefix_model_v1/evaluation.json and replay tables,No recollection
+Strict tabular/text task-disjoint evaluation,Completed local results; source committed,strict_*_stopping_oof_v1,No recollection
+Selected-answer causal evaluation,Completed local results; source hashes match,selected_answer_oof_v4_no_batch_timing; causal_dynamics_oof_v3,No recollection
+Peer-feature matched ablation,Historical predictions verified; original executor source partial,committee_oof_peer_dynamics_v3 and fixed13 sensitivity,Recover/reanalyse/refit with retained traces if stronger reproducibility is needed
+Single-model actual avoided generation,Completed prototype experiments,four online_stopping_20261002 collections,No recollection for documented prototype claims
+Fresh timestamped peer-fleet stopping,Collector/auditor capability; smoke evidence only,prospective_protocol_*,Targeted new collection only for a prospective fleet claim
+Independent accuracy-preservation confirmation,Not established by development evidence,no prespecified margin/untouched powered panel,Targeted new study only for this stronger claim
+Independent semantic label adjudication,Grader consistency/reconstruction audits exist; independent semantic review incomplete,"July grader audits, 7500-row reconstruction, 480-answer replay",Review retained answers; recollection is not the first remedy

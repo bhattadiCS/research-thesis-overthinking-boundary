@@ -1,0 +1,263 @@
+{
+  "schema": "formal-thesis-consolidated-visual-review-v3",
+  "status": "pass",
+  "review_date": "2026-10-04",
+  "scope": "Corrected formal document; semester approvals user-confirmed complete.",
+  "corrections": [
+    "Expanded contents to all 62 body headings and actual edition destinations.",
+    "Added omitted grader module to historical pytest reproduction command."
+  ],
+  "scientific_content_change": "None. Compiled v3 source differs from v2 only by the grader command line; chapter and bibliography source hashes are unchanged.",
+  "editions": {
+    "digital": {
+      "output": "output/pdf/Masters_Thesis_Formal_v3_Aditya_Bhatt.pdf",
+      "sha256": "d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f",
+      "pages": 96,
+      "source": "tmp/pdfs/formal_thesis/v3/digital/source.pdf",
+      "source_sha256": "1e1d6ca07128f52483055c800c810ef9eee3d210e2db82d97aebb7e72eaa9867",
+      "front_matter_pages": 7,
+      "contents_body_heading_count": 62,
+      "table_count": 16,
+      "figure_count": 4,
+      "coverage": [
+        {
+          "first_physical_page": 1,
+          "last_physical_page": 7,
+          "evidence": "fresh front-matter detail review"
+        },
+        {
+          "first_physical_page": 8,
+          "last_physical_page": 19,
+          "evidence": "exact mapped intro pixels/text/geometry"
+        },
+        {
+          "first_physical_page": 20,
+          "last_physical_page": 35,
+          "evidence": "exact mapped mathematical pages; fresh converted samples"
+        },
+        {
+          "first_physical_page": 36,
+          "last_physical_page": 77,
+          "evidence": "exact mapped empirical pages"
+        },
+        {
+          "first_physical_page": 78,
+          "last_physical_page": 84,
+          "evidence": "exact mapped discussion pages"
+        },
+        {
+          "first_physical_page": 85,
+          "last_physical_page": 88,
+          "evidence": "exact mapped bibliography pages"
+        },
+        {
+          "first_physical_page": 89,
+          "last_physical_page": 91,
+          "evidence": "fresh corrected Appendix A detail review"
+        },
+        {
+          "first_physical_page": 92,
+          "last_physical_page": 96,
+          "evidence": "fresh appendix detail review; exact mapped pixels/text/geometry"
+        }
+      ],
+      "coverage_complete": true,
+      "remaining_material_layout_defects": [],
+      "coverage_independently_reconstructed_from_component_records": true,
+      "conversion_receipt": "ThesisDocs/archival/formal_v3_digital_build_manifest.json",
+      "conversion_receipt_sha256": "bcb2ab5e62198b38d84a893e089090510249242e2c27fb1fe03ffc7c61eb8e3b",
+      "main_build_manifest": "ThesisDocs/formal/build_manifest_digital_v3.json",
+      "main_build_manifest_sha256": "3be20ecd8e303087a6ac2335f3ba286adc15ba6121afe4e6c82f2ee8f467bb81",
+      "validator_report": "ThesisDocs/archival/formal_v3_digital_verapdf_2b.xml",
+      "validator_report_sha256": "dae53e553cce1e7fcf8b006cc379d1252a5e0ff207e0814c21121f443b9dc531",
+      "validator_details": {
+        "passedRules": "144",
+        "failedRules": "0",
+        "passedChecks": "250386",
+        "failedChecks": "0"
+      },
+      "archival_text_and_word_geometry_identical_pages": 96,
+      "archival_pixel_identical_pages": 76,
+      "archival_maximum_rgb_channel_difference": 1,
+      "second_renderer": {
+        "pdf": "output/pdf/Masters_Thesis_Formal_v3_Aditya_Bhatt.pdf",
+        "sha256": "d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f",
+        "pages": 96,
+        "renderer": "Poppler 26.09.0",
+        "dpi": 96,
+        "pagination_pass": true,
+        "front_order_pass": true,
+        "table_entries": 16,
+        "figure_entries": 4,
+        "rendered_page_count": 96,
+        "contact_sheets": [
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_01.png",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_02.png",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_03.png",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_04.png",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_05.png",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_06.png"
+        ],
+        "root_visual_review": "All contact sheets reviewed; print physical pages48 and50 additionally viewed at full detail.",
+        "contact_sheet_sha256": {
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_01.png": "3398dfe4623a3781e1e42b4f47911b20949e9cb76b3b7b5c40c9b0b850123490",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_02.png": "d1eae4767ad7791d2a3daef5df50ada13e04dc5736209ba33963ec8aa5492058",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_03.png": "1145b304ca8a2cecd55f89d693853fedfb8580efc351e07a4152d1e2a0ec6581",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_04.png": "4bbaff1a5297995ad9b1a11ad625adbff43585838b0f1b942335b0edd3fd371b",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_05.png": "1d4de6c046798384d720a392ab2c10cc11662525b4704fdd1983e654f94d8f38",
+          "tmp/pdfs/recheck_v2/v3_digital/sheet_06.png": "169fd6324450c16b7a8b4479537f4b5a2ea3f5d4545623aa3d5d5cf02c37934a"
+        }
+      }
+    },
+    "print": {
+      "output": "output/pdf/Masters_Thesis_Formal_v3_Print_Aditya_Bhatt.pdf",
+      "sha256": "84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1",
+      "pages": 99,
+      "source": "tmp/pdfs/formal_thesis/v3/print/source.pdf",
+      "source_sha256": "dcbba384b1793b7d4bdd9887cea0e93f25d4dbc3b8bff3c7cb70c7d2566653b6",
+      "front_matter_pages": 7,
+      "contents_body_heading_count": 62,
+      "table_count": 16,
+      "figure_count": 4,
+      "coverage": [
+        {
+          "first_physical_page": 1,
+          "last_physical_page": 7,
+          "evidence": "fresh front-matter detail review"
+        },
+        {
+          "first_physical_page": 8,
+          "last_physical_page": 20,
+          "evidence": "exact mapped intro pixels/text/geometry"
+        },
+        {
+          "first_physical_page": 21,
+          "last_physical_page": 37,
+          "evidence": "exact mapped mathematical pages; fresh converted samples"
+        },
+        {
+          "first_physical_page": 38,
+          "last_physical_page": 79,
+          "evidence": "exact mapped empirical pages"
+        },
+        {
+          "first_physical_page": 80,
+          "last_physical_page": 86,
+          "evidence": "exact mapped discussion pages"
+        },
+        {
+          "first_physical_page": 87,
+          "last_physical_page": 90,
+          "evidence": "exact mapped bibliography pages"
+        },
+        {
+          "first_physical_page": 91,
+          "last_physical_page": 93,
+          "evidence": "fresh corrected Appendix A detail review"
+        },
+        {
+          "first_physical_page": 94,
+          "last_physical_page": 99,
+          "evidence": "fresh appendix detail review; exact mapped pixels/text/geometry"
+        }
+      ],
+      "coverage_complete": true,
+      "remaining_material_layout_defects": [],
+      "coverage_independently_reconstructed_from_component_records": true,
+      "conversion_receipt": "ThesisDocs/archival/formal_v3_print_build_manifest.json",
+      "conversion_receipt_sha256": "a9a6a5731e4dcb3f3947d1e0fc2329a5abf6962fef8e0154287563961b3320ad",
+      "main_build_manifest": "ThesisDocs/formal/build_manifest_print_v3.json",
+      "main_build_manifest_sha256": "6446e0954212c9c6c969557a6a380cb858e0fb3b29b23e816c50baf7a54fe5c1",
+      "validator_report": "ThesisDocs/archival/formal_v3_print_verapdf_2b.xml",
+      "validator_report_sha256": "deb78f8c48664ae140bcb1c3f46967c005951f9addca9de0d53076f28e470ab7",
+      "validator_details": {
+        "passedRules": "144",
+        "failedRules": "0",
+        "passedChecks": "251870",
+        "failedChecks": "0"
+      },
+      "archival_text_and_word_geometry_identical_pages": 99,
+      "archival_pixel_identical_pages": 79,
+      "archival_maximum_rgb_channel_difference": 1,
+      "second_renderer": {
+        "pdf": "output/pdf/Masters_Thesis_Formal_v3_Print_Aditya_Bhatt.pdf",
+        "sha256": "84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1",
+        "pages": 99,
+        "renderer": "Poppler 26.09.0",
+        "dpi": 96,
+        "pagination_pass": true,
+        "front_order_pass": true,
+        "table_entries": 16,
+        "figure_entries": 4,
+        "rendered_page_count": 99,
+        "contact_sheets": [
+          "tmp/pdfs/recheck_v2/v3_print/sheet_01.png",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_02.png",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_03.png",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_04.png",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_05.png",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_06.png",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_07.png"
+        ],
+        "root_visual_review": "All contact sheets reviewed; print physical pages48 and50 additionally viewed at full detail.",
+        "contact_sheet_sha256": {
+          "tmp/pdfs/recheck_v2/v3_print/sheet_01.png": "13b95f1932eb0ba9113cf33b18d99d2fe5c6bbfc43f5b865421fbd337124410d",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_02.png": "71f8d4957d6fdc012fa4ab20e1908d4beb3de672ab6534c443ed4c85f5976eb2",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_03.png": "05797fcf374127b75a6fc53d8e88d252b8206e34a9492e650f438f416fef09a1",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_04.png": "39c805ffd57d3bebb68165ef84b05fbae96d9b51819c7df7e1a6d3518ed4167d",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_05.png": "bd8efa79ebc10dd22c7ae1e8f8ce71debba6ee0a49ae309d64d9bc273d6f2f03",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_06.png": "29786f01e63308b5666d89095e13db3340ee12552c9fab73eaf60892ed424c23",
+          "tmp/pdfs/recheck_v2/v3_print/sheet_07.png": "f8b18982316dd06c0a73c82a150e076fb1a916401858cfbb6a08619455c4b546"
+        }
+      }
+    }
+  },
+  "evidence_components": [
+    {
+      "path": "ThesisDocs/formal/source_integrity_v3.json",
+      "sha256": "ae312a4dfd2836c3b3237af266626cea67b5c96195449114ae1855142fcfde82"
+    },
+    {
+      "path": "ThesisDocs/formal/visual_math_v3.json",
+      "sha256": "fbe5fcf43a98bff589366813a3185ce8b6d792706c0f51e1fa5a45c43e542192"
+    },
+    {
+      "path": "ThesisDocs/formal/visual_supplement_v3.json",
+      "sha256": "f59895eadbcf2bf96031d59c88d7485636c9d54e46e66b31396e7fa2485f1843"
+    },
+    {
+      "path": "ThesisDocs/archival/formal_v3_independent_technical_audit.json",
+      "sha256": "3b62b6a27be79bc52d1e258ac1f0de5e40067f438f3ebbb9e3bf3005f2cfd509"
+    },
+    {
+      "path": "ThesisDocs/formal/poppler_review_v3.json",
+      "sha256": "37934baab34261988645631d59904ed4d0164019ea4f840d29f29063bd170d99"
+    },
+    {
+      "path": "ThesisDocs/formal/source_snapshots/manifest.json",
+      "sha256": "81ecb26bc4047f69d47ba25b7033d2cedf66dcf9e3d975712bd0e5b8c196c0db"
+    }
+  ],
+  "root_second_renderer_visual_review": {
+    "renderer": "Poppler 26.09.0",
+    "dpi": 96,
+    "all_final_pages_contact_sheet_inspection": true,
+    "total_pages": 195,
+    "contact_sheets_inspected": 13,
+    "additional_full_page_detail_samples": [
+      {
+        "edition": "print",
+        "physical_pages": [
+          48,
+          50
+        ]
+      }
+    ],
+    "remaining_material_layout_defects": []
+  },
+  "limitations": [
+    "Document and technical checks do not record institutional acceptance or a deposit.",
+    "October 2026 must match the actual ETD submission month.",
+    "Scholarly significance remains the readers academic judgment."
+  ]
+}

@@ -1,0 +1,20 @@
+commit 8f5448c7fc93710575bb91e53da1ed549a55f9f8
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sun Jul 12 23:47:14 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sun Jul 12 23:47:14 2026 -0400
+
+    fix: defragment dataframe in train_tier3_pilots.py to suppress performance warnings
+
+diff --git a/research/train_tier3_pilots.py b/research/train_tier3_pilots.py
+index 62e6d77..32abf25 100644
+--- a/research/train_tier3_pilots.py
++++ b/research/train_tier3_pilots.py
+@@ -207,6 +207,7 @@ def main():
+     
+     # Merge projections back to df
+     df = pd.concat([df, proj1, proj2], axis=1)
++    df = df.copy()  # Defragment DataFrame to avoid pandas PerformanceWarning
+ 
+     # Clean CSV shifts and missing values
+     df["correct"] = pd.to_numeric(df["correct"], errors="coerce").fillna(0).astype(int)

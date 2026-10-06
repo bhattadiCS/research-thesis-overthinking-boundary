@@ -1,0 +1,1010 @@
+{
+  "schema": "formal-thesis-empirical-visual-review-v4",
+  "status": "passed_scoped_review",
+  "reviewer": "independent live_stopper agent",
+  "reviewed_at_utc": "2026-10-06T02:53:05.290815+00:00",
+  "scope": "Full Chapter3-6 and AppendixE page coverage in both finalv4 editions; all four empirical plots freshly viewed. Unchanged main tables/pages carry forward only exact mapped body RGB and word-coordinate equality. This record does not claim review of other assigned agents sections.",
+  "method": {
+    "final_image_dpi": 144,
+    "image_detail": "original",
+    "transfer_clip_points": [
+      0,
+      0,
+      612,
+      700
+    ],
+    "transfer_requirement": "Exact body RGB bytes at144dpi and exact complete word coordinate/text tuples, excluding the redesigned footer only. No nonfooter words in scoped chapters fall outside this clip.",
+    "comparison_artifact": {
+      "path": "tmp/pdfs/formal_thesis/v4/live_empirical_final_comparison.json",
+      "sha256": "5b5ca4f6488271f6212fbe5b0f62ecbcdb808b0333a8207b35b2a9769c051cc6"
+    },
+    "previous_complete_review": {
+      "path": "ThesisDocs/formal/visual_review_v3.json",
+      "sha256": "839c9dce641aa2f5d3c52bb463e4d5787e9da3a5316198e8702187a0e49e22cc"
+    },
+    "previous_empirical_supplement": {
+      "path": "ThesisDocs/formal/visual_supplement_v3.json",
+      "sha256": "f59895eadbcf2bf96031d59c88d7485636c9d54e46e66b31396e7fa2485f1843"
+    }
+  },
+  "editions": {
+    "digital": {
+      "path": "output/pdf/Masters_Thesis_Formal_v4_Aditya_Bhatt.pdf",
+      "sha256_before": "3ee3936ea9926b448d9bc4ea6f3a19eed0ba7b6309eeda7cc647f5e0227a47f8",
+      "sha256_after": "3ee3936ea9926b448d9bc4ea6f3a19eed0ba7b6309eeda7cc647f5e0227a47f8",
+      "source_pdf_sha256": "95df99e890e78d8430ce7803b2f53902455d42b6c688442fc3e625f7f8649c63",
+      "page_count": 104,
+      "front_matter_pages": 8,
+      "build_receipt": {
+        "path": "ThesisDocs/archival/formal_v4_digital_build_manifest.json",
+        "sha256": "ec8fd55d334f988e4bac9971be9db35eff919277fe74d4d9a19badf75f73e276"
+      },
+      "render_dir": "tmp/pdfs/formal_thesis/formal_v4_digital/archival_review/3ee3936ea9926b448d9bc4ea6f3a19eed0ba7b6309eeda7cc647f5e0227a47f8",
+      "chapter3_to6_physical_range": [
+        37,
+        86
+      ],
+      "appendix_e_physical_range": [
+        99,
+        102
+      ],
+      "scoped_page_count": 54,
+      "scope_complete": true,
+      "fresh_final_physical_pages": [
+        44,
+        45,
+        46,
+        49,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        77,
+        78,
+        83,
+        84,
+        85,
+        86,
+        99,
+        100,
+        101,
+        102
+      ],
+      "fresh_png_sha256": [
+        {
+          "physical_page": 44,
+          "sha256": "d4cab92fed5895601a55cbcd97277ad18ff1e918f87d19a2ffc07609f4a150d4"
+        },
+        {
+          "physical_page": 45,
+          "sha256": "384026f70ca6563b406417c38ed10e738088389873e792b06be37033522a79bf"
+        },
+        {
+          "physical_page": 46,
+          "sha256": "4a9e4e325c6c5d2b66af7ffe205913289a36680951e057bf2b199b6a92bca607"
+        },
+        {
+          "physical_page": 49,
+          "sha256": "13b3283c9e73c0c5bfb04bf30c418cb887e864f583873a0a33c132089a48039a"
+        },
+        {
+          "physical_page": 54,
+          "sha256": "d6797ddc69db11906e7696ef36d746b14f264089c00d43c1189c79a9f448f553"
+        },
+        {
+          "physical_page": 55,
+          "sha256": "0acf3f1e8b57bc28e10a01536cabfb09896a08360caf534c8b09cef58152dc18"
+        },
+        {
+          "physical_page": 56,
+          "sha256": "104644f692bb0fbba42084a4d6748998e7e67e8848c963a2775a7935606124fd"
+        },
+        {
+          "physical_page": 57,
+          "sha256": "90039df22229497e974a49fb1bb4f24b009a977f35b467ac5424cb9a1f50a40c"
+        },
+        {
+          "physical_page": 58,
+          "sha256": "b1f0c604277d15377ba8bc40bc84039ccb6febe12e5e08ac7503633961eee90e"
+        },
+        {
+          "physical_page": 59,
+          "sha256": "880dc04a42e14b91fd290dd5f8ca966fac85ada55d80d6dd2edca4622827a9a9"
+        },
+        {
+          "physical_page": 77,
+          "sha256": "dd1b941e88e8c4222d84d312e2e0b14bb1ee69e363e7675b8e810ece328e60d0"
+        },
+        {
+          "physical_page": 78,
+          "sha256": "a57a369b70ae29005bb9d70626e2322a5245c36ae60308bee4c18cc7faef18e2"
+        },
+        {
+          "physical_page": 83,
+          "sha256": "c96a63a38507c6a78f7b84b58a043925157ab41d89196eb48fe15ef0c71ff177"
+        },
+        {
+          "physical_page": 84,
+          "sha256": "05a1363e858c67602ef3a3a4d1640d0f14a130f38f5fe8028312375d129db924"
+        },
+        {
+          "physical_page": 85,
+          "sha256": "a60850a49069a107c2fc5e77cd22b21ec82b091118e6be2439e36785950dae6f"
+        },
+        {
+          "physical_page": 86,
+          "sha256": "c1df570d9c9c659e6f342c4b8f835df10fa1ed310e00351d6a1168acc8055a6a"
+        },
+        {
+          "physical_page": 99,
+          "sha256": "ab3f19ce1ca99c246aac4160190cdfef55989565d450966d737570ac75c9cedd"
+        },
+        {
+          "physical_page": 100,
+          "sha256": "367d0b00911de7f8144eaa5a63df4bf2be47c42513ca21ec0e27cce36be2cfbc"
+        },
+        {
+          "physical_page": 101,
+          "sha256": "52d0d6c5283940dde9d2e703244841c33936718737576ee81bdb2cbbb7683af5"
+        },
+        {
+          "physical_page": 102,
+          "sha256": "b5039c0202c372f1682259eaa424c4e9c9a82fdcaa30b4590f1fcd27dbccd389"
+        }
+      ],
+      "exact_body_transferred_physical_pages": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        47,
+        48,
+        50,
+        51,
+        52,
+        53,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        79,
+        80,
+        81,
+        82
+      ],
+      "comparison_exact_page_count": 37,
+      "previous_pdf": {
+        "path": "output/pdf/Masters_Thesis_Formal_v3_Aditya_Bhatt.pdf",
+        "sha256": "d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f"
+      },
+      "exact_body_page_mappings": [
+        {
+          "previous_physical_page": 36,
+          "final_physical_page": 37
+        },
+        {
+          "previous_physical_page": 37,
+          "final_physical_page": 38
+        },
+        {
+          "previous_physical_page": 38,
+          "final_physical_page": 39
+        },
+        {
+          "previous_physical_page": 39,
+          "final_physical_page": 40
+        },
+        {
+          "previous_physical_page": 40,
+          "final_physical_page": 41
+        },
+        {
+          "previous_physical_page": 41,
+          "final_physical_page": 42
+        },
+        {
+          "previous_physical_page": 42,
+          "final_physical_page": 43
+        },
+        {
+          "previous_physical_page": 46,
+          "final_physical_page": 47
+        },
+        {
+          "previous_physical_page": 47,
+          "final_physical_page": 48
+        },
+        {
+          "previous_physical_page": 48,
+          "final_physical_page": 49
+        },
+        {
+          "previous_physical_page": 49,
+          "final_physical_page": 50
+        },
+        {
+          "previous_physical_page": 50,
+          "final_physical_page": 51
+        },
+        {
+          "previous_physical_page": 51,
+          "final_physical_page": 52
+        },
+        {
+          "previous_physical_page": 52,
+          "final_physical_page": 53
+        },
+        {
+          "previous_physical_page": 58,
+          "final_physical_page": 60
+        },
+        {
+          "previous_physical_page": 59,
+          "final_physical_page": 61
+        },
+        {
+          "previous_physical_page": 60,
+          "final_physical_page": 62
+        },
+        {
+          "previous_physical_page": 61,
+          "final_physical_page": 63
+        },
+        {
+          "previous_physical_page": 62,
+          "final_physical_page": 64
+        },
+        {
+          "previous_physical_page": 63,
+          "final_physical_page": 65
+        },
+        {
+          "previous_physical_page": 64,
+          "final_physical_page": 66
+        },
+        {
+          "previous_physical_page": 65,
+          "final_physical_page": 67
+        },
+        {
+          "previous_physical_page": 66,
+          "final_physical_page": 68
+        },
+        {
+          "previous_physical_page": 67,
+          "final_physical_page": 69
+        },
+        {
+          "previous_physical_page": 68,
+          "final_physical_page": 70
+        },
+        {
+          "previous_physical_page": 69,
+          "final_physical_page": 71
+        },
+        {
+          "previous_physical_page": 70,
+          "final_physical_page": 72
+        },
+        {
+          "previous_physical_page": 71,
+          "final_physical_page": 73
+        },
+        {
+          "previous_physical_page": 72,
+          "final_physical_page": 74
+        },
+        {
+          "previous_physical_page": 73,
+          "final_physical_page": 75
+        },
+        {
+          "previous_physical_page": 74,
+          "final_physical_page": 76
+        },
+        {
+          "previous_physical_page": 75,
+          "final_physical_page": 77
+        },
+        {
+          "previous_physical_page": 76,
+          "final_physical_page": 78
+        },
+        {
+          "previous_physical_page": 77,
+          "final_physical_page": 79
+        },
+        {
+          "previous_physical_page": 78,
+          "final_physical_page": 80
+        },
+        {
+          "previous_physical_page": 79,
+          "final_physical_page": 81
+        },
+        {
+          "previous_physical_page": 80,
+          "final_physical_page": 82
+        }
+      ],
+      "empirical_figure_pages_fresh": [
+        49,
+        55,
+        77,
+        78
+      ],
+      "table_caption_and_rows_coverage": [
+        {
+          "number": 2,
+          "physical_page": 38,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 3,
+          "physical_page": 39,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 4,
+          "physical_page": 47,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 5,
+          "physical_page": 51,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 6,
+          "physical_page": 53,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 7,
+          "physical_page": 57,
+          "method": "fresh final full-page view"
+        },
+        {
+          "number": 8,
+          "physical_page": 63,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 9,
+          "physical_page": 64,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 10,
+          "physical_page": 67,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 11,
+          "physical_page": 70,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 12,
+          "physical_page": 72,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 13,
+          "physical_page": 73,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 14,
+          "physical_page": 75,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 17,
+          "physical_page": 100,
+          "method": "fresh final full-page view"
+        },
+        {
+          "number": 18,
+          "physical_page": 101,
+          "method": "fresh final full-page view"
+        }
+      ],
+      "folio_value_check": "Every scoped folio is independently extracted and equals physical_page minus8.",
+      "folio_checked_pages": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        99,
+        100,
+        101,
+        102
+      ],
+      "findings": [
+        "No clipping, overlap, truncated prose, isolated table caption, split table row or unreadable empirical label found.",
+        "Tables17/18 each remain complete on their caption page.",
+        "Figures1-4labels/captions fit and Figure4retains correct uncertainty references.",
+        "All new methodological/result/provenance and completion-scope paragraphs are legible."
+      ]
+    },
+    "print": {
+      "path": "output/pdf/Masters_Thesis_Formal_v4_Print_Aditya_Bhatt.pdf",
+      "sha256_before": "dd0195514cf97dc745db765c0da798aaf9407bd312aa658759c6cd04cd1bee2b",
+      "sha256_after": "dd0195514cf97dc745db765c0da798aaf9407bd312aa658759c6cd04cd1bee2b",
+      "source_pdf_sha256": "b52c3facefd7c08fa203c09f3b77c43453ba066519b188dcde41715e39817bc3",
+      "page_count": 109,
+      "front_matter_pages": 8,
+      "build_receipt": {
+        "path": "ThesisDocs/archival/formal_v4_print_build_manifest.json",
+        "sha256": "efed22056f285dba3afd6ceff0ee62eaa580a313323a190ecd97f003ff214a94"
+      },
+      "render_dir": "tmp/pdfs/formal_thesis/formal_v4_print/archival_review/dd0195514cf97dc745db765c0da798aaf9407bd312aa658759c6cd04cd1bee2b",
+      "chapter3_to6_physical_range": [
+        39,
+        89
+      ],
+      "appendix_e_physical_range": [
+        103,
+        107
+      ],
+      "scoped_page_count": 56,
+      "scope_complete": true,
+      "fresh_final_physical_pages": [
+        46,
+        47,
+        48,
+        49,
+        52,
+        57,
+        58,
+        59,
+        80,
+        81,
+        86,
+        87,
+        88,
+        89,
+        103,
+        104,
+        105,
+        106,
+        107
+      ],
+      "fresh_png_sha256": [
+        {
+          "physical_page": 46,
+          "sha256": "878a967a29e6234d7bcadb812a9ec5564a649f1a92ce91c02fb37795841fcf33"
+        },
+        {
+          "physical_page": 47,
+          "sha256": "f601434173d4805e221b10576a405f1eceba10eeabaa4d1d639ba786585198da"
+        },
+        {
+          "physical_page": 48,
+          "sha256": "703bc0cccb3fee548f37c1999592ad4af6647331196bec8b77a204313129da46"
+        },
+        {
+          "physical_page": 49,
+          "sha256": "12c1b8a7d9a5cff2a36380391e69463db7a0d0888c21e19962858b3db2b010fa"
+        },
+        {
+          "physical_page": 52,
+          "sha256": "cf8141e09d748f78082685fc898dd381d4b070b2a4ccd9e7abc602aca59d579f"
+        },
+        {
+          "physical_page": 57,
+          "sha256": "b29f837f0b266fcf07f97777371bbeed6673c7dc0a5db2a810d6a0917572a4a3"
+        },
+        {
+          "physical_page": 58,
+          "sha256": "b17489e853b7b19a3e2324133e375d615159de87060fd6b141df9935b4e54273"
+        },
+        {
+          "physical_page": 59,
+          "sha256": "f5d7a079331c01c05f818fb01e734190ced7f507f12c753e9e1b2f71134eabef"
+        },
+        {
+          "physical_page": 80,
+          "sha256": "cabe4017cbf1c2ed14246dc282f1b6158206ce237ea4d12e48f97225d892cde1"
+        },
+        {
+          "physical_page": 81,
+          "sha256": "2245b837bd4a037414f6ed3f717b583157465cb8f6f812600e9318bb06722173"
+        },
+        {
+          "physical_page": 86,
+          "sha256": "c4a463ae9ddabe04e5210a5b6691a633b30783509515a86f7aaed72fbba9e721"
+        },
+        {
+          "physical_page": 87,
+          "sha256": "906f38a7d496ea04134efbf763f5aa63fbf280755f463368783c4ab45e385219"
+        },
+        {
+          "physical_page": 88,
+          "sha256": "437b92037c5edec072899ce03c3cb449534cd8c1fec26c576db4ba4880e1f4b4"
+        },
+        {
+          "physical_page": 89,
+          "sha256": "4dce8118b5f74e3d438d29f74a50a4d7880fdef1d50617b795d2a049429af8ba"
+        },
+        {
+          "physical_page": 103,
+          "sha256": "c4bb3eca3dbcfd3c4a927d08b27ef385d7183e53ac52c05030c4cb325897e7ee"
+        },
+        {
+          "physical_page": 104,
+          "sha256": "d1b5519f0579a715916296c4a19c1dc17b39bbb028f82c0884f675d17a086f51"
+        },
+        {
+          "physical_page": 105,
+          "sha256": "8918321930039137182f559109aa5397e15a9c709a5ea163be2b03a9885a52c0"
+        },
+        {
+          "physical_page": 106,
+          "sha256": "f300f0308f6cfdc4a3bb43f0797c44a3f4d63d26a45a844b51e664196cc3b64d"
+        },
+        {
+          "physical_page": 107,
+          "sha256": "3b1f8d56358791d4e35b42d09cf4036cc32b471ced175a4660ff63142a20a3d8"
+        }
+      ],
+      "exact_body_transferred_physical_pages": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        50,
+        51,
+        53,
+        54,
+        55,
+        56,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        82,
+        83,
+        84,
+        85
+      ],
+      "comparison_exact_page_count": 41,
+      "previous_pdf": {
+        "path": "output/pdf/Masters_Thesis_Formal_v3_Print_Aditya_Bhatt.pdf",
+        "sha256": "84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1"
+      },
+      "exact_body_page_mappings": [
+        {
+          "previous_physical_page": 38,
+          "final_physical_page": 39
+        },
+        {
+          "previous_physical_page": 39,
+          "final_physical_page": 40
+        },
+        {
+          "previous_physical_page": 40,
+          "final_physical_page": 41
+        },
+        {
+          "previous_physical_page": 41,
+          "final_physical_page": 42
+        },
+        {
+          "previous_physical_page": 42,
+          "final_physical_page": 43
+        },
+        {
+          "previous_physical_page": 43,
+          "final_physical_page": 44
+        },
+        {
+          "previous_physical_page": 44,
+          "final_physical_page": 45
+        },
+        {
+          "previous_physical_page": 48,
+          "final_physical_page": 50
+        },
+        {
+          "previous_physical_page": 49,
+          "final_physical_page": 51
+        },
+        {
+          "previous_physical_page": 50,
+          "final_physical_page": 52
+        },
+        {
+          "previous_physical_page": 51,
+          "final_physical_page": 53
+        },
+        {
+          "previous_physical_page": 52,
+          "final_physical_page": 54
+        },
+        {
+          "previous_physical_page": 53,
+          "final_physical_page": 55
+        },
+        {
+          "previous_physical_page": 54,
+          "final_physical_page": 56
+        },
+        {
+          "previous_physical_page": 56,
+          "final_physical_page": 59
+        },
+        {
+          "previous_physical_page": 57,
+          "final_physical_page": 60
+        },
+        {
+          "previous_physical_page": 58,
+          "final_physical_page": 61
+        },
+        {
+          "previous_physical_page": 59,
+          "final_physical_page": 62
+        },
+        {
+          "previous_physical_page": 60,
+          "final_physical_page": 63
+        },
+        {
+          "previous_physical_page": 61,
+          "final_physical_page": 64
+        },
+        {
+          "previous_physical_page": 62,
+          "final_physical_page": 65
+        },
+        {
+          "previous_physical_page": 63,
+          "final_physical_page": 66
+        },
+        {
+          "previous_physical_page": 64,
+          "final_physical_page": 67
+        },
+        {
+          "previous_physical_page": 65,
+          "final_physical_page": 68
+        },
+        {
+          "previous_physical_page": 66,
+          "final_physical_page": 69
+        },
+        {
+          "previous_physical_page": 67,
+          "final_physical_page": 70
+        },
+        {
+          "previous_physical_page": 68,
+          "final_physical_page": 71
+        },
+        {
+          "previous_physical_page": 69,
+          "final_physical_page": 72
+        },
+        {
+          "previous_physical_page": 70,
+          "final_physical_page": 73
+        },
+        {
+          "previous_physical_page": 71,
+          "final_physical_page": 74
+        },
+        {
+          "previous_physical_page": 72,
+          "final_physical_page": 75
+        },
+        {
+          "previous_physical_page": 73,
+          "final_physical_page": 76
+        },
+        {
+          "previous_physical_page": 74,
+          "final_physical_page": 77
+        },
+        {
+          "previous_physical_page": 75,
+          "final_physical_page": 78
+        },
+        {
+          "previous_physical_page": 76,
+          "final_physical_page": 79
+        },
+        {
+          "previous_physical_page": 77,
+          "final_physical_page": 80
+        },
+        {
+          "previous_physical_page": 78,
+          "final_physical_page": 81
+        },
+        {
+          "previous_physical_page": 79,
+          "final_physical_page": 82
+        },
+        {
+          "previous_physical_page": 80,
+          "final_physical_page": 83
+        },
+        {
+          "previous_physical_page": 81,
+          "final_physical_page": 84
+        },
+        {
+          "previous_physical_page": 82,
+          "final_physical_page": 85
+        }
+      ],
+      "empirical_figure_pages_fresh": [
+        52,
+        59,
+        80,
+        81
+      ],
+      "table_caption_and_rows_coverage": [
+        {
+          "number": 2,
+          "physical_page": 40,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 3,
+          "physical_page": 41,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 4,
+          "physical_page": 50,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 5,
+          "physical_page": 54,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 6,
+          "physical_page": 56,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 7,
+          "physical_page": 61,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 8,
+          "physical_page": 66,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 9,
+          "physical_page": 67,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 10,
+          "physical_page": 70,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 11,
+          "physical_page": 73,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 12,
+          "physical_page": 75,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 13,
+          "physical_page": 76,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 14,
+          "physical_page": 79,
+          "method": "exact body transfer from completed finalv3 visual review"
+        },
+        {
+          "number": 17,
+          "physical_page": 104,
+          "method": "fresh final full-page view"
+        },
+        {
+          "number": 18,
+          "physical_page": 105,
+          "method": "fresh final full-page view"
+        }
+      ],
+      "folio_value_check": "Every scoped folio is independently extracted and equals physical_page minus8.",
+      "folio_checked_pages": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        103,
+        104,
+        105,
+        106,
+        107
+      ],
+      "findings": [
+        "No clipping, overlap, truncated prose, isolated table caption, split table row or unreadable empirical label found.",
+        "Tables17/18 each remain complete on their caption page.",
+        "Figures1-4labels/captions fit and Figure4retains correct uncertainty references.",
+        "All new methodological/result/provenance and completion-scope paragraphs are legible."
+      ]
+    }
+  },
+  "claim_checks": {
+    "corpus_denominators": "Canonical798770rawrows/75965sanitizedtrajectories distinguished from standardized144440rows/28888trajectories/2948tasks. Unchanged body evidence is exactly carried from previously audited frozen values.",
+    "additional_auc_values_six_decimals": [
+      0.84951,
+      0.808976,
+      0.954664,
+      0.945336,
+      0.940009,
+      0.931266,
+      0.93435,
+      0.937037
+    ],
+    "additional_population_scope": "144440current-candidate rows/2948tasks; fixed13subset98280rows/1512tasks; selected-candidate14740decisions/2948tasks. These are separate endpoints/populations.",
+    "strict_saved_probability_scope": "Original task-disjoint calibration remains part of strict baseline persisted probabilities. Peer/selected rows use original uncalibrated outputs; nonnested reporting Platt maps are diagnostic and were not reapplied.",
+    "peer_comparison_scope": "Matched baseline retains vote/count/agreement; contrast adds the peer-dynamics block. Both full/fixed-roster peer comparisons retain partial executable-source provenance.",
+    "historical_fold_scope": "N2/N3 upstream run-group fit followed by task-group threshold folds is explicitly distinguished from end-to-end task holdout.",
+    "live_fixed_budget_scope": "Learned stops at2 for every live task; main7versus6correct and trap1versus1; completion savings56.51%/52.11%; no adaptive advantage or noninferiority is asserted.",
+    "brier_scope": "Calibrated current/next0.09760/0.09970; corresponding uncalibrated0.09854/0.10068. The unchanged Chapter5 table/prose body matches the earlier audited version exactly.",
+    "figure4_uncertainty_table_references": [
+      9,
+      10,
+      12,
+      13
+    ],
+    "history_scope": "484main/600all-local/116outside-main ancestry;159code and287evidence/report commits use explicit merge-inclusive parent-path classification and overlap. No exclusive-backup-branch attribution remains.",
+    "recollection_scope": "Completed qualified retrospective/live prototype work is separated from stronger prospective peer-fleet, calibration, accuracy-preservation and transfer claims."
+  },
+  "defects": [],
+  "resolved_content_findings": [
+    "Peer control wording now specifies the additional dynamics block and retained agreement/count inputs.",
+    "Outside-main116commits are no longer attributed solely to the backup branch.",
+    "Table18usesSavedOOFAUC and explains original strict baseline calibration."
+  ],
+  "pdf_scientific_source_or_result_edits_by_reviewer": false
+}

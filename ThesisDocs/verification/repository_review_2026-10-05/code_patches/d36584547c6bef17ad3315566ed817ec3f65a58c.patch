@@ -1,0 +1,37 @@
+commit d36584547c6bef17ad3315566ed817ec3f65a58c
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Mon Jul 20 09:02:12 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Mon Jul 20 09:02:24 2026 -0400
+
+    fix: resolve pd.Series groupby type and answer_span_std_entropy in prospective peer dynamics adapter
+
+diff --git a/research/prospective_peer_dynamics.py b/research/prospective_peer_dynamics.py
+index 05b28ca..5a8e3c1 100644
+--- a/research/prospective_peer_dynamics.py
++++ b/research/prospective_peer_dynamics.py
+@@ -72,6 +72,7 @@ ANSWER_SPAN_COLUMNS = (
+     "answer_span_mean_logprob",
+     "answer_span_min_logprob",
+     "answer_span_mean_entropy",
++    "answer_span_std_entropy",
+ )
+ 
+ 
+diff --git a/research/run_committee_oof_experiments.py b/research/run_committee_oof_experiments.py
+index 5e8fe4b..fb8c7d5 100644
+--- a/research/run_committee_oof_experiments.py
++++ b/research/run_committee_oof_experiments.py
+@@ -354,10 +354,10 @@ def build_prefix_and_committee_features(frame: pd.DataFrame) -> pd.DataFrame:
+     )
+ 
+     for column in PREFIX_DELTA_COLUMNS:
+-        values = pd.to_numeric(result.get(column), errors="coerce")
++        values = pd.Series(pd.to_numeric(result.get(column), errors="coerce"), index=result.index)
+         result[f"delta_{column}"] = values.groupby(result["trajectory_id"], sort=False).diff().fillna(0.0)
+     for column in LOG1P_COLUMNS:
+-        values = pd.to_numeric(result.get(column), errors="coerce")
++        values = pd.Series(pd.to_numeric(result.get(column), errors="coerce"), index=result.index)
+         result[f"log1p_{column}"] = np.log1p(values.clip(lower=0.0))
+     return result
+ 

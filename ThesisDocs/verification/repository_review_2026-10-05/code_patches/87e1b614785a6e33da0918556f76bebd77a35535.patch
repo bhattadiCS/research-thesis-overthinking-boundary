@@ -1,0 +1,63 @@
+commit 87e1b614785a6e33da0918556f76bebd77a35535 (from 50806c76df8775f5cda3a15dadb7592a88ecbc1e)
+Merge: deb8309 50806c7
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Wed Jul 15 08:53:22 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Wed Jul 15 08:53:22 2026 -0400
+
+    Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index c45bd77..7b1897c 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -645,6 +645,7 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+         from sympy.parsing.sympy_parser import (
+             parse_expr, standard_transformations, implicit_multiplication_application,
+         )
++        import signal
+         transforms = standard_transformations + (implicit_multiplication_application,)
+         def _sympy_ready(expr: str) -> str:
+             # Digit-letter adjacency like '0x^2' tokenizes as a broken hex
+@@ -655,9 +656,26 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+ 
+         expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
+         expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
+-        if sympy.simplify(expr_a - expr_b) == 0:
++
++        # Use signal-based alarm to prevent infinite loops in sympy's simplify
++        # which can get stuck on complex/recursive expressions from LLM outputs.
++        has_sigalrm = hasattr(signal, "SIGALRM")
++        if has_sigalrm:
++            def handler(signum, frame):
++                raise TimeoutError("SymPy simplify timed out")
++            old_handler = signal.signal(signal.SIGALRM, handler)
++            signal.alarm(5)  # 5-second timeout
++
++        try:
++            is_equiv = sympy.simplify(expr_a - expr_b) == 0
++        finally:
++            if has_sigalrm:
++                signal.alarm(0)
++                signal.signal(signal.SIGALRM, old_handler)
++
++        if is_equiv:
+             return True
+-    except Exception:  # noqa: BLE001 -- unparseable expressions just fall through
++    except Exception:  # noqa: BLE001 -- unparseable expressions or timeouts just fall through
+         pass
+     return False
+ 
+diff --git a/scratch_analyze.py b/scratch_analyze.py
+index 6169c66..611643e 100644
+--- a/scratch_analyze.py
++++ b/scratch_analyze.py
+@@ -1,7 +1,7 @@
+ import os
+ import pandas as pd
+ 
+-ROOT = r"C:\Aditya_Data\Personal\ResearchThesis\research\outputs\experiment_matrix"
++ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "research", "outputs", "experiment_matrix")
+ MODELS = [
+     "deepseek_r1_distill_1p5b", "deepseek_r1_distill_7b", "qwen2p5_0p5b", "qwen2p5_3b",
+     "qwen2p5_7b", "qwen2p5_14b", "qwen2p5_32b", "mistral_7b_instruct_v0p3",

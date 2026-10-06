@@ -1,0 +1,2012 @@
+commit 6e4378bef9a98037c20d1381eb9c7b61462a6578
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sat Oct 3 00:40:13 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sat Oct 3 00:40:13 2026 -0400
+
+    Fix graders, stopping validation and research ledger audits
+
+diff --git a/ThesisDocs/defense/rehearsal/test_rehearsal_logger.py b/ThesisDocs/defense/rehearsal/test_rehearsal_logger.py
+index b53de8f..bbfed40 100644
+--- a/ThesisDocs/defense/rehearsal/test_rehearsal_logger.py
++++ b/ThesisDocs/defense/rehearsal/test_rehearsal_logger.py
+@@ -13,7 +13,7 @@ from tools.record_defense_rehearsal import (
+ )
+ 
+ 
+-def test_plan():
++def synthetic_plan():
+     return {"slide_count": 25, "talk_target_seconds": 1800, "qa_target_seconds": 1800,
+             "timing_tolerance_seconds": 120, "sources": {}, "speaker_notes_markdown": "SYNTHETIC TEST ONLY",
+             "slides": [{"number": i, "title": f"TEST ONLY slide {i}", "planned_seconds": 72,
+@@ -27,7 +27,7 @@ class RehearsalContractTests(unittest.TestCase):
+         self.temp = tempfile.TemporaryDirectory()
+         self.root = Path(self.temp.name)
+         self.start = datetime(2020, 1, 1, 12, tzinfo=timezone.utc)
+-        self.ledger = new_ledger("peer_mock", "SYNTHETIC TEST OPERATOR", "TEST_ONLY", test_plan())
++        self.ledger = new_ledger("peer_mock", "SYNTHETIC TEST OPERATOR", "TEST_ONLY", synthetic_plan())
+ 
+     def tearDown(self):
+         self.temp.cleanup()
+@@ -70,7 +70,7 @@ class RehearsalContractTests(unittest.TestCase):
+                                       **{flag: flag_values for flag in ATTESTATION_FLAGS}})
+ 
+     def test_blank_template_is_incomplete_and_has_no_actual_duration(self):
+-        blank = new_ledger("peer_mock", plan=test_plan(), template=True)
++        blank = new_ledger("peer_mock", plan=synthetic_plan(), template=True)
+         report = audit_ledger(blank, self.root)
+         self.assertEqual(report["evidence_status"], "incomplete")
+         self.assertEqual(report["observed_event_count"], 0)
+@@ -168,7 +168,7 @@ class RehearsalContractTests(unittest.TestCase):
+         self.assertEqual(audit_ledger(self.ledger, self.root)["evidence_status"], "incomplete")
+ 
+     def test_dry_run_requires_adviser_and_accepts_unrecorded_dated_record(self):
+-        self.ledger = new_ledger("adviser_dry_run", "TEST OPERATOR", "TEST_ONLY", test_plan())
++        self.ledger = new_ledger("adviser_dry_run", "TEST OPERATOR", "TEST_ONLY", synthetic_plan())
+         self.roster(audience="adviser", consent="not_requested")
+         self.session()
+         self.evidence(kind="dated_record")
+@@ -262,17 +262,149 @@ class RehearsalContractTests(unittest.TestCase):
+         path = self.root / "SYNTHETIC_PEER_ONLY.json"
+         path.write_text(json.dumps(self.ledger), encoding="utf-8")
+         with self.assertRaises(LedgerError):
+-            new_ledger("adviser_dry_run", "TEST ONLY", plan=test_plan(), prior_peer_ledger=path)
++            new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
+         self.roster()
+         self.session()
+         self.evidence()
+         self.attest()
+         path.write_text(json.dumps(self.ledger), encoding="utf-8")
+-        adviser = new_ledger("adviser_dry_run", "TEST ONLY", plan=test_plan(), prior_peer_ledger=path)
++        adviser = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
+         self.assertEqual(adviser["prior_peer_mock"]["sha256"], digest_bytes(path.read_bytes()))
+         self.assertEqual(adviser["prior_peer_mock"]["questions"], ["q1"])
+         self.assertEqual(adviser["events"], [])
+ 
++    def test_empty_retrospective_timestamp_is_not_replaced_by_current_time(self):
++        self.roster()
++        self.add("talk_start", 0)
++        for timestamp in ("", False, 0):
++            with self.subTest(timestamp=timestamp), self.assertRaises(LedgerError):
++                append_event(self.ledger, "talk_end", {}, timestamp)
++
++    def test_falsy_boundary_payload_is_not_replaced_by_empty_object(self):
++        self.roster()
++        self.add("talk_start", 0)
++        for payload in (False, 0, "", []):
++            with self.subTest(payload=payload), self.assertRaises(LedgerError):
++                append_event(self.ledger, "talk_end", payload, self.timestamp(1800))
++
++    def test_cli_rejects_malformed_manual_event_without_changing_ledger(self):
++        self.roster()
++        self.add("talk_start", 0)
++        path = self.root / "SYNTHETIC_MALFORMED_LEDGER_ONLY.json"
++        event_file = self.root / "SYNTHETIC_MALFORMED_EVENT_ONLY.json"
++        path.write_text(json.dumps(self.ledger), encoding="utf-8")
++        original = path.read_bytes()
++        cases = [[], None,
++                 {"type": "talk_end", "occurred_at": self.timestamp(1800)},
++                 {"type": "talk_end", "data": [], "occurred_at": self.timestamp(1800)},
++                 {"type": "talk_end", "data": {}, "occurred_at": None},
++                 {"type": "talk_end", "data": {}, "occurred_at": self.timestamp(1800), "recorded_at": self.timestamp(1800)}]
++        for event in cases:
++            with self.subTest(event=event):
++                event_file.write_text(json.dumps(event), encoding="utf-8")
++                self.assertEqual(main(["append", "--ledger", str(path), "--event-file", str(event_file)]), 1)
++                self.assertEqual(path.read_bytes(), original)
++
++    def test_interactive_eof_preserves_an_empty_ledger(self):
++        path = self.root / "SYNTHETIC_EOF_ONLY.json"
++        path.write_text(json.dumps(self.ledger), encoding="utf-8")
++        original = path.read_bytes()
++        for inputs in ([EOFError()], ["participant", "test_id", EOFError()]):
++            with self.subTest(inputs=inputs), patch("builtins.input", side_effect=inputs):
++                interactive(path)
++            self.assertEqual(path.read_bytes(), original)
++
++    def test_changed_or_missing_prior_peer_record_blocks_linked_completion(self):
++        self.roster()
++        self.session()
++        self.evidence()
++        self.attest()
++        path = self.root / "SYNTHETIC_PRIOR_PEER_ONLY.json"
++        path.write_text(json.dumps(self.ledger), encoding="utf-8")
++        self.ledger = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
++        self.start += timedelta(days=1)
++        self.roster(audience="adviser", consent="not_requested")
++        self.session()
++        self.evidence(kind="dated_record")
++        self.attest()
++        self.assertEqual(audit_ledger(self.ledger, self.root)["evidence_status"], "complete")
++        path.write_bytes(path.read_bytes() + b"\n")
++        changed = audit_ledger(self.ledger, self.root)
++        self.assertEqual(changed["evidence_status"], "incomplete")
++        self.assertTrue(any("prior" in reason.lower() for reason in changed["blockers"]))
++        path.unlink()
++        self.assertEqual(audit_ledger(self.ledger, self.root)["evidence_status"], "incomplete")
++
++    def test_prior_question_snapshot_must_match_the_bound_peer_record(self):
++        self.roster()
++        self.session()
++        self.evidence()
++        self.attest()
++        path = self.root / "SYNTHETIC_PRIOR_SNAPSHOT_ONLY.json"
++        path.write_text(json.dumps(self.ledger), encoding="utf-8")
++        adviser = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
++        adviser["prior_peer_mock"]["questions"] = ["UNASKED TEST QUESTION"]
++        report = audit_ledger(adviser, self.root)
++        self.assertTrue(any("prior" in reason.lower() and "question" in reason.lower() for reason in report["blockers"]))
++
++    def test_a_peer_mock_cannot_link_another_peer_as_adviser_preparation(self):
++        self.roster()
++        self.session()
++        self.evidence()
++        self.attest()
++        path = self.root / "SYNTHETIC_CROSS_KIND_PRIOR_ONLY.json"
++        path.write_text(json.dumps(self.ledger), encoding="utf-8")
++        with self.assertRaises(LedgerError):
++            new_ledger("peer_mock", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
++
++    def test_adviser_dry_run_cannot_precede_its_linked_peer_session(self):
++        self.roster()
++        self.session()
++        self.evidence()
++        self.attest()
++        path = self.root / "SYNTHETIC_PRIOR_CHRONOLOGY_ONLY.json"
++        path.write_text(json.dumps(self.ledger), encoding="utf-8")
++        self.ledger = new_ledger("adviser_dry_run", "TEST ONLY", plan=synthetic_plan(), prior_peer_ledger=path)
++        # Deliberately keep the same synthetic start: this cannot be a later rehearsal.
++        self.roster(audience="adviser", consent="not_requested")
++        self.session()
++        self.evidence(kind="dated_record")
++        self.attest()
++        report = audit_ledger(self.ledger, self.root)
++        self.assertEqual(report["evidence_status"], "incomplete")
++        self.assertIn("The adviser talk begins before its linked prior peer session ends.", report["blockers"])
++
++    def test_answered_follow_up_clears_pending_action_without_rewriting_qa(self):
++        self.roster()
++        self.add("talk_start", 0)
++        for i in range(2, 26):
++            self.add("slide", (i-1)*72, {"number": i})
++        self.add("talk_end", 1800)
++        self.add("qa_start", 1810)
++        self.add("question", 1820, {"id": "q", "asker_id": "audience", "text": "TEST ONLY question"})
++        self.add("outcome", 1830, {"question_id": "q", "disposition": "needs_followup", "action": "TEST ONLY: verify proof"})
++        self.add("qa_end", 3610)
++        self.add("session_end", 3611)
++        self.add("outcome", 3700, {"question_id": "q", "stage": "follow_up", "disposition": "answered", "answer_summary": "TEST ONLY verified later", "supporting_references": ["TEST ONLY checked proof"]})
++        report = audit_ledger(self.ledger, self.root)
++        self.assertEqual(report["questions"][0]["qa_outcome"]["disposition"], "needs_followup")
++        self.assertEqual(report["pending_question_actions"], [])
++        self.assertEqual(len(report["follow_up_outcomes"]), 1)
++
++    def test_http_evidence_reference_requires_a_real_host(self):
++        self.roster()
++        for reference in ("http:unfinished", "https://", "https://@", "https://bad host"):
++            data = {"id": "bad_ref", "kind": "recording", "reference": reference,
++                    "coverage_start": self.timestamp(0), "coverage_end": self.timestamp(1),
++                    "reviewed_by_id": "audience", "description": "TEST ONLY", "reviewed": True}
++            with self.subTest(reference=reference), self.assertRaises(LedgerError):
++                append_event(self.ledger, "evidence", data, self.timestamp(2), root=self.root)
++
++    def test_malformed_ledger_root_returns_a_cli_error(self):
++        path = self.root / "SYNTHETIC_BAD_ROOT_ONLY.json"
++        path.write_text("[]", encoding="utf-8")
++        self.assertEqual(main(["validate", "--ledger", str(path)]), 1)
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/research/analyze_online_stopping_results.py b/research/analyze_online_stopping_results.py
+index e8ea612..990c6d2 100644
+--- a/research/analyze_online_stopping_results.py
++++ b/research/analyze_online_stopping_results.py
+@@ -10,6 +10,7 @@ from __future__ import annotations
+ import argparse
+ import csv
+ import json
++from collections import Counter
+ from dataclasses import asdict
+ from pathlib import Path
+ from typing import Any
+@@ -38,6 +39,10 @@ def paired_bootstrap(rows: list[dict[str, str]], *, seed: int = 20261002, sample
+ def audit_ledgers(output: Path) -> dict[str, Any]:
+     manifest = json.loads((output / "live_manifest.json").read_text(encoding="utf-8"))
+     results = read_jsonl(output / "live_generation_results.jsonl")
++    public_tasks = read_jsonl(output / "live_public_tasks.jsonl")
++    task_ids = [task["task_id"] for task in public_tasks]
++    gold_ids = [row["task_id"] for row in read_jsonl(output / "live_sealed_gold.jsonl")]
++    policy_names = (manifest["active_policy"]["name"], manifest["baseline_policy"]["name"])
+     checks: dict[str, bool] = {}
+     checks["public_tasks_match_frozen_hash"] = file_sha256(output / "live_public_tasks.jsonl") == manifest["public_tasks_sha256"]
+     checks["gold_ledger_matches_frozen_hash"] = file_sha256(output / "live_sealed_gold.jsonl") == manifest["sealed_gold_sha256"]
+@@ -46,19 +51,50 @@ def audit_ledgers(output: Path) -> dict[str, Any]:
+         (locked / name).is_file() and file_sha256(locked / name) == digest for name, digest in manifest["code_sha256"].items()
+     )
+     checks["paired_result_count"] = len(results) == 2 * manifest["public_task_count"]
++    checks["public_task_ids_unique"] = bool(task_ids) and len(task_ids) == len(set(task_ids)) == manifest["public_task_count"]
++    checks["gold_task_coverage"] = Counter(gold_ids) == Counter(task_ids)
++    checks["paired_task_policy_coverage"] = len(set(policy_names)) == 2 and Counter(
++        (row["task_id"], row["policy"]) for row in results
++    ) == Counter((task_id, policy) for task_id in task_ids for policy in policy_names)
+     checks["minimum_two_steps"] = all(r["stopped_at_step"] >= 2 for r in results)
+     checks["no_future_steps_after_stop"] = all([o["step"] for o in r["observations"]] == list(range(1, r["stopped_at_step"] + 1)) for r in results)
++    checks["one_decision_per_observation"] = all([d["step"] for d in r["decisions"]] == [o["step"] for o in r["observations"]] for r in results)
+     checks["exactly_one_terminal_decision"] = all(sum(d["stop"] for d in r["decisions"]) == 1 and r["decisions"][-1]["stop"] for r in results)
+-    checks["selected_answer_already_observed"] = all(1 <= r["selected_step"] <= r["stopped_at_step"] and r["answer"] == r["observations"][r["selected_step"] - 1]["answer"] for r in results)
++    checks["terminal_decision_matches_result"] = all(r["decisions"] and
++        r["decisions"][-1]["step"] == r["stopped_at_step"] and
++        r["decisions"][-1]["selected_step"] == r["selected_step"] and
++        r["decisions"][-1]["selected_answer"] == r["answer"] and
++        r["decisions"][-1].get("reason") == r.get("reason") for r in results)
++    checks["selected_answer_already_observed"] = all(1 <= r["selected_step"] <= min(r["stopped_at_step"], len(r["observations"])) and r["answer"] == r["observations"][r["selected_step"] - 1]["answer"] for r in results)
++    checks["decision_selections_already_observed"] = all(
++        1 <= d["selected_step"] <= min(d["step"], len(r["observations"])) and
++        d["selected_answer"] == r["observations"][d["selected_step"] - 1]["answer"]
++        for r in results for d in r["decisions"])
+     checks["observations_precede_decisions"] = all(o["observed_ns"] <= d["decision_ns"] for r in results for o, d in zip(r["observations"], r["decisions"]))
++    checks["decision_precedes_next_observation"] = all(d["decision_ns"] <= o["observed_ns"]
++        for r in results for d, o in zip(r["decisions"][:-1], r["observations"][1:]))
++    costs = [row.get(name, 0) for row in results for name in ("generated_tokens", "prompt_tokens", "auxiliary_tokens", "peer_tokens")]
++    costs.extend(o.get(name, 0) for row in results for o in row["observations"] for name in ("generated_tokens", "prompt_tokens", "auxiliary_tokens"))
++    costs.extend(d.get("peer_tokens", 0) for row in results for d in row["decisions"])
++    checks["nonnegative_integer_costs"] = all(type(value) is int and value >= 0 for value in costs)
+     checks["completion_cost_sum"] = all(r["generated_tokens"] == sum(o["generated_tokens"] for o in r["observations"]) for r in results)
+     checks["input_cost_sum"] = all(r["prompt_tokens"] == sum(o["prompt_tokens"] for o in r["observations"]) for r in results)
++    checks["auxiliary_cost_sum"] = all(r.get("auxiliary_tokens", 0) == sum(o.get("auxiliary_tokens", 0) for o in r["observations"]) for r in results)
++    checks["peer_cost_sum"] = all(r.get("peer_tokens", 0) == sum(d.get("peer_tokens", 0) for d in r["decisions"]) for r in results)
+     forbidden = {"gold", "gold_answer", "expected_answer", "correct", "selected_correct", "oracle_stop", "utility"}
+-    checks["no_label_keys_in_runtime_task_or_event"] = not any(forbidden.intersection(o) for r in results for o in r["observations"]) and not any(forbidden.intersection(t) for t in read_jsonl(output / "live_public_tasks.jsonl"))
++    checks["no_label_keys_in_runtime_task_or_event"] = not any(forbidden.intersection(o) for r in results for o in r["observations"]) and not any(forbidden.intersection(t) for t in public_tasks)
+     with (output / "live_batch_metrics.csv").open(encoding="utf-8", newline="") as handle:
+         batches = list(csv.DictReader(handle))
+-    checks["batch_completion_cost_sum"] = all(sum(int(b["generated_tokens"]) for b in batches if b["policy"] == policy) == sum(r["generated_tokens"] for r in results if r["policy"] == policy) for policy in {r["policy"] for r in results})
+-    checks["decoder_padding_accounted"] = all(int(b["decode_token_slots"]) >= int(b["generated_tokens"]) for b in batches)
++    checks["batch_policies_registered"] = all(batch["policy"] in policy_names for batch in batches)
++    batch_costs = [batch.get(name, "0") for batch in batches for name in ("generated_tokens", "prompt_tokens", "padded_prefill_token_slots", "decode_token_slots")]
++    checks["batch_nonnegative_integer_costs"] = all(isinstance(value, str) and value.isascii() and value.isdecimal() for value in batch_costs)
++    checks["batch_completion_cost_sum"] = checks["batch_nonnegative_integer_costs"] and all(sum(int(b["generated_tokens"]) for b in batches if b["policy"] == policy) == sum(r["generated_tokens"] for r in results if r["policy"] == policy) for policy in {r["policy"] for r in results})
++    checks["batch_input_cost_sum"] = checks["batch_nonnegative_integer_costs"] and all(
++        sum(int(b.get("prompt_tokens", "0")) for b in batches if b["policy"] == policy) ==
++        sum(r["prompt_tokens"] for r in results if r["policy"] == policy) for policy in policy_names)
++    checks["prefill_padding_accounted"] = checks["batch_nonnegative_integer_costs"] and all(
++        int(b.get("padded_prefill_token_slots", "0")) >= int(b.get("prompt_tokens", "0")) for b in batches)
++    checks["decoder_padding_accounted"] = checks["batch_nonnegative_integer_costs"] and all(int(b["decode_token_slots"]) >= int(b["generated_tokens"]) for b in batches)
+     report = {"kind": "live_prefix_and_accounting_ledger_audit", "checks": checks, "all_passed": all(checks.values()),
+               "qualification": "structural audit and preserved execution sources; these checks establish runtime provenance, not model accuracy"}
+     write_json(output / "live_ledger_audit.json", report)
+diff --git a/research/learned_online_stopping_controller.py b/research/learned_online_stopping_controller.py
+index 8aee1f2..1b93b8b 100644
+--- a/research/learned_online_stopping_controller.py
++++ b/research/learned_online_stopping_controller.py
+@@ -34,14 +34,21 @@ class LearnedPolicy:
+     step_cost: float = 0.05
+ 
+     def __post_init__(self) -> None:
++        for name in ("min_steps", "max_steps"):
++            value = getattr(self, name)
++            if isinstance(value, bool) or not isinstance(value, int):
++                raise ValueError(f"{name} must be an integer")
+         if self.min_steps < 2 or self.max_steps < self.min_steps:
+             raise ValueError("learned controller requires at least two completed steps")
+         if len(self.predictor_sha256) != 64 or any(c not in "0123456789abcdef" for c in self.predictor_sha256):
+             raise ValueError("frozen predictor SHA256 is required")
+         if any(not math.isfinite(v) or v < 0 for v in (self.reward_value, self.wrong_penalty, self.step_cost)):
+             raise ValueError("utility constants must be finite and nonnegative")
+-        if self.reward_value + self.wrong_penalty <= 0:
+-            raise ValueError("the reward/penalty scale must be positive")
++        scale = self.reward_value + self.wrong_penalty
++        if not math.isfinite(scale) or scale <= 0:
++            raise ValueError("the reward/penalty scale must be finite and positive")
++        if not math.isfinite(scale + self.step_cost):
++            raise ValueError("utility constants must permit finite drift at every valid probability")
+ 
+     @property
+     def sha256(self) -> str:
+diff --git a/research/online_stopping_controller.py b/research/online_stopping_controller.py
+index f5e491e..e0579a6 100644
+--- a/research/online_stopping_controller.py
++++ b/research/online_stopping_controller.py
+@@ -23,6 +23,11 @@ SCHEMA_VERSION = "prefix-online-stopper-v1"
+ T_MIN = 2
+ 
+ 
++def _integer_at_least(value: int, name: str, minimum: int) -> None:
++    if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
++        raise ValueError(f"{name} must be an integer at least {minimum}")
++
++
+ @dataclass(frozen=True, slots=True)
+ class PublicTask:
+     """Generation input.  Evaluator labels must be held in a separate ledger."""
+@@ -91,8 +96,15 @@ class ClosedPeerPanel:
+     closed_ns: int
+ 
+     def validate(self, step: int, decision_ns: int) -> None:
+-        if not self.roster or len(self.roster) != len(set(self.roster)):
++        _integer_at_least(self.step, "peer panel step", 1)
++        _integer_at_least(self.closed_ns, "peer barrier clock", 1)
++        _integer_at_least(decision_ns, "decision clock", 1)
++        if (not isinstance(self.roster, tuple) or not isinstance(self.votes, tuple)
++                or not self.roster or not all(isinstance(peer, str) and peer.strip() for peer in self.roster)
++                or len(self.roster) != len(set(self.roster))):
+             raise ValueError("peer roster must be frozen, nonempty and unique")
++        if any(not isinstance(vote, PeerVote) for vote in self.votes):
++            raise ValueError("peer votes must be immutable PeerVote records")
+         if self.step != step or {v.peer_id for v in self.votes} != set(self.roster):
+             raise ValueError("a full same-step peer roster is required")
+         if len(self.votes) != len(self.roster):
+@@ -100,9 +112,12 @@ class ClosedPeerPanel:
+         if self.closed_ns <= 0 or decision_ns < self.closed_ns:
+             raise ValueError("peer barrier must close before the decision")
+         for vote in self.votes:
++            _integer_at_least(vote.step, "peer vote step", 1)
++            _integer_at_least(vote.completed_ns, "peer completion clock", 1)
++            _integer_at_least(vote.generated_tokens, "peer generated tokens", 0)
+             if vote.step != step or not 0 < vote.completed_ns <= self.closed_ns:
+                 raise ValueError("future, stale, or uncompleted peer vote")
+-            if not vote.answer.strip() or vote.generated_tokens < 0:
++            if not isinstance(vote.answer, str) or not vote.answer.strip() or vote.generated_tokens < 0:
+                 raise ValueError("peer answer and token accounting are required")
+ 
+ 
+@@ -129,6 +144,8 @@ class PolicyConfig:
+     peer_agreement_threshold: float = 1.0
+ 
+     def __post_init__(self) -> None:
++        for name in ("max_steps", "min_steps", "fixed_step", "stable_steps", "wobble_changes", "min_peers"):
++            _integer_at_least(getattr(self, name), name, 0)
+         if self.mode not in {"heuristic", "never", "fixed"}:
+             raise ValueError("unsupported stopping mode")
+         if self.min_steps < T_MIN or self.max_steps < self.min_steps:
+@@ -182,6 +199,7 @@ class OnlineStoppingController:
+     ) -> Decision:
+         started = time.perf_counter_ns()
+         now = time.monotonic_ns() if decision_ns is None else decision_ns
++        _integer_at_least(now, "decision clock", 1)
+         if self._closed:
+             raise RuntimeError("cannot feed observations after a terminal STOP")
+         if observation.step != len(self._prefix) + 1 or observation.step > self.config.max_steps:
+@@ -218,7 +236,8 @@ class OnlineStoppingController:
+             if valid and stable and observation.confidence >= self.config.confidence_threshold and peers_ready:
+                 stop, reason = True, "stable_high_confidence"
+             elif valid and observation.step >= max(3, self.config.min_steps) and peers_ready:
+-                if previous.parse_success and previous.confidence is not None and previous.confidence - observation.confidence >= self.config.confidence_drop:
++                if (previous.parse_success and previous.answer.strip() and previous.confidence is not None
++                        and previous.confidence - observation.confidence >= self.config.confidence_drop):
+                     stop, reason, selected = True, "confidence_drop_retain_previous", previous
+                 else:
+                     valid_prefix = [o for o in self._prefix if o.parse_success and o.answer.strip()]
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index fcf9644..6825b36 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -1,6 +1,7 @@
+ from __future__ import annotations
+ 
+ import argparse
++import ast
+ import gc
+ import hashlib
+ import importlib.util
+@@ -490,9 +491,43 @@ def extract_word_fraction_values(text: str) -> list[str]:
+     return values
+ 
+ 
++_NUMBER_LITERAL = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
++_NUMERIC_TOKEN = re.compile(rf"{_NUMBER_LITERAL}(?:\s*/\s*{_NUMBER_LITERAL})?")
++# The symbolic grader has a finite computation budget, independent of platform
++# signal support. These are parser limits, not claims about mathematical truth.
++_MAX_LITERAL_DIGITS = 1024
++_MAX_DECIMAL_EXPONENT = 1000
++_MAX_ARITHMETIC_BITS = 8192
++_SYMBOLIC_FUNCTION_NAMES = (
++    "sqrt", "sin", "cos", "tan", "cot", "sec", "csc", "asin", "acos", "atan",
++    "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "log", "exp", "floor",
++    "ceiling", "factorial", "factorial2", "Abs",
++)
++
++
++def _bounded_numeric_literal(value: str) -> bool:
++    if len(value) > _MAX_LITERAL_DIGITS + 16 or not re.fullmatch(_NUMBER_LITERAL, value):
++        return False
++    mantissa, *exponents = re.split("[eE]", value)
++    if sum(char.isdigit() for char in mantissa) > _MAX_LITERAL_DIGITS:
++        return False
++    if exponents:
++        exponent = exponents[0].lstrip("+-").lstrip("0") or "0"
++        if len(exponent) > 4 or int(exponent) > _MAX_DECIMAL_EXPONENT:
++            return False
++    return True
++
++
+ def _canonical_fraction(value: str) -> str:
++    parts = value.split("/")
++    if len(parts) > 2 or not all(_bounded_numeric_literal(part.strip()) for part in parts):
++        return value
+     try:
+-        normalized = Fraction(value)
++        if value.count("/") == 1:
++            numerator, denominator = value.split("/")
++            normalized = Fraction(numerator.strip()) / Fraction(denominator.strip())
++        else:
++            normalized = Fraction(value)
+     except (ValueError, ZeroDivisionError):
+         return value
+     return str(normalized.numerator) if normalized.denominator == 1 else str(normalized)
+@@ -504,27 +539,19 @@ def extract_numeric_candidate(text: str) -> str:
+     # The previous implementation scanned fractions first and returned a leading
+     # fraction even when the real answer was the trailing integer, deflating
+     # GSM8K correctness on ratio-flavoured problems.
+-    stripped = text.strip().lower().replace(",", "")
++    stripped = re.sub(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?",
++                      lambda match: match.group().replace(",", ""), text.strip().lower())
+     if not stripped:
+         return ""
+ 
+-    boxed_matches = re.findall(r"\\boxed\{([^{}]+)\}", stripped)
+-    if boxed_matches:
+-        stripped = boxed_matches[-1].strip().lower().replace(",", "")
+-
+-    candidates: list[tuple[int, str]] = []
+-    fraction_spans: list[tuple[int, int]] = []
+-    for match in re.finditer(r"-?\d+\s*/\s*-?\d+", stripped):
+-        fraction_spans.append((match.start(), match.end()))
+-        candidates.append((match.start(), _canonical_fraction(match.group().replace(" ", ""))))
+-    for match in re.finditer(r"-?\d+(?:\.\d+)?", stripped):
+-        if any(start <= match.start() < end for start, end in fraction_spans):
+-            continue  # already covered by a fraction match
+-        candidates.append((match.start(), _canonical_fraction(match.group())))
+-
++    boxed_content = _last_boxed_content(stripped)
++    if boxed_content is not None:
++        stripped = boxed_content.strip()
++    stripped = re.sub(rf"\\(?:d|t)?frac\{{\s*({_NUMBER_LITERAL})\s*\}}\{{\s*({_NUMBER_LITERAL})\s*\}}",
++                      r"\1/\2", stripped)
++    candidates = list(_NUMERIC_TOKEN.finditer(stripped))
+     if candidates:
+-        candidates.sort(key=lambda item: item[0])
+-        return candidates[-1][1]
++        return _canonical_fraction(candidates[-1].group())
+ 
+     word_fraction_matches = extract_word_fraction_values(stripped)
+     if word_fraction_matches:
+@@ -582,7 +609,11 @@ def _strip_latex_math(text: str) -> str:
+         s = s.replace(token, "")
+     s = s.replace("{", "").replace("}", "").replace("\\", "")
+     s = re.sub(r"(?<=\d),(?=\d{3}\b)", "", s)  # 1,000 -> 1000
+-    return s.replace(" ", "").rstrip(".").strip()
++    # Preserve a function/argument separator for SymPy's supported implicit
++    # application (e.g. "sqrt 4"); other layout whitespace is immaterial.
++    functions = "|".join(_SYMBOLIC_FUNCTION_NAMES + ("abs", "ln", "ceil"))
++    return re.sub(r"\s+", lambda match: " " if re.search(rf"\b(?:{functions})$", s[:match.start()],
++                                                       flags=re.IGNORECASE) else "", s).rstrip(".").strip()
+ 
+ 
+ def normalize_math_answer(raw_answer: str) -> str:
+@@ -591,26 +622,150 @@ def normalize_math_answer(raw_answer: str) -> str:
+     s = _strip_latex_math(raw_answer)
+     if s == "":
+         return ""
+-    bare = s.replace("(", "").replace(")", "")
+-    if re.fullmatch(r"-?\d+(\.\d+)?", bare) or re.fullmatch(r"-?\d+/-?\d+", bare):
+-        try:
+-            frac = Fraction(bare).limit_denominator(10**6)
+-            return str(frac.numerator) if frac.denominator == 1 else f"{frac.numerator}/{frac.denominator}"
+-        except (ValueError, ZeroDivisionError):
+-            pass
++    def peel_outer_group(value: str) -> str:
++        # Only remove parentheses enclosing the entire expression. Removing all
++        # groups changes the implicit product (1)(2) into the number 12.
++        while value.startswith("(") and value.endswith(")"):
++            depth = 0
++            for index, char in enumerate(value):
++                depth += (char == "(") - (char == ")")
++                if depth == 0:
++                    break
++            if index != len(value) - 1:
++                break
++            value = value[1:-1]
++        return value
++
++    bare = peel_outer_group(s)
++    if bare.count("/") == 1:
++        numerator, denominator = (peel_outer_group(part) for part in bare.split("/"))
++        if re.fullmatch(_NUMBER_LITERAL, numerator) and re.fullmatch(_NUMBER_LITERAL, denominator):
++            return _canonical_fraction(f"{numerator}/{denominator}")
++    if re.fullmatch(_NUMBER_LITERAL, bare):
++        return _canonical_fraction(bare)
+     return s.lower()
+ 
+ 
+-def _as_number(text: str | None) -> float | None:
++def _as_number(text: str | None) -> Fraction | None:
+     if not text:
+         return None
++    parts = text.split("/")
++    if len(parts) > 2 or not all(_bounded_numeric_literal(part.strip()) for part in parts):
++        return None
+     try:
+-        return float(Fraction(text))
+-    except (ValueError, ZeroDivisionError):
+-        try:
+-            return float(text)
+-        except (ValueError, TypeError):
+-            return None
++        return Fraction(parts[0]) if len(parts) == 1 else Fraction(parts[0]) / Fraction(parts[1])
++    except (ValueError, ZeroDivisionError, OverflowError):
++        return None
++
++
++def _safe_symbolic_expression(text: str):
++    """Parse supported scalar math without evaluating Python from model text.
++
++    SymPy's tokenizer supplies implicit multiplication, but its generated syntax
++    is interpreted using only arithmetic, numeric/symbol constructors and this
++    explicit function list. Attributes, imports, strings as expressions, keyword
++    arguments and arbitrary Python calls are rejected.
++    """
++    import sympy
++    from sympy.parsing.sympy_parser import (
++        stringify_expr, standard_transformations, implicit_multiplication_application,
++    )
++    functions = {name: getattr(sympy, name) for name in _SYMBOLIC_FUNCTION_NAMES}
++    functions.update({"abs": sympy.Abs, "ln": sympy.log, "ceil": sympy.ceiling})
++    constants = {"pi": sympy.pi, "oo": sympy.oo}
++    constructors = {name: getattr(sympy, name) for name in ("Symbol", "Integer", "Float", "Rational")}
++    if len(text) > 4096:
++        raise ValueError("Symbolic answer exceeds supported parse length")
++    if any(not _bounded_numeric_literal(match.group()) for match in re.finditer(_NUMBER_LITERAL, text)):
++        raise ValueError("Numeric literal exceeds the grader computation budget")
++    expression = re.sub(r"(?<![A-Za-z_])(\d)(?![eE][+-]?\d)([a-zA-Z(])", r"\1*\2", text.replace("^", "**"))
++    transformed = stringify_expr(expression, {**functions, **constants}, constructors,
++                                  standard_transformations + (implicit_multiplication_application,))
++    tree = ast.parse(transformed, mode="eval")
++    if sum(1 for _ in ast.walk(tree)) > 256:
++        raise ValueError("Symbolic answer exceeds supported parse complexity")
++
++    def number_bits(value):
++        if isinstance(value, (int, sympy.Integer)):
++            return abs(int(value)).bit_length()
++        if isinstance(value, sympy.Rational):
++            return max(abs(int(value.p)).bit_length(), int(value.q).bit_length())
++        return 0
++
++    def interpret(node):
++        if isinstance(node, ast.Constant) and type(node.value) in (str, int, float):
++            return node.value
++        if isinstance(node, ast.Name) and node.id in constants:
++            return constants[node.id]
++        if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
++            value = interpret(node.operand)
++            if isinstance(value, str):
++                raise ValueError("Strings are not arithmetic operands")
++            return value if isinstance(node.op, ast.UAdd) else -value
++        if isinstance(node, ast.BinOp):
++            left, right = interpret(node.left), interpret(node.right)
++            if isinstance(left, str) or isinstance(right, str):
++                raise ValueError("Strings are not arithmetic operands")
++            if isinstance(node.op, ast.Add):
++                if number_bits(left) + number_bits(right) + 1 > _MAX_ARITHMETIC_BITS:
++                    raise ValueError("Arithmetic result exceeds the grader computation budget")
++                return left + right
++            if isinstance(node.op, ast.Sub):
++                if number_bits(left) + number_bits(right) + 1 > _MAX_ARITHMETIC_BITS:
++                    raise ValueError("Arithmetic result exceeds the grader computation budget")
++                return left - right
++            if isinstance(node.op, ast.Mult):
++                if number_bits(left) + number_bits(right) > _MAX_ARITHMETIC_BITS:
++                    raise ValueError("Arithmetic result exceeds the grader computation budget")
++                return left * right
++            if isinstance(node.op, ast.Div):
++                if number_bits(left) + number_bits(right) > _MAX_ARITHMETIC_BITS:
++                    raise ValueError("Arithmetic result exceeds the grader computation budget")
++                return left / right
++            if isinstance(node.op, ast.Pow):
++                if (not isinstance(right, (int, sympy.Rational)) or abs(right) > 1000
++                        or isinstance(right, sympy.Rational) and right.q > 1000):
++                    raise ValueError("Power exceeds the grader computation budget")
++                if number_bits(left) * max(1, math.ceil(abs(right))) > _MAX_ARITHMETIC_BITS:
++                    raise ValueError("Power result exceeds the grader computation budget")
++                if (isinstance(right, sympy.Rational) and right.q != 1 and number_bits(left) > 40):
++                    raise ValueError("Radical exceeds the grader computation budget")
++                if (isinstance(left, sympy.Expr) and left.free_symbols
++                        and (1 + sympy.count_ops(left)) ** math.ceil(abs(right)) > 10000):
++                    raise ValueError("Symbolic expansion exceeds the grader computation budget")
++                return left ** right
++        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and not node.keywords:
++            name = node.func.id
++            args = [interpret(arg) for arg in node.args]
++            if name == "Symbol" and len(args) == 1 and isinstance(args[0], str):
++                if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", args[0]):
++                    return sympy.Symbol(args[0])
++            elif name in ("Integer", "Float", "Rational") and 1 <= len(args) <= 2:
++                if all((isinstance(arg, (int, float, sympy.Number))
++                        or isinstance(arg, str) and _bounded_numeric_literal(arg)) for arg in args):
++                    if any(number_bits(arg) > _MAX_ARITHMETIC_BITS for arg in args):
++                        raise ValueError("Number exceeds the grader computation budget")
++                    # Decimal tokens represent exact rationals in arithmetic,
++                    # avoiding binary-float equality of distinct large values.
++                    return sympy.Rational(*args) if name == "Float" else constructors[name](*args)
++            elif name in functions and args and all(isinstance(arg, (int, float, sympy.Expr)) for arg in args):
++                if len(args) != 1 and not (name in ("log", "ln") and len(args) == 2):
++                    raise ValueError("Unsupported function arity")
++                for arg in args:
++                    if name in ("factorial", "factorial2"):
++                        if not isinstance(arg, (int, sympy.Integer)) or not 0 <= arg <= 200:
++                            raise ValueError("Factorial exceeds the grader computation budget")
++                    elif isinstance(arg, (int, sympy.Rational)) and abs(arg) > 1000000:
++                        raise ValueError("Function argument exceeds the grader computation budget")
++                    elif isinstance(arg, sympy.Expr) and arg.is_number and arg.has(sympy.exp, sympy.factorial, sympy.factorial2):
++                        raise ValueError("Nested numeric function exceeds the grader computation budget")
++                return functions[name](*args)
++        raise ValueError("Unsupported symbolic syntax")
++
++    result = interpret(tree.body)
++    if not isinstance(result, (int, float, sympy.Expr)):
++        raise ValueError("Not a scalar mathematical expression")
++    return sympy.sympify(result)
+ 
+ 
+ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+@@ -620,41 +775,36 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+         return False
+     if norm_candidate == norm_expected:
+         return True
+-    try:
+-        if abs(float(norm_candidate) - float(norm_expected)) < 1e-6:
+-            return True
+-    except (ValueError, TypeError):
+-        pass
+-    # VALIDATION FIX: when the gold answer is purely numeric, the model often
+-    # gives the right number wrapped in words/units ("Savings: 550 gallons",
+-    # "1.25 miles"). Compare the candidate's trailing numeric token by value.
+-    # Gated on a numeric gold answer so a verbose wrong answer that merely
+-    # mentions a different number cannot become a false positive.
++    candidate_num = _as_number(norm_candidate)
+     exp_num = _as_number(norm_expected)
++    if candidate_num is not None and exp_num is not None and abs(candidate_num - exp_num) < Fraction(1, 10**6):
++        return True
++    # Permit a single prose/unit-wrapped numeric quantity ("Savings: 550 gallons")
++    # while preserving arithmetic expressions for the symbolic comparison.
+     candidate_str = str(candidate)
+-    # Only number-grab from PROSE-wrapped numbers, never from symbolic answers
+-    # (equations/expressions: '=', '^', '\', or digit-letter adjacency like "5r"),
+-    # so "5x-7y+11z+4=0" is never reduced to its trailing "0".
+-    looks_symbolic = bool(re.search(r"[=^\\]|\d[a-zA-Z]|[a-zA-Z]\d", candidate_str))
+-    if exp_num is not None and not looks_symbolic:
+-        cand_num = _as_number(extract_numeric_candidate(candidate_str))
+-        if cand_num is not None and abs(cand_num - exp_num) < 1e-6:
++    quantity_text = re.sub(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?",
++                           lambda match: match.group().replace(",", ""), candidate_str)
++    quantities = list(_NUMERIC_TOKEN.finditer(quantity_text))
++    prose_quantity = False
++    if len(quantities) == 1:
++        match = quantities[0]
++        surrounding = quantity_text[:match.start()] + quantity_text[match.end():]
++        prefix_words = re.findall(r"[A-Za-z]+", quantity_text[:match.start()].lower())
++        mathematical_words = {name.lower() for name in _SYMBOLIC_FUNCTION_NAMES} | {"abs", "ln", "ceil", "pi", "oo"}
++        prose_quantity = (bool(re.search(r"[A-Za-z]", surrounding))
++                          and not re.search(r"[=^\\+*/(){}\[\]'\"-]", surrounding)
++                          and not (match.start() and quantity_text[match.start() - 1].isalnum())
++                          and not (match.end() < len(quantity_text) and quantity_text[match.end()].isalnum())
++                          and not mathematical_words.intersection(re.findall(r"[A-Za-z]+", surrounding.lower()))
++                          and not (len(prefix_words) == 1 and len(prefix_words[0]) == 1))
++    if exp_num is not None and prose_quantity:
++        cand_num = _as_number(_canonical_fraction(quantities[0].group()))
++        if cand_num is not None and abs(cand_num - exp_num) < Fraction(1, 10**6):
+             return True
+     try:  # symbolic fallback; sympy ships as an indirect torch dependency
+         import sympy
+-        from sympy.parsing.sympy_parser import (
+-            parse_expr, standard_transformations, implicit_multiplication_application,
+-        )
+         import signal
+-        transforms = standard_transformations + (implicit_multiplication_application,)
+-        def _sympy_ready(expr: str) -> str:
+-            # Digit-letter adjacency like '0x^2' tokenizes as a broken hex
+-            # literal BEFORE sympy's implicit-multiplication transform runs
+-            # (TokenError; rigor_audit/01 §4c) -- make the product explicit,
+-            # leaving scientific notation (2e3) alone.
+-            return re.sub(r"(\d)(?![eE][0-9])([a-zA-Z(])", r"\1*\2", expr.replace("^", "**"))
+-
+-        # Use signal-based alarm to prevent infinite loops in sympy's parse_expr or simplify
++        # Use a signal-based alarm where available for symbolic parsing/simplify.
+         # which can get stuck on complex/recursive expressions from LLM outputs.
+         has_sigalrm = hasattr(signal, "SIGALRM")
+         if has_sigalrm:
+@@ -664,8 +814,8 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+             signal.alarm(5)  # 5-second timeout
+ 
+         try:
+-            expr_a = parse_expr(_sympy_ready(norm_candidate), transformations=transforms)
+-            expr_b = parse_expr(_sympy_ready(norm_expected), transformations=transforms)
++            expr_a = _safe_symbolic_expression(norm_candidate)
++            expr_b = _safe_symbolic_expression(norm_expected)
+             is_equiv = sympy.simplify(expr_a - expr_b) == 0
+         finally:
+             if has_sigalrm:
+@@ -692,15 +842,17 @@ def normalize_mcq_answer(raw_answer: str) -> str:
+     if boxed is not None:
+         s = boxed
+     s = s.upper()
+-    for pattern in (r"(?:ANSWER|OPTION|CHOICE)\s*(?:IS|:|=)?\s*\(?([A-H])\)?",
++    if re.search(r"(?<![A-Z0-9])(?:[A-H]|\([A-H]\))\s*/\s*(?:[A-H]|\([A-H]\))(?![A-Z0-9])", s):
++        return ""  # Slash-separated alternatives do not name a single choice.
++    for pattern in (r"\b(?:ANSWER|OPTION|CHOICE)\b\s*(?:IS\b|:|=)?\s*\(?([A-H])(?![A-Z0-9/])\)?",
+                     r"\(([A-H])\)",
+                     # '/' guards: a bare letter adjacent to a slash is part of a
+                     # token like 'N/A', not a choice (rigor_audit/01 §4a).
+-                    r"(?<![A-Z/])([A-H])(?![A-Z/])"):
++                    r"(?<![A-Z0-9/])([A-H])(?![A-Z0-9/])"):
+         matches = re.findall(pattern, s)
+         if matches:
+             return matches[-1]
+-    return s[:1] if s[:1] in _MCQ_LETTERS else ""
++    return ""
+ 
+ 
+ def _format_mcq_prompt(question: str, labeled_options: list[tuple[str, str]]) -> str:
+@@ -729,11 +881,7 @@ def normalize_answer(raw_answer: str, answer_type: str) -> str:
+                 return day_name
+         return text.split()[0]
+ 
+-    if answer_type == "int":
+-        match = re.findall(r"-?\d+", text)
+-        return match[-1] if match else text
+-
+-    if answer_type in {"fraction", "number"}:
++    if answer_type in {"int", "fraction", "number"}:
+         numeric_candidate = extract_numeric_candidate(text)
+         return numeric_candidate or text
+ 
+diff --git a/research/run_learned_online_stopping.py b/research/run_learned_online_stopping.py
+index 07314bc..2da5981 100644
+--- a/research/run_learned_online_stopping.py
++++ b/research/run_learned_online_stopping.py
+@@ -93,6 +93,8 @@ def collect_batch(tasks: list[PublicTask], predictor: Any, policy: LearnedPolicy
+         for step in range(1, policy.max_steps + 1):
+             before = len(generator.metrics)
+             observations = generator.generate_batch([tasks[i] for i in active], [controllers[i].prefix for i in active], step, [tokens[i] for i in active])
++            if len(observations) != len(active):
++                raise ValueError("generator must return one observation per active task")
+             batches.extend(asdict(metric) | {"policy": policy.name, "chunk": chunk, "step": step} for metric in generator.metrics[before:])
+             survivors = []
+             for i, observation in zip(active, observations):
+@@ -106,6 +108,8 @@ def collect_batch(tasks: list[PublicTask], predictor: Any, policy: LearnedPolicy
+             if not active:
+                 break
+     finally:
++        for token in tokens:
++            token.cancel()
+         generator.cancel()
+     if active:
+         raise AssertionError("learned terminal policy failed to close all tasks")
+diff --git a/research/run_online_stopping_evaluation.py b/research/run_online_stopping_evaluation.py
+index b7deb4d..75b6e23 100644
+--- a/research/run_online_stopping_evaluation.py
++++ b/research/run_online_stopping_evaluation.py
+@@ -356,22 +356,28 @@ def collect_policy_batch(tasks: list[PublicTask], config: PolicyConfig, generato
+     decision_rows: list[list[dict[str, Any]]] = [[] for _ in tasks]
+     active = list(range(len(tasks)))
+     start = time.perf_counter()
+-    for step in range(1, config.max_steps + 1):
+-        before = len(generator.metrics)
+-        observations = generator.generate_batch([tasks[i] for i in active], [controllers[i].prefix for i in active], step, [tokens[i] for i in active])
+-        batches.extend(asdict(metric) | {"policy": config.name, "chunk": chunk, "step": step} for metric in generator.metrics[before:])
+-        survivors = []
+-        for i, observation in zip(active, observations):
+-            decision = controllers[i].observe(observation)
+-            decision_rows[i].append(asdict(decision))
+-            if decision.stop:
+-                tokens[i].cancel()
+-            else:
+-                survivors.append(i)
+-        active = survivors
+-        if not active:
+-            break
+-    generator.cancel()
++    try:
++        for step in range(1, config.max_steps + 1):
++            before = len(generator.metrics)
++            observations = generator.generate_batch([tasks[i] for i in active], [controllers[i].prefix for i in active], step, [tokens[i] for i in active])
++            if len(observations) != len(active):
++                raise ValueError("generator must return one observation per active task")
++            batches.extend(asdict(metric) | {"policy": config.name, "chunk": chunk, "step": step} for metric in generator.metrics[before:])
++            survivors = []
++            for i, observation in zip(active, observations):
++                decision = controllers[i].observe(observation)
++                decision_rows[i].append(asdict(decision))
++                if decision.stop:
++                    tokens[i].cancel()
++                else:
++                    survivors.append(i)
++            active = survivors
++            if not active:
++                break
++    finally:
++        for token in tokens:
++            token.cancel()
++        generator.cancel()
+     if active:
+         raise AssertionError("terminal policy failed to close all tasks")
+     elapsed = time.perf_counter() - start
+diff --git a/research/tests/test_data_freeze.py b/research/tests/test_data_freeze.py
+index 9ad64c1..39f5306 100644
+--- a/research/tests/test_data_freeze.py
++++ b/research/tests/test_data_freeze.py
+@@ -66,6 +66,19 @@ class FreezeTests(unittest.TestCase):
+     def manifest(self, selection=None):
+         return freeze.build_manifest(self.root, selection=selection, created_utc="2026-10-02T00:00:00Z")
+ 
++    def use_canonical_authority(self):
++        record = freeze.file_record(self.root, self.source)
++        entry = self.authority["files"][0]
++        entry["canonical_lf_sha256"] = record["canonical_lf_sha256"]
++        entry["raw_sha256"] = record["sha256"]
++        self.authority["dataset_fingerprint"] = freeze.stable_hash([
++            {"path": entry["path"], "canonical_lf_sha256": entry["canonical_lf_sha256"]}
++        ])
++        self.authority["raw_dataset_fingerprint"] = freeze.stable_hash([
++            {"path": entry["path"], "raw_sha256": entry["raw_sha256"]}
++        ])
++        self.write(freeze.AUTHORITY, json.dumps(self.authority) + "\n")
++
+     def test_clean_corpus_verifies_and_is_deterministic(self):
+         manifest = self.manifest()
+         self.assertEqual(manifest, self.manifest())
+@@ -159,6 +172,54 @@ class FreezeTests(unittest.TestCase):
+         with self.assertRaisesRegex(freeze.IntegrityError, "Rebuilt scope"):
+             freeze.verify_manifest(self.root, manifest)
+ 
++    def test_nested_provenance_fields_are_not_ignored(self):
++        for portable in (False, True):
++            for location, key in [("scope", "created_utc"), ("preflight", "content_fingerprint"),
++                                  ("model", "created_utc")]:
++                with self.subTest(portable=portable, location=location, key=key):
++                    manifest = self.manifest()
++                    parent = {"scope": manifest["scope"],
++                              "preflight": manifest["authority"]["recorded_preflight"],
++                              "model": manifest["generation_configurations"][0]["recorded_configuration"]["model"]}[location]
++                    parent[key] = "forged source provenance"
++                    manifest["content_fingerprint"] = freeze.content_fingerprint(manifest)
++                    with self.assertRaisesRegex(freeze.IntegrityError, "Rebuilt scope"):
++                        freeze.verify_manifest(self.root, manifest, allow_line_ending_changes=portable)
++
++    def test_portable_hash_exclusions_apply_only_to_file_records(self):
++        self.write(self.metadata, json.dumps({"model": {"alias": "fixture", "canonical_lf_sha256": "model field",
++                                                       "sha256": "recorded model identity", "bytes": 12},
++                                             "task_source": "gsm8k", "dataset_split": "train", "max_steps": 5}))
++        manifest = self.manifest()
++        model = manifest["generation_configurations"][0]["recorded_configuration"]["model"]
++        model["sha256"] = "forged model identity"
++        manifest["content_fingerprint"] = freeze.content_fingerprint(manifest)
++        with self.assertRaisesRegex(freeze.IntegrityError, "Rebuilt scope"):
++            freeze.verify_manifest(self.root, manifest, allow_line_ending_changes=True)
++
++    def test_canonical_authority_verifies_across_line_endings(self):
++        self.use_canonical_authority()
++        manifest = self.manifest()
++        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
++        path = self.root / self.source
++        path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
++        result = freeze.verify_manifest(self.root, manifest, allow_line_ending_changes=True)
++        self.assertEqual(result["line_ending_only_changes"], [self.source])
++
++    def test_canonical_authority_aggregate_must_match(self):
++        self.use_canonical_authority()
++        self.authority["dataset_fingerprint"] = "0" * 64
++        self.write(freeze.AUTHORITY, json.dumps(self.authority) + "\n")
++        with self.assertRaisesRegex(freeze.IntegrityError, "canonical dataset fingerprint"):
++            self.manifest()
++
++    def test_declared_raw_authority_aggregate_must_match(self):
++        self.use_canonical_authority()
++        self.authority["raw_dataset_fingerprint"] = "0" * 64
++        self.write(freeze.AUTHORITY, json.dumps(self.authority) + "\n")
++        with self.assertRaisesRegex(freeze.IntegrityError, "raw dataset fingerprint"):
++            self.manifest()
++
+     def test_duplicate_frozen_entries_rejected(self):
+         manifest = self.manifest()
+         manifest["files"].append(copy.deepcopy(manifest["files"][0]))
+@@ -202,6 +263,63 @@ class FreezeTests(unittest.TestCase):
+             freeze.write_output(path, "replacement", replace=False)
+         self.assertEqual(path.read_text(), "user data\n")
+ 
++    def test_cli_replace_cannot_overwrite_any_selected_source(self):
++        originals = {relative: (self.root / relative).read_bytes()
++                     for relative in (self.source, self.metadata, freeze.AUTHORITY)}
++        for relative in originals:
++            with self.subTest(output=relative):
++                for source, content in originals.items():
++                    self.write(source, content)
++                with patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()) as error:
++                    status = freeze.main(["--root", str(self.root), "freeze", "--profile", "tournament",
++                                          "--output", relative, "--replace"])
++                self.assertEqual(status, 1)
++                self.assertIn("overwrite a selected input", error.getvalue())
++                self.assertEqual({source: (self.root / source).read_bytes() for source in originals}, originals)
++
++    def test_cli_output_cannot_add_a_tournament_cell(self):
++        relative = f"{freeze.DATA_ROOT}/global_extra_gsm8k/trace_steps.csv"
++        with patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()) as error:
++            status = freeze.main(["--root", str(self.root), "freeze", "--profile", "tournament", "--output", relative])
++        self.assertEqual(status, 1)
++        self.assertIn("tournament file membership", error.getvalue())
++        self.assertFalse((self.root / relative).exists())
++
++    def test_cli_output_cannot_enter_its_own_glob_membership(self):
++        for relative in ("evidence/review_manifest.json", "evidence/nested/review_manifest.json"):
++            with self.subTest(output=relative), patch.object(freeze, "THESIS_FIXED", [self.metadata]), \
++                    patch.object(freeze, "THESIS_GLOBS", ["evidence/**/*.json"]), \
++                    patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()) as error:
++                status = freeze.main(["--root", str(self.root), "freeze", "--output", relative])
++                self.assertEqual(status, 1)
++                self.assertIn("own evidence membership", error.getvalue())
++                self.assertFalse((self.root / relative).exists())
++
++    def test_separate_new_manifest_output_is_verifiable(self):
++        relative = "review_manifest.json"
++        with patch("sys.stdout", new=io.StringIO()), patch("sys.stderr", new=io.StringIO()):
++            status = freeze.main(["--root", str(self.root), "freeze", "--profile", "tournament", "--output", relative])
++        self.assertEqual(status, 0)
++        manifest = freeze.read_object(self.root / relative)
++        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
++
++    def test_explicitly_excluded_manifest_output_is_verifiable(self):
++        relative = "evidence/review_manifest.json"
++        selection = {"profile": "fixture", "fixed": [self.metadata], "globs": ["evidence/**/*.json"],
++                     "exclude_globs": [relative]}
++        manifest = self.manifest(selection)
++        output = freeze.checked_freeze_output(self.root, relative, manifest)
++        freeze.write_output(output, json.dumps(manifest) + "\n", replace=False)
++        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
++
++    def test_directory_only_glob_does_not_block_a_manifest_file(self):
++        relative = "evidence/review_manifest.json"
++        selection = {"profile": "fixture", "fixed": [self.metadata], "globs": ["evidence/**"]}
++        manifest = self.manifest(selection)
++        output = freeze.checked_freeze_output(self.root, relative, manifest)
++        freeze.write_output(output, json.dumps(manifest) + "\n", replace=False)
++        self.assertEqual(freeze.verify_manifest(self.root, manifest)["status"], "verified")
++
+     def test_local_and_historical_versions_are_separate(self):
+         class Distribution:
+             metadata = {"Name": "torch"}
+diff --git a/research/tests/test_graders.py b/research/tests/test_graders.py
+index 060c6cf..7cf20f9 100644
+--- a/research/tests/test_graders.py
++++ b/research/tests/test_graders.py
+@@ -9,8 +9,11 @@ sound cases that must keep passing. Imports real_trace_experiments via importlib
+ from __future__ import annotations
+ 
+ import importlib.util
++import contextlib
++import io
+ import sys
+ import unittest
++from unittest import mock
+ from pathlib import Path
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+@@ -20,6 +23,7 @@ sys.modules["rte"] = rte
+ spec.loader.exec_module(rte)
+ 
+ norm_num = lambda s: rte.normalize_answer(s, "number")
++norm_int = lambda s: rte.normalize_answer(s, "int")
+ norm_math = rte.normalize_math_answer
+ norm_mcq = lambda s: rte.normalize_answer(s, "mcq")
+ math_eq = rte.math_answers_equivalent
+@@ -50,6 +54,32 @@ CASES = [
+     (norm_mcq, "B. Mitochondria are the powerhouse", "B", "letter then option text"),
+     (norm_mcq, "I think it's option D because ...", "D", "option-marker in prose"),
+     (norm_mcq, "Mitochondria", "", "free-text option (no letter) -> empty"),
++    (norm_num, ".5", "1/2", "leading decimal point"),
++    (norm_num, "-2.5e-3", "-1/400", "negative scientific notation"),
++    (norm_num, "1e3", "1000", "scientific exponent is not the final answer"),
++    (norm_num, "1.5/2", "3/4", "decimal fraction numerator"),
++    (norm_num, "-1.5/-2", "3/4", "signed decimal fraction"),
++    (norm_num, r"\boxed{\frac{3}{4}}", "3/4", "nested boxed numeric fraction"),
++    (norm_num, "3/4 of 20 gives .5", "1/2", "last numeric position with a leading decimal"),
++    (norm_mcq, "Blue", "", "word prefix is not a choice letter"),
++    (norm_mcq, "Cannot determine", "", "abstention is not option C"),
++    (norm_mcq, "Answer is complicated", "", "answer cue must precede a complete letter token"),
++    (norm_mcq, "Choice: banana", "", "option word is not its initial letter"),
++    (norm_mcq, "A/B", "", "slash-delimited ambiguity is not a single choice"),
++    (norm_mcq, "B2", "", "alphanumeric token is not a choice"),
++    (norm_mcq, r"\boxed{B}", "B", "boxed MCQ remains supported"),
++    (norm_math, "1(2)", "1(2)", "implicit product must not concatenate digits"),
++    (norm_math, "(1)(2)", "(1)(2)", "adjacent groups must not concatenate digits"),
++    (norm_mcq, "(A)/(B)", "", "parenthesized slash alternatives are ambiguous"),
++    (norm_mcq, "(A)/B", "", "mixed slash alternatives are ambiguous"),
++    (norm_mcq, "Answer: (A)/(B)", "", "answer cue does not disambiguate alternatives"),
++    (norm_int, "7.0", "7", "integer-valued decimal retains its whole value"),
++    (norm_int, "1e3", "1000", "integer-valued scientific notation"),
++    (norm_int, "-2e3", "-2000", "negative integer-valued scientific notation"),
++    (norm_int, "2.5", "5/2", "noninteger decimal is not reduced to its last digit"),
++    (norm_int, "the answer is 3/2", "3/2", "noninteger fraction is not reduced to its denominator"),
++    (norm_int, "42 cans", "42", "integer with units remains supported"),
++    (norm_int, "12", "12", "bare integer remains supported"),
+ ]
+ 
+ EQ_CASES = [
+@@ -65,11 +95,77 @@ EQ_CASES = [
+     # guard: verbose wrong answer with a different number stays wrong
+     ("Hybrid: 250 gallons saved", "550", False, "different number -> not a false positive"),
+     (r'"answer": "3"', r"\frac{7}{2}", False, "nested-json wrong answer stays wrong"),
++    ("1+2", "2", False, "arithmetic is not its trailing numeric token"),
++    ("1+2", "3", True),
++    ("2*3", "3", False),
++    ("2*3", "6", True),
++    ("sqrt(2)", "2", False),
++    ("cos(0)", "0", False),
++    ("cos(0)", "1", True),
++    ("1(2)", "12", False),
++    ("1(2)", "2", True),
++    ("(1)(2)", "12", False),
++    ("(1)(2)", "2", True),
++    ("7.0/2", "0", False),
++    ("7.0/2", "3.5", True),
++    ("-2.5e-3", "-1/400", True),
++    (".5", "1/2", True),
++    ("1e3", "3", False),
++    ("1e3", "1000", True),
++    (r"\sqrt{4}", "2", True),
++    (r"\sqrt{2}", "2", False),
++    ("1/2 gallons", "0.5", True),
++    ("1e3 miles", "1000", True),
++    ("-2.5e-3 meters", "-1/400", True),
++    ("1e400", "2e400", False, "large exact numeric answers do not crash float conversion"),
++    ("sqrt 2", "2", False),
++    ("sqrt 4", "2", True),
++    ("cos 0", "0", False),
++    ("cos 0", "1", True),
++    ("log 1", "1", False),
++    ("log 1", "0", True),
++    ("pi 2", "2", False),
++    ("x 2", "2", False),
++    ("3!!", "3", True),
++    ("factorial2(3)", "3", True),
++    ("9007199254740993", "9007199254740992", False),
++    ("100000000000000000001", "100000000000000000000", False),
++    ("100000000000000000001 gallons", "100000000000000000000", False),
++    ("0.0000005", "0", True, "exact comparison retains the declared absolute tolerance"),
++    ("0.000001", "0", False, "absolute tolerance remains strict"),
+ ]
+ 
+ 
+ class GraderRegressionTests(unittest.TestCase):
+-    """Expose the same historical thirty cases to unittest and pytest discovery."""
++    """Keep historical cases and focused current-API regressions discoverable."""
++
++    def test_symbolic_candidate_cannot_execute_python_calls(self):
++        stream = io.StringIO()
++        with contextlib.redirect_stdout(stream):
++            equivalent = math_eq("__import__('builtins').print('GRADER_EVAL_MARKER')", "x")
++        self.assertFalse(equivalent)
++        self.assertEqual(stream.getvalue(), "")
++
++    def test_symbolic_gold_cannot_execute_python_calls(self):
++        stream = io.StringIO()
++        with contextlib.redirect_stdout(stream):
++            equivalent = math_eq("x", "__import__('builtins').print('GRADER_EVAL_MARKER')")
++        self.assertFalse(equivalent)
++        self.assertEqual(stream.getvalue(), "")
++
++    def test_huge_exponent_is_rejected_before_fraction_construction(self):
++        with mock.patch.object(rte, "Fraction", side_effect=AssertionError("Must not construct a huge number")):
++            self.assertEqual(rte._canonical_fraction("1e1000000000"), "1e1000000000")
++            self.assertIsNone(rte._as_number("1e1000000000"))
++
++    def test_symbolic_arithmetic_and_function_budgets(self):
++        # Only safe representative values are constructed. The outer recursive
++        # powers/factorials must be rejected before expensive materialization.
++        for expression in ("1e1000000000", "2**1000000000", "2**(2**20)",
++                           "factorial(201)", "factorial(factorial(10))", "(x+1)**1000"):
++            with self.subTest(expression=expression), self.assertRaisesRegex(ValueError, "budget"):
++                rte._safe_symbolic_expression(expression)
++        self.assertEqual(rte._safe_symbolic_expression("2**10"), 1024)
+ 
+ 
+ def _normalization_test(case):
+@@ -92,23 +188,9 @@ for _index, _case in enumerate(EQ_CASES, 1):
+     setattr(GraderRegressionTests, f"test_equivalence_{_index:02}", _equivalence_test(_case))
+ 
+ def main() -> int:
+-    failures = 0
+-    for fn, inp, expected, label in CASES:
+-        got = fn(inp)
+-        ok = got == expected
+-        failures += not ok
+-        print(f"  {'OK' if ok else 'XX'} {label}: {inp!r} -> {got!r} (want {expected!r})")
+-    print("  --- math equivalence ---")
+-    for case in EQ_CASES:
+-        a, b, want = case[0], case[1], case[2]
+-        label = case[3] if len(case) > 3 else f"{a} vs {b}"
+-        got = math_eq(a, b)
+-        ok = got == want
+-        failures += not ok
+-        print(f"  {'OK' if ok else 'XX'} {label}: math_eq({a!r},{b!r})={got} (want {want})")
+-    total = len(CASES) + len(EQ_CASES)
+-    print(f"\n{total - failures}/{total} passed")
+-    return 1 if failures else 0
++    suite = unittest.defaultTestLoader.loadTestsFromTestCase(GraderRegressionTests)
++    result = unittest.TextTestRunner(verbosity=2).run(suite)
++    return 0 if result.wasSuccessful() else 1
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/research/tests/test_learned_online_controller.py b/research/tests/test_learned_online_controller.py
+index 4f1345b..b6f98c2 100644
+--- a/research/tests/test_learned_online_controller.py
++++ b/research/tests/test_learned_online_controller.py
+@@ -13,7 +13,8 @@ sys.path.insert(0, str(RESEARCH))
+ 
+ from learned_online_stopping_controller import LearnedOnlineStoppingController, LearnedPolicy
+ from online_generation import BatchMetrics
+-from online_stopping_controller import Observation, PublicTask
++from online_stopping_controller import Observation, PolicyConfig, PublicTask
++from run_online_stopping_evaluation import collect_policy_batch
+ from run_learned_online_stopping import collect_batch
+ 
+ 
+@@ -52,6 +53,53 @@ class FakeBatchDecoder:
+ 
+ 
+ class LearnedControllerTests(unittest.TestCase):
++    def test_batch_collectors_abort_misaligned_results_without_scheduling_future_work(self):
++        tasks = [PublicTask("one", "12+13"), PublicTask("two", "13+12")]
++        for learned in (False, True):
++            for difference in (-1, 1):
++                class MisalignedDecoder(FakeBatchDecoder):
++                    def generate_batch(self, tasks, histories, step, cancellations):
++                        self.tokens = list(cancellations)
++                        result = super().generate_batch(tasks, histories, step, cancellations)
++                        return result[:-1] if difference < 0 else result + [obs(step)]
++
++                generator = MisalignedDecoder()
++                with self.subTest(learned=learned, difference=difference), self.assertRaises(ValueError):
++                    if learned:
++                        collect_batch(tasks, FakePredictor(), LearnedPolicy("a" * 64), generator, 0, [])
++                    else:
++                        collect_policy_batch(tasks, PolicyConfig(), generator, 0, [])
++                self.assertEqual(len(generator.calls), 1)
++                self.assertTrue(generator.cancelled)
++                self.assertTrue(all(token.cancelled for token in generator.tokens))
++
++    def test_batch_collectors_cancel_all_tasks_when_generation_fails(self):
++        tasks = [PublicTask("one", "12+13")]
++        for learned in (False, True):
++            class FailingDecoder(FakeBatchDecoder):
++                def generate_batch(self, tasks, histories, step, cancellations):
++                    self.tokens = list(cancellations)
++                    raise InterruptedError("test generation aborted")
++
++            generator = FailingDecoder()
++            with self.subTest(learned=learned), self.assertRaises(InterruptedError):
++                if learned:
++                    collect_batch(tasks, FakePredictor(), LearnedPolicy("a" * 64), generator, 0, [])
++                else:
++                    collect_policy_batch(tasks, PolicyConfig(), generator, 0, [])
++            self.assertTrue(generator.cancelled)
++            self.assertTrue(all(token.cancelled for token in generator.tokens))
++
++    def test_policy_rejects_noninteger_horizons_and_overflowing_utility_scale(self):
++        for name in ("min_steps", "max_steps"):
++            for value in (2.5, math.nan, math.inf, True):
++                with self.subTest(name=name, value=value), self.assertRaises(ValueError):
++                    LearnedPolicy("a" * 64, **{name: value})
++        with self.assertRaises(ValueError):
++            LearnedPolicy("a" * 64, reward_value=1e308, wrong_penalty=1e308)
++        with self.assertRaises(ValueError):
++            LearnedPolicy("a" * 64, reward_value=1e308, step_cost=1e308)
++
+     def test_predictor_not_queried_before_minimum_two_steps(self):
+         predictor = FakePredictor()
+         controller = LearnedOnlineStoppingController(predictor, "gsm8k", LearnedPolicy("a" * 64))
+diff --git a/research/tests/test_live_ledger_audit.py b/research/tests/test_live_ledger_audit.py
+new file mode 100644
+index 0000000..7dcc551
+--- /dev/null
++++ b/research/tests/test_live_ledger_audit.py
+@@ -0,0 +1,97 @@
++"""Reject incomplete or duplicated paired ledgers that otherwise balance costs."""
++import copy
++import json
++import sys
++from pathlib import Path
++
++import pytest
++
++sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++from analyze_online_stopping_results import audit_ledgers
++from run_online_stopping_evaluation import file_sha256, write_csv, write_json, write_jsonl
++
++
++def paired_ledger(directory):
++    tasks = [{"task_id": name, "prompt": "12+13"} for name in ("one", "two")]
++    write_jsonl(directory / "live_public_tasks.jsonl", tasks)
++    write_jsonl(directory / "live_sealed_gold.jsonl", [{"task_id": name, "expected_answer": "25"} for name in ("one", "two")])
++    locked = directory / "locked_code"
++    locked.mkdir()
++    (locked / "fixture.py").write_text("# fixture only\n", encoding="utf-8")
++    write_json(directory / "live_manifest.json", {
++        "public_task_count": 2,
++        "public_tasks_sha256": file_sha256(directory / "live_public_tasks.jsonl"),
++        "sealed_gold_sha256": file_sha256(directory / "live_sealed_gold.jsonl"),
++        "code_sha256": {"fixture.py": file_sha256(locked / "fixture.py")},
++        "active_policy": {"name": "active"}, "baseline_policy": {"name": "never"},
++    })
++    results = []
++    for policy in ("active", "never"):
++        for task in tasks:
++            observations = [{"step": step, "answer": "25", "observed_ns": step * 20,
++                             "generated_tokens": 7, "prompt_tokens": 11} for step in (1, 2)]
++            decisions = [{"step": step, "stop": step == 2, "decision_ns": step * 20 + 10,
++                          "selected_step": step, "selected_answer": "25"} for step in (1, 2)]
++            results.append({"task_id": task["task_id"], "policy": policy, "stopped_at_step": 2,
++                            "selected_step": 2, "answer": "25", "observations": observations,
++                            "decisions": decisions, "generated_tokens": 14, "prompt_tokens": 22})
++    write_jsonl(directory / "live_generation_results.jsonl", results)
++    write_csv(directory / "live_batch_metrics.csv", [{"policy": policy, "generated_tokens": 28,
++               "prompt_tokens": 44, "padded_prefill_token_slots": 44,
++               "decode_token_slots": 28} for policy in ("active", "never")])
++    return results
++
++
++def test_complete_paired_ledger_passes(tmp_path):
++    paired_ledger(tmp_path)
++    assert audit_ledgers(tmp_path)["all_passed"]
++
++
++@pytest.mark.parametrize("corruption", ("duplicate_task", "wrong_policy", "missing_decision", "duplicate_public_task", "auxiliary_cost", "peer_cost", "future_step_before_decision", "batch_input_cost", "missing_prefill_cost", "terminal_selection"))
++def test_pairing_and_decision_coverage_are_required(tmp_path, corruption):
++    results = paired_ledger(tmp_path)
++    if corruption == "duplicate_task":
++        results[1] = copy.deepcopy(results[0])
++    elif corruption == "wrong_policy":
++        results[0]["policy"] = "unregistered"
++        # Keep accounting consistent so the policy contract detects the change.
++        write_csv(tmp_path / "live_batch_metrics.csv", [{"policy": policy, "generated_tokens": count,
++                   "prompt_tokens": 44 if policy == "never" else 22,
++                   "padded_prefill_token_slots": 44 if policy == "never" else 22,
++                   "decode_token_slots": count} for policy, count in (("unregistered", 14), ("active", 14), ("never", 28))])
++    elif corruption == "missing_decision":
++        results[0]["decisions"] = results[0]["decisions"][1:]
++    elif corruption in ("auxiliary_cost", "peer_cost"):
++        results[0]["auxiliary_tokens" if corruption == "auxiliary_cost" else "peer_tokens"] = 999
++    elif corruption == "future_step_before_decision":
++        results[0]["observations"][1]["observed_ns"] = 25
++    elif corruption in ("batch_input_cost", "missing_prefill_cost"):
++        write_csv(tmp_path / "live_batch_metrics.csv", [{"policy": policy, "generated_tokens": 28,
++                   "decode_token_slots": 28, "prompt_tokens": 0 if corruption == "batch_input_cost" else 44,
++                   "padded_prefill_token_slots": 0} for policy in ("active", "never")])
++    elif corruption == "terminal_selection":
++        results[0]["decisions"][-1].update(selected_step=1, selected_answer="999")
++    else:
++        tasks = [{"task_id": "one", "prompt": "12+13"}] * 2
++        write_jsonl(tmp_path / "live_public_tasks.jsonl", tasks)
++        manifest = json.loads((tmp_path / "live_manifest.json").read_text())
++        manifest["public_tasks_sha256"] = file_sha256(tmp_path / "live_public_tasks.jsonl")
++        write_json(tmp_path / "live_manifest.json", manifest)
++    write_jsonl(tmp_path / "live_generation_results.jsonl", results)
++    with pytest.raises(AssertionError, match="live audit failed"):
++        audit_ledgers(tmp_path)
++
++
++@pytest.mark.parametrize("tokens", (-7, .5, True))
++def test_balanced_invalid_token_counts_are_rejected(tmp_path, tokens):
++    results = paired_ledger(tmp_path)
++    for row in results:
++        for observation in row["observations"]:
++            observation["generated_tokens"] = tokens
++        row["generated_tokens"] = 2 * tokens
++    write_jsonl(tmp_path / "live_generation_results.jsonl", results)
++    write_csv(tmp_path / "live_batch_metrics.csv", [{"policy": policy, "generated_tokens": 4 * tokens,
++               "prompt_tokens": 44, "padded_prefill_token_slots": 44,
++               "decode_token_slots": max(0, 4 * tokens)} for policy in ("active", "never")])
++    with pytest.raises(AssertionError, match="live audit failed"):
++        audit_ledgers(tmp_path)
+diff --git a/research/tests/test_live_uncertainty.py b/research/tests/test_live_uncertainty.py
+index d8ac133..65ebc53 100644
+--- a/research/tests/test_live_uncertainty.py
++++ b/research/tests/test_live_uncertainty.py
+@@ -17,6 +17,13 @@ SPEC.loader.exec_module(MODULE)
+ 
+ 
+ class PairedUncertaintyTests(unittest.TestCase):
++    def test_binomial_interval_rejects_invalid_counts_and_error_rates(self):
++        for k, n, error in ((-1, 4, .05), (5, 4, .05), (1.5, 4, .05),
++                            (1, 4.5, .05), (0, 0, .05), (True, 4, .05),
++                            (1, 4, 0), (1, 4, 1), (1, 4, 1.5), (1, 4, float("nan"))):
++            with self.subTest(k=k, n=n, error=error), self.assertRaises(ValueError):
++                MODULE.clopper_pearson(k, n, error)
++
+     def test_exact_coverage_over_multinomial_outcomes(self):
+         # Enumerate every possible (improvement,worsening,concordance) outcome.
+         # This checks coverage of the final difference interval, including the
+@@ -90,6 +97,55 @@ class PairedUncertaintyTests(unittest.TestCase):
+             with self.assertRaisesRegex(ValueError, "nonnegative integers"):
+                 MODULE.analyze(folder, 100, 804)
+ 
++    def test_rejects_missing_or_blank_task_identifiers(self):
++        with tempfile.TemporaryDirectory() as directory:
++            folder = Path(directory)
++            for identifier in (None, "", "  ", "\t"):
++                with self.subTest(identifier=identifier):
++                    frame, _ = self.fixture(folder)
++                    frame.loc[0, "task_id"] = identifier
++                    frame.to_csv(folder / "live_paired_results.csv", index=False)
++                    with self.assertRaisesRegex(ValueError, "unique task"):
++                        MODULE.analyze(folder, 100, 804)
++
++    def test_exact_token_totals_and_small_savings_above_float_integer_precision(self):
++        with tempfile.TemporaryDirectory() as directory:
++            folder = Path(directory)
++            for baseline, active in ((2**53 + 1, 2**53), (2**54, 2**54 - 1),
++                                     (2**64 + 1, 2**64)):
++                with self.subTest(baseline=baseline, active=active):
++                    pd.DataFrame({"task_id": ["NA"], "baseline_correct": [1], "active_correct": [1],
++                                  "baseline_generated_tokens": [baseline],
++                                  "active_generated_tokens": [active]}).to_csv(
++                                      folder / "live_paired_results.csv", index=False)
++                    reported = {"problems_or_trajectories": 1, "paired_improved": 0, "paired_worsened": 0,
++                                "baseline_correct": 1, "active_correct": 1,
++                                "baseline_generated_tokens": baseline, "active_generated_tokens": active}
++                    (folder / "live_metrics.json").write_text(json.dumps(reported), encoding="utf-8")
++                    result = MODULE.analyze(folder, 100, 804)
++                    self.assertEqual(result["counts"], reported)
++                    expected = (baseline - active) / baseline
++                    self.assertEqual(result["completion_token_savings"], expected)
++                    self.assertEqual(result["completion_token_savings_cluster_bootstrap_95ci"], [expected, expected])
++
++    def test_direct_analysis_rejects_invalid_bootstrap_draw_count(self):
++        with tempfile.TemporaryDirectory() as directory:
++            folder = Path(directory)
++            self.fixture(folder)
++            for draws in (0, -1, 1.5, True):
++                with self.subTest(draws=draws), self.assertRaisesRegex(ValueError, "draws"):
++                    MODULE.analyze(folder, draws, 804)
++
++    def test_token_exponent_budget_precedes_integer_materialization(self):
++        with tempfile.TemporaryDirectory() as directory:
++            folder = Path(directory)
++            frame, _ = self.fixture(folder)
++            frame["active_generated_tokens"] = frame.active_generated_tokens.astype(str)
++            frame.loc[0, "active_generated_tokens"] = "1e1000000000"
++            frame.to_csv(folder / "live_paired_results.csv", index=False)
++            with self.assertRaisesRegex(ValueError, "nonnegative integers"):
++                MODULE.analyze(folder, 100, 804)
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/research/tests/test_online_controller.py b/research/tests/test_online_controller.py
+index 762ab61..eb8c20a 100644
+--- a/research/tests/test_online_controller.py
++++ b/research/tests/test_online_controller.py
+@@ -135,6 +135,14 @@ class ControllerTests(unittest.TestCase):
+         self.assertTrue(decision.stop)
+         self.assertEqual((decision.selected_answer, decision.selected_step), ("25", 2))
+ 
++    def test_confidence_drop_cannot_replace_an_answer_with_an_empty_candidate(self) -> None:
++        controller = OnlineStoppingController(PolicyConfig(confidence_threshold=100))
++        controller.observe(observation(1, "25", 70))
++        controller.observe(observation(2, "", 95))
++        decision = controller.observe(observation(3, "26", 60))
++        self.assertFalse(decision.stop)
++        self.assertEqual((decision.selected_answer, decision.selected_step), ("26", 3))
++
+     def test_answer_wobble_selection_uses_observed_confidence(self) -> None:
+         controller = OnlineStoppingController(PolicyConfig(confidence_threshold=100, confidence_drop=100))
+         controller.observe(observation(1, "10", 75))
+@@ -182,6 +190,48 @@ class ControllerTests(unittest.TestCase):
+             with self.assertRaises(ValueError):
+                 observation(1, tokens=tokens)
+ 
++    def test_fractional_nonfinite_and_boolean_policy_counts_are_rejected(self) -> None:
++        for name in ("max_steps", "min_steps", "fixed_step", "stable_steps", "wobble_changes", "min_peers"):
++            for value in (2.5, math.nan, math.inf, True):
++                with self.subTest(name=name, value=value), self.assertRaises(ValueError):
++                    PolicyConfig(**{name: value})
++
++    def test_invalid_decision_clock_does_not_consume_an_observation(self) -> None:
++        for value in (math.nan, math.inf, 50.5, True, 0, -1):
++            controller = OnlineStoppingController()
++            with self.subTest(value=value), self.assertRaises(ValueError):
++                controller.observe(dataclasses.replace(observation(1), observed_ns=51), decision_ns=value)
++            self.assertEqual(controller.prefix, ())
++            self.assertFalse(controller.observe(observation(1), decision_ns=60).stop)
++
++    def test_malformed_peer_clock_and_token_counts_are_rejected_before_prefix_update(self) -> None:
++        valid_vote = PeerVote("a", 2, "25", 30, 8)
++        cases = []
++        for name in ("step", "completed_ns", "generated_tokens"):
++            for value in (2.5, math.nan, math.inf, True):
++                cases.append(ClosedPeerPanel(2, ("a",), (dataclasses.replace(valid_vote, **{name: value}),), 40))
++        cases.extend(dataclasses.replace(ClosedPeerPanel(2, ("a",), (valid_vote,), 40), **{name: value})
++                     for name in ("step", "closed_ns") for value in (2.5, math.nan, math.inf, True))
++        for panel in cases:
++            controller = OnlineStoppingController(PolicyConfig(min_peers=1))
++            controller.observe(observation(1))
++            with self.subTest(panel=panel), self.assertRaises(ValueError):
++                controller.observe(observation(2), peers=panel, decision_ns=50)
++            self.assertEqual(len(controller.prefix), 1)
++
++    def test_peer_roster_and_votes_require_immutable_typed_records(self) -> None:
++        vote = PeerVote("a", 2, "25", 30, 8)
++        panels = (
++            ClosedPeerPanel(2, ["a"], (vote,), 40),
++            ClosedPeerPanel(2, ("a",), [vote], 40),
++            ClosedPeerPanel(2, (1,), (dataclasses.replace(vote, peer_id=1),), 40),
++            ClosedPeerPanel(2, ("a",), (dataclasses.replace(vote, answer=25),), 40),
++            ClosedPeerPanel(2, ("a",), ({"peer_id": "a"},), 40),
++        )
++        for panel in panels:
++            with self.subTest(panel=panel), self.assertRaises(ValueError):
++                panel.validate(2, 50)
++
+     def test_peer_requirement_waits_for_complete_same_step_panel(self) -> None:
+         controller = OnlineStoppingController(PolicyConfig(min_peers=2))
+         controller.observe(observation(1))
+diff --git a/tools/analyze_live_stopping_uncertainty.py b/tools/analyze_live_stopping_uncertainty.py
+index 1b35131..efa0a85 100644
+--- a/tools/analyze_live_stopping_uncertainty.py
++++ b/tools/analyze_live_stopping_uncertainty.py
+@@ -11,6 +11,9 @@ from __future__ import annotations
+ import argparse
+ import hashlib
+ import json
++import math
++from decimal import Decimal, InvalidOperation
++from numbers import Integral, Real
+ from pathlib import Path
+ 
+ import numpy as np
+@@ -19,14 +22,30 @@ from scipy.stats import beta
+ 
+ 
+ def clopper_pearson(k: int, n: int, error: float) -> tuple[float, float]:
++    if (isinstance(k, bool) or not isinstance(k, Integral)
++            or isinstance(n, bool) or not isinstance(n, Integral) or n < 1 or not 0 <= k <= n):
++        raise ValueError("Binomial counts must be integers with n >= 1 and 0 <= k <= n")
++    if (isinstance(error, bool) or not isinstance(error, Real)
++            or not math.isfinite(error) or not 0 < error < 1):
++        raise ValueError("Binomial interval error must be finite and strictly between zero and one")
+     return (0.0 if k == 0 else float(beta.ppf(error / 2, k, n - k + 1)),
+             1.0 if k == n else float(beta.ppf(1 - error / 2, k + 1, n - k)))
+ 
+ 
+ def analyze(folder: Path, draws: int, seed: int) -> dict:
++    if isinstance(draws, bool) or not isinstance(draws, Integral) or draws < 1:
++        raise ValueError("Bootstrap draws must be a positive integer")
+     source = folder / "live_paired_results.csv"
+-    frame = pd.read_csv(source)
+-    if len(frame) == 0 or frame.task_id.duplicated().any():
++    token_columns = ["baseline_generated_tokens", "active_generated_tokens"]
++    # Read identifiers literally (e.g. "NA") and token counts as exact decimal
++    # text; float conversion can silently round an integer above 2**53.
++    frame = pd.read_csv(source, dtype={key: "string" for key in ["task_id", *token_columns]},
++                        keep_default_na=False)
++    required = {"task_id", "baseline_correct", "active_correct", *token_columns}
++    if not required.issubset(frame.columns):
++        raise ValueError(f"Missing paired-result columns: {sorted(required - set(frame.columns))}")
++    if (len(frame) == 0 or frame.task_id.str.strip().eq("").any()
++            or frame.task_id.duplicated().any()):
+         raise ValueError("One nonempty paired observation per unique task is required")
+     for key in ("baseline_correct", "active_correct"):
+         if not frame[key].isin([True, False, 0, 1]).all():
+@@ -38,11 +57,24 @@ def analyze(folder: Path, draws: int, seed: int) -> dict:
+     worsened = int(((active == 0) & (baseline == 1)).sum())
+     lower_plus, upper_plus = clopper_pearson(improved, n, .025)
+     lower_minus, upper_minus = clopper_pearson(worsened, n, .025)
+-    token_columns = ["baseline_generated_tokens", "active_generated_tokens"]
+-    tokens = frame[token_columns].to_numpy(dtype=float)
+-    if not np.isfinite(tokens).all() or (tokens < 0).any() or not (tokens == np.floor(tokens)).all():
++    def exact_count(raw: str) -> int:
++        try:
++            if len(raw) > 1040:
++                raise ValueError("Token-count literal exceeds supported size")
++            value = Decimal(raw)
++            # Bound before int: Decimal('1e1000000000') has a tiny textual
++            # representation but would materialize an enormous integer.
++            if (value.is_finite() and value.adjusted() < 1024 and value >= 0
++                    and value == value.to_integral_value()):
++                return int(value)
++        except (InvalidOperation, ValueError):
++            pass
+         raise ValueError("Completion-token counts must be measured nonnegative integers")
+-    if tokens[:, 0].sum() == 0:
++
++    tokens = np.array([[exact_count(raw) for raw in row]
++                       for row in frame[token_columns].itertuples(index=False, name=None)], dtype=object)
++    baseline_tokens, active_tokens = (int(value) for value in tokens.sum(axis=0))
++    if baseline_tokens == 0:
+         raise ValueError("Baseline completion-token denominator is zero")
+     rng = np.random.default_rng(seed)
+     savings = []
+@@ -51,14 +83,16 @@ def analyze(folder: Path, draws: int, seed: int) -> dict:
+         totals = tokens[indices].sum(axis=1)
+         if (totals[:, 0] == 0).any():
+             raise ValueError("A bootstrap sample has no baseline tokens")
+-        savings.extend(1 - totals[:, 1] / totals[:, 0])
++        # Subtract integer totals before division so a small nonzero saving is
++        # not cancelled by rounding two nearly equal floating-point ratios.
++        savings.extend((totals[:, 0] - totals[:, 1]) / totals[:, 0])
+     recorded = json.loads((folder / "live_metrics.json").read_text(encoding="utf-8"))
+     manifest_path = folder / "live_manifest.json"
+     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+     purposive = manifest.get("source", {}).get("kind") == "custom_public_task_bank"
+     expected = {"problems_or_trajectories": n, "paired_improved": improved, "paired_worsened": worsened,
+                 "baseline_correct": int(baseline.sum()), "active_correct": int(active.sum()),
+-                "baseline_generated_tokens": int(tokens[:, 0].sum()), "active_generated_tokens": int(tokens[:, 1].sum())}
++                "baseline_generated_tokens": baseline_tokens, "active_generated_tokens": active_tokens}
+     for key, value in expected.items():
+         if recorded[key] != value:
+             raise ValueError(f"Independent audit disagrees with reported {key}: {value} versus {recorded[key]}")
+@@ -68,7 +102,7 @@ def analyze(folder: Path, draws: int, seed: int) -> dict:
+             "accuracy_delta": float((active - baseline).mean()),
+             "accuracy_delta_conservative_exact_95ci": [lower_plus - upper_minus, upper_plus - lower_minus],
+             "accuracy_interval_method": "Bonferroni simultaneous 97.5% Clopper-Pearson intervals on paired improvement and worsening probabilities",
+-            "completion_token_savings": float(1 - tokens[:, 1].sum() / tokens[:, 0].sum()),
++            "completion_token_savings": (baseline_tokens - active_tokens) / baseline_tokens,
+             "completion_token_savings_cluster_bootstrap_95ci": [float(x) for x in np.quantile(savings, [.025, .975])],
+             "bootstrap_draws": draws, "bootstrap_seed": seed,
+             "scope": ("Handpicked question bank: iid-reference accuracy interval and descriptive resampling only; no randomized adversarial-population coverage"
+diff --git a/tools/freeze_research_data.py b/tools/freeze_research_data.py
+index ebbf0bc..602752a 100644
+--- a/tools/freeze_research_data.py
++++ b/tools/freeze_research_data.py
+@@ -21,9 +21,11 @@ from __future__ import annotations
+ 
+ import argparse
+ from collections import Counter, defaultdict
++from copy import deepcopy
+ import csv
+ import fnmatch
+ from datetime import datetime, timezone
++from functools import lru_cache
+ import hashlib
+ import importlib.metadata
+ import json
+@@ -267,6 +269,41 @@ def evidence_paths(root: Path, selection: dict[str, Any]) -> list[str]:
+     return sorted(selected)
+ 
+ 
++def glob_matches(relative: str, pattern: str) -> bool:
++    """Match a file path as pathlib does, including zero-directory ``**``."""
++    parts = PurePosixPath(relative).parts
++    tokens = PurePosixPath(pattern).parts
++    # A terminal ``**`` selects directories, not files, in Path.glob.
++    if tokens and tokens[-1] == "**":
++        return False
++
++    @lru_cache(maxsize=None)
++    def match(part: int, token: int) -> bool:
++        if token == len(tokens):
++            return part == len(parts)
++        if tokens[token] == "**":
++            return match(part, token + 1) or (part < len(parts) and match(part + 1, token))
++        return part < len(parts) and fnmatch.fnmatch(parts[part], tokens[token]) and match(part + 1, token + 1)
++
++    return match(0, 0)
++
++
++def checked_freeze_output(root: Path, relative: str, manifest: dict[str, Any]) -> Path:
++    """Refuse source overwrites and outputs that would change frozen membership."""
++    output = checked_path(root, relative)
++    records = [manifest["authority"], *manifest["files"], *manifest["auxiliary_evidence"]["files"]]
++    if any(output == checked_path(root, record["path"]) for record in records):
++        raise IntegrityError(f"Freeze output would overwrite a selected input: {relative}")
++    if glob_matches(relative, f"{manifest['scope']['data_root']}/global_*/trace_steps.csv"):
++        raise IntegrityError(f"Freeze output would change tournament file membership: {relative}")
++    selection = manifest["auxiliary_evidence"]["selection"]
++    included = relative in selection["fixed"] or any(glob_matches(relative, pattern) for pattern in selection["globs"])
++    excluded = any(fnmatch.fnmatchcase(relative, pattern) for pattern in selection.get("exclude_globs", []))
++    if included and not excluded:
++        raise IntegrityError(f"Freeze output would enter its own evidence membership: {relative}")
++    return output
++
++
+ def build_manifest(
+     root: Path,
+     *,
+@@ -374,8 +411,20 @@ def build_manifest(
+     # Historical manifests hashed {path,bytes,sha256}; newer runners hash
+     # {path,canonical_lf_sha256}. Store both formats and state their provenance.
+     legacy_fingerprint = stable_hash(archived_files)
+-    if not any("canonical_lf_sha256" in entry for entry in declared_files) and legacy_fingerprint != authority.get("dataset_fingerprint"):
+-        raise IntegrityError("Reconstructed legacy dataset fingerprint differs from the authority")
++    canonical_runner_fingerprint = stable_hash([
++        {"path": entry["path"], "canonical_lf_sha256": record["canonical_lf_sha256"]}
++        for entry, record in zip(declared_files, records)
++    ])
++    canonical_authority = any("canonical_lf_sha256" in entry for entry in declared_files)
++    expected_fingerprint = canonical_runner_fingerprint if canonical_authority else legacy_fingerprint
++    if expected_fingerprint != authority.get("dataset_fingerprint"):
++        kind = "canonical" if canonical_authority else "legacy"
++        raise IntegrityError(f"Reconstructed {kind} dataset fingerprint differs from the authority")
++    if "raw_dataset_fingerprint" in authority:
++        raw_files = [{"path": entry["path"], "raw_sha256": entry.get("raw_sha256", entry.get("sha256"))}
++                     for entry in declared_files]
++        if stable_hash(raw_files) != authority["raw_dataset_fingerprint"]:
++            raise IntegrityError("Reconstructed raw dataset fingerprint differs from the authority")
+     selected = selection or {"profile": "tournament-only", "fixed": [config["metadata_path"] for config in cell_configs], "globs": []}
+     auxiliary = [file_record(root, relative) for relative in evidence_paths(root, selected)]
+     manifest = {
+@@ -390,7 +439,7 @@ def build_manifest(
+                           "claim_limit": "File identity and corpus structure; not model retraining, labels' semantic validity, or prospective effectiveness."},
+         "authority": {**file_record(root, authority_relative), "recorded_dataset_fingerprint": authority.get("dataset_fingerprint"),
+                       "reconstructed_legacy_dataset_fingerprint": legacy_fingerprint,
+-                      "canonical_runner_dataset_fingerprint": stable_hash([{"path": entry["path"], "canonical_lf_sha256": record["canonical_lf_sha256"]} for entry, record in zip(declared_files, records)]),
++                      "canonical_runner_dataset_fingerprint": canonical_runner_fingerprint,
+                       "recorded_feature_count": authority.get("feature_count"), "recorded_feature_fingerprint": authority.get("feature_fingerprint"),
+                       "recorded_protocol": authority.get("protocol"), "recorded_preflight": authority.get("preflight")},
+         "corpus": corpus, "files": records, "generation_configurations": cell_configs,
+@@ -440,16 +489,20 @@ def verify_manifest(root: Path, manifest: dict[str, Any], *, allow_line_ending_c
+     # Byte matches alone do not justify silently accepting a forged metadata
+     # summary or hash declaration. Compare all rebuilt declarations after removing
+     # only the raw fields an explicitly portable audit is permitted to differ on.
+-    def portable(value: Any) -> Any:
+-        if isinstance(value, list):
+-            return [portable(item) for item in value]
+-        if isinstance(value, dict):
+-            excluded = {"content_fingerprint", "created_utc"}
+-            if allow_line_ending_changes and "canonical_lf_sha256" in value:
+-                excluded.update({"bytes", "sha256", "archived_match"})
+-            return {key: portable(item) for key, item in value.items() if key not in excluded}
+-        return value
+-    if portable(actual) != portable(manifest):
++    def comparable(value: dict[str, Any]) -> dict[str, Any]:
++        result = deepcopy(value)
++        # Only the freeze's own timestamp/fingerprint are comparison metadata.
++        # Identically named fields nested in source provenance remain protected.
++        result.pop("content_fingerprint", None)
++        result.pop("created_utc", None)
++        if allow_line_ending_changes:
++            records = [result["authority"], *result["files"], *result["auxiliary_evidence"]["files"]]
++            for record in records:
++                if "canonical_lf_sha256" in record:
++                    for key in ("bytes", "sha256", "archived_match"):
++                        record.pop(key, None)
++        return result
++    if comparable(actual) != comparable(manifest):
+         raise IntegrityError("Rebuilt scope, provenance, hashes, or structure differs from freeze")
+     return {"status": "verified", "audit_mode": "canonical_lf" if allow_line_ending_changes else "strict_bytes",
+             "data_files": len(manifest["files"]), "auxiliary_files": len(manifest["auxiliary_evidence"]["files"]),
+@@ -575,7 +628,7 @@ def main(argv: list[str] | None = None) -> int:
+                 for relative in args.extra_evidence:
+                     selection["globs" if any(token in relative for token in "*?[") else "fixed"].append(relative)
+             manifest = build_manifest(root, selection=selection)
+-            write_output(checked_path(root, args.output), json.dumps(manifest, indent=2, sort_keys=True) + "\n", replace=args.replace)
++            write_output(checked_freeze_output(root, args.output, manifest), json.dumps(manifest, indent=2, sort_keys=True) + "\n", replace=args.replace)
+             result = {"status": "frozen", "output": args.output, "data_files": len(manifest["files"]),
+                       "auxiliary_files": len(manifest["auxiliary_evidence"]["files"]), "corpus": manifest["corpus"],
+                       "content_fingerprint": manifest["content_fingerprint"]}
+diff --git a/tools/record_defense_rehearsal.py b/tools/record_defense_rehearsal.py
+index fae0cd6..54df66d 100644
+--- a/tools/record_defense_rehearsal.py
++++ b/tools/record_defense_rehearsal.py
+@@ -131,6 +131,7 @@ def new_ledger(kind, operator=None, session_id=None, plan=None, template=False,
+     plan = copy.deepcopy(plan if plan is not None else source_plan())
+     prior = None
+     if prior_peer_ledger is not None:
++        require(kind == "adviser_dry_run", "Only an adviser dry-run can link a prior peer mock.")
+         p = Path(prior_peer_ledger).resolve()
+         previous = read_ledger(p)
+         previous_audit = audit_ledger(previous)
+@@ -208,6 +209,7 @@ def _data_contract(event):
+ 
+ 
+ def validate_ledger(ledger):
++    require(isinstance(ledger, dict), "Ledger JSON must be an object.")
+     require(ledger.get("schema") == SCHEMA, "Unsupported ledger schema.")
+     require(ledger.get("kind") in KINDS and type(ledger.get("template")) is bool,
+             "Invalid rehearsal kind/template flag.")
+@@ -220,18 +222,33 @@ def validate_ledger(ledger):
+         instant(ledger.get("created_at"))
+     require(isinstance(ledger.get("events"), list), "Events must be an explicit list.")
+     logger = ledger.get("logger_source", {})
+-    require(isinstance(logger.get("sha256"), str) and len(logger["sha256"]) == 64
++    require(isinstance(logger, dict) and isinstance(logger.get("sha256"), str) and len(logger["sha256"]) == 64
+             and all(c in "0123456789abcdef" for c in logger["sha256"]), "Missing initial logger source hash.")
++    prior = ledger.get("prior_peer_mock")
++    if prior is not None:
++        require(isinstance(prior, dict) and ledger["kind"] == "adviser_dry_run",
++                "A prior peer link is an object belonging to an adviser dry-run.")
++        for key in ("path", "session_id", "sha256"):
++            text_field(prior, key)
++        require(len(prior["sha256"]) == 64 and all(c in "0123456789abcdef" for c in prior["sha256"]),
++                "Invalid prior peer ledger hash.")
++        require(isinstance(prior.get("questions"), list)
++                and all(isinstance(q, str) and bool(q.strip()) for q in prior["questions"])
++                and len(set(prior["questions"])) == len(prior["questions"]),
++                "Prior peer question IDs must be unique nonempty strings.")
+     plan = ledger.get("plan")
+     require(isinstance(plan, dict) and canonical_digest(plan) == ledger.get("plan_sha256"),
+             "Frozen source/notes plan hash changed.")
++    require(isinstance(plan.get("slides"), list) and isinstance(plan.get("sources"), dict),
++            "Frozen plan needs explicit slide and source collections.")
+     require(len(plan.get("slides", [])) == plan.get("slide_count") == 25
+             and sum(s["planned_seconds"] for s in plan["slides"]) == plan["talk_target_seconds"] == 1800
+             and plan.get("qa_target_seconds") == 1800,
+             "The frozen contract is a 25-slide/30-minute talk plus 30-minute Q&A.")
+     elapsed = 0
+     for number, s in enumerate(plan["slides"], 1):
+-        require(s["number"] == number and type(s["planned_seconds"]) is int and s["planned_seconds"] > 0
++        require(isinstance(s, dict) and type(s.get("number")) is int and s["number"] == number
++                and type(s["planned_seconds"]) is int and s["planned_seconds"] > 0
+                 and s["planned_start_seconds"] == elapsed
+                 and s["planned_end_seconds"] == elapsed + s["planned_seconds"]
+                 and digest_bytes(s["speaker_notes"].encode("utf-8")) == s["speaker_notes_utf8_sha256"],
+@@ -244,6 +261,7 @@ def validate_ledger(ledger):
+              "evidence": {}, "attestations": [], "boundaries": {}}
+     previous_hash, previous_time = None, None
+     for index, event in enumerate(ledger.get("events", []), 1):
++        require(isinstance(event, dict), "Each observed event must be an object.")
+         require(not ledger["template"], "A blank template cannot contain observed events; initialize a session.")
+         require(event.get("sequence") == index and event.get("type") in EVENT_TYPES,
+                 "Event sequence/type is invalid.")
+@@ -324,8 +342,17 @@ def validate_ledger(ledger):
+ 
+ 
+ def local_reference(reference, root=ROOT):
+-    if urlparse(reference).scheme in ("http", "https"):
+-        return None
++    require(isinstance(reference, str) and bool(reference.strip()), "Evidence reference must be nonempty text.")
++    try:
++        parsed = urlparse(reference)
++        if parsed.scheme in ("http", "https"):
++            require(bool(parsed.netloc) and bool(parsed.hostname)
++                    and not any(c.isspace() for c in reference),
++                    "An HTTP(S) evidence reference needs a host and no whitespace.")
++            parsed.port  # Reject malformed ports without opening or accessing the URL.
++            return None
++    except ValueError as exc:
++        raise LedgerError("Invalid evidence reference: " + reference) from exc
+     p = Path(reference).expanduser()
+     return p if p.is_absolute() else Path(root) / p
+ 
+@@ -335,7 +362,10 @@ def append_event(ledger, typ, data=None, occurred_at=None, root=ROOT, entry_mode
+     validate_ledger(ledger)
+     updated = copy.deepcopy(ledger)
+     recorded = utc_now()
+-    payload = copy.deepcopy(data or {})
++    require(data is None or isinstance(data, dict), "Event data must be an object.")
++    payload = copy.deepcopy({} if data is None else data)
++    observed = recorded if occurred_at is None else occurred_at
++    instant(observed)
+     if typ == "evidence":
+         ref = local_reference(payload.get("reference", ""), root)
+         if ref is not None:
+@@ -343,8 +373,8 @@ def append_event(ledger, typ, data=None, occurred_at=None, root=ROOT, entry_mode
+             payload["file_sha256"] = digest_bytes(ref.read_bytes()) if ref.is_file() else None
+             payload["file_bytes"] = ref.stat().st_size if ref.is_file() else None
+     event = {"sequence": len(updated["events"]) + 1, "type": typ,
+-             "occurred_at": occurred_at or recorded, "recorded_at": recorded,
+-             "entry_mode": entry_mode or ("manual_timestamp" if occurred_at else "observed_now"),
++             "occurred_at": observed, "recorded_at": recorded,
++             "entry_mode": entry_mode if entry_mode is not None else ("manual_timestamp" if occurred_at is not None else "observed_now"),
+              "logger_source_sha256": logger_source_hash(),
+              "data": payload, "previous_event_sha256": updated["events"][-1]["event_sha256"] if updated["events"] else None}
+     event["event_sha256"] = canonical_digest(event)
+@@ -357,6 +387,31 @@ def _seconds(a, b):
+     return round((instant(b) - instant(a)).total_seconds(), 6)
+ 
+ 
++def prior_peer_check(ledger, root=ROOT):
++    """Check optional lineage without rewriting either rehearsal record."""
++    prior = ledger.get("prior_peer_mock")
++    if prior is None:
++        return {"status": "not_linked", "reason": None}
++    path = Path(prior["path"])
++    if not path.is_absolute():
++        path = Path(root) / path
++    try:
++        if not path.is_file():
++            return {"status": "missing", "reason": "Linked prior peer ledger is missing."}
++        if digest_bytes(path.read_bytes()) != prior["sha256"]:
++            return {"status": "changed", "reason": "Linked prior peer ledger bytes changed."}
++        peer = read_ledger(path)
++        require(peer["kind"] == "peer_mock" and peer["session_id"] == prior["session_id"],
++                "Linked prior peer session identity does not match its snapshot.")
++        questions = [e["data"]["id"] for e in peer["events"] if e["type"] == "question"]
++        require(questions == prior["questions"], "Linked prior peer question snapshot does not match its record.")
++        peer_audit = audit_ledger(peer, root)
++        require(peer_audit["evidence_status"] == "complete", "Linked prior peer evidence is no longer complete.")
++        return {"status": "matched", "reason": None, "session_end": peer_audit["actual_boundaries"]["session_end"]}
++    except (LedgerError, OSError, KeyError, TypeError, ValueError) as exc:
++        return {"status": "invalid", "reason": "Linked prior peer record cannot be verified: " + str(exc)}
++
++
+ def audit_ledger(ledger, root=ROOT):
+     state = validate_ledger(ledger)
+     blockers = []
+@@ -366,6 +421,11 @@ def audit_ledger(ledger, root=ROOT):
+             blockers.append("Missing observed boundary: " + marker)
+     slides = []
+     talk_start = boundaries.get("talk_start")
++    prior_check = prior_peer_check(ledger, root)
++    if prior_check["reason"] is not None:
++        blockers.append(prior_check["reason"])
++    elif prior_check["status"] == "matched" and talk_start and instant(talk_start) < instant(prior_check["session_end"]):
++        blockers.append("The adviser talk begins before its linked prior peer session ends.")
+     for planned in ledger["plan"]["slides"]:
+         visits = [v for v in state["visits"] if v["number"] == planned["number"]]
+         closed = [v for v in visits if v["end"] is not None]
+@@ -446,8 +506,11 @@ def audit_ledger(ledger, root=ROOT):
+         current = digest_bytes(p.read_bytes()) if p.is_file() else None
+         source_checks.append({"source": name, "path": source["path"], "frozen_sha256": source["sha256"],
+                               "current_sha256": current, "matches": current == source["sha256"]})
++    current_outcomes = dict(state["qa_outcomes"])
++    for outcome in state["follow_up_outcomes"]:
++        current_outcomes[outcome["question_id"]] = outcome
+     pending_actions = [{"question_id": qid, "disposition": d["disposition"], "action": d.get("action", "")}
+-                       for qid, d in state["qa_outcomes"].items() if d["disposition"] != "answered"]
++                       for qid, d in current_outcomes.items() if d["disposition"] != "answered"]
+     return {"schema": "defense-rehearsal-audit-v1", "session_id": ledger["session_id"],
+             "kind": ledger["kind"], "is_template": ledger["template"],
+             "audit_generated_at": utc_now(), "ledger_content_sha256": canonical_digest(ledger),
+@@ -460,10 +523,11 @@ def audit_ledger(ledger, root=ROOT):
+             "timing_targets_met": all(t["within_predeclared_tolerance"] is True for t in timing.values()),
+             "slide_timings": slides, "participants": list(people.values()),
+             "consent_history": state["consents"], "question_count": len(state["questions"]),
+-            "questions": [{**q, "qa_outcome": state["qa_outcomes"].get(qid)} for qid, q in state["questions"].items()],
++            "questions": [{**q, "qa_outcome": state["qa_outcomes"].get(qid), "current_outcome": current_outcomes.get(qid)} for qid, q in state["questions"].items()],
+             "follow_up_outcomes": state["follow_up_outcomes"], "pending_question_actions": pending_actions,
+             "evidence_checks": evidence_checks, "witness_attestation_count": len(state["attestations"]),
+             "prior_peer_mock": ledger.get("prior_peer_mock"),
++            "prior_peer_mock_check": prior_check,
+             "peer_questions_revisited": [q["from_peer_question_id"] for q in state["questions"].values() if q.get("from_peer_question_id")],
+             "current_source_checks": source_checks,
+             "institutional_status": "Defense scheduling, announcement, committee approval, signatures and degree clearance are not established by this log."}
+@@ -512,7 +576,11 @@ def interactive(ledger_path):
+     while True:
+         ledger = read_ledger(ledger_path)
+         state = validate_ledger(ledger)
+-        line = input(f'{state["phase"]}> ').strip()
++        try:
++            line = input(f'{state["phase"]}> ').strip()
++        except EOFError:
++            print("Input ended; existing events remain unchanged. Completion is not inferred.")
++            return
+         command_time = utc_now()
+         if line == "quit":
+             return
+@@ -560,6 +628,9 @@ def interactive(ledger_path):
+             updated = append_event(ledger, typ, data, occurred_at=observed_time, entry_mode="observed_now")
+             write_json(ledger_path, updated)
+             print(f'Saved observed event {len(updated["events"])} at {updated["events"][-1]["occurred_at"]}.')
++        except EOFError:
++            print("Input ended during entry; no partial event was saved.")
++            return
+         except (LedgerError, ValueError) as exc:
+             print("Not saved: " + str(exc), file=sys.stderr)
+ 
+@@ -606,7 +677,13 @@ def main(argv=None):
+             print("Event/plan invariants passed. This is not a completed rehearsal assertion.")
+         elif args.command == "append":
+             event = json.loads(args.event_file.read_text(encoding="utf-8"))
+-            ledger = append_event(read_ledger(args.ledger), event["type"], event.get("data", {}), event.get("occurred_at"))
++            require(isinstance(event, dict) and {"type", "data"} <= event.keys()
++                    and event.keys() <= {"type", "data", "occurred_at"},
++                    "Manual event JSON needs type/data and only an optional occurred_at field.")
++            require(isinstance(event["data"], dict), "Manual event data must be an object.")
++            if "occurred_at" in event:
++                instant(event["occurred_at"])
++            ledger = append_event(read_ledger(args.ledger), event["type"], event["data"], event.get("occurred_at"))
+             write_json(args.ledger, ledger)
+             print("Observed event appended; original earlier events preserved.")
+         elif args.command == "audit":
+@@ -621,7 +698,10 @@ def main(argv=None):
+             print(json.dumps({k: report[k] for k in ("evidence_status", "observed_event_count", "blockers", "timing", "timing_targets_met")}, indent=2))
+             return 0 if report["evidence_status"] == "complete" or args.allow_incomplete else 2
+         return 0
+-    except (LedgerError, OSError, KeyError, json.JSONDecodeError) as exc:
++    except KeyboardInterrupt:
++        print("Logging interrupted; existing events are preserved and completion is not inferred.", file=sys.stderr)
++        return 130
++    except (LedgerError, OSError, KeyError, TypeError, ValueError) as exc:
+         print("Rehearsal logger: " + str(exc), file=sys.stderr)
+         return 1
+ 
+diff --git a/tools/verify_post_review_behavior.py b/tools/verify_post_review_behavior.py
+new file mode 100644
+index 0000000..c39e4bf
+--- /dev/null
++++ b/tools/verify_post_review_behavior.py
+@@ -0,0 +1,92 @@
++"""Verify revised controllers on saved prefixes without changing frozen outputs.
++
++This performs saved-prefix replay and structural audits, not new model inference.
++Use --output-dir to choose a new directory; an existing directory is never replaced.
++"""
++from __future__ import annotations
++
++import argparse
++import dataclasses
++import json
++import shutil
++import sys
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "research"))
++from analyze_online_stopping_results import audit_ledgers
++from learned_online_stopping_controller import LearnedOnlineStoppingController, LearnedPolicy
++from online_stopping_controller import Observation, OnlineStoppingController, PolicyConfig
++from prefix_stopping_model import PrefixStoppingModel
++from run_online_stopping_evaluation import file_sha256, read_jsonl, write_json
++
++
++def verify(output: Path) -> dict:
++    output.mkdir(parents=True, exist_ok=False)
++    predictor_path = ROOT / "research/outputs/semester2/prefix_model_v1/prefix_model.json"
++    predictor = PrefixStoppingModel.load(predictor_path)
++    base = ROOT / "research/outputs/semester2/online_stopping_20261002"
++    reports = {}
++    for name in ("main", "adversarial_live", "learned_main", "learned_adversarial"):
++        source = base if name == "main" else base / name
++        fixture = output / "ledger_audits" / name
++        fixture.mkdir(parents=True)
++        filenames = ("live_manifest.json", "live_public_tasks.jsonl", "live_sealed_gold.jsonl",
++                     "live_generation_results.jsonl", "live_batch_metrics.csv")
++        inputs = {}
++        for filename in filenames:
++            shutil.copyfile(source / filename, fixture / filename)
++            inputs[(source / filename).relative_to(ROOT).as_posix()] = file_sha256(fixture / filename)
++        shutil.copytree(source / "locked_code", fixture / "locked_code")
++        audit = audit_ledgers(fixture)
++        manifest = json.loads((fixture / "live_manifest.json").read_text(encoding="utf-8"))
++        tasks = {row["task_id"]: row for row in read_jsonl(fixture / "live_public_tasks.jsonl")}
++        results = read_jsonl(fixture / "live_generation_results.jsonl")
++        mismatches = []
++        for row in results:
++            if row["policy"] == manifest["baseline_policy"]["name"]:
++                controller = OnlineStoppingController(PolicyConfig(**manifest["baseline_policy"]))
++            elif manifest["schema_version"] == "paired-learned-prefix-live-v1":
++                controller = LearnedOnlineStoppingController(predictor, tasks[row["task_id"]]["domain"],
++                                                             LearnedPolicy(**manifest["active_policy"]))
++            else:
++                controller = OnlineStoppingController(PolicyConfig(**manifest["active_policy"]))
++            actual = []
++            for raw in row["observations"]:
++                # Original monotonic timestamps belong to their original process.
++                observation = dataclasses.replace(Observation(**raw), observed_ns=0)
++                decision = controller.observe(observation)
++                actual.append((decision.step, decision.stop, decision.reason,
++                               decision.selected_answer, decision.selected_step))
++                if decision.stop:
++                    break
++            recorded = [(d["step"], d["stop"], d["reason"], d["selected_answer"], d["selected_step"])
++                        for d in row["decisions"]]
++            if actual != recorded:
++                mismatches.append({"task_id": row["task_id"], "policy": row["policy"]})
++        reports[name] = {"recorded_rows": len(results), "matching_decision_histories": len(results) - len(mismatches),
++                         "mismatches": mismatches, "ledger_checks": audit["checks"], "input_sha256": inputs}
++    sources = ("research/online_stopping_controller.py", "research/learned_online_stopping_controller.py",
++               "research/prefix_stopping_model.py", "research/analyze_online_stopping_results.py",
++               "research/run_online_stopping_evaluation.py", "tools/verify_post_review_behavior.py")
++    report = {"kind": "post_review_saved_prefix_behavior_verification_v1", "panels": reports,
++              "source_sha256": {path: file_sha256(ROOT / path) for path in sources},
++              "predictor_sha256": file_sha256(predictor_path),
++              "all_passed": all(not r["mismatches"] and all(r["ledger_checks"].values()) for r in reports.values()),
++              "claim_limit": "Saved-prefix replay and isolated ledger audits only; no new model generation, accuracy grading, training, or timing benchmark. Learned ledgers include reused baseline rows."}
++    write_json(output / "behavior_verification.json", report)
++    return report
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--output-dir", type=Path, required=True)
++    report = verify(parser.parse_args().output_dir.resolve())
++    print(json.dumps({"all_passed": report["all_passed"],
++                      "recorded_rows": sum(p["recorded_rows"] for p in report["panels"].values()),
++                      "matching_decision_histories": sum(p["matching_decision_histories"] for p in report["panels"].values())}))
++    return 0 if report["all_passed"] else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())

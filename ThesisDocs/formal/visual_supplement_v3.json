@@ -1,0 +1,529 @@
+{
+  "schema": "formal-thesis-visual-supplement-v1",
+  "reviewer": "independent live_stopper agent",
+  "reviewed_at_utc": "2026-10-05T01:54:18.019665+00:00",
+  "status": "passed_scoped_review",
+  "scope": "Supplemental coverage of assigned final v3 ranges, empirical chapter carry-forward, and Appendix A. This record does not claim visual coverage of unassigned pages.",
+  "method": {
+    "render_engine": "PyMuPDF 1.27.2.2",
+    "dpi": 144,
+    "transfer_requirement": "Exact full-page RGB bytes, extracted text, and complete word tuples (coordinates, text, block, line, word). Full-page equality is stricter than body-only equality.",
+    "fresh_review": "Final hash-bound PNGs viewed at original resolution for new front matter and Appendices A-D.",
+    "comparison_detail": {
+      "path": "tmp/pdfs/formal_thesis/v3/visual_supplement_comparison.json",
+      "sha256": "f98608e16dd4109170d1d8080f29f4cbaa06bdbe306065414a3fbbbbe9acb627"
+    }
+  },
+  "prior_visual_coverage_evidence": [
+    {
+      "path": "ThesisDocs/formal/visual_review_v2.json",
+      "sha256": "0f82e23eef22cf0b4a43bc840be77e6c1e848099b4eb311df951cbe6055f0f74"
+    },
+    {
+      "path": "ThesisDocs/archival/formal_v2_assigned_visual_review.json",
+      "sha256": "2878c054c6b261e153000d67e90a5d5731f11e205e943076330f4da408b5ebe5"
+    }
+  ],
+  "editions": {
+    "digital": {
+      "path": "output/pdf/Masters_Thesis_Formal_v3_Aditya_Bhatt.pdf",
+      "sha256_before": "d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f",
+      "sha256_after": "d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f",
+      "page_count": 96,
+      "build_receipt": {
+        "path": "ThesisDocs/archival/formal_v3_digital_build_manifest.json",
+        "sha256": "bcb2ab5e62198b38d84a893e089090510249242e2c27fb1fe03ffc7c61eb8e3b"
+      },
+      "render_dir": "tmp/pdfs/formal_thesis/formal_v3_digital/archival_review/d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f",
+      "assigned_physical_ranges": [
+        [
+          1,
+          2
+        ],
+        [
+          6,
+          19
+        ],
+        [
+          78,
+          84
+        ],
+        [
+          92,
+          96
+        ]
+      ],
+      "assigned_pages_covered": 28,
+      "fresh_final_physical_pages": [
+        1,
+        2,
+        6,
+        7,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96
+      ],
+      "fresh_png_sha256": [
+        {
+          "physical_page": 1,
+          "sha256": "b2504ffb845b9cceb649ab180fcdf0d23703d5d1460d245013697c4a3272ed57"
+        },
+        {
+          "physical_page": 2,
+          "sha256": "b3cdbb1ba4c62988f47588bf2e04153f6c2499c67ad801579f33101726a7f879"
+        },
+        {
+          "physical_page": 6,
+          "sha256": "1b6dd4d401159d8c66f89e3e1f4e7b96fefdcd62c5335cb6368271f5418cead1"
+        },
+        {
+          "physical_page": 7,
+          "sha256": "be348f14ce218cd34edeaaf539bb44673e0528ac26ec4cad40d28d06c3dfe4d9"
+        },
+        {
+          "physical_page": 89,
+          "sha256": "bb1da12d5f0f7bb4bb595385ca741ba7700b553acb393aa8380e783da5f30d2b"
+        },
+        {
+          "physical_page": 90,
+          "sha256": "b998ec865dee0cc900871b22d7d997c9327db7fab088218462f88bd3299fcb77"
+        },
+        {
+          "physical_page": 91,
+          "sha256": "10a17df0dfebb001e21535c3d7de7806d7b42664e6608364657f088c44a8476e"
+        },
+        {
+          "physical_page": 92,
+          "sha256": "977ffe34a3937b8ed38946c0c97f2092c96174a77fc58b357e7b30ac946b3dff"
+        },
+        {
+          "physical_page": 93,
+          "sha256": "cdbb16dfc86610b3ee7228db3802c6c502fb9f28b3271beb77430d50cc73a41d"
+        },
+        {
+          "physical_page": 94,
+          "sha256": "aa624dc9e97bf22554f35ea52c3dfbfb20e26fb9eca2c80be2744bee3832e8a7"
+        },
+        {
+          "physical_page": 95,
+          "sha256": "1f16c85f5cb427170fb442f2802c6994a66bd58a8f2b76adf55e237af3f068ee"
+        },
+        {
+          "physical_page": 96,
+          "sha256": "310768a931f6deff236cbc9cda0d7a515f68375b55b451d212266cdb6e3d8fbe"
+        }
+      ],
+      "exact_carry_forward_physical_ranges": [
+        [
+          8,
+          19
+        ],
+        [
+          36,
+          77
+        ],
+        [
+          78,
+          84
+        ]
+      ],
+      "previous_final_pdf": {
+        "path": "output/pdf/Masters_Thesis_Formal_v2_Aditya_Bhatt.pdf",
+        "sha256": "5f1845de7653f02245a62016e8ffe1634b77a160dda367e4a3979d88fbcec240"
+      },
+      "previous_to_final_mappings": [
+        {
+          "previous_physical_range": [
+            6,
+            17
+          ],
+          "final_physical_range": [
+            8,
+            19
+          ]
+        },
+        {
+          "previous_physical_range": [
+            34,
+            75
+          ],
+          "final_physical_range": [
+            36,
+            77
+          ]
+        },
+        {
+          "previous_physical_range": [
+            76,
+            82
+          ],
+          "final_physical_range": [
+            78,
+            84
+          ]
+        },
+        {
+          "previous_physical_range": [
+            90,
+            94
+          ],
+          "final_physical_range": [
+            92,
+            96
+          ]
+        }
+      ],
+      "all_mapped_pages_exact": true,
+      "mapped_comparison_count": 66,
+      "mapped_max_channel_difference": 0,
+      "empirical_chapters": {
+        "final_physical_range": [
+          36,
+          77
+        ],
+        "exact_mapped_pages": 42,
+        "review_transferred": true
+      },
+      "appendix_a": {
+        "prior_raw_source": "tmp/pdfs/formal_thesis/v3/digital/source.pdf",
+        "prior_raw_sha256": "1e1d6ca07128f52483055c800c810ef9eee3d210e2db82d97aebb7e72eaa9867",
+        "prior_fresh_raw_physical_pages": [
+          89,
+          90,
+          91
+        ],
+        "final_fresh_physical_pages": [
+          89,
+          90,
+          91
+        ],
+        "raw_to_final": [
+          {
+            "final_page": 89,
+            "text_exact": true,
+            "word_geometry_exact": true,
+            "full_page_rgb_exact": true,
+            "changed_pixels": 0,
+            "max_channel_difference": 0
+          },
+          {
+            "final_page": 90,
+            "text_exact": true,
+            "word_geometry_exact": true,
+            "full_page_rgb_exact": true,
+            "changed_pixels": 0,
+            "max_channel_difference": 0
+          },
+          {
+            "final_page": 91,
+            "text_exact": true,
+            "word_geometry_exact": true,
+            "full_page_rgb_exact": false,
+            "changed_pixels": 14044,
+            "max_channel_difference": 1
+          }
+        ],
+        "source_md": "ThesisDocs/appendices.md",
+        "source_md_sha256": "359ab752267f307d5d1847351cf7df604b0fce3eccfc19fc0fd73b12abcdb8d3",
+        "command_parity": {
+          "source_nonempty_lines": 46,
+          "pdf_nonempty_lines": 46,
+          "exact_line_parity": true,
+          "physical_code_pages": [
+            89,
+            90
+          ],
+          "hash_unchanged": true
+        },
+        "powershell_parse_error_count": 0,
+        "commands_executed": false
+      },
+      "covered_physical_page_count_including_empirical_and_appendix_a": 73,
+      "findings": [
+        "Title, abstract, lists, Appendix table captions/rows, and mathematical/prose content fit without clipping or overlap.",
+        "Appendix A long options, paths, and backtick continuations remain intact. All 46 nonempty PowerShell lines match the source exactly, including the historical grader pytest path.",
+        "Appendix B Table 16 is attached to its caption and remains on one page.",
+        "Appendix C explicitly identifies the preserved 86-page document as historical v1. Appendix D equations and citation are legible."
+      ]
+    },
+    "print": {
+      "path": "output/pdf/Masters_Thesis_Formal_v3_Print_Aditya_Bhatt.pdf",
+      "sha256_before": "84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1",
+      "sha256_after": "84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1",
+      "page_count": 99,
+      "build_receipt": {
+        "path": "ThesisDocs/archival/formal_v3_print_build_manifest.json",
+        "sha256": "a9a6a5731e4dcb3f3947d1e0fc2329a5abf6962fef8e0154287563961b3320ad"
+      },
+      "render_dir": "tmp/pdfs/formal_thesis/formal_v3_print/archival_review/84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1",
+      "assigned_physical_ranges": [
+        [
+          1,
+          2
+        ],
+        [
+          6,
+          20
+        ],
+        [
+          80,
+          86
+        ],
+        [
+          94,
+          99
+        ]
+      ],
+      "assigned_pages_covered": 30,
+      "fresh_final_physical_pages": [
+        1,
+        2,
+        6,
+        7,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+      ],
+      "fresh_png_sha256": [
+        {
+          "physical_page": 1,
+          "sha256": "368a55d7435e3e95095bd0d371fe6cfef86767d7b509d9f11a2af779d5f2c77f"
+        },
+        {
+          "physical_page": 2,
+          "sha256": "01798d203d76ccb5e89b2dac8bc76b3a834e2b4d01e7d0fa6d2286b69dd6c3f0"
+        },
+        {
+          "physical_page": 6,
+          "sha256": "fedb9b42e615a758a47d049c1ef94413571e231aa879730d4957416198bfcf98"
+        },
+        {
+          "physical_page": 7,
+          "sha256": "de734067116a113fd2eb033d204c378124237e6dc47dc020dd6e27fe11d2cb85"
+        },
+        {
+          "physical_page": 91,
+          "sha256": "da41eecb4ebdbc57d93d907ba4dfeeeba3ccb2ccd168703f1c29d0de067e28ed"
+        },
+        {
+          "physical_page": 92,
+          "sha256": "c548c5c883b02c46677a8b4284ef95765e5eb9540b756dc58cc9e132f0cf107d"
+        },
+        {
+          "physical_page": 93,
+          "sha256": "fe97793f4550204f6062e2ead2f9ed86a167b8d02913455f5330f8f52cca6a83"
+        },
+        {
+          "physical_page": 94,
+          "sha256": "fd46228c1b691b105b13a3020adcfb483ee1bcb0415f745f23a13c81265ec90c"
+        },
+        {
+          "physical_page": 95,
+          "sha256": "b549a35c79bfe9e5cf2ed97fec5a83939a743a04707855072bf6bcd06d254813"
+        },
+        {
+          "physical_page": 96,
+          "sha256": "c465a879dcc08c5a22c40cc1c60fc9baa58f14b35780cdf621acfdbd1dc4ff38"
+        },
+        {
+          "physical_page": 97,
+          "sha256": "18f4708a9edba07f487c6d87cdbd7af53267e8860843e406c6cadac3b8f89538"
+        },
+        {
+          "physical_page": 98,
+          "sha256": "17bb11b4f6584127477f905a3bdc605ecdc2c59814080c663b7f225bb541f59c"
+        },
+        {
+          "physical_page": 99,
+          "sha256": "e01f0543d5a12bba1c8a1adca898c4d533432b675530b34b08eb129a9965ac46"
+        }
+      ],
+      "exact_carry_forward_physical_ranges": [
+        [
+          8,
+          20
+        ],
+        [
+          38,
+          79
+        ],
+        [
+          80,
+          86
+        ]
+      ],
+      "previous_final_pdf": {
+        "path": "output/pdf/Masters_Thesis_Formal_v2_Print_Aditya_Bhatt.pdf",
+        "sha256": "b35b02bf6d8de33e62d74e1876c2a7fa48450876d99e4de7d1c04ddeaa6569a1"
+      },
+      "previous_to_final_mappings": [
+        {
+          "previous_physical_range": [
+            6,
+            18
+          ],
+          "final_physical_range": [
+            8,
+            20
+          ]
+        },
+        {
+          "previous_physical_range": [
+            36,
+            77
+          ],
+          "final_physical_range": [
+            38,
+            79
+          ]
+        },
+        {
+          "previous_physical_range": [
+            78,
+            84
+          ],
+          "final_physical_range": [
+            80,
+            86
+          ]
+        },
+        {
+          "previous_physical_range": [
+            92,
+            97
+          ],
+          "final_physical_range": [
+            94,
+            99
+          ]
+        }
+      ],
+      "all_mapped_pages_exact": true,
+      "mapped_comparison_count": 68,
+      "mapped_max_channel_difference": 0,
+      "empirical_chapters": {
+        "final_physical_range": [
+          38,
+          79
+        ],
+        "exact_mapped_pages": 42,
+        "review_transferred": true
+      },
+      "appendix_a": {
+        "prior_raw_source": "tmp/pdfs/formal_thesis/v3/print/source.pdf",
+        "prior_raw_sha256": "dcbba384b1793b7d4bdd9887cea0e93f25d4dbc3b8bff3c7cb70c7d2566653b6",
+        "prior_fresh_raw_physical_pages": [
+          91,
+          92,
+          93
+        ],
+        "final_fresh_physical_pages": [
+          91,
+          92,
+          93
+        ],
+        "raw_to_final": [
+          {
+            "final_page": 91,
+            "text_exact": true,
+            "word_geometry_exact": true,
+            "full_page_rgb_exact": true,
+            "changed_pixels": 0,
+            "max_channel_difference": 0
+          },
+          {
+            "final_page": 92,
+            "text_exact": true,
+            "word_geometry_exact": true,
+            "full_page_rgb_exact": true,
+            "changed_pixels": 0,
+            "max_channel_difference": 0
+          },
+          {
+            "final_page": 93,
+            "text_exact": true,
+            "word_geometry_exact": true,
+            "full_page_rgb_exact": false,
+            "changed_pixels": 12960,
+            "max_channel_difference": 1
+          }
+        ],
+        "source_md": "ThesisDocs/appendices.md",
+        "source_md_sha256": "359ab752267f307d5d1847351cf7df604b0fce3eccfc19fc0fd73b12abcdb8d3",
+        "command_parity": {
+          "source_nonempty_lines": 46,
+          "pdf_nonempty_lines": 46,
+          "exact_line_parity": true,
+          "physical_code_pages": [
+            91,
+            92
+          ],
+          "hash_unchanged": true
+        },
+        "powershell_parse_error_count": 0,
+        "commands_executed": false
+      },
+      "covered_physical_page_count_including_empirical_and_appendix_a": 75,
+      "findings": [
+        "Title, abstract, lists, Appendix table captions/rows, and mathematical/prose content fit without clipping or overlap.",
+        "Appendix A long options, paths, and backtick continuations remain intact. All 46 nonempty PowerShell lines match the source exactly, including the historical grader pytest path.",
+        "Appendix B Table 16 is attached to its caption and remains on one page.",
+        "Appendix C explicitly identifies the preserved 86-page document as historical v1. Appendix D equations and citation are legible."
+      ]
+    }
+  },
+  "defects": [],
+  "scientific_sources_or_pdf_bytes_modified": false,
+  "historical_pytest_collection": {
+    "revision": "09225c95c676ab3cae1c4b9586d74f7f803f519f",
+    "checkout": "tmp/bug_review/historical_checkout",
+    "interpreter": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "command_arguments": [
+      "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "research/tests/test_graders.py",
+      "research/tests/test_mathematical_foundations.py",
+      "research/tests/test_data_freeze.py",
+      "research/tests/test_online_controller.py",
+      "research/tests/test_online_replay_accounting.py",
+      "research/tests/test_prefix_stopping_model.py",
+      "research/tests/test_learned_online_controller.py",
+      "research/tests/test_live_uncertainty.py",
+      "-q",
+      "--collect-only",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "test_paths_exactly_match_amended_appendix_a": true,
+    "additional_validation_flags": [
+      "-B",
+      "--collect-only",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "environment_override": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "tests_collected": 107,
+    "exit_code": 0,
+    "tests_executed": false,
+    "new_model_generation": false,
+    "receipt": {
+      "path": "tmp/pdfs/formal_thesis/v3/historical_pytest_collect_only.txt",
+      "sha256": "2b252e7e9f42bc4eac3372c01ed7c82f6f9c51c59417e6305824ebd7f875f75c"
+    }
+  }
+}

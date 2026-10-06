@@ -1,0 +1,22 @@
+[
+  {
+    "original_path": "research/outputs/experiment_matrix/_thesis_audit_latecells.py",
+    "commit": "3a5dde7a83833a5cea827a329983f66bc6041219",
+    "git_blob_sha1": "3e79d9db7a55df8714326db7a19ebd01ece5ab7b",
+    "recovered_path": "tmp/research_history_audit/recovered_git_artifacts/3a5dde7a8383/research/outputs/experiment_matrix/_thesis_audit_latecells.py",
+    "bytes": 3322,
+    "sha256": "8c959fdb666183de3a76dde58e9565169e83677d9a79872706de0ff32857d230",
+    "exact_git_blob_verified": true,
+    "executed_or_unpickled": false
+  },
+  {
+    "original_path": "research/outputs/experiments_v2/advanced_tournament_checkpoint.pth",
+    "commit": "524ec3477d2887b4c3b3d987447a1594ac1b7f08",
+    "git_blob_sha1": "6278b625e8024d04412ffc8292b3d1287c2b9d81",
+    "recovered_path": "tmp/research_history_audit/recovered_git_artifacts/524ec3477d28/research/outputs/experiments_v2/advanced_tournament_checkpoint.pth",
+    "bytes": 33641015,
+    "sha256": "7405818cdec82813b38317547475bd4d5f5f3d25bf67ca2f695ff54550c4c036",
+    "exact_git_blob_verified": true,
+    "executed_or_unpickled": false
+  }
+]

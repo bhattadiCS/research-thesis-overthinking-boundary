@@ -1,0 +1,2764 @@
+{
+  "schema": "independent-mathematics-toc-visual-review-v3",
+  "review_date": "2026-10-04",
+  "reviewer": "math_proofs independent agent",
+  "status": "pass_in_reviewed_scope",
+  "task_scope": [
+    "fresh academic/content review of Chapter 2 and Sections 1.4/1.7",
+    "primary-reference and official scholarly-requirements comparison",
+    "all v3 contents entries, source-heading coverage, actual heading locations, bookmark levels/destinations and PDF page labels",
+    "full final converted TOC pages 3-5 visual review in each edition",
+    "math/reference body-preservation review with exact v2 raw-source comparison"
+  ],
+  "source_edits_performed": false,
+  "pdf_reexport_performed": false,
+  "scientific_tests_rerun": false,
+  "compiled_source": {
+    "path": "ThesisDocs/Masters_Thesis_Formal_v3.md",
+    "sha256": "716ccc56b36bf789841ecd27e98d413cd0a6745df77333f9ed700a05c75ceea4"
+  },
+  "editions": {
+    "digital": {
+      "final_pdf": {
+        "path": "output/pdf/Masters_Thesis_Formal_v3_Aditya_Bhatt.pdf",
+        "sha256_before": "d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f",
+        "sha256_after": "d17638789394790d55bf02968e89f196f9ef85b06e3918fc9fb81406b8e9bf9f",
+        "pages": 96
+      },
+      "v3_raw_source": {
+        "path": "tmp/pdfs/formal_thesis/v3/digital/source.pdf",
+        "sha256": "1e1d6ca07128f52483055c800c810ef9eee3d210e2db82d97aebb7e72eaa9867"
+      },
+      "v2_raw_source": {
+        "path": "tmp/pdfs/formal_thesis/digital/source.pdf",
+        "sha256": "c2af6fb89d4236d6b7bfb746d6d3b33b86de7d9f3ed2d98e2e3c449daef3dc8d"
+      },
+      "conversion_manifest": {
+        "path": "ThesisDocs/archival/formal_v3_digital_build_manifest.json",
+        "sha256": "bcb2ab5e62198b38d84a893e089090510249242e2c27fb1fe03ffc7c61eb8e3b"
+      },
+      "build_manifest": {
+        "path": "ThesisDocs/formal/build_manifest_digital_v3.json",
+        "sha256": "3be20ecd8e303087a6ac2335f3ba286adc15ba6121afe4e6c82f2ee8f467bb81"
+      },
+      "front_matter_pages": 7,
+      "source_heading_count": 62,
+      "all_source_headings_in_contents_in_order": true,
+      "actual_heading_destination_checks": [
+        {
+          "title": "Chapter 1 Introduction and motivation",
+          "level": 1,
+          "printed_page": 1,
+          "physical_page": 8,
+          "actual_heading_pages": [
+            8
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 1 Introduction and motivation",
+            8
+          ],
+          "actual_page_label": "1",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.1 Reasoning as a sequential allocation problem",
+          "level": 2,
+          "printed_page": 1,
+          "physical_page": 8,
+          "actual_heading_pages": [
+            8
+          ],
+          "actual_bookmark": [
+            2,
+            "1.1 Reasoning as a sequential allocation problem",
+            8
+          ],
+          "actual_page_label": "1",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.2 Operational meaning of overthinking",
+          "level": 2,
+          "printed_page": 2,
+          "physical_page": 9,
+          "actual_heading_pages": [
+            9
+          ],
+          "actual_bookmark": [
+            2,
+            "1.2 Operational meaning of overthinking",
+            9
+          ],
+          "actual_page_label": "2",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.3 Research questions",
+          "level": 2,
+          "printed_page": 3,
+          "physical_page": 10,
+          "actual_heading_pages": [
+            10
+          ],
+          "actual_bookmark": [
+            2,
+            "1.3 Research questions",
+            10
+          ],
+          "actual_page_label": "3",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.4 Contributions",
+          "level": 2,
+          "printed_page": 4,
+          "physical_page": 11,
+          "actual_heading_pages": [
+            11
+          ],
+          "actual_bookmark": [
+            2,
+            "1.4 Contributions",
+            11
+          ],
+          "actual_page_label": "4",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.5 Evidence and reproducibility",
+          "level": 2,
+          "printed_page": 6,
+          "physical_page": 13,
+          "actual_heading_pages": [
+            13
+          ],
+          "actual_bookmark": [
+            2,
+            "1.5 Evidence and reproducibility",
+            13
+          ],
+          "actual_page_label": "6",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.6 Thesis organization",
+          "level": 2,
+          "printed_page": 7,
+          "physical_page": 14,
+          "actual_heading_pages": [
+            14
+          ],
+          "actual_bookmark": [
+            2,
+            "1.6 Thesis organization",
+            14
+          ],
+          "actual_page_label": "7",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.7 Related work and the thesis position",
+          "level": 2,
+          "printed_page": 8,
+          "physical_page": 15,
+          "actual_heading_pages": [
+            15
+          ],
+          "actual_bookmark": [
+            2,
+            "1.7 Related work and the thesis position",
+            15
+          ],
+          "actual_page_label": "8",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 2 Mathematical formulation and stopping theory",
+          "level": 1,
+          "printed_page": 13,
+          "physical_page": 20,
+          "actual_heading_pages": [
+            20
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 2 Mathematical formulation and stopping theory",
+            20
+          ],
+          "actual_page_label": "13",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.1 Probability model and admissible information",
+          "level": 2,
+          "printed_page": 13,
+          "physical_page": 20,
+          "actual_heading_pages": [
+            20
+          ],
+          "actual_bookmark": [
+            2,
+            "2.1 Probability model and admissible information",
+            20
+          ],
+          "actual_page_label": "13",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.2 Exact binary correctness drift",
+          "level": 2,
+          "printed_page": 15,
+          "physical_page": 22,
+          "actual_heading_pages": [
+            22
+          ],
+          "actual_bookmark": [
+            2,
+            "2.2 Exact binary correctness drift",
+            22
+          ],
+          "actual_page_label": "15",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.3 General finite-horizon optimal stopping",
+          "level": 2,
+          "printed_page": 17,
+          "physical_page": 24,
+          "actual_heading_pages": [
+            24
+          ],
+          "actual_bookmark": [
+            2,
+            "2.3 General finite-horizon optimal stopping",
+            24
+          ],
+          "actual_page_label": "17",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.4 When a drift-sign boundary is optimal",
+          "level": 2,
+          "printed_page": 19,
+          "physical_page": 26,
+          "actual_heading_pages": [
+            26
+          ],
+          "actual_bookmark": [
+            2,
+            "2.4 When a drift-sign boundary is optimal",
+            26
+          ],
+          "actual_page_label": "19",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Exact counterexample 1: delayed repair",
+          "level": 3,
+          "printed_page": 20,
+          "physical_page": 27,
+          "actual_heading_pages": [
+            27
+          ],
+          "actual_bookmark": [
+            3,
+            "Exact counterexample 1: delayed repair",
+            27
+          ],
+          "actual_page_label": "20",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Exact counterexample 2: a population curve misses adaptive value",
+          "level": 3,
+          "printed_page": 21,
+          "physical_page": 28,
+          "actual_heading_pages": [
+            28
+          ],
+          "actual_bookmark": [
+            3,
+            "Exact counterexample 2: a population curve misses adaptive value",
+            28
+          ],
+          "actual_page_label": "21",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.5 Partial observation and feature models",
+          "level": 2,
+          "printed_page": 21,
+          "physical_page": 28,
+          "actual_heading_pages": [
+            28
+          ],
+          "actual_bookmark": [
+            2,
+            "2.5 Partial observation and feature models",
+            28
+          ],
+          "actual_page_label": "21",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.6 Calibration and perturbation bounds",
+          "level": 2,
+          "printed_page": 22,
+          "physical_page": 29,
+          "actual_heading_pages": [
+            29
+          ],
+          "actual_bookmark": [
+            2,
+            "2.6 Calibration and perturbation bounds",
+            29
+          ],
+          "actual_page_label": "22",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.7 What sequential uncertainty control can certify",
+          "level": 2,
+          "printed_page": 24,
+          "physical_page": 31,
+          "actual_heading_pages": [
+            31
+          ],
+          "actual_bookmark": [
+            2,
+            "2.7 What sequential uncertainty control can certify",
+            31
+          ],
+          "actual_page_label": "24",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.8 Scope of the empirical claims",
+          "level": 2,
+          "printed_page": 27,
+          "physical_page": 34,
+          "actual_heading_pages": [
+            34
+          ],
+          "actual_bookmark": [
+            2,
+            "2.8 Scope of the empirical claims",
+            34
+          ],
+          "actual_page_label": "27",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 3 Experimental setup and methods",
+          "level": 1,
+          "printed_page": 29,
+          "physical_page": 36,
+          "actual_heading_pages": [
+            36
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 3 Experimental setup and methods",
+            36
+          ],
+          "actual_page_label": "29",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.1 Corpus separation",
+          "level": 2,
+          "printed_page": 29,
+          "physical_page": 36,
+          "actual_heading_pages": [
+            36
+          ],
+          "actual_bookmark": [
+            2,
+            "3.1 Corpus separation",
+            36
+          ],
+          "actual_page_label": "29",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.2 Model roster",
+          "level": 2,
+          "printed_page": 30,
+          "physical_page": 37,
+          "actual_heading_pages": [
+            37
+          ],
+          "actual_bookmark": [
+            2,
+            "3.2 Model roster",
+            37
+          ],
+          "actual_page_label": "30",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.3 Benchmark tasks and splits",
+          "level": 2,
+          "printed_page": 32,
+          "physical_page": 39,
+          "actual_heading_pages": [
+            39
+          ],
+          "actual_bookmark": [
+            2,
+            "3.3 Benchmark tasks and splits",
+            39
+          ],
+          "actual_page_label": "32",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.4 Response and revision protocol",
+          "level": 2,
+          "printed_page": 33,
+          "physical_page": 40,
+          "actual_heading_pages": [
+            40
+          ],
+          "actual_bookmark": [
+            2,
+            "3.4 Response and revision protocol",
+            40
+          ],
+          "actual_page_label": "33",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.5 Recorded signals and grading",
+          "level": 2,
+          "printed_page": 34,
+          "physical_page": 41,
+          "actual_heading_pages": [
+            41
+          ],
+          "actual_bookmark": [
+            2,
+            "3.5 Recorded signals and grading",
+            41
+          ],
+          "actual_page_label": "34",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.6 Statistical units and grouping",
+          "level": 2,
+          "printed_page": 35,
+          "physical_page": 42,
+          "actual_heading_pages": [
+            42
+          ],
+          "actual_bookmark": [
+            2,
+            "3.6 Statistical units and grouping",
+            42
+          ],
+          "actual_page_label": "35",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.7 Outcomes and computation measures",
+          "level": 2,
+          "printed_page": 36,
+          "physical_page": 43,
+          "actual_heading_pages": [
+            43
+          ],
+          "actual_bookmark": [
+            2,
+            "3.7 Outcomes and computation measures",
+            43
+          ],
+          "actual_page_label": "36",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.8 Reproducibility and evidence freeze",
+          "level": 2,
+          "printed_page": 37,
+          "physical_page": 44,
+          "actual_heading_pages": [
+            44
+          ],
+          "actual_bookmark": [
+            2,
+            "3.8 Reproducibility and evidence freeze",
+            44
+          ],
+          "actual_page_label": "37",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 4 Empirical evidence of overthinking",
+          "level": 1,
+          "printed_page": 39,
+          "physical_page": 46,
+          "actual_heading_pages": [
+            46
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 4 Empirical evidence of overthinking",
+            46
+          ],
+          "actual_page_label": "39",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.1 Population transitions and net value",
+          "level": 2,
+          "printed_page": 39,
+          "physical_page": 46,
+          "actual_heading_pages": [
+            46
+          ],
+          "actual_bookmark": [
+            2,
+            "4.1 Population transitions and net value",
+            46
+          ],
+          "actual_page_label": "39",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.2 Model and domain differences",
+          "level": 2,
+          "printed_page": 41,
+          "physical_page": 48,
+          "actual_heading_pages": [
+            48
+          ],
+          "actual_bookmark": [
+            2,
+            "4.2 Model and domain differences",
+            48
+          ],
+          "actual_page_label": "41",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.3 Controlled estimator comparisons",
+          "level": 2,
+          "printed_page": 43,
+          "physical_page": 50,
+          "actual_heading_pages": [
+            50
+          ],
+          "actual_bookmark": [
+            2,
+            "4.3 Controlled estimator comparisons",
+            50
+          ],
+          "actual_page_label": "43",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.4 Token cap and numerical precision",
+          "level": 2,
+          "printed_page": 44,
+          "physical_page": 51,
+          "actual_heading_pages": [
+            51
+          ],
+          "actual_bookmark": [
+            2,
+            "4.4 Token cap and numerical precision",
+            51
+          ],
+          "actual_page_label": "44",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.5 Ranking and stopping performance",
+          "level": 2,
+          "printed_page": 45,
+          "physical_page": 52,
+          "actual_heading_pages": [
+            52
+          ],
+          "actual_bookmark": [
+            2,
+            "4.5 Ranking and stopping performance",
+            52
+          ],
+          "actual_page_label": "45",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.6 The stacked retrospective diagnostic",
+          "level": 2,
+          "printed_page": 47,
+          "physical_page": 54,
+          "actual_heading_pages": [
+            54
+          ],
+          "actual_bookmark": [
+            2,
+            "4.6 The stacked retrospective diagnostic",
+            54
+          ],
+          "actual_page_label": "47",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.7 Replay and failure interpretation",
+          "level": 2,
+          "printed_page": 48,
+          "physical_page": 55,
+          "actual_heading_pages": [
+            55
+          ],
+          "actual_bookmark": [
+            2,
+            "4.7 Replay and failure interpretation",
+            55
+          ],
+          "actual_page_label": "48",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.8 Empirical conclusions",
+          "level": 2,
+          "printed_page": 49,
+          "physical_page": 56,
+          "actual_heading_pages": [
+            56
+          ],
+          "actual_bookmark": [
+            2,
+            "4.8 Empirical conclusions",
+            56
+          ],
+          "actual_page_label": "49",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 5 Online stopping and computation trade-offs",
+          "level": 1,
+          "printed_page": 51,
+          "physical_page": 58,
+          "actual_heading_pages": [
+            58
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 5 Online stopping and computation trade-offs",
+            58
+          ],
+          "actual_page_label": "51",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.1 Causal controller contract",
+          "level": 2,
+          "printed_page": 51,
+          "physical_page": 58,
+          "actual_heading_pages": [
+            58
+          ],
+          "actual_bookmark": [
+            2,
+            "5.1 Causal controller contract",
+            58
+          ],
+          "actual_page_label": "51",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.2 Policy choice and limitations",
+          "level": 2,
+          "printed_page": 52,
+          "physical_page": 59,
+          "actual_heading_pages": [
+            59
+          ],
+          "actual_bookmark": [
+            2,
+            "5.2 Policy choice and limitations",
+            59
+          ],
+          "actual_page_label": "52",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.3 Generation integration",
+          "level": 2,
+          "printed_page": 53,
+          "physical_page": 60,
+          "actual_heading_pages": [
+            60
+          ],
+          "actual_bookmark": [
+            2,
+            "5.3 Generation integration",
+            60
+          ],
+          "actual_page_label": "53",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.4 Decision latency",
+          "level": 2,
+          "printed_page": 54,
+          "physical_page": 61,
+          "actual_heading_pages": [
+            61
+          ],
+          "actual_bookmark": [
+            2,
+            "5.4 Decision latency",
+            61
+          ],
+          "actual_page_label": "54",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.5 Live paired evaluation",
+          "level": 2,
+          "printed_page": 55,
+          "physical_page": 62,
+          "actual_heading_pages": [
+            62
+          ],
+          "actual_bookmark": [
+            2,
+            "5.5 Live paired evaluation",
+            62
+          ],
+          "actual_page_label": "55",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.6 Adversarial questions and traps",
+          "level": 2,
+          "printed_page": 58,
+          "physical_page": 65,
+          "actual_heading_pages": [
+            65
+          ],
+          "actual_bookmark": [
+            2,
+            "5.6 Adversarial questions and traps",
+            65
+          ],
+          "actual_page_label": "58",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.7 Deployable prefix probability model",
+          "level": 2,
+          "printed_page": 60,
+          "physical_page": 67,
+          "actual_heading_pages": [
+            67
+          ],
+          "actual_bookmark": [
+            2,
+            "5.7 Deployable prefix probability model",
+            67
+          ],
+          "actual_page_label": "60",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.8 Actual trained-policy evaluation",
+          "level": 2,
+          "printed_page": 63,
+          "physical_page": 70,
+          "actual_heading_pages": [
+            70
+          ],
+          "actual_bookmark": [
+            2,
+            "5.8 Actual trained-policy evaluation",
+            70
+          ],
+          "actual_page_label": "63",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.9 Replay and Pareto analysis",
+          "level": 2,
+          "printed_page": 66,
+          "physical_page": 73,
+          "actual_heading_pages": [
+            73
+          ],
+          "actual_bookmark": [
+            2,
+            "5.9 Replay and Pareto analysis",
+            73
+          ],
+          "actual_page_label": "66",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.10 Online conclusions",
+          "level": 2,
+          "printed_page": 69,
+          "physical_page": 76,
+          "actual_heading_pages": [
+            76
+          ],
+          "actual_bookmark": [
+            2,
+            "5.10 Online conclusions",
+            76
+          ],
+          "actual_page_label": "69",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 6 Discussion and limitations",
+          "level": 1,
+          "printed_page": 71,
+          "physical_page": 78,
+          "actual_heading_pages": [
+            78
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 6 Discussion and limitations",
+            78
+          ],
+          "actual_page_label": "71",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.1 Scientific interpretation",
+          "level": 2,
+          "printed_page": 71,
+          "physical_page": 78,
+          "actual_heading_pages": [
+            78
+          ],
+          "actual_bookmark": [
+            2,
+            "6.1 Scientific interpretation",
+            78
+          ],
+          "actual_page_label": "71",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.2 Correctness labels and mathematical validity",
+          "level": 2,
+          "printed_page": 71,
+          "physical_page": 78,
+          "actual_heading_pages": [
+            78
+          ],
+          "actual_bookmark": [
+            2,
+            "6.2 Correctness labels and mathematical validity",
+            78
+          ],
+          "actual_page_label": "71",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.3 Theory and deployable beliefs",
+          "level": 2,
+          "printed_page": 72,
+          "physical_page": 79,
+          "actual_heading_pages": [
+            79
+          ],
+          "actual_bookmark": [
+            2,
+            "6.3 Theory and deployable beliefs",
+            79
+          ],
+          "actual_page_label": "72",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.4 Generalization and adaptation",
+          "level": 2,
+          "printed_page": 73,
+          "physical_page": 80,
+          "actual_heading_pages": [
+            80
+          ],
+          "actual_bookmark": [
+            2,
+            "6.4 Generalization and adaptation",
+            80
+          ],
+          "actual_page_label": "73",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.5 Costs beyond completion tokens",
+          "level": 2,
+          "printed_page": 74,
+          "physical_page": 81,
+          "actual_heading_pages": [
+            81
+          ],
+          "actual_bookmark": [
+            2,
+            "6.5 Costs beyond completion tokens",
+            81
+          ],
+          "actual_page_label": "74",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.6 Adversarial behavior and answer selection",
+          "level": 2,
+          "printed_page": 75,
+          "physical_page": 82,
+          "actual_heading_pages": [
+            82
+          ],
+          "actual_bookmark": [
+            2,
+            "6.6 Adversarial behavior and answer selection",
+            82
+          ],
+          "actual_page_label": "75",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.7 Evidence needed for stronger claims",
+          "level": 2,
+          "printed_page": 76,
+          "physical_page": 83,
+          "actual_heading_pages": [
+            83
+          ],
+          "actual_bookmark": [
+            2,
+            "6.7 Evidence needed for stronger claims",
+            83
+          ],
+          "actual_page_label": "76",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.8 Conclusion",
+          "level": 2,
+          "printed_page": 76,
+          "physical_page": 83,
+          "actual_heading_pages": [
+            83
+          ],
+          "actual_bookmark": [
+            2,
+            "6.8 Conclusion",
+            83
+          ],
+          "actual_page_label": "76",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "References",
+          "level": 1,
+          "printed_page": 78,
+          "physical_page": 85,
+          "actual_heading_pages": [
+            85
+          ],
+          "actual_bookmark": [
+            1,
+            "References",
+            85
+          ],
+          "actual_page_label": "78",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix A Reproducibility and evidence sources",
+          "level": 1,
+          "printed_page": 82,
+          "physical_page": 89,
+          "actual_heading_pages": [
+            89
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix A Reproducibility and evidence sources",
+            89
+          ],
+          "actual_page_label": "82",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix B Claim scope and mathematical review",
+          "level": 1,
+          "printed_page": 85,
+          "physical_page": 92,
+          "actual_heading_pages": [
+            92
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix B Claim scope and mathematical review",
+            92
+          ],
+          "actual_page_label": "85",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix C Supporting research artifacts",
+          "level": 1,
+          "printed_page": 87,
+          "physical_page": 94,
+          "actual_heading_pages": [
+            94
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix C Supporting research artifacts",
+            94
+          ],
+          "actual_page_label": "87",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix D Paired accuracy uncertainty",
+          "level": 1,
+          "printed_page": 88,
+          "physical_page": 95,
+          "actual_heading_pages": [
+            95
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix D Paired accuracy uncertainty",
+            95
+          ],
+          "actual_page_label": "88",
+          "present_in_rendered_contents": true
+        }
+      ],
+      "source_v2_to_v3_body_checks": [
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 18,
+          "v3_physical_page": 20,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 19,
+          "v3_physical_page": 21,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 20,
+          "v3_physical_page": 22,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 21,
+          "v3_physical_page": 23,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 22,
+          "v3_physical_page": 24,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 23,
+          "v3_physical_page": 25,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 24,
+          "v3_physical_page": 26,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 25,
+          "v3_physical_page": 27,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 26,
+          "v3_physical_page": 28,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 27,
+          "v3_physical_page": 29,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 28,
+          "v3_physical_page": 30,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 29,
+          "v3_physical_page": 31,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 30,
+          "v3_physical_page": 32,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 31,
+          "v3_physical_page": 33,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 32,
+          "v3_physical_page": 34,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 33,
+          "v3_physical_page": 35,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 83,
+          "v3_physical_page": 85,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 84,
+          "v3_physical_page": 86,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 85,
+          "v3_physical_page": 87,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 86,
+          "v3_physical_page": 88,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        }
+      ],
+      "v3_raw_to_final_body_checks": [
+        {
+          "physical_page": 20,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 21,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 22,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 23,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 24,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 25,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 26,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 27,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 28,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 29,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 30,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 31,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 32,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 33,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 34,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 35,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 85,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 86,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 87,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 88,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        }
+      ],
+      "v3_raw_to_final_contents_checks": [
+        {
+          "physical_page": 3,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "physical_page": 4,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "physical_page": 5,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        }
+      ],
+      "visual_review": {
+        "final_converted_contents_pages": [
+          3,
+          4,
+          5
+        ],
+        "final_converted_detail_pages": [
+          24,
+          32,
+          34
+        ],
+        "body_review_transferred_from_fully_reviewed_v2_raw_source_via_exact_text_geometry_pixels": true,
+        "chapter2_physical_range": [
+          20,
+          35
+        ],
+        "reference_physical_range": [
+          85,
+          88
+        ],
+        "contents_findings": "Readable hierarchy, correct roman/Arabic page columns and continued-page headings; no clipping, overlaps or broken text.",
+        "detail_findings": "Bellman/Snell display and proof, sequential uncertainty display, and Table 1 scope table/caption are legible and intact.",
+        "conversion_rounding_scope": "All reviewed body pages preserve exact extractable text and word geometry. Pixel differences from raw source are confined to RGB channel rounding of at most one level."
+      }
+    },
+    "print": {
+      "final_pdf": {
+        "path": "output/pdf/Masters_Thesis_Formal_v3_Print_Aditya_Bhatt.pdf",
+        "sha256_before": "84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1",
+        "sha256_after": "84ddf73e86f92169aab885d3a2552a4c9734bc629772a1d9d7b248d6d3798ea1",
+        "pages": 99
+      },
+      "v3_raw_source": {
+        "path": "tmp/pdfs/formal_thesis/v3/print/source.pdf",
+        "sha256": "dcbba384b1793b7d4bdd9887cea0e93f25d4dbc3b8bff3c7cb70c7d2566653b6"
+      },
+      "v2_raw_source": {
+        "path": "tmp/pdfs/formal_thesis/print/source.pdf",
+        "sha256": "a3839620e4b272910754589f014f4e072af206b7da7b4d8a20f462e9b122e299"
+      },
+      "conversion_manifest": {
+        "path": "ThesisDocs/archival/formal_v3_print_build_manifest.json",
+        "sha256": "a9a6a5731e4dcb3f3947d1e0fc2329a5abf6962fef8e0154287563961b3320ad"
+      },
+      "build_manifest": {
+        "path": "ThesisDocs/formal/build_manifest_print_v3.json",
+        "sha256": "6446e0954212c9c6c969557a6a380cb858e0fb3b29b23e816c50baf7a54fe5c1"
+      },
+      "front_matter_pages": 7,
+      "source_heading_count": 62,
+      "all_source_headings_in_contents_in_order": true,
+      "actual_heading_destination_checks": [
+        {
+          "title": "Chapter 1 Introduction and motivation",
+          "level": 1,
+          "printed_page": 1,
+          "physical_page": 8,
+          "actual_heading_pages": [
+            8
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 1 Introduction and motivation",
+            8
+          ],
+          "actual_page_label": "1",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.1 Reasoning as a sequential allocation problem",
+          "level": 2,
+          "printed_page": 1,
+          "physical_page": 8,
+          "actual_heading_pages": [
+            8
+          ],
+          "actual_bookmark": [
+            2,
+            "1.1 Reasoning as a sequential allocation problem",
+            8
+          ],
+          "actual_page_label": "1",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.2 Operational meaning of overthinking",
+          "level": 2,
+          "printed_page": 2,
+          "physical_page": 9,
+          "actual_heading_pages": [
+            9
+          ],
+          "actual_bookmark": [
+            2,
+            "1.2 Operational meaning of overthinking",
+            9
+          ],
+          "actual_page_label": "2",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.3 Research questions",
+          "level": 2,
+          "printed_page": 3,
+          "physical_page": 10,
+          "actual_heading_pages": [
+            10
+          ],
+          "actual_bookmark": [
+            2,
+            "1.3 Research questions",
+            10
+          ],
+          "actual_page_label": "3",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.4 Contributions",
+          "level": 2,
+          "printed_page": 5,
+          "physical_page": 12,
+          "actual_heading_pages": [
+            12
+          ],
+          "actual_bookmark": [
+            2,
+            "1.4 Contributions",
+            12
+          ],
+          "actual_page_label": "5",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.5 Evidence and reproducibility",
+          "level": 2,
+          "printed_page": 7,
+          "physical_page": 14,
+          "actual_heading_pages": [
+            14
+          ],
+          "actual_bookmark": [
+            2,
+            "1.5 Evidence and reproducibility",
+            14
+          ],
+          "actual_page_label": "7",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.6 Thesis organization",
+          "level": 2,
+          "printed_page": 8,
+          "physical_page": 15,
+          "actual_heading_pages": [
+            15
+          ],
+          "actual_bookmark": [
+            2,
+            "1.6 Thesis organization",
+            15
+          ],
+          "actual_page_label": "8",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "1.7 Related work and the thesis position",
+          "level": 2,
+          "printed_page": 8,
+          "physical_page": 15,
+          "actual_heading_pages": [
+            15
+          ],
+          "actual_bookmark": [
+            2,
+            "1.7 Related work and the thesis position",
+            15
+          ],
+          "actual_page_label": "8",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 2 Mathematical formulation and stopping theory",
+          "level": 1,
+          "printed_page": 14,
+          "physical_page": 21,
+          "actual_heading_pages": [
+            21
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 2 Mathematical formulation and stopping theory",
+            21
+          ],
+          "actual_page_label": "14",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.1 Probability model and admissible information",
+          "level": 2,
+          "printed_page": 14,
+          "physical_page": 21,
+          "actual_heading_pages": [
+            21
+          ],
+          "actual_bookmark": [
+            2,
+            "2.1 Probability model and admissible information",
+            21
+          ],
+          "actual_page_label": "14",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.2 Exact binary correctness drift",
+          "level": 2,
+          "printed_page": 16,
+          "physical_page": 23,
+          "actual_heading_pages": [
+            23
+          ],
+          "actual_bookmark": [
+            2,
+            "2.2 Exact binary correctness drift",
+            23
+          ],
+          "actual_page_label": "16",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.3 General finite-horizon optimal stopping",
+          "level": 2,
+          "printed_page": 18,
+          "physical_page": 25,
+          "actual_heading_pages": [
+            25
+          ],
+          "actual_bookmark": [
+            2,
+            "2.3 General finite-horizon optimal stopping",
+            25
+          ],
+          "actual_page_label": "18",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.4 When a drift-sign boundary is optimal",
+          "level": 2,
+          "printed_page": 20,
+          "physical_page": 27,
+          "actual_heading_pages": [
+            27
+          ],
+          "actual_bookmark": [
+            2,
+            "2.4 When a drift-sign boundary is optimal",
+            27
+          ],
+          "actual_page_label": "20",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Exact counterexample 1: delayed repair",
+          "level": 3,
+          "printed_page": 21,
+          "physical_page": 28,
+          "actual_heading_pages": [
+            28
+          ],
+          "actual_bookmark": [
+            3,
+            "Exact counterexample 1: delayed repair",
+            28
+          ],
+          "actual_page_label": "21",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Exact counterexample 2: a population curve misses adaptive value",
+          "level": 3,
+          "printed_page": 22,
+          "physical_page": 29,
+          "actual_heading_pages": [
+            29
+          ],
+          "actual_bookmark": [
+            3,
+            "Exact counterexample 2: a population curve misses adaptive value",
+            29
+          ],
+          "actual_page_label": "22",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.5 Partial observation and feature models",
+          "level": 2,
+          "printed_page": 23,
+          "physical_page": 30,
+          "actual_heading_pages": [
+            30
+          ],
+          "actual_bookmark": [
+            2,
+            "2.5 Partial observation and feature models",
+            30
+          ],
+          "actual_page_label": "23",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.6 Calibration and perturbation bounds",
+          "level": 2,
+          "printed_page": 24,
+          "physical_page": 31,
+          "actual_heading_pages": [
+            31
+          ],
+          "actual_bookmark": [
+            2,
+            "2.6 Calibration and perturbation bounds",
+            31
+          ],
+          "actual_page_label": "24",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.7 What sequential uncertainty control can certify",
+          "level": 2,
+          "printed_page": 25,
+          "physical_page": 32,
+          "actual_heading_pages": [
+            32
+          ],
+          "actual_bookmark": [
+            2,
+            "2.7 What sequential uncertainty control can certify",
+            32
+          ],
+          "actual_page_label": "25",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "2.8 Scope of the empirical claims",
+          "level": 2,
+          "printed_page": 29,
+          "physical_page": 36,
+          "actual_heading_pages": [
+            36
+          ],
+          "actual_bookmark": [
+            2,
+            "2.8 Scope of the empirical claims",
+            36
+          ],
+          "actual_page_label": "29",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 3 Experimental setup and methods",
+          "level": 1,
+          "printed_page": 31,
+          "physical_page": 38,
+          "actual_heading_pages": [
+            38
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 3 Experimental setup and methods",
+            38
+          ],
+          "actual_page_label": "31",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.1 Corpus separation",
+          "level": 2,
+          "printed_page": 31,
+          "physical_page": 38,
+          "actual_heading_pages": [
+            38
+          ],
+          "actual_bookmark": [
+            2,
+            "3.1 Corpus separation",
+            38
+          ],
+          "actual_page_label": "31",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.2 Model roster",
+          "level": 2,
+          "printed_page": 32,
+          "physical_page": 39,
+          "actual_heading_pages": [
+            39
+          ],
+          "actual_bookmark": [
+            2,
+            "3.2 Model roster",
+            39
+          ],
+          "actual_page_label": "32",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.3 Benchmark tasks and splits",
+          "level": 2,
+          "printed_page": 34,
+          "physical_page": 41,
+          "actual_heading_pages": [
+            41
+          ],
+          "actual_bookmark": [
+            2,
+            "3.3 Benchmark tasks and splits",
+            41
+          ],
+          "actual_page_label": "34",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.4 Response and revision protocol",
+          "level": 2,
+          "printed_page": 35,
+          "physical_page": 42,
+          "actual_heading_pages": [
+            42
+          ],
+          "actual_bookmark": [
+            2,
+            "3.4 Response and revision protocol",
+            42
+          ],
+          "actual_page_label": "35",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.5 Recorded signals and grading",
+          "level": 2,
+          "printed_page": 36,
+          "physical_page": 43,
+          "actual_heading_pages": [
+            43
+          ],
+          "actual_bookmark": [
+            2,
+            "3.5 Recorded signals and grading",
+            43
+          ],
+          "actual_page_label": "36",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.6 Statistical units and grouping",
+          "level": 2,
+          "printed_page": 37,
+          "physical_page": 44,
+          "actual_heading_pages": [
+            44
+          ],
+          "actual_bookmark": [
+            2,
+            "3.6 Statistical units and grouping",
+            44
+          ],
+          "actual_page_label": "37",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.7 Outcomes and computation measures",
+          "level": 2,
+          "printed_page": 38,
+          "physical_page": 45,
+          "actual_heading_pages": [
+            45
+          ],
+          "actual_bookmark": [
+            2,
+            "3.7 Outcomes and computation measures",
+            45
+          ],
+          "actual_page_label": "38",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "3.8 Reproducibility and evidence freeze",
+          "level": 2,
+          "printed_page": 39,
+          "physical_page": 46,
+          "actual_heading_pages": [
+            46
+          ],
+          "actual_bookmark": [
+            2,
+            "3.8 Reproducibility and evidence freeze",
+            46
+          ],
+          "actual_page_label": "39",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 4 Empirical evidence of overthinking",
+          "level": 1,
+          "printed_page": 41,
+          "physical_page": 48,
+          "actual_heading_pages": [
+            48
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 4 Empirical evidence of overthinking",
+            48
+          ],
+          "actual_page_label": "41",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.1 Population transitions and net value",
+          "level": 2,
+          "printed_page": 41,
+          "physical_page": 48,
+          "actual_heading_pages": [
+            48
+          ],
+          "actual_bookmark": [
+            2,
+            "4.1 Population transitions and net value",
+            48
+          ],
+          "actual_page_label": "41",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.2 Model and domain differences",
+          "level": 2,
+          "printed_page": 43,
+          "physical_page": 50,
+          "actual_heading_pages": [
+            50
+          ],
+          "actual_bookmark": [
+            2,
+            "4.2 Model and domain differences",
+            50
+          ],
+          "actual_page_label": "43",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.3 Controlled estimator comparisons",
+          "level": 2,
+          "printed_page": 45,
+          "physical_page": 52,
+          "actual_heading_pages": [
+            52
+          ],
+          "actual_bookmark": [
+            2,
+            "4.3 Controlled estimator comparisons",
+            52
+          ],
+          "actual_page_label": "45",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.4 Token cap and numerical precision",
+          "level": 2,
+          "printed_page": 46,
+          "physical_page": 53,
+          "actual_heading_pages": [
+            53
+          ],
+          "actual_bookmark": [
+            2,
+            "4.4 Token cap and numerical precision",
+            53
+          ],
+          "actual_page_label": "46",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.5 Ranking and stopping performance",
+          "level": 2,
+          "printed_page": 47,
+          "physical_page": 54,
+          "actual_heading_pages": [
+            54
+          ],
+          "actual_bookmark": [
+            2,
+            "4.5 Ranking and stopping performance",
+            54
+          ],
+          "actual_page_label": "47",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.6 The stacked retrospective diagnostic",
+          "level": 2,
+          "printed_page": 49,
+          "physical_page": 56,
+          "actual_heading_pages": [
+            56
+          ],
+          "actual_bookmark": [
+            2,
+            "4.6 The stacked retrospective diagnostic",
+            56
+          ],
+          "actual_page_label": "49",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.7 Replay and failure interpretation",
+          "level": 2,
+          "printed_page": 50,
+          "physical_page": 57,
+          "actual_heading_pages": [
+            57
+          ],
+          "actual_bookmark": [
+            2,
+            "4.7 Replay and failure interpretation",
+            57
+          ],
+          "actual_page_label": "50",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "4.8 Empirical conclusions",
+          "level": 2,
+          "printed_page": 52,
+          "physical_page": 59,
+          "actual_heading_pages": [
+            59
+          ],
+          "actual_bookmark": [
+            2,
+            "4.8 Empirical conclusions",
+            59
+          ],
+          "actual_page_label": "52",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 5 Online stopping and computation trade-offs",
+          "level": 1,
+          "printed_page": 53,
+          "physical_page": 60,
+          "actual_heading_pages": [
+            60
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 5 Online stopping and computation trade-offs",
+            60
+          ],
+          "actual_page_label": "53",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.1 Causal controller contract",
+          "level": 2,
+          "printed_page": 53,
+          "physical_page": 60,
+          "actual_heading_pages": [
+            60
+          ],
+          "actual_bookmark": [
+            2,
+            "5.1 Causal controller contract",
+            60
+          ],
+          "actual_page_label": "53",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.2 Policy choice and limitations",
+          "level": 2,
+          "printed_page": 54,
+          "physical_page": 61,
+          "actual_heading_pages": [
+            61
+          ],
+          "actual_bookmark": [
+            2,
+            "5.2 Policy choice and limitations",
+            61
+          ],
+          "actual_page_label": "54",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.3 Generation integration",
+          "level": 2,
+          "printed_page": 55,
+          "physical_page": 62,
+          "actual_heading_pages": [
+            62
+          ],
+          "actual_bookmark": [
+            2,
+            "5.3 Generation integration",
+            62
+          ],
+          "actual_page_label": "55",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.4 Decision latency",
+          "level": 2,
+          "printed_page": 56,
+          "physical_page": 63,
+          "actual_heading_pages": [
+            63
+          ],
+          "actual_bookmark": [
+            2,
+            "5.4 Decision latency",
+            63
+          ],
+          "actual_page_label": "56",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.5 Live paired evaluation",
+          "level": 2,
+          "printed_page": 57,
+          "physical_page": 64,
+          "actual_heading_pages": [
+            64
+          ],
+          "actual_bookmark": [
+            2,
+            "5.5 Live paired evaluation",
+            64
+          ],
+          "actual_page_label": "57",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.6 Adversarial questions and traps",
+          "level": 2,
+          "printed_page": 60,
+          "physical_page": 67,
+          "actual_heading_pages": [
+            67
+          ],
+          "actual_bookmark": [
+            2,
+            "5.6 Adversarial questions and traps",
+            67
+          ],
+          "actual_page_label": "60",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.7 Deployable prefix probability model",
+          "level": 2,
+          "printed_page": 62,
+          "physical_page": 69,
+          "actual_heading_pages": [
+            69
+          ],
+          "actual_bookmark": [
+            2,
+            "5.7 Deployable prefix probability model",
+            69
+          ],
+          "actual_page_label": "62",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.8 Actual trained-policy evaluation",
+          "level": 2,
+          "printed_page": 65,
+          "physical_page": 72,
+          "actual_heading_pages": [
+            72
+          ],
+          "actual_bookmark": [
+            2,
+            "5.8 Actual trained-policy evaluation",
+            72
+          ],
+          "actual_page_label": "65",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.9 Replay and Pareto analysis",
+          "level": 2,
+          "printed_page": 69,
+          "physical_page": 76,
+          "actual_heading_pages": [
+            76
+          ],
+          "actual_bookmark": [
+            2,
+            "5.9 Replay and Pareto analysis",
+            76
+          ],
+          "actual_page_label": "69",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "5.10 Online conclusions",
+          "level": 2,
+          "printed_page": 72,
+          "physical_page": 79,
+          "actual_heading_pages": [
+            79
+          ],
+          "actual_bookmark": [
+            2,
+            "5.10 Online conclusions",
+            79
+          ],
+          "actual_page_label": "72",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Chapter 6 Discussion and limitations",
+          "level": 1,
+          "printed_page": 73,
+          "physical_page": 80,
+          "actual_heading_pages": [
+            80
+          ],
+          "actual_bookmark": [
+            1,
+            "Chapter 6 Discussion and limitations",
+            80
+          ],
+          "actual_page_label": "73",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.1 Scientific interpretation",
+          "level": 2,
+          "printed_page": 73,
+          "physical_page": 80,
+          "actual_heading_pages": [
+            80
+          ],
+          "actual_bookmark": [
+            2,
+            "6.1 Scientific interpretation",
+            80
+          ],
+          "actual_page_label": "73",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.2 Correctness labels and mathematical validity",
+          "level": 2,
+          "printed_page": 73,
+          "physical_page": 80,
+          "actual_heading_pages": [
+            80
+          ],
+          "actual_bookmark": [
+            2,
+            "6.2 Correctness labels and mathematical validity",
+            80
+          ],
+          "actual_page_label": "73",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.3 Theory and deployable beliefs",
+          "level": 2,
+          "printed_page": 74,
+          "physical_page": 81,
+          "actual_heading_pages": [
+            81
+          ],
+          "actual_bookmark": [
+            2,
+            "6.3 Theory and deployable beliefs",
+            81
+          ],
+          "actual_page_label": "74",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.4 Generalization and adaptation",
+          "level": 2,
+          "printed_page": 75,
+          "physical_page": 82,
+          "actual_heading_pages": [
+            82
+          ],
+          "actual_bookmark": [
+            2,
+            "6.4 Generalization and adaptation",
+            82
+          ],
+          "actual_page_label": "75",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.5 Costs beyond completion tokens",
+          "level": 2,
+          "printed_page": 76,
+          "physical_page": 83,
+          "actual_heading_pages": [
+            83
+          ],
+          "actual_bookmark": [
+            2,
+            "6.5 Costs beyond completion tokens",
+            83
+          ],
+          "actual_page_label": "76",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.6 Adversarial behavior and answer selection",
+          "level": 2,
+          "printed_page": 77,
+          "physical_page": 84,
+          "actual_heading_pages": [
+            84
+          ],
+          "actual_bookmark": [
+            2,
+            "6.6 Adversarial behavior and answer selection",
+            84
+          ],
+          "actual_page_label": "77",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.7 Evidence needed for stronger claims",
+          "level": 2,
+          "printed_page": 78,
+          "physical_page": 85,
+          "actual_heading_pages": [
+            85
+          ],
+          "actual_bookmark": [
+            2,
+            "6.7 Evidence needed for stronger claims",
+            85
+          ],
+          "actual_page_label": "78",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "6.8 Conclusion",
+          "level": 2,
+          "printed_page": 79,
+          "physical_page": 86,
+          "actual_heading_pages": [
+            86
+          ],
+          "actual_bookmark": [
+            2,
+            "6.8 Conclusion",
+            86
+          ],
+          "actual_page_label": "79",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "References",
+          "level": 1,
+          "printed_page": 80,
+          "physical_page": 87,
+          "actual_heading_pages": [
+            87
+          ],
+          "actual_bookmark": [
+            1,
+            "References",
+            87
+          ],
+          "actual_page_label": "80",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix A Reproducibility and evidence sources",
+          "level": 1,
+          "printed_page": 84,
+          "physical_page": 91,
+          "actual_heading_pages": [
+            91
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix A Reproducibility and evidence sources",
+            91
+          ],
+          "actual_page_label": "84",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix B Claim scope and mathematical review",
+          "level": 1,
+          "printed_page": 88,
+          "physical_page": 95,
+          "actual_heading_pages": [
+            95
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix B Claim scope and mathematical review",
+            95
+          ],
+          "actual_page_label": "88",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix C Supporting research artifacts",
+          "level": 1,
+          "printed_page": 90,
+          "physical_page": 97,
+          "actual_heading_pages": [
+            97
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix C Supporting research artifacts",
+            97
+          ],
+          "actual_page_label": "90",
+          "present_in_rendered_contents": true
+        },
+        {
+          "title": "Appendix D Paired accuracy uncertainty",
+          "level": 1,
+          "printed_page": 91,
+          "physical_page": 98,
+          "actual_heading_pages": [
+            98
+          ],
+          "actual_bookmark": [
+            1,
+            "Appendix D Paired accuracy uncertainty",
+            98
+          ],
+          "actual_page_label": "91",
+          "present_in_rendered_contents": true
+        }
+      ],
+      "source_v2_to_v3_body_checks": [
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 19,
+          "v3_physical_page": 21,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 20,
+          "v3_physical_page": 22,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 21,
+          "v3_physical_page": 23,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 22,
+          "v3_physical_page": 24,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 23,
+          "v3_physical_page": 25,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 24,
+          "v3_physical_page": 26,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 25,
+          "v3_physical_page": 27,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 26,
+          "v3_physical_page": 28,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 27,
+          "v3_physical_page": 29,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 28,
+          "v3_physical_page": 30,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 29,
+          "v3_physical_page": 31,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 30,
+          "v3_physical_page": 32,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 31,
+          "v3_physical_page": 33,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 32,
+          "v3_physical_page": 34,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 33,
+          "v3_physical_page": 35,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 34,
+          "v3_physical_page": 36,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "Chapter 2",
+          "v2_physical_page": 35,
+          "v3_physical_page": 37,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 85,
+          "v3_physical_page": 87,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 86,
+          "v3_physical_page": 88,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 87,
+          "v3_physical_page": 89,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "section": "References",
+          "v2_physical_page": 88,
+          "v3_physical_page": 90,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        }
+      ],
+      "v3_raw_to_final_body_checks": [
+        {
+          "physical_page": 21,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 22,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 23,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 24,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 25,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 26,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 27,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 28,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 29,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 30,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 31,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 32,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 33,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 34,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 35,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 36,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 1
+        },
+        {
+          "physical_page": 37,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 87,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 88,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 89,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        },
+        {
+          "physical_page": 90,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "maximum_RGB_channel_difference": 0
+        }
+      ],
+      "v3_raw_to_final_contents_checks": [
+        {
+          "physical_page": 3,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "physical_page": 4,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        },
+        {
+          "physical_page": 5,
+          "text_identical": true,
+          "word_geometry_identical": true,
+          "full_page_RGB_pixels_identical": true
+        }
+      ],
+      "visual_review": {
+        "final_converted_contents_pages": [
+          3,
+          4,
+          5
+        ],
+        "final_converted_detail_pages": [
+          25,
+          33,
+          36
+        ],
+        "body_review_transferred_from_fully_reviewed_v2_raw_source_via_exact_text_geometry_pixels": true,
+        "chapter2_physical_range": [
+          21,
+          37
+        ],
+        "reference_physical_range": [
+          87,
+          90
+        ],
+        "contents_findings": "Readable hierarchy, correct roman/Arabic page columns and continued-page headings; no clipping, overlaps or broken text.",
+        "detail_findings": "Bellman/Snell display and proof, sequential uncertainty display, and Table 1 scope table/caption are legible and intact.",
+        "conversion_rounding_scope": "All reviewed body pages preserve exact extractable text and word geometry. Pixel differences from raw source are confined to RGB channel rounding of at most one level."
+      }
+    }
+  },
+  "academic_content_review": {
+    "mathematics": "No material defect identified in the stated finite-horizon results or their scope assumptions. Checked selected-candidate filtration, exact conditional binary drift, Snell first contact, fixed-process stake ordering, persistent-sign sufficient condition, two counterexamples, feature-information limits, weighting/perturbation algebra, and sequential uncertainty conditions.",
+    "originality_statements": "Sections 1.4 and 1.7 identify standard theory and close prior work; they state no new general optimal-stopping theorem, no comparative superiority, and no established adaptive advantage over fixed two responses.",
+    "scholarly_requirement_scope": "Manuscript contains substantial mathematical analysis and a literature-based case for a protocol-specific applied contribution. This audit does not determine faculty acceptance or certify that the contribution expands applied mathematics knowledge. Semester approvals are excluded from this review.",
+    "references": {
+      "entries": 25,
+      "unused_keys": [],
+      "unresolved_scholarly_keys": [],
+      "noncitation_parser_exception": "[guid] is a PowerShell type in Appendix A code.",
+      "Platt_metadata": "Fresh DOI registry metadata verifies Probabilities for SV Machines, publication 2000-09-29, pp. 61-74, MIT Press. The internal key Platt1999 does not appear as a publication year in the PDF.",
+      "live_model_identity": "Actual live manifest identifies Qwen2.5-0.5B-Instruct snapshot 7ae557604adf67be50417f59c2c2f167def9a775, consistent with the cited release/model card."
+    },
+    "primary_sources_checked": [
+      "https://ep.jhu.edu/wp-content/uploads/2024/10/EP-ACM-Research-or-Thesis-Option_guidelines.pdf",
+      "https://www.library.jhu.edu/wp-content/uploads/sites/3/2021/01/annotated-front-matter.pdf",
+      "https://www.math.ucla.edu/~tom/Stopping/sr3.pdf",
+      "https://www.math.ucla.edu/~tom/Stopping/sr5.pdf",
+      "https://arxiv.org/html/1603.08983v6",
+      "https://arxiv.org/abs/2107.05407",
+      "https://papers.neurips.cc/paper_files/paper/2022/hash/6fac9e316a4ae75ea244ddcef1982c71-Abstract-Conference.html",
+      "https://aclanthology.org/2023.emnlp-main.761/",
+      "https://aclanthology.org/2025.emnlp-main.904/",
+      "https://aclanthology.org/2026.acl-long.1256/",
+      "https://arxiv.org/html/2607.11089v1",
+      "https://api.crossref.org/works/10.7551%2Fmitpress%2F1113.003.0008",
+      "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct"
+    ],
+    "concrete_findings_remaining": [],
+    "limitation": "This is a scoped independent content/visual preservation review, not an independent reproduction of empirical experiments or an assertion of institutional acceptance."
+  }
+}

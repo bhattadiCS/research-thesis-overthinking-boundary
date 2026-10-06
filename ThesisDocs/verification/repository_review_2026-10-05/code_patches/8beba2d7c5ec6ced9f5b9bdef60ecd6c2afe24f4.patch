@@ -1,0 +1,80 @@
+commit 8beba2d7c5ec6ced9f5b9bdef60ecd6c2afe24f4
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Sat Jun 20 11:38:31 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Sat Jun 20 11:39:08 2026 -0400
+
+    fix(grader): credit prose/unit-wrapped numeric MATH answers
+    
+    Validation on a 25-problem Qwen-7B MATH run surfaced false negatives where the
+    model gave the right number wrapped in words/units ("Savings: 550 gallons",
+    "1.25 miles") -> marked wrong. math_answers_equivalent now compares the
+    candidate's trailing numeric token by value when the gold answer is numeric,
+    guarded so it never number-grabs from symbolic answers (=, ^, \, or digit-letter
+    adjacency like 5r) -> "5x-7y+11z+4=0" is not reduced to "0". Tests 23/23.
+    
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 496ec2b..487ac56 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -596,6 +596,18 @@ def normalize_math_answer(raw_answer: str) -> str:
+     return s.lower()
+ 
+ 
++def _as_number(text: str | None) -> float | None:
++    if not text:
++        return None
++    try:
++        return float(Fraction(text))
++    except (ValueError, ZeroDivisionError):
++        try:
++            return float(text)
++        except (ValueError, TypeError):
++            return None
++
++
+ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+     norm_candidate = normalize_math_answer(candidate)
+     norm_expected = normalize_math_answer(expected)
+@@ -608,6 +620,21 @@ def math_answers_equivalent(candidate: str, expected: str) -> bool:
+             return True
+     except (ValueError, TypeError):
+         pass
++    # VALIDATION FIX: when the gold answer is purely numeric, the model often
++    # gives the right number wrapped in words/units ("Savings: 550 gallons",
++    # "1.25 miles"). Compare the candidate's trailing numeric token by value.
++    # Gated on a numeric gold answer so a verbose wrong answer that merely
++    # mentions a different number cannot become a false positive.
++    exp_num = _as_number(norm_expected)
++    candidate_str = str(candidate)
++    # Only number-grab from PROSE-wrapped numbers, never from symbolic answers
++    # (equations/expressions: '=', '^', '\', or digit-letter adjacency like "5r"),
++    # so "5x-7y+11z+4=0" is never reduced to its trailing "0".
++    looks_symbolic = bool(re.search(r"[=^\\]|\d[a-zA-Z]|[a-zA-Z]\d", candidate_str))
++    if exp_num is not None and not looks_symbolic:
++        cand_num = _as_number(extract_numeric_candidate(candidate_str))
++        if cand_num is not None and abs(cand_num - exp_num) < 1e-6:
++            return True
+     try:  # symbolic fallback; sympy ships as an indirect torch dependency
+         import sympy
+         from sympy.parsing.sympy_parser import (
+diff --git a/research/tests/test_graders.py b/research/tests/test_graders.py
+index 356871c..9d9becf 100644
+--- a/research/tests/test_graders.py
++++ b/research/tests/test_graders.py
+@@ -48,6 +48,13 @@ EQ_CASES = [
+     ("x^2+1", "1+x^2", True),
+     ("5x-7y+11z+4=0", "0", False, "plane must NOT equal 0"),
+     ("3", "4", False),
++    # text/unit-wrapped numeric answers (model right, was a false negative)
++    ("Savings: 550 gallons", "550", True, "number wrapped in words/units"),
++    ("1.25 miles", "1.25", True, "decimal with unit"),
++    ("c=33", "33", True, "single-var assignment"),
++    # guard: verbose wrong answer with a different number stays wrong
++    ("Hybrid: 250 gallons saved", "550", False, "different number -> not a false positive"),
++    (r'"answer": "3"', r"\frac{7}{2}", False, "nested-json wrong answer stays wrong"),
+ ]
+ 
+ def main() -> int:

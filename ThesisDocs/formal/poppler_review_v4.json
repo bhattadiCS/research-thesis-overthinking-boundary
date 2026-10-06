@@ -1,0 +1,69 @@
+{
+  "digital": {
+    "pdf": "output/pdf/Masters_Thesis_Formal_v4_Aditya_Bhatt.pdf",
+    "sha256": "3ee3936ea9926b448d9bc4ea6f3a19eed0ba7b6309eeda7cc647f5e0227a47f8",
+    "pages": 104,
+    "renderer": "Poppler 26.09.0",
+    "dpi": 96,
+    "pagination_pass": true,
+    "front_order_pass": true,
+    "table_entries": 18,
+    "figure_entries": 6,
+    "rendered_page_count": 104,
+    "contact_sheets": [
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_01.png",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_02.png",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_03.png",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_04.png",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_05.png",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_06.png",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_07.png"
+    ],
+    "contact_sheet_sha256": {
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_01.png": "9f24843293d2301dabbff5818211cb9e254c0f2bf12e7b38bfb6d7d311409b48",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_02.png": "04c09322ce4d893d60ff0a6cc664adb83c6b0658f10a4bbdfe2106d54127b765",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_03.png": "36a9e0e8583db7061a175ff3fb5add649ae0346c59cedeeed41390b7deb1e4f6",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_04.png": "7342a67afd258f1ef3bce571f81191e6ef44a305e0b9fbaf53f2eac012733ed3",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_05.png": "10fa565945e4ce4f94d03500a577145d555ad1500102ba05d645312f17a411eb",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_06.png": "184ea0ba0222947c49b23e13034acbe51ca43518b3bae177e42c986cdcaa1289",
+      "tmp/pdfs/recheck_v4/v4_digital/sheet_07.png": "4437bf07a24a70499e5ad9e93eeda4f78b20b7eb7def07a65f1ae274e53773aa"
+    },
+    "root_all_contact_sheets_visually_inspected": true
+  },
+  "print": {
+    "pdf": "output/pdf/Masters_Thesis_Formal_v4_Print_Aditya_Bhatt.pdf",
+    "sha256": "dd0195514cf97dc745db765c0da798aaf9407bd312aa658759c6cd04cd1bee2b",
+    "pages": 109,
+    "renderer": "Poppler 26.09.0",
+    "dpi": 96,
+    "pagination_pass": true,
+    "front_order_pass": true,
+    "table_entries": 18,
+    "figure_entries": 6,
+    "rendered_page_count": 109,
+    "contact_sheets": [
+      "tmp/pdfs/recheck_v4/v4_print/sheet_01.png",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_02.png",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_03.png",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_04.png",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_05.png",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_06.png",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_07.png"
+    ],
+    "contact_sheet_sha256": {
+      "tmp/pdfs/recheck_v4/v4_print/sheet_01.png": "0c88dc61599ba1ad1435569f4162f0daf8f4d2a4f8b82a274c9ab0f777b1c010",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_02.png": "549f4c9fec87722ca4e98271069a1e342d96bb24b8456b4f381f19a02be9463e",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_03.png": "b796d9a1987c577891cdbdeeeb8de6050ee123de2cb003f87157dd37b0767628",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_04.png": "ac14a4586726fefde82eb6a775527282905bf7ac8ea9e5cf0c20c954365dd44c",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_05.png": "9d17c2c1cf2a347ef2fb2162e903c0ba8085c5368db3b007d51a45ba992a0af0",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_06.png": "560438f1eb36c88f5898b08b2ca015e46b2af7373c1924b69005139e434a9a6a",
+      "tmp/pdfs/recheck_v4/v4_print/sheet_07.png": "e2ce5e6e7d2ba2a31e47aa1f5b7943cd4e8cadb3bd73de0c3d5c9aefdb22ca50"
+    },
+    "root_all_contact_sheets_visually_inspected": true
+  },
+  "renderer_provenance": {
+    "release": "v26.09.0-0",
+    "archive_sha256": "7a6f256a0ddf7536182246a5733331bf4677cbcc34f4663774947ad34556c8d0",
+    "publisher_digest_verified": true
+  }
+}

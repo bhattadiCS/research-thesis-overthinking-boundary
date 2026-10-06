@@ -1,0 +1,21 @@
+commit 589b7976e9567dad3efd9cd8578168c05266d36a
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Fri Jun 12 10:55:41 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Fri Jun 12 10:55:41 2026 -0400
+
+    fix: load openai/gsm8k directly to avoid HF UriError with datasets v5
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 4c79e61..5f6c605 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -766,7 +766,7 @@ def load_gsm8k_tasks(max_tasks: int, dataset_split: str, shuffle_seed: int | Non
+         raise ImportError("datasets is required for --task-source gsm8k. Install it with pip install datasets evaluate bitsandbytes tqdm.")
+ 
+     try:
+-        dataset = load_dataset("gsm8k", "main", split=dataset_split)
++        dataset = load_dataset("openai/gsm8k", "main", split=dataset_split)
+     except Exception as exc:
+         raise RuntimeError(
+             f"Failed to download or load the GSM8K dataset from HuggingFace. "

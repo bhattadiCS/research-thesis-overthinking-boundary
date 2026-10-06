@@ -1,0 +1,31 @@
+commit 12b8e239495bdeeac26c22f1e4f88e7b97735bad
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Fri Jun 12 11:03:04 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Fri Jun 12 11:03:04 2026 -0400
+
+    fix: pin transformers to 4.53.3 to avoid LossKwargs ImportError
+
+diff --git a/tools/run_colab_experiment.py b/tools/run_colab_experiment.py
+index 6e2dc1e..f3b6e0b 100644
+--- a/tools/run_colab_experiment.py
++++ b/tools/run_colab_experiment.py
+@@ -39,7 +39,7 @@ MODEL_CHOICES = [
+ ]
+ 
+ MINIMUM_PACKAGE_VERSIONS = {
+-    "transformers": {"module": "transformers", "min_version": "5.5.0"},
++    "transformers": {"module": "transformers", "min_version": "4.46.0", "max_version": "4.53.99"},
+     "accelerate": {"module": "accelerate", "min_version": "1.13.0"},
+     "datasets": {"module": "datasets", "min_version": "3.4.0"},
+     "evaluate": {"module": "evaluate", "min_version": "0.4.0"},
+@@ -110,6 +110,9 @@ def collect_package_issues() -> tuple[list[str], list[str]]:
+         if version_key(installed_version) < version_key(min_version):
+             issues.append(f"{package_name}=={installed_version} is too old (requires >= {min_version})")
+             continue
++        if "max_version" in spec and version_key(installed_version) > version_key(spec["max_version"]):
++            issues.append(f"{package_name}=={installed_version} is too new (requires <= {spec['max_version']})")
++            continue
+         if package_name in IMPORT_VALIDATED_PACKAGES:
+             import_ok, import_error = probe_module_import(module_name)
+             if not import_ok:

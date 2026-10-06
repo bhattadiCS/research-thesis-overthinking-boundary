@@ -1,0 +1,1330 @@
+commit 3a5dde7a83833a5cea827a329983f66bc6041219
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Tue Jun 30 22:51:55 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Tue Jun 30 22:51:55 2026 -0400
+
+    docs: add July 1 progress check-in, advisor briefing, and experiment matrix audit outputs
+
+diff --git a/_agg_detector.py b/_agg_detector.py
+new file mode 100644
+index 0000000..8c840e0
+--- /dev/null
++++ b/_agg_detector.py
+@@ -0,0 +1,60 @@
++import csv, os, statistics as st
++
++ROOT = "research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++          "qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3",
++          "phi_4_mini_instruct","internlm3_8b_instruct","yi_1p5_9b_chat",
++          "mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++METRICS = ["mean_oracle_gap","false_late_rate","false_early_rate","mean_stop_step",
++           "mean_stop_utility","mean_oracle_utility","mean_false_late_severity"]
++
++# data[dataset][detector][metric] = list over models
++data = {d:{} for d in DATASETS}
++ncells = {d:0 for d in DATASETS}
++for d in DATASETS:
++    for m in MODELS:
++        f = os.path.join(ROOT, f"{m}__{d}", "detector_comparison.csv")
++        if not os.path.exists(f):
++            print("MISSING", f); continue
++        ncells[d]+=1
++        with open(f, newline="") as fh:
++            for row in csv.DictReader(fh):
++                det = row["detector"]
++                dd = data[d].setdefault(det, {k:[] for k in METRICS})
++                for k in METRICS:
++                    try: dd[k].append(float(row[k]))
++                    except: pass
++
++def mean(xs): return sum(xs)/len(xs) if xs else float("nan")
++
++for d in DATASETS:
++    print("\n" + "="*100)
++    print(f"DATASET: {d.upper()}   (n_models aggregated = {ncells[d]})")
++    print("="*100)
++    rows=[]
++    for det, mm in data[d].items():
++        rows.append((det, mean(mm["mean_oracle_gap"]), mean(mm["false_late_rate"]),
++                     mean(mm["false_early_rate"]), mean(mm["mean_stop_step"]),
++                     mean(mm["mean_stop_utility"]), len(mm["mean_oracle_gap"])))
++    rows.sort(key=lambda r: r[1])  # by oracle gap asc
++    hdr = f"{'detector':<22}{'oracle_gap':>11}{'false_late':>11}{'false_early':>12}{'stop_step':>11}{'stop_util':>11}{'n':>4}"
++    print(hdr); print("-"*len(hdr))
++    for det,g,fl,fe,ss,su,n in rows:
++        print(f"{det:<22}{g:>11.4f}{fl:>11.4f}{fe:>12.4f}{ss:>11.3f}{su:>11.4f}{n:>4}")
++
++# Cross-dataset summary for key detectors
++print("\n\n" + "#"*100)
++print("CROSS-DATASET SUMMARY (mean over 4 datasets of the per-dataset model-mean)")
++print("#"*100)
++KEY = ["oracle","hazard_drift","e_process","empirical_bernstein","answer_stability",
++       "entropy_plateau","first_answer","verifier_first_correct","never_stop"]
++for det in KEY:
++    gaps=[]; fls=[]; fes=[]; sss=[]
++    for d in DATASETS:
++        if det in data[d]:
++            gaps.append(mean(data[d][det]["mean_oracle_gap"]))
++            fls.append(mean(data[d][det]["false_late_rate"]))
++            fes.append(mean(data[d][det]["false_early_rate"]))
++            sss.append(mean(data[d][det]["mean_stop_step"]))
++    print(f"{det:<22} gap={mean(gaps):.4f}  false_late={mean(fls):.4f}  false_early={mean(fes):.4f}  stop_step={mean(sss):.3f}")
+diff --git a/_agg_head2head.py b/_agg_head2head.py
+new file mode 100644
+index 0000000..744ca15
+--- /dev/null
++++ b/_agg_head2head.py
+@@ -0,0 +1,71 @@
++import csv, os
++
++ROOT = "research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++          "qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3",
++          "phi_4_mini_instruct","internlm3_8b_instruct","yi_1p5_9b_chat",
++          "mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++# per-cell gap: cell[(model,dataset)][detector] = oracle_gap
++cell = {}
++for d in DATASETS:
++    for m in MODELS:
++        f = os.path.join(ROOT, f"{m}__{d}", "detector_comparison.csv")
++        if not os.path.exists(f): continue
++        dd = cell.setdefault((m,d), {})
++        with open(f, newline="") as fh:
++            for row in csv.DictReader(fh):
++                dd[row["detector"]] = (float(row["mean_oracle_gap"]),
++                                       float(row["false_late_rate"]),
++                                       float(row["false_early_rate"]))
++
++DEPLOYABLE_HEURS = ["answer_stability","entropy_plateau","first_answer"]
++THEORY = ["hazard_drift","e_process","empirical_bernstein"]
++
++print("HEAD-TO-HEAD: hazard_drift vs each deployable heuristic, per-cell oracle_gap (lower=better)")
++print("(win = hazard_drift strictly lower gap). 52 cells total.\n")
++for h in DEPLOYABLE_HEURS:
++    win=loss=tie=0; gap_diff=[]
++    for k,v in cell.items():
++        if "hazard_drift" in v and h in v:
++            a=v["hazard_drift"][0]; b=v[h][0]
++            gap_diff.append(a-b)
++            if a<b-1e-9: win+=1
++            elif a>b+1e-9: loss+=1
++            else: tie+=1
++    print(f"hazard_drift vs {h:<18}: win={win:>2} loss={loss:>2} tie={tie:>2}  mean(gap_hd - gap_{h})={sum(gap_diff)/len(gap_diff):+.4f}")
++
++print("\nBest deployable theory detector = hazard_drift. Compare to best heuristic per cell:")
++win=loss=tie=0
++for k,v in cell.items():
++    if "hazard_drift" not in v: continue
++    hd=v["hazard_drift"][0]
++    best_heur=min(v[h][0] for h in DEPLOYABLE_HEURS if h in v)
++    if hd<best_heur-1e-9: win+=1
++    elif hd>best_heur+1e-9: loss+=1
++    else: tie+=1
++print(f"hazard_drift beats the BEST-of-3 heuristic in {win}/{win+loss+tie} cells (loss={loss}, tie={tie})")
++
++# hazard_drift vs first_answer specifically (first_answer is the strongest heuristic by mean gap)
++print("\nhazard_drift vs first_answer detail by dataset (mean gap, mean false_late):")
++import statistics as stx
++for d in DATASETS:
++    hd=[cell[(m,d)]["hazard_drift"] for m in MODELS if (m,d) in cell]
++    fa=[cell[(m,d)]["first_answer"] for m in MODELS if (m,d) in cell]
++    print(f"  {d:<6} hd_gap={stx.mean(x[0] for x in hd):.4f} fa_gap={stx.mean(x[0] for x in fa):.4f} | hd_flate={stx.mean(x[1] for x in hd):.4f} fa_flate={stx.mean(x[1] for x in fa):.4f} fa_fearly={stx.mean(x[2] for x in fa):.4f}")
++
++# How often does empirical_bernstein essentially never stop? false_late near 1
++print("\nempirical_bernstein & e_process 'never stops' check (false_late):")
++for det in ["e_process","empirical_bernstein"]:
++    fl=[v[det][1] for v in cell.values() if det in v]
++    hi=sum(1 for x in fl if x>=0.9)
++    print(f"  {det:<20} mean_false_late={sum(fl)/len(fl):.4f}  cells_with_false_late>=0.90: {hi}/{len(fl)}  min={min(fl):.3f} max={max(fl):.3f}")
++
++# Gap reduction vs never_stop: how much of the never_stop->oracle gap does hazard_drift close?
++print("\nFraction of never_stop oracle-gap closed by best deployable theory (hazard_drift), per dataset:")
++import statistics as stx2
++for d in DATASETS:
++    hd=stx2.mean(cell[(m,d)]["hazard_drift"][0] for m in MODELS if (m,d) in cell)
++    ns=stx2.mean(cell[(m,d)]["never_stop"][0] for m in MODELS if (m,d) in cell)
++    print(f"  {d:<6} never_stop_gap={ns:.4f} hazard_drift_gap={hd:.4f} -> closed {100*(ns-hd)/ns:.1f}% of the do-nothing gap")
+diff --git a/research/outputs/experiment_matrix/_anytime_valid_audit.py b/research/outputs/experiment_matrix/_anytime_valid_audit.py
+new file mode 100644
+index 0000000..edfcd5c
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_anytime_valid_audit.py
+@@ -0,0 +1,160 @@
++import os, glob
++import pandas as pd, numpy as np
++
++ROOT = r"C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++pd.set_option("display.width", 200)
++pd.set_option("display.max_columns", 50)
++
++rows=[]
++for m in MODELS:
++    for d in DATASETS:
++        cell=os.path.join(ROOT,f"{m}__{d}")
++        scf=os.path.join(cell,"sequential_detector_summary.csv")
++        hf=os.path.join(cell,"hazard_drift_summary.csv")
++        if not (os.path.exists(scf) and os.path.exists(hf)):
++            continue
++        sc=pd.read_csv(scf).set_index("detector")
++        hd=pd.read_csv(hf).sort_values("step")
++        maxstep=int(hd.step.max())
++        # boundary T* = first step>=2 with hazard_mu<=0
++        sub=hd[hd.step>=2]
++        mu_cross=sub[sub.hazard_mu<=0].step.min() if (sub.hazard_mu<=0).any() else np.nan
++        # first-fire step for eb / e_process signals (>=2)
++        eb_fire=sub[sub.eb_stop_signal==1].step.min() if (sub.eb_stop_signal==1).any() else np.nan
++        ep_fire=sub[sub.e_process_stop_signal==1].step.min() if (sub.e_process_stop_signal==1).any() else np.nan
++        def g(det,col):
++            return sc.loc[det,col] if det in sc.index else np.nan
++        rows.append(dict(
++            model=m, dataset=d, maxstep=maxstep,
++            mu_cross=mu_cross, eb_fire=eb_fire, ep_fire=ep_fire,
++            # oracle
++            oracle_stop=g("oracle","mean_stop_step"),
++            oracle_util=g("oracle","mean_stop_utility"),
++            # e_process
++            ep_stop=g("e_process","mean_stop_step"),
++            ep_gap=g("e_process","mean_oracle_gap"),
++            ep_fe=g("e_process","false_early_rate"),
++            ep_fl=g("e_process","false_late_rate"),
++            ep_fls=g("e_process","mean_false_late_severity"),
++            ep_util=g("e_process","mean_stop_utility"),
++            # empirical_bernstein
++            eb_stop=g("empirical_bernstein","mean_stop_step"),
++            eb_gap=g("empirical_bernstein","mean_oracle_gap"),
++            eb_fe=g("empirical_bernstein","false_early_rate"),
++            eb_fl=g("empirical_bernstein","false_late_rate"),
++            eb_fls=g("empirical_bernstein","mean_false_late_severity"),
++            eb_util=g("empirical_bernstein","mean_stop_utility"),
++            # never_stop baseline
++            ns_stop=g("never_stop","mean_stop_step"),
++            ns_gap=g("never_stop","mean_oracle_gap"),
++            ns_fl=g("never_stop","false_late_rate"),
++            ns_util=g("never_stop","mean_stop_utility"),
++            # hazard_drift (theory drift rule, for contrast)
++            hd_stop=g("hazard_drift","mean_stop_step"),
++            hd_gap=g("hazard_drift","mean_oracle_gap"),
++            hd_fe=g("hazard_drift","false_early_rate"),
++            hd_fl=g("hazard_drift","false_late_rate"),
++            hd_util=g("hazard_drift","mean_stop_utility"),
++        ))
++S=pd.DataFrame(rows)
++print(f"Cells loaded: {len(S)} / 52")
++print(f"Max horizon distribution (maxstep): min={S.maxstep.min()}, max={S.maxstep.max()}, "
++      f"mean={S.maxstep.mean():.2f}, mode={S.maxstep.mode().tolist()}")
++print(f"  per value: {S.maxstep.value_counts().sort_index().to_dict()}")
++
++print("\n" + "="*78)
++print("Q1: DO THE BOUNDS STOP MEANINGFULLY EARLY, OR AT/NEAR MAX HORIZON?")
++print("="*78)
++# fraction of horizon used: mean_stop_step / maxstep
++S["ep_frac"]=S.ep_stop/S.maxstep
++S["eb_frac"]=S.eb_stop/S.maxstep
++S["ns_frac"]=S.ns_stop/S.maxstep
++S["oracle_frac"]=S.oracle_stop/S.maxstep
++for det,fr,st in [("e_process","ep_frac","ep_stop"),("empirical_bernstein","eb_frac","eb_stop"),
++                  ("never_stop","ns_frac","ns_stop"),("oracle","oracle_frac","oracle_stop")]:
++    print(f"  {det:22s}: mean_stop={S[st].mean():.2f}  frac_of_horizon={S[fr].mean():.3f}  "
++          f"(median frac={S[fr].median():.3f})")
++# how often does EB stop == maxstep (i.e. effectively never stop / forced to horizon)?
++print(f"\n  EB mean_stop == maxstep (forced to horizon) in {int((np.abs(S.eb_stop-S.maxstep)<0.5).sum())}/{len(S)} cells")
++print(f"  EB mean_stop >= 0.9*maxstep in {int((S.eb_frac>=0.9).sum())}/{len(S)} cells")
++print(f"  e_process mean_stop >= 0.9*maxstep in {int((S.ep_frac>=0.9).sum())}/{len(S)} cells")
++print(f"  e_process mean_stop >= 0.8*maxstep in {int((S.ep_frac>=0.8).sum())}/{len(S)} cells")
++
++print("\n" + "="*78)
++print("Q2: FALSE-LATE RATE -- do bounds actually catch overthinking?")
++print("="*78)
++for det,fl,sev in [("e_process","ep_fl","ep_fls"),("empirical_bernstein","eb_fl","eb_fls"),
++                   ("never_stop","ns_fl",None),("hazard_drift","hd_fl",None)]:
++    extra=f"  mean_severity={S[sev].mean():.2f}" if sev else ""
++    print(f"  {det:22s}: false_late mean={S[fl].mean():.4f}  median={S[fl].median():.4f}  "
++          f"min={S[fl].min():.4f}  max={S[fl].max():.4f}{extra}")
++    print(f"  {'':22s}  cells with FL>=0.95: {int((S[fl]>=0.95).sum())}/{len(S)};  FL>=0.99: {int((S[fl]>=0.99).sum())}/{len(S)}")
++
++print("\n" + "="*78)
++print("Q3: IS EB EFFECTIVELY never_stop (do-nothing)?")
++print("="*78)
++print(f"  mean_stop_step:    EB={S.eb_stop.mean():.3f}   never_stop={S.ns_stop.mean():.3f}")
++print(f"  mean_oracle_gap:   EB={S.eb_gap.mean():.4f}  never_stop={S.ns_gap.mean():.4f}")
++print(f"  EB gap as %% of never_stop gap: mean={100*(S.eb_gap/S.ns_gap).mean():.1f}%  median={100*(S.eb_gap/S.ns_gap).median():.1f}%")
++print(f"  EB false_late:     EB={S.eb_fl.mean():.4f}  never_stop={S.ns_fl.mean():.4f}")
++print(f"  EB utility:        EB={S.eb_util.mean():.4f}  never_stop={S.ns_util.mean():.4f}  oracle={S.oracle_util.mean():.4f}")
++# how many cells is EB stop within 0.5 step of never_stop
++print(f"  cells where |EB_stop - never_stop_stop| < 0.5: {int((np.abs(S.eb_stop-S.ns_stop)<0.5).sum())}/{len(S)}")
++print(f"  cells where |EB_stop - never_stop_stop| < 1.0: {int((np.abs(S.eb_stop-S.ns_stop)<1.0).sum())}/{len(S)}")
++
++print("\n" + "="*78)
++print("Q4: DOES EITHER BOUND BEAT never_stop ON UTILITY / GAP? (the real test)")
++print("="*78)
++S["ep_beats_ns_util"]=S.ep_util>S.ns_util
++S["eb_beats_ns_util"]=S.eb_util>S.ns_util
++S["ep_gap_lt_ns"]=S.ep_gap<S.ns_gap
++S["eb_gap_lt_ns"]=S.eb_gap<S.ns_gap
++print(f"  e_process utility > never_stop utility: {int(S.ep_beats_ns_util.sum())}/{len(S)} cells "
++      f"(mean util improvement={100*((S.ep_util-S.ns_util)/np.abs(S.ns_util)).mean():.1f}%)")
++print(f"  EB        utility > never_stop utility: {int(S.eb_beats_ns_util.sum())}/{len(S)} cells "
++      f"(mean util improvement={100*((S.eb_util-S.ns_util)/np.abs(S.ns_util)).mean():.1f}%)")
++print(f"  e_process oracle_gap < never_stop gap : {int(S.ep_gap_lt_ns.sum())}/{len(S)} cells")
++print(f"  EB        oracle_gap < never_stop gap : {int(S.eb_gap_lt_ns.sum())}/{len(S)} cells")
++# vs oracle, fraction of achievable gap closed
++S["ep_gap_closed"]=(S.ns_gap-S.ep_gap)/S.ns_gap   # 1.0 = closes all gap to oracle, 0 = same as never_stop
++S["eb_gap_closed"]=(S.ns_gap-S.eb_gap)/S.ns_gap
++print(f"\n  Fraction of never_stop->oracle gap CLOSED (1.0=oracle, 0=never_stop, <0=worse):")
++print(f"    e_process: mean={S.ep_gap_closed.mean():.3f}  median={S.ep_gap_closed.median():.3f}")
++print(f"    EB:        mean={S.eb_gap_closed.mean():.3f}  median={S.eb_gap_closed.median():.3f}")
++
++print("\n" + "="*78)
++print("Q5: WHEN DO BOUNDS FIRST FIRE vs boundary T* (mu-crossing)? (per-step signal)")
++print("="*78)
++valid=S.dropna(subset=["mu_cross"])
++print(f"  cells with a mu-crossing (T* exists): {len(valid)}/{len(S)}")
++print(f"  mean first-fire step:  mu_cross(T*)={valid.mu_cross.mean():.2f}  "
++      f"eb_fire={valid.eb_fire.mean():.2f}  ep_fire={valid.ep_fire.mean():.2f}  (mean maxstep={valid.maxstep.mean():.2f})")
++print(f"  EB fires LATER than T* by: mean={ (valid.eb_fire-valid.mu_cross).mean():.2f} steps "
++      f"(median={ (valid.eb_fire-valid.mu_cross).median():.2f})")
++print(f"  e_process fires vs T* by:  mean={ (valid.ep_fire-valid.mu_cross).mean():.2f} steps "
++      f"(median={ (valid.ep_fire-valid.mu_cross).median():.2f})")
++print(f"  EB never fires (no eb_stop_signal at any step>=2): {int(S.eb_fire.isna().sum())}/{len(S)} cells")
++print(f"  e_process never fires: {int(S.ep_fire.isna().sum())}/{len(S)} cells")
++
++# Save full table
++out=os.path.join(ROOT,"_anytime_valid_audit_table.csv")
++S.round(4).to_csv(out,index=False)
++print(f"\nFull per-cell table -> {out}")
++
++# Per-dataset breakdown
++print("\n" + "="*78)
++print("PER-DATASET BREAKDOWN (mean across models)")
++print("="*78)
++agg=S.groupby("dataset").agg(
++    maxstep=("maxstep","mean"),
++    ep_stop=("ep_stop","mean"), ep_fl=("ep_fl","mean"), ep_gap=("ep_gap","mean"), ep_fe=("ep_fe","mean"),
++    eb_stop=("eb_stop","mean"), eb_fl=("eb_fl","mean"), eb_gap=("eb_gap","mean"), eb_fe=("eb_fe","mean"),
++    ns_stop=("ns_stop","mean"), ns_gap=("ns_gap","mean"),
++    oracle_stop=("oracle_stop","mean"),
++).round(3)
++print(agg.to_string())
+diff --git a/research/outputs/experiment_matrix/_thesis_audit_boundary.py b/research/outputs/experiment_matrix/_thesis_audit_boundary.py
+new file mode 100644
+index 0000000..9b413f5
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_thesis_audit_boundary.py
+@@ -0,0 +1,84 @@
++import os, glob
++import pandas as pd, numpy as np
++
++ROOT = os.path.dirname(os.path.abspath(__file__))
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++LAM=0.05
++
++# Compute corrected boundary T* = inf{t>=2 : hazard_mu <= 0} from hazard_by_step.csv (conditional hazard_mu column)
++def boundary_from(df, col="hazard_mu", floor=2):
++    sub=df[df.step>=floor].sort_values("step")
++    neg=sub[sub[col]<=0]
++    if len(neg)==0: return df.step.max()
++    return int(neg.iloc[0].step)
++
++recs=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        if not os.path.exists(f): continue
++        df=pd.read_csv(f)
++        # corrected boundary uses conditional hazard drift (hazard_mu == conditional_hazard_drift here)
++        T=boundary_from(df,"hazard_mu",2)
++        # alpha/beta at step 2 (first valid)
++        s2=df[df.step==2]
++        a=s2.repair_rate.values[0] if len(s2) else np.nan
++        b=s2.corruption_rate.values[0] if len(s2) else np.nan
++        # peak q_t and step1 q
++        q1=df[df.step==1].q_t.values[0] if len(df[df.step==1]) else np.nan
++        qpeak=df.q_t.max()
++        recs.append(dict(model=m,dataset=d,boundary=T,maxstep=int(df.step.max()),
++                         alpha2=a,beta2=b,ab_ratio=(a/b if b and b>0 else np.nan),
++                         q1=q1,qpeak=qpeak,headroom=qpeak-q1,late=(T>2)))
++B=pd.DataFrame(recs)
++pd.set_option("display.width",220); pd.set_option("display.max_columns",30); pd.set_option("display.max_rows",100)
++print("===== CORRECTED BOUNDARY per cell (from conditional hazard_mu, floor t>=2) =====")
++print(B.round(3).to_string(index=False))
++
++print("\n===== boundary distribution =====")
++print("late-boundary cells (T>2):", int(B.late.sum()), "of", len(B))
++print(B.groupby("dataset").late.sum())
++print("\nlate cells list:")
++print(B[B.late][["model","dataset","boundary","alpha2","beta2","headroom"]].round(3).to_string(index=False))
++
++# Monotone one-crossing check: does conditional hazard_mu actually cross zero ONCE and stay negative?
++print("\n===== ONE-CROSSING / MONOTONICITY CHECK (Theorem 1 empirical) =====")
++viol=[]
++nonmono=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        if not os.path.exists(f): continue
++        df=pd.read_csv(f).sort_values("step")
++        mu=df[df.step>=2]["hazard_mu"].values
++        # count sign changes pos->neg and neg->pos among steps>=2
++        signs=np.sign(mu)
++        crossings_down=int(np.sum((signs[:-1]>0)&(signs[1:]<=0)))
++        crossings_up=int(np.sum((signs[:-1]<=0)&(signs[1:]>0)))
++        is_monotone=bool(np.all(np.diff(mu)<=1e-9))
++        if crossings_up>0: viol.append((m,d,crossings_down,crossings_up))
++        if not is_monotone: nonmono.append((m,d))
++print(f"cells where mu (t>=2) is exactly nonincreasing (Theorem1 holds empirically): {52-len(nonmono)}/52")
++print(f"cells with >=1 neg->pos crossing of mu after t>=2 (one-crossing VIOLATED): {len(viol)}/52")
++print("examples of one-crossing violations (model,dataset,down,up):", viol[:12])
++
++# Check the three monotonicity PREMISES of Theorem 1: q nondecr, alpha nonincr, beta nondecr
++print("\n===== THEOREM 1 PREMISE CHECK (q up, alpha down, beta up), t>=2 =====")
++pq=pa=pb=0; tot=0
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        if not os.path.exists(f): continue
++        df=pd.read_csv(f).sort_values("step")
++        sub=df[df.step>=2]
++        tot+=1
++        if np.all(np.diff(sub.q_t.values)>=-1e-9): pq+=1
++        if np.all(np.diff(sub.repair_rate.values)<=1e-9): pa+=1
++        if np.all(np.diff(sub.corruption_rate.values)>=-1e-9): pb+=1
++print(f"q_t nondecreasing: {pq}/{tot}")
++print(f"alpha (repair_rate) nonincreasing: {pa}/{tot}")
++print(f"beta (corruption_rate) nondecreasing: {pb}/{tot}")
++B.to_csv(os.path.join(ROOT,"_thesis_boundary_table.csv"),index=False)
+diff --git a/research/outputs/experiment_matrix/_thesis_audit_detectors.py b/research/outputs/experiment_matrix/_thesis_audit_detectors.py
+new file mode 100644
+index 0000000..dcaf734
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_thesis_audit_detectors.py
+@@ -0,0 +1,100 @@
++import os, glob, math
++import pandas as pd, numpy as np
++
++ROOT = os.path.dirname(os.path.abspath(__file__))
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++THEORY = ["hazard_drift","e_process","empirical_bernstein"]
++HEUR   = ["answer_stability","entropy_plateau","first_answer"]
++CHEAT  = ["verifier_first_correct"]
++BOUNDS = ["oracle","never_stop"]
++
++rows=[]
++missing=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","detector_comparison.csv")
++        if not os.path.exists(f):
++            missing.append(f"{m}__{d}"); continue
++        df=pd.read_csv(f)
++        df["model"]=m; df["dataset"]=d
++        rows.append(df)
++print("CELLS LOADED:",len(rows),"  MISSING:",missing)
++alld=pd.concat(rows,ignore_index=True)
++print("unique detectors:",sorted(alld.detector.unique()))
++
++# Per-detector mean across all 52 cells
++print("\n===== MEAN ACROSS ALL 52 CELLS (per detector) =====")
++g=alld.groupby("detector").agg(
++    n_cells=("mean_oracle_gap","size"),
++    oracle_gap=("mean_oracle_gap","mean"),
++    false_late=("false_late_rate","mean"),
++    false_early=("false_early_rate","mean"),
++    stop_util=("mean_stop_utility","mean"),
++    stop_step=("mean_stop_step","mean"),
++).sort_values("oracle_gap")
++pd.set_option("display.width",200); pd.set_option("display.max_columns",20)
++print(g.round(4))
++
++# Same but ONLY gsm8k (the sweet-spot where boundaries exist) and ONLY late-boundary cells
++print("\n===== MEAN ACROSS GSM8K CELLS ONLY (13 cells) =====")
++g2=alld[alld.dataset=="gsm8k"].groupby("detector").agg(
++    n_cells=("mean_oracle_gap","size"),
++    oracle_gap=("mean_oracle_gap","mean"),
++    false_late=("false_late_rate","mean"),
++    false_early=("false_early_rate","mean"),
++    stop_util=("mean_stop_utility","mean"),
++).sort_values("oracle_gap")
++print(g2.round(4))
++
++# Head-to-head: for each cell, rank deployable detectors only (exclude oracle, cheater)
++deployable = THEORY + HEUR + ["never_stop"]
++print("\n===== HEAD-TO-HEAD: best DEPLOYABLE detector per cell by oracle_gap =====")
++sub=alld[alld.detector.isin(deployable)].copy()
++idx=sub.groupby(["model","dataset"])["mean_oracle_gap"].idxmin()
++best=sub.loc[idx]
++print("Times each detector is the BEST (lowest oracle_gap) deployable across 52 cells:")
++print(best.detector.value_counts())
++
++print("\n===== HEAD-TO-HEAD on GSM8K only =====")
++subg=sub[sub.dataset=="gsm8k"]
++idxg=subg.groupby(["model"])["mean_oracle_gap"].idxmin()
++print(subg.loc[idxg].detector.value_counts())
++
++# Direct theory-vs-heuristic: is hazard_drift better than the BEST heuristic per cell?
++print("\n===== hazard_drift vs best-heuristic, per cell (oracle_gap) =====")
++piv=alld.pivot_table(index=["model","dataset"],columns="detector",values="mean_oracle_gap")
++piv["best_heur"]=piv[HEUR].min(axis=1)
++piv["hd_minus_bestheur"]=piv["hazard_drift"]-piv["best_heur"]
++wins=(piv["hd_minus_bestheur"]<0).sum()
++print(f"hazard_drift beats best heuristic on oracle_gap in {wins}/{len(piv)} cells")
++print("mean(hazard_drift gap - best heuristic gap) =", round(piv["hd_minus_bestheur"].mean(),4))
++
++# false_late comparison (catching overthinking) - theory vs heuristics
++print("\n===== false_late_rate: theory vs heuristics (mean across 52) =====")
++fl=alld.pivot_table(index=["model","dataset"],columns="detector",values="false_late_rate")
++print("hazard_drift mean false_late:",round(fl["hazard_drift"].mean(),4))
++print("e_process mean false_late:",round(fl["e_process"].mean(),4))
++print("empirical_bernstein mean false_late:",round(fl["empirical_bernstein"].mean(),4))
++print("first_answer mean false_late:",round(fl["first_answer"].mean(),4))
++print("entropy_plateau mean false_late:",round(fl["entropy_plateau"].mean(),4))
++print("answer_stability mean false_late:",round(fl["answer_stability"].mean(),4))
++
++# How often does each detector improve over never_stop (the do-nothing lower bound)?
++print("\n===== utility improvement over never_stop =====")
++util=alld.pivot_table(index=["model","dataset"],columns="detector",values="mean_stop_utility")
++for det in THEORY+HEUR+CHEAT:
++    better=(util[det]>util["never_stop"]).sum()
++    meandelta=(util[det]-util["never_stop"]).mean()
++    print(f"{det:24s}: beats never_stop in {better:2d}/52 cells, mean util gain {meandelta:+.4f}")
++
++# Oracle gap as fraction of (never_stop gap): normalized regret. 0=oracle, 1=never_stop
++print("\n===== NORMALIZED REGRET vs never_stop (0=oracle,1=do-nothing); mean over 52 =====")
++ns_gap=alld[alld.detector=="never_stop"].set_index(["model","dataset"])["mean_oracle_gap"]
++for det in THEORY+HEUR+CHEAT:
++    dg=alld[alld.detector==det].set_index(["model","dataset"])["mean_oracle_gap"]
++    norm=(dg/ns_gap.reindex(dg.index)).replace([np.inf,-np.inf],np.nan)
++    print(f"{det:24s}: mean normalized regret = {norm.mean():.3f}  (median {norm.median():.3f})")
+diff --git a/research/outputs/experiment_matrix/_thesis_audit_latecells.py b/research/outputs/experiment_matrix/_thesis_audit_latecells.py
+new file mode 100644
+index 0000000..3e79d9d
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_thesis_audit_latecells.py
+@@ -0,0 +1,58 @@
++import os
++import pandas as pd, numpy as np
++
++ROOT = os.path.dirname(os.path.abspath(__file__))
++late=[("qwen2p5_3b","gsm8k"),("qwen2p5_7b","gsm8k"),("qwen2p5_7b","math"),("qwen2p5_14b","gsm8k"),
++("qwen2p5_32b","gsm8k"),("qwen2p5_32b","math"),("mistral_7b_instruct_v0p3","gsm8k"),
++("internlm3_8b_instruct","gsm8k"),("yi_1p5_9b_chat","gsm8k"),("mistral_small_24b_2409","gsm8k"),
++("mistral_small_24b_2409","arc"),("llama_3p1_8b_instruct","gsm8k")]
++THEORY=["hazard_drift","e_process","empirical_bernstein"]
++HEUR=["answer_stability","entropy_plateau","first_answer"]
++
++rows=[]
++for m,d in late:
++    f=os.path.join(ROOT,f"{m}__{d}","detector_comparison.csv")
++    df=pd.read_csv(f); df["model"]=m; df["dataset"]=d; rows.append(df)
++L=pd.concat(rows,ignore_index=True)
++
++print("===== DETECTOR PERFORMANCE ON THE 12 LATE-BOUNDARY CELLS ONLY =====")
++print("(this is the ONLY regime where the optimal-stopping theory has a nontrivial boundary to find)\n")
++g=L.groupby("detector").agg(
++    oracle_gap=("mean_oracle_gap","mean"),
++    false_late=("false_late_rate","mean"),
++    false_early=("false_early_rate","mean"),
++    stop_util=("mean_stop_utility","mean"),
++    stop_step=("mean_stop_step","mean"),
++).sort_values("oracle_gap")
++print(g.round(4).to_string())
++
++# head to head deployable on late cells
++deployable=THEORY+HEUR+["never_stop"]
++sub=L[L.detector.isin(deployable)]
++idx=sub.groupby(["model","dataset"])["mean_oracle_gap"].idxmin()
++print("\nBest deployable detector per late-cell (by oracle_gap):")
++print(sub.loc[idx].groupby(["model","dataset"]).apply(lambda x:x.iloc[0]["detector"]).to_string())
++print("\ncounts:",dict(sub.loc[idx].detector.value_counts()))
++
++# hazard_drift vs first_answer head-to-head on late cells (the key comparison)
++piv=L.pivot_table(index=["model","dataset"],columns="detector",values="mean_oracle_gap")
++print("\n===== hazard_drift vs first_answer (oracle_gap) on late cells =====")
++cmp=piv[["hazard_drift","first_answer","answer_stability","entropy_plateau"]].copy()
++cmp["hd_beats_first"]=cmp["hazard_drift"]<cmp["first_answer"]
++print(cmp.round(3).to_string())
++print(f"\nhazard_drift beats first_answer on {int(cmp['hd_beats_first'].sum())}/12 late cells")
++print(f"mean oracle_gap: hazard_drift={cmp['hazard_drift'].mean():.4f}  first_answer={cmp['first_answer'].mean():.4f}  "
++      f"answer_stability={cmp['answer_stability'].mean():.4f}  entropy_plateau={cmp['entropy_plateau'].mean():.4f}")
++
++# utility view on late cells
++pu=L.pivot_table(index=["model","dataset"],columns="detector",values="mean_stop_utility")
++print("\n===== mean_stop_utility on late cells (higher=better) =====")
++print("oracle=%.4f  hazard_drift=%.4f  first_answer=%.4f  answer_stability=%.4f  entropy_plateau=%.4f  e_process=%.4f  EB=%.4f  never_stop=%.4f"%(
++ pu["oracle"].mean(),pu["hazard_drift"].mean(),pu["first_answer"].mean(),pu["answer_stability"].mean(),
++ pu["entropy_plateau"].mean(),pu["e_process"].mean(),pu["empirical_bernstein"].mean(),pu["never_stop"].mean()))
++# fraction of oracle utility captured (normalized)
++print("\nfraction of oracle's utility-over-neverstop captured:")
++denom=(pu["oracle"]-pu["never_stop"])
++for det in ["hazard_drift","first_answer","answer_stability","entropy_plateau","e_process","empirical_bernstein"]:
++    frac=((pu[det]-pu["never_stop"])/denom).mean()
++    print(f"  {det:20s}: {frac:.3f}")
+diff --git a/research/outputs/experiment_matrix/_thesis_audit_sequential.py b/research/outputs/experiment_matrix/_thesis_audit_sequential.py
+new file mode 100644
+index 0000000..d3578e9
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_thesis_audit_sequential.py
+@@ -0,0 +1,86 @@
++import os
++import pandas as pd, numpy as np
++
++ROOT = os.path.dirname(os.path.abspath(__file__))
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++# ---- Claim (b): anytime-valid false-early control at level delta ----
++# detector_comparison reports false_early_rate per detector. Theory promises EB & e_process
++# control false-early at delta. What delta? schedule delta_t = 6*delta/(pi^2 (t+1)^2). Whatever delta,
++# the practical question: do EB / e_process achieve LOW false-early? and at what false-late cost?
++rows=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","detector_comparison.csv")
++        if not os.path.exists(f): continue
++        df=pd.read_csv(f); df=df.set_index("detector")
++        for det in ["empirical_bernstein","e_process","hazard_drift","oracle","never_stop"]:
++            if det in df.index:
++                rows.append(dict(model=m,dataset=d,detector=det,
++                    false_early=df.loc[det,"false_early_rate"],
++                    false_late=df.loc[det,"false_late_rate"],
++                    oracle_gap=df.loc[det,"mean_oracle_gap"],
++                    stop_step=df.loc[det,"mean_stop_step"]))
++S=pd.DataFrame(rows)
++print("===== CLAIM (b): false-early control of anytime-valid rules =====")
++for det in ["empirical_bernstein","e_process","hazard_drift"]:
++    sub=S[S.detector==det]
++    print(f"\n{det}:")
++    print(f"  false_early: mean={sub.false_early.mean():.4f} max={sub.false_early.max():.4f} "
++          f"(cells with FE>0.05: {int((sub.false_early>0.05).sum())}/{len(sub)}, FE>0.10: {int((sub.false_early>0.10).sum())})")
++    print(f"  false_late : mean={sub.false_late.mean():.4f} (this is the COST: missed overthinking)")
++    print(f"  oracle_gap : mean={sub.oracle_gap.mean():.4f}")
++
++# Is EB effectively never-stop? compare stop_step & oracle_gap to never_stop
++print("\n===== Is empirical_bernstein effectively do-nothing? =====")
++piv=S.pivot_table(index=["model","dataset"],columns="detector",values="stop_step")
++print("mean stop_step: EB=%.2f  never_stop=%.2f  (max possible step ~ 7-13)"%(piv["empirical_bernstein"].mean(),piv["never_stop"].mean()))
++gappiv=S.pivot_table(index=["model","dataset"],columns="detector",values="oracle_gap")
++print("EB oracle_gap as %% of never_stop gap: mean=%.1f%%"%(100*(gappiv["empirical_bernstein"]/gappiv["never_stop"]).mean()))
++
++# eb_stop_signal / e_process_stop_signal: when does the bound first fire (from hazard_drift_summary)?
++print("\n===== When do EB / e-process bounds FIRST fire vs corrected boundary? =====")
++recs=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        if not os.path.exists(f): continue
++        df=pd.read_csv(f).sort_values("step")
++        sub=df[df.step>=2]
++        ebfire=sub[sub.eb_stop_signal==1].step.min() if (sub.eb_stop_signal==1).any() else np.nan
++        epfire=sub[sub.e_process_stop_signal==1].step.min() if (sub.e_process_stop_signal==1).any() else np.nan
++        mufire=sub[sub.hazard_mu<=0].step.min() if (sub.hazard_mu<=0).any() else np.nan
++        recs.append(dict(model=m,dataset=d,mu_cross=mufire,eb_fire=ebfire,ep_fire=epfire,maxstep=int(df.step.max())))
++F=pd.DataFrame(recs)
++print("mean first-fire step: mu_cross=%.2f  eb=%.2f  ep=%.2f"%(F.mu_cross.mean(),F.eb_fire.mean(),F.ep_fire.mean()))
++print("EB fires LATER than mu-crossing by (steps): mean=%.2f"%((F.eb_fire-F.mu_cross).mean()))
++print("e-process fires vs mu-crossing by (steps): mean=%.2f"%((F.ep_fire-F.mu_cross).mean()))
++# on late cells specifically
++late=[("qwen2p5_3b","gsm8k"),("qwen2p5_7b","gsm8k"),("qwen2p5_7b","math"),("qwen2p5_14b","gsm8k"),
++("qwen2p5_32b","gsm8k"),("qwen2p5_32b","math"),("mistral_7b_instruct_v0p3","gsm8k"),
++("internlm3_8b_instruct","gsm8k"),("yi_1p5_9b_chat","gsm8k"),("mistral_small_24b_2409","gsm8k"),
++("mistral_small_24b_2409","arc"),("llama_3p1_8b_instruct","gsm8k")]
++Fl=F.set_index(["model","dataset"]).loc[late]
++print("\nON 12 LATE-BOUNDARY CELLS:")
++print(Fl[["mu_cross","eb_fire","ep_fire"]].round(2).to_string())
++
++# ---- verify thesis boundary table numbers (peak acc & AUC) ----
++print("\n===== VERIFY thesis Table 3 boundary/peak/AUC against source =====")
++chk=[]
++for m in MODELS:
++    for d in DATASETS:
++        hf=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        pf=os.path.join(ROOT,f"{m}__{d}","correctness_probe_metrics.csv")
++        if not (os.path.exists(hf) and os.path.exists(pf)): continue
++        hd=pd.read_csv(hf); pm=pd.read_csv(pf)
++        peak=hd.q_t.max()
++        pooled=pm[pm.scope=="pooled_oof"]
++        auc=pooled.auc.values[0] if len(pooled) else np.nan
++        chk.append(dict(model=m,dataset=d,peak_acc=round(peak,2),pooled_auc=round(auc,2)))
++C=pd.DataFrame(chk)
++print(C.pivot(index="model",columns="dataset",values="pooled_auc").to_string())
++print("\nPeak accuracy by cell (compare to thesis table):")
++print(C.pivot(index="model",columns="dataset",values="peak_acc").to_string())
+diff --git a/research/outputs/experiment_matrix/_verify_auc.py b/research/outputs/experiment_matrix/_verify_auc.py
+new file mode 100644
+index 0000000..1865e0c
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_verify_auc.py
+@@ -0,0 +1,35 @@
++import os
++import pandas as pd, numpy as np
++
++ROOT = r"C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++rows=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","correctness_probe_metrics.csv")
++        if not os.path.exists(f): continue
++        df=pd.read_csv(f)
++        pooled=df[df.scope=="pooled_oof"]
++        per_run=df[df.scope=="per_run_oof"]
++        pooled_auc=pooled.auc.values[0] if len(pooled) else np.nan
++        per_run_mean=per_run.auc.mean()  # noisy n=10 per-run
++        rows.append(dict(model=m,dataset=d,pooled_auc=pooled_auc,per_run_mean_auc=per_run_mean,
++                         per_run_nonnull=per_run.auc.notna().sum()))
++A=pd.DataFrame(rows)
++print(f"cells: {len(A)}")
++print("\n=== POOLED OOF AUC (the cell-level OOS AUC; matches CROSS_FAMILY_REPORT) ===")
++print(f"mean={A.pooled_auc.mean():.3f}  median={A.pooled_auc.median():.3f}  min={A.pooled_auc.min():.3f}  max={A.pooled_auc.max():.3f}")
++print(f"AUC<0.65 in {int((A.pooled_auc<0.65).sum())}/{len(A)}; AUC>=0.8 in {int((A.pooled_auc>=0.8).sum())}/{len(A)}")
++print(f"AUC<0.55 (near chance) in {int((A.pooled_auc<0.55).sum())}/{len(A)}")
++print("\n=== per-run mean AUC (noisy, n=10/run, many NaN) ===")
++print(f"mean={A.per_run_mean_auc.mean():.3f}  min={A.per_run_mean_auc.min():.3f}  max={A.per_run_mean_auc.max():.3f}")
++
++print("\n=== POOLED AUC by dataset ===")
++print(A.groupby("dataset").pooled_auc.agg(["mean","min","max","count"]).round(3).to_string())
++
++print("\n=== full pooled AUC sorted ===")
++print(A.sort_values("pooled_auc")[["model","dataset","pooled_auc"]].round(3).to_string(index=False))
+diff --git a/research/outputs/experiment_matrix/_verify_detectors.py b/research/outputs/experiment_matrix/_verify_detectors.py
+new file mode 100644
+index 0000000..ade9054
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_verify_detectors.py
+@@ -0,0 +1,73 @@
++import os, glob
++import pandas as pd
++import numpy as np
++
++ROOT = "C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++          "qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3",
++          "phi_4_mini_instruct","internlm3_8b_instruct","yi_1p5_9b_chat",
++          "mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++rows = []
++missing = []
++for m in MODELS:
++    for ds in DATASETS:
++        cell = f"{m}__{ds}"
++        path = os.path.join(ROOT, cell, "detector_comparison.csv")
++        if not os.path.exists(path):
++            missing.append(cell); continue
++        df = pd.read_csv(path)
++        df["model"] = m; df["dataset"] = ds
++        rows.append(df)
++
++print("Cells loaded:", len(rows), "Missing:", missing)
++allc = pd.concat(rows, ignore_index=True)
++print("Total rows:", len(allc))
++print("Detectors present:", sorted(allc["detector"].unique()))
++print("Cells per detector:\n", allc.groupby("detector").size())
++
++# columns: detector, mean_stop_step, mean_stop_utility, mean_oracle_utility,
++#          mean_oracle_gap, false_early_rate, false_late_rate, mean_false_late_severity
++METRICS = ["mean_oracle_gap","false_late_rate","false_early_rate","mean_stop_step",
++           "mean_stop_utility","mean_oracle_utility"]
++
++def agg(sub, name):
++    g = sub.groupby("detector")[METRICS].mean()
++    g = g.sort_values("mean_oracle_gap")
++    print(f"\n===== {name} (mean over {sub['model'].nunique()} models) =====")
++    for det, r in g.iterrows():
++        print(f"  {det:24s} gap={r['mean_oracle_gap']:.3f} fl={r['false_late_rate']:.2f} "
++              f"fe={r['false_early_rate']:.2f} stop={r['mean_stop_step']:.2f} "
++              f"util={r['mean_stop_utility']:.3f} orac={r['mean_oracle_utility']:.3f}")
++    return g
++
++# POOLED across all 52 cells
++pooled = agg(allc, "POOLED 52 cells")
++
++# Per-dataset
++per_ds = {}
++for ds in DATASETS:
++    per_ds[ds] = agg(allc[allc["dataset"]==ds], ds.upper())
++
++# Fraction of never_stop->oracle gap closed by best deployable theory detector
++print("\n===== Fraction of never_stop-to-oracle UTILITY gap closed =====")
++for ds in DATASETS:
++    g = per_ds[ds]
++    ns = g.loc["never_stop","mean_stop_utility"]
++    orac = g.loc["oracle","mean_stop_utility"]
++    denom = orac - ns
++    for det in ["hazard_drift","e_process","empirical_bernstein"]:
++        u = g.loc[det,"mean_stop_utility"]
++        frac = (u - ns)/denom*100 if denom!=0 else float('nan')
++        resid = orac - u
++        print(f"  {ds:6s} {det:20s} util={u:.3f} closed={frac:.1f}% resid_gap={resid:.3f}")
++
++# anytime-valid stop_step normalized to never_stop horizon
++print("\n===== Anytime-valid stop_step / never_stop horizon =====")
++for ds in DATASETS:
++    g = per_ds[ds]
++    horizon = g.loc["never_stop","mean_stop_step"]
++    for det in ["e_process","empirical_bernstein"]:
++        ss = g.loc[det,"mean_stop_step"]
++        print(f"  {ds:6s} {det:20s} stop={ss:.2f} horizon={horizon:.1f} ratio={ss/horizon:.2f} fl={g.loc[det,'false_late_rate']:.2f}")
+diff --git a/research/outputs/experiment_matrix/_verify_h2h.py b/research/outputs/experiment_matrix/_verify_h2h.py
+new file mode 100644
+index 0000000..4b3f428
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_verify_h2h.py
+@@ -0,0 +1,79 @@
++import os
++import pandas as pd
++import numpy as np
++
++ROOT = "C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++          "qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3",
++          "phi_4_mini_instruct","internlm3_8b_instruct","yi_1p5_9b_chat",
++          "mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++rows = []
++for m in MODELS:
++    for ds in DATASETS:
++        path = os.path.join(ROOT, f"{m}__{ds}", "detector_comparison.csv")
++        df = pd.read_csv(path)
++        df["model"]=m; df["dataset"]=ds
++        rows.append(df)
++allc = pd.concat(rows, ignore_index=True)
++
++# pivot: per cell, gap by detector
++piv = allc.pivot_table(index=["model","dataset"], columns="detector", values="mean_oracle_gap")
++print("Pivot shape (cells x detectors):", piv.shape)
++
++# Head-to-head: hazard_drift LOWER gap (better) than competitor
++def h2h(a, b):
++    wins = (piv[a] < piv[b]).sum()
++    ties = (piv[a] == piv[b]).sum()
++    n = len(piv)
++    return wins, ties, n
++for comp in ["entropy_plateau","answer_stability","first_answer","e_process"]:
++    w,t,n = h2h("hazard_drift", comp)
++    print(f"hazard_drift < {comp:18s}: {w}/{n} ({100*w/n:.0f}%)  ties={t}")
++
++# Best GENUINE detector per cell.
++# "Genuine" = deployable, label-free, non-degenerate, non-oracle.
++# Exclude: oracle, verifier_first_correct (cheat), first_answer (degenerate fe=1), never_stop (degenerate).
++GENUINE = ["hazard_drift","e_process","empirical_bernstein","entropy_plateau","answer_stability"]
++print("\n=== Best genuine detector per cell (lowest oracle_gap among GENUINE) ===")
++best_counts = {d:0 for d in GENUINE}
++for (m,ds), r in piv.iterrows():
++    vals = {d:r[d] for d in GENUINE}
++    best = min(vals, key=vals.get)
++    best_counts[best]+=1
++for d,c in sorted(best_counts.items(), key=lambda x:-x[1]):
++    print(f"  {d:20s} best in {c}/52 cells")
++
++# Per-dataset: is hazard_drift the best genuine detector on the dataset-mean?
++print("\n=== Per-dataset best genuine detector (by dataset-mean gap) ===")
++for ds in DATASETS:
++    sub = allc[allc["dataset"]==ds]
++    g = sub.groupby("detector")["mean_oracle_gap"].mean()
++    gg = g[g.index.isin(GENUINE)].sort_values()
++    print(f"  {ds:6s}: " + ", ".join(f"{d}={v:.3f}" for d,v in gg.items()))
++
++# Also: per-dataset best genuine detector by per-cell majority vote
++print("\n=== Per-dataset best genuine detector (per-cell win count) ===")
++for ds in DATASETS:
++    sub = piv.xs(ds, level="dataset")
++    cnt = {d:0 for d in GENUINE}
++    for _, r in sub.iterrows():
++        vals = {d:r[d] for d in GENUINE}
++        cnt[min(vals,key=vals.get)]+=1
++    print(f"  {ds:6s}: " + ", ".join(f"{d}={c}" for d,c in sorted(cnt.items(),key=lambda x:-x[1])))
++
++# Sanity: confirm first_answer is degenerate (stop=1, fe=1) in EVERY cell
++fa = allc[allc["detector"]=="first_answer"]
++print("\nfirst_answer: stop_step unique=", sorted(fa["mean_stop_step"].unique()),
++      " false_early unique=", sorted(fa["false_early_rate"].unique()))
++ns = allc[allc["detector"]=="never_stop"]
++print("never_stop: false_late min/max=", ns["false_late_rate"].min(), ns["false_late_rate"].max())
++
++# false_late range for hazard_drift across datasets (verdict says misses 24-59%)
++hd = allc[allc["detector"]=="hazard_drift"]
++print("\nhazard_drift false_late by dataset (mean):")
++print(hd.groupby("dataset")["false_late_rate"].mean().round(3).to_dict())
++print("hazard_drift false_late pooled mean:", round(hd["false_late_rate"].mean(),3))
++print("hazard_drift false_early by dataset (mean):")
++print(hd.groupby("dataset")["false_early_rate"].mean().round(3).to_dict())
+diff --git a/research/outputs/experiment_matrix/_verify_independent.py b/research/outputs/experiment_matrix/_verify_independent.py
+new file mode 100644
+index 0000000..ab4d276
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_verify_independent.py
+@@ -0,0 +1,189 @@
++import os
++import pandas as pd, numpy as np
++
++ROOT = r"C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++LAM=0.05
++
++# ---- Load detector_comparison for all cells ----
++dc_rows=[]
++missing_dc=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","detector_comparison.csv")
++        if not os.path.exists(f):
++            missing_dc.append(f"{m}__{d}"); continue
++        df=pd.read_csv(f); df["model"]=m; df["dataset"]=d
++        dc_rows.append(df)
++DC=pd.concat(dc_rows,ignore_index=True)
++ncells=DC[["model","dataset"]].drop_duplicates().shape[0]
++print(f"=== COVERAGE: {ncells} cells with detector_comparison.csv; missing: {missing_dc} ===")
++# check for extra dirs
++import glob
++alldirs=[os.path.basename(p) for p in glob.glob(os.path.join(ROOT,"*__*")) if os.path.isdir(p)]
++expected=set(f"{m}__{d}" for m in MODELS for d in DATASETS)
++extra=[x for x in alldirs if x not in expected and "__" in x]
++print(f"extra cell-like dirs not in 13x4 list: {extra}")
++for x in extra:
++    has_dc=os.path.exists(os.path.join(ROOT,x,"detector_comparison.csv"))
++    print(f"   {x}: detector_comparison.csv exists={has_dc}")
++
++# ---- Load hazard summaries for all cells ----
++HZ={}
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        if os.path.exists(f):
++            HZ[(m,d)]=pd.read_csv(f).sort_values("step")
++
++print("\n"+"#"*80)
++print("# CLAIM (a) MECHANISM: beta direction, alpha direction, Theorem-1 premises")
++print("#"*80)
++
++beta_falls=beta_rises=0
++alpha_falls=0
++q_up_full=0; a_down_full=0; b_up_full=0; mu_down_full=0
++beta_pair_frac=[]; q_pair_frac=[]; a_pair_frac=[]; mu_pair_frac=[]
++fitted_beta_falls=0; fitted_b_up_full=0
++for (m,d),df in HZ.items():
++    sub=df[df.step>=2]
++    # fitted beta direction (overall step1->last)
++    fb=df.sort_values("step")["fitted_corruption_hazard"].values
++    if fb[-1] < fb[0]: fitted_beta_falls+=1
++    # empirical beta direction step2 -> last (use corruption_rate = conditional beta)
++    b=sub["corruption_rate"].values
++    if b[-1] < b[0]: beta_falls+=1
++    elif b[-1] > b[0]: beta_rises+=1
++    a=sub["repair_rate"].values
++    if a[-1] < a[0]: alpha_falls+=1
++    q=sub["q_t"].values
++    mu=sub["hazard_mu"].values
++    # full monotonicity (t>=2)
++    if np.all(np.diff(q)>=-1e-9): q_up_full+=1
++    if np.all(np.diff(a)<=1e-9): a_down_full+=1
++    if np.all(np.diff(b)>=-1e-9): b_up_full+=1
++    if np.all(np.diff(mu)<=1e-9): mu_down_full+=1
++    if np.all(np.diff(df.sort_values("step")["fitted_corruption_hazard"].values)>=-1e-9): fitted_b_up_full+=1
++    # fraction of step-pairs satisfying each
++    q_pair_frac.append(np.mean(np.diff(q)>=-1e-9))
++    a_pair_frac.append(np.mean(np.diff(a)<=1e-9))
++    beta_pair_frac.append(np.mean(np.diff(b)>=-1e-9))
++    mu_pair_frac.append(np.mean(np.diff(mu)<=1e-9))
++N=len(HZ)
++print(f"cells with hazard summary: {N}")
++print(f"empirical beta (corruption_rate) step2->last FALLS in {beta_falls}/{N}, RISES in {beta_rises}/{N}")
++print(f"fitted_corruption_hazard step1->last FALLS in {fitted_beta_falls}/{N}")
++print(f"empirical alpha (repair_rate) step2->last FALLS in {alpha_falls}/{N}")
++print(f"--- Theorem 1 premises (fully holds across t>=2 step-pairs) ---")
++print(f"q_t nondecreasing fully: {q_up_full}/{N}  (mean pair-frac {np.mean(q_pair_frac):.3f})")
++print(f"alpha nonincreasing fully: {a_down_full}/{N}  (mean pair-frac {np.mean(a_pair_frac):.3f})")
++print(f"beta nondecreasing fully (empirical): {b_up_full}/{N}  (mean pair-frac {np.mean(beta_pair_frac):.3f})")
++print(f"beta nondecreasing fully (fitted): {fitted_b_up_full}/{N}")
++print(f"mu nonincreasing fully (conclusion): {mu_down_full}/{N}  (mean pair-frac {np.mean(mu_pair_frac):.3f})")
++
++print("\n"+"#"*80)
++print("# CLAIM (a) CONTINUATION WINDOW: mu<=0 already at t=2? one-crossing?")
++print("#"*80)
++mu_neg_at2=0; has_pos_after2=0
++sign_changes_dist={0:0,1:0,2:0,"ge2":0}
++one_crossing_ok=0
++for (m,d),df in HZ.items():
++    sub=df[df.step>=2].sort_values("step")
++    mu=sub["hazard_mu"].values
++    if mu[0]<=0: mu_neg_at2+=1
++    if np.any(mu>0): has_pos_after2+=1
++    signs=np.sign(mu)
++    # count down and up crossings
++    down=int(np.sum((signs[:-1]>0)&(signs[1:]<=0)))
++    up=int(np.sum((signs[:-1]<=0)&(signs[1:]>0)))
++    total_cross=down+up
++    if total_cross==0: sign_changes_dist[0]+=1
++    elif total_cross==1: sign_changes_dist[1]+=1
++    elif total_cross==2: sign_changes_dist[2]+=1
++    else: sign_changes_dist["ge2"]+=1
++    if total_cross<=1: one_crossing_ok+=1
++print(f"hazard_mu <= 0 already at t=2 in {mu_neg_at2}/{N} cells")
++print(f"cells with ANY step>=2 where mu>0 (genuine continuation window): {has_pos_after2}/{N}")
++print(f"sign-change distribution of mu (t>=2): {sign_changes_dist}")
++print(f"one-crossing (<=1 sign change) holds in {one_crossing_ok}/{N}")
++
++# Oracle mean stop step across cells
++orac=DC[DC.detector=="oracle"]
++print(f"\noracle mean_stop_step: mean={orac.mean_stop_step.mean():.3f} max={orac.mean_stop_step.max():.3f} min={orac.mean_stop_step.min():.3f}")
++
++print("\n"+"#"*80)
++print("# CLAIM (b) ANYTIME-VALID: e_process & EB false_early vs delta=0.05")
++print("#"*80)
++ep=DC[DC.detector=="e_process"].set_index(["model","dataset"])
++eb=DC[DC.detector=="empirical_bernstein"].set_index(["model","dataset"])
++hd=DC[DC.detector=="hazard_drift"].set_index(["model","dataset"])
++ns=DC[DC.detector=="never_stop"].set_index(["model","dataset"])
++fa=DC[DC.detector=="first_answer"].set_index(["model","dataset"])
++orc=DC[DC.detector=="oracle"].set_index(["model","dataset"])
++
++ep_viol=(ep.false_early_rate>0.05).sum()
++print(f"e_process false_early > 0.05 in {ep_viol}/{len(ep)} cells; mean={ep.false_early_rate.mean():.4f} max={ep.false_early_rate.max():.4f}")
++eb_viol=(eb.false_early_rate>0.05).sum()
++print(f"EB false_early > 0.05 in {eb_viol}/{len(eb)} cells; mean={eb.false_early_rate.mean():.4f} max={eb.false_early_rate.max():.4f}")
++hd_viol=(hd.false_early_rate>0.05).sum()
++print(f"hazard_drift false_early > 0.05 in {hd_viol}/{len(hd)} cells; mean={hd.false_early_rate.mean():.4f} max={hd.false_early_rate.max():.4f}")
++
++print(f"\n--- EB vacuity check ---")
++print(f"EB mean_stop_step={eb.mean_stop_step.mean():.3f}  oracle={orc.mean_stop_step.mean():.3f}  never_stop={ns.mean_stop_step.mean():.3f}")
++print(f"EB false_late={eb.false_late_rate.mean():.4f}  never_stop false_late={ns.false_late_rate.mean():.4f}")
++print(f"EB oracle_gap={eb.mean_oracle_gap.mean():.4f}  first_answer oracle_gap={fa.mean_oracle_gap.mean():.4f}  never_stop gap={ns.mean_oracle_gap.mean():.4f}")
++print(f"EB gap as % of never_stop gap: mean={100*(eb.mean_oracle_gap/ns.mean_oracle_gap).mean():.1f}%")
++# forced to horizon
++maxsteps={(m,d):int(df.step.max()) for (m,d),df in HZ.items()}
++eb_forced=sum(1 for k in eb.index if k in maxsteps and abs(eb.loc[k,"mean_stop_step"]-maxsteps[k])<0.5)
++print(f"EB forced to max horizon (stop==maxstep) in {eb_forced}/{len(eb)} cells")
++
++print("\n"+"#"*80)
++print("# CLAIM (c) BEST DEPLOYABLE DETECTOR (by oracle_gap), all 52")
++print("#"*80)
++THEORY=["hazard_drift","e_process","empirical_bernstein"]
++HEUR=["answer_stability","entropy_plateau","first_answer"]
++deployable=THEORY+HEUR+["never_stop"]
++sub=DC[DC.detector.isin(deployable)].copy()
++idx=sub.groupby(["model","dataset"])["mean_oracle_gap"].idxmin()
++best=sub.loc[idx]
++print("best deployable detector counts (all 52):")
++print(best.detector.value_counts().to_string())
++for det in ["hazard_drift","answer_stability","first_answer","entropy_plateau","e_process","empirical_bernstein"]:
++    g=DC[DC.detector==det].mean_oracle_gap.mean()
++    print(f"  mean oracle_gap {det}: {g:.4f}")
++
++# probe AUC
++print("\n"+"#"*80)
++print("# CLAIM (c) PROBE AUC out-of-sample")
++print("#"*80)
++aucs=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","correctness_probe_metrics.csv")
++        if os.path.exists(f):
++            pm=pd.read_csv(f)
++            # find an auc column
++            cols=[c for c in pm.columns if "auc" in c.lower()]
++            if cols:
++                # take mean oos auc if multiple rows; prefer column literally 'auc' or containing 'oos'/'test'
++                val=None
++                for pref in ["oos","test","val","cv"]:
++                    cc=[c for c in cols if pref in c.lower()]
++                    if cc: val=pm[cc[0]].mean(); break
++                if val is None: val=pm[cols[0]].mean()
++                aucs.append((m,d,val))
++A=pd.DataFrame(aucs,columns=["model","dataset","auc"])
++if len(A):
++    print(f"probe AUC mean={A.auc.mean():.3f} min={A.auc.min():.3f} max={A.auc.max():.3f}")
++    print(f"AUC<0.65 in {int((A.auc<0.65).sum())}/{len(A)} cells; AUC>=0.8 in {int((A.auc>=0.8).sum())}/{len(A)}")
++else:
++    print("no AUC columns found; columns sample:")
++    f=os.path.join(ROOT,"qwen2p5_7b__gsm8k","correctness_probe_metrics.csv")
++    print(pd.read_csv(f).columns.tolist())
++
++DC.to_csv(os.path.join(ROOT,"_verify_DC_all.csv"),index=False)
++print("\nsaved _verify_DC_all.csv")
+diff --git a/research/outputs/experiment_matrix/_verify_latecells.py b/research/outputs/experiment_matrix/_verify_latecells.py
+new file mode 100644
+index 0000000..61b545d
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_verify_latecells.py
+@@ -0,0 +1,78 @@
++import os
++import pandas as pd, numpy as np
++
++ROOT = r"C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++# Independently derive late cells: corrected boundary T* = inf{t>=2: hazard_mu<=0}, late iff T*>2
++def boundary(df,floor=2):
++    sub=df[df.step>=floor].sort_values("step")
++    neg=sub[sub.hazard_mu<=0]
++    if len(neg)==0: return int(df.step.max())
++    return int(neg.iloc[0].step)
++
++late_derived=[]
++allB=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        if not os.path.exists(f): continue
++        df=pd.read_csv(f).sort_values("step")
++        T=boundary(df)
++        allB.append((m,d,T))
++        if T>2: late_derived.append((m,d))
++print(f"=== INDEPENDENTLY DERIVED late cells (corrected T*>2): {len(late_derived)} ===")
++for m,d in late_derived: print(f"   {m}__{d}  (T*={dict(((a,b),t) for a,b,t in allB)[(m,d)]})")
++
++# prior analyst hardcoded list
++prior_late=[("qwen2p5_3b","gsm8k"),("qwen2p5_7b","gsm8k"),("qwen2p5_7b","math"),("qwen2p5_14b","gsm8k"),
++("qwen2p5_32b","gsm8k"),("qwen2p5_32b","math"),("mistral_7b_instruct_v0p3","gsm8k"),
++("internlm3_8b_instruct","gsm8k"),("yi_1p5_9b_chat","gsm8k"),("mistral_small_24b_2409","gsm8k"),
++("mistral_small_24b_2409","arc"),("llama_3p1_8b_instruct","gsm8k")]
++sd=set(late_derived); sp=set(prior_late)
++print(f"\nprior hardcoded list size={len(sp)}; derived size={len(sd)}")
++print(f"in derived but NOT prior: {sd-sp}")
++print(f"in prior but NOT derived: {sp-sd}")
++
++# Load detector_comparison for the DERIVED late cells and re-run head-to-head
++def load_dc(cells):
++    rows=[]
++    for m,d in cells:
++        f=os.path.join(ROOT,f"{m}__{d}","detector_comparison.csv")
++        df=pd.read_csv(f); df["model"]=m; df["dataset"]=d; rows.append(df)
++    return pd.concat(rows,ignore_index=True)
++
++THEORY=["hazard_drift","e_process","empirical_bernstein"]
++HEUR=["answer_stability","entropy_plateau","first_answer"]
++
++for label,cells in [("DERIVED late cells",late_derived),("PRIOR hardcoded late cells",prior_late)]:
++    L=load_dc(cells)
++    print("\n"+"="*70)
++    print(f"HEAD-TO-HEAD on {label} (n={len(cells)})")
++    print("="*70)
++    piv=L.pivot_table(index=["model","dataset"],columns="detector",values="mean_oracle_gap")
++    # hazard_drift vs answer_stability
++    hd=piv["hazard_drift"]; ans=piv["answer_stability"]; fa=piv["first_answer"]; ent=piv["entropy_plateau"]
++    print(f"hazard_drift mean gap={hd.mean():.4f}  answer_stability={ans.mean():.4f}  first_answer={fa.mean():.4f}  entropy_plateau={ent.mean():.4f}")
++    print(f"hazard_drift beats answer_stability: {int((hd<ans).sum())}W / {int((hd>ans).sum())}L (mean gap diff hd-ans = {(hd-ans).mean():+.4f})")
++    print(f"hazard_drift beats first_answer:     {int((hd<fa).sum())}W / {int((hd>fa).sum())}L")
++    print(f"hazard_drift beats entropy_plateau:  {int((hd<ent).sum())}W / {int((hd>ent).sum())}L")
++    # best deployable
++    deployable=THEORY+HEUR+["never_stop"]
++    sub=L[L.detector.isin(deployable)].copy()
++    idx=sub.groupby(["model","dataset"])["mean_oracle_gap"].idxmin()
++    best=sub.loc[idx]
++    print(f"best deployable counts: {dict(best.detector.value_counts())}")
++    # hazard_drift dominates all 3 heuristics
++    dom=((hd<fa)&(hd<ans)&(hd<ent)).sum()
++    print(f"hazard_drift dominates ALL 3 heuristics simultaneously: {int(dom)}/{len(cells)}")
++    # hazard_drift is single best deployable
++    hd_best=int((best.detector=="hazard_drift").sum())
++    ans_best=int((best.detector=="answer_stability").sum())
++    print(f"hazard_drift single best deployable: {hd_best}/{len(cells)}; answer_stability best: {ans_best}/{len(cells)}")
++    # verifier (cheat) gap
++    vfc=L[L.detector=="verifier_first_correct"].set_index(["model","dataset"])["mean_oracle_gap"]
++    print(f"verifier_first_correct (CHEATS) mean gap: {vfc.mean():.4f}")
+diff --git a/research/outputs/experiment_matrix/_verify_remaining.py b/research/outputs/experiment_matrix/_verify_remaining.py
+new file mode 100644
+index 0000000..7c46677
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_verify_remaining.py
+@@ -0,0 +1,89 @@
++import os
++import pandas as pd, numpy as np
++
++ROOT = r"C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++"qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3","phi_4_mini_instruct",
++"internlm3_8b_instruct","yi_1p5_9b_chat","mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++dc_rows=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","detector_comparison.csv")
++        df=pd.read_csv(f); df["model"]=m; df["dataset"]=d; dc_rows.append(df)
++DC=pd.concat(dc_rows,ignore_index=True)
++
++late=[("qwen2p5_3b","gsm8k"),("qwen2p5_7b","gsm8k"),("qwen2p5_7b","math"),("qwen2p5_14b","gsm8k"),
++("qwen2p5_32b","gsm8k"),("qwen2p5_32b","math"),("mistral_7b_instruct_v0p3","gsm8k"),
++("internlm3_8b_instruct","gsm8k"),("yi_1p5_9b_chat","gsm8k"),("mistral_small_24b_2409","gsm8k"),
++("mistral_small_24b_2409","arc"),("llama_3p1_8b_instruct","gsm8k")]
++lateset=set(late)
++DC["is_late"]=DC.apply(lambda r:(r.model,r.dataset) in lateset,axis=1)
++
++def col(det,c,mask=None):
++    s=DC[DC.detector==det]
++    if mask is not None: s=s[mask(s)]
++    return s[c]
++
++print("=== e_process false_early in the 12 LATE cells ===")
++ep_late=DC[(DC.detector=="e_process")&(DC.is_late)]
++print(f"e_process false_early>0.05 in late cells: {int((ep_late.false_early_rate>0.05).sum())}/12; values: {ep_late.false_early_rate.round(3).tolist()}")
++
++print("\n=== EB worse than first_answer? (oracle_gap, all 52) ===")
++eb=DC[DC.detector=="empirical_bernstein"].set_index(["model","dataset"])["mean_oracle_gap"]
++fa=DC[DC.detector=="first_answer"].set_index(["model","dataset"])["mean_oracle_gap"]
++ns=DC[DC.detector=="never_stop"].set_index(["model","dataset"])["mean_oracle_gap"]
++print(f"EB mean gap={eb.mean():.4f}  first_answer mean gap={fa.mean():.4f}  -> EB worse by {eb.mean()-fa.mean():+.4f}")
++print(f"EB gap as fraction of never_stop gap: mean={ (eb/ns).mean():.3f}  (verdict: 76%)")
++print(f"EB worse than first_answer in {int((eb>fa).sum())}/52 cells")
++
++print("\n=== detector means across all 52 (recap) ===")
++g=DC.groupby("detector").agg(gap=("mean_oracle_gap","mean"),fl=("false_late_rate","mean"),
++    fe=("false_early_rate","mean"),step=("mean_stop_step","mean")).sort_values("gap")
++print(g.round(4).to_string())
++
++print("\n=== false_late: deployables (which catches overthinking best) ===")
++for det in ["hazard_drift","answer_stability","entropy_plateau","first_answer","e_process","empirical_bernstein","never_stop"]:
++    print(f"  {det:22s} false_late mean={DC[DC.detector==det].false_late_rate.mean():.4f}")
++
++print("\n=== Mechanism: WHY does mu<=0 at t=2? alpha vs lambda at step2 ===")
++LAM=0.05
++n_alpha_decay=0; n_beta_low=0
++a2_list=[]; b2_list=[]; mu2_list=[]
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        df=pd.read_csv(f).sort_values("step")
++        s2=df[df.step==2]
++        a2=s2.repair_rate.values[0]; b2=s2.corruption_rate.values[0]; q2=s2.q_t.values[0]
++        mu2=s2.hazard_mu.values[0]
++        a2_list.append(a2); b2_list.append(b2); mu2_list.append(mu2)
++print(f"at step2: mean alpha(repair)={np.mean(a2_list):.3f}  mean beta(corruption)={np.mean(b2_list):.3f}  mean mu={np.mean(mu2_list):.3f}")
++# decompose: is mu<=0 at t=2 driven by (1-q)alpha < q*beta+lambda?
++# count cells where corruption term q*beta dominates vs lambda dominates the negativity
++print("at step2: among the 40 cells with mu<=0, is it lambda or beta that kills mu?")
++lam_kills=0; beta_kills=0
++for m in MODELS:
++    for d in DATASETS:
++        f=os.path.join(ROOT,f"{m}__{d}","hazard_drift_summary.csv")
++        df=pd.read_csv(f).sort_values("step")
++        s2=df[df.step==2]
++        a2=s2.repair_rate.values[0]; b2=s2.corruption_rate.values[0]; q2=s2.q_t.values[0]
++        mu2=s2.hazard_mu.values[0]
++        if mu2<=0:
++            gain=(1-q2)*a2
++            corrupt=q2*b2
++            # would mu be >0 without lambda? gain - corrupt > 0 ?
++            if gain-corrupt>0:  # only lambda makes it negative
++                lam_kills+=1
++            else:  # corruption term alone already exceeds repair
++                beta_kills+=1
++print(f"  lambda alone makes mu<=0 (repair>corruption but <lambda): {lam_kills}")
++print(f"  corruption>=repair even before lambda: {beta_kills}")
++
++print("\n=== oracle stop step in late cells (the 'late boundary at 5-6' claim) ===")
++orc=DC[(DC.detector=="oracle")].set_index(["model","dataset"])["mean_stop_step"]
++orc_late=orc[orc.index.isin(lateset)]
++print(f"oracle per-trace mean stop step in late cells: mean={orc_late.mean():.3f} max={orc_late.max():.3f}")
++print(f"oracle per-trace mean stop step ALL 52: mean={orc.mean():.3f} max={orc.max():.3f}")
+diff --git a/research/outputs/experiment_matrix/_verify_robust.py b/research/outputs/experiment_matrix/_verify_robust.py
+new file mode 100644
+index 0000000..9a09c43
+--- /dev/null
++++ b/research/outputs/experiment_matrix/_verify_robust.py
+@@ -0,0 +1,76 @@
++import os
++import pandas as pd
++import numpy as np
++
++ROOT = "C:/Aditya_Data/Personal/ResearchThesis/research/outputs/experiment_matrix"
++MODELS = ["deepseek_r1_distill_1p5b","deepseek_r1_distill_7b","qwen2p5_0p5b","qwen2p5_3b",
++          "qwen2p5_7b","qwen2p5_14b","qwen2p5_32b","mistral_7b_instruct_v0p3",
++          "phi_4_mini_instruct","internlm3_8b_instruct","yi_1p5_9b_chat",
++          "mistral_small_24b_2409","llama_3p1_8b_instruct"]
++DATASETS = ["gsm8k","math","arc","gpqa"]
++
++rows = []
++for m in MODELS:
++    for ds in DATASETS:
++        path = os.path.join(ROOT, f"{m}__{ds}", "detector_comparison.csv")
++        df = pd.read_csv(path); df["model"]=m; df["dataset"]=ds
++        rows.append(df)
++allc = pd.concat(rows, ignore_index=True)
++
++# Is there an n column to weight? check columns
++print("Columns:", list(allc.columns))
++
++# GSM8K verdict: "hazard_drift achieves a LOW oracle_gap (best genuine ... on gsm8k/arc/gpqa, #2 on math;
++#   pooled gap 0.185, just behind degenerate first_answer at 0.182)"
++# verify pooled hazard_drift vs first_answer
++pooled = allc.groupby("detector")["mean_oracle_gap"].mean().sort_values()
++print("\nPooled gap (re-derived):")
++print(pooled.round(4).to_dict())
++
++# Check the claim "best genuine detector in 18/52 individual cells" -- already 18 confirmed.
++# But which definition of genuine? If e_process is included it's 23 for e_process. Verdict says hazard 18.
++# So verdict counts hazard_drift=18 best cells -- but does NOT prominently report e_process=23 best cells.
++
++# verifier_first_correct: verdict says "NOT a clean upper bound ... pooled gap 0.166 ... on MATH worse (0.402, stop 11.08)"
++vfc = allc[allc["detector"]=="verifier_first_correct"]
++print("\nverifier_first_correct gap by dataset:", vfc.groupby("dataset")["mean_oracle_gap"].mean().round(3).to_dict())
++print("verifier_first_correct stop by dataset:", vfc.groupby("dataset")["mean_stop_step"].mean().round(2).to_dict())
++print("verifier_first_correct pooled gap:", round(vfc["mean_oracle_gap"].mean(),4))
++
++# On MATH, how many deployable (genuine) detectors beat verifier on gap?
++math = allc[allc["dataset"]=="math"].groupby("detector")["mean_oracle_gap"].mean().sort_values()
++print("\nMATH gap ranking:", math.round(3).to_dict())
++vfc_math = math["verifier_first_correct"]
++GENUINE = ["hazard_drift","e_process","empirical_bernstein","entropy_plateau","answer_stability"]
++beat = [d for d in GENUINE if math[d] < vfc_math]
++print(f"Genuine detectors beating verifier on MATH gap: {beat}")
++
++# ARC: verifier has NEGATIVE gap (-0.009) and fe=0.66. Note arc verifier gap < oracle? gap is mean over models.
++# That's possible if utility-stop > oracle in some cells (oracle is per-task argmax of EXPECTED utility, realized can differ)
++arc = allc[allc["dataset"]=="arc"]
++print("\nARC verifier gap:", round(arc[arc.detector=='verifier_first_correct']['mean_oracle_gap'].mean(),4),
++      "fe:", round(arc[arc.detector=='verifier_first_correct']['false_early_rate'].mean(),3))
++
++# Claim: e_process "best on math". Confirm e_process is best GENUINE on math (0.203 < hazard 0.225). YES.
++# Claim: "empirical_bernstein barely stops". stop ratio 0.59-0.85. fl 0.62-0.92. confirmed earlier.
++
++# Claim "misses 24-59% of overthinking" = false_late range across datasets for best deployable detector.
++# hazard_drift fl: gpqa 0.245, arc 0.329, math 0.564, gsm8k 0.591. Range 0.24-0.59. matches.
++# But on MATH e_process is the 'best' detector and its fl=0.512. So if best-per-dataset, range is
++# e_process(math) fl=0.51, hazard gpqa 0.245 ... -> 0.24-0.59 still holds via gsm8k hazard 0.591.
++print("\nBest-genuine-per-dataset false_late:")
++for ds in DATASETS:
++    sub = allc[allc.dataset==ds].groupby("detector")[["mean_oracle_gap","false_late_rate"]].mean()
++    sub = sub[sub.index.isin(GENUINE)].sort_values("mean_oracle_gap")
++    bestdet = sub.index[0]
++    print(f"  {ds:6s} best={bestdet:16s} fl={sub.iloc[0]['false_late_rate']:.3f}")
++
++# Robustness: pooled ranking is unweighted mean over 52 cells. Each cell already a mean over tasks.
++# Verify equal-ish task counts via trace_steps if available -> check pilot_summary for n
++print("\n--- check a pilot_summary for task count ---")
++for c in ["qwen2p5_7b__gsm8k","qwen2p5_7b__math"]:
++    p = os.path.join(ROOT,c,"pilot_summary.csv")
++    if os.path.exists(p):
++        ps = pd.read_csv(p)
++        print(c, "cols:", list(ps.columns)[:8])
++        print(ps.head(2).to_string())

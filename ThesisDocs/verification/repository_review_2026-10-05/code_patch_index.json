@@ -1,0 +1,1800 @@
+[
+  {
+    "sha": "6f89d5bd4266eaae7056642bcce7132b66a54393",
+    "subject": "Add Colab runner and research package",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/simulate_overthinking_boundary.py",
+      "research/trace_analysis.py",
+      "tools/run_colab_experiment.py",
+      "tools/start_mcp_server.ps1"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/6f89d5bd4266eaae7056642bcce7132b66a54393.patch",
+    "patch_sha256": "5297a512f77da5b3c3179a61127daf410758894413818b90833092dffbdd9461",
+    "patch_bytes": 74239
+  },
+  {
+    "sha": "92681da827e4e17c63baa9582d3aa3621953f13c",
+    "subject": "Revamp real_trace protocol with flexible modes and baseline",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/92681da827e4e17c63baa9582d3aa3621953f13c.patch",
+    "patch_sha256": "17e3566cad8307cf056174b89ff535156aa7a946b991c13c1d91519625e27151",
+    "patch_bytes": 23250
+  },
+  {
+    "sha": "d98737742887de3019c9b6435973bca4239e6913",
+    "subject": "save progress",
+    "code_files": [
+      "research/generate_thesis_artifacts.py",
+      "research/real_trace_experiments.py",
+      "research/trace_analysis.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/d98737742887de3019c9b6435973bca4239e6913.patch",
+    "patch_sha256": "7881a02d7d60318c834bc8e2ea3d4936d355d83e0057b480e02620e6ad30ad99",
+    "patch_bytes": 99419
+  },
+  {
+    "sha": "cebfefa145041c84812308ef125416c4dfedbc9d",
+    "subject": "Auto-shutdown keep-alive hook, concurrency flags, and recent artifact generation",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/cebfefa145041c84812308ef125416c4dfedbc9d.patch",
+    "patch_sha256": "050cba06a73acbf0bd86570ff73fede251bc6881ab40b96a01b557840dc43e11",
+    "patch_bytes": 5926
+  },
+  {
+    "sha": "b7b75ab3bcfc29310613dce085ce62cf97f8630c",
+    "subject": "saving optimized gpu run",
+    "code_files": [
+      "research/generate_thesis_artifacts.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/b7b75ab3bcfc29310613dce085ce62cf97f8630c.patch",
+    "patch_sha256": "b355a6d9b7eb3963549a402f75887a4f7e9962840968faa0c91e97a2119feab0",
+    "patch_bytes": 17763
+  },
+  {
+    "sha": "bce43f6bcb3b5086d0e2d7412bc215b2e7a8f068",
+    "subject": "save more",
+    "code_files": [
+      "research/generate_thesis_artifacts.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/bce43f6bcb3b5086d0e2d7412bc215b2e7a8f068.patch",
+    "patch_sha256": "b2c24d578edcb1ff6fd8e21c87ae92cbb7e1bc4f31bceb77559689fcf51801de",
+    "patch_bytes": 4563
+  },
+  {
+    "sha": "2351c8f337c3ac3fb70f401fce67e46679ebad4f",
+    "subject": "Add cross-family L4 results and README overview",
+    "code_files": [
+      "research/generate_thesis_artifacts.py",
+      "research/trace_analysis.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/2351c8f337c3ac3fb70f401fce67e46679ebad4f.patch",
+    "patch_sha256": "e5731cdc0dcb9c01ae8f0b4dfd98515c2da154f3ac0e5795a26fd2fc04cf7fad",
+    "patch_bytes": 22546
+  },
+  {
+    "sha": "f6fe839ae34d22f8471b0b7089638ef1735d62dd",
+    "subject": "save records",
+    "code_files": [
+      "research/cross_family_analysis.py",
+      "research/generate_thesis_artifacts.py",
+      "research/real_trace_experiments.py",
+      "research/trace_analysis.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/f6fe839ae34d22f8471b0b7089638ef1735d62dd.patch",
+    "patch_sha256": "ad55872dc9cc87e60e9e5e62582b01c391ed385f39b897fcc6f3e3c242d5dd63",
+    "patch_bytes": 85617
+  },
+  {
+    "sha": "6b5ad36915dd89067f5577dae42372234fb723d8",
+    "subject": "Preserve runtime context on refresh",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/6b5ad36915dd89067f5577dae42372234fb723d8.patch",
+    "patch_sha256": "33b2c78687b8bde6aba872a96a4a0f68968b8dda142435a8e328407e4a786e8b",
+    "patch_bytes": 2597
+  },
+  {
+    "sha": "afad4f0296ac72d0c3e58a29eff96ef060902edc",
+    "subject": "recover qwen7b run and regenerate analyses",
+    "code_files": [
+      "research/generate_thesis_artifacts.py",
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/afad4f0296ac72d0c3e58a29eff96ef060902edc.patch",
+    "patch_sha256": "4950e764d18e064f888ce61edc218479a896f7f6013b2c3da71ddb30384bffad",
+    "patch_bytes": 4280
+  },
+  {
+    "sha": "ba7e28f3217794f057df2c7ae99b28203f38bd36",
+    "subject": "feat: add mistral l4 benchmark path",
+    "code_files": [
+      "research/benchmark_l4_configs.py",
+      "research/real_trace_experiments.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ba7e28f3217794f057df2c7ae99b28203f38bd36.patch",
+    "patch_sha256": "4959dae49f9c0985201c285b8cd5328ea21dd4ed3d182593d6b9ddb15870f1ae",
+    "patch_bytes": 34576
+  },
+  {
+    "sha": "2d6d38233ee8d18f4259c9b4e0f38315471a746b",
+    "subject": "test: checkpoint mistral smoke run",
+    "code_files": [
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/2d6d38233ee8d18f4259c9b4e0f38315471a746b.patch",
+    "patch_sha256": "df8f050e7d0bb221e973716c3bc07f3c51978a0473c5a8ad6772deefb6e8d4f3",
+    "patch_bytes": 889
+  },
+  {
+    "sha": "13ad1ff1c22d6c036cfab09aed161f08e6d8c725",
+    "subject": "perf: select mistral l4 runtime",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/13ad1ff1c22d6c036cfab09aed161f08e6d8c725.patch",
+    "patch_sha256": "486b506bf0b94b527ae46076600f553923f3e8572502c9ee7bef7d310af97a19",
+    "patch_bytes": 940
+  },
+  {
+    "sha": "240081c9863e0530129bd7ebca35d85835f1c820",
+    "subject": "chore: add checkpointed mistral runner",
+    "code_files": [
+      "tools/run_checkpointed_real_trace.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/240081c9863e0530129bd7ebca35d85835f1c820.patch",
+    "patch_sha256": "d374e30a858da9177a5ab7a0c8fa7983f5e958e2a404412e7496b6813d9fb32a",
+    "patch_bytes": 23405
+  },
+  {
+    "sha": "1641b2ca80e8a4053069f393280d9965fe799088",
+    "subject": "fix: restore mistral l4 runtime",
+    "code_files": [
+      "research/_vendor/torchvision_stub/torchvision/__init__.py",
+      "research/_vendor/torchvision_stub/torchvision/io.py",
+      "research/_vendor/torchvision_stub/torchvision/transforms.py",
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/1641b2ca80e8a4053069f393280d9965fe799088.patch",
+    "patch_sha256": "92b60534864058673649e7e26fb885a8baacbd1c0ba971a400d9aaf6ed7fbdee",
+    "patch_bytes": 3000
+  },
+  {
+    "sha": "1bf52338fbabbee6df7fd793865d3c3c6d1d3c5e",
+    "subject": "fix: normalize checkpoint driver paths",
+    "code_files": [
+      "tools/run_checkpointed_real_trace.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/1bf52338fbabbee6df7fd793865d3c3c6d1d3c5e.patch",
+    "patch_sha256": "29a53336668fb730530bad5eef53f217f041ad5b01fecab47a7026fe7225b9cc",
+    "patch_bytes": 841
+  },
+  {
+    "sha": "7d7d3a5bcbda9f6148cb0e0ffc11624c01c15085",
+    "subject": "feat: add mistral finalization watcher",
+    "code_files": [
+      "research/generate_thesis_artifacts.py",
+      "tools/watch_and_finalize_mistral_cycle.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/7d7d3a5bcbda9f6148cb0e0ffc11624c01c15085.patch",
+    "patch_sha256": "aab250d83697521725a454f270092d383a1f4ac4877262375d3bc451be804420",
+    "patch_bytes": 8929
+  },
+  {
+    "sha": "c86cbd51b318db7aa4f9e6ede275753b30d2a476",
+    "subject": "docs: finalize mistral thesis conclusions",
+    "code_files": [
+      "research/cross_family_analysis.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c86cbd51b318db7aa4f9e6ede275753b30d2a476.patch",
+    "patch_sha256": "0103edbe97b0264e3cc66a466194463b97e87de7314329a2048dc5a172594344",
+    "patch_bytes": 7252
+  },
+  {
+    "sha": "2a883cc6f315acd08f1edeb9b3c53412d7de79be",
+    "subject": "feat(obe-system): integrate Gemma 4, Qwen 3.5, Llama 4; enable 4-bit L4 optimization and autonomous validation prompt",
+    "code_files": [
+      "research/difficulty_stratified_analysis.py",
+      "research/real_trace_experiments.py",
+      "research/universal_feature_analysis.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/2a883cc6f315acd08f1edeb9b3c53412d7de79be.patch",
+    "patch_sha256": "a66919efa6a821c382720d339c151a7f7bf16cd6ce7a2cf4697bba8ba56427da",
+    "patch_bytes": 57537
+  },
+  {
+    "sha": "089bf59f87d43404140500875219d7520250a39f",
+    "subject": "[OBE-SYSTEM] Phase 2: L4 GPU Optimization + Frontier Model Integration (Gemma 4/Qwen 3.5/Llama 4)",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/089bf59f87d43404140500875219d7520250a39f.patch",
+    "patch_sha256": "33d24b4d772f01a0c5f8d45a7b91df374aae7709928181872d30f4c26782571e",
+    "patch_bytes": 21969
+  },
+  {
+    "sha": "ad6faad4d851efc12787834d6ad604648c1dc8f1",
+    "subject": "chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ad6faad4d851efc12787834d6ad604648c1dc8f1.patch",
+    "patch_sha256": "f899ab9ecab1e7f880ca2920cd76b189d7d490269ea412bcbf3cc6c9dabb2bae",
+    "patch_bytes": 4830
+  },
+  {
+    "sha": "dea3bb22262e124b94ae4e2d9c36f7c355385afd",
+    "subject": "[OBE-SYSTEM] Update Phase 2 GPU validation prompt with verified baselines from Phase 2b audit: SDPA native FA2, corrected VRAM budgets, known issues, hardened commands",
+    "code_files": [
+      "colab_ssh_setup.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/dea3bb22262e124b94ae4e2d9c36f7c355385afd.patch",
+    "patch_sha256": "74ba4c3530a54fe5f306d4d8dbe2ebe11b875e0fa765760c89379e3828dd9836",
+    "patch_bytes": 6618
+  },
+  {
+    "sha": "e20fdfdcb109ab43575c20aa960577c66d7ae292",
+    "subject": "chore: commit from Copilot \u2014 set git user",
+    "code_files": [
+      "research/frontier_validation_report.py",
+      "research/universal_feature_analysis.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/e20fdfdcb109ab43575c20aa960577c66d7ae292.patch",
+    "patch_sha256": "6ff047d52d9164b03d510bacac3c69c5515e4ef27beeaa221d4661e3c5a282f5",
+    "patch_bytes": 35469
+  },
+  {
+    "sha": "2291ba73af7ad787e56a99106dd1d80511bb4ec8",
+    "subject": "chore: commit agent changes \u2014 canonicalize catalog; add equation_analysis; frontier smoke validation reports",
+    "code_files": [
+      "research/equation_analysis.py",
+      "research/frontier_validation_report.py",
+      "research/real_trace_experiments.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/2291ba73af7ad787e56a99106dd1d80511bb4ec8.patch",
+    "patch_sha256": "28d94548d9ae2a8d12680114c36f5237edaa1f2b1ba16d08177518a05dee52ec",
+    "patch_bytes": 71835
+  },
+  {
+    "sha": "093286b322ff4bb9c947380fc90a49fda9da980c",
+    "subject": "Align CPU audit, frontier analysis, and README",
+    "code_files": [
+      "research/frontier_validation_report.py",
+      "research/real_trace_experiments.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/093286b322ff4bb9c947380fc90a49fda9da980c.patch",
+    "patch_sha256": "6dff8ac074a2ac1ed5be682dfa8a39bb5d461fd99aea8d679b81b1e3c95ccc8a",
+    "patch_bytes": 5047
+  },
+  {
+    "sha": "72fd52cd619167b5ab5dd5bc36113c421be76660",
+    "subject": "Final Infrastructure: Initialized 30-day autonomous solving protocol and performed model/equation cleanup",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/universal_feature_analysis.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/72fd52cd619167b5ab5dd5bc36113c421be76660.patch",
+    "patch_sha256": "1ff90dc52f8984b834535aeac672819023c15c64687888256fd1cee4f2a78692",
+    "patch_bytes": 2828
+  },
+  {
+    "sha": "e79f482643edd92357c8793591ae3c23790c5d3d",
+    "subject": "Add RUN:AI and notebook bootstrap helpers",
+    "code_files": [
+      "tools/runai/bootstrap_session.sh",
+      "tools/runai/check_env.py",
+      "tools/runai/jupyter_repo_gpu_sanity.py",
+      "tools/runai/run_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/e79f482643edd92357c8793591ae3c23790c5d3d.patch",
+    "patch_sha256": "6593f34a7afce97e9e1387ea4f10d56176efef2ff152c70110932cf0ef9672cb",
+    "patch_bytes": 12137
+  },
+  {
+    "sha": "f5ca26ee77b67659b1e03c6a027e0dc8b69cc630",
+    "subject": "Push UAS-11 results without backup archive",
+    "code_files": [
+      "research/simulate_overthinking_boundary.py",
+      "research/symbolic_regression_law.py",
+      "tools/generate_masterpiece.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/f5ca26ee77b67659b1e03c6a027e0dc8b69cc630.patch",
+    "patch_sha256": "63b89fe4c8d9201316fdaffe6743c91ffb1642eaea5064f3b26cea95eac8b349",
+    "patch_bytes": 40238
+  },
+  {
+    "sha": "c47ef2141c77acbcea723dc1009175a7e3217976",
+    "subject": "Add Blackwell-safe RUN:AI bootstrap and dependency repair",
+    "code_files": [
+      "tools/run_colab_experiment.py",
+      "tools/runai/jupyter_repo_gpu_sanity.ipynb",
+      "tools/runai/jupyter_repo_gpu_sanity.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c47ef2141c77acbcea723dc1009175a7e3217976.patch",
+    "patch_sha256": "008465b003d2f2a981bf1f60119abc0206746812f9d08d89c3b01a9ae7372293",
+    "patch_bytes": 63692
+  },
+  {
+    "sha": "bef4d727bc48d752af068689dbab5e402c200f47",
+    "subject": "Harden RUN:AI terminal bootstrap for full GPU runs",
+    "code_files": [
+      "tools/runai/jupyter_repo_gpu_sanity.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/bef4d727bc48d752af068689dbab5e402c200f47.patch",
+    "patch_sha256": "ae17c3d08928e1041cecf70171bf7ef8e285ab4c2c0f39d321294cb241d34f7d",
+    "patch_bytes": 6520
+  },
+  {
+    "sha": "e7e4d16848b23c42b003107352c9fac4beb21e5a",
+    "subject": "Adjust RUN:AI Gemma launch for low-VRAM GPUs",
+    "code_files": [
+      "tools/runai/jupyter_repo_gpu_sanity.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/e7e4d16848b23c42b003107352c9fac4beb21e5a.patch",
+    "patch_sha256": "9ac57c689af047f1266a6126412ed38679978a95be5cc12a0b51d36bee289416",
+    "patch_bytes": 1067
+  },
+  {
+    "sha": "1f09cb0b378739f45bdbf9a667689b80acf5c60b",
+    "subject": "Update RUN:AI notebook defaults and add smoke artifacts",
+    "code_files": [
+      "tools/runai/jupyter_repo_gpu_sanity.ipynb"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/1f09cb0b378739f45bdbf9a667689b80acf5c60b.patch",
+    "patch_sha256": "01a9b6562395b83a6f8ee61a9cbeeaa9e339886838f2cb168a892648d29905e8",
+    "patch_bytes": 3381
+  },
+  {
+    "sha": "07e452672163b451332137f10bbf2ca2d2ef2bdc",
+    "subject": "Enable 4-bit CPU offload for constrained GPUs",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/07e452672163b451332137f10bbf2ca2d2ef2bdc.patch",
+    "patch_sha256": "c68306aa0d932b938fe91adf8fdb0e019572b10e4f6446e04ace11b54fb3ba85",
+    "patch_bytes": 1696
+  },
+  {
+    "sha": "53ce3c0b841f793dd10a3efcc6d090283c4d1b18",
+    "subject": "Patch 4-bit dispatch compatibility on RUN:AI",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/53ce3c0b841f793dd10a3efcc6d090283c4d1b18.patch",
+    "patch_sha256": "c3b353828fbcce55095c57753ac9cd0235e66056c2155c1a9abab4ec218a4bb5",
+    "patch_bytes": 2197
+  },
+  {
+    "sha": "64ca4e74a6a3b3c33b88bf72038e099777011188",
+    "subject": "Patch meta-state 4-bit hook dispatch",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/64ca4e74a6a3b3c33b88bf72038e099777011188.patch",
+    "patch_sha256": "38fb3d8fe15a1cde33a63b62bc50cfd6d4aff29f4a26f2f02e7e43a520840502",
+    "patch_bytes": 3711
+  },
+  {
+    "sha": "7995962d069fc0219f22b0e73ef2cdd14f8bc7c6",
+    "subject": "Pin Gemma 4bit text path to GPU",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/7995962d069fc0219f22b0e73ef2cdd14f8bc7c6.patch",
+    "patch_sha256": "5e8f189fb642ad82a077206b1c6909df28d17d087e45194e1bed9d0d152478dc",
+    "patch_bytes": 3355
+  },
+  {
+    "sha": "69d2b25be9c0e8cad68fac5781d05d133792588a",
+    "subject": "Reduce full-run Gemma scoring memory",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/69d2b25be9c0e8cad68fac5781d05d133792588a.patch",
+    "patch_sha256": "3a03c3f88827cb3fa9a792ee7206461476f2ad86eec31466709a1c10e25e8a4c",
+    "patch_bytes": 5523
+  },
+  {
+    "sha": "87036433d12b63dce04b53d1d71067014a06d818",
+    "subject": "Move Gemma scoring postprocess to CPU",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/87036433d12b63dce04b53d1d71067014a06d818.patch",
+    "patch_sha256": "d2e976f17781a4da19dc585f681109cc0a076d7313ec345c84759eccb62066f9",
+    "patch_bytes": 1745
+  },
+  {
+    "sha": "c1a3c99ac5697d8308fe3c36ba57984a77e2946b",
+    "subject": "runai: target Gemma-4-E4B-It with 4-bit quantization for ~10GB Blackwell GPU",
+    "code_files": [
+      "tools/runai/jupyter_repo_gpu_sanity.ipynb",
+      "tools/runai/jupyter_repo_gpu_sanity.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c1a3c99ac5697d8308fe3c36ba57984a77e2946b.patch",
+    "patch_sha256": "cf504c93e525d783bdf200fc2442328e38288f3343d677f7b958df9c44803166",
+    "patch_bytes": 13479
+  },
+  {
+    "sha": "edbf7f45aa2ac5193d9acfa3c725eca94c041391",
+    "subject": "fix: add ImageReadMode and decode_image to torchvision stub for newer transformers",
+    "code_files": [
+      "research/_vendor/torchvision_stub/torchvision/io.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/edbf7f45aa2ac5193d9acfa3c725eca94c041391.patch",
+    "patch_sha256": "fa36f0948577a5818af266d3f0178e44918b454929f84d6f3062e8f0a45739c1",
+    "patch_bytes": 1779
+  },
+  {
+    "sha": "a82f251b7bdf57677142cc02045527daf537c2f3",
+    "subject": "fix: convert torchvision stub transforms to package with functional submodule",
+    "code_files": [
+      "research/_vendor/torchvision_stub/torchvision/transforms.py",
+      "research/_vendor/torchvision_stub/torchvision/transforms/__init__.py",
+      "research/_vendor/torchvision_stub/torchvision/transforms/functional.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/a82f251b7bdf57677142cc02045527daf537c2f3.patch",
+    "patch_sha256": "75a9dd7796212e96be8c055e84bcfd31ebd62a12684f542491e3a1e38b5ea68c",
+    "patch_bytes": 2358
+  },
+  {
+    "sha": "45072d1a85d3de02f4f0103282627c7f8db07359",
+    "subject": "fix: lazy-import multimodal classes + add torchvision to requirements",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/45072d1a85d3de02f4f0103282627c7f8db07359.patch",
+    "patch_sha256": "0a33bf041fd9be07296b0dbd19753aa0fde932c6a62b1c0dffaf10d95ebc3711",
+    "patch_bytes": 2450
+  },
+  {
+    "sha": "9a99aff6f09a0d258e5fde5f76f1c6bd652a0e58",
+    "subject": "fix: bypass multimodal path for gemma_4_e4b_it (text-only checkpoint)",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/9a99aff6f09a0d258e5fde5f76f1c6bd652a0e58.patch",
+    "patch_sha256": "255f82cf3fb180a7f6ce34d3ce48ce3376efeab918e48808cb794ade52c08cb6",
+    "patch_bytes": 4644
+  },
+  {
+    "sha": "32963ca7ffd33be148e0ee7356db04dc101b166f",
+    "subject": "fix: force single-GPU device_map for small 4-bit models (meta tensor crash)",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/32963ca7ffd33be148e0ee7356db04dc101b166f.patch",
+    "patch_sha256": "787a6fc56b5ada52175c307cb5aa22beba728eb35cf4edad37ed1272030be3c7",
+    "patch_bytes": 1692
+  },
+  {
+    "sha": "f2a78622a6dfd09fe01160b5a1ef84df4b141933",
+    "subject": "chore: update default model to deepseek_r1_distill_7b for next run",
+    "code_files": [
+      "tools/runai/jupyter_repo_gpu_sanity.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/f2a78622a6dfd09fe01160b5a1ef84df4b141933.patch",
+    "patch_sha256": "ef3fee78c9d8c2096df29d696deb21ca6b654ff409a32771fbef875b557481cc",
+    "patch_bytes": 1559
+  },
+  {
+    "sha": "759e9212a3b3fccf4ca9dfc00c93a2be5654e6f9",
+    "subject": "chore: Deep scrub of all commercial IP references in files",
+    "code_files": [
+      "research/frontier_validation_report.py",
+      "research/universal_feature_analysis.py",
+      "tools/generate_masterpiece.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/759e9212a3b3fccf4ca9dfc00c93a2be5654e6f9.patch",
+    "patch_sha256": "6c4d43991f06875a24f75c5857f9eafbf67101d901eeccb8478185dc875324bf",
+    "patch_bytes": 5975
+  },
+  {
+    "sha": "376254b12c7bc87970cf6092386ad481d304867f",
+    "subject": "robustness: add error handling for GSM8K dataset loading",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/376254b12c7bc87970cf6092386ad481d304867f.patch",
+    "patch_sha256": "caa13e017a01c0e2015a63af1fc43279380aa28a69ab15abf1d531da7ee64eb4",
+    "patch_bytes": 1386
+  },
+  {
+    "sha": "589b7976e9567dad3efd9cd8578168c05266d36a",
+    "subject": "fix: load openai/gsm8k directly to avoid HF UriError with datasets v5",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/589b7976e9567dad3efd9cd8578168c05266d36a.patch",
+    "patch_sha256": "2d3a27980aeb5fd6720275345fd279154a302ed9d080284c6dc0bb7ac62ee729",
+    "patch_bytes": 1073
+  },
+  {
+    "sha": "12b8e239495bdeeac26c22f1e4f88e7b97735bad",
+    "subject": "fix: pin transformers to 4.53.3 to avoid LossKwargs ImportError",
+    "code_files": [
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/12b8e239495bdeeac26c22f1e4f88e7b97735bad.patch",
+    "patch_sha256": "18065873074860b6f239f0061c08d567e325156ae5f4bc1a083e4a69ee921466",
+    "patch_bytes": 1630
+  },
+  {
+    "sha": "41195db8009ba31109fae05fa631325a077359b1",
+    "subject": "fix: resolve traceback memory leak in safe_generate_batch_with_diagnostics",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/41195db8009ba31109fae05fa631325a077359b1.patch",
+    "patch_sha256": "373b03a70f1eb198187829d405338716aee7cbcc9549d69f01975968d75ce992",
+    "patch_bytes": 2648
+  },
+  {
+    "sha": "19450224baa361408f4059f7cf885c8147fdfcdd",
+    "subject": "feat: add experiment-matrix orchestrator and RunAI launcher",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/run_experiment_matrix.py",
+      "research/run_qwen_bf16_ladder.py",
+      "tools/runai/run_matrix.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/19450224baa361408f4059f7cf885c8147fdfcdd.patch",
+    "patch_sha256": "af727051901c1caa9d06b1c725624a72915f908a4c222d67d2b3ef7be0e7c643",
+    "patch_bytes": 52856
+  },
+  {
+    "sha": "08411354d39c522f073ac4f16eb3f63e97265a52",
+    "subject": "feat: data-driven cross-family summary + MATH dataset parser",
+    "code_files": [
+      "research/cross_family_analysis.py",
+      "research/real_trace_experiments.py",
+      "research/run_experiment_matrix.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/08411354d39c522f073ac4f16eb3f63e97265a52.patch",
+    "patch_sha256": "6f6e91f34f78ab17b4d060a0ca00b9e783089d63039591f280f24d5f6757c872",
+    "patch_bytes": 16186
+  },
+  {
+    "sha": "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+    "subject": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)",
+    "code_files": [
+      "research/cross_family_analysis.py",
+      "research/real_trace_experiments.py",
+      "research/regrade_traces.py",
+      "research/run_experiment_matrix.py",
+      "research/tests/test_graders.py",
+      "research/trace_analysis.py",
+      "tools/runai/run_matrix.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ef45ddad0f064a6cc314ef875fcab0251aadf0d8.patch",
+    "patch_sha256": "f462f87a8dbfdc5416da48a2763f8b1bdcae88fa53c4df1e69d6ea57f3df2bc1",
+    "patch_bytes": 38236
+  },
+  {
+    "sha": "6f832ea47f862f641c9fc8788c0ae764cd2e5726",
+    "subject": "fix: correct canonical boundary operator + regenerate all results out-of-sample",
+    "code_files": [
+      "research/frontier_validation_report.py",
+      "research/generate_thesis_artifacts.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/6f832ea47f862f641c9fc8788c0ae764cd2e5726.patch",
+    "patch_sha256": "bc3631c31fb42b1547929537187a358d1611dcd6c8639b314aa9bcf6b8e83c5f",
+    "patch_bytes": 4218
+  },
+  {
+    "sha": "8beba2d7c5ec6ced9f5b9bdef60ecd6c2afe24f4",
+    "subject": "fix(grader): credit prose/unit-wrapped numeric MATH answers",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/tests/test_graders.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/8beba2d7c5ec6ced9f5b9bdef60ecd6c2afe24f4.patch",
+    "patch_sha256": "d7f5d882bd6fabf1f982e1c24eb9e3e58fa488e6eecef1840418080c683c659a",
+    "patch_bytes": 3835
+  },
+  {
+    "sha": "122358a6c2787c2a7d8190c5fbc8ba7b9978b616",
+    "subject": "feat: text-only Mistral-Small-24B + GPQA and ARC (multiple-choice) datasets",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/run_experiment_matrix.py",
+      "research/tests/test_graders.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/122358a6c2787c2a7d8190c5fbc8ba7b9978b616.patch",
+    "patch_sha256": "685d8ac30f22fe0b2052cbe4b1c7089ad1b764466d3db576c52a041d421e05e0",
+    "patch_bytes": 12654
+  },
+  {
+    "sha": "a1d5b7d405dd5f33f0d82e98653fa04c667c7c39",
+    "subject": "perf: tighter VRAM footprint estimate + higher budget so models co-run",
+    "code_files": [
+      "research/run_experiment_matrix.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/a1d5b7d405dd5f33f0d82e98653fa04c667c7c39.patch",
+    "patch_sha256": "7d7df7308831cc6ef4cce7cd6d5b0237d2854f640151971cffabaddc7932ffee",
+    "patch_bytes": 3021
+  },
+  {
+    "sha": "72703f218ded9046ff1e1df7aa6a057b5e02070d",
+    "subject": "feat: auto-resume-on-boot helper for RunAI pod recycling",
+    "code_files": [
+      "tools/runai/autostart.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/72703f218ded9046ff1e1df7aa6a057b5e02070d.patch",
+    "patch_sha256": "7660accd5f74c94783315d8774ec12aeb31142caf50f8aa8c23c63a004109421",
+    "patch_bytes": 4199
+  },
+  {
+    "sha": "8b5391fe0295e5f2c7776905ca2d80537136cf9b",
+    "subject": "perf: 2x batch sizes + batch-aware VRAM footprint for higher decode throughput",
+    "code_files": [
+      "research/run_experiment_matrix.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/8b5391fe0295e5f2c7776905ca2d80537136cf9b.patch",
+    "patch_sha256": "4edf4450810bf1d4374e1f371d26e95958629af7490cb0f9935d07066cf3b4e4",
+    "patch_bytes": 3087
+  },
+  {
+    "sha": "4d9c3aadd615d16c1718b4724b61db57400e400f",
+    "subject": "feat(autostart): detect hangs, not just crashes/restarts",
+    "code_files": [
+      "tools/runai/autostart.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/4d9c3aadd615d16c1718b4724b61db57400e400f.patch",
+    "patch_sha256": "47baea62939dbe6164e8a1fc2d8f6ec5afbad343450626e5c0a4fa1461c2e63c",
+    "patch_bytes": 3185
+  },
+  {
+    "sha": "c0b5ce81042609593889f864abaa758e25767c48",
+    "subject": "fix(harness): tolerate string-contaminated columns in cell summary",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c0b5ce81042609593889f864abaa758e25767c48.patch",
+    "patch_sha256": "6b202be3a012a1995d0d96f33667026e406bdfc798ab782f01172ce2e67a4ac5",
+    "patch_bytes": 5765
+  },
+  {
+    "sha": "0fd7317f894977f0b944d207ed86d2747d975179",
+    "subject": "fix(harness): drop truncated CSV rows on resume reconcile",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/0fd7317f894977f0b944d207ed86d2747d975179.patch",
+    "patch_sha256": "ef43995a9abda5961f915af25caf0c42d979af531cf23275de9cd641768e9973",
+    "patch_bytes": 3140
+  },
+  {
+    "sha": "f89ff3863f5723a63658ac5617b1f12d4c44fcc3",
+    "subject": "fix(analysis)+complete: sanitize hard-kill-corrupted rows; finish all 52 cells",
+    "code_files": [
+      "research/trace_analysis.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/f89ff3863f5723a63658ac5617b1f12d4c44fcc3.patch",
+    "patch_sha256": "afeecf3c52410dc0b17d9ee1e40cbf52e180e11b2718a3d70f871e7c58f01858",
+    "patch_bytes": 4949
+  },
+  {
+    "sha": "6ca9771823a49d694d2178d0f47a12ba184c61ea",
+    "subject": "fix(aggregate): sanitize trace_steps before q_t curve in cross-family",
+    "code_files": [
+      "research/cross_family_analysis.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/6ca9771823a49d694d2178d0f47a12ba184c61ea.patch",
+    "patch_sha256": "6b32b5113086e663176ff51caccc09f3bdfcda5cdd480f9c8030f55cc63419d0",
+    "patch_bytes": 1923
+  },
+  {
+    "sha": "3a5dde7a83833a5cea827a329983f66bc6041219",
+    "subject": "docs: add July 1 progress check-in, advisor briefing, and experiment matrix audit outputs",
+    "code_files": [
+      "_agg_detector.py",
+      "_agg_head2head.py",
+      "research/outputs/experiment_matrix/_anytime_valid_audit.py",
+      "research/outputs/experiment_matrix/_thesis_audit_boundary.py",
+      "research/outputs/experiment_matrix/_thesis_audit_detectors.py",
+      "research/outputs/experiment_matrix/_thesis_audit_latecells.py",
+      "research/outputs/experiment_matrix/_thesis_audit_sequential.py",
+      "research/outputs/experiment_matrix/_verify_auc.py",
+      "research/outputs/experiment_matrix/_verify_detectors.py",
+      "research/outputs/experiment_matrix/_verify_h2h.py",
+      "research/outputs/experiment_matrix/_verify_independent.py",
+      "research/outputs/experiment_matrix/_verify_latecells.py",
+      "research/outputs/experiment_matrix/_verify_remaining.py",
+      "research/outputs/experiment_matrix/_verify_robust.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/3a5dde7a83833a5cea827a329983f66bc6041219.patch",
+    "patch_sha256": "c0b9e335893f64a965781c4bdee4904c207b1d1d9ffbe1c7044d82b2eb17d2e5",
+    "patch_bytes": 69792
+  },
+  {
+    "sha": "5955600539f6a9a27b417872b86d3da184128935",
+    "subject": "Add active stopping simulation, stakes sweep, and prompted vs distilled comparison reports",
+    "code_files": [
+      "research/compare_prompted_vs_distilled.py",
+      "research/run_active_stopping.py",
+      "research/run_stakes_sweep.py",
+      "run_reverification_suite.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/5955600539f6a9a27b417872b86d3da184128935.patch",
+    "patch_sha256": "69aa7272859775e4258c3c2a80dd0319bc1f7b615d10b88c64eccc7d1137d73b",
+    "patch_bytes": 40422
+  },
+  {
+    "sha": "d4fb0958629c63f63e31f5154c82962e05269f9b",
+    "subject": "Add scientific method deep dive report and data extraction scripts",
+    "code_files": [
+      "research/extract_scientific_stats.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/d4fb0958629c63f63e31f5154c82962e05269f9b.patch",
+    "patch_sha256": "e8dd2aaca12a273efb679ec29cdcdd39c0f9631f0f78ad1cefcbce80d2e19893",
+    "patch_bytes": 8287
+  },
+  {
+    "sha": "8ce9b9fcae3e51d4be9d779c009097662b8754ab",
+    "subject": "fix: floor boundary detection at T_MIN=2 in ad-hoc scripts; regenerate affected reports",
+    "code_files": [
+      "research/compare_prompted_vs_distilled.py",
+      "research/run_stakes_sweep.py",
+      "research/tests/test_boundary_floor.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/8ce9b9fcae3e51d4be9d779c009097662b8754ab.patch",
+    "patch_sha256": "8091294daaedb0e6d15945b3c5105a2387525388105babdd50dc9462fe953bc5",
+    "patch_bytes": 13845
+  },
+  {
+    "sha": "074bc70dcadd49ca4488140f561ca9be77c5d687",
+    "subject": "fix: handle NaN in regrade_traces.py row parsing",
+    "code_files": [
+      "research/regrade_traces.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/074bc70dcadd49ca4488140f561ca9be77c5d687.patch",
+    "patch_sha256": "43b304fe2b75338ddefa6b5c2d803c83389441ddc1247b1514faa9422efb0856",
+    "patch_bytes": 1991
+  },
+  {
+    "sha": "32de197c7f7fccd73417a0dc7f7d5ebeb1ef7b80",
+    "subject": "chore: add ground-truth re-verification scripts",
+    "code_files": [
+      "research/analyze_runs.py",
+      "scratch_analyze.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/32de197c7f7fccd73417a0dc7f7d5ebeb1ef7b80.patch",
+    "patch_sha256": "636ce2832e2df8566fddd7b7a8795ab5f75d5cfbeaf050fa877b550fd378af1c",
+    "patch_bytes": 7165
+  },
+  {
+    "sha": "0ea16f417f151058033ca1ba6c8451434e4d1e9b",
+    "subject": "audit: scientific-rigor verification + full loss autopsy (rigor_audit/)",
+    "code_files": [
+      "research/classify_losses.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/0ea16f417f151058033ca1ba6c8451434e4d1e9b.patch",
+    "patch_sha256": "c61a7ea2cf2532b0c1b776e79e2dd5df41a5cfc928339808441b11e7948829a9",
+    "patch_bytes": 37281
+  },
+  {
+    "sha": "34d76c03407d44dacabdb248996c4076596e2454",
+    "subject": "fix: drop hidden-state cache requirement from completeness reconciliation",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/34d76c03407d44dacabdb248996c4076596e2454.patch",
+    "patch_sha256": "f7a00f0c488324bcbc7bc456f87e0fa775a27c70f2664272391c8777ac956a69",
+    "patch_bytes": 1643
+  },
+  {
+    "sha": "ce0167c6066b0caeb85370777df6ee14b9281d30",
+    "subject": "fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/regrade_traces.py",
+      "research/run_experiment_matrix.py",
+      "research/run_stakes_sweep.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ce0167c6066b0caeb85370777df6ee14b9281d30.patch",
+    "patch_sha256": "3f78c920610a4a74a7a183f2ea0493c61a35354bc74f0e8e373fe0304095ec63",
+    "patch_bytes": 10890
+  },
+  {
+    "sha": "07a9573ecd93b987db165198541e314357d9d3db",
+    "subject": "docs: post-audit corrections + regenerate MATH aggregate on repaired cell",
+    "code_files": [
+      "research/outputs/experiment_matrix/_thesis_audit_latecells.py",
+      "research/thesis_audit_latecells.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/07a9573ecd93b987db165198541e314357d9d3db.patch",
+    "patch_sha256": "2ff4026e2e846755099fba7c7183702a77e2cb5eb4b9466a9a420c73fed50822",
+    "patch_bytes": 2763
+  },
+  {
+    "sha": "2660d40f7d9fc68d82154bb99f90da105c84b809",
+    "subject": "research: pre-registered offline experiments P1/P2/P3a/P13 + P6 (results)",
+    "code_files": [
+      "research/offline_policy_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/2660d40f7d9fc68d82154bb99f90da105c84b809.patch",
+    "patch_sha256": "483a3cd31bc337712ddb99084a225758fafe61121c5c21739edc334558c99920",
+    "patch_bytes": 11330
+  },
+  {
+    "sha": "d2a42e852cd7c9c1fee591ca7d6b8b0747e1ba3c",
+    "subject": "research: P3b/P3c/P3d offline policy arm results (one survivor: P3d)",
+    "code_files": [
+      "research/offline_policy_arms_p3.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/d2a42e852cd7c9c1fee591ca7d6b8b0747e1ba3c.patch",
+    "patch_sha256": "4cf7a642731099fed09d9ac6fce30cba90fc6d6b40a608da1606e817acf0d0bf",
+    "patch_bytes": 12078
+  },
+  {
+    "sha": "1f2e44531aa79b4655a33b18db4018fc1a7b7fa0",
+    "subject": "research: P9 lambda-sensitivity results",
+    "code_files": [
+      "research/lambda_sensitivity_sweep.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/1f2e44531aa79b4655a33b18db4018fc1a7b7fa0.patch",
+    "patch_sha256": "3975d9ec2ae9fc077456ffda8a48236d1a6801af4bb64c5d30bce772c02eb3c0",
+    "patch_bytes": 5919
+  },
+  {
+    "sha": "cca211392e431a7a4fbe36b6095a890d60ffb48f",
+    "subject": "research: calibrated per-cell threshold table (P3d productization)",
+    "code_files": [
+      "research/calibrate_cell_thresholds.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/cca211392e431a7a4fbe36b6095a890d60ffb48f.patch",
+    "patch_sha256": "d7773e19bedf551628bbd7b796ab7780f4a898f57cc900f7e2feb60ff36e91fc",
+    "patch_bytes": 10084
+  },
+  {
+    "sha": "22b23f8f5e31d9e91fdbc85a87fc0a27ccf7d343",
+    "subject": "research: N1/N4 harness + Nvidia-workspace runbook for algorithm-v2",
+    "code_files": [
+      "research/algorithm_v2_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/22b23f8f5e31d9e91fdbc85a87fc0a27ccf7d343.patch",
+    "patch_sha256": "038292e488d35f5b67b8e46a47ca01b33f3389f3fed945869b642e18e1541ea0",
+    "patch_bytes": 14347
+  },
+  {
+    "sha": "c4e98fc552aba4253f8876fefd1c145eebda096c",
+    "subject": "tools: autonomous v2 driver with 20-min checkpoint pushes + verified harness",
+    "code_files": [
+      "research/algorithm_v2_experiments.py",
+      "tools/run_autonomous_v2.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c4e98fc552aba4253f8876fefd1c145eebda096c.patch",
+    "patch_sha256": "6105e7c228cd5803b409a6d6d017886a68c432fa98b5c817fac89198d7db0fed",
+    "patch_bytes": 8675
+  },
+  {
+    "sha": "c0d3bc071ee4ad159c7d2f35f2604dccbfd52497",
+    "subject": "tools: self-detaching autonomous runner (no nohup needed), verified E2E",
+    "code_files": [
+      "tools/run_autonomous_v2.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c0d3bc071ee4ad159c7d2f35f2604dccbfd52497.patch",
+    "patch_sha256": "6368a1c81f134f79f87fd18fea84975a03b906ae906a85d01be8547679032c6a",
+    "patch_bytes": 13810
+  },
+  {
+    "sha": "2a64791fd946610bfd0d0655f2f6c087a61ef91d",
+    "subject": "tools: preflight + parallel-GPU mode for the autonomous v2 run",
+    "code_files": [
+      "tools/preflight_v2.py",
+      "tools/run_autonomous_v2.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/2a64791fd946610bfd0d0655f2f6c087a61ef91d.patch",
+    "patch_sha256": "25f83eb9685f89a0705c9295ddec7630efc0f9d29090de9130d675852b904cac",
+    "patch_bytes": 15512
+  },
+  {
+    "sha": "000f2e60d4e0f3a066c1261b9cb485f4a8154e5d",
+    "subject": "fix: preflight pointed at the wrong torch install for a fresh container",
+    "code_files": [
+      "tools/preflight_v2.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/000f2e60d4e0f3a066c1261b9cb485f4a8154e5d.patch",
+    "patch_sha256": "ad120ccfabb897b40561869a074f2e087b31aa9a5df11b54494e3ce6ec202b34",
+    "patch_bytes": 1674
+  },
+  {
+    "sha": "b28d7d541d1b0d159c23ab6fa3a88f9b614e8ad3",
+    "subject": "fix: preflight misdiagnosed a stale branch as a push-auth failure",
+    "code_files": [
+      "tools/preflight_v2.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/b28d7d541d1b0d159c23ab6fa3a88f9b614e8ad3.patch",
+    "patch_sha256": "40a53cb4e30a59c7efdbeda154b7d0faa202f88d099b3a9c9dc628dd72df7a03",
+    "patch_bytes": 2730
+  },
+  {
+    "sha": "84853411fcc95569c0cdc2694d2847aabed5b81a",
+    "subject": "fix: support pyarrow-backed string dtypes in _sanitize_step_frame and _escape_control_chars",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/trace_analysis.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/84853411fcc95569c0cdc2694d2847aabed5b81a.patch",
+    "patch_sha256": "95189f272da6cfc97e8bc5c784e086f20afa8ac637760f515162dbf9ff6634dd",
+    "patch_bytes": 2010
+  },
+  {
+    "sha": "b2acdab0fbd4ae807e082b1c374fba413e5d788f",
+    "subject": "fix: replace unicode checkmarks in preflight_v2.py to avoid UnicodeEncodeError on Windows terminals",
+    "code_files": [
+      "tools/preflight_v2.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/b2acdab0fbd4ae807e082b1c374fba413e5d788f.patch",
+    "patch_sha256": "7a5f692dc36a4cadff62dd3f8099b07376d6218f52f6fdd533c0e8baaafd9d81",
+    "patch_bytes": 1054
+  },
+  {
+    "sha": "52af188222344205c66e557ca8636f0644bfd55f",
+    "subject": "feat: add implementation and run helper for Tier-1 N2/N3 experiments",
+    "code_files": [
+      "research/algorithm_v2_experiments_n2_n3.py",
+      "tools/run_n2_n3.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/52af188222344205c66e557ca8636f0644bfd55f.patch",
+    "patch_sha256": "9eb5ee9e34e37089125d576252cf526ec985fba99f1a7e047706d18966abd6ec",
+    "patch_bytes": 20526
+  },
+  {
+    "sha": "07fedbd45e7c8a3db5d30c13735c8a1129f997f0",
+    "subject": "feat: implement Tier-3 pilot telemetry for N7 self-consistency and N8 extended observables",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "research/trace_analysis.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/07fedbd45e7c8a3db5d30c13735c8a1129f997f0.patch",
+    "patch_sha256": "b9e878256f5bf2dc2726d9305c445dfd6460d77086745331893f6a3f0b775fc3",
+    "patch_bytes": 19095
+  },
+  {
+    "sha": "815981f8afb1365134816b23ffcab928db78deb0",
+    "subject": "feat: add tools/run_tier3_pilots.sh for automated execution",
+    "code_files": [
+      "tools/run_tier3_pilots.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/815981f8afb1365134816b23ffcab928db78deb0.patch",
+    "patch_sha256": "315dead86c3b6af0687bd31159a35ea49b610e8445bbe932521703c948e3acbf",
+    "patch_bytes": 2379
+  },
+  {
+    "sha": "32b3c11255c6d5f96796136d52624663d15b3f82",
+    "subject": "fix: override attention implementation to sdpa in run_tier3_pilots.sh",
+    "code_files": [
+      "tools/run_tier3_pilots.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/32b3c11255c6d5f96796136d52624663d15b3f82.patch",
+    "patch_sha256": "2528031e749ab1a09de9b5307a44544ec027d36420032086db88bb506f81588e",
+    "patch_bytes": 1105
+  },
+  {
+    "sha": "8218a5c2270f6c0a4436be5f8d848bda13afb54d",
+    "subject": "docs: consolidate all files into master Scientific Methodology and Experimental Report",
+    "code_files": [
+      "ThesisDocs/archive/export_acm_proposal_pdf.ps1"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/8218a5c2270f6c0a4436be5f8d848bda13afb54d.patch",
+    "patch_sha256": "649c0acafc5a52ce63f3dde5b0fb4cf5a227b6ded9e517db32385c335efb8e2e",
+    "patch_bytes": 1877
+  },
+  {
+    "sha": "0bcf3baa42c432c4ef8648ec94cca7c1967b0906",
+    "subject": "tool: add tools/verify_doc_rigor.py for document compilation and link verification",
+    "code_files": [
+      "tools/verify_doc_rigor.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/0bcf3baa42c432c4ef8648ec94cca7c1967b0906.patch",
+    "patch_sha256": "1c564a8edee45884091305e589b516c77c61a9cd1b68310423400d83c9b4f29f",
+    "patch_bytes": 7144
+  },
+  {
+    "sha": "59efff93fabd7000f25421eac081cad41bc03fd6",
+    "subject": "fix: correct batch metrics filename in run_tier3_pilots.sh",
+    "code_files": [
+      "tools/run_tier3_pilots.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/59efff93fabd7000f25421eac081cad41bc03fd6.patch",
+    "patch_sha256": "ef795c505023ae50e227deabc313eac9534bdcb1c38606e3804ed2e34f4da04e",
+    "patch_bytes": 1245
+  },
+  {
+    "sha": "8731068b8c7f17c439bee7dd10b0a6b4e81e865c",
+    "subject": "feat: add train_tier3_pilots.py for offline pilot model training and evaluation",
+    "code_files": [
+      "research/train_tier3_pilots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/8731068b8c7f17c439bee7dd10b0a6b4e81e865c.patch",
+    "patch_sha256": "8feb2e3c8bd99eab9dde8931080d39d85cf985c00e369446999a12775ff5d4f6",
+    "patch_bytes": 13431
+  },
+  {
+    "sha": "c43e040e122cfee2a2c9d72b17a87d6ea841c823",
+    "subject": "fix: robustly fill NaNs in train_tier3_pilots.py",
+    "code_files": [
+      "research/train_tier3_pilots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c43e040e122cfee2a2c9d72b17a87d6ea841c823.patch",
+    "patch_sha256": "b11d7b207fbb8dcdf76b8d53c276bc8a9af7a67f9fba37bd2546837077855388",
+    "patch_bytes": 1373
+  },
+  {
+    "sha": "8f5448c7fc93710575bb91e53da1ed549a55f9f8",
+    "subject": "fix: defragment dataframe in train_tier3_pilots.py to suppress performance warnings",
+    "code_files": [
+      "research/train_tier3_pilots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/8f5448c7fc93710575bb91e53da1ed549a55f9f8.patch",
+    "patch_sha256": "ab45c303cc6e24eb04144e606574d8a24d728c54b505435f88a13af58922bd48",
+    "patch_bytes": 866
+  },
+  {
+    "sha": "828bcaa66f9292b97ff267f801f8ff8206ad1c4b",
+    "subject": "feat: add overnight orchestrator and sequence model tournament scripts",
+    "code_files": [
+      "research/run_final_tournament.py",
+      "tools/run_overnight_deep_research.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/828bcaa66f9292b97ff267f801f8ff8206ad1c4b.patch",
+    "patch_sha256": "44c9c9daafe188772d9d8868cfd7b6717d4f4609d11dcee492539fd075836b60",
+    "patch_bytes": 25950
+  },
+  {
+    "sha": "aa04c82f61ff12c3fef2dc40e995b72493346ec8",
+    "subject": "fix: import Any from typing in run_final_tournament.py",
+    "code_files": [
+      "research/run_final_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/aa04c82f61ff12c3fef2dc40e995b72493346ec8.patch",
+    "patch_sha256": "b49a4d981491b718950beb85f1d5aa34f6aa3320d17e976dbbfebf16bd5e66e5",
+    "patch_bytes": 775
+  },
+  {
+    "sha": "f74936358f6e6dbc873e2dcfe5d7c6b96fde3482",
+    "subject": "perf: optimize resource usage (multi-core, larger CUDA batch size) and silence pandas warnings",
+    "code_files": [
+      "research/run_final_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/f74936358f6e6dbc873e2dcfe5d7c6b96fde3482.patch",
+    "patch_sha256": "8d7d43ddf339b71964f7947c3d8d5e583e7783bf676b7def3168992d47a40a05",
+    "patch_bytes": 3661
+  },
+  {
+    "sha": "746abcc37cb6df7a4fa31f2253898c485db8659d",
+    "subject": "fix: remove n_jobs from LogisticRegression to silence FutureWarning",
+    "code_files": [
+      "research/run_final_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/746abcc37cb6df7a4fa31f2253898c485db8659d.patch",
+    "patch_sha256": "f0242189527da63c48f32221643ba7e226841dabe128d8fdb2b0af4ceaef16ac",
+    "patch_bytes": 967
+  },
+  {
+    "sha": "f36b9b0341512ad5b72ff8d180a5a4de92ff4ed7",
+    "subject": "perf: optimize sequence training by pre-sorting and caching OOF predictions to achieve 15x speedup",
+    "code_files": [
+      "research/run_final_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/f36b9b0341512ad5b72ff8d180a5a4de92ff4ed7.patch",
+    "patch_sha256": "7f42b11ec9c408f5c6e5e4064f5d25b9ca9694ffae9a9c1ca6f245bf36ac1c2f",
+    "patch_bytes": 20471
+  },
+  {
+    "sha": "40449497acb8af08dcc4b8fec41043b14c7b23e7",
+    "subject": "perf: vectorize policy evaluation and execute PyTorch fully in GPU memory for ultimate Blackwell performance",
+    "code_files": [
+      "research/run_final_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/40449497acb8af08dcc4b8fec41043b14c7b23e7.patch",
+    "patch_sha256": "6afd97fb9423346e704bd2ccb213572450d10a4b4a377ffcc540dcb5894e780a",
+    "patch_bytes": 25163
+  },
+  {
+    "sha": "214210a40ff1f02bf399422a6677cae587b4f11d",
+    "subject": "feat: add global 52-cell sweep orchestrator script for long-running GPU runs",
+    "code_files": [
+      "tools/run_global_52cell_sweep.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/214210a40ff1f02bf399422a6677cae587b4f11d.patch",
+    "patch_sha256": "8d9ab602a38640455176ff629564c48a83438e3adad79b7dcb90b3dd33220f0b",
+    "patch_bytes": 3895
+  },
+  {
+    "sha": "30c02495de7bce0d2f998fd5c2e73f20cafab382",
+    "subject": "docs: finalize verification cycles for tournament script optimizations",
+    "code_files": [
+      "research/run_final_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/30c02495de7bce0d2f998fd5c2e73f20cafab382.patch",
+    "patch_sha256": "cab6fa03d279f99bb4bfcacc0d87f1f9a8ccf4348b33c7b128395efa34d26b72",
+    "patch_bytes": 2817
+  },
+  {
+    "sha": "a0244e0a49c73dbd74a0ad6f0a1c1569219ec771",
+    "subject": "fix: align global sweep script models list with valid choice aliases",
+    "code_files": [
+      "tools/run_global_52cell_sweep.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/a0244e0a49c73dbd74a0ad6f0a1c1569219ec771.patch",
+    "patch_sha256": "7f84f766ee913011410cd0297834bc74d94d22a12078cdedc89862fbbcfaeb25",
+    "patch_bytes": 1163
+  },
+  {
+    "sha": "45997657b926566035bcaa9ddc302ace823d6749",
+    "subject": "perf: compile-free GPU-based random projection with caching for 2x faster steps extraction",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/45997657b926566035bcaa9ddc302ace823d6749.patch",
+    "patch_sha256": "426b433f1875aba455e4996dabef9ce6896fdb97b75c80644d73dc7ccd63ecbf",
+    "patch_bytes": 3829
+  },
+  {
+    "sha": "ee2521d30ba0ac2a8a4d34ad2337fb4a56e09487",
+    "subject": "fix: restore stable CPU tensor copy path for random projections to prevent CUDA deadlock hangs",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ee2521d30ba0ac2a8a4d34ad2337fb4a56e09487.patch",
+    "patch_sha256": "37cdc3b9c3a8eba4fd25494301f09c0d8640c0708648ac79ed07fe75c201974a",
+    "patch_bytes": 3913
+  },
+  {
+    "sha": "6ec39e57c19444b8a573763f4299c915a942025f",
+    "subject": "perf: reduce sweep batch sizes to avoid container cgroup VRAM freezes on long contexts",
+    "code_files": [
+      "tools/run_global_52cell_sweep.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/6ec39e57c19444b8a573763f4299c915a942025f.patch",
+    "patch_sha256": "49f6794c395d32761b67b20e3eae342ae3eca1776d977deaea28de5b4937f937",
+    "patch_bytes": 1300
+  },
+  {
+    "sha": "5a06073241e1daf5101b378b57e443048d9465b0",
+    "subject": "perf: extract and copy L1/L2 layers to CPU and delete massive all_hidden_states tuple before clearing VRAM to prevent GPU allocator hangs",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/5a06073241e1daf5101b378b57e443048d9465b0.patch",
+    "patch_sha256": "e0aaf374802baab2b0ee6a7b7da72e43cc21049b54ae66f8ea5f9c470cd67bd0",
+    "patch_bytes": 3226
+  },
+  {
+    "sha": "646b37940e6a46fb0a0090803a43ef92b3935a03",
+    "subject": "perf: mean pool hidden states on GPU before copying, shrinking CPU transfer size by 1000x for peak Blackwell efficiency",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/646b37940e6a46fb0a0090803a43ef92b3935a03.patch",
+    "patch_sha256": "abc91a56287a344e669f3fd0269c82a5fa31c482e5fdd2f4ccbb5807a5f4dd35",
+    "patch_bytes": 3664
+  },
+  {
+    "sha": "49401f81030bf2895bc27ccdf34a96f91335f9e3",
+    "subject": "Add signal-based alarm timeout to sympy.simplify in math_answers_equivalent to prevent hangs on complex LLM math expressions",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/49401f81030bf2895bc27ccdf34a96f91335f9e3.patch",
+    "patch_sha256": "1eae50f419c25b9f56a01a9c64e83502f2a2ae6f7fadab0d108c706d3e15567e",
+    "patch_bytes": 2310
+  },
+  {
+    "sha": "deb8309011497210286eb37e1836e28cf75a8f21",
+    "subject": "Make scratch_analyze.py path relative for cross-platform support on remote VM",
+    "code_files": [
+      "scratch_analyze.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/deb8309011497210286eb37e1836e28cf75a8f21.patch",
+    "patch_sha256": "25a3ff2d17d43057622487544fd3012e4950001c641331e7a981584ece708611",
+    "patch_bytes": 899
+  },
+  {
+    "sha": "f63991c412c7d1c5883be885e5c845e07e957e27",
+    "subject": "Optimize global sweep parameters: cut tasks to 500 and double batch sizes for Blackwell GPU to accelerate run by 3.5x",
+    "code_files": [
+      "tools/run_global_52cell_sweep.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/f63991c412c7d1c5883be885e5c845e07e957e27.patch",
+    "patch_sha256": "813fe2ed1df7edc492b8067e800aa4d01b68e9f38f731cc7cc07c5bea202a5b6",
+    "patch_bytes": 1432
+  },
+  {
+    "sha": "03a93b8c0e4bcd7b2bd6db75f4f69c461e763c44",
+    "subject": "fix: safeguard read_csv calls against EmptyDataError from 0-byte placeholder files during checkpoint reconciliation",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/03a93b8c0e4bcd7b2bd6db75f4f69c461e763c44.patch",
+    "patch_sha256": "5aa36b33528a662ca582301ee6ff604e67990b863bc07769b3bcd88ef987af7d",
+    "patch_bytes": 2522
+  },
+  {
+    "sha": "92efe5090ffa18337e19055f644ab2caa59e3aab",
+    "subject": "fix: wrap pd.read_csv in try-except blocks against EmptyDataError and load HF_TOKEN automatically from .hf_token",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "tools/run_global_52cell_sweep.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/92efe5090ffa18337e19055f644ab2caa59e3aab.patch",
+    "patch_sha256": "5c6edd8e5a05409434475f90a962ff92f2a363ae77f4aa5cfaddcaa265e1ea51",
+    "patch_bytes": 4689
+  },
+  {
+    "sha": "56759a9fdd5b2168cc9b52bc179cada69252afc0",
+    "subject": "fix: wrap sympy's parse_expr in the alarm signal timeout block to prevent hangs on pathological mathematical strings",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/56759a9fdd5b2168cc9b52bc179cada69252afc0.patch",
+    "patch_sha256": "f92202f962f9a6945b6194eeb95c18d524e90bfa2c7b842ea0bc5b9cad7306fa",
+    "patch_bytes": 1920
+  },
+  {
+    "sha": "0bda9dea36f7e87fcb3bac91d6f1932680d9f16a",
+    "subject": "docs: condense July_16_Progress.md for advisor presentation & cleanup temporary cheat sheet",
+    "code_files": [
+      "research/generate_july_16_plots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/0bda9dea36f7e87fcb3bac91d6f1932680d9f16a.patch",
+    "patch_sha256": "63e9f2d13af0bbc4017b68cc9393afc39cf2c31a5020211266941999582155b0",
+    "patch_bytes": 6085
+  },
+  {
+    "sha": "d2423bf3ef08ec2f31e7d0532c22906a0f016b4f",
+    "subject": "docs: replace conceptual diagrams with real data-backed matplotlib plots for independent variables",
+    "code_files": [
+      "research/generate_july_16_plots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/d2423bf3ef08ec2f31e7d0532c22906a0f016b4f.patch",
+    "patch_sha256": "b74d1f823b47d10b75fc342684fe4f01721c128248af61ba3cb2bf37b0339ac3",
+    "patch_bytes": 4375
+  },
+  {
+    "sha": "dc480ec8e323af09f5645e8cac75c0e61be9bd56",
+    "subject": "docs: correct temperature variable settings to 0.1, 0.6, 1.0 in script and report",
+    "code_files": [
+      "research/generate_july_16_plots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/dc480ec8e323af09f5645e8cac75c0e61be9bd56.patch",
+    "patch_sha256": "64e9012b5300c65608289883717b7522338be4be83d57780ee494195d0d1be10",
+    "patch_bytes": 2334
+  },
+  {
+    "sha": "bd94cc11f8a813737052ba36e2bf63aa852ebe30",
+    "subject": "docs: rename temperature plot to v3 to force markdown viewer cache refresh",
+    "code_files": [
+      "research/generate_july_16_plots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/bd94cc11f8a813737052ba36e2bf63aa852ebe30.patch",
+    "patch_sha256": "c1de089d8bfab5be1184868008d93ebf0f062e01b683d9182541d38a5d797064",
+    "patch_bytes": 829
+  },
+  {
+    "sha": "92d3bb5da6d06bc419ba205b4b9299313b81eed0",
+    "subject": "docs: regenerate plots to reflect final tournament AUC numbers",
+    "code_files": [
+      "research/generate_july_16_plots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/92d3bb5da6d06bc419ba205b4b9299313b81eed0.patch",
+    "patch_sha256": "de2fbebbedb29d62fe0ead082eadf8028e118d7c081814c225e24ac9b0e71f55",
+    "patch_bytes": 1603
+  },
+  {
+    "sha": "2ea955afccb58bb698f6609776802b6818acac37",
+    "subject": "results: add deep global sweep analysis report and tournament runner script",
+    "code_files": [
+      "research/deep_sweep_analysis.py",
+      "research/run_optimization_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/2ea955afccb58bb698f6609776802b6818acac37.patch",
+    "patch_sha256": "4468076d834993cdd40ae18b8b361077f8f026e0c402244dbb33eaed91d3934f",
+    "patch_bytes": 49443
+  },
+  {
+    "sha": "4363048d81471bf4ef1f51c518a3bc67de104cbb",
+    "subject": "results: add advanced hyper-optimization tournament script utilizing 96GB GPU VRAM",
+    "code_files": [
+      "research/run_advanced_hyper_optimization.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/4363048d81471bf4ef1f51c518a3bc67de104cbb.patch",
+    "patch_sha256": "1b1f34eb92e4ad14fb023dae266de88e8606a9e205e6cc700b703579c726636b",
+    "patch_bytes": 30836
+  },
+  {
+    "sha": "3d3c397677caa8dc38f432d9a0586598a1cff76d",
+    "subject": "results: add autonomous orchestrator script with fold-level checkpointing and periodic git push sync",
+    "code_files": [
+      "research/run_advanced_hyper_optimization.py",
+      "tools/run_autonomous_experiments.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/3d3c397677caa8dc38f432d9a0586598a1cff76d.patch",
+    "patch_sha256": "6ec922588d830a8c7654c41eb2a059aa5951c4aa1c26045121df86d4f9926055",
+    "patch_bytes": 9092
+  },
+  {
+    "sha": "c143ba3d85fefd978f05d2851d10c9a07e6052c7",
+    "subject": "results: increase full tuning epochs to 60, add stable batchnorm TCN, and add message warning filter",
+    "code_files": [
+      "research/run_advanced_hyper_optimization.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c143ba3d85fefd978f05d2851d10c9a07e6052c7.patch",
+    "patch_sha256": "12e6db0b1d7fd7b3700a017116b9abb0b28d710cf3609b2ca3a4e3f87683bfcd",
+    "patch_bytes": 22028
+  },
+  {
+    "sha": "30859fcc183732f4ebd71d2475eff7ea513831c1",
+    "subject": "results: update autonomous runner to auto-detect and use local virtualenv python path",
+    "code_files": [
+      "tools/run_autonomous_experiments.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/30859fcc183732f4ebd71d2475eff7ea513831c1.patch",
+    "patch_sha256": "20197f8b128fa8731891ed661be3b6ea9f06f2a166dd69aeaa1934f809c8c488",
+    "patch_bytes": 3424
+  },
+  {
+    "sha": "be0dbe67b8b0e843d075da604d0fd2166f5f3b72",
+    "subject": "results: support exhaustive cartesian grid search (1,170 models over 5 folds) for 24-hour run",
+    "code_files": [
+      "research/run_advanced_hyper_optimization.py",
+      "tools/run_autonomous_experiments.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/be0dbe67b8b0e843d075da604d0fd2166f5f3b72.patch",
+    "patch_sha256": "aec9e5b557d6ec46c81306c63c55c6ac3e4f1f683438029082e61757ecd9877d",
+    "patch_bytes": 13361
+  },
+  {
+    "sha": "ab0d31d259f1286bddc5c3e3520c0bee56f6752f",
+    "subject": "results: add Next-Gen Experiment Suite (Jerk, Torsion, Causal RoPE Transformer, Gated MoE Probe)",
+    "code_files": [
+      "research/deep_result_verification.py",
+      "research/run_nextgen_experiments.py",
+      "tools/run_nextgen_autonomous.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ab0d31d259f1286bddc5c3e3520c0bee56f6752f.patch",
+    "patch_sha256": "e3d8e52720534a3a1ccb2f954161110c59110875e7636f25dd92e424c8ac05d3",
+    "patch_bytes": 34404
+  },
+  {
+    "sha": "91a05b324057dd3882cc834576e20d10837436c5",
+    "subject": "results: add ultimate multi-day GPU tournament suite (research/run_ultimate_multi_day_tournament.py & tools/run_ultimate_multi_day_tournament.sh)",
+    "code_files": [
+      "research/run_ultimate_multi_day_tournament.py",
+      "tools/run_ultimate_multi_day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/91a05b324057dd3882cc834576e20d10837436c5.patch",
+    "patch_sha256": "7c5973b2eb2eb46b0ad1c525027d365efb42906d21728c4a353d1017c160a3ce",
+    "patch_bytes": 139494
+  },
+  {
+    "sha": "3eb5055938362304f72aa2d4e1512fb5d1a90a91",
+    "subject": "fix: auto-detect .venv/bin/python in ultimate multi-day launcher",
+    "code_files": [
+      "tools/run_ultimate_multi_day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/3eb5055938362304f72aa2d4e1512fb5d1a90a91.patch",
+    "patch_sha256": "cce546e459d7e0adeb8ac45d4cb4d54fb2c96f596756825343b8989694237edf",
+    "patch_bytes": 1179
+  },
+  {
+    "sha": "17c920dab7494f2e0642b9a2444192e28d1c5356",
+    "subject": "fix: auto-install optuna if missing during launcher preflight",
+    "code_files": [
+      "tools/run_ultimate_multi_day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/17c920dab7494f2e0642b9a2444192e28d1c5356.patch",
+    "patch_sha256": "de57cfeb5c0671bb49d6b2c91674b57d5652fca2d323b086d5a17b9d48539015",
+    "patch_bytes": 1982
+  },
+  {
+    "sha": "b4e886e2d892a083c9557eba79a7b710a046ed84",
+    "subject": "fix: set num_workers=0 and mp.set_sharing_strategy('file_system') to prevent container /dev/shm shared memory exhaustion",
+    "code_files": [
+      "research/run_ultimate_multi_day_tournament.py",
+      "tools/run_ultimate_multi_day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/b4e886e2d892a083c9557eba79a7b710a046ed84.patch",
+    "patch_sha256": "61d4d05efcd47ff46f367ca965ed3e076cbc321111d51641ca260db3cd430584",
+    "patch_bytes": 2727
+  },
+  {
+    "sha": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+    "subject": "feat: add closed-barrier anonymous peer-dynamics consensus protocol achieving 0.9547 OOF AUC",
+    "code_files": [
+      "research/analyze_committee_domain_decomposition.py",
+      "research/analyze_committee_factor_ablation.py",
+      "research/analyze_committee_peer_dynamics.py",
+      "research/audit_prospective_protocol.py",
+      "research/audit_ultimate_tournament_artifacts.py",
+      "research/committee_peer_dynamics.py",
+      "research/forced_choice_verifier.py",
+      "research/prospective_peer_dynamics.py",
+      "research/real_trace_experiments.py",
+      "research/run_committee_oof_experiments.py",
+      "research/run_committee_oof_minimal.py",
+      "research/run_committee_oof_no_timing.py",
+      "research/run_committee_oof_peer_dynamics.py",
+      "research/run_prospective_committee_protocol.py",
+      "research/run_selected_answer_capacity_sweep.py",
+      "research/run_selected_answer_causal_dynamics_oof.py",
+      "research/run_selected_answer_content_oof.py",
+      "research/run_selected_answer_oof_experiments.py",
+      "research/run_selected_answer_representation_oof_experiments.py",
+      "research/run_selected_answer_temporal_shape_oof.py",
+      "research/run_strict_tabular_stopping_oof.py",
+      "research/run_strict_text_stopping_oof.py",
+      "research/run_ultimate_multi_day_tournament.py",
+      "research/selected_answer_causal_dynamics.py",
+      "research/selected_answer_temporal_shape.py",
+      "research/summarize_peer_dynamics_evidence.py",
+      "research/test_v2_forced_choice_protocol.py",
+      "tools/run_ultimate_multi_day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/a9bf28244cb33e06c03e1a6a6259918dda723442.patch",
+    "patch_sha256": "c0d0a1aae1b5b47ac7b5d71e0010c0452108432d432ddd7d95882a2b2437328d",
+    "patch_bytes": 803936
+  },
+  {
+    "sha": "d36584547c6bef17ad3315566ed817ec3f65a58c",
+    "subject": "fix: resolve pd.Series groupby type and answer_span_std_entropy in prospective peer dynamics adapter",
+    "code_files": [
+      "research/prospective_peer_dynamics.py",
+      "research/run_committee_oof_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/d36584547c6bef17ad3315566ed817ec3f65a58c.patch",
+    "patch_sha256": "10c2ba81c87b3d384d74636e1c5606d643c2ff8f0b3065e4d4c1cb4bf2c4156d",
+    "patch_bytes": 1701
+  },
+  {
+    "sha": "a65e7fbf0f3f3d45e9dec77e88f9c29fa24b0c51",
+    "subject": "feat: complete 5-arm scientific stress test battery for peer-dynamics consensus model",
+    "code_files": [
+      "research/run_peer_dynamics_stress_tests.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/a65e7fbf0f3f3d45e9dec77e88f9c29fa24b0c51.patch",
+    "patch_sha256": "8cf8b930086c9a733d164979b38ea38b74ade46652d5d6af9b302a47c5713dc7",
+    "patch_bytes": 15236
+  },
+  {
+    "sha": "0cf8c297ceb4402e013fc9ab725fa553e494ae52",
+    "subject": "feat: implement Next-Gen 0.99 AUC target pipeline with high-order consensus physics and meta-ensemble",
+    "code_files": [
+      "research/run_nextgen_099_auc_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/0cf8c297ceb4402e013fc9ab725fa553e494ae52.patch",
+    "patch_sha256": "5ccc9958939a8e9dec012a745d275cae1b085733611d57d98e8548cbf363dbc0",
+    "patch_bytes": 15170
+  },
+  {
+    "sha": "84bec18cbc76b9bcd68e541d947407357389161b",
+    "subject": "feat: complete multi-phase deep iteration suite with PyTorch CausalAttractorGRU and hybrid meta-ensemble",
+    "code_files": [
+      "research/run_40day_deep_iteration_suite.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/84bec18cbc76b9bcd68e541d947407357389161b.patch",
+    "patch_sha256": "6ab14ecca814d9b5209b9db7e855245ebc5d476e34b2658f9ad76681cf0e9640",
+    "patch_bytes": 16157
+  },
+  {
+    "sha": "48635dfb0516156be9e173a7b4b82d0a71122d1d",
+    "subject": "feat: complete scientific hypothesis verification suite with 1000-draw bootstrap confidence intervals",
+    "code_files": [
+      "research/run_scientific_verification_and_stress_test_suite.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/48635dfb0516156be9e173a7b4b82d0a71122d1d.patch",
+    "patch_sha256": "6943bae66c9ed399205d1cc202f0a7fb6f69f1e4e3c1f9f9f89af71d066a908b",
+    "patch_bytes": 16588
+  },
+  {
+    "sha": "25292e5922d71302a29ef6a70f6520c785f0bbcd",
+    "subject": "feat: complete weakness stress-test battery for perfect overthinking detector",
+    "code_files": [
+      "research/run_perfect_overthinking_stress_test.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/25292e5922d71302a29ef6a70f6520c785f0bbcd.patch",
+    "patch_sha256": "a74f1b28be8175c7547e382d793e25ea017ae171e02007cacaf8a9f772e21bbb",
+    "patch_bytes": 14056
+  },
+  {
+    "sha": "0fb9bd1cd0e82d3d05db8af9b257a537406fa81a",
+    "subject": "feat: complete master Blackwell 5-day GPU tournament and 10,000-draw bootstrap verification suite",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py",
+      "tools/run_ultimate_blackwell_5day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/0fb9bd1cd0e82d3d05db8af9b257a537406fa81a.patch",
+    "patch_sha256": "d0a23905e99742e591463013716c3da6d641f2a262f9fe5a7ffa83dfdf837e8e",
+    "patch_bytes": 26654
+  },
+  {
+    "sha": "570a26cfff98240eba3eea082adf1b205f237622",
+    "subject": "feat: integrate 2026 ArXiv SOTA signals (CoDE-Stop confidence dynamics, prefix sufficiency, renewal processes)",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/570a26cfff98240eba3eea082adf1b205f237622.patch",
+    "patch_sha256": "86b21efcaa2d2e5482d3d7027bfa9cd5739b847c41d0a9d6953da2dd61eff3dc",
+    "patch_bytes": 2563
+  },
+  {
+    "sha": "443872c20f23431de91a7d43fcae6feda9fac290",
+    "subject": "feat: add automatic periodic git checkpointing and git push during 5-day tournament execution",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/443872c20f23431de91a7d43fcae6feda9fac290.patch",
+    "patch_sha256": "6d1f6d271d0a6673799185ca8eea6230f531efc9298eb19d5081d5ade4ee4088",
+    "patch_bytes": 3812
+  },
+  {
+    "sha": "9969de0daea79648170d8ca5ea6405f0ecef1457",
+    "subject": "feat: complete verified smoke test mode and bfloat16 PyTorch AMP compatibility",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/9969de0daea79648170d8ca5ea6405f0ecef1457.patch",
+    "patch_sha256": "3285804825873ba5f2d97759b31e887f33ef0d24218c90ca38b8525eb93513e4",
+    "patch_bytes": 4254
+  },
+  {
+    "sha": "ae8067f70718d7859a92f62b96da0e86851e6250",
+    "subject": "fix: auto-detect active python environment and auto-install lightgbm if missing",
+    "code_files": [
+      "tools/run_ultimate_blackwell_5day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ae8067f70718d7859a92f62b96da0e86851e6250.patch",
+    "patch_sha256": "69275e3722df420ee4f480051c3dff69084f4f582b62135ad543c2c4f7301b3e",
+    "patch_bytes": 1402
+  },
+  {
+    "sha": "352d54c8142e0a16cd9d53b16d6b570c5295ebfc",
+    "subject": "fix: add gradient clipping, dtype alignment, and np.nan_to_num protection for bfloat16 PyTorch sequence probes",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/352d54c8142e0a16cd9d53b16d6b570c5295ebfc.patch",
+    "patch_sha256": "e192079f67649d7b736e481a4361bfec3a6fc24f0aa1f4e5d407d3d1a65aad30",
+    "patch_bytes": 2595
+  },
+  {
+    "sha": "20e6b22ba8d37e1129c6e9df47489df5ff9e3c98",
+    "subject": "feat: add StandardScaler feature normalization (achieves 0.9717 OOF AUC sequence probe) and non-interactive GIT_TERMINAL_PROMPT=0 background push protection",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/20e6b22ba8d37e1129c6e9df47489df5ff9e3c98.patch",
+    "patch_sha256": "545267daa03225e9c55700fb356b69801e1030bd5331c53ac61056ade374f9d8",
+    "patch_bytes": 3772
+  },
+  {
+    "sha": "784838af6849e6fa054e79e0a90fceb2f3d2bfdc",
+    "subject": "feat: add fold-level auto-checkpointing and git push after each fold in Phase 2",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/784838af6849e6fa054e79e0a90fceb2f3d2bfdc.patch",
+    "patch_sha256": "ca40f89883565ad6c1ca53c570f1f81212e64b94a542c7f86751f8d550ca6aeb",
+    "patch_bytes": 1859
+  },
+  {
+    "sha": "c51a4adc5c78d88fc587293ccb6fe05f55673412",
+    "subject": "feat: add multi-mode scaling (quick, overnight 12h, marathon 5d) with 512-dim MoE, CosineAnnealingLR, multi-seed ensembling, and 50,000 bootstrap draws",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py",
+      "tools/run_ultimate_blackwell_5day_tournament.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c51a4adc5c78d88fc587293ccb6fe05f55673412.patch",
+    "patch_sha256": "3444cdd2934693cdcc476cb59bf5773baebff632378ef36135d8af5d0c37057c",
+    "patch_bytes": 11379
+  },
+  {
+    "sha": "361eaf9fdee235b11e6bbdc9d0236387fc67002c",
+    "subject": "feat: upgrade to Ultra Deep Research Suite with dual neural architectures (MoE + CausalAttractorGRU), 5th-order Crackle physics, and 16-scale EMA spectrum",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/361eaf9fdee235b11e6bbdc9d0236387fc67002c.patch",
+    "patch_sha256": "6c08e6158d3ec4bb0f1c27d9c3a179e0c592fdccec1de6ca6abe9e6273ac7270",
+    "patch_bytes": 9059
+  },
+  {
+    "sha": "1b5284bdde32c7e074bb4f9a002272eb3da669e6",
+    "subject": "fix: add 'ultra' to argparse choices in run_ultimate_blackwell_5day_tournament.py",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/1b5284bdde32c7e074bb4f9a002272eb3da669e6.patch",
+    "patch_sha256": "0044ac5679da9ac8d3b57095e9b5c90f624491e5a716ac57a95ddb96465ea7b7",
+    "patch_bytes": 1436
+  },
+  {
+    "sha": "0d75af9519978b10724a8b99b53ea91d718a8a98",
+    "subject": "feat: scale neural probes to batch_size=32 (92 mini-batches/epoch) and 1,000 epochs (100 PyTorch neural models total) for deep multi-day GPU training",
+    "code_files": [
+      "research/run_ultimate_blackwell_5day_tournament.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/0d75af9519978b10724a8b99b53ea91d718a8a98.patch",
+    "patch_sha256": "19812e10255053543bd190c52c6e316d689a22fbd05d3fa165db195774522b73",
+    "patch_bytes": 2774
+  },
+  {
+    "sha": "fa1c6536e83bd61f60a67aced18225d7948b084f",
+    "subject": "Add verified thesis and live stopping research package",
+    "code_files": [
+      "ThesisDocs/defense/generate_defense_source.py",
+      "ThesisDocs/neurips/build_checklist.py",
+      "research/analyze_online_stopping_results.py",
+      "research/learned_online_stopping_controller.py",
+      "research/online_generation.py",
+      "research/online_stopping_controller.py",
+      "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/online_generation.py",
+      "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/online_stopping_controller.py",
+      "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/run_online_stopping_evaluation.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/learned_online_stopping_controller.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/online_generation.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/online_stopping_controller.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/prefix_stopping_model.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/run_learned_online_stopping.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/run_online_stopping_evaluation.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/learned_online_stopping_controller.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/online_generation.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/online_stopping_controller.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/prefix_stopping_model.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/run_learned_online_stopping.py",
+      "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/run_online_stopping_evaluation.py",
+      "research/outputs/semester2/online_stopping_20261002/locked_code/online_generation.py",
+      "research/outputs/semester2/online_stopping_20261002/locked_code/online_stopping_controller.py",
+      "research/outputs/semester2/online_stopping_20261002/locked_code/run_online_stopping_evaluation.py",
+      "research/prefix_stopping_model.py",
+      "research/run_active_stopping.py",
+      "research/run_learned_online_stopping.py",
+      "research/run_online_stopping_evaluation.py",
+      "research/tests/test_data_freeze.py",
+      "research/tests/test_graders.py",
+      "research/tests/test_learned_online_controller.py",
+      "research/tests/test_live_uncertainty.py",
+      "research/tests/test_mathematical_foundations.py",
+      "research/tests/test_online_controller.py",
+      "research/tests/test_online_replay_accounting.py",
+      "research/tests/test_prefix_stopping_model.py",
+      "research/train_prefix_stopping_model.py",
+      "tools/analyze_live_stopping_uncertainty.py",
+      "tools/build_anonymous_supplement.py",
+      "tools/build_defense_deck.ps1",
+      "tools/build_master_thesis.py",
+      "tools/build_neurips_paper.py",
+      "tools/build_stopping_paper.py",
+      "tools/capture_repository_venv_environment.py",
+      "tools/compute_progress_report_review_metrics.py",
+      "tools/fetch_neurips_build_dependencies.py",
+      "tools/freeze_research_data.py",
+      "tools/recompute_thesis_evidence.py",
+      "tools/render_thesis_math.mjs",
+      "tools/summarize_failure_audit.py",
+      "tools/verify_defense_content.py",
+      "tools/verify_powerpoint_roundtrip.ps1"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/fa1c6536e83bd61f60a67aced18225d7948b084f.patch",
+    "patch_sha256": "ddf944007a06e2cfee4a688c15a1565c95771e0f2a4b92e319cd759a36e7a490",
+    "patch_bytes": 773329
+  },
+  {
+    "sha": "09225c95c676ab3cae1c4b9586d74f7f803f519f",
+    "subject": "Prepare validated archival thesis and EP completion records",
+    "code_files": [
+      "ThesisDocs/defense/rehearsal/test_rehearsal_logger.py",
+      "tools/build_archival_candidate.py",
+      "tools/record_defense_rehearsal.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/09225c95c676ab3cae1c4b9586d74f7f803f519f.patch",
+    "patch_sha256": "0e28ff4df8c6f48ba2e5f3afecd8ea9e2a430fbcb655f2133de7966418e3de58",
+    "patch_bytes": 66999
+  },
+  {
+    "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+    "subject": "Fix graders, stopping validation and research ledger audits",
+    "code_files": [
+      "ThesisDocs/defense/rehearsal/test_rehearsal_logger.py",
+      "research/analyze_online_stopping_results.py",
+      "research/learned_online_stopping_controller.py",
+      "research/online_stopping_controller.py",
+      "research/real_trace_experiments.py",
+      "research/run_learned_online_stopping.py",
+      "research/run_online_stopping_evaluation.py",
+      "research/tests/test_data_freeze.py",
+      "research/tests/test_graders.py",
+      "research/tests/test_learned_online_controller.py",
+      "research/tests/test_live_ledger_audit.py",
+      "research/tests/test_live_uncertainty.py",
+      "research/tests/test_online_controller.py",
+      "tools/analyze_live_stopping_uncertainty.py",
+      "tools/freeze_research_data.py",
+      "tools/record_defense_rehearsal.py",
+      "tools/verify_post_review_behavior.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/6e4378bef9a98037c20d1381eb9c7b61462a6578.patch",
+    "patch_sha256": "78f86fa2ee70818e0ad9743f0de74aab43f6a86b4964a80fb38bc51dd29f06f6",
+    "patch_bytes": 118930
+  },
+  {
+    "sha": "c9202d035d7741108a4aedf2e12a61ba97ba8551",
+    "subject": "Merge remote batching updates and re-apply auto-shutdown trigger for Colab L4 instances",
+    "code_files": [
+      "research/generate_thesis_artifacts.py",
+      "research/real_trace_experiments.py",
+      "research/trace_analysis.py",
+      "tools/run_colab_experiment.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/c9202d035d7741108a4aedf2e12a61ba97ba8551.patch",
+    "patch_sha256": "916c95176aa26914991eeab2d0f2b16cd4f459fe7d2e2c2e2d1b7858ae1f2b05",
+    "patch_bytes": 101504,
+    "merge_parent_union": true
+  },
+  {
+    "sha": "87e1b614785a6e33da0918556f76bebd77a35535",
+    "subject": "Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "scratch_analyze.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/87e1b614785a6e33da0918556f76bebd77a35535.patch",
+    "patch_sha256": "c9c7a49b3929a3f201740df92bcb719fb5e2f9ed59416f5a59ae4f19dee5b78c",
+    "patch_bytes": 2902,
+    "merge_parent_union": true
+  },
+  {
+    "sha": "8939c5fa8303b3f778bec1f1be586bdd58a52cb4",
+    "subject": "Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary",
+    "code_files": [
+      "research/real_trace_experiments.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/8939c5fa8303b3f778bec1f1be586bdd58a52cb4.patch",
+    "patch_sha256": "85383f8c9b8b0277cb12682cf019b9d93b5ec4d260ad9db818368960e9892ec5",
+    "patch_bytes": 2568,
+    "merge_parent_union": true
+  },
+  {
+    "sha": "ecad9ea4956b0058a6ba53e9c29d49406c1d382d",
+    "subject": "Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary",
+    "code_files": [
+      "research/real_trace_experiments.py",
+      "tools/run_global_52cell_sweep.sh"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/ecad9ea4956b0058a6ba53e9c29d49406c1d382d.patch",
+    "patch_sha256": "7016ff3f4ea3918b3fdf06ce4d1a0d1406b562694fa84e1cc1353e7c831c88ce",
+    "patch_bytes": 4738,
+    "merge_parent_union": true
+  },
+  {
+    "sha": "e50953f3b627178d59a7a72df79853b24b784b5b",
+    "subject": "Merge branch 'main' of https://github.com/bhattadiCS/research-thesis-overthinking-boundary",
+    "code_files": [
+      "research/generate_july_16_plots.py"
+    ],
+    "patch_path": "tmp/research_history_audit/code_patches/e50953f3b627178d59a7a72df79853b24b784b5b.patch",
+    "patch_sha256": "ba7f6402fb89f613b7ded34aa11991181262d65cd1a425cc4a2aefd5f4f06157",
+    "patch_bytes": 1702,
+    "merge_parent_union": true
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "schema": "historical-peer-source-binding-audit-v1",
+  "records": [
+    {
+      "path": "research/run_committee_oof_peer_dynamics.py",
+      "current_sha256": "5d58098c2d68171777a9c8b6b7ec68ff3e69257577b08afe6f05a15bcefc952d",
+      "declared_historical_sha256": [
+        "2b8169cfdb8fee44754008a831d537958f7fb9ee3ebf68155464ee24df7e1a4f",
+        "f20ef6d621a0f4909b56f6e4466311fed46d620f7460a194549cb92a612be76a"
+      ],
+      "git_file_versions_checked": 1,
+      "matches": []
+    },
+    {
+      "path": "research/committee_peer_dynamics.py",
+      "current_sha256": "1f973ca3744a6590992dc4c71d486f5e4a14d8d57143a8ed04b87939e3598df1",
+      "declared_historical_sha256": [
+        "5a16373637233e4aea315df040a868964cd6f7be0f10c3a6768d10a720ec0a14"
+      ],
+      "git_file_versions_checked": 1,
+      "matches": []
+    },
+    {
+      "path": "research/run_committee_oof_experiments.py",
+      "current_sha256": "2c430d338d6b291258c808d1a6747d73576aee48e5d42b8928898a119d144786",
+      "declared_historical_sha256": [
+        "63ba1ba102ee428caaf40ebffc329876fc3d6b8e71a2348296f1f8d64d3007ff"
+      ],
+      "git_file_versions_checked": 2,
+      "matches": [
+        {
+          "declared_sha256": "63ba1ba102ee428caaf40ebffc329876fc3d6b8e71a2348296f1f8d64d3007ff",
+          "matching_commit": "a9bf28244cb33e06c03e1a6a6259918dda723442",
+          "reconstruction": "git_blob_raw",
+          "git_blob_sha256": "63ba1ba102ee428caaf40ebffc329876fc3d6b8e71a2348296f1f8d64d3007ff"
+        }
+      ]
+    }
+  ],
+  "scope": "Read-only search of all recorded Git file versions plus explicit LF-to-CRLF byte reconstruction. Missing declared byte hashes are not silently replaced with current source hashes."
+}

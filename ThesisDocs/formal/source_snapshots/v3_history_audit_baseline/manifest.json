@@ -1,0 +1,52 @@
+[
+  {
+    "original_path": "ThesisDocs/chapters/chapter1_intro.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/chapters/chapter1_intro.md",
+    "sha256": "5692e914afe710f1696003cbec3afd8ed420a27ff7fb07c7ef04b1d91fee4d7a"
+  },
+  {
+    "original_path": "ThesisDocs/chapters/chapter2_theory.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/chapters/chapter2_theory.md",
+    "sha256": "3ebf29bc62f6ea6aa976cfe1f5ec0042cbe09fb55022c66daff24e620bc42115"
+  },
+  {
+    "original_path": "ThesisDocs/chapters/chapter3_methodology.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/chapters/chapter3_methodology.md",
+    "sha256": "289ffc98874ce94c1be780aa0f32b21886f98e6f9e554122ed453c35aab1cb7b"
+  },
+  {
+    "original_path": "ThesisDocs/chapters/chapter4_empirical.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/chapters/chapter4_empirical.md",
+    "sha256": "113666d112b96fc1b9287a41aa7533607a156f10be0be25ff2280c53464f8f6e"
+  },
+  {
+    "original_path": "ThesisDocs/chapters/chapter5_online.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/chapters/chapter5_online.md",
+    "sha256": "b99551a07aa43e8f80bbfa0be54acbc6de9227d501f449cb73382556d243eb75"
+  },
+  {
+    "original_path": "ThesisDocs/chapters/chapter6_discussion.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/chapters/chapter6_discussion.md",
+    "sha256": "af97789971999559071d588fff45853c3f5ea63b84eb709c6daa7ca8234708d2"
+  },
+  {
+    "original_path": "ThesisDocs/references.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/references.md",
+    "sha256": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823"
+  },
+  {
+    "original_path": "ThesisDocs/appendices.md",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/ThesisDocs/appendices.md",
+    "sha256": "359ab752267f307d5d1847351cf7df604b0fce3eccfc19fc0fd73b12abcdb8d3"
+  },
+  {
+    "original_path": "tools/build_master_thesis.py",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/tools/build_master_thesis.py",
+    "sha256": "096ea5a7c18d315bf26d2d802f8954a4a6c55329a4c4b4e24a575559acc6dbf0"
+  },
+  {
+    "original_path": "tools/render_thesis_math.mjs",
+    "snapshot_path": "ThesisDocs/formal/source_snapshots/v3_history_audit_baseline/tools/render_thesis_math.mjs",
+    "sha256": "20608459a8f4019a732cec9ca4d29cc34cc2eeb9fbd3d5fa5033568f2e0dfe87"
+  }
+]

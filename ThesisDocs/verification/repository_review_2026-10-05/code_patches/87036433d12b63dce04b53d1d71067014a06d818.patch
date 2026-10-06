@@ -1,0 +1,37 @@
+commit 87036433d12b63dce04b53d1d71067014a06d818
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Mon May 11 22:21:10 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Mon May 11 22:21:10 2026 -0400
+
+    Move Gemma scoring postprocess to CPU
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 9eead6b..9e59098 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -1281,10 +1281,22 @@ def generate_batch_with_diagnostics(
+             torch.cuda.synchronize()
+         forward_seconds = time.perf_counter() - forward_started_at
+ 
++    # Postprocess on CPU to avoid expanding completion logits into softmax buffers on a constrained GPU.
++    generated_ids_cpu = generated_ids.detach().cpu()
++    scoring_logits = scoring_logits.float().cpu()
++    final_hidden_states = final_hidden_states.float().cpu()
++    if actual_device == "cuda":
++        del input_ids
++        del attention_mask
++        del generated_ids
++        del generated_attention_mask
++        release_cuda_memory()
++
+     results: list[dict[str, Any]] = []
+     postprocess_started_at = time.perf_counter()
+-    for index in range(generated_ids.shape[0]):
+-        raw_completion_ids = generated_ids[index, prompt_width:].detach()
++    batch_size = scoring_logits.shape[0]
++    for index in range(batch_size):
++        raw_completion_ids = generated_ids_cpu[index, prompt_width:]
+         completion_ids = trim_completion_ids(raw_completion_ids, tokenizer.pad_token_id, tokenizer.eos_token_id)
+         generated_length = int(completion_ids.shape[0])
+         raw_text = tokenizer.decode(completion_ids, skip_special_tokens=True).strip()

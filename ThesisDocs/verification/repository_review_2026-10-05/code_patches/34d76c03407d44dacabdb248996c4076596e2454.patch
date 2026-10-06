@@ -1,0 +1,31 @@
+commit 34d76c03407d44dacabdb248996c4076596e2454
+Author:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+AuthorDate: Fri Jul 10 09:54:09 2026 -0400
+Commit:     Aditya Bhatt <bhattadiCS@users.noreply.github.com>
+CommitDate: Fri Jul 10 09:54:09 2026 -0400
+
+    fix: drop hidden-state cache requirement from completeness reconciliation
+    
+    Ruling on the long-uncommitted hunk (audit lever H13, rigor_audit/00 §C):
+    KEEP. hidden_states/ caches are .gitignored and absent from every cell
+    on this machine, so the committed semantics (complete = full step rows
+    AND a hidden-state .npz) would mark every already-complete run
+    incomplete on any resume and trigger mass re-collection. Module 0
+    verified no on-disk output was ever produced under the edited
+    semantics, so history is unaffected; this changes future resumes only.
+    
+    Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+diff --git a/research/real_trace_experiments.py b/research/real_trace_experiments.py
+index 0cdee3b..6b87795 100644
+--- a/research/real_trace_experiments.py
++++ b/research/real_trace_experiments.py
+@@ -1294,7 +1294,7 @@ def reconcile_existing_outputs(
+             run_id_str = str(run_id)
+             ordered = group.sort_values("step")
+             observed_steps = [int(value) for value in ordered["step"].tolist()]
+-            is_complete = observed_steps == expected_step_sequence and run_id_str in hidden_run_ids
++            is_complete = observed_steps == expected_step_sequence
+             if is_complete:
+                 completed_from_steps.add(run_id_str)
+                 if run_id_str not in existing_run_ids:

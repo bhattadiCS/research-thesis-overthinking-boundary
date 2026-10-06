@@ -1,0 +1,117 @@
+[
+  {
+    "sha": "6e4378bef9a98037c20d1381eb9c7b61462a6578",
+    "date": "2026-10-03T00:40:13-04:00",
+    "subject": "Fix graders, stopping validation and research ledger audits"
+  },
+  {
+    "sha": "1b5284bdde32c7e074bb4f9a002272eb3da669e6",
+    "date": "2026-07-23T09:26:28-04:00",
+    "subject": "fix: add 'ultra' to argparse choices in run_ultimate_blackwell_5day_tournament.py"
+  },
+  {
+    "sha": "361eaf9fdee235b11e6bbdc9d0236387fc67002c",
+    "date": "2026-07-23T08:52:34-04:00",
+    "subject": "feat: upgrade to Ultra Deep Research Suite with dual neural architectures (MoE + CausalAttractorGRU), 5th-order Crackle physics, and 16-scale EMA spectrum"
+  },
+  {
+    "sha": "c51a4adc5c78d88fc587293ccb6fe05f55673412",
+    "date": "2026-07-23T00:40:08-04:00",
+    "subject": "feat: add multi-mode scaling (quick, overnight 12h, marathon 5d) with 512-dim MoE, CosineAnnealingLR, multi-seed ensembling, and 50,000 bootstrap draws"
+  },
+  {
+    "sha": "84bec18cbc76b9bcd68e541d947407357389161b",
+    "date": "2026-07-20T19:06:47-04:00",
+    "subject": "feat: complete multi-phase deep iteration suite with PyTorch CausalAttractorGRU and hybrid meta-ensemble"
+  },
+  {
+    "sha": "ab0d31d259f1286bddc5c3e3520c0bee56f6752f",
+    "date": "2026-07-18T22:31:15-04:00",
+    "subject": "results: add Next-Gen Experiment Suite (Jerk, Torsion, Causal RoPE Transformer, Gated MoE Probe)"
+  },
+  {
+    "sha": "bd94cc11f8a813737052ba36e2bf63aa852ebe30",
+    "date": "2026-07-16T11:05:33-04:00",
+    "subject": "docs: rename temperature plot to v3 to force markdown viewer cache refresh"
+  },
+  {
+    "sha": "dc480ec8e323af09f5645e8cac75c0e61be9bd56",
+    "date": "2026-07-16T11:02:34-04:00",
+    "subject": "docs: correct temperature variable settings to 0.1, 0.6, 1.0 in script and report"
+  },
+  {
+    "sha": "56759a9fdd5b2168cc9b52bc179cada69252afc0",
+    "date": "2026-07-16T00:46:56-04:00",
+    "subject": "fix: wrap sympy's parse_expr in the alarm signal timeout block to prevent hangs on pathological mathematical strings"
+  },
+  {
+    "sha": "84853411fcc95569c0cdc2694d2847aabed5b81a",
+    "date": "2026-07-12T11:54:17-04:00",
+    "subject": "fix: support pyarrow-backed string dtypes in _sanitize_step_frame and _escape_control_chars"
+  },
+  {
+    "sha": "07a9573ecd93b987db165198541e314357d9d3db",
+    "date": "2026-07-10T10:12:40-04:00",
+    "subject": "docs: post-audit corrections + regenerate MATH aggregate on repaired cell"
+  },
+  {
+    "sha": "ce0167c6066b0caeb85370777df6ee14b9281d30",
+    "date": "2026-07-10T10:09:04-04:00",
+    "subject": "fix: pipeline hardening from rigor-audit levers H1/H2/H4/H5/H11/H12"
+  },
+  {
+    "sha": "0ea16f417f151058033ca1ba6c8451434e4d1e9b",
+    "date": "2026-07-10T05:55:06-04:00",
+    "subject": "audit: scientific-rigor verification + full loss autopsy (rigor_audit/)"
+  },
+  {
+    "sha": "8ce9b9fcae3e51d4be9d779c009097662b8754ab",
+    "date": "2026-07-02T19:20:26-04:00",
+    "subject": "fix: floor boundary detection at T_MIN=2 in ad-hoc scripts; regenerate affected reports"
+  },
+  {
+    "sha": "3a5dde7a83833a5cea827a329983f66bc6041219",
+    "date": "2026-06-30T22:51:55-04:00",
+    "subject": "docs: add July 1 progress check-in, advisor briefing, and experiment matrix audit outputs"
+  },
+  {
+    "sha": "6ca9771823a49d694d2178d0f47a12ba184c61ea",
+    "date": "2026-06-27T19:03:43-04:00",
+    "subject": "fix(aggregate): sanitize trace_steps before q_t curve in cross-family"
+  },
+  {
+    "sha": "f89ff3863f5723a63658ac5617b1f12d4c44fcc3",
+    "date": "2026-06-27T11:42:01-04:00",
+    "subject": "fix(analysis)+complete: sanitize hard-kill-corrupted rows; finish all 52 cells"
+  },
+  {
+    "sha": "6f832ea47f862f641c9fc8788c0ae764cd2e5726",
+    "date": "2026-06-20T11:05:07-04:00",
+    "subject": "fix: correct canonical boundary operator + regenerate all results out-of-sample"
+  },
+  {
+    "sha": "ef45ddad0f064a6cc314ef875fcab0251aadf0d8",
+    "date": "2026-06-20T10:31:08-04:00",
+    "subject": "fix: remediate deep-audit critical/high findings (graders, leakage, boundary)"
+  },
+  {
+    "sha": "08411354d39c522f073ac4f16eb3f63e97265a52",
+    "date": "2026-06-20T01:02:50-04:00",
+    "subject": "feat: data-driven cross-family summary + MATH dataset parser"
+  },
+  {
+    "sha": "41195db8009ba31109fae05fa631325a077359b1",
+    "date": "2026-06-12T11:15:25-04:00",
+    "subject": "fix: resolve traceback memory leak in safe_generate_batch_with_diagnostics"
+  },
+  {
+    "sha": "093286b322ff4bb9c947380fc90a49fda9da980c",
+    "date": "2026-04-04T11:44:19-04:00",
+    "subject": "Align CPU audit, frontier analysis, and README"
+  },
+  {
+    "sha": "ad6faad4d851efc12787834d6ad604648c1dc8f1",
+    "date": "2026-04-03T21:39:40Z",
+    "subject": "chore: GPU optimization audit and fixes (IOManager, Gemma4 processor, hidden_dir, torchvision stub)"
+  }
+]
