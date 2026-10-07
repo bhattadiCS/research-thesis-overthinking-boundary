@@ -1,0 +1,56 @@
+{
+  "schema": "jhu-ep-acm-thesis-length-comparison-v1",
+  "as_of": "2026-10-07",
+  "scope": "Four verified MSc thesis PDFs listed by the EP ACM program; excludes research papers and PhD dissertations. Counts include frontmatter, references and appendices; formats and historical rules can differ. This is a convenience sample, not a census or universal target.",
+  "items": [
+    {
+      "author": "Adam Byerly",
+      "title": "Enhanced Uniform Manifold Approximation and Projection via Simultaneous Perturbation Stochastic Approximation",
+      "year": 2021,
+      "total_pdf_pages": 44,
+      "degree_confirmed_on_cover": "Master of Science",
+      "ep_acm_membership_source": "https://ep.jhu.edu/programs/applied-and-computational-mathematics/acm-student-thesis-and-research-papers-projects/",
+      "pdf_url": "https://jscholarship.library.jhu.edu/bitstreams/cfb10813-cec2-4317-a351-a9ea852cd7ac/download?download=1",
+      "pdf_sha256": "bfbbb6aceb142d5a560fd2b1bb2870258a22fe4bd30d815a60221710c5730659"
+    },
+    {
+      "author": "Erick Galinkin",
+      "title": "Malicious Network Traffic Detection via Deep Learning: An Information Theoretic View",
+      "year": 2020,
+      "total_pdf_pages": 52,
+      "degree_confirmed_on_cover": "Master of Science",
+      "ep_acm_membership_source": "https://ep.jhu.edu/programs/applied-and-computational-mathematics/acm-student-thesis-and-research-papers-projects/",
+      "pdf_url": "https://jscholarship.library.jhu.edu/bitstreams/8c1652e5-34aa-41dd-9c6c-f7c8c12648d1/download?download=1",
+      "pdf_sha256": "20d65ee92a37cdc68bc62224fe497958b9c4ab44a015729264549f8153b0e501"
+    },
+    {
+      "author": "Michael Ayres Baeder",
+      "title": "Manifold Learning for Empirical Asset Pricing",
+      "year": 2022,
+      "total_pdf_pages": 61,
+      "degree_confirmed_on_cover": "Master of Science",
+      "ep_acm_membership_source": "https://ep.jhu.edu/programs/applied-and-computational-mathematics/acm-student-thesis-and-research-papers-projects/",
+      "pdf_url": "https://jscholarship.library.jhu.edu/bitstreams/24d3bb62-2e0e-4992-aec2-d1e5cf44f127/download?download=1",
+      "pdf_sha256": "5cbab47e4522a1b0d28dd67ed98be32ee2ea0559295abbe2417f2711a86f95c2"
+    },
+    {
+      "author": "Alyssa Columbus",
+      "title": "Sleep Duration as a Neural Survival Model",
+      "year": 2022,
+      "total_pdf_pages": 88,
+      "degree_confirmed_on_cover": "Master of Science",
+      "ep_acm_membership_source": "https://ep.jhu.edu/programs/applied-and-computational-mathematics/acm-student-thesis-and-research-papers-projects/",
+      "pdf_url": "https://jscholarship.library.jhu.edu/bitstreams/554a09b0-1e7b-4046-8eb7-d834bbaaf874/download?download=1",
+      "pdf_sha256": "5ad806851c82fb680130498dd08799e170a88e11df1e17bb5cd4db671346559a"
+    }
+  ],
+  "sample_range": [
+    44,
+    88
+  ],
+  "sample_median": 56.5,
+  "previous_v5_digital_pages": 83,
+  "interpretation": "V5 was longer than three of four verified PDFs but shorter than the 88-page example. V6 is shorter than all four in both editions. This is a convenience sample; no program-wide ranking is established.",
+  "current_v6_digital_pages": 31,
+  "current_v6_print_pages": 32
+}

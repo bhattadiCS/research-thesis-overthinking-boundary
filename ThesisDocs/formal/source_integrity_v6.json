@@ -1,0 +1,61 @@
+{
+  "schema": "concise-thesis-source-integrity-v6",
+  "created_utc": "2026-10-07T23:39:48.225802+00:00",
+  "baseline_commit": "df03265cfe3b9bf4b1ee66061d81ef5796375be0",
+  "protected_files_checked": 164,
+  "protected_files_unchanged": true,
+  "baseline_manifest": "ThesisDocs/verification/concise_v6_2026-10-07/protected_baseline.json",
+  "baseline_manifest_sha256": "2d22bdb24bc36817532f1b6fb3beaf790d3a7dc346fd88bc2c704096de2577a2",
+  "compiled_manuscript": "ThesisDocs/Masters_Thesis_Formal_v6.md",
+  "compiled_sha256": "4203aebb3052b30300a14bb86e72714ac3dc333262ec19f8313e790cb6fb37f9",
+  "editions": [
+    {
+      "edition": "digital",
+      "path": "output/pdf/Masters_Thesis_Formal_v6_Aditya_Bhatt.pdf",
+      "sha256": "63c8222a318c9668d134e4551d8ca314a6c242dce4c04cd15921f4e995ad00cd",
+      "pages": 31,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v6/digital.pdf",
+      "raw_sha256": "059986e4672d023ecf8d128828f3c74f1f2f4458f47a30eecf479ba7bf73a429",
+      "word_count": 5626,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v6_digital_build_manifest.json"
+    },
+    {
+      "edition": "print",
+      "path": "output/pdf/Masters_Thesis_Formal_v6_Print_Aditya_Bhatt.pdf",
+      "sha256": "7224b034db458b41d2d82c15e9b74d7ba2ec175801711dc8bb31915bedffb141",
+      "pages": 32,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v6/print.pdf",
+      "raw_sha256": "4cc0b5f51f46fa11cb8a7a15615095cdae255a29efbb0756895b8089a349254f",
+      "word_count": 5626,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v6_print_build_manifest.json"
+    }
+  ],
+  "canonical_math_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+  "post_review_data_manifest_sha256": "00e9f04d5801dc3b8c71c96e6171a9cdfc39579c51f9855ad1ee4f94a06da23f",
+  "retained_tables": 3,
+  "retained_figures": 3,
+  "cited_references": 25,
+  "mathematical_expressions_in_compact_sources": 70,
+  "scope": "Core argument retained; full secondary derivations and results remain byte-identical in v5. This does not assert all 257 v5 expressions are printed in v6.",
+  "machine_audit": "ThesisDocs/formal/independent_checks_v6/release/technical_audit.json",
+  "machine_audit_sha256": "acc9c73f33cd97498ad262377fbbcecbd7b5bc5af52cade34a850bbec9d75708",
+  "new_generation_training_regrading_or_collection": false,
+  "exhaustive_frozen_data_verification": {
+    "path": "ThesisDocs/verification/concise_v6_2026-10-07/frozen_data_verification.json",
+    "sha256": "047def9ac3e6542dd476d66050db55384255a403a0b3d26c2925d8be68157f86",
+    "result": {
+      "audit_mode": "strict_bytes",
+      "auxiliary_files": 688,
+      "content_fingerprint": "6e014794a68e74558683862a942ef223cdce6e1d7f66583d5e7038653b1eff1a",
+      "data_files": 52,
+      "line_ending_only_changes": [],
+      "rows": 144440,
+      "status": "verified",
+      "trajectories": 28888
+    }
+  }
+}

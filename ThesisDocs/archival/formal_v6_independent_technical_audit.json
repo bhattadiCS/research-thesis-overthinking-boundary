@@ -1,0 +1,52 @@
+{
+  "schema": "formal-v6-final-audit-index",
+  "status": "verified",
+  "created_utc": "2026-10-07T23:39:48.225802+00:00",
+  "editions": [
+    {
+      "edition": "digital",
+      "path": "output/pdf/Masters_Thesis_Formal_v6_Aditya_Bhatt.pdf",
+      "sha256": "63c8222a318c9668d134e4551d8ca314a6c242dce4c04cd15921f4e995ad00cd",
+      "pages": 31,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v6/digital.pdf",
+      "raw_sha256": "059986e4672d023ecf8d128828f3c74f1f2f4458f47a30eecf479ba7bf73a429",
+      "word_count": 5626,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v6_digital_build_manifest.json"
+    },
+    {
+      "edition": "print",
+      "path": "output/pdf/Masters_Thesis_Formal_v6_Print_Aditya_Bhatt.pdf",
+      "sha256": "7224b034db458b41d2d82c15e9b74d7ba2ec175801711dc8bb31915bedffb141",
+      "pages": 32,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v6/print.pdf",
+      "raw_sha256": "4cc0b5f51f46fa11cb8a7a15615095cdae255a29efbb0756895b8089a349254f",
+      "word_count": 5626,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v6_print_build_manifest.json"
+    }
+  ],
+  "machine_audit": {
+    "path": "ThesisDocs/formal/independent_checks_v6/release/technical_audit.json",
+    "sha256": "acc9c73f33cd97498ad262377fbbcecbd7b5bc5af52cade34a850bbec9d75708"
+  },
+  "source_integrity": {
+    "path": "ThesisDocs/formal/source_integrity_v6.json",
+    "sha256": "4e5e0de104b351b24c8a0be001b2c20b2cc0e3c1d83789444fa0083a5578293b"
+  },
+  "manual_visual_review": {
+    "path": "ThesisDocs/formal/visual_review_v6.json",
+    "sha256": "6dddd65894ad15394881131c71bd24f7394b8c37a625412e20c08f85c6c39cef"
+  },
+  "scientific_and_requirements_review": {
+    "path": "ThesisDocs/verification/concise_v6_2026-10-07/revision_review.md",
+    "sha256": "9e6c3684ddf6527f173c80ef5fa75a0487592a22af385d5277f45a10ca903af5"
+  },
+  "test_record": {
+    "path": "ThesisDocs/verification/concise_v6_2026-10-07/mathematical_test_record.json",
+    "sha256": "d811a6835fc96a0dd47d4764400ef588053d8d650ddf0544172bca761c3b0f9a"
+  },
+  "verification_limits": "Software and document review establish technical preparation; defense, certification, deposit and institutional acceptance are separate events."
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "research-thesis-publication-completion-v6",
+  "as_of": "2026-10-07",
+  "repository": "https://github.com/bhattadiCS/research-thesis-overthinking-boundary",
+  "publication_identity": "The Git commit containing this record identifies this revision; remote publication is checked separately.",
+  "baseline_commit": "df03265cfe3b9bf4b1ee66061d81ef5796375be0",
+  "verdict": "Concise formal thesis v6 is technically prepared and reviewed; the complete PDF lengths are within the user-requested 25-35-page range.",
+  "semester_approvals": {
+    "status": "complete",
+    "basis": "User explicitly confirmed all semester approvals are done."
+  },
+  "editions": [
+    {
+      "edition": "digital",
+      "path": "output/pdf/Masters_Thesis_Formal_v6_Aditya_Bhatt.pdf",
+      "sha256": "63c8222a318c9668d134e4551d8ca314a6c242dce4c04cd15921f4e995ad00cd",
+      "pages": 31,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v6/digital.pdf",
+      "raw_sha256": "059986e4672d023ecf8d128828f3c74f1f2f4458f47a30eecf479ba7bf73a429",
+      "word_count": 5626,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v6_digital_build_manifest.json"
+    },
+    {
+      "edition": "print",
+      "path": "output/pdf/Masters_Thesis_Formal_v6_Print_Aditya_Bhatt.pdf",
+      "sha256": "7224b034db458b41d2d82c15e9b74d7ba2ec175801711dc8bb31915bedffb141",
+      "pages": 32,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v6/print.pdf",
+      "raw_sha256": "4cc0b5f51f46fa11cb8a7a15615095cdae255a29efbb0756895b8089a349254f",
+      "word_count": 5626,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v6_print_build_manifest.json"
+    }
+  ],
+  "word_count_before_v5": 15866,
+  "word_count_after_v6": 5626,
+  "word_reduction_percent": 64.5405269128955,
+  "scientific_content": "Five chapters, three scientific tables, three figures, twenty-five cited references, core mathematical arguments and qualified experimental conclusions.",
+  "extended_report_preserved": "output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf",
+  "new_data_required_for_existing_qualified_claims": false,
+  "no_new_data_training_or_generation": true,
+  "requirements_review": "ThesisDocs/verification/concise_v6_2026-10-07/revision_review.md",
+  "audit_index": "ThesisDocs/archival/formal_v6_independent_technical_audit.json",
+  "academic_events_not_established_by_this_revision": [
+    "Public defense and faculty completion certification",
+    "Final thesis approval, deposit and institutional format acceptance",
+    "Degree/registrar clearance"
+  ],
+  "academic_event_interpretation": "Not recorded here does not mean not completed elsewhere. Technical preparation does not fabricate academic acceptance.",
+  "preservation": "All protected previously published artifacts and frozen research remain unchanged; the current index advances to the concise v6 thesis."
+}

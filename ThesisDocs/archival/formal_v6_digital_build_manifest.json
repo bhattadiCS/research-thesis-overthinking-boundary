@@ -1,0 +1,1245 @@
+{
+  "schema": "thesis-archival-conversion-v2",
+  "profile": "PDF/A-2b",
+  "status": "validated_conversion",
+  "source": "tmp/pdfs/compact_v6/digital/source.pdf",
+  "source_sha256": "059986e4672d023ecf8d128828f3c74f1f2f4458f47a30eecf479ba7bf73a429",
+  "output": "output/pdf/Masters_Thesis_Formal_v6_Aditya_Bhatt.pdf",
+  "sha256": "63c8222a318c9668d134e4551d8ca314a6c242dce4c04cd15921f4e995ad00cd",
+  "bytes": 844898,
+  "builder": "tools/build_archival_candidate.py",
+  "builder_sha256": "c43f9fe73f5c1907fb1df991b777aee604c8315585bf8fac9f4eedb4ac18f3b2",
+  "pikepdf_version": "10.16.0",
+  "numpy_version": "2.3.5",
+  "pikepdf_report": "PDF/A-2b: pass",
+  "manual_structural_repairs": [
+    {
+      "page": 1,
+      "repair": "remove empty /Trans dictionary"
+    },
+    {
+      "page": 2,
+      "repair": "remove empty /Trans dictionary"
+    },
+    {
+      "page": 3,
+      "repair": "remove empty /Trans dictionary"
+    },
+    {
+      "page": 4,
+      "repair": "remove empty /Trans dictionary"
+    },
+    {
+      "page": 5,
+      "repair": "remove empty /Trans dictionary"
+    }
+  ],
+  "pikepdf_preparation": [
+    "Replaced the output intents with a single RGB PDF/A output intent",
+    "Set the Print flag on 1 annotation, as PDF/A requires",
+    "Declared PDF/A conformance in the XMP metadata"
+  ],
+  "authoritative_validator": "veraPDF Greenfield 1.30.2",
+  "validator_jar_sha256": "889075253fb9df4db5482efb8f8208fb3b4f2e00f5f7e1b1e31edf6fb4b69bb6",
+  "validator_exit_code": 0,
+  "validator_report": "ThesisDocs/archival/formal_v6_digital_verapdf_2b.xml",
+  "validator_report_sha256": "65441d0640a34fcea4abe256d4dbecb1bd712451deaaff095f637011cbc49816",
+  "validator_details": {
+    "passedRules": "144",
+    "failedRules": "0",
+    "passedChecks": "105840",
+    "failedChecks": "0"
+  },
+  "validator_report_attributes": {
+    "jobEndStatus": "normal",
+    "profileName": "PDF/A-2b validation profile",
+    "statement": "PDF file is compliant with Validation Profile requirements.",
+    "isCompliant": "true"
+  },
+  "render_engine": "PyMuPDF 1.27.2.2",
+  "comparison_dpi": 144,
+  "render_dir": "tmp/pdfs/formal_thesis/formal_v6_digital/archival_review/63c8222a318c9668d134e4551d8ca314a6c242dce4c04cd15921f4e995ad00cd",
+  "approval_scope": {
+    "semester_approvals": "user-confirmed complete",
+    "institutional_format_acceptance": "not asserted by technical conversion validation"
+  },
+  "limitations": [
+    "PDF/A-2b conformance is separate from institutional acceptance.",
+    "No PDF/UA accessibility or semantic-tagging conformance is asserted.",
+    "October 2026 is the title-page month; no actual submission event or institutional format acceptance is asserted."
+  ],
+  "visual_review": "required for the exact converted PDF before delivery",
+  "pages": 31,
+  "embedded_font_objects": 23,
+  "font_names": [
+    "AAAAAA+Arial-BoldMT",
+    "AAAAAA+ArialMT",
+    "BAAAAA+ArialMT",
+    "CAAAAA+Consolas",
+    "CAAAAA+KaTeX_Math-Italic",
+    "DAAAAA+KaTeX_Main-Regular",
+    "DAAAAA+KaTeX_Math-Italic",
+    "EAAAAA+KaTeX_Caligraphic-Regular",
+    "EAAAAA+KaTeX_Main-Regular",
+    "FAAAAA+KaTeX_AMS-Regular",
+    "FAAAAA+KaTeX_Size1-Regular",
+    "GAAAAA+KaTeX_Main-Bold"
+  ],
+  "unembedded_fonts": [],
+  "ordinary_text_minimum_size_points": 10.0,
+  "ordinary_text_size_requirement_points": 10,
+  "type_size_rounding_tolerance_points": 0.005,
+  "ordinary_text_undersized_spans": [],
+  "mathematical_spans_excluded_from_ordinary_type_minimum": 614,
+  "type_size_scope": "Extractable ordinary text includes body, tables, labels and code. Formal v2 has no separate footnotes. Mathematical scripts/KaTeX struts are excluded; lettering within raster figures is assessed by visual review, not this text-extractor measurement.",
+  "document_structure": {
+    "outline": [
+      [
+        1,
+        "Abstract",
+        2
+      ],
+      [
+        1,
+        "Table of contents",
+        3
+      ],
+      [
+        1,
+        "List of tables",
+        4
+      ],
+      [
+        1,
+        "List of figures",
+        5
+      ],
+      [
+        1,
+        "Chapter 1 Introduction and related work",
+        6
+      ],
+      [
+        2,
+        "1.1 Problem and research questions",
+        6
+      ],
+      [
+        2,
+        "1.2 Prior work and contribution",
+        7
+      ],
+      [
+        2,
+        "1.3 Organization and supporting material",
+        8
+      ],
+      [
+        1,
+        "Chapter 2 Mathematical formulation",
+        9
+      ],
+      [
+        2,
+        "2.1 Information, answers and computation cost",
+        9
+      ],
+      [
+        2,
+        "2.2 Repair-corruption drift",
+        10
+      ],
+      [
+        2,
+        "2.3 Finite-horizon optimum",
+        11
+      ],
+      [
+        2,
+        "2.4 A conditional myopic rule and its failure",
+        12
+      ],
+      [
+        1,
+        "Chapter 3 Experimental methods",
+        14
+      ],
+      [
+        2,
+        "3.1 Corpora, models and labels",
+        14
+      ],
+      [
+        2,
+        "3.2 Experimental units and comparisons",
+        15
+      ],
+      [
+        2,
+        "3.3 Runtime policies and fitting",
+        16
+      ],
+      [
+        2,
+        "3.4 Paired evaluation and uncertainty",
+        17
+      ],
+      [
+        1,
+        "Chapter 4 Results",
+        19
+      ],
+      [
+        2,
+        "4.1 Population continuation value",
+        19
+      ],
+      [
+        2,
+        "4.2 Controlled contrasts and retrospective diagnostics",
+        21
+      ],
+      [
+        2,
+        "4.3 Actual stopping execution",
+        23
+      ],
+      [
+        1,
+        "Chapter 5 Discussion and conclusion",
+        26
+      ],
+      [
+        2,
+        "5.1 Interpretation and limitations",
+        26
+      ],
+      [
+        2,
+        "5.2 Reproducibility and conclusion",
+        27
+      ],
+      [
+        1,
+        "References",
+        29
+      ]
+    ],
+    "page_labels": [
+      {
+        "startpage": 0,
+        "prefix": "",
+        "firstpagenum": 1,
+        "style": "r"
+      },
+      {
+        "startpage": 5,
+        "prefix": "",
+        "firstpagenum": 1,
+        "style": "D"
+      }
+    ],
+    "language": "en-US",
+    "tagged_structure_present": false,
+    "document_information": {
+      "title": "Cost aware stopping boundaries in reasoning language models",
+      "author": "Aditya Bhatt",
+      "subject": "Concise Master of Science thesis, Applied and Computational Mathematics",
+      "keywords": "",
+      "creator": "anonymous"
+    }
+  },
+  "printed_pagination": {
+    "front_matter_pages_including_cover": 5,
+    "introduction_physical_page": 6,
+    "last_arabic_page": 26,
+    "pages": [
+      {
+        "physical_page": 1,
+        "printed_number": null
+      },
+      {
+        "physical_page": 2,
+        "printed_number": "ii",
+        "horizontal_center_points": 305.998291015625,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 3,
+        "printed_number": "iii",
+        "horizontal_center_points": 305.9975128173828,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 4,
+        "printed_number": "iv",
+        "horizontal_center_points": 305.9991912841797,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 5,
+        "printed_number": "v",
+        "horizontal_center_points": 306.0,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 6,
+        "printed_number": "1",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 7,
+        "printed_number": "2",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 8,
+        "printed_number": "3",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 9,
+        "printed_number": "4",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 10,
+        "printed_number": "5",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 11,
+        "printed_number": "6",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 12,
+        "printed_number": "7",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 13,
+        "printed_number": "8",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 14,
+        "printed_number": "9",
+        "horizontal_center_points": 305.99920654296875,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 15,
+        "printed_number": "10",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 16,
+        "printed_number": "11",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 17,
+        "printed_number": "12",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 18,
+        "printed_number": "13",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 19,
+        "printed_number": "14",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 20,
+        "printed_number": "15",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 21,
+        "printed_number": "16",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 22,
+        "printed_number": "17",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 23,
+        "printed_number": "18",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 24,
+        "printed_number": "19",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 25,
+        "printed_number": "20",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 26,
+        "printed_number": "21",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 27,
+        "printed_number": "22",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 28,
+        "printed_number": "23",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 29,
+        "printed_number": "24",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 30,
+        "printed_number": "25",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 31,
+        "printed_number": "26",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      }
+    ]
+  },
+  "margin_profile": "digital",
+  "required_margins_inches": {
+    "left": 1.0,
+    "right": 1,
+    "top": 1,
+    "bottom": 1
+  },
+  "margin_measurement": {
+    "dpi": 144,
+    "nonwhite_channel_threshold": 245,
+    "raster_rounding_tolerance_points": 0.5,
+    "defects": 0
+  },
+  "unchanged_text_and_word_geometry_pages": 31,
+  "intentional_content_edit_pages": [],
+  "pixel_identical_pages": 27,
+  "pixel_max_channel_difference": 1,
+  "pixel_max_changed_fraction": 0.007728943850267379,
+  "render_isolation": {
+    "method": "one fresh process per PDF; no shared document/image caches",
+    "source_render_manifest": "tmp/pdfs/formal_thesis/formal_v6_digital/archival_review/63c8222a318c9668d134e4551d8ca314a6c242dce4c04cd15921f4e995ad00cd/source_comparison/render_manifest.json",
+    "source_render_manifest_sha256": "eefb9aebc1ac836d927c2799e8d67a614f9fa945b2a90e81c1538da3151ae351",
+    "output_render_manifest": "tmp/pdfs/formal_thesis/formal_v6_digital/archival_review/63c8222a318c9668d134e4551d8ca314a6c242dce4c04cd15921f4e995ad00cd/render_manifest.json",
+    "output_render_manifest_sha256": "c821081aed9c91bc836307de205aa42f23b102d9be08b5de708f7499ec127dde"
+  },
+  "page_comparisons": [
+    {
+      "page": 1,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "f6f6e0b39f6478eebaa5e905ff56b8e523d603cbf415c30fc98c126b3e8ffea2",
+      "rgb_pixels_sha256": "f6f6e0b39f6478eebaa5e905ff56b8e523d603cbf415c30fc98c126b3e8ffea2",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        78.0,
+        107.5,
+        534.5,
+        402.0
+      ],
+      "output_ink_bounds_points": [
+        78.0,
+        107.5,
+        534.5,
+        402.0
+      ]
+    },
+    {
+      "page": 2,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "72945a61092123afb023f23298fc6a8e7543a67c63d4b7a38b99f3f78b94dabb",
+      "rgb_pixels_sha256": "72945a61092123afb023f23298fc6a8e7543a67c63d4b7a38b99f3f78b94dabb",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        80.5,
+        539.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        80.5,
+        539.0,
+        717.0
+      ]
+    },
+    {
+      "page": 3,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "f773687914bdf7cc3d58adfe7abc576c39cf9455d4a27cc91326644b33f45834",
+      "rgb_pixels_sha256": "f773687914bdf7cc3d58adfe7abc576c39cf9455d4a27cc91326644b33f45834",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        80.0,
+        540.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        80.0,
+        540.0,
+        717.0
+      ]
+    },
+    {
+      "page": 4,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "d6de8275a18f6c1c456f080c69f44b86f1caad7f38a0687b627614f3e3e5f83e",
+      "rgb_pixels_sha256": "d6de8275a18f6c1c456f080c69f44b86f1caad7f38a0687b627614f3e3e5f83e",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        80.0,
+        539.5,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        80.0,
+        539.5,
+        717.0
+      ]
+    },
+    {
+      "page": 5,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "d941f3664a28292a9e615ba4b87921a127f3e660dfb275b01f9e51f98eddaa8c",
+      "rgb_pixels_sha256": "d941f3664a28292a9e615ba4b87921a127f3e660dfb275b01f9e51f98eddaa8c",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.5,
+        80.0,
+        540.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.5,
+        80.0,
+        540.0,
+        717.0
+      ]
+    },
+    {
+      "page": 6,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "5819e85bd8d8919c0e6eb1cf8b414f032c67a62ee6f7bd785dfa71af84b8c5cb",
+      "rgb_pixels_sha256": "5819e85bd8d8919c0e6eb1cf8b414f032c67a62ee6f7bd785dfa71af84b8c5cb",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        76.5,
+        540.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.5,
+        540.0,
+        717.0
+      ]
+    },
+    {
+      "page": 7,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "2cc9da847f8eb1e8374ca617f9d4b19583486dcc5ed01f29ab720fb46fd79b1b",
+      "rgb_pixels_sha256": "2cc9da847f8eb1e8374ca617f9d4b19583486dcc5ed01f29ab720fb46fd79b1b",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        76.0,
+        539.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.0,
+        539.0,
+        717.0
+      ]
+    },
+    {
+      "page": 8,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "9619f6a07d171ec780730a870129746c7acb8cf569800ad8fa8f7d6b058de33a",
+      "rgb_pixels_sha256": "9619f6a07d171ec780730a870129746c7acb8cf569800ad8fa8f7d6b058de33a",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ]
+    },
+    {
+      "page": 9,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "dd10a932941bf8235f55e715e0b82afcafcfcd36ffe8f5724cc289fb1ebea6b9",
+      "rgb_pixels_sha256": "dd10a932941bf8235f55e715e0b82afcafcfcd36ffe8f5724cc289fb1ebea6b9",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        76.5,
+        539.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.5,
+        539.0,
+        717.0
+      ]
+    },
+    {
+      "page": 10,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "34495e9574c2240d7a64fbcfe4a87c0e0aa0df00bc93d8d02869144f7dcb78bc",
+      "rgb_pixels_sha256": "34495e9574c2240d7a64fbcfe4a87c0e0aa0df00bc93d8d02869144f7dcb78bc",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        537.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        537.5,
+        717.5
+      ]
+    },
+    {
+      "page": 11,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "2857bb650b3d9d584ff67dfdcf09f565d118d9d4f2ac005a727c6715d4250a75",
+      "rgb_pixels_sha256": "2857bb650b3d9d584ff67dfdcf09f565d118d9d4f2ac005a727c6715d4250a75",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.5
+      ]
+    },
+    {
+      "page": 12,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "8b6e18298463c4ab7209360c9889e7fee834392054ff47ff6926432003fc839e",
+      "rgb_pixels_sha256": "8b6e18298463c4ab7209360c9889e7fee834392054ff47ff6926432003fc839e",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        531.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        531.0,
+        717.0
+      ]
+    },
+    {
+      "page": 13,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "7698f27094453bda6f3945643080a0413321c719f286dcda368a2f51b7e855af",
+      "rgb_pixels_sha256": "7698f27094453bda6f3945643080a0413321c719f286dcda368a2f51b7e855af",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        84.5,
+        528.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        84.5,
+        528.5,
+        717.5
+      ]
+    },
+    {
+      "page": 14,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "1ab8eb06354125cf4a6c554b971bd00e04d309cd8242c6902ac2fb851cb1fa9f",
+      "rgb_pixels_sha256": "c33923e0422f1656a68d9c643f54c0ae387e3863148bc65b714d3ce03b41f71b",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": false,
+      "changed_pixels": 7496,
+      "changed_pixel_fraction": 0.003866277150590876,
+      "max_channel_difference": 1,
+      "source_ink_bounds_points": [
+        72.0,
+        76.5,
+        540.0,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.5,
+        540.0,
+        717.5
+      ]
+    },
+    {
+      "page": 15,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "8670d9006841125c9cacb5df5b7f4f20cbfcb86ebb3d144e6af8b60096a1acca",
+      "rgb_pixels_sha256": "8670d9006841125c9cacb5df5b7f4f20cbfcb86ebb3d144e6af8b60096a1acca",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ]
+    },
+    {
+      "page": 16,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "1684c583d40611533c165c28f84632f8544aef0f4688082d827b4ee98c5d7a1c",
+      "rgb_pixels_sha256": "1684c583d40611533c165c28f84632f8544aef0f4688082d827b4ee98c5d7a1c",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.0,
+        717.0
+      ]
+    },
+    {
+      "page": 17,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "33dfd869a4a17f7c918dd2811290feab82acce832c89c18c11053b2e441514f7",
+      "rgb_pixels_sha256": "33dfd869a4a17f7c918dd2811290feab82acce832c89c18c11053b2e441514f7",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        537.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        537.0,
+        717.0
+      ]
+    },
+    {
+      "page": 18,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "2835fa89b2dd7b695a5a7cb9f9bbeda8de34983e9232fcd7416504245a1c339b",
+      "rgb_pixels_sha256": "2835fa89b2dd7b695a5a7cb9f9bbeda8de34983e9232fcd7416504245a1c339b",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ]
+    },
+    {
+      "page": 19,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "fb09e60f815d10ddd0a98b8a785723ace5eaec0f5ce2f05218b271921efa5a4e",
+      "rgb_pixels_sha256": "fb09e60f815d10ddd0a98b8a785723ace5eaec0f5ce2f05218b271921efa5a4e",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        76.5,
+        539.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.5,
+        539.0,
+        717.0
+      ]
+    },
+    {
+      "page": 20,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "184fcfcc7d1f687d0a706713b299fd6a3a311187a47963e3d1dfabdfd5275b58",
+      "rgb_pixels_sha256": "184fcfcc7d1f687d0a706713b299fd6a3a311187a47963e3d1dfabdfd5275b58",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        74.5,
+        538.0,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        74.5,
+        538.0,
+        717.5
+      ]
+    },
+    {
+      "page": 21,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "9d4bc30aae4af20ef55e64159e17a8a841c922dedac340726ac17ddca1362e93",
+      "rgb_pixels_sha256": "c665372eeb03505cfbe682a0f240dc94b92f6efdf84cdc58b5fd6c85b3643b65",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": false,
+      "changed_pixels": 14985,
+      "changed_pixel_fraction": 0.007728943850267379,
+      "max_channel_difference": 1,
+      "source_ink_bounds_points": [
+        72.0,
+        76.0,
+        540.0,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.0,
+        540.0,
+        717.5
+      ]
+    },
+    {
+      "page": 22,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "65f20b0d1b83cd8ad3fbbafef56805a4a69af2a1046a1f99c2f8895ec05f327e",
+      "rgb_pixels_sha256": "65f20b0d1b83cd8ad3fbbafef56805a4a69af2a1046a1f99c2f8895ec05f327e",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        540.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        540.0,
+        717.0
+      ]
+    },
+    {
+      "page": 23,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "1a495968aa7f465433a64b6ffc6f9c029a2ae5891b8f06b9fe284eae6a5834fb",
+      "rgb_pixels_sha256": "6a78721795966ffe2e9fae22a266870ebe041eac4680f8e8155f9f59f0dea3f9",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": false,
+      "changed_pixels": 8424,
+      "changed_pixel_fraction": 0.004344919786096257,
+      "max_channel_difference": 1,
+      "source_ink_bounds_points": [
+        72.0,
+        76.0,
+        540.0,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.0,
+        540.0,
+        717.5
+      ]
+    },
+    {
+      "page": 24,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "826f8679119d26f3296980e7e20b5536a1798f58c1bf36e1592750ef7f113bd6",
+      "rgb_pixels_sha256": "826f8679119d26f3296980e7e20b5536a1798f58c1bf36e1592750ef7f113bd6",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        537.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        537.5,
+        717.5
+      ]
+    },
+    {
+      "page": 25,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "a69fd026c1c67708df528c9fb2b18f98fdae295236b2b56e7ac67420ec897aa9",
+      "rgb_pixels_sha256": "a69fd026c1c67708df528c9fb2b18f98fdae295236b2b56e7ac67420ec897aa9",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        74.5,
+        536.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        74.5,
+        536.5,
+        717.5
+      ]
+    },
+    {
+      "page": 26,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "2cfa335157918724d652734605092303a61ffc547e31a729d9fc8ff5c7853452",
+      "rgb_pixels_sha256": "2cfa335157918724d652734605092303a61ffc547e31a729d9fc8ff5c7853452",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        76.5,
+        539.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.5,
+        539.0,
+        717.0
+      ]
+    },
+    {
+      "page": 27,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "90db9348ee6f27b9b99d66c467b8a6aaf9eca659d4609c031d74a8ae5a4dff82",
+      "rgb_pixels_sha256": "c77a013b3e9c65794ee3d26c7077bab4c2a6f4b98703007b27a86e55b6ad6226",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": false,
+      "changed_pixels": 2270,
+      "changed_pixel_fraction": 0.0011708176536607909,
+      "max_channel_difference": 1,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.0
+      ]
+    },
+    {
+      "page": 28,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "dc4f92d874a0d245312b2eef99ab37b5b00479aeccc73ed9587d2118a5475af1",
+      "rgb_pixels_sha256": "dc4f92d874a0d245312b2eef99ab37b5b00479aeccc73ed9587d2118a5475af1",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.5
+      ]
+    },
+    {
+      "page": 29,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "042d89d054c7fff05f6aaa7c10fb15700966500d85e4fdf71e67ee399c83fff7",
+      "rgb_pixels_sha256": "042d89d054c7fff05f6aaa7c10fb15700966500d85e4fdf71e67ee399c83fff7",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        76.5,
+        538.5,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.5,
+        538.5,
+        717.0
+      ]
+    },
+    {
+      "page": 30,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "a3095f60c3caa415063fd11024d8a591b10f2154651e4f9f1e0a1550c67ff252",
+      "rgb_pixels_sha256": "a3095f60c3caa415063fd11024d8a591b10f2154651e4f9f1e0a1550c67ff252",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        74.5,
+        537.0,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        74.5,
+        537.0,
+        717.5
+      ]
+    },
+    {
+      "page": 31,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "8a698737382dd98d3cb6f87c96d1272723f0cdd506773eb1746afe423fe3bf5d",
+      "rgb_pixels_sha256": "8a698737382dd98d3cb6f87c96d1272723f0cdd506773eb1746afe423fe3bf5d",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        74.5,
+        538.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        74.5,
+        538.5,
+        717.5
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "concise-v6-staged-byte-review",
+  "paths_checked": 124,
+  "stage_allowlist_exact": true,
+  "authored_text_whitespace_check_passed": true,
+  "raw_renderer_log_whitespace": "Native raw tool output preserved exactly; not normalized for a cosmetic whitespace check.",
+  "staged_blob_hash_mismatches": [],
+  "fresh_checkout_core_autocrlf": true,
+  "fresh_checkout_hash_mismatches": [],
+  "package_payload_and_zip_integrity": "Verified during archive creation",
+  "historical_artifacts": "164 protected baseline hashes passed; raw corpus verification passed for 52 data and 688 auxiliary files",
+  "scope": "Authoring sources, PDF files, machine and visual receipts, current index and revision archive; no unrelated user files staged."
+}
