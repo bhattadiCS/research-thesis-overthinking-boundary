@@ -13,7 +13,7 @@ A_t=a_t(H_0,\ldots,H_t),\qquad
 C_t=\mathbf1\{A_t=Y^*\}.
 $$
 
-For empirical evaluation, correctness is the versioned domain grader $C_t=g_d(A_t,Y^*)\in\{0,1\}$. Exact answer equality is the special case displayed above. The binary-reward arguments remain unchanged for this grading predicate. This notation identifies the measured endpoint; it does not certify semantic correctness of every stored label. Appendix F illustrates the information restrictions and delayed-repair counterexample.
+For empirical evaluation, correctness is the versioned domain grader $C_t=g_d(A_t,Y^*)\in\{0,1\}$. Exact answer equality is the special case displayed above. The binary-reward arguments remain unchanged for this grading predicate. This notation identifies the measured endpoint; it does not certify semantic correctness of every stored label. Appendix E illustrates the information restrictions and delayed-repair counterexample.
 
 All observations, executed peer calls, verifier outputs, and controller
 randomness used by a decision belong in this filtration. The runtime

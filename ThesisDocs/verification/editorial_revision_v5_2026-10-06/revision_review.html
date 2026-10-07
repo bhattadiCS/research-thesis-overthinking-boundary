@@ -1,0 +1,659 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Formal thesis v5 editorial review</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:980px;margin:40px auto;padding:0 24px;color:#17212b}h1{font-size:30px}h2{font-size:22px;margin-top:30px}table{border-collapse:collapse;width:100%}td,th{padding:10px;text-align:left;border-bottom:1px solid #ccc}a{color:#075985}.note{background:#f0f6fa;padding:18px;border-left:4px solid #075985}details{margin:24px 0}pre{white-space:pre-wrap;font-size:13px}small{color:#475569}</style><h1>Formal thesis v5 editorial review</h1><p>The revision shortens repeated explanation and improves flow while preserving scientific results, mathematical expressions and critical qualifications.</p><table><tr><th>Measure</th><th>v4</th><th>v5</th></tr><tr><td>Words</td><td>20,064</td><td>15,866</td></tr><tr><td>Digital pages</td><td>104</td><td>83</td></tr><tr><td>Print pages</td><td>109</td><td>88</td></tr></table><p><small>Counts use the same manuscript token method, including mathematical, table and reference tokens. The 20.9% reduction includes secondary material moved to the electronic supplement.</small></p><h2>What changed</h2><ul><li>Shorter research questions, contributions and roadmap; related work precedes the roadmap.</li><li>Results prose interprets tables rather than repeating every value.</li><li>Brief claim limits remain beside affected results; fuller explanations are consolidated.</li><li>Commands, Git history and prepared-artifact status move to an electronic guide.</li><li>Five scientific appendices replace six; the prediction table is renumbered from 18 to 17.</li><li>Repeated chapter-ending spill text is removed; captions remain attached and both table lists fit one page.</li></ul><h2>Deep verification</h2><div class="note">All 17 scientific table bodies match v4. All 257 ordered mathematical expressions and 25 references are retained. Chapter 2 changes only its appendix link. Six figure images retain their exact bytes. Historical receipts, PDFs and frozen data remain intact.</div><p>Independent verification covers all 171 final pages: source/output text and geometry, fonts and Unicode maps, margins, folios, 62 heading destinations, table/figure lists, two rendering engines and fresh PDF/A-2b validation. Human review covers every final page directly or through byte-identical body images, with changed pages inspected separately.</p><p>The paired-interval argument retains iid task pairs, binomial marginal counts, 97.5% Clopper-Pearson bounds, union-bound 95% coverage, dependence qualifications and the handpicked-trap limitation. No new model generation or retraining occurred.</p><h2>Artifacts and checks</h2><ul><li><a href="../../CURRENT_FORMAL_THESIS.md">Current thesis index</a></li><li><a href="semantic_preservation.json">Editorial preservation checks</a></li><li><a href="../../formal/source_integrity_v5.json">Source and final PDF identities</a></li><li><a href="../../formal/visual_review_v5.json">Complete visual review</a></li><li><a href="../../archival/formal_v5_independent_technical_audit.json">Independent technical audit</a></li><li><a href="../../formal/supplements/v5/reproduction_and_history.txt">Electronic reproduction guide</a></li></ul><h2>Source edits</h2><details><summary>ThesisDocs/chapters/chapter1_intro.md</summary><pre>diff --git a/ThesisDocs/chapters/chapter1_intro.md b/ThesisDocs/chapters/chapter1_intro.md
+index a189910..5cd4980 100644
+--- a/ThesisDocs/chapters/chapter1_intro.md
++++ b/ThesisDocs/chapters/chapter1_intro.md
+@@ -22,47 +22,35 @@ At the population level, an accuracy curve can show where the average benefit of
+ 
+ ## 1.3 Research questions
+ 
+-The first question is descriptive: do repair and corruption transitions explain the empirical change in correctness, after accounting for computation cost? The answer requires explicit denominators. Repair probability is computed among candidates currently wrong, and corruption probability among candidates currently correct. Dividing both counts by all candidates estimates transition frequencies, not their conditional probabilities. Chapter 2 derives the exact relationship between these quantities.
++This study asks how repair and corruption explain changes in graded correctness and whether the resulting gains justify computation cost. It also asks when a one-step drift criterion is an optimal stopping rule. Chapter 2 distinguishes conditional hazards from joint transition frequencies and establishes the finite-horizon solution, a sufficient persistence condition, and counterexamples.
+ 
+-The second question is theoretical: when is a drift-sign rule an optimal stopping rule? A one-step improvement criterion is attractive because it is simple and cheap, but a negative immediate gain need not rule out a valuable later repair. This thesis gives the general finite-horizon solution, identifies a sufficient persistence condition under which a myopic rule becomes optimal, and gives counterexamples when that condition fails. The theory is intended to make an engineering approximation understandable, not to attach an unconditional optimality claim to a convenient heuristic.
+-
+-The third question is empirical: how do model family, scale, domain, temperature, token cap, and numerical precision relate to the observed trade-off? A cross-model association does not isolate parameter count, and a matched precision comparison does not prove that every model responds to quantization in the same way. Chapter 3 states the actual designs and Chapter 4 reports conclusions at their supported scope.
+-
+-The fourth question is operational: can a controller make a prefix-only decision quickly enough to be used in a generation loop, and does that loop actually avoid future generation? These are separate checks. A function that returns a stop flag after all responses have already been generated is a replay evaluator. A live loop must cease requesting future increments, preserve the chosen answer, and record what was generated before termination. Chapter 5 distinguishes controller latency, live completion tokens, and retrospective counterfactual tokens.
++The empirical question concerns how model family, scale, domain, temperature, token cap, and numerical precision relate to the observed trade-off. The operational question is whether a prefix-only controller makes timely decisions and whether its loop avoids further generation. Chapters 3-5 distinguish descriptive associations, controlled contrasts, controller latency, live completion tokens, and replayed counterfactual costs.
+ 
+ ## 1.4 Contributions
+ 
+-This thesis contributes a protocol-specific study of the accuracy-cost trade-off in repeated response-and-revision trajectories. Learned halting, early exit, and optimal stopping for reasoning already have substantial antecedents, reviewed in Section 1.7. The project&#x27;s contribution combines an application of established stopping theory with controlled empirical contrasts and an auditable implementation. Its empirical findings concern the declared generation, answer-selection, grading, and cost conventions; changing any of those conventions defines a different decision problem.
++The contribution is a protocol-specific study of accuracy-cost trade-offs in complete response-and-revision trajectories. It combines established stopping theory with controlled empirical contrasts and a causal implementation. The findings depend on the declared generation, answer-selection, grading, and cost conventions; Section 1.6 compares them with prior work.
+ 
+-The mathematical work translates the standard finite-horizon Bellman and Snell constructions [Ferguson], [Peskir2006] into this response-boundary protocol. It identifies the decision information, selected candidate, correctness endpoint, and cumulative computation cost before deriving the conditional repair-corruption identity. The derivation separates a conditional correctness belief from panel accuracy, conditional transition probabilities from unconditional transition frequencies, and optimal continuation value from immediate drift. It proves the stated persistence condition for a myopic rule and supplies finite counterexamples when that condition is absent. Bounds for uncertain drift and changes in answer stakes have explicit scope conditions. These are specialized derivations and an assumption audit, rather than a claim to originate the general optimal-stopping theory or to establish optimality of the fitted controller.
++Chapter 2 applies finite-horizon Bellman/Snell theory [Ferguson], [Peskir2006] to a specified decision filtration, selected answer, and cumulative computation cost. It derives conditional repair-corruption drift and distinguishes one-step gain from optimal multi-step continuation value. It proves a sufficient persistence condition for myopic optimality and gives counterexamples without that condition. Drift-error bounds and stake comparisons have explicit assumptions. These results apply established theory; they do not prove the fitted controller optimal.
+ 
+-The empirical work tests explanations that cannot be settled by implementing a known stopping formula alone. It compares matched hazard estimators, examines paired token-cap and numerical-precision contrasts, and evaluates detectors with task-level grouping. The results distinguish improved ranking from improved stopping utility: more expressive fitted models and calibration can reduce utility in the recorded matched comparisons. They also distinguish retrospective diagnostics that use future observations from deployable prefix-only predictors. Together with the failure taxonomy, these contrasts provide evidence about where particular stopping approximations fail, rather than selecting only favorable accuracy or efficiency summaries.
++The empirical work compares matched hazard estimators and paired token-cap and precision settings, evaluates detectors with task-level grouping, and classifies policy failures. It distinguishes ranking from stopping utility and future-informed diagnostics from deployable prefix predictors. In the recorded matched contrasts, more expressive estimators and calibration can reduce utility. These negative results identify limitations of particular stopping approximations.
+ 
+-The evidence record separates the variable-horizon boundary corpus from the standardized five-step detector corpus. This prevents double counting and keeps model roster, benchmark split, sample size, and response horizon attached to the relevant claim. The engineering work then implements a prefix-only interface, a minimum response floor, and a loop that actually ceases future generation. Separate fit, calibration, and evaluation task groups produce a serializable probability model without supplying reference labels at runtime. Executable checks examine future-step independence, terminal behavior, token accounting, and adversarial trajectories; manifests identify the executed sources and model artifact.
++The analysis keeps the variable-horizon boundary and five-step detector corpora separate, attaching roster, split, sample size, and horizon to each result. A prefix-only controller with a response floor ceases future generation. Separate fitting, calibration, and evaluation tasks yield a serializable probability model without runtime reference labels. Checks cover future-step independence, terminal behavior, token accounting, and adversarial trajectories; manifests identify executed sources and artifacts.
+ 
+-The resulting live evaluation includes a useful negative finding: the learned rule stops at the minimum two-response budget on every task in both reported panels. Consequently, the observed savings do not establish an advantage of adaptive stopping over that fixed budget. The low absolute accuracy and broad paired uncertainty further limit an accuracy-preservation claim. The thesis contributes those measured limitations alongside the positive implementation result. It does not supply a head-to-head reproduction of the methods reviewed below, a universally best reasoning horizon, or evidence that its controller dominates prior work.
++In both live panels, the learned rule stops every task at the minimum two-response budget. Observed savings therefore do not establish an adaptive advantage over that fixed budget. Low absolute accuracy and broad paired intervals limit accuracy-preservation claims. These negative findings accompany the working causal implementation. Comparative superiority over prior methods and a universally best reasoning horizon remain unestablished.
+ 
+ ## 1.5 Evidence and reproducibility
+ 
+-A hash verifies that a later artifact has the same selected content as the frozen artifact, subject to the manifest&#x27;s stated byte-normalization rule. It does not verify that the original observations were generated honestly, that the labels are correct, that the selected sample is representative, or that the original experiment can be repeated on arbitrary hardware. Those issues require provenance, software and hardware records, executable analyses, and independent evaluation.
+-
+-This repository&#x27;s Windows checkout can transform line endings. The freeze therefore distinguishes exact local bytes from canonical LF content and checks the canonical content against the historical tournament hashes. This is a reproducibility issue with a precise solution, not permission to ignore arbitrary changes. Both identities are retained, and verification must fail on an unexplained content difference.
+-
+-Software provenance has a similar limitation. A lock file generated on the current workstation records the current environment. It cannot retrospectively establish the complete environment of the Blackwell tournament. The thesis reports historical versions where stored metadata supports them and identifies unavailable details. It avoids a claim that installing the workstation&#x27;s lock will reproduce a historical GPU run bit for bit.
++Frozen manifests identify the selected data, label versions, and retained software evidence. They distinguish historical runtime records from the current workstation environment. Hashes establish artifact identity under the declared byte-normalization rule; they do not establish label validity, representative sampling, or bit-identical regeneration.
+ 
+-The frozen binary label is the endpoint for the primary historical empirical tables in this thesis. The current grader is tested independently, but passing its regression cases is not evidence that every historical label matches its current behavior or a human adjudication. Changes to the grader require a new label census and versioned results. Chapter 6 explains the consequence for scientific interpretation.
++Historical tables retain their recorded labels. Later grader changes and reconstructed predictor targets have separate versioned results. Regression tests establish the checked behaviors, while semantic label validity requires independent adjudication. Appendix A maps the evidence and locates the electronic verification and reanalysis guide; Chapter 6 discusses these limits.
+ 
+-## 1.6 Thesis organization
+-
+-Chapter 2 defines the stochastic model, proves the general stopping result, and establishes the limits of drift-sign and uncertainty arguments. Chapter 3 documents the corpora, generation contracts, instrumentation, grading, grouping, and reproducibility procedures. Chapter 4 presents the measured boundary and detector evidence, including falsification results. Chapter 5 describes the online controller, its runtime checks, and the measured accuracy-cost trade-offs. Chapter 6 discusses generalization, interpretation, and further research. The appendices supply reproducibility commands, a claim-to-artifact map, a note on the accompanying research artifacts, and the derivation of the reported paired accuracy interval.
+-
+-## 1.7 Related work and the thesis position
++## 1.6 Related work and the thesis position
+ 
+ Chain-of-thought prompting studies how explicit intermediate reasoning can improve language-model performance [Wei2022]. Its benefit does not imply that every additional reasoning increment is valuable. Verifier training uses completed solutions to learn candidate selection [Cobbe2021], while process supervision provides feedback on intermediate mathematical steps [Lightman2023]. The present endpoint is the selected answer at a saved response boundary. It does not certify every preceding mathematical statement, so the project&#x27;s answer-level detectors are distinct from process verifiers. These approaches establish why intermediate work and evaluation can help; the stopping question concerns the conditional value of continuing a chosen protocol after a particular prefix.
+ 
+ Adaptive computation predates current language-model reasoning systems. Adaptive Computation Time learns a halting unit for repeated recurrent-state updates and includes a penalty for computation in its training objective [Graves2016]. PonderNet instead models the conditional probability of halting, optimizes expected prediction loss over possible halting steps, and regularizes the halting distribution toward a prior [Banino2021]. Both learn how much internal computation to perform within a trainable architecture. Their computational increments are state updates, whereas this thesis observes complete generated responses from a fixed generator. The connection is the allocation of effort according to the evolving state; the difference is the information available to the policy and the operation whose execution it can prevent.
+ 
+-Early exit also changes how much of a network executes for each output token. Confident Adaptive Language Modeling, or CALM, chooses intermediate-layer exits during autoregressive decoding and connects local exit decisions to sequence-level performance constraints [Schuster2022]. This differs from terminating a response-and-revision sequence: CALM can continue emitting tokens while using fewer layers, whereas the present controller decides whether to request another full response. Layer execution, generated tokens, and repeated prompt processing therefore measure different resources. CALM&#x27;s performance guarantees depend on its calibration procedure and target constraints; they cannot be transferred to a response-boundary confidence heuristic simply because both methods reduce computation.
++Confident Adaptive Language Modeling, or CALM, chooses intermediate-layer exits during autoregressive decoding and calibrates local per-token decisions against sequence-level performance constraints [Schuster2022]. The present controller instead decides whether to request another complete response. Layer execution and response generation measure different resources, and a response-boundary heuristic does not inherit CALM&#x27;s calibration guarantees.
+ 
+ Self-consistency samples several reasoning paths and aggregates their answers [Wang2022]. Adaptive-Consistency makes that sampling budget variable using agreement among the samples already generated [Aggarwal2023]. It is a direct precedent for prefix-dependent allocation, with the prefix consisting of completed sampled solutions. The present revision trajectory instead conditions later responses on earlier generated work and uses a declared causal answer selector. Independent-path aggregation and successive revision need not have the same transition law or correctness endpoint. Agreement features can be useful in either setting, but their acquisition cost and timing must be included. In particular, thirteen completed peer trajectories cannot be treated as a free observation in a cost comparison with a single generator.
+ 
+@@ -76,4 +64,8 @@ Probability calibration is another established component. Platt&#x27;s sigmoid mappin
+ 
+ Sequential uncertainty theory addresses a further question: how can an interval or decision certificate retain its stated error control under repeated observation? Hoeffding&#x27;s concentration bound concerns bounded observations under specified sampling assumptions [Hoeffding1963]. Confidence sequences provide time-uniform coverage under the conditions of their construction [Howard2021]. Such results differ from fitting a calibrated probability score, and neither an arbitrary confidence threshold nor repeated use of an ordinary bootstrap interval inherits their guarantees. Chapter 2 states sufficient assumptions for its uncertainty results; Chapters 4 and 5 report empirical uncertainty at the declared experimental unit. This keeps a mathematical stopping certificate distinct from a descriptive interval for a measured policy contrast.
+ 
+-These lines of work establish learned halting, adaptive sampling, within-chain truncation, and accuracy-cost stopping as known approaches. What this study investigates is their application to a particular answer-revision process: whether measured repair and corruption justify the chosen continuation approximation, whether controlled changes to estimation and generation alter utility, and whether a prefix-safe model produces useful adaptive decisions when actually executed. Its contributions are the resulting derivations, matched empirical findings, and inspectable protocol. Useful adaptive stopping beyond a fixed-two-response budget, transport of the fitted probabilities to new generation regimes, and broadly accuracy-preserving savings remain unestablished by the reported experiments. Since the prior methods were not reproduced under a shared generation and cost contract, the thesis makes no comparative superiority claim.
++Prior work establishes learned halting, adaptive sampling, within-chain truncation, and accuracy-cost stopping. This thesis studies complete-response revision under a specified generation, grading, and cost protocol, comparing repair-corruption rules with fixed budgets. Its contribution is protocol-specific derivations and controlled findings, including failures. Prior methods were not reproduced under a shared protocol, so comparative superiority remains untested.
++
++## 1.7 Thesis organization
++
++Chapter 2 develops the stopping theory and Chapter 3 specifies the experiments. Chapters 4-5 report empirical and online results; Chapter 6 interprets them. Appendices supply the evidence map, claim scope, paired uncertainty, supporting analyses and diagrams.
+</pre></details><details><summary>ThesisDocs/chapters/chapter3_methodology.md</summary><pre>diff --git a/ThesisDocs/chapters/chapter3_methodology.md b/ThesisDocs/chapters/chapter3_methodology.md
+index 9c98734..940a2e3 100644
+--- a/ThesisDocs/chapters/chapter3_methodology.md
++++ b/ThesisDocs/chapters/chapter3_methodology.md
+@@ -2,13 +2,13 @@
+ 
+ ## 3.1 Corpus separation
+ 
+-The project contains two main collections with different purposes. The canonical model-domain matrix is a variable-horizon response-and-revision collection used for boundary and controlled policy analyses. Its current analysis describes 75,965 sanitized trajectories and 798,770 raw saved step rows over 52 model-domain cells. The word sanitized matters: raw malformed fragments and inconsistent records are handled by the analysis pipeline, so a raw row count and an eligible trajectory count are different denominators. The standardized detector collection contains 144,440 rows from 28,888 five-step trajectories and 2,948 unique task identifiers. Its 52 cells support detector training and task-grouped scoring.
++The variable-horizon response-and-revision matrix supports boundary and controlled-policy analyses: 75,965 sanitized trajectories and 798,770 raw saved step rows over 52 model-domain cells. Sanitization handles malformed fragments and inconsistent records, so raw row and eligible trajectory counts have different denominators. The standardized five-step detector corpus supports training and task-grouped scoring: 28,888 trajectories, 144,440 rows, and 2,948 unique task identifiers across 52 cells.
+ 
+ The collections overlap in scientific subject matter and include repeated benchmark questions. They are not independent replications and must not be summed into a single sample size. The earlier replay experiment also reuses a 1,500-trajectory Qwen2.5-7B/GSM8K cell from existing evidence. Its replayed decisions do not create new language-model generations.
+ 
+ [[CORPUS_TABLE]]
+ 
+-The standardized task count exceeds the canonical matrix&#x27;s task count because the collection uses different benchmark sample allocations. Each standardized trajectory has five rows, so 28,888 multiplied by five gives exactly 144,440. Multiplying the unique task count by thirteen and five would be incorrect because model-domain cells have unequal sample sizes. Counts are derived from source-qualified trajectory keys, not from that shortcut.
++Different benchmark allocations explain the standardized corpus&#x27;s larger task count. Counts use source-qualified trajectory keys; unequal model-domain sample sizes prevent deriving row totals from unique questions multiplied by models and steps.
+ 
+ ## 3.2 Model roster
+ 
+@@ -16,15 +16,15 @@ The canonical matrix includes thirteen model configurations: DeepSeek-R1-Distill
+ 
+ [[MODEL_TABLE]]
+ 
+-The historical alias `mistral_small_24b_2409` identifies the 2409 model, whose recorded specification is 22B. An alias is not a reliable parameter count. Scientific tables use the documented model specification and retain the alias only where needed to locate source files. Likewise, a speculative entry in a software catalog is not evidence that a model was included in a completed experiment; the actual manifests and trace metadata determine inclusion.
++The historical alias `mistral_small_24b_2409` denotes the 2409 model with a recorded specification of 22B. Tables use documented specifications; aliases locate source files. Saved manifests and trace metadata determine model inclusion.
+ 
+-The model panel allows descriptive comparisons of families and scale. It does not randomize architecture, pretraining data, instruction tuning, distillation, or tokenization. A difference between two model families therefore cannot be attributed uniquely to scale. Within the Qwen ladder, common family identity reduces some confounding, but still does not create a controlled intervention on parameter count alone.
++The panel supports descriptive family and scale comparisons. Architecture, pretraining data, instruction tuning, distillation, and tokenization were not randomized, so family differences do not isolate parameter count. A common Qwen family reduces some confounding without constituting a controlled intervention on scale alone.
+ 
+ ## 3.3 Benchmark tasks and splits
+ 
+-GSM8K contains grade-school mathematical word problems and was introduced in the verifier study of Cobbe and colleagues [Cobbe2021]. MATH provides competition-style mathematical problems [Hendrycks2021]. ARC-Challenge provides difficult multiple-choice science questions [Clark2018]. GPQA provides graduate-level multiple-choice scientific questions [Rein2023]. These references identify the benchmark tasks; they do not validate this project&#x27;s chosen subsets or grading implementation.
++GSM8K provides grade-school mathematical word problems [Cobbe2021]; MATH provides competition-style mathematics [Hendrycks2021]. ARC-Challenge contains difficult multiple-choice science questions [Clark2018], and GPQA contains graduate-level multiple-choice scientific questions [Rein2023]. The following protocol specifies this project&#x27;s subsets and grading.
+ 
+-The canonical experiment registry specifies GSM8K train, MATH test, ARC-Challenge test, and GPQA main train. The standardized collection also uses GSM8K train, MATH test, and ARC-Challenge test. Its GPQA metadata records `test`, but the current loader unconditionally requests the `train` split; the saved identifiers use `gpqa_main`. The requested and inferred effective split are retained as a provenance discrepancy rather than silently equated. The historical loader revision is not recorded, so this effective-split interpretation uses the current implementation and stored task identities. Thus a dataset&#x27;s published split name and a detector&#x27;s held-out fold mean different things. A detector can be evaluated on a task-held-out fold drawn from a benchmark training split. That is an internal task holdout, not an official benchmark test-set evaluation.
++The canonical registry specifies GSM8K train, MATH test, ARC-Challenge test, and GPQA main train. The standardized collection uses the same first three splits. Its GPQA metadata records `test`, while the current loader always requests `train` and saved identifiers use `gpqa_main`. The historical loader revision is not recorded, so the effective split is inferred from the current implementation and stored identities; both requested and inferred splits are reported. Detector folds are distinct from benchmark split names: a task holdout drawn from benchmark training data is internal validation, not an official test-set evaluation.
+ 
+ SVAMP does not appear in the authoritative standardized tournament manifest. It is excluded from the reported four-domain totals. The complete prompt, task identifier, reference answer, split, and any deterministic choice shuffle must remain associated with a question. An MCQ label such as B only has meaning relative to the exact displayed ordering. The project stores or reconstructs that ordering before evaluating the option label.
+ 
+@@ -56,7 +56,7 @@ The strongest stored task-grouped detector analyses use five outer folds. For me
+ 
+ Cluster bootstraps resample questions when the same question appears in several trajectories. Model-domain estimator comparisons use the recorded cell bootstrap for their reported interval. These intervals answer different questions. A question bootstrap estimates variability associated with the observed question population conditional on the fixed model panel; a cell bootstrap summarizes variability across the existing panel. Neither one is a multi-seed generation replication.
+ 
+-The archived N2/N3 probe and hazard harness first uses run-group folds for upstream prediction and then separate task-group folds for threshold selection. Other-temperature trajectories of a question can enter upstream fitting. The later task folds therefore do not make that entire pipeline an untouched-question evaluation. These are controlled development contrasts. The separate strict tabular and text analyses and the new prefix predictor use their explicitly recorded task-disjoint contracts; Appendix E distinguishes their completed evidence. Appendix F summarizes the separation between offline labels, model fitting, and runtime prefix information.
++The archived N2/N3 probe and hazard harness uses run-group folds for upstream prediction, followed by task-group folds for threshold selection. Other-temperature trajectories of a question can enter upstream fitting, so the full pipeline is a controlled development contrast rather than an untouched-question evaluation. The strict tabular and text analyses and the new prefix predictor follow separately recorded task-disjoint contracts. Appendix D details retrospective prediction analyses; Section 5.7 specifies the predictor protocol. Appendix E illustrates offline fitting and runtime information flow.
+ 
+ ## 3.7 Outcomes and computation measures
+ 
+@@ -68,10 +68,8 @@ ROC-AUC measures ranking, with half credit for tied scores. Brier loss measures
+ 
+ ## 3.8 Reproducibility and evidence freeze
+ 
+-The evidence manifests record exact local byte hashes and canonical LF content hashes for the selected tournament files, cross-check historical fingerprints, and identify supporting boundary and analysis artifacts. File size, row count and source-qualified trajectory membership are checked in addition to content identity. Appendix A gives verification and isolated reanalysis commands.
++Evidence manifests record exact local byte hashes and canonical LF content hashes, cross-check historical fingerprints, and identify supporting analyses. Verification also checks file sizes, row counts, and source-qualified trajectory membership. Appendix A maps the evidence and locates the electronic verification and reanalysis guide.
+ 
+-The original profile, `data_manifest_v1.json`, binds the research snapshot at revision `09225c95`. The post-review profile, `data_manifest_post_review_v1.json`, binds revised graders, controllers and audit implementations at revision `6e4378be`. The fifty-two standardized trace files, fitted predictor and recorded generation outcomes are preserved across these profiles. For actual live execution, each generation manifest binds preserved source copies; the later working implementation is not substituted for the code that produced the measurements. Post-review replay checks the revised controller&#x27;s decisions on saved prefixes, without producing new generations or timing results.
++The original profile, `data_manifest_v1.json`, binds revision `09225c95`; `data_manifest_post_review_v1.json` binds grader, controller, and audit revisions at `6e4378be`. Both preserve the fifty-two standardized trace files, fitted predictor, and recorded generation outcomes. Each live-generation manifest binds the source copies executed for that run. Post-review replay checks revised decisions on saved prefixes; it produces no new generations or timing measurements.
+ 
+-The workstation lock and recorded historical environment are separate evidence. Stored Blackwell metadata records a CUDA 13.0 runtime and PyTorch 2.13.0+cu130, whereas the current workstation has different versions. Compiler libraries, drivers, hardware, random-state handling, and nondeterministic kernels can affect a repetition even with an exact package list. The freeze supports inspection and re-analysis of the stored corpus; bit-identical regeneration is not established.
+-
+-Tables and figures are associated with source paths and hash manifests. Their numerical inputs are generated by the recorded analysis implementations from the frozen evidence. This association links each reported estimate to its input population, label version and software profile.
++Stored Blackwell metadata records a CUDA 13.0 runtime and PyTorch 2.13.0+cu130; the workstation lock describes a different, current environment. Compiler libraries, hardware, drivers, random-state handling, and nondeterministic kernels also affect repetition. The freeze supports inspection and re-analysis of stored results; bit-identical regeneration is not established.
+</pre></details><details><summary>ThesisDocs/chapters/chapter4_empirical.md</summary><pre>diff --git a/ThesisDocs/chapters/chapter4_empirical.md b/ThesisDocs/chapters/chapter4_empirical.md
+index 9498770..43b2cf8 100644
+--- a/ThesisDocs/chapters/chapter4_empirical.md
++++ b/ThesisDocs/chapters/chapter4_empirical.md
+@@ -2,15 +2,15 @@
+ 
+ ## 4.1 Population transitions and net value
+ 
+-The boundary analysis measures whether another response increment improves average correctness enough to pay its cost. For a fixed panel, the next-step change in accuracy equals repair frequency minus corruption frequency. Subtracting the step penalty produces the empirical net gain. This is an exact decomposition of observed labels on a common transition-eligible panel, not an assumption about the model&#x27;s internal reasoning.
++The next-step accuracy change on a common transition-eligible panel equals repair frequency minus corruption frequency. Subtracting the step penalty gives empirical net gain. This exact decomposition of observed labels does not assume a model of internal reasoning.
+ 
+ [[BOUNDARY_TABLE]]
+ 
+-For the pooled GSM8K panel, step two has accuracy 0.2401. There are 3,145 repairs among 14,818 currently incorrect candidates and 1,170 corruptions among 4,682 currently correct candidates. The estimated repair and corruption probabilities are 0.2122 and 0.2499, respectively. Despite the larger conditional corruption probability, repairs outnumber corruptions because many more candidates are currently wrong. The net next-step gain after the 0.05 penalty is positive, approximately 0.0513.
++At step two, repairs outnumber corruptions despite a lower conditional repair probability because more candidates are currently incorrect. The next-step gain after the 0.05 penalty is positive, approximately 0.0513 (Table 4).
+ 
+-At step four, the panel contains 1,830 repairs and 1,102 corruptions among 19,500 transition-eligible trajectories. Their difference increases accuracy by about 0.0373, which is less than the 0.05 penalty. Net gain is therefore approximately -0.0127. This example demonstrates why a negative net gain does not mean accuracy must fall: accuracy can still improve while the value of improvement is below its assigned cost.
++At step four, accuracy increases by about 0.0373, below the 0.05 penalty, leaving net gain approximately -0.0127. Thus negative net gain can accompany improving accuracy.
+ 
+-Each of these two panels comprises 500 task clusters and 19,500 trajectories. The reported task-bootstrap intervals condition on the observed model and temperature panel. They characterize uncertainty in a population transition contrast, rather than a probability statement that a particular current answer is correct.
++Each panel comprises 500 task clusters and 19,500 trajectories. Its task-bootstrap intervals condition on the observed model and temperature panel and describe a population transition contrast, rather than certifying a particular answer.
+ 
+ [[BOUNDARY_FIGURE]]
+ 
+@@ -18,70 +18,64 @@ Each of these two panels comprises 500 task clusters and 19,500 trajectories. Th
+ 
+ Selected cells show different empirical crossings. In Qwen2.5-7B/GSM8K, net gain at step four is positive, approximately 0.0193, and step five is negative, approximately -0.0253. In Qwen2.5-32B/MATH, step five is positive, approximately 0.0187, and step six is negative, approximately -0.0133. Each cell contains 1,500 trajectories over 500 questions. The intervals in the evidence tables quantify variation over those questions.
+ 
+-These results support a model- and domain-dependent continuation window. They do not support a universal claim that accuracy peaks at step two or three across the project. Nor do they prove that the first negative empirical gain is the globally best stopping point. The recorded curves can return to positive gain later. Selecting a final positive-to-negative crossing after seeing the complete curve is a retrospective descriptive choice, not a live stopping time.
++These crossings describe model- and domain-dependent continuation windows. Curves can return to positive gain, so neither a universal accuracy peak at step two or three nor optimality of the first negative gain follows. A final crossing selected after observing the complete curve is a retrospective description, not a live stopping time.
+ 
+-The scale comparison also needs careful language. A larger model can have a longer useful revision window in a particular domain, but the design does not isolate parameter count from all architecture and training differences. The observed ladder is evidence about these specific models, settings, and questions. A universal scaling law would require additional models, independent generations, and a prespecified functional relationship tested on new data.
++The design does not isolate parameter count from architecture and training differences. A longer revision window therefore characterizes the specific models, settings and questions. A universal scaling law requires additional models, independent generations and a prespecified relationship tested on new data.
+ 
+ ## 4.3 Controlled estimator comparisons
+ 
+ [[CONTROLLED_TABLE]]
+ 
+-Empirical-Bayes step hazards improve mean step utility by 0.00781 per trajectory relative to the matched cell-local logistic baseline, with a recorded 52-cell interval approximately [0.00276, 0.01355]. Lagged logistic features improve utility by approximately 0.00331, and the step-two churn threshold contrast improves it by approximately 0.00210. These are mean controlled contrasts, not hundreds of percentage points of accuracy.
++Empirical-Bayes step hazards improve mean step utility by 0.00781 per trajectory over the matched cell-local logistic baseline, with a 52-cell interval approximately [0.00276, 0.01355]. Lagged logistic features and the step-two churn contrast also improve utility; Table 5 reports their mean controlled effects.
+ 
+-The distinction between a controlled effect and an aggregate score matters. The historical &#x27;+593.55&#x27; for the pooled-hazard arm is a sum of utility differences over 75,965 trajectories. Dividing by that denominator yields the per-trajectory effect. It is a hazard-estimation result; it is not, by itself, a causal estimate of the value of peer agreement. Assigning the summed number to a differently named mechanism would change the experiment being described.
++The historical &#x27;+593.55&#x27; is a summed utility difference over 75,965 trajectories; Table 5 normalizes it per trajectory. It measures the hazard-estimation contrast, rather than an accuracy percentage-point gain or an isolated causal effect of peer agreement.
+ 
+-The gradient-boosted probe and isotonic calibration arms reduce utility relative to their matched logistic controls, by approximately 0.05694 and 0.06165 per trajectory. These negative effects constrain the claim that a more expressive probability model necessarily yields a better stopping policy. They do not prove that all nonlinear models overfit or that probability calibration is inherently harmful. Their effect depends on the fitted estimator, target, sample size, and policy threshold.
++The gradient-boosted and isotonic arms reduce utility by approximately 0.05694 and 0.06165 per trajectory against their logistic controls. Greater capacity or calibration can therefore worsen this stopping objective, without establishing universal overfitting or harm from calibration. The result depends on the estimator, target, sample size and policy threshold.
+ 
+ ## 4.4 Token cap and numerical precision
+ 
+-The matched token-cap experiment compares 256 and 512 completion tokens for Mistral-Small-22B/GSM8K. Both arms have 454 losses among 1,500 trajectories under the recorded binary endpoint: the hazard policy has lower utility than never stopping. There are no discordant paired loss indicators. The empirical difference is zero, and the paired bootstrap is degenerate for that particular indicator.
++The Mistral-Small-22B/GSM8K token-cap comparison, 256 versus 512 completion tokens, gives 454 losses among 1,500 trajectories in each arm: the hazard policy has lower utility than never stopping. With no discordant paired loss indicators, the difference is zero and its bootstrap is degenerate. Answers, token counts and timings may still differ; this binary endpoint cannot isolate truncation effects across other model-domain cells.
+ 
+-This equality concerns the paired binary loss indicator. Answers, token counts and timings can differ while that indicator remains unchanged. The contrast therefore measures sensitivity of the recorded policy verdict to this token cap, rather than identifying the contribution of truncation across other model-domain cells.
+-
+-In the matched Qwen2.5-7B/GSM8K precision comparison, 418 of 1,500 step-two answers are correct under BF16 and 204 under 4-bit weights. The observed difference is 214/1,500, or 14.27 percentage points, with the recorded task interval approximately [11.13, 17.53] points. This is an absolute accuracy difference for that model, step, task panel, and implementation. It is not a 14.3 percent relative reduction shared by every quantized model.
++In the matched Qwen2.5-7B/GSM8K precision comparison, 418 of 1,500 step-two answers are correct under BF16 and 204 under 4-bit weights. The difference is 214/1,500, or 14.27 percentage points, with task interval approximately [11.13, 17.53] points. This model-, step- and implementation-specific absolute accuracy contrast is not a universal relative quantization loss.
+ 
+ ## 4.5 Ranking and stopping performance
+ 
+ [[DETECTOR_TABLE]]
+ 
+-The stored prefix-safe sequence comparison uses gated recurrent units [Cho2014]. Its causal GRU has micro AUC 0.8743, task-macro AUC 0.8214, and domain-macro AUC 0.8102. Its worst domain is GPQA at approximately 0.6313. The contrast between pooled and worst-domain performance shows why a pooled score alone is inadequate for a deployment claim.
++The stored prefix-safe causal gated recurrent unit (GRU) [Cho2014] has micro AUC 0.8743, task-macro AUC 0.8214 and domain-macro AUC 0.8102. GPQA is its worst domain at approximately 0.6313, limiting what the pooled score implies for deployment.
+ 
+-A causal transformer with rotary position embeddings [Su2021] has lower pooled AUC than the causal GRU but slightly higher recorded micro step utility, approximately 0.3331 compared with 0.3264. Its token utility is approximately 0.3634 compared with 0.3631. The descriptive fold intervals overlap, so these stored summaries do not establish a statistically unique architecture winner. They do show that ranking and stopping utility need not rank configurations identically.
++The causal transformer with rotary position embeddings (RoPE) [Su2021] has lower pooled AUC than the GRU but slightly higher step utility (approximately 0.3331 versus 0.3264) and token utility (0.3634 versus 0.3631). Overlapping descriptive fold intervals leave a unique architecture winner unestablished; ranking and stopping utility can order configurations differently.
+ 
+-Task-macro AUC is defined only for questions whose evaluated rows contain both correct and incorrect answers. There are 2,679 such tasks out of 2,948. Omitting the remaining tasks is appropriate for an undefined within-task ranking statistic, but the omission must be stated. Accuracy and utility can still include constant-label tasks.
++Task-macro AUC includes the 2,679 of 2,948 tasks whose evaluated rows contain both correct and incorrect answers. Within-task AUC is undefined for the others; accuracy and utility still include constant-label tasks.
+ 
+-Additional analyses were completed before the live controller study. On the standardized corpus, strict task-grouped tabular and text baselines have independently recomputed saved out-of-fold AUCs of 0.849510 and 0.808976. Their persisted probabilities include the original task-disjoint calibration stage. A legacy analysis recorded under an anonymous closed-barrier peer-feature contract has raw AUC 0.954664 versus 0.945336 for its matched baseline without the additional peer-dynamics features. The recorded baseline retains vote, count and agreement inputs; this contrast concerns the extra dynamics block. Fixing the roster to thirteen members reduces the corresponding scores to 0.940009 and 0.931266. The saved scores and paired folds reproduce these contrasts, but the exact executed runner and peer-feature module were not recovered from reachable source history. The peer contrast therefore has partial executable-source provenance and remains qualified historical evidence.
++On the standardized corpus, strict task-grouped tabular and text baselines have independently recomputed saved out-of-fold (OOF) AUCs of 0.849510 and 0.808976, including their original task-disjoint calibration. Appendix D gives the matched peer scores. That comparison adds dynamics above a baseline retaining vote, count and agreement inputs. Its scores and paired folds reproduce, but the executed runner and peer-feature module were not recovered, leaving partial executable-source provenance.
+ 
+-Selected-answer analyses use one causally chosen candidate per barrier rather than every model-row target. The no-batch-timing profile and the medium-capacity causal-dynamics profile have raw task-grouped AUCs of 0.934350 and 0.937037 over 14,740 decisions and 2,948 tasks. These endpoints and populations differ from the row-level comparisons, so their AUCs must not be ranked as a common benchmark. Configuration selection remains development work. The selected-answer and committee reporting calibrators are fit across previously computed out-of-fold scores and are not fully nested outer-fold calibration; their calibrated Brier and ECE summaries are diagnostic. The raw AUCs above use the original held-out scores. Appendix E records the completed analyses and distinguishes them from fresh prospective stopping evidence.
++Selected-answer analyses target one causally chosen candidate per barrier over 14,740 decisions and 2,948 tasks, rather than every model-row; their AUCs are not a common benchmark with the row-level results. Configuration selection remains development work. Peer and selected-answer reporting calibrators fit previously computed OOF scores without fully nested outer-fold calibration, so calibrated Brier and ECE summaries are diagnostic. Appendix D retains the original held-out scores, sample sizes and paired contrasts; these are historical analyses, not fresh prospective stopping evidence.
+ 
+ [[DETECTOR_FIGURE]]
+ 
+ ## 4.6 The stacked retrospective diagnostic
+ 
+-The historical stacked hybrid has stored AUC 0.955156, compared with 0.943223 for its reduced-feature LightGBM control. The observed lift is 0.011933. The stored task-bootstrap lift interval is [0.010384, 0.013480]. That interval describes the difference between two scores on this development evaluation; it is not an interval for the absolute stacked AUC.
++The stacked hybrid&#x27;s stored AUC is 0.955156 versus 0.943223 for its reduced-feature LightGBM control, a lift of 0.011933. The task-bootstrap interval [0.010384, 0.013480] describes this development difference, rather than the absolute stacked AUC.
+ 
+-Two design details limit its interpretation. First, a bidirectional sequence component reads all five saved steps and copies a trajectory score to earlier rows. A centered smoothing feature also uses later observations. The feature set therefore includes information unavailable to a live decision at an early step. Second, meta-training is not confined to the outer training partition of each reported scoring fold. Task-grouped scoring alone does not remove that upstream dependence.
++The bidirectional sequence component reads all five saved steps and copies a trajectory score to earlier rows; centered smoothing also uses later observations. Meta-training is not confined to each scoring fold&#x27;s outer training partition. These dependencies prevent treating the score as an online prefix predictor despite task-grouped scoring.
+ 
+-The control also retains committee and independent-vote aggregates, so its label &#x27;No Peers&#x27; does not denote a pure peer-free ablation. The numerical difference is a valid stored diagnostic of the implemented comparison, but it cannot isolate the causal value of peers or certify online correctness prediction. Bootstrap repetition cannot repair either information leakage or non-nested model selection.
++The control retains committee and independent-vote aggregates, so &#x27;No Peers&#x27; is not a peer-free ablation. The stored contrast cannot isolate causal peer value or certify online correctness prediction.
+ 
+-The empirical proportion of positive lifts among 10,000 bootstrap draws is 100 percent. It is not a conventional p-value, a proof of superiority on all future questions, or evidence of independent generation seeds. Bootstrap randomness repeatedly resamples the same empirical development distribution. Reporting what it resamples is more informative than describing the resamples as 10,000 independent stress experiments.
++All 10,000 bootstrap lifts were positive (100 percent), a resampling proportion rather than a conventional p-value, universal superiority or independent generation-seed replication. Repeated resampling of the development distribution cannot repair feature leakage or non-nested model selection.
+ 
+ ## 4.7 Replay and failure interpretation
+ 
+-The historical Qwen2.5-7B/GSM8K replay counts 827,804 full-horizon completion tokens and 377,960 tokens up to the selected stopping steps. The implied saving is 54.34 percent. Accuracy declines from 70.53 percent to 64.20 percent, an observed loss of 6.33 points. The policy is fit and evaluated on the same 1,500 traces, so this result is a development diagnostic. Chapter 5 compares it with the newly implemented runtime experiments.
++The Qwen2.5-7B/GSM8K replay reduces completion tokens from 827,804 to 377,960 (54.34 percent), while accuracy falls from 70.53 to 64.20 percent, a loss of 6.33 percentage points. Fitting and evaluating on the same 1,500 traces makes this a development diagnostic; Chapter 5 reports actual runtime experiments.
+ 
+-The paired failure audit covers all 75,965 sanitized variable-horizon trajectories. The archived hazard policy wins in 68,095 trajectories (89.64 percent), ties in 2,135 (2.81 percent), and loses in 5,735 (7.55 percent), relative to the full recorded horizon under the stored step utility. These are utility verdicts, not accuracy percentages. The audit reconstructs both binary endpoint labels from their utility and step cost, checks unique paired trajectories, and verifies that the taxonomy partitions every loss exactly once.
++Across 75,965 sanitized variable-horizon trajectories, the archived hazard policy wins in 68,095 (89.64 percent), ties in 2,135 (2.81 percent) and loses in 5,735 (7.55 percent) against the full horizon under stored step utility. These are utility verdicts, not accuracy percentages. The audit reconstructs both binary endpoint labels from utility and cost, checks unique pairs and partitions every loss exactly once.
+ 
+ [[FAILURE_TABLE]]
+ 
+-Every observed utility loss stopped on an incorrect candidate and ended with a correct full-horizon candidate. This pattern describes the current records; a correctness gain after an early stop can outweigh the accumulated cost. Among those losses, 196 stop states have an empty extracted candidate. Another 460 traces contain an earlier correct decision-eligible answer, and 600 contain a correct step-one answer but no correct eligible answer before stopping. The remaining losses first reach an eligible correct answer one step after stopping (1,706) or at least two steps later (2,773). The categories follow a fixed priority order, so an empty stop takes precedence over other properties of the same trace.
+-
+-The larger late-repair group is 48.35 percent of losses. It does not mean that these traces invariably repaired at step five, or that all online predictors must fail. Horizons vary in this matrix. The recomputation uses frozen labels and does not execute a new regrade or train a new probe. Old probe AUCs embedded in the classification script&#x27;s descriptive tags are excluded from this table. A failed linear predictor of a late repair is evidence about that predictor and its recorded features; it is not an information-theoretic impossibility proof for every possible online signal.
++Every observed utility loss stops on an incorrect candidate and ends correctly. Table 7 applies mutually exclusive priority rules, with empty stops first. The 48.35-percent late-repair group first reaches an eligible correct answer at least two steps after stopping; variable horizons prevent interpreting this as a universal step-five outcome.
+ 
+-The taxonomy is conditional on the archived labels and the stored policy. The versioned grader coverage described in Section 3.5 tests specified normalization and equivalence behaviors; independent corpus adjudication would assess whether labeling errors alter this partition.
++The taxonomy conditions on archived labels and the stored policy. Recomputation performs no fresh regrading or probe training, and excludes old classification-tag AUCs. These patterns cannot prove that all online predictors must fail. Section 3.5&#x27;s grader checks cover specified behaviors; independent adjudication is needed to assess labeling errors&#x27; effect on the partition.
+ 
+ ## 4.8 Empirical conclusions
+ 
+-The stored evidence supports cost-sensitive continuation decisions that vary by model and domain. Repairs can dominate early aggregate changes, later gains can fall below their cost, and estimator changes can improve or worsen utility. It also supplies direct counterexamples to several overly broad claims: pooled AUC is not live policy accuracy, a zero token-cap contrast does not establish universal absence of truncation, and replay savings need not preserve accuracy.
+-
+-Chapter 5 evaluates frozen policies that use only the observed prefix and directly control subsequent response generation. Their accuracy and computation measurements assess the operational consequence of these continuation trade-offs.
++Continuation value varies with model, domain and cost. Matched estimators can improve or worsen utility; ranking quality and replay savings alone do not establish accuracy preservation.
+</pre></details><details><summary>ThesisDocs/chapters/chapter5_online.md</summary><pre>diff --git a/ThesisDocs/chapters/chapter5_online.md b/ThesisDocs/chapters/chapter5_online.md
+index 86b3e40..e5dbb4a 100644
+--- a/ThesisDocs/chapters/chapter5_online.md
++++ b/ThesisDocs/chapters/chapter5_online.md
+@@ -2,69 +2,67 @@
+ 
+ ## 5.1 Causal controller contract
+ 
+-The online controller accepts one newly completed response observation at a time. An observation contains its step number, candidate answer, parsing status, generated completion tokens, and any explicitly available confidence or instrumentation. The API has no field for the reference answer, the correctness label, a future response, or a score computed from the full trajectory. The controller stores its own prefix and rejects skipped, repeated, or out-of-order observations.
++The controller accepts completed responses in step order, storing only their observed prefix: candidate answer, parsing status, completion tokens and available confidence or instrumentation. Its API excludes reference answers, correctness labels, future responses and full-trajectory scores, and rejects skipped, repeated or out-of-order observations.
+ 
+-The policy enforces a minimum of two completed increments and a finite maximum horizon. Stopping closes the controller, so feeding a subsequent response is an error rather than an implicit restart. Each decision records a selected answer and step, the reason for termination and measured latency; the frozen manifest records the policy fingerprint. Invalid confidence, incomplete parsing and future timestamps receive explicit validation.
++The policy enforces a two-increment floor, a finite horizon and terminal closure. Decisions record the selected answer and step, termination reason and latency; the manifest binds the policy fingerprint. Validation covers confidence, parsing and future timestamps.
+ 
+-The generation and latency results in this chapter use the executed source versions preserved by the live manifests. Subsequent controller revisions strengthen input validation and ledger accounting. Saved-prefix replay reproduces all 480 recorded decision histories across the four collections, including reused baseline rows, and the revised grader leaves their final-answer labels unchanged. This post-review verification measures behavior on existing observations; the reported generation costs and latency distributions retain their original execution provenance.
++Live manifests preserve the executed source versions for generation and latency. Subsequent validation and accounting revisions reproduce all 480 saved decision histories across the four collections, including reused baseline rows, and leave final-answer labels unchanged. This replay verifies existing observations; it does not replace the original generation-cost or latency provenance.
+ 
+-Peer agreement is optional. When used, the API requires a complete, same-step roster whose barrier closes before the decision. An incomplete panel, a duplicate peer, or a vote that completes later cannot support a current stopping decision. These checks establish the declared event contract; timestamps alone cannot establish that an external caller supplied authentic observations. A fleet experiment must retain generation events and charge every peer&#x27;s computation.
++Optional peer agreement requires a complete same-step roster closed before scoring; incomplete panels, duplicate peers and late votes are rejected. Timestamps verify event order, not an external caller&#x27;s authenticity. A fleet experiment must retain generation events and charge every peer&#x27;s computation.
+ 
+ ## 5.2 Policy choice and limitations
+ 
+-The first runtime policy is a frozen confidence-and-stability heuristic. Model-reported confidence is uncalibrated, and a stable answer can be wrong. Default selection carries forward the latest nonempty answer; confidence-drop and answer-wobble branches can retain a prior candidate. Neither retention branch fired in the reported live panels. The controller also provides fixed-step and never-stop controls under the same floor and horizon. These transparent policies make it possible to compare the engineering effect of termination separately from the value of correctness prediction.
++The first policy is a frozen confidence-and-stability heuristic. Confidence is uncalibrated, and a stable answer can be wrong. Selection uses the latest nonempty answer, with confidence-drop and answer-wobble branches that can retain a prior candidate; neither fired in the live panels. Fixed-step and never-stop controls share the floor and horizon, separating termination&#x27;s engineering effect from correctness prediction.
+ 
+-The retrospective 0.955156 stacked score is excluded from the controller. Its bidirectional sequence score and future-step smoothing violate the runtime information contract, and a new causal implementation cannot inherit its AUC by reusing the name of the detector. Stored task-held-out predictions can support replay comparisons, but they are not a deployable fitted model unless the training artifact and its causal feature transformation are available and verified.
++The retrospective stacked score is excluded because its future-step information violates this contract (Section 4.6). Stored task-held-out predictions support replay, but deployment requires a verified fitted artifact and causal feature transformation; a new implementation cannot inherit the retrospective AUC.
+ 
+-The heuristics are engineering choices rather than instances of the general Bellman optimum. A confidence drop may justify caution without proving that all future repair opportunities are exhausted. Oscillation can signal instability without distinguishing a wrong candidate from a correct one. Chapter 2&#x27;s delayed-repair counterexample applies directly: immediate evidence against continuing does not, without structural assumptions, establish a globally optimal stop.
++These heuristics do not implement the general Bellman optimum. Confidence drops and oscillation need not exhaust future repair opportunities or identify incorrect answers. Chapter 2&#x27;s delayed-repair counterexample shows why immediate evidence against continuation needs additional structural assumptions to justify an optimal stop.
+ 
+ ## 5.3 Generation integration
+ 
+-The generation adapter requests an increment, constructs its permitted observation, evaluates the controller, and requests the next increment only if the decision continues. A stop therefore prevents future model calls. A caller cancellation is propagated through the adapter&#x27;s generation lifecycle. Baseline and active policies use the same response-boundary and parsing conventions so the stopping comparison does not silently change the response contract.
++The adapter requests an increment, constructs its permitted observation and evaluates the controller before requesting another. Stopping therefore prevents future model calls; caller cancellation propagates through the generation lifecycle. Baseline and active policies share response-boundary and parsing conventions.
+ 
+-This integration stops between complete reasoning responses. It does not claim that the risk heuristic identifies an optimal token inside a response. Cancellation and a common response-completion boundary can interrupt a call for engineering reasons, but they are different mechanisms from the policy&#x27;s step-level decision. Completion-token savings refer to avoided response generation under this declared granularity.
++The policy stops between complete reasoning responses, rather than locating an optimal token within a response. Engineering cancellation can interrupt a call, but is distinct from this step-level decision. Completion-token savings measure avoided generation at the declared response granularity.
+ 
+-The active and full-horizon arms are executed separately. For deterministic greedy generation, the evaluation checks whether their shared prefixes agree. Changing batch membership or kernels can affect numeric results, so deterministic sampling alone is not proof of identical prefixes. A measured mismatch must be reported, because it limits interpreting the full arm as an exact counterfactual continuation of the active arm.
++Separately executed greedy arms are checked for shared-prefix agreement. Batch membership and kernels can change numeric results, so deterministic sampling alone does not ensure matching prefixes. Mismatches limit treating the full arm as an exact counterfactual continuation.
+ 
+ ## 5.4 Decision latency
+ 
+ [[LATENCY_TABLE]]
+ 
+-The latency experiment evaluates decisions on one hundred math-question prefixes, retaining per-step timings and the benchmark context. It reports the median, upper quantiles, and maximum, with the number of measured decisions. A single fast average is not sufficient to establish a worst-observed under-ten-millisecond target. These measurements cover the controller call on already prepared observations, not the language-model forward pass or external peers.
++Table 8 reports decision counts, median, upper quantiles and maximum on one hundred saved math-question prefixes. The under-ten-millisecond target concerns the observed maximum, not a fast average. Timing covers prepared controller observations, excluding language-model forward passes and external peers.
+ 
+-Unit and adversarial state-machine checks complement this timing result. They verify the minimum floor, horizon termination, terminal closure, future-step independence, parsing guards, exact token accumulation, peer barriers, and cancellation. Their passing result establishes implementation behavior on the covered cases. It does not establish that the heuristic preserves accuracy on a distribution of language-model questions.
++State-machine checks cover the floor, horizon, closure, future-step independence, parsing, token accumulation, peer barriers and cancellation. They verify the tested implementation behavior, rather than distributional accuracy preservation.
+ 
+ ## 5.5 Live paired evaluation
+ 
+ [[LIVE_TABLE]]
+ 
+-The live experiment freezes the task panel, policy, and generation settings before opening evaluation outcomes. Public task records are supplied to generation separately from the reference-answer ledger. Grading occurs after the generation events are written. This separation makes the information boundary inspectable and prevents a runtime stopping decision from accidentally consuming the benchmark label.
++The live experiment freezes tasks, policy and generation settings before opening outcomes. Generation receives public tasks separately from the reference ledger; grading follows event recording, keeping benchmark labels outside runtime decisions.
+ 
+-The primary paired quantities are final-answer accuracy, selected-answer accuracy, generated completion tokens, executed response increments, prompt-token counts, and wall time. The report states whether auxiliary scoring or peer generations occur. The ratio-of-total completion-token saving is computed from actual generated counts in the two arms. A completion-token reduction is not automatically an equal reduction in wall time, energy, or total inference cost.
++Paired endpoints include final- and selected-answer accuracy, completion tokens, response increments, prompt tokens and wall time, with auxiliary or peer generation disclosed. Completion-token saving is the ratio of total actual token differences to total baseline tokens; wall time, energy and total inference cost are separate outcomes.
+ 
+-The experiments use Qwen2.5-0.5B-Instruct [Qwen2024] in a local development setting. Tasks previously present in the corpus remain development tasks even when the policy is frozen before their new generation. Prospective execution, task novelty and transfer to another model are distinct evaluation properties.
++The model is Qwen2.5-0.5B-Instruct [Qwen2024]. Previously observed corpus tasks remain development tasks despite a policy frozen before new generation. Prospective execution, task novelty and cross-model transfer are distinct properties; this run does not validate the Qwen2.5-7B replay or thirteen-model panel as a live system.
+ 
+-The accuracy interval is reported alongside savings. An observed gain or zero difference is not a noninferiority proof unless the interval and a prespecified tolerance establish that claim. This thesis makes no unconditional assertion of zero accuracy loss. Likewise, a result from Qwen2.5-0.5B does not validate the earlier Qwen2.5-7B replay or the thirteen-model detector panel as a live system.
++Both heuristic arms answer six of one hundred questions correctly. Six tasks stop early and ninety-four reach the horizon. Completion-token saving is 2.94 percent, with descriptive task-bootstrap interval [0.85, 5.63] percent (Table 9). The conservative iid-reference accuracy interval [-4.29, +4.29] percentage points allows meaningful losses; observed equality does not establish noninferiority without a prespecified tolerance.
+ 
+-The heuristic run answers six of one hundred questions correctly in each arm. No paired correctness indicators change, but the conservative paired interval still allows an accuracy change between approximately -4.29 and +4.29 percentage points under the declared iid task-pair reference model. Completion tokens decline from 22,244 to 21,591, a saving of 2.94 percent; its descriptive task-bootstrap interval is approximately [0.85, 5.63] percent. Only six tasks stop by the confidence-and-stability rule, and ninety-four reach the maximum horizon. The mean stopping step is 4.85.
++Only 88 of 500 full-horizon responses satisfy the complete JSON contract. Carrying forward a nonempty candidate cannot recover arbitrary malformed reasoning, and all failures remain in the denominator. The weak six-percent baseline requires evaluation on a larger, protocol-capable model before useful deployed answer quality can be claimed.
+ 
+-The response contract is a substantial limitation. Only 88 of the 500 full-horizon responses are strictly valid complete JSON, and final baseline accuracy is six percent. The controller can retain a previously extracted nonempty answer when a later increment is empty, but that selection rule does not recover arbitrary malformed reasoning. All resulting failures remain included in the reported denominator. A study on a larger, protocol-capable model is needed before this experiment can support useful deployed answer quality.
+-
+-Shared prefixes are exactly identical on 94 of the 100 paired tasks, rather than all of them. The remaining differences constrain a trajectory-specific counterfactual interpretation even though both arms use greedy sampling and the same frozen generation adapter. Measured completion tokens are supplemented by prompt tokens (142,498 versus 137,574), model time (1,127.05 versus 1,099.21 seconds), padded prefill slots (231,856 versus 222,781), and padded decoding slots (57,856 versus 56,128). Prompt plus completion tokens fall by 3.39 percent. There are no auxiliary verifier or peer generations. These quantities describe different costs and are not interchangeable efficiency percentages.
++Shared prefixes match on 94 of 100 pairs, limiting trajectory-specific counterfactual interpretation. Additional costs are prompt tokens (142,498 versus 137,574), model time (1,127.05 versus 1,099.21 seconds), padded prefill slots (231,856 versus 222,781) and decoding slots (57,856 versus 56,128). Prompt-plus-completion tokens fall 3.39 percent; no verifier or peers are generated. These costs are not interchangeable efficiency percentages.
+ 
+ ## 5.6 Adversarial questions and traps
+ 
+ [[ADVERSARIAL_TABLE]]
+ 
+-The adversarial bank contains twenty independently specified mathematical questions, with separate public prompts and evaluation labels. It includes changing percentage bases, harmonic average speed, conditional probability, dependent sampling, inclusive endpoint counts, reciprocal rates, exponent precedence, answer-contract distinctions, and irrelevant details. Exact short derivations accompany the evaluation labels so they can be checked independently of model output.
++The twenty-question bank separates public prompts from independently checkable labels and short exact derivations. It covers percentage bases, harmonic average speed, conditional probability, dependent sampling, inclusive endpoints, reciprocal rates, exponent precedence, answer contracts and irrelevant details.
+ 
+-This bank is designed to probe common reasoning traps, not to estimate the worst-case failure rate of every possible attack. Some classic puzzle forms may have appeared in model pretraining even though these exact project records are newly written. The measured outcome is therefore robustness on the frozen bank under this model and prompt protocol. The software&#x27;s malformed-input and forged-peer tests remain a separate engineering evaluation.
++The handpicked bank probes these traps under the frozen model and prompt protocol; classic puzzle forms may occur in pretraining. It does not estimate a general worst-case attack rate. Malformed-input and forged-peer tests separately evaluate software behavior.
+ 
+-The completed heuristic trap run answers one of twenty questions correctly in each arm. Completion tokens decrease from 4,736 to 4,578, a saving of 3.34 percent; all twenty shared prefixes match exactly. Only two tasks stop by stable confidence, and the other eighteen reach the horizon. The mean stopping step is 4.75. Full-horizon strict JSON validity is fourteen of one hundred responses. The conservative iid-reference accuracy difference interval is approximately [-19.68, +19.68] percentage points, and the descriptive token-saving interval is [0.00, 8.80] percent. This small, low-accuracy panel provides no strong accuracy-preservation or broad adversarial-robustness claim.
++Both heuristic arms answer one of twenty questions correctly. Two stop early and eighteen reach the horizon; all twenty shared prefixes match. Strict JSON validity is fourteen of one hundred baseline responses. The 3.34-percent completion-token saving has interval [0.00, 8.80] percent; the conservative iid-reference accuracy interval is [-19.68, +19.68] percentage points (Table 10). This small, low-accuracy panel establishes neither accuracy preservation nor broad adversarial robustness.
+ 
+-A wrong but stable high-confidence answer is particularly informative: it demonstrates a limitation of the confidence-and-stability heuristic even when the controller functions exactly as intended. A late repair after termination similarly tests the stopping approximation. The evaluation retains these adverse outcomes rather than choosing a new threshold on the same questions and relabeling the adjusted result confirmatory.
++A stable high-confidence error challenges the heuristic; a late repair challenges its stopping approximation. These adverse outcomes are retained without tuning a new threshold on the same questions and calling the adjusted result confirmatory.
+ 
+-The conservative paired accuracy interval uses simultaneous 97.5-percent Clopper-Pearson intervals on the improvement and worsening probabilities. A union bound gives at least 95-percent simultaneous coverage under iid task-pair sampling, without assuming the two discordance categories are independent. Subtracting the interval endpoints then bounds their difference. The task-bootstrap saving interval resamples paired questions and recomputes the ratio of total tokens. Because this trap bank is handpicked, its interval is a conditional reference calculation and resampling diagnostic; it does not establish randomized adversarial-population coverage.
++Paired accuracy intervals subtract simultaneous 97.5-percent Clopper-Pearson bounds for improvement and worsening probabilities. A union bound gives at least 95-percent coverage under iid task-pair sampling without independence of discordance categories (Appendix C). Token intervals resample paired questions and recompute the ratio of total tokens. For the handpicked trap bank these are reference calculations and resampling diagnostics, not randomized adversarial-population coverage.
+ 
+ ## 5.7 Deployable prefix probability model
+ 
+@@ -80,11 +78,11 @@ The training targets match runtime answer selection. Reconstructing candidates w
+ 
+ [[PREDICTOR_TABLE]]
+ 
+-The fitted artifact serializes both scalers, coefficient vectors and calibrators, allowing standard-library probability evaluation without scikit-learn at runtime. Its byte hash is checked by the controller against the frozen policy. The calibrated held-out Brier scores are 0.09760 for the current target and 0.09970 for the next target, slightly below the corresponding uncalibrated scores of 0.09854 and 0.10068. Those aggregate scores and ten-bin calibration summaries are marginal development diagnostics, rather than certified conditional probabilities for a live prefix.
++The byte-checked artifact serializes scalers, coefficients and calibrators for standard-library evaluation without scikit-learn. Held-out Brier scores are 0.09760 for the current target and 0.09970 for the next, versus uncalibrated 0.09854 and 0.10068. These scores and ten-bin calibration summaries are marginal development diagnostics, not certified live-prefix conditional probabilities.
+ 
+-Transport from the archive remains a material limitation. None of the 7,500 archived outputs satisfies the live strict JSON contract. Consequently, confidence and strict-parsing features have no observed archive variation, while the live JSON prompt creates a different feature distribution. Archived token counts also omit emitted EOS tokens that the live ledger includes. Archive calibration therefore provides marginal evidence under a different prompt and feature distribution from the live experiment.
++None of the 7,500 archived outputs meets the live JSON contract, leaving confidence and strict-parsing features without archive variation. The live prompt shifts that distribution, and its ledger includes emitted EOS tokens omitted by archived counts. Archive calibration therefore does not establish transport to the live protocol.
+ 
+-On the 276 held-out archived tasks, the learned rule stops 275 times at step two and once at step three. Its accuracy is 11.96 percent, compared with 10.51 percent for the full horizon; the task-bootstrap paired accuracy interval includes zero, approximately [-1.45, +4.35] percentage points. Replayed completion-token saving is 51.29 percent, with an approximate interval [49.31, 53.09] percent. The near agreement with a fixed-two-step policy means this evaluation demonstrates little additional stopping value from the learned heads. It does establish a reproducible, causally computed fitted artifact that can be evaluated prospectively.
++On 276 held-out archived tasks, the rule stops 275 times at step two and once at step three. Accuracy is 11.96 versus 10.51 percent at the full horizon; the task-bootstrap paired interval [-1.45, +4.35] percentage points includes zero. Replayed completion-token saving is 51.29 percent, interval [49.31, 53.09] percent. This near-fixed budget demonstrates little additional adaptation, but provides a reproducible causal artifact for prospective evaluation.
+ 
+ ## 5.8 Actual trained-policy evaluation
+ 
+@@ -92,34 +90,26 @@ On the 276 held-out archived tasks, the learned rule stops 275 times at step two
+ 
+ [[LEARNED_ADVERSARIAL_TABLE]]
+ 
+-The trained policy generates its own stopped trajectories and is paired with the previously executed full-horizon baseline. The baseline manifest, model bytes, public prompts, generation adapter, batch order and results are linked by hash. Shared-prefix agreement is measured alongside physical costs because separate execution times and changing batch membership can produce numerical differences.
+-
+-The predictor artifact and policy are frozen before learned generation. No live or trap outcomes enter its coefficient, calibrator, feature, cost or threshold fitting. The comparison remains a development experiment on one small model and two declared panels. It does not deploy the retrospective stacked hybrid, establish per-instance safety, or prove that the learned rule improves on a cheap fixed-step policy.
++The trained policy generates its own stopped trajectories against the previously executed full-horizon baseline. Hashes bind baseline manifests, model bytes, prompts, adapter, batch order and results. Predictor and policy are frozen before generation; live and trap outcomes enter no coefficient, calibration, feature, cost or threshold fitting. This remains a development study of one small model and two panels, not deployment of the retrospective stack or a per-instance safety guarantee.
+ 
+-The completed trained-policy run stops at step two on all one hundred GSM8K questions. It answers seven correctly, compared with six at the full horizon, and saves 56.51 percent of completion tokens (22,244 versus 9,674). The descriptive saving interval is approximately [54.83, 58.01] percent. The conservative paired accuracy-change interval is approximately [-4.27, +6.21] percentage points, so the observed one-point improvement does not demonstrate superiority or accuracy noninferiority. Every shared prefix matches exactly. Since every task stops at the same step, this realized policy is equivalent to a fixed-two-step budget on the collected panel; the experiment supplies no evidence of useful adaptive stopping beyond that budget.
++On all one hundred GSM8K questions, the trained policy stops at step two with identical shared prefixes. It answers seven correctly versus six at the full horizon and saves 56.51 percent of completion tokens (Table 12; saving interval [54.83, 58.01] percent). The conservative accuracy-change interval [-4.27, +6.21] percentage points establishes neither superiority nor noninferiority. Uniform stopping makes the realized policy equivalent to a fixed-two-step budget on this panel, with no demonstrated adaptive advantage.
+ 
+-The trained trap run also stops at step two on all twenty tasks, with one correct answer in both arms. Completion tokens decline from 4,736 to 2,268, saving 52.11 percent, with a descriptive task-resampling interval approximately [45.86, 57.17] percent. All twenty shared prefixes match. The handpicked-bank accuracy interval retains the broad iid-reference bounds of approximately [-19.68, +19.68] percentage points. The large compute reduction accompanies weak absolute answer accuracy and does not establish general adversarial robustness.
++All twenty trained trap runs also stop at step two with matching prefixes and one correct answer in each arm. Completion-token saving is 52.11 percent (Table 13; interval [45.86, 57.17] percent), while the handpicked-bank iid-reference accuracy bounds remain [-19.68, +19.68] percentage points. Large savings accompany weak absolute accuracy, without establishing general adversarial robustness.
+ 
+-Accounting includes repeated prompt processing: the trained main arm uses 43,874 prompt tokens instead of 142,498, and the trap arm uses 8,115 instead of 27,641. Prompt-plus-completion savings are approximately 67.50 and 67.93 percent. Measured main model time is 343.25 seconds rather than 1,127.05, and trap model time is 74.12 rather than 245.14. Padded prefill and decoding slots are separately recorded, with no verifier or peer generations. These are observations on this execution environment; they do not guarantee the same latency reduction under another model or batching regime.
++Prompt-plus-completion savings are 67.50 percent on the main panel and 67.93 percent on traps; Tables 12–13 retain prompt counts. Model times are 343.25 versus 1,127.05 seconds and 74.12 versus 245.14 seconds, respectively. Padded prefill and decoding slots are recorded separately, with no verifier or peer generations. These environment-specific costs do not guarantee equivalent reductions under another model or batching regime.
+ 
+-On one hundred actual baseline prefixes repeated twenty times, the trained controller executes 4,000 decisions with median 0.059 ms, p99 0.3143 ms and maximum 0.9369 ms. This benchmark includes feature extraction, both probability heads, calibration, validation and drift computation. It excludes language-model loading, generation, tokenization and peer waits. The measured decision overhead satisfies the under-ten-millisecond target at the observed maximum.
++On one hundred baseline prefixes repeated twenty times, 4,000 trained-controller decisions have median 0.059 ms, p99 0.3143 ms and maximum 0.9369 ms. Timing includes feature extraction, both heads, calibration, validation and drift computation, excluding model loading, generation, tokenization and peer waits. The observed maximum meets the under-ten-millisecond decision target.
+ 
+ ## 5.9 Replay and Pareto analysis
+ 
+ [[PARETO_TABLE]]
+ 
+-A development replay compares the frozen heuristic with fixed-step policies and the full horizon on already saved trajectories. It is useful because all policies can be evaluated against the same recorded continuations at low additional cost. Its counterfactual validity still requires that stopping does not change the preceding generation protocol. It cannot measure live controller overhead, asynchronous batching effects, or energy.
++Replay compares frozen heuristic, fixed-step and full-horizon policies on common saved continuations. Counterfactual validity requires unchanged preceding generation; replay cannot measure live overhead, asynchronous batching effects or energy.
+ 
+-The accuracy-cost plane reports each policy&#x27;s observed accuracy against its measured or replay-counted completion tokens. A policy is dominated when another policy achieves at least as much accuracy with no greater cost and improves at least one quantity. Nondominated policies form the empirical Pareto set. A point on that set is not automatically preferred: choosing among points requires a declared utility weight or an accuracy constraint.
++The accuracy-cost plane pairs accuracy with measured or replay-counted completion tokens. A policy is dominated when another has no lower accuracy and no greater cost, improving at least one. Choosing within the empirical Pareto set requires a utility weight or accuracy constraint.
+ 
+ [[PARETO_FIGURE]]
+ 
+ [[ACTUAL_PARETO_FIGURE]]
+ 
+-The displayed Pareto set describes this development panel. Its membership can change with new tasks, generation seeds or a larger response budget. An independent evaluation would fix the policy-selection rule and distinguish changes to the maximum response horizon from changes to the stopping rule within that horizon.
+-
+-## 5.10 Online conclusions
+-
+-The online work establishes a causal runtime interface, direct control over future response scheduling, and reproducible measurements of decision cost and answer-cost trade-offs. The live and replay results have distinct roles. Live events demonstrate actual avoided generation; replay provides broader development comparisons on a shared stored panel; constructed tests verify the event contract.
+-
+-The learned policy selects response two on every live task, yielding a measured budget reduction with no demonstrated adaptive advantage over fixed two. Weak absolute accuracy and broad paired intervals limit the answer-quality conclusion. Independent calibration, stronger baselines and larger task panels are needed to assess whether prefix prediction contributes useful adaptation beyond this fixed budget.
++The displayed set is panel-specific and may change with tasks, generation seeds or response budgets. Independent evaluation must freeze policy selection and distinguish a changed maximum horizon from a changed stopping rule within it.
+</pre></details><details><summary>ThesisDocs/chapters/chapter6_discussion.md</summary><pre>diff --git a/ThesisDocs/chapters/chapter6_discussion.md b/ThesisDocs/chapters/chapter6_discussion.md
+index 5f1113b..9a311c4 100644
+--- a/ThesisDocs/chapters/chapter6_discussion.md
++++ b/ThesisDocs/chapters/chapter6_discussion.md
+@@ -2,64 +2,60 @@
+ 
+ ## 6.1 Scientific interpretation
+ 
+-The central finding is that another reasoning increment has an uncertain and cost-dependent value. A question can benefit from revision, suffer a later answer corruption, or remain unchanged while consuming computation. The exact binary-transition decomposition makes these cases measurable. The optimal-stopping formulation explains why their relevance depends on future opportunities as well as the next step.
++Continuation can repair an answer, corrupt it or consume computation without sufficient improvement. The binary-transition decomposition measures these changes, while optimal stopping values future opportunities beyond the next increment. A population curve mixes difficulty, models and sampling outcomes; its crossing alone need not identify the best action for every prefix.
+ 
+-This combination supports a stopping problem, but not a universal stopping step. A panel curve mixes question difficulty, model configurations, and sampling outcomes. Even a stable population crossing need not identify the best decision for each prefix. A deployed system needs a conditional predictor, a continuation model, or an explicitly acknowledged heuristic. Its performance must be measured under the information available at runtime.
+-
+-The distinction is also practical. A simple fixed-step policy can satisfy causal execution and save tokens without claiming to recognize correctness. A more elaborate detector may rank answers well while consuming peer or scoring computation that offsets some savings. Complexity is justified by its measured contribution to the final objective, not by the sophistication of its architecture.
++Runtime allocation therefore needs a conditional predictor, a continuation model or an acknowledged heuristic evaluated using permitted information. A fixed-step policy can save tokens without recognizing correctness; a richer detector must justify its additional scoring or peer cost through measured improvement in the final objective.
+ 
+ ## 6.2 Correctness labels and mathematical validity
+ 
+-The observable correctness state is defined by a reference grader. It is not a direct observation of mathematical understanding. Numeric extraction can fail on wording, symbolic equivalence can fail on domain assumptions, and an MCQ option can be parsed correctly while its rationale is wrong. These issues can affect both training targets and estimates of repair and corruption.
++Grader-defined correctness measures reference agreement rather than mathematical understanding. Wording can defeat numeric extraction, domain restrictions can affect symbolic equivalence, and a correct MCQ option can accompany a wrong rationale. These errors affect training targets and repair/corruption estimates.
+ 
+-The regression tests improve confidence in particular parser behaviors, but a comprehensive label-validity claim would require stratified human adjudication or an independent trusted verifier. Difficult symbolic cases deserve disproportionate attention because surface normalization may identify expressions that differ on an excluded domain or fail to identify mathematically equivalent expressions. The audit should distinguish parsing failure, benchmark-reference issues, and genuine reasoning errors.
++Regression tests cover specified parser behaviors. Broader validity requires stratified human adjudication or an independent trusted verifier. Symbolic normalization can merge expressions with different domain restrictions or miss equivalent ones; an audit should distinguish parsing failures, reference issues and reasoning errors.
+ 
+-The primary tournament analysis uses the archived labels. The prefix predictor uses the separately documented candidate reconstruction and training-target regrading in Section 5.7. The post-review grader changes are also versioned separately: their audit found unchanged final-answer labels in all four live panels, while preserving the original corpus and numerical summaries. A different label definition would change the estimand and would require a separate row-level audit and recomputation of dependent results.
++The tournament retains archived labels; Section 5.7 separately versions reconstructed predictor targets and regrading. The post-review grader audit preserves final-answer labels in all four live panels and the original corpus summaries. A changed label definition changes the estimand and requires a row-level audit and recomputation of dependent results.
+ 
+ ## 6.3 Theory and deployable beliefs
+ 
+-The correctness posterior, repair probability, and corruption probability are conditional expectations under the true data-generating distribution. A fitted classifier is an estimate of one of those quantities only under additional assumptions about its inputs, training target, sampling distribution, and calibration. A model trained with class-balanced loss can be useful for ranking while targeting a reweighted distribution rather than the natural deployment posterior.
++Correctness, repair and corruption probabilities are conditional expectations under the true data-generating distribution. Interpreting a classifier as their estimate requires assumptions about inputs, targets, sampling and calibration. Class-balanced loss can support ranking while targeting a reweighted distribution instead of the deployment posterior.
+ 
+-The theorem in Chapter 2 does not certify those estimates. It states what an optimal policy would do if the relevant conditional expectations were known. The finite-system checks verify algebra and dynamic-programming behavior on specified examples. They do not turn an estimated model on a development corpus into the true conditional continuation law of an unseen language-model deployment.
++Chapter 2 characterizes optimal decisions when the relevant conditional expectations are known; it does not certify fitted estimates. Finite-system checks verify specified algebra and dynamic programs, without establishing the true continuation law of an unseen deployment.
+ 
+-Similarly, a confidence interval over questions differs from a confidence sequence along a single reasoning trajectory. The former describes a population estimator under a resampling design. The latter requires a valid sequential concentration or martingale construction for observations generated by the actual process. The reported intervals therefore support population comparisons under their stated assumptions, without a per-instance error guarantee.
++Question-level confidence intervals describe population comparisons under their sampling or resampling assumptions. A confidence sequence along one reasoning trajectory instead requires a valid sequential concentration or martingale construction for that process. The reported intervals provide no per-instance error guarantee.
+ 
+ ## 6.4 Generalization and adaptation
+ 
+-The project contains a broad but fixed panel of models and domains. A single generation seed per setting leaves seed variability largely unmeasured. Benchmark questions may have appeared during language-model pretraining, and task-held-out detector folds cannot eliminate that possibility. The collection&#x27;s revision prompts, temperatures, response limits, and grading conventions further define the population to which its results apply.
++One generation seed per setting leaves seed variability largely unmeasured in the fixed model/domain panel. Task-held-out detector folds cannot rule out benchmark exposure during language-model pretraining. Revision prompts, temperatures, response limits and grading conventions also define the population to which these results apply.
+ 
+-Repeated algorithm development on the same corpus introduces selection effects. Even an outer task holdout can become a development set when many configurations are repeatedly compared and the best result determines the next experiment. A final confirmatory study needs a frozen policy, a locked feature contract, and an untouched evaluation panel. Its report should record any deviations from the prespecified experiment.
++Repeated configuration comparisons can turn an outer task holdout into a development set. Confirmation requires a frozen policy and feature contract, an untouched evaluation panel, and recorded deviations from the prespecified experiment.
+ 
+-Several development safeguards have already been implemented and exercised: strict task-grouped baselines, matched peer-feature ablations, fixed-budget controls, and versioned grader audits. Their completed results are evidence for the documented retrospective and protocol-specific conclusions. An additional fresh collection is needed only when the claim requires independent prospective validation, such as a calibrated deployed peer-fleet stopping benefit. It is not necessary to recollect the existing corpus to report its qualified findings. Historical seed terminology also requires care: independently seeded training or repeated resampling is distinct from independently generated model-response trajectories.
++Strict task-grouped baselines, matched peer ablations, fixed-budget controls and grader audits support the qualified retrospective and protocol-specific findings. Fresh collection is needed for claims requiring independent prospective validation, including calibrated peer-fleet benefit. Independent training seeds or resampling do not constitute independently generated response trajectories.
+ 
+-Domain stress tests already suggest that transfer is weaker than pooled internal evaluation. GPQA is a limiting domain in the stored causal sequence results. A new benchmark, another model family, or an adversarial prompt distribution can shift the meaning of confidence and agreement. Deployment requires monitoring and reevaluation rather than assuming the four-domain panel establishes indefinite generalization.
++GPQA&#x27;s weak causal sequence results expose domain variation masked by pooled scores. New benchmarks, model families or adversarial prompts can change confidence and agreement signals, requiring monitoring and reevaluation beyond the four-domain panel.
+ 
+ ## 6.5 Costs beyond completion tokens
+ 
+-Completion-token reduction is a useful direct measure when a controller prevents responses from being generated. It is still only part of total inference cost. Repeated prompt processing, verifier forward passes, peer-model generations, batching effects, synchronization, network delay, and controller execution all contribute. Wall time and energy need direct instrumentation if they are the claimed outcomes.
++Avoided completion tokens measure one part of inference cost. Prompt processing, verifier passes, peer generation, batching, synchronization, network delay and controller execution also contribute. Wall-time and energy claims require direct instrumentation.
+ 
+-Peer agreement particularly changes the comparison. If the baseline generates one model and the stopping system launches thirteen models, a shorter target trajectory may nevertheless cost more in aggregate. Peer signals are valid runtime information only after the peers have produced them, and their generation cost must be charged. A synchronized panel and an asynchronous deployment are different policies with different latency and cost.
++Thirteen peers can make a shorter target trajectory more costly than a single-model baseline. Their outputs become available only after generation, whose cost must be charged. Synchronization and asynchronous scheduling further change the policy, latency and cost.
+ 
+-The controller latency benchmarks measure decisions on already available observations. The learned benchmark includes prefix feature extraction, both probability heads, calibration and drift calculation. They exclude model loading, response generation, tokenization, peer waits and network communication. An under-ten-millisecond decision satisfies the measured engineering target, but cannot by itself imply that total response time is unchanged.
++Controller timings cover available observations, including learned feature extraction, both heads, calibration and drift. They exclude loading, generation, tokenization, peer waits and network communication. Meeting the under-ten-millisecond decision target does not establish unchanged total response time.
+ 
+ ## 6.6 Adversarial behavior and answer selection
+ 
+-A stable answer can be stably wrong. Several models can agree because they share a misleading interpretation. A correct first answer can be replaced at the mandatory second step. A trajectory can look unpromising for several increments and then repair. These cases are useful adversarial tests because they challenge different assumptions behind a stopping heuristic.
++Shared misconceptions can create stable, confident agreement. Mandatory continuation can replace a correct first answer, while an apparently unpromising trajectory can later repair. These cases challenge different heuristic assumptions.
+ 
+-The software tests use constructed prefixes to check the decision contract and failure behavior. The live evaluation uses twenty prespecified trap questions, independently checked answer keys, and measured generation costs. These provide complementary evidence about software behavior and model responses. The small, hand-selected bank does not estimate performance across the broader distribution of adversarial mathematical prompts.
++Constructed-prefix tests check software contracts; the twenty prespecified traps use independently checked keys and measured generation costs to test model responses. This complementary evidence does not make the small handpicked bank representative of broader adversarial prompts.
+ 
+-The deployed baseline and learned policy select the latest nonempty candidate; the heuristic also permits the causal retention branches described in Section 5.2. Those branches were absent in the actual panels. Stopping and answer selection remain distinct interventions: retaining a previous candidate can recover an answer lost during mandatory continuation, but its benefit depends on a selector that uses only permitted prefix information. A richer candidate selector warrants a separate comparison; selecting the correct candidate from reference labels defines an oracle comparator.
++Baseline and learned policies select the latest nonempty candidate. The heuristic&#x27;s retention branches (Section 5.2) did not fire in the live panels. Retaining an earlier answer is a distinct intervention that can recover a candidate lost during mandatory continuation; its selector must use permitted prefix information. A richer selector needs a separate comparison, while reference-guided selection is an oracle.
+ 
+ ## 6.7 Evidence needed for stronger claims
+ 
+-To establish a claim of savings without meaningful accuracy loss, the experiment needs a prespecified noninferiority margin, a justified sample size, and a paired evaluation of a frozen policy against the full-horizon baseline. A confidence interval must exclude losses larger than that margin; an observed zero difference is insufficient. Independent evaluation tasks and generation seeds would strengthen transfer and reproducibility evidence.
++Accuracy-preserving savings require a prespecified noninferiority margin, justified sample size and paired evaluation of a frozen policy against the full horizon. The confidence interval must exclude losses beyond that margin; observed equality is insufficient. Independent tasks and generation seeds strengthen transfer and reproducibility evidence.
+ 
+-To establish an optimal learned boundary, the state representation and estimated transition law need support. A one-dimensional correctness estimate is not automatically sufficient for all future revision dynamics. Demonstrating predictive sufficiency would require showing that omitted prefix information does not materially improve the relevant continuation prediction under the target distribution. The general full-history formulation accommodates this dependence without assuming scalar-state sufficiency.
++An optimal learned boundary needs a supported state representation and transition law. A scalar correctness estimate need not summarize future revision dynamics; predictive sufficiency requires showing that omitted prefix information does not materially improve continuation prediction under the target distribution. The full-history formulation avoids assuming scalar sufficiency.
+ 
+-To establish numerical reproducibility of a historical tournament, the original training environment, feature construction, split membership, fitted artifacts, and stochastic controls need to be recovered or rerun. The data freeze and current environment lock identify the available corpus and software profiles; unavailable historical training details remain a limitation. A re-analysis with a fully captured new environment would constitute a separately versioned experiment.
++Historical reproduction requires original features, splits, fits, software and stochastic controls. The freeze and current environment lock identify available artifacts, without reconstructing missing training details. Reanalysis under a fully captured new environment is a separately versioned experiment.
+ 
+ ## 6.8 Conclusion
+ 
+-Cost-aware stopping offers a precise way to study useful and harmful continuation in reasoning models. The project&#x27;s experiments show model- and domain-dependent trade-offs, demonstrate the importance of matched comparisons and causal feature availability, and expose the limits of retrospective detector scores. The mathematical formulation supplies a valid general optimum and a clear explanation of when simpler drift rules can fail.
+-
+-The resulting controller executes prefix-only decisions in the measured live experiments. The thesis&#x27;s strongest conclusion is conditional and operational: computation should be allocated according to the expected value of permitted continuation, and the evidence for that allocation must jointly report answer quality, incurred cost, and the information available at the decision. Stronger universal or safety claims require independent experiments.
++Useful continuation depends on the model, domain and assigned cost. The controlled comparisons show that better ranking or added calibration need not improve stopping utility. General optimal stopping requires conditional continuation values; myopic drift rules need additional structure and fail in the counterexamples. The live prototype prevents further generation, but every learned live task stops at step two: its savings demonstrate a reduced fixed budget, without demonstrated adaptive advantage. Weak absolute accuracy and broad paired intervals leave accuracy noninferiority unestablished. Broader claims require independent validation and full accounting for prompt processing, peers, verifiers and controller cost.
+</pre></details><details><summary>ThesisDocs/appendices.md</summary><pre>diff --git a/ThesisDocs/appendices.md b/ThesisDocs/appendices.md
+index 74485ac..762b233 100644
+--- a/ThesisDocs/appendices.md
++++ b/ThesisDocs/appendices.md
+@@ -1,66 +1,14 @@
+ # Appendix A Reproducibility and evidence sources
+ 
+-The empirical results have two software profiles. The original research snapshot is preserved at revision `09225c95c676ab3cae1c4b9586d74f7f803f519f` with `data_manifest_v1.json`. Revision `6e4378bef9a98037c20d1381eb9c7b61462a6578` contains the subsequent software review and `data_manifest_post_review_v1.json`. The latter changes validation, grading and controller input handling while preserving the original corpus, fitted predictor, generation ledgers and reported results. Each live manifest additionally binds the exact executed source copies in its `locked_code` directory.
+-
+-The following PowerShell commands create detached checkouts and new analysis directories outside the frozen result folders. Run them from a clone containing the recorded evidence, using a Python analysis environment described by `software_provenance_v1.json`. The historical tournament environment is only partially recorded; these commands verify and reanalyse saved data rather than regenerate the original model corpus.
+-
+-```powershell
+-$historicalRevision = `
+-  &quot;09225c95c676ab3cae1c4b9586d74f7f803f519f&quot;
+-$reviewedRevision = `
+-  &quot;6e4378bef9a98037c20d1381eb9c7b61462a6578&quot;
+-$scratch = Join-Path $env:TEMP `
+-  (&quot;stopping-thesis-&quot; + [guid]::NewGuid().ToString(&quot;N&quot;))
+-New-Item -ItemType Directory -Path $scratch | Out-Null
+-$historical = Join-Path $scratch &quot;historical&quot;
+-git worktree add --detach $historical $historicalRevision
+-Push-Location $historical
+-python tools/freeze_research_data.py verify `
+-  --manifest data_manifest_v1.json `
+-  --allow-line-ending-changes
+-python research/tests/test_graders.py
+-python research/tests/test_boundary_floor.py
+-python -m pytest `
+-  research/tests/test_graders.py `
+-  research/tests/test_mathematical_foundations.py `
+-  research/tests/test_data_freeze.py `
+-  research/tests/test_online_controller.py `
+-  research/tests/test_online_replay_accounting.py `
+-  research/tests/test_prefix_stopping_model.py `
+-  research/tests/test_learned_online_controller.py `
+-  research/tests/test_live_uncertainty.py -q
+-python tools/recompute_thesis_evidence.py `
+-  --output-dir (Join-Path $scratch &quot;tables&quot;)
+-$liveCopies = Join-Path $scratch &quot;live-panels&quot;
+-Copy-Item -LiteralPath `
+-  &quot;research/outputs/semester2/online_stopping_20261002&quot; `
+-  -Destination $liveCopies -Recurse
+-$panels = @($liveCopies, `
+-  (Join-Path $liveCopies &quot;adversarial_live&quot;), `
+-  (Join-Path $liveCopies &quot;learned_main&quot;), `
+-  (Join-Path $liveCopies &quot;learned_adversarial&quot;))
+-python tools/analyze_live_stopping_uncertainty.py @panels
+-Pop-Location
+-
+-$reviewed = Join-Path $scratch &quot;reviewed&quot;
+-git worktree add --detach $reviewed $reviewedRevision
+-Push-Location $reviewed
+-python tools/freeze_research_data.py verify `
+-  --manifest data_manifest_post_review_v1.json `
+-  --allow-line-ending-changes
+-python research/tests/test_graders.py
+-python tools/verify_post_review_behavior.py `
+-  --output-dir (Join-Path $scratch &quot;review-behavior&quot;)
+-Pop-Location
+-```
+-
+-The historical grader receipt contains thirty cases, whereas the revised grader exposes ninety-eight tests. The recorded verification receipts contain 107 passing tests for the historical research suite and 243 for the broader post-review repository suite. These counts refer to their named source versions. The post-review behavior check reproduces all 480 saved decision histories across the four live collections and audits copied ledgers; it performs no model generation or latency measurement. The repeated baseline rows in the learned collections do not constitute additional generations.
+-
+-The uncertainty command writes only into the copied panels, and the table entry point receives an explicit scratch output path. New generation experiments require the documented model snapshot, task allocation, policy and generation settings, together with a fresh result directory. The manuscript build manifests record the rendering dependencies, including the pinned KaTeX package and local browser engine.
++The original research profile is fixed at revision `09225c95c676ab3cae1c4b9586d74f7f803f519f` by `data_manifest_v1.json`. The post-review profile at `6e4378bef9a98037c20d1381eb9c7b61462a6578` uses `data_manifest_post_review_v1.json` for revised grading, controller validation and behavior checks. Both preserve the collected corpus, fitted predictor and recorded generation outcomes. Each live manifest binds the sources actually executed in its `locked_code` directory.
+ 
+ [[EVIDENCE_TABLE]]
+ 
+-The standardized tournament manifest lists the mandatory fifty-two trace files. Supporting evidence adds the matrix, paired arms, cached estimator comparisons, stored OOF predictions, analysis implementations, and newly collected events. This source selection is explicit, so a reader can distinguish a fingerprint of selected evidence from a census of every incidental file in the repository.
++The electronic supplement, `ThesisDocs/formal/supplements/v5/reproduction_and_history.txt`, gives commands for detached checkouts, data verification and isolated reanalysis. Verification uses `tools/freeze_research_data.py`; `tools/recompute_thesis_evidence.py` reconstructs tables, and `tools/verify_post_review_behavior.py` checks saved controller behavior. Analysis outputs go to new scratch directories, and uncertainty analysis operates on copied live panels.
++
++The recorded receipts distinguish thirty historical grader cases from ninety-eight revised tests, and 107 passing historical-suite tests from 243 post-review repository tests. Saved-prefix verification reproduces 480 decision histories across four live collections; reused baseline rows are not additional generations. These counts identify their source versions, rather than measuring corpus-wide label validity.
++
++The fifty-two standardized trace files are mandatory freeze inputs. Supporting evidence includes the variable-horizon matrix, paired study arms, stored predictions and live event ledgers. Exact-byte and canonical-LF hashes identify selected evidence; they do not establish bit-identical regeneration of the partially recorded historical GPU environment. The current authoring manifests separately identify the rendering environment and exact PDF bytes.
+ 
+ # Appendix B Claim scope and mathematical review
+ 
+@@ -78,46 +26,23 @@ The standardized tournament manifest lists the mandatory fifty-two trace files.
+ | No meaningful accuracy loss | Prespecified tolerance and adequate paired confidence interval | Not inferred merely from observed equality |
+ | Grader regression coverage | Versioned test inputs and execution receipts | Thirty historical cases and ninety-eight revised tests cover specified parser behaviors; corpus-wide validity requires separate adjudication |
+ 
+-The proof audit explicitly checks the filtration, hidden correctness target, measurability of stopping events, finite-horizon integrability, cost accounting, and the difference between conditional beliefs and sample averages. Exact finite-system tests supplement those proofs by checking enumerated policy values and counterexamples. Neither a test suite nor a plot substitutes for a general mathematical argument.
+-
+-# Appendix C Supporting research artifacts
+-
+-The research is accompanied by a prepared twenty-five-page paper, an anonymous conference manuscript with a technical appendix, and a native twenty-five-slide presentation with thirty minutes of speaker notes. The presentation contains thirteen editable tables and three native charts. These artifacts communicate the mathematical argument and the frozen empirical results in formats suited to review and presentation.
+-
+-The preserved eighty-six-page historical v1 archival candidate has a byte-bound veraPDF report confirming PDF/A-2b conformance. Its validation establishes the document-format result for those bytes. An oral defense and institutional deposit are separate events and are not recorded by this research evidence.
++# Appendix C Paired accuracy uncertainty
+ 
+-# Appendix D Paired accuracy uncertainty
++For iid task pairs, let $I$ indicate an incorrect baseline answer paired with a correct active answer, and $W$ a correct baseline answer paired with an incorrect active answer. The accuracy difference is $\delta=\pi_I-\pi_W$, where $\pi_I=\Pr(I=1)$ and $\pi_W=\Pr(W=1)$. The indicators are mutually exclusive within a task; their independence is not assumed.
+ 
+-For a task sampled under a common independent and identically distributed task law, let $I$ indicate an incorrect baseline answer repaired by the active policy and let $W$ indicate a correct baseline answer corrupted by it. The population accuracy difference is $\delta=\pi_I-\pi_W$, where $\pi_I=\Pr(I=1)$ and $\pi_W=\Pr(W=1)$. The two indicators are mutually exclusive within a task; the analysis does not assume their independence.
+-
+-Across $n$ independent task pairs, each marginal discordance count is binomial. Construct an exact two-sided 97.5% Clopper–Pearson interval $[L_I,U_I]$ for $\pi_I$ and a separate interval $[L_W,U_W]$ for $\pi_W$ [Clopper1934]. Each interval has noncoverage probability at most 0.025. The union bound therefore gives simultaneous coverage at least 0.95, irrespective of the dependence between the two counts. On that event, subtraction yields
++Across $n$ independent pairs, each marginal discordance count is binomial. Exact two-sided 97.5% Clopper-Pearson intervals $[L_I,U_I]$ for $\pi_I$ and $[L_W,U_W]$ for $\pi_W$ each have noncoverage probability at most 0.025 [Clopper1934]. A union bound gives simultaneous coverage at least 0.95 regardless of dependence between the counts. Subtraction yields
+ 
+ $$\delta\in[L_I-U_W,\ U_I-L_W].$$
+ 
+-This is the conservative 95% paired interval reported for the live panels. Exact finite multinomial outcome enumeration supplements the coverage argument; it does not replace the binomial assumptions. With no observed discordances, both marginal lower bounds are zero and both upper bounds equal $1-0.0125^{1/n}$. Thus observed equality gives a nonzero uncertainty interval, rather than evidence of exact equivalence. No accuracy tolerance or noninferiority hypothesis was prespecified.
+-
+-The twenty hand-selected adversarial tasks are a fixed challenge bank. An interval calculated using an independent-task reference model does not provide randomized coverage for an adversarial population. Completion-token intervals instead use a paired task bootstrap of the ratio of total token differences to total baseline tokens. These are descriptive resampling intervals, rather than exact finite-sample certificates.
+-
+-# Appendix E Completed research and evidence scope
++This is the conservative 95% paired interval in the live tables. Exact multinomial enumeration supplements the binomial coverage argument. With no discordances, both lower bounds are zero and both upper bounds equal $1-0.0125^{1/n}$. Observed equality therefore leaves nonzero uncertainty; no noninferiority tolerance or hypothesis was prespecified.
+ 
+-The repository history at GitHub main revision `6e4378b` contains 484 reachable commits, including 159 that change code and 287 that change research outputs or reports; these categories overlap and merge paths include differences against every parent. The full local history has 600 reachable commits, including 116 retained outside the current main ancestry. Those historical copies are not additional independent experiments. The repository review inventory records every commit and changed path, while the code and artifact audits distinguish an implemented capability, a completed experiment, a rejected variant, and a prospective claim.
++The twenty handpicked traps form a fixed challenge bank, so the iid-reference interval gives no randomized adversarial-population coverage. Completion-token intervals bootstrap paired tasks and the ratio of total token differences to baseline tokens; these are descriptive resampling intervals.
+ 
+-**Table 17. Completed research and remaining evidence scope.**
+-
+-| Study component | Existing evidence | Interpretation |
+-| --- | --- | --- |
+-| Mathematical formulation | Finite-horizon proofs, counterexamples and exact-system checks | Completed mathematical analysis |
+-| Main response corpora | Thirteen-model panels; 798,770 raw matrix rows and 144,440 standardized rows | Completed collections with separately defined populations |
+-| Controlled policy studies | Floor, stakes, threshold, hazard, lag, token-cap and precision contrasts | Completed development experiments, including negative findings |
+-| Label and software audits | Historical grader checks, reconstructed predictor targets and live-ledger replay | Completed checks with their stated label and source-version scope |
+-| Strict prediction baselines | Task-grouped tabular and text models; held-out fixed-budget comparisons | Completed retrospective evaluations |
+-| Peer and selected-answer models | Anonymous matched ablations, fixed-roster sensitivity and selected-candidate scores | Completed historical studies; peer executable-source provenance is partial |
+-| Actual stopping execution | Four single-model paired collections; latency and physical cost ledgers | Completed live prototype experiments |
+-| Prospective peer fleet | Collector and audit code; small schema/accounting smoke ledgers | Capability exists; a substantial confirmation collection is not recorded |
++# Appendix D Retrospective prediction analyses
+ 
+-The controlled studies and negative results were not merely proposed. Commits `2660d40`, `d2a42e8`, `1f2e445`, `cca2113`, and later algorithm-v2 work record executed analyses. Commit `a9bf282` includes the anonymous peer-feature result and its evidence brief. Commit `fa1c653` adds the canonical proof and actual single-model stopping package; `6e4378b` strengthens grading and saved-ledger verification. Some strict and selected-answer result bundles are retained locally without being committed; their source hashes, saved predictions, fold coverage, and status were checked separately. Directories marked rejected or incomplete are excluded from the qualified results below.
++Table 17 distinguishes row-level correctness from correctness of one causally selected answer per closed barrier. The endpoints and eligible populations differ, so the scores do not form a common architecture ranking.
+ 
+-**Table 18. Additional completed retrospective prediction analyses.**
++**Table 17. Additional retrospective prediction analyses.**
+ 
+ | Analysis | Units and tasks | Saved OOF AUC | Endpoint |
+ | --- | --- | --- | --- |
+@@ -130,21 +55,21 @@ The controlled studies and negative results were not merely proposed. Commits `2
+ | Selected answer without timing | 14,740 decisions; 2,948 tasks | 0.934350 | Selected-candidate correctness |
+ | Selected causal dynamics | 14,740 decisions; 2,948 tasks | 0.937037 | Selected-candidate correctness |
+ 
+-The strict baseline AUCs and both paired peer comparisons were recomputed directly from saved predictions, with their task-fold memberships and source-corpus hashes checked. The anonymous peer delta is 0.009328, with a recorded paired task-bootstrap interval [0.008028, 0.010639]. The fixed-roster delta is 0.008743, with interval [0.006653, 0.010882]. These are resampling intervals for the archived panel. The selected-answer source and five-fold checkpoint coverage were checked; their endpoint is one selected answer per closed barrier. The strict baseline probabilities include their original task-disjoint calibration; the peer and selected-answer rows use original uncalibrated outputs. No additional reporting calibration was applied to the persisted scores for this check.
++The strict baseline and paired peer scores were recomputed from saved predictions, with source hashes and task-fold memberships checked. The anonymous peer lift is 0.009328, with paired task-bootstrap interval [0.008028, 0.010639]; the fixed-roster lift is 0.008743, with interval [0.006653, 0.010882]. These intervals describe the archived panels. Selected-answer source and five-fold checkpoint coverage were also checked.
+ 
+-The strict baseline and selected-answer source hashes match retained code. In contrast, the legacy peer runner and feature-module hashes do not match any recovered Git version, including line-ending reconstructions; the common base script does resolve to the recorded July commit. The saved peer prediction arrays are auditable, but exact reproduction of the original executable feature pipeline remains incomplete. This qualification applies to both full-corpus and fixed-roster peer scores in Table 18.
++Strict baseline probabilities include the original task-disjoint calibration. Peer and selected-answer scores use original uncalibrated outputs; this check applies no additional reporting calibration. The later reporting calibrators use previously computed out-of-fold scores across folds and are not fully nested, so their Brier and ECE summaries are diagnostic.
+ 
+-The historical peer candidate has no assigned stopping threshold in its evidence brief. Its full-horizon observational collector and small smoke ledgers do not establish a calibrated live fleet policy or avoided peer generation. Those claims would require a separately frozen and executed study. Likewise, a historical stress-report label of &quot;multi-seed&quot; describes resampling of fixed predictions, and one long-horizon report labels a step-at-least-four analysis as step-at-least-six. These report labels do not establish additional generation. Qualified archived results and the actual single-model ledgers remain usable without recollecting the corpus.
++Strict-baseline and selected-answer source hashes match retained code. The legacy peer runner and feature-module hashes do not match any recovered Git version, including line-ending reconstructions, although their common base script resolves to the recorded July commit. The saved arrays and paired folds are auditable; exact reproduction of the executed peer-feature pipeline remains incomplete. This qualification covers both peer populations in Table 17.
+ 
+-The current record supports a mathematical formulation, controlled empirical findings, honest failure analysis, and an inspectable live prototype. Broader calibration, accuracy-preservation and cross-model prospective claims have separate evidence requirements. Their absence is a limit on those stronger claims, rather than a requirement to repeat every completed experiment.
++The historical peer candidate has no assigned stopping threshold. Its full-horizon collector and small smoke ledgers establish neither calibrated prospective fleet stopping nor avoided peer generation. The electronic supplement records the development history and distinguishes reused predictions from independently generated trajectories.
+ 
+-# Appendix F Information flow and delayed repair diagrams
++# Appendix E Information flow and delayed repair diagrams
+ 
+ ![Offline fitting and runtime information flow](images/thesis_v4/information_flow.png)
+ 
+ **Figure 5. Offline fitting and runtime information flow.** Reference labels enter fitting and evaluation offline; runtime decisions receive observed prefixes and frozen parameters. The continuation loop incurs additional generation cost. This schematic describes the information contract and does not assert a Bellman-optimal fitted controller or an executed peer fleet.
+ 
+-The fitted single-model controller estimates current and next selected-answer correctness and uses a one-step drift rule, with a declared response floor and horizon. The general theorem instead uses conditional multi-step continuation value. Their distinct requirements explain why runtime correctness, probability calibration, and policy optimality require different evidence.
++The fitted single-model controller estimates current and next selected-answer correctness and uses a one-step drift rule, with a declared response floor and horizon. The general theorem instead uses conditional multi-step continuation value.
+ 
+ ![Decision tree for the delayed-repair counterexample](images/thesis_v4/delayed_repair_tree.png)
+ 
+</pre></details></html>

@@ -1,0 +1,108 @@
+Electronic reproduction and historical evidence supplement for formal thesis v5
+
+This supplement retains workflow instructions and dated status detail moved out of the concise scientific manuscript. It accompanies the preserved v4 publication and the v5 revision; no new model generation or training was performed. The scientific result tables, uncertainty derivation and substantive provenance limits remain in the thesis.
+
+# Appendix A Reproducibility and evidence sources
+
+The empirical results have two software profiles. The original research snapshot is preserved at revision `09225c95c676ab3cae1c4b9586d74f7f803f519f` with `data_manifest_v1.json`. Revision `6e4378bef9a98037c20d1381eb9c7b61462a6578` contains the subsequent software review and `data_manifest_post_review_v1.json`. The latter changes validation, grading and controller input handling while preserving the original corpus, fitted predictor, generation ledgers and reported results. Each live manifest additionally binds the exact executed source copies in its `locked_code` directory.
+
+The following PowerShell commands create detached checkouts and new analysis directories outside the frozen result folders. Run them from a clone containing the recorded evidence, using a Python analysis environment described by `software_provenance_v1.json`. The historical tournament environment is only partially recorded; these commands verify and reanalyse saved data rather than regenerate the original model corpus.
+
+```powershell
+$historicalRevision = `
+  "09225c95c676ab3cae1c4b9586d74f7f803f519f"
+$reviewedRevision = `
+  "6e4378bef9a98037c20d1381eb9c7b61462a6578"
+$scratch = Join-Path $env:TEMP `
+  ("stopping-thesis-" + [guid]::NewGuid().ToString("N"))
+New-Item -ItemType Directory -Path $scratch | Out-Null
+$historical = Join-Path $scratch "historical"
+git worktree add --detach $historical $historicalRevision
+Push-Location $historical
+python tools/freeze_research_data.py verify `
+  --manifest data_manifest_v1.json `
+  --allow-line-ending-changes
+python research/tests/test_graders.py
+python research/tests/test_boundary_floor.py
+python -m pytest `
+  research/tests/test_graders.py `
+  research/tests/test_mathematical_foundations.py `
+  research/tests/test_data_freeze.py `
+  research/tests/test_online_controller.py `
+  research/tests/test_online_replay_accounting.py `
+  research/tests/test_prefix_stopping_model.py `
+  research/tests/test_learned_online_controller.py `
+  research/tests/test_live_uncertainty.py -q
+python tools/recompute_thesis_evidence.py `
+  --output-dir (Join-Path $scratch "tables")
+$liveCopies = Join-Path $scratch "live-panels"
+Copy-Item -LiteralPath `
+  "research/outputs/semester2/online_stopping_20261002" `
+  -Destination $liveCopies -Recurse
+$panels = @($liveCopies, `
+  (Join-Path $liveCopies "adversarial_live"), `
+  (Join-Path $liveCopies "learned_main"), `
+  (Join-Path $liveCopies "learned_adversarial"))
+python tools/analyze_live_stopping_uncertainty.py @panels
+Pop-Location
+
+$reviewed = Join-Path $scratch "reviewed"
+git worktree add --detach $reviewed $reviewedRevision
+Push-Location $reviewed
+python tools/freeze_research_data.py verify `
+  --manifest data_manifest_post_review_v1.json `
+  --allow-line-ending-changes
+python research/tests/test_graders.py
+python tools/verify_post_review_behavior.py `
+  --output-dir (Join-Path $scratch "review-behavior")
+Pop-Location
+```
+
+The historical grader receipt contains thirty cases, whereas the revised grader exposes ninety-eight tests. The recorded verification receipts contain 107 passing tests for the historical research suite and 243 for the broader post-review repository suite. These counts refer to their named source versions. The post-review behavior check reproduces all 480 saved decision histories across the four live collections and audits copied ledgers; it performs no model generation or latency measurement. The repeated baseline rows in the learned collections do not constitute additional generations.
+
+The uncertainty command writes only into the copied panels, and the table entry point receives an explicit scratch output path. New generation experiments require the documented model snapshot, task allocation, policy and generation settings, together with a fresh result directory. The manuscript build manifests record the rendering dependencies, including the pinned KaTeX package and local browser engine.
+
+**Table 15. Claim evidence sources.**
+
+| Claim or output | Authoritative repository source |
+| --- | --- |
+| Tournament corpus | data_manifest_v1.json and ultimate_tournament_manifest.json |
+| Boundary and matched effects | research/outputs/thesis_v1/evidence/*.csv |
+| Proofs and exact finite checks | research/mathematical_foundations.md; test_mathematical_foundations.py |
+| Controller execution | online_stopping_controller.py; online_generation.py |
+| Latency and replay | research/outputs/semester2/online_stopping_20261002/ |
+| Adversarial bank | research/adversarial_tasks_v1.jsonl; adversarial_gold_v1.jsonl |
+| Archived policy failures | research/reports/thesis_failure_audit_v1/audit_summary.json |
+| Deployable prefix predictor | research/outputs/semester2/prefix_model_v1/ |
+| PDF authoring | tools/build_master_thesis.py; tools/render_thesis_math.mjs |
+
+The standardized tournament manifest lists the mandatory fifty-two trace files. Supporting evidence adds the matrix, paired arms, cached estimator comparisons, stored OOF predictions, analysis implementations, and newly collected events. This source selection is explicit, so a reader can distinguish a fingerprint of selected evidence from a census of every incidental file in the repository.
+
+# Historical v4 supporting-artifact note
+
+The research is accompanied by a prepared twenty-five-page paper, an anonymous conference manuscript with a technical appendix, and a native twenty-five-slide presentation with thirty minutes of speaker notes. The presentation contains thirteen editable tables and three native charts. These artifacts communicate the mathematical argument and the frozen empirical results in formats suited to review and presentation.
+
+The preserved eighty-six-page historical v1 archival candidate has a byte-bound veraPDF report confirming PDF/A-2b conformance. Its validation establishes the document-format result for those bytes. An oral defense and institutional deposit are separate events and are not recorded by this research evidence.
+
+# Historical v4 completed-work and evidence-scope record
+
+The repository history at GitHub main revision `6e4378b` contains 484 reachable commits, including 159 that change code and 287 that change research outputs or reports; these categories overlap and merge paths include differences against every parent. The full local history has 600 reachable commits, including 116 retained outside the current main ancestry. Those historical copies are not additional independent experiments. The repository review inventory records every commit and changed path, while the code and artifact audits distinguish an implemented capability, a completed experiment, a rejected variant, and a prospective claim.
+
+Historical v4 Table 17: Completed research and remaining evidence scope
+
+| Study component | Existing evidence | Interpretation |
+| --- | --- | --- |
+| Mathematical formulation | Finite-horizon proofs, counterexamples and exact-system checks | Completed mathematical analysis |
+| Main response corpora | Thirteen-model panels; 798,770 raw matrix rows and 144,440 standardized rows | Completed collections with separately defined populations |
+| Controlled policy studies | Floor, stakes, threshold, hazard, lag, token-cap and precision contrasts | Completed development experiments, including negative findings |
+| Label and software audits | Historical grader checks, reconstructed predictor targets and live-ledger replay | Completed checks with their stated label and source-version scope |
+| Strict prediction baselines | Task-grouped tabular and text models; held-out fixed-budget comparisons | Completed retrospective evaluations |
+| Peer and selected-answer models | Anonymous matched ablations, fixed-roster sensitivity and selected-candidate scores | Completed historical studies; peer executable-source provenance is partial |
+| Actual stopping execution | Four single-model paired collections; latency and physical cost ledgers | Completed live prototype experiments |
+| Prospective peer fleet | Collector and audit code; small schema/accounting smoke ledgers | Capability exists; a substantial confirmation collection is not recorded |
+
+The controlled studies and negative results were not merely proposed. Commits `2660d40`, `d2a42e8`, `1f2e445`, `cca2113`, and later algorithm-v2 work record executed analyses. Commit `a9bf282` includes the anonymous peer-feature result and its evidence brief. Commit `fa1c653` adds the canonical proof and actual single-model stopping package; `6e4378b` strengthens grading and saved-ledger verification. Some strict and selected-answer result bundles are retained locally without being committed; their source hashes, saved predictions, fold coverage, and status were checked separately. Directories marked rejected or incomplete are excluded from the qualified scientific results in Appendix D of the v5 thesis.
+
+The historical peer candidate has no assigned stopping threshold in its evidence brief. Its full-horizon observational collector and small smoke ledgers do not establish a calibrated live fleet policy or avoided peer generation. Those claims would require a separately frozen and executed study. Likewise, a historical stress-report label of "multi-seed" describes resampling of fixed predictions, and one long-horizon report labels a step-at-least-four analysis as step-at-least-six. These report labels do not establish additional generation. Qualified archived results and the actual single-model ledgers remain usable without recollecting the corpus.
+
+The current record supports a mathematical formulation, controlled empirical findings, honest failure analysis, and an inspectable live prototype. Broader calibration, accuracy-preservation and cross-model prospective claims have separate evidence requirements. Their absence is a limit on those stronger claims, rather than a requirement to repeat every completed experiment.

@@ -1,0 +1,70 @@
+{
+  "schema": "independent-verapdf-v5-v1",
+  "created_utc": "2026-10-06T15:25:21.727745+00:00",
+  "scope": "Fresh validation of existing exact v5 PDF bytes; no document authoring, PDF export, marker or prior-receipt mutation.",
+  "editions": [
+    {
+      "edition": "digital",
+      "pdf": "output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf",
+      "pdf_sha256_before": "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+      "pdf_sha256_after": "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+      "validator_jar_sha256": "889075253fb9df4db5482efb8f8208fb3b4f2e00f5f7e1b1e31edf6fb4b69bb6",
+      "conversion_receipt_sha256": "0b4164bbc6275c9aadff92d7d26b0211e39f670c045a9985bc5b73142fa96d6d",
+      "command_arguments": [
+        "java",
+        "-Xmx1g",
+        "-jar",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\pdfa_tools\\verapdf-1.30.2\\bin\\cli-1.30.2.jar",
+        "--flavour",
+        "2b",
+        "--format",
+        "xml",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\output\\pdf\\Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf"
+      ],
+      "exit_code": 0,
+      "report": "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\formal_thesis\\v5\\independent\\final_83_88_verapdf\\independent_verapdf_digital.xml",
+      "report_sha256": "a8ef5fa99bb92ff2964195a38d86b2b89a4a60c4ecef326e9fa8f2abda364a98",
+      "validation_report_attributes": [
+        {
+          "jobEndStatus": "normal",
+          "profileName": "PDF/A-2b validation profile",
+          "statement": "PDF file is compliant with Validation Profile requirements.",
+          "isCompliant": "true"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "edition": "print",
+      "pdf": "output/pdf/Masters_Thesis_Formal_v5_Print_Aditya_Bhatt.pdf",
+      "pdf_sha256_before": "86cbbef1b8e212c6e23f8a1d7c24895adc4e82a921a1235429df05e3a75dbee6",
+      "pdf_sha256_after": "86cbbef1b8e212c6e23f8a1d7c24895adc4e82a921a1235429df05e3a75dbee6",
+      "validator_jar_sha256": "889075253fb9df4db5482efb8f8208fb3b4f2e00f5f7e1b1e31edf6fb4b69bb6",
+      "conversion_receipt_sha256": "d99be607013eab944b6265d4b0a6ba8df060d144f58b89a0184236da5c187825",
+      "command_arguments": [
+        "java",
+        "-Xmx1g",
+        "-jar",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\pdfa_tools\\verapdf-1.30.2\\bin\\cli-1.30.2.jar",
+        "--flavour",
+        "2b",
+        "--format",
+        "xml",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\output\\pdf\\Masters_Thesis_Formal_v5_Print_Aditya_Bhatt.pdf"
+      ],
+      "exit_code": 0,
+      "report": "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\formal_thesis\\v5\\independent\\final_83_88_verapdf\\independent_verapdf_print.xml",
+      "report_sha256": "bcc80bb6ca871fe3709811b2fa1bb11a800a774a4dc220e4ecca582418cfcb4d",
+      "validation_report_attributes": [
+        {
+          "jobEndStatus": "normal",
+          "profileName": "PDF/A-2b validation profile",
+          "statement": "PDF file is compliant with Validation Profile requirements.",
+          "isCompliant": "true"
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "all_pass": true
+}

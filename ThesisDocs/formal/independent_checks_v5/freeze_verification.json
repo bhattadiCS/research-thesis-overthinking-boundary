@@ -1,0 +1,13 @@
+{
+  "status": "verified",
+  "audit_mode": "canonical_lf",
+  "manifest_sha256": "00e9f04d5801dc3b8c71c96e6171a9cdfc39579c51f9855ad1ee4f94a06da23f",
+  "auxiliary_files": 688,
+  "content_fingerprint": "6e014794a68e74558683862a942ef223cdce6e1d7f66583d5e7038653b1eff1a",
+  "data_files": 52,
+  "line_ending_only_changes": [],
+  "rows": 144440,
+  "trajectories": 28888,
+  "operation": "tools/freeze_research_data.py verify --manifest data_manifest_post_review_v1.json --allow-line-ending-changes",
+  "verification_role": "Fresh post-edit frozen research verification; no generation/retraining."
+}

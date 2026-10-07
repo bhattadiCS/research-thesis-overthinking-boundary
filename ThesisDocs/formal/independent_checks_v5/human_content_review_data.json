@@ -1,0 +1,45 @@
+{
+  "schema": "formal-v5-final-frontmatter-release-source-content-review-v1",
+  "created_utc": "2026-10-06T15:35:45.075775+00:00",
+  "status": "pass",
+  "scope": "Resealed final identity binding after front-list spacing changed. All manuscript body sources and compiled content are byte-identical to the preceding final review; no new scientific review, experiments, regrading, tests or source/PDF edits.",
+  "preceding_source_review": {
+    "path": "tmp/pdfs/formal_thesis/v5/content_review_data_freeze_final_release.json",
+    "sha256": "9b2f2b315cb7d8855bccc287ec1c759c536ee95feb50beeac6e036ea04f9b170"
+  },
+  "source_hashes": {
+    "ThesisDocs/chapters/chapter1_intro.md": "14995549a7014d83771c7f97e7221ff8504b28a7d98ec179a72d27af883692cc",
+    "ThesisDocs/chapters/chapter3_methodology.md": "4d6299806d5f64a93f2e8b13b6db0aeafa9286fc3f06be1c5c5fb5e3f6ed4333",
+    "ThesisDocs/chapters/chapter4_empirical.md": "906bb535c4163d29019df40459234ca9185f36127b346d4a91b6e9918a9396f4",
+    "ThesisDocs/chapters/chapter5_online.md": "700ee83ce3341020ca7c9bc4f86b597508609982e0138e33718eb188f7c39628",
+    "ThesisDocs/chapters/chapter6_discussion.md": "eebd137fa6f8f64e490567671bbf49b3cdbda01cabbfc99040e484c7815edaa3",
+    "ThesisDocs/appendices.md": "00f1c71be706a55aadf643b45a787a23742cf60d93b98e6661997780cf282202",
+    "ThesisDocs/formal/supplements/v5/reproduction_and_history.txt": "fce48497c23ecbbeec6acd7641be4ef14ac78d8c5374c35ff87b46d90e3c143d",
+    "ThesisDocs/Masters_Thesis_Formal_v5.md": "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d"
+  },
+  "final_pdf_bindings": {
+    "digital": {
+      "path": "output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf",
+      "sha256": "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+      "pages": 83
+    },
+    "print": {
+      "path": "output/pdf/Masters_Thesis_Formal_v5_Print_Aditya_Bhatt.pdf",
+      "sha256": "86cbbef1b8e212c6e23f8a1d7c24895adc4e82a921a1235429df05e3a75dbee6",
+      "pages": 88
+    }
+  },
+  "checks": {
+    "all_current_body_and_compiled_source_hashes_match_preceding_final_review": true,
+    "compiled_matches_stable_final_handoff_identity": true,
+    "all_preceding_scientific_preservation_checks_remain_bound_to_unchanged_content": true
+  },
+  "inherited_scientific_checks": {
+    "all_current_source_hashes_match_final_layout_delta_review": true,
+    "compiled_matches_stable_handoff_identity": true,
+    "scientific_tables_values_units_sample_sizes_endpoints_and_intervals_preserved": true,
+    "paired_interval_exact_TeX_assumptions_and_coverage_limits_preserved": true,
+    "moved_administrative_and_reproduction_detail_remains_in_unchanged_electronic_guide": true
+  },
+  "blockers": []
+}

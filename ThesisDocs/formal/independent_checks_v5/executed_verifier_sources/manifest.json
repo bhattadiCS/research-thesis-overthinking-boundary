@@ -1,0 +1,210 @@
+{
+  "schema": "independent-final-v5-verifier-execution-index-v1",
+  "created_utc": "2026-10-06T15:28:52.850005+00:00",
+  "scope": "Exact scripts and observed execution receipts for independent read-only verification of stable final 83/88-page v5 editions. No model experiments, manuscript/PDF edits, old receipt mutation, or external submission.",
+  "executed_source_copies": [
+    {
+      "original_relative_path": "tmp/pdfs/formal_thesis/v5/independent/check_v5_final.py",
+      "preserved_copy": "tmp/pdfs/formal_thesis/v5/independent/executed_83_88_verifier_sources/check_v5_final.py",
+      "sha256": "c9009377af8bfcdbe5dbe0aa8c5a06dcfb955841e0b38413e616bcaf0a526fdc",
+      "bytes": 28518
+    },
+    {
+      "original_relative_path": "tmp/pdfs/formal_thesis/v5/independent/check_v5_sources.py",
+      "preserved_copy": "tmp/pdfs/formal_thesis/v5/independent/executed_83_88_verifier_sources/check_v5_sources.py",
+      "sha256": "def1d38204be5379e786031a261a3c0ed69b47400961de4c076a4358c8d47824",
+      "bytes": 9174
+    },
+    {
+      "original_relative_path": "tmp/pdfs/formal_thesis/v5/independent/check_v5_poppler.py",
+      "preserved_copy": "tmp/pdfs/formal_thesis/v5/independent/executed_83_88_verifier_sources/check_v5_poppler.py",
+      "sha256": "95ba49d82c1ca412e72bc411f9b2153f5b5d06b17be0f9c33a2e2765c73367f9",
+      "bytes": 12116
+    },
+    {
+      "original_relative_path": "tmp/pdfs/formal_thesis/v5/independent/run_verapdf_v5.py",
+      "preserved_copy": "tmp/pdfs/formal_thesis/v5/independent/executed_83_88_verifier_sources/run_verapdf_v5.py",
+      "sha256": "4cfdb831b64852917ee72081c77f621ce540459d71989f6eeacb642247f9cef6",
+      "bytes": 3331
+    }
+  ],
+  "execution_recipes": [
+    {
+      "script": "tmp/pdfs/formal_thesis/v5/independent/check_v5_final.py",
+      "python_executable": "tmp/pdfs/pdfa_tools/venv/Scripts/python.exe",
+      "executed_argument_vector": [
+        "-B",
+        "tmp/pdfs/formal_thesis/v5/independent/check_v5_final.py",
+        "--directory",
+        "tmp/pdfs/formal_thesis/v5/independent/final_83_88_technical"
+      ],
+      "cwd": "C:\\Aditya_Data\\Personal\\ResearchThesis",
+      "receipt": "tmp/pdfs/formal_thesis/v5/independent/final_83_88_technical/technical_audit.json",
+      "receipt_sha256": "df8cee4e738a53b4289f3735d434142d817b0b77539fd591ab67bdb46e521654"
+    },
+    {
+      "script": "tmp/pdfs/formal_thesis/v5/independent/check_v5_sources.py",
+      "python_executable": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "executed_argument_vector": [
+        "-B",
+        "tmp/pdfs/formal_thesis/v5/independent/check_v5_sources.py",
+        "--directory",
+        "tmp/pdfs/formal_thesis/v5/independent/final_83_88_sources"
+      ],
+      "cwd": "C:\\Aditya_Data\\Personal\\ResearchThesis",
+      "receipt": "tmp/pdfs/formal_thesis/v5/independent/final_83_88_sources/source_comparison.json",
+      "receipt_sha256": "4e427008dcd431dc76ef84b04594e030aebb6076e8390f474ba428c14494d7d8"
+    },
+    {
+      "script": "tmp/pdfs/formal_thesis/v5/independent/check_v5_poppler.py",
+      "python_executable": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "executed_argument_vector": [
+        "-B",
+        "tmp/pdfs/formal_thesis/v5/independent/check_v5_poppler.py",
+        "--directory",
+        "tmp/pdfs/formal_thesis/v5/independent/final_83_88_poppler"
+      ],
+      "cwd": "C:\\Aditya_Data\\Personal\\ResearchThesis",
+      "receipt": "tmp/pdfs/formal_thesis/v5/independent/final_83_88_poppler/poppler_checks.json",
+      "receipt_sha256": "0d56ace2a0c30bc2f152b9c03cd619cf40c971c0b3fcebf353fd10a475b8c771"
+    },
+    {
+      "script": "tmp/pdfs/formal_thesis/v5/independent/run_verapdf_v5.py",
+      "python_executable": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "executed_argument_vector": [
+        "-B",
+        "tmp/pdfs/formal_thesis/v5/independent/run_verapdf_v5.py",
+        "--directory",
+        "tmp/pdfs/formal_thesis/v5/independent/final_83_88_verapdf"
+      ],
+      "cwd": "C:\\Aditya_Data\\Personal\\ResearchThesis",
+      "receipt": "tmp/pdfs/formal_thesis/v5/independent/final_83_88_verapdf/independent_verapdf_summary.json",
+      "receipt_sha256": "abdc7411002b8db0bbfb585f8c126ee03a5c9dccdde5c5046c9e8dbdaf505916"
+    }
+  ],
+  "python_provenance": {
+    "technical": {
+      "python_executable": "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\pdfa_tools\\venv\\Scripts\\python.exe",
+      "python_version": "3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]",
+      "packages": {
+        "pymupdf": "1.27.2.2",
+        "pikepdf": "10.16.0",
+        "numpy": "2.3.5"
+      }
+    },
+    "source_poppler_verapdf": {
+      "python_executable": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "python_version": "3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]",
+      "packages": {
+        "Pillow": "12.1.1"
+      }
+    }
+  },
+  "final_editions": [
+    {
+      "edition": "digital",
+      "pdf": "output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf",
+      "pdf_sha256": "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+      "raw_pdf": "tmp/pdfs/formal_thesis/v5/digital/source.pdf",
+      "raw_sha256": "231b164cfc651f5fb9025d4bffa584d7441d397b524f7050424ecab140af8794",
+      "pages": 83,
+      "front_matter_pages": 7,
+      "toc_headings": 62,
+      "front_section_page_counts": {
+        "toc": 3,
+        "list_tables": 1,
+        "list_figures": 1
+      },
+      "table_count": 17,
+      "figure_count": 6,
+      "minimum_ordinary_type_points": 10.0,
+      "margin_defects": 0
+    },
+    {
+      "edition": "print",
+      "pdf": "output/pdf/Masters_Thesis_Formal_v5_Print_Aditya_Bhatt.pdf",
+      "pdf_sha256": "86cbbef1b8e212c6e23f8a1d7c24895adc4e82a921a1235429df05e3a75dbee6",
+      "raw_pdf": "tmp/pdfs/formal_thesis/v5/print/source.pdf",
+      "raw_sha256": "589bf13ba3d5416311d346a93315483e585aaf73fbbe82c2ff66bf9d0a2f8508",
+      "pages": 88,
+      "front_matter_pages": 7,
+      "toc_headings": 62,
+      "front_section_page_counts": {
+        "toc": 3,
+        "list_tables": 1,
+        "list_figures": 1
+      },
+      "table_count": 17,
+      "figure_count": 6,
+      "minimum_ordinary_type_points": 10.0,
+      "margin_defects": 0
+    }
+  ],
+  "compiled_v5_sha256": "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d",
+  "source_preservation": {
+    "scientific_tables": 17,
+    "v4_snapshots": 12,
+    "protected_files": 104,
+    "preserved_image_bytes": 6,
+    "all_ordered_true_tex_equal": true,
+    "references_byte_identical": true,
+    "references_defined_used": 25
+  },
+  "complete_technical_hash_bindings": 499,
+  "historical_hash_bindings": 1345,
+  "fresh_verapdf_compliant": true,
+  "fresh_verapdf_counts": [
+    {
+      "edition": "digital",
+      "pdf_sha256": "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+      "pass": true,
+      "counts": [
+        {
+          "passedRules": "144",
+          "failedRules": "0",
+          "passedChecks": "240860",
+          "failedChecks": "0"
+        }
+      ],
+      "fresh_xml": "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\formal_thesis\\v5\\independent\\final_83_88_verapdf\\independent_verapdf_digital.xml",
+      "fresh_xml_sha256": "a8ef5fa99bb92ff2964195a38d86b2b89a4a60c4ecef326e9fa8f2abda364a98"
+    },
+    {
+      "edition": "print",
+      "pdf_sha256": "86cbbef1b8e212c6e23f8a1d7c24895adc4e82a921a1235429df05e3a75dbee6",
+      "pass": true,
+      "counts": [
+        {
+          "passedRules": "144",
+          "failedRules": "0",
+          "passedChecks": "243161",
+          "failedChecks": "0"
+        }
+      ],
+      "fresh_xml": "C:\\Aditya_Data\\Personal\\ResearchThesis\\tmp\\pdfs\\formal_thesis\\v5\\independent\\final_83_88_verapdf\\independent_verapdf_print.xml",
+      "fresh_xml_sha256": "bcc80bb6ca871fe3709811b2fa1bb11a800a774a4dc220e4ecca582418cfcb4d"
+    }
+  ],
+  "all_machine_checks_pass": true,
+  "fresh_visual_front_list_review": [
+    {
+      "edition": "digital",
+      "pdf_sha256": "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+      "physical_page": 6,
+      "image": "tmp/pdfs/formal_thesis/v5/independent/final_83_88_poppler/digital/page-06.png",
+      "image_sha256": "280b643aeddfe98b3e83456d11f337eb6618b5f8e3ebde4139d779607c7fa793",
+      "fresh_human_inspection": "All 17 list entries and right-side folios fit cleanly on one page; no overlap or clipping observed."
+    },
+    {
+      "edition": "print",
+      "pdf_sha256": "86cbbef1b8e212c6e23f8a1d7c24895adc4e82a921a1235429df05e3a75dbee6",
+      "physical_page": 6,
+      "image": "tmp/pdfs/formal_thesis/v5/independent/final_83_88_poppler/print/page-06.png",
+      "image_sha256": "05d16b9365665f97c82ec8ce1043036df2c6099c085b45e164060718e3849441",
+      "fresh_human_inspection": "All 17 list entries and right-side folios fit cleanly on one page; no overlap or clipping observed."
+    }
+  ],
+  "visual_scope": "Final Poppler renders generated for all 171 pages. Parent owns exact all-body carry mapping and final publication visual receipts. Freshly reviewed the changed table-list page 6 in each edition at 144dpi full resolution. Previous broader preliminary reviews retain their original PDF identities.",
+  "preliminary_receipts_preserved": true,
+  "reproduction_note": "Execute at the listed original relative paths. This directory preserves evidence copies; restore original paths before rerunning. Choose fresh output folders beneath tmp/pdfs/formal_thesis/v5/independent/ to preserve existing receipts."
+}

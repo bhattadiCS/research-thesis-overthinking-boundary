@@ -38,6 +38,7 @@ OUTPUT = WORK / "source.pdf"
 LEFT = 72
 RIGHT = 540
 SUBMISSION_DATE = "October 2026"
+LIST_ENTRY_GAP = 8  # Front lists may be single-spaced; keep all entries legible.
 CHAPTERS = ["chapter1_intro.md", "chapter2_theory.md", "chapter3_methodology.md",
             "chapter4_empirical.md", "chapter5_online.md", "chapter6_discussion.md"]
 FONT = Path("C:/Windows/Fonts/arial.ttf")
@@ -147,14 +148,21 @@ def build_figures(boundary: pd.DataFrame, detector: pd.DataFrame, replay: pd.Dat
         plt.close(fig)
 
 
-def evidence_inserts(allow_pending: bool) -> dict[str, str]:
+def evidence_inserts(allow_pending: bool, *, preserve_figures: bool = False) -> dict[str, str]:
     boundary = pd.read_csv(EVIDENCE / "boundary_domain_step_metrics.csv")
     controlled = pd.read_csv(EVIDENCE / "algorithm_v2_normalized_effects.csv")
     detector = pd.read_csv(EVIDENCE / "tournament_balanced_summary.csv")
     failures = read_json(ROOT / "research/reports/thesis_failure_audit_v1/audit_summary.json")
     prefix_evaluation = read_json(PREFIX_MODEL / "evaluation.json")
     replay = pd.read_csv(ONLINE / "replay_pareto.csv") if (ONLINE / "replay_pareto.csv").exists() else None
-    build_figures(boundary, detector, replay)
+    if preserve_figures:
+        # An editorial revision reuses the reviewed scientific figures. It must
+        # not regenerate the historical assets or silently change their bytes.
+        for entry in read_json(DOCS / "formal/source_integrity_v4.json")["figure_files"]:
+            if sha(ROOT / entry["path"]) != entry["sha256"]:
+                raise ValueError(f"Reviewed figure changed: {entry['path']}")
+    else:
+        build_figures(boundary, detector, replay)
     counts = [["GSM8K", "train", "1,000", "8,064", "40,320"],
               ["MATH-500", "test", "500", "6,500", "32,500"],
               ["ARC-Challenge", "test", "1,000", "8,500", "42,500"],
@@ -284,7 +292,7 @@ def sync_theory() -> None:
         "case displayed above. The binary-reward arguments remain unchanged "
         "for this grading predicate. This notation identifies the measured "
         "endpoint; it does not certify semantic correctness of every stored label. "
-        "Appendix F illustrates the information restrictions and delayed-repair counterexample.\n\n"
+        "Appendix E illustrates the information restrictions and delayed-repair counterexample.\n\n"
         "All observations, executed peer calls, verifier outputs, and controller")
     theory = theory.replace(
         "$\\mathcal B_t$ is the candidate set available at $t$.",
@@ -345,7 +353,7 @@ def html_math(source: str, runtime: Path, key: str) -> str:
     # tables intact. A repeated header alone does not prevent orphan captions.
     content = re.sub(r'(<p><strong>Table \d+\..*?</strong></p>\s*<table>.*?</table>)',
                      r'<div class="table-block">\1</div>', content, flags=re.S)
-    content = re.sub(r'(<p><img\b[^>]*></p>\s*<p><strong>Figure \d+\.</strong>.*?</p>)',
+    content = re.sub(r'(<p><img\b[^>]*></p>\s*<p><strong>Figure \d+\..*?</p>)',
                      r'<div class="figure-block">\1</div>', content, flags=re.S)
     # Keep short proof conclusions together; equations can otherwise defeat
     # the browser's usual widow/orphan count at a page boundary.
@@ -475,7 +483,7 @@ def list_layout(kind: str, labels: list[str], pages: list[int]) -> list[list[tup
     y = 670
     for index, (label, page) in enumerate(zip(labels, pages), 1):
         lines = canvas_lines(f"{kind} {index}. {label}", 11, RIGHT - LEFT - 38)
-        height = len(lines) * 16 + 12
+        height = len(lines) * 16 + LIST_ENTRY_GAP
         if y - height < 108:
             chunks.append([])
             y = 670
@@ -578,7 +586,7 @@ def front_matter(chapter_lengths: list[int], chapter_titles: list[str],
                 for line_index, line in enumerate(lines):
                     c.drawString(LEFT, y - line_index * 16, line)
                 c.drawRightString(RIGHT, y, str(page))
-                y -= len(lines) * 16 + 12
+                y -= len(lines) * 16 + LIST_ENTRY_GAP
             c.showPage()
     c.save()
     return path, front_entries
@@ -617,7 +625,8 @@ def main() -> None:
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--allow-pending-live",action="store_true")
     parser.add_argument("--edition", choices=["digital", "print"], default="digital")
-    parser.add_argument("--document-version", choices=["v2", "v3", "v4"], default="v4")
+    parser.add_argument("--document-version", choices=["v5"], default="v5",
+                        help="Historical editions require their archived source and builder versions.")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--submission-date", default="October 2026")
     parser.add_argument("--chrome",type=Path,default=Path("C:/Program Files/Google/Chrome/Application/chrome.exe"))
@@ -637,10 +646,7 @@ def main() -> None:
     if not (runtime/"node_modules/katex/dist/katex.min.css").is_file():
         raise FileNotFoundError("Install the pinned KaTeX renderer as documented in this script.")
     sync_theory()
-    if args.document_version == "v4":
-        from build_thesis_explanatory_figures import build as build_explanatory_figures
-        build_explanatory_figures()
-    inserts=evidence_inserts(args.allow_pending_live)
+    inserts=evidence_inserts(args.allow_pending_live, preserve_figures=True)
     sources=[DOCS/"chapters"/name for name in CHAPTERS]+[DOCS/"references.md",DOCS/"appendices.md"]
     reference_source=(DOCS/"references.md").read_text(encoding="utf-8")
     ref_keys=re.findall(r"^\[([A-Za-z0-9]+)\]",reference_source,re.M)

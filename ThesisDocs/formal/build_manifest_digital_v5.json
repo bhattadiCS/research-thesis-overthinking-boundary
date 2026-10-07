@@ -1,0 +1,412 @@
+{
+  "output": "tmp/pdfs/formal_thesis/v5/digital/source.pdf",
+  "sha256": "231b164cfc651f5fb9025d4bffa584d7441d397b524f7050424ecab140af8794",
+  "audit": {
+    "pages": 83,
+    "text_margin_defects": 0,
+    "blank_pages": 0,
+    "embedded_font_objects": 36,
+    "pdfa_conformance": "not asserted; dedicated final validator required"
+  },
+  "schema": "formal-thesis-build-v5",
+  "edition": "digital",
+  "main_builder_sha256": "5c632df41b25cfea523ffd8318cf0af4e9f76c91dfa61ac0ad9c3b0fa6992fac",
+  "contents_body_entries": [
+    {
+      "level": 1,
+      "title": "Chapter 1 Introduction and motivation",
+      "body_page": 1
+    },
+    {
+      "level": 2,
+      "title": "1.1 Reasoning as a sequential allocation problem",
+      "body_page": 1
+    },
+    {
+      "level": 2,
+      "title": "1.2 Operational meaning of overthinking",
+      "body_page": 2
+    },
+    {
+      "level": 2,
+      "title": "1.3 Research questions",
+      "body_page": 3
+    },
+    {
+      "level": 2,
+      "title": "1.4 Contributions",
+      "body_page": 4
+    },
+    {
+      "level": 2,
+      "title": "1.5 Evidence and reproducibility",
+      "body_page": 5
+    },
+    {
+      "level": 2,
+      "title": "1.6 Related work and the thesis position",
+      "body_page": 5
+    },
+    {
+      "level": 2,
+      "title": "1.7 Thesis organization",
+      "body_page": 9
+    },
+    {
+      "level": 1,
+      "title": "Chapter 2 Mathematical formulation and stopping theory",
+      "body_page": 10
+    },
+    {
+      "level": 2,
+      "title": "2.1 Probability model and admissible information",
+      "body_page": 10
+    },
+    {
+      "level": 2,
+      "title": "2.2 Exact binary correctness drift",
+      "body_page": 12
+    },
+    {
+      "level": 2,
+      "title": "2.3 General finite-horizon optimal stopping",
+      "body_page": 14
+    },
+    {
+      "level": 2,
+      "title": "2.4 When a drift-sign boundary is optimal",
+      "body_page": 16
+    },
+    {
+      "level": 3,
+      "title": "Exact counterexample 1: delayed repair",
+      "body_page": 17
+    },
+    {
+      "level": 3,
+      "title": "Exact counterexample 2: a population curve misses adaptive value",
+      "body_page": 18
+    },
+    {
+      "level": 2,
+      "title": "2.5 Partial observation and feature models",
+      "body_page": 18
+    },
+    {
+      "level": 2,
+      "title": "2.6 Calibration and perturbation bounds",
+      "body_page": 19
+    },
+    {
+      "level": 2,
+      "title": "2.7 What sequential uncertainty control can certify",
+      "body_page": 21
+    },
+    {
+      "level": 2,
+      "title": "2.8 Scope of the empirical claims",
+      "body_page": 24
+    },
+    {
+      "level": 1,
+      "title": "Chapter 3 Experimental setup and methods",
+      "body_page": 26
+    },
+    {
+      "level": 2,
+      "title": "3.1 Corpus separation",
+      "body_page": 26
+    },
+    {
+      "level": 2,
+      "title": "3.2 Model roster",
+      "body_page": 27
+    },
+    {
+      "level": 2,
+      "title": "3.3 Benchmark tasks and splits",
+      "body_page": 29
+    },
+    {
+      "level": 2,
+      "title": "3.4 Response and revision protocol",
+      "body_page": 30
+    },
+    {
+      "level": 2,
+      "title": "3.5 Recorded signals and grading",
+      "body_page": 31
+    },
+    {
+      "level": 2,
+      "title": "3.6 Statistical units and grouping",
+      "body_page": 32
+    },
+    {
+      "level": 2,
+      "title": "3.7 Outcomes and computation measures",
+      "body_page": 33
+    },
+    {
+      "level": 2,
+      "title": "3.8 Reproducibility and evidence freeze",
+      "body_page": 34
+    },
+    {
+      "level": 1,
+      "title": "Chapter 4 Empirical evidence of overthinking",
+      "body_page": 35
+    },
+    {
+      "level": 2,
+      "title": "4.1 Population transitions and net value",
+      "body_page": 35
+    },
+    {
+      "level": 2,
+      "title": "4.2 Model and domain differences",
+      "body_page": 37
+    },
+    {
+      "level": 2,
+      "title": "4.3 Controlled estimator comparisons",
+      "body_page": 38
+    },
+    {
+      "level": 2,
+      "title": "4.4 Token cap and numerical precision",
+      "body_page": 39
+    },
+    {
+      "level": 2,
+      "title": "4.5 Ranking and stopping performance",
+      "body_page": 40
+    },
+    {
+      "level": 2,
+      "title": "4.6 The stacked retrospective diagnostic",
+      "body_page": 42
+    },
+    {
+      "level": 2,
+      "title": "4.7 Replay and failure interpretation",
+      "body_page": 43
+    },
+    {
+      "level": 2,
+      "title": "4.8 Empirical conclusions",
+      "body_page": 44
+    },
+    {
+      "level": 1,
+      "title": "Chapter 5 Online stopping and computation trade-offs",
+      "body_page": 45
+    },
+    {
+      "level": 2,
+      "title": "5.1 Causal controller contract",
+      "body_page": 45
+    },
+    {
+      "level": 2,
+      "title": "5.2 Policy choice and limitations",
+      "body_page": 46
+    },
+    {
+      "level": 2,
+      "title": "5.3 Generation integration",
+      "body_page": 46
+    },
+    {
+      "level": 2,
+      "title": "5.4 Decision latency",
+      "body_page": 47
+    },
+    {
+      "level": 2,
+      "title": "5.5 Live paired evaluation",
+      "body_page": 48
+    },
+    {
+      "level": 2,
+      "title": "5.6 Adversarial questions and traps",
+      "body_page": 50
+    },
+    {
+      "level": 2,
+      "title": "5.7 Deployable prefix probability model",
+      "body_page": 52
+    },
+    {
+      "level": 2,
+      "title": "5.8 Actual trained-policy evaluation",
+      "body_page": 54
+    },
+    {
+      "level": 2,
+      "title": "5.9 Replay and Pareto analysis",
+      "body_page": 57
+    },
+    {
+      "level": 1,
+      "title": "Chapter 6 Discussion and limitations",
+      "body_page": 60
+    },
+    {
+      "level": 2,
+      "title": "6.1 Scientific interpretation",
+      "body_page": 60
+    },
+    {
+      "level": 2,
+      "title": "6.2 Correctness labels and mathematical validity",
+      "body_page": 60
+    },
+    {
+      "level": 2,
+      "title": "6.3 Theory and deployable beliefs",
+      "body_page": 61
+    },
+    {
+      "level": 2,
+      "title": "6.4 Generalization and adaptation",
+      "body_page": 61
+    },
+    {
+      "level": 2,
+      "title": "6.5 Costs beyond completion tokens",
+      "body_page": 62
+    },
+    {
+      "level": 2,
+      "title": "6.6 Adversarial behavior and answer selection",
+      "body_page": 63
+    },
+    {
+      "level": 2,
+      "title": "6.7 Evidence needed for stronger claims",
+      "body_page": 63
+    },
+    {
+      "level": 2,
+      "title": "6.8 Conclusion",
+      "body_page": 64
+    },
+    {
+      "level": 1,
+      "title": "References",
+      "body_page": 65
+    },
+    {
+      "level": 1,
+      "title": "Appendix A Reproducibility and evidence sources",
+      "body_page": 69
+    },
+    {
+      "level": 1,
+      "title": "Appendix B Claim scope and mathematical review",
+      "body_page": 71
+    },
+    {
+      "level": 1,
+      "title": "Appendix C Paired accuracy uncertainty",
+      "body_page": 72
+    },
+    {
+      "level": 1,
+      "title": "Appendix D Retrospective prediction analyses",
+      "body_page": 73
+    },
+    {
+      "level": 1,
+      "title": "Appendix E Information flow and delayed repair diagrams",
+      "body_page": 75
+    }
+  ],
+  "submission_month_year": "October 2026",
+  "front_matter_pages": 7,
+  "left_margin_inches": 1.0,
+  "other_minimum_margins_inches": 1,
+  "abstract_words": 209,
+  "figure_titles": [
+    "Population accuracy and net gain.",
+    "Micro, domain-macro, and worst-domain ranking differ substantially.",
+    "Development replay accuracy against completion-token cost.",
+    "Actual generated arms on two development panels.",
+    "Offline fitting and runtime information flow.",
+    "Delayed repair defeats a myopic stopping rule."
+  ],
+  "table_titles": [
+    "Mathematical objects and assumptions.",
+    "Standardized five-step corpus.",
+    "Model configurations.",
+    "GSM8K transition panel; 19,500 trajectories and 500 task clusters per row.",
+    "Matched effects.",
+    "Stored causal detectors; common task-held-out development evaluation.",
+    "Mutually exclusive archived-policy loss patterns; 5,735 utility losses among 75,965 trajectories.",
+    "Controller-only latency on 100 saved math-question prefixes.",
+    "Actual paired local generation on 100 GSM8K questions.",
+    "Actual paired local generation on the 20-question trap bank.",
+    "Deployable probability heads on 276 archived held-out tasks; repeated rows are not independent trials.",
+    "Actual trained-policy generation paired with the existing 100-question live baseline.",
+    "Actual trained-policy generation paired with the existing trap-bank live baseline.",
+    "Frozen variants replayed on 1,500 saved trajectories.",
+    "Claim evidence sources.",
+    "Claim scope and required evidence.",
+    "Additional retrospective prediction analyses."
+  ],
+  "figure_body_pages": [
+    36,
+    42,
+    58,
+    59,
+    75,
+    76
+  ],
+  "table_body_pages": [
+    24,
+    26,
+    28,
+    35,
+    38,
+    40,
+    44,
+    47,
+    48,
+    50,
+    53,
+    54,
+    55,
+    57,
+    69,
+    71,
+    73
+  ],
+  "source_files": {
+    "ThesisDocs/chapters/chapter1_intro.md": "14995549a7014d83771c7f97e7221ff8504b28a7d98ec179a72d27af883692cc",
+    "ThesisDocs/chapters/chapter2_theory.md": "6543c39fc83adb56a7fcd6c6c5e37110aeea475c0bce4e40adeda4c5172318c3",
+    "ThesisDocs/chapters/chapter3_methodology.md": "4d6299806d5f64a93f2e8b13b6db0aeafa9286fc3f06be1c5c5fb5e3f6ed4333",
+    "ThesisDocs/chapters/chapter4_empirical.md": "906bb535c4163d29019df40459234ca9185f36127b346d4a91b6e9918a9396f4",
+    "ThesisDocs/chapters/chapter5_online.md": "700ee83ce3341020ca7c9bc4f86b597508609982e0138e33718eb188f7c39628",
+    "ThesisDocs/chapters/chapter6_discussion.md": "eebd137fa6f8f64e490567671bbf49b3cdbda01cabbfc99040e484c7815edaa3",
+    "ThesisDocs/references.md": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+    "ThesisDocs/appendices.md": "00f1c71be706a55aadf643b45a787a23742cf60d93b98e6661997780cf282202"
+  },
+  "canonical_math_source_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+  "evidence_manifest_sha256": "0af11a9241c68ea3e4da558359a3fa25efa1c0ebb28802be4f8350b93500f9d4",
+  "katex": "0.19.0",
+  "data_manifest_sha256": "fda3ab68dfe35d64b2f496195ec6d37eb1bcd5f913f5a791a02d009f11daff6b",
+  "chapter_page_counts": {
+    "Chapter 1 Introduction and motivation": 9,
+    "Chapter 2 Mathematical formulation and stopping theory": 16,
+    "Chapter 3 Experimental setup and methods": 9,
+    "Chapter 4 Empirical evidence of overthinking": 10,
+    "Chapter 5 Online stopping and computation trade-offs": 15,
+    "Chapter 6 Discussion and limitations": 5,
+    "References": 4,
+    "Appendix A Reproducibility and evidence sources": 8
+  },
+  "word_count": 15866,
+  "interim_live_results_permitted": false,
+  "visual_review": "required after this build; machine checks alone do not prove visual quality"
+}

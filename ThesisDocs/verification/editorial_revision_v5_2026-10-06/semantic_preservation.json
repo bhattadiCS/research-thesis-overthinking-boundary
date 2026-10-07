@@ -1,0 +1,137 @@
+{
+  "schema": "editorial-semantic-preservation-v5",
+  "status": "verified",
+  "baseline_commit": "c8ba3bc753529fcd28561bb71a46f03c1420023f",
+  "v4_words": 20064,
+  "v5_words": 15866,
+  "reduction_words": 4198,
+  "reduction_percent": 20.923046251993622,
+  "scientific_table_data": [
+    {
+      "v4_table": 1,
+      "v5_table": 1,
+      "body_equal": true
+    },
+    {
+      "v4_table": 2,
+      "v5_table": 2,
+      "body_equal": true
+    },
+    {
+      "v4_table": 3,
+      "v5_table": 3,
+      "body_equal": true
+    },
+    {
+      "v4_table": 4,
+      "v5_table": 4,
+      "body_equal": true
+    },
+    {
+      "v4_table": 5,
+      "v5_table": 5,
+      "body_equal": true
+    },
+    {
+      "v4_table": 6,
+      "v5_table": 6,
+      "body_equal": true
+    },
+    {
+      "v4_table": 7,
+      "v5_table": 7,
+      "body_equal": true
+    },
+    {
+      "v4_table": 8,
+      "v5_table": 8,
+      "body_equal": true
+    },
+    {
+      "v4_table": 9,
+      "v5_table": 9,
+      "body_equal": true
+    },
+    {
+      "v4_table": 10,
+      "v5_table": 10,
+      "body_equal": true
+    },
+    {
+      "v4_table": 11,
+      "v5_table": 11,
+      "body_equal": true
+    },
+    {
+      "v4_table": 12,
+      "v5_table": 12,
+      "body_equal": true
+    },
+    {
+      "v4_table": 13,
+      "v5_table": 13,
+      "body_equal": true
+    },
+    {
+      "v4_table": 14,
+      "v5_table": 14,
+      "body_equal": true
+    },
+    {
+      "v4_table": 15,
+      "v5_table": 15,
+      "body_equal": true
+    },
+    {
+      "v4_table": 16,
+      "v5_table": 16,
+      "body_equal": true
+    },
+    {
+      "v4_table": 18,
+      "v5_table": 17,
+      "body_equal": true
+    }
+  ],
+  "status_table_preserved_in_electronic_supplement": true,
+  "ordered_math_expressions": [
+    {
+      "path": "ThesisDocs/chapters/chapter2_theory.md",
+      "expression_count": 236,
+      "ordered_tex_equal": true
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter3_methodology.md",
+      "expression_count": 3,
+      "ordered_tex_equal": true
+    },
+    {
+      "path": "ThesisDocs/chapters/chapter5_online.md",
+      "expression_count": 6,
+      "ordered_tex_equal": true
+    },
+    {
+      "path": "ThesisDocs/appendices.md",
+      "expression_count": 12,
+      "ordered_tex_equal": true
+    }
+  ],
+  "chapter2_only_change": "Appendix F cross-reference becomes Appendix E",
+  "references_byte_equal": true,
+  "all_25_bibliography_entries_retained": true,
+  "protected_historical_files": 104,
+  "protected_historical_hash_mismatches": [],
+  "scope": "Editorial/source equality checks complement human semantic and visual review; no new research or model generation.",
+  "source_hashes": {
+    "ThesisDocs/Masters_Thesis_Formal_v5.md": "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d",
+    "ThesisDocs/appendices.md": "00f1c71be706a55aadf643b45a787a23742cf60d93b98e6661997780cf282202",
+    "ThesisDocs/references.md": "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+    "tools/build_master_thesis.py": "5c632df41b25cfea523ffd8318cf0af4e9f76c91dfa61ac0ad9c3b0fa6992fac",
+    "ThesisDocs/chapters/chapter1_intro.md": "14995549a7014d83771c7f97e7221ff8504b28a7d98ec179a72d27af883692cc",
+    "ThesisDocs/chapters/chapter2_theory.md": "6543c39fc83adb56a7fcd6c6c5e37110aeea475c0bce4e40adeda4c5172318c3",
+    "ThesisDocs/chapters/chapter3_methodology.md": "4d6299806d5f64a93f2e8b13b6db0aeafa9286fc3f06be1c5c5fb5e3f6ed4333",
+    "ThesisDocs/chapters/chapter4_empirical.md": "906bb535c4163d29019df40459234ca9185f36127b346d4a91b6e9918a9396f4",
+    "ThesisDocs/chapters/chapter5_online.md": "700ee83ce3341020ca7c9bc4f86b597508609982e0138e33718eb188f7c39628",
+    "ThesisDocs/chapters/chapter6_discussion.md": "eebd137fa6f8f64e490567671bbf49b3cdbda01cabbfc99040e484c7815edaa3"
+  }
+}
