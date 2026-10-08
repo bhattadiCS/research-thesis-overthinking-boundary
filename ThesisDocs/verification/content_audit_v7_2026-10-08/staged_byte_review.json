@@ -1,0 +1,16 @@
+{
+  "schema": "thesis-v7-staged-byte-review",
+  "allowlisted_paths": 133,
+  "all_stage_and_checkout_bytes_match": true,
+  "checkout_core_autocrlf": true,
+  "authored_whitespace_check_passed": true,
+  "raw_tool_output": "Preserved byte-for-byte including native line endings and layout whitespace.",
+  "protected_previously_published_files_unchanged": 286,
+  "content_checks_pass": 19,
+  "v5_sections_accounted_for": 55,
+  "final_pages": {
+    "digital": 33,
+    "print": 34
+  },
+  "no_unrelated_user_files_staged": true
+}

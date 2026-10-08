@@ -1,0 +1,10 @@
+{
+  "audit_mode": "strict_bytes",
+  "auxiliary_files": 688,
+  "content_fingerprint": "6e014794a68e74558683862a942ef223cdce6e1d7f66583d5e7038653b1eff1a",
+  "data_files": 52,
+  "line_ending_only_changes": [],
+  "rows": 144440,
+  "status": "verified",
+  "trajectories": 28888
+}

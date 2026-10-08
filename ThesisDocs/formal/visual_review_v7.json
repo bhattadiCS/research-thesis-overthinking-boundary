@@ -1,0 +1,49 @@
+{
+  "schema": "concise-thesis-manual-visual-review-v7",
+  "reviewed_utc": "2026-10-08T20:15:53.264993+00:00",
+  "reviewer": "Root Codex visual inspection; no separate human or subagent review is asserted.",
+  "scope": "Every exact final page inspected through Poppler contact sheets; full-resolution mathematical, table, figure and bibliography pages inspected in addition. PyMuPDF converter renders provide a separate rendering engine.",
+  "pages_reviewed": 67,
+  "editions": [
+    {
+      "edition": "digital",
+      "path": "output/pdf/Masters_Thesis_Formal_v7_Aditya_Bhatt.pdf",
+      "sha256": "426f3d26fc0f832e3a9ed59de1074629c3ae52877716de27903e19fb84d8bfdf",
+      "pages": 33,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v7/digital.pdf",
+      "raw_sha256": "b65c78d687a0247a8bed0ebcfc112ebf48d136f75fda288cca87b41e0501557f",
+      "word_count": 6130,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v7_digital_build_manifest.json"
+    },
+    {
+      "edition": "print",
+      "path": "output/pdf/Masters_Thesis_Formal_v7_Print_Aditya_Bhatt.pdf",
+      "sha256": "cdc10dca78b4f3833509a7c150e2df62252de5dab11a65e770d078e677c20ff6",
+      "pages": 34,
+      "front_pages": 5,
+      "raw_copy": "ThesisDocs/formal/raw_sources/v7/print.pdf",
+      "raw_sha256": "2ed2a76ff3b95ed9f3c11f5b8423f87f699e44e81909abdc06be326c1be98152",
+      "word_count": 6130,
+      "abstract_words": 166,
+      "conversion_manifest": "ThesisDocs/archival/formal_v7_print_build_manifest.json"
+    }
+  ],
+  "machine_contact_sheets": "ThesisDocs/formal/independent_checks_v7/final2/technical_audit.json",
+  "machine_contact_sheets_sha256": "f14ed010af48fb22c8d82c12cf3565e859e623c643629b27c05d2c0c23fb84b4",
+  "checks": [
+    "Cover and abstract fields, whitespace and double spacing",
+    "Roman front and Arabic main pagination, contents and separate caption lists",
+    "Visible equation symbols, subscripts, delimiters and proof endings",
+    "Table headers, units, values and intervals; no split rows",
+    "Figure axes, labels, annotations and attached captions",
+    "Reference entries remain intact across page boundaries",
+    "No observed text clipping, overlapping elements or missing glyphs"
+  ],
+  "observed_unresolved_defects": [],
+  "layout_repairs": "Caption-title page lookup; paired-interval argument kept together; head diagnostics precede the final figure. Inherited fixed table columns and intact bibliography entries.",
+  "scientific_review": "ThesisDocs/verification/content_audit_v7_2026-10-08/review.md",
+  "scientific_review_sha256": "ef82d75283fedb11098addae2152c7908929a1a502f889abb3bcc5a95f4c6ded",
+  "institutional_acceptance_asserted": false
+}

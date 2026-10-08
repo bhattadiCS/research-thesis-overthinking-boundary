@@ -1,0 +1,21 @@
+# Chapter 5 Discussion and conclusion
+
+## 5.1 Interpretation and limitations
+
+The theoretical and experimental results answer different parts of the stopping question. Binary transitions make improvement and deterioration measurable. Bellman continuation values account for later repair opportunities; a one-step sign rule is optimal only under additional structure. Controlled comparisons show that improved ranking and increased estimator complexity need not improve policy utility. Actual execution confirms avoided generation, but the learned rule's uniform two-response stopping is a budget reduction rather than evidence of adaptive reasoning allocation.
+
+The frozen grader defines the measured endpoint. Numeric parsing, symbolic domain restrictions and benchmark references can still be wrong; a correct MCQ option can accompany an invalid rationale. Regression tests cover specified cases, while semantic label validity requires independent adjudication. Primary labels and reconstructed predictor targets are separate versions, and changes require a new census and dependent analysis.
+
+A classifier estimates the required conditional probability only under assumptions about its inputs, target, sampling and calibration. Class-balanced losses can target reweighted distributions. Marginal archive calibration, particularly under a different JSON prompt and token contract, does not validate live-prefix probabilities. Likewise, a question-level interval differs from a time-uniform certificate along one trajectory. The mathematics states its assumptions; the prototype supplies empirical evidence under its own contract.
+
+The model panel, prompts, temperatures, grader and single generation seed define the observed population. Task-held-out folds cannot rule out benchmark exposure during pretraining, and repeated development can exhaust a holdout's independence. Stronger confirmation requires a frozen policy, feature contract, prespecified accuracy tolerance and justified sample size on untouched tasks. The handpicked traps and one small live model do not establish transfer across reasoning-specialized models or adversarial populations.
+
+Response termination also differs from early layer exit or within-chain truncation. Every comparison must charge the resources actually executed: prompts, completions, probes, peers and scheduling. Thirteen peer generators can make a shorter target response more expensive than a single-model baseline. A prospective peer-fleet policy needs timestamped generation and a complete cost ledger; the archived peer scores and small smoke ledgers do not establish one.
+
+## 5.2 Reproducibility and conclusion
+
+The original `data_manifest_v1.json` and post-review `data_manifest_post_review_v1.json` preserve the research corpus and executed live source copies. Hashes establish selected artifact identity, not honest original generation, correct labels or representative sampling. Exact historical GPU regeneration is not established by a workstation lock. The [extended v5 report and source/evidence map](https://github.com/bhattadiCS/research-thesis-overthinking-boundary/blob/df03265cfe3b9bf4b1ee66061d81ef5796375be0/ThesisDocs/CURRENT_FORMAL_THESIS.md) retain complete proofs and bounds, all seventeen scientific tables, six figures, additional predictor results and isolated reanalysis commands. Legacy peer executable-source provenance remains partial and is explicitly qualified there.
+
+The study supports protocol-specific stopping experiments that jointly measure quality, cost and decision-time information. It establishes the conditional mathematical argument, matched positive and negative findings, and a causal runtime implementation. Its live savings accompany weak accuracy and a nearly fixed budget, leaving adaptive benefit and accuracy noninferiority unestablished. These limitations are part of the research result and define the independent evidence needed for stronger claims.
+
+The concise manuscript is the primary thesis. The preserved extended report supplies supporting technical detail and previous-version audit receipts; it is not an additional independent experiment. Both are available with the versioned repository publication. No data recollection, regrading, training or model generation was performed for this editorial revision.

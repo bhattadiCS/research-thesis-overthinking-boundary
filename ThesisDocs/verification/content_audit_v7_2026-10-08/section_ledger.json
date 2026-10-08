@@ -1,0 +1,340 @@
+{
+  "schema": "v5-to-v7-scientific-section-ledger",
+  "v5_sha256": "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d",
+  "v7_sha256": "fd2077694fe872d2209de025cf9ea779d8304130b90add7bf526a0bf6521285e",
+  "sections_accounted_for": 55,
+  "unmapped_scientific_sections": [],
+  "rows": [
+    {
+      "v5_section": "1.1",
+      "v5_title": "1.1 Reasoning as a sequential allocation problem",
+      "v7_or_support_location": "1.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "1.2",
+      "v5_title": "1.2 Operational meaning of overthinking",
+      "v7_or_support_location": "1.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "1.3",
+      "v5_title": "1.3 Research questions",
+      "v7_or_support_location": "1.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "1.4",
+      "v5_title": "1.4 Contributions",
+      "v7_or_support_location": "1.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "1.5",
+      "v5_title": "1.5 Evidence and reproducibility",
+      "v7_or_support_location": "5.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "1.6",
+      "v5_title": "1.6 Related work and the thesis position",
+      "v7_or_support_location": "1.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "1.7",
+      "v5_title": "1.7 Thesis organization",
+      "v7_or_support_location": "1.3",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.1",
+      "v5_title": "2.1 Probability model and admissible information",
+      "v7_or_support_location": "2.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.2",
+      "v5_title": "2.2 Exact binary correctness drift",
+      "v7_or_support_location": "2.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.3",
+      "v5_title": "2.3 General finite-horizon optimal stopping",
+      "v7_or_support_location": "2.3",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.4",
+      "v5_title": "2.4 When a drift-sign boundary is optimal",
+      "v7_or_support_location": "2.4",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.4 counterexample",
+      "v5_title": "Exact counterexample 1: delayed repair",
+      "v7_or_support_location": "2.4 and Figure 1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.4 counterexample",
+      "v5_title": "Exact counterexample 2: a population curve misses adaptive value",
+      "v7_or_support_location": "Preserved v5 Section 2.4; supporting adaptive-information counterexample",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.5",
+      "v5_title": "2.5 Partial observation and feature models",
+      "v7_or_support_location": "2.1 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.6",
+      "v5_title": "2.6 Calibration and perturbation bounds",
+      "v7_or_support_location": "5.1 summary; full derivations in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.7",
+      "v5_title": "2.7 What sequential uncertainty control can certify",
+      "v7_or_support_location": "1.2 and 5.1 scope; full certificates in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "2.8",
+      "v5_title": "2.8 Scope of the empirical claims",
+      "v7_or_support_location": "1.2 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.1",
+      "v5_title": "3.1 Corpus separation",
+      "v7_or_support_location": "3.1 and Table 1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.2",
+      "v5_title": "3.2 Model roster",
+      "v7_or_support_location": "3.1 restored roster; full ID table in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.3",
+      "v5_title": "3.3 Benchmark tasks and splits",
+      "v7_or_support_location": "3.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.4",
+      "v5_title": "3.4 Response and revision protocol",
+      "v7_or_support_location": "3.1 and 3.3 restored settings/floor",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.5",
+      "v5_title": "3.5 Recorded signals and grading",
+      "v7_or_support_location": "3.1, 3.3 and 5.1; detailed parser cases in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.6",
+      "v5_title": "3.6 Statistical units and grouping",
+      "v7_or_support_location": "3.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.7",
+      "v5_title": "3.7 Outcomes and computation measures",
+      "v7_or_support_location": "3.2 restored notation/accounting",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "3.8",
+      "v5_title": "3.8 Reproducibility and evidence freeze",
+      "v7_or_support_location": "5.2; historical environment detail in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.1",
+      "v5_title": "4.1 Population transitions and net value",
+      "v7_or_support_location": "4.1 and Figure 2; full step table in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.2",
+      "v5_title": "4.2 Model and domain differences",
+      "v7_or_support_location": "4.1; full cell tables in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.3",
+      "v5_title": "4.3 Controlled estimator comparisons",
+      "v7_or_support_location": "4.2 and Table 2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.4",
+      "v5_title": "4.4 Token cap and numerical precision",
+      "v7_or_support_location": "4.2 and Table 2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.5",
+      "v5_title": "4.5 Ranking and stopping performance",
+      "v7_or_support_location": "4.2; full architecture summaries in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.6",
+      "v5_title": "4.6 The stacked retrospective diagnostic",
+      "v7_or_support_location": "4.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.7",
+      "v5_title": "4.7 Replay and failure interpretation",
+      "v7_or_support_location": "4.2; full failure taxonomy in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "4.8",
+      "v5_title": "4.8 Empirical conclusions",
+      "v7_or_support_location": "5.1 and 5.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.1",
+      "v5_title": "5.1 Causal controller contract",
+      "v7_or_support_location": "3.3",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.2",
+      "v5_title": "5.2 Policy choice and limitations",
+      "v7_or_support_location": "3.3 restored heuristic settings",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.3",
+      "v5_title": "5.3 Generation integration",
+      "v7_or_support_location": "3.3 and 3.4 restored runtime contract",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.4",
+      "v5_title": "5.4 Decision latency",
+      "v7_or_support_location": "4.3 learned latency; additional heuristic benchmark in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.5",
+      "v5_title": "5.5 Live paired evaluation",
+      "v7_or_support_location": "4.3 and Table 3",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.6",
+      "v5_title": "5.6 Adversarial questions and traps",
+      "v7_or_support_location": "3.4 and 4.3",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.7",
+      "v5_title": "5.7 Deployable prefix probability model",
+      "v7_or_support_location": "3.3 and 4.3 restored feature/head validation detail",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.8",
+      "v5_title": "5.8 Actual trained-policy evaluation",
+      "v7_or_support_location": "4.3, Table 3 and Figure 3",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "5.9",
+      "v5_title": "5.9 Replay and Pareto analysis",
+      "v7_or_support_location": "4.3 and Figure 3; complete replay/Pareto table in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.1",
+      "v5_title": "6.1 Scientific interpretation",
+      "v7_or_support_location": "5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.2",
+      "v5_title": "6.2 Correctness labels and mathematical validity",
+      "v7_or_support_location": "3.1 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.3",
+      "v5_title": "6.3 Theory and deployable beliefs",
+      "v7_or_support_location": "2.1, 2.4 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.4",
+      "v5_title": "6.4 Generalization and adaptation",
+      "v7_or_support_location": "3.2 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.5",
+      "v5_title": "6.5 Costs beyond completion tokens",
+      "v7_or_support_location": "4.3 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.6",
+      "v5_title": "6.6 Adversarial behavior and answer selection",
+      "v7_or_support_location": "3.3, 4.3 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.7",
+      "v5_title": "6.7 Evidence needed for stronger claims",
+      "v7_or_support_location": "3.4 and 5.1",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "6.8",
+      "v5_title": "6.8 Conclusion",
+      "v7_or_support_location": "5.2",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "Appendix A",
+      "v5_title": "Appendix A Reproducibility and evidence sources",
+      "v7_or_support_location": "5.2 pinned evidence map; full source/provenance catalogue in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "Appendix B",
+      "v5_title": "Appendix B Claim scope and mathematical review",
+      "v7_or_support_location": "Claim qualifications retained across Chapters 2-5; full scope table in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "Appendix C",
+      "v5_title": "Appendix C Paired accuracy uncertainty",
+      "v7_or_support_location": "3.4 exact paired-interval argument",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "Appendix D",
+      "v5_title": "Appendix D Retrospective prediction analyses",
+      "v7_or_support_location": "4.2/5.2 qualification; complete peer/selected-answer data in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    },
+    {
+      "v5_section": "Appendix E",
+      "v5_title": "Appendix E Information flow and delayed repair diagrams",
+      "v7_or_support_location": "2.4 Figure 1 and 3.3 runtime flow; other diagrams in v5",
+      "preserved_support": "ThesisDocs/Masters_Thesis_Formal_v5.md"
+    }
+  ],
+  "interpretation": "All supporting content remains in the preserved extended report. Mapped summaries are not assertions that every original derivation, figure or numeric table is printed in v7."
+}

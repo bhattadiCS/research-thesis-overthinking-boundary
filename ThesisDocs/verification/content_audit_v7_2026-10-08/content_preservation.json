@@ -1,0 +1,299 @@
+{
+  "schema": "thesis-content-restoration-audit-v7",
+  "baseline_commit": "0bab2f17b6c5de8c04b585e6e44bfeea68c2eb96",
+  "core_comparison": "v6 primary thesis",
+  "full_support_comparison": "v5 extended report",
+  "checks": [
+    {
+      "name": "286 previously published/frozen files retain exact bytes",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "chapter1_introduction.md unchanged from v6",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "chapter2_mathematics.md unchanged from v6",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "chapter5_discussion.md unchanged from v6",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "chapter3_methods.md all other original paragraphs retained",
+      "passed": true,
+      "details": 20
+    },
+    {
+      "name": "chapter4_results.md all other original paragraphs retained",
+      "passed": true,
+      "details": 22
+    },
+    {
+      "name": "all 70 ordered v6 math expressions retained",
+      "passed": true,
+      "details": {
+        "v6": 70,
+        "v7": 73
+      }
+    },
+    {
+      "name": "all three scientific table bodies unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "all three figure paths and captions unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "portable feature count and explicit missing-confidence feature",
+      "passed": true,
+      "details": [
+        "step",
+        "parse_success",
+        "answer_present",
+        "confidence_centered",
+        "confidence_missing",
+        "confidence_delta",
+        "prefix_confidence_mean",
+        "log_generated_tokens",
+        "log_cumulative_generated_tokens",
+        "answer_changed",
+        "answer_streak",
+        "prefix_answer_changes",
+        "log_answer_characters",
+        "log_thought_characters",
+        "thought_numeric_density",
+        "thought_uncertainty_density",
+        "thought_verification_density",
+        "domain_gsm8k",
+        "domain_math",
+        "step_confidence_interaction",
+        "streak_confidence_interaction"
+      ]
+    },
+    {
+      "name": "q_current restored held-out metrics equal saved evaluation",
+      "passed": true,
+      "details": {
+        "target": "q_current",
+        "rows": 1380,
+        "auc": "0.7101",
+        "brier": "0.0976",
+        "ece_10_equal_width": "0.0222"
+      }
+    },
+    {
+      "name": "p_next restored held-out metrics equal saved evaluation",
+      "passed": true,
+      "details": {
+        "target": "p_next",
+        "rows": 1104,
+        "auc": "0.6923",
+        "brier": "0.0997",
+        "ece_10_equal_width": "0.0209"
+      }
+    },
+    {
+      "name": "restored generation contract ",
+      "passed": true,
+      "details": {
+        "batch_size": 32,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    },
+    {
+      "name": "restored generation contract adversarial_live/",
+      "passed": true,
+      "details": {
+        "batch_size": 32,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    },
+    {
+      "name": "restored generation contract learned_main/",
+      "passed": true,
+      "details": {
+        "batch_size": 32,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    },
+    {
+      "name": "restored generation contract learned_adversarial/",
+      "passed": true,
+      "details": {
+        "batch_size": 32,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    },
+    {
+      "name": "heuristic parameters match the executed manifest",
+      "passed": true,
+      "details": {
+        "confidence_drop": 15.0,
+        "confidence_threshold": 90.0,
+        "fixed_step": 2,
+        "max_steps": 5,
+        "min_peers": 0,
+        "min_steps": 2,
+        "mode": "heuristic",
+        "name": "confidence_stability_v1",
+        "peer_agreement_threshold": 1.0,
+        "stable_steps": 2,
+        "wobble_changes": 2
+      }
+    },
+    {
+      "name": "token/trajectory notation explicitly defined",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "four thesis structures inspected",
+      "passed": true,
+      "details": [
+        {
+          "file": "baeder.pdf",
+          "pages": 61,
+          "toc_physical_pages": [
+            4,
+            5
+          ],
+          "has_intro": true,
+          "has_theory_or_method": true,
+          "has_experiments_or_results": true
+        },
+        {
+          "file": "byerly.pdf",
+          "pages": 44,
+          "toc_physical_pages": [
+            5,
+            6
+          ],
+          "has_intro": true,
+          "has_theory_or_method": true,
+          "has_experiments_or_results": true
+        },
+        {
+          "file": "columbus.pdf",
+          "pages": 88,
+          "toc_physical_pages": [
+            5
+          ],
+          "has_intro": true,
+          "has_theory_or_method": true,
+          "has_experiments_or_results": true
+        },
+        {
+          "file": "galinkin.pdf",
+          "pages": 52,
+          "toc_physical_pages": [
+            5,
+            6
+          ],
+          "has_intro": true,
+          "has_theory_or_method": true,
+          "has_experiments_or_results": true
+        }
+      ]
+    }
+  ],
+  "restored_head_metrics": [
+    {
+      "target": "q_current",
+      "rows": 1380,
+      "auc": "0.7101",
+      "brier": "0.0976",
+      "ece_10_equal_width": "0.0222"
+    },
+    {
+      "target": "p_next",
+      "rows": 1104,
+      "auc": "0.6923",
+      "brier": "0.0997",
+      "ece_10_equal_width": "0.0209"
+    }
+  ],
+  "executed_live_manifest_bindings": [
+    {
+      "path": "research/outputs/semester2/online_stopping_20261002/live_manifest.json",
+      "sha256": "cdf10e924110c59aa85b6d64b016426f1fdcf518771d1174a67e6344a966e081",
+      "generation": {
+        "batch_size": 32,
+        "boundary": "first strictly valid complete JSON object or EOS or token cap",
+        "device": "cuda",
+        "do_sample": false,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0
+      },
+      "model_snapshot": "7ae557604adf67be50417f59c2c2f167def9a775"
+    },
+    {
+      "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_manifest.json",
+      "sha256": "cd75aed1d5f0d3e8117f3b0a78e0a74b455480e743e835f961cb2bf2d10b7faa",
+      "generation": {
+        "batch_size": 32,
+        "boundary": "first strictly valid complete JSON object or EOS or token cap",
+        "device": "cuda",
+        "do_sample": false,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0
+      },
+      "model_snapshot": "7ae557604adf67be50417f59c2c2f167def9a775"
+    },
+    {
+      "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_manifest.json",
+      "sha256": "ee064a32f7cfb309589de9e77c17e265b072353859f63d3ca392c9da42c6c729",
+      "generation": {
+        "batch_size": 32,
+        "boundary": "first strictly valid complete JSON object or EOS or token cap",
+        "device": "cuda",
+        "do_sample": false,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0
+      },
+      "model_snapshot": "7ae557604adf67be50417f59c2c2f167def9a775"
+    },
+    {
+      "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_manifest.json",
+      "sha256": "24c1d713450cc718a7aa5beab3a135384d373c5553d4deaa2c0fdfa555a0d5ea",
+      "generation": {
+        "batch_size": 32,
+        "boundary": "first strictly valid complete JSON object or EOS or token cap",
+        "device": "cuda",
+        "do_sample": false,
+        "max_new_tokens": 128,
+        "seed": 20261002,
+        "temperature": 0.0
+      },
+      "model_snapshot": "7ae557604adf67be50417f59c2c2f167def9a775"
+    }
+  ],
+  "evaluation_path": "research/outputs/semester2/prefix_model_v1/evaluation.json",
+  "evaluation_sha256": "659eca8d5e3a5949bbeb60df79c77654144fc76d221585d71d10a7b0afb3abf9",
+  "audit_script_sha256": "29e60449872cf7631740e81c2b9e8695e095b396e07ac3546b95a23d95d1033f",
+  "all_pass": true,
+  "scope": "Exact prior paragraph, math-expression, table, figure and source-value comparisons; preserved v5 contains further supporting content not printed in v7. This does not claim a lossless 83-to-34-page rewrite."
+}

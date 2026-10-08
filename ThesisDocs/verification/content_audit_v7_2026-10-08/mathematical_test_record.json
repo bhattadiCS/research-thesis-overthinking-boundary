@@ -1,0 +1,13 @@
+{
+  "command": "tmp/pdfs/pdfa_tools/venv/Scripts/python.exe -m pytest research/tests/test_mathematical_foundations.py research/tests/test_live_uncertainty.py -q",
+  "result": "21 passed in 5.54s",
+  "evidence_basis": "Prior v6 execution passed 21 tests on October 7; this v7 document-only revision performed no new test run. Matching research/test hashes justify reuse.",
+  "prior_result": "ThesisDocs/verification/concise_v6_2026-10-07/mathematical_test_record.json",
+  "prior_result_sha256": "d811a6835fc96a0dd47d4764400ef588053d8d650ddf0544172bca761c3b0f9a",
+  "test_file_sha256": {
+    "research/tests/test_mathematical_foundations.py": "47c7510883ed540d12e4f7d4781145c0fcf95f915c3b43ed015f84f4d6afe800",
+    "research/tests/test_live_uncertainty.py": "463ee4239afc56741cea5fd4f14d2cc28bbef83d933e52139b63603efae620cc"
+  },
+  "canonical_math_sha256": "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+  "subsequent_changes": "Only thesis authoring/layout and receipt scripts changed; research implementation and test sources remained frozen."
+}
