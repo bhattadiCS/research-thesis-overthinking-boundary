@@ -1,0 +1,35 @@
+{
+  "strict_tabular": {
+    "rows": 144440,
+    "tasks": 2948,
+    "auc": 0.8495096500918485
+  },
+  "strict_text": {
+    "rows": 144440,
+    "tasks": 2948,
+    "auc": 0.8089757413672247
+  },
+  "heldout_replay": {
+    "n": 276,
+    "stop_counts": {
+      "2": 275,
+      "3": 1
+    },
+    "baseline_correct": 29,
+    "active_correct": 33,
+    "baseline_tokens": 77799,
+    "active_tokens": 37897,
+    "saving": 0.5128857697399709,
+    "accuracy_delta": 0.014492753623188406,
+    "step_utilities_match": true
+  },
+  "learned_latency": {
+    "n": 4000,
+    "median": 0.059,
+    "p99": 0.3143149999999997,
+    "maximum": 0.9369
+  },
+  "heuristic_latency": {
+    "note": "Path unavailable; leave heuristic timing source reproduction to exact Agent C path."
+  }
+}

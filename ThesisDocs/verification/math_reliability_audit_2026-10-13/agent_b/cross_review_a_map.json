@@ -1,0 +1,70 @@
+[
+  {
+    "b_cross_id": "B-XA-01",
+    "a_claim_ids": [
+      "A-014",
+      "A-015"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_b/cross_review_a.md#B-XA-01",
+    "assumptions": "Recorded concise-v7 finite-horizon binary reward model; specific theorem/pair-sampling premise in the cited derivation."
+  },
+  {
+    "b_cross_id": "B-XA-02",
+    "a_claim_ids": [
+      "A-017",
+      "A-018",
+      "A-019",
+      "A-020",
+      "A-021"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_b/cross_review_a.md#B-XA-02",
+    "assumptions": "Recorded concise-v7 finite-horizon binary reward model; specific theorem/pair-sampling premise in the cited derivation."
+  },
+  {
+    "b_cross_id": "B-XA-03",
+    "a_claim_ids": [
+      "A-028",
+      "A-029",
+      "A-030"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_b/cross_review_a.md#B-XA-03",
+    "assumptions": "Recorded concise-v7 finite-horizon binary reward model; specific theorem/pair-sampling premise in the cited derivation."
+  },
+  {
+    "b_cross_id": "B-XA-04",
+    "a_claim_ids": [
+      "A-033",
+      "A-034",
+      "A-035",
+      "A-036"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_b/cross_review_a.md#B-XA-04",
+    "assumptions": "Recorded concise-v7 finite-horizon binary reward model; specific theorem/pair-sampling premise in the cited derivation."
+  },
+  {
+    "b_cross_id": "B-XA-05",
+    "a_claim_ids": [
+      "A-038",
+      "A-039"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_b/cross_review_a.md#B-XA-05",
+    "assumptions": "Recorded concise-v7 finite-horizon binary reward model; specific theorem/pair-sampling premise in the cited derivation."
+  },
+  {
+    "b_cross_id": "B-XA-06",
+    "a_claim_ids": [
+      "A-051",
+      "A-052",
+      "A-053",
+      "A-054"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_b/cross_review_a.md#B-XA-06",
+    "assumptions": "Recorded concise-v7 finite-horizon binary reward model; specific theorem/pair-sampling premise in the cited derivation."
+  }
+]

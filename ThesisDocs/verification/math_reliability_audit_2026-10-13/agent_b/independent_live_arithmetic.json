@@ -1,0 +1,135 @@
+[
+  {
+    "panel": "heuristic_main",
+    "source": "research/outputs/semester2/online_stopping_20261002/live_paired_results.csv",
+    "sha256": "c223a0263f254f4318159eb6d024e56d23e55f79a4c51026b81873de33eb5adf",
+    "n": 100,
+    "unique_tasks": 100,
+    "baseline_correct": 6,
+    "active_correct": 6,
+    "improved": 0,
+    "worsened": 0,
+    "baseline_completion": 22244,
+    "active_completion": 21591,
+    "baseline_prompt": 142498,
+    "active_prompt": 137574,
+    "saving_exact": "653/22244",
+    "saving_percent": 2.935623089372415,
+    "prompt_plus_completion_saving_percent": 3.385293367811487,
+    "accuracy_delta_points": 0.0,
+    "paired_cp_95_points": [
+      -4.2874030238438525,
+      4.2874030238438525
+    ],
+    "saving_bootstrap_percent": [
+      0.8507177794051558,
+      5.629574454428539
+    ],
+    "stopped_step_counts": {
+      "2": 4,
+      "3": 1,
+      "4": 1,
+      "5": 94
+    },
+    "shared_prefix_identical": 94,
+    "limits": "Arithmetic relative to saved frozen labels and ledger token counts; does not independently adjudicate generated answers, verify generation events or establish population sampling."
+  },
+  {
+    "panel": "adversarial_live",
+    "source": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_paired_results.csv",
+    "sha256": "5f1e02917543d8e351c0c434a79c4a2152ac4ca47a56170233729875c224981e",
+    "n": 20,
+    "unique_tasks": 20,
+    "baseline_correct": 1,
+    "active_correct": 1,
+    "improved": 0,
+    "worsened": 0,
+    "baseline_completion": 4736,
+    "active_completion": 4578,
+    "baseline_prompt": 27641,
+    "active_prompt": 26143,
+    "saving_exact": "79/2368",
+    "saving_percent": 3.3361486486486487,
+    "prompt_plus_completion_saving_percent": 5.114741946443463,
+    "accuracy_delta_points": 0.0,
+    "paired_cp_95_points": [
+      -19.675967970462555,
+      19.675967970462555
+    ],
+    "saving_bootstrap_percent": [
+      0.0,
+      8.79643121175892
+    ],
+    "stopped_step_counts": {
+      "2": 1,
+      "3": 1,
+      "5": 18
+    },
+    "shared_prefix_identical": 20,
+    "limits": "Arithmetic relative to saved frozen labels and ledger token counts; does not independently adjudicate generated answers, verify generation events or establish population sampling."
+  },
+  {
+    "panel": "learned_main",
+    "source": "research/outputs/semester2/online_stopping_20261002/learned_main/live_paired_results.csv",
+    "sha256": "f6abd0aeb1cc0eb6b3328b53be661902b3d9ea4c43e2593ee570ca04ded99850",
+    "n": 100,
+    "unique_tasks": 100,
+    "baseline_correct": 6,
+    "active_correct": 7,
+    "improved": 1,
+    "worsened": 0,
+    "baseline_completion": 22244,
+    "active_completion": 9674,
+    "baseline_prompt": 142498,
+    "active_prompt": 43874,
+    "saving_exact": "6285/11122",
+    "saving_percent": 56.5096205718396,
+    "prompt_plus_completion_saving_percent": 67.49584198322225,
+    "accuracy_delta_points": 1.0,
+    "paired_cp_95_points": [
+      -4.274825032732632,
+      6.211922021093292
+    ],
+    "saving_bootstrap_percent": [
+      54.825694263737546,
+      58.01191943551758
+    ],
+    "stopped_step_counts": {
+      "2": 100
+    },
+    "shared_prefix_identical": 100,
+    "limits": "Arithmetic relative to saved frozen labels and ledger token counts; does not independently adjudicate generated answers, verify generation events or establish population sampling."
+  },
+  {
+    "panel": "learned_adversarial",
+    "source": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_paired_results.csv",
+    "sha256": "75e4b826bfd6bc064de6a8c4dec71abac1cded0039afb6ea4d53ac66cc8cf9f4",
+    "n": 20,
+    "unique_tasks": 20,
+    "baseline_correct": 1,
+    "active_correct": 1,
+    "improved": 0,
+    "worsened": 0,
+    "baseline_completion": 4736,
+    "active_completion": 2268,
+    "baseline_prompt": 27641,
+    "active_prompt": 8115,
+    "saving_exact": "617/1184",
+    "saving_percent": 52.111486486486484,
+    "prompt_plus_completion_saving_percent": 67.93093862927387,
+    "accuracy_delta_points": 0.0,
+    "paired_cp_95_points": [
+      -19.675967970462555,
+      19.675967970462555
+    ],
+    "saving_bootstrap_percent": [
+      45.85667925964603,
+      57.17264824294295
+    ],
+    "stopped_step_counts": {
+      "2": 20
+    },
+    "shared_prefix_identical": 20,
+    "limits": "Arithmetic relative to saved frozen labels and ledger token counts; does not independently adjudicate generated answers, verify generation events or establish population sampling."
+  }
+]

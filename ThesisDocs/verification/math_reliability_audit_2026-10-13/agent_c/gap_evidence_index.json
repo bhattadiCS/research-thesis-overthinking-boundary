@@ -1,0 +1,150 @@
+{
+  "schema": "agent-c-final-gap-evidence-index-v1",
+  "date": "2026-10-13",
+  "scope": "Accessible local package/workspace evidence; no refit, model generation, grading, arbitrary pickle execution or external search.",
+  "commands": [
+    "rg workspace file inventory queries are recorded in gap_search.json",
+    "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.py",
+    "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.py",
+    "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_finish.py"
+  ],
+  "files": [
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "bytes": 2458804,
+      "sha256": "cfbeb85b6b027cb58a31545917b741769cf59e7e934957876681f719dde9f37c"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+      "bytes": 7903,
+      "sha256": "f92523dbc9f5bab8c29eb791ee28df92ef41c5514811ffe2f57655630e68524d"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.py",
+      "bytes": 5792,
+      "sha256": "0581d790641194bc5f063d87b611a5eea30de203ad91497fc71d590dfaae2a33"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_finish.py",
+      "bytes": 12156,
+      "sha256": "fc9c707fb61a2c10ba6ea4516d6a59d2f6c889bb4a0c4c761a0976a51b5d4a84"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.py",
+      "bytes": 4156,
+      "sha256": "aae0764918fc67bdea66b3c2bf91e7bb76e403a4cf9f6ce03f18afd8641a8f04"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.json",
+      "bytes": 53252,
+      "sha256": "41d4b690ccad6eec6651ee0d4bb2df8b2069bd6221921ddb8a3793cb1850af8d"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_candidate_paths.txt",
+      "bytes": 1039346,
+      "sha256": "19908653e223f0715930226d37e1e454107c8af7f5d2255a2c096124d4293f09"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_workspace_paths.txt",
+      "bytes": 38112,
+      "sha256": "7f897aba14773505864e434e218b8a1451e21a7b72c9e067ffa52631c76ddf68"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/00_Thesis_v7_Publication_Package_2026-10-08.json",
+      "bytes": 23471,
+      "sha256": "d110939731ced99526da9e65a5b1cdd95b7adf3475450a6b458ff8d621bb7ed6"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/01_Thesis_v6_Publication_Package_2026-10-07.json",
+      "bytes": 21972,
+      "sha256": "e4b96dc9c42b0c300e64fa3f761ddba650e8cd1543b4a8994f72af87f6cc12fc"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/02_Thesis_v5_Publication_Package_2026-10-06.json",
+      "bytes": 58911,
+      "sha256": "df03365c83a974f4f96a7a4bf36e61378dd502dae5319e11fafa4547e5f7a20c"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/03_Thesis_v4_Publication_Package_2026-10-06.json",
+      "bytes": 55263,
+      "sha256": "38cbf087c20c71b33568b8b63cbe9590dde66cb5ca7000f90eb9761c28c50ea0"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/04_Thesis_v4_Audited_Research_Supplement.json",
+      "bytes": 51729,
+      "sha256": "5b3a4e614d96bf45567743c44e39b1916dcca6196d822ee5c82ec15adfa139aa"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/05_anonymous_stopping_supplement_v1.json",
+      "bytes": 31007,
+      "sha256": "c90b242bb1dcc509e6829a13b56864c4a8a4a9021e5aa20c4fd0179492ffdb83"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/06_real_traces_colab_smoke.json",
+      "bytes": 2720,
+      "sha256": "e1082c84de2dbf41314f66e58c52eab89a55a5b317e872e9cbcf42f80c892388"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/07_real_traces_colab.json",
+      "bytes": 2086,
+      "sha256": "0d0a0ec80ec84d65f15b8f2a4736485dfad9f3239e7f77fe40344874bd86755d"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/08_Thesis_v4_Publication_Package_2026-10-06.json",
+      "bytes": 55263,
+      "sha256": "38cbf087c20c71b33568b8b63cbe9590dde66cb5ca7000f90eb9761c28c50ea0"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/09_Thesis_v4_Audited_Research_Supplement.json",
+      "bytes": 51729,
+      "sha256": "5b3a4e614d96bf45567743c44e39b1916dcca6196d822ee5c82ec15adfa139aa"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/10_real_traces_colab_smoke_deepseek_r1_distill_1p5b.json",
+      "bytes": 3634,
+      "sha256": "446c4ff773e87aac56dcb5a16a1911fca9d0a426a754dba14a19db10d3f3a989"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/11_Release-26.09.0-0.json",
+      "bytes": 89969,
+      "sha256": "45983b3782110aa9db4030b6a89fcb520e9d063055545a9cd45f2c8a66bd298d"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/13_verapdf-installer.json",
+      "bytes": 584,
+      "sha256": "8c5e4dfbb823146c89b72d095fcaf5cff382f25d4cceebcfb695ea1ab52a98a0"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/14_anonymous_stopping_supplement_v1.json",
+      "bytes": 31007,
+      "sha256": "c90b242bb1dcc509e6829a13b56864c4a8a4a9021e5aa20c4fd0179492ffdb83"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/15_Thesis_v5_Publication_Package_2026-10-06.json",
+      "bytes": 58911,
+      "sha256": "df03365c83a974f4f96a7a4bf36e61378dd502dae5319e11fafa4547e5f7a20c"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/16_Thesis_v7_Publication_Package_2026-10-08.json",
+      "bytes": 23471,
+      "sha256": "d110939731ced99526da9e65a5b1cdd95b7adf3475450a6b458ff8d621bb7ed6"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/17_Thesis_v6_Publication_Package_2026-10-07.json",
+      "bytes": 21972,
+      "sha256": "e4b96dc9c42b0c300e64fa3f761ddba650e8cd1543b4a8994f72af87f6cc12fc"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/18_official_template.json",
+      "bytes": 365,
+      "sha256": "db3505bdd918dc3befc21973d74aa5c175340ee2bfca74350a066df652937670"
+    },
+    {
+      "path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_zip_inventories/19_tectonic.json",
+      "bytes": 129,
+      "sha256": "6a12098406f7c535b095e322de6b9f9f1f86a57de7696224f92887dd28569449"
+    }
+  ],
+  "conclusions": "Exact N1 heldout effects, Blackwell per-row stack scores and original7B exact stopped endpoints remain NOT ESTABLISHED. Original7B baseline reproduced; rounded parameter/feature metadata retained but insufficient for exact stopped-token identity. Advanced checkpoint arrays belong a separate202440-row experiment.",
+  "outer_bounds": "Aggregate precision intervals are conservative outer bounds; shared coefficients mean endpoints need not be jointly attainable."
+}

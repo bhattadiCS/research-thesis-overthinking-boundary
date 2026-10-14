@@ -1,0 +1,13 @@
+{
+  "timestamp_utc": "2026-10-14T02:18:28.555508+00:00",
+  "claims": 1016,
+  "math_occurrences": 257,
+  "paragraphs": 255,
+  "table_cells": 453,
+  "source_bindings_match": true,
+  "outcomes": {
+    "VERIFIED UNDER RECORDED ASSUMPTIONS": 431,
+    "NOT ESTABLISHED": 585
+  },
+  "inventory_is_not_exhaustive_verification": true
+}

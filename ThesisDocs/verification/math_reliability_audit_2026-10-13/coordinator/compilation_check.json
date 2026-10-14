@@ -1,0 +1,32 @@
+[
+  {
+    "version": "v7",
+    "compiled_body_matches": true,
+    "builder_abstract_in_compiled": true,
+    "body_sha256": "fa60f9a5782670df6eff7f887324041d5e333ebf72111aba6547f0c2bfb9856c",
+    "source_paths": [
+      "ThesisDocs/concise_v7/chapter1_introduction.md",
+      "ThesisDocs/concise_v7/chapter2_mathematics.md",
+      "ThesisDocs/concise_v7/chapter3_methods.md",
+      "ThesisDocs/concise_v7/chapter4_results.md",
+      "ThesisDocs/concise_v7/chapter5_discussion.md",
+      "ThesisDocs/references.md"
+    ]
+  },
+  {
+    "version": "v5",
+    "compiled_body_matches": true,
+    "builder_abstract_in_compiled": true,
+    "body_sha256": "25c6a2ea1ac3b66c7c80be7d978321d022c670e64d0741b2d64a2fe5f1345fe5",
+    "source_paths": [
+      "ThesisDocs/chapters/chapter1_intro.md",
+      "ThesisDocs/chapters/chapter2_theory.md",
+      "ThesisDocs/chapters/chapter3_methodology.md",
+      "ThesisDocs/chapters/chapter4_empirical.md",
+      "ThesisDocs/chapters/chapter5_online.md",
+      "ThesisDocs/chapters/chapter6_discussion.md",
+      "ThesisDocs/references.md",
+      "ThesisDocs/appendices.md"
+    ]
+  }
+]

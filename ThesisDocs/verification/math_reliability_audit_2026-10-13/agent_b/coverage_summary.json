@@ -1,0 +1,12 @@
+{
+  "mapped_v5_units": 1071,
+  "outcomes": {
+    "NOT ESTABLISHED": 549,
+    "VERIFIED UNDER RECORDED ASSUMPTIONS": 522
+  },
+  "v5_chapter2_units": 366,
+  "v5_chapter2_unresolved": [
+    "V5-0048"
+  ],
+  "complete_inventory_mapping_not_complete_verification": true
+}

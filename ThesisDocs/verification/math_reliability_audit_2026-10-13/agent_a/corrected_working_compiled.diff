@@ -1,0 +1,18 @@
+--- C:\Aditya_Data\Personal\ResearchThesis\ThesisDocs\Masters_Thesis_Formal_v5.md
++++ C:\Aditya_Data\Personal\ResearchThesis\ThesisDocs\verification\math_reliability_audit_2026-10-13\corrected_extended_v5_math_audit1\ThesisDocs\Masters_Thesis_Formal_v5_math_audit1.md
+@@ -912,13 +912,13 @@
+ 
+ | Observed loss pattern | Count | Share of losses |
+ | --- | --- | --- |
+-| No extracted candidate at the stop | 196 | 3.42% |
++| Missing normalized answer at the stop | 196 | 3.42% |
+ | An earlier decision-eligible candidate was correct | 460 | 8.02% |
+ | Step one was correct; no eligible pre-stop answer was correct | 600 | 10.46% |
+ | First eligible correct answer arrived one step after the stop | 1,706 | 29.75% |
+ | First eligible correct answer arrived at least two steps after the stop | 2,773 | 48.35% |
+ 
+-Every observed utility loss stops on an incorrect candidate and ends correctly. Table 7 applies mutually exclusive priority rules, with empty stops first. The 48.35-percent late-repair group first reaches an eligible correct answer at least two steps after stopping; variable horizons prevent interpreting this as a universal step-five outcome.
++Every observed utility loss stops on an incorrect candidate and ends correctly. Table 7 applies mutually exclusive priority rules, testing missing recorded normalized answers first (blank or CSV-missing values); raw extracted answer text can still be present. The 48.35-percent late-repair group first reaches an eligible correct answer at least two steps after stopping; variable horizons prevent interpreting this as a universal step-five outcome.
+ 
+ The taxonomy conditions on archived labels and the stored policy. Recomputation performs no fresh regrading or probe training, and excludes old classification-tag AUCs. These patterns cannot prove that all online predictors must fail. Section 3.5's grader checks cover specified behaviors; independent adjudication is needed to assess labeling errors' effect on the partition.
+ 

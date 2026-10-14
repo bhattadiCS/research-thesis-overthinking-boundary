@@ -1,0 +1,245 @@
+{
+  "heuristic_main": {
+    "tasks": 100,
+    "baseline_correct": 6,
+    "active_correct": 6,
+    "improvements": 0,
+    "worsenings": 0,
+    "completion_tokens": [
+      22244,
+      21591
+    ],
+    "completion_savings": 0.02935623089372419,
+    "accuracy_interval": [
+      -0.042874030238438526,
+      0.042874030238438526
+    ],
+    "token_bootstrap_interval": [
+      0.008507177794051532,
+      0.056295744544285375
+    ],
+    "prompt_tokens": [
+      142498,
+      137574
+    ],
+    "total_token_savings": 0.033852933678114816,
+    "stop_counts": {
+      "('baseline', 5)": 100,
+      "('active', 5)": 94,
+      "('active', 2)": 4,
+      "('active', 4)": 1,
+      "('active', 3)": 1
+    },
+    "termination_reasons": {
+      "('baseline', 'terminal_horizon')": 100,
+      "('active', 'terminal_horizon')": 94,
+      "('active', 'stable_high_confidence')": 6
+    },
+    "strict_json": {
+      "baseline": 88,
+      "active": 86
+    },
+    "batch_totals": {
+      "never": {
+        "prompt_tokens": 142498.0,
+        "generated_tokens": 22244.0,
+        "padded_prefill_token_slots": 231856.0,
+        "decode_token_slots": 57856.0,
+        "model_seconds": 1127.0454995000036,
+        "tokenize_seconds": 0.6630873997928565
+      },
+      "confidence_stability_v1": {
+        "prompt_tokens": 137574.0,
+        "generated_tokens": 21591.0,
+        "padded_prefill_token_slots": 222781.0,
+        "decode_token_slots": 56128.0,
+        "model_seconds": 1099.2063722996973,
+        "tokenize_seconds": 0.7527260002680116
+      }
+    },
+    "shared_prefix_matches": 94
+  },
+  "heuristic_traps": {
+    "tasks": 20,
+    "baseline_correct": 1,
+    "active_correct": 1,
+    "improvements": 0,
+    "worsenings": 0,
+    "completion_tokens": [
+      4736,
+      4578
+    ],
+    "completion_savings": 0.033361486486486513,
+    "accuracy_interval": [
+      -0.19675967970462555,
+      0.19675967970462555
+    ],
+    "token_bootstrap_interval": [
+      0.0,
+      0.0879643121175892
+    ],
+    "prompt_tokens": [
+      27641,
+      26143
+    ],
+    "total_token_savings": 0.051147419464434685,
+    "stop_counts": {
+      "('baseline', 5)": 20,
+      "('active', 5)": 18,
+      "('active', 2)": 1,
+      "('active', 3)": 1
+    },
+    "termination_reasons": {
+      "('baseline', 'terminal_horizon')": 20,
+      "('active', 'terminal_horizon')": 18,
+      "('active', 'stable_high_confidence')": 2
+    },
+    "strict_json": {
+      "baseline": 14,
+      "active": 11
+    },
+    "batch_totals": {
+      "never": {
+        "prompt_tokens": 27641.0,
+        "generated_tokens": 4736.0,
+        "padded_prefill_token_slots": 41560.0,
+        "decode_token_slots": 12660.0,
+        "model_seconds": 245.13545120006893,
+        "tokenize_seconds": 0.2058550000656393
+      },
+      "confidence_stability_v1": {
+        "prompt_tokens": 26143.0,
+        "generated_tokens": 4578.0,
+        "padded_prefill_token_slots": 38847.0,
+        "decode_token_slots": 12030.0,
+        "model_seconds": 231.66791289998218,
+        "tokenize_seconds": 0.1457527000457045
+      }
+    },
+    "shared_prefix_matches": 20
+  },
+  "learned_main": {
+    "tasks": 100,
+    "baseline_correct": 6,
+    "active_correct": 7,
+    "improvements": 1,
+    "worsenings": 0,
+    "completion_tokens": [
+      22244,
+      9674
+    ],
+    "completion_savings": 0.5650962057183959,
+    "accuracy_interval": [
+      -0.04274825032732631,
+      0.06211922021093292
+    ],
+    "token_bootstrap_interval": [
+      0.5482569426373755,
+      0.5801191943551758
+    ],
+    "prompt_tokens": [
+      142498,
+      43874
+    ],
+    "total_token_savings": 0.6749584198322225,
+    "stop_counts": {
+      "('baseline', 5)": 100,
+      "('active', 2)": 100
+    },
+    "termination_reasons": {
+      "('baseline', 'terminal_horizon')": 100,
+      "('active', 'estimated_drift_nonpositive')": 100
+    },
+    "strict_json": {
+      "baseline": 88,
+      "active": 83
+    },
+    "batch_totals": {
+      "never": {
+        "prompt_tokens": 142498.0,
+        "generated_tokens": 22244.0,
+        "padded_prefill_token_slots": 231856.0,
+        "decode_token_slots": 57856.0,
+        "model_seconds": 1127.0454995000036,
+        "tokenize_seconds": 0.6630873997928565
+      },
+      "learned_prefix_drift_v1": {
+        "prompt_tokens": 43874.0,
+        "generated_tokens": 9674.0,
+        "padded_prefill_token_slots": 58624.0,
+        "decode_token_slots": 23564.0,
+        "model_seconds": 343.2535203997977,
+        "tokenize_seconds": 0.2055147000355642
+      }
+    },
+    "shared_prefix_matches": 100
+  },
+  "learned_traps": {
+    "tasks": 20,
+    "baseline_correct": 1,
+    "active_correct": 1,
+    "improvements": 0,
+    "worsenings": 0,
+    "completion_tokens": [
+      4736,
+      2268
+    ],
+    "completion_savings": 0.5211148648648649,
+    "accuracy_interval": [
+      -0.19675967970462555,
+      0.19675967970462555
+    ],
+    "token_bootstrap_interval": [
+      0.4585667925964603,
+      0.5717264824294295
+    ],
+    "prompt_tokens": [
+      27641,
+      8115
+    ],
+    "total_token_savings": 0.6793093862927386,
+    "stop_counts": {
+      "('baseline', 5)": 20,
+      "('active', 2)": 20
+    },
+    "termination_reasons": {
+      "('baseline', 'terminal_horizon')": 20,
+      "('active', 'estimated_drift_nonpositive')": 20
+    },
+    "strict_json": {
+      "baseline": 14,
+      "active": 10
+    },
+    "batch_totals": {
+      "never": {
+        "prompt_tokens": 27641.0,
+        "generated_tokens": 4736.0,
+        "padded_prefill_token_slots": 41560.0,
+        "decode_token_slots": 12660.0,
+        "model_seconds": 245.13545120006893,
+        "tokenize_seconds": 0.2058550000656393
+      },
+      "learned_prefix_drift_v1": {
+        "prompt_tokens": 8115.0,
+        "generated_tokens": 2268.0,
+        "padded_prefill_token_slots": 10420.0,
+        "decode_token_slots": 5100.0,
+        "model_seconds": 74.1156049000565,
+        "tokenize_seconds": 0.0866372999735176
+      }
+    },
+    "shared_prefix_matches": 20
+  },
+  "learned_latency": {
+    "decisions": 4000,
+    "median": 0.059,
+    "p99": 0.3143149999999997,
+    "maximum": 0.9369,
+    "columns": [
+      "repeat",
+      "task_id",
+      "step",
+      "latency_ms"
+    ]
+  }
+}

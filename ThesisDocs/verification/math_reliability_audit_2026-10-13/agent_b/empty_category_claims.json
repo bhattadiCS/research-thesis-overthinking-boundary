@@ -1,0 +1,50 @@
+[
+  {
+    "id": "B-F01",
+    "coordinator_ids": ["V5-0669"],
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 915,
+    "claim": "No extracted candidate at the stop",
+    "outcome": "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS",
+    "category": "presentation issue / ambiguous measured field",
+    "severity": "low",
+    "evidence": ["agent_b/empty_category_review.md", "agent_b/empty_category_independent.json", "research/classify_losses.py:406-408", "tools/summarize_failure_audit.py:19"],
+    "correction": "Missing normalized answer at the stop",
+    "reason": "Predicate uses normalized field after archived missing-value parsing, while108 of196 original raw answer literals are nonempty. This lexical count does not establish semantic validity of any raw string."
+  },
+  {
+    "id": "B-F02",
+    "coordinator_ids": ["V5-0684"],
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 921,
+    "claim": "with empty stops first",
+    "outcome": "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS",
+    "category": "presentation issue / ambiguous priority predicate",
+    "severity": "low",
+    "evidence": ["agent_b/empty_category_review.md", "agent_b/empty_category_independent.json", "research/classify_losses.py:427-441"],
+    "correction": "Table7 applies mutually exclusive priority rules, with missing normalized answers assigned first under the archived CSV reader's convention; raw answer text can still be present.",
+    "reason": "Frozen no-regrade analysis gives this predicate first effective priority. It is neither a test of raw-answer emptiness nor a proof that no candidate text was extracted.",
+    "scope": "Only this wording clause is adjudicated here; the other claims in the paragraph retain their separately recorded evidence."
+  },
+  {
+    "id": "B-E01",
+    "coordinator_ids": ["V5-0670", "V5-0671"],
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 915,
+    "claim": "196 cases;3.42 percent of5735 losses",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "exact frozen-source identity",
+    "evidence": ["agent_b/check_empty_category.py", "agent_b/empty_category_independent.json"],
+    "assumptions": "Frozen loss population and original default-NA predicate; source-qualified cell/run/step join, actual sanitizer and keep-first duplicate rule. No semantic regrading.",
+    "result": "All5735 original loss stops join; all196 predicate hits match stored B category with zero mismatches.196/5735*100=3.4176111595, rounding to3.42."
+  },
+  {
+    "id": "B-E02",
+    "claim": "Literal source fields in all196 B cases",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "exact frozen-source identity",
+    "evidence": ["agent_b/check_empty_category.py", "agent_b/empty_category_independent.json"],
+    "result": "108 nonempty raw answer literals,88 empty raw answer literals;191 empty normalized literals and5 literal n/a normalized values read as missing by archived default parser.108 raw literals include17 None,5 N/A and86 other strings.",
+    "limits": "Lexical presence only; no claim that these raw strings are correct, usable or semantically meaningful candidates."
+  }
+]

@@ -1,0 +1,2213 @@
+[
+  {
+    "inventory_id": "V7-0011",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 29,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-026",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Averaged saved compute can exceed an accuracy loss (e.g. accuracy -.1, cost saving .2 gives utility +.1); delayed repair gives regret. Questions themselves are not asserted results.",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0014",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 37,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-021",
+      "A-029",
+      "A-035",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; D1-D5 reconstruct the stated mathematical specialization. Contribution novelty/bibliographic comparison and empirical contribution remain coordinator/C scope.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0015",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 39,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-008",
+      "A-050",
+      "A-065"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Calibration and fixed-time intervals do not supply conditional or time-uniform guarantees. Actual fitted method is empirical scope.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0018",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0019",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0020",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0021",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0022",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0023",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0024",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0025",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0026",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0027",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0028",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0029",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0030",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 54,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-003"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0031",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 54,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-003"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0032",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 56,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-004",
+      "A-005"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0033",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 58,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-006",
+      "A-007",
+      "A-008"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0034",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 58,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-006",
+      "A-007",
+      "A-008"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0035",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 58,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-006",
+      "A-007",
+      "A-008"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0036",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 60,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-009",
+      "A-010"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0037",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 60,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-009",
+      "A-010"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0038",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 60,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-009",
+      "A-010"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0039",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 60,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-009",
+      "A-010"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0040",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 62,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-011"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0041",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 62,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-011"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0042",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 64,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-012",
+      "A-013"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0043",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 64,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-012",
+      "A-013"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0044",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 64,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-012",
+      "A-013"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0045",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 66,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-014"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0046",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 66,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-014"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0047",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 68,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-015"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0048",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 68,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-015"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0049",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 68,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-015"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0050",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 68,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-015"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0051",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 70,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-016"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0052",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 74,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-017"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; The time range t<N is the hazard-definition domain.",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0053",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 74,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-017"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; The time range t<N is the hazard-definition domain.",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0054",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 76,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-017"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0055",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 76,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-017"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0056",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 78,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-018"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0057",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 80,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-019"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0058",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 80,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-019"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0059",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 82,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-020"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0060",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 82,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-020"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0061",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 84,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-021"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0062",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 84,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-021"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0063",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 86,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-022",
+      "A-023",
+      "A-024"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0064",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 88,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-025",
+      "A-026",
+      "A-027"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0065",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 88,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-025",
+      "A-026",
+      "A-027"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0066",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 92,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-028"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Ferguson primary text accessed; finite recursion independently derived in D3. Book metadata is coordinator scope.",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0067",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 94,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-028"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0068",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 94,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-028"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0069",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 96,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-029"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0070",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 96,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-029"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0071",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 96,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-029"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0072",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 96,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-029"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0073",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0074",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0075",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0076",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0077",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0078",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0079",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0080",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0081",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0082",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-030"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0083",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 100,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-031",
+      "A-032"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0084",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 100,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-031",
+      "A-032"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0085",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 104,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-033"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0086",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 104,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-033"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0087",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 106,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-034"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0088",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 106,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-034"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0089",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 108,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-035"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0090",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 108,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-035"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0091",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 110,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-036"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0092",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 110,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-036"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0093",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-037",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0094",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-037",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0095",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-037",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0096",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-037",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0097",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-037",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0098",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-037",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0099",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-037",
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0100",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 114,
+    "kind": "figure",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "NOT ESTABLISHED",
+    "agent_a_claim_ids": [
+      "A-038"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Underlying delayed-repair mathematics is derived in D5; this image has not been visually inspected by A.",
+    "remaining_evidence": "Rendered image correspondence remains coordinator scope.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0101",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 116,
+    "kind": "caption",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-038",
+      "A-039"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Caption mathematical values, persistence failure and distinct theoretical/live floor are checked by D5.",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0102",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 118,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-039",
+      "A-040"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0103",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 118,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-039",
+      "A-040"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0140",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 147,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-041"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0141",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 149,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-042"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0142",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-043",
+      "A-044",
+      "A-045",
+      "A-046"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0143",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-043",
+      "A-044",
+      "A-045",
+      "A-046"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0144",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-043",
+      "A-044",
+      "A-045",
+      "A-046"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0145",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-043",
+      "A-044",
+      "A-045",
+      "A-046"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0146",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-043",
+      "A-044",
+      "A-045",
+      "A-046"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0147",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-043",
+      "A-044",
+      "A-045",
+      "A-046"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0148",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 153,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-047"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0150",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 159,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-048"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0151",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 161,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-049"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0152",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 161,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-049"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0153",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 161,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-049"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0154",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 161,
+    "kind": "equation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-049"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0158",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 169,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-050"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0161",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0162",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0163",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0164",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0165",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0166",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0167",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0168",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0169",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0170",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 179,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-053"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0171",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 179,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-053"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0172",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 181,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-054",
+      "A-055"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0173",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 181,
+    "kind": "equation",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-054",
+      "A-055"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Required independent central second review pending Agent B.",
+    "second_review_pending": true
+  },
+  {
+    "inventory_id": "V7-0174",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 188,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-056"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0175",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 190,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-027"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Population averages cannot establish a per-prefix conditional action. Counts/interval construction require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0177",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 194,
+    "kind": "caption",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-027"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Zero gain differs from zero accuracy; panel crossings do not determine every conditional action. Plotted bands/image require C/coordinator.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0178",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 196,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-057"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0179",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 200,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-043",
+      "A-047"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Utility per trajectory is not accuracy percentage points, and ranking/calibration improvement is not an optimality theorem. Actual contrast signs require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0221",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 216,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-058",
+      "A-059"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0222",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 218,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-047"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Ranking summaries alone cannot establish unique model optimality or calibrated runtime probabilities; AUC inputs/numbers require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0223",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 220,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-060"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0225",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 224,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-061"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0226",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 228,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-062"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0227",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 230,
+    "kind": "caption",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-051",
+      "A-052",
+      "A-053",
+      "A-055"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Conditional mathematical coverage is valid; table sampling/token/pair provenance requires C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0263",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 239,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-016",
+      "A-055"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Prefix disagreement limits literal same-prefix continuation interpretation; fixed traps lack randomized adversarial-population coverage. Counts require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0264",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 241,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-045",
+      "A-046",
+      "A-066"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Completion savings do not establish system savings. Counts/timing require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0265",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 243,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Conditional displayed arithmetic .9369<10 is correct; latency measurement and component inclusion require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0266",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 245,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-063"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0268",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 249,
+    "kind": "caption",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-062"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Uniform two-response action provides no exhibited adaptive allocation over fixed two. Uniformity/figure values require C/coordinator.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0269",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 251,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-062"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Nearly constant stop budgets provide little exhibited adaptation; all percentages/intervals/causal executable provenance require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0270",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 258,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-021",
+      "A-029",
+      "A-035",
+      "A-047",
+      "A-062"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Binary transitions and conditional stopping argument verified; controlled/live empirical conclusions require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0271",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 260,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-003",
+      "A-004"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Binary grader endpoint does not imply rationale validity or universal semantic accuracy. Finite regression cases do not prove all labels.",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0272",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 262,
+    "kind": "paragraph",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-064",
+      "A-065"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+    "remaining_evidence": "",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0273",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 264,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-041",
+      "A-055"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Task holdout cannot logically exclude pretraining overlap; repeated data-dependent selection can invalidate confirmation. Actual panel/seed/design facts require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0274",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 266,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-066",
+      "A-046"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Total executed-resource cost and possible peer-cost excess are conditional deductions; archived fleet evidence claims require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0275",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 270,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-067"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Hash identity is distinct from scientific provenance/labels/sampling. Actual manifest/source coverage requires coordinator/C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  },
+  {
+    "inventory_id": "V7-0276",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 272,
+    "kind": "paragraph",
+    "outcome": "NOT ESTABLISHED",
+    "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "agent_a_claim_ids": [
+      "A-029",
+      "A-035",
+      "A-038",
+      "A-062"
+    ],
+    "reviewer": "Agent A",
+    "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Conditional mathematics verified; broad empirical implementation/conclusion premises require C.",
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "second_review_pending": false
+  }
+]

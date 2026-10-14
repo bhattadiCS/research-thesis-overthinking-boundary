@@ -1,0 +1,76 @@
+[
+  {
+    "id": "D-MODEL",
+    "conditions": "Finite deterministic integer horizon/floor; measurable variables/selector/grader; increasing decision filtration; bounded binary reward; adapted nonnegative nondecreasing cumulative cost with E K_N finite.",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": [
+      "agent_a/review.md D1-D4",
+      "agent_b/review.md",
+      "agent_b/cross_review_a.md"
+    ]
+  },
+  {
+    "id": "D-LABEL-ENDPOINT",
+    "conditions": "Frozen correctness labels and selected-answer convention define each analysis endpoint; semantic truth of every label is not independently established.",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_c/prefix_source_independent.json",
+      "agent_c/historical_parser_comparison.json"
+    ]
+  },
+  {
+    "id": "D-PERSISTENCE",
+    "conditions": "After the first nonpositive true conditional drift, every later eligible true conditional drift is nonpositive a.s.; not established for fitted/live process.",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_a/review.md D4",
+      "agent_b/cross_review_a.md B-XA-04"
+    ]
+  },
+  {
+    "id": "D-COVERAGE",
+    "conditions": "Simultaneous valid intervals for the actual post-information conditional targets, or bounded independent fixed-count probes for the stated pre-probe target with justified target alignment.",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_a/cross_review_b.md AXB3-6",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "D-SAMPLING",
+    "conditions": "iid task pairs for exact binomial reference coverage; task/cell bootstrap conditional on fixed observed panel; independent unseen-task/model/seed generalization not established.",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_a/review.md D6",
+      "coordinator/independent_numerics.json",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "D-PREFIX",
+    "conditions": "Causal observed prefixes; frozen parameters; no gold/future API inputs; selector/targets align; declared floors/horizons and charged resources.",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": [
+      "agent_c/runtime_compare.json",
+      "agent_c/prefix_source_independent.json",
+      "coordinator/independent_scores.json"
+    ]
+  },
+  {
+    "id": "D-FROZEN-CACHE",
+    "conditions": "N2/N3/N4 reproductions begin at saved per-cell endpoint totals, not independent refitting or recovery of all original fitted decisions.",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": [
+      "agent_a/numerical_cross_review.json",
+      "agent_c/controls_independent.json"
+    ]
+  },
+  {
+    "id": "D-HISTORY-GAPS",
+    "conditions": "Missing N1 heldout predictions, stack per-row arrays and original 7B replay stops prevent exact source-row reproduction without prohibited fitting; peer executed-source provenance partial.",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_c/ledger.json C-011/013/018"
+    ]
+  }
+]

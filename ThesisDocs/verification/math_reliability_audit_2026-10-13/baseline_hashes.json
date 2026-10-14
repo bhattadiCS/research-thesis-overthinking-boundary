@@ -1,0 +1,182 @@
+﻿[
+    {
+        "path":  "ThesisDocs/chapters/chapter1_intro.md",
+        "sha256":  "14995549a7014d83771c7f97e7221ff8504b28a7d98ec179a72d27af883692cc",
+        "bytes":  16288
+    },
+    {
+        "path":  "ThesisDocs/chapters/chapter2_theory.md",
+        "sha256":  "6543c39fc83adb56a7fcd6c6c5e37110aeea475c0bce4e40adeda4c5172318c3",
+        "bytes":  26391
+    },
+    {
+        "path":  "ThesisDocs/chapters/chapter3_methodology.md",
+        "sha256":  "4d6299806d5f64a93f2e8b13b6db0aeafa9286fc3f06be1c5c5fb5e3f6ed4333",
+        "bytes":  12774
+    },
+    {
+        "path":  "ThesisDocs/chapters/chapter4_empirical.md",
+        "sha256":  "906bb535c4163d29019df40459234ca9185f36127b346d4a91b6e9918a9396f4",
+        "bytes":  8890
+    },
+    {
+        "path":  "ThesisDocs/chapters/chapter5_online.md",
+        "sha256":  "700ee83ce3341020ca7c9bc4f86b597508609982e0138e33718eb188f7c39628",
+        "bytes":  14857
+    },
+    {
+        "path":  "ThesisDocs/chapters/chapter6_discussion.md",
+        "sha256":  "eebd137fa6f8f64e490567671bbf49b3cdbda01cabbfc99040e484c7815edaa3",
+        "bytes":  7808
+    },
+    {
+        "path":  "ThesisDocs/concise_v7/chapter1_introduction.md",
+        "sha256":  "b2aa7a215d1a281ada386a6de08fb54bdb018566157276534794228a7e98f8d8",
+        "bytes":  4734
+    },
+    {
+        "path":  "ThesisDocs/concise_v7/chapter2_mathematics.md",
+        "sha256":  "16f61c10abb45824754ec3eff3e50787e621a6cab3917363c66356af96efec3d",
+        "bytes":  6771
+    },
+    {
+        "path":  "ThesisDocs/concise_v7/chapter3_methods.md",
+        "sha256":  "15af55c30ee13dcf85d327f28c999fb97d5eb3f0784ebaaa6b39b31bca63def6",
+        "bytes":  10121
+    },
+    {
+        "path":  "ThesisDocs/concise_v7/chapter4_results.md",
+        "sha256":  "455098bb3e3617a78aea5ff203087b714125c1303d791b293d7bd0d60bb37292",
+        "bytes":  6501
+    },
+    {
+        "path":  "ThesisDocs/concise_v7/chapter5_discussion.md",
+        "sha256":  "1989dad0cc9f4b6757bfb58ca470a4cdef5cca23579356d57de812e585a44659",
+        "bytes":  4316
+    },
+    {
+        "path":  "ThesisDocs/concise_v7/README.txt",
+        "sha256":  "52c7a6782684591bf1eb1dd481ca31cccc1b5bb4c0accdc3d6dcb00474415f4a",
+        "bytes":  2315
+    },
+    {
+        "path":  "ThesisDocs/formal/build_manifest_digital_v5.json",
+        "sha256":  "6753502799d09b76dbe59cf56482872979985763447e9352a24a729eebbb7bae",
+        "bytes":  10929
+    },
+    {
+        "path":  "ThesisDocs/formal/build_manifest_digital_v7.json",
+        "sha256":  "b51ccdcc4335b0cb76c06a32fbd3a24043bb7f78f1bdb3b08f05324879b7e339",
+        "bytes":  5011
+    },
+    {
+        "path":  "ThesisDocs/formal/build_manifest_print_v5.json",
+        "sha256":  "630a9ae905c94dd177ca8fd6c09ed49d4249e3442b17cf4bb698887a49a9d2eb",
+        "bytes":  10928
+    },
+    {
+        "path":  "ThesisDocs/formal/build_manifest_print_v7.json",
+        "sha256":  "c3c36a5035d0f90d182d02c6e27b6d94f2680f73e7d596056d631903eaeef5e3",
+        "bytes":  5007
+    },
+    {
+        "path":  "ThesisDocs/formal/source_integrity_v5.json",
+        "sha256":  "fe68e3b0b0985b369d90ec23640a04e11aa559206ff6f985a1166ea2e69f822d",
+        "bytes":  8697
+    },
+    {
+        "path":  "ThesisDocs/formal/source_integrity_v7.json",
+        "sha256":  "0de33085b37a24ae8aff2cdce44205c188c90f7ba6ae21a8655ce293939cf8fa",
+        "bytes":  3191
+    },
+    {
+        "path":  "ThesisDocs/formal/visual_empirical_v5.json",
+        "sha256":  "e55df6019c1cf5ff290db66c48794b00c59fcb2f18d388f6e5134e9bec14f567",
+        "bytes":  106028
+    },
+    {
+        "path":  "ThesisDocs/formal/visual_math_v5.json",
+        "sha256":  "4ec7ad304202812abbf0de59ddff36e58098d06f8a7127d730bb10375369cb61",
+        "bytes":  75477
+    },
+    {
+        "path":  "ThesisDocs/formal/visual_review_v5.json",
+        "sha256":  "f1d6eab77853ccf771cafc650cd6526bff784ae295d4c0277e8ceaf785831aa6",
+        "bytes":  4275
+    },
+    {
+        "path":  "ThesisDocs/formal/visual_review_v7.json",
+        "sha256":  "110e093839bdda612de54064a3c36c902c25b1c061d635800a42f68fa9bd308f",
+        "bytes":  2724
+    },
+    {
+        "path":  "ThesisDocs/formal/visual_root_v5.json",
+        "sha256":  "38b96ba51947e11897dccf721ce14e31dfefb4db7c67a38f64f7b281519d1836",
+        "bytes":  36660
+    },
+    {
+        "path":  "output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf",
+        "sha256":  "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+        "bytes":  1473679
+    },
+    {
+        "path":  "output/pdf/Masters_Thesis_Formal_v7_Aditya_Bhatt.pdf",
+        "sha256":  "426f3d26fc0f832e3a9ed59de1074629c3ae52877716de27903e19fb84d8bfdf",
+        "bytes":  850510
+    },
+    {
+        "path":  "research/mathematical_foundations.md",
+        "sha256":  "5c49b379f53cf0f6e521e9aeff957cd4bb69b705ead8452dd72dddfaf7a09dbf",
+        "bytes":  27920
+    },
+    {
+        "path":  "research/tests/test_live_uncertainty.py",
+        "sha256":  "463ee4239afc56741cea5fd4f14d2cc28bbef83d933e52139b63603efae620cc",
+        "bytes":  8355
+    },
+    {
+        "path":  "research/tests/test_mathematical_foundations.py",
+        "sha256":  "47c7510883ed540d12e4f7d4781145c0fcf95f915c3b43ed015f84f4d6afe800",
+        "bytes":  17223
+    },
+    {
+        "path":  "ThesisDocs/appendices.md",
+        "sha256":  "00f1c71be706a55aadf643b45a787a23742cf60d93b98e6661997780cf282202",
+        "bytes":  8813
+    },
+    {
+        "path":  "ThesisDocs/CURRENT_FORMAL_THESIS.md",
+        "sha256":  "e41fbf6fac826665945c744b117a2ab98f40a37d821c7347bfdb868c0bb495eb",
+        "bytes":  3786
+    },
+    {
+        "path":  "ThesisDocs/Masters_Thesis_Formal_v5.md",
+        "sha256":  "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d",
+        "bytes":  113102
+    },
+    {
+        "path":  "ThesisDocs/Masters_Thesis_Formal_v7.md",
+        "sha256":  "fd2077694fe872d2209de025cf9ea779d8304130b90add7bf526a0bf6521285e",
+        "bytes":  42876
+    },
+    {
+        "path":  "ThesisDocs/references.md",
+        "sha256":  "bcf6305ad0c469114756f50bcbcb9a38c2a25da9cc1846856d2f585538fd6823",
+        "bytes":  6126
+    },
+    {
+        "path":  "tools/build_concise_thesis_v7.py",
+        "sha256":  "be6b183891dd9f92f01efdcf9f9e3cf4ee106beb8521b5d8d904432838cbfde1",
+        "bytes":  14111
+    },
+    {
+        "path":  "tools/build_master_thesis.py",
+        "sha256":  "5c632df41b25cfea523ffd8318cf0af4e9f76c91dfa61ac0ad9c3b0fa6992fac",
+        "bytes":  47154
+    },
+    {
+        "path":  "tools/render_thesis_math.mjs",
+        "sha256":  "20608459a8f4019a732cec9ca4d29cc34cc2eeb9fbd3d5fa5033568f2e0dfe87",
+        "bytes":  903
+    }
+]

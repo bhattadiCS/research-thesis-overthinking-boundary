@@ -1,0 +1,91 @@
+{
+  "python": "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "version": "3.12.4",
+  "environment_notes": "Existing environment; no dependencies changed; bytecode disabled and temp/logs in audit directory.",
+  "results": [
+    {
+      "command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-B",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\research\\tests\\test_mathematical_foundations.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.086332799983211,
+      "source_sha256": "47c7510883ed540d12e4f7d4781145c0fcf95f915c3b43ed015f84f4d6afe800",
+      "log": "test_mathematical_foundations.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-B",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\research\\tests\\test_live_uncertainty.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.311016899999231,
+      "source_sha256": "463ee4239afc56741cea5fd4f14d2cc28bbef83d933e52139b63603efae620cc",
+      "log": "test_live_uncertainty.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-B",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\research\\tests\\test_online_controller.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.19313280005007982,
+      "source_sha256": "32886123f291d418e72f5381ce552194bb4a13954c39605ec5374d3ae48ee523",
+      "log": "test_online_controller.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-B",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\research\\tests\\test_learned_online_controller.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.23783570004161447,
+      "source_sha256": "c2ea311b44165964248284191b714a07fcde9ba6e7f2a167d68d3ce0453c79ee",
+      "log": "test_learned_online_controller.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-B",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\research\\tests\\test_prefix_stopping_model.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 45.40945210005157,
+      "source_sha256": "fe54ece3e9e1a200e9def33d28e8d8dc85359a33183a20be6c5864e5c6b166d8",
+      "log": "test_prefix_stopping_model.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-B",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\research\\tests\\test_online_replay_accounting.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.2470248999306932,
+      "source_sha256": "47fe7dfeb278a54dffb127c6cddc8358ecd7e75d139b34c504b843a45c848f4a",
+      "log": "test_online_replay_accounting.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\ThesisDocs\\verification\\math_reliability_audit_2026-10-13\\agent_c\\test_tmp\\test_live_ledger_audit",
+        "C:\\Aditya_Data\\Personal\\ResearchThesis\\research\\tests\\test_live_ledger_audit.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.4731670999899507,
+      "source_sha256": "f7988cf894966e75aad8a0d0f2b968f70147d8ba9876c3127a2afad9d49edb52",
+      "log": "test_live_ledger_audit.log"
+    }
+  ]
+}

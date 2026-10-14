@@ -1,0 +1,28 @@
+[
+  {
+    "target": "agent_b/review.md D18",
+    "kind": "audit-prose arithmetic transcription correction",
+    "initial": "4.2876867 percentage points at n=100; 19.67546 at n=20",
+    "corrected": "4.28740302384385 percentage points at n=100; 19.6759679704625 at n=20",
+    "derivation": "100*(1-0.0125**(1/n))",
+    "detection": "B independently recomputed immediately after initial write; A independently reported the same correction during second review.",
+    "manuscript_affected": false,
+    "effect": "None on manuscript intervals: [-4.29,+4.29] and [-19.68,+19.68] already round correctly. No thesis error finding."
+  },
+  {
+    "target": "agent_b/review.md D17",
+    "kind": "audit-prose last-digit arithmetic transcription correction",
+    "initial": "1-377960/827804=0.54341851",
+    "corrected": "1-377960/827804=0.54341849",
+    "detection": "B independent Python recomputation.",
+    "manuscript_affected": false,
+    "effect": "None on manuscript 54.34 percent rounding. No thesis error finding."
+  },
+  {
+    "target": "agent_b/coverage_map.json versus initial claims.json",
+    "kind": "explicit conservative reconciliation",
+    "change": "Every coordinator V5 unit mapped. Mixed runtime-interface paragraph is left NOT ESTABLISHED pending actual C code conformance, even though the mathematical information restriction is a valid assumption. Mixed empirical paragraphs retain verified mathematical subclaims without whole-paragraph passes. Live numerical table cells now have independent saved-row arithmetic evidence.",
+    "manuscript_affected": false,
+    "effect": "Prevents deduced theory, displayed-count arithmetic or scope-table evidence requirements from being read as empirical verification. Initial ledger retained."
+  }
+]

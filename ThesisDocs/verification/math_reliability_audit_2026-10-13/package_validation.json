@@ -1,0 +1,25 @@
+{
+  "completed_utc": "2026-10-14T03:01:03.266185+00:00",
+  "source_units": 1348,
+  "math_expressions": 330,
+  "sentences": 1197,
+  "outcomes": {
+    "NOT ESTABLISHED": 59,
+    "VERIFIED UNDER RECORDED ASSUMPTIONS": 1287,
+    "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS": 2
+  },
+  "scientific_unresolved": 39,
+  "every_initial_unit_accounted_for": true,
+  "unique_ids_and_dependency_targets_valid": true,
+  "csv_json_ids_agree": true,
+  "test_suites_succeeded": 7,
+  "existing_test_cases_passed": 87,
+  "original_hashes_preserved": 36,
+  "git_head": "5304575ce8d421673ee85e3429a128fbddeee697",
+  "tracked_diff_empty": true,
+  "final_pdf_sha256": "5b6b47b64ff1c94c836ef255b84cb5dc7f72ec31bd7b985bc18e72182ff0d373",
+  "final_manuscript_sha256": "5c2181dae627b4407cebf93f8084a1adad9f4a5584134cc89610f349b7fd3654",
+  "final_pdf_independently_reviewed": true,
+  "source_change_count": 2,
+  "blanket_all_mathematics_verdict": false
+}

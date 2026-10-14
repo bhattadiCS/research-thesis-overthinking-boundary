@@ -1,0 +1,1 @@
+[{"tex": "\\widehat q_t", "display": false}, {"tex": "\\widehat p_{t+1}", "display": false}, {"tex": "\\widehat\\mu_t=(v+p)(\\widehat p_{t+1}-\\widehat q_t)-\\lambda.", "display": true}, {"tex": "v=1", "display": false}, {"tex": "p=0", "display": false}, {"tex": "\\lambda=0.05", "display": false}]

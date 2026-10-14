@@ -1,0 +1,501 @@
+{
+  "live": [
+    {
+      "panel": ".",
+      "source": "research/outputs/semester2/online_stopping_20261002/live_paired_results.csv",
+      "sha256": "c223a0263f254f4318159eb6d024e56d23e55f79a4c51026b81873de33eb5adf",
+      "n": 100,
+      "baseline_correct": 6,
+      "active_correct": 6,
+      "improved": 0,
+      "worsened": 0,
+      "accuracy_delta": 0.0,
+      "baseline_tokens": 22244,
+      "active_tokens": 21591,
+      "saving": 0.02935623089372415,
+      "cp_binomial_inversion": [
+        -0.0428740302384385,
+        0.0428740302384385
+      ],
+      "bootstrap": [
+        0.008507177794051558,
+        0.05629574454428539
+      ],
+      "bootstrap_seed": 804,
+      "bootstrap_draws": 10000,
+      "cp_difference_from_recorded": 2.7755575615628914e-17,
+      "bootstrap_difference_from_recorded": 2.6020852139652106e-17,
+      "zero_discordance_upper": 0.0428740302384385,
+      "prompt_completion_saving": 0.033852933678114816
+    },
+    {
+      "panel": "adversarial_live",
+      "source": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_paired_results.csv",
+      "sha256": "5f1e02917543d8e351c0c434a79c4a2152ac4ca47a56170233729875c224981e",
+      "n": 20,
+      "baseline_correct": 1,
+      "active_correct": 1,
+      "improved": 0,
+      "worsened": 0,
+      "accuracy_delta": 0.0,
+      "baseline_tokens": 4736,
+      "active_tokens": 4578,
+      "saving": 0.033361486486486486,
+      "cp_binomial_inversion": [
+        -0.19675967970462538,
+        0.19675967970462538
+      ],
+      "bootstrap": [
+        0.0,
+        0.0879643121175892
+      ],
+      "bootstrap_seed": 804,
+      "bootstrap_draws": 10000,
+      "cp_difference_from_recorded": 1.6653345369377348e-16,
+      "bootstrap_difference_from_recorded": 0.0,
+      "zero_discordance_upper": 0.19675967970462538,
+      "prompt_completion_saving": 0.051147419464434685
+    },
+    {
+      "panel": "learned_main",
+      "source": "research/outputs/semester2/online_stopping_20261002/learned_main/live_paired_results.csv",
+      "sha256": "f6abd0aeb1cc0eb6b3328b53be661902b3d9ea4c43e2593ee570ca04ded99850",
+      "n": 100,
+      "baseline_correct": 6,
+      "active_correct": 7,
+      "improved": 1,
+      "worsened": 0,
+      "accuracy_delta": 0.01,
+      "baseline_tokens": 22244,
+      "active_tokens": 9674,
+      "saving": 0.565096205718396,
+      "cp_binomial_inversion": [
+        -0.042748250327326286,
+        0.06211922021093291
+      ],
+      "bootstrap": [
+        0.5482569426373755,
+        0.5801191943551758
+      ],
+      "bootstrap_seed": 804,
+      "bootstrap_draws": 10000,
+      "cp_difference_from_recorded": 2.7755575615628914e-17,
+      "bootstrap_difference_from_recorded": 0.0,
+      "zero_discordance_upper": 0.0428740302384385,
+      "prompt_completion_saving": 0.6749584198322225
+    },
+    {
+      "panel": "learned_adversarial",
+      "source": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_paired_results.csv",
+      "sha256": "75e4b826bfd6bc064de6a8c4dec71abac1cded0039afb6ea4d53ac66cc8cf9f4",
+      "n": 20,
+      "baseline_correct": 1,
+      "active_correct": 1,
+      "improved": 0,
+      "worsened": 0,
+      "accuracy_delta": 0.0,
+      "baseline_tokens": 4736,
+      "active_tokens": 2268,
+      "saving": 0.5211148648648649,
+      "cp_binomial_inversion": [
+        -0.19675967970462538,
+        0.19675967970462538
+      ],
+      "bootstrap": [
+        0.45856679259646027,
+        0.5717264824294295
+      ],
+      "bootstrap_seed": 804,
+      "bootstrap_draws": 10000,
+      "cp_difference_from_recorded": 1.6653345369377348e-16,
+      "bootstrap_difference_from_recorded": 5.551115123125783e-17,
+      "zero_discordance_upper": 0.19675967970462538,
+      "prompt_completion_saving": 0.6793093862927386
+    }
+  ],
+  "boundary_arithmetic": [
+    {
+      "domain": "arc",
+      "step": 1,
+      "n": 19500,
+      "q": 0.66,
+      "alpha": 0.2901960784313726,
+      "beta": 0.08686868686868687,
+      "accuracy_gain": 0.04133333333333333,
+      "net": -0.00866666666666667
+    },
+    {
+      "domain": "arc",
+      "step": 2,
+      "n": 19500,
+      "q": 0.7013333333333334,
+      "alpha": 0.21565934065934067,
+      "beta": 0.07809300965194502,
+      "accuracy_gain": 0.009641025641025642,
+      "net": -0.04035897435897436
+    },
+    {
+      "domain": "arc",
+      "step": 3,
+      "n": 19500,
+      "q": 0.710974358974359,
+      "alpha": 0.18914123491838183,
+      "beta": 0.06563762261973456,
+      "accuracy_gain": 0.008,
+      "net": -0.042
+    },
+    {
+      "domain": "arc",
+      "step": 4,
+      "n": 19500,
+      "q": 0.718974358974359,
+      "alpha": 0.16605839416058393,
+      "beta": 0.05970042796005706,
+      "accuracy_gain": 0.0037435897435897435,
+      "net": -0.04625641025641026
+    },
+    {
+      "domain": "arc",
+      "step": 5,
+      "n": 19500,
+      "q": 0.7227179487179487,
+      "alpha": 0.1535047161087479,
+      "beta": 0.05385652451571702,
+      "accuracy_gain": 0.003641025641025641,
+      "net": -0.04635897435897436
+    },
+    {
+      "domain": "arc",
+      "step": 6,
+      "n": 19500,
+      "q": 0.7263589743589743,
+      "alpha": 0.14411544227886056,
+      "beta": 0.052174526969782545,
+      "accuracy_gain": 0.0015384615384615385,
+      "net": -0.048461538461538466
+    },
+    {
+      "domain": "arc",
+      "step": 7,
+      "n": 19500,
+      "q": 0.7278974358974359,
+      "alpha": 0.129852996607614,
+      "beta": 0.04804847118500775,
+      "accuracy_gain": 0.000358974358974359,
+      "net": -0.04964102564102564
+    },
+    {
+      "domain": "gpqa",
+      "step": 1,
+      "n": 17466,
+      "q": 0.24813924195579984,
+      "alpha": 0.10097471824550716,
+      "beta": 0.24342408860175357,
+      "accuracy_gain": 0.015515859383945951,
+      "net": -0.03448414061605405
+    },
+    {
+      "domain": "gpqa",
+      "step": 2,
+      "n": 17466,
+      "q": 0.2636551013397458,
+      "alpha": 0.08249747298032813,
+      "beta": 0.18935939196525517,
+      "accuracy_gain": 0.01082102370319478,
+      "net": -0.039178976296805224
+    },
+    {
+      "domain": "gpqa",
+      "step": 3,
+      "n": 17466,
+      "q": 0.27447612504294056,
+      "alpha": 0.06826073232323232,
+      "beta": 0.15373383395911555,
+      "accuracy_gain": 0.007328523989465247,
+      "net": -0.042671476010534753
+    },
+    {
+      "domain": "gpqa",
+      "step": 4,
+      "n": 17466,
+      "q": 0.2818046490324058,
+      "alpha": 0.05293367346938776,
+      "beta": 0.12860625761885414,
+      "accuracy_gain": 0.0017748769036986145,
+      "net": -0.048225123096301385
+    },
+    {
+      "domain": "gpqa",
+      "step": 5,
+      "n": 17466,
+      "q": 0.2835795259361044,
+      "alpha": 0.04499320706465276,
+      "beta": 0.1055925701594993,
+      "accuracy_gain": 0.0022901637467078895,
+      "net": -0.047709836253292115
+    },
+    {
+      "domain": "gpqa",
+      "step": 6,
+      "n": 17466,
+      "q": 0.28586968968281234,
+      "alpha": 0.0397658943317566,
+      "beta": 0.09693570999399159,
+      "accuracy_gain": 0.0006870491240123669,
+      "net": -0.04931295087598764
+    },
+    {
+      "domain": "gpqa",
+      "step": 7,
+      "n": 17466,
+      "q": 0.2865567388068247,
+      "alpha": 0.03940293716395153,
+      "beta": 0.0933066933066933,
+      "accuracy_gain": 0.0013740982480247338,
+      "net": -0.048625901751975266
+    },
+    {
+      "domain": "gpqa",
+      "step": 8,
+      "n": 17466,
+      "q": 0.2879308370548494,
+      "alpha": 0.03746884296856155,
+      "beta": 0.09127063034400477,
+      "accuracy_gain": 0.00040077865567388066,
+      "net": -0.04959922134432612
+    },
+    {
+      "domain": "gpqa",
+      "step": 9,
+      "n": 17466,
+      "q": 0.2883316157105233,
+      "alpha": 0.03813354786806114,
+      "beta": 0.07525814138204924,
+      "accuracy_gain": 0.005439138898431238,
+      "net": -0.04456086110156877
+    },
+    {
+      "domain": "gsm8k",
+      "step": 1,
+      "n": 19500,
+      "q": 0.1762051282051282,
+      "alpha": 0.1670816733067729,
+      "beta": 0.41850989522700816,
+      "accuracy_gain": 0.06389743589743589,
+      "net": 0.01389743589743589
+    },
+    {
+      "domain": "gsm8k",
+      "step": 2,
+      "n": 19500,
+      "q": 0.24010256410256411,
+      "alpha": 0.21224186799838035,
+      "beta": 0.2498932080307561,
+      "accuracy_gain": 0.10128205128205128,
+      "net": 0.05128205128205128
+    },
+    {
+      "domain": "gsm8k",
+      "step": 3,
+      "n": 19500,
+      "q": 0.3413846153846154,
+      "alpha": 0.18352409873082612,
+      "beta": 0.1765059336037254,
+      "accuracy_gain": 0.06061538461538461,
+      "net": 0.01061538461538461
+    },
+    {
+      "domain": "gsm8k",
+      "step": 4,
+      "n": 19500,
+      "q": 0.402,
+      "alpha": 0.15693336763570878,
+      "beta": 0.14057915550452865,
+      "accuracy_gain": 0.037333333333333336,
+      "net": -0.012666666666666666
+    },
+    {
+      "domain": "gsm8k",
+      "step": 5,
+      "n": 19500,
+      "q": 0.43933333333333335,
+      "alpha": 0.1302478734107747,
+      "beta": 0.1176607914088946,
+      "accuracy_gain": 0.021333333333333333,
+      "net": -0.02866666666666667
+    },
+    {
+      "domain": "gsm8k",
+      "step": 6,
+      "n": 19500,
+      "q": 0.46066666666666667,
+      "alpha": 0.11410097936673956,
+      "beta": 0.10887231437159078,
+      "accuracy_gain": 0.011384615384615385,
+      "net": -0.03861538461538462
+    },
+    {
+      "domain": "gsm8k",
+      "step": 7,
+      "n": 19500,
+      "q": 0.47205128205128205,
+      "alpha": 0.09936862554638173,
+      "beta": 0.10059750135795763,
+      "accuracy_gain": 0.0049743589743589745,
+      "net": -0.04502564102564103
+    },
+    {
+      "domain": "gsm8k",
+      "step": 8,
+      "n": 19500,
+      "q": 0.47702564102564105,
+      "alpha": 0.10070602078838987,
+      "beta": 0.08922812298430445,
+      "accuracy_gain": 0.010102564102564103,
+      "net": -0.0398974358974359
+    },
+    {
+      "domain": "gsm8k",
+      "step": 9,
+      "n": 19500,
+      "q": 0.48712820512820515,
+      "alpha": 0.08349165083491651,
+      "beta": 0.08242972944520476,
+      "accuracy_gain": 0.0026666666666666666,
+      "net": -0.04733333333333334
+    },
+    {
+      "domain": "math",
+      "step": 1,
+      "n": 19499,
+      "q": 0.07128570695933124,
+      "alpha": 0.041471091722348,
+      "beta": 0.4309352517985611,
+      "accuracy_gain": 0.007795271552387302,
+      "net": -0.0422047284476127
+    },
+    {
+      "domain": "math",
+      "step": 2,
+      "n": 19499,
+      "q": 0.07908097851171855,
+      "alpha": 0.05997661079244863,
+      "beta": 0.2522697795071336,
+      "accuracy_gain": 0.035283860710805685,
+      "net": -0.014716139289194317
+    },
+    {
+      "domain": "math",
+      "step": 3,
+      "n": 19499,
+      "q": 0.11436483922252423,
+      "alpha": 0.04898951879089698,
+      "beta": 0.1789237668161435,
+      "accuracy_gain": 0.02292425252577055,
+      "net": -0.02707574747422945
+    },
+    {
+      "domain": "math",
+      "step": 4,
+      "n": 19499,
+      "q": 0.1372890917482948,
+      "alpha": 0.04476281060515991,
+      "beta": 0.1423234964512514,
+      "accuracy_gain": 0.019077901430842606,
+      "net": -0.030922098569157397
+    },
+    {
+      "domain": "math",
+      "step": 5,
+      "n": 19499,
+      "q": 0.15636699317913738,
+      "alpha": 0.041033434650455926,
+      "beta": 0.13184650705149228,
+      "accuracy_gain": 0.01400071798553772,
+      "net": -0.035999282014462286
+    },
+    {
+      "domain": "math",
+      "step": 6,
+      "n": 19499,
+      "q": 0.1703677111646751,
+      "alpha": 0.03529702664276442,
+      "beta": 0.12402167369054787,
+      "accuracy_gain": 0.008154264321247244,
+      "net": -0.04184573567875276
+    },
+    {
+      "domain": "math",
+      "step": 7,
+      "n": 19499,
+      "q": 0.17852197548592236,
+      "alpha": 0.03121488325633662,
+      "beta": 0.09997127262280954,
+      "accuracy_gain": 0.007795271552387302,
+      "net": -0.0422047284476127
+    },
+    {
+      "domain": "math",
+      "step": 8,
+      "n": 19499,
+      "q": 0.18631724703830965,
+      "alpha": 0.0289297869658389,
+      "beta": 0.0957886044591247,
+      "accuracy_gain": 0.0056925996204933585,
+      "net": -0.044307400379506645
+    },
+    {
+      "domain": "math",
+      "step": 9,
+      "n": 19499,
+      "q": 0.19200984665880302,
+      "alpha": 0.02735639479530308,
+      "beta": 0.08146367521367522,
+      "accuracy_gain": 0.006461869839478948,
+      "net": -0.043538130160521056
+    },
+    {
+      "domain": "math",
+      "step": 10,
+      "n": 19499,
+      "q": 0.19847171649828196,
+      "alpha": 0.02399385757246145,
+      "beta": 0.08604651162790698,
+      "accuracy_gain": 0.002153956613159649,
+      "net": -0.047846043386840356
+    },
+    {
+      "domain": "math",
+      "step": 11,
+      "n": 19499,
+      "q": 0.2006256731114416,
+      "alpha": 0.02354526207737217,
+      "beta": 0.08384458077709611,
+      "accuracy_gain": 0.002000102569362531,
+      "net": -0.04799989743063747
+    },
+    {
+      "domain": "math",
+      "step": 12,
+      "n": 19499,
+      "q": 0.20262577568080414,
+      "alpha": 0.022896835605865706,
+      "beta": 0.07162743609212857,
+      "accuracy_gain": 0.003743781732396533,
+      "net": -0.04625621826760347
+    },
+    {
+      "domain": "math",
+      "step": 13,
+      "n": 19499,
+      "q": 0.20636955741320068,
+      "alpha": 0.02552504038772213,
+      "beta": 0.06660039761431412,
+      "accuracy_gain": 0.006513154520744653,
+      "net": -0.04348684547925535
+    }
+  ],
+  "precision_contrast_pp": 14.266666666666667,
+  "token_step_equivalence": 250.0,
+  "sampling_limit": "Arithmetic conditional on frozen grader labels. iid task sampling and population transport not established by these calculations. Bootstrap draws resample observed tasks."
+}

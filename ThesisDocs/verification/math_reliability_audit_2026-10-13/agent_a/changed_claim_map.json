@@ -1,0 +1,69 @@
+[
+  {
+    "claim_id": "A-REV-001",
+    "original_inventory_id": "V5-0669",
+    "corrected_path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/corrected_extended_v5_math_audit1/ThesisDocs/Masters_Thesis_Formal_v5_math_audit1.md",
+    "line": 915,
+    "original_claim": "No extracted candidate at the stop",
+    "corrected_claim": "Missing normalized answer at the stop",
+    "original_outcome": "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS",
+    "corrected_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "presentation issue",
+    "evidence": "agent_a/corrected_working_copy_review.json and corrected_final_copy_review.json:196 matches,191 blank,5 literal n/a,108 nonempty raw extracted answers; full5735-row defaultCSVpredicate equals categoryB.",
+    "dependencies": [
+      "frozen archived labels",
+      "stored stop rows",
+      "default CSV missing-value semantics",
+      "first active taxonomy priority"
+    ],
+    "numeric_effect": "none"
+  },
+  {
+    "claim_id": "A-REV-002",
+    "original_inventory_id": "V5-0684",
+    "corrected_path": "ThesisDocs/verification/math_reliability_audit_2026-10-13/corrected_extended_v5_math_audit1/ThesisDocs/Masters_Thesis_Formal_v5_math_audit1.md",
+    "line": 921,
+    "corrected_claim": "Table7 prioritizes missing normalized answers under the archived CSV convention; raw text can be present.",
+    "corrected_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "same predicate/source/unique raw-row check as A-REV-001; optional prior regrade predicate inactive in this primary table.",
+    "dependencies": [
+      "A-REV-001"
+    ],
+    "numeric_effect": "all classification counts,shares,late-repair endpoint,grade labels and utilities unchanged"
+  },
+  {
+    "claim_id": "A-REV-003",
+    "original_inventory_ids": [
+      "V5-0670",
+      "V5-0671"
+    ],
+    "corrected_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "claim": "Table7 count196 and share3.42% unchanged and arithmetically correct for5735 losses.",
+    "evidence": "196/5735*100=3.4176111595466434; five categories sum5735.",
+    "dependencies": [
+      "A-REV-001"
+    ],
+    "numeric_effect": "none"
+  },
+  {
+    "claim_id": "A-REV-004",
+    "corrected_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "claim": "All257TeX occurrences and all277 digit-containing table cells identical between original and final corrected compiled sources.",
+    "evidence": "Exact ordered string comparisons in agent_a/review_corrected_final_copy.py and corrected_final_compiled.diff.",
+    "dependencies": [
+      "exact source hashes in corrected_final_copy_review.json"
+    ],
+    "numeric_effect": "none"
+  },
+  {
+    "claim_id": "A-REV-005",
+    "corrected_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "claim": "The candidate1 orphan continuation page is resolved in final83-page PDF hash5b6b47b64ff1c94c836ef255b84cb5dc7f72ec31bd7b985bc18e72182ff0d373.",
+    "evidence": "Complete actual image review of final PDFpages50,51,52; images and hashes in corrected_final_copy_review.json.",
+    "dependencies": [
+      "final PDFbytes SHA256"
+    ],
+    "limits": "Only these three final pages are visually reviewed by A."
+  }
+]

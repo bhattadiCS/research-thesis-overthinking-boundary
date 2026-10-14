@@ -1,0 +1,698 @@
+[
+  {
+    "version": "v7",
+    "page": 1,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 2,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 3,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 4,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 5,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 6,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 7,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 8,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 9,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 10,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 11,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 12,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 13,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 14,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 15,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 16,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 17,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 18,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 19,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 20,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 21,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 22,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 23,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 24,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 25,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 26,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 27,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 28,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 29,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 30,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 31,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 32,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v7",
+    "page": 33,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 1,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 2,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 3,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 4,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 5,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 6,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 7,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 8,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 9,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 10,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 11,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 12,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 13,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 14,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 15,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 16,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 17,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 18,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 19,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 20,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 21,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 22,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 23,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 24,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 25,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 26,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 27,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 28,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 29,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 30,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 31,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 32,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 33,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 34,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 35,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 36,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 37,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 38,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 39,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 40,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 41,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 42,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 43,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 44,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 45,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 46,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 47,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 48,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 49,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 50,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 51,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 52,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 53,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 54,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 55,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 56,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 57,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 58,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 59,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 60,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 61,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 62,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 63,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 64,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 65,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 66,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 67,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 68,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 69,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 70,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 71,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 72,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 73,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 74,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 75,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 76,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 77,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 78,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 79,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 80,
+    "raster_equal": false,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 81,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 82,
+    "raster_equal": true,
+    "text_equal": true
+  },
+  {
+    "version": "v5",
+    "page": 83,
+    "raster_equal": true,
+    "text_equal": true
+  }
+]

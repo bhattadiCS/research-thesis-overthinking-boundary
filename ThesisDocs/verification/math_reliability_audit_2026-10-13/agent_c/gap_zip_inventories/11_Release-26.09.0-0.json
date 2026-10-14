@@ -1,0 +1,3404 @@
+[
+  {
+    "path": "poppler-26.09.0/Library/",
+    "bytes": 0,
+    "compressed_bytes": 0,
+    "crc32": 0
+  },
+  {
+    "path": "poppler-26.09.0/share/",
+    "bytes": 0,
+    "compressed_bytes": 0,
+    "crc32": 0
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/",
+    "bytes": 0,
+    "compressed_bytes": 0,
+    "crc32": 0
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/",
+    "bytes": 0,
+    "compressed_bytes": 0,
+    "crc32": 0
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-console-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8759,
+    "crc32": 3106404098
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-console-l1-2-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8814,
+    "crc32": 1696032193
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-datetime-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8583,
+    "crc32": 1020665357
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-debug-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8580,
+    "crc32": 1766032839
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-errorhandling-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8645,
+    "crc32": 2903598627
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-fibers-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8574,
+    "crc32": 128449107
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-fibers-l1-1-1.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8512,
+    "crc32": 3648070298
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-file-l1-1-0.dll",
+    "bytes": 27008,
+    "compressed_bytes": 9868,
+    "crc32": 4286620191
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-file-l1-2-0.dll",
+    "bytes": 22888,
+    "compressed_bytes": 8622,
+    "crc32": 990644363
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-file-l2-1-0.dll",
+    "bytes": 22912,
+    "compressed_bytes": 8764,
+    "crc32": 1606603687
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-handle-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8617,
+    "crc32": 184343108
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-heap-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8799,
+    "crc32": 130389079
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-interlocked-l1-1-0.dll",
+    "bytes": 22888,
+    "compressed_bytes": 8653,
+    "crc32": 599634132
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-kernel32-legacy-l1-1-1.dll",
+    "bytes": 22888,
+    "compressed_bytes": 8900,
+    "crc32": 2880405951
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-libraryloader-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8972,
+    "crc32": 3624930362
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-localization-l1-2-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 9564,
+    "crc32": 2396120171
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-memory-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8805,
+    "crc32": 3679720087
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-namedpipe-l1-1-0.dll",
+    "bytes": 22888,
+    "compressed_bytes": 8737,
+    "crc32": 888124237
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-processenvironment-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8886,
+    "crc32": 2035797985
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-processthreads-l1-1-0.dll",
+    "bytes": 22912,
+    "compressed_bytes": 9450,
+    "crc32": 2907494070
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-processthreads-l1-1-1.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8828,
+    "crc32": 324047872
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-profile-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8550,
+    "crc32": 2893932217
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-rtlsupport-l1-1-0.dll",
+    "bytes": 22888,
+    "compressed_bytes": 8856,
+    "crc32": 3870129972
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-string-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8682,
+    "crc32": 490660221
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-synch-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 9262,
+    "crc32": 3416594508
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-synch-l1-2-0.dll",
+    "bytes": 22888,
+    "compressed_bytes": 8874,
+    "crc32": 3173170167
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-sysinfo-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8947,
+    "crc32": 1081697840
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-sysinfo-l1-2-0.dll",
+    "bytes": 22912,
+    "compressed_bytes": 8751,
+    "crc32": 1439702623
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-timezone-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8791,
+    "crc32": 2878914415
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-core-util-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8602,
+    "crc32": 2581350870
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-conio-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8966,
+    "crc32": 579540422
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-convert-l1-1-0.dll",
+    "bytes": 26992,
+    "compressed_bytes": 10242,
+    "crc32": 913510401
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-environment-l1-1-0.dll",
+    "bytes": 22912,
+    "compressed_bytes": 8804,
+    "crc32": 4024647909
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-filesystem-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 9473,
+    "crc32": 1024527911
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-heap-l1-1-0.dll",
+    "bytes": 22872,
+    "compressed_bytes": 8951,
+    "crc32": 1615037666
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-locale-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 8914,
+    "crc32": 2714415742
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-math-l1-1-0.dll",
+    "bytes": 31064,
+    "compressed_bytes": 12370,
+    "crc32": 3851278881
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-multibyte-l1-1-0.dll",
+    "bytes": 31064,
+    "compressed_bytes": 11323,
+    "crc32": 1126481127
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-private-l1-1-0.dll",
+    "bytes": 76120,
+    "compressed_bytes": 24754,
+    "crc32": 112445962
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-process-l1-1-0.dll",
+    "bytes": 22896,
+    "compressed_bytes": 9042,
+    "crc32": 2585428361
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-runtime-l1-1-0.dll",
+    "bytes": 26968,
+    "compressed_bytes": 10362,
+    "crc32": 1233539525
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-stdio-l1-1-0.dll",
+    "bytes": 26968,
+    "compressed_bytes": 10885,
+    "crc32": 706250472
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-string-l1-1-0.dll",
+    "bytes": 26968,
+    "compressed_bytes": 11048,
+    "crc32": 2899654051
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-time-l1-1-0.dll",
+    "bytes": 22912,
+    "compressed_bytes": 9586,
+    "crc32": 1338113490
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/api-ms-win-crt-utility-l1-1-0.dll",
+    "bytes": 22912,
+    "compressed_bytes": 8975,
+    "crc32": 1588195636
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/cairo-gobject.dll",
+    "bytes": 28160,
+    "compressed_bytes": 10847,
+    "crc32": 3288155047
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/cairo-script-interpreter.dll",
+    "bytes": 136704,
+    "compressed_bytes": 57283,
+    "crc32": 3468475948
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/cairo.dll",
+    "bytes": 1040896,
+    "compressed_bytes": 538064,
+    "crc32": 866207483
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/charset.dll",
+    "bytes": 12800,
+    "compressed_bytes": 5931,
+    "crc32": 388346459
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/comerr64.dll",
+    "bytes": 21504,
+    "compressed_bytes": 9165,
+    "crc32": 3232082184
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/concrt140.dll",
+    "bytes": 374200,
+    "compressed_bytes": 172070,
+    "crc32": 1452371957
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/deflate.dll",
+    "bytes": 177664,
+    "compressed_bytes": 95436,
+    "crc32": 3282120997
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/expat.dll",
+    "bytes": 266752,
+    "compressed_bytes": 78531,
+    "crc32": 389947113
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/ffi-8.dll",
+    "bytes": 31232,
+    "compressed_bytes": 17301,
+    "crc32": 2361235248
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/fontconfig-1.dll",
+    "bytes": 452096,
+    "compressed_bytes": 166464,
+    "crc32": 3885246263
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/freetype.dll",
+    "bytes": 684032,
+    "compressed_bytes": 378173,
+    "crc32": 150566068
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/gio-2.0-0.dll",
+    "bytes": 1622016,
+    "compressed_bytes": 708298,
+    "crc32": 3425396605
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/girepository-2.0-0.dll",
+    "bytes": 138240,
+    "compressed_bytes": 61076,
+    "crc32": 2547057384
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/glib-2.0-0.dll",
+    "bytes": 1359872,
+    "compressed_bytes": 585419,
+    "crc32": 2503674193
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/gmodule-2.0-0.dll",
+    "bytes": 19968,
+    "compressed_bytes": 9504,
+    "crc32": 534827726
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/gobject-2.0-0.dll",
+    "bytes": 320512,
+    "compressed_bytes": 142763,
+    "crc32": 3288082090
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/graphite2.dll",
+    "bytes": 131072,
+    "compressed_bytes": 68950,
+    "crc32": 3238983775
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/gssapi64.dll",
+    "bytes": 397824,
+    "compressed_bytes": 132964,
+    "crc32": 1052548668
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/gthread-2.0-0.dll",
+    "bytes": 10752,
+    "compressed_bytes": 4954,
+    "crc32": 544262372
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz-cairo.dll",
+    "bytes": 36864,
+    "compressed_bytes": 17685,
+    "crc32": 1861049063
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz-gobject.dll",
+    "bytes": 91136,
+    "compressed_bytes": 27426,
+    "crc32": 164480195
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz-gpu.dll",
+    "bytes": 171520,
+    "compressed_bytes": 43152,
+    "crc32": 1565226455
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz-icu.dll",
+    "bytes": 13824,
+    "compressed_bytes": 6329,
+    "crc32": 840705336
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz-raster.dll",
+    "bytes": 86528,
+    "compressed_bytes": 43740,
+    "crc32": 1531029198
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz-subset.dll",
+    "bytes": 1261056,
+    "compressed_bytes": 646579,
+    "crc32": 1203465866
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz-vector.dll",
+    "bytes": 128000,
+    "compressed_bytes": 60989,
+    "crc32": 3936002946
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/harfbuzz.dll",
+    "bytes": 1192960,
+    "compressed_bytes": 578439,
+    "crc32": 371731941
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/iconv.dll",
+    "bytes": 1086464,
+    "compressed_bytes": 742836,
+    "crc32": 61819175
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icudt.dll",
+    "bytes": 1024,
+    "compressed_bytes": 354,
+    "crc32": 1637911768
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icudt78.dll",
+    "bytes": 33110528,
+    "compressed_bytes": 13405601,
+    "crc32": 3798348428
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icuin.dll",
+    "bytes": 4221952,
+    "compressed_bytes": 1443014,
+    "crc32": 2570416994
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icuin78.dll",
+    "bytes": 4221952,
+    "compressed_bytes": 1443014,
+    "crc32": 2570416994
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icuio.dll",
+    "bytes": 272384,
+    "compressed_bytes": 123148,
+    "crc32": 953054538
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icuio78.dll",
+    "bytes": 272384,
+    "compressed_bytes": 123148,
+    "crc32": 953054538
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icutest.dll",
+    "bytes": 262144,
+    "compressed_bytes": 126829,
+    "crc32": 3454620092
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icutest78.dll",
+    "bytes": 262144,
+    "compressed_bytes": 126829,
+    "crc32": 3454620092
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icutu.dll",
+    "bytes": 581120,
+    "compressed_bytes": 256558,
+    "crc32": 2776697543
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icutu78.dll",
+    "bytes": 581120,
+    "compressed_bytes": 256558,
+    "crc32": 2776697543
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icuuc.dll",
+    "bytes": 2728448,
+    "compressed_bytes": 943414,
+    "crc32": 3040956630
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/icuuc78.dll",
+    "bytes": 2728448,
+    "compressed_bytes": 943414,
+    "crc32": 3040956630
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/intl-8.dll",
+    "bytes": 224256,
+    "compressed_bytes": 80942,
+    "crc32": 4221852212
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/jpeg8.dll",
+    "bytes": 694784,
+    "compressed_bytes": 195567,
+    "crc32": 2620636112
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/k5sprt64.dll",
+    "bytes": 165376,
+    "compressed_bytes": 59773,
+    "crc32": 1214474049
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/kfwlogon.dll",
+    "bytes": 36864,
+    "compressed_bytes": 15639,
+    "crc32": 4182433922
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/krb5_64.dll",
+    "bytes": 1226240,
+    "compressed_bytes": 399447,
+    "crc32": 3442392860
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/krbcc64.dll",
+    "bytes": 112640,
+    "compressed_bytes": 35659,
+    "crc32": 1174009005
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/lcms2.dll",
+    "bytes": 581632,
+    "compressed_bytes": 297047,
+    "crc32": 3739328813
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/leashw64.dll",
+    "bytes": 152576,
+    "compressed_bytes": 50387,
+    "crc32": 606664320
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/Lerc.dll",
+    "bytes": 548864,
+    "compressed_bytes": 188042,
+    "crc32": 3841734812
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libbz2.dll",
+    "bytes": 77824,
+    "compressed_bytes": 36678,
+    "crc32": 1636003503
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libcrypto-3-x64.dll",
+    "bytes": 7434240,
+    "compressed_bytes": 2402221,
+    "crc32": 3504347494
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libcurl.dll",
+    "bytes": 795136,
+    "compressed_bytes": 408246,
+    "crc32": 2618405065
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libexpat.dll",
+    "bytes": 266752,
+    "compressed_bytes": 78531,
+    "crc32": 389947113
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/liblzma.dll",
+    "bytes": 188416,
+    "compressed_bytes": 102495,
+    "crc32": 3162738919
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libpng16.dll",
+    "bytes": 198656,
+    "compressed_bytes": 106155,
+    "crc32": 2450983392
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libssh2.dll",
+    "bytes": 260608,
+    "compressed_bytes": 126082,
+    "crc32": 80733720
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libssl-3-x64.dll",
+    "bytes": 1320960,
+    "compressed_bytes": 501638,
+    "crc32": 1625338249
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libtiff.dll",
+    "bytes": 504320,
+    "compressed_bytes": 193398,
+    "crc32": 228642291
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/libzstd.dll",
+    "bytes": 657408,
+    "compressed_bytes": 263332,
+    "crc32": 2674798565
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/msvcp140_1.dll",
+    "bytes": 35768,
+    "compressed_bytes": 17997,
+    "crc32": 4103375493
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/msvcp140_2.dll",
+    "bytes": 274872,
+    "compressed_bytes": 113149,
+    "crc32": 1371056543
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/msvcp140_atomic_wait.dll",
+    "bytes": 57792,
+    "compressed_bytes": 26967,
+    "crc32": 1095252635
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/msvcp140_codecvt_ids.dll",
+    "bytes": 31160,
+    "compressed_bytes": 16557,
+    "crc32": 4197271743
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/msvcp140.dll",
+    "bytes": 643512,
+    "compressed_bytes": 209858,
+    "crc32": 803361483
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/openjp2.dll",
+    "bytes": 360448,
+    "compressed_bytes": 162178,
+    "crc32": 3613266005
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pcre2-16.dll",
+    "bytes": 566272,
+    "compressed_bytes": 233199,
+    "crc32": 929861715
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pcre2-32.dll",
+    "bytes": 545280,
+    "compressed_bytes": 223407,
+    "crc32": 4214050267
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pcre2-8.dll",
+    "bytes": 603648,
+    "compressed_bytes": 243696,
+    "crc32": 3876432421
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pcre2-posix.dll",
+    "bytes": 13824,
+    "compressed_bytes": 6702,
+    "crc32": 4156195570
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdfattach.exe",
+    "bytes": 23040,
+    "compressed_bytes": 11128,
+    "crc32": 3373381222
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdfdetach.exe",
+    "bytes": 47104,
+    "compressed_bytes": 23331,
+    "crc32": 1224691384
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdffonts.exe",
+    "bytes": 26112,
+    "compressed_bytes": 12259,
+    "crc32": 1691501873
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdfimages.exe",
+    "bytes": 52736,
+    "compressed_bytes": 23219,
+    "crc32": 762740089
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdfinfo.exe",
+    "bytes": 66048,
+    "compressed_bytes": 32136,
+    "crc32": 763473688
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdfseparate.exe",
+    "bytes": 24064,
+    "compressed_bytes": 12002,
+    "crc32": 395476311
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdftocairo.exe",
+    "bytes": 160256,
+    "compressed_bytes": 75563,
+    "crc32": 2006206600
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdftohtml.exe",
+    "bytes": 134144,
+    "compressed_bytes": 59336,
+    "crc32": 3923913225
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdftoppm.exe",
+    "bytes": 50176,
+    "compressed_bytes": 21099,
+    "crc32": 627128722
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdftops.exe",
+    "bytes": 48640,
+    "compressed_bytes": 20180,
+    "crc32": 1340916588
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdftotext.exe",
+    "bytes": 71680,
+    "compressed_bytes": 30560,
+    "crc32": 1223697291
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pdfunite.exe",
+    "bytes": 39936,
+    "compressed_bytes": 18528,
+    "crc32": 1041223487
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/pixman-1-0.dll",
+    "bytes": 600064,
+    "compressed_bytes": 244651,
+    "crc32": 299187278
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/poppler-cpp.dll",
+    "bytes": 178688,
+    "compressed_bytes": 67127,
+    "crc32": 1373071360
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/poppler-glib.dll",
+    "bytes": 457728,
+    "compressed_bytes": 183563,
+    "crc32": 3682210962
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/poppler.dll",
+    "bytes": 6739968,
+    "compressed_bytes": 1823780,
+    "crc32": 2779029600
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/psl-5.dll",
+    "bytes": 77312,
+    "compressed_bytes": 61012,
+    "crc32": 883858827
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/tiff.dll",
+    "bytes": 504320,
+    "compressed_bytes": 193398,
+    "crc32": 228642291
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/turbojpeg.dll",
+    "bytes": 1165312,
+    "compressed_bytes": 425259,
+    "crc32": 4194945475
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/ucrtbase.dll",
+    "bytes": 1362264,
+    "compressed_bytes": 680857,
+    "crc32": 3656766279
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/vcamp140.dll",
+    "bytes": 417728,
+    "compressed_bytes": 186073,
+    "crc32": 3777787675
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/vccorlib140.dll",
+    "bytes": 350648,
+    "compressed_bytes": 117318,
+    "crc32": 2891970705
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/vcomp140.dll",
+    "bytes": 212920,
+    "compressed_bytes": 111420,
+    "crc32": 3950390517
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/vcruntime140_1.dll",
+    "bytes": 50112,
+    "compressed_bytes": 27003,
+    "crc32": 2441211731
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/vcruntime140_threads.dll",
+    "bytes": 38840,
+    "compressed_bytes": 20610,
+    "crc32": 1099322899
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/vcruntime140.dll",
+    "bytes": 178616,
+    "compressed_bytes": 87684,
+    "crc32": 2456958808
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/xpprof64.dll",
+    "bytes": 54784,
+    "compressed_bytes": 20889,
+    "crc32": 1713878171
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/zlib.dll",
+    "bytes": 90624,
+    "compressed_bytes": 53054,
+    "crc32": 3001405044
+  },
+  {
+    "path": "poppler-26.09.0/Library/bin/zstd.dll",
+    "bytes": 657408,
+    "compressed_bytes": 263332,
+    "crc32": 2674798565
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Annot.h",
+    "bytes": 62151,
+    "compressed_bytes": 11919,
+    "crc32": 2337822645
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/AnnotStampImageHelper.h",
+    "bytes": 2221,
+    "compressed_bytes": 927,
+    "crc32": 620036770
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Array.h",
+    "bytes": 3444,
+    "compressed_bytes": 1232,
+    "crc32": 3539988280
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/BBoxOutputDev.h",
+    "bytes": 2384,
+    "compressed_bytes": 672,
+    "crc32": 28375613
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/CachedFile.h",
+    "bytes": 4186,
+    "compressed_bytes": 1312,
+    "crc32": 2619838527
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Catalog.h",
+    "bytes": 11270,
+    "compressed_bytes": 3536,
+    "crc32": 2594665109
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/CertificateInfo.h",
+    "bytes": 5025,
+    "compressed_bytes": 1710,
+    "crc32": 2498462398
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/CharTypes.h",
+    "bytes": 526,
+    "compressed_bytes": 240,
+    "crc32": 1460970827
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/CryptoSignBackend.h",
+    "bytes": 4907,
+    "compressed_bytes": 1650,
+    "crc32": 2202265261
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/CurlCachedFile.h",
+    "bytes": 903,
+    "compressed_bytes": 375,
+    "crc32": 1954787246
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/CurlPDFDocBuilder.h",
+    "bytes": 1137,
+    "compressed_bytes": 446,
+    "crc32": 2388243898
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/DateInfo.h",
+    "bytes": 1951,
+    "compressed_bytes": 786,
+    "crc32": 4103044321
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Dict.h",
+    "bytes": 6208,
+    "compressed_bytes": 1945,
+    "crc32": 1510152007
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Error.h",
+    "bytes": 3842,
+    "compressed_bytes": 1295,
+    "crc32": 1072326790
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/ErrorCodes.h",
+    "bytes": 1994,
+    "compressed_bytes": 640,
+    "crc32": 2699448823
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/FILECacheLoader.h",
+    "bytes": 871,
+    "compressed_bytes": 412,
+    "crc32": 4065961794
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/FileSpec.h",
+    "bytes": 2731,
+    "compressed_bytes": 960,
+    "crc32": 3907780090
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/FontInfo.h",
+    "bytes": 3096,
+    "compressed_bytes": 1089,
+    "crc32": 2346227170
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Form.h",
+    "bytes": 31329,
+    "compressed_bytes": 7449,
+    "crc32": 1305921542
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Function.h",
+    "bytes": 9137,
+    "compressed_bytes": 2143,
+    "crc32": 3869126144
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Gfx.h",
+    "bytes": 14916,
+    "compressed_bytes": 4004,
+    "crc32": 2575175147
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/GfxFont.h",
+    "bytes": 16454,
+    "compressed_bytes": 4627,
+    "crc32": 2138035410
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/GfxState_helpers.h",
+    "bytes": 2615,
+    "compressed_bytes": 838,
+    "crc32": 2510930474
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/GfxState.h",
+    "bytes": 70881,
+    "compressed_bytes": 12447,
+    "crc32": 688015493
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/GlobalParams.h",
+    "bytes": 9528,
+    "compressed_bytes": 2762,
+    "crc32": 3863186622
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/HashAlgorithm.h",
+    "bytes": 508,
+    "compressed_bytes": 244,
+    "crc32": 1369992611
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/JPEG2000Stream.h",
+    "bytes": 2183,
+    "compressed_bytes": 953,
+    "crc32": 4199020187
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/JSInfo.h",
+    "bytes": 1895,
+    "compressed_bytes": 891,
+    "crc32": 3991779944
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Lexer.h",
+    "bytes": 3709,
+    "compressed_bytes": 1486,
+    "crc32": 2049040787
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Link.h",
+    "bytes": 18594,
+    "compressed_bytes": 4033,
+    "crc32": 3199026893
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/MarkedContentOutputDev.h",
+    "bytes": 3545,
+    "compressed_bytes": 1296,
+    "crc32": 2726676424
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Movie.h",
+    "bytes": 3567,
+    "compressed_bytes": 1385,
+    "crc32": 386677457
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/NameToUnicodeTable.h",
+    "bytes": 451690,
+    "compressed_bytes": 34110,
+    "crc32": 3094818534
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Object.h",
+    "bytes": 19520,
+    "compressed_bytes": 3551,
+    "crc32": 2051944432
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/OptionalContent.h",
+    "bytes": 3287,
+    "compressed_bytes": 1087,
+    "crc32": 434220857
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Outline.h",
+    "bytes": 3868,
+    "compressed_bytes": 1313,
+    "crc32": 3886627455
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/OutputDev.h",
+    "bytes": 19188,
+    "compressed_bytes": 4972,
+    "crc32": 4120775344
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Page.h",
+    "bytes": 10902,
+    "compressed_bytes": 3262,
+    "crc32": 1529482509
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PageTransition.h",
+    "bytes": 3107,
+    "compressed_bytes": 1176,
+    "crc32": 542686822
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Parser.h",
+    "bytes": 2798,
+    "compressed_bytes": 1097,
+    "crc32": 3230004655
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PDFDoc.h",
+    "bytes": 21862,
+    "compressed_bytes": 5433,
+    "crc32": 2787072879
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PDFDocBuilder.h",
+    "bytes": 1526,
+    "compressed_bytes": 604,
+    "crc32": 472071194
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PDFDocEncoding.h",
+    "bytes": 1423,
+    "compressed_bytes": 614,
+    "crc32": 1972433845
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PDFDocFactory.h",
+    "bytes": 1969,
+    "compressed_bytes": 814,
+    "crc32": 1689665507
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PDFRectangle.h",
+    "bytes": 2343,
+    "compressed_bytes": 785,
+    "crc32": 662996152
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/poppler_private_export.h",
+    "bytes": 1247,
+    "compressed_bytes": 335,
+    "crc32": 1077593625
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/poppler-config.h",
+    "bytes": 3001,
+    "compressed_bytes": 1039,
+    "crc32": 3325674933
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PopplerCache.h",
+    "bytes": 2079,
+    "compressed_bytes": 756,
+    "crc32": 3776212499
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/ProfileData.h",
+    "bytes": 996,
+    "compressed_bytes": 363,
+    "crc32": 1033637046
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/PSOutputDev.h",
+    "bytes": 25814,
+    "compressed_bytes": 6827,
+    "crc32": 2958188699
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Ref.h",
+    "bytes": 3985,
+    "compressed_bytes": 1478,
+    "crc32": 1721648868
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Rendition.h",
+    "bytes": 4616,
+    "compressed_bytes": 1652,
+    "crc32": 2584094103
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/SignatureInfo.h",
+    "bytes": 3261,
+    "compressed_bytes": 1147,
+    "crc32": 1646445761
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Sound.h",
+    "bytes": 2458,
+    "compressed_bytes": 1112,
+    "crc32": 413343849
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/SplashOutputDev.h",
+    "bytes": 16797,
+    "compressed_bytes": 4096,
+    "crc32": 922215093
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Stream-CCITT.h",
+    "bytes": 36948,
+    "compressed_bytes": 3120,
+    "crc32": 2459083663
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/Stream.h",
+    "bytes": 47337,
+    "compressed_bytes": 9138,
+    "crc32": 218020623
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/StructElement.h",
+    "bytes": 11623,
+    "compressed_bytes": 3333,
+    "crc32": 814968848
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/StructTreeRoot.h",
+    "bytes": 2445,
+    "compressed_bytes": 942,
+    "crc32": 157102701
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/TextOutputDev.h",
+    "bytes": 35315,
+    "compressed_bytes": 8593,
+    "crc32": 880422256
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UnicodeCClassTables.h",
+    "bytes": 107148,
+    "compressed_bytes": 2169,
+    "crc32": 2814764114
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UnicodeCompTables.h",
+    "bytes": 40842,
+    "compressed_bytes": 5924,
+    "crc32": 18802203
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UnicodeDecompTables.h",
+    "bytes": 457321,
+    "compressed_bytes": 56908,
+    "crc32": 3180672125
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UnicodeMap.h",
+    "bytes": 3750,
+    "compressed_bytes": 1293,
+    "crc32": 2743539812
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UnicodeMapFuncs.h",
+    "bytes": 1196,
+    "compressed_bytes": 523,
+    "crc32": 3487041735
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UnicodeMapTables.h",
+    "bytes": 23967,
+    "compressed_bytes": 3288,
+    "crc32": 3011790946
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UnicodeTypeTable.h",
+    "bytes": 1736,
+    "compressed_bytes": 652,
+    "crc32": 2569280903
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/UTF.h",
+    "bytes": 6148,
+    "compressed_bytes": 2080,
+    "crc32": 1241929045
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/ViewerPreferences.h",
+    "bytes": 2564,
+    "compressed_bytes": 795,
+    "crc32": 121887169
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/XRef.h",
+    "bytes": 13217,
+    "compressed_bytes": 4310,
+    "crc32": 1358952174
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler_cpp_export.h",
+    "bytes": 1159,
+    "compressed_bytes": 334,
+    "crc32": 2765816115
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-destination.h",
+    "bytes": 1866,
+    "compressed_bytes": 879,
+    "crc32": 2171941790
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-document.h",
+    "bytes": 4574,
+    "compressed_bytes": 1554,
+    "crc32": 451785794
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-embedded-file.h",
+    "bytes": 1643,
+    "compressed_bytes": 824,
+    "crc32": 4059058234
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-font-private.h",
+    "bytes": 2361,
+    "compressed_bytes": 1061,
+    "crc32": 924485071
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-font.h",
+    "bytes": 2225,
+    "compressed_bytes": 933,
+    "crc32": 1865044930
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-global.h",
+    "bytes": 3418,
+    "compressed_bytes": 1481,
+    "crc32": 4162891855
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-image.h",
+    "bytes": 1973,
+    "compressed_bytes": 928,
+    "crc32": 2144151857
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-page-renderer.h",
+    "bytes": 2227,
+    "compressed_bytes": 999,
+    "crc32": 3572683559
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-page-transition.h",
+    "bytes": 1959,
+    "compressed_bytes": 898,
+    "crc32": 497871425
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-page.h",
+    "bytes": 5966,
+    "compressed_bytes": 2253,
+    "crc32": 98761662
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-rectangle.h",
+    "bytes": 1953,
+    "compressed_bytes": 911,
+    "crc32": 282237523
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-toc.h",
+    "bytes": 1607,
+    "compressed_bytes": 743,
+    "crc32": 3055688065
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/cpp/poppler-version.h",
+    "bytes": 1247,
+    "compressed_bytes": 624,
+    "crc32": 2541437103
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/fofi/FoFiBase.h",
+    "bytes": 2546,
+    "compressed_bytes": 920,
+    "crc32": 3255087605
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/fofi/FoFiEncodings.h",
+    "bytes": 1625,
+    "compressed_bytes": 531,
+    "crc32": 4148221931
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/fofi/FoFiIdentifier.h",
+    "bytes": 1769,
+    "compressed_bytes": 638,
+    "crc32": 4127021051
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/fofi/FoFiTrueType.h",
+    "bytes": 8547,
+    "compressed_bytes": 2445,
+    "crc32": 3651336615
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/fofi/FoFiType1C.h",
+    "bytes": 8746,
+    "compressed_bytes": 2625,
+    "crc32": 1558234638
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-action.h",
+    "bytes": 12461,
+    "compressed_bytes": 3267,
+    "crc32": 2657113610
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-annot.h",
+    "bytes": 22679,
+    "compressed_bytes": 4117,
+    "crc32": 390069834
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-attachment.h",
+    "bytes": 4815,
+    "compressed_bytes": 1745,
+    "crc32": 1616663287
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-date.h",
+    "bytes": 1040,
+    "compressed_bytes": 607,
+    "crc32": 2335312010
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-document.h",
+    "bytes": 22409,
+    "compressed_bytes": 4826,
+    "crc32": 1667411081
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-enums.h",
+    "bytes": 9153,
+    "compressed_bytes": 1584,
+    "crc32": 2017649626
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-features.h",
+    "bytes": 2785,
+    "compressed_bytes": 1071,
+    "crc32": 2058212024
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-form-field.h",
+    "bytes": 17538,
+    "compressed_bytes": 3329,
+    "crc32": 3833478303
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-layer.h",
+    "bytes": 1989,
+    "compressed_bytes": 915,
+    "crc32": 2845828527
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-macros.h",
+    "bytes": 1143,
+    "compressed_bytes": 347,
+    "crc32": 2309970493
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-media.h",
+    "bytes": 3285,
+    "compressed_bytes": 1355,
+    "crc32": 3125779549
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-movie.h",
+    "bytes": 3337,
+    "compressed_bytes": 1252,
+    "crc32": 3875671361
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-page.h",
+    "bytes": 16330,
+    "compressed_bytes": 3631,
+    "crc32": 2819980085
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler-structure-element.h",
+    "bytes": 17329,
+    "compressed_bytes": 2803,
+    "crc32": 1738070061
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/glib/poppler.h",
+    "bytes": 15047,
+    "compressed_bytes": 3939,
+    "crc32": 3514626880
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/gfile.h",
+    "bytes": 3919,
+    "compressed_bytes": 1525,
+    "crc32": 719300773
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/gmem.h",
+    "bytes": 4604,
+    "compressed_bytes": 1331,
+    "crc32": 796476080
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/GooCheckedOps.h",
+    "bytes": 3302,
+    "compressed_bytes": 784,
+    "crc32": 3522488835
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/GooLikely.h",
+    "bytes": 594,
+    "compressed_bytes": 263,
+    "crc32": 3180380662
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/GooString.h",
+    "bytes": 7099,
+    "compressed_bytes": 2553,
+    "crc32": 2921890177
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/GooTimer.h",
+    "bytes": 1180,
+    "compressed_bytes": 505,
+    "crc32": 2206040463
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/grandom.h",
+    "bytes": 441,
+    "compressed_bytes": 284,
+    "crc32": 1863043440
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/gstrtod.h",
+    "bytes": 1505,
+    "compressed_bytes": 819,
+    "crc32": 3682884858
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/ImgWriter.h",
+    "bytes": 1154,
+    "compressed_bytes": 520,
+    "crc32": 4137655530
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/JpegWriter.h",
+    "bytes": 1920,
+    "compressed_bytes": 800,
+    "crc32": 300696799
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/PNGWriter.h",
+    "bytes": 1708,
+    "compressed_bytes": 736,
+    "crc32": 4233190762
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/goo/TiffWriter.h",
+    "bytes": 1804,
+    "compressed_bytes": 764,
+    "crc32": 901934534
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/Splash.h",
+    "bytes": 17121,
+    "compressed_bytes": 4256,
+    "crc32": 3853241898
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashBitmap.h",
+    "bytes": 5432,
+    "compressed_bytes": 1843,
+    "crc32": 2696682422
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashClip.h",
+    "bytes": 4425,
+    "compressed_bytes": 1498,
+    "crc32": 3902390326
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashErrorCodes.h",
+    "bytes": 1337,
+    "compressed_bytes": 559,
+    "crc32": 3116140058
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashFont.h",
+    "bytes": 4789,
+    "compressed_bytes": 1652,
+    "crc32": 2428454527
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashFontEngine.h",
+    "bytes": 4018,
+    "compressed_bytes": 1246,
+    "crc32": 265005026
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashFontFile.h",
+    "bytes": 2796,
+    "compressed_bytes": 953,
+    "crc32": 1560317859
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashFontFileID.h",
+    "bytes": 1389,
+    "compressed_bytes": 507,
+    "crc32": 2973398941
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashGlyphBitmap.h",
+    "bytes": 690,
+    "compressed_bytes": 246,
+    "crc32": 2206987223
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashMath.h",
+    "bytes": 5953,
+    "compressed_bytes": 1277,
+    "crc32": 714759483
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashPath.h",
+    "bytes": 4344,
+    "compressed_bytes": 1395,
+    "crc32": 3682333023
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashPattern.h",
+    "bytes": 3452,
+    "compressed_bytes": 963,
+    "crc32": 3382595833
+  },
+  {
+    "path": "poppler-26.09.0/Library/include/poppler/splash/SplashTypes.h",
+    "bytes": 6679,
+    "compressed_bytes": 1664,
+    "crc32": 4091630975
+  },
+  {
+    "path": "poppler-26.09.0/Library/lib/poppler-cpp.lib",
+    "bytes": 191502,
+    "compressed_bytes": 20364,
+    "crc32": 1751856225
+  },
+  {
+    "path": "poppler-26.09.0/Library/lib/poppler-glib.lib",
+    "bytes": 163860,
+    "compressed_bytes": 24514,
+    "crc32": 331803438
+  },
+  {
+    "path": "poppler-26.09.0/Library/lib/poppler.lib",
+    "bytes": 17037826,
+    "compressed_bytes": 1596093,
+    "crc32": 43714553
+  },
+  {
+    "path": "poppler-26.09.0/Library/lib/pkgconfig/poppler-cpp.pc",
+    "bytes": 414,
+    "compressed_bytes": 216,
+    "crc32": 2196678868
+  },
+  {
+    "path": "poppler-26.09.0/Library/lib/pkgconfig/poppler-glib.pc",
+    "bytes": 520,
+    "compressed_bytes": 253,
+    "crc32": 3284993231
+  },
+  {
+    "path": "poppler-26.09.0/Library/lib/pkgconfig/poppler.pc",
+    "bytes": 464,
+    "compressed_bytes": 256,
+    "crc32": 2940564797
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/",
+    "bytes": 0,
+    "compressed_bytes": 0,
+    "crc32": 0
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdfattach.1",
+    "bytes": 1128,
+    "compressed_bytes": 541,
+    "crc32": 2159393526
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdfdetach.1",
+    "bytes": 2464,
+    "compressed_bytes": 975,
+    "crc32": 1267236308
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdffonts.1",
+    "bytes": 2379,
+    "compressed_bytes": 1045,
+    "crc32": 230496944
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdfimages.1",
+    "bytes": 6481,
+    "compressed_bytes": 2453,
+    "crc32": 4094780056
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdfinfo.1",
+    "bytes": 3897,
+    "compressed_bytes": 1655,
+    "crc32": 3848515754
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdfseparate.1",
+    "bytes": 1585,
+    "compressed_bytes": 710,
+    "crc32": 4037135891
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdftocairo.1",
+    "bytes": 11693,
+    "compressed_bytes": 3953,
+    "crc32": 2810982240
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdftohtml.1",
+    "bytes": 2694,
+    "compressed_bytes": 1307,
+    "crc32": 88135302
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdftoppm.1",
+    "bytes": 6663,
+    "compressed_bytes": 2296,
+    "crc32": 2713429920
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdftops.1",
+    "bytes": 9151,
+    "compressed_bytes": 3102,
+    "crc32": 4118530077
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdftotext.1",
+    "bytes": 4825,
+    "compressed_bytes": 2018,
+    "crc32": 2667250384
+  },
+  {
+    "path": "poppler-26.09.0/Library/share/man/man1/pdfunite.1",
+    "bytes": 1165,
+    "compressed_bytes": 558,
+    "crc32": 1208599106
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/",
+    "bytes": 0,
+    "compressed_bytes": 0,
+    "crc32": 0
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/CMakeLists.txt",
+    "bytes": 9332,
+    "compressed_bytes": 1428,
+    "crc32": 294804751
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/COPYING",
+    "bytes": 1560,
+    "compressed_bytes": 818,
+    "crc32": 2048590255
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/COPYING.adobe",
+    "bytes": 1565,
+    "compressed_bytes": 798,
+    "crc32": 3424732685
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/COPYING.gpl2",
+    "bytes": 17987,
+    "compressed_bytes": 6846,
+    "crc32": 392499292
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/Makefile",
+    "bytes": 10918,
+    "compressed_bytes": 1729,
+    "crc32": 3527699565
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/poppler-data.pc",
+    "bytes": 179,
+    "compressed_bytes": 134,
+    "crc32": 3182318499
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/poppler-data.pc.in",
+    "bytes": 158,
+    "compressed_bytes": 125,
+    "crc32": 855266446
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/README",
+    "bytes": 1027,
+    "compressed_bytes": 526,
+    "crc32": 1038223449
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cidToUnicode/Adobe-CNS1",
+    "bytes": 97321,
+    "compressed_bytes": 48473,
+    "crc32": 342784317
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cidToUnicode/Adobe-GB1",
+    "bytes": 151426,
+    "compressed_bytes": 72450,
+    "crc32": 3480005617
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cidToUnicode/Adobe-Japan1",
+    "bytes": 115643,
+    "compressed_bytes": 43233,
+    "crc32": 1533440506
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cidToUnicode/Adobe-Korea1",
+    "bytes": 91760,
+    "compressed_bytes": 41470,
+    "crc32": 2559858145
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-0",
+    "bytes": 3829,
+    "compressed_bytes": 1702,
+    "crc32": 2054303025
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-1",
+    "bytes": 4002,
+    "compressed_bytes": 1778,
+    "crc32": 677478081
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-2",
+    "bytes": 4022,
+    "compressed_bytes": 1788,
+    "crc32": 1771788218
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-3",
+    "bytes": 4122,
+    "compressed_bytes": 1828,
+    "crc32": 3800309312
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-4",
+    "bytes": 4142,
+    "compressed_bytes": 1835,
+    "crc32": 1717400568
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-5",
+    "bytes": 4142,
+    "compressed_bytes": 1834,
+    "crc32": 3277217376
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-6",
+    "bytes": 4142,
+    "compressed_bytes": 1835,
+    "crc32": 2610391492
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-7",
+    "bytes": 4118,
+    "compressed_bytes": 1818,
+    "crc32": 1784896602
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-B5pc",
+    "bytes": 9061,
+    "compressed_bytes": 3951,
+    "crc32": 1046508002
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-ETen-B5",
+    "bytes": 9462,
+    "compressed_bytes": 4109,
+    "crc32": 4166730930
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-H-CID",
+    "bytes": 3355,
+    "compressed_bytes": 1438,
+    "crc32": 1758322391
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-H-Host",
+    "bytes": 9570,
+    "compressed_bytes": 4195,
+    "crc32": 1383584572
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-H-Mac",
+    "bytes": 9126,
+    "compressed_bytes": 3992,
+    "crc32": 2090206435
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/Adobe-CNS1-UCS2",
+    "bytes": 266531,
+    "compressed_bytes": 100596,
+    "crc32": 2186289817
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/B5-H",
+    "bytes": 7493,
+    "compressed_bytes": 3374,
+    "crc32": 3122256667
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/B5-V",
+    "bytes": 2924,
+    "compressed_bytes": 1266,
+    "crc32": 1312873166
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/B5pc-H",
+    "bytes": 7547,
+    "compressed_bytes": 3404,
+    "crc32": 3883424843
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/B5pc-UCS2",
+    "bytes": 2647,
+    "compressed_bytes": 1115,
+    "crc32": 2127536706
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/B5pc-UCS2C",
+    "bytes": 272945,
+    "compressed_bytes": 87226,
+    "crc32": 283056564
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/B5pc-V",
+    "bytes": 2936,
+    "compressed_bytes": 1268,
+    "crc32": 1618732324
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/CNS-EUC-H",
+    "bytes": 12246,
+    "compressed_bytes": 4179,
+    "crc32": 2220424859
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/CNS-EUC-V",
+    "bytes": 13278,
+    "compressed_bytes": 4451,
+    "crc32": 3675754723
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/CNS1-H",
+    "bytes": 5611,
+    "compressed_bytes": 2460,
+    "crc32": 3616339957
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/CNS1-V",
+    "bytes": 2932,
+    "compressed_bytes": 1262,
+    "crc32": 537955506
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/CNS2-H",
+    "bytes": 4275,
+    "compressed_bytes": 1911,
+    "crc32": 2655010678
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/CNS2-V",
+    "bytes": 2683,
+    "compressed_bytes": 1148,
+    "crc32": 560492609
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/ETen-B5-H",
+    "bytes": 7703,
+    "compressed_bytes": 3465,
+    "crc32": 3503055506
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/ETen-B5-UCS2",
+    "bytes": 276625,
+    "compressed_bytes": 92252,
+    "crc32": 3693387205
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/ETen-B5-V",
+    "bytes": 2974,
+    "compressed_bytes": 1286,
+    "crc32": 542521367
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/ETenms-B5-H",
+    "bytes": 2729,
+    "compressed_bytes": 1168,
+    "crc32": 854493755
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/ETenms-B5-V",
+    "bytes": 3041,
+    "compressed_bytes": 1312,
+    "crc32": 3389605633
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/ETHK-B5-H",
+    "bytes": 23202,
+    "compressed_bytes": 10093,
+    "crc32": 66762865
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/ETHK-B5-V",
+    "bytes": 2955,
+    "compressed_bytes": 1274,
+    "crc32": 2951224329
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKdla-B5-H",
+    "bytes": 23268,
+    "compressed_bytes": 8787,
+    "crc32": 4231464682
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKdla-B5-V",
+    "bytes": 2941,
+    "compressed_bytes": 1262,
+    "crc32": 1521584036
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKdlb-B5-H",
+    "bytes": 20928,
+    "compressed_bytes": 7996,
+    "crc32": 3746843976
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKdlb-B5-V",
+    "bytes": 2941,
+    "compressed_bytes": 1262,
+    "crc32": 97179309
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKgccs-B5-H",
+    "bytes": 13724,
+    "compressed_bytes": 5866,
+    "crc32": 2119130585
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKgccs-B5-V",
+    "bytes": 2947,
+    "compressed_bytes": 1262,
+    "crc32": 124001194
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKm314-B5-H",
+    "bytes": 13537,
+    "compressed_bytes": 5557,
+    "crc32": 3129511861
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKm314-B5-V",
+    "bytes": 2947,
+    "compressed_bytes": 1264,
+    "crc32": 2509256944
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKm471-B5-H",
+    "bytes": 16507,
+    "compressed_bytes": 6556,
+    "crc32": 2229608280
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKm471-B5-V",
+    "bytes": 2947,
+    "compressed_bytes": 1263,
+    "crc32": 2113979601
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKscs-B5-H",
+    "bytes": 23253,
+    "compressed_bytes": 10117,
+    "crc32": 1720143186
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/HKscs-B5-V",
+    "bytes": 2961,
+    "compressed_bytes": 1276,
+    "crc32": 252031591
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UCS2-B5pc",
+    "bytes": 273255,
+    "compressed_bytes": 86145,
+    "crc32": 2402548633
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UCS2-ETen-B5",
+    "bytes": 286940,
+    "compressed_bytes": 94227,
+    "crc32": 3682090878
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UCS2-H",
+    "bytes": 326349,
+    "compressed_bytes": 109730,
+    "crc32": 1077374356
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UCS2-V",
+    "bytes": 2971,
+    "compressed_bytes": 1286,
+    "crc32": 3058296461
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UTF16-H",
+    "bytes": 253253,
+    "compressed_bytes": 104894,
+    "crc32": 3030531166
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UTF16-V",
+    "bytes": 2960,
+    "compressed_bytes": 1282,
+    "crc32": 123537372
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UTF32-H",
+    "bytes": 324657,
+    "compressed_bytes": 110429,
+    "crc32": 3438209421
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UTF32-V",
+    "bytes": 3040,
+    "compressed_bytes": 1295,
+    "crc32": 370538527
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UTF8-H",
+    "bytes": 290056,
+    "compressed_bytes": 105374,
+    "crc32": 852880359
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-CNS1/UniCNS-UTF8-V",
+    "bytes": 2996,
+    "compressed_bytes": 1290,
+    "crc32": 3133287829
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-0",
+    "bytes": 3292,
+    "compressed_bytes": 1479,
+    "crc32": 3338822157
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-1",
+    "bytes": 3446,
+    "compressed_bytes": 1554,
+    "crc32": 1827274265
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-2",
+    "bytes": 4400,
+    "compressed_bytes": 1949,
+    "crc32": 4054976797
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-3",
+    "bytes": 4399,
+    "compressed_bytes": 1946,
+    "crc32": 2519324896
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-4",
+    "bytes": 4951,
+    "compressed_bytes": 2158,
+    "crc32": 1295462494
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-5",
+    "bytes": 5051,
+    "compressed_bytes": 2199,
+    "crc32": 3966119453
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-GBK-EUC",
+    "bytes": 90971,
+    "compressed_bytes": 32775,
+    "crc32": 4155379243
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-GBpc-EUC",
+    "bytes": 5503,
+    "compressed_bytes": 2358,
+    "crc32": 3695801888
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-H-CID",
+    "bytes": 3470,
+    "compressed_bytes": 1518,
+    "crc32": 4022599045
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-H-Host",
+    "bytes": 91549,
+    "compressed_bytes": 33100,
+    "crc32": 2096778428
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-H-Mac",
+    "bytes": 5484,
+    "compressed_bytes": 2370,
+    "crc32": 2370525645
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/Adobe-GB1-UCS2",
+    "bytes": 221211,
+    "compressed_bytes": 85265,
+    "crc32": 1609252220
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GB-EUC-H",
+    "bytes": 4427,
+    "compressed_bytes": 2008,
+    "crc32": 4162127590
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GB-EUC-V",
+    "bytes": 3100,
+    "compressed_bytes": 1339,
+    "crc32": 4204210382
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GB-H",
+    "bytes": 4322,
+    "compressed_bytes": 1956,
+    "crc32": 3859953356
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GB-V",
+    "bytes": 3076,
+    "compressed_bytes": 1335,
+    "crc32": 1892216076
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBK-EUC-H",
+    "bytes": 83102,
+    "compressed_bytes": 30954,
+    "crc32": 788204955
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBK-EUC-UCS2",
+    "bytes": 224247,
+    "compressed_bytes": 78022,
+    "crc32": 435175721
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBK-EUC-V",
+    "bytes": 3089,
+    "compressed_bytes": 1330,
+    "crc32": 456881047
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBK2K-H",
+    "bytes": 90926,
+    "compressed_bytes": 35761,
+    "crc32": 3255285528
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBK2K-V",
+    "bytes": 3482,
+    "compressed_bytes": 1488,
+    "crc32": 3034568900
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBKp-EUC-H",
+    "bytes": 83083,
+    "compressed_bytes": 30935,
+    "crc32": 3738467094
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBKp-EUC-V",
+    "bytes": 3095,
+    "compressed_bytes": 1332,
+    "crc32": 196642498
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBpc-EUC-H",
+    "bytes": 4455,
+    "compressed_bytes": 2023,
+    "crc32": 3286036614
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBpc-EUC-UCS2",
+    "bytes": 2729,
+    "compressed_bytes": 1155,
+    "crc32": 3091015402
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBpc-EUC-UCS2C",
+    "bytes": 142756,
+    "compressed_bytes": 48321,
+    "crc32": 955110704
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBpc-EUC-V",
+    "bytes": 3112,
+    "compressed_bytes": 1342,
+    "crc32": 1124159320
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBT-EUC-H",
+    "bytes": 46773,
+    "compressed_bytes": 18727,
+    "crc32": 3063502515
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBT-EUC-V",
+    "bytes": 3108,
+    "compressed_bytes": 1342,
+    "crc32": 3080128310
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBT-H",
+    "bytes": 46668,
+    "compressed_bytes": 18540,
+    "crc32": 2400553640
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBT-V",
+    "bytes": 3084,
+    "compressed_bytes": 1337,
+    "crc32": 3265101887
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBTpc-EUC-H",
+    "bytes": 46803,
+    "compressed_bytes": 18741,
+    "crc32": 421637601
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/GBTpc-EUC-V",
+    "bytes": 3120,
+    "compressed_bytes": 1344,
+    "crc32": 3005046365
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UCS2-GBK-EUC",
+    "bytes": 234056,
+    "compressed_bytes": 81586,
+    "crc32": 1776692196
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UCS2-GBpc-EUC",
+    "bytes": 189539,
+    "compressed_bytes": 61045,
+    "crc32": 2257534788
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UCS2-H",
+    "bytes": 274383,
+    "compressed_bytes": 96096,
+    "crc32": 2442642172
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UCS2-V",
+    "bytes": 3167,
+    "compressed_bytes": 1370,
+    "crc32": 3352717812
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UTF16-H",
+    "bytes": 199981,
+    "compressed_bytes": 84473,
+    "crc32": 781721946
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UTF16-V",
+    "bytes": 3061,
+    "compressed_bytes": 1325,
+    "crc32": 2461910393
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UTF32-H",
+    "bytes": 267909,
+    "compressed_bytes": 89874,
+    "crc32": 914696106
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UTF32-V",
+    "bytes": 3177,
+    "compressed_bytes": 1340,
+    "crc32": 2264366087
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UTF8-H",
+    "bytes": 237834,
+    "compressed_bytes": 85871,
+    "crc32": 4065617637
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-GB1/UniGB-UTF8-V",
+    "bytes": 3115,
+    "compressed_bytes": 1339,
+    "crc32": 681791331
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78-EUC-H",
+    "bytes": 14796,
+    "compressed_bytes": 6309,
+    "crc32": 3583374365
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78-EUC-V",
+    "bytes": 3222,
+    "compressed_bytes": 1391,
+    "crc32": 4122713703
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78-H",
+    "bytes": 14673,
+    "compressed_bytes": 6183,
+    "crc32": 553174606
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78-RKSJ-H",
+    "bytes": 14827,
+    "compressed_bytes": 6344,
+    "crc32": 3496711069
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78-RKSJ-V",
+    "bytes": 3228,
+    "compressed_bytes": 1399,
+    "crc32": 2198557948
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78-V",
+    "bytes": 3198,
+    "compressed_bytes": 1388,
+    "crc32": 530248926
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78ms-RKSJ-H",
+    "bytes": 16500,
+    "compressed_bytes": 6988,
+    "crc32": 4069730719
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/78ms-RKSJ-V",
+    "bytes": 4209,
+    "compressed_bytes": 1806,
+    "crc32": 1793049725
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/83pv-RKSJ-H",
+    "bytes": 7080,
+    "compressed_bytes": 3071,
+    "crc32": 3331174046
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90ms-RKSJ-H",
+    "bytes": 6070,
+    "compressed_bytes": 2676,
+    "crc32": 2668491484
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90ms-RKSJ-UCS2",
+    "bytes": 106193,
+    "compressed_bytes": 40786,
+    "crc32": 637555612
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90ms-RKSJ-V",
+    "bytes": 4229,
+    "compressed_bytes": 1819,
+    "crc32": 1875762959
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90msp-RKSJ-H",
+    "bytes": 6001,
+    "compressed_bytes": 2652,
+    "crc32": 2169892816
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90msp-RKSJ-V",
+    "bytes": 4212,
+    "compressed_bytes": 1806,
+    "crc32": 1379952742
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90pv-RKSJ-H",
+    "bytes": 7815,
+    "compressed_bytes": 3361,
+    "crc32": 4293761551
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90pv-RKSJ-UCS2",
+    "bytes": 3254,
+    "compressed_bytes": 1390,
+    "crc32": 3134149022
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90pv-RKSJ-UCS2C",
+    "bytes": 97291,
+    "compressed_bytes": 37330,
+    "crc32": 3821777502
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/90pv-RKSJ-V",
+    "bytes": 3715,
+    "compressed_bytes": 1608,
+    "crc32": 2459633913
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Add-H",
+    "bytes": 14854,
+    "compressed_bytes": 6253,
+    "crc32": 3980940989
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Add-RKSJ-H",
+    "bytes": 15038,
+    "compressed_bytes": 6412,
+    "crc32": 1206044097
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Add-RKSJ-V",
+    "bytes": 3823,
+    "compressed_bytes": 1649,
+    "crc32": 1598065022
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Add-V",
+    "bytes": 3793,
+    "compressed_bytes": 1643,
+    "crc32": 2439752516
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-0",
+    "bytes": 3341,
+    "compressed_bytes": 1502,
+    "crc32": 4120686408
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-1",
+    "bytes": 3342,
+    "compressed_bytes": 1505,
+    "crc32": 1829479214
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-2",
+    "bytes": 3380,
+    "compressed_bytes": 1519,
+    "crc32": 3357431721
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-3",
+    "bytes": 3390,
+    "compressed_bytes": 1527,
+    "crc32": 2118568235
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-4",
+    "bytes": 3868,
+    "compressed_bytes": 1726,
+    "crc32": 1822974451
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-5",
+    "bytes": 4248,
+    "compressed_bytes": 1878,
+    "crc32": 2065177789
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-6",
+    "bytes": 4468,
+    "compressed_bytes": 1970,
+    "crc32": 1235199307
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-7",
+    "bytes": 4444,
+    "compressed_bytes": 1954,
+    "crc32": 3440022284
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-90ms-RKSJ",
+    "bytes": 7536,
+    "compressed_bytes": 3175,
+    "crc32": 1610881816
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-90pv-RKSJ",
+    "bytes": 9527,
+    "compressed_bytes": 3865,
+    "crc32": 2172236838
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-H-CID",
+    "bytes": 3654,
+    "compressed_bytes": 1566,
+    "crc32": 1407920589
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-H-Host",
+    "bytes": 7786,
+    "compressed_bytes": 3256,
+    "crc32": 2547683126
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-H-Mac",
+    "bytes": 6713,
+    "compressed_bytes": 2861,
+    "crc32": 2162964907
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-PS-H",
+    "bytes": 23434,
+    "compressed_bytes": 9051,
+    "crc32": 414255592
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-PS-V",
+    "bytes": 14214,
+    "compressed_bytes": 5672,
+    "crc32": 430569527
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-UCS2",
+    "bytes": 294111,
+    "compressed_bytes": 107590,
+    "crc32": 658825856
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/EUC-H",
+    "bytes": 5075,
+    "compressed_bytes": 2251,
+    "crc32": 1677176613
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/EUC-V",
+    "bytes": 3223,
+    "compressed_bytes": 1400,
+    "crc32": 4217443950
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Ext-H",
+    "bytes": 15424,
+    "compressed_bytes": 6512,
+    "crc32": 749788742
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Ext-RKSJ-H",
+    "bytes": 15607,
+    "compressed_bytes": 6677,
+    "crc32": 202583748
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Ext-RKSJ-V",
+    "bytes": 3481,
+    "compressed_bytes": 1515,
+    "crc32": 1103799719
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Ext-V",
+    "bytes": 3451,
+    "compressed_bytes": 1506,
+    "crc32": 330968160
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/H",
+    "bytes": 4941,
+    "compressed_bytes": 2170,
+    "crc32": 3298514796
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Hankaku",
+    "bytes": 2821,
+    "compressed_bytes": 1272,
+    "crc32": 2320205033
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Hiragana",
+    "bytes": 2795,
+    "compressed_bytes": 1258,
+    "crc32": 222650897
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Hojo-EUC-H",
+    "bytes": 4626,
+    "compressed_bytes": 1927,
+    "crc32": 3278237718
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Hojo-EUC-V",
+    "bytes": 2709,
+    "compressed_bytes": 1156,
+    "crc32": 3608789986
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Hojo-H",
+    "bytes": 4276,
+    "compressed_bytes": 1916,
+    "crc32": 3570391118
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Hojo-V",
+    "bytes": 2685,
+    "compressed_bytes": 1152,
+    "crc32": 3178850150
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Katakana",
+    "bytes": 2711,
+    "compressed_bytes": 1202,
+    "crc32": 4151812119
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/NWP-H",
+    "bytes": 17298,
+    "compressed_bytes": 7206,
+    "crc32": 4034716768
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/NWP-V",
+    "bytes": 3603,
+    "compressed_bytes": 1555,
+    "crc32": 295700474
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/RKSJ-H",
+    "bytes": 5124,
+    "compressed_bytes": 2263,
+    "crc32": 3050016032
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/RKSJ-V",
+    "bytes": 3229,
+    "compressed_bytes": 1407,
+    "crc32": 3510852064
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/Roman",
+    "bytes": 2688,
+    "compressed_bytes": 1184,
+    "crc32": 1885171118
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UCS2-90ms-RKSJ",
+    "bytes": 149695,
+    "compressed_bytes": 50074,
+    "crc32": 1085687405
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UCS2-90pv-RKSJ",
+    "bytes": 142968,
+    "compressed_bytes": 47692,
+    "crc32": 46585336
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UCS2-H",
+    "bytes": 83592,
+    "compressed_bytes": 31158,
+    "crc32": 2323829268
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UCS2-V",
+    "bytes": 2714,
+    "compressed_bytes": 1148,
+    "crc32": 3403393542
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UTF16-H",
+    "bytes": 62948,
+    "compressed_bytes": 28029,
+    "crc32": 2262367850
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UTF16-V",
+    "bytes": 2720,
+    "compressed_bytes": 1150,
+    "crc32": 3617702042
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UTF32-H",
+    "bytes": 84821,
+    "compressed_bytes": 29856,
+    "crc32": 4036057307
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UTF32-V",
+    "bytes": 2720,
+    "compressed_bytes": 1148,
+    "crc32": 2843183834
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UTF8-H",
+    "bytes": 73701,
+    "compressed_bytes": 27932,
+    "crc32": 2595598837
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniHojo-UTF8-V",
+    "bytes": 2716,
+    "compressed_bytes": 1149,
+    "crc32": 157550844
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UCS2-H",
+    "bytes": 168597,
+    "compressed_bytes": 57356,
+    "crc32": 3743244185
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UCS2-HW-H",
+    "bytes": 2820,
+    "compressed_bytes": 1213,
+    "crc32": 612455793
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UCS2-HW-V",
+    "bytes": 6591,
+    "compressed_bytes": 2719,
+    "crc32": 880430823
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UCS2-V",
+    "bytes": 6509,
+    "compressed_bytes": 2672,
+    "crc32": 827491721
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UTF16-H",
+    "bytes": 188225,
+    "compressed_bytes": 77934,
+    "crc32": 233095546
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UTF16-V",
+    "bytes": 5806,
+    "compressed_bytes": 2554,
+    "crc32": 3144866593
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UTF32-H",
+    "bytes": 245445,
+    "compressed_bytes": 83247,
+    "crc32": 2163712545
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UTF32-V",
+    "bytes": 6838,
+    "compressed_bytes": 2648,
+    "crc32": 4253176603
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UTF8-H",
+    "bytes": 216459,
+    "compressed_bytes": 78861,
+    "crc32": 1997090864
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS-UTF8-V",
+    "bytes": 6331,
+    "compressed_bytes": 2630,
+    "crc32": 2848007798
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS2004-UTF16-H",
+    "bytes": 188305,
+    "compressed_bytes": 78003,
+    "crc32": 3237851163
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS2004-UTF16-V",
+    "bytes": 5830,
+    "compressed_bytes": 2557,
+    "crc32": 2426947867
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS2004-UTF32-H",
+    "bytes": 245525,
+    "compressed_bytes": 83303,
+    "crc32": 1142346350
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS2004-UTF32-V",
+    "bytes": 6862,
+    "compressed_bytes": 2651,
+    "crc32": 284879070
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS2004-UTF8-H",
+    "bytes": 216537,
+    "compressed_bytes": 78930,
+    "crc32": 3650988822
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJIS2004-UTF8-V",
+    "bytes": 6353,
+    "compressed_bytes": 2633,
+    "crc32": 338015210
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJISPro-UCS2-HW-V",
+    "bytes": 6729,
+    "compressed_bytes": 2762,
+    "crc32": 1969837674
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJISPro-UCS2-V",
+    "bytes": 6618,
+    "compressed_bytes": 2713,
+    "crc32": 4010564739
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJISPro-UTF8-V",
+    "bytes": 7467,
+    "compressed_bytes": 2827,
+    "crc32": 4286980221
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJISX0213-UTF32-H",
+    "bytes": 245434,
+    "compressed_bytes": 83195,
+    "crc32": 627369777
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJISX0213-UTF32-V",
+    "bytes": 6804,
+    "compressed_bytes": 2630,
+    "crc32": 1611975008
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJISX02132004-UTF32-H",
+    "bytes": 245515,
+    "compressed_bytes": 83251,
+    "crc32": 3933868568
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/UniJISX02132004-UTF32-V",
+    "bytes": 6828,
+    "compressed_bytes": 2634,
+    "crc32": 164381857
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/V",
+    "bytes": 3199,
+    "compressed_bytes": 1396,
+    "crc32": 1310152744
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan1/WP-Symbol",
+    "bytes": 3093,
+    "compressed_bytes": 1419,
+    "crc32": 418104599
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Japan2/Adobe-Japan2-0",
+    "bytes": 3168,
+    "compressed_bytes": 1426,
+    "crc32": 3017583354
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-0",
+    "bytes": 3433,
+    "compressed_bytes": 1528,
+    "crc32": 1947686884
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-1",
+    "bytes": 4089,
+    "compressed_bytes": 1816,
+    "crc32": 512972422
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-2",
+    "bytes": 4088,
+    "compressed_bytes": 1815,
+    "crc32": 2369946394
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-H-CID",
+    "bytes": 3039,
+    "compressed_bytes": 1333,
+    "crc32": 3661299120
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-H-Host",
+    "bytes": 16800,
+    "compressed_bytes": 7013,
+    "crc32": 4294073598
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-H-Mac",
+    "bytes": 12278,
+    "compressed_bytes": 5099,
+    "crc32": 3901466127
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-KSCms-UHC",
+    "bytes": 16605,
+    "compressed_bytes": 6901,
+    "crc32": 1347040321
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-KSCpc-EUC",
+    "bytes": 12452,
+    "compressed_bytes": 5145,
+    "crc32": 3692687633
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-UCS2",
+    "bytes": 146807,
+    "compressed_bytes": 56713,
+    "crc32": 3531155486
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSC-EUC-H",
+    "bytes": 11728,
+    "compressed_bytes": 5022,
+    "crc32": 127101672
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSC-EUC-V",
+    "bytes": 3036,
+    "compressed_bytes": 1315,
+    "crc32": 3325699917
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSC-H",
+    "bytes": 11637,
+    "compressed_bytes": 4926,
+    "crc32": 3122371249
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSC-Johab-H",
+    "bytes": 84250,
+    "compressed_bytes": 31818,
+    "crc32": 1094166324
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSC-Johab-V",
+    "bytes": 3050,
+    "compressed_bytes": 1322,
+    "crc32": 2838732976
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSC-V",
+    "bytes": 3012,
+    "compressed_bytes": 1313,
+    "crc32": 2818453891
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCms-UHC-H",
+    "bytes": 15940,
+    "compressed_bytes": 6723,
+    "crc32": 4201259870
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCms-UHC-HW-H",
+    "bytes": 15936,
+    "compressed_bytes": 6720,
+    "crc32": 2935111112
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCms-UHC-HW-V",
+    "bytes": 3049,
+    "compressed_bytes": 1310,
+    "crc32": 1951964315
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCms-UHC-UCS2",
+    "bytes": 182560,
+    "compressed_bytes": 63901,
+    "crc32": 2634437095
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCms-UHC-V",
+    "bytes": 3050,
+    "compressed_bytes": 1319,
+    "crc32": 307428204
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCpc-EUC-H",
+    "bytes": 12555,
+    "compressed_bytes": 5390,
+    "crc32": 2006210883
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCpc-EUC-UCS2",
+    "bytes": 17200,
+    "compressed_bytes": 4891,
+    "crc32": 4267497171
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCpc-EUC-UCS2C",
+    "bytes": 151061,
+    "compressed_bytes": 51731,
+    "crc32": 152128723
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/KSCpc-EUC-V",
+    "bytes": 3048,
+    "compressed_bytes": 1317,
+    "crc32": 3037627847
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UCS2-KSCms-UHC",
+    "bytes": 188853,
+    "compressed_bytes": 65830,
+    "crc32": 2616706946
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UCS2-KSCpc-EUC",
+    "bytes": 147723,
+    "compressed_bytes": 50465,
+    "crc32": 4190514794
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UCS2-H",
+    "bytes": 166009,
+    "compressed_bytes": 60435,
+    "crc32": 3202607955
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UCS2-V",
+    "bytes": 3076,
+    "compressed_bytes": 1324,
+    "crc32": 3132403203
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UTF16-H",
+    "bytes": 122938,
+    "compressed_bytes": 53303,
+    "crc32": 2809903805
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UTF16-V",
+    "bytes": 3030,
+    "compressed_bytes": 1308,
+    "crc32": 3989518814
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UTF32-H",
+    "bytes": 165010,
+    "compressed_bytes": 56638,
+    "crc32": 94187274
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UTF32-V",
+    "bytes": 3130,
+    "compressed_bytes": 1324,
+    "crc32": 3692266599
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UTF8-H",
+    "bytes": 145845,
+    "compressed_bytes": 53415,
+    "crc32": 3817704914
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-Korea1/UniKS-UTF8-V",
+    "bytes": 3076,
+    "compressed_bytes": 1321,
+    "crc32": 3167667720
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-0",
+    "bytes": 2879,
+    "compressed_bytes": 1274,
+    "crc32": 127338817
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-1",
+    "bytes": 3012,
+    "compressed_bytes": 1341,
+    "crc32": 2876697202
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-2",
+    "bytes": 3512,
+    "compressed_bytes": 1568,
+    "crc32": 2479746519
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-3",
+    "bytes": 3532,
+    "compressed_bytes": 1579,
+    "crc32": 1827782963
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-4",
+    "bytes": 3552,
+    "compressed_bytes": 1587,
+    "crc32": 327382213
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-5",
+    "bytes": 3572,
+    "compressed_bytes": 1596,
+    "crc32": 356539767
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-6",
+    "bytes": 3732,
+    "compressed_bytes": 1670,
+    "crc32": 3627518406
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-7",
+    "bytes": 4092,
+    "compressed_bytes": 1810,
+    "crc32": 3638845923
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-8",
+    "bytes": 4372,
+    "compressed_bytes": 1925,
+    "crc32": 1722572408
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-9",
+    "bytes": 4412,
+    "compressed_bytes": 1943,
+    "crc32": 1451476012
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/Adobe-KR-UCS2",
+    "bytes": 203264,
+    "compressed_bytes": 78595,
+    "crc32": 1036336084
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/UniAKR-UTF16-H",
+    "bytes": 186571,
+    "compressed_bytes": 79516,
+    "crc32": 462618271
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/UniAKR-UTF32-H",
+    "bytes": 250512,
+    "compressed_bytes": 84339,
+    "crc32": 3381612796
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/cMap/Adobe-KR/UniAKR-UTF8-H",
+    "bytes": 220026,
+    "compressed_bytes": 77500,
+    "crc32": 2390093943
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/nameToUnicode/Bulgarian",
+    "bytes": 630,
+    "compressed_bytes": 327,
+    "crc32": 97585769
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/nameToUnicode/Greek",
+    "bytes": 125,
+    "compressed_bytes": 96,
+    "crc32": 2662231745
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/nameToUnicode/Thai",
+    "bytes": 3074,
+    "compressed_bytes": 792,
+    "crc32": 980491917
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/Big5",
+    "bytes": 133464,
+    "compressed_bytes": 65557,
+    "crc32": 748015579
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/Big5ascii",
+    "bytes": 133839,
+    "compressed_bytes": 65790,
+    "crc32": 2600222562
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/EUC-CN",
+    "bytes": 67589,
+    "compressed_bytes": 33632,
+    "crc32": 2005898050
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/EUC-JP",
+    "bytes": 66176,
+    "compressed_bytes": 32854,
+    "crc32": 3481032304
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/GBK",
+    "bytes": 117814,
+    "compressed_bytes": 59160,
+    "crc32": 3477898566
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/ISO-2022-CN",
+    "bytes": 67033,
+    "compressed_bytes": 32839,
+    "crc32": 418975858
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/ISO-2022-JP",
+    "bytes": 65913,
+    "compressed_bytes": 32264,
+    "crc32": 3576658007
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/ISO-2022-KR",
+    "bytes": 68259,
+    "compressed_bytes": 33612,
+    "crc32": 3723384739
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/ISO-8859-6",
+    "bytes": 524,
+    "compressed_bytes": 228,
+    "crc32": 476157316
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/ISO-8859-7",
+    "bytes": 584,
+    "compressed_bytes": 276,
+    "crc32": 3987676440
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/ISO-8859-8",
+    "bytes": 605,
+    "compressed_bytes": 284,
+    "crc32": 2002541759
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/ISO-8859-9",
+    "bytes": 626,
+    "compressed_bytes": 286,
+    "crc32": 2760502520
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/KOI8-R",
+    "bytes": 904,
+    "compressed_bytes": 418,
+    "crc32": 416871530
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/Latin2",
+    "bytes": 1346,
+    "compressed_bytes": 565,
+    "crc32": 3360033379
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/Shift-JIS",
+    "bytes": 65988,
+    "compressed_bytes": 32166,
+    "crc32": 1047242097
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/TIS-620",
+    "bytes": 451,
+    "compressed_bytes": 211,
+    "crc32": 1478051720
+  },
+  {
+    "path": "poppler-26.09.0/share/poppler/unicodeMap/Windows-1255",
+    "bytes": 638,
+    "compressed_bytes": 300,
+    "crc32": 3405215407
+  }
+]

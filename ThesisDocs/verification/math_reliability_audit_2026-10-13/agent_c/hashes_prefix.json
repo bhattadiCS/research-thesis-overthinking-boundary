@@ -1,0 +1,10 @@
+{
+  "research/outputs/semester2/prefix_model_v1/prefix_model.json": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+  "research/outputs/semester2/prefix_model_v1/heldout_prefix_predictions.csv": "f71337213c2ebc10a3fbc95452a811f781f1300b072dc097a3256b0df4e43473",
+  "research/outputs/semester2/prefix_model_v1/evaluation.json": "659eca8d5e3a5949bbeb60df79c77654144fc76d221585d71d10a7b0afb3abf9",
+  "research/outputs/semester2/prefix_model_v1/task_split.csv": "d23f54010b85b3071e7ffb5c58ce5a890365e84174d19154c3efb2f19517fee0",
+  "research/outputs/semester2/prefix_model_v1/label_reconstruction_audit.csv": "ff7a789cc04880830a3484d6c77b4d791b810a0afbb76d68ab78918e0843f534",
+  "research/outputs/semester2/online_stopping_20261002/live_public_tasks.jsonl": "ff59b3fbf094acac04eb2ea54b87260403944b0bdbf985bd6706692d7d09520c",
+  "research/adversarial_tasks_v1.jsonl": "6046358cb8e8d8c47c1cec4fc26ddda0ea48308e177e32b06b99d10952037836",
+  "research/outputs/semester2/prefix_model_v1/heldout_policy_replay.csv": "e68de793d7f5b1495fc36f9f930cb877a8a6cc36b58f845eecadec6c0a7ee6ae"
+}

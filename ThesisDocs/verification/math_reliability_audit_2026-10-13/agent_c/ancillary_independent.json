@@ -1,0 +1,274 @@
+{
+  "anonymous": {
+    "rows": 144440,
+    "tasks": 2948,
+    "auc": 0.9546638703930357,
+    "baseline_auc": 0.9453355857281374,
+    "delta": 0.009328284664898323,
+    "interval": [
+      0.008027515453664837,
+      0.010638990839960782
+    ],
+    "matched_folds": true,
+    "bootstrap_draws": 2000
+  },
+  "fixed13": {
+    "rows": 98280,
+    "tasks": 1512,
+    "auc": 0.9400091689517813,
+    "baseline_auc": 0.931266134763085,
+    "delta": 0.008743034188696375,
+    "interval": [
+      0.006653037849561447,
+      0.010881746822712209
+    ],
+    "matched_folds": true,
+    "bootstrap_draws": 2000
+  },
+  "selected_no_timing": {
+    "rows": 14740,
+    "tasks": 2948,
+    "auc": 0.9343502984042028,
+    "brier": 0.09931192748969611
+  },
+  "selected_dynamics": {
+    "rows": 14740,
+    "tasks": 2948,
+    "auc": 0.9370369330204548,
+    "brier": 0.10019667195483556
+  },
+  "heuristic_latency": {
+    "all": {
+      "decisions": 18880,
+      "median": 0.0034,
+      "p99": 0.013,
+      "maximum": 0.4383
+    },
+    "confidence_stability_v1": {
+      "decisions": 8880,
+      "median": 0.0042,
+      "p99": 0.015341999999999825,
+      "maximum": 0.4383
+    },
+    "never": {
+      "decisions": 10000,
+      "median": 0.0034,
+      "p99": 0.0106,
+      "maximum": 0.1109
+    }
+  },
+  "replay_pareto": {
+    "replay_confidence_80_paired.csv": {
+      "tasks": 1500,
+      "trajectories": 1500,
+      "baseline_correct": 143,
+      "active_correct": 144,
+      "baseline_completion_tokens": 418845,
+      "active_completion_tokens": 374129,
+      "saving": 0.10676025737444639,
+      "mean_stop": 4.332666666666666,
+      "nondominated": false
+    },
+    "replay_confidence_90_paired.csv": {
+      "tasks": 1500,
+      "trajectories": 1500,
+      "baseline_correct": 143,
+      "active_correct": 144,
+      "baseline_completion_tokens": 418845,
+      "active_completion_tokens": 377172,
+      "saving": 0.09949503993123943,
+      "mean_stop": 4.3773333333333335,
+      "nondominated": false
+    },
+    "replay_confidence_95_paired.csv": {
+      "tasks": 1500,
+      "trajectories": 1500,
+      "baseline_correct": 143,
+      "active_correct": 143,
+      "baseline_completion_tokens": 418845,
+      "active_completion_tokens": 382981,
+      "saving": 0.08562594754622832,
+      "mean_stop": 4.468,
+      "nondominated": false
+    },
+    "replay_fixed_2_paired.csv": {
+      "tasks": 1500,
+      "trajectories": 1500,
+      "baseline_correct": 143,
+      "active_correct": 144,
+      "baseline_completion_tokens": 418845,
+      "active_completion_tokens": 204011,
+      "saving": 0.5129200539579081,
+      "mean_stop": 2.0,
+      "nondominated": true
+    },
+    "replay_fixed_3_paired.csv": {
+      "tasks": 1500,
+      "trajectories": 1500,
+      "baseline_correct": 143,
+      "active_correct": 149,
+      "baseline_completion_tokens": 418845,
+      "active_completion_tokens": 278444,
+      "saving": 0.3352099225250391,
+      "mean_stop": 3.0,
+      "nondominated": true
+    },
+    "replay_fixed_4_paired.csv": {
+      "tasks": 1500,
+      "trajectories": 1500,
+      "baseline_correct": 143,
+      "active_correct": 146,
+      "baseline_completion_tokens": 418845,
+      "active_completion_tokens": 349254,
+      "saving": 0.16614976900762812,
+      "mean_stop": 4.0,
+      "nondominated": false
+    },
+    "replay_never_paired.csv": {
+      "tasks": 1500,
+      "trajectories": 1500,
+      "baseline_correct": 143,
+      "active_correct": 143,
+      "baseline_completion_tokens": 418845,
+      "active_completion_tokens": 418845,
+      "saving": 0.0,
+      "mean_stop": 5.0,
+      "nondominated": false
+    }
+  },
+  "locked_code_bindings": [
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002",
+      "file": "online_generation.py",
+      "expected": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "raw": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "canonical_lf": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002",
+      "file": "online_stopping_controller.py",
+      "expected": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "raw": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "canonical_lf": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002",
+      "file": "run_online_stopping_evaluation.py",
+      "expected": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "raw": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "canonical_lf": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/adversarial_live",
+      "file": "online_generation.py",
+      "expected": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "raw": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "canonical_lf": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/adversarial_live",
+      "file": "online_stopping_controller.py",
+      "expected": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "raw": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "canonical_lf": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/adversarial_live",
+      "file": "run_online_stopping_evaluation.py",
+      "expected": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "raw": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "canonical_lf": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "file": "learned_online_stopping_controller.py",
+      "expected": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+      "raw": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+      "canonical_lf": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "file": "online_generation.py",
+      "expected": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "raw": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "canonical_lf": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "file": "online_stopping_controller.py",
+      "expected": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "raw": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "canonical_lf": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "file": "prefix_stopping_model.py",
+      "expected": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+      "raw": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+      "canonical_lf": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "file": "run_learned_online_stopping.py",
+      "expected": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934",
+      "raw": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934",
+      "canonical_lf": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_main",
+      "file": "run_online_stopping_evaluation.py",
+      "expected": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "raw": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "canonical_lf": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "file": "learned_online_stopping_controller.py",
+      "expected": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+      "raw": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a",
+      "canonical_lf": "173cd3625ee1079ff37e2dc4e10115dbded203cbc3ee627ddffad29c5a91703a"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "file": "online_generation.py",
+      "expected": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "raw": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2",
+      "canonical_lf": "fb896b55640feb290c76c284f06a66aa48145b7ebfc95edfcab8539165e06eb2"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "file": "online_stopping_controller.py",
+      "expected": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "raw": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91",
+      "canonical_lf": "6aaef4e1bd9169d2c9a296786c47a5799f07f4c1b0eb7a2095cb96f5065bec91"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "file": "prefix_stopping_model.py",
+      "expected": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+      "raw": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117",
+      "canonical_lf": "57eba4bc0eaa0d03f53c9362c10133a71bd55d39b6e4cb88a3c93d20afde5117"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "file": "run_learned_online_stopping.py",
+      "expected": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934",
+      "raw": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934",
+      "canonical_lf": "90421be61377dde58b713807b786bfb670d984ca217a6fe9c839b2522c105934"
+    },
+    {
+      "folder": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+      "file": "run_online_stopping_evaluation.py",
+      "expected": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "raw": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136",
+      "canonical_lf": "ede740767aa718c361466784aa1b9712972f9f379b2aaf1d8f958a7fed3ae136"
+    }
+  ],
+  "stacked_diagnostic": {
+    "reported_auc": 0.9551560211009974,
+    "reported_control_auc": 0.9432225590934173,
+    "derived_difference": 0.011933462007580053,
+    "outcome": "NOT ESTABLISHED",
+    "gap": "Only aggregate report retained in recorded output directory; no per-row stack/control probabilities found there. No model refit performed. Aggregate subtraction verified; individual AUC, Brier and 10000 bootstrap lifts not independently reproduced."
+  }
+}

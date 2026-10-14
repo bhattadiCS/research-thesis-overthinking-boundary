@@ -1,0 +1,188 @@
+<!doctype html><html><head><meta charset="utf-8"><base href="file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/verification/math_reliability_audit_2026-10-13/corrected_extended_v5_math_audit1/ThesisDocs/"><link rel="stylesheet" href="file:///C:/Aditya_Data/Personal/ResearchThesis/tmp/thesis_pdf_runtime/node_modules/katex/dist/katex.min.css"><style>
+    @page {size:letter; margin:1in 1in 1.35in 1in;}
+    body {font-family:Arial,sans-serif; font-size:12pt; line-height:2; color:#111; margin:0;}
+    p {margin:0 0 12pt;orphans:2;widows:2;} h1 {font-size:18pt;line-height:1.35;margin:0 0 25pt;break-after:avoid;break-before:page;}
+    h1:first-child {break-before:auto;}
+    h2 {font-size:14pt;line-height:1.4;margin:21pt 0 11pt;break-after:avoid;}
+    h3 {font-size:12pt;line-height:1.4;margin:15pt 0 9pt;break-after:avoid;}
+    table {font-size:10.1pt;line-height:1.35;border-collapse:collapse;width:100%;margin:12pt 0 18pt;break-inside:avoid;}
+    .table-block {break-inside:avoid;}
+    .figure-block {break-inside:avoid;}
+    .math-intro {break-inside:avoid;}
+    .proof-ending {break-inside:avoid;}
+    .math-inline-short {white-space:nowrap;}
+    .math-punctuation {font-family:Arial,sans-serif;font-size:12pt;}
+    th {text-align:left;border-bottom:1pt solid #333;} td,th {padding:6pt 4pt;vertical-align:top;overflow-wrap:anywhere;}
+    tr {break-inside:avoid;} td {border-bottom:.4pt solid #bbb;} thead {display:table-header-group;}
+    code {font-size:10.1pt;overflow-wrap:anywhere;} pre {font-size:10.1pt;line-height:1.4;white-space:pre;}
+    pre code {overflow-wrap:normal;}
+    img {width:100%;height:auto;break-inside:avoid;} a {color:#222;overflow-wrap:anywhere;text-decoration:none;}
+    .katex {font-size:1.03em;} .katex-display {margin:14pt 0;line-height:1.2;break-inside:avoid;}
+    blockquote {margin:12pt 15pt;font-size:11pt;}
+    </style></head><body><h1>Chapter 3 Experimental setup and methods</h1>
+<h2>3.1 Corpus separation</h2>
+<p>The variable-horizon response-and-revision matrix supports boundary and controlled-policy analyses: 75,965 sanitized trajectories and 798,770 raw saved step rows over 52 model-domain cells. Sanitization handles malformed fragments and inconsistent records, so raw row and eligible trajectory counts have different denominators. The standardized five-step detector corpus supports training and task-grouped scoring: 28,888 trajectories, 144,440 rows, and 2,948 unique task identifiers across 52 cells.</p>
+<p>The collections overlap in scientific subject matter and include repeated benchmark questions. They are not independent replications and must not be summed into a single sample size. The earlier replay experiment also reuses a 1,500-trajectory Qwen2.5-7B/GSM8K cell from existing evidence. Its replayed decisions do not create new language-model generations.</p>
+<div class="table-block"><p><strong>Table 2. Standardized five-step corpus.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Effective split</th>
+<th>Tasks</th>
+<th>Trajectories</th>
+<th>Rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GSM8K</td>
+<td>train</td>
+<td>1,000</td>
+<td>8,064</td>
+<td>40,320</td>
+</tr>
+<tr>
+<td>MATH-500</td>
+<td>test</td>
+<td>500</td>
+<td>6,500</td>
+<td>32,500</td>
+</tr>
+<tr>
+<td>ARC-Challenge</td>
+<td>test</td>
+<td>1,000</td>
+<td>8,500</td>
+<td>42,500</td>
+</tr>
+<tr>
+<td>GPQA main</td>
+<td>train (inferred; request test)</td>
+<td>448</td>
+<td>5,824</td>
+<td>29,120</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>four domains</td>
+<td>2,948</td>
+<td>28,888</td>
+<td>144,440</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different benchmark allocations explain the standardized corpus's larger task count. Counts use source-qualified trajectory keys; unequal model-domain sample sizes prevent deriving row totals from unique questions multiplied by models and steps.</p>
+<h2>3.2 Model roster</h2>
+<p>The canonical matrix includes thirteen model configurations: DeepSeek-R1-Distill-Qwen-1.5B and 7B; Qwen2.5-0.5B, 3B, 7B, 14B, and 32B Instruct [25]; InternLM3-8B-Instruct; Llama-3.1-8B-Instruct; Mistral-7B-Instruct-v0.3; Mistral-Small-Instruct-2409; Phi-4-mini-instruct; and Yi-1.5-9B-Chat. The standardized detector collection replaces InternLM3 with Qwen3.5-9B. These are distinct rosters, even though both have thirteen entries.</p>
+<div class="table-block"><p><strong>Table 3. Model configurations. Source: cell metadata.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model ID</th>
+<th>Recorded scale</th>
+<th>Membership</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B</td>
+<td>1.5B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>deepseek-ai/DeepSeek-R1-Distill-Qwen-7B</td>
+<td>7B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>internlm/InternLM3-8B-Instruct</td>
+<td>8B</td>
+<td>Matrix only</td>
+</tr>
+<tr>
+<td>meta-llama/Llama-3.1-8B-Instruct</td>
+<td>8B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>mistralai/Mistral-7B-Instruct-v0.3</td>
+<td>7B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>mistralai/Mistral-Small-Instruct-2409</td>
+<td>22B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>microsoft/Phi-4-mini-instruct</td>
+<td>4B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>Qwen/Qwen2.5-0.5B-Instruct</td>
+<td>0.5B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>Qwen/Qwen2.5-14B-Instruct</td>
+<td>14B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>Qwen/Qwen2.5-32B-Instruct</td>
+<td>32B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>Qwen/Qwen2.5-3B-Instruct</td>
+<td>3B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>Qwen/Qwen2.5-7B-Instruct</td>
+<td>7B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>01-ai/Yi-1.5-9B-Chat</td>
+<td>9B</td>
+<td>Matrix + detector</td>
+</tr>
+<tr>
+<td>Qwen/Qwen3.5-9B</td>
+<td>9B</td>
+<td>Detector only</td>
+</tr>
+</tbody>
+</table></div>
+<p>The historical alias <code>mistral_small_24b_2409</code> denotes the 2409 model with a recorded specification of 22B. Tables use documented specifications; aliases locate source files. Saved manifests and trace metadata determine model inclusion.</p>
+<p>The panel supports descriptive family and scale comparisons. Architecture, pretraining data, instruction tuning, distillation, and tokenization were not randomized, so family differences do not isolate parameter count. A common Qwen family reduces some confounding without constituting a controlled intervention on scale alone.</p>
+<h2>3.3 Benchmark tasks and splits</h2>
+<p>GSM8K provides grade-school mathematical word problems [2]; MATH provides competition-style mathematics [3]. ARC-Challenge contains difficult multiple-choice science questions [4], and GPQA contains graduate-level multiple-choice scientific questions [5]. The following protocol specifies this project's subsets and grading.</p>
+<p>The canonical registry specifies GSM8K train, MATH test, ARC-Challenge test, and GPQA main train. The standardized collection uses the same first three splits. Its GPQA metadata records <code>test</code>, while the current loader always requests <code>train</code> and saved identifiers use <code>gpqa_main</code>. The historical loader revision is not recorded, so the effective split is inferred from the current implementation and stored identities; both requested and inferred splits are reported. Detector folds are distinct from benchmark split names: a task holdout drawn from benchmark training data is internal validation, not an official test-set evaluation.</p>
+<p>SVAMP does not appear in the authoritative standardized tournament manifest. It is excluded from the reported four-domain totals. The complete prompt, task identifier, reference answer, split, and any deterministic choice shuffle must remain associated with a question. An MCQ label such as B only has meaning relative to the exact displayed ordering. The project stores or reconstructs that ordering before evaluating the option label.</p>
+<h2>3.4 Response and revision protocol</h2>
+<p>A saved step is a complete response generated under the collection's prompt contract. For the canonical registry, seed 7 and dataset shuffle seed 17 are recorded. The temperature panel uses 0.1, 0.6, and 1.0, and the common completion-token cap is 256. Response horizons are domain-specific: ten increments for GSM8K and GPQA, fourteen for MATH, and eight for ARC. Individual metadata remains authoritative when a cell records a deviation or recovery event.</p>
+<p>The standardized detector corpus has five saved increments per trajectory. Its generation settings include temperature 0.6 and seed 7. A repeated call with a revision prompt is not equivalent to revealing another fragment of one uninterrupted chain of thought. The revision prompt itself can change the distribution of the next answer. The stopping target is therefore defined relative to this complete sequential protocol, including prompt construction and sampling.</p>
+<p>The minimum admissible stopping step is two in the principal experiments. This floor is a design choice informed by development analyses. It is not a theorem that every question requires a revision. Some trajectories are correct only at step one, and the floor can exclude their best candidate. Allowing an answer-selection policy to return a previously saved candidate would define a different action space; such a policy must be compared separately.</p>
+<p>At every decision, computation already incurred is sunk. The continuation decision should charge the incremental cost of future generation, not charge the prefix again. At evaluation, however, total policy cost includes every generated response up to the selected step. The distinction keeps the Bellman recursion and empirical cost accounting consistent.</p>
+<h2>3.5 Recorded signals and grading</h2>
+<p>Recorded signals can include candidate text, normalized answer, correctness, completion-token count, generation runtime, answer changes, log-probability summaries, entropy, hidden-state displacement, and peer agreement. Availability varies across experiments. A missing signal should be recorded as missing or excluded by a documented rule; treating it as a meaningful zero can alter a learned boundary.</p>
+<p>Correctness labels use the benchmark's answer type. Numeric tasks use extraction and normalization; symbolic MATH tasks use the project's mathematical equivalence checks; multiple-choice tasks compare the parsed option with the exact displayed reference. Normalization must preserve information that matters to equivalence. For example, reducing an arbitrary plane equation to its right-hand side would identify distinct mathematical objects, and treating the phrase 'the third option' as the fraction one third would corrupt an MCQ answer.</p>
+<p>The historical grader receipt covers thirty specific cases. Following the software review, the revised grader exposes ninety-eight tests covering normalization, mathematical equivalence, ambiguous option labels and bounded symbolic parsing. The receipts identify the tested source versions, and finite-system stopping tests separately check the minimum boundary and termination behavior. Regression coverage concerns these specified behaviors; validity across the full answer corpus requires independent adjudication.</p>
+<p>The primary boundary tables use the archived <code>correct</code> values. The predictor training in Section 5.7 uses a separately versioned reconstruction and regrade of its selected candidates. A subsequent comparison of the historical and revised graders found no changes to the final-answer labels in the four live collections. These checks leave the original labels and results intact; a corpus-wide regrade would define a new analysis version with its own label changes and dependent estimates.</p>
+<h2>3.6 Statistical units and grouping</h2>
+<p>Rows from one trajectory are dependent, and trajectories from the same task share the question and reference. Task-held-out detector folds keep all rows for a question outside the detector's training data. A source-qualified key combines the cell with its run identifier to prevent accidental merging of trajectories from different model-domain cells. Checking raw identifier collisions is useful, but source qualification remains the defined identity rule.</p>
+<p>The strongest stored task-grouped detector analyses use five outer folds. For meta-model stacking, every upstream fitted component must also respect the outer split: its parameters and any calibrated thresholds must be fit using outer-training data alone. Producing a base score out of fold somewhere in the development pipeline does not automatically make a later outer-fold stacked result nested. Chapter 4 explains why the historical 0.955156 result falls short of that standard.</p>
+<p>Cluster bootstraps resample questions when the same question appears in several trajectories. Model-domain estimator comparisons use the recorded cell bootstrap for their reported interval. These intervals answer different questions. A question bootstrap estimates variability associated with the observed question population conditional on the fixed model panel; a cell bootstrap summarizes variability across the existing panel. Neither one is a multi-seed generation replication.</p>
+<p>The archived N2/N3 probe and hazard harness uses run-group folds for upstream prediction, followed by task-group folds for threshold selection. Other-temperature trajectories of a question can enter upstream fitting, so the full pipeline is a controlled development contrast rather than an untouched-question evaluation. The strict tabular and text analyses and the new prefix predictor follow separately recorded task-disjoint contracts. Appendix D details retrospective prediction analyses; Section 5.7 specifies the predictor protocol. Appendix E illustrates offline fitting and runtime information flow.</p>
+<h2>3.7 Outcomes and computation measures</h2>
+<p>Accuracy is the mean binary correctness label at the policy's selected answer. Historical per-trajectory step utility is <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>U</mi><mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>τ</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mi>C</mi><mrow><mi>i</mi><mo separator="true">,</mo><msub><mi>τ</mi><mi>i</mi></msub></mrow></msub><mo>−</mo><mn>0.05</mn><mo stretchy="false">(</mo><msub><mi>τ</mi><mi>i</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">U_i(\tau_i)=C_{i,\tau_i}-0.05(\tau_i-1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:-0.1132em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0.05</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="math-punctuation">,</span></span></span></span></span> so the mandatory first response is a common baseline and each additional increment incurs the penalty. This penalty is a utility convention, not five percent of physical power consumption or a universal economic price. Token utility is <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mo separator="true">,</mo><msub><mi>τ</mi><mi>i</mi></msub></mrow></msub><mo>−</mo><mn>0.0002</mn><msubsup><mo>∑</mo><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>τ</mi><mi>i</mi></msub></msubsup><msub><mi>L</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>s</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{i,\tau_i}-0.0002\sum_{s=1}^{\tau_i}L_{i,s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:-0.1132em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.104em;vertical-align:-0.2997em;"></span><span class="mord">0.0002</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:-0.1132em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="math-punctuation">,</span></span></span></span></span> where <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>s</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L_{i,s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></span> is measured completion tokens; 250 completion tokens carry the same penalty as one response increment. Charging every generated token includes the first response, which cancels in paired policy differences on the same trace. The theoretical reward in Chapter 2 can subtract the common prefix cost without changing the optimal continuation decision.</p>
+<p>Token savings are one minus the ratio of total stopped-policy completion tokens to total full-horizon completion tokens, calculated on a common task panel. The ratio of totals differs from the average per-question saving and weights long generations more heavily. Both the definition and denominator must accompany a percentage. Prompt tokens, scoring passes, peer generations, controller inference, and runtime may have separate costs and cannot be omitted from a claim about total compute savings.</p>
+<p>ROC-AUC measures ranking, with half credit for tied scores. Brier loss measures squared error of probabilistic predictions. Neither alone establishes a stopping guarantee. Class-balanced raw probability outputs generally target a reweighted posterior, as derived in Chapter 2; their held-out ranking or marginal calibration does not validate natural-distribution conditional hazards. A detector with high pooled AUC can be poorly calibrated around the selected stopping threshold or fail on an underrepresented domain. The evaluation therefore includes micro, task-macro, domain-macro, worst-domain, and policy utility summaries.</p>
+<h2>3.8 Reproducibility and evidence freeze</h2>
+<p>Evidence manifests record exact local byte hashes and canonical LF content hashes, cross-check historical fingerprints, and identify supporting analyses. Verification also checks file sizes, row counts, and source-qualified trajectory membership. Appendix A maps the evidence and locates the electronic verification and reanalysis guide.</p>
+<p>The original profile, <code>data_manifest_v1.json</code>, binds revision <code>09225c95</code>; <code>data_manifest_post_review_v1.json</code> binds grader, controller, and audit revisions at <code>6e4378be</code>. Both preserve the fifty-two standardized trace files, fitted predictor, and recorded generation outcomes. Each live-generation manifest binds the source copies executed for that run. Post-review replay checks revised decisions on saved prefixes; it produces no new generations or timing measurements.</p>
+<p>Stored Blackwell metadata records a CUDA 13.0 runtime and PyTorch 2.13.0+cu130; the workstation lock describes a different, current environment. Compiler libraries, hardware, drivers, random-state handling, and nondeterministic kernels also affect repetition. The freeze supports inspection and re-analysis of stored results; bit-identical regeneration is not established.</p></body></html>

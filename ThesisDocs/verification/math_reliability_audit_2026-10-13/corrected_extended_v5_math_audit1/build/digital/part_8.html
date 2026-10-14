@@ -1,0 +1,210 @@
+<!doctype html><html><head><meta charset="utf-8"><base href="file:///C:/Aditya_Data/Personal/ResearchThesis/ThesisDocs/verification/math_reliability_audit_2026-10-13/corrected_extended_v5_math_audit1/ThesisDocs/"><link rel="stylesheet" href="file:///C:/Aditya_Data/Personal/ResearchThesis/tmp/thesis_pdf_runtime/node_modules/katex/dist/katex.min.css"><style>
+    @page {size:letter; margin:1in 1in 1.35in 1in;}
+    body {font-family:Arial,sans-serif; font-size:12pt; line-height:2; color:#111; margin:0;}
+    p {margin:0 0 12pt;orphans:2;widows:2;} h1 {font-size:18pt;line-height:1.35;margin:0 0 25pt;break-after:avoid;break-before:page;}
+    h1:first-child {break-before:auto;}
+    h2 {font-size:14pt;line-height:1.4;margin:21pt 0 11pt;break-after:avoid;}
+    h3 {font-size:12pt;line-height:1.4;margin:15pt 0 9pt;break-after:avoid;}
+    table {font-size:10.1pt;line-height:1.35;border-collapse:collapse;width:100%;margin:12pt 0 18pt;break-inside:avoid;}
+    .table-block {break-inside:avoid;}
+    .figure-block {break-inside:avoid;}
+    .math-intro {break-inside:avoid;}
+    .proof-ending {break-inside:avoid;}
+    .math-inline-short {white-space:nowrap;}
+    .math-punctuation {font-family:Arial,sans-serif;font-size:12pt;}
+    th {text-align:left;border-bottom:1pt solid #333;} td,th {padding:6pt 4pt;vertical-align:top;overflow-wrap:anywhere;}
+    tr {break-inside:avoid;} td {border-bottom:.4pt solid #bbb;} thead {display:table-header-group;}
+    code {font-size:10.1pt;overflow-wrap:anywhere;} pre {font-size:10.1pt;line-height:1.4;white-space:pre;}
+    pre code {overflow-wrap:normal;}
+    img {width:100%;height:auto;break-inside:avoid;} a {color:#222;overflow-wrap:anywhere;text-decoration:none;}
+    .katex {font-size:1.03em;} .katex-display {margin:14pt 0;line-height:1.2;break-inside:avoid;}
+    blockquote {margin:12pt 15pt;font-size:11pt;}
+    </style></head><body><h1>Appendix A Reproducibility and evidence sources</h1>
+<p>The original research profile is fixed at revision <code>09225c95c676ab3cae1c4b9586d74f7f803f519f</code> by <code>data_manifest_v1.json</code>. The post-review profile at <code>6e4378bef9a98037c20d1381eb9c7b61462a6578</code> uses <code>data_manifest_post_review_v1.json</code> for revised grading, controller validation and behavior checks. Both preserve the collected corpus, fitted predictor and recorded generation outcomes. Each live manifest binds the sources actually executed in its <code>locked_code</code> directory.</p>
+<div class="table-block"><p><strong>Table 15. Claim evidence sources.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Claim or output</th>
+<th>Authoritative repository source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tournament corpus</td>
+<td>data_manifest_v1.json and ultimate_tournament_manifest.json</td>
+</tr>
+<tr>
+<td>Boundary and matched effects</td>
+<td>research/outputs/thesis_v1/evidence/*.csv</td>
+</tr>
+<tr>
+<td>Proofs and exact finite checks</td>
+<td>research/mathematical_foundations.md; test_mathematical_foundations.py</td>
+</tr>
+<tr>
+<td>Controller execution</td>
+<td>online_stopping_controller.py; online_generation.py</td>
+</tr>
+<tr>
+<td>Latency and replay</td>
+<td>research/outputs/semester2/online_stopping_20261002/</td>
+</tr>
+<tr>
+<td>Adversarial bank</td>
+<td>research/adversarial_tasks_v1.jsonl; adversarial_gold_v1.jsonl</td>
+</tr>
+<tr>
+<td>Archived policy failures</td>
+<td>research/reports/thesis_failure_audit_v1/audit_summary.json</td>
+</tr>
+<tr>
+<td>Deployable prefix predictor</td>
+<td>research/outputs/semester2/prefix_model_v1/</td>
+</tr>
+<tr>
+<td>PDF authoring</td>
+<td>tools/build_master_thesis.py; tools/render_thesis_math.mjs</td>
+</tr>
+</tbody>
+</table></div>
+<p>The electronic supplement, <code>ThesisDocs/formal/supplements/v5/reproduction_and_history.txt</code>, gives commands for detached checkouts, data verification and isolated reanalysis. Verification uses <code>tools/freeze_research_data.py</code>; <code>tools/recompute_thesis_evidence.py</code> reconstructs tables, and <code>tools/verify_post_review_behavior.py</code> checks saved controller behavior. Analysis outputs go to new scratch directories, and uncertainty analysis operates on copied live panels.</p>
+<p>The recorded receipts distinguish thirty historical grader cases from ninety-eight revised tests, and 107 passing historical-suite tests from 243 post-review repository tests. Saved-prefix verification reproduces 480 decision histories across four live collections; reused baseline rows are not additional generations. These counts identify their source versions, rather than measuring corpus-wide label validity.</p>
+<p>The fifty-two standardized trace files are mandatory freeze inputs. Supporting evidence includes the variable-horizon matrix, paired study arms, stored predictions and live event ledgers. Exact-byte and canonical-LF hashes identify selected evidence; they do not establish bit-identical regeneration of the partially recorded historical GPU environment. The current authoring manifests separately identify the rendering environment and exact PDF bytes.</p>
+<h1>Appendix B Claim scope and mathematical review</h1>
+<div class="table-block"><p><strong>Table 16. Claim scope and required evidence.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Evidence required</th>
+<th>Supported interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binary repair-corruption identity</td>
+<td>Common transition panel or conditional probability proof</td>
+<td>Exact decomposition in Chapter 2</td>
+</tr>
+<tr>
+<td>General optimal stopping</td>
+<td>Full conditional continuation law and all costs</td>
+<td>Finite-horizon theorem; not a calibrated learned deployment</td>
+</tr>
+<tr>
+<td>First drift crossing is optimal</td>
+<td>Pathwise persistence after the crossing</td>
+<td>Conditional theorem; not established universally by the empirical curves</td>
+</tr>
+<tr>
+<td>0.955156 AUC</td>
+<td>Stored historical tournament result</td>
+<td>Retrospective non-nested diagnostic</td>
+</tr>
+<tr>
+<td>Causal detector ranking</td>
+<td>Task-grouped causal sequence outputs</td>
+<td>Internal development evaluation</td>
+</tr>
+<tr>
+<td>Replay completion-token saving</td>
+<td>Frozen traces and selected prefixes</td>
+<td>Counterfactual development quantity</td>
+</tr>
+<tr>
+<td>Live completion-token saving</td>
+<td>Actual generation events from both arms</td>
+<td>Model-, task-, and protocol-specific measurement</td>
+</tr>
+<tr>
+<td>No meaningful accuracy loss</td>
+<td>Prespecified tolerance and adequate paired confidence interval</td>
+<td>Not inferred merely from observed equality</td>
+</tr>
+<tr>
+<td>Grader regression coverage</td>
+<td>Versioned test inputs and execution receipts</td>
+<td>Thirty historical cases and ninety-eight revised tests cover specified parser behaviors; corpus-wide validity requires separate adjudication</td>
+</tr>
+</tbody>
+</table></div>
+<h1>Appendix C Paired accuracy uncertainty</h1>
+<p>For iid task pairs, let <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span></span></span></span></span> indicate an incorrect baseline answer paired with a correct active answer, and <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span></span></span></span></span> a correct baseline answer paired with an incorrect active answer. The accuracy difference is <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mo>=</mo><msub><mi>π</mi><mi>I</mi></msub><mo>−</mo><msub><mi>π</mi><mi>W</mi></msub></mrow><annotation encoding="application/x-tex">\delta=\pi_I-\pi_W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0785em;">I</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="math-punctuation">,</span></span></span></span></span> where <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>I</mi></msub><mo>=</mo><mi>Pr</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>I</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi_I=\Pr(I=1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0785em;">I</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">Pr</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span> and <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>W</mi></msub><mo>=</mo><mi>Pr</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>W</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi_W=\Pr(W=1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">Pr</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="math-punctuation">.</span></span></span></span></span> The indicators are mutually exclusive within a task; their independence is not assumed.</p>
+<div class="math-intro"><p>Across <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> independent pairs, each marginal discordance count is binomial. Exact two-sided 97.5% Clopper-Pearson intervals <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><msub><mi>L</mi><mi>I</mi></msub><mo separator="true">,</mo><msub><mi>U</mi><mi>I</mi></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[L_I,U_I]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0785em;">I</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0785em;">I</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span> for <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>I</mi></msub></mrow><annotation encoding="application/x-tex">\pi_I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0785em;">I</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> and <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><msub><mi>L</mi><mi>W</mi></msub><mo separator="true">,</mo><msub><mi>U</mi><mi>W</mi></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[L_W,U_W]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span> for <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>W</mi></msub></mrow><annotation encoding="application/x-tex">\pi_W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> each have noncoverage probability at most 0.025 [15]. A union bound gives simultaneous coverage at least 0.95 regardless of dependence between the counts. Subtraction yields</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>δ</mi><mo>∈</mo><mo stretchy="false">[</mo><msub><mi>L</mi><mi>I</mi></msub><mo>−</mo><msub><mi>U</mi><mi>W</mi></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>U</mi><mi>I</mi></msub><mo>−</mo><msub><mi>L</mi><mi>W</mi></msub><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\delta\in[L_I-U_W,\ U_I-L_W].</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0785em;">I</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0785em;">I</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">]</span><span class="mord">.</span></span></span></span></span></p></div>
+<p>This is the conservative 95% paired interval in the live tables. Exact multinomial enumeration supplements the binomial coverage argument. With no discordances, both lower bounds are zero and both upper bounds equal <span class="math-inline-short"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msup><mn>0.0125</mn><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mi>n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">1-0.0125^{1/n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.888em;"></span><span class="mord">0.012</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1/</span><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span><span class="math-punctuation">.</span></span></span></span></span> Observed equality therefore leaves nonzero uncertainty; no noninferiority tolerance or hypothesis was prespecified.</p>
+<p>The twenty handpicked traps form a fixed challenge bank, so the iid-reference interval gives no randomized adversarial-population coverage. Completion-token intervals bootstrap paired tasks and the ratio of total token differences to baseline tokens; these are descriptive resampling intervals.</p>
+<h1>Appendix D Retrospective prediction analyses</h1>
+<p>Table 17 distinguishes row-level correctness from correctness of one causally selected answer per closed barrier. The endpoints and eligible populations differ, so the scores do not form a common architecture ranking.</p>
+<div class="table-block"><p><strong>Table 17. Additional retrospective prediction analyses.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Analysis</th>
+<th>Units and tasks</th>
+<th>Saved OOF AUC</th>
+<th>Endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Strict tabular</td>
+<td>144,440 rows; 2,948 tasks</td>
+<td>0.849510</td>
+<td>Current-candidate correctness</td>
+</tr>
+<tr>
+<td>Strict text</td>
+<td>144,440 rows; 2,948 tasks</td>
+<td>0.808976</td>
+<td>Current-candidate correctness</td>
+</tr>
+<tr>
+<td>Anonymous peer features</td>
+<td>144,440 rows; 2,948 tasks</td>
+<td>0.954664</td>
+<td>Current-candidate correctness</td>
+</tr>
+<tr>
+<td>Matched anonymous baseline</td>
+<td>Same rows and tasks</td>
+<td>0.945336</td>
+<td>Current-candidate correctness</td>
+</tr>
+<tr>
+<td>Fixed thirteen-member peers</td>
+<td>98,280 rows; 1,512 tasks</td>
+<td>0.940009</td>
+<td>Current-candidate correctness</td>
+</tr>
+<tr>
+<td>Matched fixed-roster baseline</td>
+<td>Same rows and tasks</td>
+<td>0.931266</td>
+<td>Current-candidate correctness</td>
+</tr>
+<tr>
+<td>Selected answer without timing</td>
+<td>14,740 decisions; 2,948 tasks</td>
+<td>0.934350</td>
+<td>Selected-candidate correctness</td>
+</tr>
+<tr>
+<td>Selected causal dynamics</td>
+<td>14,740 decisions; 2,948 tasks</td>
+<td>0.937037</td>
+<td>Selected-candidate correctness</td>
+</tr>
+</tbody>
+</table></div>
+<p>The strict baseline and paired peer scores were recomputed from saved predictions, with source hashes and task-fold memberships checked. The anonymous peer lift is 0.009328, with paired task-bootstrap interval [0.008028, 0.010639]; the fixed-roster lift is 0.008743, with interval [0.006653, 0.010882]. These intervals describe the archived panels. Selected-answer source and five-fold checkpoint coverage were also checked.</p>
+<p>Strict baseline probabilities include the original task-disjoint calibration. Peer and selected-answer scores use original uncalibrated outputs; this check applies no additional reporting calibration. The later reporting calibrators use previously computed out-of-fold scores across folds and are not fully nested, so their Brier and ECE summaries are diagnostic.</p>
+<p>Strict-baseline and selected-answer source hashes match retained code. The legacy peer runner and feature-module hashes do not match any recovered Git version, including line-ending reconstructions, although their common base script resolves to the recorded July commit. The saved arrays and paired folds are auditable; exact reproduction of the executed peer-feature pipeline remains incomplete. This qualification covers both peer populations in Table 17.</p>
+<p>The historical peer candidate has no assigned stopping threshold. Its full-horizon collector and small smoke ledgers establish neither calibrated prospective fleet stopping nor avoided peer generation. The electronic supplement records the development history and distinguishes reused predictions from independently generated trajectories.</p>
+<h1>Appendix E Information flow and delayed repair diagrams</h1>
+<div class="figure-block"><p><img alt="Offline fitting and runtime information flow" src="images/thesis_v4/information_flow.png" /></p>
+<p><strong>Figure 5. Offline fitting and runtime information flow.</strong> Reference labels enter fitting and evaluation offline; runtime decisions receive observed prefixes and frozen parameters. The continuation loop incurs additional generation cost. This schematic describes the information contract and does not assert a Bellman-optimal fitted controller or an executed peer fleet.</p></div>
+<p>The fitted single-model controller estimates current and next selected-answer correctness and uses a one-step drift rule, with a declared response floor and horizon. The general theorem instead uses conditional multi-step continuation value.</p>
+<div class="figure-block"><p><img alt="Decision tree for the delayed-repair counterexample" src="images/thesis_v4/delayed_repair_tree.png" /></p>
+<p><strong>Figure 6. Delayed repair defeats a myopic stopping rule.</strong> The exact counterexample has horizon two, earliest permitted stop zero and incremental cost 0.10. Correctness follows zero, zero, one. Immediate drift at zero is -0.10, whereas continuation to the horizon yields reward 0.80. This abstract floor differs from the live experiments' floor of two; the diagram illustrates the Chapter 2 counterexample rather than new generated data.</p></div></body></html>

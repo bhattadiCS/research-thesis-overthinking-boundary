@@ -1,0 +1,86 @@
+[
+  {
+    "path": "real_traces_colab/correctness_probe_metrics.csv",
+    "bytes": 132,
+    "compressed_bytes": 90,
+    "crc32": 1739556775
+  },
+  {
+    "path": "real_traces_colab/detector_comparison.csv",
+    "bytes": 290,
+    "compressed_bytes": 143,
+    "crc32": 4060800745
+  },
+  {
+    "path": "real_traces_colab/detector_comparison_by_run.csv",
+    "bytes": 1133,
+    "compressed_bytes": 228,
+    "crc32": 947093817
+  },
+  {
+    "path": "real_traces_colab/feature_weights.csv",
+    "bytes": 152,
+    "compressed_bytes": 86,
+    "crc32": 191891263
+  },
+  {
+    "path": "real_traces_colab/hazard_by_step.csv",
+    "bytes": 167,
+    "compressed_bytes": 120,
+    "crc32": 3142483236
+  },
+  {
+    "path": "real_traces_colab/hazard_drift_summary.csv",
+    "bytes": 170,
+    "compressed_bytes": 120,
+    "crc32": 3178158543
+  },
+  {
+    "path": "real_traces_colab/metadata.json",
+    "bytes": 1374,
+    "compressed_bytes": 636,
+    "crc32": 854239295
+  },
+  {
+    "path": "real_traces_colab/pilot_summary.csv",
+    "bytes": 382,
+    "compressed_bytes": 243,
+    "crc32": 4253911952
+  },
+  {
+    "path": "real_traces_colab/real_trace_detector_gaps.png",
+    "bytes": 71641,
+    "compressed_bytes": 61172,
+    "crc32": 1977939110
+  },
+  {
+    "path": "real_traces_colab/real_trace_hazard_curves.png",
+    "bytes": 52283,
+    "compressed_bytes": 43098,
+    "crc32": 2043524377
+  },
+  {
+    "path": "real_traces_colab/trace_runs.csv",
+    "bytes": 480,
+    "compressed_bytes": 234,
+    "crc32": 54491668
+  },
+  {
+    "path": "real_traces_colab/trace_steps.csv",
+    "bytes": 1829,
+    "compressed_bytes": 642,
+    "crc32": 2636580937
+  },
+  {
+    "path": "real_traces_colab/hidden_states/qwen2p5_0p5b__calendar_offset_easy__temp0.20__seed7.npz",
+    "bytes": 4029,
+    "compressed_bytes": 4026,
+    "crc32": 1156000111
+  },
+  {
+    "path": "real_traces_colab/hidden_states/qwen2p5_0p5b__fraction_remaining__temp0.20__seed7.npz",
+    "bytes": 4032,
+    "compressed_bytes": 4027,
+    "crc32": 372485657
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "path": "real_traces_colab_smoke/correctness_probe_metrics.csv",
+    "bytes": 281,
+    "compressed_bytes": 154,
+    "crc32": 3072363562
+  },
+  {
+    "path": "real_traces_colab_smoke/detector_comparison.csv",
+    "bytes": 354,
+    "compressed_bytes": 163,
+    "crc32": 2410945941
+  },
+  {
+    "path": "real_traces_colab_smoke/detector_comparison_by_run.csv",
+    "bytes": 2102,
+    "compressed_bytes": 303,
+    "crc32": 3779028154
+  },
+  {
+    "path": "real_traces_colab_smoke/feature_weights.csv",
+    "bytes": 650,
+    "compressed_bytes": 303,
+    "crc32": 3873161066
+  },
+  {
+    "path": "real_traces_colab_smoke/hazard_by_step.csv",
+    "bytes": 202,
+    "compressed_bytes": 133,
+    "crc32": 1850273766
+  },
+  {
+    "path": "real_traces_colab_smoke/hazard_drift_summary.csv",
+    "bytes": 189,
+    "compressed_bytes": 129,
+    "crc32": 3971595709
+  },
+  {
+    "path": "real_traces_colab_smoke/metadata.json",
+    "bytes": 2155,
+    "compressed_bytes": 878,
+    "crc32": 2456783579
+  },
+  {
+    "path": "real_traces_colab_smoke/pilot_summary.csv",
+    "bytes": 410,
+    "compressed_bytes": 260,
+    "crc32": 2209626076
+  },
+  {
+    "path": "real_traces_colab_smoke/real_trace_detector_gaps.png",
+    "bytes": 85592,
+    "compressed_bytes": 68895,
+    "crc32": 1443570431
+  },
+  {
+    "path": "real_traces_colab_smoke/real_trace_feature_weights.png",
+    "bytes": 123050,
+    "compressed_bytes": 93679,
+    "crc32": 2144281442
+  },
+  {
+    "path": "real_traces_colab_smoke/real_trace_hazard_curves.png",
+    "bytes": 59038,
+    "compressed_bytes": 45980,
+    "crc32": 1341817861
+  },
+  {
+    "path": "real_traces_colab_smoke/trace_runs.csv",
+    "bytes": 939,
+    "compressed_bytes": 331,
+    "crc32": 4135045396
+  },
+  {
+    "path": "real_traces_colab_smoke/trace_steps.csv",
+    "bytes": 6373,
+    "compressed_bytes": 1611,
+    "crc32": 1020249521
+  },
+  {
+    "path": "real_traces_colab_smoke/hidden_states/qwen2p5_0p5b__calendar_offset_easy__temp0.20__seed7.npz",
+    "bytes": 4014,
+    "compressed_bytes": 4004,
+    "crc32": 404127348
+  },
+  {
+    "path": "real_traces_colab_smoke/hidden_states/qwen2p5_0p5b__fraction_remaining__temp0.20__seed7.npz",
+    "bytes": 4025,
+    "compressed_bytes": 4019,
+    "crc32": 3018353703
+  },
+  {
+    "path": "real_traces_colab_smoke/hidden_states/qwen2p5_0p5b__linear_equation__temp0.20__seed7.npz",
+    "bytes": 3998,
+    "compressed_bytes": 3981,
+    "crc32": 1456414271
+  },
+  {
+    "path": "real_traces_colab_smoke/hidden_states/qwen2p5_0p5b__python_trace__temp0.20__seed7.npz",
+    "bytes": 4011,
+    "compressed_bytes": 3994,
+    "crc32": 1706117831
+  }
+]

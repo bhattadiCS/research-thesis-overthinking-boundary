@@ -1,0 +1,43 @@
+{
+  "rows": 7500,
+  "candidate_parser_mismatches": [
+    {
+      "trajectory_id": "global_qwen2p5_0p5b_gsm8k::qwen2p5_0p5b__gsm8k_train_00086_af406602__temp0.60__seed7",
+      "step": 4,
+      "current_parser_candidate": "1/2",
+      "frozen_candidate": "2",
+      "split": "calibration"
+    },
+    {
+      "trajectory_id": "global_qwen2p5_0p5b_gsm8k::qwen2p5_0p5b__gsm8k_train_00515_e570a908__temp0.60__seed7",
+      "step": 1,
+      "current_parser_candidate": "125/128",
+      "frozen_candidate": "953125/2",
+      "split": "train"
+    },
+    {
+      "trajectory_id": "global_qwen2p5_0p5b_gsm8k::qwen2p5_0p5b__gsm8k_train_00522_ceeba2cc__temp0.60__seed7",
+      "step": 1,
+      "current_parser_candidate": "20",
+      "frozen_candidate": "10720",
+      "split": "train"
+    }
+  ],
+  "scalers": [
+    {
+      "head": "q_current",
+      "train_rows": 4510,
+      "maximum_mean_difference": 0.0,
+      "maximum_scale_difference": 0.0
+    },
+    {
+      "head": "p_next",
+      "train_rows": 3608,
+      "maximum_mean_difference": 0.0,
+      "maximum_scale_difference": 0.0
+    }
+  ],
+  "heldout_features_checked": 1380,
+  "features": 21,
+  "source_use": "No references read or regrading/fit executed; frozen reconstructed labels retained."
+}

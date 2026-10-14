@@ -1,0 +1,921 @@
+[
+  {
+    "version": "v7",
+    "page": 1,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 2,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 3,
+    "headings": [
+      "Chapter 1 Introduction and related work",
+      "1.1 Problem and research questions",
+      "1.2 Prior work and contribution",
+      "1.3 Organization and supporting material",
+      "Chapter 2 Mathematical formulation",
+      "2.1 Information, answers and computation cost",
+      "2.2 Repair-corruption drift",
+      "2.3 Finite-horizon optimum",
+      "2.4 A conditional myopic rule and its failure",
+      "Chapter 3 Experimental methods",
+      "3.1 Corpora, models and labels",
+      "3.2 Experimental units and comparisons",
+      "3.3 Runtime policies and fitting",
+      "3.4 Paired evaluation and uncertainty",
+      "Chapter 4 Results",
+      "4.1 Population continuation value",
+      "4.2 Controlled contrasts and retrospective diagnostics",
+      "4.3 Actual stopping execution",
+      "Chapter 5 Discussion and conclusion",
+      "5.1 Interpretation and limitations",
+      "5.2 Reproducibility and conclusion"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 4,
+    "headings": [
+      "Table 1. Standardized five-step corpus.",
+      "Table 2. Controlled development contrasts.",
+      "Table 3. Actual paired generation."
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 5,
+    "headings": [
+      "Figure 1. Delayed repair defeats a myopic rule.",
+      "Figure 2. Population accuracy and continuation gain.",
+      "Figure 3. Actual paired answer quality and completion cost."
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 6,
+    "headings": [
+      "Chapter 1 Introduction and related work",
+      "1.1 Problem and research questions"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 7,
+    "headings": [
+      "1.2 Prior work and contribution"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 8,
+    "headings": [
+      "1.3 Organization and supporting material",
+      "Chapter 2 develops the mathematical argument. Chapter 3 defines the data, methods"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 9,
+    "headings": [
+      "Chapter 2 Mathematical formulation",
+      "2.1 Information, answers and computation cost"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 10,
+    "headings": [
+      "2.2 Repair-corruption drift"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 11,
+    "headings": [
+      "2.3 Finite-horizon optimum",
+      "Theorem 1. The earliest permitted time with "
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 12,
+    "headings": [
+      "2.4 A conditional myopic rule and its failure",
+      "Theorem 2. Under this persistence condition, "
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 13,
+    "headings": [
+      "Figure 1. Delayed repair defeats a myopic rule. The horizon-two example permits"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 14,
+    "headings": [
+      "Chapter 3 Experimental methods",
+      "3.1 Corpora, models and labels",
+      "Table 1. Standardized five-step corpus."
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 15,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 16,
+    "headings": [
+      "3.2 Experimental units and comparisons"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 17,
+    "headings": [
+      "3.3 Runtime policies and fitting"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 18,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 19,
+    "headings": [
+      "3.4 Paired evaluation and uncertainty"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 20,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 21,
+    "headings": [
+      "Chapter 4 Results",
+      "4.1 Population continuation value"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 22,
+    "headings": [
+      "Figure 2. Population accuracy and continuation gain. Bands are task-cluster"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 23,
+    "headings": [
+      "4.2 Controlled contrasts and retrospective diagnostics",
+      "Table 2 normalizes matched effects per trajectory rather than interpreting summed utility",
+      "Table 2. Controlled development contrasts. Estimator intervals resample 52 cells;"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 24,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 25,
+    "headings": [
+      "4.3 Actual stopping execution",
+      "Table 3 reports physically generated responses, not tokens inferred solely from",
+      "Table 3. Actual paired generation. Tokens count completions. Accuracy intervals",
+      "2.94%",
+      "3.34%"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 26,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 27,
+    "headings": [
+      "Figure 3. Actual paired answer quality and completion cost. Learned points stop at"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 28,
+    "headings": [
+      "Chapter 5 Discussion and conclusion",
+      "5.1 Interpretation and limitations"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 29,
+    "headings": [
+      "5.2 Reproducibility and conclusion"
+    ]
+  },
+  {
+    "version": "v7",
+    "page": 30,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 31,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 32,
+    "headings": []
+  },
+  {
+    "version": "v7",
+    "page": 33,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 1,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 2,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 3,
+    "headings": [
+      "Chapter 1 Introduction and motivation",
+      "1.1 Reasoning as a sequential allocation problem",
+      "1.2 Operational meaning of overthinking",
+      "1.3 Research questions",
+      "1.4 Contributions",
+      "1.5 Evidence and reproducibility",
+      "1.6 Related work and the thesis position",
+      "1.7 Thesis organization",
+      "Chapter 2 Mathematical formulation and stopping theory",
+      "2.1 Probability model and admissible information",
+      "2.2 Exact binary correctness drift",
+      "2.3 General finite-horizon optimal stopping",
+      "2.4 When a drift-sign boundary is optimal",
+      "2.5 Partial observation and feature models",
+      "2.6 Calibration and perturbation bounds",
+      "2.7 What sequential uncertainty control can certify",
+      "2.8 Scope of the empirical claims",
+      "Chapter 3 Experimental setup and methods",
+      "3.1 Corpus separation",
+      "3.2 Model roster",
+      "3.3 Benchmark tasks and splits"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 4,
+    "headings": [
+      "3.4 Response and revision protocol",
+      "3.5 Recorded signals and grading",
+      "3.6 Statistical units and grouping",
+      "3.7 Outcomes and computation measures",
+      "3.8 Reproducibility and evidence freeze",
+      "Chapter 4 Empirical evidence of overthinking",
+      "4.1 Population transitions and net value",
+      "4.2 Model and domain differences",
+      "4.3 Controlled estimator comparisons",
+      "4.4 Token cap and numerical precision",
+      "4.5 Ranking and stopping performance",
+      "4.6 The stacked retrospective diagnostic",
+      "4.7 Replay and failure interpretation",
+      "4.8 Empirical conclusions",
+      "Chapter 5 Online stopping and computation trade-offs",
+      "5.1 Causal controller contract",
+      "5.2 Policy choice and limitations",
+      "5.3 Generation integration",
+      "5.4 Decision latency",
+      "5.5 Live paired evaluation",
+      "5.6 Adversarial questions and traps",
+      "5.7 Deployable prefix probability model",
+      "5.8 Actual trained-policy evaluation",
+      "5.9 Replay and Pareto analysis",
+      "Chapter 6 Discussion and limitations",
+      "6.1 Scientific interpretation",
+      "6.2 Correctness labels and mathematical validity"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 5,
+    "headings": [
+      "6.3 Theory and deployable beliefs",
+      "6.4 Generalization and adaptation",
+      "6.5 Costs beyond completion tokens",
+      "6.6 Adversarial behavior and answer selection",
+      "6.7 Evidence needed for stronger claims",
+      "6.8 Conclusion",
+      "Appendix A Reproducibility and evidence sources",
+      "Appendix B Claim scope and mathematical review",
+      "Appendix C Paired accuracy uncertainty",
+      "Appendix D Retrospective prediction analyses",
+      "Appendix E Information flow and delayed repair diagrams"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 6,
+    "headings": [
+      "Table 1. Mathematical objects and assumptions.",
+      "Table 2. Standardized five-step corpus.",
+      "Table 3. Model configurations.",
+      "Table 4. GSM8K transition panel; 19,500 trajectories and 500 task clusters per row.",
+      "Table 5. Matched effects.",
+      "Table 6. Stored causal detectors; common task-held-out development evaluation.",
+      "Table 7. Mutually exclusive archived-policy loss patterns; 5,735 utility losses among",
+      "Table 8. Controller-only latency on 100 saved math-question prefixes.",
+      "Table 9. Actual paired local generation on 100 GSM8K questions.",
+      "Table 10. Actual paired local generation on the 20-question trap bank.",
+      "Table 11. Deployable probability heads on 276 archived held-out tasks; repeated rows",
+      "Table 12. Actual trained-policy generation paired with the existing 100-question live",
+      "Table 13. Actual trained-policy generation paired with the existing trap-bank live",
+      "Table 14. Frozen variants replayed on 1,500 saved trajectories.",
+      "Table 15. Claim evidence sources.",
+      "Table 16. Claim scope and required evidence.",
+      "Table 17. Additional retrospective prediction analyses."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 7,
+    "headings": [
+      "Figure 1. Population accuracy and net gain.",
+      "Figure 2. Micro, domain-macro, and worst-domain ranking differ substantially.",
+      "Figure 3. Development replay accuracy against completion-token cost.",
+      "Figure 4. Actual generated arms on two development panels.",
+      "Figure 5. Offline fitting and runtime information flow.",
+      "Figure 6. Delayed repair defeats a myopic stopping rule."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 8,
+    "headings": [
+      "Chapter 1 Introduction and motivation",
+      "1.1 Reasoning as a sequential allocation problem"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 9,
+    "headings": [
+      "1.2 Operational meaning of overthinking"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 10,
+    "headings": [
+      "1.3 Research questions"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 11,
+    "headings": [
+      "1.4 Contributions",
+      "Chapter 2 applies finite-horizon Bellman/Snell theory [11], [12] to a specified decision"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 12,
+    "headings": [
+      "1.5 Evidence and reproducibility",
+      "Appendix A maps the evidence and locates the electronic verification and reanalysis",
+      "1.6 Related work and the thesis position"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 13,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 14,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 15,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 16,
+    "headings": [
+      "1.7 Thesis organization",
+      "Chapter 2 develops the stopping theory and Chapter 3 specifies the experiments."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 17,
+    "headings": [
+      "Chapter 2 Mathematical formulation and stopping",
+      "2.1 Probability model and admissible information"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 18,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 19,
+    "headings": [
+      "2.2 Exact binary correctness drift",
+      "Theorem 2 (conditional drift identity). Almost surely,"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 20,
+    "headings": [
+      "Corollary 2.1 (affine stakes). Suppose a correct answer earns "
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 21,
+    "headings": [
+      "3.1 proves the corresponding ordering of earliest optimal stop times. That ordering need",
+      "2.3 General finite-horizon optimal stopping",
+      "Theorem 3 (Bellman recursion and Snell envelope). Set"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 22,
+    "headings": [
+      "Corollary 3.1 (stake monotonicity under a fixed process). Compare affine stakes"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 23,
+    "headings": [
+      "2.4 When a drift-sign boundary is optimal",
+      "Theorem 4 (persistent nonpositive drift). Define"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 24,
+    "headings": [
+      "Corollary 4.1 (a sufficient structural condition). Suppose cost is constant ",
+      "Theorem 4 applies."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 25,
+    "headings": [
+      "2.5 Partial observation and feature models"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 26,
+    "headings": [
+      "2.6 Calibration and perturbation bounds"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 27,
+    "headings": [
+      "Proposition 5 (class weighting changes the population target). For a binary target",
+      "Proposition 6 (drift perturbation and interval propagation). If "
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 28,
+    "headings": [
+      "2.7 What sequential uncertainty control can certify",
+      "Proposition 7 (a precisely scoped first-crossing guarantee). Suppose "
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 29,
+    "headings": [
+      "Proposition 7 follows from this construction only if "
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 30,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 31,
+    "headings": [
+      "Proposition 7's coverage premise.",
+      "2.8 Scope of the empirical claims",
+      "Table 1. Mathematical objects and assumptions."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 32,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 33,
+    "headings": [
+      "Chapter 3 Experimental setup and methods",
+      "3.1 Corpus separation",
+      "Table 2. Standardized five-step corpus."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 34,
+    "headings": [
+      "3.2 Model roster"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 35,
+    "headings": [
+      "Table 3. Model configurations. Source: cell metadata.",
+      "1.5B"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 36,
+    "headings": [
+      "3.3 Benchmark tasks and splits"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 37,
+    "headings": [
+      "3.4 Response and revision protocol"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 38,
+    "headings": [
+      "3.5 Recorded signals and grading"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 39,
+    "headings": [
+      "3.6 Statistical units and grouping"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 40,
+    "headings": [
+      "3.7 Outcomes and computation measures"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 41,
+    "headings": [
+      "3.8 Reproducibility and evidence freeze"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 42,
+    "headings": [
+      "Chapter 4 Empirical evidence of overthinking",
+      "4.1 Population transitions and net value",
+      "Table 4. GSM8K transition panel; 19,500 trajectories and 500 task clusters per"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 43,
+    "headings": [
+      "Figure 1. Population accuracy and net gain. Bands are task-cluster bootstrap intervals."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 44,
+    "headings": [
+      "4.2 Model and domain differences"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 45,
+    "headings": [
+      "4.3 Controlled estimator comparisons",
+      "Table 5. Matched effects. Estimator intervals resample 52 cells; systems intervals",
+      "Table 5 reports their mean controlled effects."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 46,
+    "headings": [
+      "4.4 Token cap and numerical precision"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 47,
+    "headings": [
+      "4.5 Ranking and stopping performance",
+      "Table 6. Stored causal detectors; common task-held-out development evaluation."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 48,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 49,
+    "headings": [
+      "Figure 2. Micro, domain-macro, and worst-domain ranking differ substantially. Stored",
+      "4.6 The stacked retrospective diagnostic"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 50,
+    "headings": [
+      "4.7 Replay and failure interpretation"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 51,
+    "headings": [
+      "Table 7. Mutually exclusive archived-policy loss patterns; 5,735 utility losses",
+      "3.42%",
+      "4.8 Empirical conclusions"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 52,
+    "headings": [
+      "Chapter 5 Online stopping and computation trade-offs",
+      "5.1 Causal controller contract"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 53,
+    "headings": [
+      "5.2 Policy choice and limitations",
+      "Chapter 2's delayed-repair counterexample shows why immediate evidence against",
+      "5.3 Generation integration"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 54,
+    "headings": [
+      "5.4 Decision latency",
+      "Table 8. Controller-only latency on 100 saved math-question prefixes.",
+      "Table 8 reports decision counts, median, upper quantiles and maximum on one hundred"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 55,
+    "headings": [
+      "5.5 Live paired evaluation",
+      "Table 9. Actual paired local generation on 100 GSM8K questions.",
+      "2.94%",
+      "4.85"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 56,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 57,
+    "headings": [
+      "5.6 Adversarial questions and traps",
+      "Table 10. Actual paired local generation on the 20-question trap bank.",
+      "3.34%",
+      "4.75"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 58,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 59,
+    "headings": [
+      "5.7 Deployable prefix probability model"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 60,
+    "headings": [
+      "Table 11. Deployable probability heads on 276 archived held-out tasks; repeated"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 61,
+    "headings": [
+      "5.8 Actual trained-policy evaluation",
+      "Table 12. Actual trained-policy generation paired with the existing 100-question"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 62,
+    "headings": [
+      "Table 13. Actual trained-policy generation paired with the existing trap-bank live"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 63,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 64,
+    "headings": [
+      "5.9 Replay and Pareto analysis",
+      "Table 14. Frozen variants replayed on 1,500 saved trajectories. These are"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 65,
+    "headings": [
+      "Figure 3. Development replay accuracy against completion-token cost. Labels identify"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 66,
+    "headings": [
+      "Figure 4. Actual generated arms on two development panels. Each learned arm reuses"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 67,
+    "headings": [
+      "Chapter 6 Discussion and limitations",
+      "6.1 Scientific interpretation",
+      "6.2 Correctness labels and mathematical validity"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 68,
+    "headings": [
+      "6.3 Theory and deployable beliefs",
+      "Chapter 2 characterizes optimal decisions when the relevant conditional expectations",
+      "6.4 Generalization and adaptation"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 69,
+    "headings": [
+      "6.5 Costs beyond completion tokens"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 70,
+    "headings": [
+      "6.6 Adversarial behavior and answer selection",
+      "6.7 Evidence needed for stronger claims"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 71,
+    "headings": [
+      "6.8 Conclusion"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 72,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 73,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 74,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 75,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 76,
+    "headings": [
+      "Appendix A Reproducibility and evidence sources",
+      "Table 15. Claim evidence sources."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 77,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 78,
+    "headings": [
+      "Appendix B Claim scope and mathematical review",
+      "Table 16. Claim scope and required evidence."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 79,
+    "headings": [
+      "Appendix C Paired accuracy uncertainty"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 80,
+    "headings": [
+      "Appendix D Retrospective prediction analyses",
+      "Table 17 distinguishes row-level correctness from correctness of one causally selected",
+      "Table 17. Additional retrospective prediction analyses."
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 81,
+    "headings": []
+  },
+  {
+    "version": "v5",
+    "page": 82,
+    "headings": [
+      "Appendix E Information flow and delayed repair",
+      "Figure 5. Offline fitting and runtime information flow. Reference labels enter fitting"
+    ]
+  },
+  {
+    "version": "v5",
+    "page": 83,
+    "headings": [
+      "Figure 6. Delayed repair defeats a myopic stopping rule. The exact counterexample"
+    ]
+  }
+]

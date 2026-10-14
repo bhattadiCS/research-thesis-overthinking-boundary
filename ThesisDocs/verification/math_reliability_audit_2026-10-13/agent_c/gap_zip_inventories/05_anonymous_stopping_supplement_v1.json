@@ -1,0 +1,1028 @@
+[
+  {
+    "path": "README.md",
+    "bytes": 2626,
+    "compressed_bytes": 1390,
+    "crc32": 3322989636
+  },
+  {
+    "path": "capsule_manifest.json",
+    "bytes": 71469,
+    "compressed_bytes": 10271,
+    "crc32": 3373532332
+  },
+  {
+    "path": "data_manifest_v1.json",
+    "bytes": 503302,
+    "compressed_bytes": 71502,
+    "crc32": 3905085259
+  },
+  {
+    "path": "requirements.historical-tournament.partial.txt",
+    "bytes": 299,
+    "compressed_bytes": 220,
+    "crc32": 1964821811
+  },
+  {
+    "path": "requirements.lock.txt",
+    "bytes": 6459,
+    "compressed_bytes": 3076,
+    "crc32": 2835310180
+  },
+  {
+    "path": "requirements.repository-venv.lock.txt",
+    "bytes": 1892,
+    "compressed_bytes": 1050,
+    "crc32": 3190731723
+  },
+  {
+    "path": "research/_vendor/torchvision_stub/torchvision/__init__.py",
+    "bytes": 62,
+    "compressed_bytes": 56,
+    "crc32": 2988641704
+  },
+  {
+    "path": "research/_vendor/torchvision_stub/torchvision/io.py",
+    "bytes": 930,
+    "compressed_bytes": 441,
+    "crc32": 2202450609
+  },
+  {
+    "path": "research/_vendor/torchvision_stub/torchvision/transforms/__init__.py",
+    "bytes": 353,
+    "compressed_bytes": 231,
+    "crc32": 3833150407
+  },
+  {
+    "path": "research/_vendor/torchvision_stub/torchvision/transforms/functional.py",
+    "bytes": 558,
+    "compressed_bytes": 246,
+    "crc32": 1847709962
+  },
+  {
+    "path": "research/adversarial_gold_v1.jsonl",
+    "bytes": 3168,
+    "compressed_bytes": 920,
+    "crc32": 2937721523
+  },
+  {
+    "path": "research/adversarial_tasks_v1.jsonl",
+    "bytes": 5131,
+    "compressed_bytes": 1614,
+    "crc32": 443947453
+  },
+  {
+    "path": "research/analyze_online_stopping_results.py",
+    "bytes": 11757,
+    "compressed_bytes": 3924,
+    "crc32": 2611953573
+  },
+  {
+    "path": "research/learned_online_stopping_controller.py",
+    "bytes": 4607,
+    "compressed_bytes": 1731,
+    "crc32": 1343113555
+  },
+  {
+    "path": "research/mathematical_foundations.md",
+    "bytes": 27920,
+    "compressed_bytes": 11252,
+    "crc32": 3387164817
+  },
+  {
+    "path": "research/online_generation.py",
+    "bytes": 9341,
+    "compressed_bytes": 3244,
+    "crc32": 2707356192
+  },
+  {
+    "path": "research/online_stopping_controller.py",
+    "bytes": 13190,
+    "compressed_bytes": 4051,
+    "crc32": 1128978031
+  },
+  {
+    "path": "research/outputs/experiments_v2/ultimate_tournament_manifest.json",
+    "bytes": 11287,
+    "compressed_bytes": 3597,
+    "crc32": 4126642187
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/baseline_replay_policies.json",
+    "bytes": 1816,
+    "compressed_bytes": 500,
+    "crc32": 261468136
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_and_baseline_replay_pareto.csv",
+    "bytes": 824,
+    "compressed_bytes": 290,
+    "crc32": 4121167124
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_batch_metrics.csv",
+    "bytes": 951,
+    "compressed_bytes": 451,
+    "crc32": 2376450054
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_collection_runtime.json",
+    "bytes": 212,
+    "compressed_bytes": 177,
+    "crc32": 3287700170
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_controller_latency.csv",
+    "bytes": 8418,
+    "compressed_bytes": 1132,
+    "crc32": 3834008701
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_generation_results.jsonl",
+    "bytes": 148271,
+    "compressed_bytes": 11002,
+    "crc32": 711144830
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_ledger_audit.json",
+    "bytes": 699,
+    "compressed_bytes": 350,
+    "crc32": 961565165
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_manifest.json",
+    "bytes": 2924,
+    "compressed_bytes": 1554,
+    "crc32": 2311885964
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_metrics.json",
+    "bytes": 2121,
+    "compressed_bytes": 975,
+    "crc32": 779080972
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_paired_results.csv",
+    "bytes": 2458,
+    "compressed_bytes": 812,
+    "crc32": 2927568959
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_posthoc_analysis.json",
+    "bytes": 2329,
+    "compressed_bytes": 578,
+    "crc32": 3432432584
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_public_tasks.jsonl",
+    "bytes": 5131,
+    "compressed_bytes": 1614,
+    "crc32": 1596490004
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_sealed_gold.jsonl",
+    "bytes": 3168,
+    "compressed_bytes": 916,
+    "crc32": 2096912265
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/live_uncertainty.json",
+    "bytes": 1211,
+    "compressed_bytes": 638,
+    "crc32": 81500243
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/code_bindings.json",
+    "bytes": 312,
+    "compressed_bytes": 208,
+    "crc32": 3513151896
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/online_generation.py",
+    "bytes": 9341,
+    "compressed_bytes": 3244,
+    "crc32": 2707356192
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/online_stopping_controller.py",
+    "bytes": 13190,
+    "compressed_bytes": 4051,
+    "crc32": 1128978031
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/locked_code/run_online_stopping_evaluation.py",
+    "bytes": 29925,
+    "compressed_bytes": 8699,
+    "crc32": 4065978217
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/online_stopping_pareto.png",
+    "bytes": 92464,
+    "compressed_bytes": 83349,
+    "crc32": 2063494661
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/online_stopping_pareto.svg",
+    "bytes": 59757,
+    "compressed_bytes": 11197,
+    "crc32": 3980981905
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/adversarial_live/runtime_environment.json",
+    "bytes": 703,
+    "compressed_bytes": 436,
+    "crc32": 1208368994
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/baseline_replay_policies.json",
+    "bytes": 1816,
+    "compressed_bytes": 500,
+    "crc32": 261468136
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/final_evidence_summary.json",
+    "bytes": 30610,
+    "compressed_bytes": 5477,
+    "crc32": 973237398
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/final_verification.json",
+    "bytes": 792,
+    "compressed_bytes": 420,
+    "crc32": 1702902383
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/latency_100_math_problems.csv",
+    "bytes": 2528512,
+    "compressed_bytes": 106945,
+    "crc32": 2913049134
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/latency_summary.json",
+    "bytes": 1093,
+    "compressed_bytes": 481,
+    "crc32": 625923745
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/baseline_replay_policies.json",
+    "bytes": 1816,
+    "compressed_bytes": 500,
+    "crc32": 261468136
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/frozen_prefix_predictor.json",
+    "bytes": 6324,
+    "compressed_bytes": 2304,
+    "crc32": 1639612053
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/learned_decision_latency_repeated_prefixes.csv",
+    "bytes": 24645,
+    "compressed_bytes": 3968,
+    "crc32": 2830581820
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/learned_latency_summary.json",
+    "bytes": 414,
+    "compressed_bytes": 265,
+    "crc32": 3776297425
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_and_baseline_replay_pareto.csv",
+    "bytes": 818,
+    "compressed_bytes": 296,
+    "crc32": 658358952
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_batch_metrics.csv",
+    "bytes": 682,
+    "compressed_bytes": 346,
+    "crc32": 3374080247
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_collection_runtime.json",
+    "bytes": 317,
+    "compressed_bytes": 244,
+    "crc32": 779278725
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_controller_latency.csv",
+    "bytes": 5558,
+    "compressed_bytes": 888,
+    "crc32": 1181408702
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_generation_results.jsonl",
+    "bytes": 120426,
+    "compressed_bytes": 10449,
+    "crc32": 469575017
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_ledger_audit.json",
+    "bytes": 699,
+    "compressed_bytes": 350,
+    "crc32": 961565165
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_manifest.json",
+    "bytes": 4269,
+    "compressed_bytes": 2278,
+    "crc32": 1799732902
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_metrics.json",
+    "bytes": 2386,
+    "compressed_bytes": 1102,
+    "crc32": 2428621000
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_paired_results.csv",
+    "bytes": 2638,
+    "compressed_bytes": 852,
+    "crc32": 2119161588
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_posthoc_analysis.json",
+    "bytes": 2338,
+    "compressed_bytes": 597,
+    "crc32": 3589007498
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_public_tasks.jsonl",
+    "bytes": 5131,
+    "compressed_bytes": 1614,
+    "crc32": 1596490004
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_sealed_gold.jsonl",
+    "bytes": 3168,
+    "compressed_bytes": 916,
+    "crc32": 2096912265
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/live_uncertainty.json",
+    "bytes": 1224,
+    "compressed_bytes": 646,
+    "crc32": 952462627
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/code_bindings.json",
+    "bytes": 595,
+    "compressed_bytes": 340,
+    "crc32": 349183823
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/learned_online_stopping_controller.py",
+    "bytes": 4607,
+    "compressed_bytes": 1731,
+    "crc32": 1343113555
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/online_generation.py",
+    "bytes": 9341,
+    "compressed_bytes": 3244,
+    "crc32": 2707356192
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/online_stopping_controller.py",
+    "bytes": 13190,
+    "compressed_bytes": 4051,
+    "crc32": 1128978031
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/prefix_stopping_model.py",
+    "bytes": 9024,
+    "compressed_bytes": 3001,
+    "crc32": 4184577875
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/run_learned_online_stopping.py",
+    "bytes": 13143,
+    "compressed_bytes": 4120,
+    "crc32": 899996397
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/locked_code/run_online_stopping_evaluation.py",
+    "bytes": 29925,
+    "compressed_bytes": 8699,
+    "crc32": 4065978217
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/online_stopping_pareto.png",
+    "bytes": 93402,
+    "compressed_bytes": 84407,
+    "crc32": 3877743640
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/online_stopping_pareto.svg",
+    "bytes": 59756,
+    "compressed_bytes": 11209,
+    "crc32": 3866321742
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_adversarial/runtime_environment.json",
+    "bytes": 703,
+    "compressed_bytes": 436,
+    "crc32": 1208368994
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/baseline_replay_policies.json",
+    "bytes": 1816,
+    "compressed_bytes": 500,
+    "crc32": 261468136
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/frozen_prefix_predictor.json",
+    "bytes": 6324,
+    "compressed_bytes": 2304,
+    "crc32": 1639612053
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/learned_decision_latency_repeated_prefixes.csv",
+    "bytes": 153556,
+    "compressed_bytes": 20785,
+    "crc32": 3696503581
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/learned_latency_summary.json",
+    "bytes": 422,
+    "compressed_bytes": 266,
+    "crc32": 3916119360
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_and_baseline_replay_pareto.csv",
+    "bytes": 832,
+    "compressed_bytes": 324,
+    "crc32": 1383461318
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_batch_metrics.csv",
+    "bytes": 2309,
+    "compressed_bytes": 983,
+    "crc32": 774081865
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_collection_runtime.json",
+    "bytes": 300,
+    "compressed_bytes": 235,
+    "crc32": 3313309041
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_controller_latency.csv",
+    "bytes": 32966,
+    "compressed_bytes": 4173,
+    "crc32": 3074119062
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_generation_results.jsonl",
+    "bytes": 563425,
+    "compressed_bytes": 43419,
+    "crc32": 3205262549
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_ledger_audit.json",
+    "bytes": 699,
+    "compressed_bytes": 350,
+    "crc32": 961565165
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_manifest.json",
+    "bytes": 4701,
+    "compressed_bytes": 2565,
+    "crc32": 3226545995
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_metrics.json",
+    "bytes": 2394,
+    "compressed_bytes": 1140,
+    "crc32": 1957225833
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_paired_results.csv",
+    "bytes": 11041,
+    "compressed_bytes": 2498,
+    "crc32": 2607192341
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_posthoc_analysis.json",
+    "bytes": 2351,
+    "compressed_bytes": 630,
+    "crc32": 2476620961
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_public_tasks.jsonl",
+    "bytes": 35832,
+    "compressed_bytes": 10677,
+    "crc32": 515533418
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_sealed_gold.jsonl",
+    "bytes": 10544,
+    "compressed_bytes": 1566,
+    "crc32": 1439750164
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_uncertainty.json",
+    "bytes": 1253,
+    "compressed_bytes": 674,
+    "crc32": 2700476464
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/code_bindings.json",
+    "bytes": 595,
+    "compressed_bytes": 340,
+    "crc32": 349183823
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/learned_online_stopping_controller.py",
+    "bytes": 4607,
+    "compressed_bytes": 1731,
+    "crc32": 1343113555
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/online_generation.py",
+    "bytes": 9341,
+    "compressed_bytes": 3244,
+    "crc32": 2707356192
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/online_stopping_controller.py",
+    "bytes": 13190,
+    "compressed_bytes": 4051,
+    "crc32": 1128978031
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/prefix_stopping_model.py",
+    "bytes": 9024,
+    "compressed_bytes": 3001,
+    "crc32": 4184577875
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/run_learned_online_stopping.py",
+    "bytes": 13143,
+    "compressed_bytes": 4120,
+    "crc32": 899996397
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/locked_code/run_online_stopping_evaluation.py",
+    "bytes": 29925,
+    "compressed_bytes": 8699,
+    "crc32": 4065978217
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/online_stopping_pareto.png",
+    "bytes": 96024,
+    "compressed_bytes": 87038,
+    "crc32": 1145634320
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/online_stopping_pareto.svg",
+    "bytes": 59329,
+    "compressed_bytes": 11208,
+    "crc32": 1163265115
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_main/runtime_environment.json",
+    "bytes": 703,
+    "compressed_bytes": 436,
+    "crc32": 1208368994
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_preflight/PROVISIONAL_STATUS.json",
+    "bytes": 429,
+    "compressed_bytes": 281,
+    "crc32": 292722535
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_preflight/learned_decision_latency_repeated_prefixes.csv",
+    "bytes": 153587,
+    "compressed_bytes": 20710,
+    "crc32": 3317142112
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/learned_preflight/learned_latency_summary.json",
+    "bytes": 425,
+    "compressed_bytes": 271,
+    "crc32": 228941630
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_and_baseline_replay_pareto.csv",
+    "bytes": 838,
+    "compressed_bytes": 332,
+    "crc32": 297289144
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_batch_metrics.csv",
+    "bytes": 3406,
+    "compressed_bytes": 1372,
+    "crc32": 3759653532
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_collection_runtime.json",
+    "bytes": 213,
+    "compressed_bytes": 176,
+    "crc32": 2274322695
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_controller_latency.csv",
+    "bytes": 50032,
+    "compressed_bytes": 5416,
+    "crc32": 562576088
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_generation_results.jsonl",
+    "bytes": 704725,
+    "compressed_bytes": 46213,
+    "crc32": 458684833
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_ledger_audit.json",
+    "bytes": 699,
+    "compressed_bytes": 350,
+    "crc32": 961565165
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_manifest.json",
+    "bytes": 3374,
+    "compressed_bytes": 1843,
+    "crc32": 1540748943
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_metrics.json",
+    "bytes": 2113,
+    "compressed_bytes": 981,
+    "crc32": 1755303243
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_paired_results.csv",
+    "bytes": 10140,
+    "compressed_bytes": 2355,
+    "crc32": 59909991
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_posthoc_analysis.json",
+    "bytes": 2361,
+    "compressed_bytes": 633,
+    "crc32": 1866684960
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_public_tasks.jsonl",
+    "bytes": 35832,
+    "compressed_bytes": 10677,
+    "crc32": 515533418
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_sealed_gold.jsonl",
+    "bytes": 10544,
+    "compressed_bytes": 1566,
+    "crc32": 1439750164
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/live_uncertainty.json",
+    "bytes": 1260,
+    "compressed_bytes": 663,
+    "crc32": 1549919622
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/locked_code/code_bindings.json",
+    "bytes": 312,
+    "compressed_bytes": 208,
+    "crc32": 3513151896
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/locked_code/online_generation.py",
+    "bytes": 9341,
+    "compressed_bytes": 3244,
+    "crc32": 2707356192
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/locked_code/online_stopping_controller.py",
+    "bytes": 13190,
+    "compressed_bytes": 4051,
+    "crc32": 1128978031
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/locked_code/run_online_stopping_evaluation.py",
+    "bytes": 29925,
+    "compressed_bytes": 8699,
+    "crc32": 4065978217
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/locked_replay_policies.json",
+    "bytes": 2489,
+    "compressed_bytes": 751,
+    "crc32": 1151089856
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/online_and_learned_test_results.txt",
+    "bytes": 5084,
+    "compressed_bytes": 1050,
+    "crc32": 3565525273
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/online_stopping_pareto.png",
+    "bytes": 95941,
+    "compressed_bytes": 87636,
+    "crc32": 1336706648
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/online_stopping_pareto.svg",
+    "bytes": 59130,
+    "compressed_bytes": 11163,
+    "crc32": 1083315691
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_confidence_80_paired.csv",
+    "bytes": 265268,
+    "compressed_bytes": 32067,
+    "crc32": 1327043023
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_confidence_90_paired.csv",
+    "bytes": 265041,
+    "compressed_bytes": 31951,
+    "crc32": 1253938257
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_confidence_95_paired.csv",
+    "bytes": 264574,
+    "compressed_bytes": 31754,
+    "crc32": 1253629860
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_fixed_2_paired.csv",
+    "bytes": 245280,
+    "compressed_bytes": 32709,
+    "crc32": 1151977008
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_fixed_3_paired.csv",
+    "bytes": 246056,
+    "compressed_bytes": 32892,
+    "crc32": 2370495331
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_fixed_4_paired.csv",
+    "bytes": 246328,
+    "compressed_bytes": 32796,
+    "crc32": 2545505276
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_metrics.json",
+    "bytes": 7177,
+    "compressed_bytes": 1467,
+    "crc32": 2384400707
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_never_paired.csv",
+    "bytes": 249369,
+    "compressed_bytes": 29166,
+    "crc32": 2023835349
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/replay_pareto.csv",
+    "bytes": 2824,
+    "compressed_bytes": 1040,
+    "crc32": 2043532847
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/runtime_environment.json",
+    "bytes": 703,
+    "compressed_bytes": 436,
+    "crc32": 1208368994
+  },
+  {
+    "path": "research/outputs/semester2/online_stopping_20261002/source_revision_notes.json",
+    "bytes": 9493,
+    "compressed_bytes": 1389,
+    "crc32": 2238140268
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/data_freeze_at_training.json",
+    "bytes": 441752,
+    "compressed_bytes": 59403,
+    "crc32": 1442384857
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/evaluation.json",
+    "bytes": 22993,
+    "compressed_bytes": 3523,
+    "crc32": 3899376430
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/excluded_trajectories.csv",
+    "bytes": 33,
+    "compressed_bytes": 33,
+    "crc32": 2186206934
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/heldout_policy_replay.csv",
+    "bytes": 238092,
+    "compressed_bytes": 12581,
+    "crc32": 2604437713
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/heldout_prefix_predictions.csv",
+    "bytes": 501244,
+    "compressed_bytes": 94303,
+    "crc32": 3210836216
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/label_reconstruction_audit.csv",
+    "bytes": 1331481,
+    "compressed_bytes": 94301,
+    "crc32": 2472109894
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/prefix_model.json",
+    "bytes": 6324,
+    "compressed_bytes": 2304,
+    "crc32": 1639612053
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/report.md",
+    "bytes": 2321,
+    "compressed_bytes": 1207,
+    "crc32": 2979314204
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/task_split.csv",
+    "bytes": 70334,
+    "compressed_bytes": 13188,
+    "crc32": 2206676970
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/test_summary.json",
+    "bytes": 1434,
+    "compressed_bytes": 801,
+    "crc32": 3294527561
+  },
+  {
+    "path": "research/outputs/semester2/prefix_model_v1/training_protocol.json",
+    "bytes": 4322,
+    "compressed_bytes": 1614,
+    "crc32": 3647892697
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/algorithm_v2_normalized_effects.csv",
+    "bytes": 5642,
+    "compressed_bytes": 1519,
+    "crc32": 3220058959
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/boundary_domain_step_metrics.csv",
+    "bytes": 10837,
+    "compressed_bytes": 4755,
+    "crc32": 2579283871
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/boundary_selected_cell_step_metrics.csv",
+    "bytes": 5142,
+    "compressed_bytes": 1857,
+    "crc32": 535828876
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/manifest.json",
+    "bytes": 2502,
+    "compressed_bytes": 1145,
+    "crc32": 3669972
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/offline_replay_metrics.csv",
+    "bytes": 588,
+    "compressed_bytes": 330,
+    "crc32": 3994534127
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/tournament_balanced_summary.csv",
+    "bytes": 3212,
+    "compressed_bytes": 1556,
+    "crc32": 2613799275
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/tournament_per_domain.csv",
+    "bytes": 4034,
+    "compressed_bytes": 1472,
+    "crc32": 3983556830
+  },
+  {
+    "path": "research/outputs/thesis_v1/evidence/tournament_per_fold.csv",
+    "bytes": 5089,
+    "compressed_bytes": 1975,
+    "crc32": 3207924467
+  },
+  {
+    "path": "research/prefix_stopping_model.py",
+    "bytes": 9024,
+    "compressed_bytes": 3001,
+    "crc32": 4184577875
+  },
+  {
+    "path": "research/real_trace_experiments.py",
+    "bytes": 124298,
+    "compressed_bytes": 28920,
+    "crc32": 4291261212
+  },
+  {
+    "path": "research/reports/thesis_failure_audit_v1/audit_summary.json",
+    "bytes": 3214,
+    "compressed_bytes": 1418,
+    "crc32": 1775790266
+  },
+  {
+    "path": "research/reports/thesis_failure_audit_v1/taxonomy_summary.csv",
+    "bytes": 633,
+    "compressed_bytes": 391,
+    "crc32": 1622497839
+  },
+  {
+    "path": "research/run_learned_online_stopping.py",
+    "bytes": 13097,
+    "compressed_bytes": 4103,
+    "crc32": 3328328793
+  },
+  {
+    "path": "research/run_online_stopping_evaluation.py",
+    "bytes": 31955,
+    "compressed_bytes": 9271,
+    "crc32": 3448143700
+  },
+  {
+    "path": "research/tests/test_data_freeze.py",
+    "bytes": 14146,
+    "compressed_bytes": 3876,
+    "crc32": 2146341583
+  },
+  {
+    "path": "research/tests/test_graders.py",
+    "bytes": 4927,
+    "compressed_bytes": 2017,
+    "crc32": 156043520
+  },
+  {
+    "path": "research/tests/test_learned_online_controller.py",
+    "bytes": 5697,
+    "compressed_bytes": 1762,
+    "crc32": 2853264310
+  },
+  {
+    "path": "research/tests/test_live_uncertainty.py",
+    "bytes": 4843,
+    "compressed_bytes": 1585,
+    "crc32": 1735970179
+  },
+  {
+    "path": "research/tests/test_mathematical_foundations.py",
+    "bytes": 17223,
+    "compressed_bytes": 4590,
+    "crc32": 2820057287
+  },
+  {
+    "path": "research/tests/test_online_controller.py",
+    "bytes": 14630,
+    "compressed_bytes": 3916,
+    "crc32": 3957301455
+  },
+  {
+    "path": "research/tests/test_online_replay_accounting.py",
+    "bytes": 3281,
+    "compressed_bytes": 1245,
+    "crc32": 880393190
+  },
+  {
+    "path": "research/tests/test_prefix_stopping_model.py",
+    "bytes": 12714,
+    "compressed_bytes": 3778,
+    "crc32": 1749397231
+  },
+  {
+    "path": "research/train_prefix_stopping_model.py",
+    "bytes": 26946,
+    "compressed_bytes": 8115,
+    "crc32": 3113227333
+  },
+  {
+    "path": "software_provenance_v1.json",
+    "bytes": 10619,
+    "compressed_bytes": 2787,
+    "crc32": 1468414160
+  },
+  {
+    "path": "software_repository_venv_observed_v1.json",
+    "bytes": 3511,
+    "compressed_bytes": 1507,
+    "crc32": 1493927193
+  },
+  {
+    "path": "tools/analyze_live_stopping_uncertainty.py",
+    "bytes": 5324,
+    "compressed_bytes": 2199,
+    "crc32": 2784223470
+  },
+  {
+    "path": "tools/freeze_research_data.py",
+    "bytes": 36489,
+    "compressed_bytes": 10044,
+    "crc32": 268306567
+  }
+]

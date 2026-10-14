@@ -1,0 +1,18 @@
+{
+  "matrix": {
+    "cells": 52,
+    "raw_rows": 798770,
+    "raw_distinct_runs": 75996,
+    "task_ids": 1955,
+    "saved_hazard_eligible_runs": 75965,
+    "all_five_responses": null
+  },
+  "standardized": {
+    "cells": 52,
+    "raw_rows": 144440,
+    "raw_distinct_runs": 28888,
+    "task_ids": 2948,
+    "saved_hazard_eligible_runs": null,
+    "all_five_responses": true
+  }
+}

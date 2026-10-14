@@ -1,0 +1,2535 @@
+[
+  {
+    "id": "V7-0012",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 33,
+    "end_line": 33,
+    "section": "1.2 Prior work and contribution",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Chain-of-thought prompting makes intermediate reasoning explicit [1]. Verifier training and process supervision evaluate completed answers or intermediate steps [2], [6]. Self-consistency aggregates sampled solutions, while Adaptive-Consistency adjusts their sampling budget [7], [19]. Successive revision instead conditions later responses on earlier work; its transition law, answer selector and acquisition costs need not match independent-path sampling.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "Coordinator",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [],
+    "independent_reviews": [],
+    "verified_subclaims": [],
+    "remaining_evidence": "No specialist whole-unit verification. Coordinator retained the exact text/location for scope or literature/metadata reconciliation; this is not a negative mathematical verdict.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0013",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 35,
+    "end_line": 35,
+    "section": "1.2 Prior work and contribution",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Adaptive Computation Time and PonderNet learn internal halting decisions [16], [17]. CALM exits intermediate network layers while continuing token generation [18]. The overthinking literature and answer-convergence methods address excessive reasoning and termination within a chain of thought [8], [20]. REFRAIN uses a redundancy discriminator and an adaptive controller [21]; OS-Pruner applies accuracy-cost optimal stopping at paragraph boundaries [22]. These are substantial antecedents. This thesis studies complete-response revision under its own generation, selection, grading and cost conventions, rather than claiming to originate learned halting or optimal stopping.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "Coordinator",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [],
+    "independent_reviews": [],
+    "verified_subclaims": [],
+    "remaining_evidence": "No specialist whole-unit verification. Coordinator retained the exact text/location for scope or literature/metadata reconciliation; this is not a negative mathematical verdict.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0187",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 206,
+    "end_line": 214,
+    "section": "4.2 Controlled contrasts and retrospective diagnostics",
+    "kind": "table_cell",
+    "table_column": 3,
+    "claim": "+0.01210",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V5-0543"
+    ],
+    "reviewer": "C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V7-0187",
+          "version": "v7",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 206,
+          "section": "4.2 Controlled contrasts and retrospective diagnostics",
+          "kind": "table_cell",
+          "claim": "+0.01210",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0188",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 206,
+    "end_line": 214,
+    "section": "4.2 Controlled contrasts and retrospective diagnostics",
+    "kind": "table_cell",
+    "table_column": 4,
+    "claim": "[+0.00522, +0.01907]",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V5-0544"
+    ],
+    "reviewer": "C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V7-0188",
+          "version": "v7",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 206,
+          "section": "4.2 Controlled contrasts and retrospective diagnostics",
+          "kind": "table_cell",
+          "claim": "[+0.00522, +0.01907]",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0191",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 207,
+    "end_line": 214,
+    "section": "4.2 Controlled contrasts and retrospective diagnostics",
+    "kind": "table_cell",
+    "table_column": 3,
+    "claim": "+0.01286",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V5-0548"
+    ],
+    "reviewer": "C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V7-0191",
+          "version": "v7",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 207,
+          "section": "4.2 Controlled contrasts and retrospective diagnostics",
+          "kind": "table_cell",
+          "claim": "+0.01286",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0192",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 207,
+    "end_line": 214,
+    "section": "4.2 Controlled contrasts and retrospective diagnostics",
+    "kind": "table_cell",
+    "table_column": 4,
+    "claim": "[+0.00683, +0.01911]",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V5-0549"
+    ],
+    "reviewer": "C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V7-0192",
+          "version": "v7",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 207,
+          "section": "4.2 Controlled contrasts and retrospective diagnostics",
+          "kind": "table_cell",
+          "claim": "[+0.00683, +0.01911]",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0223",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 220,
+    "end_line": 220,
+    "section": "4.2 Controlled contrasts and retrospective diagnostics",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The historical stacked AUC 0.955156 is a non-nested retrospective diagnostic. Its bidirectional component and centered smoothing use future steps; upstream meta-training is not confined to each outer training partition. Its reduced-feature control also retains vote aggregates. Consequently, the result neither isolates causal peer value nor qualifies as an online predictor. Positive lifts in all 10,000 bootstrap draws do not repair those dependencies or constitute independent-generation evidence.",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING",
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "A; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+      "agent_c/gap_search.md",
+      "agent_c/gap_evidence_index.json",
+      "coordinator/independent_rounded_replay.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "A",
+        "record": {
+          "inventory_id": "V7-0223",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 220,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+          "agent_a_claim_ids": [
+            "A-060"
+          ],
+          "reviewer": "Agent A",
+          "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Exact compiled-line mapping to independently recorded source claim(s).",
+          "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+          "second_review_pending": false
+        },
+        "evidence_map": "agent_a/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V7-0223",
+          "version": "v7",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 220,
+          "section": "4.2 Controlled contrasts and retrospective diagnostics",
+          "kind": "paragraph",
+          "claim": "The historical stacked AUC 0.955156 is a non-nested retrospective diagnostic. Its bidirectional component and centered smoothing use future steps; upstream meta-training is not confined to each outer training partition. Its reduced-feature control also retains vote aggregates. Consequently, the result neither isolates causal peer value nor qualifies as an online predictor. Positive lifts in all 10,000 bootstrap draws do not repair those dependencies or constitute independent-generation evidence.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-014"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Temporal/nesting critique checked in source; absolute historical scores and bootstrap arrays unavailable for independent reproduction.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical stack: per-row stacked/control scores, labels and bootstrap specifications/outputs. Original 7B replay: original per-run stopped rows or full-precision fitted heads; four-decimal heads and complete raw feature order are retained, but interval analysis leaves97 trajectories uncertified. Its full-run baseline reproduces directly; exact stopped endpoint does not. Expanded archive/checkpoint/NPZ inventories in agent_c/gap_search.md; independent interval check in coordinator/independent_rounded_replay.json. No refit performed.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0224",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 222,
+    "end_line": 222,
+    "section": "4.2 Controlled contrasts and retrospective diagnostics",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Development replay on 1,500 Qwen2.5-7B/GSM8K traces saves 54.34% of completion tokens while accuracy falls from 70.53% to 64.20%, a 6.33-percentage-point loss. Fitting and evaluation reuse the same cell, so this is a development diagnostic.",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [],
+    "reviewer": "C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.json",
+      "agent_c/gap_search.md",
+      "agent_c/gap_evidence_index.json",
+      "coordinator/independent_rounded_replay.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V7-0224",
+          "version": "v7",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 222,
+          "section": "4.2 Controlled contrasts and retrospective diagnostics",
+          "kind": "paragraph",
+          "claim": "Development replay on 1,500 Qwen2.5-7B/GSM8K traces saves 54.34% of completion tokens while accuracy falls from 70.53% to 64.20%, a 6.33-percentage-point loss. Fitting and evaluation reuse the same cell, so this is a development diagnostic.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-015"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.json"
+          ],
+          "scope": "Historical in-sample replay source stop decisions not recovered; aggregate arithmetic alone is insufficient.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical stack: per-row stacked/control scores, labels and bootstrap specifications/outputs. Original 7B replay: original per-run stopped rows or full-precision fitted heads; four-decimal heads and complete raw feature order are retained, but interval analysis leaves97 trajectories uncertified. Its full-run baseline reproduces directly; exact stopped endpoint does not. Expanded archive/checkpoint/NPZ inventories in agent_c/gap_search.md; independent interval check in coordinator/independent_rounded_replay.json. No refit performed.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V7-0275",
+    "version": "v7",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 270,
+    "end_line": 270,
+    "section": "5.2 Reproducibility and conclusion",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The original `data_manifest_v1.json` and post-review `data_manifest_post_review_v1.json` preserve the research corpus and executed live source copies. Hashes establish selected artifact identity, not honest original generation, correct labels or representative sampling. Exact historical GPU regeneration is not established by a workstation lock. The [extended v5 report and source/evidence map](https://github.com/bhattadiCS/research-thesis-overthinking-boundary/blob/df03265cfe3b9bf4b1ee66061d81ef5796375be0/ThesisDocs/CURRENT_FORMAL_THESIS.md) retain complete proofs and bounds, all seventeen scientific tables, six figures, additional predictor results and isolated reanalysis commands. Legacy peer executable-source provenance remains partial and is explicitly qualified there.",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [],
+    "reviewer": "A; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Hash identity is distinct from scientific provenance/labels/sampling. Actual manifest/source coverage requires coordinator/C.",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "A",
+        "record": {
+          "inventory_id": "V7-0275",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 270,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "deductive_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+          "agent_a_claim_ids": [
+            "A-067"
+          ],
+          "reviewer": "Agent A",
+          "evidence": "agent_a/review.md D1-D7; agent_a/cross_review_b.md; Hash identity is distinct from scientific provenance/labels/sampling. Actual manifest/source coverage requires coordinator/C.",
+          "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+          "second_review_pending": false
+        },
+        "evidence_map": "agent_a/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V7-0275",
+          "version": "v7",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+          "line": 270,
+          "section": "5.2 Reproducibility and conclusion",
+          "kind": "paragraph",
+          "claim": "The original `data_manifest_v1.json` and post-review `data_manifest_post_review_v1.json` preserve the research corpus and executed live source copies. Hashes establish selected artifact identity, not honest original generation, correct labels or representative sampling. Exact historical GPU regeneration is not established by a workstation lock. The [extended v5 report and source/evidence map](https://github.com/bhattadiCS/research-thesis-overthinking-boundary/blob/df03265cfe3b9bf4b1ee66061d81ef5796375be0/ThesisDocs/CURRENT_FORMAL_THESIS.md) retain complete proofs and bounds, all seventeen scientific tables, six figures, additional predictor results and isolated reanalysis commands. Legacy peer executable-source provenance remains partial and is explicitly qualified there.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-008"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Whole paragraph includes empirical/implementation/bibliographic premises pending C/coordinator; favorable outcome applies only to explicitly mapped mathematical deductions.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": [
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json"
+    ]
+  },
+  {
+    "id": "V5-0009",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 25,
+    "end_line": 25,
+    "section": "1.1 Reasoning as a sequential allocation problem",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Language models can answer mathematical and scientific questions by producing intermediate text before committing to an answer. Chain-of-thought prompting makes that intermediate work explicit [1]. The resulting sequence can contain useful calculations, checks, and repairs. It can also contain repetition, an incorrect reinterpretation of the problem, or a revision that replaces a correct candidate with an incorrect one. Additional generation therefore has an uncertain benefit and a measurable cost. A stopping policy must decide when the expected benefit of another increment justifies that cost.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0009",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 25,
+          "end_line": 25,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P002"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0026",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 69,
+    "end_line": 69,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Chain-of-thought prompting studies how explicit intermediate reasoning can improve language-model performance [1]. Its benefit does not imply that every additional reasoning increment is valuable. Verifier training uses completed solutions to learn candidate selection [2], while process supervision provides feedback on intermediate mathematical steps [6]. The present endpoint is the selected answer at a saved response boundary. It does not certify every preceding mathematical statement, so the project's answer-level detectors are distinct from process verifiers. These approaches establish why intermediate work and evaluation can help; the stopping question concerns the conditional value of continuing a chosen protocol after a particular prefix.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0026",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 69,
+          "end_line": 69,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P019"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0027",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 71,
+    "end_line": 71,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Adaptive computation predates current language-model reasoning systems. Adaptive Computation Time learns a halting unit for repeated recurrent-state updates and includes a penalty for computation in its training objective [16]. PonderNet instead models the conditional probability of halting, optimizes expected prediction loss over possible halting steps, and regularizes the halting distribution toward a prior [17]. Both learn how much internal computation to perform within a trainable architecture. Their computational increments are state updates, whereas this thesis observes complete generated responses from a fixed generator. The connection is the allocation of effort according to the evolving state; the difference is the information available to the policy and the operation whose execution it can prevent.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0027",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 71,
+          "end_line": 71,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P020"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0028",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 73,
+    "end_line": 73,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Confident Adaptive Language Modeling, or CALM, chooses intermediate-layer exits during autoregressive decoding and calibrates local per-token decisions against sequence-level performance constraints [18]. The present controller instead decides whether to request another complete response. Layer execution and response generation measure different resources, and a response-boundary heuristic does not inherit CALM's calibration guarantees.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0028",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 73,
+          "end_line": 73,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P021"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0029",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 75,
+    "end_line": 75,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Self-consistency samples several reasoning paths and aggregates their answers [7]. Adaptive-Consistency makes that sampling budget variable using agreement among the samples already generated [19]. It is a direct precedent for prefix-dependent allocation, with the prefix consisting of completed sampled solutions. The present revision trajectory instead conditions later responses on earlier generated work and uses a declared causal answer selector. Independent-path aggregation and successive revision need not have the same transition law or correctness endpoint. Agreement features can be useful in either setting, but their acquisition cost and timing must be included. In particular, thirteen completed peer trajectories cannot be treated as a free observation in a cost comparison with a single generator.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0029",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 75,
+          "end_line": 75,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P022"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0030",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 77,
+    "end_line": 77,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The overthinking literature motivates inefficiency from excessive test-time reasoning [8]. More recent work addresses termination within a chain of thought. Liu and Wang examine answer convergence and evaluate answer-consistency stopping, changes to end-of-reasoning signals, and a supervised stopping predictor using internal activations [20]. Their work shows that stability is a serious candidate stopping signal, rather than a new idea introduced by this thesis. Stability, however, is a statement about answer agreement; the project separately measures correctness and the possibility of a later repair. Its complete-response boundaries and observable prefix summaries also differ from intervention within a single reasoning trace or access to internal activations.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0030",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 77,
+          "end_line": 77,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P023"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0031",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 79,
+    "end_line": 79,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "REFRAIN combines a reflective-redundancy discriminator with a sliding-window upper-confidence-bound controller that adapts stopping thresholds [21]. This provides a recent training-free alternative to a fitted probability model. A redundancy score, a stable answer, and a probability of correctness are different quantities, and each policy must specify how its score determines a continuation decision. The present confidence-and-stability heuristic and trained drift rule are evaluated under their own fixed thresholds and response protocol; REFRAIN's reported results are contextual evidence, not estimates of this implementation's savings or accuracy.",
+    "dependencies": [
+      "D-SAMPLING",
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0031",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 79,
+          "end_line": 79,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P024"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0032",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 81,
+    "end_line": 81,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Optimal stopping supplies the established mathematical distinction between immediate reward and conditional continuation value [11], [12]. A particularly close reasoning application is OS-Pruner, a July 2026 preprint that optimizes answer accuracy minus a token-length penalty after observing a reasoning prefix [22]. It intervenes at paragraph boundaries, elicits a final answer on termination, and trains a stopping policy using hidden-state features and precomputed rewards. It also presents a Bellman interpretation and distinguishes continuation value from a fixed correctness threshold. Thus, applying an accuracy-cost optimal-stopping objective to reasoning is already explicit in prior work. This thesis studies selected answers at complete-response boundaries and estimates one-step drift from observable summaries. Its fitted rule approximates a different target from a learned full continuation-value policy, and its finite counterexamples explain the extra conditions needed to connect myopic drift to optimal stopping.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0032",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 81,
+          "end_line": 81,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P025"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0033",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 83,
+    "end_line": 83,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Probability calibration is another established component. Platt's sigmoid mapping fits probabilities from classifier scores [23], and Guo et al. distinguish probability calibration from classification accuracy and evaluate post-processing methods for neural networks [24]. The project uses independently held-out task groups to fit its Platt calibrators and reports ranking and probability errors separately. A calibration fit on archived prefixes does not establish calibration under the live generator, parser, or stopping-induced state distribution. The actual live model is the instruction-tuned Qwen2.5-0.5B release [25]; identifying its model snapshot is essential because the wider archived model panels do not validate transport to every Qwen release or to larger reasoning-specialized models.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0033",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 83,
+          "end_line": 83,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P026"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0035",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 87,
+    "end_line": 87,
+    "section": "1.6 Related work and the thesis position",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Prior work establishes learned halting, adaptive sampling, within-chain truncation, and accuracy-cost stopping. This thesis studies complete-response revision under a specified generation, grading, and cost protocol, comparing repair-corruption rules with fixed budgets. Its contribution is protocol-specific derivations and controlled findings, including failures. Prior methods were not reproduced under a shared protocol, so comparative superiority remains untested.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0035",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 87,
+          "end_line": 87,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P028"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0509",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 803,
+    "end_line": 803,
+    "section": "3.8 Reproducibility and evidence freeze",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Stored Blackwell metadata records a CUDA 13.0 runtime and PyTorch 2.13.0+cu130; the workstation lock describes a different, current environment. Compiler libraries, hardware, drivers, random-state handling, and nondeterministic kernels also affect repetition. The freeze supports inspection and re-analysis of stored results; bit-identical regeneration is not established.",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0509",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 803,
+          "end_line": 803,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P134"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0509",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 803,
+          "section": "3.8 Reproducibility and evidence freeze",
+          "kind": "paragraph",
+          "claim": "Stored Blackwell metadata records a CUDA 13.0 runtime and PyTorch 2.13.0+cu130; the workstation lock describes a different, current environment. Compiler libraries, hardware, drivers, random-state handling, and nondeterministic kernels also affect repetition. The freeze supports inspection and re-analysis of stored results; bit-identical regeneration is not established.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-016"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0543",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 843,
+    "end_line": 851,
+    "section": "4.3 Controlled estimator comparisons",
+    "kind": "table_cell",
+    "table_column": 3,
+    "claim": "+0.01210",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V7-0187"
+    ],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0543",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 843,
+          "end_line": 851,
+          "kind": "table_cell",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-T099",
+            "B-T100",
+            "B-T101",
+            "B-T102",
+            "B-T103"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0543",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 843,
+          "section": "4.3 Controlled estimator comparisons",
+          "kind": "table_cell",
+          "claim": "+0.01210",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0544",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 843,
+    "end_line": 851,
+    "section": "4.3 Controlled estimator comparisons",
+    "kind": "table_cell",
+    "table_column": 4,
+    "claim": "[+0.00522, +0.01907]",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V7-0188"
+    ],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0544",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 843,
+          "end_line": 851,
+          "kind": "table_cell",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-T099",
+            "B-T100",
+            "B-T101",
+            "B-T102",
+            "B-T103"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0544",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 843,
+          "section": "4.3 Controlled estimator comparisons",
+          "kind": "table_cell",
+          "claim": "[+0.00522, +0.01907]",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0548",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 844,
+    "end_line": 851,
+    "section": "4.3 Controlled estimator comparisons",
+    "kind": "table_cell",
+    "table_column": 3,
+    "claim": "+0.01286",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V7-0191"
+    ],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0548",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 844,
+          "end_line": 851,
+          "kind": "table_cell",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-T104",
+            "B-T105",
+            "B-T106",
+            "B-T107",
+            "B-T108"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0548",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 844,
+          "section": "4.3 Controlled estimator comparisons",
+          "kind": "table_cell",
+          "claim": "+0.01286",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0549",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 844,
+    "end_line": 851,
+    "section": "4.3 Controlled estimator comparisons",
+    "kind": "table_cell",
+    "table_column": 4,
+    "claim": "[+0.00683, +0.01911]",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [
+      "V7-0192"
+    ],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0549",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 844,
+          "end_line": 851,
+          "kind": "table_cell",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-T104",
+            "B-T105",
+            "B-T106",
+            "B-T107",
+            "B-T108"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0549",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 844,
+          "section": "4.3 Controlled estimator comparisons",
+          "kind": "table_cell",
+          "claim": "[+0.00683, +0.01911]",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-018"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Saved-total normalization verified, exact historical heldout Ridge predictions and bootstrap CIs not reconstructed without prohibited refit.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0659",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 897,
+    "end_line": 897,
+    "section": "4.6 The stacked retrospective diagnostic",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The stacked hybrid's stored AUC is 0.955156 versus 0.943223 for its reduced-feature LightGBM control, a lift of 0.011933. The task-bootstrap interval [0.010384, 0.013480] describes this development difference, rather than the absolute stacked AUC.",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/review.md#D17",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+      "agent_c/gap_search.md",
+      "agent_c/gap_evidence_index.json",
+      "coordinator/independent_rounded_replay.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0659",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 897,
+          "end_line": 897,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "mixed",
+          "b_claim_ids": [
+            "B-P157"
+          ],
+          "evidence": [
+            "agent_b/review.md#D17"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [
+            ".955156-.943223=.011933; stored score arrays and bootstrap require C."
+          ],
+          "remaining_evidence": ".955156-.943223=.011933; stored score arrays and bootstrap require C.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0659",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 897,
+          "section": "4.6 The stacked retrospective diagnostic",
+          "kind": "paragraph",
+          "claim": "The stacked hybrid's stored AUC is 0.955156 versus 0.943223 for its reduced-feature LightGBM control, a lift of 0.011933. The task-bootstrap interval [0.010384, 0.013480] describes this development difference, rather than the absolute stacked AUC.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-014"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Temporal/nesting critique checked in source; absolute historical scores and bootstrap arrays unavailable for independent reproduction.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [
+      ".955156-.943223=.011933; stored score arrays and bootstrap require C."
+    ],
+    "remaining_evidence": "Historical stack: per-row stacked/control scores, labels and bootstrap specifications/outputs. Original 7B replay: original per-run stopped rows or full-precision fitted heads; four-decimal heads and complete raw feature order are retained, but interval analysis leaves97 trajectories uncertified. Its full-run baseline reproduces directly; exact stopped endpoint does not. Expanded archive/checkpoint/NPZ inventories in agent_c/gap_search.md; independent interval check in coordinator/independent_rounded_replay.json. No refit performed.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0662",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 903,
+    "end_line": 903,
+    "section": "4.6 The stacked retrospective diagnostic",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "All 10,000 bootstrap lifts were positive (100 percent), a resampling proportion rather than a conventional p-value, universal superiority or independent generation-seed replication. Repeated resampling of the development distribution cannot repair feature leakage or non-nested model selection.",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/review.md#D17",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+      "agent_c/gap_search.md",
+      "agent_c/gap_evidence_index.json",
+      "coordinator/independent_rounded_replay.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0662",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 903,
+          "end_line": 903,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "mixed",
+          "b_claim_ids": [
+            "B-P160"
+          ],
+          "evidence": [
+            "agent_b/review.md#D17"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [
+            "Positive bootstrap fraction alone is not a conventional p-value or independent generation replication; draw signs require C."
+          ],
+          "remaining_evidence": "Positive bootstrap fraction alone is not a conventional p-value or independent generation replication; draw signs require C.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0662",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 903,
+          "section": "4.6 The stacked retrospective diagnostic",
+          "kind": "paragraph",
+          "claim": "All 10,000 bootstrap lifts were positive (100 percent), a resampling proportion rather than a conventional p-value, universal superiority or independent generation-seed replication. Repeated resampling of the development distribution cannot repair feature leakage or non-nested model selection.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-014"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [
+      "Positive bootstrap fraction alone is not a conventional p-value or independent generation replication; draw signs require C."
+    ],
+    "remaining_evidence": "Historical stack: per-row stacked/control scores, labels and bootstrap specifications/outputs. Original 7B replay: original per-run stopped rows or full-precision fitted heads; four-decimal heads and complete raw feature order are retained, but interval analysis leaves97 trajectories uncertified. Its full-run baseline reproduces directly; exact stopped endpoint does not. Expanded archive/checkpoint/NPZ inventories in agent_c/gap_search.md; independent interval check in coordinator/independent_rounded_replay.json. No refit performed.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0663",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 907,
+    "end_line": 907,
+    "section": "4.7 Replay and failure interpretation",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The Qwen2.5-7B/GSM8K replay reduces completion tokens from 827,804 to 377,960 (54.34 percent), while accuracy falls from 70.53 to 64.20 percent, a loss of 6.33 percentage points. Fitting and evaluating on the same 1,500 traces makes this a development diagnostic; Chapter 5 reports actual runtime experiments.",
+    "dependencies": [
+      "D-LABEL-ENDPOINT",
+      "D-SAMPLING"
+    ],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/review.md#D17",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.json",
+      "agent_c/gap_search.md",
+      "agent_c/gap_evidence_index.json",
+      "coordinator/independent_rounded_replay.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0663",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 907,
+          "end_line": 907,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "mixed",
+          "b_claim_ids": [
+            "B-P161"
+          ],
+          "evidence": [
+            "agent_b/review.md#D17"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [
+            "Saving arithmetic from displayed totals verifies; raw old replay/provenance require C."
+          ],
+          "remaining_evidence": "Saving arithmetic from displayed totals verifies; raw old replay/provenance require C.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0663",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 907,
+          "section": "4.7 Replay and failure interpretation",
+          "kind": "paragraph",
+          "claim": "The Qwen2.5-7B/GSM8K replay reduces completion tokens from 827,804 to 377,960 (54.34 percent), while accuracy falls from 70.53 to 64.20 percent, a loss of 6.33 percentage points. Fitting and evaluating on the same 1,500 traces makes this a development diagnostic; Chapter 5 reports actual runtime experiments.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-015"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.json"
+          ],
+          "scope": "Historical in-sample replay source stop decisions not recovered; aggregate arithmetic alone is insufficient.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [
+      "Saving arithmetic from displayed totals verifies; raw old replay/provenance require C."
+    ],
+    "remaining_evidence": "Historical stack: per-row stacked/control scores, labels and bootstrap specifications/outputs. Original 7B replay: original per-run stopped rows or full-precision fitted heads; four-decimal heads and complete raw feature order are retained, but interval analysis leaves97 trajectories uncertified. Its full-run baseline reproduces directly; exact stopped endpoint does not. Expanded archive/checkpoint/NPZ inventories in agent_c/gap_search.md; independent interval check in coordinator/independent_rounded_replay.json. No refit performed.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0749",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 992,
+    "end_line": 992,
+    "section": "5.5 Live paired evaluation",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The live experiment freezes tasks, policy and generation settings before opening outcomes. Generation receives public tasks separately from the reference ledger; grading follows event recording, keeping benchmark labels outside runtime decisions.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0749",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 992,
+          "end_line": 992,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P181"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0749",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 992,
+          "section": "5.5 Live paired evaluation",
+          "kind": "paragraph",
+          "claim": "The live experiment freezes tasks, policy and generation settings before opening outcomes. Generation receives public tasks separately from the reference ledger; grading follows event recording, keeping benchmark labels outside runtime decisions.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-006",
+            "C-009"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": [
+      "coordinator/independent_numerics.json",
+      "agent_b/independent_live_arithmetic.json",
+      "coordinator/independent_numerics.json binomial-tail inversion and task bootstrap"
+    ]
+  },
+  {
+    "id": "V5-0877",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1097,
+    "end_line": 1097,
+    "section": "5.8 Actual trained-policy evaluation",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The trained policy generates its own stopped trajectories against the previously executed full-horizon baseline. Hashes bind baseline manifests, model bytes, prompts, adapter, batch order and results. Predictor and policy are frozen before generation; live and trap outcomes enter no coefficient, calibration, feature, cost or threshold fitting. This remains a development study of one small model and two panels, not deployment of the retrospective stack or a per-instance safety guarantee.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0877",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1097,
+          "end_line": 1097,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P203"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0877",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1097,
+          "section": "5.8 Actual trained-policy evaluation",
+          "kind": "paragraph",
+          "claim": "The trained policy generates its own stopped trajectories against the previously executed full-horizon baseline. Hashes bind baseline manifests, model bytes, prompts, adapter, batch order and results. Predictor and policy are frozen before generation; live and trap outcomes enter no coefficient, calibration, feature, cost or threshold fitting. This remains a development study of one small model and two panels, not deployment of the retrospective stack or a per-instance safety guarantee.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-006",
+            "C-009"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": [
+      "coordinator/independent_numerics.json",
+      "agent_b/independent_live_arithmetic.json",
+      "coordinator/independent_numerics.json binomial-tail inversion and task bootstrap"
+    ]
+  },
+  {
+    "id": "V5-0934",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1150,
+    "end_line": 1150,
+    "section": "6.2 Correctness labels and mathematical validity",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The tournament retains archived labels; Section 5.7 separately versions reconstructed predictor targets and regrading. The post-review grader audit preserves final-answer labels in all four live panels and the original corpus summaries. A changed label definition changes the estimand and requires a row-level audit and recomputation of dependent results.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/review.md#D1"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0934",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1150,
+          "end_line": 1150,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "mixed",
+          "b_claim_ids": [
+            "B-P218"
+          ],
+          "evidence": [
+            "agent_b/review.md#D1"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [
+            "A different label definition changes estimand; actual regrade receipts/unchanged labels require C."
+          ],
+          "remaining_evidence": "A different label definition changes estimand; actual regrade receipts/unchanged labels require C.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [
+      "A different label definition changes estimand; actual regrade receipts/unchanged labels require C."
+    ],
+    "remaining_evidence": "A different label definition changes estimand; actual regrade receipts/unchanged labels require C.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0950",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1192,
+    "end_line": 1192,
+    "section": "6.7 Evidence needed for stronger claims",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Historical reproduction requires original features, splits, fits, software and stochastic controls. The freeze and current environment lock identify available artifacts, without reconstructing missing training details. Reanalysis under a fully captured new environment is a separately versioned experiment.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0950",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1192,
+          "end_line": 1192,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P234"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0952",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1254,
+    "end_line": 1254,
+    "section": "Appendix A Reproducibility and evidence sources",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The original research profile is fixed at revision `09225c95c676ab3cae1c4b9586d74f7f803f519f` by `data_manifest_v1.json`. The post-review profile at `6e4378bef9a98037c20d1381eb9c7b61462a6578` uses `data_manifest_post_review_v1.json` for revised grading, controller validation and behavior checks. Both preserve the collected corpus, fitted predictor and recorded generation outcomes. Each live manifest binds the sources actually executed in its `locked_code` directory.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0952",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1254,
+          "end_line": 1254,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P237"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0952",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1254,
+          "section": "Appendix A Reproducibility and evidence sources",
+          "kind": "paragraph",
+          "claim": "The original research profile is fixed at revision `09225c95c676ab3cae1c4b9586d74f7f803f519f` by `data_manifest_v1.json`. The post-review profile at `6e4378bef9a98037c20d1381eb9c7b61462a6578` uses `data_manifest_post_review_v1.json` for revised grading, controller validation and behavior checks. Both preserve the collected corpus, fitted predictor and recorded generation outcomes. Each live manifest binds the sources actually executed in its `locked_code` directory.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-016",
+            "C-021"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical provenance/suite/manifest assertions require the exact earlier executed sources, source-version test receipts and complete recovered-history comparison. Saved-data arithmetic and current source/PDF identities are separately verified; no original-execution authenticity is inferred.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0974",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1270,
+    "end_line": 1270,
+    "section": "Appendix A Reproducibility and evidence sources",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The electronic supplement, `ThesisDocs/formal/supplements/v5/reproduction_and_history.txt`, gives commands for detached checkouts, data verification and isolated reanalysis. Verification uses `tools/freeze_research_data.py`; `tools/recompute_thesis_evidence.py` reconstructs tables, and `tools/verify_post_review_behavior.py` checks saved controller behavior. Analysis outputs go to new scratch directories, and uncertainty analysis operates on copied live panels.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0974",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1270,
+          "end_line": 1270,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P239"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0974",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1270,
+          "section": "Appendix A Reproducibility and evidence sources",
+          "kind": "paragraph",
+          "claim": "The electronic supplement, `ThesisDocs/formal/supplements/v5/reproduction_and_history.txt`, gives commands for detached checkouts, data verification and isolated reanalysis. Verification uses `tools/freeze_research_data.py`; `tools/recompute_thesis_evidence.py` reconstructs tables, and `tools/verify_post_review_behavior.py` checks saved controller behavior. Analysis outputs go to new scratch directories, and uncertainty analysis operates on copied live panels.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-016",
+            "C-021"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical provenance/suite/manifest assertions require the exact earlier executed sources, source-version test receipts and complete recovered-history comparison. Saved-data arithmetic and current source/PDF identities are separately verified; no original-execution authenticity is inferred.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0975",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1272,
+    "end_line": 1272,
+    "section": "Appendix A Reproducibility and evidence sources",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The recorded receipts distinguish thirty historical grader cases from ninety-eight revised tests, and 107 passing historical-suite tests from 243 post-review repository tests. Saved-prefix verification reproduces 480 decision histories across four live collections; reused baseline rows are not additional generations. These counts identify their source versions, rather than measuring corpus-wide label validity.",
+    "dependencies": [
+      "D-PREFIX"
+    ],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0975",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1272,
+          "end_line": 1272,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P240"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0975",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1272,
+          "section": "Appendix A Reproducibility and evidence sources",
+          "kind": "paragraph",
+          "claim": "The recorded receipts distinguish thirty historical grader cases from ninety-eight revised tests, and 107 passing historical-suite tests from 243 post-review repository tests. Saved-prefix verification reproduces 480 decision histories across four live collections; reused baseline rows are not additional generations. These counts identify their source versions, rather than measuring corpus-wide label validity.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-016",
+            "C-020"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+          ],
+          "scope": "Historical receipt counts not rerun;87 specified existing current tests executed with logs.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical provenance/suite/manifest assertions require the exact earlier executed sources, source-version test receipts and complete recovered-history comparison. Saved-data arithmetic and current source/PDF identities are separately verified; no original-execution authenticity is inferred.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0976",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1274,
+    "end_line": 1274,
+    "section": "Appendix A Reproducibility and evidence sources",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The fifty-two standardized trace files are mandatory freeze inputs. Supporting evidence includes the variable-horizon matrix, paired study arms, stored predictions and live event ledgers. Exact-byte and canonical-LF hashes identify selected evidence; they do not establish bit-identical regeneration of the partially recorded historical GPU environment. The current authoring manifests separately identify the rendering environment and exact PDF bytes.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0976",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1274,
+          "end_line": 1274,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P241"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-0976",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1274,
+          "section": "Appendix A Reproducibility and evidence sources",
+          "kind": "paragraph",
+          "claim": "The fifty-two standardized trace files are mandatory freeze inputs. Supporting evidence includes the variable-horizon matrix, paired study arms, stored predictions and live event ledgers. Exact-byte and canonical-LF hashes identify selected evidence; they do not establish bit-identical regeneration of the partially recorded historical GPU environment. The current authoring manifests separately identify the rendering environment and exact PDF bytes.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-016",
+            "C-021"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical provenance/suite/manifest assertions require the exact earlier executed sources, source-version test receipts and complete recovered-history comparison. Saved-data arithmetic and current source/PDF identities are separately verified; no original-execution authenticity is inferred.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-0990",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1285,
+    "end_line": 1290,
+    "section": "Appendix B Claim scope and mathematical review",
+    "kind": "table_cell",
+    "table_column": 1,
+    "claim": "0.955156 AUC",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/review.md#D16",
+      "agent_c/gap_search.md",
+      "agent_c/gap_evidence_index.json",
+      "coordinator/independent_rounded_replay.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-0990",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1285,
+          "end_line": 1290,
+          "kind": "table_cell",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "mixed",
+          "b_claim_ids": [
+            "B-T404",
+            "B-T405",
+            "B-T406"
+          ],
+          "evidence": [
+            "agent_b/review.md#D16"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [
+            "D16: evidence requirement/scope mapping is valid conditionally."
+          ],
+          "remaining_evidence": "Numerical or implementation assertion in the named claim still requires C/coordinator.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [
+      "D16: evidence requirement/scope mapping is valid conditionally."
+    ],
+    "remaining_evidence": "Historical stack: per-row stacked/control scores, labels and bootstrap specifications/outputs. Original 7B replay: original per-run stopped rows or full-precision fitted heads; four-decimal heads and complete raw feature order are retained, but interval analysis leaves97 trajectories uncertified. Its full-run baseline reproduces directly; exact stopped endpoint does not. Expanded archive/checkpoint/NPZ inventories in agent_c/gap_search.md; independent interval check in coordinator/independent_rounded_replay.json. No refit performed.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-1007",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1290,
+    "end_line": 1290,
+    "section": "Appendix B Claim scope and mathematical review",
+    "kind": "table_cell",
+    "table_column": 3,
+    "claim": "Thirty historical cases and ninety-eight revised tests cover specified parser behaviors; corpus-wide validity requires separate adjudication",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-1007",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1290,
+          "end_line": 1290,
+          "kind": "table_cell",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-T419",
+            "B-T420",
+            "B-T421"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-1065",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1325,
+    "end_line": 1325,
+    "section": "Appendix D Retrospective prediction analyses",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "Strict-baseline and selected-answer source hashes match retained code. The legacy peer runner and feature-module hashes do not match any recovered Git version, including line-ending reconstructions, although their common base script resolves to the recorded July commit. The saved arrays and paired folds are auditable; exact reproduction of the executed peer-feature pipeline remains incomplete. This qualification covers both peer populations in Table 17.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-1065",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1325,
+          "end_line": 1325,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P251"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-1065",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1325,
+          "section": "Appendix D Retrospective prediction analyses",
+          "kind": "paragraph",
+          "claim": "Strict-baseline and selected-answer source hashes match retained code. The legacy peer runner and feature-module hashes do not match any recovered Git version, including line-ending reconstructions, although their common base script resolves to the recorded July commit. The saved arrays and paired folds are auditable; exact reproduction of the executed peer-feature pipeline remains incomplete. This qualification covers both peer populations in Table 17.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-013",
+            "C-016"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json"
+          ],
+          "scope": "Saved-score arithmetic checked; exhaustive historical executable Git recovery not repeated.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical provenance/suite/manifest assertions require the exact earlier executed sources, source-version test receipts and complete recovered-history comparison. Saved-data arithmetic and current source/PDF identities are separately verified; no original-execution authenticity is inferred.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  },
+  {
+    "id": "V5-1066",
+    "version": "v5",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "line": 1327,
+    "end_line": 1327,
+    "section": "Appendix D Retrospective prediction analyses",
+    "kind": "paragraph",
+    "table_column": "",
+    "claim": "The historical peer candidate has no assigned stopping threshold. Its full-horizon collector and small smoke ledgers establish neither calibrated prospective fleet stopping nor avoided peer generation. The electronic supplement records the development history and distinguishes reused predictions from independently generated trajectories.",
+    "dependencies": [],
+    "duplicates": [],
+    "reviewer": "B; C",
+    "outcome": "NOT ESTABLISHED",
+    "evidence": [
+      "agent_b/claims.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json"
+    ],
+    "independent_reviews": [
+      {
+        "reviewer": "B",
+        "record": {
+          "claim_id": "V5-1066",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1327,
+          "end_line": 1327,
+          "kind": "paragraph",
+          "outcome": "NOT ESTABLISHED",
+          "scope": "empirical_or_other_unresolved",
+          "b_claim_ids": [
+            "B-P252"
+          ],
+          "evidence": [
+            "agent_b/claims.json"
+          ],
+          "assumptions_or_interpretation": "No favorable empirical inference from a prior audit or a displayed number.",
+          "verified_subclaims": [],
+          "remaining_evidence": "Agent C/coordinator source-row, executed-source, metadata, figure or bibliography reconciliation as applicable; independent semantic labels and population transfer remain distinct.",
+          "reviewer": "Agent B",
+          "no_blanket_empirical_pass": true
+        },
+        "evidence_map": "agent_b/coverage_map.json"
+      },
+      {
+        "reviewer": "C",
+        "record": {
+          "id": "V5-1066",
+          "version": "v5",
+          "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+          "line": 1327,
+          "section": "Appendix D Retrospective prediction analyses",
+          "kind": "paragraph",
+          "claim": "The historical peer candidate has no assigned stopping threshold. Its full-horizon collector and small smoke ledgers establish neither calibrated prospective fleet stopping nor avoided peer generation. The electronic supplement records the development history and distinguishes reused predictions from independently generated trajectories.",
+          "outcome": "NOT ESTABLISHED",
+          "check_ids": [
+            "C-013",
+            "C-016"
+          ],
+          "evidence": [
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+            "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json"
+          ],
+          "scope": "Linked source/numerical subclaims were checked, but this paragraph-level inventory unit also contains contextual/provenance or interpretive assertions not all independently established by Agent C. Use the linked check scopes rather than inferring a full-paragraph pass.",
+          "central_second_review": "Pending coordinator reconciliation except independently reviewed four live panels."
+        },
+        "evidence_map": "agent_c/coverage_map.json"
+      }
+    ],
+    "verified_subclaims": [],
+    "remaining_evidence": "Historical provenance/suite/manifest assertions require the exact earlier executed sources, source-version test receipts and complete recovered-history comparison. Saved-data arithmetic and current source/PDF identities are separately verified; no original-execution authenticity is inferred.",
+    "conditional_scope": "A favorable result verifies the quoted recorded definitions/arithmetic/derivation only. It does not assert semantic label truth, representative sampling, fitted posterior validity or institutional acceptance.",
+    "scope": "mathematical_or_scientific_claim",
+    "independent_second_review": []
+  }
+]

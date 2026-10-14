@@ -1,0 +1,1396 @@
+[
+  {
+    "id": "V7-0001",
+    "exact_cross_version_duplicates": [
+      "V5-0001"
+    ]
+  },
+  {
+    "id": "V7-0002",
+    "exact_cross_version_duplicates": [
+      "V5-0002"
+    ]
+  },
+  {
+    "id": "V7-0003",
+    "exact_cross_version_duplicates": [
+      "V5-0003"
+    ]
+  },
+  {
+    "id": "V7-0004",
+    "exact_cross_version_duplicates": [
+      "V5-0004"
+    ]
+  },
+  {
+    "id": "V7-0005",
+    "exact_cross_version_duplicates": [
+      "V5-0005"
+    ]
+  },
+  {
+    "id": "V7-0007",
+    "exact_cross_version_duplicates": [
+      "V5-0007"
+    ]
+  },
+  {
+    "id": "V7-0008",
+    "exact_cross_version_duplicates": [
+      "V5-0008"
+    ]
+  },
+  {
+    "id": "V7-0020",
+    "exact_cross_version_duplicates": [
+      "V5-0039"
+    ]
+  },
+  {
+    "id": "V7-0021",
+    "exact_cross_version_duplicates": [
+      "V5-0040"
+    ]
+  },
+  {
+    "id": "V7-0022",
+    "exact_cross_version_duplicates": [
+      "V5-0042"
+    ]
+  },
+  {
+    "id": "V7-0023",
+    "exact_cross_version_duplicates": [
+      "V5-0043",
+      "V5-0054",
+      "V5-0058",
+      "V5-0066",
+      "V5-0317"
+    ]
+  },
+  {
+    "id": "V7-0026",
+    "exact_cross_version_duplicates": [
+      "V5-0043",
+      "V5-0054",
+      "V5-0058",
+      "V5-0066",
+      "V5-0317"
+    ]
+  },
+  {
+    "id": "V7-0028",
+    "exact_cross_version_duplicates": [
+      "V5-0041",
+      "V5-0233",
+      "V5-0234",
+      "V5-0259"
+    ]
+  },
+  {
+    "id": "V7-0034",
+    "exact_cross_version_duplicates": [
+      "V5-0050",
+      "V5-0079",
+      "V5-0334"
+    ]
+  },
+  {
+    "id": "V7-0035",
+    "exact_cross_version_duplicates": [
+      "V5-0051"
+    ]
+  },
+  {
+    "id": "V7-0039",
+    "exact_cross_version_duplicates": [
+      "V5-0065",
+      "V5-0125"
+    ]
+  },
+  {
+    "id": "V7-0050",
+    "exact_cross_version_duplicates": [
+      "V5-0081"
+    ]
+  },
+  {
+    "id": "V7-0053",
+    "exact_cross_version_duplicates": [
+      "V5-0085",
+      "V5-0170",
+      "V5-0180"
+    ]
+  },
+  {
+    "id": "V7-0076",
+    "exact_cross_version_duplicates": [
+      "V5-0043",
+      "V5-0054",
+      "V5-0058",
+      "V5-0066",
+      "V5-0317"
+    ]
+  },
+  {
+    "id": "V7-0081",
+    "exact_cross_version_duplicates": [
+      "V5-0038",
+      "V5-0158",
+      "V5-0174",
+      "V5-0323"
+    ]
+  },
+  {
+    "id": "V7-0084",
+    "exact_cross_version_duplicates": [
+      "V5-0108",
+      "V5-0399"
+    ]
+  },
+  {
+    "id": "V7-0103",
+    "exact_cross_version_duplicates": [
+      "V5-0240"
+    ]
+  },
+  {
+    "id": "V7-0106",
+    "exact_cross_version_duplicates": [
+      "V5-0406"
+    ]
+  },
+  {
+    "id": "V7-0107",
+    "exact_cross_version_duplicates": [
+      "V5-0407"
+    ]
+  },
+  {
+    "id": "V7-0108",
+    "exact_cross_version_duplicates": [
+      "V5-0408"
+    ]
+  },
+  {
+    "id": "V7-0109",
+    "exact_cross_version_duplicates": [
+      "V5-0409"
+    ]
+  },
+  {
+    "id": "V7-0110",
+    "exact_cross_version_duplicates": [
+      "V5-0410"
+    ]
+  },
+  {
+    "id": "V7-0111",
+    "exact_cross_version_duplicates": [
+      "V5-0411"
+    ]
+  },
+  {
+    "id": "V7-0112",
+    "exact_cross_version_duplicates": [
+      "V5-0412"
+    ]
+  },
+  {
+    "id": "V7-0113",
+    "exact_cross_version_duplicates": [
+      "V5-0413",
+      "V5-0423"
+    ]
+  },
+  {
+    "id": "V7-0114",
+    "exact_cross_version_duplicates": [
+      "V5-0414"
+    ]
+  },
+  {
+    "id": "V7-0115",
+    "exact_cross_version_duplicates": [
+      "V5-0415"
+    ]
+  },
+  {
+    "id": "V7-0116",
+    "exact_cross_version_duplicates": [
+      "V5-0416"
+    ]
+  },
+  {
+    "id": "V7-0117",
+    "exact_cross_version_duplicates": [
+      "V5-0417",
+      "V5-0422"
+    ]
+  },
+  {
+    "id": "V7-0118",
+    "exact_cross_version_duplicates": [
+      "V5-0418"
+    ]
+  },
+  {
+    "id": "V7-0119",
+    "exact_cross_version_duplicates": [
+      "V5-0419"
+    ]
+  },
+  {
+    "id": "V7-0120",
+    "exact_cross_version_duplicates": [
+      "V5-0420"
+    ]
+  },
+  {
+    "id": "V7-0121",
+    "exact_cross_version_duplicates": [
+      "V5-0421"
+    ]
+  },
+  {
+    "id": "V7-0122",
+    "exact_cross_version_duplicates": [
+      "V5-0417",
+      "V5-0422"
+    ]
+  },
+  {
+    "id": "V7-0123",
+    "exact_cross_version_duplicates": [
+      "V5-0413",
+      "V5-0423"
+    ]
+  },
+  {
+    "id": "V7-0124",
+    "exact_cross_version_duplicates": [
+      "V5-0424"
+    ]
+  },
+  {
+    "id": "V7-0125",
+    "exact_cross_version_duplicates": [
+      "V5-0425"
+    ]
+  },
+  {
+    "id": "V7-0126",
+    "exact_cross_version_duplicates": [
+      "V5-0426"
+    ]
+  },
+  {
+    "id": "V7-0127",
+    "exact_cross_version_duplicates": [
+      "V5-0427"
+    ]
+  },
+  {
+    "id": "V7-0128",
+    "exact_cross_version_duplicates": [
+      "V5-0428"
+    ]
+  },
+  {
+    "id": "V7-0129",
+    "exact_cross_version_duplicates": [
+      "V5-0429"
+    ]
+  },
+  {
+    "id": "V7-0130",
+    "exact_cross_version_duplicates": [
+      "V5-0430"
+    ]
+  },
+  {
+    "id": "V7-0131",
+    "exact_cross_version_duplicates": [
+      "V5-0431"
+    ]
+  },
+  {
+    "id": "V7-0132",
+    "exact_cross_version_duplicates": [
+      "V5-0432"
+    ]
+  },
+  {
+    "id": "V7-0133",
+    "exact_cross_version_duplicates": [
+      "V5-0433"
+    ]
+  },
+  {
+    "id": "V7-0134",
+    "exact_cross_version_duplicates": [
+      "V5-0434"
+    ]
+  },
+  {
+    "id": "V7-0135",
+    "exact_cross_version_duplicates": [
+      "V5-0435"
+    ]
+  },
+  {
+    "id": "V7-0143",
+    "exact_cross_version_duplicates": [
+      "V5-0357",
+      "V5-0366"
+    ]
+  },
+  {
+    "id": "V7-0144",
+    "exact_cross_version_duplicates": [
+      "V5-0504"
+    ]
+  },
+  {
+    "id": "V7-0147",
+    "exact_cross_version_duplicates": [
+      "V5-0503"
+    ]
+  },
+  {
+    "id": "V7-0152",
+    "exact_cross_version_duplicates": [
+      "V5-0790"
+    ]
+  },
+  {
+    "id": "V7-0153",
+    "exact_cross_version_duplicates": [
+      "V5-0791"
+    ]
+  },
+  {
+    "id": "V7-0163",
+    "exact_cross_version_duplicates": [
+      "V5-1009"
+    ]
+  },
+  {
+    "id": "V7-0164",
+    "exact_cross_version_duplicates": [
+      "V5-0150",
+      "V5-1010"
+    ]
+  },
+  {
+    "id": "V7-0165",
+    "exact_cross_version_duplicates": [
+      "V5-1012"
+    ]
+  },
+  {
+    "id": "V7-0166",
+    "exact_cross_version_duplicates": [
+      "V5-1013"
+    ]
+  },
+  {
+    "id": "V7-0167",
+    "exact_cross_version_duplicates": [
+      "V5-1011"
+    ]
+  },
+  {
+    "id": "V7-0168",
+    "exact_cross_version_duplicates": [
+      "V5-1016"
+    ]
+  },
+  {
+    "id": "V7-0169",
+    "exact_cross_version_duplicates": [
+      "V5-1018"
+    ]
+  },
+  {
+    "id": "V7-0170",
+    "exact_cross_version_duplicates": [
+      "V5-1020"
+    ]
+  },
+  {
+    "id": "V7-0171",
+    "exact_cross_version_duplicates": [
+      "V5-1021"
+    ]
+  },
+  {
+    "id": "V7-0173",
+    "exact_cross_version_duplicates": [
+      "V5-1023"
+    ]
+  },
+  {
+    "id": "V7-0182",
+    "exact_cross_version_duplicates": [
+      "V5-0540",
+      "V5-0721",
+      "V5-0756",
+      "V5-0820",
+      "V5-0849",
+      "V5-1030"
+    ]
+  },
+  {
+    "id": "V7-0184",
+    "exact_cross_version_duplicates": [
+      "V5-0539"
+    ]
+  },
+  {
+    "id": "V7-0186",
+    "exact_cross_version_duplicates": [
+      "V5-0597"
+    ]
+  },
+  {
+    "id": "V7-0187",
+    "exact_cross_version_duplicates": [
+      "V5-0543"
+    ]
+  },
+  {
+    "id": "V7-0188",
+    "exact_cross_version_duplicates": [
+      "V5-0544"
+    ]
+  },
+  {
+    "id": "V7-0190",
+    "exact_cross_version_duplicates": [
+      "V5-0597"
+    ]
+  },
+  {
+    "id": "V7-0191",
+    "exact_cross_version_duplicates": [
+      "V5-0548"
+    ]
+  },
+  {
+    "id": "V7-0192",
+    "exact_cross_version_duplicates": [
+      "V5-0549"
+    ]
+  },
+  {
+    "id": "V7-0194",
+    "exact_cross_version_duplicates": [
+      "V5-0597"
+    ]
+  },
+  {
+    "id": "V7-0195",
+    "exact_cross_version_duplicates": [
+      "V5-0553"
+    ]
+  },
+  {
+    "id": "V7-0196",
+    "exact_cross_version_duplicates": [
+      "V5-0554"
+    ]
+  },
+  {
+    "id": "V7-0198",
+    "exact_cross_version_duplicates": [
+      "V5-0597"
+    ]
+  },
+  {
+    "id": "V7-0199",
+    "exact_cross_version_duplicates": [
+      "V5-0558"
+    ]
+  },
+  {
+    "id": "V7-0200",
+    "exact_cross_version_duplicates": [
+      "V5-0559"
+    ]
+  },
+  {
+    "id": "V7-0202",
+    "exact_cross_version_duplicates": [
+      "V5-0597"
+    ]
+  },
+  {
+    "id": "V7-0203",
+    "exact_cross_version_duplicates": [
+      "V5-0563"
+    ]
+  },
+  {
+    "id": "V7-0204",
+    "exact_cross_version_duplicates": [
+      "V5-0564"
+    ]
+  },
+  {
+    "id": "V7-0206",
+    "exact_cross_version_duplicates": [
+      "V5-0597"
+    ]
+  },
+  {
+    "id": "V7-0207",
+    "exact_cross_version_duplicates": [
+      "V5-0568"
+    ]
+  },
+  {
+    "id": "V7-0208",
+    "exact_cross_version_duplicates": [
+      "V5-0569"
+    ]
+  },
+  {
+    "id": "V7-0210",
+    "exact_cross_version_duplicates": [
+      "V5-0597"
+    ]
+  },
+  {
+    "id": "V7-0211",
+    "exact_cross_version_duplicates": [
+      "V5-0573"
+    ]
+  },
+  {
+    "id": "V7-0212",
+    "exact_cross_version_duplicates": [
+      "V5-0574"
+    ]
+  },
+  {
+    "id": "V7-0215",
+    "exact_cross_version_duplicates": [
+      "V5-0578"
+    ]
+  },
+  {
+    "id": "V7-0216",
+    "exact_cross_version_duplicates": [
+      "V5-0579"
+    ]
+  },
+  {
+    "id": "V7-0218",
+    "exact_cross_version_duplicates": [
+      "V5-0513",
+      "V5-0884"
+    ]
+  },
+  {
+    "id": "V7-0219",
+    "exact_cross_version_duplicates": [
+      "V5-0583"
+    ]
+  },
+  {
+    "id": "V7-0220",
+    "exact_cross_version_duplicates": [
+      "V5-0584"
+    ]
+  },
+  {
+    "id": "V7-0229",
+    "exact_cross_version_duplicates": [
+      "V5-0111",
+      "V5-1015"
+    ]
+  },
+  {
+    "id": "V7-0236",
+    "exact_cross_version_duplicates": [
+      "V5-0724",
+      "V5-0823",
+      "V5-0843"
+    ]
+  },
+  {
+    "id": "V7-0243",
+    "exact_cross_version_duplicates": [
+      "V5-0759",
+      "V5-0779",
+      "V5-0852",
+      "V5-0872"
+    ]
+  },
+  {
+    "id": "V7-0250",
+    "exact_cross_version_duplicates": [
+      "V5-0724",
+      "V5-0823",
+      "V5-0843"
+    ]
+  },
+  {
+    "id": "V7-0257",
+    "exact_cross_version_duplicates": [
+      "V5-0759",
+      "V5-0779",
+      "V5-0852",
+      "V5-0872"
+    ]
+  },
+  {
+    "id": "V5-0001",
+    "exact_cross_version_duplicates": [
+      "V7-0001"
+    ]
+  },
+  {
+    "id": "V5-0002",
+    "exact_cross_version_duplicates": [
+      "V7-0002"
+    ]
+  },
+  {
+    "id": "V5-0003",
+    "exact_cross_version_duplicates": [
+      "V7-0003"
+    ]
+  },
+  {
+    "id": "V5-0004",
+    "exact_cross_version_duplicates": [
+      "V7-0004"
+    ]
+  },
+  {
+    "id": "V5-0005",
+    "exact_cross_version_duplicates": [
+      "V7-0005"
+    ]
+  },
+  {
+    "id": "V5-0007",
+    "exact_cross_version_duplicates": [
+      "V7-0007"
+    ]
+  },
+  {
+    "id": "V5-0008",
+    "exact_cross_version_duplicates": [
+      "V7-0008"
+    ]
+  },
+  {
+    "id": "V5-0038",
+    "exact_cross_version_duplicates": [
+      "V7-0081"
+    ]
+  },
+  {
+    "id": "V5-0039",
+    "exact_cross_version_duplicates": [
+      "V7-0020"
+    ]
+  },
+  {
+    "id": "V5-0040",
+    "exact_cross_version_duplicates": [
+      "V7-0021"
+    ]
+  },
+  {
+    "id": "V5-0041",
+    "exact_cross_version_duplicates": [
+      "V7-0028"
+    ]
+  },
+  {
+    "id": "V5-0042",
+    "exact_cross_version_duplicates": [
+      "V7-0022"
+    ]
+  },
+  {
+    "id": "V5-0043",
+    "exact_cross_version_duplicates": [
+      "V7-0023",
+      "V7-0026",
+      "V7-0076"
+    ]
+  },
+  {
+    "id": "V5-0050",
+    "exact_cross_version_duplicates": [
+      "V7-0034"
+    ]
+  },
+  {
+    "id": "V5-0051",
+    "exact_cross_version_duplicates": [
+      "V7-0035"
+    ]
+  },
+  {
+    "id": "V5-0054",
+    "exact_cross_version_duplicates": [
+      "V7-0023",
+      "V7-0026",
+      "V7-0076"
+    ]
+  },
+  {
+    "id": "V5-0058",
+    "exact_cross_version_duplicates": [
+      "V7-0023",
+      "V7-0026",
+      "V7-0076"
+    ]
+  },
+  {
+    "id": "V5-0065",
+    "exact_cross_version_duplicates": [
+      "V7-0039"
+    ]
+  },
+  {
+    "id": "V5-0066",
+    "exact_cross_version_duplicates": [
+      "V7-0023",
+      "V7-0026",
+      "V7-0076"
+    ]
+  },
+  {
+    "id": "V5-0079",
+    "exact_cross_version_duplicates": [
+      "V7-0034"
+    ]
+  },
+  {
+    "id": "V5-0081",
+    "exact_cross_version_duplicates": [
+      "V7-0050"
+    ]
+  },
+  {
+    "id": "V5-0085",
+    "exact_cross_version_duplicates": [
+      "V7-0053"
+    ]
+  },
+  {
+    "id": "V5-0108",
+    "exact_cross_version_duplicates": [
+      "V7-0084"
+    ]
+  },
+  {
+    "id": "V5-0111",
+    "exact_cross_version_duplicates": [
+      "V7-0229"
+    ]
+  },
+  {
+    "id": "V5-0125",
+    "exact_cross_version_duplicates": [
+      "V7-0039"
+    ]
+  },
+  {
+    "id": "V5-0150",
+    "exact_cross_version_duplicates": [
+      "V7-0164"
+    ]
+  },
+  {
+    "id": "V5-0158",
+    "exact_cross_version_duplicates": [
+      "V7-0081"
+    ]
+  },
+  {
+    "id": "V5-0170",
+    "exact_cross_version_duplicates": [
+      "V7-0053"
+    ]
+  },
+  {
+    "id": "V5-0174",
+    "exact_cross_version_duplicates": [
+      "V7-0081"
+    ]
+  },
+  {
+    "id": "V5-0180",
+    "exact_cross_version_duplicates": [
+      "V7-0053"
+    ]
+  },
+  {
+    "id": "V5-0233",
+    "exact_cross_version_duplicates": [
+      "V7-0028"
+    ]
+  },
+  {
+    "id": "V5-0234",
+    "exact_cross_version_duplicates": [
+      "V7-0028"
+    ]
+  },
+  {
+    "id": "V5-0240",
+    "exact_cross_version_duplicates": [
+      "V7-0103"
+    ]
+  },
+  {
+    "id": "V5-0259",
+    "exact_cross_version_duplicates": [
+      "V7-0028"
+    ]
+  },
+  {
+    "id": "V5-0317",
+    "exact_cross_version_duplicates": [
+      "V7-0023",
+      "V7-0026",
+      "V7-0076"
+    ]
+  },
+  {
+    "id": "V5-0323",
+    "exact_cross_version_duplicates": [
+      "V7-0081"
+    ]
+  },
+  {
+    "id": "V5-0334",
+    "exact_cross_version_duplicates": [
+      "V7-0034"
+    ]
+  },
+  {
+    "id": "V5-0357",
+    "exact_cross_version_duplicates": [
+      "V7-0143"
+    ]
+  },
+  {
+    "id": "V5-0366",
+    "exact_cross_version_duplicates": [
+      "V7-0143"
+    ]
+  },
+  {
+    "id": "V5-0399",
+    "exact_cross_version_duplicates": [
+      "V7-0084"
+    ]
+  },
+  {
+    "id": "V5-0406",
+    "exact_cross_version_duplicates": [
+      "V7-0106"
+    ]
+  },
+  {
+    "id": "V5-0407",
+    "exact_cross_version_duplicates": [
+      "V7-0107"
+    ]
+  },
+  {
+    "id": "V5-0408",
+    "exact_cross_version_duplicates": [
+      "V7-0108"
+    ]
+  },
+  {
+    "id": "V5-0409",
+    "exact_cross_version_duplicates": [
+      "V7-0109"
+    ]
+  },
+  {
+    "id": "V5-0410",
+    "exact_cross_version_duplicates": [
+      "V7-0110"
+    ]
+  },
+  {
+    "id": "V5-0411",
+    "exact_cross_version_duplicates": [
+      "V7-0111"
+    ]
+  },
+  {
+    "id": "V5-0412",
+    "exact_cross_version_duplicates": [
+      "V7-0112"
+    ]
+  },
+  {
+    "id": "V5-0413",
+    "exact_cross_version_duplicates": [
+      "V7-0113",
+      "V7-0123"
+    ]
+  },
+  {
+    "id": "V5-0414",
+    "exact_cross_version_duplicates": [
+      "V7-0114"
+    ]
+  },
+  {
+    "id": "V5-0415",
+    "exact_cross_version_duplicates": [
+      "V7-0115"
+    ]
+  },
+  {
+    "id": "V5-0416",
+    "exact_cross_version_duplicates": [
+      "V7-0116"
+    ]
+  },
+  {
+    "id": "V5-0417",
+    "exact_cross_version_duplicates": [
+      "V7-0117",
+      "V7-0122"
+    ]
+  },
+  {
+    "id": "V5-0418",
+    "exact_cross_version_duplicates": [
+      "V7-0118"
+    ]
+  },
+  {
+    "id": "V5-0419",
+    "exact_cross_version_duplicates": [
+      "V7-0119"
+    ]
+  },
+  {
+    "id": "V5-0420",
+    "exact_cross_version_duplicates": [
+      "V7-0120"
+    ]
+  },
+  {
+    "id": "V5-0421",
+    "exact_cross_version_duplicates": [
+      "V7-0121"
+    ]
+  },
+  {
+    "id": "V5-0422",
+    "exact_cross_version_duplicates": [
+      "V7-0117",
+      "V7-0122"
+    ]
+  },
+  {
+    "id": "V5-0423",
+    "exact_cross_version_duplicates": [
+      "V7-0113",
+      "V7-0123"
+    ]
+  },
+  {
+    "id": "V5-0424",
+    "exact_cross_version_duplicates": [
+      "V7-0124"
+    ]
+  },
+  {
+    "id": "V5-0425",
+    "exact_cross_version_duplicates": [
+      "V7-0125"
+    ]
+  },
+  {
+    "id": "V5-0426",
+    "exact_cross_version_duplicates": [
+      "V7-0126"
+    ]
+  },
+  {
+    "id": "V5-0427",
+    "exact_cross_version_duplicates": [
+      "V7-0127"
+    ]
+  },
+  {
+    "id": "V5-0428",
+    "exact_cross_version_duplicates": [
+      "V7-0128"
+    ]
+  },
+  {
+    "id": "V5-0429",
+    "exact_cross_version_duplicates": [
+      "V7-0129"
+    ]
+  },
+  {
+    "id": "V5-0430",
+    "exact_cross_version_duplicates": [
+      "V7-0130"
+    ]
+  },
+  {
+    "id": "V5-0431",
+    "exact_cross_version_duplicates": [
+      "V7-0131"
+    ]
+  },
+  {
+    "id": "V5-0432",
+    "exact_cross_version_duplicates": [
+      "V7-0132"
+    ]
+  },
+  {
+    "id": "V5-0433",
+    "exact_cross_version_duplicates": [
+      "V7-0133"
+    ]
+  },
+  {
+    "id": "V5-0434",
+    "exact_cross_version_duplicates": [
+      "V7-0134"
+    ]
+  },
+  {
+    "id": "V5-0435",
+    "exact_cross_version_duplicates": [
+      "V7-0135"
+    ]
+  },
+  {
+    "id": "V5-0503",
+    "exact_cross_version_duplicates": [
+      "V7-0147"
+    ]
+  },
+  {
+    "id": "V5-0504",
+    "exact_cross_version_duplicates": [
+      "V7-0144"
+    ]
+  },
+  {
+    "id": "V5-0513",
+    "exact_cross_version_duplicates": [
+      "V7-0218"
+    ]
+  },
+  {
+    "id": "V5-0539",
+    "exact_cross_version_duplicates": [
+      "V7-0184"
+    ]
+  },
+  {
+    "id": "V5-0540",
+    "exact_cross_version_duplicates": [
+      "V7-0182"
+    ]
+  },
+  {
+    "id": "V5-0543",
+    "exact_cross_version_duplicates": [
+      "V7-0187"
+    ]
+  },
+  {
+    "id": "V5-0544",
+    "exact_cross_version_duplicates": [
+      "V7-0188"
+    ]
+  },
+  {
+    "id": "V5-0548",
+    "exact_cross_version_duplicates": [
+      "V7-0191"
+    ]
+  },
+  {
+    "id": "V5-0549",
+    "exact_cross_version_duplicates": [
+      "V7-0192"
+    ]
+  },
+  {
+    "id": "V5-0553",
+    "exact_cross_version_duplicates": [
+      "V7-0195"
+    ]
+  },
+  {
+    "id": "V5-0554",
+    "exact_cross_version_duplicates": [
+      "V7-0196"
+    ]
+  },
+  {
+    "id": "V5-0558",
+    "exact_cross_version_duplicates": [
+      "V7-0199"
+    ]
+  },
+  {
+    "id": "V5-0559",
+    "exact_cross_version_duplicates": [
+      "V7-0200"
+    ]
+  },
+  {
+    "id": "V5-0563",
+    "exact_cross_version_duplicates": [
+      "V7-0203"
+    ]
+  },
+  {
+    "id": "V5-0564",
+    "exact_cross_version_duplicates": [
+      "V7-0204"
+    ]
+  },
+  {
+    "id": "V5-0568",
+    "exact_cross_version_duplicates": [
+      "V7-0207"
+    ]
+  },
+  {
+    "id": "V5-0569",
+    "exact_cross_version_duplicates": [
+      "V7-0208"
+    ]
+  },
+  {
+    "id": "V5-0573",
+    "exact_cross_version_duplicates": [
+      "V7-0211"
+    ]
+  },
+  {
+    "id": "V5-0574",
+    "exact_cross_version_duplicates": [
+      "V7-0212"
+    ]
+  },
+  {
+    "id": "V5-0578",
+    "exact_cross_version_duplicates": [
+      "V7-0215"
+    ]
+  },
+  {
+    "id": "V5-0579",
+    "exact_cross_version_duplicates": [
+      "V7-0216"
+    ]
+  },
+  {
+    "id": "V5-0583",
+    "exact_cross_version_duplicates": [
+      "V7-0219"
+    ]
+  },
+  {
+    "id": "V5-0584",
+    "exact_cross_version_duplicates": [
+      "V7-0220"
+    ]
+  },
+  {
+    "id": "V5-0597",
+    "exact_cross_version_duplicates": [
+      "V7-0186",
+      "V7-0190",
+      "V7-0194",
+      "V7-0198",
+      "V7-0202",
+      "V7-0206",
+      "V7-0210"
+    ]
+  },
+  {
+    "id": "V5-0721",
+    "exact_cross_version_duplicates": [
+      "V7-0182"
+    ]
+  },
+  {
+    "id": "V5-0724",
+    "exact_cross_version_duplicates": [
+      "V7-0236",
+      "V7-0250"
+    ]
+  },
+  {
+    "id": "V5-0756",
+    "exact_cross_version_duplicates": [
+      "V7-0182"
+    ]
+  },
+  {
+    "id": "V5-0759",
+    "exact_cross_version_duplicates": [
+      "V7-0243",
+      "V7-0257"
+    ]
+  },
+  {
+    "id": "V5-0779",
+    "exact_cross_version_duplicates": [
+      "V7-0243",
+      "V7-0257"
+    ]
+  },
+  {
+    "id": "V5-0790",
+    "exact_cross_version_duplicates": [
+      "V7-0152"
+    ]
+  },
+  {
+    "id": "V5-0791",
+    "exact_cross_version_duplicates": [
+      "V7-0153"
+    ]
+  },
+  {
+    "id": "V5-0820",
+    "exact_cross_version_duplicates": [
+      "V7-0182"
+    ]
+  },
+  {
+    "id": "V5-0823",
+    "exact_cross_version_duplicates": [
+      "V7-0236",
+      "V7-0250"
+    ]
+  },
+  {
+    "id": "V5-0843",
+    "exact_cross_version_duplicates": [
+      "V7-0236",
+      "V7-0250"
+    ]
+  },
+  {
+    "id": "V5-0849",
+    "exact_cross_version_duplicates": [
+      "V7-0182"
+    ]
+  },
+  {
+    "id": "V5-0852",
+    "exact_cross_version_duplicates": [
+      "V7-0243",
+      "V7-0257"
+    ]
+  },
+  {
+    "id": "V5-0872",
+    "exact_cross_version_duplicates": [
+      "V7-0243",
+      "V7-0257"
+    ]
+  },
+  {
+    "id": "V5-0884",
+    "exact_cross_version_duplicates": [
+      "V7-0218"
+    ]
+  },
+  {
+    "id": "V5-1009",
+    "exact_cross_version_duplicates": [
+      "V7-0163"
+    ]
+  },
+  {
+    "id": "V5-1010",
+    "exact_cross_version_duplicates": [
+      "V7-0164"
+    ]
+  },
+  {
+    "id": "V5-1011",
+    "exact_cross_version_duplicates": [
+      "V7-0167"
+    ]
+  },
+  {
+    "id": "V5-1012",
+    "exact_cross_version_duplicates": [
+      "V7-0165"
+    ]
+  },
+  {
+    "id": "V5-1013",
+    "exact_cross_version_duplicates": [
+      "V7-0166"
+    ]
+  },
+  {
+    "id": "V5-1015",
+    "exact_cross_version_duplicates": [
+      "V7-0229"
+    ]
+  },
+  {
+    "id": "V5-1016",
+    "exact_cross_version_duplicates": [
+      "V7-0168"
+    ]
+  },
+  {
+    "id": "V5-1018",
+    "exact_cross_version_duplicates": [
+      "V7-0169"
+    ]
+  },
+  {
+    "id": "V5-1020",
+    "exact_cross_version_duplicates": [
+      "V7-0170"
+    ]
+  },
+  {
+    "id": "V5-1021",
+    "exact_cross_version_duplicates": [
+      "V7-0171"
+    ]
+  },
+  {
+    "id": "V5-1023",
+    "exact_cross_version_duplicates": [
+      "V7-0173"
+    ]
+  },
+  {
+    "id": "V5-1030",
+    "exact_cross_version_duplicates": [
+      "V7-0182"
+    ]
+  }
+]

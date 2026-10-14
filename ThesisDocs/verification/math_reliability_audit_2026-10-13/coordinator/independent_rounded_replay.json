@@ -1,0 +1,23 @@
+{
+  "trajectories": 1500,
+  "rows": 15000,
+  "totals": {
+    "baseline_tokens": 827804,
+    "baseline_correct": 1058,
+    "midpoint_tokens": 377774,
+    "midpoint_correct": 963,
+    "token_outer_lower": 374891,
+    "token_outer_upper": 380891,
+    "correct_outer_lower": 958,
+    "correct_outer_upper": 964,
+    "interval_certified": 1403,
+    "interval_ambiguous": 97
+  },
+  "independent_agreement": true,
+  "assumptions": "Reported coefficients are nearest-four-decimal versions of applied heads; historical raw unscaled features and step-two floor define the replay.",
+  "derivation": "Triangle inequality bounds each logit by 0.00005*sum(abs(augmented features)); sigmoid is increasing. Drift decreases in q and beta, increases in alpha on [0,1]^3. Enumerate all interval-compatible first crossings, with forced horizon.",
+  "limits": "Outer bounds can include jointly unattainable extrema because coefficients are shared across heads/rows/times. An interval-ambiguous decision is not proof of an actually different historical decision. No exact historical stopped total certified; no contradiction shown.",
+  "source_sha256": "8d609e342d69571e60319987d510bfddb94cd7ac90d79910cbef036da0298b8d",
+  "report_sha256": "a182e937ed7ef60166b82dcd0495150ac5a57c75cd8b057afbb864b0716fbf88",
+  "historical_source_sha256": "3399d9b19b175e6a4dbb3bcce9e41a769d845fbe41871a0577181f7569e48789"
+}

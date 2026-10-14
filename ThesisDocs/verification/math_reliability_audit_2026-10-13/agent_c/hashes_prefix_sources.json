@@ -1,0 +1,8 @@
+{
+  "research/outputs/semester2/prefix_model_v1/prefix_model.json": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+  "research/outputs/semester2/prefix_model_v1/label_reconstruction_audit.csv": "ff7a789cc04880830a3484d6c77b4d791b810a0afbb76d68ab78918e0843f534",
+  "research/outputs/semester2/prefix_model_v1/heldout_prefix_predictions.csv": "f71337213c2ebc10a3fbc95452a811f781f1300b072dc097a3256b0df4e43473",
+  "research/outputs/semester2/prefix_model_v1/training_protocol.json": "69c755ac71533a7b31f34c9ed4e448e0690cd11846fcabb9ed191da59e508d85",
+  "research/outputs/experiments_v2/global_qwen2p5_0p5b_gsm8k/trace_steps.csv": "efdcf815b1bc95490dc5d74ac5e8b7088626bd92abce15a83ee9d2389e8a4116",
+  "research/outputs/experiments_v2/global_qwen2p5_0p5b_math/trace_steps.csv": "1dcc0ce4754c8ab3f9b378e58d115ece4fa0d8aa06a230a87423ad029adef7ff"
+}

@@ -1,0 +1,2935 @@
+[
+  {
+    "id": "V7-0009",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0010",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0014",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0015",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0016",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0017",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0051",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0064",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0100",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V7-0102",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Combined independent theory derivations, inspected report structure and code/evidence establish this protocol description and its stated limits; no comparative-superiority, originality or unconditional deployment guarantee is accepted.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/review.md",
+      "coordinator/compilation_check.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V7-0104",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0105",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V7-0136",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0137",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0138",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0139",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0140",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0141",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0148",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0149",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0150",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0151",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0155",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0156",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0157",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0158",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0159",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0160",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0172",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0179",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0180",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V7-0185",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V7-0186",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V7-0189",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V7-0190",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V7-0221",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0222",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0225",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0264",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0265",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0266",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0269",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0270",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0273",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0274",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0276",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V7-0277",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0010",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0017",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0018",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0019",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0021",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0022",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0023",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0036",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0048",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator checked this complete protocol/theory/roadmap statement against the actual report structure, independently derived stopping results, literal runtime interfaces, saved causal decision histories, separate corpus censuses and matched numerical comparisons. Empirical truth is limited to recorded labels/events; no universal generalization or original-execution authenticity is inferred.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_c/runtime_compare.json",
+      "agent_c/ledger.json",
+      "coordinator/independent_numerics.json"
+    ]
+  },
+  {
+    "id": "V5-0403",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0404",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0405",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0436",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0437",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0438",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0484",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0485",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0486",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0487",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0488",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0489",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0490",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0491",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0493",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0494",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0495",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0496",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0497",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0500",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0506",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0507",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0508",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0532",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0534",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0535",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0541",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V5-0542",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V5-0545",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V5-0546",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V5-0547",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V5-0550",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Descriptor/unit/sample-count cell only: code specifies LOCO/LOMO step-utility comparisons; frozen cache counts sum to75,965. This does not establish their missing heldout effect/CIs, which retain separate unresolved IDs.",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "agent_a/numerical_cross_review.json",
+      "coordinator/independent_census.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ]
+  },
+  {
+    "id": "V5-0586",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0587",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0588",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0591",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0652",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0653",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0654",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0655",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0656",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0657",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0658",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0660",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0661",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0664",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0665",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0685",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0686",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0687",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0688",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0689",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0690",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0691",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0692",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0693",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0694",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0695",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0696",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0697",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0718",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0719",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0720",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0751",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0752",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0753",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0754",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0755",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0784",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0785",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0786",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0787",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0789",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0790",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Current/next score notation and reward1,wrong-penalty0,cost.05 parameters directly match serialized artifact, runtime decision algebra and selected-answer target construction.",
+    "evidence": [
+      "agent_c/prefix_independent.json",
+      "agent_c/runtime_compare.json",
+      "coordinator/independent_scores.json",
+      "research/learned_online_stopping_controller.py:80"
+    ]
+  },
+  {
+    "id": "V5-0791",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Current/next score notation and reward1,wrong-penalty0,cost.05 parameters directly match serialized artifact, runtime decision algebra and selected-answer target construction.",
+    "evidence": [
+      "agent_c/prefix_independent.json",
+      "agent_c/runtime_compare.json",
+      "coordinator/independent_scores.json",
+      "research/learned_online_stopping_controller.py:80"
+    ]
+  },
+  {
+    "id": "V5-0794",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0795",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Current/next score notation and reward1,wrong-penalty0,cost.05 parameters directly match serialized artifact, runtime decision algebra and selected-answer target construction.",
+    "evidence": [
+      "agent_c/prefix_independent.json",
+      "agent_c/runtime_compare.json",
+      "coordinator/independent_scores.json",
+      "research/learned_online_stopping_controller.py:80"
+    ]
+  },
+  {
+    "id": "V5-0796",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Current/next score notation and reward1,wrong-penalty0,cost.05 parameters directly match serialized artifact, runtime decision algebra and selected-answer target construction.",
+    "evidence": [
+      "agent_c/prefix_independent.json",
+      "agent_c/runtime_compare.json",
+      "coordinator/independent_scores.json",
+      "research/learned_online_stopping_controller.py:80"
+    ]
+  },
+  {
+    "id": "V5-0797",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Current/next score notation and reward1,wrong-penalty0,cost.05 parameters directly match serialized artifact, runtime decision algebra and selected-answer target construction.",
+    "evidence": [
+      "agent_c/prefix_independent.json",
+      "agent_c/runtime_compare.json",
+      "coordinator/independent_scores.json",
+      "research/learned_online_stopping_controller.py:80"
+    ]
+  },
+  {
+    "id": "V5-0798",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0799",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0800",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0816",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0817",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0818",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0819",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0848",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0878",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0879",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0880",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0881",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0882",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0925",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0926",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0927",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0928",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0938",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0940",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0941",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0944",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0946",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0947",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0951",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator reconciled the complete quoted unit: numeric/source/code facts against the linked C checks and independent coordinator/A/B calculations; the remaining interpretive clauses restrict the inference and follow from the recorded filtration, dependence, development scope and cost conventions. Favorable status is conditional on frozen labels and recorded execution artifacts, not authenticity or transfer.",
+    "evidence": [
+      "agent_c/ledger.json (exact linked check scopes retained above)",
+      "agent_a/review.md D1-D7",
+      "agent_a/numerical_cross_review.md",
+      "agent_b/review.md",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_scores.json",
+      "coordinator/independent_secondary.json",
+      "coordinator/independent_tournament.json"
+    ]
+  },
+  {
+    "id": "V5-0953",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0954",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0955",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0956",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0957",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0958",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0959",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0960",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0961",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0962",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0963",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0964",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0965",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0966",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0967",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0968",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0969",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0970",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0971",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0972",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0973",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Evidence-source index label/path only: named local sources exist and were used in this audit. This does not certify every historical statement in those files.",
+    "evidence": [
+      "coordinator/compilation_check.json",
+      "agent_c/commands.json",
+      "agent_a/review.md",
+      "agent_b/review.md"
+    ]
+  },
+  {
+    "id": "V5-0977",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-0978",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0979",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0980",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0981",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0982",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0983",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0984",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0985",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0986",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0987",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0988",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0989",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0991",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0992",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0993",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0994",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0995",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0996",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0997",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0998",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-0999",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1000",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1001",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1002",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1003",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1004",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1005",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1006",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Conditional claim-scope/evidence-requirement table, not an assertion that listed sufficient empirical evidence has been supplied. Compared directly with independent theorem, coverage and information-flow derivations.",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ledger.json"
+    ]
+  },
+  {
+    "id": "V5-1025",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Appendix mathematical scope, original-score arithmetic and inference limitations reconciled with independent proofs, saved-array checks, live row computations and actual rendered diagrams. Original peer executable reconstruction remains a separate explicit gap.",
+    "evidence": [
+      "agent_b/review.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_secondary.json"
+    ]
+  },
+  {
+    "id": "V5-1026",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-1063",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Appendix mathematical scope, original-score arithmetic and inference limitations reconciled with independent proofs, saved-array checks, live row computations and actual rendered diagrams. Original peer executable reconstruction remains a separate explicit gap.",
+    "evidence": [
+      "agent_b/review.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_secondary.json"
+    ]
+  },
+  {
+    "id": "V5-1064",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Appendix mathematical scope, original-score arithmetic and inference limitations reconciled with independent proofs, saved-array checks, live row computations and actual rendered diagrams. Original peer executable reconstruction remains a separate explicit gap.",
+    "evidence": [
+      "agent_b/review.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_secondary.json"
+    ]
+  },
+  {
+    "id": "V5-1067",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-1068",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-1069",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Appendix mathematical scope, original-score arithmetic and inference limitations reconciled with independent proofs, saved-array checks, live row computations and actual rendered diagrams. Original peer executable reconstruction remains a separate explicit gap.",
+    "evidence": [
+      "agent_b/review.md",
+      "agent_a/cross_review_b.md",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_secondary.json"
+    ]
+  },
+  {
+    "id": "V5-1070",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  },
+  {
+    "id": "V5-1071",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "reason": "Coordinator viewed the actual PDF figure/table caption, labels and mathematical units against the source. Delayed-repair rewards agree deductively; empirical point/interval labels agree with the relevant independently recomputed panels. Captions remain explicitly descriptive/conditional.",
+    "evidence": [
+      "coordinator/pdf_page_index.json",
+      "coordinator/render_diagnostics.json",
+      "agent_c/matrix_independent.json",
+      "agent_c/ancillary_independent.json",
+      "coordinator/independent_numerics.json",
+      "coordinator/independent_tournament.json",
+      "agent_a/review.md D5"
+    ]
+  }
+]

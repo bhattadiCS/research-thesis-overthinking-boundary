@@ -1,0 +1,2443 @@
+[
+  {
+    "claim_id": "A-001",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 5,
+    "claim": "Finite deterministic integer horizon, floor, probability space and increasing observation filtration define the model.",
+    "dependencies": [],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md recorded assumptions",
+    "assumption_conditions": "N finite integer >=0; 0<=m<=N; H_t measurable",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-001-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "claim": "Finite deterministic integer horizon, floor, probability space and increasing observation filtration define the model.",
+    "dependencies": [
+      "A-001"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md recorded assumptions",
+    "assumption_conditions": "N finite integer >=0; 0<=m<=N; H_t measurable",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-001",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-002",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 5,
+    "claim": "Specified measurable causal answer selector is adapted to the declared filtration.",
+    "dependencies": [
+      "A-001"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md recorded assumptions",
+    "assumption_conditions": "a_t measurable; depends only on H_0,...,H_t",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-002-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 52,
+    "claim": "Specified measurable causal answer selector is adapted to the declared filtration.",
+    "dependencies": [
+      "A-002"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md recorded assumptions",
+    "assumption_conditions": "a_t measurable; depends only on H_0,...,H_t",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-002",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-003",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 7,
+    "claim": "Binary graded correctness C_t and conditional belief q_t=E[C_t|F_t] are well defined.",
+    "dependencies": [
+      "A-001",
+      "A-002"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1-D2",
+    "assumption_conditions": "measurable binary grader/reference/candidate; conditional-expectation versions",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-003-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 54,
+    "claim": "Binary graded correctness C_t and conditional belief q_t=E[C_t|F_t] are well defined.",
+    "dependencies": [
+      "A-003"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1-D2",
+    "assumption_conditions": "measurable binary grader/reference/candidate; conditional-expectation versions",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-003",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-004",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 9,
+    "claim": "Changing selector or grader changes the endpoint; comparisons fix them.",
+    "dependencies": [
+      "A-002",
+      "A-003"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definitional endpoint identity",
+    "assumption_conditions": "fixed selector/grader for each comparison",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-004-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 56,
+    "claim": "Changing selector or grader changes the endpoint; comparisons fix them.",
+    "dependencies": [
+      "A-004"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definitional endpoint identity",
+    "assumption_conditions": "fixed selector/grader for each comparison",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-004",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-005",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 9,
+    "claim": "Future labels/outputs are excluded from runtime inputs; completed observations enter after costs.",
+    "dependencies": [
+      "A-001"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Model information contract, not empirical execution verification",
+    "assumption_conditions": "F_t is restricted as stated; empirical implementation checked separately",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-005-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 56,
+    "claim": "Future labels/outputs are excluded from runtime inputs; completed observations enter after costs.",
+    "dependencies": [
+      "A-005"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Model information contract, not empirical execution verification",
+    "assumption_conditions": "F_t is restricted as stated; empirical implementation checked separately",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-005",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-006",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 11,
+    "claim": "Deterministic measurable reference from fully observed task can make C_t observable and q_t=C_t.",
+    "dependencies": [
+      "A-002",
+      "A-003"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md recorded assumptions",
+    "assumption_conditions": "task/reference and selector/grader F_t-measurable",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-006-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 58,
+    "claim": "Deterministic measurable reference from fully observed task can make C_t observable and q_t=C_t.",
+    "dependencies": [
+      "A-006"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md recorded assumptions",
+    "assumption_conditions": "task/reference and selector/grader F_t-measurable",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-006",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-007",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 11,
+    "claim": "Under that full-information model nondegenerate posterior uncertainty needs latent reference or a coarser policy filtration.",
+    "dependencies": [
+      "A-006"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Conditional expectation of a measurable variable equals itself",
+    "assumption_conditions": "claim is about declared statistical information, not computational tractability",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-007-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 58,
+    "claim": "Under that full-information model nondegenerate posterior uncertainty needs latent reference or a coarser policy filtration.",
+    "dependencies": [
+      "A-007"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Conditional expectation of a measurable variable equals itself",
+    "assumption_conditions": "claim is about declared statistical information, not computational tractability",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-007",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-008",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 11,
+    "claim": "A fitted prefix score alone does not establish posterior given all task semantics.",
+    "dependencies": [
+      "A-003",
+      "A-006"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 calibrated constant-score counterexample",
+    "assumption_conditions": "no unproved calibration/transport assumption",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-008-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 58,
+    "claim": "A fitted prefix score alone does not establish posterior given all task semantics.",
+    "dependencies": [
+      "A-008"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 calibrated constant-score counterexample",
+    "assumption_conditions": "no unproved calibration/transport assumption",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-008",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-009",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 13,
+    "claim": "Admissible decisions are F_t stopping times bounded between m and N.",
+    "dependencies": [
+      "A-001"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1,D3,D4",
+    "assumption_conditions": "declared feasible policy class",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-009-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 60,
+    "claim": "Admissible decisions are F_t stopping times bounded between m and N.",
+    "dependencies": [
+      "A-009"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1,D3,D4",
+    "assumption_conditions": "declared feasible policy class",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-009",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-010",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 13,
+    "claim": "Nonnegative adapted nondecreasing integrable cumulative cost ensures stopped-cost integrability.",
+    "dependencies": [
+      "A-009"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "0<=K_tau<=K_N; review.md assumptions",
+    "assumption_conditions": "E[K_N]<infinity",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-010-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 60,
+    "claim": "Nonnegative adapted nondecreasing integrable cumulative cost ensures stopped-cost integrability.",
+    "dependencies": [
+      "A-010"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "0<=K_tau<=K_N; review.md assumptions",
+    "assumption_conditions": "E[K_N]<infinity",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-010",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-011",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 15,
+    "claim": "Objective maximizes expected selected graded reward minus cumulative executed cost.",
+    "dependencies": [
+      "A-003",
+      "A-009",
+      "A-010"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition; finite integrability proof",
+    "assumption_conditions": "specified endpoint and feasible costs",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-011-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 62,
+    "claim": "Objective maximizes expected selected graded reward minus cumulative executed cost.",
+    "dependencies": [
+      "A-011"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition; finite integrability proof",
+    "assumption_conditions": "specified endpoint and feasible costs",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-011",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-012",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 17,
+    "claim": "G_t=q_t-K_t and c_t=E[K_{t+1}-K_t|F_t] are integrable adapted quantities.",
+    "dependencies": [
+      "A-003",
+      "A-010"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2-D3",
+    "assumption_conditions": "t<N for incremental cost",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-012-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 64,
+    "claim": "G_t=q_t-K_t and c_t=E[K_{t+1}-K_t|F_t] are integrable adapted quantities.",
+    "dependencies": [
+      "A-012"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2-D3",
+    "assumption_conditions": "t<N for incremental cost",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-012",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-013",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 17,
+    "claim": "Common incurred cost is sunk for conditional continuation but remains in total cost.",
+    "dependencies": [
+      "A-012"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Subtract F_t-measurable K_t from every conditional continuation payoff",
+    "assumption_conditions": "the same incurred cost across actions at this prefix",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-013-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 64,
+    "claim": "Common incurred cost is sunk for conditional continuation but remains in total cost.",
+    "dependencies": [
+      "A-013"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Subtract F_t-measurable K_t from every conditional continuation payoff",
+    "assumption_conditions": "the same incurred cost across actions at this prefix",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-013",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-014",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 19,
+    "claim": "Lemma1: E[C_tau-K_tau]=E[G_tau] for every admissible random stop.",
+    "dependencies": [
+      "A-003",
+      "A-009",
+      "A-010",
+      "A-012"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1",
+    "assumption_conditions": "finite horizon; stopping-event measurability; integrability",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-014-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 66,
+    "claim": "Lemma1: E[C_tau-K_tau]=E[G_tau] for every admissible random stop.",
+    "dependencies": [
+      "A-014"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1",
+    "assumption_conditions": "finite horizon; stopping-event measurability; integrability",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-014",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-015",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 21,
+    "claim": "Lemma1 proof conditions on each random stopping event then sums.",
+    "dependencies": [
+      "A-014"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1 checks every proof step",
+    "assumption_conditions": "no observability or martingale assumption on C/q",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-015-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 68,
+    "claim": "Lemma1 proof conditions on each random stopping event then sums.",
+    "dependencies": [
+      "A-015"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D1 checks every proof step",
+    "assumption_conditions": "no observability or martingale assumption on C/q",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-015",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-016",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 23,
+    "claim": "Full-trajectory replay requires stopping to preserve preceding-prefix law.",
+    "dependencies": [
+      "A-001",
+      "A-009"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Potential-outcome/prefix compatibility qualification",
+    "assumption_conditions": "actual equality/law correspondence must be evidenced, not assumed from deterministic sampling",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-016-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 70,
+    "claim": "Full-trajectory replay requires stopping to preserve preceding-prefix law.",
+    "dependencies": [
+      "A-016"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Potential-outcome/prefix compatibility qualification",
+    "assumption_conditions": "actual equality/law correspondence must be evidenced, not assumed from deterministic sampling",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-016",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-017",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 29,
+    "claim": "Conditional repair/corruption hazards are probabilities in [0,1].",
+    "dependencies": [
+      "A-003"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2 constructs ratios of conditional joint probabilities",
+    "assumption_conditions": "t<N; arbitrary [0,1] versions on zero-at-risk sets",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-017-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 76,
+    "claim": "Conditional repair/corruption hazards are probabilities in [0,1].",
+    "dependencies": [
+      "A-017"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2 constructs ratios of conditional joint probabilities",
+    "assumption_conditions": "t<N; arbitrary [0,1] versions on zero-at-risk sets",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-017",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-018",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 31,
+    "claim": "Zero-at-risk hazard versions do not change corresponding weighted hazard.",
+    "dependencies": [
+      "A-017"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2: r<=1-q and s<=q",
+    "assumption_conditions": "finite probability versions; no division on zero sets",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-018-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 78,
+    "claim": "Zero-at-risk hazard versions do not change corresponding weighted hazard.",
+    "dependencies": [
+      "A-018"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2: r<=1-q and s<=q",
+    "assumption_conditions": "finite probability versions; no division on zero sets",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-018",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-019",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 33,
+    "claim": "Next-step correctness conditional mean equals (1-q)alpha+q(1-beta).",
+    "dependencies": [
+      "A-003",
+      "A-017",
+      "A-018"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2 binary indicator decomposition",
+    "assumption_conditions": "no Markov/independence/stationarity assumption",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-019-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 80,
+    "claim": "Next-step correctness conditional mean equals (1-q)alpha+q(1-beta).",
+    "dependencies": [
+      "A-019"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2 binary indicator decomposition",
+    "assumption_conditions": "no Markov/independence/stationarity assumption",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-019",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-020",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 35,
+    "claim": "E[q_{t+1}|F_t]=E[C_{t+1}|F_t] by tower property.",
+    "dependencies": [
+      "A-001",
+      "A-003"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2",
+    "assumption_conditions": "nested filtrations; bounded labels",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-020-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 82,
+    "claim": "E[q_{t+1}|F_t]=E[C_{t+1}|F_t] by tower property.",
+    "dependencies": [
+      "A-020"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2",
+    "assumption_conditions": "nested filtrations; bounded labels",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-020",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-021",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 37,
+    "claim": "Exact drift: mu=(1-q)alpha-q beta-c.",
+    "dependencies": [
+      "A-012",
+      "A-019",
+      "A-020"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2",
+    "assumption_conditions": "binary reward; expected cost increment; t<N",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-021-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 84,
+    "claim": "Exact drift: mu=(1-q)alpha-q beta-c.",
+    "dependencies": [
+      "A-021"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2",
+    "assumption_conditions": "binary reward; expected cost increment; t<N",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-021",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-022",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 39,
+    "claim": "Conditional empirical hazards divide events by correct at-risk denominators.",
+    "dependencies": [
+      "A-017"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Finite-panel event-count definitions",
+    "assumption_conditions": "same eligible common transition panel; denominator positive or recorded undefined convention",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-022-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 86,
+    "claim": "Conditional empirical hazards divide events by correct at-risk denominators.",
+    "dependencies": [
+      "A-022"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Finite-panel event-count definitions",
+    "assumption_conditions": "same eligible common transition panel; denominator positive or recorded undefined convention",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-022",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-023",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 39,
+    "claim": "Repair joint frequency minus corruption joint frequency is accuracy change.",
+    "dependencies": [
+      "A-019"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2 sum of C_next-C_now",
+    "assumption_conditions": "common panel and identical labels/selection endpoints",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-023-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 86,
+    "claim": "Repair joint frequency minus corruption joint frequency is accuracy change.",
+    "dependencies": [
+      "A-023"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D2 sum of C_next-C_now",
+    "assumption_conditions": "common panel and identical labels/selection endpoints",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-023",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-024",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 39,
+    "claim": "Higher conditional corruption hazard can coexist with more repairs.",
+    "dependencies": [
+      "A-022",
+      "A-023"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Example 3145/14818<1170/4682 but 3145>1170",
+    "assumption_conditions": "different at-risk population sizes",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-024-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 86,
+    "claim": "Higher conditional corruption hazard can coexist with more repairs.",
+    "dependencies": [
+      "A-024"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Example 3145/14818<1170/4682 but 3145>1170",
+    "assumption_conditions": "different at-risk population sizes",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-024",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-025",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 41,
+    "claim": "Historical .05 penalty is a utility convention and not a physical monetary/energy conversion.",
+    "dependencies": [
+      "A-012"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition plus absence of a conversion model",
+    "assumption_conditions": "empirical convention to be checked against sources by Agent C",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-025-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 88,
+    "claim": "Historical .05 penalty is a utility convention and not a physical monetary/energy conversion.",
+    "dependencies": [
+      "A-025"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition plus absence of a conversion model",
+    "assumption_conditions": "empirical convention to be checked against sources by Agent C",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-025",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-026",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 41,
+    "claim": "Positive accuracy change can coexist with negative net utility gain.",
+    "dependencies": [
+      "A-021"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Any gain in (0,c) gives negative drift; review.md D7",
+    "assumption_conditions": "positive cost; common endpoint",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-026-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 88,
+    "claim": "Positive accuracy change can coexist with negative net utility gain.",
+    "dependencies": [
+      "A-026"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Any gain in (0,c) gives negative drift; review.md D7",
+    "assumption_conditions": "positive cost; common endpoint",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-026",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-027",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 41,
+    "claim": "Population accuracy/estimated drift are distinct from conditional prefix decisions.",
+    "dependencies": [
+      "A-003",
+      "A-021"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Conditional expectation vs its population average; D4,D5",
+    "assumption_conditions": "no conditional homogeneity assumption",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-027-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 88,
+    "claim": "Population accuracy/estimated drift are distinct from conditional prefix decisions.",
+    "dependencies": [
+      "A-027"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Conditional expectation vs its population average; D4,D5",
+    "assumption_conditions": "no conditional homogeneity assumption",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-027",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-028",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 47,
+    "claim": "Finite Snell recursion V_N=G_N; V_t=max(G_t,E[V_{t+1}|F_t]).",
+    "dependencies": [
+      "A-009",
+      "A-012"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D3",
+    "assumption_conditions": "finite horizon and integrable adapted rewards",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-028-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 94,
+    "claim": "Finite Snell recursion V_N=G_N; V_t=max(G_t,E[V_{t+1}|F_t]).",
+    "dependencies": [
+      "A-028"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D3",
+    "assumption_conditions": "finite horizon and integrable adapted rewards",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-028",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-029",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 49,
+    "claim": "Theorem1: first permitted Snell equality is optimal and attains E[V_m].",
+    "dependencies": [
+      "A-014",
+      "A-028"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D3 complete backward construction",
+    "assumption_conditions": "ties stop immediately; finite termination; admissible unrestricted stopping times",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-029-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 96,
+    "claim": "Theorem1: first permitted Snell equality is optimal and attains E[V_m].",
+    "dependencies": [
+      "A-029"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D3 complete backward construction",
+    "assumption_conditions": "ties stop immediately; finite termination; admissible unrestricted stopping times",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-029",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-030",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 51,
+    "claim": "Theorem1 proof establishes upper bound, attaining policy, measurability, termination and integrability.",
+    "dependencies": [
+      "A-028",
+      "A-029"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D3 step-by-step proof",
+    "assumption_conditions": "no positivity of cost, Markov property or uniqueness needed",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-030-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 98,
+    "claim": "Theorem1 proof establishes upper bound, attaining policy, measurability, termination and integrability.",
+    "dependencies": [
+      "A-030"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D3 step-by-step proof",
+    "assumption_conditions": "no positivity of cost, Markov property or uniqueness needed",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-030",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-031",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 53,
+    "claim": "Bellman continuation uses later information and is not in general a q-only threshold.",
+    "dependencies": [
+      "A-028"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D5 two regimes with q=.5 and opposite future values",
+    "assumption_conditions": "future laws/costs can depend on observed regime",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-031-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 100,
+    "claim": "Bellman continuation uses later information and is not in general a q-only threshold.",
+    "dependencies": [
+      "A-031"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D5 two regimes with q=.5 and opposite future values",
+    "assumption_conditions": "future laws/costs can depend on observed regime",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-031",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-032",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 53,
+    "claim": "Fitted one-step model is not the theorem multi-step conditional law.",
+    "dependencies": [
+      "A-021",
+      "A-028"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "D4-D5 delayed repair and conditional-law distinction",
+    "assumption_conditions": "unless additional structure and correctness assumptions independently established",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-032-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 100,
+    "claim": "Fitted one-step model is not the theorem multi-step conditional law.",
+    "dependencies": [
+      "A-032"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "D4-D5 delayed repair and conditional-law distinction",
+    "assumption_conditions": "unless additional structure and correctness assumptions independently established",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-032",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-033",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 57,
+    "claim": "First nonpositive true-drift time, capped at N, is a permitted stopping time.",
+    "dependencies": [
+      "A-009",
+      "A-021"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4",
+    "assumption_conditions": "mu adapted; empty crossing set assigned infinity; deterministic floor",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-033-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 104,
+    "claim": "First nonpositive true-drift time, capped at N, is a permitted stopping time.",
+    "dependencies": [
+      "A-033"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4",
+    "assumption_conditions": "mu adapted; empty crossing set assigned infinity; deterministic floor",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-033",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-034",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 59,
+    "claim": "Persistence is the almost-sure condition 1{tau_mu<=t}mu_t<=0 for every t<N.",
+    "dependencies": [
+      "A-033"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4 sign analysis",
+    "assumption_conditions": "a structural assumption, not inferred from panel curves",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-034-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 106,
+    "claim": "Persistence is the almost-sure condition 1{tau_mu<=t}mu_t<=0 for every t<N.",
+    "dependencies": [
+      "A-034"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4 sign analysis",
+    "assumption_conditions": "a structural assumption, not inferred from panel curves",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-034",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-035",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 61,
+    "claim": "Theorem2: persistent true drift implies myopic stopping optimality.",
+    "dependencies": [
+      "A-014",
+      "A-021",
+      "A-033",
+      "A-034"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4 stopped telescoping proof",
+    "assumption_conditions": "including random crossings, earlier/later competing stops, ties and empty crossing",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-035-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 108,
+    "claim": "Theorem2: persistent true drift implies myopic stopping optimality.",
+    "dependencies": [
+      "A-035"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4 stopped telescoping proof",
+    "assumption_conditions": "including random crossings, earlier/later competing stops, ties and empty crossing",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-035",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-036",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 63,
+    "claim": "Theorem2 proof: continuation strictly better before crossing; residual reward is supermartingale after crossing.",
+    "dependencies": [
+      "A-028",
+      "A-034",
+      "A-035"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4 constructs G_t-G_{t wedge rho} and direct proof",
+    "assumption_conditions": "finite conditional sampling; integrable stopped increments",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-036-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 110,
+    "claim": "Theorem2 proof: continuation strictly better before crossing; residual reward is supermartingale after crossing.",
+    "dependencies": [
+      "A-036"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D4 constructs G_t-G_{t wedge rho} and direct proof",
+    "assumption_conditions": "finite conditional sampling; integrable stopped increments",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-036",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-037",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 65,
+    "claim": "Observed curves/fitted heads do not establish pathwise conditional persistence.",
+    "dependencies": [
+      "A-027",
+      "A-034"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Marginal curves do not imply conditional sign restrictions",
+    "assumption_conditions": "no unreported empirical persistence theorem",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-037-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "claim": "Observed curves/fitted heads do not establish pathwise conditional persistence.",
+    "dependencies": [
+      "A-037"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Marginal curves do not imply conditional sign restrictions",
+    "assumption_conditions": "no unreported empirical persistence theorem",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-037",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-038",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 65,
+    "claim": "Delayed repair example: G=(0,-.10,.80), mu=(-.10,.90), myopic=0, optimal=2.",
+    "dependencies": [
+      "A-021",
+      "A-028",
+      "A-033"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D5; finite_tree_check.py exact rational checks",
+    "assumption_conditions": "N=2,m=0; deterministic labels/costs",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-038-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 112,
+    "claim": "Delayed repair example: G=(0,-.10,.80), mu=(-.10,.90), myopic=0, optimal=2.",
+    "dependencies": [
+      "A-038"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D5; finite_tree_check.py exact rational checks",
+    "assumption_conditions": "N=2,m=0; deterministic labels/costs",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-038",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-039",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 69,
+    "claim": "Different example floor establishes mathematical failure, not deployed failure frequency.",
+    "dependencies": [
+      "A-038"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D5",
+    "assumption_conditions": "the deployed m=2 contract differs",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-039-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 118,
+    "claim": "Different example floor establishes mathematical failure, not deployed failure frequency.",
+    "dependencies": [
+      "A-039"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D5",
+    "assumption_conditions": "the deployed m=2 contract differs",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-039",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-040",
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "line": 69,
+    "claim": "Supporting bounds/counterexamples imply no unconditional optimality or instance safety for fitted controller.",
+    "dependencies": [
+      "A-035",
+      "A-038"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Theorem conditions are substantive; no guarantee follows without them",
+    "assumption_conditions": "supporting extended bound validity independently cross-reviewed later",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-040-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 118,
+    "claim": "Supporting bounds/counterexamples imply no unconditional optimality or instance safety for fitted controller.",
+    "dependencies": [
+      "A-040"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Theorem conditions are substantive; no guarantee follows without them",
+    "assumption_conditions": "supporting extended bound validity independently cross-reviewed later",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-040",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-041",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 19,
+    "claim": "Rows and trajectories sharing a task need not be independent; task folds retain question rows together.",
+    "dependencies": [],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Clustered sampling logic",
+    "assumption_conditions": "frozen fold/row assignments are empirical Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-041-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 147,
+    "claim": "Rows and trajectories sharing a task need not be independent; task folds retain question rows together.",
+    "dependencies": [
+      "A-041"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Clustered sampling logic",
+    "assumption_conditions": "frozen fold/row assignments are empirical Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-041",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-042",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 21,
+    "claim": "Bootstrap draws recycle observations and do not create independent generations.",
+    "dependencies": [],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition of bootstrap resampling; review.md D7",
+    "assumption_conditions": "independence must come from original sampling process",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-042-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 149,
+    "claim": "Bootstrap draws recycle observations and do not create independent generations.",
+    "dependencies": [
+      "A-042"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition of bootstrap resampling; review.md D7",
+    "assumption_conditions": "independence must come from original sampling process",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-042",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-043",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 23,
+    "claim": "Step utility and token utility use penalties .05(tau-1) and .0002 sum L.",
+    "dependencies": [
+      "A-011"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition; sunk mandatory response cancels in paired step comparison",
+    "assumption_conditions": "empirical convention correspondence remains Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-043-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "claim": "Step utility and token utility use penalties .05(tau-1) and .0002 sum L.",
+    "dependencies": [
+      "A-043"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition; sunk mandatory response cancels in paired step comparison",
+    "assumption_conditions": "empirical convention correspondence remains Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-043",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-044",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 23,
+    "claim": "250 completion tokens have the same stated penalty as one response increment.",
+    "dependencies": [
+      "A-043"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Independently computed .05/.0002=250",
+    "assumption_conditions": "stated utility units; not physical equivalence",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-044-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "claim": "250 completion tokens have the same stated penalty as one response increment.",
+    "dependencies": [
+      "A-044"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Independently computed .05/.0002=250",
+    "assumption_conditions": "stated utility units; not physical equivalence",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-044",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-045",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 23,
+    "claim": "Ratio-of-total completion savings baseline-length weights per-question savings.",
+    "dependencies": [
+      "A-043"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 weighted-average identity",
+    "assumption_conditions": "positive baseline completion counts/positive aggregate denominator",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-045-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "claim": "Ratio-of-total completion savings baseline-length weights per-question savings.",
+    "dependencies": [
+      "A-045"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 weighted-average identity",
+    "assumption_conditions": "positive baseline completion counts/positive aggregate denominator",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-045",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-046",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 23,
+    "claim": "Stopped response index alone cannot establish physical savings.",
+    "dependencies": [
+      "A-045"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Different response lengths/probe costs can yield same stop index",
+    "assumption_conditions": "physical claim needs actual resource ledger",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-046-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 151,
+    "claim": "Stopped response index alone cannot establish physical savings.",
+    "dependencies": [
+      "A-046"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Different response lengths/probe costs can yield same stop index",
+    "assumption_conditions": "physical claim needs actual resource ledger",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-046",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-047",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 25,
+    "claim": "ROC-AUC concerns ranking; Brier concerns probability error; neither alone validates live policy.",
+    "dependencies": [
+      "A-008"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 monotone-score and calibration counterexamples",
+    "assumption_conditions": "outcome/sampling/transport assumptions required",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-047-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 153,
+    "claim": "ROC-AUC concerns ranking; Brier concerns probability error; neither alone validates live policy.",
+    "dependencies": [
+      "A-047"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 monotone-score and calibration counterexamples",
+    "assumption_conditions": "outcome/sampling/transport assumptions required",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-047",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-048",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 31,
+    "claim": "Two-response floor can exclude a first-only correct candidate; floor is a protocol choice.",
+    "dependencies": [
+      "A-009"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Sequence C=(1,0,0) with latest-answer selector",
+    "assumption_conditions": "runtime correspondence is empirical, feasible-action consequence is mathematical",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-048-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 159,
+    "claim": "Two-response floor can exclude a first-only correct candidate; floor is a protocol choice.",
+    "dependencies": [
+      "A-048"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Sequence C=(1,0,0) with latest-answer selector",
+    "assumption_conditions": "runtime correspondence is empirical, feasible-action consequence is mathematical",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-048",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-049",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 33,
+    "claim": "Fitted rule stops at nonpositive p_hat_next-q_hat-.05 and is myopic rather than Bellman.",
+    "dependencies": [
+      "A-021",
+      "A-028",
+      "A-032"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition plus D5 delayed repair",
+    "assumption_conditions": "actual implementation checked separately; no assertion fitted heads are true means",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-049-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 161,
+    "claim": "Fitted rule stops at nonpositive p_hat_next-q_hat-.05 and is myopic rather than Bellman.",
+    "dependencies": [
+      "A-049"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Definition plus D5 delayed repair",
+    "assumption_conditions": "actual implementation checked separately; no assertion fitted heads are true means",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-049",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-050",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 41,
+    "claim": "Archive calibration does not establish transport to live prompts/contracts.",
+    "dependencies": [
+      "A-008",
+      "A-047"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Marginal calibration counterexample and changed conditional law",
+    "assumption_conditions": "transport needs additional assumptions/evidence",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-050-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 169,
+    "claim": "Archive calibration does not establish transport to live prompts/contracts.",
+    "dependencies": [
+      "A-050"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Marginal calibration counterexample and changed conditional law",
+    "assumption_conditions": "transport needs additional assumptions/evidence",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-050",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-051",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 49,
+    "claim": "For iid pairs, accuracy delta=pi_I-pi_W; marginal discordance counts are binomial.",
+    "dependencies": [],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 indicator identity",
+    "assumption_conditions": "iid pairs; binary labels; I/W within-pair independence not needed",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-051-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "claim": "For iid pairs, accuracy delta=pi_I-pi_W; marginal discordance counts are binomial.",
+    "dependencies": [
+      "A-051"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 indicator identity",
+    "assumption_conditions": "iid pairs; binary labels; I/W within-pair independence not needed",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-051",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-052",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 49,
+    "claim": "Two exact marginal 97.5% CP intervals have joint coverage at least95%.",
+    "dependencies": [
+      "A-051"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 union bound .025+.025=.05",
+    "assumption_conditions": "each marginal interval has >=.975 coverage; iid task-pair reference model",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-052-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 177,
+    "claim": "Two exact marginal 97.5% CP intervals have joint coverage at least95%.",
+    "dependencies": [
+      "A-052"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 union bound .025+.025=.05",
+    "assumption_conditions": "each marginal interval has >=.975 coverage; iid task-pair reference model",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-052",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-053",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 51,
+    "claim": "Subtracting simultaneous discordance bounds gives delta in [L_I-U_W,U_I-L_W].",
+    "dependencies": [
+      "A-051",
+      "A-052"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 deterministic interval subtraction",
+    "assumption_conditions": "same simultaneous coverage event",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-053-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 179,
+    "claim": "Subtracting simultaneous discordance bounds gives delta in [L_I-U_W,U_I-L_W].",
+    "dependencies": [
+      "A-053"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 deterministic interval subtraction",
+    "assumption_conditions": "same simultaneous coverage event",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-053",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-054",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 53,
+    "claim": "Zero discordance CP upper marginal bound is 1-.0125^(1/n), nonzero at finite n.",
+    "dependencies": [
+      "A-052"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 exact binomial inversion; independent n=100/20 arithmetic",
+    "assumption_conditions": "n>=1; equal-tail two-sided97.5% interval",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-054-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 181,
+    "claim": "Zero discordance CP upper marginal bound is 1-.0125^(1/n), nonzero at finite n.",
+    "dependencies": [
+      "A-054"
+    ],
+    "outcome": "NOT ESTABLISHED",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D6 exact binomial inversion; independent n=100/20 arithmetic",
+    "assumption_conditions": "n>=1; equal-tail two-sided97.5% interval",
+    "reviewer": "Agent A",
+    "second_review": "PENDING",
+    "duplicate_of": "A-054",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-055",
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "line": 53,
+    "claim": "Handpicked challenge bank iid-reference bounds do not yield randomized adversarial population coverage.",
+    "dependencies": [
+      "A-051",
+      "A-052"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Sampling model mismatch; review.md D6",
+    "assumption_conditions": "no claimed random sampling from an adversarial population",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-055-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 181,
+    "claim": "Handpicked challenge bank iid-reference bounds do not yield randomized adversarial population coverage.",
+    "dependencies": [
+      "A-055"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Sampling model mismatch; review.md D6",
+    "assumption_conditions": "no claimed random sampling from an adversarial population",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-055",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-056",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 5,
+    "claim": "Displayed panel counts imply q=.2401, alpha=.21224<beta=.24989 and net gain=.0513.",
+    "dependencies": [
+      "A-022",
+      "A-023",
+      "A-024"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Independent arithmetic: 4682/19500 and (3145-1170)/19500-.05",
+    "assumption_conditions": "conditional on displayed counts; source-row reproduction belongs to Agent C",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-056-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 188,
+    "claim": "Displayed panel counts imply q=.2401, alpha=.21224<beta=.24989 and net gain=.0513.",
+    "dependencies": [
+      "A-056"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Independent arithmetic: 4682/19500 and (3145-1170)/19500-.05",
+    "assumption_conditions": "conditional on displayed counts; source-row reproduction belongs to Agent C",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-056",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-057",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 11,
+    "claim": "Hindsight last crossing need not be adapted or universally optimal.",
+    "dependencies": [
+      "A-027",
+      "A-038"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Later signs may require future observations; D5",
+    "assumption_conditions": "a deterministic prespecified time is adapted; the retrospectively selected pathwise crossing generally is not",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-057-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 196,
+    "claim": "Hindsight last crossing need not be adapted or universally optimal.",
+    "dependencies": [
+      "A-057"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Later signs may require future observations; D5",
+    "assumption_conditions": "a deterministic prespecified time is adapted; the retrospectively selected pathwise crossing generally is not",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-057",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-058",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 19,
+    "claim": "Identical paired loss indicators yield zero mean contrast and degenerate empirical bootstrap.",
+    "dependencies": [],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "All paired differences zero implies every resample mean zero",
+    "assumption_conditions": "conditional on claim of identical indicators; source-row truth Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-058-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 216,
+    "claim": "Identical paired loss indicators yield zero mean contrast and degenerate empirical bootstrap.",
+    "dependencies": [
+      "A-058"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "All paired differences zero implies every resample mean zero",
+    "assumption_conditions": "conditional on claim of identical indicators; source-row truth Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-058",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-059",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 19,
+    "claim": "Displayed BF16/4bit counts give a14.27 percentage-point difference.",
+    "dependencies": [],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Independent arithmetic:100*(418-204)/1500=14.2666667",
+    "assumption_conditions": "conditional on displayed counts; source-row reproduction Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-059-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 216,
+    "claim": "Displayed BF16/4bit counts give a14.27 percentage-point difference.",
+    "dependencies": [
+      "A-059"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Independent arithmetic:100*(418-204)/1500=14.2666667",
+    "assumption_conditions": "conditional on displayed counts; source-row reproduction Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-059",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-060",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 23,
+    "claim": "Positive bootstrap lifts do not repair future-feature or nonnested-training leakage.",
+    "dependencies": [
+      "A-042",
+      "A-047"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Resampling cannot alter score construction/information contract",
+    "assumption_conditions": "actual leakage evidence Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-060-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 220,
+    "claim": "Positive bootstrap lifts do not repair future-feature or nonnested-training leakage.",
+    "dependencies": [
+      "A-060"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Resampling cannot alter score construction/information contract",
+    "assumption_conditions": "actual leakage evidence Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-060",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-061",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 27,
+    "claim": "Binary utility loss under nondecreasing saved costs implies stopped incorrect/final correct.",
+    "dependencies": [
+      "A-003",
+      "A-010"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "C_stop-C_final+K_final-K_stop<0 forces C_stop-C_final=-1",
+    "assumption_conditions": "same binary labels, cumulative cost nondecreasing; empirical all-loss census Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-061-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 224,
+    "claim": "Binary utility loss under nondecreasing saved costs implies stopped incorrect/final correct.",
+    "dependencies": [
+      "A-061"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "C_stop-C_final+K_final-K_stop<0 forces C_stop-C_final=-1",
+    "assumption_conditions": "same binary labels, cumulative cost nondecreasing; empirical all-loss census Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-061",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-062",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 31,
+    "claim": "Uniform response-two policy shows no demonstrated adaptation beyond fixed-two budget.",
+    "dependencies": [
+      "A-048",
+      "A-049"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Identical selected budget under stated uniform stops",
+    "assumption_conditions": "actual uniformity and choice/score overhead require Agent C evidence",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-062-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 228,
+    "claim": "Uniform response-two policy shows no demonstrated adaptation beyond fixed-two budget.",
+    "dependencies": [
+      "A-062"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Identical selected budget under stated uniform stops",
+    "assumption_conditions": "actual uniformity and choice/score overhead require Agent C evidence",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-062",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-063",
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "line": 41,
+    "claim": "Rows remain task dependent; terminal responses omitted from next-step target.",
+    "dependencies": [
+      "A-041"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Repeated questions share sampling unit; no next response at horizon",
+    "assumption_conditions": "actual row/censoring/target contract Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-063-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 245,
+    "claim": "Rows remain task dependent; terminal responses omitted from next-step target.",
+    "dependencies": [
+      "A-063"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Repeated questions share sampling unit; no next response at horizon",
+    "assumption_conditions": "actual row/censoring/target contract Agent C scope",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-063",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-064",
+    "path": "ThesisDocs/concise_v7/chapter5_discussion.md",
+    "line": 9,
+    "claim": "Class-balanced losses can target reweighted rather than original probabilities.",
+    "dependencies": [],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 weighted log-loss minimizer",
+    "assumption_conditions": "binary population risk; positive class weights; flexible model minimizer",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-064-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 262,
+    "claim": "Class-balanced losses can target reweighted rather than original probabilities.",
+    "dependencies": [
+      "A-064"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 weighted log-loss minimizer",
+    "assumption_conditions": "binary population risk; positive class weights; flexible model minimizer",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-064",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-065",
+    "path": "ThesisDocs/concise_v7/chapter5_discussion.md",
+    "line": 9,
+    "claim": "Question-level intervals do not imply time-uniform trajectory certificates.",
+    "dependencies": [
+      "A-052",
+      "A-053"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 repeated-event union distinction",
+    "assumption_conditions": "time-uniform claim requires valid sequential control",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-065-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 262,
+    "claim": "Question-level intervals do not imply time-uniform trajectory certificates.",
+    "dependencies": [
+      "A-065"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "review.md D7 repeated-event union distinction",
+    "assumption_conditions": "time-uniform claim requires valid sequential control",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-065",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-066",
+    "path": "ThesisDocs/concise_v7/chapter5_discussion.md",
+    "line": 13,
+    "claim": "Charging thirteen peer generators can make shorter target response more expensive.",
+    "dependencies": [
+      "A-010",
+      "A-046"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Sum of positive peer costs can exceed saved target cost",
+    "assumption_conditions": "actual acquisitions/cost values empirical; statement is possibility",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-066-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 266,
+    "claim": "Charging thirteen peer generators can make shorter target response more expensive.",
+    "dependencies": [
+      "A-066"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "Sum of positive peer costs can exceed saved target cost",
+    "assumption_conditions": "actual acquisitions/cost values empirical; statement is possibility",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-066",
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-067",
+    "path": "ThesisDocs/concise_v7/chapter5_discussion.md",
+    "line": 17,
+    "claim": "Hashes establish artifact identity rather than semantic correctness or representativeness.",
+    "dependencies": [],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "A hash comparison tests byte identity, not provenance/sampling hypotheses",
+    "assumption_conditions": "cryptographic collision assumption for identity; no scientific validity inferred",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": null,
+    "stage": "independent initial review, before exchange"
+  },
+  {
+    "claim_id": "A-067-D",
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "line": 270,
+    "claim": "Hashes establish artifact identity rather than semantic correctness or representativeness.",
+    "dependencies": [
+      "A-067"
+    ],
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "initial_derivation_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "evidence": "A hash comparison tests byte identity, not provenance/sampling hypotheses",
+    "assumption_conditions": "cryptographic collision assumption for identity; no scientific validity inferred",
+    "reviewer": "Agent A",
+    "second_review": "not required for this noncentral claim",
+    "duplicate_of": "A-067",
+    "stage": "independent initial review, before exchange"
+  }
+]

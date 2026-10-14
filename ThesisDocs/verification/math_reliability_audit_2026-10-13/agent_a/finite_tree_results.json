@@ -1,0 +1,37 @@
+{
+  "arithmetic": "fractions.Fraction",
+  "horizon": 2,
+  "q_grid": [
+    "0",
+    "1/2",
+    "1"
+  ],
+  "per_increment_costs": [
+    "0",
+    "1/10",
+    "1/2"
+  ],
+  "floors": [
+    0,
+    1,
+    2
+  ],
+  "policy_scope": "all adapted deterministic stopping policies on each binary tree",
+  "checks": {
+    "trees_floors_checked": 19683,
+    "persistent_cases": 17280,
+    "persistent_random_crossing_cases": 3324,
+    "myopic_suboptimal_cases": 686
+  },
+  "snell_mismatches": 0,
+  "persistence_theorem_mismatches": 0,
+  "boundary_checks": [
+    "N=0",
+    "m=N",
+    "zero cost",
+    "equality ties",
+    "random crossing",
+    "delayed repair"
+  ],
+  "limitation": "Finite enumeration supplements the independent deductive proof; it does not prove the general theorem."
+}

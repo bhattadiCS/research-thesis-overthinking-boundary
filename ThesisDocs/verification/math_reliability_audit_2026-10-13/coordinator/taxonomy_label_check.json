@@ -1,0 +1,54 @@
+{
+  "cases": 196,
+  "nonempty_literal_raw_answers": 108,
+  "normalized_field_literals": {
+    "": 191,
+    "n/a": 5
+  },
+  "examples": [
+    {
+      "cell": "internlm3_8b_instruct__gpqa",
+      "run_id": "internlm3_8b_instruct__gpqa_main_00097_526b98ff__temp0.60__seed7",
+      "step": 2,
+      "answer": "3,4-dimethyl-5,6-dihydroxyoctanal",
+      "normalized": "",
+      "classification_answer": "3,4-dimethyl-5,6-dihydroxyoctanal"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00041_57e4090f__temp0.10__seed7",
+      "step": 4,
+      "answer": "15",
+      "normalized": "",
+      "classification_answer": "15"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00102_4c432e78__temp0.10__seed7",
+      "step": 5,
+      "answer": "5.0",
+      "normalized": "",
+      "classification_answer": "5.0"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00117_da3420e1__temp0.10__seed7",
+      "step": 2,
+      "answer": "210",
+      "normalized": "",
+      "classification_answer": "210"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00334_39cea5b1__temp0.10__seed7",
+      "step": 2,
+      "answer": "60",
+      "normalized": "",
+      "classification_answer": "60"
+    }
+  ],
+  "outcome": "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS",
+  "category": "presentation issue",
+  "correction": "Missing normalized answer at the stop",
+  "effect": "No counts, shares, labels or utility values change."
+}

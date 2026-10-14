@@ -1,0 +1,848 @@
+[
+  {
+    "path": "ThesisDocs/.gitattributes",
+    "bytes": 587,
+    "compressed_bytes": 256,
+    "crc32": 1274479068
+  },
+  {
+    "path": "ThesisDocs/CURRENT_FORMAL_THESIS.md",
+    "bytes": 3786,
+    "compressed_bytes": 1519,
+    "crc32": 184694499
+  },
+  {
+    "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+    "bytes": 113102,
+    "compressed_bytes": 40318,
+    "crc32": 3284725091
+  },
+  {
+    "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+    "bytes": 42876,
+    "compressed_bytes": 16897,
+    "crc32": 2106917934
+  },
+  {
+    "path": "ThesisDocs/archival/formal_v7_digital_build_manifest.json",
+    "bytes": 35605,
+    "compressed_bytes": 5658,
+    "crc32": 3083507180
+  },
+  {
+    "path": "ThesisDocs/archival/formal_v7_digital_verapdf_2b.xml",
+    "bytes": 1405,
+    "compressed_bytes": 601,
+    "crc32": 963686501
+  },
+  {
+    "path": "ThesisDocs/archival/formal_v7_independent_technical_audit.json",
+    "bytes": 2321,
+    "compressed_bytes": 989,
+    "crc32": 3084170833
+  },
+  {
+    "path": "ThesisDocs/archival/formal_v7_print_build_manifest.json",
+    "bytes": 36506,
+    "compressed_bytes": 5758,
+    "crc32": 1077660469
+  },
+  {
+    "path": "ThesisDocs/archival/formal_v7_print_verapdf_2b.xml",
+    "bytes": 1411,
+    "compressed_bytes": 606,
+    "crc32": 4163868387
+  },
+  {
+    "path": "ThesisDocs/concise_v7/README.txt",
+    "bytes": 2315,
+    "compressed_bytes": 1102,
+    "crc32": 657269753
+  },
+  {
+    "path": "ThesisDocs/concise_v7/chapter1_introduction.md",
+    "bytes": 4734,
+    "compressed_bytes": 2204,
+    "crc32": 1712971188
+  },
+  {
+    "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+    "bytes": 6771,
+    "compressed_bytes": 2988,
+    "crc32": 1318295475
+  },
+  {
+    "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+    "bytes": 10121,
+    "compressed_bytes": 4570,
+    "crc32": 770784961
+  },
+  {
+    "path": "ThesisDocs/concise_v7/chapter4_results.md",
+    "bytes": 6501,
+    "compressed_bytes": 3104,
+    "crc32": 179466130
+  },
+  {
+    "path": "ThesisDocs/concise_v7/chapter5_discussion.md",
+    "bytes": 4316,
+    "compressed_bytes": 2119,
+    "crc32": 3858830902
+  },
+  {
+    "path": "ThesisDocs/formal/build_manifest_digital_v7.json",
+    "bytes": 5011,
+    "compressed_bytes": 1795,
+    "crc32": 1464359667
+  },
+  {
+    "path": "ThesisDocs/formal/build_manifest_print_v7.json",
+    "bytes": 5007,
+    "compressed_bytes": 1795,
+    "crc32": 3036715333
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/check_content.py",
+    "bytes": 5975,
+    "compressed_bytes": 2564,
+    "crc32": 3149835826
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/contact_01_06.png",
+    "bytes": 377584,
+    "compressed_bytes": 328753,
+    "crc32": 867848613
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/contact_07_12.png",
+    "bytes": 716522,
+    "compressed_bytes": 643446,
+    "crc32": 925265233
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/contact_13_18.png",
+    "bytes": 787108,
+    "compressed_bytes": 711429,
+    "crc32": 2521632604
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/contact_19_24.png",
+    "bytes": 628498,
+    "compressed_bytes": 566182,
+    "crc32": 1282491191
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/contact_25_30.png",
+    "bytes": 683778,
+    "compressed_bytes": 613093,
+    "crc32": 567589131
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/contact_31_33.png",
+    "bytes": 453137,
+    "compressed_bytes": 402790,
+    "crc32": 1845927825
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-01.png",
+    "bytes": 43781,
+    "compressed_bytes": 35582,
+    "crc32": 768185936
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-02.png",
+    "bytes": 150134,
+    "compressed_bytes": 134466,
+    "crc32": 4116160016
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-03.png",
+    "bytes": 120489,
+    "compressed_bytes": 105164,
+    "crc32": 1008655459
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-04.png",
+    "bytes": 26408,
+    "compressed_bytes": 19325,
+    "crc32": 3893362361
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-05.png",
+    "bytes": 29145,
+    "compressed_bytes": 21793,
+    "crc32": 2029568896
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-06.png",
+    "bytes": 171495,
+    "compressed_bytes": 153684,
+    "crc32": 2425409589
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-07.png",
+    "bytes": 216037,
+    "compressed_bytes": 194428,
+    "crc32": 3578855214
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-08.png",
+    "bytes": 135574,
+    "compressed_bytes": 120419,
+    "crc32": 2206951349
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-09.png",
+    "bytes": 175600,
+    "compressed_bytes": 156746,
+    "crc32": 3165983623
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-10.png",
+    "bytes": 166891,
+    "compressed_bytes": 149027,
+    "crc32": 2706331395
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-11.png",
+    "bytes": 176639,
+    "compressed_bytes": 157933,
+    "crc32": 82187488
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-12.png",
+    "bytes": 143003,
+    "compressed_bytes": 127415,
+    "crc32": 2241809878
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-13.png",
+    "bytes": 138226,
+    "compressed_bytes": 124503,
+    "crc32": 3047600219
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-14.png",
+    "bytes": 177636,
+    "compressed_bytes": 158303,
+    "crc32": 2976279696
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-15.png",
+    "bytes": 194928,
+    "compressed_bytes": 175150,
+    "crc32": 2901825401
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-16.png",
+    "bytes": 202313,
+    "compressed_bytes": 181088,
+    "crc32": 1492556382
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-17.png",
+    "bytes": 194785,
+    "compressed_bytes": 174527,
+    "crc32": 1915476908
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-18.png",
+    "bytes": 208316,
+    "compressed_bytes": 187519,
+    "crc32": 2440859242
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-19.png",
+    "bytes": 120246,
+    "compressed_bytes": 105820,
+    "crc32": 2093187990
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-20.png",
+    "bytes": 100960,
+    "compressed_bytes": 88081,
+    "crc32": 1398032610
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-21.png",
+    "bytes": 105455,
+    "compressed_bytes": 92421,
+    "crc32": 3869435629
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-22.png",
+    "bytes": 189942,
+    "compressed_bytes": 176768,
+    "crc32": 3642758709
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-23.png",
+    "bytes": 183114,
+    "compressed_bytes": 163052,
+    "crc32": 1290306213
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-24.png",
+    "bytes": 221268,
+    "compressed_bytes": 199483,
+    "crc32": 2995724723
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-25.png",
+    "bytes": 182190,
+    "compressed_bytes": 163442,
+    "crc32": 3158609221
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-26.png",
+    "bytes": 173416,
+    "compressed_bytes": 155276,
+    "crc32": 1910398797
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-27.png",
+    "bytes": 143008,
+    "compressed_bytes": 127228,
+    "crc32": 3284082779
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-28.png",
+    "bytes": 186583,
+    "compressed_bytes": 167405,
+    "crc32": 1773163330
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-29.png",
+    "bytes": 188557,
+    "compressed_bytes": 169564,
+    "crc32": 1155548068
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-30.png",
+    "bytes": 100279,
+    "compressed_bytes": 87251,
+    "crc32": 3930060819
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-31.png",
+    "bytes": 283286,
+    "compressed_bytes": 256411,
+    "crc32": 3757343692
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-32.png",
+    "bytes": 306595,
+    "compressed_bytes": 278762,
+    "crc32": 2859422061
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/page-33.png",
+    "bytes": 125802,
+    "compressed_bytes": 111599,
+    "crc32": 1739791884
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/pdftoppm_stderr.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/pdftoppm_stdout.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/pdftotext_stderr.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/pdftotext_stdout.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/text_layout.txt",
+    "bytes": 51129,
+    "compressed_bytes": 18226,
+    "crc32": 489308035
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/verapdf.xml",
+    "bytes": 1405,
+    "compressed_bytes": 601,
+    "crc32": 2623339960
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/digital/verapdf_stderr.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/contact_01_06.png",
+    "bytes": 379149,
+    "compressed_bytes": 330723,
+    "crc32": 647571116
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/contact_07_12.png",
+    "bytes": 718536,
+    "compressed_bytes": 644645,
+    "crc32": 428463415
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/contact_13_18.png",
+    "bytes": 769215,
+    "compressed_bytes": 693806,
+    "crc32": 171488593
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/contact_19_24.png",
+    "bytes": 614470,
+    "compressed_bytes": 553304,
+    "crc32": 1227851952
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/contact_25_30.png",
+    "bytes": 657224,
+    "compressed_bytes": 589281,
+    "crc32": 3910703052
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/contact_31_34.png",
+    "bytes": 496236,
+    "compressed_bytes": 441768,
+    "crc32": 764006379
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-01.png",
+    "bytes": 44015,
+    "compressed_bytes": 35793,
+    "crc32": 4160367416
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-02.png",
+    "bytes": 159145,
+    "compressed_bytes": 142089,
+    "crc32": 1985396529
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-03.png",
+    "bytes": 120030,
+    "compressed_bytes": 104840,
+    "crc32": 3855677958
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-04.png",
+    "bytes": 26142,
+    "compressed_bytes": 19100,
+    "crc32": 2298276699
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-05.png",
+    "bytes": 29201,
+    "compressed_bytes": 21943,
+    "crc32": 1955069999
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-06.png",
+    "bytes": 176926,
+    "compressed_bytes": 157849,
+    "crc32": 3186810867
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-07.png",
+    "bytes": 200966,
+    "compressed_bytes": 180110,
+    "crc32": 2690313588
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-08.png",
+    "bytes": 160115,
+    "compressed_bytes": 142326,
+    "crc32": 4282054393
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-09.png",
+    "bytes": 152007,
+    "compressed_bytes": 135398,
+    "crc32": 2589035050
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-10.png",
+    "bytes": 164266,
+    "compressed_bytes": 146743,
+    "crc32": 1353282638
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-11.png",
+    "bytes": 180503,
+    "compressed_bytes": 161205,
+    "crc32": 1069313596
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-12.png",
+    "bytes": 178027,
+    "compressed_bytes": 159433,
+    "crc32": 2194130396
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-13.png",
+    "bytes": 135493,
+    "compressed_bytes": 121405,
+    "crc32": 1864102601
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-14.png",
+    "bytes": 177248,
+    "compressed_bytes": 158027,
+    "crc32": 4065803132
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-15.png",
+    "bytes": 203959,
+    "compressed_bytes": 182767,
+    "crc32": 320808238
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-16.png",
+    "bytes": 204883,
+    "compressed_bytes": 184277,
+    "crc32": 3509637016
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-17.png",
+    "bytes": 186110,
+    "compressed_bytes": 166537,
+    "crc32": 1281333014
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-18.png",
+    "bytes": 199457,
+    "compressed_bytes": 178702,
+    "crc32": 1638872127
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-19.png",
+    "bytes": 154510,
+    "compressed_bytes": 137528,
+    "crc32": 1061403702
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-20.png",
+    "bytes": 104798,
+    "compressed_bytes": 92040,
+    "crc32": 2059261279
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-21.png",
+    "bytes": 106163,
+    "compressed_bytes": 92986,
+    "crc32": 1873478497
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-22.png",
+    "bytes": 170470,
+    "compressed_bytes": 157019,
+    "crc32": 1005690618
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-23.png",
+    "bytes": 179537,
+    "compressed_bytes": 159817,
+    "crc32": 3375247198
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-24.png",
+    "bytes": 186769,
+    "compressed_bytes": 167389,
+    "crc32": 3584198911
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-25.png",
+    "bytes": 114984,
+    "compressed_bytes": 101060,
+    "crc32": 3546461985
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-26.png",
+    "bytes": 173227,
+    "compressed_bytes": 154648,
+    "crc32": 1915182785
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-27.png",
+    "bytes": 138645,
+    "compressed_bytes": 122782,
+    "crc32": 3947963466
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-28.png",
+    "bytes": 125823,
+    "compressed_bytes": 110554,
+    "crc32": 2574573870
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-29.png",
+    "bytes": 191486,
+    "compressed_bytes": 171642,
+    "crc32": 118429336
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-30.png",
+    "bytes": 199018,
+    "compressed_bytes": 178396,
+    "crc32": 177354014
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-31.png",
+    "bytes": 101773,
+    "compressed_bytes": 88887,
+    "crc32": 2889926722
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-32.png",
+    "bytes": 286193,
+    "compressed_bytes": 259167,
+    "crc32": 469024462
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-33.png",
+    "bytes": 309749,
+    "compressed_bytes": 281456,
+    "crc32": 1650341861
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/page-34.png",
+    "bytes": 70851,
+    "compressed_bytes": 60908,
+    "crc32": 2681995328
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/pdftoppm_stderr.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/pdftoppm_stdout.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/pdftotext_stderr.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/pdftotext_stdout.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/text_layout.txt",
+    "bytes": 50868,
+    "compressed_bytes": 18257,
+    "crc32": 608051682
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/verapdf.xml",
+    "bytes": 1411,
+    "compressed_bytes": 607,
+    "crc32": 1116966034
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/print/verapdf_stderr.txt",
+    "bytes": 0,
+    "compressed_bytes": 2,
+    "crc32": 0
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/final2/technical_audit.json",
+    "bytes": 165225,
+    "compressed_bytes": 28986,
+    "crc32": 4080229566
+  },
+  {
+    "path": "ThesisDocs/formal/independent_checks_v7/section_ledger.py",
+    "bytes": 4802,
+    "compressed_bytes": 1981,
+    "crc32": 648325636
+  },
+  {
+    "path": "ThesisDocs/formal/raw_sources/v7/digital.pdf",
+    "bytes": 873481,
+    "compressed_bytes": 779668,
+    "crc32": 1743312305
+  },
+  {
+    "path": "ThesisDocs/formal/raw_sources/v7/print.pdf",
+    "bytes": 875166,
+    "compressed_bytes": 780394,
+    "crc32": 3024705963
+  },
+  {
+    "path": "ThesisDocs/formal/source_integrity_v7.json",
+    "bytes": 3191,
+    "compressed_bytes": 1415,
+    "crc32": 3467781870
+  },
+  {
+    "path": "ThesisDocs/formal/visual_review_v7.json",
+    "bytes": 2724,
+    "compressed_bytes": 1299,
+    "crc32": 1318499690
+  },
+  {
+    "path": "ThesisDocs/images/thesis_v2/actual_live_pareto.png",
+    "bytes": 102272,
+    "compressed_bytes": 89600,
+    "crc32": 1650986898
+  },
+  {
+    "path": "ThesisDocs/images/thesis_v2/population_transitions.png",
+    "bytes": 212924,
+    "compressed_bytes": 199249,
+    "crc32": 1808905630
+  },
+  {
+    "path": "ThesisDocs/images/thesis_v4/delayed_repair_tree.png",
+    "bytes": 96467,
+    "compressed_bytes": 84706,
+    "crc32": 359117225
+  },
+  {
+    "path": "ThesisDocs/references.md",
+    "bytes": 6126,
+    "compressed_bytes": 2886,
+    "crc32": 2946762201
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/content_preservation.json",
+    "bytes": 8560,
+    "compressed_bytes": 1939,
+    "crc32": 599473139
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/frozen_data_verification.json",
+    "bytes": 275,
+    "compressed_bytes": 192,
+    "crc32": 345016460
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/jhu_thesis_lengths.json",
+    "bytes": 3260,
+    "compressed_bytes": 1219,
+    "crc32": 1148281249
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/mathematical_test_record.json",
+    "bytes": 1067,
+    "compressed_bytes": 603,
+    "crc32": 2395164129
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/package_readme.txt",
+    "bytes": 1641,
+    "compressed_bytes": 914,
+    "crc32": 404303465
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/peer_structure_review.json",
+    "bytes": 3962,
+    "compressed_bytes": 1248,
+    "crc32": 3108505757
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/protected_baseline.json",
+    "bytes": 50009,
+    "compressed_bytes": 13803,
+    "crc32": 1117479527
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/publication_completion_v7.json",
+    "bytes": 2945,
+    "compressed_bytes": 1346,
+    "crc32": 1404465110
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/review.md",
+    "bytes": 6655,
+    "compressed_bytes": 3063,
+    "crc32": 303351859
+  },
+  {
+    "path": "ThesisDocs/verification/content_audit_v7_2026-10-08/section_ledger.json",
+    "bytes": 12923,
+    "compressed_bytes": 2258,
+    "crc32": 1135909586
+  },
+  {
+    "path": "output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf",
+    "bytes": 1473679,
+    "compressed_bytes": 1327230,
+    "crc32": 1873311612
+  },
+  {
+    "path": "output/pdf/Masters_Thesis_Formal_v5_Print_Aditya_Bhatt.pdf",
+    "bytes": 1478939,
+    "compressed_bytes": 1329810,
+    "crc32": 672906821
+  },
+  {
+    "path": "output/pdf/Masters_Thesis_Formal_v7_Aditya_Bhatt.pdf",
+    "bytes": 850510,
+    "compressed_bytes": 779091,
+    "crc32": 1161525329
+  },
+  {
+    "path": "output/pdf/Masters_Thesis_Formal_v7_Print_Aditya_Bhatt.pdf",
+    "bytes": 851711,
+    "compressed_bytes": 779776,
+    "crc32": 992424317
+  },
+  {
+    "path": "output/research/.gitattributes",
+    "bytes": 142,
+    "compressed_bytes": 96,
+    "crc32": 1034207920
+  },
+  {
+    "path": "tools/build_archival_candidate.py",
+    "bytes": 24061,
+    "compressed_bytes": 7486,
+    "crc32": 1726406979
+  },
+  {
+    "path": "tools/build_concise_thesis_v7.py",
+    "bytes": 14111,
+    "compressed_bytes": 6307,
+    "crc32": 2295525139
+  },
+  {
+    "path": "tools/build_master_thesis.py",
+    "bytes": 47154,
+    "compressed_bytes": 15981,
+    "crc32": 1521220591
+  },
+  {
+    "path": "tools/render_thesis_math.mjs",
+    "bytes": 903,
+    "compressed_bytes": 503,
+    "crc32": 744583862
+  },
+  {
+    "path": "tools/verify_concise_thesis_v7.py",
+    "bytes": 15621,
+    "compressed_bytes": 5592,
+    "crc32": 3510871313
+  }
+]

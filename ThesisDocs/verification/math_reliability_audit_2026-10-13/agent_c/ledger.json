@@ -1,0 +1,533 @@
+[
+  {
+    "id": "C-001",
+    "title": "Raw-source corpus separation and census",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "Counts identify saved source-qualified trajectories; frozen labels are accepted, and overlapping archives are not independent experiments.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tournament_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/matrix_independent.json"
+    ],
+    "dependencies": [],
+    "source_locations": [
+      {
+        "path": "research/run_ultimate_multi_day_tournament.py",
+        "line": 626,
+        "needle": "def load_trace_frame"
+      },
+      {
+        "path": "research/trace_analysis.py",
+        "line": 611,
+        "needle": "def _sanitize_step_frame"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-002",
+    "title": "Population transitions, empirical hazards, net drift and task CIs",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "All55 domain/selected-cell strata: source-label counts, conditional denominators, (repairs-corruptions)/n-.05, and all four10000-draw task percentile intervals. Conditional on fixed model/temperature panel; not per-prefix conditional laws.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/matrix_independent.json"
+    ],
+    "dependencies": [
+      "C-001"
+    ],
+    "source_locations": [
+      {
+        "path": "tools/compute_progress_report_review_metrics.py",
+        "line": 125,
+        "needle": "def boundary_statistics"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-003",
+    "title": "N2/N3/N4 frozen-cache controlled contrasts; N5/N6 paired endpoints",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "Reconstructs all five cached cell effects and10000-draw weighted-cell intervals, N5 binary losses and N6 matched source labels/task bootstrap. Does not refit upstream models or establish untouched-task inference.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json"
+    ],
+    "dependencies": [
+      "C-001"
+    ],
+    "source_locations": [
+      {
+        "path": "research/algorithm_v2_experiments_n2_n3.py",
+        "line": 27,
+        "needle": "GroupKFold"
+      },
+      {
+        "path": "tools/compute_progress_report_review_metrics.py",
+        "line": 299,
+        "needle": "def write_algorithm_outputs"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-004",
+    "title": "Stored causal tournament metrics and utility",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "All9 configurations: pooled, domain, task AUC;2679 mixed-label task groups; step utilities; raw completion and invoked-K2 token utilities. Repeated tasks dependent; architecture superiority not established.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tournament_independent.json"
+    ],
+    "dependencies": [
+      "C-001"
+    ],
+    "source_locations": [
+      {
+        "path": "research/run_ultimate_multi_day_tournament.py",
+        "line": 2095,
+        "needle": "def evaluate_stopping_policy"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-005",
+    "title": "Strict tabular/text saved OOF AUC and partition implementation",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "Joins144440 saved OOF rows to original labels and recomputes AUC. Code fits/calibrates inside outer training tasks. No new fit or full training-history reconstruction.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tournament_independent.json"
+    ],
+    "dependencies": [
+      "C-001"
+    ],
+    "source_locations": [
+      {
+        "path": "research/run_strict_tabular_stopping_oof.py",
+        "line": 441,
+        "needle": "def train_fold"
+      },
+      {
+        "path": "research/run_strict_text_stopping_oof.py",
+        "line": 297,
+        "needle": "outer_train, outer_test"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-006",
+    "title": "Actual four-panel paired cost/accuracy arithmetic and event ledger",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "Actual saved events reproduce completion/prompt/batch/timing sums, selected answers, stop counts, strict JSON denominator and reused baseline identity; paired labels accepted without regrading. Coordinator independently reproduced CP/token arithmetic.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json"
+    ],
+    "dependencies": [
+      "C-008",
+      "C-009",
+      "C-021"
+    ],
+    "source_locations": [
+      {
+        "path": "research/run_online_stopping_evaluation.py",
+        "line": 43,
+        "needle": "def"
+      },
+      {
+        "path": "research/analyze_online_stopping_results.py",
+        "line": 39,
+        "needle": "def audit_ledgers"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-007",
+    "title": "Portable probability heads, targets, splits, features and replay",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "902/322/276 task roles;21 features; original-source heldout feature/scaler correspondence; frozen selected-candidate label targets; serialized logistic+Platt scores; AUC/Brier/10-bin ECE; heldout replay/task CIs. No fit or gold regrading. Frozen parser matches7500 rows at recorded09225 revision; current parser has3 version differences.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/prefix_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/prefix_source_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json"
+    ],
+    "dependencies": [
+      "C-008"
+    ],
+    "source_locations": [
+      {
+        "path": "research/train_prefix_stopping_model.py",
+        "line": 59,
+        "needle": "def task_split"
+      },
+      {
+        "path": "research/train_prefix_stopping_model.py",
+        "line": 219,
+        "needle": "def fit_component"
+      },
+      {
+        "path": "research/prefix_stopping_model.py",
+        "line": 167,
+        "needle": "def _score"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-008",
+    "title": "Prefix runtime decision and answer-selection contract",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "Completed observations are recorded before decisions; floor2,horizon5,terminal-first branch,no post-stop input; current/next selected answer heads and (p_next-q)*(reward+penalty)-cost. Replays480 saved histories/2020 decisions with identical actions/reasons/answers; historical clocks separately checked then rebased. No Bellman-optimality claim.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+    ],
+    "dependencies": [],
+    "source_locations": [
+      {
+        "path": "research/learned_online_stopping_controller.py",
+        "line": 78,
+        "needle": "def observe"
+      },
+      {
+        "path": "research/online_stopping_controller.py",
+        "line": 215,
+        "needle": "self._prefix.append(observation)"
+      },
+      {
+        "path": "research/online_stopping_controller.py",
+        "line": 292,
+        "needle": "def run_online_generation"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-009",
+    "title": "Paired exact confidence allocation and task token bootstrap",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "For iid pairs, each marginal binomial CP error.025 has simultaneous coverage>=.95 by union bound; subtraction preserves coverage without within-pair independence. Zero discordance upper bound1-.0125**(1/n). 10000 task resamples recompute ratio of totals. Handpicked-bank interval is iid reference only.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+    ],
+    "dependencies": [],
+    "source_locations": [
+      {
+        "path": "tools/analyze_live_stopping_uncertainty.py",
+        "line": 24,
+        "needle": "def clopper_pearson"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-010",
+    "title": "Archived verdict census and complete priority failure taxonomy",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "All75965 endpoint utilities and labels agree;68095/2135/5735 verdicts and196/460/600/1706/2773 priority categories reproduce. Labels are archived endpoints; taxonomy does not imply impossibility of prediction.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/matrix_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/empty_candidate_check.json"
+    ],
+    "dependencies": [
+      "C-001"
+    ],
+    "source_locations": [
+      {
+        "path": "research/classify_losses.py",
+        "line": 406,
+        "needle": "def classify_B_empty_answer"
+      },
+      {
+        "path": "research/classify_losses.py",
+        "line": 427,
+        "needle": "def classify("
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-011",
+    "title": "Saved controller latency statistics",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "Recomputes all18880 heuristic and4000 learned decision durations and quantiles. These are recorded controller-only measurements; no prospective timing regeneration/end-to-end or energy claim.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/live_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+    ],
+    "dependencies": [
+      "C-008"
+    ],
+    "source_locations": [
+      {
+        "path": "research/outputs/semester2/online_stopping_20261002/latency_100_math_problems.csv",
+        "line": 1,
+        "needle": "repeat,policy"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-012",
+    "title": "Frozen variant replay arithmetic and Pareto flags",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "All7 per-trajectory paired files reproduce1500-row accuracy/token sums/savings and strict dominance flags. Counterfactual interpretation requires unchanged generating prefix; not measured live costs.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+    ],
+    "dependencies": [
+      "C-008"
+    ],
+    "source_locations": [
+      {
+        "path": "research/outputs/semester2/online_stopping_20261002/replay_pareto.csv",
+        "line": 1,
+        "needle": "policy,policy_sha256"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-013",
+    "title": "Appendix D peer and selected-answer saved-array scores",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "All8 Appendix D AUCs reproduce; peer paired folds/labels match; anonymous/fixed13 2000 task bootstrap lifts reproduce using independent weighted-Mann-Whitney arithmetic. Legacy executed peer source remains separately unestablished; calibrated reporting scores are nonnested diagnostics.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+    ],
+    "dependencies": [
+      "C-001"
+    ],
+    "source_locations": [
+      {
+        "path": "research/analyze_committee_peer_dynamics.py",
+        "line": 202,
+        "needle": "def paired_task_bootstrap"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-014",
+    "title": "Historical stacked AUC/Brier/bootstrap numerical reproduction",
+    "outcome": "NOT ESTABLISHED",
+    "category": "unresolved question",
+    "severity": "unresolved",
+    "assumptions_and_limits": "Expanded search covers20 workspace archives,3970 NPZ headers,5 checkpoint paths,13 prepared pickle metadata files and source save logic. No exact Blackwell stacked/control arrays found. Distinct advanced checkpoint arrays are202440-row other-model outputs. Aggregate .9551560211-.9432225591=.0119334620 is checked; absolute AUC/Brier/10000 draws remain unestablished. No refit or pickle object execution. Code temporal/nesting critique is separately checked.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "dependencies": [],
+    "source_locations": [
+      {
+        "path": "research/run_ultimate_blackwell_5day_tournament.py",
+        "line": 28,
+        "needle": "savgol_filter"
+      },
+      {
+        "path": "research/run_ultimate_blackwell_5day_tournament.py",
+        "line": 610,
+        "needle": "meta_df[\"moe_probe_q\"]"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-015",
+    "title": "Historical7B exact stopped in-sample replay endpoint",
+    "outcome": "NOT ESTABLISHED",
+    "category": "unresolved question",
+    "severity": "unresolved",
+    "assumptions_and_limits": "Original report retains4-decimal heads; historical source fully records4 raw features with no scaler. Baseline827804 tokens/1058 correct independently reproduced from15000 rows. Coefficient-rounding intervals certify1403 stops;97 ambiguous; rounded-weight total377774 differs from reported377960, within conservative bounds374891..380891. Exact stopped endpoint needs full parameter precision/original stops,not a missing feature contract. No such evidence found in available package/local named inventories. This is not a contradiction or a permitted refit.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/rounded_replay_bounds.json"
+    ],
+    "dependencies": [],
+    "source_locations": [
+      {
+        "path": "tools/compute_progress_report_review_metrics.py",
+        "line": 666,
+        "needle": "def write_offline_replay_output"
+      },
+      {
+        "path": "research/run_active_stopping.py",
+        "line": 4,
+        "needle": "previous script fit three logistic heads"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-016",
+    "title": "Original-generation authenticity, label semantics and complete historical provenance",
+    "outcome": "NOT ESTABLISHED",
+    "category": "empirical limitation",
+    "severity": "unresolved",
+    "assumptions_and_limits": "Hashes establish bytes, not honest generation or correct labels. No corpus-wide gold adjudication/regrading performed. No exhaustive Git reconstruction of peer executable history, original GPQA loader execution, historical GPU environment, or prior suite receipts repeated here.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/historical_parser_comparison.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json"
+    ],
+    "dependencies": [],
+    "source_locations": [
+      {
+        "path": "ThesisDocs/appendices.md",
+        "line": 62,
+        "needle": "legacy peer runner"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-017",
+    "title": "Table7 empty-candidate category wording",
+    "outcome": "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS",
+    "category": "presentation issue",
+    "severity": "low",
+    "assumptions_and_limits": "Category uses normalized-field missingness after pandas NA parsing;108/196 raw source answer strings are nonempty under keep_default_na=False. Replace wording with Recorded normalized candidate missing at the stop. Counts,priority partition,48.35% late-repair claim unchanged.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/empty_candidate_check.json"
+    ],
+    "dependencies": [
+      "C-010"
+    ],
+    "source_locations": [
+      {
+        "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+        "line": 915,
+        "needle": "No extracted candidate at the stop"
+      },
+      {
+        "path": "research/classify_losses.py",
+        "line": 408,
+        "needle": "return L[\"stop_answer_normalized\"]"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-018",
+    "title": "N1 exact LOCO/LOMO endpoints and CIs",
+    "outcome": "NOT ESTABLISHED",
+    "category": "unresolved question",
+    "severity": "unresolved",
+    "assumptions_and_limits": "Expanded package/workspace inventories and52 cache schemas retain no per-heldout Ridge predictions or selected per-cell contributions. Historical source computes those in memory and prints aggregate totals. No refit performed. Saved919.20/75965 and976.80/75965 normalization verified; exact endpoints and intervals remain unestablished.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/controls_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/gap_search.md"
+    ],
+    "dependencies": [
+      "C-003"
+    ],
+    "source_locations": [
+      {
+        "path": "tools/compute_progress_report_review_metrics.py",
+        "line": 200,
+        "needle": "def n1_contributions"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-019",
+    "title": "Recorded model/settings metadata and effective split qualifications",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "All52 matrix and52 standardized metadata records inspected; roster13 each and22B Mistral alias reproduce. Metadata statements verified as recorded settings, not original execution authenticity; GPQA request-test/current-loader-train inference remains qualified.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/metadata_independent.json",
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tournament_independent.json"
+    ],
+    "dependencies": [
+      "C-001"
+    ],
+    "source_locations": [
+      {
+        "path": "research/real_trace_experiments.py",
+        "line": 1287,
+        "needle": "def load_gpqa_tasks"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-020",
+    "title": "Existing relevant regression suites",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "87 existing cases pass:12 foundations,9 uncertainty,25 online,10 learned,14 prefix,3 replay,14 ledger. No dependencies changed. Finite cases supplement proofs and do not prove untested universal claims.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/tests.json"
+    ],
+    "dependencies": [],
+    "source_locations": [
+      {
+        "path": "research/tests/test_mathematical_foundations.py",
+        "line": 96,
+        "needle": "class MathematicalFoundationsTests"
+      },
+      {
+        "path": "research/tests/test_live_uncertainty.py",
+        "line": 19,
+        "needle": "class PairedUncertaintyTests"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  },
+  {
+    "id": "C-021",
+    "title": "Frozen executed source and artifact byte bindings",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "category": "valid conditional result",
+    "severity": "informational",
+    "assumptions_and_limits": "All retained live locked_code files match recorded raw or canonical-LF hashes. Baselines copied into learned panels equal original record objects. Matching bytes does not authenticate original execution.",
+    "evidence": [
+      "ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/ancillary_independent.json"
+    ],
+    "dependencies": [
+      "C-006"
+    ],
+    "source_locations": [
+      {
+        "path": "research/outputs/semester2/online_stopping_20261002/learned_main/live_manifest.json",
+        "line": 1,
+        "needle": "code_sha256"
+      }
+    ],
+    "second_review": "Coordinator independently reviewed live uncertainty/cost arithmetic; other central quantities require coordinator evidence reconciliation before final integrated verdict."
+  }
+]

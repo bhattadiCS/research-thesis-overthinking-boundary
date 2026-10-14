@@ -1,0 +1,125 @@
+[
+  {
+    "cross_review_id": "AXB1",
+    "agent_b_claim_ids": [
+      "B-CH2-11",
+      "B-CH2-14"
+    ],
+    "path": "ThesisDocs/chapters/chapter2_theory.md",
+    "line_start": 152,
+    "line_end": 263,
+    "claim": "Affine stakes and monotonic earliest optimal stops",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_a/cross_review_b.md AXB1",
+    "assumption_conditions": "w>0; common law/filtration/candidates/cost/floor/horizon; nondecreasing costs",
+    "reviewer": "Agent A",
+    "reconciliation": "Independent derivations agree with B; no manuscript correction justified."
+  },
+  {
+    "cross_review_id": "AXB2",
+    "agent_b_claim_ids": [
+      "B-CH2-22"
+    ],
+    "path": "ThesisDocs/chapters/chapter2_theory.md",
+    "line_start": 408,
+    "line_end": 433,
+    "claim": "Weighted population log-loss optimum and drift-flip example",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_a/cross_review_b.md AXB2",
+    "assumption_conditions": "p in (0,1); positive weights; unrestricted probability prediction; not a finite-fit guarantee",
+    "reviewer": "Agent A",
+    "reconciliation": "Independent derivations agree with B; no manuscript correction justified."
+  },
+  {
+    "cross_review_id": "AXB3",
+    "agent_b_claim_ids": [
+      "B-CH2-23"
+    ],
+    "path": "ThesisDocs/chapters/chapter2_theory.md",
+    "line_start": 435,
+    "line_end": 474,
+    "claim": "Drift perturbation inequality and exact rectangle extrema",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_a/cross_review_b.md AXB3",
+    "assumption_conditions": "probabilities in [0,1]; nonnegative error tolerances; simultaneous intervals if coverage interpreted",
+    "reviewer": "Agent A",
+    "reconciliation": "Independent derivations agree with B; no manuscript correction justified."
+  },
+  {
+    "cross_review_id": "AXB4",
+    "agent_b_claim_ids": [
+      "B-CH2-24"
+    ],
+    "path": "ThesisDocs/chapters/chapter2_theory.md",
+    "line_start": 478,
+    "line_end": 500,
+    "claim": "First-upper-bound-crossing one-step sign guarantee",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_a/cross_review_b.md AXB4",
+    "assumption_conditions": "observable bounds; simultaneous coverage; finite horizon; 0<delta<1",
+    "reviewer": "Agent A",
+    "reconciliation": "Independent derivations agree with B; no manuscript correction justified."
+  },
+  {
+    "cross_review_id": "AXB5",
+    "agent_b_claim_ids": [
+      "B-CH2-25",
+      "B-CH2-26"
+    ],
+    "path": "ThesisDocs/chapters/chapter2_theory.md",
+    "line_start": 502,
+    "line_end": 537,
+    "claim": "Conditional Hoeffding, summable failure budget and pre/post-probe distinction",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_a/cross_review_b.md AXB5",
+    "assumption_conditions": "positive count fixed given pre-probe information; conditional independence/boundedness/common mean; correct target",
+    "reviewer": "Agent A",
+    "reconciliation": "Independent derivations agree with B; no manuscript correction justified."
+  },
+  {
+    "cross_review_id": "AXB6",
+    "agent_b_claim_ids": [
+      "B-CH2-27",
+      "B-CH2-28"
+    ],
+    "path": "ThesisDocs/chapters/chapter2_theory.md",
+    "line_start": 539,
+    "line_end": 570,
+    "claim": "Product e-process, fixed mixtures, supremum bound and dependence witness",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_a/cross_review_b.md AXB6",
+    "assumption_conditions": "adapted bounded observations; conditional-mean null; fixed eta and fixed mixture",
+    "reviewer": "Agent A",
+    "reconciliation": "Independent derivations agree with B; no manuscript correction justified."
+  },
+  {
+    "cross_review_id": "AXB7",
+    "agent_b_claim_ids": [
+      "B-M246",
+      "B-M247",
+      "B-M248",
+      "B-M249",
+      "B-M250",
+      "B-M251",
+      "B-M252",
+      "B-M253",
+      "B-M254",
+      "B-M255",
+      "B-M256",
+      "B-M257",
+      "B-P243",
+      "B-P244",
+      "B-P245",
+      "B-P246"
+    ],
+    "path": "ThesisDocs/appendices.md",
+    "line_start": 31,
+    "line_end": 39,
+    "claim": "Paired exact binomial/union-bound interval and zero-discordance endpoint",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "evidence": "agent_a/cross_review_b.md AXB7",
+    "assumption_conditions": "iid binary task pairs; exact marginal CP intervals; no within-pair independence needed",
+    "reviewer": "Agent A",
+    "reconciliation": "Independent derivations agree with B; no manuscript correction justified."
+  }
+]

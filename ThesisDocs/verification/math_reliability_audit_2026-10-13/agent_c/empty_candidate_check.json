@@ -1,0 +1,903 @@
+{
+  "category_B": 196,
+  "nonempty_raw_candidates": 108,
+  "examples": [
+    {
+      "cell": "internlm3_8b_instruct__gpqa",
+      "run_id": "internlm3_8b_instruct__gpqa_main_00097_526b98ff__temp0.60__seed7",
+      "step": 2,
+      "raw_answer": "3,4-dimethyl-5,6-dihydroxyoctanal",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "3,4-dimethyl-5,6-dihydroxyoctanal"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00041_57e4090f__temp0.10__seed7",
+      "step": 4,
+      "raw_answer": "15",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "15"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00102_4c432e78__temp0.10__seed7",
+      "step": 5,
+      "raw_answer": "5.0",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "5.0"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00117_da3420e1__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "210",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "210"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00228_74062832__temp1.00__seed7",
+      "step": 6,
+      "raw_answer": "90",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "90"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00295_f0549092__temp0.60__seed7",
+      "step": 4,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "run_id": "llama_3p1_8b_instruct__arc_test_00334_39cea5b1__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "60",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "60"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00006_3739a204__temp0.60__seed7",
+      "step": 3.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00009_a047a4da__temp0.10__seed7",
+      "step": 4.0,
+      "raw_answer": "1.55 * 10^-23 s",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "1.55 * 10^-23 s"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00011_159b66c2__temp1.00__seed7",
+      "step": 4.0,
+      "raw_answer": "unknown",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "unknown"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00027_c27e0667__temp0.60__seed7",
+      "step": 2.0,
+      "raw_answer": "0.67 mL",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.67 mL"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00032_2c712926__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00040_bae470e5__temp0.10__seed7",
+      "step": 4.0,
+      "raw_answer": "0.984",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.984"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00072_f9c1cbbe__temp0.10__seed7",
+      "step": 3.0,
+      "raw_answer": "0.025 M",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.025 M"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00072_f9c1cbbe__temp0.60__seed7",
+      "step": 2.0,
+      "raw_answer": "0.025 M",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.025 M"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00088_5c8ec699__temp0.60__seed7",
+      "step": 4.0,
+      "raw_answer": "12 + log10(nSi/nH) = 7.5 + 0.3 = 7.8",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "12 + log10(nSi/nH) = 7.5 + 0.3 = 7.8"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00089_a9708bcf__temp0.10__seed7",
+      "step": 4.0,
+      "raw_answer": "\u03bb = ln(2) / 30.2 * 365.25 * 24 * 60",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "\u03bb = ln(2) / 30.2 * 365.25 * 24 * 60"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00106_c822f17d__temp1.00__seed7",
+      "step": 6.0,
+      "raw_answer": "8.11 * 10^-7",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "8.11 * 10^-7"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00114_cc31d190__temp0.10__seed7",
+      "step": 4.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00114_cc31d190__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00122_acd8adff__temp1.00__seed7",
+      "step": 3.0,
+      "raw_answer": "Not Determined",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Not Determined"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00129_2f8554c6__temp0.10__seed7",
+      "step": 2.0,
+      "raw_answer": "Not determined",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Not determined"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00129_2f8554c6__temp1.00__seed7",
+      "step": 3.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00134_a19bb999__temp0.10__seed7",
+      "step": 5.0,
+      "raw_answer": "3,060,000 km",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "3,060,000 km"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00134_a19bb999__temp0.60__seed7",
+      "step": 5.0,
+      "raw_answer": "1.0000614",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "1.0000614"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00164_85a125b7__temp0.10__seed7",
+      "step": 3.0,
+      "raw_answer": "0.66M",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.66M"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00164_85a125b7__temp0.60__seed7",
+      "step": 5.0,
+      "raw_answer": "m1 = 0.495M, m2 = 0.495M/2 = 0.2475M",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "m1 = 0.495M, m2 = 0.495M/2 = 0.2475M"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00192_c7d17646__temp1.00__seed7",
+      "step": 5.0,
+      "raw_answer": "to be determined",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "to be determined"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00209_9b29ec4f__temp0.60__seed7",
+      "step": 6.0,
+      "raw_answer": "0.707106781",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.707106781"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00239_6bd82de1__temp0.10__seed7",
+      "step": 2.0,
+      "raw_answer": "6",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "6"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00244_b19e7cd4__temp0.60__seed7",
+      "step": 2.0,
+      "raw_answer": "7",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "7"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00265_5da0a844__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "No answer yet",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "No answer yet"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00266_9f63ee0c__temp0.60__seed7",
+      "step": 4.0,
+      "raw_answer": "2",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "2"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00270_5f35815b__temp0.60__seed7",
+      "step": 2.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00297_79ccfa48__temp1.00__seed7",
+      "step": 6.0,
+      "raw_answer": "0.15",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.15"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00317_f5386a48__temp0.10__seed7",
+      "step": 4.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00391_263cb0f2__temp0.60__seed7",
+      "step": 6.0,
+      "raw_answer": "z \u2248 3.3",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "z \u2248 3.3"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "run_id": "llama_3p1_8b_instruct__gpqa_main_00437_99b6c8bc__temp0.60__seed7",
+      "step": 3.0,
+      "raw_answer": "3520",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "3520"
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gsm8k",
+      "run_id": "llama_3p1_8b_instruct__gsm8k_train_00225_eb4c19c6__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "N/A",
+      "raw_normalized_field": "n/a",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__arc",
+      "run_id": "mistral_7b_instruct_v0p3__arc_test_00141_38c02509__temp0.60__seed7",
+      "step": 2,
+      "raw_answer": "They both move independently.",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "They both move independently."
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__arc",
+      "run_id": "mistral_7b_instruct_v0p3__arc_test_00251_80eac29b__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "None of the given options",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "None of the given options"
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__arc",
+      "run_id": "mistral_7b_instruct_v0p3__arc_test_00457_f210958e__temp0.60__seed7",
+      "step": 2,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__gpqa",
+      "run_id": "mistral_7b_instruct_v0p3__gpqa_main_00027_c27e0667__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "0.1864 micromole",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.1864 micromole"
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__gpqa",
+      "run_id": "mistral_7b_instruct_v0p3__gpqa_main_00105_abf87818__temp0.60__seed7",
+      "step": 2,
+      "raw_answer": "2-hydroxy-3-cyano-4-methoxy-5-formyl-6-(dimethylamino)benzoic acid",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "2-hydroxy-3-cyano-4-methoxy-5-formyl-6-(dimethylamino)benzoic acid"
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__gpqa",
+      "run_id": "mistral_7b_instruct_v0p3__gpqa_main_00275_350edb15__temp1.00__seed7",
+      "step": 5,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__gpqa",
+      "run_id": "mistral_7b_instruct_v0p3__gpqa_main_00362_261d55a0__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "2>1>4>3",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "2>1>4>3"
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__gpqa",
+      "run_id": "mistral_7b_instruct_v0p3__gpqa_main_00399_2c2a0a46__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "No answer yet.",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "No answer yet."
+    },
+    {
+      "cell": "mistral_small_24b_2409__arc",
+      "run_id": "mistral_small_24b_2409__arc_test_00228_74062832__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__arc",
+      "run_id": "mistral_small_24b_2409__arc_test_00327_5805f8ad__temp1.00__seed7",
+      "step": 3,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__arc",
+      "run_id": "mistral_small_24b_2409__arc_test_00436_1db7d473__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00032_2c712926__temp1.00__seed7",
+      "step": 4,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00043_89746543__temp1.00__seed7",
+      "step": 4,
+      "raw_answer": "Not determined yet",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Not determined yet"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00049_5cb9f19f__temp1.00__seed7",
+      "step": 4,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00093_527f0ce0__temp0.60__seed7",
+      "step": 5,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00099_42030505__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00125_bcca5972__temp0.10__seed7",
+      "step": 4,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00125_bcca5972__temp1.00__seed7",
+      "step": 3,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00129_2f8554c6__temp1.00__seed7",
+      "step": 6,
+      "raw_answer": "Product 5: 3'-Bromo-4-methoxy-1,1'-biphenyl",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Product 5: 3'-Bromo-4-methoxy-1,1'-biphenyl"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00172_0d7f923c__temp1.00__seed7",
+      "step": 3,
+      "raw_answer": "Incremental",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Incremental"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00192_c7d17646__temp0.60__seed7",
+      "step": 5,
+      "raw_answer": "Not yet calculated",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Not yet calculated"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00220_b3735bfc__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "Not yet determined",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Not yet determined"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00285_ab897308__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00295_7617aa20__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00295_7617aa20__temp0.60__seed7",
+      "step": 3,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00295_7617aa20__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00302_15b4ea6e__temp0.60__seed7",
+      "step": 3,
+      "raw_answer": "Not yet determined",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Not yet determined"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00305_fae05632__temp0.60__seed7",
+      "step": 2,
+      "raw_answer": "Not determined yet",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Not determined yet"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00306_1eefe6b2__temp0.10__seed7",
+      "step": 6,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00318_fe6b411a__temp0.10__seed7",
+      "step": 3,
+      "raw_answer": "|",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "|"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00359_c923a0df__temp1.00__seed7",
+      "step": 5,
+      "raw_answer": "In progress",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "In progress"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00369_da8d46cf__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "None yet",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "None yet"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00384_73f2ebfe__temp1.00__seed7",
+      "step": 3,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00394_d514cb2a__temp1.00__seed7",
+      "step": 3,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00411_0e949c53__temp0.60__seed7",
+      "step": 3,
+      "raw_answer": "O",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "O"
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00428_faf86a33__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "None of the options have been eliminated yet.",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "None of the options have been eliminated yet."
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "run_id": "mistral_small_24b_2409__gpqa_main_00433_051e33e5__temp1.00__seed7",
+      "step": 3,
+      "raw_answer": "Let's consider the directions of the photons in the next step.",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Let's consider the directions of the photons in the next step."
+    },
+    {
+      "cell": "mistral_small_24b_2409__math",
+      "run_id": "mistral_small_24b_2409__math_test_00426_206b8557__temp1.00__seed7",
+      "step": 7,
+      "raw_answer": "N/A",
+      "raw_normalized_field": "n/a",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "phi_4_mini_instruct__gpqa",
+      "run_id": "phi_4_mini_instruct__gpqa_main_00242_f4a67935__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "phi_4_mini_instruct__gpqa",
+      "run_id": "phi_4_mini_instruct__gpqa_main_00377_ed2f5045__temp1.00__seed7",
+      "step": 4,
+      "raw_answer": "Unknown",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Unknown"
+    },
+    {
+      "cell": "qwen2p5_0p5b__arc",
+      "run_id": "qwen2p5_0p5b__arc_test_00006_73fea8aa__temp1.00__seed7",
+      "step": 5,
+      "raw_answer": "table salt",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "table salt"
+    },
+    {
+      "cell": "qwen2p5_0p5b__arc",
+      "run_id": "qwen2p5_0p5b__arc_test_00040_aeb16c3b__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "neutralization",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "neutralization"
+    },
+    {
+      "cell": "qwen2p5_0p5b__arc",
+      "run_id": "qwen2p5_0p5b__arc_test_00371_61d05f33__temp0.60__seed7",
+      "step": 3,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "qwen2p5_0p5b__gpqa",
+      "run_id": "qwen2p5_0p5b__gpqa_main_00065_91a75aec__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "4",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "4"
+    },
+    {
+      "cell": "qwen2p5_0p5b__gpqa",
+      "run_id": "qwen2p5_0p5b__gpqa_main_00269_4baadd2b__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "1 and 4",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "1 and 4"
+    },
+    {
+      "cell": "qwen2p5_0p5b__gpqa",
+      "run_id": "qwen2p5_0p5b__gpqa_main_00342_469cc479__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "4>3>2>5>1>6>7",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "4>3>2>5>1>6>7"
+    },
+    {
+      "cell": "qwen2p5_14b__gpqa",
+      "run_id": "qwen2p5_14b__gpqa_main_00440_5ede3d09__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "None of the options",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "None of the options"
+    },
+    {
+      "cell": "qwen2p5_14b__math",
+      "run_id": "qwen2p5_14b__math_test_00081_df488277__temp1.00__seed7",
+      "step": 4,
+      "raw_answer": "N/A",
+      "raw_normalized_field": "n/a",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "qwen2p5_14b__math",
+      "run_id": "qwen2p5_14b__math_test_00083_5465f015__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "N/A",
+      "raw_normalized_field": "n/a",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "qwen2p5_32b__math",
+      "run_id": "qwen2p5_32b__math_test_00120_8eef5288__temp0.60__seed7",
+      "step": 3,
+      "raw_answer": "N/A",
+      "raw_normalized_field": "n/a",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "qwen2p5_3b__arc",
+      "run_id": "qwen2p5_3b__arc_test_00041_57e4090f__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "0.25 hours = 15 minutes",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "0.25 hours = 15 minutes"
+    },
+    {
+      "cell": "qwen2p5_3b__arc",
+      "run_id": "qwen2p5_3b__arc_test_00079_73a6dca6__temp0.60__seed7",
+      "step": 4,
+      "raw_answer": "latex gloves",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "latex gloves"
+    },
+    {
+      "cell": "qwen2p5_3b__arc",
+      "run_id": "qwen2p5_3b__arc_test_00245_e7db20d6__temp0.10__seed7",
+      "step": 2,
+      "raw_answer": "organisms may become extinct",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "organisms may become extinct"
+    },
+    {
+      "cell": "qwen2p5_3b__arc",
+      "run_id": "qwen2p5_3b__arc_test_00256_73563be9__temp1.00__seed7",
+      "step": 3,
+      "raw_answer": "improving the habitats of herring",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "improving the habitats of herring"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00049_5cb9f19f__temp0.60__seed7",
+      "step": 2.0,
+      "raw_answer": "ln(2) = [ (T_1 - T_2) / (T1*T2)]",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "ln(2) = [ (T_1 - T_2) / (T1*T2)]"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00097_526b98ff__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "3,4-dimethyl-5,6-dioxooctanoic acid",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "3,4-dimethyl-5,6-dioxooctanoic acid"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00113_6e7866fc__temp0.60__seed7",
+      "step": 4.0,
+      "raw_answer": "quinuclidine",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "quinuclidine"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00117_f4e6822b__temp0.60__seed7",
+      "step": 3.0,
+      "raw_answer": "The volume calculation will be done next.",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "The volume calculation will be done next."
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00258_1dfce2be__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "Water = 104\u00b0, Oil = 122\u00b0",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Water = 104\u00b0, Oil = 122\u00b0"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00263_3beaf352__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "the change in excitation ratio affects the ratio of neutral Ti atoms in the two levels",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "the change in excitation ratio affects the ratio of neutral Ti atoms in the two levels"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00269_4baadd2b__temp0.60__seed7",
+      "step": 2.0,
+      "raw_answer": "4",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "4"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00290_000b6cf3__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "s-cis, s-cis",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "s-cis, s-cis"
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "run_id": "qwen2p5_3b__gpqa_main_00303_a57ec377__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "4,6",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "4,6"
+    },
+    {
+      "cell": "yi_1p5_9b_chat__arc",
+      "run_id": "yi_1p5_9b_chat__arc_test_00228_74062832__temp0.60__seed7",
+      "step": 3,
+      "raw_answer": "90 kilometers per hour",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "90 kilometers per hour"
+    },
+    {
+      "cell": "yi_1p5_9b_chat__arc",
+      "run_id": "yi_1p5_9b_chat__arc_test_00364_f961994a__temp1.00__seed7",
+      "step": 2,
+      "raw_answer": "1.5 km",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "1.5 km"
+    },
+    {
+      "cell": "yi_1p5_9b_chat__gpqa",
+      "run_id": "yi_1p5_9b_chat__gpqa_main_00072_f9c1cbbe__temp0.10__seed7",
+      "step": 3.0,
+      "raw_answer": "Moles of acetic acid = 0.05 M * 0.02 L = 0.001 mol; Moles of acetate = 0.000 mol (since no NaOH has been added yet).",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "Moles of acetic acid = 0.05 M * 0.02 L = 0.001 mol; Moles of acetate = 0.000 mol (since no NaOH has been added yet)."
+    },
+    {
+      "cell": "yi_1p5_9b_chat__gpqa",
+      "run_id": "yi_1p5_9b_chat__gpqa_main_00076_10647ec7__temp0.60__seed7",
+      "step": 2.0,
+      "raw_answer": "2 -bromo-4,4 -dimethylcyclopentanone",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "2 -bromo-4,4 -dimethylcyclopentanone"
+    },
+    {
+      "cell": "yi_1p5_9b_chat__gpqa",
+      "run_id": "yi_1p5_9b_chat__gpqa_main_00086_1039e804__temp1.00__seed7",
+      "step": 2.0,
+      "raw_answer": "None",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": ""
+    },
+    {
+      "cell": "yi_1p5_9b_chat__gpqa",
+      "run_id": "yi_1p5_9b_chat__gpqa_main_00384_73f2ebfe__temp0.10__seed7",
+      "step": 6.0,
+      "raw_answer": "The probabilities of obtaining the degenerate eigenvalue 1 are 8/17 and 1/17.",
+      "raw_normalized_field": "",
+      "saved_classification_raw_answer": "The probabilities of obtaining the degenerate eigenvalue 1 are 8/17 and 1/17."
+    }
+  ],
+  "source_hashes": {
+    "research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc/trace_steps.csv": "108cd38409eff2b72fd1de1aacd373599428285d375ecb3634a6287ae0267d32",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__gpqa/trace_steps.csv": "fc005e529267e3a8e4495502a0986453e27733d7504df48fd936f38575c13621",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__gsm8k/trace_steps.csv": "e91a44cbb6cafe180a5f4278df9e75c6227dcb2515b288cd48bf90dce8a98efd",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_7b__arc/trace_steps.csv": "cbd7ffb0b9d66cf1e7fc898e63374a72c827d1eeeee9e56d36c9dcad9d173c78",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_7b__gpqa/trace_steps.csv": "652cce7ad19313648d911a2f579f8e39bdd65d312c48569ece8047831242565b",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_7b__gsm8k/trace_steps.csv": "73df7dca3f47c705a9395ed716ebb574f8184d6edecc6c9622ecfbc8de80882a",
+    "research/outputs/experiment_matrix/internlm3_8b_instruct__gpqa/trace_steps.csv": "bf8fa9ef7eaa3040d4134b296ac2a22304b23c50424df27aab91d76ddaf6f6f1",
+    "research/outputs/experiment_matrix/llama_3p1_8b_instruct__arc/trace_steps.csv": "1a03dc1bd01889fd55f77103ed87e5a737944d77e0db63e26ca08999dfa9473e",
+    "research/outputs/experiment_matrix/llama_3p1_8b_instruct__gpqa/trace_steps.csv": "537e3f45615ff235fba48fbc0f224d703b6401fbf017f364ac5357dfd63751c9",
+    "research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k/trace_steps.csv": "f46c9eac9a4039157be7b4cb8d0cb7b09ad1a2a2e7bfec313c2322e7112d4033",
+    "research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__arc/trace_steps.csv": "daec25e2c515f71a4335ed5a360c39c72e8fdc9667ea1a4a8c5ec6210db7caf9",
+    "research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__gpqa/trace_steps.csv": "791ddebba557c91bc8435940ee7dbaaab1908c458f1a13a86c1f1ded4ad047a1",
+    "research/outputs/experiment_matrix/mistral_small_24b_2409__arc/trace_steps.csv": "e8948f6fdc571d34230cfb6e7f4762833b727edf31be0c3c0f70954dbcc27059",
+    "research/outputs/experiment_matrix/mistral_small_24b_2409__gpqa/trace_steps.csv": "63a3faad9148717ac8eb58b42d752920f27938cd0efd67d277755e6995a012a1",
+    "research/outputs/experiment_matrix/mistral_small_24b_2409__math/trace_steps.csv": "961640ce82d38393f77389f01d2b0e3536fa9e2c8f5b5a8177fffba57ccb8de4",
+    "research/outputs/experiment_matrix/phi_4_mini_instruct__gpqa/trace_steps.csv": "eb42f4d5d7f563544ebd556319efdc17afc06f80f9b18f75d900029fdb127788",
+    "research/outputs/experiment_matrix/qwen2p5_0p5b__arc/trace_steps.csv": "448a0a6f863f25de2c7f58128b7480ffcb4abcce6414f9498e2ec61dcffd50b4",
+    "research/outputs/experiment_matrix/qwen2p5_0p5b__gpqa/trace_steps.csv": "8e5642dd553f2df8708628eeb7ffc9af69d3667e979aff7af27f2d448b73e878",
+    "research/outputs/experiment_matrix/qwen2p5_14b__gpqa/trace_steps.csv": "a39edb5e97c1001c8d19e47450be9b9c5ad6895a8f611014888b58680fcbac15",
+    "research/outputs/experiment_matrix/qwen2p5_14b__gsm8k/trace_steps.csv": "85325c57153d9a9a0fa8ccf432f1b17184fc66097f0f85a92fab8964055c2d6a",
+    "research/outputs/experiment_matrix/qwen2p5_14b__math/trace_steps.csv": "feb1f7f26dda7d3295549731164f14feeed78fdc47d9fe7645682c49d6668953",
+    "research/outputs/experiment_matrix/qwen2p5_32b__arc/trace_steps.csv": "fde4b619f937aa72ba03350b10f960817e91b877d718b472b2e0b1392b866e72",
+    "research/outputs/experiment_matrix/qwen2p5_32b__gpqa/trace_steps.csv": "896c3ddcd3bea41beea81636e4b85d4c0adae0e45090f807b81bba25041c3018",
+    "research/outputs/experiment_matrix/qwen2p5_32b__math/trace_steps.csv": "944d44835c5e96be130d1cd3570728dea0ee9fe0adf3be5939bcf7dd2cadcdbf",
+    "research/outputs/experiment_matrix/qwen2p5_3b__arc/trace_steps.csv": "d87193ff98a20e1e151083016428cd956ef0fdd37a2a8dfc7b1b3cfa9055bb59",
+    "research/outputs/experiment_matrix/qwen2p5_3b__gpqa/trace_steps.csv": "4a13c20bc4a8a41f2a0c3b2a96c8ee3949435c033eae1d9e8e01d507cc47afa7",
+    "research/outputs/experiment_matrix/qwen2p5_7b__arc/trace_steps.csv": "125ee0f623eb626a567572f68f21d7def1d63ed5a7f5daff87c54be0c71deca8",
+    "research/outputs/experiment_matrix/qwen2p5_7b__gpqa/trace_steps.csv": "55c15212abbfea5f15dff147ecab40bcd7bb9d8001a029fb7715b4d82901553f",
+    "research/outputs/experiment_matrix/yi_1p5_9b_chat__arc/trace_steps.csv": "e2ca65786707ba582d7d55c258a4c8a2e9d4742605a7af2429b8b591fa900a9f",
+    "research/outputs/experiment_matrix/yi_1p5_9b_chat__gpqa/trace_steps.csv": "9dd5d7908fa5df9462eaa4af389d5417f6fceb560ccb6388f171565e0b948b4b",
+    "research/outputs/experiment_matrix/yi_1p5_9b_chat__gsm8k/trace_steps.csv": "6f4b65571820996c8640a9247cd42c55fcb91b7c04fe901685800de4357c7005"
+  }
+}

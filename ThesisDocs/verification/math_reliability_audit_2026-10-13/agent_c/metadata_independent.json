@@ -1,0 +1,2248 @@
+{
+  "matrix": [
+    {
+      "cell": "deepseek_r1_distill_1p5b__arc",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "deepseek_r1_distill_1p5b__gpqa",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "deepseek_r1_distill_1p5b__gsm8k",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "deepseek_r1_distill_1p5b__math",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "deepseek_r1_distill_7b__arc",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "deepseek_r1_distill_7b__gpqa",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "deepseek_r1_distill_7b__gsm8k",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "deepseek_r1_distill_7b__math",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "internlm3_8b_instruct__arc",
+      "model": "internlm3_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "internlm3_8b_instruct__gpqa",
+      "model": "internlm3_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "internlm3_8b_instruct__gsm8k",
+      "model": "internlm3_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "internlm3_8b_instruct__math",
+      "model": "internlm3_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__arc",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gpqa",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__gsm8k",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "llama_3p1_8b_instruct__math",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__arc",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__gpqa",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__gsm8k",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "mistral_7b_instruct_v0p3__math",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "mistral_small_24b_2409__arc",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "mistral_small_24b_2409__gpqa",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "mistral_small_24b_2409__gsm8k",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "mistral_small_24b_2409__math",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "phi_4_mini_instruct__arc",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "phi_4_mini_instruct__gpqa",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "phi_4_mini_instruct__gsm8k",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "phi_4_mini_instruct__math",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_0p5b__arc",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_0p5b__gpqa",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "qwen2p5_0p5b__gsm8k",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "qwen2p5_0p5b__math",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_14b__arc",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_14b__gpqa",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "qwen2p5_14b__gsm8k",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "qwen2p5_14b__math",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_32b__arc",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_32b__gpqa",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "qwen2p5_32b__gsm8k",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "qwen2p5_32b__math",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_3b__arc",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_3b__gpqa",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "qwen2p5_3b__gsm8k",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "qwen2p5_3b__math",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_7b__arc",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "qwen2p5_7b__gpqa",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "qwen2p5_7b__gsm8k",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "qwen2p5_7b__math",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "yi_1p5_9b_chat__arc",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 8,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "yi_1p5_9b_chat__gpqa",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "yi_1p5_9b_chat__gsm8k",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 10,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "yi_1p5_9b_chat__math",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.1,
+        0.6,
+        1.0
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 14,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    }
+  ],
+  "standardized": [
+    {
+      "cell": "global_deepseek_r1_distill_1p5b_arc",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_deepseek_r1_distill_1p5b_gpqa",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_deepseek_r1_distill_1p5b_gsm8k",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_deepseek_r1_distill_1p5b_math",
+      "model": "deepseek_r1_distill_1p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_deepseek_r1_distill_7b_arc",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_deepseek_r1_distill_7b_gpqa",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_deepseek_r1_distill_7b_gsm8k",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_deepseek_r1_distill_7b_math",
+      "model": "deepseek_r1_distill_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_llama_3p1_8b_instruct_arc",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_llama_3p1_8b_instruct_gpqa",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_llama_3p1_8b_instruct_gsm8k",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_llama_3p1_8b_instruct_math",
+      "model": "llama_3p1_8b_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_mistral_7b_instruct_v0p3_arc",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_mistral_7b_instruct_v0p3_gpqa",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_mistral_7b_instruct_v0p3_gsm8k",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_mistral_7b_instruct_v0p3_math",
+      "model": "mistral_7b_instruct_v0p3",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_mistral_small_24b_2409_arc",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_mistral_small_24b_2409_gpqa",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_mistral_small_24b_2409_gsm8k",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_mistral_small_24b_2409_math",
+      "model": "mistral_small_24b_2409",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_phi_4_mini_instruct_arc",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_phi_4_mini_instruct_gpqa",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_phi_4_mini_instruct_gsm8k",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_phi_4_mini_instruct_math",
+      "model": "phi_4_mini_instruct",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_0p5b_arc",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_0p5b_gpqa",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_0p5b_gsm8k",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_0p5b_math",
+      "model": "qwen2p5_0p5b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_14b_arc",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_14b_gpqa",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_14b_gsm8k",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_14b_math",
+      "model": "qwen2p5_14b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_32b_arc",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_32b_gpqa",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_32b_gsm8k",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_32b_math",
+      "model": "qwen2p5_32b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_3b_arc",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_3b_gpqa",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_3b_gsm8k",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_3b_math",
+      "model": "qwen2p5_3b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_7b_arc",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_7b_gpqa",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_7b_gsm8k",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 1000,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_qwen2p5_7b_math",
+      "model": "qwen2p5_7b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_qwen_3p5_9b_arc",
+      "model": "qwen_3p5_9b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_qwen_3p5_9b_gpqa",
+      "model": "qwen_3p5_9b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_qwen_3p5_9b_gsm8k",
+      "model": "qwen_3p5_9b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_qwen_3p5_9b_math",
+      "model": "qwen_3p5_9b",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    },
+    {
+      "cell": "global_yi_1p5_9b_chat_arc",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "arc",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "arc_test"
+      ]
+    },
+    {
+      "cell": "global_yi_1p5_9b_chat_gpqa",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "gpqa",
+      "task_count": 448,
+      "task_id_prefixes": [
+        "gpqa_main"
+      ]
+    },
+    {
+      "cell": "global_yi_1p5_9b_chat_gsm8k",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "train",
+      "task_source": "gsm8k",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "gsm8k_train"
+      ]
+    },
+    {
+      "cell": "global_yi_1p5_9b_chat_math",
+      "model": "yi_1p5_9b_chat",
+      "temperatures": [
+        0.6
+      ],
+      "seeds": [
+        7
+      ],
+      "max_steps": 5,
+      "completion_cap": 256,
+      "shuffle_seed": 17,
+      "requested_split": "test",
+      "task_source": "math",
+      "task_count": 500,
+      "task_id_prefixes": [
+        "math_test"
+      ]
+    }
+  ],
+  "rosters": {
+    "matrix": {
+      "deepseek_r1_distill_1p5b": {
+        "alias": "deepseek_r1_distill_1p5b",
+        "hf_name": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+        "family": "DeepSeek-R1 distill",
+        "parameter_count": "1.5B"
+      },
+      "deepseek_r1_distill_7b": {
+        "alias": "deepseek_r1_distill_7b",
+        "hf_name": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "family": "DeepSeek-R1 distill",
+        "parameter_count": "7B"
+      },
+      "internlm3_8b_instruct": {
+        "alias": "internlm3_8b_instruct",
+        "hf_name": "internlm/InternLM3-8B-Instruct",
+        "family": "InternLM3",
+        "parameter_count": "8B"
+      },
+      "llama_3p1_8b_instruct": {
+        "alias": "llama_3p1_8b_instruct",
+        "hf_name": "meta-llama/Llama-3.1-8B-Instruct",
+        "family": "Llama 3.1",
+        "parameter_count": "8B"
+      },
+      "mistral_7b_instruct_v0p3": {
+        "alias": "mistral_7b_instruct_v0p3",
+        "hf_name": "mistralai/Mistral-7B-Instruct-v0.3",
+        "family": "Mistral instruct",
+        "parameter_count": "7B"
+      },
+      "mistral_small_24b_2409": {
+        "alias": "mistral_small_24b_2409",
+        "hf_name": "mistralai/Mistral-Small-Instruct-2409",
+        "family": "Mistral Small",
+        "parameter_count": "22B"
+      },
+      "phi_4_mini_instruct": {
+        "alias": "phi_4_mini_instruct",
+        "hf_name": "microsoft/Phi-4-mini-instruct",
+        "family": "Phi 4",
+        "parameter_count": "4B"
+      },
+      "qwen2p5_0p5b": {
+        "alias": "qwen2p5_0p5b",
+        "hf_name": "Qwen/Qwen2.5-0.5B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "0.5B"
+      },
+      "qwen2p5_14b": {
+        "alias": "qwen2p5_14b",
+        "hf_name": "Qwen/Qwen2.5-14B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "14B"
+      },
+      "qwen2p5_32b": {
+        "alias": "qwen2p5_32b",
+        "hf_name": "Qwen/Qwen2.5-32B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "32B"
+      },
+      "qwen2p5_3b": {
+        "alias": "qwen2p5_3b",
+        "hf_name": "Qwen/Qwen2.5-3B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "3B"
+      },
+      "qwen2p5_7b": {
+        "alias": "qwen2p5_7b",
+        "hf_name": "Qwen/Qwen2.5-7B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "7B"
+      },
+      "yi_1p5_9b_chat": {
+        "alias": "yi_1p5_9b_chat",
+        "hf_name": "01-ai/Yi-1.5-9B-Chat",
+        "family": "Yi 1.5",
+        "parameter_count": "9B"
+      }
+    },
+    "standardized": {
+      "deepseek_r1_distill_1p5b": {
+        "alias": "deepseek_r1_distill_1p5b",
+        "hf_name": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+        "family": "DeepSeek-R1 distill",
+        "parameter_count": "1.5B"
+      },
+      "deepseek_r1_distill_7b": {
+        "alias": "deepseek_r1_distill_7b",
+        "hf_name": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "family": "DeepSeek-R1 distill",
+        "parameter_count": "7B"
+      },
+      "llama_3p1_8b_instruct": {
+        "alias": "llama_3p1_8b_instruct",
+        "hf_name": "meta-llama/Llama-3.1-8B-Instruct",
+        "family": "Llama 3.1",
+        "parameter_count": "8B"
+      },
+      "mistral_7b_instruct_v0p3": {
+        "alias": "mistral_7b_instruct_v0p3",
+        "hf_name": "mistralai/Mistral-7B-Instruct-v0.3",
+        "family": "Mistral instruct",
+        "parameter_count": "7B"
+      },
+      "mistral_small_24b_2409": {
+        "alias": "mistral_small_24b_2409",
+        "hf_name": "mistralai/Mistral-Small-Instruct-2409",
+        "family": "Mistral Small",
+        "parameter_count": "22B"
+      },
+      "phi_4_mini_instruct": {
+        "alias": "phi_4_mini_instruct",
+        "hf_name": "microsoft/Phi-4-mini-instruct",
+        "family": "Phi 4",
+        "parameter_count": "4B"
+      },
+      "qwen2p5_0p5b": {
+        "alias": "qwen2p5_0p5b",
+        "hf_name": "Qwen/Qwen2.5-0.5B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "0.5B"
+      },
+      "qwen2p5_14b": {
+        "alias": "qwen2p5_14b",
+        "hf_name": "Qwen/Qwen2.5-14B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "14B"
+      },
+      "qwen2p5_32b": {
+        "alias": "qwen2p5_32b",
+        "hf_name": "Qwen/Qwen2.5-32B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "32B"
+      },
+      "qwen2p5_3b": {
+        "alias": "qwen2p5_3b",
+        "hf_name": "Qwen/Qwen2.5-3B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "3B"
+      },
+      "qwen2p5_7b": {
+        "alias": "qwen2p5_7b",
+        "hf_name": "Qwen/Qwen2.5-7B-Instruct",
+        "family": "Qwen2.5 instruct",
+        "parameter_count": "7B"
+      },
+      "qwen_3p5_9b": {
+        "alias": "qwen_3p5_9b",
+        "hf_name": "Qwen/Qwen3.5-9B",
+        "family": "Qwen3.5 instruct",
+        "parameter_count": "9B"
+      },
+      "yi_1p5_9b_chat": {
+        "alias": "yi_1p5_9b_chat",
+        "hf_name": "01-ai/Yi-1.5-9B-Chat",
+        "family": "Yi 1.5",
+        "parameter_count": "9B"
+      }
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "reviewer": "Agent A",
+  "pdf_sha256": "bba3e78c1d6edcc2a38e7f3cd2159382ca5f6a34320413ac42ea08f0775b5559",
+  "expected_pdf_sha256_matches": true,
+  "pdf_pages": 84,
+  "compiled_original_sha256": "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d",
+  "compiled_corrected_sha256": "09104843e0846043acf79145e4332a0653ef2273487d273dfa8b899d2b02f92b",
+  "edits": [
+    {
+      "operation": "replace",
+      "old_start_line": 915,
+      "old_end_line": 915,
+      "new_start_line": 915,
+      "new_end_line": 915,
+      "old": [
+        "| No extracted candidate at the stop | 196 | 3.42% |"
+      ],
+      "new": [
+        "| Missing normalized answer at the stop | 196 | 3.42% |"
+      ]
+    },
+    {
+      "operation": "replace",
+      "old_start_line": 921,
+      "old_end_line": 921,
+      "new_start_line": 921,
+      "new_end_line": 921,
+      "old": [
+        "Every observed utility loss stops on an incorrect candidate and ends correctly. Table 7 applies mutually exclusive priority rules, with empty stops first. The 48.35-percent late-repair group first reaches an eligible correct answer at least two steps after stopping; variable horizons prevent interpreting this as a universal step-five outcome."
+      ],
+      "new": [
+        "Every observed utility loss stops on an incorrect candidate and ends correctly. Table 7 applies mutually exclusive priority rules, testing missing recorded normalized answers first (blank or CSV-missing values); raw extracted answer text can still be present. The 48.35-percent late-repair group first reaches an eligible correct answer at least two steps after stopping; variable horizons prevent interpreting this as a universal step-five outcome."
+      ]
+    }
+  ],
+  "tex_occurrences_original": 257,
+  "tex_occurrences_new": 257,
+  "all_tex_occurrences_byte_text_identical": true,
+  "digit_containing_table_cells_original": 277,
+  "digit_containing_table_cells_new": 277,
+  "all_digit_containing_table_cells_identical": true,
+  "taxonomy_counts": {
+    "B_stopped_on_empty_answer": 196,
+    "C_passed_earlier_correct": 460,
+    "D_step1_only_correct": 600,
+    "E_next_step_repair": 1706,
+    "F_late_repair": 2773
+  },
+  "missing_normalized_literal_counts": {
+    "": 191,
+    "n/a": 5
+  },
+  "nonempty_raw_extracted_answer_count": 108,
+  "category_b_share_percent": 3.4176111595466434,
+  "taxonomy_input_sha256": {
+    "research/reports/thesis_failure_audit_v1/loss_classification.csv": "cdaf8b406d0f116afb8d611c6c148dcac2edb31ade781152989d9517e4b4c43f",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__arc/trace_steps.csv": "108cd38409eff2b72fd1de1aacd373599428285d375ecb3634a6287ae0267d32",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__gpqa/trace_steps.csv": "fc005e529267e3a8e4495502a0986453e27733d7504df48fd936f38575c13621",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_1p5b__gsm8k/trace_steps.csv": "e91a44cbb6cafe180a5f4278df9e75c6227dcb2515b288cd48bf90dce8a98efd",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_7b__arc/trace_steps.csv": "cbd7ffb0b9d66cf1e7fc898e63374a72c827d1eeeee9e56d36c9dcad9d173c78",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_7b__gpqa/trace_steps.csv": "652cce7ad19313648d911a2f579f8e39bdd65d312c48569ece8047831242565b",
+    "research/outputs/experiment_matrix/deepseek_r1_distill_7b__gsm8k/trace_steps.csv": "73df7dca3f47c705a9395ed716ebb574f8184d6edecc6c9622ecfbc8de80882a",
+    "research/outputs/experiment_matrix/internlm3_8b_instruct__gpqa/trace_steps.csv": "bf8fa9ef7eaa3040d4134b296ac2a22304b23c50424df27aab91d76ddaf6f6f1",
+    "research/outputs/experiment_matrix/llama_3p1_8b_instruct__arc/trace_steps.csv": "1a03dc1bd01889fd55f77103ed87e5a737944d77e0db63e26ca08999dfa9473e",
+    "research/outputs/experiment_matrix/llama_3p1_8b_instruct__gpqa/trace_steps.csv": "537e3f45615ff235fba48fbc0f224d703b6401fbf017f364ac5357dfd63751c9",
+    "research/outputs/experiment_matrix/llama_3p1_8b_instruct__gsm8k/trace_steps.csv": "f46c9eac9a4039157be7b4cb8d0cb7b09ad1a2a2e7bfec313c2322e7112d4033",
+    "research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__arc/trace_steps.csv": "daec25e2c515f71a4335ed5a360c39c72e8fdc9667ea1a4a8c5ec6210db7caf9",
+    "research/outputs/experiment_matrix/mistral_7b_instruct_v0p3__gpqa/trace_steps.csv": "791ddebba557c91bc8435940ee7dbaaab1908c458f1a13a86c1f1ded4ad047a1",
+    "research/outputs/experiment_matrix/mistral_small_24b_2409__arc/trace_steps.csv": "e8948f6fdc571d34230cfb6e7f4762833b727edf31be0c3c0f70954dbcc27059",
+    "research/outputs/experiment_matrix/mistral_small_24b_2409__gpqa/trace_steps.csv": "63a3faad9148717ac8eb58b42d752920f27938cd0efd67d277755e6995a012a1",
+    "research/outputs/experiment_matrix/mistral_small_24b_2409__math/trace_steps.csv": "961640ce82d38393f77389f01d2b0e3536fa9e2c8f5b5a8177fffba57ccb8de4",
+    "research/outputs/experiment_matrix/phi_4_mini_instruct__gpqa/trace_steps.csv": "eb42f4d5d7f563544ebd556319efdc17afc06f80f9b18f75d900029fdb127788",
+    "research/outputs/experiment_matrix/qwen2p5_0p5b__arc/trace_steps.csv": "448a0a6f863f25de2c7f58128b7480ffcb4abcce6414f9498e2ec61dcffd50b4",
+    "research/outputs/experiment_matrix/qwen2p5_0p5b__gpqa/trace_steps.csv": "8e5642dd553f2df8708628eeb7ffc9af69d3667e979aff7af27f2d448b73e878",
+    "research/outputs/experiment_matrix/qwen2p5_14b__gpqa/trace_steps.csv": "a39edb5e97c1001c8d19e47450be9b9c5ad6895a8f611014888b58680fcbac15",
+    "research/outputs/experiment_matrix/qwen2p5_14b__gsm8k/trace_steps.csv": "85325c57153d9a9a0fa8ccf432f1b17184fc66097f0f85a92fab8964055c2d6a",
+    "research/outputs/experiment_matrix/qwen2p5_14b__math/trace_steps.csv": "feb1f7f26dda7d3295549731164f14feeed78fdc47d9fe7645682c49d6668953",
+    "research/outputs/experiment_matrix/qwen2p5_32b__arc/trace_steps.csv": "fde4b619f937aa72ba03350b10f960817e91b877d718b472b2e0b1392b866e72",
+    "research/outputs/experiment_matrix/qwen2p5_32b__gpqa/trace_steps.csv": "896c3ddcd3bea41beea81636e4b85d4c0adae0e45090f807b81bba25041c3018",
+    "research/outputs/experiment_matrix/qwen2p5_32b__math/trace_steps.csv": "944d44835c5e96be130d1cd3570728dea0ee9fe0adf3be5939bcf7dd2cadcdbf",
+    "research/outputs/experiment_matrix/qwen2p5_3b__arc/trace_steps.csv": "d87193ff98a20e1e151083016428cd956ef0fdd37a2a8dfc7b1b3cfa9055bb59",
+    "research/outputs/experiment_matrix/qwen2p5_3b__gpqa/trace_steps.csv": "4a13c20bc4a8a41f2a0c3b2a96c8ee3949435c033eae1d9e8e01d507cc47afa7",
+    "research/outputs/experiment_matrix/qwen2p5_7b__arc/trace_steps.csv": "125ee0f623eb626a567572f68f21d7def1d63ed5a7f5daff87c54be0c71deca8",
+    "research/outputs/experiment_matrix/qwen2p5_7b__gpqa/trace_steps.csv": "55c15212abbfea5f15dff147ecab40bcd7bb9d8001a029fb7715b4d82901553f",
+    "research/outputs/experiment_matrix/yi_1p5_9b_chat__arc/trace_steps.csv": "e2ca65786707ba582d7d55c258a4c8a2e9d4742605a7af2429b8b591fa900a9f",
+    "research/outputs/experiment_matrix/yi_1p5_9b_chat__gpqa/trace_steps.csv": "9dd5d7908fa5df9462eaa4af389d5417f6fceb560ccb6388f171565e0b948b4b",
+    "research/outputs/experiment_matrix/yi_1p5_9b_chat__gsm8k/trace_steps.csv": "6f4b65571820996c8640a9247cd42c55fcb91b7c04fe901685800de4357c7005"
+  },
+  "rendered_pages": [
+    {
+      "pdf_page_1_based": 50,
+      "body_label": "43",
+      "image": "revision_final_render_bba3e78c/page_050.png",
+      "image_sha256": "fe3c7bcc813740fd9a822c1f796faf920038da19e3fd32929309ee25b3ff3cfa",
+      "text": "The control retains committee and independent-vote aggregates, so 'No Peers' is not a\npeer-free ablation. The stored contrast cannot isolate causal peer value or certify online\ncorrectness prediction.\nAll 10,000 bootstrap lifts were positive (100 percent), a resampling proportion rather\nthan a conventional p-value, universal superiority or independent generation-seed\nreplication. Repeated resampling of the development distribution cannot repair feature\nleakage or non-nested model selection.\n4.7 Replay and failure interpretation\nThe Qwen2.5-7B/GSM8K replay reduces completion tokens from 827,804 to 377,960\n(54.34 percent), while accuracy falls from 70.53 to 64.20 percent, a loss of 6.33\npercentage points. Fitting and evaluating on the same 1,500 traces makes this a\ndevelopment diagnostic; Chapter 5 reports actual runtime experiments.\nAcross 75,965 sanitized variable-horizon trajectories, the archived hazard policy wins in\n68,095 (89.64 percent), ties in 2,135 (2.81 percent) and loses in 5,735 (7.55 percent)\nagainst the full horizon under stored step utility. These are utility verdicts, not accuracy\npercentages. The audit reconstructs both binary endpoint labels from utility and cost,\nchecks unique pairs and partitions every loss exactly once.\n43\n"
+    },
+    {
+      "pdf_page_1_based": 51,
+      "body_label": "44",
+      "image": "revision_final_render_bba3e78c/page_051.png",
+      "image_sha256": "4861ad1f000fc88da4a7c669e7b12eedb0723e33558b2b56ac09b5254260809e",
+      "text": "Table 7. Mutually exclusive archived-policy loss patterns; 5,735 utility losses\namong 75,965 trajectories.\nObserved loss pattern\nCount\nShare of losses\nMissing normalized answer at the stop\n196\n3.42%\nAn earlier decision-eligible candidate was correct\n460\n8.02%\nStep one was correct; no eligible pre-stop answer was correct\n600\n10.46%\nFirst eligible correct answer arrived one step after the stop\n1,706\n29.75%\nFirst eligible correct answer arrived at least two steps after the stop\n2,773\n48.35%\nEvery observed utility loss stops on an incorrect candidate and ends correctly. Table 7\napplies mutually exclusive priority rules, testing missing recorded normalized answers\nfirst (blank or CSV-missing values); raw extracted answer text can still be present. The\n48.35-percent late-repair group first reaches an eligible correct answer at least two\nsteps after stopping; variable horizons prevent interpreting this as a universal step-five\noutcome.\nThe taxonomy conditions on archived labels and the stored policy. Recomputation\nperforms no fresh regrading or probe training, and excludes old classification-tag AUCs.\nThese patterns cannot prove that all online predictors must fail. Section 3.5's grader\nchecks cover specified behaviors; independent adjudication is needed to assess\nlabeling errors' effect on the partition.\n4.8 Empirical conclusions\nContinuation value varies with model, domain and cost. Matched estimators can\nimprove or worsen utility; ranking quality and replay savings alone do not establish\n44\n"
+    },
+    {
+      "pdf_page_1_based": 52,
+      "body_label": "45",
+      "image": "revision_final_render_bba3e78c/page_052.png",
+      "image_sha256": "664bf86f2f5c9abf94cee3283da549e9f1b4feaf5fabf9ba7269c83d5e99aec0",
+      "text": "accuracy preservation.\n45\n"
+    },
+    {
+      "pdf_page_1_based": 53,
+      "body_label": "46",
+      "image": "revision_final_render_bba3e78c/page_053.png",
+      "image_sha256": "9fc8c1ee3fdbbae4edf0c78d8a96cf9a075d40bf064d3f3a4e3c239252183ae2",
+      "text": "Chapter 5 Online stopping and computation trade-offs\n5.1 Causal controller contract\nThe controller accepts completed responses in step order, storing only their observed\nprefix: candidate answer, parsing status, completion tokens and available confidence or\ninstrumentation. Its API excludes reference answers, correctness labels, future\nresponses and full-trajectory scores, and rejects skipped, repeated or out-of-order\nobservations.\nThe policy enforces a two-increment floor, a finite horizon and terminal closure.\nDecisions record the selected answer and step, termination reason and latency; the\nmanifest binds the policy fingerprint. Validation covers confidence, parsing and future\ntimestamps.\nLive manifests preserve the executed source versions for generation and latency.\nSubsequent validation and accounting revisions reproduce all 480 saved decision\nhistories across the four collections, including reused baseline rows, and leave final-\nanswer labels unchanged. This replay verifies existing observations; it does not replace\nthe original generation-cost or latency provenance.\nOptional peer agreement requires a complete same-step roster closed before scoring;\nincomplete panels, duplicate peers and late votes are rejected. Timestamps verify event\norder, not an external caller's authenticity. A fleet experiment must retain generation\nevents and charge every peer's computation.\n46\n"
+    }
+  ],
+  "visual_outcome": "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS",
+  "visual_finding": "PDF page52/body45 contains only orphan continuation line accuracy preservation. plus folio; page51/body44 ends the same paragraph after two lines.",
+  "changed_taxonomy_claim_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+  "dependencies": "Archived labels, stored stops, default CSV missing-value semantics and first active taxonomy predicate; no regrading or count reassignment.",
+  "unresolved_endpoints_unchanged": [
+    "N1 LOCO/LOMO underlying held-out threshold predictions",
+    "historical stacked pipeline endpoint",
+    "in-sample replay endpoint"
+  ],
+  "scope": "Source exact comparison plus read-only predicate check and final-byte renders of pages50-53; not complete84-page visual review."
+}

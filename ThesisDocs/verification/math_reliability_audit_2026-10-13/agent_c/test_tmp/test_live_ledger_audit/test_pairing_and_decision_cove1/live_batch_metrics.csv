@@ -1,0 +1,4 @@
+policy,generated_tokens,prompt_tokens,padded_prefill_token_slots,decode_token_slots
+unregistered,14,22,22,14
+active,14,22,22,14
+never,28,44,44,28

@@ -1,0 +1,172 @@
+[
+  {
+    "id": "F-001",
+    "severity": "low",
+    "category": "presentation issue",
+    "outcome": "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS",
+    "claim_ids": [
+      "V5-0669",
+      "V5-0684"
+    ],
+    "location": "ThesisDocs/Masters_Thesis_Formal_v5.md:915;921; PDF page51/body44,Table7",
+    "claim": "No extracted candidate at the stop; empty stops first",
+    "evidence": [
+      "agent_c/empty_candidate_check.json",
+      "coordinator/taxonomy_label_check.json",
+      "agent_b/empty_category_independent.json",
+      "agent_a/corrected_final_copy_review.json"
+    ],
+    "established_issue": "Predicate tests normalized-field missingness under archived CSV semantics.196 cases:191blank and5literal n/a normalized fields;108raw answer literals nonempty, including22missing-value-like markers and86otherstrings.",
+    "smallest_correction": "Missing normalized answer at the stop; Table7 prioritizes missing normalized answers under the archived CSV convention; raw text can be present.",
+    "required_assumptions": "Retain archived CSV NA interpretation, source-qualified joins and category priority. No semantic reclassification/regrading.",
+    "downstream_effect": "Description only; no count/share/utility/label/equation changes.",
+    "correction_status": "Applied and independently re-reviewed in v5_math_audit1; original files preserved.",
+    "corrected_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS"
+  },
+  {
+    "id": "G-001",
+    "severity": "material verification gap",
+    "category": "unresolved question",
+    "outcome": "NOT ESTABLISHED",
+    "claim_ids": [
+      "V7-0187",
+      "V7-0188",
+      "V7-0191",
+      "V7-0192",
+      "V5-0543",
+      "V5-0544",
+      "V5-0548",
+      "V5-0549"
+    ],
+    "claim": "N1 LOCO/LOMO mean effects and95%intervals",
+    "evidence": [
+      "agent_c/controls_independent.json",
+      "tools/compute_progress_report_review_metrics.py:200"
+    ],
+    "missing_evidence": "Historical heldout Ridge predictions or per-unit selected utility-profile contributions and matching fold provenance. Caches retain features/targets/profiles; no prohibited refit.",
+    "verified_part": "919.20/75965 and976.80/75965 normalization and declared endpoint/count contract.",
+    "smallest_correction": "No numerical alteration justified by nonreproduction alone; retain as unresolved historical results in audit.",
+    "downstream_effect": "N1 endpoints not accepted; N2/N3/N4/N5/N6 and core theory independent."
+  },
+  {
+    "id": "G-002",
+    "severity": "material verification gap",
+    "category": "unresolved question",
+    "outcome": "NOT ESTABLISHED",
+    "claim_ids": [
+      "V7-0223",
+      "V5-0659",
+      "V5-0662",
+      "V5-0990"
+    ],
+    "claim": "Historical stack AUCs,lift,bootstrap interval and10000positive lifts",
+    "evidence": [
+      "agent_c/ledger.json C-014",
+      "agent_c/review.md"
+    ],
+    "missing_evidence": "Per-row stacked/control score arrays, matching labels, and exact bootstrap inputs/outputs for historical report. Current causal tournament arrays are a different analysis.",
+    "verified_part": "Accessible aggregate contains reported values; subtraction and inspected temporal/non-nested code limitations are checkable.",
+    "smallest_correction": "No new numeric value invented; retain explicitly retrospective interpretation and audit uncertainty.",
+    "downstream_effect": "No accepted online/causal peer or performance guarantee from stack; current prefix/controller arithmetic unaffected."
+  },
+  {
+    "id": "G-003",
+    "severity": "material verification gap",
+    "category": "unresolved question",
+    "outcome": "NOT ESTABLISHED",
+    "claim_ids": [
+      "V7-0224",
+      "V5-0663"
+    ],
+    "claim": "Original1500trajectory7Bfitted replay saving54.34%,accuracy70.53→64.20%",
+    "evidence": [
+      "agent_c/ledger.json C-015",
+      "agent_b/review.md D17",
+      "agent_c/gap_search.md",
+      "agent_c/rounded_replay_bounds.json",
+      "coordinator/independent_rounded_replay.json"
+    ],
+    "missing_evidence": "Original per-run stopped rows or full-precision fitted heads. Four-decimal heads and complete unscaled feature order exist; rounding intervals leave97 trajectory stops uncertified. No refit performed.",
+    "verified_part": "All15000raw rows reproduce baseline827804tokens/1058correct. Quoted377960stopped total gives54.341849%saving. Independent rounded-head evaluation gives377774tokens/963correct; conservative outer token bounds374891..380891 and correct-count958..964 do not contradict the historical full-precision endpoint and are not asserted jointly attainable.",
+    "smallest_correction": "Retain exact stopped endpoint as unestablished; do not mistake rounded coefficients for original parameters or invent a numerical correction.",
+    "downstream_effect": "Separate from276task portable-prefix replay and frozen-policy Pareto variants with available saved rows."
+  },
+  {
+    "id": "G-004",
+    "severity": "material provenance gap",
+    "category": "empirical limitation",
+    "outcome": "NOT ESTABLISHED",
+    "claim_ids": [
+      "V5-1065"
+    ],
+    "claim": "Exact reproduction of legacy peer executed feature pipeline",
+    "evidence": [
+      "agent_c/ancillary_independent.json",
+      "agent_c/ledger.json C-013/C-016"
+    ],
+    "missing_evidence": "Hash-matching original runner and feature-module sources and complete executed feature/fit provenance.",
+    "verified_part": "Saved-array AUCs,paired folds and2paired bootstrap contrasts reproduce.",
+    "smallest_correction": "Keep manuscript provenance qualification; no altered metric justified.",
+    "downstream_effect": "No prospective peer-fleet or causal savings guarantee; saved-array descriptive score arithmetic remains supported."
+  },
+  {
+    "id": "L-001",
+    "severity": "scope condition",
+    "category": "valid conditional result",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "claim": "Core stopping mathematics",
+    "evidence": [
+      "agent_a/review.md",
+      "agent_b/cross_review_a.md",
+      "agent_a/cross_review_b.md"
+    ],
+    "required_assumptions": "Finite bounded stopping times, measurable causal selector/grader,adapted integrable costs,recorded persistence/coverage/fixed-process assumptions for respective special results.",
+    "empirical_premises_established": false,
+    "downstream_effect": "Conditional validity does not imply fitted Bellman optimality,true live posterior calibration,observed persistence or per-instance correctness."
+  },
+  {
+    "id": "L-002",
+    "severity": "scope condition",
+    "category": "empirical limitation",
+    "outcome": "NOT ESTABLISHED",
+    "claim": "Broader empirical guarantees",
+    "evidence": [
+      "coordinator/independent_numerics.json",
+      "agent_c/prefix_source_independent.json",
+      "agent_c/runtime_compare.json"
+    ],
+    "missing_evidence": "Representative untouched task/model/seed evaluation,prespecified noninferiority tolerance,validated live conditional targets,semantic label adjudication and complete original execution provenance.",
+    "verified_part": "Recorded panels,conditional formulas and tested code behaviors as detailed in report.",
+    "downstream_effect": "Accuracy noninferiority,adaptive benefit,broad adversarial robustness,energy/total-cost guarantees remain unestablished."
+  },
+  {
+    "id": "L-003",
+    "severity": "reference scope gap",
+    "category": "unresolved question",
+    "outcome": "NOT ESTABLISHED",
+    "claim": "Full original-reference and historical receipt verification",
+    "evidence": [
+      "agent_b/visual_review.json",
+      "agent_b/review.md",
+      "AUDIT_REPORT.md Primary references",
+      "unresolved_claims.json"
+    ],
+    "missing_evidence": "Accessible original Clopper–Pearson full text/Peskir book; complete checks of each prior-method algorithm and historical107/243suite source-version receipts.",
+    "verified_part": "Finite Snell and binomial coverage independently derived; Ferguson and original Hoeffding checked; required current suites executed.",
+    "downstream_effect": "No identified proof defect follows from access gap. No novelty or institutional acceptance certification."
+  },
+  {
+    "id": "QA-001",
+    "severity": "resolved layout issue",
+    "category": "presentation issue",
+    "outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+    "claim": "First corrected84pagePDF candidate stranded final line onpage52",
+    "evidence": [
+      "agent_a/corrected_working_copy_review.md",
+      "agent_a/corrected_final_copy_review.md",
+      "corrected_extended_v5_math_audit1/final_verification.json"
+    ],
+    "smallest_correction": "Shorten only added priority explanation while preserving normalized-field/CSV/raw-text meaning.",
+    "downstream_effect": "Final83pagePDF,onlypage51materiallychanged; candidate1 preserved and superseded. No equation/numerical changes."
+  }
+]

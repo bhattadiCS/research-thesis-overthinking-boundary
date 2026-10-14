@@ -1,0 +1,26 @@
+[
+  {
+    "path": "verapdf-greenfield-1.30.2/",
+    "bytes": 0,
+    "compressed_bytes": 0,
+    "crc32": 0
+  },
+  {
+    "path": "verapdf-greenfield-1.30.2/verapdf-install",
+    "bytes": 2157,
+    "compressed_bytes": 930,
+    "crc32": 3626664726
+  },
+  {
+    "path": "verapdf-greenfield-1.30.2/verapdf-install.bat",
+    "bytes": 1600,
+    "compressed_bytes": 743,
+    "crc32": 656837241
+  },
+  {
+    "path": "verapdf-greenfield-1.30.2/verapdf-izpack-installer-1.30.2.jar",
+    "bytes": 33169980,
+    "compressed_bytes": 32921567,
+    "crc32": 3272344398
+  }
+]

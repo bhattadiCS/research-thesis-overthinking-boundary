@@ -1,0 +1,67 @@
+{
+  "cwd": "C:\\Aditya_Data\\Personal\\ResearchThesis",
+  "environment": "Existing Python312; no dependency changes; final invocations disabled bytecode; test temp files constrained to agent_c/test_tmp",
+  "commands": [
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py live",
+      "purpose": "live",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py prefix",
+      "purpose": "prefix",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py prefix_sources",
+      "purpose": "prefix_sources",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py matrix",
+      "purpose": "matrix",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py controls",
+      "purpose": "controls",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py tournament",
+      "purpose": "tournament",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py ancillary",
+      "purpose": "ancillary",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/recompute.py metadata",
+      "purpose": "metadata",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/run_checks.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/parser_versions.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/runtime_compare.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/empty_candidate_check.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B ThesisDocs/verification/math_reliability_audit_2026-10-13/agent_c/finalize.py",
+      "exit_code": 0
+    }
+  ],
+  "notes": "Early own-script errors were corrected locally: public trap domain assumption, duplicate step key, dataframe index-column selection and historical-clock rebasing. They are not manuscript findings. First prefix-source run also exposed3 current/frozen parser version differences; historical source matches all7500."
+}

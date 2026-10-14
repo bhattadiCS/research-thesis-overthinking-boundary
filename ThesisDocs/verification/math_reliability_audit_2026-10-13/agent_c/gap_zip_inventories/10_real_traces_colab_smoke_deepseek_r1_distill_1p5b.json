@@ -1,0 +1,122 @@
+[
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/batch_metrics.csv",
+    "bytes": 1632,
+    "compressed_bytes": 694,
+    "crc32": 630037611
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/correctness_probe_metrics.csv",
+    "bytes": 193,
+    "compressed_bytes": 125,
+    "crc32": 1755644003
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/detector_comparison.csv",
+    "bytes": 596,
+    "compressed_bytes": 195,
+    "crc32": 3266579074
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/detector_comparison_by_run.csv",
+    "bytes": 2381,
+    "compressed_bytes": 322,
+    "crc32": 3650498086
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/drift_crossing_proof.png",
+    "bytes": 97009,
+    "compressed_bytes": 78071,
+    "crc32": 3003733293
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/empirical_bernstein_summary.csv",
+    "bytes": 279,
+    "compressed_bytes": 132,
+    "crc32": 1242197232
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/feature_weights.csv",
+    "bytes": 1007,
+    "compressed_bytes": 340,
+    "crc32": 4198857472
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/hazard_by_step.csv",
+    "bytes": 197,
+    "compressed_bytes": 134,
+    "crc32": 3308022444
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/hazard_decomposition_by_step.csv",
+    "bytes": 761,
+    "compressed_bytes": 369,
+    "crc32": 2123061882
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/hazard_drift_summary.csv",
+    "bytes": 761,
+    "compressed_bytes": 369,
+    "crc32": 2123061882
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/metadata.json",
+    "bytes": 2671,
+    "compressed_bytes": 1036,
+    "crc32": 1471849783
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/pilot_summary.csv",
+    "bytes": 431,
+    "compressed_bytes": 264,
+    "crc32": 3432218364
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/real_trace_detector_gaps.png",
+    "bytes": 84293,
+    "compressed_bytes": 73455,
+    "crc32": 3658722196
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/real_trace_feature_weights.png",
+    "bytes": 108642,
+    "compressed_bytes": 93419,
+    "crc32": 263554522
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/real_trace_hazard_curves.png",
+    "bytes": 97009,
+    "compressed_bytes": 78071,
+    "crc32": 3003733293
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/sequential_detector_summary.csv",
+    "bytes": 377,
+    "compressed_bytes": 151,
+    "crc32": 1305633661
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/trace_runs.csv",
+    "bytes": 740,
+    "compressed_bytes": 317,
+    "crc32": 1551680127
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/trace_steps.csv",
+    "bytes": 5286,
+    "compressed_bytes": 1650,
+    "crc32": 4252446623
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/hidden_states/deepseek_r1_distill_1p5b__calendar_offset_easy__temp0.10__seed7.npz",
+    "bytes": 6627,
+    "compressed_bytes": 6612,
+    "crc32": 1523658450
+  },
+  {
+    "path": "real_traces_colab_smoke_deepseek_r1_distill_1p5b/hidden_states/deepseek_r1_distill_1p5b__fraction_remaining__temp0.10__seed7.npz",
+    "bytes": 6606,
+    "compressed_bytes": 6594,
+    "crc32": 1680842134
+  }
+]

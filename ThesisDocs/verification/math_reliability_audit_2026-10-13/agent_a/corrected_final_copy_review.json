@@ -1,0 +1,143 @@
+{
+  "reviewer": "Agent A",
+  "final_pdf_sha256": "5b6b47b64ff1c94c836ef255b84cb5dc7f72ec31bd7b985bc18e72182ff0d373",
+  "final_compiled_sha256": "5c2181dae627b4407cebf93f8084a1adad9f4a5584134cc89610f349b7fd3654",
+  "final_pages": 83,
+  "original_compiled_sha256": "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d",
+  "exact_edits": [
+    {
+      "operation": "replace",
+      "original_lines": [
+        915,
+        915
+      ],
+      "corrected_lines": [
+        915,
+        915
+      ],
+      "original": [
+        "| No extracted candidate at the stop | 196 | 3.42% |"
+      ],
+      "corrected": [
+        "| Missing normalized answer at the stop | 196 | 3.42% |"
+      ]
+    },
+    {
+      "operation": "replace",
+      "original_lines": [
+        921,
+        921
+      ],
+      "corrected_lines": [
+        921,
+        921
+      ],
+      "original": [
+        "Every observed utility loss stops on an incorrect candidate and ends correctly. Table 7 applies mutually exclusive priority rules, with empty stops first. The 48.35-percent late-repair group first reaches an eligible correct answer at least two steps after stopping; variable horizons prevent interpreting this as a universal step-five outcome."
+      ],
+      "corrected": [
+        "Every observed utility loss stops on an incorrect candidate and ends correctly. Table 7 prioritizes missing normalized answers under the archived CSV convention; raw text can be present. The 48.35-percent late-repair group first reaches an eligible correct answer at least two steps after stopping; variable horizons prevent interpreting this as a universal step-five outcome."
+      ]
+    }
+  ],
+  "tex_occurrences_each": 257,
+  "all_tex_identical": true,
+  "digit_containing_table_cells_each": 277,
+  "all_numeric_table_cells_identical": true,
+  "full_taxonomy_predicate_rows_checked": 5735,
+  "missing_normalized_predicate_count": 196,
+  "full_predicate_equals_category_B": true,
+  "raw_field_evidence": "agent_a/corrected_working_copy_review.json:191 blank plus5 literal n/a;108 nonempty raw answers, all196 unique raw stop keys independently checked.",
+  "archived_taxonomy_sha256_unchanged": "cdaf8b406d0f116afb8d611c6c148dcac2edb31ade781152989d9517e4b4c43f",
+  "preserved_baseline_files": [
+    {
+      "path": "ThesisDocs/concise_v7/chapter1_introduction.md",
+      "sha256": "b2aa7a215d1a281ada386a6de08fb54bdb018566157276534794228a7e98f8d8",
+      "baseline_matches": true
+    },
+    {
+      "path": "ThesisDocs/concise_v7/chapter2_mathematics.md",
+      "sha256": "16f61c10abb45824754ec3eff3e50787e621a6cab3917363c66356af96efec3d",
+      "baseline_matches": true
+    },
+    {
+      "path": "ThesisDocs/concise_v7/chapter3_methods.md",
+      "sha256": "15af55c30ee13dcf85d327f28c999fb97d5eb3f0784ebaaa6b39b31bca63def6",
+      "baseline_matches": true
+    },
+    {
+      "path": "ThesisDocs/concise_v7/chapter4_results.md",
+      "sha256": "455098bb3e3617a78aea5ff203087b714125c1303d791b293d7bd0d60bb37292",
+      "baseline_matches": true
+    },
+    {
+      "path": "ThesisDocs/concise_v7/chapter5_discussion.md",
+      "sha256": "1989dad0cc9f4b6757bfb58ca470a4cdef5cca23579356d57de812e585a44659",
+      "baseline_matches": true
+    },
+    {
+      "path": "ThesisDocs/concise_v7/README.txt",
+      "sha256": "52c7a6782684591bf1eb1dd481ca31cccc1b5bb4c0accdc3d6dcb00474415f4a",
+      "baseline_matches": true
+    },
+    {
+      "path": "output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf",
+      "sha256": "3b71a59c86953538f441cdfca44be795cdf1f43d9cf9c77d0cc6bf6f52c9e178",
+      "baseline_matches": true
+    },
+    {
+      "path": "output/pdf/Masters_Thesis_Formal_v7_Aditya_Bhatt.pdf",
+      "sha256": "426f3d26fc0f832e3a9ed59de1074629c3ae52877716de27903e19fb84d8bfdf",
+      "baseline_matches": true
+    },
+    {
+      "path": "ThesisDocs/Masters_Thesis_Formal_v5.md",
+      "sha256": "9d16428e5f21570b2b7da11ba89385b188a2752fa772ad854c69e8828944331d",
+      "baseline_matches": true
+    },
+    {
+      "path": "ThesisDocs/Masters_Thesis_Formal_v7.md",
+      "sha256": "fd2077694fe872d2209de025cf9ea779d8304130b90add7bf526a0bf6521285e",
+      "baseline_matches": true
+    },
+    {
+      "path": "tools/build_concise_thesis_v7.py",
+      "sha256": "be6b183891dd9f92f01efdcf9f9e3cf4ee106beb8521b5d8d904432838cbfde1",
+      "baseline_matches": true
+    }
+  ],
+  "rendered_pages": [
+    {
+      "pdf_page_1_based": 50,
+      "body_label": "43",
+      "image": "revision_final_render_5b6b47b6/page_050.png",
+      "image_sha256": "fe3c7bcc813740fd9a822c1f796faf920038da19e3fd32929309ee25b3ff3cfa",
+      "text": "The control retains committee and independent-vote aggregates, so 'No Peers' is not a\npeer-free ablation. The stored contrast cannot isolate causal peer value or certify online\ncorrectness prediction.\nAll 10,000 bootstrap lifts were positive (100 percent), a resampling proportion rather\nthan a conventional p-value, universal superiority or independent generation-seed\nreplication. Repeated resampling of the development distribution cannot repair feature\nleakage or non-nested model selection.\n4.7 Replay and failure interpretation\nThe Qwen2.5-7B/GSM8K replay reduces completion tokens from 827,804 to 377,960\n(54.34 percent), while accuracy falls from 70.53 to 64.20 percent, a loss of 6.33\npercentage points. Fitting and evaluating on the same 1,500 traces makes this a\ndevelopment diagnostic; Chapter 5 reports actual runtime experiments.\nAcross 75,965 sanitized variable-horizon trajectories, the archived hazard policy wins in\n68,095 (89.64 percent), ties in 2,135 (2.81 percent) and loses in 5,735 (7.55 percent)\nagainst the full horizon under stored step utility. These are utility verdicts, not accuracy\npercentages. The audit reconstructs both binary endpoint labels from utility and cost,\nchecks unique pairs and partitions every loss exactly once.\n43\n"
+    },
+    {
+      "pdf_page_1_based": 51,
+      "body_label": "44",
+      "image": "revision_final_render_5b6b47b6/page_051.png",
+      "image_sha256": "25407162c92cab170c9e447e8b38d32c09e631ef5a772f59a8d29382bdc64212",
+      "text": "Table 7. Mutually exclusive archived-policy loss patterns; 5,735 utility losses\namong 75,965 trajectories.\nObserved loss pattern\nCount\nShare of losses\nMissing normalized answer at the stop\n196\n3.42%\nAn earlier decision-eligible candidate was correct\n460\n8.02%\nStep one was correct; no eligible pre-stop answer was correct\n600\n10.46%\nFirst eligible correct answer arrived one step after the stop\n1,706\n29.75%\nFirst eligible correct answer arrived at least two steps after the stop\n2,773\n48.35%\nEvery observed utility loss stops on an incorrect candidate and ends correctly. Table 7\nprioritizes missing normalized answers under the archived CSV convention; raw text\ncan be present. The 48.35-percent late-repair group first reaches an eligible correct\nanswer at least two steps after stopping; variable horizons prevent interpreting this as a\nuniversal step-five outcome.\nThe taxonomy conditions on archived labels and the stored policy. Recomputation\nperforms no fresh regrading or probe training, and excludes old classification-tag AUCs.\nThese patterns cannot prove that all online predictors must fail. Section 3.5's grader\nchecks cover specified behaviors; independent adjudication is needed to assess\nlabeling errors' effect on the partition.\n4.8 Empirical conclusions\nContinuation value varies with model, domain and cost. Matched estimators can\nimprove or worsen utility; ranking quality and replay savings alone do not establish\naccuracy preservation.\n44\n"
+    },
+    {
+      "pdf_page_1_based": 52,
+      "body_label": "45",
+      "image": "revision_final_render_5b6b47b6/page_052.png",
+      "image_sha256": "e213b269ff086cc9db702aaac50e525eec17c182e58e9e0f0186330a1a4f8135",
+      "text": "Chapter 5 Online stopping and computation trade-offs\n5.1 Causal controller contract\nThe controller accepts completed responses in step order, storing only their observed\nprefix: candidate answer, parsing status, completion tokens and available confidence or\ninstrumentation. Its API excludes reference answers, correctness labels, future\nresponses and full-trajectory scores, and rejects skipped, repeated or out-of-order\nobservations.\nThe policy enforces a two-increment floor, a finite horizon and terminal closure.\nDecisions record the selected answer and step, termination reason and latency; the\nmanifest binds the policy fingerprint. Validation covers confidence, parsing and future\ntimestamps.\nLive manifests preserve the executed source versions for generation and latency.\nSubsequent validation and accounting revisions reproduce all 480 saved decision\nhistories across the four collections, including reused baseline rows, and leave final-\nanswer labels unchanged. This replay verifies existing observations; it does not replace\nthe original generation-cost or latency provenance.\nOptional peer agreement requires a complete same-step roster closed before scoring;\nincomplete panels, duplicate peers and late votes are rejected. Timestamps verify event\norder, not an external caller's authenticity. A fleet experiment must retain generation\nevents and charge every peer's computation.\n45\n"
+    }
+  ],
+  "changed_claim_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+  "visual_outcome": "VERIFIED UNDER RECORDED ASSUMPTIONS",
+  "visual_scope": "Final PDFpages50-52/body43-45, not complete83-page visual review.",
+  "unresolved_endpoint_status_unchanged": [
+    "N1 LOCO/LOMO underlying held-out threshold predictions",
+    "historical stacked pipeline endpoint",
+    "in-sample replay endpoint"
+  ],
+  "visual_finding": "Actual final-byte images of PDF pages50-52/body43-45 inspected completely: Table7 and corrected prose are legible and aligned; the Section4.8 paragraph now ends on page51, and Chapter5 starts on page52. No clipping, overlapping text, isolated continuation page or unreadable glyphs observed in these reviewed pages.",
+  "scoped_final_approval": true,
+  "visual_review_limit": "Approval is for the scoped two-text-change correction and the three inspected final pages; not a blanket all83-page visual, empirical or institutional verdict."
+}

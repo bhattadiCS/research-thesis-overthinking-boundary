@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-10-14T03:01:02.501910+00:00",
+  "head": "5304575ce8d421673ee85e3429a128fbddeee697",
+  "baseline_preserved": true,
+  "source_units": {
+    "source_units": 1348,
+    "sentenced_claim_addresses": 1197,
+    "math_expressions": 330,
+    "counts": {
+      "NOT ESTABLISHED": 59,
+      "VERIFIED UNDER RECORDED ASSUMPTIONS": 1287,
+      "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS": 2
+    },
+    "by_version": {
+      "v7": {
+        "NOT ESTABLISHED": 17,
+        "VERIFIED UNDER RECORDED ASSUMPTIONS": 260
+      },
+      "v5": {
+        "NOT ESTABLISHED": 42,
+        "VERIFIED UNDER RECORDED ASSUMPTIONS": 1027,
+        "REQUIRES CORRECTION OR ADDITIONAL ASSUMPTIONS": 2
+      }
+    },
+    "unresolved_scientific_units": 39,
+    "no_blanket_all_math_verdict": true
+  },
+  "all_mathematics_verified_without_qualification": false
+}

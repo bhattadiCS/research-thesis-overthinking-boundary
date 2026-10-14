@@ -1,0 +1,720 @@
+{
+  "source": "ThesisDocs/verification/math_reliability_audit_2026-10-13/corrected_extended_v5_math_audit1/ThesisDocs/Masters_Thesis_Formal_v5_math_audit1.md",
+  "source_sha256": "5c2181dae627b4407cebf93f8084a1adad9f4a5584134cc89610f349b7fd3654",
+  "pdf": "ThesisDocs/verification/math_reliability_audit_2026-10-13/corrected_extended_v5_math_audit1/Masters_Thesis_Formal_v5_math_audit1_Aditya_Bhatt.pdf",
+  "pdf_sha256": "5b6b47b64ff1c94c836ef255b84cb5dc7f72ec31bd7b985bc18e72182ff0d373",
+  "pages": 83,
+  "exact_content_changes_only_two": true,
+  "all_257_tex_occurrences_byte_identical": true,
+  "all_numeric_literals_identical": true,
+  "affected_table_page": [
+    51
+  ],
+  "pending_visual_review": false,
+  "page_index": [
+    {
+      "page": 1,
+      "headings": []
+    },
+    {
+      "page": 2,
+      "headings": []
+    },
+    {
+      "page": 3,
+      "headings": [
+        "Chapter 1 Introduction and motivation",
+        "1.1 Reasoning as a sequential allocation problem",
+        "1.2 Operational meaning of overthinking",
+        "1.3 Research questions",
+        "1.4 Contributions",
+        "1.5 Evidence and reproducibility",
+        "1.6 Related work and the thesis position",
+        "1.7 Thesis organization",
+        "Chapter 2 Mathematical formulation and stopping theory",
+        "2.1 Probability model and admissible information",
+        "2.2 Exact binary correctness drift",
+        "2.3 General finite-horizon optimal stopping",
+        "2.4 When a drift-sign boundary is optimal",
+        "2.5 Partial observation and feature models",
+        "2.6 Calibration and perturbation bounds",
+        "2.7 What sequential uncertainty control can certify",
+        "2.8 Scope of the empirical claims",
+        "Chapter 3 Experimental setup and methods",
+        "3.1 Corpus separation",
+        "3.2 Model roster",
+        "3.3 Benchmark tasks and splits"
+      ]
+    },
+    {
+      "page": 4,
+      "headings": [
+        "3.4 Response and revision protocol",
+        "3.5 Recorded signals and grading",
+        "3.6 Statistical units and grouping",
+        "3.7 Outcomes and computation measures",
+        "3.8 Reproducibility and evidence freeze",
+        "Chapter 4 Empirical evidence of overthinking",
+        "4.1 Population transitions and net value",
+        "4.2 Model and domain differences",
+        "4.3 Controlled estimator comparisons",
+        "4.4 Token cap and numerical precision",
+        "4.5 Ranking and stopping performance",
+        "4.6 The stacked retrospective diagnostic",
+        "4.7 Replay and failure interpretation",
+        "4.8 Empirical conclusions",
+        "Chapter 5 Online stopping and computation trade-offs",
+        "5.1 Causal controller contract",
+        "5.2 Policy choice and limitations",
+        "5.3 Generation integration",
+        "5.4 Decision latency",
+        "5.5 Live paired evaluation",
+        "5.6 Adversarial questions and traps",
+        "5.7 Deployable prefix probability model",
+        "5.8 Actual trained-policy evaluation",
+        "5.9 Replay and Pareto analysis",
+        "Chapter 6 Discussion and limitations",
+        "6.1 Scientific interpretation",
+        "6.2 Correctness labels and mathematical validity"
+      ]
+    },
+    {
+      "page": 5,
+      "headings": [
+        "6.3 Theory and deployable beliefs",
+        "6.4 Generalization and adaptation",
+        "6.5 Costs beyond completion tokens",
+        "6.6 Adversarial behavior and answer selection",
+        "6.7 Evidence needed for stronger claims",
+        "6.8 Conclusion",
+        "Appendix A Reproducibility and evidence sources",
+        "Appendix B Claim scope and mathematical review",
+        "Appendix C Paired accuracy uncertainty",
+        "Appendix D Retrospective prediction analyses",
+        "Appendix E Information flow and delayed repair diagrams"
+      ]
+    },
+    {
+      "page": 6,
+      "headings": [
+        "Table 1. Mathematical objects and assumptions.",
+        "Table 2. Standardized five-step corpus.",
+        "Table 3. Model configurations.",
+        "Table 4. GSM8K transition panel; 19,500 trajectories and 500 task clusters per row.",
+        "Table 5. Matched effects.",
+        "Table 6. Stored causal detectors; common task-held-out development evaluation.",
+        "Table 7. Mutually exclusive archived-policy loss patterns; 5,735 utility losses among",
+        "Table 8. Controller-only latency on 100 saved math-question prefixes.",
+        "Table 9. Actual paired local generation on 100 GSM8K questions.",
+        "Table 10. Actual paired local generation on the 20-question trap bank.",
+        "Table 11. Deployable probability heads on 276 archived held-out tasks; repeated rows",
+        "Table 12. Actual trained-policy generation paired with the existing 100-question live",
+        "Table 13. Actual trained-policy generation paired with the existing trap-bank live",
+        "Table 14. Frozen variants replayed on 1,500 saved trajectories.",
+        "Table 15. Claim evidence sources.",
+        "Table 16. Claim scope and required evidence.",
+        "Table 17. Additional retrospective prediction analyses."
+      ]
+    },
+    {
+      "page": 7,
+      "headings": [
+        "Figure 1. Population accuracy and net gain.",
+        "Figure 2. Micro, domain-macro, and worst-domain ranking differ substantially.",
+        "Figure 3. Development replay accuracy against completion-token cost.",
+        "Figure 4. Actual generated arms on two development panels.",
+        "Figure 5. Offline fitting and runtime information flow.",
+        "Figure 6. Delayed repair defeats a myopic stopping rule."
+      ]
+    },
+    {
+      "page": 8,
+      "headings": [
+        "Chapter 1 Introduction and motivation",
+        "1.1 Reasoning as a sequential allocation problem"
+      ]
+    },
+    {
+      "page": 9,
+      "headings": [
+        "1.2 Operational meaning of overthinking"
+      ]
+    },
+    {
+      "page": 10,
+      "headings": [
+        "1.3 Research questions"
+      ]
+    },
+    {
+      "page": 11,
+      "headings": [
+        "1.4 Contributions",
+        "Chapter 2 applies finite-horizon Bellman/Snell theory [11], [12] to a specified decision"
+      ]
+    },
+    {
+      "page": 12,
+      "headings": [
+        "1.5 Evidence and reproducibility",
+        "Appendix A maps the evidence and locates the electronic verification and reanalysis",
+        "1.6 Related work and the thesis position"
+      ]
+    },
+    {
+      "page": 13,
+      "headings": []
+    },
+    {
+      "page": 14,
+      "headings": []
+    },
+    {
+      "page": 15,
+      "headings": []
+    },
+    {
+      "page": 16,
+      "headings": [
+        "1.7 Thesis organization",
+        "Chapter 2 develops the stopping theory and Chapter 3 specifies the experiments."
+      ]
+    },
+    {
+      "page": 17,
+      "headings": [
+        "Chapter 2 Mathematical formulation and stopping",
+        "2.1 Probability model and admissible information"
+      ]
+    },
+    {
+      "page": 18,
+      "headings": []
+    },
+    {
+      "page": 19,
+      "headings": [
+        "2.2 Exact binary correctness drift"
+      ]
+    },
+    {
+      "page": 20,
+      "headings": []
+    },
+    {
+      "page": 21,
+      "headings": [
+        "3.1 proves the corresponding ordering of earliest optimal stop times. That ordering need",
+        "2.3 General finite-horizon optimal stopping"
+      ]
+    },
+    {
+      "page": 22,
+      "headings": []
+    },
+    {
+      "page": 23,
+      "headings": [
+        "2.4 When a drift-sign boundary is optimal"
+      ]
+    },
+    {
+      "page": 24,
+      "headings": []
+    },
+    {
+      "page": 25,
+      "headings": [
+        "2.5 Partial observation and feature models"
+      ]
+    },
+    {
+      "page": 26,
+      "headings": [
+        "2.6 Calibration and perturbation bounds"
+      ]
+    },
+    {
+      "page": 27,
+      "headings": []
+    },
+    {
+      "page": 28,
+      "headings": [
+        "2.7 What sequential uncertainty control can certify"
+      ]
+    },
+    {
+      "page": 29,
+      "headings": []
+    },
+    {
+      "page": 30,
+      "headings": []
+    },
+    {
+      "page": 31,
+      "headings": [
+        "2.8 Scope of the empirical claims",
+        "Table 1. Mathematical objects and assumptions."
+      ]
+    },
+    {
+      "page": 32,
+      "headings": []
+    },
+    {
+      "page": 33,
+      "headings": [
+        "Chapter 3 Experimental setup and methods",
+        "3.1 Corpus separation",
+        "Table 2. Standardized five-step corpus."
+      ]
+    },
+    {
+      "page": 34,
+      "headings": [
+        "3.2 Model roster"
+      ]
+    },
+    {
+      "page": 35,
+      "headings": [
+        "Table 3. Model configurations. Source: cell metadata.",
+        "1.5B"
+      ]
+    },
+    {
+      "page": 36,
+      "headings": [
+        "3.3 Benchmark tasks and splits"
+      ]
+    },
+    {
+      "page": 37,
+      "headings": [
+        "3.4 Response and revision protocol"
+      ]
+    },
+    {
+      "page": 38,
+      "headings": [
+        "3.5 Recorded signals and grading"
+      ]
+    },
+    {
+      "page": 39,
+      "headings": [
+        "3.6 Statistical units and grouping"
+      ]
+    },
+    {
+      "page": 40,
+      "headings": [
+        "3.7 Outcomes and computation measures"
+      ]
+    },
+    {
+      "page": 41,
+      "headings": [
+        "3.8 Reproducibility and evidence freeze"
+      ]
+    },
+    {
+      "page": 42,
+      "headings": [
+        "Chapter 4 Empirical evidence of overthinking",
+        "4.1 Population transitions and net value",
+        "Table 4. GSM8K transition panel; 19,500 trajectories and 500 task clusters per"
+      ]
+    },
+    {
+      "page": 43,
+      "headings": [
+        "Figure 1. Population accuracy and net gain. Bands are task-cluster bootstrap intervals."
+      ]
+    },
+    {
+      "page": 44,
+      "headings": [
+        "4.2 Model and domain differences"
+      ]
+    },
+    {
+      "page": 45,
+      "headings": [
+        "4.3 Controlled estimator comparisons",
+        "Table 5. Matched effects. Estimator intervals resample 52 cells; systems intervals",
+        "Table 5 reports their mean controlled effects."
+      ]
+    },
+    {
+      "page": 46,
+      "headings": [
+        "4.4 Token cap and numerical precision"
+      ]
+    },
+    {
+      "page": 47,
+      "headings": [
+        "4.5 Ranking and stopping performance",
+        "Table 6. Stored causal detectors; common task-held-out development evaluation."
+      ]
+    },
+    {
+      "page": 48,
+      "headings": []
+    },
+    {
+      "page": 49,
+      "headings": [
+        "Figure 2. Micro, domain-macro, and worst-domain ranking differ substantially. Stored",
+        "4.6 The stacked retrospective diagnostic"
+      ]
+    },
+    {
+      "page": 50,
+      "headings": [
+        "4.7 Replay and failure interpretation"
+      ]
+    },
+    {
+      "page": 51,
+      "headings": [
+        "Table 7. Mutually exclusive archived-policy loss patterns; 5,735 utility losses",
+        "3.42%",
+        "4.8 Empirical conclusions"
+      ]
+    },
+    {
+      "page": 52,
+      "headings": [
+        "Chapter 5 Online stopping and computation trade-offs",
+        "5.1 Causal controller contract"
+      ]
+    },
+    {
+      "page": 53,
+      "headings": [
+        "5.2 Policy choice and limitations",
+        "Chapter 2's delayed-repair counterexample shows why immediate evidence against",
+        "5.3 Generation integration"
+      ]
+    },
+    {
+      "page": 54,
+      "headings": [
+        "5.4 Decision latency",
+        "Table 8. Controller-only latency on 100 saved math-question prefixes.",
+        "Table 8 reports decision counts, median, upper quantiles and maximum on one hundred"
+      ]
+    },
+    {
+      "page": 55,
+      "headings": [
+        "5.5 Live paired evaluation",
+        "Table 9. Actual paired local generation on 100 GSM8K questions.",
+        "2.94%",
+        "4.85"
+      ]
+    },
+    {
+      "page": 56,
+      "headings": []
+    },
+    {
+      "page": 57,
+      "headings": [
+        "5.6 Adversarial questions and traps",
+        "Table 10. Actual paired local generation on the 20-question trap bank.",
+        "3.34%",
+        "4.75"
+      ]
+    },
+    {
+      "page": 58,
+      "headings": []
+    },
+    {
+      "page": 59,
+      "headings": [
+        "5.7 Deployable prefix probability model"
+      ]
+    },
+    {
+      "page": 60,
+      "headings": [
+        "Table 11. Deployable probability heads on 276 archived held-out tasks; repeated"
+      ]
+    },
+    {
+      "page": 61,
+      "headings": [
+        "5.8 Actual trained-policy evaluation",
+        "Table 12. Actual trained-policy generation paired with the existing 100-question"
+      ]
+    },
+    {
+      "page": 62,
+      "headings": [
+        "Table 13. Actual trained-policy generation paired with the existing trap-bank live"
+      ]
+    },
+    {
+      "page": 63,
+      "headings": []
+    },
+    {
+      "page": 64,
+      "headings": [
+        "5.9 Replay and Pareto analysis",
+        "Table 14. Frozen variants replayed on 1,500 saved trajectories. These are"
+      ]
+    },
+    {
+      "page": 65,
+      "headings": [
+        "Figure 3. Development replay accuracy against completion-token cost. Labels identify"
+      ]
+    },
+    {
+      "page": 66,
+      "headings": [
+        "Figure 4. Actual generated arms on two development panels. Each learned arm reuses"
+      ]
+    },
+    {
+      "page": 67,
+      "headings": [
+        "Chapter 6 Discussion and limitations",
+        "6.1 Scientific interpretation",
+        "6.2 Correctness labels and mathematical validity"
+      ]
+    },
+    {
+      "page": 68,
+      "headings": [
+        "6.3 Theory and deployable beliefs",
+        "Chapter 2 characterizes optimal decisions when the relevant conditional expectations",
+        "6.4 Generalization and adaptation"
+      ]
+    },
+    {
+      "page": 69,
+      "headings": [
+        "6.5 Costs beyond completion tokens"
+      ]
+    },
+    {
+      "page": 70,
+      "headings": [
+        "6.6 Adversarial behavior and answer selection",
+        "6.7 Evidence needed for stronger claims"
+      ]
+    },
+    {
+      "page": 71,
+      "headings": [
+        "6.8 Conclusion"
+      ]
+    },
+    {
+      "page": 72,
+      "headings": []
+    },
+    {
+      "page": 73,
+      "headings": []
+    },
+    {
+      "page": 74,
+      "headings": []
+    },
+    {
+      "page": 75,
+      "headings": []
+    },
+    {
+      "page": 76,
+      "headings": [
+        "Appendix A Reproducibility and evidence sources",
+        "Table 15. Claim evidence sources."
+      ]
+    },
+    {
+      "page": 77,
+      "headings": []
+    },
+    {
+      "page": 78,
+      "headings": [
+        "Appendix B Claim scope and mathematical review",
+        "Table 16. Claim scope and required evidence."
+      ]
+    },
+    {
+      "page": 79,
+      "headings": [
+        "Appendix C Paired accuracy uncertainty"
+      ]
+    },
+    {
+      "page": 80,
+      "headings": [
+        "Appendix D Retrospective prediction analyses",
+        "Table 17 distinguishes row-level correctness from correctness of one causally selected",
+        "Table 17. Additional retrospective prediction analyses."
+      ]
+    },
+    {
+      "page": 81,
+      "headings": []
+    },
+    {
+      "page": 82,
+      "headings": [
+        "Appendix E Information flow and delayed repair",
+        "Figure 5. Offline fitting and runtime information flow. Reference labels enter fitting"
+      ]
+    },
+    {
+      "page": 83,
+      "headings": [
+        "Figure 6. Delayed repair defeats a myopic stopping rule. The exact counterexample"
+      ]
+    }
+  ],
+  "visual_review": {
+    "coordinator_original_pages_viewed": {
+      "v7": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "v5": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    "coordinator_final_changed_sheets_viewed": [
+      12,
+      13,
+      14
+    ],
+    "independent_reviewer": "agent_a/corrected_final_copy_review.md",
+    "unchanged_final_pages": "82 pages have identical text and rendered110dpi RGB values within one channel level of the83-page original already visually inspected; only final page51 materially changes.",
+    "changed_page": 51,
+    "candidate1_rejected": "84-page candidate has orphan accuracy-preservation line on page52; preserved separately, superseded by this83-page final."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "v5_math_audit1",
+  "purpose": "Unpublished mathematical reliability audit working copy; primary v7 and published v5 unchanged.",
+  "semantic_changes": [
+    {
+      "source": "working builder evidence_inserts FAILURE_TABLE",
+      "before": "No extracted candidate at the stop",
+      "after": "Missing normalized answer at the stop"
+    },
+    {
+      "source": "ThesisDocs/chapters/chapter4_empirical.md",
+      "before": "Table 7 applies mutually exclusive priority rules, with empty stops first.",
+      "after": "Table 7 prioritizes missing normalized answers under the archived CSV convention; raw text can be present."
+    }
+  ],
+  "numerical_changes": false,
+  "theorem_changes": false,
+  "frozen_data_changes": false,
+  "builder_original_sha256": "5c632df41b25cfea523ffd8318cf0af4e9f76c91dfa61ac0ad9c3b0fa6992fac",
+  "builder_working_sha256": "8eb6b41fd4aaa994bc7d93ac3215672a7a86bda5c03b1d0e4f59f3487e820ced"
+}

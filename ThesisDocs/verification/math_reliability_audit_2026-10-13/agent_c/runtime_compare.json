@@ -1,0 +1,26 @@
+[
+  {
+    "folder": "research/outputs/semester2/online_stopping_20261002",
+    "histories": 200,
+    "decisions": 985,
+    "mismatches": []
+  },
+  {
+    "folder": "research/outputs/semester2/online_stopping_20261002/adversarial_live",
+    "histories": 40,
+    "decisions": 195,
+    "mismatches": []
+  },
+  {
+    "folder": "research/outputs/semester2/online_stopping_20261002/learned_main",
+    "histories": 200,
+    "decisions": 700,
+    "mismatches": []
+  },
+  {
+    "folder": "research/outputs/semester2/online_stopping_20261002/learned_adversarial",
+    "histories": 40,
+    "decisions": 140,
+    "mismatches": []
+  }
+]
