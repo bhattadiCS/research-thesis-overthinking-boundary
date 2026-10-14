@@ -8,13 +8,7 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .vscode/
-/tmp/pdfs/master_thesis/
-/tmp/thesis_pdf_runtime/
-/tmp/presentations/defense/
-/tmp/neurips_build/
-/tmp/pdfs/stopping_paper/
-/tmp/pdfs/pdfa_tools/
-/tmp/pdfs/archival_candidate/
+tmp/
 .ipynb_checkpoints/
 .DS_Store
 Thumbs.db
@@ -55,6 +49,13 @@ research/outputs/**/hidden_states/
 research/outputs/experiments_v2/autonomous_run.log
 research/outputs/experiments_v2/nohup.out
 research/outputs/experiments_v2/.run.pid
+research/outputs/experiments_v2/*_oof_*
+research/outputs/experiments_v2/*smoke*
+research/outputs/experiments_v2/*.pth
+research/outputs/experiments_v2/*.sqlite3
+research/outputs/experiments_v2/ultimate_tournament_runtime.log
+git_history_full.txt
+git_history_utf8.txt
 
 # Thesis documentation
 ThesisDocs/*
