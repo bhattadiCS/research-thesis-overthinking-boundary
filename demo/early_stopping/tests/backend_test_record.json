@@ -1,0 +1,28 @@
+{
+  "command": [
+    "C:\\Users\\bhatt\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "demo/early_stopping/tests",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "C:\\Aditya_Data\\Personal\\ResearchThesis",
+  "exit_code": 0,
+  "elapsed_seconds": 1.1001637999434024,
+  "scope": "Injected deterministic generator and predictor; no language-model generation, fitting, training, regrading or dependency changes.",
+  "source_sha256": {
+    "demo/early_stopping/runtime.py": "2fdcccab2c4af7df137b92ebe28d0a960b74ccbd85ac21466cb8d3487c6a3be5",
+    "demo/early_stopping/server.py": "11e2fb02f2ef4a0c2faf1fe190a42ad3da03679bc2a734a4b36c566f7967640f",
+    "demo/early_stopping/streaming_generator.py": "0328d281a6378700ad08b9b18fa692cb3854291d396df9951433cffd5b18c4e1",
+    "demo/early_stopping/tests/fakes.py": "24f691c79f927864ba6be635705e92204d00956f30a87be885976a9d32011c5a",
+    "demo/early_stopping/tests/run_review_tests.py": "93b913ba9a0ad2dda0ab595ccddda73440cd9fe69b000d04b29ac94d7db8d27a",
+    "demo/early_stopping/tests/test_runtime.py": "eaa85cf2d7da8eec7fd0bf3244d4b563e1a377e5590d012b98ce26e47958635d",
+    "demo/early_stopping/tests/test_server.py": "72eb4ceb4cb384e2a335479b5d742ff26adb516f64587136078cf7ed8eb33a6d"
+  },
+  "log": "demo/early_stopping/tests/backend_test.log"
+}

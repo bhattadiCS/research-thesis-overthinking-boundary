@@ -1,0 +1,82 @@
+{
+  "verified_utc": "2026-10-14T04:12:03.148496+00:00",
+  "actual_run_id": "5adf55c8ec28469cba0fd0ec56e98dec",
+  "actual_prompt": "Find all real solutions of\n\nlog_2(x^2 - 7x + 10) + log_2(x^2 - 7x + 12) = -1.\n\nGive the complete solution set in exact form, not decimals, with a brief justification that no valid solutions were omitted and no invalid solutions were included.",
+  "summary": {
+    "early": {
+      "answer": "{\"thought\":\"Verify the solution by substituting \\( x \\) into the original equation.\",\"answer\":\"25\",\"confidence\":98,\"stop\":false}",
+      "selected_step": 2,
+      "stopped_at_step": 2,
+      "reason": "estimated_drift_nonpositive",
+      "completion_tokens": 68,
+      "prompt_tokens": 483,
+      "elapsed_seconds": 5.8666037999792024
+    },
+    "baseline": {
+      "answer": "{\"thought\":\"Verify the solution by substituting \\( x \\) into the original equation.\",\"answer\":\"25\",\"confidence\":100,\"stop\":false}",
+      "selected_step": 5,
+      "stopped_at_step": 5,
+      "reason": "terminal_horizon",
+      "completion_tokens": 169,
+      "prompt_tokens": 1772,
+      "elapsed_seconds": 16.06049519998487
+    },
+    "completion_tokens_saved": 101,
+    "completion_savings": 0.5976331360946746,
+    "physical_completion_tokens": 169,
+    "physical_prompt_tokens": 1772,
+    "answers_match": false,
+    "comparison_note": "Both sides share the same generated prefix. After early STOP, only the full run continues. Token savings compare the two policies; running this comparison still generates the full run. Matching answers does not establish correctness."
+  },
+  "early_responses": 2,
+  "full_responses": 5,
+  "skipped_responses": 3,
+  "current_score": 0.0033001717766077128,
+  "next_score": 0.006325662440481306,
+  "gain_percentage_points": 0.30254906638735934,
+  "cost_percentage_points": 5.0,
+  "net_percentage_points": -4.697450933612641,
+  "all_five_outputs_malformed": true,
+  "answer_comparison_not_established": true,
+  "browser_tools_checks": "Coordinator inspected the existing Edge user tab, ran this exact prompt through Run comparison after the redesign, observed completed result, switched Dark/Light/System, expanded calculation and retained record; actual screenshots/AX states returned by Browser Use.",
+  "capture_scope": "These isolated Chrome renders restore the actual completed run; no new generation. Actual live interaction used Browser Use on the user tab.",
+  "viewports": [
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "no_horizontal_overflow": true,
+      "actual_retained_record_unchanged": true,
+      "readability_gate_verified": true
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "no_horizontal_overflow": true,
+      "actual_retained_record_unchanged": true,
+      "readability_gate_verified": true
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "no_horizontal_overflow": true,
+      "actual_retained_record_unchanged": true,
+      "readability_gate_verified": true
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "no_horizontal_overflow": true,
+      "actual_retained_record_unchanged": true,
+      "readability_gate_verified": true
+    }
+  ],
+  "page_errors": [],
+  "source_sha256": {
+    "app.js": "abe9639f20acc2a7b53f29267886ea72c8bef1704287bf059a42f6ad2f16f147",
+    "index.html": "fc1abebbf21f48715b2b5fb0d4eabe92a137f18f6fa44fe2385cced372a892f4",
+    "styles.css": "a2d14bbfd74563ad4a8e836915583e325ff9a35fbc11d2defa77829fa80ec958"
+  },
+  "ux_groups_passed": 8,
+  "backend_tests_passed": 25,
+  "original_files_preserved": 36
+}

@@ -1,0 +1,47 @@
+{
+  "verified_utc": "2026-10-14T03:29:03.680469+00:00",
+  "browser": "Installed Google Chrome, isolated automated-test context, normal sandbox",
+  "actual_model_generation": true,
+  "run_id": "f1237dd9255b494092c741fc9af74fd6",
+  "summary": {
+    "early": {
+      "answer": "100",
+      "selected_step": 2,
+      "stopped_at_step": 2,
+      "reason": "estimated_drift_nonpositive",
+      "completion_tokens": 62,
+      "prompt_tokens": 320,
+      "elapsed_seconds": 5.66602799994871
+    },
+    "baseline": {
+      "answer": "100",
+      "selected_step": 5,
+      "stopped_at_step": 5,
+      "reason": "terminal_horizon",
+      "completion_tokens": 167,
+      "prompt_tokens": 1124,
+      "elapsed_seconds": 18.169755399925634
+    },
+    "completion_tokens_saved": 105,
+    "completion_savings": 0.6287425149700598,
+    "physical_completion_tokens": 167,
+    "physical_prompt_tokens": 1124,
+    "answers_match": true,
+    "comparison_note": "Both sides share the same generated prefix. After early STOP, only the full run continues. Token savings compare the two policies; running this comparison still generates the full run. Matching answers does not establish correctness."
+  },
+  "stream_before_response_complete": true,
+  "early_answer_and_cost_frozen": true,
+  "reload_reconnected": true,
+  "mobile_reconnected_without_new_generation": true,
+  "mobile_no_horizontal_overflow": true,
+  "real_cancellation_verified": true,
+  "cancelled_run_id": "4ede1e3394e44d2991c09695dda1b733",
+  "blank_prompt_validation": true,
+  "example_chip_and_domain_verified": true,
+  "browser_page_errors": [],
+  "files": {
+    "app.js": "bca5c9c166a705d7cfc4ebf946b3e04c96b7a70a92e6e4af61dc954e5b4252d6",
+    "index.html": "a7bf0284bfa44aa0989bb9f3f4aa7f67cb2e27a30765f9dbfa6d4cc476eb5e1f",
+    "styles.css": "fcc42cb958a6324cfc50e0f9200e63061f65de5fa9b27103423be1376e5ae7b6"
+  }
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="A local, live comparison of early stopping and a five-response language-model budget.">
+  <title>Early stopping · Live comparison</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#comparison">Skip to comparison</a>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Early stopping comparison home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
+        <span>Boundary<span class="brand-dot">.</span><small>LOCAL RESEARCH DEMO</small></span>
+      </a>
+      <div class="server-status" id="server-status" role="status">
+        <span class="status-dot" aria-hidden="true"></span><span id="server-status-text">Connecting to local server</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div><p class="eyebrow">COST-AWARE GENERATION</p><h1 id="page-title">Watch a policy<br class="desktop-break"> decide when to stop.</h1></div>
+        <p class="intro-copy">Watch one local model revise an answer. Compare an early-stopping policy with the full five-response budget, as the text arrives.</p>
+      </section>
+
+      <div class="notice" id="system-notice" role="status" hidden></div>
+
+      <section class="composer surface" aria-labelledby="prompt-heading">
+        <form id="run-form" novalidate>
+          <div class="section-heading"><div><span class="section-number" aria-hidden="true">01</span><h2 id="prompt-heading">Give it a problem</h2></div><span class="local-label"><span aria-hidden="true">●</span> Runs on this computer</span></div>
+          <label class="sr-only" for="prompt">Problem to solve</label>
+          <textarea id="prompt" name="prompt" rows="3" maxlength="3000" placeholder="Enter a math or arithmetic problem…" aria-describedby="prompt-help prompt-error" required></textarea>
+          <div class="prompt-footer"><p id="prompt-help">Use a self-contained question with one clear answer.</p><span id="prompt-count" aria-hidden="true">0 / 3,000</span></div>
+          <p class="field-error" id="prompt-error" role="alert" hidden></p>
+          <div class="example-row"><span>Try an example</span><button class="example-chip" type="button" data-example="shopping">Shopping arithmetic <span aria-hidden="true">↗</span></button><button class="example-chip" type="button" data-example="equation">Linear equation <span aria-hidden="true">↗</span></button><button class="example-chip" type="button" data-example="speed">Average speed <span aria-hidden="true">↗</span></button></div>
+          <div class="configuration">
+            <div class="domain-control"><label for="domain">Problem domain</label><select name="domain" id="domain"><option value="gsm8k">Arithmetic · GSM8K style</option><option value="math">Mathematics</option></select></div>
+            <fieldset class="policy-control"><legend>Early-stopping policy</legend><div class="policy-options"><label class="policy-option"><input type="radio" name="policy" value="learned" checked><span>Learned drift</span></label><label class="policy-option"><input type="radio" name="policy" value="heuristic"><span>Confidence heuristic</span></label></div></fieldset>
+            <div class="run-actions"><button id="cancel-button" class="button button-quiet" type="button" hidden>Cancel run</button><button id="run-button" class="button button-primary" type="submit" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 8 6-8 6V4Z"/></svg><span>Run comparison</span></button></div>
+          </div>
+          <div class="configuration-note"><p id="policy-description">Uses frozen current- and next-answer predictors to estimate whether another response is worth its cost.</p><span>Minimum 2 responses <span aria-hidden="true">·</span> Maximum 5 <span id="continuation-cost"><span aria-hidden="true">·</span> Learned continuation penalty 0.05</span></span></div>
+        </form>
+      </section>
+
+      <section id="comparison" class="comparison-section" aria-labelledby="comparison-heading" tabindex="-1">
+        <div class="comparison-heading"><div><span class="section-number" aria-hidden="true">02</span><h2 id="comparison-heading">Follow the comparison</h2></div><div id="run-status" class="run-status" role="status"><span class="run-status-dot" aria-hidden="true"></span><span id="run-status-text">Ready when you are</span></div></div>
+        <div class="comparison-note"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h4a3 3 0 0 1 3 3v4a3 3 0 0 0 3 3h2M4 5h4a3 3 0 0 1 3 3v0a3 3 0 0 0 3 3h2M13 8l3 3-3 3M13 12l3 3-3 3"/></svg><p>The arms share each generated response until the early policy stops. After that, only the full-budget arm continues.</p></div>
+        <p class="restored-note" id="restored-note" role="status" hidden></p>
+        <div class="result-strip" id="result-strip" hidden aria-labelledby="result-heading">
+          <div class="result-main"><span class="result-icon" aria-hidden="true">↘</span><div><p id="result-heading">Completion tokens avoided by the early arm</p><strong id="result-savings">—</strong><span id="result-token-detail"></span></div></div>
+          <div class="result-comparison"><span id="answer-match" class="match-badge"></span><p id="result-note"></p><small id="physical-tokens"></small></div>
+        </div>
+        <div class="comparison-grid">
+          <article class="arm-panel arm-early surface" id="early-panel" aria-labelledby="early-title">
+            <div class="arm-header"><div><span class="arm-accent" aria-hidden="true"></span><h3 id="early-title">Early stopping</h3><p id="early-policy-label">Learned drift policy</p></div><span class="arm-badge" id="early-badge">Waiting</span></div>
+            <dl class="arm-metrics"><div><dt>Responses</dt><dd id="early-steps">0 <span>/ 5</span></dd></div><div><dt>Completion tokens</dt><dd id="early-completion">—</dd></div><div><dt>Input tokens</dt><dd id="early-prompt">—</dd></div><div><dt>Time</dt><dd id="early-time">—</dd></div></dl>
+            <div class="selected-answer"><span class="answer-label">Selected answer</span><p id="early-answer">—</p><small id="early-answer-source">The policy’s selected candidate will appear here.</small><div class="selected-format-note" id="early-format-note" hidden><strong>Unstructured response</strong><span>The expected format was not parsed. The recorded extracted candidate is shown.</span></div></div>
+            <div class="decision-box" id="decision-box" hidden><div class="decision-title"><span id="decision-icon" aria-hidden="true">→</span><strong id="decision-title">Policy decision</strong><span id="decision-step"></span></div><p id="decision-reason"></p><dl class="estimate-grid" id="estimate-grid" hidden><div><dt>Estimated current correctness</dt><dd id="estimate-current">—</dd></div><div><dt>Estimated next correctness</dt><dd id="estimate-next">—</dd></div><div><dt>Estimated drift</dt><dd id="estimate-drift">—</dd></div></dl><small id="estimate-note" hidden>These are model estimates, not correctness guarantees.</small></div>
+            <div class="response-list" id="early-responses"><div class="empty-state"><span aria-hidden="true">⌁</span><p>A smaller budget, if the policy stops.</p><small>Live responses and decisions will appear here.</small></div></div>
+          </article>
+          <article class="arm-panel arm-baseline surface" id="baseline-panel" aria-labelledby="baseline-title">
+            <div class="arm-header"><div><span class="arm-accent" aria-hidden="true"></span><h3 id="baseline-title">Full budget</h3><p>Five complete responses</p></div><span class="arm-badge" id="baseline-badge">Waiting</span></div>
+            <dl class="arm-metrics"><div><dt>Responses</dt><dd id="baseline-steps">0 <span>/ 5</span></dd></div><div><dt>Completion tokens</dt><dd id="baseline-completion">—</dd></div><div><dt>Input tokens</dt><dd id="baseline-prompt">—</dd></div><div><dt>Time</dt><dd id="baseline-time">—</dd></div></dl>
+            <div class="selected-answer"><span class="answer-label">Selected answer</span><p id="baseline-answer">—</p><small id="baseline-answer-source">The latest candidate will appear here.</small><div class="selected-format-note" id="baseline-format-note" hidden><strong>Unstructured response</strong><span>The expected format was not parsed. The recorded extracted candidate is shown.</span></div></div>
+            <div class="response-list" id="baseline-responses"><div class="empty-state"><span aria-hidden="true">↗</span><p>The full revision budget.</p><small>It continues after the early arm has stopped.</small></div></div>
+          </article>
+        </div>
+        <p class="accounting-note">This comparison still generates the full baseline. Token savings describe the continuation budget the early arm would avoid; the shared prefix is generated once. Matching answers do not establish correctness.</p>
+        <div id="run-error" class="notice notice-error" role="alert" hidden></div>
+      </section>
+
+      <details class="explanation surface"><summary><span>What does this comparison show?</span><span class="details-plus" aria-hidden="true">+</span></summary><div class="explanation-grid"><div><h3>A response is one full revision</h3><p>Each step asks the model for a complete answer. It is not an individual token or an uninterrupted hidden thought. Both arms use the same observed prefix.</p></div><div><h3>Two different stopping rules</h3><p>The learned policy compares estimated next correctness with current correctness and a 0.05 response cost. The heuristic uses reported confidence and answer stability. Both have a two-response minimum and five-response limit.</p></div><div><h3>A cost comparison, not a grade</h3><p>No reference answer is sent to the stopping policy. Its scores are estimates; an early stop can miss a later correction. This demo does not certify correctness, optimality or accuracy preservation.</p></div></div></details>
+    </main>
+
+    <footer class="site-footer"><p>Built for inspecting a stopping decision, one response at a time.</p><div id="model-details"><span id="model-name">Local model</span><span class="footer-divider" aria-hidden="true">/</span><span id="model-device">Device unknown</span><span class="footer-divider" aria-hidden="true">/</span><span id="predictor-detail">Checking predictor</span></div></footer>
+    <div class="sr-only" id="announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+  </div>
+  <template id="response-template"><section class="response-card"><header class="response-heading"><h4></h4><div><span class="shared-badge">Shared prefix</span><span class="response-state">Generating<span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span></span></div></header><div class="response-format-note" role="note" hidden><strong>Unstructured response</strong><span>The expected format was not parsed. This extracted candidate is retained unchanged.</span></div><div class="response-summary" hidden><span>Generated summary</span><p></p></div><div class="response-candidate" hidden><span>Candidate answer</span><p></p></div><details class="raw-response" open><summary>Live response <span class="response-token-count"></span></summary><pre tabindex="0" aria-label="Generated response text"></pre></details><div class="response-footer" hidden></div></section></template>
+</body>
+</html>

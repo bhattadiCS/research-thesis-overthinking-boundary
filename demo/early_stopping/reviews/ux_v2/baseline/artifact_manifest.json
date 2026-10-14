@@ -1,0 +1,215 @@
+{
+  "created_utc": "2026-10-14T03:31:41.590912+00:00",
+  "files": [
+    {
+      "path": "__init__.py",
+      "bytes": 80,
+      "sha256": "55860691270b2c23da605417e68703b10970d2f1ce1aec96bc026151ce05ba3e"
+    },
+    {
+      "path": "agent_frontend.md",
+      "bytes": 4816,
+      "sha256": "7374cbdfb26734d85a5c2ae345382931475aaa80c5c5ffe9959ad0f3bf2cb0bb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4112,
+      "sha256": "1355d54c55e51898021b1339ba752164792582d1723c1a9566a926f66b09417f"
+    },
+    {
+      "path": "reviews/backend_test_review.md",
+      "bytes": 4205,
+      "sha256": "ce605315f3d776ba6542286de26b325a0d6fbca957fe701dec1b85a1a8921593"
+    },
+    {
+      "path": "reviews/browser_smoke.json",
+      "bytes": 1911,
+      "sha256": "20fc78f6f64c94578a4798271c21be5464facdb419891e02212e2659b73d4eeb"
+    },
+    {
+      "path": "reviews/browser_smoke.py",
+      "bytes": 7086,
+      "sha256": "601d374e6a5f742049b4767fd2144dddb430bdc3ecef00e0eb135e7e6d41385b"
+    },
+    {
+      "path": "reviews/cancelled_run.json",
+      "bytes": 1847,
+      "sha256": "e5778299b62eb370ba54cd10a858e8944f4acc3e15e110d8716e03129ad943d5"
+    },
+    {
+      "path": "reviews/comparison_preview.png",
+      "bytes": 146024,
+      "sha256": "8114c4d41ab2b8fe3d73ffb4f3a3fa70ab78d08e0e4a28dc7f5265a1f753f152"
+    },
+    {
+      "path": "reviews/completed_run.json",
+      "bytes": 62254,
+      "sha256": "547be940eba42841ec5b9da304373e35f79bef7a28f8fb79e6089f9b20e9197a"
+    },
+    {
+      "path": "reviews/completion_check.json",
+      "bytes": 2603,
+      "sha256": "33991cf8feb23f26907348443460c98ded939c50965742d3d1ea7d6fd5944e78"
+    },
+    {
+      "path": "reviews/desktop_cancelled.png",
+      "bytes": 103065,
+      "sha256": "e67047b0cb64a252f935c7be7fd4c228861350da6d78d2246d0888f358a2cda4"
+    },
+    {
+      "path": "reviews/desktop_complete.png",
+      "bytes": 303440,
+      "sha256": "32e805802934b4fe89c4391a759790d4f3656591390cce03dbd6825ff0960712"
+    },
+    {
+      "path": "reviews/desktop_complete.txt",
+      "bytes": 5198,
+      "sha256": "5c9b84a5fa234ed7e452abb625b233b0583ff15d2aa1d5117febda58609b2ede"
+    },
+    {
+      "path": "reviews/desktop_during_comparison.png",
+      "bytes": 184875,
+      "sha256": "f2e731632b5faffa8d5fc08d0110ec8bd4de1b58ea4f60777239c7c967771496"
+    },
+    {
+      "path": "reviews/desktop_ready.png",
+      "bytes": 107455,
+      "sha256": "9766385372bda075e79532c13c4c24abbb59391119f90bb6521a340c81692ffd"
+    },
+    {
+      "path": "reviews/final_desktop.png",
+      "bytes": 304392,
+      "sha256": "024a29c7ac72e2b073346a1f2b7d614cc2de0ff7a0d09fc712a58315ed1435c3"
+    },
+    {
+      "path": "reviews/final_mobile.png",
+      "bytes": 282671,
+      "sha256": "1e52b28938fb71bde8eedf0e6c4cbcedaba951b23ba85fd61cddbebe9edb20d5"
+    },
+    {
+      "path": "reviews/live_smoke.json",
+      "bytes": 2844,
+      "sha256": "3f66b76413ef50fb9d1c6d91e2af825bdd1b32d46f6827da49ceab81730c513d"
+    },
+    {
+      "path": "reviews/live_smoke_events.json",
+      "bytes": 56155,
+      "sha256": "da2178b6bef4186d95f8b97e99916e0eaef5f456c0f375cae5fcae2b502dbff6"
+    },
+    {
+      "path": "reviews/math_design.md",
+      "bytes": 22093,
+      "sha256": "b110afa9f3cc934963ca7fb21dd7f487379f7f44c9ad25ef6c3ff5151afdc33d"
+    },
+    {
+      "path": "reviews/missing_model.png",
+      "bytes": 105389,
+      "sha256": "791ad3b3426bdc2d4f2db280f6a4bdaeb535e487d1a11cabe39cea263b23b8a0"
+    },
+    {
+      "path": "reviews/mobile_complete.png",
+      "bytes": 282766,
+      "sha256": "ddb28fb156c76f4a819a49af54974908c75771b79c80a931f83115cb47505af3"
+    },
+    {
+      "path": "reviews/render_final.json",
+      "bytes": 1181,
+      "sha256": "c86f5f56a5f78133fd206f9373d64f1f582411a8ffc4342b4ce241f65e1bc6df"
+    },
+    {
+      "path": "reviews/render_final.py",
+      "bytes": 3724,
+      "sha256": "ab4320eda3955bd12c5122d6efebe71dd0d11fe3a13f56efd655ee359f29b911"
+    },
+    {
+      "path": "reviews/ui_states.json",
+      "bytes": 387,
+      "sha256": "f8c89055f038c4119ecbf18faec1144ef11ee3eef81275821ab43c450e9da7bc"
+    },
+    {
+      "path": "reviews/ui_states.py",
+      "bytes": 3262,
+      "sha256": "ea017d49694295177c56fec3440e88dbf7dceaa7035eb321b44ef1ea8ee4d45b"
+    },
+    {
+      "path": "reviews/VERIFICATION.md",
+      "bytes": 4693,
+      "sha256": "159fc457cb0c1f6b3690b477bf7726bbd882e27c2a7123627f7d655f2fb9b160"
+    },
+    {
+      "path": "reviews/verify_completion.py",
+      "bytes": 5687,
+      "sha256": "27ca6517f5000d2338cff131817e95ccd086c97020ef0747d94d918e761cb214"
+    },
+    {
+      "path": "reviews/verify_live.py",
+      "bytes": 3164,
+      "sha256": "56cc92501de192c89c29767f4c1cb8ce85ba710e059365de097b4bdf98219e14"
+    },
+    {
+      "path": "runtime.py",
+      "bytes": 14184,
+      "sha256": "2fdcccab2c4af7df137b92ebe28d0a960b74ccbd85ac21466cb8d3487c6a3be5"
+    },
+    {
+      "path": "server.py",
+      "bytes": 10420,
+      "sha256": "11e2fb02f2ef4a0c2faf1fe190a42ad3da03679bc2a734a4b36c566f7967640f"
+    },
+    {
+      "path": "start.ps1",
+      "bytes": 2268,
+      "sha256": "c610c2fca831d0e4c3bdd49ed42d02429f3c098cbed3acd4ce3a3548abed89bf"
+    },
+    {
+      "path": "static/app.js",
+      "bytes": 32925,
+      "sha256": "bca5c9c166a705d7cfc4ebf946b3e04c96b7a70a92e6e4af61dc954e5b4252d6"
+    },
+    {
+      "path": "static/index.html",
+      "bytes": 11706,
+      "sha256": "a7bf0284bfa44aa0989bb9f3f4aa7f67cb2e27a30765f9dbfa6d4cc476eb5e1f"
+    },
+    {
+      "path": "static/styles.css",
+      "bytes": 27880,
+      "sha256": "fcc42cb958a6324cfc50e0f9200e63061f65de5fa9b27103423be1376e5ae7b6"
+    },
+    {
+      "path": "streaming_generator.py",
+      "bytes": 3676,
+      "sha256": "0328d281a6378700ad08b9b18fa692cb3854291d396df9951433cffd5b18c4e1"
+    },
+    {
+      "path": "tests/backend_test.log",
+      "bytes": 4258,
+      "sha256": "282b5e295d2bdfcccaf057e7b303c49fcd347c99470d876e4f59ce99810589e6"
+    },
+    {
+      "path": "tests/backend_test_record.json",
+      "bytes": 1393,
+      "sha256": "96346a0fe1965ffee26e5b0e155f39be328267927b546fac84dfa92d5b1033c7"
+    },
+    {
+      "path": "tests/fakes.py",
+      "bytes": 3379,
+      "sha256": "24f691c79f927864ba6be635705e92204d00956f30a87be885976a9d32011c5a"
+    },
+    {
+      "path": "tests/run_review_tests.py",
+      "bytes": 1469,
+      "sha256": "93b913ba9a0ad2dda0ab595ccddda73440cd9fe69b000d04b29ac94d7db8d27a"
+    },
+    {
+      "path": "tests/test_runtime.py",
+      "bytes": 11290,
+      "sha256": "eaa85cf2d7da8eec7fd0bf3244d4b563e1a377e5590d012b98ce26e47958635d"
+    },
+    {
+      "path": "tests/test_server.py",
+      "bytes": 10619,
+      "sha256": "72eb4ceb4cb384e2a335479b5d742ff26adb516f64587136078cf7ed8eb33a6d"
+    }
+  ]
+}

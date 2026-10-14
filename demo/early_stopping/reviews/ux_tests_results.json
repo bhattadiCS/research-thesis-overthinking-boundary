@@ -1,0 +1,407 @@
+{
+  "verified_utc": "2026-10-14T04:08:00.658753+00:00",
+  "synthetic_fixtures": true,
+  "language_model_generations": 0,
+  "host": "isolated ephemeral loopback with inert manager",
+  "failure": null,
+  "checks": [
+    {
+      "name": "unreadable_selected",
+      "passed": true,
+      "answer_comparison": "Answer comparison unavailable",
+      "primary_answers_withhold_unreadable_candidates": true,
+      "raw_evidence_available": true,
+      "outcome_avoids_answer_disagreement_claim": "Stopped after 2 of 5 responses Early stopping skipped 3 responses. The full run kept going to show what happened next. Answer comparison unavailable. The model's final output could not be read reliably, so this run does not establish whether continuing helped or hurt the answer."
+    },
+    {
+      "name": "prior_readable",
+      "passed": true,
+      "selected_step": 2,
+      "stopped_at": 3,
+      "malformed_response_does_not_taint_readable_selected_answer": true
+    },
+    {
+      "name": "small_gain_stop",
+      "passed": true,
+      "gain": "+0.3 percentage points",
+      "required": "5.0 percentage points",
+      "net": "-4.7 percentage points",
+      "explanation": "The estimated improvement is at or below the continuation penalty. Predictor score: 0.3% now \u2192 0.6% after another response. Expected improvement: +0.3 percentage points. Continuing requires more than 5.0 percentage points. The estimated gain does not exceed the penalty, so the rule stops. It can stop even when both scores are low; stopping does not certify the answer.",
+      "response_three": "Full run only",
+      "completed_response_logs_collapsed": true
+    },
+    {
+      "name": "horizon_no_savings",
+      "passed": true,
+      "outcome": "The policy did not stop before the limit, so no later responses were skipped.",
+      "reason": "This is the common limit for both runs. No prediction beyond response five is made.",
+      "terminal_next_estimates_hidden": true,
+      "avoided_tokens": 0
+    },
+    {
+      "name": "zero_scores_blank",
+      "passed": true,
+      "zero_is_supplied_estimate": true,
+      "blank_parse_success_does_not_establish_readable_answer": true
+    },
+    {
+      "name": "exact_tie_four",
+      "passed": true,
+      "net": 0,
+      "strict_positive_continuation": true,
+      "explanation": "Predictor score: 0.0% now \u2192 5.0% after another response. Expected improvement: +5.0 percentage points. Continuing requires more than 5.0 percentage points. The estimated gain does not exceed the penalty, so the rule stops. It can stop even when both scores are low; stopping does not certify the answer.",
+      "stopped_at": 4
+    },
+    {
+      "name": "tiny_positive_continue",
+      "passed": true,
+      "displayed_net": "+1.0e-7 percentage points",
+      "rounded_tie_explained": "Predictor score: 30.0% now \u2192 35.0% after another response. Expected improvement: +5.0 percentage points. Continuing requires more than 5.0 percentage points. The estimated gain clears that penalty, so the rule keeps going. The displayed gain and penalty look tied because of rounding; the rule uses full precision. It can stop even when both scores are low; stopping does not certify the answer.",
+      "incomplete_run_has_no_savings": true
+    },
+    {
+      "name": "theme_persistence_mobile",
+      "passed": true,
+      "facts": [
+        {
+          "theme": "dark",
+          "root_background": "rgb(16, 22, 32)",
+          "contrast": {
+            "#outcome-summary": {
+              "ratio": 9.756521395751312,
+              "foreground": [
+                0.7568627450980392,
+                0.8,
+                0.8627450980392157,
+                1
+              ],
+              "background": [
+                0.09803921568627451,
+                0.13725490196078433,
+                0.19215686274509805,
+                1
+              ],
+              "font": "15px"
+            },
+            "#decision-explainer": {
+              "ratio": 8.10336082334005,
+              "foreground": [
+                0.7568627450980392,
+                0.8,
+                0.8627450980392157,
+                1
+              ],
+              "background": [
+                0.09803921568627451,
+                0.20784313725490197,
+                0.19607843137254902,
+                1
+              ],
+              "font": "14px"
+            },
+            "#early-answer": {
+              "ratio": 11.916165869327223,
+              "foreground": [
+                0.9411764705882353,
+                0.9568627450980393,
+                0.9803921568627451,
+                1
+              ],
+              "background": [
+                0.09803921568627451,
+                0.20784313725490197,
+                0.19607843137254902,
+                1
+              ],
+              "font": "23px"
+            },
+            "#baseline-answer": {
+              "ratio": 12.31857346613749,
+              "foreground": [
+                0.9411764705882353,
+                0.9568627450980393,
+                0.9803921568627451,
+                1
+              ],
+              "background": [
+                0.16862745098039217,
+                0.16862745098039217,
+                0.28627450980392155,
+                1
+              ],
+              "font": "23px"
+            }
+          },
+          "bounds": {
+            "#outcome-summary": {
+              "x": 39,
+              "y": 1637.078125,
+              "width": 312,
+              "height": 54
+            },
+            "#decision-explainer": {
+              "x": 56,
+              "y": 2893.65625,
+              "width": 278,
+              "height": 196
+            },
+            "#early-answer": {
+              "x": 56,
+              "y": 2498.5625,
+              "width": 278,
+              "height": 33.34375
+            }
+          }
+        },
+        {
+          "theme": "light",
+          "root_background": "rgb(244, 246, 251)",
+          "contrast": {
+            "#outcome-summary": {
+              "ratio": 6.048915518520488,
+              "foreground": [
+                0.3254901960784314,
+                0.39215686274509803,
+                0.47843137254901963,
+                1
+              ],
+              "background": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "font": "15px"
+            },
+            "#decision-explainer": {
+              "ratio": 5.462157141216077,
+              "foreground": [
+                0.3254901960784314,
+                0.39215686274509803,
+                0.47843137254901963,
+                1
+              ],
+              "background": [
+                0.9176470588235294,
+                0.9647058823529412,
+                0.9490196078431372,
+                1
+              ],
+              "font": "14px"
+            },
+            "#early-answer": {
+              "ratio": 13.75197441854892,
+              "foreground": [
+                0.09019607843137255,
+                0.14901960784313725,
+                0.23529411764705882,
+                1
+              ],
+              "background": [
+                0.9176470588235294,
+                0.9647058823529412,
+                0.9490196078431372,
+                1
+              ],
+              "font": "23px"
+            },
+            "#baseline-answer": {
+              "ratio": 13.401563458671239,
+              "foreground": [
+                0.09019607843137255,
+                0.14901960784313725,
+                0.23529411764705882,
+                1
+              ],
+              "background": [
+                0.9450980392156862,
+                0.9372549019607843,
+                0.984313725490196,
+                1
+              ],
+              "font": "23px"
+            }
+          },
+          "bounds": {
+            "#outcome-summary": {
+              "x": 39,
+              "y": 1637.078125,
+              "width": 312,
+              "height": 54
+            },
+            "#decision-explainer": {
+              "x": 56,
+              "y": 2893.65625,
+              "width": 278,
+              "height": 196
+            },
+            "#early-answer": {
+              "x": 56,
+              "y": 2498.5625,
+              "width": 278,
+              "height": 33.34375
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "page_errors": [],
+  "intercepted_api_requests": [
+    {
+      "case": "unreadable_selected",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "unreadable_selected",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "unreadable_selected",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "prior_readable",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "prior_readable",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "prior_readable",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "full_horizon",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "full_horizon",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "full_horizon",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "zero_scores_blank",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "zero_scores_blank",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "zero_scores_blank",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "exact_tie_four",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "exact_tie_four",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "exact_tie_four",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "tiny_positive_cancelled",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "tiny_positive_cancelled",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "tiny_positive_cancelled",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/runs/ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "stop_two",
+      "method": "GET",
+      "url": "http://127.0.0.1:58139/api/status"
+    }
+  ],
+  "static_source_sha256": {
+    "app.js": "abe9639f20acc2a7b53f29267886ea72c8bef1704287bf059a42f6ad2f16f147",
+    "index.html": "fc1abebbf21f48715b2b5fb0d4eabe92a137f18f6fa44fe2385cced372a892f4",
+    "styles.css": "a2d14bbfd74563ad4a8e836915583e325ff9a35fbc11d2defa77829fa80ec958"
+  }
+}

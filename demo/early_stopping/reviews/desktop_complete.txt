@@ -1,0 +1,226 @@
+Skip to comparison
+Boundary.
+LOCAL RESEARCH DEMO
+Local model ready
+
+COST-AWARE GENERATION
+
+Watch a policy
+decide when to stop.
+
+Watch one local model revise an answer. Compare an early-stopping policy with the full five-response budget, as the text arrives.
+
+01
+Give it a problem
+●
+Runs on this computer
+Problem to solve
+
+Use a self-contained question with one clear answer.
+
+31 / 3,000
+Try an example
+Shopping arithmetic ↗
+Linear equation ↗
+Average speed ↗
+Problem domain
+Arithmetic · GSM8K style
+Mathematics
+Early-stopping policy
+Learned drift
+Confidence heuristic
+Run comparison
+
+Uses frozen current- and next-answer predictors to estimate whether another response is worth its cost.
+
+Minimum 2 responses · Maximum 5 · Learned continuation penalty 0.05
+02
+Follow the comparison
+Comparison complete
+
+The arms share each generated response until the early policy stops. After that, only the full-budget arm continues.
+
+Reconnected to the current live run. Earlier responses were restored from its event history; reopening this page started no new generation.
+
+↘
+
+Completion tokens avoided by the early arm
+
+62.9%105 of 167 tokens
+Same normalized answer text
+
+Both sides share the same generated prefix. After early STOP, only the full run continues. Token savings compare the two policies; running this comparison still generates the full run. Matching answers does not establish correctness.
+
+Actually generated for this comparison: 167 completion tokens, shared prefix counted once.
+Early stopping
+
+Learned drift policy
+
+Stopped at 2
+Responses
+2 / 5
+Completion tokens
+62
+Input tokens
+320
+Time
+5.7 s
+Selected answer
+
+100
+
+Selected from response 2 · stopped after 2 responses
+Unstructured response
+The expected format was not parsed. The recorded extracted candidate is shown.
+■
+Stop here
+After response 2
+
+Estimated next-response gain does not cover the 0.05 continuation penalty.
+
+Estimated current correctness
+4.2%
+Estimated next correctness
+5.2%
+Estimated drift
+-0.0406
+These are model estimates, not correctness guarantees.
+Response 1
+Shared prefix
+Complete
+Generated summary
+
+A quick check shows that 2 + 2 equals 4.
+
+Candidate answer
+
+4
+
+Raw response
+31 tokens
+146 input tokens · 2.8 s · Reported confidence 100/100
+Response 2
+Shared prefix
+Complete
+Unstructured response
+The expected format was not parsed. This extracted candidate is retained unchanged.
+Generated summary
+
+{"thought":"A quick check shows that 2 + 2 equals 4. | answer:4| confidence:100.0}
+
+Candidate answer
+
+100
+
+Raw response
+31 tokens
+174 input tokens · 2.8 s · Strict format not parsed; raw output retained
+Full budget
+
+Five complete responses
+
+Complete
+Responses
+5 / 5
+Completion tokens
+167
+Input tokens
+1,124
+Time
+18.2 s
+Selected answer
+
+100
+
+Selected from response 5 · generated 5 responses
+Unstructured response
+The expected format was not parsed. The recorded extracted candidate is shown.
+Response 1
+Shared prefix
+Complete
+Generated summary
+
+A quick check shows that 2 + 2 equals 4.
+
+Candidate answer
+
+4
+
+Raw response
+31 tokens
+146 input tokens · 2.8 s · Reported confidence 100/100
+Response 2
+Shared prefix
+Complete
+Unstructured response
+The expected format was not parsed. This extracted candidate is retained unchanged.
+Generated summary
+
+{"thought":"A quick check shows that 2 + 2 equals 4. | answer:4| confidence:100.0}
+
+Candidate answer
+
+100
+
+Raw response
+31 tokens
+174 input tokens · 2.8 s · Strict format not parsed; raw output retained
+Response 3
+Complete
+Unstructured response
+The expected format was not parsed. This extracted candidate is retained unchanged.
+Generated summary
+
+{"thought":"A quick check shows that 2 + 2 equals 4. | answer:4| confidence:100.0,"stop":true}
+
+Candidate answer
+
+100
+
+Raw response
+35 tokens
+219 input tokens · 3.7 s · Strict format not parsed; raw output retained
+Response 4
+Complete
+Unstructured response
+The expected format was not parsed. This extracted candidate is retained unchanged.
+Generated summary
+
+{"thought":"A quick check shows that 2 + 2 equals 4. | answer:4| confidence:100.0,"stop":false}
+
+Candidate answer
+
+100
+
+Raw response
+35 tokens
+268 input tokens · 4.6 s · Strict format not parsed; raw output retained
+Response 5
+Complete
+Unstructured response
+The expected format was not parsed. This extracted candidate is retained unchanged.
+Generated summary
+
+{"thought":"A quick check shows that 2 + 2 equals 4. | answer:4| confidence:100.0,"stop":false}
+
+Candidate answer
+
+100
+
+Raw response
+35 tokens
+317 input tokens · 4.2 s · Strict format not parsed; raw output retained
+
+This comparison still generates the full baseline. Token savings describe the continuation budget the early arm would avoid; the shared prefix is generated once. Matching answers do not establish correctness.
+
+What does this comparison show?
++
+
+Built for inspecting a stopping decision, one response at a time.
+
+Qwen2.5-0.5B-Instruct
+/
+CUDA
+/
+Predictor 92fe0af86a
+Comparison complete. Token totals and selected answers are ready.

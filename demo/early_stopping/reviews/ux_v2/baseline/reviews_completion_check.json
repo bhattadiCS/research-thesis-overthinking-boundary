@@ -1,0 +1,73 @@
+{
+  "verified_utc": "2026-10-14T03:31:41.590912+00:00",
+  "requirements_proven": [
+    "typed_prompt_actual_generation",
+    "live_decoded_text",
+    "early_stop_vs_full_continuation",
+    "selected_answer_and_prefix_freeze",
+    "actual_token_accounting",
+    "cancel_and_reuse",
+    "running_reload_reconnect",
+    "mobile_saved_restore",
+    "visible_error_states"
+  ],
+  "source_hashes_match_actual_browser_and_tests": true,
+  "original_hashes_preserved": 36,
+  "existing_tracked_sources_unchanged": true,
+  "actual_completed_run_id": "f1237dd9255b494092c741fc9af74fd6",
+  "actual_early_responses": 2,
+  "actual_baseline_responses": 5,
+  "actual_summary": {
+    "early": {
+      "answer": "100",
+      "selected_step": 2,
+      "stopped_at_step": 2,
+      "reason": "estimated_drift_nonpositive",
+      "completion_tokens": 62,
+      "prompt_tokens": 320,
+      "elapsed_seconds": 5.66602799994871
+    },
+    "baseline": {
+      "answer": "100",
+      "selected_step": 5,
+      "stopped_at_step": 5,
+      "reason": "terminal_horizon",
+      "completion_tokens": 167,
+      "prompt_tokens": 1124,
+      "elapsed_seconds": 18.169755399925634
+    },
+    "completion_tokens_saved": 105,
+    "completion_savings": 0.6287425149700598,
+    "physical_completion_tokens": 167,
+    "physical_prompt_tokens": 1124,
+    "answers_match": true,
+    "comparison_note": "Both sides share the same generated prefix. After early STOP, only the full run continues. Token savings compare the two policies; running this comparison still generates the full run. Matching answers does not establish correctness."
+  },
+  "service_status": {
+    "model": {
+      "path": "C:\\Users\\bhatt\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-0.5B-Instruct\\snapshots\\7ae557604adf67be50417f59c2c2f167def9a775",
+      "name": "Qwen2.5-0.5B-Instruct",
+      "available": true,
+      "loaded": true,
+      "device": "cuda"
+    },
+    "predictor": {
+      "available": true,
+      "sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+      "error": null
+    },
+    "busy": false,
+    "run": {
+      "id": "f1237dd9255b494092c741fc9af74fd6",
+      "status": "complete"
+    }
+  },
+  "unverified_scientific_claims": [
+    "answer_correctness",
+    "adaptive_advantage",
+    "true_conditional_calibration",
+    "accuracy_noninferiority",
+    "Bellman_optimality"
+  ],
+  "verification_limits": "Local Qwen0.5B math/arithmetic demonstration; Chrome verified, connected Edge profile blocks local pages. No frozen research data modified."
+}

@@ -1,0 +1,11 @@
+{
+  "verified_utc": "2026-10-14T03:29:35.473170+00:00",
+  "synthetic_http_fixtures": true,
+  "model_generations": 0,
+  "missing_model_blocks_run_with_explanation": true,
+  "missing_predictor_allows_heuristic": true,
+  "heuristic_hides_learned_cost": true,
+  "start_error_has_message_and_recovers_controls": true,
+  "unreachable_server_is_visible": true,
+  "page_errors": []
+}

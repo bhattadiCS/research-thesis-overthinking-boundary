@@ -1,0 +1,35 @@
+{
+  "verified_utc": "2026-10-14T03:29:28.559725+00:00",
+  "run_id": "f1237dd9255b494092c741fc9af74fd6",
+  "new_model_generations": 0,
+  "actual_saved_events": true,
+  "note": "Isolated test changes only latest-run pointer; actual prior run served and clearly labeled as saved.",
+  "viewports": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1100,
+      "no_horizontal_overflow": true,
+      "unstructured_cues": 9,
+      "response_summary_font": "13px",
+      "real_saved_run_restored": true,
+      "counts_match_live_receipt": true
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "no_horizontal_overflow": true,
+      "unstructured_cues": 9,
+      "response_summary_font": "13px",
+      "real_saved_run_restored": true,
+      "counts_match_live_receipt": true
+    }
+  ],
+  "page_errors": [],
+  "final_source_sha256": {
+    "app.js": "bca5c9c166a705d7cfc4ebf946b3e04c96b7a70a92e6e4af61dc954e5b4252d6",
+    "index.html": "a7bf0284bfa44aa0989bb9f3f4aa7f67cb2e27a30765f9dbfa6d4cc476eb5e1f",
+    "styles.css": "fcc42cb958a6324cfc50e0f9200e63061f65de5fa9b27103423be1376e5ae7b6"
+  }
+}

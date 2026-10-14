@@ -1,0 +1,90 @@
+{
+  "verified_utc": "2026-10-14T03:14:42.496567+00:00",
+  "run_id": "fa863041d244497686ea71ed2db5d9ec",
+  "status_before": {
+    "model": {
+      "path": "C:\\Users\\bhatt\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-0.5B-Instruct\\snapshots\\7ae557604adf67be50417f59c2c2f167def9a775",
+      "name": "Qwen2.5-0.5B-Instruct",
+      "available": true,
+      "loaded": false,
+      "device": "cuda"
+    },
+    "predictor": {
+      "available": true,
+      "sha256": "92fe0af86ac0f204d514a6938d0a29dace2b3cdffa24800cc4e2c85a2d51879f",
+      "error": null
+    },
+    "busy": false,
+    "run": null
+  },
+  "request": {
+    "prompt": "A box holds 12 red balls and 8 blue balls. How many balls are in the box altogether?",
+    "domain": "gsm8k",
+    "policy": "learned",
+    "step_cost": 0.05
+  },
+  "summary": {
+    "early": {
+      "answer": "24",
+      "selected_step": 2,
+      "stopped_at_step": 2,
+      "reason": "estimated_drift_nonpositive",
+      "completion_tokens": 63,
+      "prompt_tokens": 342,
+      "elapsed_seconds": 7.360604600049555
+    },
+    "baseline": {
+      "answer": "24",
+      "selected_step": 5,
+      "stopped_at_step": 5,
+      "reason": "terminal_horizon",
+      "completion_tokens": 159,
+      "prompt_tokens": 1059,
+      "elapsed_seconds": 15.630184900015593
+    },
+    "completion_tokens_saved": 96,
+    "completion_savings": 0.6037735849056604,
+    "physical_completion_tokens": 159,
+    "physical_prompt_tokens": 1059,
+    "answers_match": true,
+    "comparison_note": "Both sides share the same generated prefix. After early STOP, only the full run continues. Token savings compare the two policies; running this comparison still generates the full run. Matching answers does not establish correctness."
+  },
+  "streaming": [
+    {
+      "step": 1,
+      "token_events": 32,
+      "first_token_seconds": 21.380792999989353,
+      "response_end_seconds": 23.49253399996087
+    },
+    {
+      "step": 2,
+      "token_events": 33,
+      "first_token_seconds": 23.908238800009713,
+      "response_end_seconds": 25.914612199994735
+    },
+    {
+      "step": 3,
+      "token_events": 33,
+      "first_token_seconds": 26.454390099970624,
+      "response_end_seconds": 28.382485099951737
+    },
+    {
+      "step": 4,
+      "token_events": 33,
+      "first_token_seconds": 28.98475319996942,
+      "response_end_seconds": 31.042650199960917
+    },
+    {
+      "step": 5,
+      "token_events": 33,
+      "first_token_seconds": 32.049987499951385,
+      "response_end_seconds": 34.184172199922614
+    }
+  ],
+  "real_model_generation": true,
+  "active_observation_count": 2,
+  "baseline_observation_count": 5,
+  "physical_accounting_verified": true,
+  "completed_response_counts_verified": true,
+  "no_correctness_grade": true
+}

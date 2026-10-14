@@ -1,0 +1,81 @@
+{
+  "id": "4ede1e3394e44d2991c09695dda1b733",
+  "status": "cancelled",
+  "prompt": "Compute 7 times 8 and give the number.",
+  "config": {
+    "prompt": "Compute 7 times 8 and give the number.",
+    "domain": "gsm8k",
+    "policy": "learned",
+    "step_cost": 0.05
+  },
+  "events": [
+    {
+      "seq": 1,
+      "type": "run_started",
+      "run_id": "4ede1e3394e44d2991c09695dda1b733",
+      "prompt": "Compute 7 times 8 and give the number.",
+      "policy": "learned",
+      "domain": "gsm8k",
+      "max_steps": 5,
+      "min_steps": 2,
+      "step_cost": 0.05,
+      "model_name": "Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "seq": 2,
+      "type": "response_start",
+      "run_id": "4ede1e3394e44d2991c09695dda1b733",
+      "step": 1,
+      "arms": [
+        "early",
+        "baseline"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "token",
+      "run_id": "4ede1e3394e44d2991c09695dda1b733",
+      "step": 1,
+      "arms": [
+        "early",
+        "baseline"
+      ],
+      "text": "{\"",
+      "generated_tokens": 1
+    },
+    {
+      "seq": 4,
+      "type": "token",
+      "run_id": "4ede1e3394e44d2991c09695dda1b733",
+      "step": 1,
+      "arms": [
+        "early",
+        "baseline"
+      ],
+      "text": "{\"thought",
+      "generated_tokens": 2
+    },
+    {
+      "seq": 5,
+      "type": "token",
+      "run_id": "4ede1e3394e44d2991c09695dda1b733",
+      "step": 1,
+      "arms": [
+        "early",
+        "baseline"
+      ],
+      "text": "{\"thought\":\"",
+      "generated_tokens": 3
+    },
+    {
+      "seq": 6,
+      "type": "cancelled",
+      "run_id": "4ede1e3394e44d2991c09695dda1b733",
+      "message": "Comparison cancelled during generation",
+      "summary": null
+    }
+  ],
+  "summary": null,
+  "error": null,
+  "last_seq": 6
+}
