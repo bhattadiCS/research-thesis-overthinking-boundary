@@ -48,7 +48,7 @@ def inserts():
         rows.append([label,str(n),f"{100*m['baseline_accuracy']:.0f}% / {100*m['active_accuracy']:.0f}%",
             f"{m['baseline_generated_tokens']:,} / {m['active_generated_tokens']:,}",
             saving_val, delta_val, f"{m['shared_prefix_identical_problems']}/{n}"])
-    live=shared.table(['Panel / policy','n','Accuracy (%)<br>(full / stopped)','Completion tokens<br>(full / stopped)','Token saving (%)<br>[95% CI]','Accuracy change (pp)<br>[95% CI]','Prefix<br>match'],rows,
+    live=shared.table(['Panel / policy','n','Accuracy<br>(full / stopped)','Completion tokens<br>(full / stopped)','Token saving (%)<br>[95% CI]','Accuracy change (pp)<br>[95% CI]','Prefix<br>match'],rows,
       'Table 3. Actual paired generation. Tokens count completions. Accuracy intervals use the conservative iid-reference calculation; saving intervals bootstrap paired tasks. Traps are handpicked. Learned rows reuse the previously generated baseline, rather than adding independent baseline collections.')
     return {'CORPUS_TABLE':corpus,'CONTROLLED_TABLE':controlled,'LIVE_TABLE':live,
       'DELAYED_REPAIR_FIGURE':'![Delayed repair stopping counterexample](images/thesis_v7/delayed_repair_tree.png)\n\n**Figure 1. Delayed repair defeats a myopic rule.** The horizon-two example permits stopping at zero. Its first negative drift precedes a later repair; the true persistence condition fails. This theoretical floor differs from the live floor of two.',
@@ -66,7 +66,7 @@ def print_part(source,name,work,runtime,chrome,left):
     if name=='part_4':
         assert content.count('<table>')==2
         live_start=content.rfind('<table>')
-        widths=[11,4.5,9.5,17,24,24.5,9.5] if left==108 else [14,5,11,16,22.5,22.5,9]
+        widths=[11,4.5,12,17,23,23.5,9] if left==108 else [11,4.5,12.5,17,23,23,9]
         content=content[:live_start]+content[live_start:].replace('<table>','<table class="live-results"><colgroup>'+''.join(f'<col style="width:{width}%">' for width in widths)+'</colgroup>',1)
     bibliography=name=='part_6'
     typography='font-size:11pt;line-height:1.35;' if bibliography else 'font-size:12pt;line-height:2;'

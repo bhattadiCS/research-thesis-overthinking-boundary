@@ -7,19 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="1384237">
+      <item size="1370471">
         <name>C:\Aditya_Data\Personal\ResearchThesis\output\pdf\Masters_Thesis_Formal_v7_Print_Aditya_Bhatt.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/A-2b validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
-        <details passedRules="144" failedRules="0" passedChecks="110246" failedChecks="0"></details>
+        <details passedRules="144" failedRules="0" passedChecks="110164" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791994531065" finish="1791994532659">00:00:01.594</duration>
+      <duration start="1791995664084" finish="1791995665606">00:00:01.522</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791994530923" finish="1791994532693">00:00:01.770</duration>
+    <duration start="1791995664005" finish="1791995665627">00:00:01.622</duration>
   </batchSummary>
 </report>

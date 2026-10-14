@@ -3,10 +3,10 @@
   "profile": "PDF/A-2b",
   "status": "validated_conversion",
   "source": "tmp/pdfs/compact_v7/print/source.pdf",
-  "source_sha256": "36f0d823ca1066a32e6ac5b63d30a44243f6f3857bc2a84bd22738c64b3fc20a",
+  "source_sha256": "26443d0286a208b6767d6cb521998af7437779c2062d5741fa7d9a850bb7f530",
   "output": "output/pdf/Masters_Thesis_Formal_v7_Print_Aditya_Bhatt.pdf",
-  "sha256": "9d1d3ba7709f6312ae69b19b1d167a42ab13417d24eea44d74124c77336bc7ab",
-  "bytes": 1384237,
+  "sha256": "1633df4b9233a902b42d2a6a3b6f5c022cf3693fbf32cc1219b4084c3d34838b",
+  "bytes": 1370471,
   "builder": "tools/build_archival_candidate.py",
   "builder_sha256": "c43f9fe73f5c1907fb1df991b777aee604c8315585bf8fac9f4eedb4ac18f3b2",
   "pikepdf_version": "10.16.0",
@@ -43,11 +43,11 @@
   "validator_jar_sha256": "889075253fb9df4db5482efb8f8208fb3b4f2e00f5f7e1b1e31edf6fb4b69bb6",
   "validator_exit_code": 0,
   "validator_report": "ThesisDocs/archival/formal_v7_print_verapdf_2b.xml",
-  "validator_report_sha256": "89f2463c7163c7d8d80ef6dd5a0c3969db570729cfce53fb87916c0ce96c0adb",
+  "validator_report_sha256": "0fce006ab0f3048932512187ba083d937ffbe9ee5724e6b6cdcc2a1bc4d10fb2",
   "validator_details": {
     "passedRules": "144",
     "failedRules": "0",
-    "passedChecks": "110246",
+    "passedChecks": "110164",
     "failedChecks": "0"
   },
   "validator_report_attributes": {
@@ -58,7 +58,7 @@
   },
   "render_engine": "PyMuPDF 1.27.2.2",
   "comparison_dpi": 144,
-  "render_dir": "tmp/pdfs/formal_thesis/formal_v7_print/archival_review/9d1d3ba7709f6312ae69b19b1d167a42ab13417d24eea44d74124c77336bc7ab",
+  "render_dir": "tmp/pdfs/formal_thesis/formal_v7_print/archival_review/1633df4b9233a902b42d2a6a3b6f5c022cf3693fbf32cc1219b4084c3d34838b",
   "approval_scope": {
     "semester_approvals": "user-confirmed complete",
     "institutional_format_acceptance": "not asserted by technical conversion validation"
@@ -485,10 +485,10 @@
   "pixel_max_changed_fraction": 0.0071301247771836,
   "render_isolation": {
     "method": "one fresh process per PDF; no shared document/image caches",
-    "source_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_print/archival_review/9d1d3ba7709f6312ae69b19b1d167a42ab13417d24eea44d74124c77336bc7ab/source_comparison/render_manifest.json",
-    "source_render_manifest_sha256": "9ca1cd318dfe56e50d8ff39e1d4861e75e07cebc7c211107f600672bfcdd6ce8",
-    "output_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_print/archival_review/9d1d3ba7709f6312ae69b19b1d167a42ab13417d24eea44d74124c77336bc7ab/render_manifest.json",
-    "output_render_manifest_sha256": "e7ff75e1e4573ac3c1829232f25b9684b014f1f9ddc9d473784c856f080e2746"
+    "source_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_print/archival_review/1633df4b9233a902b42d2a6a3b6f5c022cf3693fbf32cc1219b4084c3d34838b/source_comparison/render_manifest.json",
+    "source_render_manifest_sha256": "b0adc6e1cf0c08bbcdd04cb3343acbbf3d69358a7e9974375d7ddfe20302f8cb",
+    "output_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_print/archival_review/1633df4b9233a902b42d2a6a3b6f5c022cf3693fbf32cc1219b4084c3d34838b/render_manifest.json",
+    "output_render_manifest_sha256": "4a5d7a75a77db6251f301eddb1434fea83ec39c23de69c702e7a322b56d9d300"
   },
   "page_comparisons": [
     {
@@ -720,8 +720,8 @@
       "page": 10,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "34433fb500c648fa9d6ca1af5c16d3890dbf193511976e0f7d9be7208914e702",
-      "rgb_pixels_sha256": "34433fb500c648fa9d6ca1af5c16d3890dbf193511976e0f7d9be7208914e702",
+      "source_rgb_pixels_sha256": "07198f4b046f1050f899f2e49a285bb98289f2250716221043d35a79b89c9955",
+      "rgb_pixels_sha256": "07198f4b046f1050f899f2e49a285bb98289f2250716221043d35a79b89c9955",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -770,8 +770,8 @@
       "page": 12,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "46eca7d3d29b0f41afef4ba4bf9531e9e2caf0263cf772dd34d92e28dcd6e8e1",
-      "rgb_pixels_sha256": "46eca7d3d29b0f41afef4ba4bf9531e9e2caf0263cf772dd34d92e28dcd6e8e1",
+      "source_rgb_pixels_sha256": "c2b4a896fcecf993882f89acbdeee5375a471e4929110416692af2e69fa6f21c",
+      "rgb_pixels_sha256": "c2b4a896fcecf993882f89acbdeee5375a471e4929110416692af2e69fa6f21c",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1070,8 +1070,8 @@
       "page": 24,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "5cab1418b7246b8d6bbda0d604a93bd9e9e6f106be235eeaae76d0a39ead45ea",
-      "rgb_pixels_sha256": "5cab1418b7246b8d6bbda0d604a93bd9e9e6f106be235eeaae76d0a39ead45ea",
+      "source_rgb_pixels_sha256": "a8a4a03e413e3229026d0b72cea023ffc50f98fd08ff5e2944b6c33e88ca15cf",
+      "rgb_pixels_sha256": "a8a4a03e413e3229026d0b72cea023ffc50f98fd08ff5e2944b6c33e88ca15cf",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1080,13 +1080,13 @@
       "max_channel_difference": 0,
       "source_ink_bounds_points": [
         108.0,
-        72.0,
+        77.0,
         538.5,
         717.5
       ],
       "output_ink_bounds_points": [
         108.0,
-        72.0,
+        77.0,
         538.5,
         717.5
       ]
@@ -1120,8 +1120,8 @@
       "page": 26,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "6661db62e21bdff4ff46791c724e2d4298280a8da0fcf8a2d5e2ae6658232988",
-      "rgb_pixels_sha256": "6661db62e21bdff4ff46791c724e2d4298280a8da0fcf8a2d5e2ae6658232988",
+      "source_rgb_pixels_sha256": "351f4fa36591ddf7480dae024537f974cc4f9572891b22067d5a805ee27aec5d",
+      "rgb_pixels_sha256": "351f4fa36591ddf7480dae024537f974cc4f9572891b22067d5a805ee27aec5d",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1130,14 +1130,14 @@
       "max_channel_difference": 0,
       "source_ink_bounds_points": [
         108.0,
-        74.0,
-        540.0,
+        77.0,
+        536.5,
         717.0
       ],
       "output_ink_bounds_points": [
         108.0,
-        74.0,
-        540.0,
+        77.0,
+        536.5,
         717.0
       ]
     },
@@ -1145,13 +1145,13 @@
       "page": 27,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "bab3df6011f48a3c17930eb43da0b3f3d5a8f74c703dbd98610fd54672ce7a52",
-      "rgb_pixels_sha256": "e46b1204d104d46ffd5b6c53cbd1cadf00aa1b0954781efb880bbe4d641d5589",
+      "source_rgb_pixels_sha256": "5de791e6246b88c80dcb7e65b2ee733a02a8724803130730df7a9305481e053b",
+      "rgb_pixels_sha256": "d54021f788b2f84315de1fd4077e8b748358be24947ecaec061b395ce1183307",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": false,
-      "changed_pixels": 6057,
-      "changed_pixel_fraction": 0.003124071598336304,
+      "changed_pixels": 6918,
+      "changed_pixel_fraction": 0.0035681570608041197,
       "max_channel_difference": 1,
       "source_ink_bounds_points": [
         108.0,

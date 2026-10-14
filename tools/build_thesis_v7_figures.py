@@ -138,7 +138,7 @@ def build_figure_3_forest_plot():
     items = list(df.iterrows())[::-1]
     y_pos = np.arange(len(items))
 
-    fig, ax = plt.subplots(figsize=(7.4, 4.6), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(7.6, 4.8), constrained_layout=True)
 
     # Reference zero line
     ax.axvline(0, color="#444444", linestyle="--", linewidth=1.0, zorder=1)
@@ -163,59 +163,49 @@ def build_figure_3_forest_plot():
                     fmt=marker, color=color, ecolor=color, elinewidth=1.6,
                     capsize=4, capthick=1.4, markersize=5.5, zorder=3)
 
-        # Value label
+        # Value label: always place to right of zero line or right of whisker
         sign = "+" if mean > 0 else ""
         txt = f"{sign}{mean:.5f} [{lo:+.5f}, {hi:+.5f}]"
-        # Position label cleanly
-        if mean >= 0:
-            ax.text(max(hi + 0.006, 0.025), i, txt, va="center", ha="left", fontsize=9.2, color="#222222")
+        if mean < 0:
+            ax.text(0.008, i, txt, va="center", ha="left", fontsize=9.2, color="#222222")
         else:
-            ax.text(min(lo - 0.006, -0.01), i, txt, va="center", ha="right", fontsize=9.2, color="#222222")
+            ax.text(max(hi + 0.006, 0.022), i, txt, va="center", ha="left", fontsize=9.2, color="#222222")
 
     y_labels = [labels[r.experiment] for _, r in items]
     ax.set_yticks(y_pos)
     ax.set_yticklabels(y_labels, fontsize=10.5)
     ax.set_xlabel("Mean controlled contrast [95% CI]\n(Utility / Trajectory, Loss-risk diff, or Accuracy diff)", fontsize=10.5)
-    ax.set_xlim(-0.12, 0.22)
+    ax.set_xlim(-0.11, 0.32)
     ax.grid(axis="x", alpha=0.15, linestyle=":")
 
-    # Annotate regions
-    ax.text(-0.065, 8.5, "← Utility degraded\n(GBDT, Isotonic)", ha="center", va="top", fontsize=9, color="#D55E00",
-            bbox=dict(boxstyle="round,pad=0.25", facecolor="#FFF0ED", edgecolor="#D55E00", lw=0.6))
-    ax.text(0.045, 8.5, "Utility improved →\n(EB hazards, Held-out threshold)", ha="center", va="top", fontsize=9, color="#0072B2",
-            bbox=dict(boxstyle="round,pad=0.25", facecolor="#EDF6FD", edgecolor="#0072B2", lw=0.6))
-
     out_path = OUT / "controlled_contrasts_forest.png"
-    fig.savefig(out_path, dpi=300)
+    fig.savefig(out_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
     print("Built:", out_path)
 
 def build_figure_4_failure_audit():
     """Figure 4: Archived policy failure taxonomy and delayed-repair distribution."""
-    failures = read_json(ROOT / "research/reports/thesis_failure_audit_v1/audit_summary.json")
-    cats = failures["categories"]
-
-    # Categories in order: Late repair, Next-step repair, Step 1 only, Passed earlier, Missing answer
-    # Reverse for horizontal bar
-    cats_rev = cats[::-1]
-    labels = [
-        "Missing normalized answer\nat stop (3.42%)",
-        "Passed earlier correct\ncandidate (8.02%)",
-        "Step 1 only was correct;\nno pre-stop answer (10.46%)",
-        "Next-step repair:\narrived 1 step later (29.75%)",
-        "Delayed repair (Late):\narrived \u2265 2 steps later (48.35%)"
+    # Explicitly ordered list pairing label, count, share, and color
+    # Order from bottom (index 0) to top (index 4) for barh:
+    data = [
+        {"label": "Missing normalized answer\nat stop", "count": 196, "share": 3.42, "color": "#999999"},
+        {"label": "Passed earlier correct\ncandidate", "count": 460, "share": 8.02, "color": "#888888"},
+        {"label": "Step 1 only was correct;\nno pre-stop answer", "count": 600, "share": 10.46, "color": "#E69F00"},
+        {"label": "Next-step repair:\narrived 1 step later", "count": 1706, "share": 29.75, "color": "#56B4E9"},
+        {"label": "Delayed repair (Late):\narrived \u2265 2 steps later", "count": 2773, "share": 48.35, "color": "#0072B2"}
     ]
-    counts = [c["count"] for c in cats_rev]
-    shares = [c["share_of_losses"] * 100 for c in cats_rev]
 
-    fig, ax = plt.subplots(figsize=(7.4, 4.4), constrained_layout=True)
+    labels = [d["label"] for d in data]
+    counts = [d["count"] for d in data]
+    shares = [d["share"] for d in data]
+    colors = [d["color"] for d in data]
 
-    colors = ["#999999", "#888888", "#E69F00", "#56B4E9", "#0072B2"]
+    fig, ax = plt.subplots(figsize=(7.6, 4.6), constrained_layout=True)
 
-    y_pos = np.arange(len(counts))
+    y_pos = np.arange(len(data))
     bars = ax.barh(y_pos, counts, height=0.62, color=colors, edgecolor="#222222", linewidth=0.8, zorder=2)
 
-    for i, (bar, count, share) in enumerate(zip(bars, counts, shares)):
+    for bar, count, share in zip(bars, counts, shares):
         w = bar.get_width()
         ax.text(w + 40, bar.get_y() + bar.get_height()/2,
                 f"{count:,} ({share:.2f}%)",
@@ -224,17 +214,17 @@ def build_figure_4_failure_audit():
     ax.set_yticks(y_pos)
     ax.set_yticklabels(labels, fontsize=10)
     ax.set_xlabel("Count of policy losses (Total = 5,735 among 75,965 trajectories)", fontsize=10.5)
-    ax.set_xlim(0, 3250)
+    ax.set_xlim(0, 3600)
     ax.grid(axis="x", alpha=0.15, linestyle=":")
 
-    # Highlight box for delayed repair dominance
-    ax.text(2050, 0.9,
+    # Highlight box in lower-right open whitespace alongside the 196, 460, 600 bars
+    ax.text(1350, 0.85,
             "Key finding: 78.10% (4,479 / 5,735)\nof losses repaired after stopping;\n48.35% require \u2265 2 steps later,\ndefeating myopic 1-step boundaries.",
             ha="left", va="center", fontsize=9.8, linespacing=1.35,
             bbox=dict(boxstyle="round,pad=0.4", facecolor="#EBF5FB", edgecolor="#0072B2", lw=0.9))
 
     out_path = OUT / "failure_audit_taxonomy.png"
-    fig.savefig(out_path, dpi=300)
+    fig.savefig(out_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
     print("Built:", out_path)
 

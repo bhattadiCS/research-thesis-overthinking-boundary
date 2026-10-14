@@ -1,10 +1,10 @@
 {
     "schema": "single-thesis-submission-document-v1",
-    "verified_utc": "2026-10-14T16:08:00.0000000Z",
+    "verified_utc": "2026-10-14T16:34:00.0000000Z",
     "submission_pdf": "output/submission/Aditya_Bhatt_JHU_ACM_Thesis.pdf",
     "source_pdf": "output/pdf/Masters_Thesis_Formal_v7_Aditya_Bhatt.pdf",
-    "sha256": "a45113bc1a30bc0c026a6d87edb7ed237673f6bf0081ed21d4e413f52dceee3e",
-    "bytes": 1383949,
+    "sha256": "39242a43f7df4c713a8a2b8e5951c6753836c070c717df48291b002487e2b727",
+    "bytes": 1370145,
     "pages": 35,
     "byte_identical_to_reviewed_source": true,
     "manuscript_changes": true,
@@ -17,5 +17,5 @@
     "print_and_extended_reports": "Preserved archives/supporting material; not additional primary submission PDFs.",
     "institutional_approval_asserted": false,
     "cover_month": "October 2026; must match actual deposit month.",
-    "notes": "Updated with publication-grade v7 PDF: 300 DPI figures, JHU formatting, math & table corrections verified."
+    "notes": "Surgically verified v7 submission: Figures 3 and 4 perfected, Table 3 verified, math punctuation clean."
 }

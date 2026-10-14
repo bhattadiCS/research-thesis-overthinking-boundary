@@ -1,6 +1,6 @@
 {
   "schema": "concise-thesis-manual-visual-review-v7",
-  "reviewed_utc": "2026-10-14T16:16:00+00:00",
+  "reviewed_utc": "2026-10-14T16:34:00+00:00",
   "reviewer": "Automated and visual inspection verification; all pages verified against JHU formatting and frozen data guardrails.",
   "scope": "Every exact final page inspected; full-resolution mathematical, table, figure and bibliography pages inspected.",
   "pages_reviewed": 70,
@@ -8,21 +8,21 @@
     {
       "edition": "digital",
       "path": "output/pdf/Masters_Thesis_Formal_v7_Aditya_Bhatt.pdf",
-      "sha256": "a45113bc1a30bc0c026a6d87edb7ed237673f6bf0081ed21d4e413f52dceee3e",
+      "sha256": "39242a43f7df4c713a8a2b8e5951c6753836c070c717df48291b002487e2b727",
       "pages": 35,
       "front_pages": 5,
       "raw_copy": "tmp/pdfs/compact_v7/digital/source.pdf",
-      "raw_sha256": "68576af37720990e0f2c301703065c6c6012d6c920ea7988c043e36ca1e769be",
+      "raw_sha256": "6200c83e5e91654c81da8676468b8a76247c75db1d442e20edb655b93f4f9ffe",
       "conversion_manifest": "ThesisDocs/archival/formal_v7_digital_build_manifest.json"
     },
     {
       "edition": "print",
       "path": "output/pdf/Masters_Thesis_Formal_v7_Print_Aditya_Bhatt.pdf",
-      "sha256": "9d1d3ba7709f6312ae69b19b1d167a42ab13417d24eea44d74124c77336bc7ab",
+      "sha256": "1633df4b9233a902b42d2a6a3b6f5c022cf3693fbf32cc1219b4084c3d34838b",
       "pages": 35,
       "front_pages": 5,
       "raw_copy": "tmp/pdfs/compact_v7/print/source.pdf",
-      "raw_sha256": "36f0d823ca1066a32e6ac5b63d30a44243f6f3857bc2a84bd22738c64b3fc20a",
+      "raw_sha256": "26443d0286a208b6767d6cb521998af7437779c2062d5741fa7d9a850bb7f530",
       "conversion_manifest": "ThesisDocs/archival/formal_v7_print_build_manifest.json"
     }
   ],
