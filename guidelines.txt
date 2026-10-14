@@ -1,0 +1,529 @@
+=== GUIDELINES ===
+ Last Revised: July 13, 2026 
+ 1 
+Two-Semester Research or Thesis Option in the  
+Master of Science in Applied and Computational Mathematics  
+and the 
+Post-Master’s Certificate in Applied and Computational Mathematics 
+(https://ep.jhu.edu/current-students/student-forms/) 
+ 
+ 
+Background 
+The Applied and Computational Mathematics ( ACM) Program emphasizes mathematical 
+and computational techniques of fundamental importance  and practical relevance.  As 
+such, ACM offers students the opportunity to do in-depth research that is meant to lead 
+to an improvement of practice in industry, government, or non- profit organizations. To 
+that end, this document describes the procedures and requirements for a student to 
+pursue a two-semester research project through one of two different paths, the research 
+option or thesis option. 
+ 
+The discussion below summarizes the requirements that students and faculty are to follow 
+relative to the research and thesis options. Sections 1 – 3 summarize the requirements 
+as they apply to either an M.S. degree or Post -Master’s Certificate. Section 4 spells out 
+the step-by-step procedure to be followed by students and research advisers.  Section 5 
+is the list of ACM faculty approved to serve as research supervisors (a subset of the full 
+ACM faculty). The Appendix gives the catalog descriptions for the  research and thesis 
+courses. 
+ 
+1.  Requirements for the M.S. in Applied and Computational Mathematics 
+The requirements for the Master of Science in Applied and Computational Mathematics 
+are as follows: 
+ 
+• Ten courses must be completed within five years. 
+o Four core courses: 
+→ 625.603 Statistical Methods and Data Analysis 
+→ 625.601 Real Analysis 
+or 625.602 Modern Algebra or 625.609 Matrix Theory 
+→ One 2-course sequence from the following options: 
+⇒ 625.717 Advanced Differential Equations: Partial Differential Equations  
+and 625.718 Advanced Differential Equations: Nonlinear Differential 
+Equations and Dynamical Systems 
+⇒ 625.721 Probability and Stochastic Processes I and 625.722 Probability 
+and Stochastic Processes II 
+⇒ 625.725 Theory of Statistics I and 625.726 Theory of Statistics  
+o Six electives that must include at least four from the program (625.xxx), with 
+at least two of the four courses at the 700-level. Students are required to take 
+at least one 700- level course outside of the core sequences ( 625.717/718, 
+625.721/722, and 625.725/726).  
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 2 
+ 
+If the student pursues a research or thesis option, the following two -course sequence 
+may replace two of the six elective courses (either 600- or 700-level) outside of the four 
+core courses: 
+ 
+• 625.801-802 Applied and Computational Mathematics Master's Research 
+or 
+• 625.803-804 Applied and Computational Mathematics Master's Thesis 
+ 
+2.  Requirements for the Post-Master’s Certificate in Applied and 
+Computational Mathematics 
+The requirements for the Post -Master’s Certificate in Applied and Computational 
+Mathematics are as follows: 
+ 
+• Five courses must be completed within three years. 
+• At least four of the five courses must be from the Applied and Computational 
+Mathematics program (numbered 625.680 or higher).  
+• At least three of the courses must be at the 700- level, and at least one of the 700 -
+level courses must be outside of the sequences 625.717/718, 625.721/722, and 
+625.725/726. 
+ 
+With a research or thesis option, the following two-course sequence may replace two of 
+the required five courses (at either the 600- or 700-level): 
+ 
+• 625.805–806 Applied and Computational Mathematics Post-Master’s Research 
+or 
+• 625.807–808 Applied and Computational Mathematics Post-Master’s Thesis 
+ 
+3.  Research Requirements and Final Deliverable 
+It is required  that the research be applied or theoretical work that goes beyond a 
+straightforward implementation of known methods. It is also required that the research 
+have significant mathematical content. The intent of the research is to expand the body 
+of knowledge in the broad area of applied mathematics. Regardless of the option chosen 
+(research option or thesis option), e ach project is to be guided by a rese arch adviser, 
+chosen from a subset of the ACM faculty called the ACM Research Faculty below (the 
+research adviser may be different from the student’s academic adviser assigned at 
+admission to the ACM Program). In addition, each student is required to select a second 
+reader to provide an independent second opinion on the research and the associated 
+documentation. The s econd reader may be any member of the technical community 
+(Johns Hopkins or elsewhere) who has deep knowledge in the area of the research.  
+ 
+The final deliverable is to be  one of the following documents, depending on the option  
+(research or thesis) chosen: 
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 3 
+ 
+1. Research option. A technical paper on the order of 25 or more double-spaced 
+typed pages (or equivalent) submitted to a peer-reviewed (refereed) journal or 
+to a conference with accompanying refereed proceedings. It is also desirable, 
+although not required, that the paper be presented at an external professional 
+meeting if the primary submission is a journal article . See additional 
+requirements for the final deliverable below. 
+2. Thesis option. An electronic thesis submission to the MSE Library following 
+standards posted at http://guides.library.jhu.edu/etd. See additional 
+requirements for the final deliverable below. 
+ 
+• Regardless of the option chosen, a  professional-quality research or thesis defense 
+presentation is required. The defense is to be scheduled near the end of the project, 
+but prior to the assignment of the final grade. The presentation must be open to the 
+public and the audience must include the research adviser and second reader. 
+• For the research option, where the final deliverable is a journal-quality technical paper, 
+if there are multiple authors, the student must be the primary contributor to the work 
+of the paper (i.e., the student’s work must represent at least 60 percent in both the 
+technical content and the writing). 
+ 
+4. Research Proposal Process 
+Students and research advisers are to follow the steps below . (The form to accompany 
+steps 1 to 5 may be found online at https://ep.jhu.edu/current-students/student-forms/) 
+1. In advance of the first semester of thesis or research work, the student contacts a 
+potential research adviser from within the ACM Research Faculty below. The student 
+may approach the adviser with either a project in mind or with the intention of 
+soliciting suggestions for a topic from the adviser. 
+2. After choosing a topic, the student selects a second reader to provide an independent 
+second opinion on the research and the associated documentation. The second reader 
+is expected to be available for consultation throughout the duration of the research 
+work and is expected to read and comment on the draft documentation produced 
+near the end of the project. The second reader must be approved by the research or 
+thesis adviser, academic adviser, and ACM Program Chair. 
+3. After settling on a research adviser, second reader, and a potential topic, the student 
+conducts a thorough literature survey to identify related work and to clarify precisely 
+what is known and not known about the potential area of study. The goal is to identify 
+topics that would be new or add to the volume of knowledge and understanding in 
+the areas of applied mathematics and modern computational methods. 
+4. After settling on a topic of study, t he student writes a research proposal of 
+approximately two-to-three pages. The proposal is to be completed 
+in advance of the 
+first semester of thesis/research work in order to allow time for review, approval, and 
+registration in the appropriate research or thesis course prior to the start of the 
+semester. The proposal must identify both the research adviser and second reader. 
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 4 
+The proposal must clearly discuss the  problem motivation, what the student intends 
+to accomplish, and why the research will be an original contribution to the field using 
+knowledge gained from the literature survey in step 3 above. The proposal is to also 
+discuss the plans for final documentation; i.e., which option will be chosen, including 
+the intended refereed journal and/or refereed conference proceedings for 
+dissemination of the final results if the research option is selected. The discussion of 
+documentation should also include mention of likely co -authors (if any) beyond the 
+student and his/her adviser.   
+5. The research adviser and second reader endorse the proposal and forward it, along 
+with the ACM Thesis/Research Project Approval form for Semester 1, to the academic 
+adviser for approval, who then forwards the proposal to the Program Chair for final 
+approval. After final approval, the proposal and communication chain of approvals 
+are added to the student’s academic file. 
+6. Given the approved proposal and registration in the appropriate course (625.801 , 
+625.803, 625.805 or 625.807), t he research plan in the proposal is implemented by 
+the student with an expectation of at least biweekly contact with the research adviser. 
+Registration in these courses cannot occur until the proposal is approved (step 5 
+above). 
+7. At the end of the first semester, the student is to complete the status report,  ACM 
+Thesis/Research Project Approval Form for Semester 2. If there are unique challenges 
+or problems, these should be mentioned as part of the report. The status report should 
+provide a clear indication of what needs to be done to ensure completion of the project 
+by the end of the second semester. The research adviser will assign a grade for the 
+first semester based, in part, on this report. After completion of the status report, the 
+student is to send the document to the research adviser, second reader, academic 
+adviser, and Program Chair for their approval. 
+8. Given success in the first semester, the student enrolls in 625.802, 625.804, 625.806 
+or 625.808, as appropriate, and continues the research. Ideally, a final defense and 
+corresponding deliverable are to be completed by the end of the second semester. 
+The defense is to be scheduled at a time and location of convenience to the student, 
+research adviser, second reader, and others with an interest in the topic. The 
+academic adviser and Program Chair should also be informed about the defense. The 
+defense should allow for approximately 30 minutes of student presentation and 30 
+minutes of questions from attendees. The final deliverable must take account of 
+relevant comments or questions that arise during the defense. Note: If the final 
+deliverable has not been submitted to the appropriate outlet by the end of the second 
+semester, the thesis adviser may assign an “I” [incomplete] grade until all conditions 
+are met. 
+9. A final message that certifies the satisfactory completion of the defense presentation 
+and the paper/thesis is sent by the research adviser and second reader and forwarded 
+to the academic adviser, Program Manager (Beryl Castello beryl.castello@jhu.edu), 
+and the Program Chair (James Spall james.spall@jhuapl.edu) together with a copy 
+of the final paper/thesis . If the final product includes authors other than the 
+student, the adviser must discuss the student’s role relative to that of the other 
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 5 
+authors; the final message must certify that the student is the primary contributor 
+(over 60 percent) to both the technical work and the writing of the paper/thesis. For 
+the thesis option, guidelines at http://guides.library.jhu.edu/etd are to be followed.  
+The Program Chair gives the final approval and the research adviser then assigns the 
+final grade to the relevant course  (625.802, 625.804, 625.806 or 625.808).  The 
+approval message from the Chair to the research adviser  and the final paper /thesis 
+are placed in the student’s academic file and, as appropriate, sent to the MSE Library. 
+If the research adviser assigned an “I” grade for reasons discussed in item 8 above, 
+the submission of the approved checklist and final paper /thesis for the student’s 
+academic file should be delayed until the adviser is ready to assign a final letter grade.  
+ 
+5. ACM Research Faculty 
+The following ACM faculty members are available to supervise two-semester research or 
+thesis projects. 
+ 
+Name 
+Contact info. (email and/or 
+phone and/or personal 
+website) 
+Courses taught in 
+ACM 
+Areas of 
+specialization Comments 
+Christopher 
+Boswell 
+ 
+Christopher.Boswell@jhuapl.
+edu 
+ 
+625.687 
+Topological Data 
+Analysis, Synthetic 
+Aperture Radar 
+-- 
+Beryl Castello beryl.castello@jhu.edu 
+625.615, 625.616, 
+625.624, 625.694, 
+625.741 (and 
+other courses in 
+JHU AMS Dept.) 
+Optimization and 
+Operations Research 
+Student is expected 
+to take course from 
+instructor prior to 
+research.  
+Cleon Davis cleon.davis@jhu.edu 
+625.201, 625.690 
+(and other 
+courses within 
+ECE) 
+Intelligent systems 
+(neural networks, 
+genetic algorithms, 
+fuzzy logic). 
+-- 
+Stacy Hill stacy.hill@jhuapl.edu 625.601, 625.728 
+Stochastic 
+estimation; modeling 
+and optimization. 
+Student is expected 
+to have taken at least 
+one 700-level course 
+from instructor. 
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 6 
+Name 
+Contact info. (email and/or 
+phone and/or personal 
+website) 
+Courses taught in 
+ACM 
+Areas of 
+specialization Comments 
+Zonghui Hu zhu18@jhu.edu 625.603 
+Causal inference, 
+high-dimensional 
+data analysis, 
+semiparametric and 
+nonparametric 
+modeling, 
+mathematical 
+statistics in medical 
+research 
+-- 
+Anthony 
+Johnson ajohn260@jhu.edu 
+625.240, 625.250, 
+625.251, 625.692, 
+625.717 (and 
+other courses 
+within CS and DS) 
+Numerical ODEs; 
+PDEs; FEA; complex 
+variable boundary 
+element method. 
+-- 
+Nandi Leslie 
+nleslie2@jhu.edu 
+or  
+nandi.o.leslie@gmail.com  
+625.603, 625.664 
+Machine learning, 
+statistics, stochastic 
+processes, 
+cybersecurity 
+-- 
+Christine 
+Nickel 
+cnickel1@jhu.edu; 
+703-732-6824 
+625.602, 625.609, 
+625.636, 625.664, 
+625.680, 625.685, 
+625.734, 625.736  
+Probability and 
+discrete 
+mathematics. 
+Student is expected 
+to take course from 
+instructor prior to 
+research. 
+Moustapha 
+Pemy 
+mpemy@towson.edu; 
+410-704-3585; 
+https://tigerweb.towson.edu
+/mpemy/index.html 
+625.641, 625.642, 
+625.695, 625.714 
+Stochastic control 
+and mathematical 
+finance. 
+Student is expected 
+to take course from 
+instructor prior to 
+research. 
+Burhan Sadiq burhan.sadiq@jhuapl.edu 
+625.603, 625.623, 
+625.721–722, 
+625.725–726 
+Numerical Analysis, 
+Approximation 
+Theory, Modeling & 
+Optimization, 
+Machine Learning, 
+Data Mining. 
+Student is expected 
+to take course from 
+instructor prior to 
+research. 
+Cetin Savkli cetin.savkli@jhuapl.edu 
+625.603 (Also 
+teaching Graph 
+Analytics 605.632 
+under CS 
+Program) 
+Graph analysis; data 
+mining; probabilistic 
+models; multivariate 
+time series analysis. 
+Exposure to graph 
+algorithms, 
+probability and 
+statistics; 
+competence in a 
+programming 
+language (such as 
+Java or Python). 
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 7 
+Name 
+Contact info. (email and/or 
+phone and/or personal 
+website) 
+Courses taught in 
+ACM 
+Areas of 
+specialization Comments 
+David Schug 
+dschug1@jh.edu 
+or 
+david.schug@navy.mil 
+ or david.schug@gmail.com 
+625.603, 625.604, 
+625.615, 625.663, 
+625.744 
+Numerical Methods, 
+Math Modeling, 
+Harmonic Analysis, 
+Wavelet Theory, 
+Signal Processing, 
+Bayesian 
+Estimation/Kalman 
+filtering, and Data 
+Analysis applied to 
+remote sensing, 
+image processing, 
+computer vision and 
+photogrammetric 
+methods. 
+-- 
+Tatyana 
+Sorokina 
+tsorokina@towson.edu; 
+ 
+https://tigerweb.towson.edu
+/tsorokin 
+625.611, 625.687 
+Numerical analysis; 
+approximation 
+theory; multivariate 
+splines; finite 
+elements. 
+-- 
+James Spall 
+james.spall@jhuapl.edu; 
+ 
+https://sites.google.com/vie
+w/james-spall  
+625.743 
+(plus other 
+courses in JHU 
+AMS Dept. within 
+full-time 
+programs) 
+Stochastic systems 
+and estimation; 
+optimization; Monte 
+Carlo methods. 
+Student is expected 
+to take course from 
+instructor prior to 
+research.  
+Mike Weisman mjw@jhu.edu;  
+240-228-3784 
+625.601, 625.703, 
+625.740 
+Data mining; 
+machine learning; 
+computer vision; 
+complex analysis; 
+dynamical systems. 
+Student is expected 
+to have taken at least 
+one 700-level course 
+from instructor. 
+Zerotti Woods Zerotti.woods@jhuapl.edu 
+ 
+625.638, 625.742 
+(and other 
+courses within 
+DS) 
+Deep Learning, 
+Regularization 
+Recomputes 
+Techniques in 
+Machine Learning 
+-- 
+AMS: Applied Mathematics and Statistics; CS: Computer Science; DS: Data Science; ECE: 
+Electrical and Computer Engineering 
+ 
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 8 
+Appendix  
+Below are catalog descriptions for the  research and  thesis courses. Students 
+pursuing the research or  thesis options for either an M.S. degree or P ost-Master's 
+Certificate are required to register for these courses. The relevant sequence below may 
+be used to fulfill two courses within the 700-level course requirements for the ACM M.S. 
+degree or Post-Master's Certificate. 
+ 
+625.801–802 Applied and Computational Mathematics Master's Research 
+625.803–804 Applied and Computational Mathematics Master's Thesis 
+The course sequences 625.801–802 and 625.803–804 are designed for students in the 
+ACM Master's program wishing to work with a  faculty adviser to conduct significant 
+independent original research in the field of applied and computational mathematics  
+(each of 625.801, 802, 803, and 804 is one semester). A sequence may be used to fulfill 
+two courses within the 700-level course requirements for the ACM M.S. degree; only one 
+sequence may count towards the M.S. The course 625.800 Independent Study may not 
+be used towards the ACM M.S. if the student also wishes to count 625.801–802 or 
+625.803–804 towards the M.S. degree. For sequence 625.801–802, the student is to 
+produce a technical paper for submission to a journal or to a conference with 
+accompanied refereed proceedings. For sequence 625.803–804, the student is to produce 
+an electronic  thesis for submission to the JHU Library based on standards posted at 
+http://guides.library.jhu.edu/etd (the student is also encourage d to write a technical 
+paper for publication based on the thesis). For either sequence, the intent of the research 
+is to expand the body of knowledge in the broad area of applied mathematics, with the 
+research leading to professional-quality documentation. Students with a potential interest 
+in pursuing a doctoral degree at JHU or another university should consider enrolling in 
+one of these sequences to gain familiarity with the research process (doctoral intentions 
+at JHU or elsewhere, however, are not a requirement for enrollment). Note: The student 
+must identify a potential research adviser from within the ACM Research Faculty to initiate 
+the approval procedure 
+prior to enrollment in the  chosen course sequence; enrollment 
+may only occur after approval. 
+Prerequisites: Have completed at least six courses towards the M.S., including the ACM 
+courses 625.601 (Real analysis) and/or 625.609 (Matrix theory), 625.603 (Statistical 
+methods and data analysis), and at least one of the following three ACM two -semester 
+offerings: 625.717−718 (Advanced differential equations: Partial differential equations 
+and nonlinear differential equations and dynamical systems), 625.721 −722 (Probability 
+and stochastic processes I and II), or 625.725 −726 (Theory of statistics I and II). It is 
+recommended that the research or thesis sequence represent the final two (9th and 10th) 
+courses of the M.S. degree.  
+Instructor: Member of ACM Research Faculty. 
+ 
+625.805–806 Applied and Computational Mathematics Post-Master’s Research 
+625.807–808 Applied and Computational Mathematics Post-Master’s Thesis 
+The course sequences 625.805–806 and 625.807–808 are designed for students in the 
+--- PAGE ---
+ Last Revised: July 13, 2026 
+ 9 
+ACM Post-Master’s certificate (PMC)  program wishing to work with a faculty adviser to 
+conduct significant independent original research in the field of applied and computational 
+mathematics (each of 625.805, 806, 807, and 808 is one semester). A sequence may be 
+used to fulfill two courses within the course requirements for the ACM PMC; only one 
+sequence may count towards the PMC. The course 625.800 Independent Study may not 
+be used towards the PMC if the student also wishes to count 625.805–806 or 625.807–
+808 towards the PMC. For sequence 625.805–806, the student is to produce a technical 
+paper for submission to a journal or to a conference with accompanied refereed 
+proceedings. For sequence 625.807–808, the student is to produce an electronic thesis 
+for submission to the JHU Library based on standards posted at 
+http://guides.library.jhu.edu/etd (the student is also encourage to write a technical paper 
+for publication based on the thesis). For either sequence, the intent of the research is to 
+expand the body of knowledge in the broad area of applied mathematics, with the 
+research leading to professional-quality documentation. Students with a potential interest 
+in pursuing a doctoral degree at JHU or another university should consider enrolling in 
+one of these sequences to gain familiarity with the research process (doctoral intentions 
+are not a requirement for enrollment) . Note: The student must identify a potential 
+research adviser from within the ACM Research Faculty to initiate the approval procedure 
+prior to enrollment in the chosen course sequence; enrollment may only occur after 
+approval.  
+Prerequisites: At least two  courses towards the Post-Master's Certificate. It is 
+recommended that the research or thesis sequence represent the final two (4th and 5th) 
+courses of the ACM Post-Master's Certificate program.  
+Instructor: Member of ACM Research Faculty. 
+--- PAGE ---

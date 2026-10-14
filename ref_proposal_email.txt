@@ -1,0 +1,116 @@
+Total pages: 3
+=== Page 1 ===
+Overthinking Boundary in Reasoning LLMs
+Master's Thesis Proposal for 625.803–804
+Student: Aditya Bhatt (Applied & Computational Mathematics)
+Research Adviser: Dr. Zerotti Woods
+Second Reader: Dr. Moustapha Pemy
+1. Problem Motivation
+Reasoning-oriented large language models often benefit from intermediate steps, but the marginal value of
+further reasoning is not uniformly positive. Beyond a model-dependent and task-dependent point, additional
+inference can revise a correct answer, drift away from the relevant solution path, or consume compute without
+improving correctness. This thesis studies that transition point, called the overthinking boundary, and asks
+whether it can be defined mathematically, detected empirically, and used as a practical stopping rule.
+This topic fits applied and computational mathematics because it combines stochastic modeling, sequential
+decision-making, hazard processes, uncertainty quantification, and empirical analysis of computational
+systems. The phenomenon is analogous to batch overtraining in supervised learning and to overthinking an
+exam question and changing a correct answer to a wrong one.
+2. Research Question and Contribution
+The main research question is whether the point at which further reasoning becomes counterproductive
+in a reasoning language model can be characterized as a mathematically meaningful stopping boundary
+and estimated from observable trace features.
+Recent literature on adaptive test-time compute suggests that longer chain-of-thought is not uniformly
+beneficial, but much of that work relies on proxy scores or heuristics rather than an explicit continuation-value
+formulation. The intended contribution is to formalize overthinking as an optimal stopping problem with
+distinct repair and corruption hazards and to test that framework on real traces from open-weight reasoning
+models. Unlike a pure confidence or entropy heuristic, the framework separates beneficial continuation from
+harmful continuation and places the problem at the intersection of stochastic processes, sequential inference,
+and modern AI systems. The thesis therefore aims to formalize a continuation-value framework, study whether
+its drift admits an operational stopping boundary, estimate the latent quantities from observable traces, and
+compare the resulting rules against fixed-length, never-stop, and sequential-detection baselines.
+3. Proposed Methodology
+Analytical formalization. To detect the overthinking boundary, this study treats each reasoning trace as a
+jump process with competing repair and corruption hazards. Let τ be a stopping time with respect to the
+observable filtration Ft. For a fixed problem instance, let G denote the deterministic ground-truth answer, let
+At denote the candidate answer produced after step t, and define correctness by Ct = I(At = G). Even though G
+is fixed, At and Ct are random because the model's reasoning trajectory is stochastic. The randomness enters
+through the sampled reasoning path and the stopping time, not through the truth itself.
+
+=== Page 2 ===
+CORE OBJECTS
+G
+fixed ground-truth answer
+At
+candidate answer after t steps
+Ct
+correctness indicator, equal to 1 when At = G
+qt
+conditional probability of correctness
+OBJECTIVE
+E[Cτ - λτ | F0]
+The expectation is over repeated sampled reasoning paths, together with the induced stopping time, not over
+the objective truth of the answer. Conditioning on the observed trace gives the current correctness belief qt =
+P(Ct = 1 | Ft) = E[Ct | Ft]. Let St = qt - λt denote the expected utility of stopping immediately at step t. The
+Bellman recursion then compares stopping now against continuing one more step.
+BELLMAN RECURSION
+Ut = max{St, E[Ut+1 | Ft]}
+This recursion is distinct from the one-step continuation gain. The latter is the marginal value of one more
+reasoning step rather than the recursion itself.
+ONE-STEP CONTINUATION GAIN
+μt = E[St+1 - St | Ft]
+= (1 - qt) αt - qt βt - λ
+Here αt = P(Ct+1 = 1 | Ct = 0, Ft) is the repair hazard, βt = P(Ct+1 = 0 | Ct = 1, Ft) is the corruption hazard, and
+λ is the per-step compute cost. In plain terms, αt is the chance that one more step fixes a currently wrong
+answer, while βt is the chance that one more step breaks a currently correct answer. Under a one-crossing
+latent model, the canonical boundary is the first step at which μt becomes nonpositive. In empirical traces,
+nonmonotone drift can require distinguishing an early warning crossing from the last usable positive window.
+If qt rises early while αt falls and βt rises, then μt should plausibly cross zero at most once, yielding the
+candidate boundary
+CANDIDATE BOUNDARY
+T* = inf{t : μt ≤ 0}
+Equivalently, μt > 0 defines a continuation region in which another step has positive expected value, whereas
+μt ≤ 0 marks the stopping region.
+TOY TRACE INTERPRETATION
+Suppose a model starts an arithmetic problem with a wrong answer, repairs it, and later changes that correct
+answer after excessive reflection. Early on, repair can dominate corruption, so μt > 0 and continuation helps;
+later, corruption can dominate, so μt ≤ 0 and stopping is preferable. This matches early stopping in training
+and exam-answer overthinking.
+
+=== Page 3 ===
+Estimation and experiment. The hidden variable in the problem is correctness during the trace: at inference
+time, the model does not reveal whether its current answer is actually correct. The thesis will therefore
+estimate qt, αt, and βt from observable trace features including answer revisions, entropy summaries, trace
+length, and hidden-state proxies where available. These quantities will be estimated in two layers: a
+correctness model for qt and transition models for repair and corruption at the next step. Because the stop rule
+scans the trace repeatedly, the thesis will compare pointwise concentration methods with anytime-valid
+procedures such as empirical-Bernstein bounds and e-process-style detectors.
+Offline, benchmark problems with known answers allow traces to be labeled for training and evaluation.
+Online, the rule sees only observable trace features, so it must act on predicted values of qt, αt, and βt rather
+than on ground-truth correctness itself.
+The empirical study will use real traces from DeepSeek-R1-Distill-Qwen-1.5B, Qwen2.5-0.5B-Instruct,
+Qwen2.5-7B-Instruct, and Mistral-7B-Instruct on GSM8K-style exact-answer problems. The main
+comparisons will be among hazard-based drift rules, statistically valid sequential detectors, fixed-length
+policies, and never-stop baselines, with evaluation by answer accuracy at stop time, average stop step,
+compute-adjusted utility, oracle regret, and robustness across tasks and model families.
+4. Expected Results and Significance
+The expected outcome is a mathematically rigorous and empirically validated framework showing that
+overthinking can be analyzed as a stopping phenomenon. The thesis does not require one universal stop step
+shared by every model family; rather, it aims to identify a common hazard-based framework whose boundary
+location depends on the balance between repair and corruption. Theoretically, this formalizes the optimal-
+compute problem for autoregressive reasoning; practically, it enables higher answer accuracy and lower
+inference latency in resource-constrained environments.
+An important distinction is between the latent boundary T* defined using idealized correctness quantities and
+the operational stopping rule τ̂, which must be computed from observable trace features alone. A successful
+outcome is therefore not merely defining the ideal boundary, but showing that a data-driven rule can track it
+closely enough to achieve low regret relative to the oracle boundary while saving test-time compute.
+5. Preliminary Work and Semester Plan
+Substantial preliminary work has already been completed, including the mathematical framework, a full trace-
+generation and evaluation pipeline, and instrumented runs on DeepSeek, Qwen, and Mistral families on
+GSM8K-style tasks. Current evidence suggests that the boundary is capability-dependent: stronger families
+can sustain longer repair-dominant windows before corruption dominates. Phase 1 (625.803) will finalize the
+stochastic formulation, complete the literature survey, and consolidate the cross-family evaluation pipeline.
+Phase 2 (625.804) will run larger empirical studies, evaluate robustness across difficulty strata and model
+families, and complete the final thesis and defense materials. This research will be conducted under the
+guidance of Dr. Woods and Dr. Pemy and prepared in accordance with the Johns Hopkins University Master's
+thesis guidelines.
+
