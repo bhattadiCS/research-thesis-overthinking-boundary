@@ -1,10 +1,10 @@
-# Cost aware stopping boundaries in reasoning language models
+# Cost-aware stopping boundaries in reasoning language models
 
 by
 
 Aditya Bhatt
 
-A thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science
+A thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science in Applied and Computational Mathematics
 
 Baltimore, Maryland
 
@@ -14,9 +14,9 @@ October 2026
 
 Additional response revisions can repair an answer, corrupt it, or consume computation without sufficient gain. This thesis studies stopping at complete-response boundaries using graded correctness and explicit computation cost. It derives repair-corruption drift, specializes finite-horizon optimal stopping, proves a sufficient persistence condition for a myopic rule, and gives a delayed-repair counterexample. Frozen experiments distinguish a variable-horizon matrix from a standardized corpus of 144,440 rows, 28,888 trajectories and 2,948 tasks. Matched estimator, token-cap and precision comparisons show protocol-specific trade-offs, including cases where greater estimator capacity or calibration reduces utility. An executed prefix controller prevents future generation. On 100 GSM8K questions its learned arm saves 56.51 percent of completion tokens with seven correct answers versus six at the full horizon; on twenty traps it saves 52.11 percent with one correct answer in each arm. Every learned live task stops at the two-response floor, so useful adaptation and accuracy noninferiority remain unestablished. The results support cost-sensitive stopping experiments with joint reporting of answer quality, physical cost and decision-time information.
 
-Research adviser: Zerotti Woods
+Research adviser: Dr. Zerotti Woods
 
-Second reader: Moustapha Pemy
+Second reader: Dr. Moustapha Pemy
 
 # Chapter 1 Introduction and related work
 
@@ -111,7 +111,7 @@ $$\mathbf1_{\{\tau_\mu\le t\}}\mu_t\le0\quad\text{almost surely for every }t<N.$
 
 Persistence is substantive and is not established by the observed curves or fitted heads. A deterministic delayed-repair example has $N=2$, $m=0$, correctness $(0,0,1)$ and cumulative costs $(0,0.10,0.20)$. Immediate drift at zero is $-0.10$, yet continuing to the horizon yields reward $0.80$. The first nonpositive drift rule stops too early; drift subsequently becomes positive and violates persistence.
 
-![Delayed repair stopping counterexample](images/thesis_v4/delayed_repair_tree.png)
+![Delayed repair stopping counterexample](images/thesis_v7/delayed_repair_tree.png)
 
 **Figure 1. Delayed repair defeats a myopic rule.** The horizon-two example permits stopping at zero. Its first negative drift precedes a later repair; the true persistence condition fails. This theoretical floor differs from the live floor of two.
 
@@ -174,7 +174,7 @@ Actual paired executions use Qwen2.5-0.5B-Instruct [25] on 100 GSM8K questions a
 
 All four live collections record greedy generation, temperature zero, seed 20261002, maximum batch size 32 and at most 128 newly generated tokens per response. A response ends at the first strictly valid complete JSON object, EOS or the token cap. The model snapshot is `7ae557604adf67be50417f59c2c2f167def9a775`; manifests bind its files and executed source copies. EOS-inclusive live token counts differ from the archive convention. Learned arms reuse the previously collected full-horizon baseline, as marked in Table 3.
 
-For $n\ge1$ iid task pairs, let $I$ flag baseline incorrect/active correct and $W$ baseline correct/active incorrect. Write $\pi_I=\Pr(I=1)$ and $\pi_W=\Pr(W=1)$, so $\delta=\pi_I-\pi_W$ is the accuracy difference. Their marginal counts are binomial but the within-pair indicators are not assumed independent. Exact two-sided 97.5% Clopper-Pearson bounds $[L_I,U_I]$ and $[L_W,U_W]$ for the respective marginal probabilities [15] have joint coverage at least 95% by a union bound; subtraction gives
+For $n\ge1$ iid task pairs, let $I$ flag baseline incorrect/active correct and $W$ baseline correct/active incorrect. Write $\pi_I=\mathbb P(I=1)$ and $\pi_W=\mathbb P(W=1)$, so $\delta=\pi_I-\pi_W$ is the accuracy difference. Their marginal counts are binomial but the within-pair indicators are not assumed independent. Exact two-sided 97.5% Clopper-Pearson bounds $[L_I,U_I]$ and $[L_W,U_W]$ for the respective marginal probabilities [15] have joint coverage at least 95% by a union bound; subtraction gives
 
 $$\delta\in[L_I-U_W,\ U_I-L_W].$$
 
@@ -189,7 +189,7 @@ On the pooled GSM8K transition panel, step two has accuracy 0.2401. Repairs occu
 
 Each transition panel contains 500 task clusters and 19,500 eligible trajectories. Figure 2 reports task-cluster intervals conditional on the observed models and temperatures. These population estimates do not certify correctness of an individual answer or identify its optimal stopping time.
 
-![Population accuracy and net continuation gain](images/thesis_v2/population_transitions.png)
+![Population accuracy and net continuation gain](images/thesis_v7/population_transitions.png)
 
 **Figure 2. Population accuracy and continuation gain.** Bands are task-cluster bootstrap intervals. The horizontal line marks zero net gain, not zero accuracy. Panel crossings do not identify an optimal action for every prefix.
 
@@ -197,7 +197,7 @@ Recorded crossings differ by cell. Qwen2.5-7B/GSM8K has positive net gain at ste
 
 ## 4.2 Controlled contrasts and retrospective diagnostics
 
-Table 2 normalizes matched effects per trajectory rather than interpreting summed utility as accuracy percentage points. Empirical-Bayes hazards improve recorded utility relative to cell-local logistic hazards, while gradient boosting and isotonic calibration reduce it relative to their controls. Better capacity or calibration can therefore worsen this stopping objective under the tested estimator, target, sample and threshold.
+Table 2 normalizes matched effects per trajectory rather than interpreting summed utility as accuracy percentage points. Empirical-Bayes hazards improve recorded utility relative to cell-local logistic hazards, while gradient boosting and isotonic calibration reduce it relative to their controls. Better capacity or calibration can therefore worsen this stopping objective under the tested estimator, target, sample and threshold. Figure 3 displays these matched contrasts alongside their 95% confidence intervals.
 
 **Table 2. Controlled development contrasts. Estimator intervals resample 52 cells; token-cap/precision intervals resample 500 task clusters. Utility means are per trajectory; accuracy and risk differences are proportions.**
 
@@ -213,6 +213,10 @@ Table 2 normalizes matched effects per trajectory rather than interpreting summe
 | 512 versus 256 tokens | Loss risk | +0.00000 | [+0.00000, +0.00000] |
 | BF16 versus 4-bit | Accuracy | +0.14267 | [+0.11133, +0.17533] |
 
+![Controlled development contrasts forest plot](images/thesis_v7/controlled_contrasts_forest.png)
+
+**Figure 3. Matched development contrasts relative to zero effect.** Whiskers indicate 95% confidence intervals. Empirical-Bayes shrinkage and held-out meta-calibrated thresholds yield positive controlled utility gains, whereas gradient-boosted trees and isotonic probability calibration substantially reduce utility relative to matched baselines.
+
 The matched 256/512-token comparison gives 454 policy losses among 1,500 trajectories in each arm, with no discordant loss indicators. Its zero contrast and degenerate bootstrap concern that binary verdict; answers and token counts may still differ. The Qwen2.5-7B precision comparison gives 418/1,500 correct step-two answers under BF16 versus 204 under 4-bit weights, an absolute 14.27-percentage-point contrast. Neither result generalizes to every token cap or quantized model.
 
 Strict task-grouped tabular/text saved OOF AUCs are 0.849510/0.808976 and include their original task-disjoint calibration. The causal GRU has micro AUC 0.8743 and worst-domain GPQA AUC 0.6313. Within-task AUC is defined for only 2,679 of 2,948 tasks with mixed labels. These grouped summaries describe ranking; they do not establish a statistically unique model winner or calibrated live policy.
@@ -221,7 +225,11 @@ The historical stacked AUC 0.955156 is a non-nested retrospective diagnostic. It
 
 Development replay on 1,500 Qwen2.5-7B/GSM8K traces saves 54.34% of completion tokens while accuracy falls from 70.53% to 64.20%, a 6.33-percentage-point loss. Fitting and evaluation reuse the same cell, so this is a development diagnostic.
 
-The broader archived failure audit partitions 5,735 utility losses among 75,965 trajectories. Every loss stops incorrectly and ends correctly, with 48.35% first reaching an eligible correct answer at least two steps later. This supports delayed-repair as a practical failure mode, conditional on the archived labels and policy. It is not an impossibility result for all online predictors. Full taxonomies and qualified peer/selected-answer analyses remain in the extended report.
+The broader archived failure audit partitions 5,735 utility losses among 75,965 trajectories (Figure 4). Every loss stops incorrectly and ends correctly, with 48.35% first reaching an eligible correct answer at least two steps later. This supports delayed-repair as a practical failure mode, conditional on the archived labels and policy. It is not an impossibility result for all online predictors. Full taxonomies and qualified peer/selected-answer analyses remain in the extended report.
+
+![Archived utility-loss taxonomy and delayed repair](images/thesis_v7/failure_audit_taxonomy.png)
+
+**Figure 4. Archived policy utility-loss taxonomy and delayed repair.** Among 75,965 trajectories, 5,735 incurred utility losses under the archived hazard policy. Delayed repair-where an eligible correct answer first arrives at least two steps after stopping-accounts for 48.35% (2,773/5,735) of all losses, confirming that non-monotonic repair trajectories defeat myopic stopping rules in practice.
 
 ## 4.3 Actual stopping execution
 
@@ -229,24 +237,24 @@ Table 3 reports physically generated responses, not tokens inferred solely from 
 
 **Table 3. Actual paired generation. Tokens count completions. Accuracy intervals use the conservative iid-reference calculation; saving intervals bootstrap paired tasks. Traps are handpicked. Learned rows reuse the previously generated baseline, rather than adding independent baseline collections.**
 
-| Panel / policy | n | Accuracy (%)<br>full / stopped | Tokens<br>full / stopped | Saving (%)<br>[95% CI] | Change (pp)<br>[95% CI] | Prefix<br>match |
+| Panel / policy | n | Accuracy (%)<br>(full / stopped) | Completion tokens<br>(full / stopped) | Token saving (%)<br>[95% CI] | Accuracy change (pp)<br>[95% CI] | Prefix<br>match |
 | --- | --- | --- | --- | --- | --- | --- |
-| GSM8K, heuristic | 100 | 6% / 6% | 22,244 / 21,591 | 2.94%<br>[0.85, 5.63] | [-4.29, +4.29] | 94/100 |
-| Traps, heuristic | 20 | 5% / 5% | 4,736 / 4,578 | 3.34%<br>[0.00, 8.80] | [-19.68, +19.68] | 20/20 |
-| GSM8K, learned | 100 | 6% / 7% | 22,244 / 9,674 | 56.51%<br>[54.83, 58.01] | [-4.27, +6.21] | 100/100 |
-| Traps, learned | 20 | 5% / 5% | 4,736 / 2,268 | 52.11%<br>[45.86, 57.17] | [-19.68, +19.68] | 20/20 |
+| GSM8K, heuristic | 100 | 6% / 6% | 22,244 / 21,591 | 2.94% [0.85, 5.63] | 0.00 [-4.29, +4.29] | 94/100 |
+| Traps, heuristic | 20 | 5% / 5% | 4,736 / 4,578 | 3.34% [0.00, 8.80] | 0.00 [-19.68, +19.68] | 20/20 |
+| GSM8K, learned | 100 | 6% / 7% | 22,244 / 9,674 | 56.51% [54.83, 58.01] | +1.00 [-4.27, +6.21] | 100/100 |
+| Traps, learned | 20 | 5% / 5% | 4,736 / 2,268 | 52.11% [45.86, 57.17] | 0.00 [-19.68, +19.68] | 20/20 |
 
 Only 88/500 main baseline responses and 14/100 trap baseline responses satisfy the strict JSON contract. Malformed outputs remain in denominators. Heuristic shared prefixes agree on 94/100 main pairs, limiting exact continuation interpretation; all learned main and trap prefixes agree. Trap results concern a small prespecified challenge bank, not broad adversarial robustness.
 
-Completion savings are not total-cost guarantees. Learned main prompt tokens fall from 142,498 to 43,874; prompt-plus-completion savings are 67.50%, and measured model time falls from 1,127.05 to 343.25 seconds. Trap prompt-plus-completion savings are 67.93%. There are no verifier or peer generations. Batching, padded slots and environment-specific timing remain separately recorded; energy was not measured.
+Completion savings are not total-cost guarantees. Learned main prompt tokens fall from 142,498 to 43,874 (combined prompt-plus-completion tokens fall from 164,742 to 53,548); prompt-plus-completion savings are 67.50%, and measured model time falls from 1,127.05 to 343.25 seconds. Trap prompt-plus-completion savings are 67.93%. There are no verifier or peer generations. Batching, padded slots and environment-specific timing remain separately recorded; energy was not measured.
 
 On 4,000 decisions from repeated actual baseline prefixes, learned-controller latency has median 0.059 ms, p99 0.3143 ms and maximum 0.9369 ms. It includes extraction, both heads, calibration, validation and drift; it excludes loading, generation, tokenization and peer waits. The observed maximum meets the under-ten-millisecond decision target, without guaranteeing unchanged end-to-end latency.
 
 On 276 held-out archive tasks, the current-correctness head has AUC 0.7101, Brier loss 0.0976 and ten-bin ECE 0.0222 over 1,380 rows. The next-selected-correctness head has AUC 0.6923, Brier loss 0.0997 and ECE 0.0209 over 1,104 rows. Repeated rows remain task dependent; the next-step target omits terminal responses. These marginal archive diagnostics concern the deployed logistic heads, rather than the separate sequence models in Section 4.2, and do not certify conditional live calibration.
 
-![Actual accuracy and completion-token costs](images/thesis_v2/actual_live_pareto.png)
+![Actual accuracy and completion-token costs](images/thesis_v7/actual_live_pareto.png)
 
-**Figure 3. Actual paired answer quality and completion cost.** Learned points stop at two on every task and provide no demonstrated adaptation beyond that fixed budget. Point estimates omit intervals, reported in Table 3.
+**Figure 5. Actual paired answer quality and completion cost.** Learned points stop at two on every task and provide no demonstrated adaptation beyond that fixed budget. Point estimates omit intervals, reported in Table 3.
 
 Held-out archive replay is also nearly fixed: 275 of 276 tasks stop at two and one at three. Accuracy is 11.96% versus 10.51% at the full horizon, with paired interval [-1.45, +4.35] percentage points; replayed token saving is 51.29%, interval [49.31, 53.09]%. This produces an inspectable causal fitted artifact, while providing little evidence that its predictions add useful adaptation beyond the floor.
 
@@ -298,7 +306,7 @@ The concise manuscript is the primary thesis. The preserved extended report supp
 
 [11] Ferguson, T. S. Optimal Stopping and Applications. UCLA electronic text. Chapters 3 and 5. https://www.math.ucla.edu/~tom/Stopping/sr3.pdf and https://www.math.ucla.edu/~tom/Stopping/sr5.pdf
 
-[12] Peskir, G., and Shiryaev, A. (2006). Optimal Stopping and Free-Boundary Problems. Birkhauser, Lectures in Mathematics ETH Zurich. https://doi.org/10.1007/978-3-7643-7390-0
+[12] Peskir, G., and Shiryaev, A. (2006). Optimal Stopping and Free-Boundary Problems. Birkhäuser, Lectures in Mathematics ETH Zürich. https://doi.org/10.1007/978-3-7643-7390-0
 
 [13] Hoeffding, W. (1963). Probability Inequalities for Sums of Bounded Random Variables. Journal of the American Statistical Association 58(301), 13-30. https://doi.org/10.1080/01621459.1963.10500830
 

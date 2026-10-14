@@ -42,16 +42,20 @@ def inserts():
     for label,folder in [('GSM8K, heuristic',shared.ONLINE),('Traps, heuristic',shared.ADVERSARIAL),('GSM8K, learned',shared.ONLINE/'learned_main'),('Traps, learned',shared.ONLINE/'learned_adversarial')]:
         m=read(folder/'live_metrics.json');u=read(folder/'live_uncertainty.json');n=m['problems_or_trajectories']
         lo,hi=u['accuracy_delta_conservative_exact_95ci'];slo,shi=u['completion_token_savings_cluster_bootstrap_95ci']
+        delta_sign = '+' if m['accuracy_delta'] > 0 else ''
+        delta_val = f"{delta_sign}{100*m['accuracy_delta']:.2f} [{100*lo:+.2f}, {100*hi:+.2f}]"
+        saving_val = f"{100*m['measured_completion_token_savings']:.2f}% [{100*slo:.2f}, {100*shi:.2f}]"
         rows.append([label,str(n),f"{100*m['baseline_accuracy']:.0f}% / {100*m['active_accuracy']:.0f}%",
             f"{m['baseline_generated_tokens']:,} / {m['active_generated_tokens']:,}",
-            f"{100*m['measured_completion_token_savings']:.2f}%<br>[{100*slo:.2f}, {100*shi:.2f}]",
-            f'[{100*lo:+.2f}, {100*hi:+.2f}]',f"{m['shared_prefix_identical_problems']}/{n}"])
-    live=shared.table(['Panel / policy','n','Accuracy (%)<br>full / stopped','Tokens<br>full / stopped','Saving (%)<br>[95% CI]','Change (pp)<br>[95% CI]','Prefix<br>match'],rows,
+            saving_val, delta_val, f"{m['shared_prefix_identical_problems']}/{n}"])
+    live=shared.table(['Panel / policy','n','Accuracy (%)<br>(full / stopped)','Completion tokens<br>(full / stopped)','Token saving (%)<br>[95% CI]','Accuracy change (pp)<br>[95% CI]','Prefix<br>match'],rows,
       'Table 3. Actual paired generation. Tokens count completions. Accuracy intervals use the conservative iid-reference calculation; saving intervals bootstrap paired tasks. Traps are handpicked. Learned rows reuse the previously generated baseline, rather than adding independent baseline collections.')
     return {'CORPUS_TABLE':corpus,'CONTROLLED_TABLE':controlled,'LIVE_TABLE':live,
-      'DELAYED_REPAIR_FIGURE':'![Delayed repair stopping counterexample](images/thesis_v4/delayed_repair_tree.png)\n\n**Figure 1. Delayed repair defeats a myopic rule.** The horizon-two example permits stopping at zero. Its first negative drift precedes a later repair; the true persistence condition fails. This theoretical floor differs from the live floor of two.',
-      'POPULATION_FIGURE':'![Population accuracy and net continuation gain](images/thesis_v2/population_transitions.png)\n\n**Figure 2. Population accuracy and continuation gain.** Bands are task-cluster bootstrap intervals. The horizontal line marks zero net gain, not zero accuracy. Panel crossings do not identify an optimal action for every prefix.',
-      'ACTUAL_COST_FIGURE':'![Actual accuracy and completion-token costs](images/thesis_v2/actual_live_pareto.png)\n\n**Figure 3. Actual paired answer quality and completion cost.** Learned points stop at two on every task and provide no demonstrated adaptation beyond that fixed budget. Point estimates omit intervals, reported in Table 3.'}
+      'DELAYED_REPAIR_FIGURE':'![Delayed repair stopping counterexample](images/thesis_v7/delayed_repair_tree.png)\n\n**Figure 1. Delayed repair defeats a myopic rule.** The horizon-two example permits stopping at zero. Its first negative drift precedes a later repair; the true persistence condition fails. This theoretical floor differs from the live floor of two.',
+      'POPULATION_FIGURE':'![Population accuracy and net continuation gain](images/thesis_v7/population_transitions.png)\n\n**Figure 2. Population accuracy and continuation gain.** Bands are task-cluster bootstrap intervals. The horizontal line marks zero net gain, not zero accuracy. Panel crossings do not identify an optimal action for every prefix.',
+      'FOREST_PLOT_FIGURE':'![Controlled development contrasts forest plot](images/thesis_v7/controlled_contrasts_forest.png)\n\n**Figure 3. Matched development contrasts relative to zero effect.** Whiskers indicate 95% confidence intervals. Empirical-Bayes shrinkage and held-out meta-calibrated thresholds yield positive controlled utility gains, whereas gradient-boosted trees and isotonic probability calibration substantially reduce utility relative to matched baselines.',
+      'FAILURE_AUDIT_FIGURE':'![Archived utility-loss taxonomy and delayed repair](images/thesis_v7/failure_audit_taxonomy.png)\n\n**Figure 4. Archived policy utility-loss taxonomy and delayed repair.** Among 75,965 trajectories, 5,735 incurred utility losses under the archived hazard policy. Delayed repair—where an eligible correct answer first arrives at least two steps after stopping—accounts for 48.35% (2,773/5,735) of all losses, confirming that non-monotonic repair trajectories defeat myopic stopping rules in practice.',
+      'ACTUAL_COST_FIGURE':'![Actual accuracy and completion-token costs](images/thesis_v7/actual_live_pareto.png)\n\n**Figure 5. Actual paired answer quality and completion cost.** Learned points stop at two on every task and provide no demonstrated adaptation beyond that fixed budget. Point estimates omit intervals, reported in Table 3.'}
 
 def print_part(source,name,work,runtime,chrome,left):
     content=shared.html_math(source,runtime,name)
@@ -62,7 +66,8 @@ def print_part(source,name,work,runtime,chrome,left):
     if name=='part_4':
         assert content.count('<table>')==2
         live_start=content.rfind('<table>')
-        content=content[:live_start]+content[live_start:].replace('<table>','<table class="live-results"><colgroup>'+''.join(f'<col style="width:{width}%">' for width in [16,6,13,19,15,19,12])+'</colgroup>',1)
+        widths=[11,4.5,9.5,17,24,24.5,9.5] if left==108 else [14,5,11,16,22.5,22.5,9]
+        content=content[:live_start]+content[live_start:].replace('<table>','<table class="live-results"><colgroup>'+''.join(f'<col style="width:{width}%">' for width in widths)+'</colgroup>',1)
     bibliography=name=='part_6'
     typography='font-size:11pt;line-height:1.35;' if bibliography else 'font-size:12pt;line-height:2;'
     spacing='8pt' if bibliography else '12pt'
@@ -72,7 +77,9 @@ def print_part(source,name,work,runtime,chrome,left):
     p{{margin:0 0 {spacing};orphans:2;widows:2;}}h1{{font-size:18pt;line-height:1.35;margin:0 0 25pt;break-after:avoid;}}h2{{font-size:14pt;line-height:1.4;margin:20pt 0 10pt;break-after:avoid;}}
     table{{font-size:10.1pt;line-height:1.35;border-collapse:collapse;width:100%;margin:12pt 0 18pt;break-inside:avoid;}}.table-block,.figure-block,.math-intro,.proof-ending{{break-inside:avoid;}}
     th{{text-align:left;border-bottom:1pt solid #333;}}td{{border-bottom:.4pt solid #bbb;}}td,th{{padding:6pt 4pt;vertical-align:top;overflow-wrap:anywhere;}}tr{{break-inside:avoid;}}thead{{display:table-header-group;}}
-    .live-results{{table-layout:fixed;}}.live-results td:nth-child(2),.live-results td:nth-child(7){{white-space:nowrap;}}
+    .live-results{{table-layout:fixed;font-size:10.0pt;}}.live-results th{{vertical-align:bottom;line-height:1.2;padding:4pt 1.5pt;}}.live-results td{{padding:4pt 1.5pt;line-height:1.25;}}
+    .live-results td:nth-child(2),.live-results td:nth-child(7){{white-space:nowrap;text-align:center;}}.live-results th:nth-child(2),.live-results th:nth-child(7){{text-align:center;}}
+    .live-results td:nth-child(3),.live-results td:nth-child(4),.live-results td:nth-child(5),.live-results td:nth-child(6){{white-space:nowrap;}}
     .uncertainty-argument{{break-inside:avoid;}}
     code{{font-size:10.1pt;overflow-wrap:anywhere;}}img{{width:100%;height:auto;break-inside:avoid;}}a{{color:#222;overflow-wrap:anywhere;text-decoration:none;}}
     .katex{{font-size:1.03em;}}.katex-display{{margin:14pt 0;line-height:1.2;break-inside:avoid;}}.math-inline-short{{white-space:nowrap;}}.math-punctuation{{font-family:Arial,sans-serif;font-size:12pt;}}{keep_references}'''
@@ -93,7 +100,7 @@ def main():
         unknown=set(re.findall(r'\[([A-Za-z][A-Za-z0-9]+)\](?!\()',citation_text))-set(refs);assert not unknown,(path,unknown)
         for key,v in refs.items():s=s.replace(f'[{key}]',f'[{v}]')
         sources.append(s.translate(str.maketrans({c:'-' for c in '\u2010\u2011\u2012\u2013\u2014\u2015'})))
-    fronttext=f'# {shared.TITLE}\n\nby\n\nAditya Bhatt\n\nA thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science\n\nBaltimore, Maryland\n\n{a.submission_date}\n\n# Abstract\n\n{ABSTRACT}\n\nResearch adviser: Zerotti Woods\n\nSecond reader: Moustapha Pemy'
+    fronttext=f'# {shared.TITLE}\n\nby\n\nAditya Bhatt\n\nA thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science in Applied and Computational Mathematics\n\nBaltimore, Maryland\n\n{a.submission_date}\n\n# Abstract\n\n{ABSTRACT}\n\nResearch adviser: Dr. Zerotti Woods\n\nSecond reader: Dr. Moustapha Pemy'
     compiled='\n\n'.join([fronttext]+sources);(DOCS/'Masters_Thesis_Formal_v7.md').write_text(compiled,encoding='utf-8',newline='\n')
     parts=[print_part(s,f'part_{i+1}',work,runtime,a.chrome,left) for i,s in enumerate(sources)];body=fitz.open();lengths=[]
     for path in parts:
@@ -106,16 +113,17 @@ def main():
     front,fe=shared.front_matter(lengths,titles,fp,tp,[],figures,tables,entries);final=fitz.open(front);fc=len(final);final.insert_pdf(body)
     folio=work/'folios.pdf';c=canvas.Canvas(str(folio),pagesize=(612,792),initialFontName='ThesisArial')
     for i in range(len(final)):
-        if i:c.setFont('ThesisArial',10);c.drawCentredString(306,75,shared.roman(i+1) if i<fc else str(i-fc+1))
+        if i:c.setFont('ThesisArial',10);c.drawCentredString(306,75,shared.roman(i+1).lower() if i<fc else str(i-fc+1))
         c.showPage()
     c.save()
     with fitz.open(folio) as overlay:
         for i in range(1,len(final)):final[i].show_pdf_page(final[i].rect,overlay,i)
     for page in final:page.clean_contents(sanitize=True)
-    final.set_toc([[1,title,page] for title,page in fe]+[[level,title,fc+page] for level,title,page in entries]);final.set_metadata({'title':shared.TITLE,'author':'Aditya Bhatt','subject':'Concise Master of Science thesis, Applied and Computational Mathematics'});final.xref_set_key(final.pdf_catalog(),'Lang','(en-US)');final.set_page_labels([{'startpage':0,'style':'r','firstpagenum':1},{'startpage':fc,'style':'D','firstpagenum':1}])
+    final.set_toc([[1,title,page] for title,page in fe]+[[level,title,fc+page] for level,title,page in entries]);final.set_metadata({'title':shared.TITLE,'author':'Aditya Bhatt','subject':'Master of Science thesis, Applied and Computational Mathematics'});final.xref_set_key(final.pdf_catalog(),'Lang','(en-US)');final.set_page_labels([{'startpage':0,'style':'r','firstpagenum':1},{'startpage':fc,'style':'D','firstpagenum':1}])
     out=work/'source.pdf';shared.inspect_pdf(final);final.save(out,garbage=4,deflate=True)
     with fitz.open(out) as saved:audit=shared.inspect_pdf(saved)
     record={'schema':'concise-formal-thesis-build-v7','edition':a.edition,'output':out.relative_to(ROOT).as_posix(),'sha256':sha(out),'main_builder_sha256':sha(__file__),'shared_renderer_sha256':sha(shared.__file__),'source_files':{p.relative_to(ROOT).as_posix():sha(p) for p in paths},'canonical_math_source_sha256':sha(ROOT/'research/mathematical_foundations.md'),'data_manifest_sha256':sha(ROOT/'data_manifest_post_review_v1.json'),'audit':audit,'word_count':len(re.findall(r"\b[\w'-]+\b",compiled)),'abstract_words':len(ABSTRACT.split()),'front_matter_pages':fc,'submission_month_year':a.submission_date,'left_margin_inches':left/72,'other_minimum_margins_inches':1,'main_text_font_points':12,'main_text_line_height':2,'bibliography_font_points':11,'bibliography_line_height':1.35,'contents_body_entries':[{'level':l,'title':t,'body_page':i} for l,t,i in entries],'chapter_page_counts':dict(zip(titles,lengths)),'figure_titles':figures,'table_titles':tables,'figure_body_pages':fp,'table_body_pages':tp,'extended_document':'output/pdf/Masters_Thesis_Formal_v5_Aditya_Bhatt.pdf','target_total_pages':[25,35],'visual_review':'required before release'}
+    (DOCS/f'formal/build_manifest_{a.edition}_v7.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8',newline='\n');print(json.dumps({'pages':len(final),'words':record['word_count'],'front':fc,'parts':record['chapter_page_counts'],'output':str(out)}))
     (DOCS/f'formal/build_manifest_{a.edition}_v7.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8',newline='\n');print(json.dumps({'pages':len(final),'words':record['word_count'],'front':fc,'parts':record['chapter_page_counts'],'output':str(out)}))
 
 if __name__=='__main__':main()

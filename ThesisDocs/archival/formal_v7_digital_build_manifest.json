@@ -3,10 +3,10 @@
   "profile": "PDF/A-2b",
   "status": "validated_conversion",
   "source": "tmp/pdfs/compact_v7/digital/source.pdf",
-  "source_sha256": "b65c78d687a0247a8bed0ebcfc112ebf48d136f75fda288cca87b41e0501557f",
+  "source_sha256": "68576af37720990e0f2c301703065c6c6012d6c920ea7988c043e36ca1e769be",
   "output": "output/pdf/Masters_Thesis_Formal_v7_Aditya_Bhatt.pdf",
-  "sha256": "426f3d26fc0f832e3a9ed59de1074629c3ae52877716de27903e19fb84d8bfdf",
-  "bytes": 850510,
+  "sha256": "a45113bc1a30bc0c026a6d87edb7ed237673f6bf0081ed21d4e413f52dceee3e",
+  "bytes": 1383949,
   "builder": "tools/build_archival_candidate.py",
   "builder_sha256": "c43f9fe73f5c1907fb1df991b777aee604c8315585bf8fac9f4eedb4ac18f3b2",
   "pikepdf_version": "10.16.0",
@@ -43,11 +43,11 @@
   "validator_jar_sha256": "889075253fb9df4db5482efb8f8208fb3b4f2e00f5f7e1b1e31edf6fb4b69bb6",
   "validator_exit_code": 0,
   "validator_report": "ThesisDocs/archival/formal_v7_digital_verapdf_2b.xml",
-  "validator_report_sha256": "ebb4247e55503463600632024dace8bc0a2797efcf710e5c5e4da9a876f92f6b",
+  "validator_report_sha256": "0897b6b95ef760e711f7a165a5e7a6eda07221a2178c2bf50573e157c098b752",
   "validator_details": {
     "passedRules": "144",
     "failedRules": "0",
-    "passedChecks": "108387",
+    "passedChecks": "109841",
     "failedChecks": "0"
   },
   "validator_report_attributes": {
@@ -58,7 +58,7 @@
   },
   "render_engine": "PyMuPDF 1.27.2.2",
   "comparison_dpi": 144,
-  "render_dir": "tmp/pdfs/formal_thesis/formal_v7_digital/archival_review/426f3d26fc0f832e3a9ed59de1074629c3ae52877716de27903e19fb84d8bfdf",
+  "render_dir": "tmp/pdfs/formal_thesis/formal_v7_digital/archival_review/a45113bc1a30bc0c026a6d87edb7ed237673f6bf0081ed21d4e413f52dceee3e",
   "approval_scope": {
     "semester_approvals": "user-confirmed complete",
     "institutional_format_acceptance": "not asserted by technical conversion validation"
@@ -69,8 +69,8 @@
     "October 2026 is the title-page month; no actual submission event or institutional format acceptance is asserted."
   ],
   "visual_review": "required for the exact converted PDF before delivery",
-  "pages": 33,
-  "embedded_font_objects": 23,
+  "pages": 35,
+  "embedded_font_objects": 24,
   "font_names": [
     "AAAAAA+Arial-BoldMT",
     "AAAAAA+ArialMT",
@@ -83,14 +83,15 @@
     "EAAAAA+KaTeX_Main-Regular",
     "FAAAAA+KaTeX_AMS-Regular",
     "FAAAAA+KaTeX_Size1-Regular",
+    "GAAAAA+KaTeX_AMS-Regular",
     "GAAAAA+KaTeX_Main-Bold"
   ],
   "unembedded_fonts": [],
-  "ordinary_text_minimum_size_points": 10.0,
+  "ordinary_text_minimum_size_points": 9.997499465942383,
   "ordinary_text_size_requirement_points": 10,
   "type_size_rounding_tolerance_points": 0.005,
   "ordinary_text_undersized_spans": [],
-  "mathematical_spans_excluded_from_ordinary_type_minimum": 621,
+  "mathematical_spans_excluded_from_ordinary_type_minimum": 623,
   "type_size_scope": "Extractable ordinary text includes body, tables, labels and code. Formal v2 has no separate footnotes. Mathematical scripts/KaTeX struts are excluded; lettering within raster figures is assessed by visual review, not this text-extractor measurement.",
   "document_structure": {
     "outline": [
@@ -202,27 +203,27 @@
       [
         2,
         "4.3 Actual stopping execution",
-        25
+        26
       ],
       [
         1,
         "Chapter 5 Discussion and conclusion",
-        28
+        30
       ],
       [
         2,
         "5.1 Interpretation and limitations",
-        28
+        30
       ],
       [
         2,
         "5.2 Reproducibility and conclusion",
-        29
+        31
       ],
       [
         1,
         "References",
-        31
+        33
       ]
     ],
     "page_labels": [
@@ -242,9 +243,9 @@
     "language": "en-US",
     "tagged_structure_present": false,
     "document_information": {
-      "title": "Cost aware stopping boundaries in reasoning language models",
+      "title": "Cost-aware stopping boundaries in reasoning language models",
       "author": "Aditya Bhatt",
-      "subject": "Concise Master of Science thesis, Applied and Computational Mathematics",
+      "subject": "Master of Science thesis, Applied and Computational Mathematics",
       "keywords": "",
       "creator": "anonymous"
     }
@@ -252,7 +253,7 @@
   "printed_pagination": {
     "front_matter_pages_including_cover": 5,
     "introduction_physical_page": 6,
-    "last_arabic_page": 28,
+    "last_arabic_page": 30,
     "pages": [
       {
         "physical_page": 1,
@@ -449,6 +450,18 @@
         "printed_number": "28",
         "horizontal_center_points": 305.9985046386719,
         "center_reference": "page"
+      },
+      {
+        "physical_page": 34,
+        "printed_number": "29",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
+      },
+      {
+        "physical_page": 35,
+        "printed_number": "30",
+        "horizontal_center_points": 305.9985046386719,
+        "center_reference": "page"
       }
     ]
   },
@@ -465,25 +478,25 @@
     "raster_rounding_tolerance_points": 0.5,
     "defects": 0
   },
-  "unchanged_text_and_word_geometry_pages": 33,
+  "unchanged_text_and_word_geometry_pages": 35,
   "intentional_content_edit_pages": [],
-  "pixel_identical_pages": 29,
+  "pixel_identical_pages": 31,
   "pixel_max_channel_difference": 1,
   "pixel_max_changed_fraction": 0.007728943850267379,
   "render_isolation": {
     "method": "one fresh process per PDF; no shared document/image caches",
-    "source_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_digital/archival_review/426f3d26fc0f832e3a9ed59de1074629c3ae52877716de27903e19fb84d8bfdf/source_comparison/render_manifest.json",
-    "source_render_manifest_sha256": "5eb6015df65349158d181060576269bdc8b0988b020993c0cc1f4a4151433a84",
-    "output_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_digital/archival_review/426f3d26fc0f832e3a9ed59de1074629c3ae52877716de27903e19fb84d8bfdf/render_manifest.json",
-    "output_render_manifest_sha256": "81fe160bed14352006f77a0e7078cbfd8a69ae232111e0e83acb1157d676acbb"
+    "source_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_digital/archival_review/a45113bc1a30bc0c026a6d87edb7ed237673f6bf0081ed21d4e413f52dceee3e/source_comparison/render_manifest.json",
+    "source_render_manifest_sha256": "07523757475a4ff6824ca100b71165633e9cdd2483d83ac70d45ab928466ffe3",
+    "output_render_manifest": "tmp/pdfs/formal_thesis/formal_v7_digital/archival_review/a45113bc1a30bc0c026a6d87edb7ed237673f6bf0081ed21d4e413f52dceee3e/render_manifest.json",
+    "output_render_manifest_sha256": "cb8217f93498f222fcf5b6026c85f4de9928556a23dff5873d5276e669c55c6c"
   },
   "page_comparisons": [
     {
       "page": 1,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "f6f6e0b39f6478eebaa5e905ff56b8e523d603cbf415c30fc98c126b3e8ffea2",
-      "rgb_pixels_sha256": "f6f6e0b39f6478eebaa5e905ff56b8e523d603cbf415c30fc98c126b3e8ffea2",
+      "source_rgb_pixels_sha256": "32bdedc8b8344041377dbcaa9a74ec54f259ea5eaffc9176abba78726764f3ab",
+      "rgb_pixels_sha256": "32bdedc8b8344041377dbcaa9a74ec54f259ea5eaffc9176abba78726764f3ab",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -507,8 +520,8 @@
       "page": 2,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "72945a61092123afb023f23298fc6a8e7543a67c63d4b7a38b99f3f78b94dabb",
-      "rgb_pixels_sha256": "72945a61092123afb023f23298fc6a8e7543a67c63d4b7a38b99f3f78b94dabb",
+      "source_rgb_pixels_sha256": "63b323aef3716764155b352854939f5c2d5c57a652732573a28ab386900dd6f6",
+      "rgb_pixels_sha256": "63b323aef3716764155b352854939f5c2d5c57a652732573a28ab386900dd6f6",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -532,8 +545,8 @@
       "page": 3,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "a4fd871854a01c3e5ad2a71c907cf740a9865b922923365af262e91019ce6129",
-      "rgb_pixels_sha256": "a4fd871854a01c3e5ad2a71c907cf740a9865b922923365af262e91019ce6129",
+      "source_rgb_pixels_sha256": "9a69692562d9af396a176aedc19ab3ea7ecdbd70347b7839ed8d7f5e31f88498",
+      "rgb_pixels_sha256": "9a69692562d9af396a176aedc19ab3ea7ecdbd70347b7839ed8d7f5e31f88498",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -557,8 +570,8 @@
       "page": 4,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "ea7d328cb65d88c25488537dc29e55db37ad64533c0f9f3e819914adc00be9ae",
-      "rgb_pixels_sha256": "ea7d328cb65d88c25488537dc29e55db37ad64533c0f9f3e819914adc00be9ae",
+      "source_rgb_pixels_sha256": "fcc3652fc67daa103be4eb5d5257110cc424d04cd41f2b9907e76cda56f9f8d0",
+      "rgb_pixels_sha256": "fcc3652fc67daa103be4eb5d5257110cc424d04cd41f2b9907e76cda56f9f8d0",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -582,8 +595,8 @@
       "page": 5,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "b6bbbdf025f68348ec35e8b40756bb875a7e75f39652898c2ba3ac30a1cb1b79",
-      "rgb_pixels_sha256": "b6bbbdf025f68348ec35e8b40756bb875a7e75f39652898c2ba3ac30a1cb1b79",
+      "source_rgb_pixels_sha256": "ff57bd848d486100ba7e6868fae28637e74325087665adad70461417e8112084",
+      "rgb_pixels_sha256": "ff57bd848d486100ba7e6868fae28637e74325087665adad70461417e8112084",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -782,8 +795,8 @@
       "page": 13,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "7698f27094453bda6f3945643080a0413321c719f286dcda368a2f51b7e855af",
-      "rgb_pixels_sha256": "7698f27094453bda6f3945643080a0413321c719f286dcda368a2f51b7e855af",
+      "source_rgb_pixels_sha256": "8ee0c5428a285771c554ad36be42e7590b761f7745d26e2f36bf736b1fc57ab9",
+      "rgb_pixels_sha256": "8ee0c5428a285771c554ad36be42e7590b761f7745d26e2f36bf736b1fc57ab9",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -792,14 +805,14 @@
       "max_channel_difference": 0,
       "source_ink_bounds_points": [
         72.0,
-        84.5,
-        528.5,
+        89.0,
+        529.0,
         717.5
       ],
       "output_ink_bounds_points": [
         72.0,
-        84.5,
-        528.5,
+        89.0,
+        529.0,
         717.5
       ]
     },
@@ -957,8 +970,8 @@
       "page": 20,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "2499c7bd79552b2e27661e289c3a03419a3af3b5855197728fc63f5020afcffd",
-      "rgb_pixels_sha256": "2499c7bd79552b2e27661e289c3a03419a3af3b5855197728fc63f5020afcffd",
+      "source_rgb_pixels_sha256": "a28c3678fd8c740d3e3d6fb612e9863d2cbe3a75f85fe427c0c29fe8d8183661",
+      "rgb_pixels_sha256": "a28c3678fd8c740d3e3d6fb612e9863d2cbe3a75f85fe427c0c29fe8d8183661",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -968,13 +981,13 @@
       "source_ink_bounds_points": [
         72.0,
         78.5,
-        539.0,
+        540.0,
         717.5
       ],
       "output_ink_bounds_points": [
         72.0,
         78.5,
-        539.0,
+        540.0,
         717.5
       ]
     },
@@ -1007,8 +1020,8 @@
       "page": 22,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "b874a757c9b08d29189053f5163144b09fb60a62a74e17a13651ddd8ee2eb157",
-      "rgb_pixels_sha256": "b874a757c9b08d29189053f5163144b09fb60a62a74e17a13651ddd8ee2eb157",
+      "source_rgb_pixels_sha256": "5e1960745d1ccb49b90668be0b32d89da2df9592cb188b070b24df4720af95e2",
+      "rgb_pixels_sha256": "5e1960745d1ccb49b90668be0b32d89da2df9592cb188b070b24df4720af95e2",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1032,8 +1045,8 @@
       "page": 23,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "25f3e6277ee9b96c13761bacc86c1ea907c42259ef7e212b5aeca811d47decde",
-      "rgb_pixels_sha256": "bc6d44903f3d79dd270f625f9da5ddeeec7fcb2c358f0cc57aac71cd9a81f8a6",
+      "source_rgb_pixels_sha256": "93ef33b11aa869116cba9e534682cbaaa39899637be58954a58455d300cc525c",
+      "rgb_pixels_sha256": "624add782a4f7709252f151233a9ed2a844c057eb506e6369eb2afcdd6b09199",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": false,
@@ -1057,8 +1070,8 @@
       "page": 24,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "8f57ff10188925e6d09e78196637ff71bc09e5e0f7b5664e2823cc32f5e10236",
-      "rgb_pixels_sha256": "8f57ff10188925e6d09e78196637ff71bc09e5e0f7b5664e2823cc32f5e10236",
+      "source_rgb_pixels_sha256": "08df13b2f8c26ae52362de0d0e543725142b5e662b6fa8f03e73893ac5004612",
+      "rgb_pixels_sha256": "08df13b2f8c26ae52362de0d0e543725142b5e662b6fa8f03e73893ac5004612",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1067,13 +1080,13 @@
       "max_channel_difference": 0,
       "source_ink_bounds_points": [
         72.0,
-        79.0,
+        72.0,
         540.0,
         717.5
       ],
       "output_ink_bounds_points": [
         72.0,
-        79.0,
+        72.0,
         540.0,
         717.5
       ]
@@ -1082,24 +1095,24 @@
       "page": 25,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "e96b86b60da972b84f13cac36a9d6a33efb50da89af7bc07c525cd9ad4e58d5c",
-      "rgb_pixels_sha256": "d6fced5587fe33643350c832e1890cf28d89499d6d9fec25dd49ef4e1f4ccb27",
+      "source_rgb_pixels_sha256": "6b4acf50f5a0a97028fd9a011513f02e77d9bf5c5702e87bf7737971ac62a3a1",
+      "rgb_pixels_sha256": "6b4acf50f5a0a97028fd9a011513f02e77d9bf5c5702e87bf7737971ac62a3a1",
       "text_identical": true,
       "word_geometry_identical": true,
-      "pixels_identical": false,
-      "changed_pixels": 8424,
-      "changed_pixel_fraction": 0.004344919786096257,
-      "max_channel_difference": 1,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
       "source_ink_bounds_points": [
         72.0,
-        76.0,
-        540.0,
+        79.0,
+        538.5,
         717.5
       ],
       "output_ink_bounds_points": [
         72.0,
-        76.0,
-        540.0,
+        79.0,
+        538.5,
         717.5
       ]
     },
@@ -1107,8 +1120,8 @@
       "page": 26,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "f064efe692f62ed05aed3c9f0b9505993caf8f4a02651d8617aeacc0ff2e6920",
-      "rgb_pixels_sha256": "f064efe692f62ed05aed3c9f0b9505993caf8f4a02651d8617aeacc0ff2e6920",
+      "source_rgb_pixels_sha256": "fa374dd99d95de83f95187a45122e08bd7b3a272ca5a1fed8f98a400be4ce7ac",
+      "rgb_pixels_sha256": "fa374dd99d95de83f95187a45122e08bd7b3a272ca5a1fed8f98a400be4ce7ac",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1117,14 +1130,14 @@
       "max_channel_difference": 0,
       "source_ink_bounds_points": [
         72.0,
-        79.0,
-        538.5,
+        74.0,
+        540.0,
         717.0
       ],
       "output_ink_bounds_points": [
         72.0,
-        79.0,
-        538.5,
+        74.0,
+        540.0,
         717.0
       ]
     },
@@ -1132,24 +1145,24 @@
       "page": 27,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "ff08908259a6cd95e0d4554e0fe9b5fac2d957db0aae4ee8b4008f7ff3171697",
-      "rgb_pixels_sha256": "ff08908259a6cd95e0d4554e0fe9b5fac2d957db0aae4ee8b4008f7ff3171697",
+      "source_rgb_pixels_sha256": "8652bcfa6e5e8a068efc3e663d655768b41cbb461ccae77a7b136605e0974548",
+      "rgb_pixels_sha256": "96af6d4bcea98e97c663e1c8c259809df77a791c3cdf571d6fe10d5cb88fabac",
       "text_identical": true,
       "word_geometry_identical": true,
-      "pixels_identical": true,
-      "changed_pixels": 0,
-      "changed_pixel_fraction": 0.0,
-      "max_channel_difference": 0,
+      "pixels_identical": false,
+      "changed_pixels": 7498,
+      "changed_pixel_fraction": 0.0038673087079949824,
+      "max_channel_difference": 1,
       "source_ink_bounds_points": [
         72.0,
-        74.5,
-        536.5,
+        79.0,
+        540.0,
         717.0
       ],
       "output_ink_bounds_points": [
         72.0,
-        74.5,
-        536.5,
+        79.0,
+        540.0,
         717.0
       ]
     },
@@ -1157,8 +1170,58 @@
       "page": 28,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "2d387452c12d10342577fa044d1d6e5a52873cea5c751b785e9007ec2d5b329e",
-      "rgb_pixels_sha256": "2d387452c12d10342577fa044d1d6e5a52873cea5c751b785e9007ec2d5b329e",
+      "source_rgb_pixels_sha256": "87ca13ac22c49ad01395dc4cea82cfd6c6b9138dad8bb4bf755f368430bd7ed7",
+      "rgb_pixels_sha256": "87ca13ac22c49ad01395dc4cea82cfd6c6b9138dad8bb4bf755f368430bd7ed7",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        538.5,
+        717.5
+      ]
+    },
+    {
+      "page": 29,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "db82bcd7739dfdf86e6ac8ca85c014d84cb700bb38f6c02d8134b4b9e746b7b9",
+      "rgb_pixels_sha256": "db82bcd7739dfdf86e6ac8ca85c014d84cb700bb38f6c02d8134b4b9e746b7b9",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        74.5,
+        536.5,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        74.5,
+        536.5,
+        717.0
+      ]
+    },
+    {
+      "page": 30,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "cee67f6fbf9369679a99bd6a436967d27e1343a0438ab499bd3c8e7ab7108e08",
+      "rgb_pixels_sha256": "cee67f6fbf9369679a99bd6a436967d27e1343a0438ab499bd3c8e7ab7108e08",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1179,11 +1242,11 @@
       ]
     },
     {
-      "page": 29,
+      "page": 31,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "63de626d70af43aa5af064aaf268d3d0f302f09d171bbdcb84ebbf03b08dd167",
-      "rgb_pixels_sha256": "26e45661d5459880877c2f0c268c46ae4139dd5ebb6815d9a1c47e0987513697",
+      "source_rgb_pixels_sha256": "0dc284fcc23569e057464e04166d7d48820d5ca95bf868f348297ff46d3f5f03",
+      "rgb_pixels_sha256": "16a8defcb7ae67b623e655faddf385ad415352ed795dd5a3bc0b4c8d9b5463a5",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": false,
@@ -1194,62 +1257,12 @@
         72.0,
         79.0,
         539.0,
-        717.0
-      ],
-      "output_ink_bounds_points": [
-        72.0,
-        79.0,
-        539.0,
-        717.0
-      ]
-    },
-    {
-      "page": 30,
-      "width": 1224,
-      "height": 1584,
-      "source_rgb_pixels_sha256": "f5102fd52b9bbec01be7e6db81bc59db9a46dbcf4206a1ffca7a2aaf59ad117c",
-      "rgb_pixels_sha256": "f5102fd52b9bbec01be7e6db81bc59db9a46dbcf4206a1ffca7a2aaf59ad117c",
-      "text_identical": true,
-      "word_geometry_identical": true,
-      "pixels_identical": true,
-      "changed_pixels": 0,
-      "changed_pixel_fraction": 0.0,
-      "max_channel_difference": 0,
-      "source_ink_bounds_points": [
-        72.0,
-        79.0,
-        539.0,
         717.5
       ],
       "output_ink_bounds_points": [
         72.0,
         79.0,
         539.0,
-        717.5
-      ]
-    },
-    {
-      "page": 31,
-      "width": 1224,
-      "height": 1584,
-      "source_rgb_pixels_sha256": "53bc29e3ab9c87f5db540c5d031a760000077f66b30107a7e51778272f328caa",
-      "rgb_pixels_sha256": "53bc29e3ab9c87f5db540c5d031a760000077f66b30107a7e51778272f328caa",
-      "text_identical": true,
-      "word_geometry_identical": true,
-      "pixels_identical": true,
-      "changed_pixels": 0,
-      "changed_pixel_fraction": 0.0,
-      "max_channel_difference": 0,
-      "source_ink_bounds_points": [
-        72.0,
-        76.5,
-        538.5,
-        717.5
-      ],
-      "output_ink_bounds_points": [
-        72.0,
-        76.5,
-        538.5,
         717.5
       ]
     },
@@ -1257,8 +1270,58 @@
       "page": 32,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "0c31e2fb9f7565e2c8993ebe641624d6020e6e349476075fd05b02770946e419",
-      "rgb_pixels_sha256": "0c31e2fb9f7565e2c8993ebe641624d6020e6e349476075fd05b02770946e419",
+      "source_rgb_pixels_sha256": "f1d1b18b1a60ad48cc0feb86304d076a45b2adac59eafc85a1927bcb48fee27c",
+      "rgb_pixels_sha256": "f1d1b18b1a60ad48cc0feb86304d076a45b2adac59eafc85a1927bcb48fee27c",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.0
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        79.0,
+        539.0,
+        717.0
+      ]
+    },
+    {
+      "page": 33,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "d325e7162f3a5b4e054043ab6b90fec86e5fed602d2e30c84e3213e0017b1532",
+      "rgb_pixels_sha256": "d325e7162f3a5b4e054043ab6b90fec86e5fed602d2e30c84e3213e0017b1532",
+      "text_identical": true,
+      "word_geometry_identical": true,
+      "pixels_identical": true,
+      "changed_pixels": 0,
+      "changed_pixel_fraction": 0.0,
+      "max_channel_difference": 0,
+      "source_ink_bounds_points": [
+        72.0,
+        76.5,
+        538.5,
+        717.5
+      ],
+      "output_ink_bounds_points": [
+        72.0,
+        76.5,
+        538.5,
+        717.5
+      ]
+    },
+    {
+      "page": 34,
+      "width": 1224,
+      "height": 1584,
+      "source_rgb_pixels_sha256": "1e368f67031735721bdf17fdf5d7fc0b9eda28fe5b7599ebd41fbe2d74f8873d",
+      "rgb_pixels_sha256": "1e368f67031735721bdf17fdf5d7fc0b9eda28fe5b7599ebd41fbe2d74f8873d",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,
@@ -1269,21 +1332,21 @@
         72.0,
         74.5,
         537.0,
-        717.0
+        717.5
       ],
       "output_ink_bounds_points": [
         72.0,
         74.5,
         537.0,
-        717.0
+        717.5
       ]
     },
     {
-      "page": 33,
+      "page": 35,
       "width": 1224,
       "height": 1584,
-      "source_rgb_pixels_sha256": "e43b21027d56805cd2a32a6830db4bad90e1c141ac378b7ac89bc59a5db1b015",
-      "rgb_pixels_sha256": "e43b21027d56805cd2a32a6830db4bad90e1c141ac378b7ac89bc59a5db1b015",
+      "source_rgb_pixels_sha256": "0845ac4517327768f52adc4926ae95b14ee84b3776f5b2b457f3d53337fdb5e7",
+      "rgb_pixels_sha256": "0845ac4517327768f52adc4926ae95b14ee84b3776f5b2b457f3d53337fdb5e7",
       "text_identical": true,
       "word_geometry_identical": true,
       "pixels_identical": true,

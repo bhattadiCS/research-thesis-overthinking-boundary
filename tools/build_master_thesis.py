@@ -42,7 +42,7 @@ LIST_ENTRY_GAP = 8  # Front lists may be single-spaced; keep all entries legible
 CHAPTERS = ["chapter1_intro.md", "chapter2_theory.md", "chapter3_methodology.md",
             "chapter4_empirical.md", "chapter5_online.md", "chapter6_discussion.md"]
 FONT = Path("C:/Windows/Fonts/arial.ttf")
-TITLE = "Cost aware stopping boundaries in reasoning language models"
+TITLE = "Cost-aware stopping boundaries in reasoning language models"
 ABSTRACT = (
     "Additional reasoning can repair an incorrect answer, replace a correct answer, or consume computation without sufficient improvement. "
     "This thesis formulates response-level stopping as a finite-horizon decision based on observable prefixes and hidden correctness. "
@@ -503,7 +503,7 @@ def front_matter(chapter_lengths: list[int], chapter_titles: list[str],
     table_chunks = list_layout("Table", tables, table_pages)
     figure_chunks = list_layout("Figure", figures, figure_pages)
     def contents_layout(front_entries):
-        entries = [(1, title, roman(page)) for title, page in front_entries
+        entries = [(1, title, roman(page).lower()) for title, page in front_entries
                    if title != "Table of contents"]
         entries.extend((level, title, str(page)) for level, title, page in body_entries)
         chunks = [[]]
@@ -539,7 +539,7 @@ def front_matter(chapter_lengths: list[int], chapter_titles: list[str],
     center = (LEFT + RIGHT) / 2
     c.setFont("ThesisArial", 16)
     first_y = 792 - 108 - pdfmetrics.getAscent("ThesisArial", 16)
-    title_lines = ["COST AWARE STOPPING BOUNDARIES", "IN REASONING LANGUAGE MODELS"]
+    title_lines = ["COST-AWARE STOPPING BOUNDARIES", "IN REASONING LANGUAGE MODELS"]
     for index, text in enumerate(title_lines):
         c.drawCentredString(center, first_y - index * 24, text)
     by_y = first_y - 24 - 72
@@ -547,7 +547,7 @@ def front_matter(chapter_lengths: list[int], chapter_titles: list[str],
     c.setFont("ThesisArial", 12)
     c.drawCentredString(center, by_y, "by")
     c.drawCentredString(center, author_y, "Aditya Bhatt")
-    statement = "A thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science"
+    statement = "A thesis submitted to Johns Hopkins University in conformity with the requirements for the degree of Master of Science in Applied and Computational Mathematics"
     y = author_y - 108
     statement_lines = canvas_lines(statement, 12, RIGHT - LEFT)
     for line in statement_lines:
@@ -562,8 +562,8 @@ def front_matter(chapter_lengths: list[int], chapter_titles: list[str],
     end = wrap_canvas(c, ABSTRACT, 675)
     if end - 44 < 108:
         raise ValueError("Abstract and reader names do not fit within the page margins")
-    end = wrap_canvas(c, "Research adviser: Zerotti Woods", end - 12, size=11, leading=16)
-    wrap_canvas(c, "Second reader: Moustapha Pemy", end, size=11, leading=16)
+    end = wrap_canvas(c, "Research adviser: Dr. Zerotti Woods", end - 12, size=11, leading=16)
+    wrap_canvas(c, "Second reader: Dr. Moustapha Pemy", end, size=11, leading=16)
     c.showPage()
     for chunk_index, chunk in enumerate(contents_chunks):
         c.setFont("ThesisArial", 16)

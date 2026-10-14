@@ -46,7 +46,7 @@ Actual paired executions use Qwen2.5-0.5B-Instruct [Qwen2024] on 100 GSM8K quest
 
 All four live collections record greedy generation, temperature zero, seed 20261002, maximum batch size 32 and at most 128 newly generated tokens per response. A response ends at the first strictly valid complete JSON object, EOS or the token cap. The model snapshot is `7ae557604adf67be50417f59c2c2f167def9a775`; manifests bind its files and executed source copies. EOS-inclusive live token counts differ from the archive convention. Learned arms reuse the previously collected full-horizon baseline, as marked in Table 3.
 
-For $n\ge1$ iid task pairs, let $I$ flag baseline incorrect/active correct and $W$ baseline correct/active incorrect. Write $\pi_I=\Pr(I=1)$ and $\pi_W=\Pr(W=1)$, so $\delta=\pi_I-\pi_W$ is the accuracy difference. Their marginal counts are binomial but the within-pair indicators are not assumed independent. Exact two-sided 97.5% Clopper-Pearson bounds $[L_I,U_I]$ and $[L_W,U_W]$ for the respective marginal probabilities [Clopper1934] have joint coverage at least 95% by a union bound; subtraction gives
+For $n\ge1$ iid task pairs, let $I$ flag baseline incorrect/active correct and $W$ baseline correct/active incorrect. Write $\pi_I=\mathbb P(I=1)$ and $\pi_W=\mathbb P(W=1)$, so $\delta=\pi_I-\pi_W$ is the accuracy difference. Their marginal counts are binomial but the within-pair indicators are not assumed independent. Exact two-sided 97.5% Clopper-Pearson bounds $[L_I,U_I]$ and $[L_W,U_W]$ for the respective marginal probabilities [Clopper1934] have joint coverage at least 95% by a union bound; subtraction gives
 
 $$\delta\in[L_I-U_W,\ U_I-L_W].$$
 
